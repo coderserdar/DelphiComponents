@@ -1,0 +1,66 @@
+package MLRsysco;
+
+{$R *.RES}
+{$R 'ButtonBrowse.dcr'}
+{$R 'Configuration.dcr'}
+{$R 'FileOperation.dcr'}
+{$R 'progmngr.dcr'}
+{$R 'BroadcasterUnit.dcr'}
+{$R 'DrvFmtUnit.dcr'}
+{$R 'TAPIServiceUnit.dcr'}
+{$R 'DragDropUnit.dcr'}
+{$R 'FileIteratorUnit.dcr'}
+{$R 'ImpersonatorUnit.dcr'}
+{$R 'WizardManagerUnit.dcr'}
+{$R 'TelnetClientUnit.dcr'}
+{$R 'RecentDocsUnit.dcr'}
+{$R 'TrayIconUnit.dcr'}
+{$ALIGN ON}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $00400000}
+{$DESCRIPTION 'Marcelo System Components.'}
+{$IMPLICITBUILD OFF}
+
+requires
+  vcl40,
+  Vclx40;
+
+contains
+  ButtonBrowse in 'ButtonBrowse.pas',
+  Configuration in 'Configuration.pas',
+  FileOperation in 'FileOperation.pas',
+  MLRActionsUnit in 'MLRActionsUnit.pas',
+  Progmngr in 'progmngr.pas',
+  BroadcasterUnit in 'BroadcasterUnit.pas',
+  DrvFmtUnit in 'DrvFmtUnit.pas',
+  TAPIServiceUnit in 'TAPIServiceUnit.pas',
+  DragDropUnit in 'DragDropUnit.pas',
+  FileIteratorUnit in 'FileIteratorUnit.pas',
+  ImpersonatorUnit in 'ImpersonatorUnit.pas',
+  ThreadedActionUnit in 'ThreadedActionUnit.pas',
+  WizardManagerUnit in 'WizardManagerUnit.pas',
+  TelnetClientUnit in 'TelnetClientUnit.pas',
+  PanelSizable in 'PanelSizable.pas',
+  UsersListBoxUnit in 'UsersListBoxUnit.pas',
+  RecentDocsUnit in 'RecentDocsUnit.pas',
+  TrayIconUnit in 'TrayIconUnit.pas';
+
+end.

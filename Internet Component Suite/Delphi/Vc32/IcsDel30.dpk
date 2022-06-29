@@ -1,0 +1,78 @@
+package IcsDel30;
+
+{$R *.RES}
+{$R 'wsocket.dcr'}
+{$R 'wsockets.dcr'}
+{$R 'wait.dcr'}
+{$R 'fingcli.dcr'}
+{$R 'FtpCli.dcr'}
+{$R 'HttpProt.dcr'}
+{$R 'MimeDec.dcr'}
+{$R 'NntpCli.dcr'}
+{$R 'ping.dcr'}
+{$R 'tncnx.dcr'}
+{$R 'tnemulvt.dcr'}
+{$R 'tnscript.dcr'}
+{$R 'emulvt.dcr'}
+{$R 'ftpsrv.dcr'}
+{$R 'MbxFile.dcr'}
+{$R 'SmtpProt.dcr'}
+{$R 'Pop3prot.dcr'}
+{$R 'dnsquery.dcr'}
+{$R 'Httpsrv.dcr'}
+{$ALIGN ON}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS ON}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $00400000}
+{$DESCRIPTION 'Internet Component Suite (by F. Piette)'}
+{$IMPLICITBUILD ON}
+
+requires
+  vcl30;
+
+contains
+  wsocket,
+  wsockbuf,
+  wait,
+  wsockets,
+  fingcli,
+  formpos,
+  FtpCli,
+  HttpProt,
+  icmp,
+  md5,
+  MimeDec,
+  NntpCli,
+  ping,
+  tncnx,
+  tnemulvt,
+  tnoptfrm,
+  tnscript,
+  emulvt,
+  ftpsrv,
+  ftpsrvc,
+  MbxFile,
+  SmtpProt,
+  dnsquery,
+  Pop3prot,
+  Httpsrv,
+  FtpSrvT;
+
+end.

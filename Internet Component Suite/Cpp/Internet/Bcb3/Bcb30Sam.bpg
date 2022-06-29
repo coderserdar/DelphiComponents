@@ -1,0 +1,107 @@
+#------------------------------------------------------------------------------
+VERSION = BWS.01
+#------------------------------------------------------------------------------
+!ifndef ROOT
+ROOT = $(MAKEDIR)\..
+!endif
+#------------------------------------------------------------------------------
+MAKE = $(ROOT)\bin\make.exe -$(MAKEFLAGS) -f$**
+DCC = $(ROOT)\bin\dcc32.exe $**
+BRCC = $(ROOT)\bin\brcc32.exe $**
+#------------------------------------------------------------------------------
+PROJECTS = IcsBcb30 CliDemo Client5 Client7 ConCli1 ConCli2 Finger FtpServ \
+  ftptst HttpPg httptst MailRcv MailSnd MtSrv NewsRdr NsLookup PingTst Recv \
+  Sender Server5 SocksTst SrvDemo TcpSrv TnClient TnDemo tnsrv TWSChat UdpLstn \
+  UdpSend
+#------------------------------------------------------------------------------
+default: $(PROJECTS)
+#------------------------------------------------------------------------------
+
+ConCli1: ConCli1.bpr
+  $(MAKE)
+
+ConCli2: ConCli2.bpr
+  $(MAKE)
+
+Client5: Client5.bpr
+  $(MAKE)
+
+Finger: Finger.bpr
+  $(MAKE)
+
+FtpServ: FtpServ.bpr
+  $(MAKE)
+
+ftptst: ftptst.bpr
+  $(MAKE)
+
+HttpPg: HttpPg.bpr
+  $(MAKE)
+
+httptst: httptst.bpr
+  $(MAKE)
+
+MailRcv: MailRcv.bpr
+  $(MAKE)
+
+MailSnd: MailSnd.bpr
+  $(MAKE)
+
+MtSrv: MtSrv.bpr
+  $(MAKE)
+
+NewsRdr: NewsRdr.bpr
+  $(MAKE)
+
+PingTst: PingTst.bpr
+  $(MAKE)
+
+Server5: Server5.bpr
+  $(MAKE)
+
+TnClient: TnClient.bpr
+  $(MAKE)
+
+TnDemo: TnDemo.bpr
+  $(MAKE)
+
+tnsrv: tnsrv.bpr
+  $(MAKE)
+
+TWSChat: TWSChat.bpr
+  $(MAKE)
+
+UdpLstn: UdpLstn.bpr
+  $(MAKE)
+
+UdpSend: UdpSend.bpr
+  $(MAKE)
+
+IcsBcb30: ..\..\..\Delphi\VC32\IcsBcb30.bpk
+  $(MAKE)
+
+Client7: Client7.bpr
+  $(MAKE)
+
+SocksTst: SocksTst.bpr
+  $(MAKE)
+
+CliDemo: CliDemo.bpr
+  $(MAKE)
+
+SrvDemo: SrvDemo.bpr
+  $(MAKE)
+
+Sender: Sender.bpr
+  $(MAKE)
+
+Recv: Recv.bpr
+  $(MAKE)
+
+NsLookup: NsLookup.bpr
+  $(MAKE)
+
+TcpSrv: TcpSrv.bpr
+  $(MAKE)
+
+

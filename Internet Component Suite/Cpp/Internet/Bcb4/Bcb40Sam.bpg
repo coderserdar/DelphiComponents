@@ -1,0 +1,108 @@
+#------------------------------------------------------------------------------
+VERSION = BWS.01
+#------------------------------------------------------------------------------
+!ifndef ROOT
+ROOT = $(MAKEDIR)\..
+!endif
+#------------------------------------------------------------------------------
+MAKE = $(ROOT)\bin\make.exe -$(MAKEFLAGS) -f$**
+DCC = $(ROOT)\bin\dcc32.exe $**
+BRCC = $(ROOT)\bin\brcc32.exe $**
+#------------------------------------------------------------------------------
+PROJECTS = Icsbcb40.bpl Clidemo.exe Client5.exe Client7.exe Concli1.exe \
+  Concli2.exe Finger.exe Ftpserv.exe FtpTst.exe HttpPg.exe HttpTst.exe \
+  MailRcv.exe MailSnd.exe MtSrv.exe NewsRdr.exe NsLookup.exe PingTst.exe Recv.exe \
+  Sender.exe Server5.exe SocksTst.exe SrvDemo.exe TcpSrv.exe TnClient.exe \
+  TnDemo.exe TnSrv.exe TWSChat.exe UdpLstn.exe UdpSend.exe
+#------------------------------------------------------------------------------
+default: $(PROJECTS)
+#------------------------------------------------------------------------------
+
+Clidemo.exe: Clidemo.bpr
+  $(MAKE)
+
+Icsbcb40.bpl: ..\..\..\Delphi\VC32\Icsbcb40.bpk
+  $(MAKE)
+
+Client5.exe: Client5.bpr
+  $(MAKE)
+
+Client7.exe: Client7.bpr
+  $(MAKE)
+
+Concli1.exe: Concli1.bpr
+  $(MAKE)
+
+Concli2.exe: Concli2.bpr
+  $(MAKE)
+
+Finger.exe: Finger.bpr
+  $(MAKE)
+
+Ftpserv.exe: Ftpserv.bpr
+  $(MAKE)
+
+FtpTst.exe: FtpTst.bpr
+  $(MAKE)
+
+HttpPg.exe: HttpPg.bpr
+  $(MAKE)
+
+HttpTst.exe: HttpTst.bpr
+  $(MAKE)
+
+MailRcv.exe: MailRcv.bpr
+  $(MAKE)
+
+MailSnd.exe: MailSnd.bpr
+  $(MAKE)
+
+MtSrv.exe: MtSrv.bpr
+  $(MAKE)
+
+NewsRdr.exe: NewsRdr.bpr
+  $(MAKE)
+
+NsLookup.exe: NsLookup.bpr
+  $(MAKE)
+
+PingTst.exe: PingTst.bpr
+  $(MAKE)
+
+Recv.exe: Recv.bpr
+  $(MAKE)
+
+Sender.exe: Sender.bpr
+  $(MAKE)
+
+Server5.exe: Server5.bpr
+  $(MAKE)
+
+SocksTst.exe: SocksTst.bpr
+  $(MAKE)
+
+SrvDemo.exe: SrvDemo.bpr
+  $(MAKE)
+
+TnClient.exe: TnClient.bpr
+  $(MAKE)
+
+TnDemo.exe: TnDemo.bpr
+  $(MAKE)
+
+TnSrv.exe: TnSrv.bpr
+  $(MAKE)
+
+TWSChat.exe: TWSChat.bpr
+  $(MAKE)
+
+UdpLstn.exe: UdpLstn.bpr
+  $(MAKE)
+
+UdpSend.exe: UdpSend.bpr
+  $(MAKE)
+
+TcpSrv.exe: TcpSrv.bpr
+  $(MAKE)
+
+

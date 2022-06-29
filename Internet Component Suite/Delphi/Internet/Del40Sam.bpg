@@ -1,0 +1,162 @@
+#------------------------------------------------------------------------------
+VERSION = BWS.01
+#------------------------------------------------------------------------------
+!ifndef ROOT
+ROOT = $(MAKEDIR)\..
+!endif
+#------------------------------------------------------------------------------
+MAKE = $(ROOT)\bin\make.exe -$(MAKEFLAGS) -f$**
+DCC = $(ROOT)\bin\dcc32.exe $**
+BRCC = $(ROOT)\bin\brcc32.exe $**
+#------------------------------------------------------------------------------
+PROJECTS = IcsDel40.bpl clidemo.exe client5.exe Client7.exe concli1.exe \
+  concli2.exe ConSrv1.exe dnslook.exe finger.exe ftpServ.exe ftpthrd.exe \
+  ftptst.exe httpasp.exe httpasy.exe httpChk.exe Httpdmo.exe httpget.exe \
+  httppg.exe httpthrd.exe httptst.exe MailRcv.exe MailSnd.exe md5test.exe \
+  MimeDemo.exe MimeTst.exe mtsrv.exe MyYahoo.exe newsrdr.exe NsLookup.exe \
+  pingtst.exe Pop3Mime.exe Recv.exe Sender.exe server5.exe srvdemo.exe \
+  SocksTst.exe TcpSrv.exe tnclient.exe tndemo.exe tnsrv.exe twschat.exe \
+  udplstn.exe udpsend.exe WebServ.exe IcsDll1.dll DllTst1.exe
+#------------------------------------------------------------------------------
+default: $(PROJECTS)
+#------------------------------------------------------------------------------
+
+ftptst.exe: ftptst.dpr
+  $(DCC)
+
+ftpServ.exe: ftpServ.dpr
+  $(DCC)
+
+IcsDel40.bpl: ..\VC32\IcsDel40.dpk
+  $(DCC)
+
+httptst.exe: httptst.dpr
+  $(DCC)
+
+httpthrd.exe: httpthrd.dpr
+  $(DCC)
+
+httpasp.exe: httpasp.dpr
+  $(DCC)
+
+httpasy.exe: httpasy.dpr
+  $(DCC)
+
+Httpdmo.exe: Httpdmo.dpr
+  $(DCC)
+
+httpget.exe: httpget.dpr
+  $(DCC)
+
+httppg.exe: httppg.dpr
+  $(DCC)
+
+md5test.exe: md5test.dpr
+  $(DCC)
+
+finger.exe: finger.dpr
+  $(DCC)
+
+clidemo.exe: clidemo.dpr
+  $(DCC)
+
+client5.exe: client5.dpr
+  $(DCC)
+
+tnsrv.exe: tnsrv.dpr
+  $(DCC)
+
+concli1.exe: concli1.dpr
+  $(DCC)
+
+concli2.exe: concli2.dpr
+  $(DCC)
+
+dnslook.exe: dnslook.dpr
+  $(DCC)
+
+MimeDemo.exe: MimeDemo.dpr
+  $(DCC)
+
+MimeTst.exe: MimeTst.dpr
+  $(DCC)
+
+mtsrv.exe: mtsrv.dpr
+  $(DCC)
+
+newsrdr.exe: newsrdr.dpr
+  $(DCC)
+
+pingtst.exe: pingtst.dpr
+  $(DCC)
+
+Pop3Mime.exe: Pop3Mime.dpr
+  $(DCC)
+
+server5.exe: server5.dpr
+  $(DCC)
+
+tnclient.exe: tnclient.dpr
+  $(DCC)
+
+tndemo.exe: tndemo.dpr
+  $(DCC)
+
+twschat.exe: twschat.dpr
+  $(DCC)
+
+MailRcv.exe: MailRcv.dpr
+  $(DCC)
+
+MailSnd.exe: MailSnd.dpr
+  $(DCC)
+
+Sender.exe: Sender.dpr
+  $(DCC)
+
+Recv.exe: Recv.dpr
+  $(DCC)
+
+SocksTst.exe: SocksTst.dpr
+  $(DCC)
+
+Client7.exe: Client7.dpr
+  $(DCC)
+
+udpsend.exe: udpsend.dpr
+  $(DCC)
+
+udplstn.exe: udplstn.dpr
+  $(DCC)
+
+ftpthrd.exe: ftpthrd.dpr
+  $(DCC)
+
+srvdemo.exe: srvdemo.dpr
+  $(DCC)
+
+NsLookup.exe: NsLookup.dpr
+  $(DCC)
+
+ConSrv1.exe: ConSrv1.dpr
+  $(DCC)
+
+MyYahoo.exe: MyYahoo.dpr
+  $(DCC)
+
+TcpSrv.exe: TcpSrv.dpr
+  $(DCC)
+
+httpChk.exe: httpChk.dpr
+  $(DCC)
+
+WebServ.exe: WebServ.dpr
+  $(DCC)
+
+IcsDll1.dll: IcsDll1.dpr
+  $(DCC)
+
+DllTst1.exe: DllTst1.dpr
+  $(DCC)
+
+

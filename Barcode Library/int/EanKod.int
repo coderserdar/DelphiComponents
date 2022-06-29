@@ -1,0 +1,352 @@
+unit EanKod;
+
+{$I ean.inc}
+
+// OCR, UPC-D
+// maxiCode, MSI
+// QR Code
+// Code 16K, Code 49, Code 1, PDF 417, Vericode, DataMatrix
+// Australia Post 4-State, KIX 4-state, Royal Mail 4-state
+// Codablock 256, Codablock A, Codablock N
+
+// Centrovane kontrolne znaky - vertikalne
+// offset medzi textom a kodom
+// quiet zone - velkost, hranice
+// popis - sablona
+// Ean128A, Ean128B, Ean128C
+
+
+interface
+
+uses
+     {$ifdef MSWINDOWS}
+       {$ifdef PSOFT_D4}Windows,
+       {$else}
+                WinProcs,WinTypes,
+       {$endif}
+        Graphics, Messages, Controls, Printers, ClipBrd, Dialogs, FileCtrl, Forms,
+     {$endif}
+
+     {$ifdef LINUX}
+        Types, Qt, QControls, QGraphics, QPrinters, QDialogs, QForms,
+     {$endif}
+     {$ifdef PSOFT_PDF417}
+        EanPDF417,
+     {$endif}
+     Classes, SysUtils, EanSpecs;
+
+const BarcodeLibraryVersion  = '4.4';
+      BarcodeLibraryHomePage = 'http://barcode.psoft.sk';
+      BarcodeLibraryEmail    = 'barcode@psoft.sk';
+      BarcodeLibraryRegisterString = 'http://shareit1.element5.com/product.html?productid=132706';
+
+type
+
+ TBarCodePaintEvent = procedure (Sender: TObject; R:TRect; ABarCode:String) of object;
+
+ TLastPaintError = (erOK, erMustBe, erErrorInBarCode, erCharOutOfSet,
+                    erSmallPaintBox, erOutOfSecurityBox,
+                    erBarcodeLengthInvalid,erFirstCharMustBeZero,
+                    erCharMustBeSpace,
+                    erCountCharMustBeEven,
+                    erEmptyCode);
+
+
+  TBarcodeListStyle = (btSymbol, btText);
+
+  TCustomEAN = class;
+
+  TBarcodeCaption = class(TPersistent)
+  private
+       FEan         : TCustomEAN;
+       FVisible     : Boolean;
+       FText        : String;
+       FFont        : TFont;
+       FAutoSize    : Boolean;
+       FAlignment   : TAlignment;
+       FAutoCaption : Boolean;
+       procedure ChangeEAN;
+       procedure FontChanged(Sender: TObject);
+       procedure SetVisible(Value:Boolean);
+       procedure SetText(Value:String);
+       procedure SetFont(Value:TFont);
+       procedure SetAutoSize(Value:Boolean);
+       procedure SetAutoCaption(Value:Boolean);
+       procedure SetAlignment(Value:TAlignment);
+  protected
+       procedure Paint(C:TCanvas; var R:TRect; RC:TPoint; Up:Boolean); virtual;
+  public
+       constructor CreateEAN(AOwner:TComponent);
+       destructor  Destroy; override;
+       procedure   Assign(Source:TPersistent); override;
+       function    CalcFontRect(R:TRect):TRect;
+       procedure   UpdateCaption;
+  published
+       property Visible  : Boolean    Read FVisible   Write SetVisible           Default False;
+       property Text     : String     Read FText      Write SetText;
+       property Font     : TFont      Read FFont      Write SetFont;
+       property AutoSize : Boolean    Read FAutoSize  Write SetAutoSize          Default True;
+       property Alignment: TAlignment Read FAlignment Write SetAlignment         Default taCenter;
+       property AutoCaption : Boolean    Read FAutoCaption  Write SetAutoCaption Default False;
+  end;
+
+  TBarCodeHorzLines = class(TPen)
+  private
+      FLinesCount : Integer;
+      procedure SetLinesCount(Value:Integer);
+  published
+      property LinesCount : Integer Read FLinesCount Write SetLinesCount;
+  end;
+
+  {$ifdef PSOFT_PDF417}
+        TpsPDF417=class(TPersistent)
+        private
+                FMode:psPDF417Mode;
+                FRows:Integer;
+                FCols:Integer;
+                FSecurityLevel:psPDF417ErrorCorrection;
+                FTruncated:Boolean;
+                FOnChange:TNotifyEvent;
+                FPaintIfSmall:Boolean;
+                procedure Invalidate;
+                procedure SetMode(Value:psPDF417Mode);
+                procedure SetSecurityLevel(Value:psPDF417ErrorCorrection);
+                procedure SetRows(Value:Integer);
+                procedure SetCols(Value:Integer);
+                procedure SetTruncated(Value:Boolean);
+                procedure SetPaintIfSmall(Value:Boolean);
+        public
+                Ean:TCustomEan;
+                constructor CreateEan(AOwner:TComponent);
+        published
+                property Mode:psPDF417Mode Read FMode Write SetMode;
+                property Rows:Integer Read FRows Write SetRows Default 0;
+                property Cols:Integer Read FCols Write SetCols Default 10;
+                property SecurityLevel: psPDF417ErrorCorrection Read FSecurityLevel Write SetSecurityLevel;
+                property Truncated:Boolean Read FTruncated Write SetTruncated;
+                property PaintIfSmall:Boolean Read FPaintIfSmall Write SetPaintIfSmall;
+                property OnChange:TNotifyEvent Read FOnChange write FOnChange;
+        end;
+  {$endif}
+
+  TCustomEan = class(TCustomControl)
+  private
+         FBarCode        : string;
+         FShowLabels     : Boolean;
+         FStartStopLines : Boolean;
+         FTypBarCode     : TTypBarCode;
+         FLinesColor     : TColor;
+         FEan13AddUp     : Boolean;
+         FFontAutoSize   : Boolean;
+         FAutoInc        : Boolean;
+         FAutoIncFrom    : Integer;
+         FAutoIncTo      : Integer;
+         FFirstCode      : String;
+         FSecurity       : Boolean;
+         FDemoVersion    : Boolean;
+         FTransparent    : Boolean;
+         FBackGroundColor: TColor;
+         FLastPaintError : TLastPaintError;
+         FLastErrorIndex : Integer;
+         FLastErrorChar  : Char;
+         FLabelMask      : String;
+         FAngle          : Integer;
+         FOnPaint        : TBarCodePaintEvent;
+         FOnChangeTypCode: TNotifyEvent;
+         FOnChangeBarCode: TNotifyEvent;
+         FOnResize       : TNotifyEvent;
+         FCaption        : TBarcodeCaption;
+         FAutoSize       : Boolean;
+         FDisableEditor  : Boolean;
+         FCaptionBottom  : TbarcodeCaption;
+
+         FBars           : String;
+         FHorzLines      : TBarcodeHorzLines;
+
+         FAutoCheckDigit : Boolean;
+
+         {$ifdef PSOFT_PDF417}
+                FPDF417:TpsPDF417;
+         {$endif}
+         procedure   SetBarCode(Value:String);
+         procedure   SetLabelMask(Value:String);
+         procedure   SetShowLabels(Value:Boolean);
+         procedure   SetTransparent(Value:Boolean);
+         procedure   SetStartStopLines(Value:Boolean);
+         procedure   SetLinesColor(Value:TColor);
+         procedure   SetBackgroundColor(Value:TColor);
+         procedure   SetAddUp      (Value:Boolean);
+         procedure   SetFontAuto(Value:Boolean);
+         procedure   SetSecurity(Value:Boolean);
+         procedure   SetDemo(Value:Boolean);
+         procedure   SetAngle(Value:Integer);
+         function    Codabar(ck:string):String;
+         function    AbcCodabar(ck:string):string;
+         function    Code39Standard(ck:string):string;
+         function    Code39Full(ck:string):string;
+         function    Code93Standard(ck:string):string;
+         function    Code93Full(ck:string):string;
+         function    Code128(ck:string; T:TTypBarCode):string;
+         function    EanAddOn(ck:String; le:Integer):String;
+         function    Ean8(ck:string):string;
+         function    Ean13(ck:string):string;
+         function    UPCA(ck:String):String;
+         function    UPCE(ck:String):String;
+         // function    ITF14(ck:string):string;
+         function    Plessey(ck:String):String;
+         function    Datalogic(ck:string):String;
+         function    Matrix(ck:string):String;
+         function    Industrial(ck:string):String;
+         function    Interleaved(ck:string):String;
+         function    IATA(ck:string):String;
+         function    Invert(ck:string):string;
+         function    Coop(ck:string):String;
+         function    Code11(ck:string):String;
+         function    PostNet(ck:string):string;
+         function    PZN(ck:String):String;
+         function    Zoom(ABarCode:string; AWidth:integer; ASecurity:Boolean):string;
+         procedure   SaveAsWMFInt(M:TFileName);
+         procedure   SetCaption(Value:TBarcodeCaption);
+         procedure   SetCaptionBottom(Value:TBarcodeCaption);
+         function    CheckEAN8 (var s:String):Boolean;
+         function    CheckEAN13(var s:String):Boolean;
+         function    CheckUPCA (var s:String):Boolean;
+         function    TestCharsInSet(s:String):Boolean;
+         procedure   SetAutoSize(Value:Boolean);
+         procedure   SetSetOfChars(Value:String);
+         procedure   HorzLinesChange(Sender:TObject);
+         procedure   SetAutoCheckDigit(Value:Boolean);
+  protected
+         procedure   Paint; override;
+         function    GetBarCodeLines(var BC:String):String;
+         procedure   SetTypBarCode(Value:TTypBarCode);   virtual;
+         procedure   MouseDown(Button: TMouseButton; Shift: TShiftState; X, Y: Integer); override;
+  public
+         constructor Create(AOwner:TComponent); override;
+         destructor  Destroy;                   override;
+         procedure   BarcodeComplete;
+         procedure   DblClick;                  override;
+         procedure   Next;
+         procedure   Copyright;
+         procedure   ActiveSetupWindow(Sheet:String);         virtual;
+         procedure   SetBounds(ALeft, ATop, AWidth, AHeight: Integer); override;
+
+         function    MinWidth:Integer;
+         function    GetSetOfChars:string;
+         function    GetSetOfCharsVisible:String;
+         function    CheckBarCode(S:String):Boolean;
+         procedure   CopyToClipboard;
+         procedure   CopyToClipboardWMF;
+         procedure   SaveAsBitmap(M:TFileName);
+         procedure   SaveAsWMF(M:TFileName);
+         procedure   SaveAsEMF(M:TFileName);
+         procedure   SaveAsGIF(M:TFileName);
+		{$IFDEF PSOFT_JPEG}
+               procedure   SaveAsJPG(M:TFileName);
+            {$ENDIF}
+         procedure   SaveToFile(M:TFileName);
+         procedure   Print(R:TRect);
+         procedure   PrintToCanvas(C:TCanvas; R:TRect);
+         function    LastPaintErrorText:String;
+         function    DigitVisible(idx:integer):Boolean;
+         procedure   AddTypesToList(L:TStrings; S:TBarcodeListStyle);
+         function    GetBarcodeInfo:TBarCodeInfo;
+         procedure   ExportToHTML(FileName:TFileName; gt:TGraphicsType);
+         procedure   Assign(Value:TPersistent); override;
+         function    BarcodeTypeName:String;
+         property AutoInc           : Boolean        Read FAutoInc         Write FAutoInc;
+         property AutoIncFrom       : Integer        Read FAutoIncFrom     Write FAutoIncFrom;
+         property AutoIncTo         : Integer        Read FAutoIncTo       Write FAutoIncTo;
+         property DemoVersion       : Boolean        Read FDemoVersion     Write SetDemo;
+         property BackgroundColor   : TColor         Read FBackgroundColor Write SetBackgroundColor;
+         property Transparent       : Boolean        Read FTransparent     Write SetTransparent;
+         property ShowLabels        : Boolean        Read FShowLabels      Write SetShowLabels;
+         property StartStopLines    : Boolean        Read FStartStopLines  Write SetStartStopLines;
+         property TypBarCode        : TTypBarCode    Read FTypBarCode      Write SetTypBarCode;
+         property LinesColor        : TColor         Read FLinesColor      Write SetLinesColor;
+         property Ean13AddUp        : Boolean        Read FEan13AddUp      Write SetAddUp;
+         property FontAutoSize      : Boolean        Read FFontAutoSize    Write SetFontAuto;
+         property Security          : Boolean        Read FSecurity        Write SetSecurity;
+         property Font;
+         property LastPaintError:TLastPaintError Read FLastPaintError;
+         property OnPaint:TBarCodePaintEvent Read FOnPaint Write FOnPaint;
+         property OnChangeTypCode:TNotifyEvent Read FOnChangeTypCode Write FOnChangeTypCode;
+         property OnChangeBarCode:TNotifyEvent Read FOnChangeBarCode Write FOnChangeBarCode;
+         property BarCode           : string         Read FBarCode         Write SetBarCode;
+         property LabelMask         : string         Read FLabelMask       Write SetLabelMask;
+         property FirstBarCode      : string         Read FFirstCode       Write FFirstCode;
+         property Angle             : Integer        Read FAngle           Write SetAngle             Default 0;
+         property AutoSize          : Boolean         Read FAutoSize       Write SetAutoSize          Default True;
+         property DisableEditor     : Boolean         Read FDisableEditor  Write FDisableEditor       Default False;
+         property Caption           : TBarcodeCaption Read FCaption        Write SetCaption Stored True;
+         property CaptionBottom     : TBarcodeCaption Read FCaptionBottom  Write SetCaptionBottom Stored True;
+         property HorzLines         : TBarcodeHorzLines Read FHorzLines      Write FHorzLines;
+         property SetOfChars        : String Read GetSetOfChars Write SetSetOfChars Stored False;
+         property AutoCheckDigit    : Boolean Read FAutoCheckDigit write SetAutoCheckDigit;
+         {$ifdef PSOFT_PDF417}
+                property PDF417            : TpsPDF417 Read FPDF417 write FPDF417;
+         {$endif}
+  published
+         property Align;
+         property Visible;
+         property OnClick;
+         property OnDblClick;
+         property OnDragDrop;
+         property OnDragOver;
+         property OnEndDrag;
+         property OnMouseDown;
+         property OnMouseMove;
+         property OnMouseUp;
+         property OnResize:TNotifyEvent Read FOnResize Write FOnResize;
+         {$ifndef PSOFT_D1}
+                  property OnStartDrag;
+         {$endif}
+  end;
+
+  TEan   = class(TCustomEan)
+     published
+         property AutoInc;
+         property AutoIncFrom;
+         property AutoIncTo;
+         property FirstBarCode;
+         property BackgroundColor;
+         property Transparent;
+         property ShowLabels;
+         property StartStopLines;
+         property TypBarCode;
+         property LinesColor;
+         property Ean13AddUp;
+         property FontAutoSize;
+         property Security;
+         property Font;
+         property LastPaintError;
+         property BarCode;
+         property LabelMask;
+         property OnPaint;
+         property OnChangeTypCode;
+         property OnChangeBarCode;
+         property DemoVersion;
+         property Angle;
+         property Caption;
+         property CaptionBottom;
+         property AutoSize;
+         property DisableEditor;
+         property HorzLines;
+         property SetOfChars;
+         property AutoCheckDigit;
+         {$ifdef PSOFT_PDF417}
+                property PDF417; 
+         {$endif}
+  end;
+
+
+
+  procedure PaintBarCode(C:TCanvas; R:TRect; E:TCustomEan);
+  function  IsBookland(ISBN:String):Boolean;
+  function  BooklandToEAN(s:String; T:TTypBarcode):String;
+  function  CalcEan8CheckDigit(s:String):Char;
+  function  CalcEan13CheckDigit(s:String):Char;
+  function  CalcISBNCheckDigit(s:String):Char;
+
+
+implementation

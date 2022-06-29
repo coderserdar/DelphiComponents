@@ -1,0 +1,130 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!-- C++Builder XML Project -->
+<PROJECT>
+  <MACROS>
+    <VERSION value="BCB.05.03"/>
+    <PROJECT value="IcsBcb50.bpl"/>
+    <OBJFILES value="WSocket.obj Httpprot.obj Ftpcli.obj Wait.obj TnScript.obj Fingcli.obj 
+      Nntpcli.obj Ping.obj TnCnx.obj TnEmulVT.obj EmulVT.obj FtpSrv.obj 
+      SmtpProt.obj WSockBuf.obj Pop3Prot.obj MimeDec.obj DnsQuery.obj 
+      WSocketS.obj HttpSrv.obj IcsBcb50.obj"/>
+    <RESFILES value="IcsBcb50.res WSocket.dcr Httpprot.dcr Ftpcli.dcr Wait.dcr TnScript.dcr 
+      Fingcli.dcr Nntpcli.dcr Ping.dcr TnCnx.dcr TnEmulVT.dcr EmulVT.dcr 
+      FtpSrv.dcr SmtpProt.dcr Pop3Prot.dcr MimeDec.dcr DnsQuery.dcr WSocketS.dcr 
+      HttpSrv.dcr"/>
+    <IDLFILES value=""/>
+    <IDLGENFILES value=""/>
+    <DEFFILE value=""/>
+    <RESDEPEN value="$(RESFILES)"/>
+    <LIBFILES value=""/>
+    <LIBRARIES value="vcljpg50.lib vcldbx50.lib vclx50.lib vclbde50.lib vcldb50.lib"/>
+    <SPARELIBS value="vcl50.lib vcldb50.lib vclbde50.lib vclx50.lib vcldbx50.lib vcljpg50.lib"/>
+    <PACKAGES value="vcl50.bpi"/>
+    <PATHCPP value=".;"/>
+    <PATHPAS value=".;"/>
+    <PATHRC value=".;"/>
+    <PATHASM value=".;"/>
+    <DEBUGLIBPATH value="$(BCB)\lib\debug"/>
+    <RELEASELIBPATH value="$(BCB)\lib\release"/>
+    <LINKER value="ilink32"/>
+    <USERDEFINES value=""/>
+    <SYSDEFINES value="NO_STRICT;_VIS_NOLIB;USEPACKAGES"/>
+    <MAINSOURCE value="IcsBcb50.cpp"/>
+    <INCLUDEPATH value="..\..\internet;..;D:\delphi\vc32\;$(BCB)\include;$(BCB)\include\vcl"/>
+    <LIBPATH value="$(BCB)\Projects\Lib;..\..\internet;..;D:\delphi\vc32\;$(BCB)\lib\obj;$(BCB)\lib"/>
+    <WARNINGS value="-w-par -w-8027 -w-8026"/>
+    <WARNOPTSTR value=""/>
+  </MACROS>
+  <OPTIONS>
+    <IDLCFLAGS value="-I..\..\internet -I.. -ID:\delphi\vc32\. -I$(BCB)\include 
+      -I$(BCB)\include\vcl -src_suffix cpp -boa"/>
+    <CFLAG1 value="-Od -Vx -Ve -Tkh30000 -X- -r- -a8 -b- -k -y -v -vi- -c -tWM"/>
+    <PFLAGS value="-$YD -$W -$O- -v -M -JPHNE"/>
+    <RFLAGS value=""/>
+    <AFLAGS value="/mx /w2 /zd"/>
+    <LFLAGS value="-D&quot;Internet Component Suite (ICS) for BCB5 by F. Piette&quot; -aa -Tpp -x -Gn 
+      -Gl -Gi -v"/>
+  </OPTIONS>
+  <LINKER>
+    <ALLOBJ value="c0pkg32.obj $(PACKAGES) sysinit.obj $(OBJFILES)"/>
+    <ALLRES value="$(RESFILES)"/>
+    <ALLLIB value="$(LIBFILES) $(LIBRARIES) import32.lib cp32mt.lib"/>
+  </LINKER>
+  <IDEOPTIONS>
+[Version Info]
+IncludeVerInfo=1
+AutoIncBuild=1
+MajorVer=2
+MinorVer=0
+Release=0
+Build=15
+Debug=0
+PreRelease=0
+Special=0
+Private=0
+DLL=0
+Locale=2060
+CodePage=1252
+
+[Version Info Keys]
+CompanyName=OverByte (F. Piette)
+FileDescription=ICS Components for BCB5
+FileVersion=2.0.0.15
+InternalName=IcsBcb50
+LegalCopyright=(c) 1997-2000 by François PIETTE
+LegalTrademarks=
+OriginalFilename=
+ProductName=ICS
+ProductVersion=2.0.0.0
+Comments=http://www.rtfm.be/fpiette/indexuk.htm
+
+[HistoryLists\hlIncludePath]
+Count=4
+Item0=..\..\internet;..;D:\delphi\vc32\;$(BCB)\include;$(BCB)\include\vcl
+Item1=..\..\internet;..\..\Delphi;D:\delphi\vc32\;$(BCB)\include;$(BCB)\include\vcl
+Item2=..\..\internet;..;..\..\..\delphi\vc32;$(BCB)\include;$(BCB)\include\vcl
+Item3=..\..\internet;..\..\DELPHI;..\..\..\delphi\vc32;$(BCB)\include;$(BCB)\include\vcl
+
+[HistoryLists\hlLibraryPath]
+Count=6
+Item0=$(BCB)\Projects\Lib;..\..\internet;..;D:\delphi\vc32\;$(BCB)\lib\obj;$(BCB)\lib
+Item1=$(BCB)\Projects\Lib;..\..\internet;..\..\Delphi;D:\delphi\vc32\;$(BCB)\lib\obj;$(BCB)\lib
+Item2=$(BCB)\Projects\Lib;..\..\internet;..;..\..\..\delphi\vc32;$(BCB)\lib\obj;$(BCB)\lib
+Item3=$(BCB)\Projects\Lib;..\..\internet;..\..\DELPHI;..\..\..\delphi\vc32;$(BCB)\lib\obj;$(BCB)\lib
+Item4=..\vc32;..\..\internet;..;..\..\..\delphi\vc32;$(BCB)\lib\obj;$(BCB)\lib
+Item5=..\..\internet;..;..\..\..\delphi\vc32;$(BCB)\lib\obj;$(BCB)\lib
+
+[HistoryLists\hlDebugSourcePath]
+Count=1
+Item0=$(BCB)\source\vcl
+
+[HistoryLists\hlConditionals]
+Count=1
+Item0=_RTLDLL;USEPACKAGES
+
+[Debugging]
+DebugSourceDirs=$(BCB)\source\vcl
+
+[Parameters]
+RunParams=
+HostApplication=
+RemoteHost=
+RemotePath=
+RemoteDebug=0
+
+[Compiler]
+ShowInfoMsgs=0
+LinkDebugVcl=0
+LinkCGLIB=0
+
+[CORBA]
+AddServerUnit=1
+AddClientUnit=1
+PrecompiledHeaders=1
+
+[Language]
+ActiveLang=
+ProjectLang=
+RootDir=
+  </IDEOPTIONS>
+</PROJECT>

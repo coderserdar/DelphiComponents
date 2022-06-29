@@ -1,0 +1,125 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!-- C++Builder XML Project -->
+<PROJECT>
+  <MACROS>
+    <VERSION value="BCB.05.03"/>
+    <PROJECT value="Client7.exe"/>
+    <OBJFILES value="Client7.obj ..\Cli7.obj"/>
+    <RESFILES value="Client7.res"/>
+    <IDLFILES value=""/>
+    <IDLGENFILES value=""/>
+    <DEFFILE value=""/>
+    <RESDEPEN value="$(RESFILES) ..\Cli7.dfm"/>
+    <LIBFILES value=""/>
+    <LIBRARIES value="bcbsmp50.lib IcsBcb50.lib vclx50.lib vclbde50.lib vcldb50.lib vcl50.lib"/>
+    <SPARELIBS value="vcl50.lib vcldb50.lib vclbde50.lib vclx50.lib IcsBcb50.lib bcbsmp50.lib"/>
+    <PACKAGES value="vclx50.bpi vcl50.bpi vcldb50.bpi vclbde50.bpi vcldbx50.bpi bcbsmp50.bpi 
+      dclocx50.bpi qrpt50.bpi teeui50.bpi vclsmp50.bpi teedb50.bpi tee50.bpi 
+      ibsmp50.bpi nmfast50.bpi inetdb50.bpi inet50.bpi"/>
+    <PATHCPP value=".;.."/>
+    <PATHPAS value=".;"/>
+    <PATHRC value=".;"/>
+    <PATHASM value=".;"/>
+    <DEBUGLIBPATH value="$(BCB)\lib\debug"/>
+    <RELEASELIBPATH value="$(BCB)\lib\release"/>
+    <LINKER value="ilink32"/>
+    <USERDEFINES value=""/>
+    <SYSDEFINES value="NO_STRICT;_RTLDLL;_VIS_NOLIB"/>
+    <MAINSOURCE value="Client7.cpp"/>
+    <INCLUDEPATH value="..\;..;..\..\..\delphi\vc32;$(BCB)\include;$(BCB)\include\vcl;..\..\..\delphi\midware"/>
+    <LIBPATH value="..\;..;$(BCB)\Projects\Lib;..\..\..\delphi\vc32;$(BCB)\lib\obj;$(BCB)\lib"/>
+    <WARNINGS value="-w-par -w-8027 -w-8026"/>
+    <WARNOPTSTR value=""/>
+  </MACROS>
+  <OPTIONS>
+    <IDLCFLAGS value="-I..\. -I.. -I..\..\..\delphi\vc32 -I$(BCB)\include -I$(BCB)\include\vcl 
+      -I..\..\..\delphi\midware -src_suffix cpp -boa"/>
+    <CFLAG1 value="-Od -Vx -Ve -Tkh30000 -X- -r- -a8 -b- -k -y -v -vi- -c -tW -tWM"/>
+    <PFLAGS value="-$YD -$W -$O- -v -M -JPHNE"/>
+    <RFLAGS value=""/>
+    <AFLAGS value="/mx /w2 /zd"/>
+    <LFLAGS value="-D&quot;&quot; -aa -Tpe -x -Gn -v"/>
+  </OPTIONS>
+  <LINKER>
+    <ALLOBJ value="c0w32.obj Memmgr.Lib sysinit.obj $(OBJFILES)"/>
+    <ALLRES value="$(RESFILES)"/>
+    <ALLLIB value="$(LIBFILES) $(LIBRARIES) import32.lib cp32mti.lib"/>
+  </LINKER>
+  <IDEOPTIONS>
+[Version Info]
+IncludeVerInfo=1
+AutoIncBuild=1
+MajorVer=1
+MinorVer=0
+Release=1
+Build=1
+Debug=0
+PreRelease=0
+Special=0
+Private=0
+DLL=0
+Locale=1036
+CodePage=1252
+
+[Version Info Keys]
+CompanyName=OverByte (F. Piette)
+FileDescription=
+FileVersion=1.0.1.1
+InternalName=
+LegalCopyright=(c) 1998-2000 by François PIETTE
+LegalTrademarks=
+OriginalFilename=
+ProductName=
+ProductVersion=1.0.0.0
+Comments=http://www.rtfm.be/fpiette/indexuk.htm
+
+[HistoryLists\hlIncludePath]
+Count=5
+Item0=..\;..;..\..\..\delphi\vc32;$(BCB)\include;$(BCB)\include\vcl;..\..\..\delphi\midware
+Item1=..\..\Internet;..\..\..\delphi\vc32;$(BCB)\include;$(BCB)\include\vcl;..\..\..\delphi\midware
+Item2=..\;..\..\INTERNET;..;..\..\..\delphi\vc32;$(BCB)\include;$(BCB)\include\vcl;..\..\..\delphi\midware
+Item3=..\;..\..\INTERNET;..\..\..\delphi\vc32;..;$(BCB)\include;$(BCB)\include\vcl;..\..\..\delphi\midware
+Item4=..\..\delphi\vc32;$(BCB)\include;$(BCB)\include\vcl;d:\fpiette\delphi\midware
+
+[HistoryLists\hlLibraryPath]
+Count=5
+Item0=..\;..;$(BCB)\Projects\Lib;..\..\..\delphi\vc32;$(BCB)\lib\obj;$(BCB)\lib
+Item1=..\..\Internet;$(BCB)\Projects\Lib;..\..\..\delphi\vc32;$(BCB)\lib\obj;$(BCB)\lib
+Item2=..\;$(BCB)\Projects\Lib;..\..\INTERNET;..;..\..\..\delphi\vc32;$(BCB)\lib\obj;$(BCB)\lib
+Item3=$(BCB)\Projects\Lib;..\;..\..\INTERNET;..\..\..\delphi\vc32;..;$(BCB)\lib\obj;$(BCB)\lib
+Item4=..\..\delphi\vc32;$(BCB)\lib\obj;$(BCB)\lib
+
+[HistoryLists\hlDebugSourcePath]
+Count=1
+Item0=$(BCB)\source\vcl
+
+[HistoryLists\hlConditionals]
+Count=1
+Item0=_RTLDLL;USEPACKAGES
+
+[Debugging]
+DebugSourceDirs=$(BCB)\source\vcl
+
+[Parameters]
+RunParams=
+HostApplication=
+RemoteHost=
+RemotePath=
+RemoteDebug=0
+
+[Compiler]
+ShowInfoMsgs=0
+LinkDebugVcl=0
+LinkCGLIB=0
+
+[CORBA]
+AddServerUnit=1
+AddClientUnit=1
+PrecompiledHeaders=1
+
+[Language]
+ActiveLang=
+ProjectLang=
+RootDir=
+  </IDEOPTIONS>
+</PROJECT>

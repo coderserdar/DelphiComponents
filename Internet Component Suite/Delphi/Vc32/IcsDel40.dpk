@@ -1,0 +1,78 @@
+package IcsDel40;
+
+{$R *.RES}
+{$R 'WSocket.dcr'}
+{$R 'fingcli.dcr'}
+{$R 'FtpCli.dcr'}
+{$R 'FtpSrv.dcr'}
+{$R 'HttpProt.dcr'}
+{$R 'MimeDec.dcr'}
+{$R 'NntpCli.dcr'}
+{$R 'ping.dcr'}
+{$R 'pop3prot.dcr'}
+{$R 'TnCnx.dcr'}
+{$R 'tnemulvt.dcr'}
+{$R 'tnscript.dcr'}
+{$R 'emulvt.dcr'}
+{$R 'SmtpProt.dcr'}
+{$R 'MbxFile.dcr'}
+{$R 'wait.dcr'}
+{$R 'DnsQuery.dcr'}
+{$R 'WSocketS.dcr'}
+{$R 'HttpSrv.dcr'}
+{$ALIGN ON}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS ON}
+{$RANGECHECKS ON}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $00400000}
+{$DESCRIPTION 'ICS components (Freeware from  F. Piette)'}
+{$IMPLICITBUILD OFF}
+
+requires
+  vcl40;
+
+contains
+  WSockBuf in 'WSockBuf.pas',
+  WSocket in 'WSocket.pas',
+  FingCli in 'fingcli.pas',
+  Formpos in 'formpos.pas',
+  FtpCli in 'FtpCli.pas',
+  FtpSrv in 'FtpSrv.pas',
+  FtpSrvC in 'FtpSrvC.pas',
+  HttpProt in 'HttpProt.pas',
+  icmp in 'icmp.pas',
+  MD5 in 'MD5.pas',
+  MimeDec in 'MimeDec.pas',
+  NntpCli in 'NntpCli.pas',
+  Ping in 'ping.pas',
+  TnCnx in 'TnCnx.pas',
+  TnEmulVT in 'TnEmulVT.pas',
+  Tnoptfrm in 'tnoptfrm.pas' {OptForm},
+  TnScript in 'TnScript.pas',
+  Emulvt in 'emulvt.pas',
+  SmtpProt in 'SmtpProt.pas',
+  MbxFile in 'MbxFile.pas',
+  Pop3Prot in 'Pop3Prot.pas',
+  Wait in 'wait.pas',
+  DnsQuery in 'DnsQuery.pas',
+  WSocketS in 'WSocketS.pas',
+  HttpSrv in 'HttpSrv.pas',
+  FtpSrvT in 'FtpSrvT.pas';
+
+end.

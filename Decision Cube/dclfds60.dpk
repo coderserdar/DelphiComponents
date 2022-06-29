@@ -1,0 +1,42 @@
+package dclfds60;
+
+{$R *.res}
+{$R 'Src\FxReg.dcr'}
+{$ALIGN 8}
+{ ASSERTIONS OFF}
+{$BOOLEVAL OFF}
+{ DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{ LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{ STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $5059FFEB}
+{$DESCRIPTION 'WL Decision Cube Components'}
+{$DESIGNONLY}
+{$IMPLICITBUILD OFF}
+
+requires
+  dcltee,
+  designide,
+  fds60,
+  dcldb;
+
+contains
+  FxDConst in 'Src\FxDConst.pas',
+  FxReg in 'Src\FxReg.pas',
+  FxDimEdt in 'Src\FxDimEdt.pas' {DimEditor};
+
+end.
+

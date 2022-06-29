@@ -1,0 +1,221 @@
+# ---------------------------------------------------------------------------
+!if !$d(BCB)
+BCB = $(MAKEDIR)\..
+!endif
+
+# ---------------------------------------------------------------------------
+# IDE SECTION
+# ---------------------------------------------------------------------------
+# The following section of the project makefile is managed by the BCB IDE.
+# It is recommended to use the IDE to change any of the values in this
+# section.
+# ---------------------------------------------------------------------------
+
+VERSION = BCB.04.04
+# ---------------------------------------------------------------------------
+PROJECT = Icsbcb40.bpl
+OBJFILES = WSocket.obj httpprot.obj ftpcli.obj wait.obj tnscript.obj fingcli.obj \
+  nntpcli.obj ping.obj tncnx.obj tnemulvt.obj emulvt.obj FtpSrv.obj SmtpProt.obj \
+  wsockbuf.obj Pop3Prot.obj MimeDec.obj DnsQuery.obj WSocketS.obj HttpSrv.obj \
+  Icsbcb40.obj
+RESFILES = Icsbcb40.res WSocket.dcr httpprot.dcr ftpcli.dcr wait.dcr tnscript.dcr \
+  fingcli.dcr nntpcli.dcr ping.dcr tncnx.dcr tnemulvt.dcr emulvt.dcr FtpSrv.dcr \
+  SmtpProt.dcr Pop3Prot.dcr MimeDec.dcr DnsQuery.dcr WSocketS.dcr HttpSrv.dcr
+DEFFILE =
+RESDEPEN = $(RESFILES)
+LIBFILES =
+IDLGENFILES =
+IDLFILES =
+LIBRARIES = vcljpg40.lib vcldbx40.lib vclmid40.lib vclx40.lib vcldb40.lib
+SPARELIBS = vcl40.lib vcldb40.lib vclx40.lib vclmid40.lib vcldbx40.lib vcljpg40.lib
+PACKAGES = vcl40.bpi bcbsmp40.bpi
+# ---------------------------------------------------------------------------
+PATHCPP = .;
+PATHASM = .;
+PATHPAS = .;
+PATHRC = .;
+DEBUGLIBPATH = $(BCB)\lib\debug
+RELEASELIBPATH = $(BCB)\lib\release
+SYSDEFINES = NO_STRICT;_RTLDLL;USEPACKAGES
+USERDEFINES =
+# ---------------------------------------------------------------------------
+CFLAG1 = -I..\..\internet;..;..\..\..\delphi\vc32;$(BCB)\include;$(BCB)\include\vcl -Od \
+  -Hc -H=$(BCB)\lib\vcl40.csm -w -Ve -Tkh30000 -r- -a8 -k -y -v -vi- \
+  -D$(SYSDEFINES);$(USERDEFINES) -c -b- -w-par -w-inl -Vx -tWM
+CFLAG2 =
+CFLAG3 =
+IDLCFLAGS = -I..\..\internet -I.. -I..\..\..\delphi\vc32 -I$(BCB)\include \
+  -I$(BCB)\include\vcl -src_suffixcpp
+PFLAGS = -U$(BCB)\Projects\Lib;..\..\internet;..;..\..\..\delphi\vc32;$(BCB)\lib\obj;$(BCB)\lib;$(RELEASELIBPATH) \
+  -I..\..\internet;..;..\..\..\delphi\vc32;$(BCB)\include;$(BCB)\include\vcl -$YD \
+  -$W -$O- -v -M -JPHNE
+RFLAGS = -i..\..\internet;..;..\..\..\delphi\vc32;$(BCB)\include;$(BCB)\include\vcl
+AFLAGS = /i..\..\internet /i..\..\DELPHI /i..\..\..\delphi\vc32 /i$(BCB)\include \
+  /i$(BCB)\include\vcl /mx /w2 /zd /d_RTLDLL /dUSEPACKAGES
+LFLAGS = -L$(BCB)\Projects\Lib;..\..\internet;..;..\..\..\delphi\vc32;$(BCB)\lib\obj;$(BCB)\lib;$(RELEASELIBPATH) \
+  -D"ICS components by F. Piette" -aa -Tpp -x -Gn -Gl -Gi -v
+IFLAGS =
+# ---------------------------------------------------------------------------
+ALLOBJ = c0pkg32.obj Memmgr.Lib $(PACKAGES) sysinit.obj $(OBJFILES)
+ALLRES = $(RESFILES)
+ALLLIB = $(LIBFILES) $(LIBRARIES) import32.lib cp32mti.lib
+# ---------------------------------------------------------------------------
+!ifdef IDEOPTIONS
+
+[Version Info]
+IncludeVerInfo=1
+AutoIncBuild=1
+MajorVer=2
+MinorVer=0
+Release=0
+Build=6
+Debug=0
+PreRelease=0
+Special=0
+Private=0
+DLL=0
+Locale=2060
+CodePage=1252
+
+[Version Info Keys]
+CompanyName=OverByte (F. Piette)
+FileDescription=ICS Components for BCB4
+FileVersion=2.0.0.6
+InternalName=IcsBcb40
+LegalCopyright=(c) 97'-'99 by F. Piette
+LegalTrademarks=
+OriginalFilename=
+ProductName=ICS
+ProductVersion=2.0.0.0
+Comments=http://www.rtfm.be/fpiette/indexuk.htm
+
+[Excluded Packages]
+$(BCB)\Bin\dcl31w40.bpl=Delphi 1.0 Compatibility Components
+$(BCB)\Bin\bcbsmp40.bpl=Borland C++ Sample Components
+$(BCB)\Bin\dclint40.bpl=Borland Resource DLL Wizard
+C:\WINDOWS\SYSTEM\\ibsmp40.bpl=Borland C++ InterBase Alerter Component
+$(BCB)\Bin\rcexpert.bpl=Borland Resource Expert
+$(BCB)\Bin\dcldb40.bpl=Borland Database Components
+$(BCB)\Bin\dclqrt40.bpl=QuickReport Components
+$(BCB)\Bin\mfcowlwizard.bpl=MFC/OWL Wizard
+$(BCB)\Bin\dcltee40.bpl=Borland TeeChart Components
+$(BCB)\Bin\dcldss40.bpl=Borland Decision Cube Components
+
+[HistoryLists\hlIncludePath]
+Count=2
+Item0=..\..\internet;..\..\DELPHI;..\..\..\delphi\vc32;$(BCB)\include;$(BCB)\include\vcl
+Item1=..\..\internet;..;..\..\..\delphi\vc32;$(BCB)\include;$(BCB)\include\vcl
+
+[HistoryLists\hlLibraryPath]
+Count=3
+Item0=$(BCB)\Projects\Lib;..\..\internet;..\..\DELPHI;..\..\..\delphi\vc32;$(BCB)\lib\obj;$(BCB)\lib
+Item1=..\vc32;..\..\internet;..;..\..\..\delphi\vc32;$(BCB)\lib\obj;$(BCB)\lib
+Item2=..\..\internet;..;..\..\..\delphi\vc32;$(BCB)\lib\obj;$(BCB)\lib
+
+[HistoryLists\hlDebugSourcePath]
+Count=1
+Item0=$(BCB)\source\vcl
+
+[HistoryLists\hlConditionals]
+Count=1
+Item0=_RTLDLL;USEPACKAGES
+
+[Debugging]
+DebugSourceDirs=$(BCB)\source\vcl
+
+[Parameters]
+RunParams=
+HostApplication=
+RemoteHost=
+RemotePath=
+RemoteDebug=0
+
+[Compiler]
+InMemoryExe=0
+ShowInfoMsgs=0
+
+[CORBA]
+AddServerUnit=1
+AddClientUnit=1
+PrecompiledHeaders=1
+
+!endif
+
+# ---------------------------------------------------------------------------
+# MAKE SECTION
+# ---------------------------------------------------------------------------
+# This section of the project file is not used by the BCB IDE.  It is for
+# the benefit of building from the command-line using the MAKE utility.
+# ---------------------------------------------------------------------------
+
+.autodepend
+# ---------------------------------------------------------------------------
+!if !$d(BCC32)
+BCC32 = bcc32
+!endif
+
+!if !$d(DCC32)
+DCC32 = dcc32
+!endif
+
+!if !$d(TASM32)
+TASM32 = tasm32
+!endif
+
+!if !$d(LINKER)
+LINKER = ilink32
+!endif
+
+!if !$d(BRCC32)
+BRCC32 = brcc32
+!endif
+
+!if !$d(IDL2CPP)
+IDL2CPP = idl2cpp
+!endif
+# ---------------------------------------------------------------------------
+!if $d(PATHCPP)
+.PATH.CPP = $(PATHCPP)
+.PATH.C   = $(PATHCPP)
+!endif
+
+!if $d(PATHPAS)
+.PATH.PAS = $(PATHPAS)
+!endif
+
+!if $d(PATHASM)
+.PATH.ASM = $(PATHASM)
+!endif
+
+!if $d(PATHRC)
+.PATH.RC  = $(PATHRC)
+!endif
+# ---------------------------------------------------------------------------
+$(PROJECT): $(IDLGENFILES) $(OBJFILES) $(RESDEPEN) $(DEFFILE)
+    $(BCB)\BIN\$(LINKER) @&&!
+    $(LFLAGS) +
+    $(ALLOBJ), +
+    $(PROJECT),, +
+    $(ALLLIB), +
+    $(DEFFILE), +
+    $(ALLRES)
+!
+# ---------------------------------------------------------------------------
+.pas.hpp:
+    $(BCB)\BIN\$(DCC32) $(PFLAGS) {$< }
+
+.pas.obj:
+    $(BCB)\BIN\$(DCC32) $(PFLAGS) {$< }
+
+.cpp.obj:
+    $(BCB)\BIN\$(BCC32) $(CFLAG1) $(CFLAG2) $(CFLAG3) -n$(@D) {$< }
+
+.c.obj:
+    $(BCB)\BIN\$(BCC32) $(CFLAG1) $(CFLAG2) $(CFLAG3) -n$(@D) {$< }
+
+.asm.obj:
+    $(BCB)\BIN\$(TASM32) $(AFLAGS) $<, $@
+
+.rc.res:
+    $(BCB)\BIN\$(BRCC32) $(RFLAGS) -fo$@ $<
+# ---------------------------------------------------------------------------

@@ -1,0 +1,79 @@
+package IcsDel60;
+
+{$R *.res}
+{$R 'WSocket.dcr'}
+{$R 'FingCli.dcr'}
+{$R 'FtpCli.dcr'}
+{$R 'FtpSrv.dcr'}
+{$R 'HttpProt.dcr'}
+{$R 'MimeDec.dcr'}
+{$R 'NntpCli.dcr'}
+{$R 'Ping.dcr'}
+{$R 'Pop3Prot.dcr'}
+{$R 'TnCnx.dcr'}
+{$R 'TnEmulVT.dcr'}
+{$R 'TnScript.dcr'}
+{$R 'EmulVT.dcr'}
+{$R 'SmtpProt.dcr'}
+{$R 'MbxFile.dcr'}
+{$R 'Wait.dcr'}
+{$R 'DnsQuery.dcr'}
+{$R 'WSocketS.dcr'}
+{$R 'HttpSrv.dcr'}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS ON}
+{$RANGECHECKS ON}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'Internet Component Suite (ICS) for Delphi 6'}
+{$IMPLICITBUILD ON}
+
+requires
+  vcl,
+  rtl;
+
+contains
+  WSockBuf in 'WSockBuf.pas',
+  WSocket in 'WSocket.pas',
+  FingCli in 'FingCli.pas',
+  FormPos in 'FormPos.pas',
+  FtpCli in 'FtpCli.pas',
+  FtpSrv in 'FtpSrv.pas',
+  FtpSrvC in 'FtpSrvC.pas',
+  HttpProt in 'HttpProt.pas',
+  Icmp in 'Icmp.pas',
+  MD5 in 'MD5.pas',
+  MimeDec in 'MimeDec.pas',
+  NntpCli in 'NntpCli.pas',
+  Ping in 'Ping.pas',
+  TnCnx in 'TnCnx.pas',
+  TnEmulVT in 'TnEmulVT.pas',
+  TnOptFrm in 'TnOptFrm.pas' {OptForm},
+  TnScript in 'TnScript.pas',
+  EmulVT in 'EmulVT.pas',
+  SmtpProt in 'SmtpProt.pas',
+  MbxFile in 'MbxFile.pas',
+  Pop3Prot in 'Pop3Prot.pas',
+  Wait in 'Wait.pas',
+  DnsQuery in 'DnsQuery.pas',
+  WSocketS in 'WSocketS.pas',
+  HttpSrv in 'HttpSrv.pas',
+  FtpSrvT in 'FtpSrvT.pas';
+
+end.

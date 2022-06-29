@@ -1,0 +1,55 @@
+package fds60;
+
+{$R *.res}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $4088FFF3}
+{$DESCRIPTION 'WL Decision Cube Components'}
+{$RUNONLY}
+{$IMPLICITBUILD OFF}
+
+requires
+  vcl,
+  rtl,
+  dbrtl,
+  tee;
+
+contains
+  FxGrid in 'Src\FxGrid.pas',
+  FxButton in 'Src\FxButton.pas',
+  FxDB in 'Src\FxDB.pas',
+  FxConsts in 'Src\FxConsts.pas',
+  FxStore in 'Src\FxStore.pas',
+  FxCommon in 'Src\FxCommon.pas',
+  FxArrays in 'Src\FxArrays.pas',
+  FxPivSrc in 'Src\FxPivSrc.pas',
+  FxDCube in 'Src\FxDCube.pas' {FDCubeEditor},
+  FxGraph in 'Src\FxGraph.pas',
+  FxDimPager in 'Src\FxDimPager.pas',
+  FxPBar in 'Src\FxPBar.pas' {FxProgressDialog},
+  FxCache in 'Src\FxCache.pas',
+  FxMap in 'Src\FxMap.pas',
+  FxBin in 'Src\FxBin.pas',
+  FxHtml in 'Src\FxHtml.pas',
+  FxExpr in 'Src\FxExpr.pas';
+
+end.
+
