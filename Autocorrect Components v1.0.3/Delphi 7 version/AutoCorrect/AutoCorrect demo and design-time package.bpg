@@ -1,0 +1,26 @@
+#------------------------------------------------------------------------------
+VERSION = BWS.01
+#------------------------------------------------------------------------------
+!ifndef ROOT
+ROOT = $(MAKEDIR)\..
+!endif
+#------------------------------------------------------------------------------
+MAKE = $(ROOT)\bin\make.exe -$(MAKEFLAGS) -f$**
+DCC = $(ROOT)\bin\dcc32.exe $**
+BRCC = $(ROOT)\bin\brcc32.exe $**
+#------------------------------------------------------------------------------
+PROJECTS = dclCCRAutoCorrect.bpl CodelessDemo.exe AutoCorrectDemo.exe
+#------------------------------------------------------------------------------
+default: $(PROJECTS)
+#------------------------------------------------------------------------------
+
+AutoCorrectDemo.exe: Demos\AutoCorrectDemo.dpr
+  $(DCC)
+
+dclCCRAutoCorrect.bpl: dclCCRAutoCorrect.dpk
+  $(DCC)
+
+CodelessDemo.exe: Demos\CodelessDemo.dpr
+  $(DCC)
+
+

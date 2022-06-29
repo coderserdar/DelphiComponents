@@ -1,0 +1,40 @@
+package dclCCRAutoCorrect;
+
+{$R *.res}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'AutoCorrect Components v1.0 (CCR.AutoCorrect)'}
+{$DESIGNONLY}
+{$IMPLICITBUILD ON}
+
+requires
+  designide,
+  rtl,
+  vcl;
+
+contains
+  CCR.AutoCorrect in 'CCR.AutoCorrect.pas',
+  CCR.AutoCorrect.Controls in 'CCR.AutoCorrect.Controls.pas',
+  CCR.AutoCorrect.Consts in 'CCR.AutoCorrect.Consts.pas',
+  CCR.AutoCorrect.Reg in 'CCR.AutoCorrect.Reg.pas';
+
+end.

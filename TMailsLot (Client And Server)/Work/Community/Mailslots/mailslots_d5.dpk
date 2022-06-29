@@ -1,0 +1,39 @@
+package mailslots_d5;
+
+{$R *.RES}
+{$R 'Mailslotreg.dcr'}
+{$ALIGN ON}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'Composants Mailslots'}
+{$IMPLICITBUILD OFF}
+
+requires
+  vcl50,
+  dclstd50;
+
+contains
+  Mailslots in 'Mailslots.pas',
+  Mailslotreg in 'Mailslotreg.pas',
+  NetworkBrowser in 'NetworkBrowser.pas',
+  NetworkBrowserEditor in 'NetworkBrowserEditor.pas' {TNetworkBrowserEditor};
+
+end.

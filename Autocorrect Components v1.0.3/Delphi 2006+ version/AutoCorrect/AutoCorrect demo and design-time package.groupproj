@@ -1,0 +1,54 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{686511e5-73d4-4179-8df4-51982339e855}</ProjectGuid>
+  </PropertyGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Projects Include="dclCCRAutoCorrect.dproj" />
+    <Projects Include="Demos\AutoCorrectDemo.dproj" />
+    <Projects Include="Demos\CodelessDemo.dproj" />
+  </ItemGroup>
+  <ProjectExtensions>
+    <Borland.Personality>Default.Personality</Borland.Personality>
+    <Borland.ProjectType />
+    <BorlandProject>
+  <BorlandProject xmlns=""> <Default.Personality> </Default.Personality> </BorlandProject></BorlandProject>
+  </ProjectExtensions>
+  <Target Name="dclCCRAutoCorrect">
+    <MSBuild Projects="dclCCRAutoCorrect.dproj" Targets="" />
+  </Target>
+  <Target Name="dclCCRAutoCorrect:Clean">
+    <MSBuild Projects="dclCCRAutoCorrect.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="dclCCRAutoCorrect:Make">
+    <MSBuild Projects="dclCCRAutoCorrect.dproj" Targets="Make" />
+  </Target>
+  <Target Name="CodelessDemo">
+    <MSBuild Projects="Demos\CodelessDemo.dproj" Targets="" />
+  </Target>
+  <Target Name="CodelessDemo:Clean">
+    <MSBuild Projects="Demos\CodelessDemo.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="CodelessDemo:Make">
+    <MSBuild Projects="Demos\CodelessDemo.dproj" Targets="Make" />
+  </Target>
+  <Target Name="AutoCorrectDemo">
+    <MSBuild Projects="Demos\AutoCorrectDemo.dproj" Targets="" />
+  </Target>
+  <Target Name="AutoCorrectDemo:Clean">
+    <MSBuild Projects="Demos\AutoCorrectDemo.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="AutoCorrectDemo:Make">
+    <MSBuild Projects="Demos\AutoCorrectDemo.dproj" Targets="Make" />
+  </Target>
+  <Target Name="Build">
+    <CallTarget Targets="dclCCRAutoCorrect;CodelessDemo;AutoCorrectDemo" />
+  </Target>
+  <Target Name="Clean">
+    <CallTarget Targets="dclCCRAutoCorrect:Clean;CodelessDemo:Clean;AutoCorrectDemo:Clean" />
+  </Target>
+  <Target Name="Make">
+    <CallTarget Targets="dclCCRAutoCorrect:Make;CodelessDemo:Make;AutoCorrectDemo:Make" />
+  </Target>
+  <Import Condition="Exists('$(MSBuildBinPath)\Borland.Group.Targets')" Project="$(MSBuildBinPath)\Borland.Group.Targets" />
+</Project>
