@@ -1,0 +1,250 @@
+<pre>
+TCompLHA Frequently Asked Questions
+
+Last updated: April 2001
+
+Contents:
+
+**** Purchasing and Licensing:
+* Do I need a per-copy runtime license to distribute applications
+  which use TCompLHA?
+* What is the price to register and use TCompLHA?
+* How quickly will a registration request be processed?
+* Can I also buy the source code if I want to?
+* Which source options do I need?
+* Do you take credit cards?
+* Do I need to make separate registrations for Delphi 1, 2, 3, 4, 5 and
+  C++ Builder 1, 3, 4?
+* Do you accept Compuserve SWREG registrations?
+* Can we pay with a check?
+
+**** Performance and Capabilities
+* With what archiving programs is TCompLHA compatible?
+* Does TCompLHA require any external DLLs to operate?
+* Can I create a self-extracting EXE with TCompLHA?
+* Is TCompLHA "industrial strength", or does it have hidden size
+  limitations or problems?
+* Can I create archives which span across several disks?
+* How good is the data compression I get with TCompLHA?
+* I have some files which don't get any smaller when compressed
+  using TCompLHA. Why not?
+* Why don't "protected" Paradox tables compress well with TCompLHA?
+* Is TCompLHA thread-safe?
+* Is TCompLHA Year-2000 compliant?
+
+**** How To:
+* Can I seek into the middle of a compressed file and decompress
+  just part of it?
+* Does TCompLHA handle updates and deletions from an archive
+  nicely, or does it leave "holes"?
+* How can I speed up access to files in an archive?
+* Can TCompLHA do an "update only newer files" operation by checking dates?
+
+**** Problems (also see the Troubleshooting section of CompLHA.hlp):
+* I compressed a file using TCompLHA, but I can't seem to decompress it.
+  Why not?
+* I compressed something into a stream, but I can't seem to expand it.
+  Why not?
+* How do I eliminate the registration popup message? Is any other
+  functionality affected in an unregistered copy of TCompLHA?
+* Do you have any demo programs written specifically for C++ Builder, or
+  are they all Pascal?
+* My application's memory use seems to increase every time I decompress
+  files. Why?
+* What should I do if I see an "EUnableToCompress" exception?
+
+============ And here are the answers: =================
+
+**** Purchasing and Licensing:
+
+* Do I need a per-copy runtime license to distribute applications which use
+  TCompLHA?
+No. You only need to buy a developers' license for each developer.
+
+* What is the price to register and use TCompLHA?
+See the pricing information and handy form in Registration section of the
+CompLHA.hlp help file which comes with TCompLHA.
+
+* How quickly will a registration request be processed?
+Fax or Email: Usually within the same working day. Mail: you should receive
+the registration codes and/or source code on disk within one week of our
+receipt of your order.
+
+* Can I also buy the source code if I want to?
+Yes. The source units for TCompLHA and TSegLHA are each available separately (see the
+Registration section in CompLHA.hlp).
+
+* Do you take credit cards?
+Yes -- Mastercard and Visa only.
+
+* Do I need to make separate registrations for Delphi 1, 2, 3, 4, 5, and C++
+  Builder 1, 3, 4?
+No. One registration will cover one developer's use of TCompLHA with all of
+them.
+
+* Do you accept Compuserve SWREG registrations?
+No. We are not on Compuserve -- their service in this corner of the planet is
+not on a par with the Internet.
+
+* Can we pay with a check?
+Yes. In general, we will accept most cheques in most currencies provided
+their value is a close match to the payment required. However, credit card
+orders can be processed more quickly.
+
+
+**** Performance and Capabilities
+
+* With what archiving programs is TCompLHA compatible?
+TCompLHA has been thoroughly tested with LHArc 1.13 and LHA 2.13 for DOS and
+the popular WinZip shell utility (our tests were with v6.2).  In summary:
+1. TCompLHA 2.0 and higher can COMPRESS files into archives which are compatible with
+   any of the above programs
+2. TCompLHA 2.0  and higher can EXPAND files which were compressed with LHArc or with LHA
+   and with WinZip writing to "LZH" files
+3. TCompLHA 2.0  and higher can EXPAND files compressed with any version of our
+   <A HREF="http://www.spis.co.nz/compress.htm">TCompress</A>
+   product, provided they don't use custom compression formats or archive key
+   protection.
+
+* Does TCompLHA require any external DLLs to operate?
+None whatsoever. TCompLHA is written in 100% native Delphi. (Of course, in
+Delphi 3  and higher you can choose to use TCompLHA as a separate DPL "package", but
+that's entirely up to you).
+
+* Can I create a self-extracting EXE with TCompLHA?
+Yes. See the SFX.DPR project (read the comments at the top) and MAKEEXE.DPR.
+
+* Is TCompLHA "industrial strength", or does it have hidden size limitations
+  or problems?
+Hundreds of developers are using our compression products for an extremely
+wide range of applications, with file sizes ranging from kilobytes to hundreds
+of megabytes. They, and we, believe them to be a trouble-free solution for the
+range of compression problems for which they were designed. Limitations tend to
+be wholly a factor of the deployment platform (e.g. system resources, free
+disk space etc). The only known limits (in common with all known archiving products
+at this point) are a 2GB limit for any single file being compressed
+into an archive, and a 2GB limit on the overall size of an archive.
+
+* Can I create archives which span across several disks?
+Yes -- use the TSegLHA component. It's also great for simple backup/restore
+applications -- you don't need to worry if the archive size will increase
+beyond one floppy disk.
+
+* How good is the data compression I get with TCompLHA?
+All data compression is dependent on the method used and the nature of the
+input data. Because it is compatible with LHArc and LHA, you should get compression
+results which are identical to those programs and similar to those achieved by
+other compression utilities.
+
+* I have some files which don't get any smaller when compressed using
+TCompLHA. Why not?
+See the question above. Some files have data which is already so complex that
+they won't compress significantly, or at all. If you have colh5 set as your
+CompressionMethod, you should get roughly the same level of compression as
+common compression utilities will give you.
+
+* Why don't "protected" Paradox tables compress well with TCompLHA?
+When you protect a Paradox table, the entropy or "randomness" of its data
+increases significantly -- so much so that all compression algorithms become
+much less efficient. You'll encounter this whether you use TCompLHA or any
+other compression utility.
+
+* Is TCompLHA thread-safe?
+Yes, from V4.0 onwards the code can be used in multi-threaded applications. To use it effectively, you need to create an instance of the component within each new thread -- as per the example code in the LHADemo sample application.
+
+* Is TCompLHA Year-2000 compliant
+Yes. No date-based calculations are performed, and all date storage formats used are compliant with DOS definitions, which support four year digits.
+
+
+**** How To:
+
+* Can I seek into the middle of a single compressed file in the archive, 
+  and decompress just part of it?
+Generally speaking, no compression method will permit this. However, it can
+be "faked" in either of the following ways:
+1. Decompress the entire file into a temporary TMemorystream using
+the ExpandStreamFromArchive method, then use the TStream seek and read methods
+to access any part of it. This is not useful if the file is huge of course, but
+decompressing to a temporary TFilestream instead might be viable for some
+situations.
+2. Instead of compressing it as a single file, use CompressStreamToArchive to
+compress it as a series of  "chunks" or file segments (each chunk can be given
+a name in the archive which is its number, e.g. "1", "2" etc). With this
+approach you can randomly select any chunk and decompress it individually. For
+performance-critical applications, also see the question below on speeding up
+access to files in archives.
+
+* Does TCompLHA handle updates and deletions from an archive nicely, or does
+  it leave "holes"?
+Unless the AllowDuplicates property is True, archives are rewritten to
+eliminate holes and remove old files. AllowDuplicates will cause new additions
+to be directly appended to an archive without checking, which could lead to
+duplicate files in the archive, but not "holes".
+
+* How can I speed up access to files in an archive?
+For small archives, this is hardly necessary --- finding and decompressing
+any file is generally very fast. But if your archive gets very large, the
+sequential search needed to find a given file to decompress it can be a time-
+waster. A solution to this is to use the Scan method once, when you
+first access your archive (as the LHAdemo example application does). This
+process also creates a TFileInformation list with information about each file,
+including its position in the archive. With that information, you can open the
+archive as a TFileStream, seek directly to the appropriate place and use the
+ExpandFilesFromStream method to expand just that file. Time savings on large
+archives by using this method can be very significant indeed.
+
+* Can TCompLHA do an "update only newer files" operation by checking dates?
+Yes. To do this you would start with a Scan of the archive to create a list of the existing archive files and their dates, then Compress the files you want to add with the following logic in the OnCheckFile event:
+
+if mode=cmLHACompress then
+with CompLHA do
+begin
+  count := FileList.indexof(newfilepath); { note: may need to search case INsensitive }
+  if (count >=0) and
+      (datetime <= TCompLHAFileInfo(FileInformation[count]).DateTime) then
+	newFilePath := CompLHASkipFlag;
+end;
+
+
+**** Problems (also see the Troubleshooting section of CompLHA.hlp):
+
+* I compressed a file using TCompLHA, but I can't seem to decompress it. Why
+  not?
+The most likely reason is that you are not specifying the correct filename (as
+stored in the archive). This can be double-checked by using the LHADemo program
+to look at the files in your archive. The filename you specify should match the
+filepath which is stored in the archive. Review the CompLHA.hlp help section on
+"Filename Handling in Compressed Archives" to see some examples of how to
+control what filenames and paths are stored in the archive.
+
+* I compressed something into a stream, but I can't seem to expand it.
+  Why not?
+Don't forget to either close and reopen the stream or (more commonly)
+seek back to the beginning of the stream before trying to expand from it!
+
+* How do I eliminate the registration popup message? Is any other
+functionality affected in an unregistered copy of TCompLHA?
+When you register TCompLHA, you will be given values to set into the RegName
+and RegNumber properties of your TCompLHA components. If you set these
+exactly as provided to you, they will eliminate the popup. Apart from the
+popup message, unregistered copies of TCompLHA behave exactly the same as
+registered ones.
+
+* Do you have any demo programs written specifically for C++ Builder, or are
+  they all Pascal?
+At this point, all the demonstrations are in Delphi. Visit our Web site at
+http://www.spis.co.nz/compLHA.htm from time to time to check for C++
+versions of the demonstrations.
+
+* My application's memory use seems to increase every time I decompress
+  files. Why?
+If you are directly using the ScanCompressedFile or ScanCompressedStream
+methods, see the notes in their section of CompLHA.hlp about the
+TCompLHAFileInfo information and the FreeFileList method, which will allow
+you to eliminate memory loss.
+
+* What should I do if I see an "EUnableToCompress" exception?
+Nothing, unless you are directly calling the DoCompress method (see the help). All other methods handle this exception internally, meaning that the only time you'll see this exception is if you have "Break On Exception" turned on in the IDE.
+
+</pre>
+<P>Return to <A HREF="http://www.spis.co.nz/compLHA.htm">TCompLHA</A>

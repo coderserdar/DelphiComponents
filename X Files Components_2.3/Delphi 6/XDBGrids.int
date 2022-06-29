@@ -1,0 +1,639 @@
+
+{*******************************************************}
+{                                                       }
+{                  X-Files Components                   }
+{                                                       }
+{       Copyright (c) 1999-2001 Krzysztof Szyszka       }
+{                                                       }
+{*******************************************************}
+unit XDBGrids;
+{$R-}
+
+interface
+
+uses Variants, Windows, SysUtils, Messages, Classes, Controls, Forms, StdCtrls,
+  Graphics, Grids, DBCtrls, Db, Menus, ImgList;
+
+type
+  TColumnValue = (cvColor, cvWidth, cvFont, cvAlignment, cvReadOnly, cvTitleColor,
+    cvTitleCaption, cvTitleAlignment, cvTitleFont, cvImeMode, cvImeName);
+  TColumnValues = set of TColumnValue;
+
+
+const
+  ColumnTitleValues = [cvTitleColor..cvTitleFont];
+  cm_DeferLayout = WM_USER + 100;
+
+{ TXColumn defines internal storage for column attributes.  If IsStored is
+  True, values assigned to properties are stored in this object, the grid-
+  or field-based default sources are not modified.  Values read from
+  properties are the previously assigned value, if any, or the grid- or
+  field-based default values if nothing has been assigned to that property.
+  This class also publishes the column attribute properties for persistent
+  storage.
+
+  If IsStored is True, the column does not maintain local storage of
+  property values.  Assignments to column properties are passed through to
+  the underlying grid- or field-based default sources.  }
+
+type
+  TXColumn = class;
+  TXCustomDBGrid = class;
+
+  TMarker = (tmNone, tmAscend, tmDescend);
+  TVAlignment = (tvTopJustify, tvBottomJustify, tvCenter);
+  TImageDraw = (idAlignment, idOpposite, idCenter, idStretch, idTileCell,
+    idTileGrid, idTileCol, idTileRow);
+  TCheckBoxToggle = (ctCustomToggle, ctKeyPressOnly, ctOnCellClick, ctSelectClick);
+  TSelection = (slCellSelected, slRowSelected, slMultiSelected, slCellFixed);
+  TSelections = set of TSelection;
+  TFixedStyle = (fsDefault, fsSoft, fsNice, fsFlat, fsFine, fsMild);
+  THintCell = (hcTitle, hcHeader, hcFiller, hcEditor);
+  TToolTipsWidth = (ttAutoWidth, ttFixedWidth);
+  TTotalType = (ttNone, ttSum, ttCount, ttMax, ttMin, ttAverage, ttText, ttExpression);
+
+  TXColumnReport = class(TPersistent)
+  private
+    { Private declarations }
+  public
+    constructor Create(Column: TXColumn);
+    destructor Destroy; override;
+    procedure Assign(Source: TPersistent); override;
+    function IsPrinted: Boolean;
+    procedure RestoreDefaults; virtual;
+    property Column: TXColumn read FColumn;
+  published
+    property TotalMask: string read FTotalMask write FTotalMask;
+    property TotalText: string read FTotalText write FTotalText;
+    property TotalType: TTotalType read FTotalType write FTotalType default ttNone;
+    property Visible: Boolean read FVisible write FVisible default True;
+  end;
+
+  TXColumnTitle = class(TPersistent)
+  private
+    { Private declarations }
+  protected
+    procedure RefreshDefaultFont;
+  public
+    constructor Create(Column: TXColumn);
+    destructor Destroy; override;
+    procedure Assign(Source: TPersistent); override;
+    function DefaultAlignment: TAlignment;
+    function DefaultColor: TColor;
+    function DefaultFont: TFont;
+    function DefaultCaption: string;
+    function HeaderLeft(Index: Integer): TXColumn;
+    function HeaderRight(Index: Integer): TXColumn;
+    procedure RestoreDefaults; virtual;
+    procedure ToggleMarker(NewOrder: Boolean);
+    property Column: TXColumn read FColumn;
+    property HeaderHintRows[Index: Integer]: string read GetHeaderHintRows;
+    property HeaderRowCount: Integer read GetHeaderRowCount;
+    property HeaderRows[Index: Integer]: string read GetHeaderRows;
+  published
+    property Alignment: TAlignment read GetAlignment write SetAlignment
+      stored IsAlignmentStored;
+    property AutoToggle: Boolean read FAutoToggle write FAutoToggle default True;
+    property Button: Boolean read FButton write SetButton default True;
+    property Caption: string read GetCaption write SetCaption stored IsCaptionStored;
+    property Color: TColor read GetColor write SetColor stored IsColorStored;
+    property Ellipsis: Boolean read FEllipsis write SetEllipsis default True;
+    property Font: TFont read GetFont write SetFont stored IsFontStored;
+    property Header: string read FHeader write SetHeader;
+    property HeaderHint: string read FHeaderHint write FHeaderHint;
+    property Hint: string read FHint write FHint;
+    property ImageIndex: Integer read FImageIndex write SetImageIndex default -1;
+    property Marker: TMarker read FMarker write SetMarker default tmNone;
+    property MarkerIndex: Integer read FMarkerIndex write SetMarkerIndex default -1;
+    property OrderIndex: Integer read GetOrderIndex write SetOrderIndex stored False;
+    property PopupMenu: TPopupMenu read FPopupMenu write SetPopupMenu;
+    property VAlignment: TVAlignment read FVAlignment write SetVAlignment default tvCenter;
+    property WordWrap: Boolean read FWordWrap write SetWordWrap default True;
+  end;
+
+  TColumnButtonStyle = (cbsAuto, cbsEllipsis, cbsNone);
+
+  TXColumn = class(TCollectionItem)
+  private
+    { Private declarations }
+  protected
+    function  CreateReport: TXColumnReport; virtual;
+    function  CreateTitle: TXColumnTitle; virtual;
+    function  GetGrid: TXCustomDBGrid;
+    function GetDisplayName: string; override;
+    procedure RefreshDefaultFont;
+    procedure SetIndex(Value: Integer); override;
+    property IsStored: Boolean read FStored write FStored default True;
+  public
+    constructor Create(Collection: TCollection); override;
+    destructor Destroy; override;
+    procedure Assign(Source: TPersistent); override;
+    function  DefaultAlignment: TAlignment;
+    function  DefaultColor: TColor;
+    function  DefaultFont: TFont;
+    function  DefaultImeMode: TImeMode;
+    function  DefaultImeName: TImeName;
+    function  DefaultReadOnly: Boolean;
+    function  DefaultWidth: Integer;
+    function  Depth: Integer;
+    function  IsCheckBoxValue(Checked: Boolean): Boolean;
+    procedure RestoreDefaults; virtual;
+    procedure Synchronize;
+    procedure ToggleCheckBoxValue;
+    property  Grid: TXCustomDBGrid read GetGrid;
+    property  AssignedValues: TColumnValues read FAssignedValues;
+    property  Expandable: Boolean read GetExpandable;
+    property  Field: TField read GetField write SetField;
+    property  ParentColumn: TXColumn read GetParentColumn;
+    property  Showing: Boolean read GetShowing;
+    property  TrueWidth: Integer read GetTrueWidth;
+  published
+    property  Alignment: TAlignment read GetAlignment write SetAlignment
+      stored IsAlignmentStored;
+    property  ButtonStyle: TColumnButtonStyle read FButtonStyle write SetButtonStyle
+      default cbsAuto;
+    property  CheckBox: Boolean read FCheckBox write SetCheckBox default False;
+    property  CheckBoxToggle: TCheckBoxToggle read FCheckBoxToggle write FCheckBoxToggle
+      default ctOnCellClick;
+    property  CheckBoxValues: string read FCheckBoxValues write SetCheckBoxValues
+      stored IsCheckBoxValuesStored;
+    property  Color: TColor read GetColor write SetColor stored IsColorStored;
+    property  DropDownRows: Cardinal read FDropDownRows write FDropDownRows default 7;
+    property  EditorHint: string read FEditorHint write FEditorHint;
+    property  Ellipsis: Boolean read FEllipsis write SetEllipsis default True;
+    property  Expanded: Boolean read GetExpanded write SetExpanded default True;
+    property  FieldName: String read FFieldName write SetFieldName;
+    property  Font: TFont read GetFont write SetFont stored IsFontStored;
+    property  ImageDraw: TImageDraw read FImageDraw write SetImageDraw default idCenter;
+    property  ImageOffsetX: Integer read FImageOffsetX write SetImageOffsetX default 0;
+    property  ImageOffsetY: Integer read FImageOffsetY write SetImageOffsetY default 0;
+    property  Images: TImageList read FImages write SetImages;
+    property  ImeMode: TImeMode read GetImeMode write SetImeMode stored IsImeModeStored;
+    property  ImeName: TImeName read GetImeName write SetImeName stored IsImeNameStored;
+    property  PickList: TStrings read GetPickList write SetPickList;
+    property  PopupMenu: TPopupMenu read FPopupMenu write SetPopupMenu;
+    property  Report: TXColumnReport read FReport write SetReport;
+    property  QuickDraw: Boolean read FQuickDraw write SetQuickDraw default True;
+    property  ReadOnly: Boolean read GetReadOnly write SetReadOnly
+      stored IsReadOnlyStored;
+    property  ShowBlob: Boolean read FShowBlob write SetShowBlob default True;
+    property  ShowEdit: Boolean read FShowEdit write SetShowEdit default True;
+    property  Title: TXColumnTitle read FTitle write SetTitle;
+    property  ToolTips: Boolean read FToolTips write SetToolTips default True;
+    property  ToolTipsWidth: TToolTipsWidth read FToolTipsWidth write SetToolTipsWidth default ttAutoWidth;
+    property  Transparent: Boolean read FTransparent write SetTransparent default False;
+    property  TransparentColor: TColor read FTransparentColor write SetTransparentColor default clNone;
+    property  VAlignment: TVAlignment read FVAlignment write SetVAlignment default tvCenter;
+    property  Visible: Boolean read GetVisible write SetVisible;
+    property  Wallpaper: Boolean read FWallpaper write SetWallpaper default False;
+    property  Width: Integer read GetWidth write SetWidth stored IsWidthStored;
+    property  WidthBase: Integer read GetWidthBase write SetWidthBase stored False;
+    property  WidthMax: Integer read FWidthMax write SetWidthMax default -1;
+    property  WidthMin: Integer read FWidthMin write SetWidthMin default -1;
+    property  WordWrap: Boolean read FWordWrap write SetWordWrap default True;
+  end;
+
+  TXColumnClass = class of TXColumn;
+
+  TDBGridColumnsState = (csDefault, csCustomized);
+
+  TXDBGridColumns = class(TCollection)
+  private
+    { Private declarations }
+  protected
+    function GetOwner: TPersistent; override;
+    procedure Update(Item: TCollectionItem); override;
+  public
+    constructor Create(Grid: TXCustomDBGrid; ColumnClass: TXColumnClass);
+    destructor Destroy; override;
+    function  Add: TXColumn;
+    procedure LoadFromFile(const Filename: string);
+    procedure LoadFromStream(S: TStream);
+    procedure RestoreDefaults;
+    procedure RebuildColumns;
+    procedure RemoveMarkers;
+    procedure SaveToFile(const Filename: string);
+    procedure SaveToStream(S: TStream);
+    procedure UpdateMarkers;
+    property State: TDBGridColumnsState read GetState write SetState;
+    property Grid: TXCustomDBGrid read FGrid;
+    property Items[Index: Integer]: TXColumn read GetColumn write SetColumn; default;
+  end;
+
+  TXGridDataLink = class(TDataLink)
+  private
+    { Private declarations }
+  protected
+    procedure ActiveChanged; override;
+    procedure BuildAggMap;
+    procedure DataSetChanged; override;
+    procedure DataSetScrolled(Distance: Integer); override;
+    procedure FocusControl(Field: TFieldRef); override;
+    procedure EditingChanged; override;
+    function IsAggRow(Value: Integer): Boolean; virtual;
+    procedure LayoutChanged; override;
+    procedure RecordChanged(Field: TField); override;
+    procedure UpdateData; override;
+    function  GetMappedIndex(ColIndex: Integer): Integer;
+  public
+    constructor Create(AGrid: TXCustomDBGrid);
+    destructor Destroy; override;
+    function AddMapping(const FieldName: string): Boolean;
+    procedure ClearMapping;
+    procedure Modified;
+    procedure Reset;
+    property DefaultFields: Boolean read GetDefaultFields;
+    property FieldCount: Integer read FFieldCount;
+    property Fields[I: Integer]: TField read GetFields;
+    property SparseMap: Boolean read FSparseMap write FSparseMap;
+    property Grid: TXCustomDBGrid read FGrid;
+  end;
+
+  TXBookmarkList = class
+  private
+    { Private declarations }
+  protected
+    function CurrentRow: TBookmarkStr;
+    function Compare(const Item1, Item2: TBookmarkStr): Integer;
+    procedure LinkActive(Value: Boolean);
+  public
+    constructor Create(AGrid: TXCustomDBGrid);
+    destructor Destroy; override;
+    procedure Clear;           // free all bookmarks
+    procedure Delete;          // delete all selected rows from dataset
+    function  Find(const Item: TBookmarkStr; var Index: Integer): Boolean;
+    function  IndexOf(const Item: TBookmarkStr): Integer;
+    function  Refresh: Boolean;// drop orphaned bookmarks; True = orphans found
+    property Count: Integer read GetCount;
+    property CurrentRowSelected: Boolean read GetCurrentRowSelected
+      write SetCurrentRowSelected;
+    property Items[Index: Integer]: TBookmarkStr read GetItem; default;
+  end;
+
+  TXDBGridOption = (dgEditing, dgAlwaysShowEditor, dgTitles, dgIndicator,
+    dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect,
+    dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgMultiSelect,
+    dgRightMoving, dgTitleButtons, dgTitleHeaders, dgTitleWidthOff,
+    dgMarkerAutoAlign, dgMarkerAutoSwitch, dgRowResize, dgRowScroll,
+    dgIndicatorMarkOff, dgAllowDeleteOff, dgAllowInsertOff,
+    dgMarkerAutoToggle, dgMarkerAscendOnly);
+  TXDBGridOptions = set of TXDBGridOption;
+
+  TXHintOption = (hoTitleHints, hoShowTitleHints, hoEditorHints, hoShowEditorHints,
+    hoShowToolTips, hoKeepShowToolTips, hoAlwaysShowToolTips);
+  TXHintOptions = set of TXHintOption;
+
+  { The DBGrid's DrawDataCell virtual method and OnDrawDataCell event are only
+    called when the grid's Columns.State is csDefault.  This is for compatibility
+    with existing code. These routines don't provide sufficient information to
+    determine which column is being drawn, so the column attributes aren't
+    easily accessible in these routines.  Column attributes also introduce the
+    possibility that a column's field may be nil, which would break existing
+    DrawDataCell code.   DrawDataCell, OnDrawDataCell, and DefaultDrawDataCell
+    are obsolete, retained for compatibility purposes. }
+  TDrawDataCellEvent = procedure (Sender: TObject; const Rect: TRect; Field: TField;
+    State: TGridDrawState) of object;
+
+  { The DBGrid's DrawColumnCell virtual method and OnDrawColumnCell event are
+    always called, when the grid has defined column attributes as well as when
+    it is in default mode.  These new routines provide the additional
+    information needed to access the column attributes for the cell being
+    drawn, and must support nil fields.  }
+
+  TDrawColumnCellEvent = procedure (Sender: TObject; const Rect: TRect;
+    DataCol: Integer; Column: TXColumn; State: TGridDrawState) of object;
+  TPaintColumnCellEvent = procedure (Sender: TObject; const Rect: TRect;
+    DataCol: Integer; Column: TXColumn; Highlight: Boolean; Selections: TSelections;
+    var Color: TColor; Font: TFont; var Image: TPersistent) of object;
+  TDBGridClickEvent = procedure (Column: TXColumn) of object;
+  THeaderClickEvent = procedure (Column: TXColumn; Index: Integer) of object;
+  TColumnMovingEvent = procedure (Sender: TObject; FromIndex, ToIndex: Longint;
+    var Accept: Boolean) of object;
+  TColumnScrollEvent = procedure (Sender: TObject; LeftIndex: Longint) of object;
+  TCellHintEvent = procedure (Sender: TObject; Column: TXColumn; Index: Integer;
+    HintCell: THintCell; var HintStr: string) of object;
+  TCalcImageIndexEvent = procedure (Sender: TObject; Column: TXColumn;
+    var Index: Integer) of object;
+
+  TXCustomDBGrid = class(TCustomGrid)
+  private
+    { Private declarations }
+  protected
+    FUpdateFields: Boolean;
+    FAcquireFocus: Boolean;
+    function  RawToDataColumn(ACol: Integer): Integer;
+    function  DataToRawColumn(ACol: Integer): Integer;
+    function  AcquireLayoutLock: Boolean;
+    procedure BeginLayout;
+    procedure BeginUpdate;
+    procedure CalcImageIndex(Column: TXColumn; var Index: Integer); dynamic;
+    procedure CalcSizingState(X, Y: Integer; var State: TGridState;
+      var Index: Longint; var SizingPos, SizingOfs: Integer;
+      var FixedInfo: TGridDrawInfo); override;
+    procedure CancelLayout;
+    function  CanEditAcceptKey(Key: Char): Boolean; override;
+    function  CanEditModify: Boolean; override;
+    function  CanEditShow: Boolean; override;
+    procedure CellClick(Column: TXColumn); dynamic;
+    procedure CellHint(Column: TXColumn; Index: Integer; HintCell: THintCell;
+      var HintStr: string); dynamic;
+    procedure ColumnMoved(FromIndex, ToIndex: Longint); override;
+    procedure ColumnMoving(FromIndex, ToIndex: Longint; var Accept: Boolean); dynamic;
+    function CalcTitleRect(Col: TXColumn; ARow: Integer;
+      var MasterCol: TXColumn): TRect;
+    function ColumnAtDepth(Col: TXColumn; ADepth: Integer): TXColumn;
+    procedure ColEnter; dynamic;
+    procedure ColExit; dynamic;
+    procedure ColWidthsChanged; override;
+    function  CreateColumns: TXDBGridColumns; dynamic;
+    function  CreateEditor: TInplaceEdit; override;
+    function  CreateDataLink: TXGridDataLink; dynamic;
+    procedure CreateWnd; override;
+    procedure DeferLayout;
+    procedure DefineFieldMap; virtual;
+    procedure DefineProperties(Filer: TFiler); override;
+    procedure DrawCell(ACol, ARow: Longint; ARect: TRect; AState: TGridDrawState); override;
+    procedure DrawDataCell(const Rect: TRect; Field: TField;
+      State: TGridDrawState); dynamic; { obsolete }
+    procedure DrawColumnCell(const Rect: TRect; DataCol: Integer;
+      Column: TXColumn; State: TGridDrawState); dynamic;
+    procedure EditButtonClick; dynamic;
+    procedure EndLayout;
+    procedure EndUpdate;
+    function  GetColField(DataCol: Integer): TField;
+    function  GetEditLimit: Integer; override;
+    function  GetEditMask(ACol, ARow: Longint): string; override;
+    function  GetEditStyle(ACol, ARow: Longint): TEditStyle; override;
+    function  GetEditText(ACol, ARow: Longint): string; override;
+    function  GetFieldValue(ACol: Integer): string;
+    procedure FillerClick; dynamic;
+    procedure HeaderClick(Column: TXColumn; Index: Integer); dynamic;
+    function  HighlightCell(DataCol, DataRow: Integer; const Value: string;
+      AState: TGridDrawState): Boolean; virtual;
+    procedure IndicatorClick; dynamic;
+    procedure InvalidateRow(ARow: Longint);
+    function  InvalidateTile(Tile: TImageDraw): Boolean;
+    procedure InvalidateTitles;
+    procedure KeyDown(var Key: Word; Shift: TShiftState); override;
+    procedure KeyPress(var Key: Char); override;
+    procedure KeyUp(var Key: Word; Shift: TShiftState); override;
+    procedure LayoutChanged; virtual;
+    procedure LinkActive(Value: Boolean); virtual;
+    procedure Loaded; override;
+    procedure MouseDown(Button: TMouseButton; Shift: TShiftState;
+      X, Y: Integer); override;
+    procedure MouseMove(Shift: TShiftState; X, Y: Integer); override;
+    procedure MouseUp(Button: TMouseButton; Shift: TShiftState;
+      X, Y: Integer); override;
+    procedure Notification(AComponent: TComponent; Operation: TOperation); override;
+    procedure OrderChanged; dynamic;
+    procedure Paint; override;
+    procedure PaintColumnCell(const Rect: TRect; DataCol: Integer;
+      Column: TXColumn; Highlight: Boolean; Selections: TSelections;
+      var Color: TColor; Font: TFont; var Image: TPersistent); virtual;
+    procedure RowHeightsChanged; override;
+    procedure Scroll(Distance: Integer); virtual;
+    procedure SetColumnAttributes; virtual;
+    procedure SetEditText(ACol, ARow: Longint; const Value: string); override;
+    procedure SetEnabled(Value: Boolean); override;
+    function  StoreColumns: Boolean;
+    procedure TimedScroll(Direction: TGridScrollDirection); override;
+    procedure TitleClick(Column: TXColumn); dynamic;
+    procedure TopLeftChanged; override;
+    function UseRightToLeftAlignmentForField(const AField: TField;
+      Alignment: TAlignment): Boolean;
+    function BeginColumnDrag(var Origin, Destination: Integer;
+      const MousePt: TPoint): Boolean; override;
+    function CheckColumnDrag(var Origin, Destination: Integer;
+      const MousePt: TPoint): Boolean; override;
+    function EndColumnDrag(var Origin, Destination: Integer;
+      const MousePt: TPoint): Boolean; override;
+    property Columns: TXDBGridColumns read FColumns write SetColumns;
+    property DefaultDrawing: Boolean read FDefaultDrawing write FDefaultDrawing default True;
+    property DataLink: TXGridDataLink read FDataLink;
+    property FillerButton: Boolean read FFillerButton write FFillerButton default True;
+    property FillerColor: TColor read FFillerColor write SetFillerColor stored FCustomFillerColor;
+    property FillerHint: string read FFillerHint write FFillerHint;
+    property FillerIndex: Integer read FFillerIndex write SetFillerIndex default -7;
+    property FillerPopupMenu: TPopupMenu read FFillerPopupMenu write SetFillerPopupMenu;
+    property FixedColor write SetFixedColor default clBtnFace;
+    property FixedCols: Integer read FFixedCols write SetFixedCols default 0;
+    property FixedStyle: TFixedStyle read FFixedStyle write SetFixedStyle default fsDefault;
+    property HeaderColor: TColor read FHeaderColor write SetHeaderColor stored FCustomHeaderColor;
+    property HeaderFont: TFont read FHeaderFont write SetHeaderFont;
+    property HeaderLinesCount: Integer read FHeaderLinesCount write SetHeaderLinesCount default 1;
+    property HeaderRowCount: Integer read FHeaderRowCount;
+    property HeaderRowHeight: Integer read FHeaderRowHeight;
+    property Hint write SetHint;
+    property HintOptions: TXHintOptions read FHintOptions write FHintOptions
+      default [hoTitleHints, hoShowTitleHints, hoEditorHints, hoShowToolTips];
+    property IndicatorImages: TImageList read FIndicatorImages write SetIndicatorImages;
+    property IndicatorOffset: Byte read FIndicatorOffset;
+    property IndicatorPopupMenu: TPopupMenu read FIndicatorPopupMenu write SetIndicatorPopupMenu;
+    property IndicatorWidth: Integer read FIndicatorWidth write SetIndicatorWidth default 11;
+    property LayoutLock: Byte read FLayoutLock;
+    property LeftCol write SetLeftCol;
+    property LinesCount: Integer read FLinesCount write SetLinesCount default 1;
+    property LinesCountMax: Integer read FLinesCountMax write SetLinesCountMax default -1;
+    property LinesCountMin: Integer read FLinesCountMin write SetLinesCountMin default 1;
+    property ManageGrid: TXCustomDBGrid read FManageGrid write SetManageGrid stored False;
+    property MasterGrid: TXCustomDBGrid read FMasterGrid write SetMasterGrid;
+    property Options: TXDBGridOptions read FOptions write SetOptions
+      default [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines,
+      dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgRightMoving,
+      dgTitleButtons, dgTitleHeaders, dgTitleWidthOff, dgMarkerAutoAlign,
+      dgRowResize, dgRowScroll, dgMarkerAutoToggle];
+    property OrderFields: string read GetOrderFields write SetOrderFields stored False;
+    property ParentColor default False;
+    property ReadOnly: Boolean read FReadOnly write FReadOnly default False;
+    property ScrollBars: TScrollStyle read FScrollBars write SetScrollBars default ssBoth;
+    property SelectedRows: TXBookmarkList read FBookmarks;
+    property StretchMode: Boolean read FStretchMode write SetStretchMode default False;
+    property StretchWidthMax: Integer read FStretchWidthMax write SetStretchWidthMax default -1;
+    property StretchWidthMin: Integer read FStretchWidthMin write SetStretchWidthMin default -1;
+    property TitleFont: TFont read FTitleFont write SetTitleFont;
+    property TitleImages: TImageList read FTitleImages write SetTitleImages;
+    property TitleLinesCount: Integer read FTitleLinesCount write SetTitleLinesCount default 1;
+    property TitleMarkers: TImageList read FTitleMarkers write SetTitleMarkers;
+    property UpdateLock: Byte read FUpdateLock;
+    property OnColEnter: TNotifyEvent read FOnColEnter write FOnColEnter;
+    property OnColExit: TNotifyEvent read FOnColExit write FOnColExit;
+    property OnDrawDataCell: TDrawDataCellEvent read FOnDrawDataCell
+      write FOnDrawDataCell; { obsolete }
+    property OnDrawColumnCell: TDrawColumnCellEvent read FOnDrawColumnCell
+      write FOnDrawColumnCell;
+    property OnEditButtonClick: TNotifyEvent read FOnEditButtonClick
+      write FOnEditButtonClick;
+    property OnColumnMoved: TMovedEvent read FOnColumnMoved write FOnColumnMoved;
+    property OnColumnMoving: TColumnMovingEvent read FOnColumnMoving write FOnColumnMoving;
+    property OnColumnResize: TNotifyEvent read FOnColumnResize write FOnColumnResize;
+    property OnColumnScroll: TColumnScrollEvent read FOnColumnScroll write FOnColumnScroll;
+    property OnCalcImageIndex: TCalcImageIndexEvent read FOnCalcImageIndex write FOnCalcImageIndex;
+    property OnCellClick: TDBGridClickEvent read FOnCellClick write FOnCellClick;
+    property OnCellHint: TCellHintEvent read FOnCellHint write FOnCellHint;
+    property OnFillerClick: TNotifyEvent read FOnFillerClick write FOnFillerClick;
+    property OnHeaderClick: THeaderClickEvent read FOnHeaderClick write FOnHeaderClick;
+    property OnIndicatorClick: TNotifyEvent read FOnIndicatorClick write FOnIndicatorClick;
+    property OnOrderChanged: TNotifyEvent read FOnOrderChanged write FOnOrderChanged;
+    property OnPaintColumnCell: TPaintColumnCellEvent read FOnPaintColumnCell
+      write FOnPaintColumnCell;
+    property OnRowResize: TNotifyEvent read FOnRowResize write FOnRowResize;
+    property OnTitleClick: TDBGridClickEvent read FOnTitleClick write FOnTitleClick;
+  public
+    constructor Create(AOwner: TComponent); override;
+    destructor Destroy; override;
+    procedure BeginOrderUpdate;
+    function ColumnByName(const FieldName: string): TXColumn;
+    procedure DefaultDrawDataCell(const Rect: TRect; Field: TField;
+      State: TGridDrawState); { obsolete }
+    procedure DefaultDrawColumnCell(const Rect: TRect; DataCol: Integer;
+      Column: TXColumn; State: TGridDrawState);
+    procedure DefaultHandler(var Msg); override;
+    procedure DisableGrid;
+    procedure EnableGrid;
+    procedure EndOrderUpdate;
+    function ExecuteAction(Action: TBasicAction): Boolean; override;
+    function FindColumn(const FieldName: string): TXColumn;
+    procedure ShowPopupEditor(Column: TXColumn; X: Integer = Low(Integer);
+      Y: Integer = Low(Integer)); dynamic;
+    function GridDisabled: Boolean;
+    procedure SetupOrderFields(Value: string);
+    procedure StretchGrid;
+    procedure Synchronize;
+    function UpdateAction(Action: TBasicAction): Boolean; override;
+    function ValidFieldIndex(FieldIndex: Integer): Boolean;
+    property ColLineWidth: Integer read GetColLineWidth;
+    property EditorMode;
+    property FieldCount: Integer read GetFieldCount;
+    property Fields[FieldIndex: Integer]: TField read GetFields;
+    property Indicators: TImageList read GetIndicators;
+    property LastShiftState: TShiftState read FLastShiftState;
+    property Markers: TImageList read GetMarkers;
+    property RowHeight: Integer read GetRowHeight;
+    property RowLineWidth: Integer read GetRowLineWidth;
+    property ScrollBarHeight: Integer read GetScrollBarHeight;
+    property ScrollBarWidth: Integer read GetScrollBarWidth;
+    property SelectedField: TField read GetSelectedField write SetSelectedField;
+    property SelectedIndex: Integer read GetSelectedIndex write SetSelectedIndex;
+    property TitleHeight: Integer read GetTitleHeight;
+    property DataSource: TDataSource read GetDataSource write SetDataSource;
+  end;
+
+  TXDBGrid = class(TXCustomDBGrid)
+  public
+    property Canvas;
+    property ManageGrid: TXCustomDBGrid read FManageGrid;
+    property SelectedRows;
+  published
+    property Align;
+    property Anchors;
+    property BiDiMode;
+    property BorderStyle;
+    property Color;
+    property Columns stored False; //StoreColumns;
+    property Constraints;
+    property Ctl3D;
+    property DataSource;
+    property DefaultDrawing;
+    property DragCursor;
+    property DragKind;
+    property DragMode;
+    property Enabled;
+    property FillerButton;
+    property FillerColor;
+    property FillerHint;
+    property FillerIndex;
+    property FillerPopupMenu;
+    property FixedColor;
+    property FixedCols;
+    property FixedStyle;
+    property Font;
+    property HeaderColor;
+    property HeaderFont;
+    property HeaderLinesCount;
+    property Hint;
+    property HintOptions;
+    property ImeMode;
+    property ImeName;
+    property IndicatorImages;
+    property IndicatorPopupMenu;
+    property IndicatorWidth;
+    property LinesCount;
+    property LinesCountMax;
+    property LinesCountMin;
+    property MasterGrid;
+    property Options;
+    property OrderFields;
+    property ParentBiDiMode;
+    property ParentColor;
+    property ParentCtl3D;
+    property ParentFont;
+    property ParentShowHint;
+    property PopupMenu;
+    property ReadOnly;
+    property ScrollBars;
+    property ShowHint;
+    property StretchMode;
+    property StretchWidthMax;
+    property StretchWidthMin;
+    property TabOrder;
+    property TabStop;
+    property TitleFont;
+    property TitleImages;
+    property TitleLinesCount;
+    property TitleMarkers;
+    property Visible;
+    property OnCalcImageIndex;
+    property OnCellClick;
+    property OnCellHint;
+    property OnColEnter;
+    property OnColExit;
+    property OnColumnMoved;
+    property OnColumnMoving;
+    property OnColumnResize;
+    property OnColumnScroll;
+    property OnDrawDataCell;  { obsolete }
+    property OnDrawColumnCell;
+    property OnDblClick;
+    property OnDragDrop;
+    property OnDragOver;
+    property OnEditButtonClick;
+    property OnEndDock;
+    property OnEndDrag;
+    property OnEnter;
+    property OnExit;
+    property OnFillerClick;
+    property OnHeaderClick;
+    property OnIndicatorClick;
+    property OnKeyDown;
+    property OnKeyPress;
+    property OnKeyUp;
+    property OnOrderChanged;
+    property OnMouseDown;
+    property OnMouseMove;
+    property OnMouseUp;
+    property OnPaintColumnCell;
+    property OnRowResize;
+    property OnStartDock;
+    property OnStartDrag;
+    property OnTitleClick;
+  end;
+
+const { Default width for indicator }
+  IndicatorWidth = 11;
+
+const { ImageIndex for IndicatorImages }
+  iiClear = -1;
+  iiArrow = 0;
+  iiEdit = 1;
+  iiInsert = 2;
+  iiMultiDot = 3;
+  iiMultiArrow = 4;
+  iiMenu = 5;
+
+  procedure ModifyOrderFields(SQL: TStrings; OrderFields: string);
+  function ExtractOrderFields(SQL: TStrings): string;
+  function CommaToSemicolon(const S: string): string;
+  function SemicolonToComma(const S: string): string;
+
+implementation

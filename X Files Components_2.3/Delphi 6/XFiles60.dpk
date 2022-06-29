@@ -1,0 +1,47 @@
+package XFiles60;
+
+{$R *.res}
+{$R 'XDBGrids.dcr'}
+{$R 'XQRGrids.dcr'}
+{$ALIGN 1}
+{$ASSERTIONS OFF}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA OFF}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS OFF}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'X-Files Components Trial'}
+{$IMPLICITBUILD OFF}
+
+requires
+  designide,
+  rtl,
+  dbrtl,
+  bdertl,
+  vcl,
+  vcldb,
+  qrpt;
+
+contains
+  XFCAbout in 'XFCAbout.pas',
+  XFCLines in 'XFCLines.pas',
+  XDBGrids in 'XDBGrids.pas',
+  XQRGrids in 'XQRGrids.pas',
+  XDBGridsReg in 'XDBGridsReg.pas',
+  XQRGridsReg in 'XQRGridsReg.pas';
+
+end.

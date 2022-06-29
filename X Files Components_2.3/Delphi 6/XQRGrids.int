@@ -1,0 +1,222 @@
+
+{*******************************************************}
+{                                                       }
+{                  X-Files Components                   }
+{                                                       }
+{       Copyright (c) 1999-2001 Krzysztof Szyszka       }
+{                                                       }
+{*******************************************************}
+unit XQRGrids;
+{$R-}
+
+interface
+
+uses Windows, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  Grids, XDBGrids, QuickRpt, QRPrntr, QRCtrls, Db, DBCtrls;
+
+const
+  clDefault = clNone;
+
+const
+  SReportDBGridUndefined: string = 'Unable create report for undefined ReportDBGrid';
+  SReportDBGridDisabled: string = 'Unable create report for disabled ReportDBGrid';
+  SNumberPerCount: string = '%d / %d';
+
+type
+  TXReportForm = TForm;
+  TXReportAlign = (raLeft, raRight, raCenter, raStretch);
+  TXReportNames = (rnNone, rnClass, rnShort, rnLong);
+  TXReportBorder = (rbNone, rbSpace, rbFrame, rbTopLine, rbBottomLine);
+  TXReportVisible = (rvFalse, rvTrue, rvAuto);
+  TXReportSysData = (rdTime, rdDate, rdDateTime, rdPageNumber, rdReportTitle, rdDetailCount, rdDetailNo,
+                     rdNone, rdPartNo, rdPartCount, rdPartNoPerCount);
+  TXReportOption = (roFirstPageHeader, roLastPageFooter, roCompression, roPrintIfEmpty, roShowProgress,
+                    roForceTrueTypes, roAllowFixedColor, roModalMode, roAllPagesTitle, roAllPagesLegend);
+  TXReportOptions = set of TXReportOption;
+
+  TCustomQuickRep = QuickRpt.TCustomQuickRep;
+  TQRCustomBand = QuickRpt.TQRCustomBand;
+  TQRPrintEvent = procedure (Sender: TObject; var Value: string) of object;
+
+type
+  TXReportStyle = class(TPersistent)
+  private
+    { Private declarations }
+  public
+    constructor Create;
+  published
+    property ColLines: TXReportVisible read FColLines write FColLines default rvAuto;
+    property LineColor: TColor read FLineColor write FLineColor default clBlack;
+    property LineWidth: Integer read FLineWidth write SetLineWidth default 2;
+    property RowLines: TXReportVisible read FRowLines write FRowLines default rvAuto;
+    property TextColExtend: Integer read FTextColExtend write FTextColExtend default 1;
+    property TextColIndent: Integer read FTextColIndent write FTextColIndent default 1;
+    property TextRowExtend: Integer read FTextRowExtend write FTextRowExtend default 0;
+    property TextRowIndent: Integer read FTextRowIndent write FTextRowIndent default 1;
+  end;
+
+type
+  TXReportBandStyle = class(TPersistent)
+  private
+    { Private declarations }
+  public
+    constructor Create;
+  published
+    property Color: TColor read FColor write FColor default clDefault;
+    property FontCharset: TFontCharset read FFontCharset write FFontCharset default DEFAULT_CHARSET;
+    property FontColor: TColor read FFontColor write FFontColor default clDefault;
+    property FontName: TFontName read FFontName write FFontName stored IsFontNameStored;
+    property FontSize: Integer read FFontSize write SetFontSize default 0;
+  end;
+
+type
+  TXReportText = class(TPersistent)
+  private
+    { Private declarations }
+  public
+    constructor Create;
+    property Caption[Index: Integer]: string read GetCaption write SetCaption;
+    property SysData[Index: Integer]: TXReportSysData read GetSysData write SetSysData;
+  published
+    property CenterCaption: string index 2 read GetCaption write SetCaption;
+    property CenterSysData: TXReportSysData index 2 read GetSysData write SetSysData default rdNone;
+    property LeftCaption: string index 0 read GetCaption write SetCaption;
+    property LeftSysData: TXReportSysData index 0 read GetSysData write SetSysData default rdNone;
+    property RightCaption: string index 1 read GetCaption write SetCaption;
+    property RightSysData: TXReportSysData index 1 read GetSysData write SetSysData default rdNone;
+  end;
+
+type
+  TXReportBand = class(TPersistent)
+  private
+    { Private declarations }
+  protected
+    property Color: TColor read FColor write FColor default clDefault;
+    property Font: TFont read FFont write SetFont stored IsFontStored;
+    property Visible: TXReportVisible read FVisible write FVisible default rvAuto;
+  public
+    constructor Create(const AName: string);
+    destructor Destroy; override;
+    property Name: string read FName;
+    property QRBand: TQRCustomBand read FQRBand write FQRBand;
+  end;
+
+type
+  TXReportGridBand = class(TXReportBand)
+  published
+    property Color;
+    property Font;
+    property Visible;
+  end;
+
+type
+  TXReportPageBand = class(TXReportBand)
+  private
+    { Private declarations }
+  public
+    constructor Create(const AName: string; AExtend, AIndent: Integer; ABorder: TXReportBorder);
+    destructor Destroy; override;
+  published
+    property BandExtend: Integer read FBandExtend write FBandExtend default 0;
+    property BandIndent: Integer read FBandIndent write FBandIndent default 0;
+    property Border: TXReportBorder read FBorder write FBorder default rbNone;
+    property Color default clWhite;
+    property Font;
+    property Text: TXReportText read FText write SetText;
+    property Visible;
+  end;
+
+type
+  TXReportBands = class(TPersistent)
+  private
+    { Private declarations }
+  public
+    constructor Create;
+    destructor Destroy; override;
+  published
+    property GridBands: TXReportBandStyle read FGridBands write SetGridBands;
+    property GridColumns: TXReportGridBand index 0 read GetGridBand write SetGridBand;
+    property GridHeaders: TXReportGridBand index 1 read GetGridBand write SetGridBand;
+    property GridTitles: TXReportGridBand index 2 read GetGridBand write SetGridBand;
+    property GridTotals: TXReportGridBand index 3 read GetGridBand write SetGridBand;
+    property PageFooter: TXReportPageBand index 0 read GetPageBand write SetPageBand;
+    property PageHeader: TXReportPageBand index 1 read GetPageBand write SetPageBand;
+    property PageTitle: TXReportPageBand index 2 read GetPageBand write SetPageBand;
+    property PageLegend: TXReportPageBand index 3 read GetPageBand write SetPageBand;
+  end;
+
+type
+  TXQRGrid = class(TComponent)
+  private
+    { Private declarations }
+  protected
+    function GridColumnColor(Column: TXColumn): TColor; virtual;
+    function GridColumnFont(Column: TXColumn): TFont; virtual;
+    function GridHeaderColor(Column: TXColumn): TColor; virtual;
+    function GridHeaderFont(Column: TXColumn): TFont; virtual;
+    function GridTitleColor(Column: TXColumn): TColor; virtual;
+    function GridTitleFont(Column: TXColumn): TFont; virtual;
+    function GridTotalColor(Column: TXColumn): TColor; virtual;
+    function GridTotalFont(Column: TXColumn): TFont; virtual;
+    function NewReport: TQuickRep;
+    function NewQRBand(const Name: string; BandType: TQRBandType; Height: Integer): TQRBand;
+    function NewQRChildBand(const Name: string; ParentBand: TQRCustomBand; Height: Integer): TQRChildBand;
+    function NewQRShape(const Name: string; Shape: TQRShapeType; Left, Top, Width, Height: Integer): TQRShape;
+    function NewQRLabel(const Name: string; Color: TColor; Font: TFont; Left, Top, Width, Height: Integer): TQRLabel;
+    function NewQRDBText(const Name: string; Color: TColor; Font: TFont; Left, Top, Width, Height: Integer): TQRDBText;
+    function NewQRExpr(const Name: string; Color: TColor; Font: TFont; Left, Top, Width, Height: Integer): TQRExpr;
+    function NewQRSysData(const Name: string; Color: TColor; Font: TFont; Left, Top, Width, Height: Integer): TQRSysData;
+    procedure NewRectangle(const Name: string; Color: TColor; Left, Top, Width, Height: Integer);
+    procedure NewHorLine(Left, Top, Width: Integer);
+    procedure NewVerLine(Left, Top, Height: Integer);
+    procedure NewTopLine(Left, Top, Width, Height: Integer);
+    procedure NewBottomLine(Left, Top, Width, Height: Integer);
+    procedure NewLeftLine(Left, Top, Width, Height: Integer);
+    procedure NewRightLine(Left, Top, Width, Height: Integer);
+    procedure NewColumn(Column: TXColumn; Left, Top, Width, Height: Integer);
+    procedure NewHeader(Column: TXColumn; Index: Integer; Left, Top, Width, Height: Integer);
+    procedure NewTitle(Column: TXColumn; Left, Top, Width, Height: Integer);
+    procedure NewTotal(Column: TXColumn; Left, Top, Width, Height: Integer);
+    procedure NewField(Band: TXReportPageBand; Alignment: TAlignment; Left, Top, Width, Height: Integer);
+    procedure Notification(AComponent: TComponent; Operation: TOperation); override;
+    procedure UpdateDesigner;
+    property LineColor: TColor read FLineColor write FLineColor;
+    property LineColWidth: Integer read FLineColWidth write FLineColWidth;
+    property LineRowWidth: Integer read FLineRowWidth write FLineRowWidth;
+    property LineWidth: Integer read FLineWidth write FLineWidth;
+    property ReportBand: TQRCustomBand read FReportBand write FReportBand;
+  public
+    constructor Create(AOwner: TComponent); override;
+    destructor Destroy; override;
+    function CalcReportPartCount: Integer;
+    procedure Preview;
+    procedure Print;
+    procedure PrintAll;
+    procedure ShowReport;
+    procedure SaveReport(const FileName: string);
+    property ReportPartCount: Integer read GetReportPartCount;
+  published
+    property Options: TXReportOptions read FOptions write SetOptions default
+      [roFirstPageHeader, roLastPageFooter, roPrintIfEmpty, roShowProgress, roForceTrueTypes, roAllowFixedColor, roModalMode];
+    property PrintCurrentRow: Boolean read FPrintCurrentRow write FPrintCurrentRow default False;
+    property PrinterPage: TQRPage read GetPrinterPage write SetPrinterPage;
+    property PrinterSettings: TQuickRepPrinterSettings read GetPrinterSettings write SetPrinterSettings;
+    property PrintSelectedRows: Boolean read FPrintSelectedRows write FPrintSelectedRows default False;
+    property ReportAlign: TXReportAlign read FReportAlign write FReportAlign default raStretch;
+    property ReportBands: TXReportBands read FReportBands write SetReportBands;
+    property ReportDBGrid: TXDBGrid read FReportDBGrid write SetReportDBGrid;
+    property ReportPart: Integer read FReportPart write SetReportPart default 1;
+    property ReportStyle: TXReportStyle read FReportStyle write SetReportStyle;
+    property ReportTitle: string read FReportTitle write SetReportTitle stored IsReportTitleStored;
+    property AfterBandPrint: TQRBandAfterPrintEvent read FAfterBandPrint write FAfterBandPrint;
+    property AfterPagePrint: TQRNotifyEvent read FAfterPagePrint write FAfterPagePrint;
+    property AfterPreview: TQRAfterPreviewEvent read FAfterPreview write FAfterPreview;
+    property AfterPrint: TQRAfterPrintEvent read FAfterPrint write FAfterPrint;
+    property BeforeBandPrint: TQRBandBeforePrintEvent read FBeforeBandPrint write FBeforeBandPrint;
+    property BeforePagePrint: TQRNotifyEvent read FBeforePagePrint write FBeforePagePrint;
+    property BeforePrint: TQRReportBeforePrintEvent read FBeforePrint write FBeforePrint;
+    property OnPrint: TQRPrintEvent read FOnPrint write FOnPrint;
+    property OnReportCreate: TQRNotifyEvent read FOnReportCreate write FOnReportCreate;
+  end;
+
+implementation

@@ -1,0 +1,57 @@
+=== TCompLHA Release History: ===
+
+May 2001 TCompLHA 6.0 released
+* Delphi 6 support
+* Kylix support
+* Fix to MatchFileName so *.* matches files with no extension (fixes bug introduced in 5.0)
+
+February 200 TCompLHA 5.1 released
+* C++ Builder 5 support (no code changes)
+
+September 1999 TCompLHA 5.0 released
+* Delphi 5.0 support
+* GetAllFilesInDir now returns Read Only and NTFS Compressed Files.
+* MatchFileName is no longer fooled by directory names with '.' in them.
+
+January 1999, TCompLHA 4.01 released
+* C++ Builder 4.0 support (no code changes)
+
+July 1998, TCompLHA 4.0 released
+* Delphi 4.0 support
+* Thread-safe code, including threaded example in LHADemo
+* TCompLHAStream full-source sample component added (compLHS.pas)
+* FileInList function documented
+
+April 2, 1998, TCompLHA 2.5c released
+* C++ Builder 3.0 support
+
+January 26, 1998, TCompLHA 2.5b released
+* Now reads/appends-to SFX archives created by DOS LHA without problems
+* Can now set CheckSpaceBeforeExpand=True for 4GB drives (except Delphi 1)
+* New SegExt property in SegLHA
+* SegLHA fixed '\' missing between SegDir and segment name
+* Delphi 3.02 support
+
+Oct 14, 1997  TCompLHA 2.5 Released
+* Delphi 3.01 support
+* New FileInformationIndex property
+* Accepts /S in GetMatchingFiles/GetAllFilesInDir to recurse subdirectories too
+* In safe/verify modes, also checks that actual target file can be opened
+* Respects MakeDirectories setting for new archive creation
+* ExceptionOnFileError now handles file creation errors as well as open errors
+* Now appends 00 to all archives, per LHA/LHArc behaviour
+* GetAllFilesInDir/GetMatchingFiles now handle FILE_ATTRIBUTE_NORMAL
+* ELZHBadDecodeTable and EUnableToCompress exceptions now public
+* TSegLHA now uses the current directory if TempArchivePath is not set
+
+July 15, 1997 TCompLHA 2.0 Released
+
+New features include encryption, LZH5 compression, self-extracting archives, disk-spanning and one-step backup/restore (TSegLHA component), properties such as AbortOperation and TempArchivePath.
+
+Bug fixes for:
+a) CRC errors for files which were compressed IN THE SAME OPERATION as a file which was uncompressible (i.e. ultimately stored without compression)
+b) Safe mode or Verify expansion failed when a target directory did not exist
+
+
+May 28, 1997 TCompLHA 1.0 Released
+
