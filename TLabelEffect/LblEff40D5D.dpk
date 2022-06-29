@@ -1,0 +1,43 @@
+package LblEff40D5D;
+
+{$R *.RES}
+{$ALIGN ON}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'LabelEffect (Design)'}
+{$IMPLICITBUILD OFF}
+
+requires
+  vcl50,
+  LblEff40D5,
+  Vclx50,
+  VclSmp50;
+
+contains
+  LeColrEd in 'LeColrEd.pas' {ColourSchemePropEd},
+  LeStylEd in 'LeStylEd.pas' {EffectStylePropEd},
+  LeEfctEd in 'LeEfctEd.pas' {EffectOptionPropEd},
+  LeGradEd in 'LeGradEd.pas' {GraduateOptionPropEd},
+  LeReszEd in 'LeReszEd.pas' {ResizeOptionPropEd},
+  LECompEd in 'LECompEd.pas' {LabelEffectEditor},
+  LeDsgnReg in 'LeDsgnReg.pas';
+
+end.

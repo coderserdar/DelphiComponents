@@ -1,0 +1,53 @@
+package truerad_d5;
+
+{$R *.RES}
+{$ALIGN ON}
+{$ASSERTIONS OFF}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS OFF}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'TrueRAD Suite'}
+{$IMPLICITBUILD OFF}
+
+requires
+  vcl50,
+  VCLIE50;
+
+contains
+  radconlist in 'radconlist.pas',
+  radcommon in 'radcommon.pas',
+  radcsdlg in 'editors\radcsdlg.pas' {radConnectionEditor},
+  radreg in 'radreg.pas',
+  radlinksedit in 'editors\radlinksedit.pas' {radMethodParameterEditor},
+  radp2p in 'radp2p.pas',
+  rade2p in 'rade2p.pas',
+  radvar in 'radvar.pas',
+  rade2m in 'rade2m.pas',
+  radpropindex in 'editors\radpropindex.pas' {radPropertyIndexEditor},
+  radabout in 'editors\radabout.pas' {radAboutForm},
+  radvclpatch in 'vcl5\radvclpatch.pas',
+  radclasses in 'vcl5\radclasses.pas',
+  radcontrols in 'vcl5\radcontrols.pas',
+  radgraphics in 'vcl5\radgraphics.pas',
+  radimglist in 'vcl5\radimglist.pas',
+  radstdctrls in 'vcl5\radstdctrls.pas',
+  radsystem in 'vcl5\radsystem.pas',
+  radactnlist in 'vcl5\radactnlist.pas';
+
+end.

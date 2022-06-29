@@ -1,0 +1,46 @@
+package Fundamentals3_SocketsD7;
+
+{$R *.res}
+{$R 'Sockets\cSocketHostLookup.dcr'}
+{$R 'Sockets\cSocketsUDP.dcr'}
+{$R 'Sockets\cTCPClient.dcr'}
+{$R 'Sockets\cTCPServer.dcr'}
+{$ASSERTIONS OFF}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS OFF}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'Fundamentals 3 Sockets'}
+{$DESIGNONLY}
+{$IMPLICITBUILD OFF}
+
+requires
+  Fundamentals3_UtilitiesD7;
+
+contains
+  cWinSock in 'Sockets\cWinSock.pas',
+  cSocks in 'Sockets\cSocks.pas',
+  cSocketHostLookup in 'Sockets\cSocketHostLookup.pas',
+  cSockets in 'Sockets\cSockets.pas',
+  cSocketsTCP in 'Sockets\cSocketsTCP.pas',
+  cSocketsTCPClient in 'Sockets\cSocketsTCPClient.pas',
+  cSocketsTCPServer in 'Sockets\cSocketsTCPServer.pas',
+  cSocketsUDP in 'Sockets\cSocketsUDP.pas',
+  cTCPStream in 'Sockets\cTCPStream.pas',
+  cTCPClient in 'Sockets\cTCPClient.pas',
+  cTCPServer in 'Sockets\cTCPServer.pas',
+  cSocketsReg in 'Sockets\cSocketsReg.pas';
+
+end.
+

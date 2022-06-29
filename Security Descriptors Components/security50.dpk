@@ -1,0 +1,44 @@
+package security50;
+
+{$R *.RES}
+{$ALIGN ON}
+{$ASSERTIONS OFF}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS OFF}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'Composants Securité'}
+{$IMPLICITBUILD OFF}
+
+requires
+  vcl50,
+  dclstd50;
+
+contains
+  aclregistry in 'aclregistry.pas',
+  aclcom in 'aclcom.pas',
+  aclfiles in 'aclfiles.pas',
+  aclreg in 'aclreg.pas',
+  aclbase in 'aclbase.pas',
+  aclfuncs in 'aclfuncs.pas',
+  aclconst in 'aclconst.pas',
+  acldesc in 'acldesc.pas',
+  aclcheck in 'aclcheck.pas',
+  ntlmapi in 'ntlmapi.pas';
+
+end.
