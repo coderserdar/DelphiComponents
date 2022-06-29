@@ -1,0 +1,69 @@
+package acntD6_R;
+{$R *.res}
+{$ALIGN 8}
+{$ASSERTIONS OFF}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS OFF}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE ON}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'AlphaControls run-time library'}
+{$RUNONLY}
+{$IMPLICITBUILD OFF}
+{$WARNINGS OFF}
+
+requires
+  vcl,
+  vclx,
+  vcljpg;
+
+contains
+  sEdit in 'sEdit.pas',
+  sPanel in 'sPanel.pas',
+  sConst in 'sConst.pas',
+  sRadioButton in 'sRadioButton.pas',
+  sCheckbox in 'sCheckbox.pas',
+  sGraphUtils in 'sGraphUtils.pas',
+  sUtils in 'sUtils.pas',
+  sVclUtils in 'sVclUtils.pas',
+  sMessages in 'sMessages.pas',
+  sGauge in 'sGauge.pas',
+  sStoreUtils in 'sStoreUtils.pas',
+  sStyleSimply in 'sStyleSimply.pas',
+  sGradient in 'sGradient.pas',
+  sDefaults in 'sDefaults.pas',
+  sSkinManager in 'sSkinManager.pas',
+  sMaskData in 'sMaskData.pas',
+  sSkinProps in 'sSkinProps.pas',
+  sSkinProvider in 'sSkinProvider.pas',
+  sStrings in 'sStrings.pas',
+  sSkinMenus in 'sSkinMenus.pas',
+  sScrollBar in 'sScrollBar.pas',
+  sMDIForm in 'sMDIForm.pas',
+  sCommonData in 'sCommonData.pas',
+  sAlphaGraph in 'sAlphaGraph.pas',
+  sComboBox in 'sComboBox.pas',
+  sButton in 'sButton.pas',
+  sSpeedButton in 'sSpeedButton.pas',
+  sBitBtn in 'sBitBtn.pas',
+  sFade in 'sFade.pas',
+  sLabel in 'sLabel.pas',
+  sThirdParty in 'sThirdParty.pas',
+  sAlphaListBox in 'sAlphaListBox.pas',
+  sBorders in 'sBorders.pas';
+
+end.

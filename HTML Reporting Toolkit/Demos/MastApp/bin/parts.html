@@ -1,0 +1,34 @@
+<html>
+  <title>Browse parts</title>
+  <style>
+      body      { font-family: "Verdana, Arial, Helvetica";
+                  font-size: "10pt" }
+      hr        { color: blue }
+      table     { font-family: "Verdana, Tahoma"; font-size: "11px" }
+      td        { background-color:"#EEEEEE"; cursor: default;
+                  padding-left: 3pt; padding-right: 3pt; padding-top: 2pt; padding-bottom: 2pt; }
+      th        { background-color:"#E3E3E3";
+                  padding-left: 3pt; padding-right: 3pt; padding-top: 2pt; padding-bottom: 2pt; }
+
+      .A        {  text-decoration: none; color: black; }
+      .A:hover  { text-decoration: underline; }
+      .A:visited { text-decoration: none; color: black }
+      .A:visited:hover { text-decoration: underline; color: black }
+
+      .printOnly { display: none }
+
+      @media print  {
+        .printOnly { display: block }
+      }
+  </style>
+  <script>
+      function Init() {
+         window.external.SelectedNode = 3;
+      }
+  </script>
+  <body onLoad="Init()" bgcolor="#F0F0F0" leftmargin="0" rightmargin="0" bottommargin="0" scroll="no">
+    <H2 align="center">Browse and edit parts</H2>
+    <object classid="clsid:67498C63-A01D-4135-842F-E41D2F1105F1"
+            codebase="BrParts.cab#version=1,0,0,0" width="100%" height="100%">
+  </body>
+</html>

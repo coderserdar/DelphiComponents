@@ -1,0 +1,47 @@
+package users_basic_v19;
+
+{$R *.RES}
+{$ALIGN ON}
+{$ASSERTIONS OFF}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS OFF}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'TUsers Basic Classes v1.9 - ToolsAndComps'}
+{$IMPLICITBUILD ON}
+
+requires
+  Vcl50,
+  Vcldb50,
+  Vclbde50;
+
+contains
+  crypto in 'crypto.pas',
+  dlgsearch in 'dlgsearch.pas',
+  login in 'login.pas',
+  new_profile in 'new_profile.pas',
+  new_user in 'new_user.pas',
+  user_adm in 'user_adm.pas',
+  chng_pwd in 'chng_pwd.pas',
+  users_res in 'users_res.pas',
+  users_basic in 'users_basic.pas',
+  dtm_users in 'dtm_users.pas',
+  dtm_login in 'dtm_login.pas',
+  users_sac in 'users_sac.pas';
+
+end.

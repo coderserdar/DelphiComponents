@@ -1,0 +1,18 @@
+/*
+ COMP_RES.RC
+ This file defines a custom resource of type TCOMPRESS
+ (a file made with TCOMPRESS).
+ The particular file being stored in this case
+ is MYARCHIV.ARC, made by COMPDEMO, which we will describe
+ internally as MyArchiv.
+ NB: The *contents* of the archive are not important at
+ this point -- they will be whatever file(s) you have placed
+ into myarchiv.arc with COMPDEMO.
+
+ Compile this file with (16-bit): delphi\bin\brc -r COMP_RES.RC
+ or                     (32-bit): delphi3.0\bin\brc32 -r COMP_RES.RC
+
+ That will create a COMP_RES.RES file which should be included in
+ project's main form or project file with {$R COMP_RES.RES}
+*/
+MyArchiv TCOMPRESS "MYARCHIV.arc"

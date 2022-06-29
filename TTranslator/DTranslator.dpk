@@ -1,0 +1,46 @@
+package DTranslator;
+
+{$R *.RES}
+{$R 'TranslatorReg.dcr'}
+{$ALIGN ON}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS OFF}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS ON}
+{$RANGECHECKS ON}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'TTranslator (c) Oy Polycon Ab'}
+{$IMPLICITBUILD OFF}
+{$DEFINE DBUTEST}
+{$DEFINE NO_DTI}
+{$DEFINE TRANSLATOR}
+
+requires
+  vcl50,
+  Vclbde50,
+  Vcldb50;
+
+contains
+  TranslatorReg in 'TranslatorReg.pas',
+  LanguageEditor in 'LanguageEditor.pas' {dlgLangEditor},
+  Translator in 'Translator.pas',
+  TranslatorEditor in 'TranslatorEditor.pas' {dlgStringsEditor},
+  TranslatorEdt in 'TranslatorEdt.pas',
+  TranslatorInterfaces in 'TranslatorInterfaces.pas',
+  AboutTranslator in 'AboutTranslator.pas' {dlgAboutTranslator};
+
+end.

@@ -1,0 +1,218 @@
+TUsersCS Security Component v1.971
+Tools&Comps - Controle de Usuários para Delphi, C++ Builder e Kylix
+  Home Page: www.toolsandcomps.com/por
+     e-mail: info@toolsandcomps.com
+   Endereço: Rua do Beijo, 9 - Novo México
+             Vila Velha - ES - Brasil
+        CEP: 29104-080-020
+       Fone: 55 27 33891138/55 27 99602760
+
+Última Atualização: 02 de Jan de 2003
+
+CONTEUDO
+--------
+
+· Instalação 
+· Aplicações de exemplo
+· Mudando o idioma do componente
+· O que há de novo
+· Informação importante para usuários do MS-Access
+
+Instalação
+----------
+
+Para instalar o TUsersCS em seu computador:
+
+1. Remova todas as prévias versões do TUsersCS. Vá no menu "Components|Install Packages" e selecione os 3 packages do TUsersCS, clicando no botão "Remove". Também faça uma checagem por versões antigas das BPLs e DCPs do componente no diretório $(Delphi)\Projects\BPL, deletando os arquivos caso estes existam.
+
+2. No menu File|Open, abra os package p_editors_pkg.dpk, users_basic_v19.dpk e users_cs_v19.dpk e clique no botão Install de cada package. Os packages estão no diretório c:\ToolsAndComps\UsersCS\Delphi5Trial 
+
+OU
+ 
+  No menu Components|Install Packages, clique no botão Add... e selecione as 3 BPLs que estão no diretório do componente C:\ToolsAndComps\UsersCS\Delphi5Trial 
+
+NOTA: Para outras versões do Delphi, escolha o diretório correspondente.
+
+3. Atualize a configuração do Library Path do seu Delphi incluindo os diretórios:
+  · c:\ToolsAndComps\UsersCS\Delphi5Trial (de acordo com a versão do Delphi que você estiver   usando)
+  · c:\ToolsAndComps\UsersCS\CRYPTO
+  · c:\Arquivos de Programas\Borland\Delphi 5\Source\ToolsAPI (verifique o diretório de instalação de seu Delphi)
+
+NOTA:
+  · Você também pode incluir esses diretórios no Search Path de seu projeto
+
+
+Aplicações de exemplo
+---------------------
+
+As aplicações de exemplo utilizam uma base de dados em Paradox, sendo que não é necessário configurações extras para executar as aplicações . Essa base de dados se encontra no diretório ToolsAndComps\UsersCS\Samples\Data. 
+
+Se você deseja testar o programa SAC.EXE (Security Administration Central), você deve executar as outras aplicações como o usuário master primeiro para registrá-las no banco de dados de segurança.
+
+Usuários do C++ Builder: Os exemplos estão referenciando o diretório ToolsAndComps\UsersCS\CB5Trial. Se você está usando o CB6, será necessário modificar estas referências em Project | Options | Directories/Conditionals, e atualizar os valores das opções  "Include Path" e "Library Path".
+
+Mudando o idioma do componente
+------------------------------
+
+Caso o idioma apresentado pelo componente não seja o idioma de sua escolha, vá até o diretório UsersCS\Resources e copie os arquivos que estão dentro do diretório do idioma desejado para o diretório aonde estão os DCU's componente. Após copiar os arquivos, recompile sua aplicação.
+
+O que há de novo 
+----------------
+Versão 1.971 (02 de Jan de 2003)
+
+* Suporte correto a ActionBands
+* Versão para D7
+* Pequenas mudanças internas 
+
+Versão 1.97 (29 de Julho de 2002)
+
+* Corrigido problema de atualização da propriedade FormName quando se utilizava o componente em formulários herdados. O erro acontecia apenas quando se inseria o component em forms herdados já prontos.
+* Corrigido problema de atualização do Parent de um component, quando se mudava o mesmo de um parent para outro (por exemplo, ao se mudar um TButton de um TPanel para outro TPanel)
+
+Versão 1.96 (7 de Julho de 2002)
+
+* Corrigido um Bug de Stack Overflow quando se utilizava o componente com TFrames
+* Corrigido um Bug de Stack Overflow quando se utilizava diversos PageControls aninhandos
+* Adicionado suporte correto ao componente SideBar da Dev Express. Veja o aplicativo de exemplo para saber como proceder com tais componentes ("Samples\DevExpress SideBar")
+* Corrigido um Bug na instalação dos packages em Delphi 5
+
+Versão 1.95 (15 de Maio de 2002)
+
+* Agora os componentes da lista de permissões (módulo de administração de usuários) aparecem na mesma ordem em que aparecem nos formulários. 
+* uma mundança na lógica do componente permitiu um considerável ganho de performance na carga da aplicação
+* corrigido um bug no registro de componentes em tempo de execução: as configurações de segurança do usuário não estavam sendo aplicadas corretamente.
+* agora o formulário de registro de componentes possui um botão para cancelar as mudanças efetuadas.
+* uma mudança no algoritmo de login trace permite limpar a lista de usuários travados no banco de dados automaticamente.
+
+Versão 1.94 (10 de Abril de 2002)
+
+· Adicionado suporte completo a função Logout: a função agora desabilita todos os componentes protegidos pelo componente de segurança, além de finalizar a seção do usuário na aplicação. 
+· Corrigido um problema na gravação dos dados de login trace, quando o componente TDatabase era destruído antes do componente de segurança.
+· Agora quando se abre o sistema sem se efetuar o login, todos os componentes protegidos são desabilitados
+· Nova propriedade DefaultSetting: O desenvolvedor agora pode escolher qual será a configuração   de acesso padrão para os componentes protegidos na criação de um novo usuário/perfil ou quando se protege um novo componente.
+· Erro corrigido: quando se trocava de usuário na aplicação, através da execução do método login,   alguns forms já abertos não estavam sendo atualizados com as permissões do novo usuário.
+
+Versão 1.93 (11 de Março de 2002)
+
+· corrigido um problema na gravação dos dados de login trace em algumas versões do Windows NT e Windows NT Worksation. O componente não conseguia obter o nome do computador
+· o ComponentRegistration Form agora suporta corretamente mais de um componente da Developer Express no mesmo form. Antes havia uma limitação de apenas um componente desse tipo por form 
+· algumas pequenas mundanças internas
+· Agora os relatórios estão disponíveis apenas na versão registrada, para eliminar a mensagem de erro de compilação 'unit xxx.pas was compiled with a different version of unit yyy.pas', que aparecia quando se usava uma versão do QR diferente da versão usada para compilar o componente.
+
+
+Versão 1.92 (05 de Fevereiro de 2002)
+
+· corrigido problema de Access Violation quando se executava a aplicação a partir do 
+  Delphi quando há um TScrollBox no form
+· corrigido problema de Access Violation quando se executava a aplicação a partir do 
+  Delphi quando se protegia componentes da biblioteca Info Power.
+· corrigido um problema da característica de TimeOut no Windows 2000
+· corrigo o erro "qryUserInfo: Cannot perform this operation on a closed dataset": 
+  esse erro acontecia quando se atingia o limite de tentativas de login com o usuário master, 
+  ficando a aplicação desprotegida após o erro.
+
+Versão 1.90 (27 de Dezembro de 2001)
+
+· Nova propriedade AutoApplySecurity (TUsersCSReg): permite ao desenvolvedor escolher se a segurança será aplicada automaticamente quando o usuário acessa o form ou se a segurança será aplicada manualmente pelo desenvolvedor através do método ApplySecurity.
+· Novo método SetDabataseConnection (TUsersCSReg): método que permite utilizar o componente em um form contido em uma DLL. Veja o exemplo "Samples\Forms in DLLs".
+· Nova propriedade IsRepositoryForm (TUsersCSReg): método que informa se o componente é parte ou não de um form que irá ser usado como template no repositório de objetos do Delphi. Outras modificações foram feitas para o perfeito suporte a herança de formulários. Veja o exemplo "Samples\Repository Templates".
+· Novos Eventos BeforeApplySecurity e AfterApplySecurity (TUsersCSReg)
+· Nova Propriedade UserIsMaster (Classe TUser)
+· Nova Propriedade LastLoginDateTime (Classe TUser)
+· Removidos warnings e hints.
+· BUG Corrigido: botão Atualizar Usuários (Aba Permissões) não estava funcionando corretamente em alguns casos.
+· BUG Corrigido: as funções GetComponentInfo e GetUserComponentInfo não funcionavam corretamente se chamados no OnCreate do Form.
+· BUG Corrigido: Aliases criados em outros sessions não eram vísiveis pelo componente.
+· BUG Corrigido: ActionsItems estavam aparecendo duplicados no Component Registration Form.
+· BUG Corrigido: Quando se logava no sistema com um mesmo usuário em diferentes máquinas, as informações de Login Trace de todas as conexões estavam sendo apagadas (apenas quando se permitia múltiplos logins de um mesmo usuário).
+· BUG Corrigido: Usuários estavam sendo desabilitados continuamente (mesmo que fossem habilitados novamente pelo administrador) quando o Nº máximo de dias sem utilizar a aplicação era ultrapassado.
+
+Versão 1.83 (14 de Setembro de 2001)
+
+· Gravação dos dados de Auditoria está mais rápida: uma mudança interna possibilitou a gravação dos dados de auditoria de uma forma mais rápida
+· Informações de Login/Logout não são mais gravadas para o usuário master
+· BUG Corrigido: OnApplySecurity não estava sendo disparado para alguns componentes
+· As informações de logout agora são gravadas quando se fecha a conexão com o banco de dados, e não mais quando a aplicação terminava. Isso prevê erros na finalização da aplicação quando o componente de conexão está em um form diferente do form aonde está o componente de segurança e o form com o componente de conexão era destruído antes ao final da aplicação.
+· Possibilidade de se usar o TUsersCSReg em forms herdados
+
+Versão 1.82 (24 de Agosto de 2001)
+
+· Resolvido problema de Access Violation quando se deletava o componente principal 
+(TUsersCS)e após se tentava deletar os componentes secundários (TUsersCSReg) dos formulários
+· Adicionado suporte a aplicações baseadas em ActiveX: Agora é possível trabalhar com o componente de segurança em formulários do tipo TActiveForm
+
+Versão 1.8 (21 de Julho de 2001)
+
+· Mundanças na segurança de um Dataset: Agora quando se aplica restrições de segurança em um Dataset cujos campos não foram registrados no componente, o TUsersCS automaticamente aplica a mesma configuração de segurança do Dataset para os seus Tfields.
+· BUG Corrigido: Registro de componentes em tempo de execução não estava funcionando corretamente. 
+· Novo Evento OnApplySecurity: Novo evento do TUsersCSReg, que é disparado para cada item protegido. Esse evento tem como parâmetros o item que está prestes a receber a configuração de segurança e também as informações de configuração de segurança do componente em relação ao usuário. Com esse evento o desenvolvedor pode realizar configurações extras no componente e informar ao componente de segurança se a proteção daquele item será processada ou não.
+· Agora o componente também suporta TCustomActions
+
+Versão 1.7 (01 de Julho de 2001) 
+
+· BUG Corrigido: Em um Page Control com várias TabSheets, o componente estava tornando a última TabSheet como sendo a TabSheet ativa
+· BUG Corrigido: No Component Registration Form, estavam sendo exibidos alguns componentes desnecessários, como Datasources.
+· BUG Corrigido: No Component Registration Form, agora todos controles dentros de um TCoolBar são exibidos, permitindo sua seleção para proteção.
+· BUG Corrigido: No Component Registration Form, alguns componentes estavam sendo exibidos duplamente
+
+Versão 1.7 (30 de Maio de 2001) 
+
+· BUG Corrigido: Novos perfis estavam sendo exibidos apenas na próxima vez que se abria o módulo de administração de usuários
+· BUG Corrigido: O componente não estava corrigindo a base de dados de Login Trace quando uma aplicação tinha uma terminação anormal e era inicializada novamente. Esse erro acontecia apenas quando se usava arquivos Paradox com nomes curtos (propriedade FileNames83DOS como True)
+· Novos eventos: BeforeLogin, WhileDoLogin e AfterLogin (Veja Exemplo)
+
+Versão 1.7 (15 de Maio de 2001) 
+
+· Adicionada nova propriedade MaxCurrentUsers(Integer). A propriedade MaxCurrentUsers indica o número máximo de usuários que podem estar usando a aplicação ao mesmo tempo.   
+· Adicionada nova propriedade HaltOnReachMaxCurrentUsers(Boolean). A propriedade HaltOnReachMaxCurrentUsers indica se o componente terminará a aplicação se o número de máximo de usuários correntes é alcançado.
+· Adicionada nova função GetNumberOfCurrentUsers. Esta função devolve o número de usuários que estão usando a aplicação quando a mesma é executada.
+
+Versão 1.7 (19 de Abril de 2001)
+
+· Suporte aos componentes da Developer Express (Express Bars, Express Quantum Grid e Express Quantum TreeList). 
+· Foi feita uma substancial mudança no algoritmo para exibição de componentes no form de registro e agora serão exibidos praticamente todos os componentes visuais.
+· Novo método e um evento para o registro de componentes em tempo de execução. 
+· O algoritmo de criptografia padrão do componente foi trocado. Havia um bug no algoritmo antigo, que não permitia descriptografar textos com letras duplicadas em sequencia corretamente. Usuários antigos precisam executar o programa para a troca da criptografia das senhas.
+· Houve um aumento no tamanho do campo da senha para 60 caracteres. Isso permite a utilização de outros algoritmos de criptografia. Usuários antigos precisam executar o programa para atualização do banco.
+· O tamanho do campo do nome do usuário foi aumentado para 30 caracteres. Usuários antigos precisam executar o programa para atualização do banco.
+· Novo método que permite retornar o status de um componente em relação a um usuário que não está logado na aplicação. 
+· Novo form para visualização dos formulários registrados
+· Corrigido BUGs referentes a colunas que não aceitam valores nulos e a nomes de colunas ambíguas em alguns bancos (MS-SQL Server e Oracle).
+· Novo métido que exibe a lista de todas as aplicação cadastradas no banco de dados de segurança sendo possível ter uma única aplicação para realizar o gerenciamento de toda a segurança.
+· Corrigido um problema de instalação dos packages.
+· Nova propriedade booleand MSAccess, que indica ao componente se a base de dados de segurança está armazenada em uma base de dados MS-Access.
+· Versão para Delphi 3 disponível novamente.
+· Incluídos novos exemplos
+
+Versão 1.6 (Inclui novidades da v1.5.5 também)
+
+· Suporte a TActions
+· Evento para validação da senha a partir da aplicação
+· Customização da tela de cadastro de usuários
+· Time Out para aplicação
+· Relatórios diversos
+	a) Listagem de Usuários
+	b) Listagem de Perfis
+	c) Listagem dos acessos de um usuário
+	d) Listagem dos acessos de um perfil
+	e) Listagem das atividades de login dos usuários 
+	f) Listagem da utilização de um item pelos usuários 
+	g) Listagem da utilização de items por um usuário 
+· Garantia de Login único
+· Bloqueio de acesso a aplicação após N dias sem utilizar a mesma
+· Desabilita usuário após N tentativas de login sem sucesso
+· Restrição de acesso a registros: novo campo ADDITIONAL_INFO para se armazenar informações extras dos usuários das aplicações, possibilitando inclusive restrições a faixas de dados
+· Melhoras na performance
+· Mais flexibilidade na configuração de acessos do usuários: agora é possível mesclar entre as opções Visivel, Invisível e Visível mas Desabilitado para cada componente individualmente.
+
+
+Informação importante para usuários do MS-Access
+------------------------------------------------
+O TUsersCS possui um flag que deve ser modificado para se usar uma arquivo MS-Access como sendo o banco de dados para as tabelas de segurança. Selecione o componente no Object Inspector e mude o valor da propriedade MSAccess para true.
+
+Obrigado por escolher o TUsersCS
+
+Caso você tenha encontrado algum bug no componente ou não conseguiu testá-lo por algum motivo, por favor, reporte-nos o ocorrido para que possamos corrigir os prováveis erros.
+
+->>> Leia atentamente o manual do usuário para um melhor esclarecimento a respeito das novas características
+->>> Veja as aplicações de exemplo que se encontram nos diretório UsersCS\Samples para um exemplo  de utilização de todos os recursos do componente.
