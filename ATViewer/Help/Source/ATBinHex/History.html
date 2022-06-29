@@ -1,0 +1,221 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+  <title>Versions history</title>
+  <link href="Main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<h2>Versions history</h2>
+<hr>
+
+2.7.0
+<ul> 
+<li> Added: TextGutterLinesStep prop.
+</ul>
+
+2.6.0 (16 mar 2009)
+<ul>
+<li> Added: URL/mail highlighting.
+<li> Changed: OnDrawLine parameters.
+<li> Added: OnDrawLine2 event.
+<li> Added: asoRegExMLine search option.
+<li> Fixed: On reloading selection is restored too.
+<li> Fixed: Tab display for fixed modes.
+</ul>
+
+2.5.0 (7 dec 2008)
+<ul>
+<li> Added: Delphi 2009 compat.
+<li> Added: SearchStarted, SearchString prop.
+<li> Added: AutoReloadSimple, AutoReloadSimpleTime prop.
+<li> Added: OnDrawLine event (allows to color lines).
+<li> Fixed: D2009 text search.
+</ul>
+
+
+2.4.0 (06 sep 2008)
+<ul>
+<li> Added: Line numbers: TextGutterLines*, FontGutter.
+<li> Fixed: "Positions out of range" exception.
+<li> Fixed: Printing.
+<li> Fixed: Reload line up issue.
+</ul>
+
+2.3.0 (21 jun)
+<ul>
+<li> Added: PosLine property.
+<li> Fixed: Tailing issue.
+</ul>
+
+2.2.0 (01 Mar 2008)
+<ul>
+<li> Added: Printing:
+  <ul>
+  <li> Margin* properties.
+  <li> Margins handling during PrintSetup call.
+  <li> FontFooter property.
+  <li> Page numbers are printed.
+  <li> Changed: Print declaration.
+  </ul>
+<li> Added: Notepad minor feature: follow tail on control resize.
+<li> Fixed: Vertical scrollbar may disappear on some files.
+<li> Fixed: AutoReload could not apply sometimes.
+</ul>
+
+2.1.0 (27 Jan 2008)
+<ul>
+<li> Added: FindFirst method has additional asoFromPage option.
+<li> Added: FindNext method has additional AFindPrevious parameter to find previous match.
+<li> Changed: Printing code separated to ATBinHexPrint.inc.
+<li> Removed: VariableScrollbar property.
+<li> Fixed: FindNext error after changing view mode.
+</ul>
+
+2.0.0 (17 Dec 2007)
+<ul>
+<li> Added: TextGutter, TextGutterWidth, TextColorGutter properties.
+<li> Added: Tabs (#9) have correct dynamic size (currently only for monospaced fonts).
+<li> Fixed: AutoReload option could not apply sometimes.
+<li> Fixed: Trailing spaces showing on word wrap.
+</ul>
+
+1.9.2 (28 Oct 2007)
+<ul>
+<li> Added: TextOemSpecial property.
+<li> Added: TextNonPrintable property.
+<li> Changed: Msg* properties changed to single TextPopupCaption[] property.
+</ul>
+
+1.9.0 (20 Oct 2007):
+<ul>
+<li> Added: Many codepages added, see complete list in ATxCodepages.pas.
+  See notes for TextEncoding property.
+  Note: RegEx search for custom codepages is not yet implemented.
+<li> Added: TextEncodingName property.
+<li> Added: TextEncodingsMenu method.
+<li> Added: "Encodings menu" popup menu item.
+<li> Added: Mouse shortcut for zoom: left button + wheel.
+<li> Added: Reload method.
+<li> Changed: OnScaleChange event removed, OnOptionsChange added instead.
+<li> Fixed: Number of wheel scroll lines now read correctly.
+</ul>
+
+1.8.0 (28 Sep 2007):
+<ul>
+<li> Added: View mode "Unicode/Hex", similar to FAR manager's one.
+<li> Added: Nice scroll by middle mouse click, like in MSIE / Forefox.
+<li> Added: Support for KOI8-R codepage. More codepages will be added later.
+<li> Added: Properties TextWidthUHex, TextWidthFitUHex.
+<li> Added: Properties SelTextShort, SelTextShortW.
+<li> Changed: Auto-scroll horz. speed decreased (more smooth scroll).
+</ul>
+
+1.7.0 (01 Aug 2007):
+<ul>
+<li> Changes regarding printing:
+  <ul>
+  <li> Changed: Redraw procedure refactored so now it's possible to use DrawTo
+       to draw control contents on other bitmaps, not only on screen.
+  <li> Changed: Print method rewritten, it uses DrawTo, so control prints itself
+       in exactly the same form as it's shown on screen (but grayscaled).
+       The printing is now possible in all modes, including Unicode!
+  <li> Added: ATPrintPreview component is used to show print preview form.
+       It's enabled by "PREVIEW" define in ATBinHexOptions.inc.
+  <li> Added: PrintPreview method.      
+  </ul>
+<li> Added: Only chars missed in the current font are replaced with dots.
+<li> Added: Visual indication of Enabled property (grayed text).
+<li> Added: OnScroll event.
+<li> Changed: Property ScrollPageSize renamed to VariableScrollbar, it's default value is False now.
+</ul>
+
+1.6.2 (16 Jun 2007):
+<ul>
+<li> Added: Auto-scroll when mouse is lefter/righter than client area
+<li> Added: Shift + Mouse Wheel scrolls text horizontally
+<li> Added: Ctrl + Mouse Wheel changes font size
+<li> Added: OnScaleChange event
+<li> Changed: ATStreamSearch updated for DIRegEx 4.1.1 release
+<li> Fixed: Possible AV on text selection under Multi-Byte locales
+</ul>
+
+1.6.0 (28 Mar 2007):
+<ul>
+<li> Changed: License updated to MPL 1.1
+<li> Added: ATStreamSearch helper component
+<li> Added: RegEx search option (DIRegEx library must be used)
+<li> Changed: FindFirst/FindNext methods added instead of FindText method
+<li> Added: Feature like in RichEdit: triple click selects current line
+<li> Added: MaxClipboardDataSizeMb property
+<li> Changed: TextSearchIndent property renamed to TextSearchIndentVert
+<li> Changed: OnSearchProgress event added instead of SearchCallback property
+<li> Changed: ATBinHexDef.inc file renamed to ATBinHexOptions.inc,
+     several options added to it 
+</ul>
+
+1.5.8 (24 Feb 2007):
+<ul>
+<li> Changed: Files are not locked for deletion anymore (Note: not supported in Win9x) 
+<li> Added: IncreaseFontSize method 
+<li> Added: OnFileReload event 
+</ul>
+
+1.5.6 (14 Dec 2006):
+<ul>
+<li> Added: FindText method works also in Unicode mode 
+<li> Added: Scroll method 
+<li> Added: TextSearchIndentHorz property 
+<li> Added: Feature similar to RichEdit's: selection can be changed by performing 
+     Click at block start and Shift+Click at end 
+<li> Changed: Declaration of SetSelection method 
+<li> Removed: AutoCopy property: it can be done via OnSelectionChange event 
+</ul>
+
+1.5.5 (24 Nov 2006):
+<ul>
+<li> Added: TextPopupCommands property 
+<li> Added: MaxLengths property 
+</ul>
+
+1.5.3 (02 Oct 2006):
+<ul>
+<li> Added: AutoReload, AutoReloadBeep, AutoReloadFollowTail properties 
+<li> Added: AutoCopy property 
+<li> Added: TextTabSize property 
+<li> Added: TextColorHexBack property 
+<li> Added: PosOffset, SelText, SelTextW properties 
+<li> Added: OnSelectionChange event 
+</ul>
+
+1.5.2 (09 Sep 2006):
+<ul>
+<li> Changed: Most of units renamed to AT*.* to avoid name confusions 
+<li> Added: Thread safety note in the help
+</ul>
+
+1.5.1 (04 Aug 2006):
+<ul>
+<li> Added: OpenStream method 
+<li> Added: Feature similar to RichEdit's: double click selects word under cursor 
+</ul>
+
+1.5.0 (22 Jul 2006):
+<ul>
+<li> Added: Implemented Text mode (with variable line length) 
+<li> Added: Unicode mode is now also has variable line length 
+<li> Added: Select/Copy commands work in Unicode mode too 
+<li> Added: FontOEM, ScrollPageSize properties 
+</ul>
+
+...
+<p>
+
+1.3.2 (17 Jun 2006):
+<ul>
+<li> Initial release (previous versions were included in the ATViewer pack)
+</ul>
+
+</body>
+</html>

@@ -1,0 +1,2 @@
+//{$define REGEX}
+//{$define TNT}

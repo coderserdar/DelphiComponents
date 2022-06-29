@@ -1,0 +1,189 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+  <title>Usage: Properties, General</title>
+  <link href="Main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<h2>Properties, General</h2>
+<hr>
+
+<table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="width: 40%;"><font color="DarkBlue">Mode</font></td>
+      <td>Current view mode.<br>
+      Possible values:<br>
+      <ul>
+      <li><b>vmodeText</b>: Text mode</li>
+      <li><b>vmodeBinary</b>: Binary mode (with fixed line length)</li>
+      <li><b>vmodeHex</b>: Hex mode</li>
+      <li><b>vmodeUnicode</b>: Unicode and Unicode/Hex modes</li>
+      <li><b>vmodeRTF</b>: RTF/UTF-8 mode</li>
+      <li><b>vmodeMedia</b>: Image/Multimedia mode</li>
+      <li><b>vmodeWeb</b>: Internet mode</li>
+      <li><b>vmodeWLX</b>: Plugins mode</li>
+      </ul>
+      Notes:<br>
+      <ul>
+      <li>To activate the combined Unicode/Hex mode, user should call the Unicode mode twice.</li>
+      <li>Plugins mode is available only when "WLX" define is uncommented in ATViewerOptions.inc file.</li>
+      <li>UTF-8 encoded texts can be shown only under Windows 2000/XP+.
+      This is due to a limitation of MS RichEdit control.</li>
+      </ul>
+      </td>
+    </tr>
+    <tr>
+      <td><font color="DarkBlue">ModeDetect</font></td>
+      <td>Enables mode auto-detection on file opening.<br>
+     File type may be determined by extension or sometimes by contents (extension has higher priority than contents).
+     The global variable <b>ATViewerOptions</b> contains extensions lists for different modes, 
+     it's declared as record:
+<pre>
+  type
+    TATViewerGlobalOptions = record
+      ExtText: string; //Text files
+      ExtRTF: string; //RTF files
+      ExtImages: string; //Image files
+      ExtMedia: string; //Video and audio clips
+      ExtWeb: string; //Internet documents
+    end;
+</pre>
+     Note:<br>
+     <ul>
+     <li>For Plugins mode the different plugin detection scheme is used: matched plugin is determined
+       first by plugin detect-string, or, if plugin detect-string is empty, the first plugin that can
+       load given file is shown. Plugins mode can have higher or lower priority than internal viewers: see
+       PluginsHighPriority property.</li>
+     </ul>
+     </td>
+    </tr>
+
+    <tr>
+      <td>
+        <font color="DarkBlue">ModesDisabledForDetect</font> <br>
+        <font color="DarkBlue">ModeUndetected</font> <br>
+        <font color="DarkBlue">ModeUndetectedCfm</font>
+      </td>
+      <td>Mode detection options (used when ModeDetect = True):
+        <ul>
+        <li> Set of modes that won't be auto-detected.
+        <li> Default mode that is set when nothing is detected.
+        <li> Allows to show confirmation (yellow panel at the top) for unknown file types.
+          When user clicks this message, file is shown in ModeUndetected mode.
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <font color="DarkBlue">FileName</font> <br>
+        <font color="DarkBlue">FileSize</font> <br>
+        <font color="DarkBlue">FileTime</font> (public, read-only)
+      </td>
+      <td>Properties of currently opened file or folder:
+        <ul>
+        <li> Name (WideString)
+        <li> Size (Int64)
+        <li> Time (TFileTime record)
+        </ul>
+      Note:<br>
+      <ul>
+      <li> To convert FileTime value to a readable string, you may use,
+        for example, the FormatFileTime function from "Universal Viewer" demo.
+      </ul>
+      </td>
+    </tr>
+    <tr>
+      <td><font color="DarkBlue">IsFocused</font></td>
+      <td>Enables control focusing on file opening.<br>
+        Note:<br>
+        <ul>
+        <li>Set to True if you use component as main form control
+        (e.g. you have something like Universal Viewer demo).
+        Set to False if you use component as additional optional control
+        (e.g. you have something like Browser demo).
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <font color="DarkBlue">BorderStyle</font> (inherited) <br>
+        <font color="DarkBlue">BorderStyleInner</font>
+      </td>
+      <td>Border styles:
+        <ul>
+        <li> Border style of entire TATViewer control.
+        <li> Border style of embedded controls (TATBinHex, TWebBrowser etc).
+        </ul>
+      Note:<br>
+      <ul>
+      <li> Set both BorderStyle and BorderStyleInner to bsNone to hide border completely.
+      </ul>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <font color="DarkBlue">
+          PosPercent <br>
+          PosOffset <br>
+          PosLine
+        </font> (public)
+      </td>
+      <td>Current scroll position:
+        <ul>
+        <li> Relative position in percents (%). <br>
+            Valid in text, Internet, Plugins modes.
+        <li> Absolute offset (Int64, 0-based). <br>
+            Valid in text, Internet modes.
+        <li> Line number (1-based, 0 if line number is not found). <br>
+            Valid in text modes only.
+        </ul>
+        Notes for line numbers in ATBinHex control:
+        <ul>
+        <li> Lines are separated by: #13#10, #13, #10.
+        <li> Line numbers are counted only for the first portion of file
+             (see TextGutterLines*).
+        <li> Line numbers are counted for the "current" copy of file,
+             they may be incorrect if file was changed (and not reloaded)
+             since the last display.
+        </ul>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <font color="DarkBlue">
+          SearchStarted <br>
+          SearchFinished
+        </font> (public, read-only)
+      </td>
+      <td>Search state flags:
+        <ul>
+        <li> Flag that is set after FindFirst method was called once.
+        <li> Flag indicating that FindFirst / FindNext methods returned False on last call.
+        </ul>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <font color="DarkBlue">
+          MarginLeft <br>
+          MarginTop <br>
+          MarginRight <br>
+          MarginBottom
+        </font> (public)
+      </td>
+      <td>Printing margins.<br>
+        Currently in mm.
+      </td>
+    </tr>
+
+  </tbody>
+</table>
+
+</body>
+</html>

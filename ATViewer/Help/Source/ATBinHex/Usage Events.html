@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+  <title>Usage: Events</title>
+  <link href="Main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<h2>Events</h2>
+<hr>
+
+<table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="2">
+<tbody>
+<tr>
+  <td style="width: 40%;"><font color="DarkBlue">OnFileReload</font></td>
+  <td>Fired after file auto-reload complete (when AutoReload = True).</td>
+</tr>
+
+<tr>
+  <td><font color="DarkBlue">OnSelectionChange</font></td>
+  <td>Fired on text selection change.</td>
+</tr>
+
+<tr>
+  <td><font color="DarkBlue">OnOptionsChange</font></td>
+  <td>Fired after an option has been changed by user.<br>
+    Examples of such changable options:
+    <ul>
+    <li> Text encoding can be changed using right-click menu.
+    <li> Font size can be changed using Ctrl + Mouse wheel.
+    </ul>
+  </td>
+</tr>
+
+<tr>
+  <td><font color="DarkBlue">OnSearchProgress</font></td>
+  <td>Fired on text search progress.<br>
+    It is of type:
+<pre>
+  TATStreamSearchProgress = procedure(
+    const ACurrentPos, AMaximalPos: Int64;
+    var AContinueSearching: Boolean) of object;</pre>
+    Parameters:
+    <ul>
+    <li> ACurrentPos: Current search position.
+    <li> AMaximalPos: Maximal search position.
+    <li> AContinueSearching: Initially set to True.
+      If changed to False then search will be stopped.
+    </ul>
+  </td>
+</tr>
+
+<tr>
+  <td><font color="DarkBlue">OnDrawLine</font></td>
+  <td>Fired before a line is to be drawn in variable length modes (Text, Unicode).<br>
+    You can use it to color the entire line or to disable line drawing.<br>
+    It is of type:
+<pre>
+  TATBinHexDrawLine = procedure(
+    ASender: TObject;
+    ACanvas: TCanvas;
+    const AStr: WideString;
+    const ARect: TRect;
+    const ATextPnt: TPoint;
+    var ADone: Boolean) of object; </pre>
+    Parameters:<br>
+    <ul>
+    <li> ASender: Sender ATBinHex object.
+    <li> ACanvas: Canvas which parameters you can change.
+         It is allowed to change ACanvas.Font.Color and ACanvas.Brush.Color only.
+    <li> AStr: String which is to be drawn.
+    <li> ARect: Rectangle in which string is to be drawn.
+    <li> ATextPnt: Point after gutter.
+    <li> ADone: Initially False. It set to True, string will not be drawn.
+    </ul>
+  </td>
+</tr>
+
+<tr>
+  <td><font color="DarkBlue">OnDrawLine2</font></td>
+  <td>Fired after a line has been drawn in variable length modes (Text, Unicode).<br>
+    You can use it to color some parts of the line.<br>
+    It is of type:
+<pre>
+  TATBinHexDrawLine2 = procedure(
+    ASender: TObject;
+    ACanvas: TCanvas;
+    const AStr: WideString;
+    const APnt: TPoint;
+    const AOptions: TATBinHexOutputOptions) of object; </pre>
+    Parameters:<br>
+    <ul>
+    <li> ASender: Sender object.
+    <li> ACanvas: Canvas object. You should not change canvas parameters.
+    <li> AStr: String which has been drawn.
+    <li> APnt: Canvas point at which string has been drawn.
+    <li> AOptions: Helper options record. See ATBinHex.pas for details.
+    </ul>
+    Note:
+    <ul>
+    <li> To color some part of the line, you should get string extent first.
+      Use the StringExtent function from ATBinHex.pas for this.
+    </ul>
+  </td>
+</tr>
+
+<tr>
+  <td><font color="DarkBlue">OnClickURL</font></td>
+  <td>Fired on URL/mail clicking, when URL highlighting is enabled.<br>
+    It is of type:
+<pre>
+  TATBinHexClickURL = procedure(
+    ASender: TObject;
+    const AString: AnsiString) of object; </pre>
+    The typical handling of this event:
+<pre>
+    procedure Form1.TextClickURL(Sender: TObject; const AString: AnsiString);
+    begin
+      FOpenURL(AString, Handle);
+    end; </pre>
+  </td>
+</tr>
+
+
+</tbody>
+</table>
+
+</body>
+</html>

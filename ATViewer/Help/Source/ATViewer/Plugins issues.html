@@ -1,0 +1,266 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+  <title>Issues with Lister plugins</title>
+  <link href="Main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<h2>Issues with Lister plugins</h2>
+<hr>
+
+Here is the list of known issues with Lister plugins, when they are used under
+<a href="http://www.uvviewsoft.com" target=_blank>Universal Viewer</a> application.
+<p>
+Plugins:
+
+<ul>
+<li> <a href="#AmpView">AmpView</a>
+<li> <a href="#AnyTag">AnyTag</a>
+<li> <a href="#ArcView">ArcView</a>
+<li> <a href="#ArchView">ArchView</a>
+<li> <a href="#DBFView">DBF-View (CDBFView.wlx)</a>
+<li> <a href="#FileView">FileView</a>
+<li> <a href="#FlashView">FlashView</a>
+<li> <a href="#GSA">GSA Lister</a>
+<li> <a href="#HpgEd">HPG_Ed</a>
+<li> <a href="#IEView">IEView</a>
+<li> <a href="#IniEd">IniEd</a>
+<li> <a href="#MediaShow">Media Show</a>
+<li> <a href="#MMedia">MMedia</a>
+<li> <a href="#MyViewPad">MyViewPad</a>
+<li> <a href="#SGHMMF">SGHMMF (SGHFS)</a>
+<li> <a href="#SGViewer">SGViewer</a>
+<li> <a href="#SWFView">SWFView</a>
+<li> <a href="#SWFLister">SWF Lister</a>
+<li> <a href="#xBaseView">xBaseView</a>
+<li> <a href="#XPIInfo">XPIInfo</a>
+<li> <a href="#WSZView">WSZView</a>
+</ul>
+
+<p>
+Issues:
+
+<!-------------------------------------->
+<a name="AmpView"></a>
+<h4>AmpView</h4>
+(Version 3.2) 
+
+<p>
+<ul>
+<li> Generally, AmpView is not recommended under UV, because it completely hides UV interface, leaving only plugin window on screen. 
+<li>Plugin moves UV window out of screen, so after UV restart window position will be reset. 
+</ul>
+
+
+<!-------------------------------------->
+<a name="AnyTag"></a>
+<h4>AnyTag</h4>
+(Version 0.93) 
+
+<ul>
+<li> Issue under Windows Vista: if plugin was used once, then on UV exit you'll see Windows error message box (translated from Russian): "Application has been terminated... There was a problem that caused the application to terminate..." 
+</ul>
+
+
+<!-------------------------------------->
+<a name="ArcView"></a>
+<h4>ArcView</h4>
+(Version 1.2) 
+
+<ul>
+<li> After plugin closing UV window becomes invisible. 
+</ul>
+
+
+<!-------------------------------------->
+<a name="ArchView"></a>
+<h4>ArchView</h4>
+(Version 0.9.1.2) 
+
+<ul>
+<li> Plugin may corrupt UV window size on every plugin activation. The solution for this: write the following options to the ArchView.ini: 
+<pre>
+[Window]
+WidthWindow=600
+HeightWindow=400
+SaveWindowSize=0
+</pre>
+</ul>
+
+<!-------------------------------------->
+<a name="DBFView"></a>
+<h4>DBF-View (CDBFView.wlx)</h4>
+(Version 1.1) 
+
+<p>
+This plugin is currently not supported, sorry. It requires support of rarely-used Lister API function, which is currently not implemented in ATViewer base component. Suggestion: use BaseView and xBaseView plugins instead, they are both more functional than DBF-View. 
+
+<!-------------------------------------->
+<a name="FileView"></a>
+<h4>FileView</h4>
+(Version 2.0 alpha) 
+
+<ul>
+<li> UV window changes to zero height, so that just the caption bar remains. 
+</ul>
+
+<!-------------------------------------->
+<a name="FlashView"></a>
+<h4>FlashView</h4>
+(Version 1.4) 
+
+<ul>
+<li> On some SWF files UV may crash on exit. 
+</ul>
+
+<!-------------------------------------->
+<a name="GSA"></a>
+<h4>GSA Lister</h4>
+(Version 1.02) 
+
+<ul>
+<li> UV crashes on exit.
+<li> "Lister find" button doesn't work. 
+</ul>
+
+<!-------------------------------------->
+<a name="HpgEd"></a>
+<h4>HPG_Ed</h4>
+(Version 0.5.13) 
+
+<ul>
+<li> Plugin doesn't respect UV window size, and shows file above toolbar and Navigation panel. 
+</ul>
+
+<!-------------------------------------->
+<a name="IEView"></a>
+<h4>IEView</h4>
+(Version 1.94.1) 
+
+<ul>
+<li> Generally, plugin is not recommended, because UV already has embedded MSIE-based viewer. 
+<li> Plugin is not too stable, so sometimes it shows exceptions, for example after plugin reloading. 
+<li> Plugin doesn't respect UV window size, and may show file preview out of window. 
+<li> Plugin may show unrequested MSIE's search dialog during invoke of UV's built-in search dialog. 
+</ul>
+
+<!-------------------------------------->
+<a name="IniEd"></a>
+<h4>IniEd</h4>
+(Version 1.2)
+
+<ul>
+<li> Plugin text search doesn't work. 
+</ul>
+
+<!-------------------------------------->
+<a name="MediaShow"></a>
+<h4>Media Show</h4>
+(Version 0.9.5) 
+
+<ul>
+<li> Generally, Media Show is not recommended under UV because it completely hides UV interface creating its own dialog window, and leaving "ghost" taskbar button of UV on screen. 
+<li> If you'll add unsupported media file types to the MediaShow.ini file (for example .RM type), you will see exceptions on plugin loading, and after that UV will crash on exit. So don't use Media Show with new file types, use UV's embedded WMP-based viewer instead. 
+</ul>
+
+<!-------------------------------------->
+<a name="MMedia"></a>
+<h4>MMedia</h4>
+(Version 2.4.4.0) 
+
+<ul>
+<li> It conflicts with UV's embedded WMP-based viewer: after plugin using embedded viewer opens Windows Media Player in the new window. 
+<li> It's not stable, it sometimes shows exceptions on opening. 
+<li> WMV files may block Viewer. 
+</ul>
+
+<!-------------------------------------->
+<a name="MyViewPad"></a>
+<h4>MyViewPad</h4>
+(Version 3.5.0) 
+
+<ul>
+<li> Generally, MyViewPad is not recommended under UV because it completely hides UV interface creating its own dialog window. Also the plugin has some visual glitches when called from UV, it seems it expects only Total Commander as an application. 
+</ul>
+
+<!-------------------------------------->
+<a name="SGHMMF"></a>
+<h4>SGHMMF (SGHFS)</h4>
+(Version: SGHMMF 1.2, SGHFS 1.41) 
+
+<ul>
+<li> After plugin usage Viewer may crash (show multiple error messages) on exit. The reason of this is currently unknown. 
+</ul>
+
+<!-------------------------------------->
+<a name="SGViewer"></a>
+<h4>SGViewer</h4>
+(Version 1.8.8) 
+
+<p>
+Note: these issues are fixed in SGViewer 1.9. 
+
+<ul>
+<li> Full Screen menu item is grayed. Plugin can start fullscreen if you set so in options but you can't return from it. 
+<li> Fit to Screen option doesn't work. 
+</ul>
+
+<!-------------------------------------->
+<a name="SWFView"></a>
+<h4>SWFView</h4>
+(Version 1.3.3)
+
+<ul>
+<li> If flash file is opened at 100%, plugin changes the window size, 
+and then doesn't restore it on closing. 
+So after plugin closing window size changes. 
+Workaround for this: uncheck UV option "Misc -- Save window position". 
+</ul>
+
+<!-------------------------------------->
+<a name="SWFLister"></a>
+<h4>SWF Lister</h4>
+(Version 2.0.0.1) 
+
+<ul>
+<li> On some SWF files: after playing file, plugin disables closing of UV window, so that only Ctrl-Alt-Del can close window. 
+</ul>
+
+<!-------------------------------------->
+<a name="xBaseView"></a>
+<h4>xBaseView</h4>
+(Version 7.2) 
+
+<ul>
+<li> Note that xBaseView doesn't work under UV versions older than 1.5.2. 
+<li> Issue that is fixed in xBaseView 7.3+: plugin modifies the UV main menu, but doesn't restore it correctly on close, so that some menu items become renamed. 
+</ul>
+
+
+<!-------------------------------------->
+<a name="XPIInfo"></a>
+<h4>XPIInfo</h4>
+(Version 1.1d)
+
+<ul>
+<li> Plugin has strange drawing issues under UV. 
+</ul>
+
+<!-------------------------------------->
+<a name="WSZView"></a>
+<h4>WSZView</h4>
+(Version 2.95) 
+
+<ul>
+<li> Plugin can activate on non-supported file types and then it just shows an empty black screen. As a solution for this, to disable unrequested plugin activation, delete "FORCE" word from WSZView's detect-string in plugins configuration dialog. 
+</ul>
+
+<!-------------------------------------->
+<!-------------------------------------->
+<!-------------------------------------->
+
+
+</body>
+</html>

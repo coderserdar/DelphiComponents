@@ -1,0 +1,333 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+  <title>Versions history</title>
+  <link href="Main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<h2>Versions history</h2>
+<hr>
+
+2.8.4 (9 sep 2009)
+<ul>
+<li> Added: ModeUndetectedCfm prop. Allows to hide dump initially.
+<li> Fixed: loading of big RTFs.
+<li> Fixed: hang with some wrong MHT.
+</ul>
+
+2.8.2 (3 may 2009)
+<ul>
+<li> Added: TIFF support using VTiff.dll (see Source\DLL).
+<li> Added: TIFF multipage support, if DLL present.
+<li> Fixed: ANI support fixed.
+<li> Fixed: codepages list rearranged.
+</ul>
+
+
+2.8.0 (4 apr 2009)
+<ul> 
+<li> Added: OpenStream method.
+<li> Added: OnLoadImageStream, OnLoadWebStream events.
+<li> Demo: ViewerStream.
+<li> Added: TextGutterLinesStep prop.
+</ul>
+
+2.7.0 (16 mar 2009)
+<ul>
+<li> Added: Text URL/mail highlighting.
+<li> Added: asoRegExMLine search option.
+<li> Fixed: UTF-8 search next.
+</ul>
+
+2.6.4 (7 dec 2008)
+<ul>
+<li> Added: Delphi 2009 compat.
+<li> Added: OnWebTitleChange event.
+<li> Added: MediaShowControls, MediaShowTracker prop.
+<li> Fixed: SearchStarted with auto-reload.
+<li> Fixed: Image flickering.
+</ul>
+
+
+2.6.0 (06 sep 2008)
+<ul>
+<li> Added: Line numbers: TextGutterLines*, TextFontGutter.
+<li> Added: Delphi 5 compat returned.
+<li> Fixed: FocusActiveControl.
+<li> Fixed: Text printing.
+<li> Fixed: Text reload line up issue.
+<li> Fixed: RichEdit find text selection.
+</ul>
+
+
+2.5.0 (25 Jun)
+<ul>
+<li> Added: "JP2" define, Jpeg2000 library usage.
+<li> Added: "ANI" define, Amnani library usage.
+<li> Added: MediaLoop prop.
+<li> Added: PosLine prop.
+<li> Added: OnWebStatusTextChange event.
+<li> Fixed: Text tailing issue.
+<li> Demo: SearchSimple.
+</ul>
+
+2.4.0 (30 Mar)
+<ul>
+<li> Added: ImageBPP prop.
+<li> Added: PngImage usage, "PNG" define.
+<li> Added: IJL15.dll usage, "IJL" define / IJLIntegration prop.
+</ul>
+
+2.3.0 (01 Mar)
+<ul>
+<li> Added: Printing:
+  <ul>
+  <li> Margin* properties.
+  <li> Margins handling during PrintSetup call.
+  <li> TextFontFooter property.
+  <li> Text page numbers are printed.
+  </ul>
+<li> Added: Text mode: Notepad minor feature: follow tail on control resize.
+<li> Fixed: Text mode: Vertical scrollbar may disappear on some files.
+<li> Fixed: Text mode: TextAutoReload could not apply sometimes.
+<li> Fixed: Some Image* properties not changable in design time.
+</ul>
+
+2.2.0 (27 Jan 2008)
+<ul>
+<li> Added: FindFirst method has additional asoFromPage option.
+<li> Added: FindNext method has additional AFindPrevious parameter to find previous match.
+<li> Added: ImageError, ImageErrorMessage, ImageErrorMessageBox properties.
+<li> Changed: MediaColor property renamed to ImageColor.
+<li> Removed: TextVariableScrollbar property.
+<li> Fixed: FindNext error after changing view mode.
+<li> Fixed: Some Image* properties were not published.
+</ul>
+
+2.1.0 (30 Dec 2007)
+<ul>
+<li> Added: OpenFolder method, which allows to use such plugins as VisualDirSize.
+<li> Added: "Applications -- Lister plugins issues" topic in this help.
+<li> Changed: CloseActivePlugin method removed: use Open('') instead.
+<li> Fixed: Plugins mode: "WLX_UNLOAD" define added in ATViewerOptions.inc, comment it to prevent AVs with some plugins.
+<li> Fixed: Plugins mode: Plugins could not load when ModeDetect = False.
+</ul>
+
+2.0.0 (17 Dec 2007)
+<ul>
+<li> Added: Open method has additional parameter to reduce image flickering.
+<li> Added: Text mode: TextGutter, TextGutterWidth, TextColorGutter properties.
+<li> Added: Text mode: Tabs (#9) have correct dynamic size (currently only for monospaced fonts).
+<li> Added: ATFileNotificationSimple helper component (not used currently).
+<li> Fixed: Text mode: TextAutoReload option could not apply sometimes.
+<li> Fixed: Text mode: Trailing spaces showing on word wrap.
+<li> Fixed: Internet mode: WebBrowser memory leak.
+<li> Fixed: Plugins mode: Plugins were not unloaded on file closing.
+<li> Fixed: MsgBox() could loose form focus.
+<li> Changed: "Universal Viewer" demo forms renamed.
+</ul>
+
+1.9.2 (28 Oct 2007)
+<ul>
+<li> Added: TextOemSpecial property.
+<li> Added: TextNonPrintable property.
+<li> Changed: Msg* properties changed to single TextPopupCaption[] property.
+<li> Added: Topic "Misc -- Applications" in this help.
+</ul>
+
+1.9.0 (20 Oct 2007):
+<ul>
+<li> Added: Text mode: Many codepages added, see complete list in ATxCodepages.pas.
+     See notes for TextEncoding property.
+     Note: RegEx search for custom codepages is not yet implemented.
+<li> Added: Text mode: TextEncodingName property.
+<li> Added: Text mode: TextEncodingsMenu method.
+<li> Added: Text mode: "Encodings menu" popup menu item.
+<li> Added: Text/Image modes: Mouse shortcut for zoom: left button + wheel.
+<li> Added: Reload method.
+<li> Changed: OnScaleChange event removed, OnOptionsChange added instead.
+<li> Fixed: File was not closed completely if FindFirst method was called.
+<li> Fixed: Text mode: Number of wheel scroll lines now read correctly.
+</ul>
+
+1.8.1 (01 Oct 2007):
+<ul>
+<li> Added: Internet mode: WebBusy property - must be checked in form's OnCloseQuery handler.
+</ul>
+
+1.8.0 (28 Sep 2007):
+<ul>
+<li> Added: View mode "Unicode/Hex", similar to FAR manager's one.
+     To activate it user should call the Unicode mode twice.
+<li> Added: Text modes: Nice scroll by middle mouse click, like in MSIE / Firefox.
+<li> Added: Text modes: Support for KOI8-R codepage. More codepages will be added later.
+<li> Added: Text modes: Properties TextWidthUHex, TextWidthFitUHex.
+<li> Added: Text modes: Properties TextSelTextShort, TextSelTextShortW.
+<li> Added: Image mode: ImageEffect method can apply "Flip horizontally" and "Flip vertically" effects.
+<li> Changed: Internet mode: Reworked WebOffline property: global Offline flag is used.
+     Now when property is True, application should not connect to Internet at all. Default value changed to False.
+     Also see notes for WebOffline property.
+<li> Changed: Internet mode: Initial status of global Offline flag is saved, and then restored on application exit.
+<li> Changed: Plugins mode: Additional "WLX_FORM" define in ATViewerOptions.inc instead of "FAKE_TC_FORM" define in WLXProc.pas.
+     It is commended by default.
+<li> Changed: Image mode: All ImageXXXX properties made public (correct your DFM files).
+<li> Fixed: Image mode: Transparency setting for animated GIFs.
+<li> Removed: ATxIniProc unit removed from demos.
+</ul>
+
+1.7.2 (22 Aug 2007):
+<ul>
+<li> Added: Image mode: ImageResample property (not for Win9x).
+<li> Added: Image mode: Large images are shown during loading.
+<li> Changed: Refactored image methods to work not with TImage but with TPicture.
+     This is needed for compatability with TATImage.
+<li> Changed: MediaPlay property renamed to MediaAutoPlay.
+<li> Fixed: Internet mode: Acrobat Reader plugin could cause crash on application exit.
+</ul>
+
+1.7.0 (01 Aug 2007):
+<ul>
+<li> Changes regarding printing:
+  <ul>
+  <li> Added: Print method for Text/Binary/Hex/Unicode modes is rewritten,
+       so control prints itself in exactly the same view as it's shown on screen (but grayscaled).
+       The printing in Unicode mode is finally done!
+  <li> Added: <b>ATPrintPreview</b> component (separate download) is used to show print preview form
+       in Text/Binary/Hex/Unicode and Image modes.
+       It can be enabled by uncommenting the "PREVIEW" define in 
+       ATViewerOptions.inc / ATBinHexOptions.inc.
+  <li> Changed: The usage of ATPrintPreview component is required for images printing.
+  </ul>
+<li> Added: IrfanView/XnView can be integrated into Image mode with the help of <b>nmzIrfanXnView</b> unit
+     (you need to uncomment the "IVIEW" define in ATViewerOptions.inc).
+     See the IViewIntegration property.
+<li> Added: Text mode: Only chars missed in the current font are replaced with dots.
+<li> Fixed: Plugins mode: Exception with FileInfo plugin.
+<li> Fixed: Internet mode: BMP files sometimes open in a new window.
+<li> Changed: Text mode: Property TextScrollPageSize renamed to TextVariableScrollbar, it's default value is False now.
+</ul>
+
+1.6.2 (19 Jun 2007):
+<ul>
+<li> Added: OnFileUnload, OnFileLoad events
+<li> Added: BinHex public property
+<li> Added: MediaVolume, MediaMute, MediaPlayCount properties
+<li> Added: MediaDoPlayPause method
+<li> Changed: ATStreamSearch updated for DIRegEx 4.1.1 release
+<li> Changed: OnDocumentLoaded event renamed to OnWebDocumentComplete
+<li> Added: OnWebNavigateComplete event
+<li> Added: Text mode: Auto-scroll when mouse is lefter/righter than client area
+<li> Added: Text mode: Shift + Mouse Wheel scrolls horizontally
+<li> Added: Text mode: Ctrl + Mouse Wheel changes font size
+<li> Added: Image mode: Ctrl + Mouse Wheel changes image scale
+<li> Added: OnScaleChange event
+<li> Fixed: Text mode: Possible AV on text selection under Multi-Byte locales
+</ul>
+
+1.6.0 (28 Mar 2007):
+<ul>
+<li> Changed: License updated to MPL 1.1
+<li> Added: ATImageBox and ATStreamSearch helper components 
+<li> Added: RegEx search option (DIRegEx library must be used) 
+<li> Added: Text modes feature: triple click selects current line 
+<li> Some methods/properties added and some removed: <br>
+     <ul>
+     <li>Changed: FindFirst/FindNext methods instead of FindText
+     <li>Added: TextMaxClipboardDataSizeMb property
+     <li>Added: ImageBox property
+     <li>Changed: TextSearchIndent property renamed to TextSearchIndentVert
+     <li>Changed: ImageLabelVisible and ImageLabelCaption properties removed, 
+         use ImageBox.ImageLabel.Visible and ImageBox.ImageLabel.Caption instead
+     <li>Changed: OnTextSearchProgress event added instead of SearchCallback property
+     </ul>
+<li> Changed: AT*Def.inc files renamed to AT*Options.inc;
+     several options added to ATViewerOptions.inc 
+</ul>
+
+1.5.8 (25 Feb 2007):
+<ul>
+<li> Changed: Text modes: files are not locked for deletion anymore (Note: not supported under Win9x) 
+<li> Added: RTF/UTF-8 mode: RichEdit control made URL aware (Note: not supported under Win9x) 
+<li> Added: RTF/UTF-8 mode: UTF-8 files can be shown without UTF-8 signatures (Note: not supported under Win9x) 
+<li> Added: Plugins mode: support for TC 7 Lister API;
+     better parsing of plugins detect-strings 
+<li> Added: Image mode: image is scrollable by keyboard and mouse wheel 
+<li> Added: FindDialog method
+<li> Removed: FindWeb method
+<li> Added: PrintDialog method can print images now 
+<li> Added: IncreaseScale method 
+<li> Added: PosPercent/PosOffset properties work also in Internet mode 
+<li> Added: TextSelStart, TextSelLength, TextSelText, TextSelTextW properties; TextScroll method 
+<li> Added: FileName, FileSize, FileTime, ModeUndetected, SearchFinished properties 
+<li> Added: MediaPlaylistPause, ImageKeepPosition properties 
+<li> Added: WebAcceptAllFiles, WebWaitForNavigate properties 
+<li> Added: OnTextFileReload event 
+<li> Changed: Declaration of FindText method
+<li> Changed: Renamed method ShowPopupMenu to TextPopupMenu
+<li> Fixed: Resizing of transparent images 
+</ul>
+
+1.5.6 (16 Dec 2006):
+<ul>
+<li> Added: FindText/FindNext methods work also in Unicode mode 
+<li> Added: TextSearchIndentHorz property 
+<li> Added: Properties: ImageDrag, ImageCursor, ImageDragCursor, MediaCenter  
+<li> Added: Properties: ImageLabelVisible, ImageLabelCaption, ImageLabelFont
+<li> Changed: Declaration of ffViewerExt* variables, they are moved into record ATViewerOptions
+<li> Changed: Declaration of PluginsSendMessage method
+<li> Changed: Renamed property MediaIconSize to ImageIconSize
+<li> Changed: Renamed event OnPlaybackEnd to OnMediaPlaybackEnd
+<li> Changed: Renamed several variables in ATViewerMsg.pas 
+</ul>
+
+1.5.5 (24 Nov 2006):
+<ul>
+<li> Added: Properties: ModesDisabledForDetect, MediaFitOnlyBig,
+           TextPopupCommands, TextMaxLengths, IsImage, IsIcon, IsMetafile, IsMedia 
+<li> Added: IE4X conditional define in ATViewerDef.inc that enables usage of MSIE 4+ OnFileDownload event,
+           it's used to supress "File Download" MSIE dialog 
+<li> Added: ImageScale property; ImageScaleInc, ImageScaleDec, ImageEffect methods 
+<li> Added: FocusActiveControl, ShowPopupMenu methods 
+<li> Added: WebGoBack, WebGoForward methods 
+<li> Added: CopyToClipboard method also works with images 
+</ul>
+
+1.5.3 (02 Oct 2006):
+<ul>
+<li> Added: Properties: TextAutoReload, TextAutoReloadBeep, TextAutoReloadFollowTail
+<li> Added: Properties: TextAutoCopy, TextTabSize, TextColorHexBack, PosOffset 
+</ul>
+
+1.5.2 (09 Sep 2006):
+<ul>
+<li> Changed: Most of units renamed to AT*.* to avoid name confusions 
+<li> Changed: GIFImage is used instead of RX Lib's GIFCtrl - see ATViewerDef.inc 
+<li> Added: WMP 9.0 mode; all media modes made optional - see ATViewerDef.inc 
+<li> Added: Compatability with xBaseView Lister plugin 
+<li> Added: BorderStyleInner property 
+<li> Added: OnDocumentLoaded event 
+</ul>
+
+1.5.0 (22 Jul 2006):
+<ul>
+<li> Added: Improved Text mode: now it doesn't use MS RichEdit, so files of any size can be opened 
+<li> Added: Improved Unicode mode: now it has variable line length, Select/Copy commands are supported in it 
+<li> Added: RTF mode, which is an "old" Text mode that uses RichEdit. It's used for RTF and UTF-8 files.
+           <br>Note: UTF-8 files are supported only under Win 2K/XP and must have special signature. 
+<li> Fixed: Error in Internet mode when IE 7 is installed 
+<li> Added: TextFontOEM, TextDetectOEM, TextScrollPageSize properties 
+</ul>
+
+...
+<br>
+<br>
+
+1.0.0 (16 Mar 2006):
+<ul>
+<li> Initial version 
+</ul>
+
+</body>
+</html>

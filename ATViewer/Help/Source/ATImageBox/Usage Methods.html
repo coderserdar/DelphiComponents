@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+  <title>Usage: Methods</title>
+  <link href="Main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<h2>Methods</h2>
+<hr>
+
+<table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="2">
+<tbody>
+<tr>
+  <td><font color="DarkBlue">procedure IncreaseImageScale(AIncrement: Boolean);</font>
+    <p>Increases (AIncrement = True) or decreases the current image scale
+    using predefined set of scale values.<br>
+    The minimal value in this set is 7, and the maximal is 1600.
+  </td>
+</tr>
+<tr>
+  <td><font color="DarkBlue">procedure UpdateImageInfo;</font>
+  <p>Updates internal image info fields.<br>
+  Must be called after you load a new image.<br>
+  The typical image load procedure can look like this:
+  <p>
+<pre>
+  procedure TFormMain.LoadImage(const AFileName: string);
+  begin
+    try
+      try
+        ATImageBox1.Image.Resample := True;
+        ATImageBox1.Image.ResampleBackColor := ATImageBox1.Color;
+        ATImageBox1.Image.Picture.LoadFromFile(AFileName);
+      finally
+        ATImageBox1.UpdateImageInfo;
+      end;
+    except
+      Application.MessageBox('Could not load image', 'Error',
+        MB_OK or MB_ICONERROR);
+    end;
+  end;
+</pre>
+  </td>
+</tr>
+</tbody>
+</table>
+     
+</body>
+</html>

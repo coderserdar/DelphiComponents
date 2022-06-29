@@ -1,0 +1,206 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+  <title>Usage: Methods</title>
+  <link href="Main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<h2>Methods</h2>
+<hr>
+
+<table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="2"><tbody>
+    <tr>
+      <td><font color="DarkBlue">function Open(const AFileName: WideString; ARedraw: Boolean = True): Boolean;</font><br>
+      Opens a file and optionally redraws control.<br>
+      Result is True if file was successfully opened
+      or False if file was not found or other open error occured.<br>
+      Pass the empty AFileName string to close the currently open file.<br>
+      Note:<br>
+      <ul>
+      <li>ARedraw parameter must be set to False in the case you create ATBinHex
+          object at run-time and then call Open('')/OpenStream(nil) in your destructor
+          to free data. In this case the control must not be redrawn
+          because this will cause its parent access error.
+      </ul>
+      </td>
+    </tr>
+    <tr>
+      <td><font color="DarkBlue">function OpenStream(AStream: TStream; ARedraw: Boolean = True): Boolean;</font><br>
+      Opens a stream and optionally redraws control.<br>
+      Result is True if stream was successfully opened.<br>
+      Pass nil to stop use the currently used stream.<br>
+      Notes:<br>
+      <ul>
+      <li>See note for Open.</li>
+      <li>Stream is not freed automatically, you should free it by yourself, 
+          but only after you call OpenStream(nil).</li>
+      <li>In Delphi 5 TStream.Size is declared as Longint,
+          so if you are going to open streams larger than 2 Gb, you should
+          use newer Delphi versions which declare TStream.Size as Int64.</li>
+      </ul>
+      </td>
+    </tr>
+    <tr>
+      <td><font color="DarkBlue">procedure Reload;</font><br>
+      Reloads current file or stream.
+      </td>
+    </tr>
+    <tr>
+      <td><font color="DarkBlue">function FindFirst(const AText: WideString; AOptions: TATStreamSearchOptions): Boolean;</font><br>
+      Starts text search.<br>
+      AText: text to search (Note: Unicode string must be in the Little-Endian format).<br>
+      AOptions: search options that are set of flags:<br>
+      <ul>
+      <li> <b>asoWholeWords</b>: Search for whole words only </li>
+      <li> <b>asoCaseSens</b>: Case-sensitive search </li>
+      <li> <b>asoBackward</b>: Backward search (Note: not supported for RegEx search) </li>
+      <li> <b>asoRegEx</b>: RegEx (regular expressions) search </li>
+      <li> <b>asoRegExMLine</b>: Multiline regex search (used with asoRegEx) </li>
+      <li> <b>asoFromPage</b>: Starts search from the current page, otherwise in entire file </li>
+      </ul>
+      Result is True if text was found.<br>
+      Match position and length are saved in SearchResultStart and SearchResultLength properties.
+      You should manually highlight found match using SetSelection method.<br>
+      Notes:<br>
+      <ul>
+      <li>RegEx search (asoRegEx option) is available only when RegEx library is compiled in.
+          See ATStreamSearchOptions.inc file.</li>
+      <li>Unicode-named files can be handled during search only when Tnt Unicode
+          Controls are compiled in. See ATStreamSearchOptions.inc file.</li>
+      <li>When non-RegEx search is performed, two
+          different search functions are used: one for 1-byte Text/Binary/Hex
+          modes and other for Unicode modes; they give different search results.</li>
+      </ul>
+      </td>
+    </tr>
+    <tr>
+      <td><font color="DarkBlue">function FindNext(AFindPrevious: Boolean = False): Boolean;</font><br>
+      Continues text search.<br>
+      AFindPrevious: continue search in reverse direction (Note: not supported for RegEx search).<br>
+      Result is the same as for FindFirst method.<br>
+      Note:<br>
+      <ul>
+      <li>After you change view mode or reload a file, you cannot continue search immediately, 
+      you must first call FindFirst.</li>
+      </ul>
+      </td>
+    </tr>
+    <tr>
+      <td><font color="DarkBlue">procedure CopyToClipboard(AsHex: Boolean = False);</font><br>
+      Copies current selection (AnsiString or WideString depending on current view mode)
+      to Clipboard.<br>
+      AsHex may be True in Text/Binary/Hex modes, in this case
+      the hex-encoded string (bytes in the hex form separated by spaces) will be
+      copied.<br>
+      Notes:<br>
+      <ul>
+      <li>This procedure may fail and show an error message if selection is too big to fit in memory.</li>
+      <li>To prevent visual "hanging" during copying of too large block,
+          data size is internally limited by MaxClipboardDataSizeMb value.</li>
+      </ul>
+      </td>
+    </tr>
+    <tr>
+      <td><font color="DarkBlue">procedure SetSelection(const AStart, ALength: Int64; AScroll: Boolean; AFireEvent: Boolean = True; ARedraw: Boolean = True);</font><br>
+      Sets selection and optionally scrolls control to selection start.<br>
+      AStart: selection start (0-based),<br>
+      ALength: selection length,<br>
+      AScroll: scroll control to selection start afterwards,<br>
+      AFireEvent: fire the OnSelectionChange event afterwards,<br>
+      ARedraw: redraw control afterwards.<br>
+      Note:<br>
+      <ul>
+      <li>If AScroll = True, control will be scrolled using the code:
+          <pre>  Scroll(AStart, TextSearchIndentVert, TextSearchIndentHorz);</pre>
+      </ul>
+      </td>
+    </tr>
+    <tr>
+      <td><font color="DarkBlue">procedure Scroll(const APos: Int64; AIndentVert, AIndentHorz: integer; ARedraw: Boolean = True);</font><br>
+      Scrolls control to specified position.<br>
+      Control will be scrolled vertically so that position APos (0-based) is visible 
+      by AIndentVert lines lower than top border;
+      if after that the position is still out of screen, control will be
+      scrolled horizontally so that position is visible by AIndentHorz chars righter than left border.<br>
+      ARedraw: allow to redraw control afterwards.
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <font color="DarkBlue">procedure SelectAll;</font> <br>
+        <font color="DarkBlue">procedure SelectNone;</font> <br>
+      Selects all text.<br>
+      Deselects text.
+    </tr>
+    <tr>
+      <td>
+        <font color="DarkBlue">
+          procedure Print(
+            APrintRange: TPrintRange;
+            AFromPage: Integer = 1;
+            AToPage: Integer = MaxInt;
+            ACopies: Integer = 1;
+            const ACaption: string = '');
+        </font><br>
+        Shows "Print preview" dialog and allows user to print text.<br>
+        APrintRange: print range (type declared in Dialogs.pas):
+          <ul>
+          <li> <b>prAllPages</b>: prints all text.
+          <li> <b>prSelection</b>: prints selection only.
+          <li> <b>prPageNums</b>: prints pages from AFromPage to AToPage.
+          </ul>
+        ACopies: number of print copies,<br>
+        ACaption: caption of print job.<br>
+        Notes:
+        <ul>
+        <li> This method shows "Print preview" form only when ATPrintPreview component
+             is used by enabling the "PREVIEW" define in ATBinHexOptions.inc.
+             Otherwise it just prints the text without questions.
+        <li> Resulting page sizes are affected by Margin* properties
+             and printer page sizes, not by visible control size.
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td><font color="DarkBlue">procedure PrintPreview;</font><br>
+        Shows "Print preview" dialog for current selection.<br>
+        When text is selected (SelLength &lt;&gt; 0), this method calls
+        Print(prSelection), otherwise it calls Print(prAllPages).
+        Note:
+        <ul>
+        <li> This method works only when ATPrintPreview component is used
+             by enabling the "PREVIEW" define in ATBinHexOptions.inc.
+             Otherwise it does nothing.
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td><font color="DarkBlue">function IncreaseFontSize(AIncrement: Boolean): Boolean;</font><br>
+      Increases (AIncrement = True) or decreases current font size.<br>
+      Result is True if font size was changed or False if minimal
+      or maximal size value is already set.<br>
+      Note:<br>
+      <ul>
+      <li>For raster fonts (the default OEM font is raster)
+          this size change is not simple increment by one.</li>
+      </ul>
+      </td>
+    </tr>
+    <tr>
+      <td><font color="DarkBlue">procedure TextEncodingsMenu(AX, AY: Integer);</font><br>
+      Shows menu of all available encodings for the current mode.<br>
+      Menu is shown at point (AX, AY).<br>
+      Note:<br>
+      <ul>
+      <li> In Unicode modes this method displays the special Unicode menu,
+           which contains only "UTF-16 LE" and "UTF-16 BE" items.
+      </ul>
+      </td>
+    </tr>
+</tbody>
+</table>
+     
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+  <title>Usage: Methods, Text-related</title>
+  <link href="Main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<h2>Methods, Text-related</h2>
+<hr>
+
+<table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="2">
+<tbody>
+  <tr>
+    <td><font color="DarkBlue">procedure TextPopupMenu(AX, AY: integer);</font><br>
+    Shows right-click menu in text modes.<br>
+    Menu is shown at point (AX, AY).
+    </td>
+  </tr>
+  <tr>
+    <td><font color="DarkBlue">procedure TextEncodingsMenu(AX, AY: integer);</font><br>
+    Shows menu of all available encodings for the current text mode.<br>
+    Menu is shown at point (AX, AY).<br>
+    Note:<br>
+    <ul>
+    <li> In Unicode mode this method displays the special Unicode menu,
+      which contains only "UTF-16 LE" and "UTF-16 BE" items.
+    </ul>
+    </td>
+  </tr>
+  <tr>
+    <td><font color="DarkBlue">procedure TextScroll(const APos: Int64; AIndentVert, AIndentHorz: integer);</font><br>
+    Scrolls text control to a given position.<br>
+    Control is scrolled to position APos (0-based), with vertical indent
+    AIndentVert characters and average horizontal indent AIndentHorz characters.
+    </td>
+  </tr>
+</tbody>
+</table>
+</body>
+</html>

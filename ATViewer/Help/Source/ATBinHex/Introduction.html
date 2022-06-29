@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+  <title>Introduction</title>
+  <link href="Main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<h2>ATBinHex Component</h2>
+<hr>
+
+<b>ATBinHex</b> is a control that implements the quick file (stream) viewer.
+Only visible part of file (or stream) is loaded into viewer, so it's suitable
+to show files of unlimited size. Features:
+
+<ul>
+<li> Support for huge file sizes (of type Int64)
+<li> Support for Unicode file names
+<li> Support for multiple codepages: ANSI, OEM, EBCDIC, KOI8, ISO, Mac etc.
+<li> Many service methods implemented: copying to Clipboard, printing, search etc.
+</ul>
+
+<p>
+There are 5 view modes available:
+<ul>
+<li> <b>Text</b>: file is shown in text form
+<li> <b>Binary</b>: file is shown in binary form, with fixed line length
+<li> <b>Hex</b>: file is shown in hex dump
+<li> <b>Unicode</b>: Unicode contents of file is shown
+<li> <b>Unicode/Hex</b>: combined Hex and Unicode modes
+</ul>
+
+<center>
+<p> <img alt="" src="ModeText.gif"><br> <i>Text mode</i>
+<p> <img alt="" src="ModeBinary.gif"><br> <i>Binary mode</i>
+<p> <img alt="" src="ModeHex.gif"><br> <i>Hex mode</i>
+<p> <img alt="" src="ModeUnicode.gif"><br> <i>Unicode mode</i>
+<p> <img alt="" src="ModeUHex.gif"><br> <i>Unicode/Hex mode</i>
+</center>
+
+<p>
+There is extended version of this component available,
+<a href="http://atorg.net.ru/delphi/atviewer.htm" target="_blank"><b>ATViewer</b></a>,
+which can show files in such modes as RTF, Image, Multimedia, Internet and WLX Plugins.
+But if you just need to show a plain file dump, <b>ATBinHex</b> should be enough.
+
+<p>
+There is also <b>FreePascal/Lazarus</b> version (ported from original version),
+which is maintained by independent developer.
+This version is currently in beta stage, some features are not yet implemented.
+Refer to <a href="http://code.google.com/p/luipack/" target="_blank">LuiPack page</a>.
+
+</body>
+</html>

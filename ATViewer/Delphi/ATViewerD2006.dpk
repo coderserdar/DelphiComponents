@@ -1,0 +1,69 @@
+package ATViewerD2006;
+
+{$R *.res}
+{$R '..\Source\MediaPlayer_TLB.dcr'}
+{$R '..\Source\ATBinHex.dcr'}
+{$R '..\Source\ATFileNotification.dcr'}
+{$R '..\Source\ATImageBox.dcr'}
+{$R '..\Source\ATStreamSearch.dcr'}
+{$R '..\Source\ATViewer.dcr'}
+{$R '..\Source\MediaPlayer9_TLB.dcr'}
+{$R '..\Source\ATFileNotificationSimple.dcr'}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'ATViewer'}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl,
+  vcl,
+  vclx,
+  vcljpg,
+  vclie;
+
+contains
+  MediaPlayer_TLB in '..\Source\MediaPlayer_TLB.pas',
+  ATBinHex in '..\Source\ATBinHex.pas',
+  ATFileNotification in '..\Source\ATFileNotification.pas',
+  ATImageBox in '..\Source\ATImageBox.pas',
+  ATStreamSearch in '..\Source\ATStreamSearch.pas',
+  ATViewer in '..\Source\ATViewer.pas',
+  MediaPlayer9_TLB in '..\Source\MediaPlayer9_TLB.pas',
+  ATFileNotificationSimple in '..\Source\ATFileNotificationSimple.pas',
+  ATViewerMsg in '..\Source\ATViewerMsg.pas',
+  ATxBitmapProc in '..\Source\ATxBitmapProc.pas',
+  ATxClipboard in '..\Source\ATxClipboard.pas',
+  ATxCodepages in '..\Source\ATxCodepages.pas',
+  ATxFProc in '..\Source\ATxFProc.pas',
+  ATxImageProc in '..\Source\ATxImageProc.pas',
+  ATxPanel in '..\Source\ATxPanel.pas',
+  ATxREProc in '..\Source\ATxREProc.pas',
+  ATxREUrl in '..\Source\ATxREUrl.pas',
+  ATxSHex in '..\Source\ATxSHex.pas',
+  ATxSProc in '..\Source\ATxSProc.pas',
+  ATxWBProc in '..\Source\ATxWBProc.pas',
+  nmzIrfanXnView in '..\Source\nmzIrfanXnView.pas',
+  WebBrowser4_TLB in '..\Source\WebBrowser4_TLB.pas',
+  WLXPlugin in '..\Source\WLXPlugin.pas',
+  WLXProc in '..\Source\WLXProc.pas';
+
+end.

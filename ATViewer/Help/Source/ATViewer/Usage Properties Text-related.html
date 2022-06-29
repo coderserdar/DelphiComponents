@@ -1,0 +1,335 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+  <title>Usage: Properties, Text-related</title>
+  <link href="Main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<h2>Properties, Text-related</h2>
+<hr>
+
+<table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="width: 40%;"><font color="DarkBlue">TextEncoding</font></td>
+      <td>Text encoding.<br>
+        It can be used in Text, Binary, Hex and Plugins modes.<br>
+        Possible values:<br>
+        <ul>
+        <li> <b>vencANSI</b>: ANSI encoding (locale dependent)</li>
+        <li> <b>vencOEM</b>: OEM encoding (locale dependent)</li>
+        <li> <b>vencEBCDIC</b>: IBM EBCDIC US encoding</li>
+        <li> <b>vencKOI8</b>: KOI8-R encoding</li>
+        <li> <b>vencISO</b>: ISO encoding (locale dependent)</li>
+        <li> <b>vencMac</b>: Macintosh encoding (locale dependent)</li>
+        <li> plus many others, see the complete list in ATxCodepages.pas.
+        </ul>
+        Notes:
+        <ul>
+        <li>For Plugins mode only ANSI and OEM encodings are available.
+        <li>For Text/Binary/Hex modes ANSI, OEM, EBCDIC, KOI8, ISO, Mac encodings are always available.
+        <li>EBCDIC, KOI8, ISO, Mac encodings are used via MultiByteToWideChar API, if possible.
+            But if they are not installed on OS (for example, on Win9x),
+            then the hardcoded codepages are used.
+        <li>All other encodings are used via MultiByteToWideChar API,
+            they are available only when installed on OS.
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td><font color="DarkBlue">TextEncodingName</font> (public, read-only)</td>
+      <td>Name of current text encoding.<br>
+        Note:<br>
+        <ul>
+        <li> It can be read in all text modes, even in Unicode and RTF/UTF-8 modes.
+          In Unicode mode is will show "UTF-16 LE" or "UTF-16 BE".
+          In RTF/UTF-8 mode it will show "RTF" or "UTF-8".
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <font color="DarkBlue">TextDetect</font> <br>
+        <font color="DarkBlue">TextDetectOEM</font> <br>
+        <font color="DarkBlue">TextDetectSize</font> <br>
+        <font color="DarkBlue">TextDetectLimit</font>
+      </td>
+      <td>Text auto-detection options. <br>
+        Text, Unicode and UTF-8 files can be detected.<br>
+        <ul>
+        <li> <b>TextDetect</b>: enables auto-detection.
+        <li> <b>TextDetectOEM</b>: enables also detection of OEM codepage.
+        <li> <b>TextDetectSize</b>: size of block (in Kb) read to detect text.
+        <li> <b>TextDetectLimit</b>: maximal file size (in Kb) allowed for detection, 0: don't limit.
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td><font color="DarkBlue">TextWrap</font></td>
+      <td>Enables word wrap.
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <font color="DarkBlue">TextWidth</font> <br>
+        <font color="DarkBlue">TextWidthHex</font> <br>
+        <font color="DarkBlue">TextWidthUHex</font>
+      </td>
+      <td>Width of text in fixed-length modes:
+        <ul>
+        <li> <b>TextWidth</b>: Binary mode.
+        <li> <b>TextWidthHex</b>: Hex mode.
+        <li> <b>TextWidthUHex</b>: Unicode/Hex mode.
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <font color="DarkBlue">TextWidthFit</font> <br>
+        <font color="DarkBlue">TextWidthFitHex</font> <br>
+        <font color="DarkBlue">TextWidthFitUHex</font>
+      </td>
+      <td>Enables width auto-fit in fixed-length modes.<br>
+        <ul>
+        <li> <b>TextWidthFit</b>: Binary mode.
+        <li> <b>TextWidthFitHex</b>: Hex mode.
+        <li> <b>TextWidthFitUHex</b>: Unicode/Hex mode.
+        </ul>
+      Note:<br>
+      <ul>
+      <li>These properties work correctly only with monospaced fonts.
+        With fonts of variable width you can get text partially
+        not fitting in the control.
+      </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <font color="DarkBlue">TextSearchIndentVert</font> <br>
+        <font color="DarkBlue">TextSearchIndentHorz</font>
+      </td>
+      <td>Text indents, used when text is highlighted with successfull FindText / FindNext methods call.
+        <ul>
+        <li> <b>TextSearchIndentVert</b>: number of lines above selection.
+        <li> <b>TextSearchIndentHorz</b>: average number of chars lefter than selection.
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td><font color="DarkBlue">TextTabSize</font></td>
+      <td>Tabulation (#9) size.
+      </td>
+    </tr>
+    <tr>
+      <td><font color="DarkBlue">TextOemSpecial</font></td>
+      <td>Enables usage of special OEM font (when TextEncoding = vencOEM).<br>
+      Note:
+      <ul>
+      <li> This property should be set to True only on older Win9x systems.
+        NT systems support displaying of OEM text in Unicode
+        (using MultiByteToWideChar API and Unicode fonts),
+        so special OEM font is not needed.
+      </ul>
+      </td>
+    </tr>
+
+    <tr>
+      <td><font color="DarkBlue">TextNonPrintable</font></td>
+      <td>Enables displaying of non-printable characters.<br>
+        Note:<br>
+        <ul>
+        <li> When enabled, spaces are shown as small dots,
+          tabs (#9) are shown as "right arrows",
+          and line ends are shown as "paragraphs".
+        </ul>
+      </td>
+    </tr>
+
+  <tr>
+    <td><font color="DarkBlue">TextUrlHilight</font></td>
+    <td>
+      Enables URL/mail highlighting.<br>
+      Note:
+      <ul>
+      <li> For this option to work the RegEx library must be compiled in.
+        See ATBinHexOptions.inc file: "REGEX" and "SEARCH" defines must be enabled.
+      </ul>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      <font color="DarkBlue">
+        TextGutter <br>
+        TextGutterLines <br>
+        TextGutterLinesBufSize <br>
+        TextGutterLinesCount <br>
+        TextGutterLinesStep <br>
+        TextGutterLinesExtUse <br>
+        TextGutterLinesExtList
+      </font>
+    </td>
+    <td>Gutter (vertical bar on the left) options:
+      <ul>
+      <li> Enables gutter.
+      <li> Enables line numbers on gutter (in var length modes).
+      <li> Buffer size for line numbers.
+           Lines below this buffer are not counted.
+           Recommended is ~300Kb .. 1Mb.
+      <li> Maximal count of line numbers shown.
+      <li> Step for line numbers. Minimal is 1, means "show numbers for all lines".
+      <li> Enables lines numbers only for specified file extensions.
+      <li> List of file extensions for the previous option.
+           It can be, for example, 'c,cpp,h,hpp,pas,dpr'.
+      </ul>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      <font color="DarkBlue">
+        TextFont <br>
+        TextFontOEM <br>
+        TextFontFooter <br>
+        TextFontGutter
+      </font>
+    </td>
+    <td>Fonts:
+      <ul>
+      <li> Text font.
+      <li> OEM text font.
+        Used in Text/Binary/Hex modes when (TextEncoding = vEncOEM) and (TextOemSpecial = True).
+      <li> Font for printing footer.
+      <li> Font for gutter line numbers.
+      </ul>
+    </td>
+  </tr>
+    
+    <tr>
+      <td>
+        <font color="DarkBlue">
+          TextColor <br>
+          TextColorGutter <br>
+          TextColorURL <br>
+          TextColorHex <br>
+          TextColorHex2 <br>
+          TextColorHexBack <br>
+          TextColorLines <br>
+          TextColorError
+        </font>
+      </td>
+      <td>
+        Colors of:
+        <ul>
+        <li> Text background
+        <li> Gutter
+        <li> URLs
+        <li> Hex digits (even)
+        <li> Hex digits (odd)
+        <li> Hex digits background
+        <li> Hex mode vertical lines
+        <li> Error messages (displayed when read error occurs)
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td><font color="DarkBlue">TextAutoCopy</font></td>
+      <td>Enables auto-copying to Clipboard at the end of text selection operation.
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <font color="DarkBlue">TextAutoReload</font> <br>
+        <font color="DarkBlue">TextAutoReloadBeep</font> <br>
+        <font color="DarkBlue">TextAutoReloadFollowTail</font>
+      </td>
+      <td>File auto-reloading options:<br>
+        <ul>
+        <li> <b>TextAutoReload</b>: enables auto-reload.
+        <li> <b>TextAutoReloadBeep</b>: enables beep on reload.
+        <li> <b>TextAutoReloadFollowTail</b>: enables repositioning
+          at the file end, if previous view position was also at the end.
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td><font color="DarkBlue">TextPopupCommands</font></td>
+      <td>Set of commands visible in the popup (right-click) menu.<br>
+      Commands available:<br>
+      <ul>
+      <li><b>vpCmdCopy</b>: Copy selection to Clipboard.
+      <li><b>vpCmdCopyHex</b>: Copy selection in hex form in Hex mode.
+      <li><b>vpCmdSelectLine</b>: Select current line.
+      <li><b>vpCmdSelectAll</b>: Select all text.
+      <li><b>vpCmdEncMenu</b>: Show encodings menu.
+      </ul>
+      </td>
+    </tr>
+    <tr>
+      <td><font color="DarkBlue">TextPopupCaption[AIndex: TATPopupCommand]</font> <br> (public, write-only) </td>
+      <td>Captions of popup (right-click) menu items.<br>
+      For possible values of AIndex see TextPopupCommands.
+      </td>
+    </tr>
+    <tr>
+      <td><font color="DarkBlue">TextMaxLengths[AIndex: TATBinHexMode]</font> (public)</td>
+      <td>Maximal line lengths.<br>
+      These values are for all view modes of ATBinHex control.
+      They set internal values that define the maximal length of a single string in a file.
+      Values are 300 by default.<br>
+      For example, you may set TextMaxLengths[vbmodeText] to 1000 if user needs to work
+      with strings of length 1000 in Text mode.<br>
+      Notes:
+      <ul>
+      <li>Larger values increase size of memory buffer for a file, so slow down file reading.</li>
+      <li>Values are applied after file reopening: after calling Open, Reload methods or
+      after changing Mode property.</li>
+      </ul>
+      </td>
+    </tr>
+    <tr>
+      <td><font color="DarkBlue">TextMaxClipboardDataSizeMb</font></td>
+      <td>Maximal data size (in Mb), for copying to Clipboard. <br>
+      Default value is 16 (Mb), which prevents visual "hanging"
+      when too large block is selected accidentally before copying.
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <font color="DarkBlue">TextSelStart</font> (public) <br>
+        <font color="DarkBlue">TextSelLength</font> (public) <br>
+        <font color="DarkBlue">TextSelText</font> (public, read-only) <br>
+        <font color="DarkBlue">TextSelTextW</font> (public, read-only) <br>
+        <font color="DarkBlue">TextSelTextShort</font> (public, read-only) <br>
+        <font color="DarkBlue">TextSelTextShortW</font> (public, read-only)
+      </td>
+      <td>Current selection properties:
+        <ul>
+        <li> <b>TextSelStart</b>: Selection start (Int64, 0-based).
+        <li> <b>TextSelLength</b>: Selection length (Int64).
+        <li> <b>TextSelText</b>: Selection text (AnsiString) in non-Unicode modes.
+        <li> <b>TextSelTextW</b>: Selection text (WideString) in Unicode mode.
+        <li> <b>TextSelTextShort</b>: Same as TextSelText, but limited to the length of 256 chars.
+        <li> <b>TextSelTextShortW</b>: Same as TextSelTextW, but limited to the length of 256 chars.
+        </ul>
+      Note:<br>
+      <ul>
+      <li>You should call TextSelText/TextSelTextW inside try...except block,
+        because when selection is too big, exception is generated.
+      </ul>
+      </td>
+    </tr>
+    <tr>
+      <td><font color="DarkBlue">BinHex</font> (public, read-only)</td>
+      <td>Embedded text control object (of type TATBinHex).<br>
+      You can use this object to access advanced text-related
+      properties not published in TATViewer.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+</body>
+</html>

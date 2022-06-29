@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+  <title>Usage: Methods, Plugins-related</title>
+  <link href="Main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<h2>Methods, Plugins-related</h2>
+<hr>
+
+<table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="2">
+<tbody>
+  <tr>
+    <td><font color="DarkBlue">procedure RemovePlugins;</font><br>
+    Clears internal plugins list.
+    </td>
+  </tr>
+  <tr>
+    <td><font color="DarkBlue">function AddPlugin(const AFilename: TWlxFilename; const ADetectStr: string): Boolean;</font><br>
+   Adds plugin record (file name and detect-string) to internal plugins list.<br>
+   Result is True if record was added.<br>
+   Notes:
+   <ul>
+   <li> Detect-string is a plugin's "property", which initial value
+     you can get using WlxGetDetectString function (declared in WLXProc.pas).
+     So if you want to add a plugin with its default detect-string, use:
+     <pre>  ATViewer1.AddPlugin(AFileName, WlxGetDetectString(AFileName));</pre>
+   <li> Unicode plugins filenames are currently not supported (TWlxFilename is AnsiString).
+   </ul>
+   </td>
+  </tr>
+  <tr>
+    <td><font color="DarkBlue">function GetPlugin(AIndex: word; var AFilename: TWlxFilename; var ADetectStr: string): Boolean;</font><br>
+   Returns plugin record (file name and detect-string) from internal list.<br>
+   Result is True if record with index AIndex exists and was returned.<br>
+   Note:
+   <ul>
+   <li> To get all plugin records, call this function in cycle with AIndex := 1 to WlxPluginsMaxCount,
+   until it returns False.
+   </ul>
+   </td>
+  </tr>
+  <tr>
+    <td><font color="DarkBlue">procedure InitPluginsParams(AParent: TWinControl; const AIniFilename: string);</font><br>
+   Initializes plugins' parent control and path to default .ini file.<br>
+   Must be called before first Open / OpenFolder methods call.<br>
+   Notes:<br>
+   <ul>
+   <li> AParent may be any windowed control, it will be used by plugins as their "parent", they will send
+   some messages to this parent. You may set this parent to ATViewer object
+   or other Panel object, but it's not quite recommended because some (not all) plugins prefer
+   that parent is Form object. For example: xBaseView plugin modifies its parent's main menu, and Imagine/SynPlus
+   plugins modify their parent's caption. Additionally, Form object is preferred because in the case you are
+   going to create fully-functional Viewer that can get current position in percents,
+   you need to handle some messages that plugins are sending to the parent,
+   and redirect them back to plugins (see PluginsSendMessage method).
+   <li>If AParent is Form object, it must have the correct OnResize event handler,
+   which is automatically called after plugin window displaying.
+   In that handler you must call ResizeActivePlugin method to reposition plugin window.
+   </ul>
+   </td>
+  </tr>
+  <tr>
+    <td><font color="DarkBlue">procedure ResizeActivePlugin(const Rect: TRect);</font><br>
+   Resizes the active plugin's window to a given rectangle.<br>
+   Note:
+   <ul>
+   <li>It must be called in OnResize event handler of your form or parent control.
+   </ul>
+   </td>
+  </tr>
+  <tr>
+    <td><font color="DarkBlue">procedure PluginsSendMessage(const AMessage: TMessage);</font><br>
+     Sends plugin-related message to ATViewer object.<br>
+     Note:<br>
+     <ul>
+     <li>Your form must redirect WM_COMMAND message to Viewer object if you are going
+     to read PosPercent property in Plugins mode. Without this
+     Viewer object cannot know this position and will return 0. Redirection
+     must be done when high word of message's WParam is itm_percent (value
+     declared in WLXPlugin.pas). Sample code of such handler from demo:
+<pre>
+  procedure TFormViewUV.WMCommand(var Message: TMessage);
+  begin
+    inherited;
+    if Message.WParamHi = itm_percent then
+      ATViewer1.PluginsSendMessage(Message);
+  end;</pre>
+     </ul>
+     </td>
+    </tr>
+</tbody>
+</table>
+
+</body>
+</html>

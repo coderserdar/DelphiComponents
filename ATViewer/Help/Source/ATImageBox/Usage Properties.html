@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+  <title>Usage: Properties</title>
+  <link href="Main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<h2>Properties</h2>
+<hr>
+
+<table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="2">
+<tbody>
+<tr>
+  <td style="width: 30%;"><font color="DarkBlue">Image</font><br>(public, read-only)</td>
+  <td>Image object. You need to access this object's LoadFromFile method to load new image.
+    This object is of type TATImage, which is the same as TImage but with additional properties:
+    <ul>
+    <li> <b>Resample</b>: Enables image resampling after scaling.
+    <li> <b>ResampleDelay</b>: Delay (in msec) between finishing of control resizing and beginning of the resampling operation.
+    <li> <b>ResampleBackColor</b>: Color of image background. You need to pass the value of TATImageBox.Color here.
+    </ul>
+    <p>
+    Notes:
+    <ul>
+    <li> Use Image.Cursor to change default control cursor.
+    <li> Resampling option is not supported under Win9x.
+    </ul>
+  </td>
+</tr>
+<tr>
+  <td><font color="DarkBlue">ImageWidth<br>ImageHeight</font><br>(public, read-only)</td>
+  <td>Original image width and height.<br>
+    These values are updated when you call UpdateImageInfo method.
+    You must call it immediately after you load a new image.
+  </td>
+</tr>
+<tr>
+  <td><font color="DarkBlue">ImageScale</font><br>(public)</td>
+  <td>Current image scale in percents (%).<br>
+    On ImageScale assignment, ImageFitToWindow property becomes False.
+  </td>
+</tr>
+<tr>
+  <td><font color="DarkBlue">ImageLabel</font><br>(public, read-only)</td>
+  <td>TLabel object that is the label over the left-top control corner.<br>
+    Access ImageLabel's properties to change appearance of a label:
+    Visible, Caption, Font etc.
+  </td>
+</tr>
+<tr>
+  <td><font color="DarkBlue">ImageFitToWindow</font></td>
+  <td>Enables to fit image (proportionally) to the current control client area.<br>
+    If ImageFitOnlyBig = True and image is smaller than control size,
+    image will not be scaled.
+  </td>
+</tr>
+<tr>
+  <td><font color="DarkBlue">ImageFitOnlyBig</font></td>
+  <td>Enables to fit only images larger than current control size.
+  </td>
+</tr>
+<tr>
+  <td><font color="DarkBlue">ImageCenter</font></td>
+  <td>Enables to center smaller images in control client area.
+  </td>
+</tr>
+<tr>
+  <td><font color="DarkBlue">ImageKeepPosition</font></td>
+  <td>Enables to keep image relative position on scaling.
+  </td>
+</tr>
+<tr>
+  <td><font color="DarkBlue">ImageDrag</font></td>
+  <td>Enables to drag large images by mouse.
+  </td>
+</tr>
+<tr>
+  <td><font color="DarkBlue">ImageDragCursor</font></td>
+  <td>Cursor used for image dragging state (default is crSizeAll).<br>
+    To change cursor for default idle state, use Image.Cursor.
+  </td>
+</tr>
+<tr>
+  <td><font color="DarkBlue">ImageScaleCursor</font></td>
+  <td>Cursor used for image scaling state (default is crSizeNS).<br>
+    Used when user scales image by (Left mouse button + Wheel) shortcut.
+  </td>
+</tr>
+<tr>
+  <td><font color="DarkBlue">Focusable</font></td>
+  <td>Enables control to catch focus on mouse click.
+  </td>
+</tr>
+</tbody>
+</table>
+
+</body>
+</html>

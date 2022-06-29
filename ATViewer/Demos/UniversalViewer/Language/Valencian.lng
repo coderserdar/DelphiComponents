@@ -1,0 +1,528 @@
+; Translation readme
+; ------------------
+;
+; To prepare a translation:
+; - Translate this file and test it. Do not localize special chars:
+;   \n \r \t %s %d.
+; - Include information about you in the [About] section.
+; - Mask email by replacing '@' with ' at '.
+; - Name your file with ASCII characters only.
+;
+; Versions history
+; ----------------
+;
+; 3.0: Messages -100,107,-150, Captions 167,-275-279,288,302-309,
+;      315-316,322-323,330,332,416,-424,428-435,507,550,554
+; 3.1: Captions -206,275,287-292,309,325,-339,710-736
+; 3.2: Messages 126, Captions 800-802, 880-899, 353, 740,745-746, 219-222
+; 3.4: Msg 400-420 127,8 153,4, Cap 803 305 120
+; 3.6: Cap 407 109
+; 3.7: Cap 269-273
+; 3.7.1: Cap 276
+; 3.7.3: Cap 264-268, 277
+; 3.8.0.1: Msg 209,215-216, Cap 531,534,544
+
+[About]
+
+Version=3.8
+Author=vjatv
+Homepage=http://vjatv.iespana.es
+Email=
+
+[Messages]
+
+100=
+101="Archiu no trobat: %s"
+102="No es pot obrir l'archiu: %s"
+104="No es pot carregar l'archiu: %s"
+105="No es pot llegir l'archiu: %s"
+106="No es possible iniciar %s"
+107="No s'ha trobat la carpeta: "%s""
+
+109="Erro de llectura en desplaçament %s"
+110="No pot manejar la llista d'archius: %s"
+115="Format d'image desconegut"
+116="Format multimedia desconegut"
+120="No es troba la cadena buscada: "%s""
+121="No es pot copiar text al portapapers"
+122="Cadena Hex no valida: "%s""
+123="Buscant "%s":"
+124="Ha ocorregut un erro en la busca"
+125="Text no seleccionat"
+126="No hi ha informació EXIF d'este archiu"
+127="El portapapers no conte gràfic o format de text"
+128="No pot guardar l'archiu temporal"
+
+151="No pot eixecutar la ferramenta:\n%s"
+152="No es possible aplicar l'opció d'integració a l'Explorer en el Registre. Intenta eixecutar l'aplicació com Administrador."
+153="Ajuntant archiu."
+154="No es pot enviar el correu electrònic (Erro de MAPI)"
+
+200="Excepció en el complement %s en funció %s"
+201="No es pot descarregar el complement %s"
+202="No es poden carregar els complements: formulari pare no especificat"
+
+209="Els següents complements van ser afegits:\n\n%s\nEls següents complements seran actualisats:\n\n%s"
+210="Els següents complements van ser afegits:\n\n%s\nEls següents complements ya estan instalats i no van a ser afegits:\n\n%s"
+211="(ningun)\n"
+212="Archiu orige/nom de carpeta no vàlida"
+213="Nom d'eixecutable de Total Commander no vàlit"
+214="(no s'ha trobat)"
+215="No es pot descomprimir l'archiu "%s" en la carpeta de complements "%s""
+216="No es pot trobar el complement de l'archiu "%s""
+
+250="Este es l'ultim archiu en el directori. ¿Botar al primer archiu?"
+251="Este es el primer archiu en el directori. ¿Botar a l'últim archiu?"
+252="El archiu %s no es troba en el directori. ¿botar al primer archiu?"
+253="El directori actual esta buit. No es pot botar a un atre archiu."
+254="Este archiu esta només en el directori. No pot botar a un atre archiu."
+255="Este es l'últim archiu en la llista. ¿Botar al primer archiu?"
+256="Este es el primer archiu en la llista. ¿Botar al primer archiu?"
+
+260="Borrar archiu"
+261="¿Vols moure "%s" a la Paperera de Reciclage?"
+262="¿Vols borrar "%s"?"
+263=""%s" no es pot borrar"
+264="No es possible copiar o moure "%s" a "%s""
+
+301="%d bytes"
+302="%d Kb"
+303="%d Mb"
+304="%d Gb"
+305="%d Tb"
+306="%d de %d en el directori"
+307="%d de %d en la llista"
+
+310="Aplicació registrada correctament, ¡gràcies!"
+311="Clau de registre incorrecta, per favor verifica les teues senyes."
+312="¡La llicència Rusa només pot utilisar-se en versions Ruses de Windows!"
+313="El periodo de prova ha expirat - per favor registre l'aplicació."
+
+;Keys
+400="BkSp"     
+401="Tab"      
+402="Esc"      
+403="Intro"    
+404="Espai"    
+405="PgUp"     
+406="PgDn"     
+407="Fi"      
+408="Home"     
+409="Esqu."     
+410="Amunt"       
+411="Dreta"    
+412="Baix"     
+413="Ins"      
+414="Del"      
+415="Shift+"   
+416="Ctrl+"    
+417="Alt+" 
+
+[Captions]
+
+;FormViewUV
+100="&Archiu"
+101="&Obrir..."
+102="&Reobrir"
+103="&Guardar com..."
+104="&Tancar"
+105="O&brir carpeta..."
+106="Obrir recent"
+107="&Netejar llista"
+108="Enviar per &Correu electrònic..."
+109="Copiar nom d'archiu"
+110="Im&primir..."
+111="&Vista previa..."
+112="C&onfig. plana..."
+115="Archiu ant&erior"
+116="Archiu seg&üent"
+117="&Borrar..."
+118="Prop&ietats..."
+119="&Eixir"
+
+120="&Apegar"
+121="&Editar"
+122="&Copiar"
+123="Triar-ho t&ot"
+124="&Buscar..."
+125="Buscar &següent"
+126="&Anar a..."
+127="Copiar com &hex"
+128="Triar &llínea"
+129="Copiar a l'a&rchiu..."
+
+130="&Opcions"
+131="&1  Text"
+132="&2  Binari (llong. de llínea fixa)"
+133="&3  Hex"
+134="&4  Image/Multimedia"
+135="&5  Internet/Office"
+136="&6  Unicode"
+137="&7  Complements"
+
+142="Tallar te&xt"
+143="Aj&ustar image a la finestra"
+144="&Navegar desconectat"
+145="Se&mpre per damunt"
+146="P&antalla completa"
+
+147="&Configurar..."
+148="Configurar &complements..."
+149="Personalisar &barra ferramentes..."
+
+150="&Vore"
+151="I&mage"
+152="&Arrimar"
+153="&Alluntar"
+154="Ta&many Original"
+
+155="Aj&uda"
+156="&Al voltant de..."
+
+157="Girar a la &dreta"
+158="Girar a l'&esquerre"
+159="Convertir a escala de &grisos"
+160="Convertir a &Negatiu"
+161="Ajustar només imàgens &grans"
+162="Mostrar E&tiqueta d'informació"
+163="&Centrar image en la finestra"
+164="&Zoom"
+165="Ajustar image en la &finestra"
+166="&Reproduir/Pausar"
+
+167="Busca &anterior"
+168="&Codificació"
+169="&Menú de codificació..."
+170="Codificació &anterior"
+171="Codificació &següent"
+172="Mostrar caràcters &no-imprimibles"
+173="Mostrar cursor de &text"
+
+176="< &Arrere"
+177="&Avant >"
+
+178="Te&xt"
+179="&Internet"
+
+180="Cap archiu carregat"
+
+181="&Ferramentes"
+182="Configurar ferramentes &usuari..."
+183="&Alvançat"
+184="&Configurar manualment l'archiu editor"
+185="Editar archiu &històric manualment"
+186="&Guardar posició"
+
+200="Navegador"
+201="Tancar panell de navegació"
+202="Pujar un nivell"
+203="Canviar vista del navegador"
+204="Visor"
+205="Tancar archiu"
+207="La carpeta esta buida"
+
+210="&Vistes del Panel de navegació"
+211="&Icons"
+212="&Llista"
+213="&Detalls"
+214="&Miniatures"
+217="Disposició &horisontal de l'arbre"
+
+219="&Efecte d'image"
+220="&Playback"
+221="&Pujar Volum"
+222="&Baixar volum"
+223="&Silenci"
+
+224="Invertir &verticalment"
+225="Invertir &horisontalment"
+
+230="Enllaços &web"
+231="Plana principal..."
+232="In&formació retroactiva..."
+233="&Descarregar complements..."
+234="&Contingut..."
+
+;FormViewOptions
+269="&Canal i números de llínees..."
+270="Mostrar &números de llínees en canal"
+271="&Només per al primer:"
+272="Kb de l'archiu"
+273="Només per a estos archius &extensions:"
+268="Auto-detectar"
+
+269="&Canal i números de llínees..."
+270="Mostrar canal i números de llínea"
+271="&Només per al primer:"
+272="Kb de l'archiu"
+273="Només per a estes &extensions de l'archiu:"
+
+274="&Canal a l'esquerre"
+275="Sense cap mensage  d'&erro, just emetre un so"
+276="Conte &Màx. de número de llínees:"
+277="Tratar d'obrir tipos d'archius &desconegut"
+
+280="Varis"
+281="R&esoldre destí d'archius .lnk"
+282="Contador &de reproducció"
+283="&Mostrar archius ocults"
+284="Auto&-guardar posició"
+285="Guardar l'última carpeta de treball"
+286="Historial"
+287="Imnprimir"
+288="&Interfaç:"
+289="Guardar historial de &busca"
+290="Font al &peu:"
+291="Ne&tejar"
+292="Net&ejar"
+
+300="Opcions del Visor Universal"
+301="Extensions de l'archiu"
+302="Modos de Text"
+303="Modo Multimedia"
+304="Interfaç"
+305="General"
+306="Alvançat"
+307="Accesos directes"
+308="Font i colors"
+309="Auto-recarregar"
+
+310="&Text:"
+311="&Imàgens:"
+312="&Media:"
+313="I&nternet:"
+314="&RTF:"
+
+315="Color Hex"
+316="Fondo Hex"
+
+317="Utilisar font especial OE&M"
+318="Llongitut mà&xima de llínea"
+319="Ta&many Etiqueta"
+320="&Font:"
+321="&Colors:"
+322="&Auto-ajustar ample de text"
+323="Ajustar a&mple de text"
+324="Most&rar busca: llínees amunt"
+325="S&ugerir selecció com a busca de text"
+326="A&uto-refrescar archiu"
+327="Anali&sar al final"
+328="&Beep al recarregar"
+329="&Copiar-Automàticament al Portapepers"
+
+330="Color de l'etiqueta de l'image"
+331="Remostreig de l'image al canviar tama&ny"
+332="&Fondo d'i&mage:"
+333="Mostrar transparènci&a de l'image"
+334="Auto-reproduir Audio/&Vídeo"
+
+335="I&dioma:"
+336="Element del menú contextual en &Explorer"
+337="&Barra de ferramentes"
+338="Mostrar &vora al voltant de l'àrea"
+
+340="Orde"
+341="Acces directe"
+342="&Acces directe:"
+
+343="Mos&trar menú icons"
+344="Mostrar men&u"
+345="Mostrar llista d'&archius recents"
+346="Una sol&a instància"
+347="Mostrar barra d'&estat"
+348="Mostrar &panel de navegació"
+
+;Buttons
+350="Acceptar"
+351="Cancelar"
+352="Buscar"
+353="Tancar"
+
+;FormViewOptions2
+380="Aut&o-detecció"
+381="&Auto-detectar archius de text"
+382="per &orde"
+383="Kb"
+384="tamany &màxim:"
+385="Kb (0: sense llímit)"
+386="Auto-detectar el còdic &OEM"
+387="Auto-detectar el còdic de &text"
+388="per al llenguage:"
+
+;FormViewGoto
+400="Anar a"
+401="Anar a la &posició:"
+402="&Percent (%)"
+403="Desplaçament &Hexadecimal"
+404="Desplaçament &Decimal"
+405="&Principi de selecció"
+406="&Final de selecció"
+407="Número de &Llínea"
+
+;FormViewAbout
+410="Al voltant de"
+411="Versió"
+412="Crèdits:"
+413="Registrat per:"
+414="Versió d'evaluació (te queden %d dies)"
+415=
+416="Acort de llicència"
+
+;FormFindText
+420="Buscar"
+421="&Buscar:"
+422="&Només paraules completes"
+423="Sensible a &MAYÚSC./Minúsc."
+424=
+425="Cadena &hexadecimal"
+426="Expressió &Regular"
+427=" (llibreria no utilisada)"
+428="Opcions"
+429="Direcció"
+430="&Alvançar"
+431="&Retrocedir"
+432="Orige"
+433="Des d&el cursor"
+434="Des de la &plana actual"
+435="Archiu &sancer"
+
+;FormPluginsOptions
+500="Configuració dels complements"
+501="Complements instalats"
+502="&Afegir..."
+503="&Llevar"
+504="&Editar..."
+505="&Pujar"
+506="&Baixar"
+507="&Configurar..."
+510="Nom"
+511="Detectar cadena"
+512="Nom d'archiu"
+520="Els complements tenen &major prioritat que els visors interns"
+521="Guardar noms d'archiu en variable %&Commander_Path%"
+524="Afegir la &clau 'Alt' al menú d'accessos directes, de modo que no entren en conflicte en els complements"
+
+;FormPluginsAdd
+530="Instalar complements"
+531="Importar complements des de l'archiu de configuracio de &Total Commander"
+532="Instalar complements des d'una &carpeta especificada"
+533="Instalar només un archiu de &complement"
+534="Instalar complement(s) des de l'&archiu(s)"
+537="&Eixecutable de Total Commander:"
+538="Archiu de con&figuració de Total Commander:"
+539="&Archiu:"
+540="&Carpeta:"
+541="Aplicacions (*.exe)|*.EXE"
+542="Archius Ini (*.ini)|*.INI"
+543="Complements (*.wlx)|*.WLX"
+544="Archius (*.zip,*.rar)|*.ZIP;*.RAR"
+
+;FormPluginsEdit
+550="Configurar complement"
+551="Nom d'archiu:"
+552="&Detectar cadena:"
+553="&Predeterminat"
+554="Archiu de configuració:"
+
+;FormViewToolbar
+560="Personalisar Barra de ferramentes"
+561="Botons d&isponibles:"
+562="Tr&iar botons:"
+563="&Afegir ->"
+564="<- &Llevar"
+565="Re&iniciar"
+566="(Separador)"
+
+;FormViewToolList
+600="Llista de ferramentes d'usuari"
+601="Propietats de ferramentes d'usuari"
+602="Tí&tul:"
+603="Ap&licació:"
+604="Pa&ràmetros:"
+605="Paràmetros &macros (doble-clic per afegir macro a la llista de paràmetros):"
+606="Accions a realisar:"
+607="Abans d'eixecutar l'aplicació:"
+608="Despres d'eixecutar l'aplicació:"
+609="Indirecta: afegir '?' com a primer caràcter per a confirmar paràmetros."
+
+;FormViewRename
+650="Renomenar archiu"
+651="Renomenar..."
+652="&Renomenar a:"
+653="Copiar a la carpeta..."
+654="Moure a la carpeta..."
+
+;FormViewReg
+700="Registrar el programa"
+701="&Registrar..."
+702="Informació de registre"
+703="&Nom:"
+704="&Clau:"
+705="Apegar"
+
+;FormPrintPreview
+710="Margens"
+711="&Esquerre:"
+712="&Dreta:"
+713="&Dalt:"
+714="&Baix:"
+715="mm"
+716="cm"
+717="Polzades"
+718="Gamma"
+719="Valor &Gamma:"
+
+720="Vista previa d'impressió"
+721="Imprimir"
+722="Opcions"
+723="Vista previa"
+724="&Text al peu"
+725="No es pot ubicar el bitmap temporal."
+726="Posició"
+
+727="Modo &adequat:"
+728="Normal"
+729="Millor"
+730="Extensió"
+731="Tamany personalisat"
+732="&Altura:"
+733="&Amplària:"
+734="&Proporcional"
+735="Fo&nt..."
+736="&Sistema d'impressió..."
+
+;FormViewOptionsImages
+740="Llibr&eries"
+741="&Utilisar IrfanView/XnView per a carregar imàgens"
+742="&Nom de l'archiu del programa:"
+743="&Extensions de l'image:"
+744="IrfanView/&XnView te prioritat sobre la llibreria interna"
+745="Use "ijl15.dll" per a carregar gràfics &JPEG"
+746="&Extensions d'archiu:"
+
+;FormNavColumns
+780="Més..."
+781="Ajustar Columnes"
+782="Comprovar les columnes que vols fer visibles en esta carpeta. Arrastrar i amollar per a reordenar les columnes."
+783="La columna triada deu ser "
+784="pixels d'ample"
+785="LiveUpdate"
+
+;FormViewOptions..
+800="I&cons:"
+801="(Predeterminat)"
+802="(Guardar plantilla...)"
+803="&Reproduir continuament"
+
+;FormViewEXIF
+880="Llector EXIF"
+881="Mostrar E&XIF..."
+883="Etiqueta"
+884="Propietat"
+885="Valor"
+890=" IFD 0 "
+891=" EXIF Sub IFD"
+892=" EXIF Interoperabilitat IFD "
+893=" Nota del fabricant "
+894=" IFD 1"
+895=" Miniatura "

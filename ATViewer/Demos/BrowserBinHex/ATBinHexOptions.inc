@@ -1,0 +1,1 @@
+{$define HSCROLLBAR_WORKAROUND}

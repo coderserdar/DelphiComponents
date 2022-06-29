@@ -1,0 +1,100 @@
+//---------------------------------------------------------------
+procedure TFormViewUV.DoFileRename;
+var
+  OldName, NewName, NewNameFull: WideString;
+  OK: boolean;
+begin
+  OldName:= FFileName;
+  NewName:= '';
+
+  with TFormViewRename.Create(nil) do
+    try
+      edFilename.Text:= SExtractFileName(OldName);
+      if ShowModal = mrOk then
+        NewName:= edFilename.Text;
+    finally
+      Release;
+    end;
+
+  if NewName <> '' then
+    begin
+    CloseFile;
+
+    //Wait for PDF
+    repeat Sleep(FFileMoveDelay) until not Viewer.WebBusy;
+
+    NewNameFull:= SExtractFilePath(OldName) + NewName;
+
+    Screen.Cursor:= crHourGlass;
+    OK:= FFileMove(OldName, NewNameFull);
+    Screen.Cursor:= crDefault;
+
+    if OK then
+      begin
+      LoadFile(NewNameFull);
+      end
+    else
+      begin
+      MsgCopyMoveError(OldName, NewName);
+      LoadFile(OldName);
+      end;
+    end;
+end;
+
+//---------------------------------------------------------------
+procedure TFormViewUV.DoFileCopy;
+var
+  OldName, NewName, DestDir: WideString;
+  OK: boolean;
+begin
+  DestDir:= WideExtractFileDir(FFileName);
+  if WideSelectDirectory(mnuFileCopy.Caption, '', DestDir) then
+    begin
+    OldName:= FFileName;
+    NewName:= DestDir + '\' + WideExtractFileName(OldName);
+
+    Screen.Cursor:= crHourGlass;
+    OK:= FFileCopy(OldName, NewName);
+    Screen.Cursor:= crDefault;
+
+    if not OK then
+      MsgCopyMoveError(OldName, NewName);
+    end;
+end;
+
+//---------------------------------------------------------------
+procedure TFormViewUV.DoFileMove;
+var
+  OldName, NewName, NextName, DestDir: WideString;
+  OK: boolean;
+begin
+  DestDir:= WideExtractFileDir(FFileName);
+  if WideSelectDirectory(mnuFileMove.Caption, '', DestDir) then
+    begin
+    OldName:= FFileName;
+    NewName:= DestDir + '\' + WideExtractFileName(OldName);
+
+    NextName:= FFileList.GetNext(OldName, nfNext);
+    if SCompareIW(NextName, OldName) = 0 then
+      NextName:= '';
+
+    CloseFile;
+
+    //Wait for PDF
+    repeat Sleep(FFileMoveDelay) until not Viewer.WebBusy;
+
+    Screen.Cursor:= crHourGlass;
+    OK:= FFileMove(OldName, NewName);
+    Screen.Cursor:= crDefault;
+
+    if OK then
+      begin
+      LoadFile(NextName);
+      end
+    else
+      begin
+      MsgCopyMoveError(OldName, NewName);
+      LoadFile(OldName);
+      end;
+    end;
+end;

@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+  <title>Usage: Events, Text-related</title>
+  <link href="Main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<h2>Events, Text-related</h2>
+<hr>
+
+<table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="2">
+<tbody>
+<tr>
+  <td style="width: 40%;"><font color="DarkBlue">OnTextFileReload</font></td>
+  <td>Event fired after file auto-reload has been completed.<br>
+    See TextAutoReload property.
+  </td>
+</tr>
+<tr>
+  <td><font color="DarkBlue">OnTextSearchProgress</font></td>
+  <td>Event fired during text search progress. It is of type:
+<pre>
+  TATStreamSearchProgress = procedure(
+    const ACurrentPos, AMaximalPos: Int64;
+    var AContinueSearching: Boolean) of object;
+</pre>
+    ACurrentPos: current search position,<br>
+    AMaximalPos: maximal search position (almost equals to file size),<br>
+    AContinueSearching: if set to False then search will be stopped.</td>
+</tr>
+</tbody></table>
+</body>
+</html>

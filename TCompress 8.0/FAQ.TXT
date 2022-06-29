@@ -1,0 +1,316 @@
+<pre>
+TCompress Frequently Asked Questions
+
+Last updated: December 2004
+
+Contents:
+
+**** Purchasing and Licensing:
+* Do I need a per-copy runtime license to distribute applications
+  which use TCompress?
+* What is the price to register and use TCompress?
+* How much do I pay for multiple developer licences?
+* How quickly will a registration request be processed?
+* Can I also buy the source code if I want to?
+* Which source options do I need?
+* Do you take credit cards?
+* Do I need to make separate registrations for different compiler versions I own?
+* Can we pay with a check?
+
+**** Performance and Capabilities
+* Does TCompress create files compatible with ZIP, LHArc or
+  Winzip?
+* Does TCompress require any external DLLs to operate?
+* Can I create a self-extracting EXE with TCompress?
+* Is TCompress "industrial strength", or does it have hidden size
+  limitations or problems?
+* What is the Compctrl unit for?
+* Can I create archives which span across several disks?
+* How good is the data compression I get with TCompress?
+* I have some files which don't get any smaller when compressed
+  using TCompress. Why not?
+* Why don't "protected" Paradox tables compress well with TCompress?
+* Is there a routine or component to auto-compress entire records
+  within a database?
+* Is TCompress thread-safe?
+* Is TCompress Year-2000 compliant
+
+**** How To:
+* Can I seek into the middle of a compressed file and decompress
+  just part of it?
+* Does TCompress handle updates and deletions from an archive
+  nicely, or does it leave "holes"?
+* How do I use TCompress/TCDBMemo etc. if I have a Data Module in my
+  project?
+* How can I speed up access to files in an archive?
+* How can I compress a string in memory?
+* How can I read string data and compress it into a blob field?
+
+**** Problems (also see the Troubleshooting section of Compress.hlp):
+* I compressed a file using TCompress, but I can't seem to decompress it. Why
+  not?
+* I compressed something into a stream, but I can't seem to expand it.
+  Why not?
+* How do I eliminate the registration popup message? Is any other
+  functionality affected in an unregistered copy of TCompress?
+* My application says "Requires BDE" when I run it on another machine. Does
+  TCompress require the Borland Database Engine?
+* What should I do if I get an "Out of Memory" message using TCompress?
+* Do you have any demo programs written specifically for C++ Builder, or are
+  they all Pascal?
+* My application's memory use seems to increase every time I decompress
+  files. Why?
+* What should I do if I see an "EUnableToCompress" exception?
+* How do I fix a "transliterate error" with TCDBMemo and Interbase blobs
+
+============ And here are the answers: =================
+
+**** Purchasing and Licensing:
+
+* Do I need a per-copy runtime license to distribute applications which use
+  TCompress?
+No. You only need to buy a developers' license for each developer.
+
+* What is the price to register and use TCompress?
+See the pricing information and handy form in Registration section of the
+Compress.hlp help file which comes with TCompress.
+
+* How much do I pay for multiple developer licences?
+Please contact us if you want to buy a license for more than one developer; we offer generous discounts for multiple-license purchases.
+
+* How quickly will a registration request be processed?
+Fax or Email: Usually within the same working day. Mail: you should receive
+the registration codes and/or source code on disk within one week of our
+receipt of the order.
+
+* Can I also buy the source code if I want to?
+Yes. All the source of TCompress is available. You can buy the source code of
+the TCompress component itself (in the Compress unit), and separately buy the
+source of the blob field components (CDBMemo etc) in the Compctrl unit.
+
+* Which source options do I need?
+If you are just planning on working with compressed files (singly or in multi-
+file archives), you need the Compress unit source. If you will be using any
+of the blob compression components or classes, you should buy both the
+Compress unit AND the Compctrl unit source.
+
+* Do you take credit cards?
+Yes -- Mastercard, Visa and Amex only.
+
+* Do I need to make separate registrations for different compiler versions I own?
+No. One registration will cover one developer's use of TCompress with all of
+the compiler versions supported by the release of TCompress which is licensed.
+
+* Can we pay with a check?
+Yes. In general, we will accept most cheques in most currencies provided
+their value is a close match to the payment required. However, credit card
+orders can be processed more quickly.
+
+
+**** Performance and Capabilities
+
+* Does TCompress create files compatible with ZIP, LHArc or Winzip?
+No. TCompress uses compression methods which are comparable to those used in
+the above programs. However, in order to meet its design goals (in
+particular: general purpose compression capabilities, the ability to mix
+compression types in one archive, and support for "custom" compression), it
+does not use a file format compatible with any of the above.
+
+HOWEVER, our TCompLHA component is specifically designed to create and manage
+LHArc/LHA archives (which can also be used with WinZip).  Naturally, TCompLHA
+can also read TCompress archives. For more information, see:
+<A HREF="http://www.spis.co.nz/compLHA.htm">http://www.spis.co.nz/compLHA.htm</A>
+
+* Does TCompress require any external DLLs to operate?
+None whatsoever. TCompress is written in 100% native Delphi.
+
+* Can I create a self-extracting EXE with TCompress?
+Yes. In the Compress.zip file are two example projects that show how to do
+this -- selfextr.dpr and selfxsml.dpr.
+
+* Is TCompress "industrial strength", or does it have hidden size limitations
+  or problems?
+Hundreds of developers are using TCompress for an extremely wide range of
+applications, with file sizes ranging from kilobytes up to tens of GB. They,
+and we, believe it to be a trouble-free solution for the range of compression
+problems for which it was designed. Limitations tend to be wholly a factor of
+the deployment platform (e.g. system resources, free disk space etc). Version
+8.0 supports files and archives with an overall size bigger than the 2GB
+"OS-determined" limit which applied to earlier versions (there is
+a new upper limit, of course, but that is 8 exabytes = 2^63 bytes).
+
+* What is the Compctrl unit for?
+It contains all the classes and components for working with database Blob
+fields (CDBMemo, CDBImage, CDBRich, TCBlobfield, TCBlobstream etc). If you
+don't plan to work with any of those, you don't need to install it.
+
+* Can I create archives which span across several disks?
+Yes, if you use the add-on TSegCompress component developed by Ken McClain:
+<A HREF="http://www.softbreeze.net/nickel.htm">http://www.softbreeze.net/nickel.htm</A>. Or use our TCompLHA product, which includes a TSegLHA component -- see <A HREF="http://spis.co.nz/CompLHA.htm">http://spis.co.nz/CompLHA.htm</A>.
+
+* How good is the data compression I get with TCompress?
+All data compression is dependent on the method used and the nature of the
+input data. For best compression use the LZH5 algorithm -- its results should
+be similar to those you would get when using Zip compression with the same
+file(s). See the Introduction to Data Compression section of the Compress.hlp
+help file.
+
+* I have some files which don't get any smaller when compressed using
+  TCompress. Why not?
+See the question above. Some files have data which is already so complex that
+they won't compress significantly, or at all. If you have coLZH5 set as your
+CompressionMethod, you should get roughly the same level of compression as
+common compression utilities will give you -- sometimes better.
+
+* Why don't "protected" Paradox tables compress well with TCompress?
+When you protect a Paradox table, the entropy or "randomness" of its data
+increases significantly -- so much so that all compression algorithms become
+much less efficient. You'll encounter this whether you use TCompress or any
+other common compression utility.
+
+* Is there a routine or component to auto-compress entire records within a
+  database?
+No. TCompress provides file-level compression (e.g. the entire set of
+database files into a single archive) and TCDBMemo etc. provide blob-level
+compression (e.g. autocompressing memo, image or binary fields in your
+database). There isn't a way to compress entire database records and still
+provide the kind of fast indexed random access which most databases require.
+
+* Is TCompress thread-safe?
+Yes, the code can be used in multi-threaded applications. To use it effectively, you need to create an instance of the component within each
+new thread -- as per the example code in the CompDemo sample application.
+
+* Is TCompress Year-2000 compliant
+Yes. No date-based calculations are performed, and all date storage formats
+used are compliant with Windows definitions, which support four year digits.
+
+**** How To:
+
+* Can I seek into the middle of a compressed file and decompress just part of
+  it?
+Generally speaking, no compression method will permit this. However, it can
+be "faked" in either of the following ways:
+1. Decompress the entire file into a temporary TMemorystream, then use the
+TStream seek and read methods to access any part of it. This is not useful if
+the file is huge of course, but decompressing to a temporary TFilestream
+instead might be viable for some situations.
+2. Instead of compressing it as a single file, compress it as a series of
+"chunks" or file segments, all stored in a multi-file archive (each chunk can
+be given a name in the archive which is its number, e.g. "1", "2" etc). With
+this approach you can randomly select any chunk and decompress it
+individually. For performance-critical applications, also see the question
+below on speeding up access to multi-file archives.
+
+* Does TCompress handle updates and deletions from an archive nicely, or does
+  it leave "holes"?
+If the standard CompressFile(s)/DeleteFiles/ExpandFile(s) methods are used,
+archives are rewritten to eliminate holes and remove old files. You can
+bypass or delay this archive rewriting process if you want by using routines
+like CompressStreamToArchive.
+
+* How do I use TCompress/TCDBMemo etc. if I have a Data Module in my
+  project?
+Put the TCompress object on your Data Module with your tables. Any CDBMemo
+etc. objects should still  be on the appropriate form(s) of course.
+
+* How can I speed up access to files in an archive?
+For small archives, this is hardly necessary --- finding and decompressing
+any file is generally very fast. But if your archive gets very large, the
+sequential search needed to find a given file to decompress it can be a time-
+waster. A solution to this is to use ScanCompressedFile once when you
+first access your archive (as the Compdemo example application does). This
+process also creates a TCompressedFileInfo object for each file containing
+its position in the archive. With that information, you can open the archive
+as a TFileStream, seek directly to the appropriate place and use the DoExpand
+method to expand just that file. Time savings on large archives by using this
+method can be very significant indeed.
+
+* How can I compress a string in memory?
+Use the CompressString and ExpandString methods.
+
+* How can I read string data and compress it into a blob field?
+The simplest possible way is to use CompressString, then store that in the blob as binary data. However, this means you'll have to take care of the reading and expansion process yourself as well.
+
+A better way might be to use the visual CDBMemo component and simply use its LoadFromFile method to load the strings. If its compression properties are correctly set, it will auto-compress the data when the record is posted.
+
+If you want to do it non-visually (e.g. on a data module), do as follows:
+
+a) Create a non-visual TCBlobfield component on-the-fly and point it at your existing memo field (see BLOBMAIN.PAS for an example of this).
+
+b) Set its CompressSource and CompressionMethod properties appropriately
+
+c) Then step through each record of the table doing this:
+edit;
+OurBlobField.LoadFromFile(yourExternalFilename);
+post; { write back, forcing it to compress as it is written }
+
+Note that other handy assignment methods are available, including LoadFromStrings. If you want to compress existing uncompressed data in the memo, just assign the field to itself so that it is marked for updating, e.g. OurBlobField.asString := OurBlobField.AsString (good in Delphi 2 and 3 -- in Delphi 1 you'll have to SaveToStrings into a TStringList, then LoadFromStrings back again).
+
+**** Problems (also see the Troubleshooting section of Compress.hlp):
+
+* I compressed a file using TCompress, but I can't seem to decompress it. Why
+  not?
+There are two likely reasons:
+1. You have your parameters round the wrong way when calling the ExpandFile
+method. Sensible parameter naming will help you avoid this, e.g.
+ExpandFile(StoredFilename, ArchiveFilename).
+2. You are not specifying the correct StoredFileName. It should match the
+filepath which is stored in the archive -- which can be double-checked by
+using the Compdemo program. Review the Compress.hlp help sections on
+TargetPath and "Filename Handling in Compressed Archives" to see some
+examples of how to control what filenames and paths are stored in the
+archive.
+
+* I compressed something into a stream, but I can't seem to expand it.
+  Why not?
+Don't forget to either close and reopen the stream or (more commonly)
+seek back to the beginning of the stream before trying to expand from it!
+Also check that the stream FROM which you compressed the data had been
+positioned to the start before you compressed it. The Compress and Expand
+methods both work from the CURRENT stream location...
+
+* How do I eliminate the registration popup message? Is any other
+functionality affected in an unregistered copy of TCompress?
+When you register TCompress, you will be given values to set into the RegName
+and RegNumber properties of your TCompress components. If you set these
+exactly as provided to you, they will eliminate the popup. Apart from the
+popup message, unregistered copies of TCompress behave exactly the same as
+registered ones.
+
+* My application says "Requires BDE" when I run it on another machine. Does
+  TCompress require the Borland Database Engine?
+No. If you are not using the database blob compression components (CDBMemo etc),
+then you don't need the BDE. Just be sure that your project units
+don't have any unintentional references to "DB" or "DBTables" etc. in their
+Uses clauses. Also make sure you have the "comp" package rather than the compdb package installed, as the latter "requires" the BDE package.
+
+* Do you have any demo programs written specifically for C++ Builder, or are
+  they all Delphi?
+At this point, all the demonstrations are in Delphi but we've provided C++ compatible project header files so they can be checked under C++ Builder.
+
+* What should I do if I get an "Out of Memory" message using TCompress?
+This is exceptionally rare and will only arise if physical or swapfile memory is limited -- free up more disk space on your Windows swap drive.
+
+* My application's memory use seems to increase every time I decompress
+  files. Why?
+If you are using the ScanCompressedFile or ScanCompressedStream methods,
+see the notes in their section of Compress.hlp about the TCompressedFileInfo
+information and the FreeFileList method, which will allow you to eliminate
+memory loss.
+
+* What should I do if I see an "EUnableToCompress" exception?
+Nothing, unless you are directly calling the DoCompress method (see the help). All other methods handle this exception internally, meaning that the only time you'll see this exception is if you have "Break On Exception" turned on in the IDE.
+
+* How do I fix a "transliterate error" with TCDBMemo and Interbase blobs
+This error is caused by the usual Interbase memo field SQL definition
+that sets the blob's data sub-type to "1", which can only be used
+for text. Consequently, the highly varied characters used in a
+compressed file are rejected. The fix is to amend your SQL to
+create a blob field with sub-type of zero, which is a binary blob, e.g.
+ALTER TABLE TEST_ONE
+  ADD TEST_TEXT BLOB SUB_TYPE 0 SEGMENT SIZE 80;
+Thanks to Charlie Savage of Atkinson-Baker for this report.
+
+
+</pre>
+<P>Return to <A HREF="http://www.spis.co.nz/compress.htm">TCompress</A>

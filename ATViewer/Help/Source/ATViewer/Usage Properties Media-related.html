@@ -1,0 +1,302 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+  <title>Usage: Properties, Media-related</title>
+  <link href="Main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<h2>Properties, Media-related</h2>
+<hr>
+
+<table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="width: 40%;"><font color="DarkBlue">MediaMode</font></td>
+      <td>Player mode (used when Mode = vmodeMedia).<br>
+      Possible values:<br>
+      <ul>
+      <li><b>vmmodeNone</b>: "Uninitialized" value that is set when no other modes are available - see Notes.</li>
+      <li><b>vmmodeMCI</b>: Usage of TMediaPlayer component (Windows MCI interface).</li>
+      <li><b>vmmodeWMP64</b>: Usage of Windows Media Player 6.4 ActiveX.</li>
+      <li><b>vmmodeWMP9</b>: Usage of Windows Media Player 9.0 ActiveX.</li>
+      </ul>
+      Notes:<br>
+      <ul>
+      <li>MCI and WMP modes are available only when corresponding defines are uncommented 
+        in ATViewerOptions.inc.</li>
+      <li>WMP 9.0 mode will not work on end user's machine if no Windows Media Player 9+ is installed,
+        while WMP 6.4 mode should work on all machines since Windows Media Player 6.4 is preinstalled
+        even on Windows 95. Use ATxWMP unit from Universal Viewer demo to check 
+        availability of different WMP versions.</li>
+      </ul>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <font color="DarkBlue">
+          MediaAutoPlay <br>
+          MediaPlayCount <br>
+          MediaLoop <br>
+          MediaPlaylistPause <br>
+          MediaShowControls <br>
+          MediaShowTracker 
+        </font>
+      </td>
+      <td>
+        Media properties (when IsMedia = True).
+      <ul>
+      <li> Enables auto-start of media playback.
+      <li> Number of times (default is 1) media will be played.
+      <li> Loops media playback. When it is set, MediaPlayCount is ignored.
+      <li> Pause (in msec, default is 500 msec) between media playback end
+           and firing the OnMediaPlaybackEnd event.
+      <li> WMP 6.4 only: Show play controls on WMP control.
+      <li> WMP 6.4 only: Show play tracker on WMP control.
+      </ul>
+      </td>
+    </tr>
+
+    <tr>
+      <td><font color="DarkBlue">MediaVolume</font> (public)</td>
+      <td>Volume of media player (when IsMedia = True).<br>
+      It is in the range from 0 to 10.<br>
+      Notes:<br>
+      <ul>
+      <li>Currently not supported with MediaMode = vmmodeMCI.</li>
+      <li>WMP ActiveX controls use different volume ranges in 6.4 and 9+ versions. 
+        This property correctly handles both cases.</li>
+      <li>WMP 6.4 ActiveX has an issue: it doesn't always update its Volume
+        property when state is changed using visual controls (when volume
+        slider is dragged by mouse).</li>
+      </ul>
+      </td>
+    </tr>
+
+    <tr>
+      <td><font color="DarkBlue">MediaMute</font> (public)</td>
+      <td>Mute state of media player (when IsMedia = True).<br>
+      Note:<br>
+      <ul>
+      <li>Currently not supported with MediaMode = vmmodeMCI.</li>
+      <li>WMP 6.4 ActiveX has an issue: it doesn't always update its Mute property
+        when state is changed using visual control (when Mute button is
+        pressed by mouse).</li>
+      </ul>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <font color="DarkBlue">
+          MediaFit <br>
+          MediaFitOnlyBig <br>
+          MediaCenter
+        </font>
+      </td>
+      <td> Media/image fitting options:
+        <ul>
+        <li> Enables fitting of images. <br>
+             Works in Multimedia (both for images and for movies) and Plugins modes.
+        <li> Enables fitting of big images only. <br>
+             Works in Multimedia (for images only) and Plugins modes.
+        <li> Enables centering of smaller images. <br>
+             Works in Multimedia (for images only) and Plugins modes.
+        </ul>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <font color="DarkBlue">
+          IsImage <br>
+          IsIcon <br>
+          IsMetafile <br>
+          IsMedia
+        </font> (public, read-only)
+      </td>
+      <td>Flags which show what media type is loaded in Multimedia mode:
+        <ul>
+        <li> <b>IsImage</b>: Image (any format).
+        <li> <b>IsIcon</b>: Image which is an icon (ICO).
+        <li> <b>IsMetafile</b>: Image which is a metafile (WMF, EMF).
+        <li> <b>IsMedia</b>: Video or audio clip.
+        </ul>
+        Note:<br>
+        <ul>
+        <li>Images and media files are detected by file extension 
+            using global variable <b>ATViewerOptions</b>.
+            See description of ModeDetect property for details.
+        </ul>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <font color="DarkBlue">
+          ImageWidth <br>
+          ImageHeight <br>
+          ImageBPP
+        </font> (public, read-only)
+      </td>
+      <td>Image properties (when IsImage = True):
+        <ul>
+        <li> Width.
+        <li> Height.
+        <li> Bits per pixel.
+        </ul>
+        Notes:
+        <ul>
+        <li> ImageBPP is supported for GIF, PNG, BMP, JPG (with IJL usage), GraphicEx types. Otherwise it is 0.
+        <li> ImageWidth, ImageHeight change when size effect is applied (ImageEffect method).
+        </ul>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <font color="DarkBlue">
+          ImageColor <br>
+          ImageDrag <br>
+          ImageCursor <br>
+          ImageDragCursor <br>
+          ImageTransparent <br>
+          ImageResample <br>
+          ImageKeepPosition
+        </font>
+      </td>
+      <td>
+        Image control properties (when IsImage = True):
+        <ul>
+        <li> <b>ImageColor</b>: Color of image background.
+        <li> <b>ImageDrag</b>: Enables dragging of large images by mouse.
+        <li> <b>ImageCursor</b>: Cursor of image object (default is crDefault).
+        <li> <b>ImageDragCursor</b>: Cursor used for image dragging (default is crSizeAll).
+        <li> <b>ImageTransparent</b>: Enables image transparency showing.
+                                      Affects only formats with transparency (GIF, PNG etc).
+        <li> <b>ImageResample</b>: Enables image resampling on scaling.
+        <li> <b>ImageKeepPosition</b>: Enables keeping of image view position
+                                       on image scaling and control resizing.
+        </ul>
+      </td>
+    </tr>
+
+    <tr>
+      <td><font color="DarkBlue">ImageScale</font> (public)</td>
+      <td>Current image scale in percents (%).<br>
+      Notes:<br>
+      <ul>
+      <li> When MediaFit = False, this value is 100 initially;
+      when MediaFit = True, this value is affected by current control size.
+      <li> Changing of this property sets MediaFit to False.
+      <li> You can increase/decrease ImageScale in predefined row of values
+      using ImageScaleInc / ImageScaleDec methods.
+      </ul>
+      </td>
+    </tr>
+    <tr>
+      <td><font color="DarkBlue">ImageBox</font> (public, read-only)</td>
+      <td>Embedded imagebox object (of type TATImageBox, declared in ATImageBox.pas).<br>
+      Note:<br>
+      <ul>
+      <li> Use this object to access advanced image-related properties,
+        such as image label caption/visibility, border size, scrollbars etc.
+      </ul>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <font color="DarkBlue">
+          ImageError <br>
+          ImageErrorMessage
+        </font> (public, read-only) <br>
+        <font color="DarkBlue">
+          ImageErrorMessageBox
+        </font>
+      </td>
+      <td>Image error state (when IsImage = True):
+        <ul>
+        <li> <b>ImageError</b>: True if image loading error occured.
+        <li> <b>ImageErrorMessage</b>: String describing the error.
+        <li> <b>ImageErrorMessageBox</b>: Enables to display messagebox when error occurs.
+        </ul>
+      Note:<br>
+      <ul>
+      <li> When ImageErrorMessageBox = True, messagebox is displayed on image loading error
+        and you don't need to read ImageError/ImageErrorMessage properties.
+        When ImageErrorMessageBox = False, you should read these properties
+        and show error text inside image label, like in this example:
+<pre>
+procedure TFormView.UpdateImageLabel;
+begin
+  with ATViewer1 do
+    if IsImage and Assigned(ImageBox) then
+      if ImageError then
+      begin
+        ImageBox.ImageLabel.Visible := True;
+        ImageBox.ImageLabel.Caption := ImageErrorMessage;
+        ImageBox.ImageLabel.Font.Color := clRed;
+      end
+      else
+      begin
+        ImageBox.ImageLabel.Visible := FImageLabelVisibleFlag;
+        ImageBox.ImageLabel.Caption := Format(
+          '%d x %d (%d%%)',
+          [ImageWidth, ImageHeight, ImageScale]);
+        ImageBox.ImageLabel.Font.Color := clBlue;
+      end;
+end;
+</pre>
+      </ul>
+      </td>
+    </tr>
+
+    <tr>
+      <td><font color="DarkBlue">IViewIntegration</font></td>
+      <td>Options that allow to integrate IrfanView/XnView
+       applications into Image mode.<br>
+       This is record that contains the following fields:
+        <ul>
+        <li> <b>Enabled</b>: Enables integration.
+        <li> <b>ExeName</b>: IrfanView or XnView application executable path.
+        <li> <b>ExtList</b>: List (comma separated) of file extensions supported by IrfanView/XnView.
+        <li> <b>HighPriority</b>: Sets the priority for IrfanView/XnView higher than for internal image library.
+             This option works when a file extension (e.g. 'JPG') can be handled by both 
+             the internal library and IrfanView/XnView.
+        </ul>
+        Notes:
+        <ul>
+        <li> This property is available only when "IVIEW" define
+          is uncommented in ATViewerOptions.inc file.
+        <li> User can switch image loading between internal library and IrfanView/XnView
+          by setting the Mode to vmodeMedia.
+        </ul>
+      </td>
+    </tr>
+
+    <tr>
+      <td><font color="DarkBlue">IJLIntegration</font></td>
+      <td>Options that allow to integrate IJL (Intel JPEG Library, ijl15.dll)
+        into Image mode.<br>
+        This is record that contains the following fields:
+        <ul>
+        <li> <b>Enabled</b>: Enables integration.
+        <li> <b>ExtList</b>: List (comma separated) of JPEG file extensions.
+        </ul>
+        Notes:
+        <ul>
+        <li> This property is available only when "IJL" define
+          is uncommented in ATViewerOptions.inc file.
+        <li> IJL is used when Enabled = True, and "ijl15.dll" file is present in %PATH%.
+          DLL is loaded dynamically.
+        </ul>
+      </td>
+    </tr>
+
+</tbody>
+</table>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+  <title>Usage: Events, Media-related</title>
+  <link href="Main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<h2>Events, Media-related</h2>
+<hr>
+
+<table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="width: 40%;">
+        <font color="DarkBlue">OnMediaPlaybackEnd</font>
+      </td>
+      <td>Event fired after media playback has been finished (when IsMedia = True).
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <font color="DarkBlue">OnLoadImageStream</font>
+      </td>
+      <td>
+        Event fired after OpenStream method was called with AMode = vmodeMedia.
+        It is of type:
+<pre>
+  type
+    TATViewerLoadImageStream = procedure(Sender: TObject;
+      AImageBox: TATImageBox; AStream: TStream) of object; </pre>
+        You should load image into AImageBox object from AStream parameter here.<br>
+        The image can be of any type: TBitmap, TJpegImage, TMetafile etc.
+        See example for this handler in ViewerStream demo.
+      </td>
+    </tr>
+  </tbody>
+</table>
+</body>
+</html>

@@ -1,0 +1,77 @@
+object Form1: TForm1
+  Caption = 'Compressed Bitmaps from Resources'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  Height = 248
+  ShowHint = True
+  Width = 323
+  Left = 8
+  Top = 8
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Image1: TImage
+    Stretch = True
+    Left = 8
+    Top = 8
+    Width = 241
+    Height = 129
+  end
+  object Memo1: TMemo
+    Lines.Strings = (
+      'Program for testing loading of compressed '
+      'resources (see also Selfextr.dpr and '
+      'Selfxsml.dpr).'
+      ''
+      'Before you do ANYTHING, read the comments at '
+      'the top of the  BMTESTF.PAS unit in this project.'
+      ''
+      'Then follow the instructions therein.')
+    TabOrder = 2
+    Left = 8
+    Top = 8
+    Width = 246
+    Height = 113
+  end
+  object Button1: TButton
+    Caption = '&Create'
+    TabOrder = 0
+    Left = 8
+    Top = 144
+    Width = 75
+    Height = 25
+    Hint = 'Creates a compressed bitmap file (do first)'
+    OnClick = Button1Click
+  end
+  object Button2: TButton
+    Caption = '&Load'
+    TabOrder = 1
+    Left = 178
+    Top = 144
+    Width = 75
+    Height = 25
+    Hint = 'Don'#39't do this until you'#39've followed instructions #1..#5 in full'
+    OnClick = Button2Click
+  end
+  object MyBitmap: TEdit
+    TabOrder = 3
+    Text = 'MyBitmap'
+    Left = 88
+    Top = 144
+    Width = 81
+    Height = 21
+  end
+  object Compress1: TCompress
+    RegNumber = 0
+    MakeDirectories = False
+    ExceptionOnFileError = False
+    Key = 0
+    CheckSpaceBeforeExpand = False
+    Left = 112
+    Top = 40
+  end
+end

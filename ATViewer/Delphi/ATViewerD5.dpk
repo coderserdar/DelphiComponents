@@ -1,0 +1,50 @@
+package ATViewerD5;
+
+{$R *.RES}
+{$R '..\Source\MediaPlayer_TLB.dcr'}
+{$R '..\Source\ATBinHex.dcr'}
+{$R '..\Source\ATFileNotification.dcr'}
+{$R '..\Source\ATImageBox.dcr'}
+{$R '..\Source\ATStreamSearch.dcr'}
+{$R '..\Source\ATViewer.dcr'}
+{$R '..\Source\MediaPlayer9_TLB.dcr'}
+{$ALIGN ON}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS OFF}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'ATViewer'}
+{$IMPLICITBUILD ON}
+
+requires
+  vcl50,
+  VCLX50,
+  VCLJPG50,
+  VCLIE50;
+
+contains
+  MediaPlayer_TLB in '..\Source\MediaPlayer_TLB.pas',
+  ATBinHex in '..\Source\ATBinHex.pas',
+  ATFileNotification in '..\Source\ATFileNotification.pas',
+  ATImageBox in '..\Source\ATImageBox.pas',
+  ATStreamSearch in '..\Source\ATStreamSearch.pas',
+  ATViewer in '..\Source\ATViewer.pas',
+  MediaPlayer9_TLB in '..\Source\MediaPlayer9_TLB.pas';
+
+end.

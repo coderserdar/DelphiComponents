@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+  <title>Usage: Hints and FAQ</title>
+  <link href="Main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<h2>Hints and FAQ</h2>
+<hr>
+
+<p>
+<b>Q1: How can I load the contents of an AnsiString or WideString?</b>
+
+<p>
+A: You should do it using OpenStream method, giving it a TMemoryStream as
+a parameter. Sample procedures for AnsiString and WideString are shown
+below. Note that you should free stream only after calling
+Viewer.OpenStream(nil), otherwise control will try to read deallocated
+memory on scrolling!
+
+<p>
+<center>
+<textarea cols="60" rows="10" readonly="readonly">
+//Viewer: TATBinHex field
+//MS: TMemoryStream field
+
+procedure TFormView.LoadAnsiString(const S: string);
+begin
+  if not Assigned(MS) then
+    MS := TMemoryStream.Create;
+
+  MS.SetSize(Length(S));
+  if S &lt;&gt; '' then
+  begin
+    MS.Position := 0;
+    MS.WriteBuffer(S[1], Length(S));
+  end;
+
+  Viewer.Mode := vbmodeText;
+  Viewer.OpenStream(MS);
+end;
+
+procedure TFormView.LoadWideString(const S: WideString);
+begin
+  if not Assigned(MS) then
+    MS := TMemoryStream.Create;
+
+  MS.SetSize(Length(S) * 2);
+  if S &lt;&gt; '' then
+  begin
+    MS.Position := 0;
+    MS.WriteBuffer(S[1], Length(S) * 2);
+  end;
+
+  Viewer.Mode := vbmodeUnicode;
+  Viewer.OpenStream(MS);
+end;
+
+procedure TFormView.EmptyViewer;
+begin
+  Viewer.OpenStream(nil);
+
+  if Assigned(MS) then
+    FreeAndNil(MS);
+end;
+</textarea>
+</center>
+
+<p>
+<hr>
+
+<p>
+<b>Q2: I have an issue with horizontal scrollbar. Even when text becomes
+short enough, scrollbar doesn't disappear...</b>
+
+<p>
+A: This is done as workaround for Windows XP bug: when scrollbar is about
+to disappear, this may cause both scrollbars and window border to disappear.
+You can disable this workaround by commenting the "HSCROLLBAR_WORKAROUND" 
+define in ATBinHexOptions.inc.
+
+<p>
+The RichEdit control doesn't have this problem because it precalculates widths for all strings
+and sets scrollbar size to the max value.
+We cannot do this in ATBinHex control, so the scrollbar size is calculated dinamically.
+
+<p>
+<hr>
+
+
+<p>
+<b>Q3: After changing a property, it is not applied.</b>
+
+<p>
+A: Many properties require that after changing them, file should
+be reopened (using Open/Reload methods).
+
+
+</body>
+</html>

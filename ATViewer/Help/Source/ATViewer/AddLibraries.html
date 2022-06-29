@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+  <title>Additional libraries</title>
+  <link href="Main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<h2>Additional libraries</h2>
+<hr>
+
+
+Additional <b>optional</b> libraries/units used in <b>ATViewer</b> are:<br>
+<ol>
+<li> Graphic libraries:
+  <ol>
+  <li> <b>GIFImage</b>: used to support animated GIF graphic.<br>
+  After you install this library, enable its usage in ATViewerOptions.inc,
+  uncomment the "GIF" define.
+
+  <p>
+  <li> <b>PNGImage</b>: used to support PNG graphic.<br>
+  After you install this library, enable its usage in ATViewerOptions.inc,
+  uncomment the "PNG" define.
+
+  <p>
+  <li> <b>LibTiffDelphi</b>: used to support TIFF.<br>
+  After you install this library, enable its usage in ATViewerOptions.inc,
+  uncomment the "TIFF" define. Also you need to compile VTiff.dll (Source\DLL)
+  and place it into application folder.
+
+  <p>
+  <li> <b>IJL (Intel JPEG Library)</b>: used to fully support JPEG. <br>
+  You need IJL15.dll in application folder, IJL.pas and JPEG_IO.pas.
+  After you install them, enable library usage in ATViewerOptions.inc,
+  uncomment the "IJL" define.
+
+  <p>
+  <li> <b>GraphicEx</b>: used to support many formats: TGA, TIFF, PSD etc. <br>
+  After you install this library, enable its usage in ATViewerOptions.inc,
+  uncomment the "GEX" define. <br>
+  Note: You should disable GIF, PNG support in GraphicEx, as they are supported better
+  by GIFImage/PNGImage.
+
+  <p>
+  <li> <b>Jpeg2000 lib for Delphi</b>: used to support JP2 graphic. <br>
+  After you install this library, enable its usage in ATViewerOptions.inc,
+  uncomment the "JP2" define.
+
+  <p>
+  <li> <b>AmnAni DLL</b>: used to support ANI graphic. <br>
+  You need amnani.dll, amnani_impl.pas files.
+  After you install this library, enable its usage in ATViewerOptions.inc,
+  uncomment the "ANI" define.
+  </ol>
+
+<p>
+<li> <b>Tnt Unicode Controls</b>: used to load Unicode-named files in some cases.
+It is used in the following functions:
+  <p>
+  <ul>
+  <li> To load Unicode-named files in Image mode (TTntPicture/TTntFileStream classes are used)
+  <li> To load Unicode-named files in RTF mode (TTntFileStream class is used)
+  <li> To read Unicode-named files during text search (TTntFileStream class is used)
+  </ul>
+
+<p>
+After you install this library, enable its
+usage in 3 files: ATViewerOptions.inc / ATImageBoxOptions.inc / ATStreamSearchOptions.inc;
+uncomment the "TNT" define in all these files.
+
+<p>
+<li> <b>DIRegEx</b>: used to support RegEx (regular expressions) search.
+After you install this library,
+enable its usage in file ATStreamSearchOptions.inc, uncomment the "REGEX" define.
+
+<p>
+<li> <b>ATPrintPreview</b>: used to show the "Print preview" form before the actual printing.
+After you install this unit, enable its
+usage in files ATViewerOptions.inc / ATBinHexOptions.inc, uncomment the "PREVIEW" define.
+
+<p>
+<li> <b>nmzIrfanXnView</b>: used to integrate IfranView/XnView external viewers into Image mode.
+This unit is included in the ATViewer package.
+Enable its usage in file ATViewerOptions.inc, uncomment the "IVIEW" define.
+</ol>
+
+Download links for mentioned libraries are listed in the <a href="Copyrights.html">Copyrights</a> topic.
+
+</body></html>

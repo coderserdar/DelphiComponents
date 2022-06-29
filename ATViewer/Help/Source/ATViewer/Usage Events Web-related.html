@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+  <title>Usage: Events, Web-related</title>
+  <link href="Main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<h2>Events, Web-related</h2>
+<hr>
+
+<table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="width: 40%;">
+        <font color="DarkBlue">OnWebDocumentComplete</font>
+      </td>
+      <td>
+        Event fired after embedded WebBrowser control completes loading of a document.
+        You may use this event to put focus back to the main application control,
+        this may be needed since the Word/Excel/Acrobat ActiveX steal the focus.<br>
+        Note:<br>
+        <ul>
+        <li>This event corresponds to TWebBrowser.OnDocumentComplete, see Delphi help for details.</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <font color="DarkBlue">OnWebNavigateComplete</font>
+      </td>
+      <td>
+        Event fired after embedded WebBrowser control navigates to a new location.<br>
+        Note:<br>
+        <ul>
+        <li>This event corresponds to TWebBrowser.OnNavigateComplete2, see Delphi help for details.</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <font color="DarkBlue">OnWebStatusTextChange</font>
+      </td>
+      <td>
+        Event fired on webpage status text change.<br>
+        Note:<br>
+        <ul>
+        <li>This event corresponds to TWebBrowser.OnStatusTextChange.
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td><font color="DarkBlue">OnWebTitleChange</font></td>
+      <td>
+        Event fired on webpage title change.<br>
+        Note:<br>
+        <ul>
+        <li>This event corresponds to TWebBrowser.OnTitleChange.
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td><font color="DarkBlue">OnLoadWebStream</font></td>
+      <td>
+        Event fired after OpenStream method was called with AMode = vmodeWeb.
+        It is of type:
+<pre>
+  type
+    TATViewerLoadWebStream = procedure(Sender: TObject;
+      ABrowser: TWebBrowser; AStream: TStream) of object; </pre>
+        You should load data into ABrowser object from AStream parameter.<br>
+        See example for this handler in ViewerStream demo.
+      </td>
+    </tr>
+  </tbody>
+</table>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+  <title>Usage: Properties</title>
+  <link href="Main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<h2>Properties</h2>
+<hr>
+<table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="2">
+<tbody>
+<tr><td style="width: 30%;"><font color="DarkBlue">Options</font><br></td>
+  <td>Set of flags specifying what file-system properties to watch. They are self-descriptive:<br>
+  <ul>
+    <li><b>foNotifyFilename</b>: files names</li>
+    <li><b>foNotifyDirname</b>: directories names</li>
+    <li><b>foNotifyAttributes</b>: attributes</li>
+    <li><b>foNotifySize</b>: files sizes</li>
+    <li><b>foNotifyLastWrite</b>: last modification time</li>
+    <li><b>foNotifyLastAccess</b>: last access time</li>
+    <li><b>foNotifyCreation</b>: creation time</li>
+    <li><b>foNotifySecurity</b>: NTFS security attributes</li>
+  </ul>
+  Notes:
+  <ul>
+    <li>foNotifyDirname and foNotifySecurity options apply
+    only for a directory (when Directory property is set).
+  </ul>
+  </td></tr>
+<tr><td><font color="DarkBlue">Directory</font></td><td>Name of directory to watch.<br>
+  See note for FileName.
+  </td></tr>
+<tr><td><font color="DarkBlue">FileName</font></td><td>Name of file to watch.<br>
+  Note:
+  <ul>
+    <li>You may set Directory or FileName, not both of them.
+  </ul>  
+    </td></tr>
+<tr><td><font color="DarkBlue">Subtree</font></td><td>Enables watching of subdirectories of specified directory. Applies only for&nbsp;a directory. </td></tr>
+<tr><td><font color="DarkBlue">Enabled</font> (public)</td><td>Alternative
+to Start/Stop methods to increase readability of your source. When set
+to True it calls Start, when set to False it calls Stop.</td></tr>
+</tbody></table>
+
+</body>
+</html>

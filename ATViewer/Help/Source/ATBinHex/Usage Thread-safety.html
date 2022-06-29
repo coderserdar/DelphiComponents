@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+  <title>Usage: Thread-safety note</title>
+  <link href="Main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<h2>Thread-safety note</h2>
+<hr>
+
+The current component version is not thread safe. But if you need to use it in a multi-thread
+application, the following hint should help to use it right. For example, you need
+to call Open method from several threads. Don't do this, instead do it in message way:
+all threads should send a message (it may be some Windows message not used in your application,
+e.g. EM_DISPLAYBAND) to main thread, informing it that a filename should be opened.
+Pointer to a filename can be passed as message parameter.
+So the main message handler calls Open.
+
+<p>
+Note: this may be a risk of receiving messages from several threads at almost the same time,
+so additional boolean "Busy flag" should be set on message-handler start and reset on exit.
+
+</body>
+</html>

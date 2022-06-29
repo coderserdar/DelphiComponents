@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+  <title>Introduction</title>
+  <link href="Main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<h2>ATViewer Component</h2>
+<hr>
+
+<b>ATViewer</b> is a component for <b>Delphi/C++Builder</b>, which allows to view files of various types.
+There is no edit possibility, just quick view - so it's useful to implement
+"View file" feature in your Delphi/C++Builder application.
+
+<p>
+The following view modes are implemented:
+
+<ul>
+<li> <span class="blue"><b>Text, Binary, Hex, Unicode</b></span>: 
+  all files, of unlimited size. <br>
+  Plain file dump is shown.
+  Used <b>ATBinHex</b> component: only visible part of file is loaded into memory.
+  Modes are suitable for huge files and files of unknown type.
+<li> <span class="blue"><b>RTF/UTF-8</b></span>: 
+  RTF and UTF-8 encoded texts. <br>
+  File is shown using <b>RichEdit</b> control.
+<li> <span class="blue"><b>Image</b></span>: 
+  all general image formats: BMP JPG ICO GIF PNG...
+  plus all formats supported by <i>IrfanView/XnView</i> external viewers. <br>
+  File is shown using <b>ATImageBox</b> component.
+<li> <span class="blue"><b>Multimedia</b></span>:
+  all file types supported by <b>MS Windows Media Player</b>: AVI MPEG WMV MP3... <br>
+  File is shown using WMP ActiveX control.
+<li> <span class="blue"><b>Internet</b></span>:
+  all file types supported by <b>MS Internet Explorer</b>: HTML XML DOC XLS... <br>
+  File is shown using MSIE ActiveX control.
+<li> <span class="blue"><b>Plugins</b></span>:
+  all files supported by <b>Total Commander Lister</b> plugins.
+</ul>
+
+<p>Collections of Lister plugins can be found at the following two sites:
+
+<ul>
+<li><a href="http://www.totalcmd.net/directory/lister.html" target="_blank">totalcmd.net</a>
+<li><a href="http://en.totalcmd.pl/download" target="_blank">totalcmd.pl</a>
+</ul>
+
+</body></html>

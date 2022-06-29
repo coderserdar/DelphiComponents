@@ -1,0 +1,133 @@
+object Form1: TForm1
+  Left = 237
+  Top = 271
+  Width = 650
+  Height = 423
+  HorzScrollBar.Range = 603
+  VertScrollBar.Range = 393
+  ActiveControl = DBGrid1
+  Caption = 'Form1'
+  Color = clBackground
+  OnCreate = FormCreate
+  PixelsPerInch = 75
+  TextHeight = 15
+  TextWidth = 7
+  object DBGrid1: TDBGrid
+    Left = 40
+    Top = 24
+    Width = 561
+    Height = 161
+    DataSource = DataSource1
+    TabOrder = 0
+    TitleFont.Color = clBlack
+    TitleFont.Height = 13
+    TitleFont.Name = 'Helvetica'
+    TitleFont.Pitch = fpVariable
+    TitleFont.Style = []
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'Category'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'Common_Name'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'Length (cm)'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'Length_In'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'Species Name'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'Species No'
+        Visible = True
+      end>
+  end
+  object CDBImage1: TCDBImage
+    Left = 40
+    Top = 232
+    Width = 297
+    Height = 161
+    CompressSource = Compress1
+    CompressionMethod = coNone
+    DataField = 'Graphic'
+    DataSource = DataSource1
+    TabOrder = 1
+  end
+  object DBNavigator1: TDBNavigator
+    Left = 40
+    Top = 192
+    Width = 464
+    Height = 27
+    DataSource = DataSource1
+    VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast, nbInsert, nbDelete, nbPost, nbCancel]
+    TabOrder = 2
+    OnClick = DBNavigator1Click
+  end
+  object CDBMemo1: TCDBMemo
+    Left = 352
+    Top = 232
+    Width = 249
+    Height = 161
+    CompressSource = Compress1
+    CompressionMethod = coNone
+    DataField = 'Notes'
+    DataSource = DataSource1
+    ScrollBars = ssAutoBoth
+    TabOrder = 3
+  end
+  object Button1: TButton
+    Left = 528
+    Top = 192
+    Width = 75
+    Height = 25
+    Caption = 'Save'
+    TabOrder = 4
+    OnClick = Button1Click
+  end
+  object SQLClientDataSet1: TSQLClientDataSet
+    Aggregates = <>
+    FileName = '/home/eamon/CompCode/k1/Compress/biolife.cds'
+    Options = [poAllowCommandText]
+    Params = <>
+    Left = 496
+    Top = 120
+  end
+  object DataSource1: TDataSource
+    DataSet = SQLClientDataSet1
+    Left = 408
+    Top = 80
+  end
+  object Compress1: TCompress
+    RegNumber = 0
+    MakeDirectories = False
+    ExceptionOnFileError = False
+    Key = 0
+    CheckSpaceBeforeExpand = False
+    Left = 240
+    Top = 80
+  end
+  object OpenDialog1: TOpenDialog
+    Title = 'Open'
+    Left = 528
+    Top = 80
+  end
+  object SaveDialog1: TSaveDialog
+    Title = 'Save As'
+    Left = 560
+    Top = 128
+  end
+end

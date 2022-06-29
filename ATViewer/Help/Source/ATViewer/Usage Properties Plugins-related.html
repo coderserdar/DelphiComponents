@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+  <title>Usage: Properties, Plugins-related</title>
+  <link href="Main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<h2>Properties, Plugins-related</h2>
+<hr>
+
+<table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="2">
+<tbody>
+<tr>
+  <td style="width: 40%;">
+    <font color="DarkBlue">ActivePluginName</font> <br> (read-only)
+  </td>
+  <td>Name of currently active plugin (or empty string if plugins are not loaded).<br>
+    It also can be used in Image mode:
+    it shows the name of IrfanView/XnView executable,
+    or the name of IJL library, if it was used to load graphics.
+  </td>
+</tr>
+<tr>
+  <td>
+    <font color="DarkBlue">
+      ActivePluginSupportsSearch <br>
+      ActivePluginSupportsPrint <br>
+      ActivePluginSupportsCommands <br>
+    </font>
+    (read-only)
+  </td>
+  <td>Indicates does active plugin support:
+    <ul>
+    <li> Find / Find Next commands.
+    <li> Print command.
+    <li> Copy / Select All / Go To / Set Parameters commands.
+    </ul>
+   </td>
+</tr>
+<tr>
+  <td><font color="DarkBlue">ActivePluginWindowHandle</font></td>
+  <td>Handle of active plugin's window (or 0 if plugins are not loaded).</td>
+</tr> 
+<tr>
+  <td><font color="DarkBlue"> PluginsHighPriority</font></td>
+  <td>Sets priority for plugins higher than for internal viewers.
+  When this priority is high, plugins are tried first for a new file, and
+  if no matched plugin is found then matched internal viewer is used
+  (match is determined by file extension and sometimes by contents). When
+  this priority is low, matched internal viewer is used first.
+  </td>
+</tr>
+</tbody></table>
+
+</body></html>

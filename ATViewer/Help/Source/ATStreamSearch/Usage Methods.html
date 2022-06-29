@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+  <title>Usage: Methods</title>
+  <link href="Main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<h2>Methods</h2>
+<hr>
+<table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="2">
+<tbody>
+<tr>
+  <td>
+  <font color="DarkBlue">function FindFirst(<br>
+    &nbsp;&nbsp; const AText: WideString;<br>
+    &nbsp;&nbsp; const AStartPos: Int64;<br>
+    &nbsp;&nbsp; AEncoding: TATEncoding;<br>
+    &nbsp;&nbsp; AOptions: TATStreamSearchOptions): Boolean;</font>
+  <p>
+  Starts the search.<br>
+  Before the search, the FileName or Stream property must be assigned.<br>
+  Parameters:
+  <ul>
+  <li>AText: string to find.<br>
+    Unicode string must be in the Little-Endian format.</li>
+  <p>
+  <li>AStartPos: search start position (0-based).<br>
+    If it is 0, search will be performed from the beginning or end of the file/stream,
+    depending of "Backward Search" option presence.</li>
+  <p>
+  <li>AEncoding: text encoding. Possible values are:
+    <ul>
+    <li><b>vEncANSI</b>: ANSI encoding (locale dependent)</li>
+    <li><b>vEncOEM</b>: OEM encoding (locale dependent)</li>
+    <li><b>vEncEBCDIC</b>: IBM EBCDIC US encoding</li>
+    <li><b>vEncKOI8</b>: KOI8-R encoding</li>
+    <li><b>vEncISO</b>: ISO encoding (locale dependent)</li>
+    <li><b>vEncMac</b>: Macintosh encoding (locale dependent)</li>
+    <li>plus many others, see the complete list in ATxCodepages.pas
+    </ul>
+  </li>
+  <p>
+  <li>AOptions: search options that are set of flags:
+    <ul>
+    <li><b>asoCaseSens</b>: Case Sensitive search</li>
+    <li><b>asoWholeWords</b>: Whole Words search</li>
+    <li><b>asoBackward</b>: Backward search (Note: ignored in RegEx mode)</li>
+    <li><b>asoRegEx</b>: RegEx search</li>
+    <li><b>asoRegExMLine</b>: RegEx multiline search (used with asoRegEx)</li>
+    </ul>
+  </li>
+  </ul>
+  Result is True if search was successfull.<br>
+  In this case you can read the
+  FoundStart and FoundLength properties to get the resulting position and length.<br>
+  Notes:<br>
+    <ul>
+    <li>RegEx notes:
+      <ul>
+      <li>On invalid regex this method raises an exception with descriptive message.</li>
+      <li>It is not recommended to use "Case Sensitive" and "Whole Words" options with
+        quite complex regex that already specifies these options.
+        For example, you shouldn't use the "Case Sensitive" option with regex containing (?i),
+        and shouldn't use the "Whole Words" option with regex containing /b or /pZ.
+        Otherwise the search result can be incorrect.
+      </ul>
+    </li>
+    <li>Encodings notes:
+      <ul>
+      <li>ANSI, OEM, EBCDIC, KOI8, ISO, Mac encodings are always available.
+      <li>EBCDIC, KOI8, ISO, Mac encodings are used via MultiByteToWideChar API, if possible.
+        But if they are not installed on OS (for example, on Win9x),
+        then the hardcoded codepages are used.
+      <li>All other encodings are used via MultiByteToWideChar API,
+        they are available only when installed on OS.
+      </ul>
+    </li>
+    </ul>
+  </td>
+</tr>
+<tr>
+  <td>
+  <font color="DarkBlue">function FindNext(AFindPrevious: Boolean = False): Boolean;</font><br><br>
+  Continues the search.<br>
+  AFindPrevious: continue search in reverse direction (Note: not supported for RegEx search).<br>
+  Result is the same as for FindFirst method.
+  </td>
+</tr>
+</tbody>
+</table>
+
+</body>
+</html>

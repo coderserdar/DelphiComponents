@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+  <title>Usage: Events, General</title>
+  <link href="Main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<h2>Events, General</h2>
+<hr>
+
+<table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="width: 40%;"><font color="DarkBlue">OnFileUnload</font></td>
+      <td>Event fired before view mode has been changed and before a new file has been opened using Open method.<br>
+      Should be used to perform some file finalization, like saving of current file position.<br>
+      Note:
+      <ul>
+      <li> If you don't close currently opened file on application closing, this event is not fired.
+      So you may need to additionally call its handler in your form's OnClose event.
+      </li></ul>
+      </td>
+    </tr>
+    <tr>
+      <td><font color="DarkBlue">OnFileLoad</font></td>
+      <td>Event fired after view mode has been changed and after a new file has been opened using Open method.<br>
+      Should be used to perform some file post-initialization, like restoring of previously saved file position.</td>
+    </tr>
+    <tr>
+      <td><font color="DarkBlue">OnOptionsChange</font></td>
+      <td>Event fired after some option has been changed by a user.<br>
+        Examples of such changable options:
+        <ul>
+        <li> Text encoding can be changed using right-click menu
+        <li> Text and image scale can be changed using Ctrl + Mouse wheel
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table></body></html>

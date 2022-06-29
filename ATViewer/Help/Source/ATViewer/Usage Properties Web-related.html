@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+  <title>Usage: Properties, Web-related</title>
+  <link href="Main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<h2>Properties, Web-related</h2>
+<hr>
+
+<table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="2">
+<tbody>
+<tr>
+  <td style="width: 40%;"><font color="DarkBlue">WebOffline</font></td>
+  <td>Sets the "Offline connection" mode before a browser navigation operation.<br>
+    Notes:<br>
+    <ul>
+    <li> This property is available only when "OFFLINE" define is uncommented in ATViewerOptions.inc.
+         When the property is used, the "wininet.dll" is linked to the application at runtime.
+    <li> This will toggle the <u>global</u> MSIE Offline flag
+         (not TWebBrowser.Offline, since it doesn't work).
+    <li> You don't need to read the global Offline flag at application startup and then restore it on exit.
+         The component performs this task by itself.
+    </ul>
+  </td>
+</tr>
+<tr>
+  <td><font color="DarkBlue">WebBusy</font> (public, read-only)</td>
+  <td>Returns the busy state of browser object.<br>
+    You must check this value in your form's
+    OnCloseQuery event handler like this:
+   <pre>
+   procedure TForm1.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+   begin
+     CanClose := not ATViewer1.WebBusy;
+   end;</pre>
+  </td>
+</tr>
+<tr>
+  <td><font color="DarkBlue">WebAcceptAllFiles</font></td>
+  <td>Enables the "File Download" browser dialog when attempt to open an unknown file type is performed in Internet mode.<br>
+    Note:<br>
+    <ul>
+    <li>When "IE4X" conditional define is commented in ATViewerOptions.inc, this property is not used.
+        When "IE4X" define is uncommented, this property is used and is False by default so
+        no "File Download" dialogs appear.
+    </ul>
+  </td>
+</tr>
+<tr>
+  <td><font color="DarkBlue">WebWaitForNavigate</font></td>
+  <td>Enables the waiting for browser navigation completion.<br>
+    Note:<br>
+    <ul>
+    <li> Default is False: usually this is not needed and also not recommended
+         (because the time for navigation completion may be significant and this will look like
+         the application is "frozen"). But sometimes it may be useful: for
+         example, if you want to scroll the control (using PosPercent property)
+         immediately after page opening.
+    </ul>
+  </td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

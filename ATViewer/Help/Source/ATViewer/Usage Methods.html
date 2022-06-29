@@ -1,0 +1,215 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+  <title>Usage: Methods, General</title>
+  <link href="Main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<h2>Methods, General</h2>
+<hr>
+
+<table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td><font color="DarkBlue">function Open(const AFileName: WideString; APicture: TPicture = nil): Boolean;</font><br>
+        Opens a file.<br>
+        Result is True if file was successfully opened or False if file
+        was not found or other open error occured.<br>
+        Pass the empty AFileName string to close the currently opened file.<br>
+        APicture optional parameter can specify the preloaded image object.<br>
+        Notes:<br>
+        <ul>
+        <li>APicture parameter is introduced to reduce flickering when user loads multiple images.
+        For example, user goes through an image directory using "File -- Next" interface command.
+        After user has loaded an image, you can create a thread, that will load the next image in background 
+        and save it into TPicture object. When user performs "File -- Next" command again,
+        you can quickly load the preloaded object using APicture parameter, 
+        and then create a thread that will load the next image etc.
+        <li>APicture parameter is used only when Image mode is activated
+        (this depends on filename and mode detection properties).
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td><font color="DarkBlue">function OpenStream(AStream: TStream; AMode: TATViewerMode): Boolean;</font><br>
+        Opens a stream in a given view mode.<br>
+        Pass nil to stop use the currently used stream.<br>
+        Result is True if stream was successfully read.<br>
+        The AMode parameter can be:
+        <ul>
+        <li> <b>vmodeText, vmodeBinary, vmodeHex, vmodeUnicode</b>:
+             Stream is passed to ATBinHex control. You can free stream object only 
+             after you call OpenStream(nil), because stream is constantly read.
+        <li> <b>vmodeRTF</b>: Stream is read into RichEdit control.
+        <li> <b>vmodeMedia</b>: Stream must contain image data, which will be read into
+             ATImageBox control using OnLoadImageStream event handler.
+        <li> <b>vmodeWeb</b>: Stream must contain data valid for WebBrowser control,
+             it will be read using OnLoadWebStream event handler.
+        </ul>
+        Notes:<br>
+        <ul>
+        <li> See "ViewerStream" demo for example of OnLoadImageStream / OnLoadWebStream event handlers.
+        <li> Mode property cannot be changed while stream is opened.
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td><font color="DarkBlue">function OpenFolder(const AFolderName: WideString): Boolean;</font><br>
+        Opens a folder using Lister plugin.<br>
+        Result is True if folder was opened using some plugin.<br>
+        Pass the empty AFolderName string to close the currently opened plugin
+        (you can also call Open('') for this).<br>
+        Notes:<br>
+        <ul>
+        <li>Examples of Lister plugins which can show folders are VisualDirSize and IEView.
+        <li>Mode property cannot be changed while folder is opened: internal viewers cannot be used for folders.
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td><font color="DarkBlue">procedure Reload;</font><br>
+        Reloads the currently opened file or folder.<br>
+        Note:
+        <ul>
+        <li>This method just reassigns the old value of Mode property. As the result:
+          <ul>
+          <li>when performed in Unicode mode, it switches between pure Unicode and Unicode/Hex modes;
+          <li>when performed in Plugins mode, it loads the next matched plugin.
+          </ul>      
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td><font color="darkblue">function FindFirst(const AText: WideString; AOptions: TATStreamSearchOptions): Boolean;</font><br>
+        Starts text search.<br>
+        AText: text to search (Note: Unicode string must be in the Little-Endian format).<br>
+        AOptions: search options that are set of flags:<br>
+        <ul>
+        <li> <b>asoWholeWords</b>: Search for whole words only </li>
+        <li> <b>asoCaseSens</b>: Case-sensitive search </li>
+        <li> <b>asoBackward</b>: Backward search (Note: not supported in RTF mode and for RegEx) </li>
+        <li> <b>asoRegEx</b>: RegEx search (Note: supported only in Text/Binary/Hex/Unicode modes) </li>
+        <li> <b>asoRegExMLine</b>: Multiline regex search (used with asoRegEx) </li>
+        <li> <b>asoFromPage</b>: Starts search from the current page, otherwise in entire file
+             (Note: supported in all text modes) </li>
+        </ul>
+        Result is True if text was found and highlighted.<br>
+        Notes:<br>
+        <ul>
+        <li> RegEx search (asoRegEx option) is available only when RegEx library is compiled in.
+             See ATStreamSearchOptions.inc file.</li>
+        <li> Unicode-named files can be handled during search only when Tnt Unicode Controls 
+             are compiled in. See ATStreamSearchOptions.inc file.</li>
+        <li> When non-RegEx search is performed, two different search functions are used: one for 1-byte 
+             Text/Binary/Hex modes and another for Unicode mode; they give different search results.</li>
+        <li> In Text/Binary/Hex modes, when TextEncoding &lt;&gt; vencANSI, text is automatically decoded during search.</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td><font color="DarkBlue">function FindNext(AFindPrevious: Boolean = False): Boolean;</font><br>
+        Continues text search.<br>
+        AFindPrevious: continue search in reverse direction.<br>
+        Result is the same as for FindFirst method.<br>
+        Notes:<br>
+        <ul>
+        <li> AFindPrevious option can be used only in Text/Binary/Hex/Unicode modes
+             and cannot be used for RegEx search.
+        <li> After you change view mode or reload a file, you cannot continue search 
+             immediately, you must first call FindFirst method.</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td><font color="DarkBlue">function FindDialog(AFindNext: Boolean): Boolean;</font><br>
+        Calls custom search dialog, specific to the current view mode or plugin.<br>
+        This may be MSIE search dialog in Internet mode, or active plugin's
+        custom dialog.<br>
+        AFindNext should be set to True for "Find next" command.<br>
+        Result is True if custom dialog was successfully shown.
+        In this case you don't need to show your own dialog.
+        If Result is False, then you need to show your own dialog 
+        and then call FindFirst / FindNext methods.</td>
+    </tr>
+    <tr>
+      <td><font color="DarkBlue">procedure CopyToClipboard(AsHex: Boolean = False);</font><br>
+        Copies data to Clipboard.<br>
+        This method works differently in various view modes:
+        <ul>
+        <li> Text/Binary/Hex: data is the current selection (AnsiString).
+             AsHex parameter may be True, in this case the hex-encoded string
+             (bytes in the hex form separated by spaces) will be copied. </li>
+        <li> Unicode: data is the current selection (WideString). </li>
+        <li> Multimedia: when an image is loaded (IsImage = True): data is the whole image. </li>
+        <li> Internet: data is the current selection (usually HTML text). </li>
+        <li> Plugins: data is the current selection; data type depends on plugin and 
+             plugin is responsible for performing the copying operation. </li>
+        <li> RTF: data is the current selection (plain or RTF text). </li>
+        </ul>
+        Note:
+        <ul>
+        <li>This method may fail and show an error message if data size selected is too big.</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <font color="DarkBlue">
+          procedure SelectAll; <br>
+          procedure SelectNone;
+        </font>
+        <br>
+        <ul>
+        <li> <b>SelectAll</b>: Selects all text. Works in text, Internet, Plugins modes.
+        <li> <b>SelectNone</b>: Deselects text. Works in text, Internet modes.
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <font color="DarkBlue">
+          procedure PrintDialog; <br>
+          procedure PrintSetup; <br>
+          procedure PrintPreview;
+        </font>
+        <br>
+        <ul>
+        <li> <b>PrintDialog</b>: Shows "Print" dialog. Works in all modes.
+        <li> <b>PrintSetup</b>: Shows "Print Setup" dialog. Works in all modes.
+        <li> <b>PrintPreview</b>: Shows "Print Preview" dialog. Works in Text/Binary/Hex/Unicode, Multimedia (IsImage = True), Internet modes.
+        </ul>
+        Notes:<br>
+        <ul>
+        <li> PrintDialog / PrintPreview methods show preview form in text/Multimedia modes,
+             but only when ATPrintPreview component is used by enabling the "PREVIEW" define
+             in ATBinHexOptions.inc / ATViewerOptions.inc files.
+        <li> PrintSetup / PrintPreview methods show MSIE dialogs in Internet mode.
+        <li> PrintSetup does nothing in Delphi 5-6, because TPageSetupDialog is not available.
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td><font color="DarkBlue">procedure FocusActiveControl;</font><br>
+        Focuses the active embedded control (TATBinHex, TRichEdit, TWebBrowser etc).<br>
+        Notes:
+        <ul>
+        <li>If you have ATViewer as main form control, you should call FocusActiveControl
+        in your form's WM_ACTIVATE message handler to put focus back to ATViewer after some dialog
+        has been shown.
+        <li>See also IsFocused property.
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td><font color="DarkBlue">procedure IncreaseScale(AIncrement: Boolean);</font><br>
+        Increases (AIncrement = True) or decreases current font size or
+        image scale.<br>
+        Works in text, Multimedia (IsImage = True), Internet modes.
+      </td>
+    </tr>
+  </tbody>
+</table>
+</body>
+</html>

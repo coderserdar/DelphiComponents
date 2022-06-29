@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+  <title>Usage: Properties</title>
+  <link href="Main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<h2>Properties</h2>
+<hr>
+
+<table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="2">
+<tbody>
+<tr>
+  <td style="width: 30%;"><font color="DarkBlue">FileName</font><br>(public)</td>
+  <td>File name (WideString).<br>
+  Assign this property to prepare the search in a given file.
+  Assign the empty string to free the internal stream allocated.</td>
+</tr>
+<tr>
+  <td><font color="DarkBlue">Stream</font><br>(public)</td>
+  <td>Stream (TStream).<br>
+  Assign this property to prepare the search in a given stream.
+  Stream is not freed after the search is finished - you must free it by yourself.</td>
+</tr>
+<tr>
+  <td><font color="DarkBlue">FoundStart<br></font>(public, read-only)</td>
+  <td>Resulting match position (0-based).<br>
+  Can be read only after successfull FindFirst/FindNext methods call.</td>
+</tr>
+<tr>
+  <td><font color="DarkBlue">FoundLength<br></font>(public, read-only)</td>
+  <td>Resulting match length.<br>
+  Can be read only after successfull FindFirst/FindNext methods call.</td>
+</tr>
+</tbody>
+</table>
+
+</body>
+</html>

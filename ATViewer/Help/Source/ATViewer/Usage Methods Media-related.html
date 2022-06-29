@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+  <title>Usage: Methods, Media-related</title>
+  <link href="Main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<h2>Methods, Media-related</h2>
+<hr>
+
+<table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td><font color="DarkBlue">procedure ImageScaleInc;</font><br>
+          <font color="DarkBlue">procedure ImageScaleDec;</font><br>
+      Increases or decreases current ImageScale value and sets MediaFit to False (when IsImage = True).<br>
+      The nearest value to the current ImageScale value is set.
+      The following row of predefined scale values is used:
+      7, 10, 20, 30... 100, 150... 1600.
+      </td>
+    </tr>
+    <tr>
+     <td><font color="DarkBlue">function ImageEffect(AEffect: TATViewerImageEffect): Boolean;</font><br>
+     Applies an image effect (when IsImage = True).<br>
+     Possible effects:<br>
+     <ul>
+     <li><b>vieRotate90</b>: rotate image 90 grad clockwise </li>
+     <li><b>vieRotate270</b>: rotate image 90 grad anti-clockwise </li>
+     <li><b>vieGrayscale</b>: convert image to grayscale </li>
+     <li><b>vieNegative</b>: convert image to negative colors </li>
+     <li><b>vieFlipVertical</b>: flip image vertically </li>
+     <li><b>vieFlipHorizontal</b>: flip image horizontally </li>
+     </ul>
+     Result is True when effect was successfully applied.<br>
+     Note:<br>
+     <ul>
+     <li>After applying of effect, icons (ICO) and metafiles (WMF, EMF) become "rasterized"
+     and may loose transparency and quality.</li>
+     </ul>
+     </td>
+    </tr>
+    <tr>
+      <td><font color="DarkBlue">procedure MediaDoPlayPause;</font><br>
+      Starts or pauses media playback (when IsMedia = True). 
+      </td>
+    </tr>
+  </tbody>
+</table>
+</body>
+</html>
