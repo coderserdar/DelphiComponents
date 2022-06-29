@@ -1,0 +1,62 @@
+{**********************************************************}
+{                                                          }
+{  Devrace Extension Library                               }
+{                                                          }
+{  Copyright (c) 1999 - 2002, Balabuyev Yevgeny            }
+{  Contact: yebalabuyev@devrace.com                        }
+{                                                          }
+{ -------------------------------------------------------- }
+{  ExtLib home page      : http://www.devrace.com/extlib   }
+{  ExtLib support e-mail : extlib@devrace.com              }
+{ -------------------------------------------------------- }
+{                                                          }
+{  Please see the file License.txt for full license        }
+{  information                                             }
+{                                                          }
+{**********************************************************}
+
+package ExtLib_D7;
+
+{$R *.res}
+{$R 'ExtLib.dcr'}
+{$ALIGN 8}
+{$ASSERTIONS OFF}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS OFF}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'Devrace Extension Library'}
+{$IMPLICITBUILD OFF}
+
+requires
+  vcl,
+  designide,
+  rtl;
+
+contains
+  ELDsgnr in 'ELDsgnr.pas',
+  ELSConsts in 'ELSConsts.pas',
+  ELControls in 'ELControls.pas',
+  ELUtils in 'ELUtils.pas',
+  ELPropInsp in 'ELPropInsp.pas',
+  ELDgrm in 'ELDgrm.pas',
+  ELStringsEdit in 'ELStringsEdit.pas' {ELStringsEditorDlg},
+  ELRegister in 'ELRegister.pas',
+  ELDsgnEditors in 'ELDsgnEditors.pas';
+
+end.

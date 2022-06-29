@@ -1,0 +1,74 @@
+package PMemo6Pack6;
+
+{$R *.res}
+{$R 'pmemoreg.dcr'}
+{$R 'ExtHilitReg.dcr'}
+{$R 'HtmlHilitReg.dcr'}
+{$R 'NbHilit.dcr'}
+{$R 'OOPReg.dcr'}
+{$R 'PlusGutter.dcr'}
+{$R 'PlusToFormat.dcr'}
+{$R 'pmprint.dcr'}
+{$R 'URLHighlight.dcr'}
+{$R 'CPPReg.dcr'}
+{$R 'SQLHilitReg.dcr'}
+{$R 'pmCollapseHandler.dcr'}
+{$R 'EmailHilitReg.dcr'}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS OFF}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'PlusMemo and accessories v6'}
+{$DESIGNONLY}
+{$IMPLICITBUILD OFF}
+
+requires
+  rtl,
+  designide;
+
+contains
+  pmemoreg in 'pmemoreg.pas',
+  Plusmemo in 'Plusmemo.pas',
+  PMSupport in 'PMSupport.pas',
+  ExtHilit in 'ExtHilit.pas',
+  ExtHilitReg in 'ExtHilitReg.pas',
+  HtmlHighlight in 'HtmlHighlight.pas',
+  HtmlHilitReg in 'HtmlHilitReg.pas',
+  NbHilit in 'NbHilit.pas',
+  OOPHilit in 'OOPHilit.pas',
+  OOPReg in 'OOPReg.pas',
+  PlusGutter in 'PlusGutter.pas',
+  PlusKeys in 'PlusKeys.pas' {DlgExtKeysEditor},
+  PlusLns in 'PlusLns.pas' {FrmPlusLines},
+  PlusToFormat in 'PlusToFormat.pas',
+  pmpprev in 'pmpprev.pas' {FrmPMPrintPreview},
+  pmprint in 'pmprint.pas',
+  URLHighlight in 'URLHighlight.pas',
+  CPPHilit in 'CPPHilit.pas',
+  CPPReg in 'CPPReg.pas',
+  SQLHilit in 'SQLHilit.pas',
+  SQLHilitReg in 'SQLHilitReg.pas',
+  pmCollapseHandler in 'pmCollapseHandler.pas',
+  pmActions in 'pmActions.pas',
+  EMailHilit in 'EmailHilit.pas',
+  EmailHilitReg in 'EmailHilitReg.pas';
+
+end.
+

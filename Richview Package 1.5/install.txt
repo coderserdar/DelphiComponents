@@ -1,0 +1,20 @@
+If you have another version of RichView Package installed,
+you need to delete (archive) it.
+If older version remains in paths where Delphi
+searches for components, you will not be able to compile/run
+your applications with RichView properly.
+
+INSTALLING COMPONENTS
+  Components for Delphi 6 are in D6 directory.
+  Open RVPkgD6.dpk (menu "File|Open") and click "Install" button 
+in the package window. 
+  If your version of Delphi supports database components, 
+repeat the steps above with RVDBPkgD6.dpk.
+INSTALLING HELP
+Choose menu "Help|Customize...". You'll see Borland OpenHelp Window.
+Click the tab "Contents", then "Add files" button and add "RichView.cnt".
+Click the tab "Index", then "Add files" button and add "RichView.hlp".
+Click the tab "Link", then "Add files" button and add "RichView.hlp".
+Click OpenHelp menu "File|Save project".
+
+

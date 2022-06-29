@@ -1,0 +1,68 @@
+package RVPkgD6;
+
+{$R *.res}
+{$R 'RVReg.dcr'}
+{$ALIGN 8}
+{$ASSERTIONS OFF}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS OFF}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'RichView'}
+{$DESIGNONLY}
+{$IMPLICITBUILD OFF}
+
+requires
+  designide,
+  vcljpg,
+  vcl;
+
+contains
+  RVStyle in 'RVStyle.pas',
+  DLines in 'DLines.pas',
+  PtblRV in 'PtblRV.pas',
+  RichView in 'RichView.pas',
+  RVEdit in 'RVEdit.pas',
+  RVPP in 'RVPP.pas',
+  RVScroll in 'RVScroll.pas',
+  RVSEdit in 'RVSEdit.pas',
+  CRVPP in 'CRVPP.pas',
+  CRVData in 'CRVData.pas',
+  CRVFData in 'CRVFData.pas',
+  PtRVData in 'PtRVData.pas',
+  RVBack in 'RVBack.pas',
+  RVERVData in 'RVERVData.pas',
+  RVFMisc in 'RVFMisc.pas',
+  RVFuncs in 'RVFuncs.pas',
+  RVItem in 'RVItem.pas',
+  RVReg in 'RVReg.pas',
+  RVRVData in 'RVRVData.pas',
+  RVUndo in 'RVUndo.pas',
+  RVUni in 'RVUni.pas',
+  RVClasses in 'RVClasses.pas',
+  RVTable in 'RVTable.pas',
+  RVCodePages in 'RVCodePages.pas',
+  RVDataList in 'RVDataList.pas',
+  RVTInplace in 'RVTInplace.pas',
+  RVCtrlData in 'RVCtrlData.pas',
+  RVStr in 'RVStr.pas',
+  RVRTFErr in 'RVRTFErr.pas',
+  RVRTFProps in 'RVRTFProps.pas',
+  RVRTF in 'RVRTF.pas';
+
+end.
