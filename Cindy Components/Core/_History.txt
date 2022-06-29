@@ -1,0 +1,358 @@
+Cindy components V8.21.0
+
+2017-10-10 - VCL.cyWinUtils.pas - Corrected function FileTimeToDateTime()
+2017-10-10 - VCL.cyWinUtils.pas - Added function DateTimeToFileTime()
+2017-09-27 - cyStrUtils.pas - Added function String_SetLine()
+2017-08-11 - vcl.cyGraphics.pas - Added functions RectWidth and RectHeight 
+
+
+Cindy components V8.20.0
+
+2017-07-01 - Added function String_LoadFromFile()
+
+2017-05-26 - VCL.cyObjUtils.pas - Added functions TreeNodeMoveBeforeSibling, TreeNodeMoveAfterSibling
+
+2017-05-17 - VCL.cySysUtils.pas - Added funtion Textfile_Add()
+
+2017-05-08 - VCL.cyWinUtils.pas - Added function GetFileVersionInfo(const FileName: string): TFileVersionInfo;
+
+
+Cindy components V8.12.0
+
+2017-04-12 - VCL.cyWinUtils.pas - Added function GetDefaultPrinter: string;
+2017-04-12 - VCL.cyWinUtils.pas - Added function ShellPinToTaskbar() but seems not working 
+
+
+Cindy components V8.11.0
+
+2017-04-11 - cyCompilerDefines.inc - Avoid new delphi versions compilation problems with the use of {$IF CompilerVersion >= 30}
+2017-04-11 - cyCompilerDefines.inc - Use of directive "CompilerVersion" and "UNICODE" instead of "VER" 
+2017-04-11 - cyCompilerDefines.inc - Added Delphi 10.2 Tokyo support!
+2017-04-11 - VCL.cyWinUtils.pas - Corrected Delphi XE compilation error 
+
+
+Cindy components V8.10.0
+
+2017-03-27 - Corrected package name on pkCindyDBCore*.dpk file.
+2017-02-28 - cyStrUtils.pas - Added function String_GetLinesFromRange()
+2017-02-28 - cyStrUtils.pas - Added function String_SaveToFile()
+2017-02-22 cyStrUtils.pas - Added procedure String_RemoveChars(var aStr: String; const RemoveChars: string);
+
+
+Cindy components V8.04.0
+
+2017-02-03 - VCL.cyObjUtils.pas - Added function RichEditStringLocate(aRichEdit: TRichEdit; const aText: string; const Options: TSearchTypes; const FromPos: Integer = 0; const SearchLength: Integer = 0; const AutoSelectText: Boolean = true): Integer;
+2017-01-23 - Added units VCL.cyDmmCanvas, VCL.cyObjUtils, VCL.cySysUtils and VCL.cyWinUtils to pkcindycore*.dpk package
+
+
+Cindy components V8.03.1
+
+2017-01-23 - Corrected requires pkCindyCore package to delphi associated package 
+2017-01-23 - Replaced on all units {$IFDEF DELPHI2009_OR_ABOVE} by {$IFDEF UNICODE}
+
+
+Cindy components V8.03.0
+
+2016-12-23 - Added Result to function Open(aClientDataset: TClientDataset; const Filename: String = ''; const SavedFormat: TDataPacketFormat = dfBinary): TClientDatasetOpenMode;
+2016-12-16 - cyStrUtils.pas - Added function String_MatchFilter(aStr, aFilter: String; const StrFilterOptions: TStrFilterOptions = [strfoCaseInsensitive, strfoPartialKeyRelativePos, strfoAccentsInsensitive]; const SomethingChar: Char = '%'): Boolean;
+
+
+Cindy components V8.02.0
+
+2016-12-09 - vcl.cyWinUtils.pas - Modified ShellExecuteAsModal() and added ShellOpenFileAsModal()
+
+Cindy components V8.01.0
+2016-11-14 - cyDB.pas - Added function GetFilter_FromKeywordsInput(const OnField, aKeywordsInput: String): string;
+2016-11-11 Added function ValidFieldForClientDatasetIndex(Field: TField): Boolean
+
+Cindy components V8.00.0
+
+Lot of improvments !
+
+2016-11-02 - cyStrUtils.pas - Added function String_MatchKeywordsInput()
+2016-10-04 - Created pkCindyDBCore*.dpk run-time package
+2016-09-15 - cyStrUtils.pas - Corrected String_Copy() when copying from right
+
+Cindy components V7.25.0
+2016-07-09 - cyStrUtils.pas - Added String_substFast() for case sensitive replacement! 
+-> 4 times faster than StringReplace() on small strings (about 20 chars)
+-> 2 times faster than StringReplace() on medium strings (about 200 chars)
+-> Relatively same speed on big strings (tested with string with 50.000 chars)
+Using String_substFast() to remove chars is even twice more faster than previous stats! 
+
+Cindy components V7.24.0
+2016-07-28 - cyStrUtils.pas - Corrected function MaskPartsCount()
+2016-07-28 - cyStrUtils.pas - Added function MaskCharsCount(aMask: string; var RsltOptionalCount: Integer): Integer;
+2016-07-26 - cyDB.pas - Added procedure Open(aClientDataset: TClientDataset; const Filename: String = ''; const SavedFormat: TDataPacketFormat = dfBinary) that can load data from file even if you have added new fields/modify fields size in the meantime. 
+
+Cindy components V7.23
+2016-06-29 - cyStrUtils.pas - Added optional char handling with % on mask functions below:  
+2016-06-29 - cyStrUtils.pas - function GetNextMaskPart(var InOutMask, RsltMaskPartParamStr: string; var RsltMaskPartType: TMaskPartType; var RsltOptional: Boolean): Boolean;
+2016-06-29 - cyStrUtils.pas - function IsValidMask(const aMask: String): Boolean;
+2016-06-29 - cyStrUtils.pas - function MaskPartCount(aMask: string; var RsltOptionalCount: Integer): Integer;
+2016-06-29 - cyStrUtils.pas - function DetectPartialMatchMask(var InOutMask: string; const aString: string): Boolean;
+2016-06-29 - cyStrUtils.pas - function MaskPartTypeCompatible(const aMaskPartType, withMaskPartType: TMaskPartType): Boolean;
+2016-06-29 - cyStrUtils.pas - function IsMatchMask(var aMask: string; var aString: string): Boolean;
+2016-06-29 - cyStrUtils.pas - function IsMatchMask2(const aMask: string; const aString: string): Boolean;
+2016-06-29 - cyStrUtils.pas - function MergeMaskToMatchedString(var InOutMask: string; aString: string): String;
+2016-06-29 - cyStrUtils.pas - function MergeMaskToMatchedString2(const aMask: string; const aString: string): String;
+
+2016-06-28 - vcl.cySysUtils.pas - Added function TextToRichText(const aText: String): string (aText can be rtf or not rtf text)
+
+Cindy components V7.21
+2016-04-29 - cyStrUtils.pas - Added function String_MatchInput(aStr, aInput: String; const StrLocateOptions: TStrLocateOptions): Boolean;
+2016-04-29 - cyStrUtils.pas - Added strloPartialKeyRelativePos to type TStrLocateOptions
+2016-04-29 - cyStrUtils.pas - Added missing function String_RemoveAccentsFromChars to D7 to D2007 !
+2016-04-29 - cyStrUtils.pas - SubString_Locate() with strloAccentsInsensitive feature !
+2016-04-29 - cyStrUtils.pas - Added strloAccentsInsensitive to type TStrLocateOption
+2016-04-26 - cyDB.pas - Fixed error on ReadOnly fields on function CloneFieldValues
+
+Cindy components V7.20
+2016-04-15 - VCL.cyClasses.pas - Added property TcyRunTimeResize.ParentControl: Boolean
+2016-04-15 - VCL.cyClasses.pas - Modified TcyRunTimeDesign in order to handle control's parent if Control.Align = alClient!
+
+Cindy components V7.11
+24/03/2016 - cyStrUtils.pas - Added function String_ToFloat(const Str: String; var RsltValue: Extended): Boolean;
+24/03/2016 - cyStrUtils.pas - function String_ToFloat(const Str: String; const IfCantConvert: Extended = 0): Extended;
+05/11/2013 - vcl.cyGraphics.pas - added procedure DrawInnerBorders(Canvas: TCanvas; var Rect: TRect; const TopColor, BottomColor: TColor);
+09/03/2016 - cyStrUtils.pas - Added function String_RemoveAccentsFromChars()
+08/03/2016 - vcl.cyWinUtils.pas - Added function IsCharKey(vkey: Word): Boolean
+03/03/2016 - vcl.cySysUtils.pas - Corrected small bug on MergeMaskToMatchedString2()
+
+Cindy components V7.10
+16/02/2016 - vcl.cyWinUtils.pas - Added function GetVolumeSerialNumber(const Drive: PChar): Widestring;
+10/02/2016 - vcl.cySysUtils.pas - Added function RichTextToText(rtfText: String): string;
+29/01/2016 - cyStrUtils.pas - Added functions String_GetLineCount() and String_GetLine(const Str: String; const Line: Word; const ReturnIfNotExists: string): String;
+21/01/2016 - vcl.cyWinUtils.pas - Added function GetNextSameDirectoryName(fromDirectoryName: String): String;
+21/01/2016 - vcl.cyWinUtils.pas - Added function GetAvailableDirectory(DesiredDirectoryName: String): String;
+30/12/2015 - vcl.cyWinUtils.pas - Added function IsFileExtension()
+
+Cindy components V7.05
+11/12/2015 - vcl.cyWinUtils.pas - Added function ChangeFileName()
+03/12/2015 - cyDB.pas - Added new unit with database functions
+
+Cindy components V7.04
+27/11/2015 - vcl.cyImage.pas - Added ConvertBmpFileToJpegFile(const aBmpFile, aJpegFile: String; const QualityPercent: Word);
+27/11/2015 - vcl.cyImage.pas - Added ConvertJpegFileToBmpFile(const aJpegFile, aBmpFile: String) and ConvertBmpFileToJpegFile(const aBmpFile, aJpegFile: String; QualityPercent: Word)
+
+24/11/2015 - cyStrUtils.pas - Added function DetectPartialMatchMask(var aMask: string; const aString: string): Boolean
+17/11/2015 - cyStrUtils.pas - Added function MaskPartCount(aMask: string): Integer
+
+Cindy components V7.03
+27/10/2015 - cyStrUtils.pas - Added SeparationChar parameter to function StringToCsvCell(aStr: String; const SeparationChar: Char = ';'): String;
+15/10/2015 - cyStrUtils.pas - Added GetNextMaskPart(), IsValidMask(), IsMatchMask(), IsMatchMask2(), MergeMaskToMatchedString() functions
+
+Cindy components V7.00
+13/09/2015 - Added support for Delphi 10
+12/08/2015 - cyStrUtils.pas - Added isValidWebSiteChar(), isValidWebMailChar(), isValidwebSite() and isValidWebMail() from cyDERUtils.pas
+
+Cindy components V6.85
+22/07/2015 - VCL.cyWinUtils.pas - Added function ExtractFileSubDirs()
+
+Cindy components V6.83
+01/06/2015 - VCL.cyClasses.pas - Replaced TImageList object by TDragImageList on components properties. 
+
+Cindy components V6.82
+01/06/2015 - VCL.cyWinUtils.pas - FileIsOpen() doesn' t returns true anymore if file is readOnly 
+
+Cindy components V6.81
+13/05/2015 - cyStrUtils.pas - Added new String_Subst() with start and end position in string 
+05/05/2015 - VCL.cyWinUtils.pas - Added function ShellDelDir()
+05/05/2015 - VCL.cyWinUtils.pas - function ShellRenameDir() has now result 
+
+Cindy components V6.80
+22/04/2015 - Added support for Delphi XE8
+15/04/2015 - Added cyCryptUtils.pas with functions VERNAM_CRYPT, VERNAM_CRYPT_WITH_KEY, VERNAM_DECRYPT, 
+		VERNAM_CRYPT_FILE, VERNAM_CRYPT_FILE_WITH_KEY, VERNAM_DECRYPT_FILE
+
+Cindy components V6.78
+22/12/2014 - cyStrUtils.pas - Added procedure GetCsvCellsContent(const fromCsvLine: String; Values: TStrings);
+
+Cindy components V6.76
+23/10/2014 - VCL.cyWinUtils.pas - Added GetNextSameFilename (also used on function GetAvailableFilename())
+
+Cindy components V6.75
+24/09/2014 - Added support for Delphi XE7
+06/08/2014 - Added functions GetWindowsComputerName, GetWindowsComputerIP, MacAddressToString and StrToMacAddress
+
+  function IPToMacAddress(AdresseIP: string): string;
+01/08/2014 - VCL.cyImage.pas - Added procedure BitmapCrop()
+24/07/2014 - VCL.cyImage.pas - Modified function BitmapResize() with option to keep current palette color
+23/07/2014 - VCL.cyImage.pas - Corrected function BitmapRotate()
+
+Cindy components V6.72
+20/05/2014 - VCL.cyWinUtils.pas - Added FindWindowsComputer() function
+
+Cindy components V6.70
+30/04/2014 - Added support for Delphi XE6
+11/03/2014 - VCL.cyWinUtils.pas - Added ShellDelDir(), ChangeSystemDate(), SleepMicroS(), GetWindowsComputerName(), GetWindowsComputerIP() functions 
+05/03/2014 - VCL.cyWinUtils.pas - Added ShellUnzipFile() function 
+
+Cindy components V6.52
+27/12/2013 - VCL.cyWinUtils.pas - Corrected GetAvailableFilename() function 
+
+Cindy components V6.51
+27/11/2013 - VCL.cyWinUtils.pas - Modified ShellExecuteAsModal in order to accept empty ApplicationName parameter
+11/11/2013 - VCL.cyWinUtils.pas - Added GetAvailableFilename() function 
+
+Cindy components V6.50
+05/11/2013 - cyGraphics.pas - Finally added angle gradient drawing feature!
+05/11/2013 - cyStrUtils.pas - Modified SubString_get() in order to retrieve a string instead of ShortString
+31/10/2013 - cyDBX.pas - SQLGetStringExpr() : Added support for MS SQL server
+
+Cindy components V6.03
+02/10/2013 - Added support for Delphi XE5
+
+Cindy components V6.0
+12/04/2013 - Windows 64 bits support platform
+11/04/2013 - Prefixed with "VCL." all windows platform units
+10/04/2013 - Renamed ShellExecuteAsAdmin() to ShellExecuteExAsAdmin()
+10/04/2013 - Added ShellExecuteEx() function 
+20/03/2013 - cyDBX.pas - cross-platform ready
+20/03/2013 - cyStrUtils.pas - cross-platform ready
+20/03/2013 - cyDateUtils.pas - cross-platform ready
+
+Cindy components V5.14
+15/02/2013 - Now may compile on Delphi XE2/XE3
+08/02/2013 - cyDBX.pas - Added TQuery.ParamCheck := false in some functions 
+11/01/2013 - cyObjUtils.pas - function GetControlBitmap now paint TRichEdit controls
+11/01/2013 - cyObjUtils.pas - Added function GetRichEditBitmap()
+
+Cindy components V5.13
+14/12/2012 - cyDBX.pas - Added function SQLReturnFieldValueAsInteger()
+
+Cindy components V5.11
+15/11/2012 - cyDBX.pas - Added function SQLReturnFieldValueAsString() 
+13/11/2012 - cyDBX.pas - Added function SQLGetPrimaryKey()
+13/11/2012 - cyDBX.pas - Renamed SQLConnection_GetLastInsertID() to SQLExecute_GetLastInsertID()
+13/11/2012 - cyDBX.pas - Created function BackQuotedStr() 
+12/11/2012 - cyDBX.pas - Added functions GetInternalRecordLockId() and IsFreeLockId() 
+08/11/2012 - cyDBX.pas - Added SQLExecuteInsert() function that retrieve PrimaryKey value of inserted record
+08/11/2012 - cyDBX.pas - Added const OnlyFirstFound: Boolean parameter on function ExtractSQLTableNames()
+
+Cindy components V5.10.2
+06/11/2012 - cyDBX.pas - Now i use FormatSettings instead of deprecated global variables like DecimalSeparator
+
+Cindy components V5.10
+30/10/2012 - cyObjUtils.pas - Added RichEditSetStr() to set formated rtf text to a RichEdit
+30/10/2012 - cyDBX.pas - SQLExecute() and SQLReturnFieldValue can now accept until 8 sql lines on parameters
+24/10/2012 - cyStrUtils - Improved speed on String_SubstCar() and String_Subst(), String_Subst() now 2x faster than SysUtils.StringReplace()
+19/10/2012 - cyWinUtils.pas - Added unit
+19/10/2012 - cySysUtils.pas - Added unit
+
+Cindy components V5.09.2
+18/10/2012 - cyDBX.pas - Corrected compilation problems with old Delphi versions
+
+Cindy components V5.09
+04/03/2012 - cyStrUtils.pas - Added function SearchPos(SubStr: String; Str: String; MaxErrors: Integer): Integer;
+03/10/2012 - cyDBX.pas - Modified ClientDS_GetProvider() function to work if ProviderName = '' (like on TSimpleDataset)
+
+
+Cindy components V5.07
+13/08/2012 - cyDBX.pas - Added ExtractSQLTableNames(), ExtractSQLFields() and ExtractSQLOrderByFields() functions 
+13/08/2012 - cyDBX.pas - Removed SQLGetBooleanExpr()and SQLGetBooleanParam() because it depends if field is signed or not
+
+Cindy components V5.05
+13/07/2012 - cyGraphics.pas - Created TLineCoord type 
+13/07/2012 - cyGraphics.pas - Added Result: TLineCoord and OnlyCalcFoldLine: Boolean parameter to DrawLeftTurnPageEffect() and DrawRightTurnPageEffect()
+
+Cindy components V5.04
+12/07/2012 - cyGraphics.pas - Added DrawLeftTurnPageEffect() and DrawRightTurnPageEffect() functions
+12/07/2012 - cyGraphics.pas - Added GetProportionalRect() function 
+12/07/2012 - cyGraphics.pas - Added DrawCanvas() function using Windows GDI API
+12/07/2012 - cyGraphics.pas - Use DrawCanvas() on DrawGraphic()function instead of using TCanvas.StretchDraw() if it is a bitmap
+
+Cindy components V5.0
+31/06/2012 - cyObjUtils - Added unit 
+
+Cindy components V4.51
+25/06/2012 - cyCtrlUtils.pas - Added unit 
+
+Cindy components V4.50
+22/06/2012 - cyGraphics.pas - Added function cyDrawCheckBox()
+22/06/2012 - cyGraphics.pas - Added function cyDrawButton()
+22/06/2012 - cyGraphics.pas - Added function cyDrawButtonFace()
+22/06/2012 - cyGraphics.pas - Added function cyDrawSingleLineText()
+21/06/2012 - cyGraphics.pas - Added overloaded function cyFrame()
+21/06/2012 - cyGraphics.pas - Added function DrawMosaicPortion()
+21/06/2012 - cyGraphics.pas - Added function DrawRectangleInside()
+21/06/2012 - cyGraphics.pas - Added function DrawCanvas()
+21/06/2012 - cyGraphics.pas - Added overloaded function DrawGraphic() with source Rect parameter and transparent color 
+21/06/2012 - cyGraphics.pas - Added function ColorSetPercentPale()
+21/06/2012 - cyGraphics.pas - Added function ColorSetPercentContrast()
+21/06/2012 - cyGraphics.pas - Added function ColorModify()
+21/06/2012 - cyGraphics.pas - Renamed ExposeToLight() to ColorSetPercentBrightness()
+19/06/2012 - cyImage.pas - Created unit with some image processing functions 
+19/06/2012 - cyBDE.pas - Created unit with some BDE functions 
+15/06/2012 - cyBDX.pas - Renamed cDbxErrorServerEdit constant to cDbxErrorServerModify
+11/06/2012 - cyBDX.pas - Added SQLGetBooleanExpr() and SQLGetBooleanParam() functions
+11/06/2012 - cyBDX.pas - Changed SQLConnection_GetLastInsertID() function Result to String
+08/06/2012 - cyStrUtils.pas - Corrected bug on String_Copy() function 
+
+Cindy components V4.42
+07/02/2012 - cyStrUtils.pas - New functions : String_ExtractCars() and Char_GetType()
+
+Cindy components V4.40
+13/10/2011 - cyDBX.pas - Created SQLGetStringExpr() function
+13/10/2011 - cyDBX.pas - Created SQLGetFloatExpr() and SQLGetFloatParam() functions
+13/10/2011 - cyStrUtils.pas - Created String_Quote() function
+10/10/2011 - cyDateUtils.pas - Added IntersectPeriods() function
+10/10/2011 - Renamed MergeDateAndTime to MergeDateWithTime
+06/10/2011 - cyDateUtils.pas - Added function GetSecondsBetween(DateTime1, DateTime2: TDateTime): Int64;
+16/09/2011 - cyCompilerDefines.inc - Added support for Delphi XE2
+
+Cindy components V4.18
+24/06/2011 - cyDBX.pas - New functions added. 
+
+Cindy components V4.17
+09/05/2011 - cyDBX.pas - added unit! Clientdataset/DatasetProvider functions. 
+
+Cindy components V4.16
+27/05/2011 - cyDateUtils - Added function ShortTimeStringToTime(ShortTimeStr: String; const ShortTimeFormat: String = 'hh:nn:ss'): TDateTime;
+27/05/2011 - cyDateUtils - Added function GetMinutesBetween(DateTime1, DateTime2: TDateTime): Int64;
+27/05/2011 - cyDateUtils - Added function GetMinutesBetween(From_ShortTimeStr, To_ShortTimeStr: String; const ShortTimeFormat: String = 'hh:nn:ss'): Int64; 
+
+
+Cindy components V4.1 - *** Added code library units in \core folder ***
+25/03/2011 - Added cyStrUtils unit 
+25/03/2011 - Added cyDateUtils unit 
+15/11/2010 - cyGraphics - corrected ProgressionRGB declaration to ProgressionRGB: Array[0..2] of SmallInt in cyGradientFill() procedure. 
+
+20/09/2010
+cyCompilerDefines.inc - Added complier directive support for Delphi XE
+
+14/05/2010
+cyClasses - Created TcyShadowText.DrawShadowText() function to paint Shadow text. 
+
+13/05/2010
+cyGraphics - Renamed cyAcceleratorTextWidth funtion do CanvasAcceleratorTextWidth
+cyGraphics - Created procedure cyDrawText()
+cyGraphics - Created function DrawTextFormatFlags()
+cyGraphics - Created function cyCreateFontIndirect
+
+12/05/2010
+cyGraphics - Modified TBgStyle type to TBgStyle = (bgNone, bgNormal, bgMosaic, bgStretch, bgStretchProportional)
+cyGraphics - Created TBgPosition type: TBgPosition = (bgCentered, bgTopLeft, bgTopCenter, bgTopRight, bgCenterRight, bgBottomRight, bgBottomCenter, bgBottomLeft, bgCenterLeft)
+cyGraphics - Modified procedure DrawGraphic() to exploit TBgStyle and TBgPosition 
+cyTypes    - Created cyTypes unit and moved some code from cyGraphics to it. 
+cyClasses  - Created cyClasses unit and moved some code from cyGraphics to it. 
+
+11/05/2010
+cyGraphics - Created procedure DrawGraphic(Destination: TCanvas; DestRect: TRect; aGraphic: TGraphic; Transparent: Boolean;
+                      Style: TBgStyle; IndentX, IndentY, IntervalX, IntervalY, RepeatX, RepeatY: Integer)
+
+06/05/2010
+cyGraphics - Created RunTimeDesign class for component moving/resizing feature at run-time. 
+
+27/04/2010
+cyGraphics - Created function PictureIsTransparentAtPos(aPicture: TPicture; aPoint: TPoint): boolean;
+cyGraphics - Created function PngImageIsTransparentAtPos(aPngImage: TPngImage; aPoint: TPoint): boolean;
+
+01/04/2010
+cyGraphics - Added function SomethingToDraw: Boolean to TcyBgPicture class. 
+
+30/03/2010
+cyGraphics - Added jpeg unit to the Uses because jpeg images don' t appear at run-time. 
+
+29/09/2009
+Created "Core" directory for easy to use by all components packages. 

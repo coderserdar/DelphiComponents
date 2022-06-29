@@ -1,0 +1,163 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.72 [en] (Windows NT 5.0; U) [Netscape]">
+   <title>ALT-Tab: Microsoft feature or developer nightmare</title>
+</head>
+<body>
+&nbsp;
+<table WIDTH="100%" >
+<tr>
+<td VALIGN=CENTER><span CLASS="heading2"><b>ALT-Tab: Microsoft<sup><font face="Arial,Helvetica"><font size=-2>&reg;</font></font></sup>
+feature or developer nightmare?</b></span></td>
+
+<td><font face="Verdana"><font size=-1>Author: Ryan J. Mills</font></font>
+<br><font face="Verdana"><font size=-1>Date: May, 2, 2001</font></font>
+<br><font face="Verdana"><font size=-1>Email: rmills@oz.quest.com</font></font></td>
+</tr>
+</table>
+
+<p><font face="Verdana"><font size=-1>Since the beginning of the Windows
+operating system, at least from the release of Windows 95 (Win95) shell,
+there have been many bugs found and fixed with the different variants of
+the OS. One of the most troublesome, and in my opinion one of the most
+trying, has been the <b>ALT-Tab</b> bug.</font></font>
+<p><font face="Verdana"><font size=-1>Now if you don't know what bug I'm
+talking about, let me explain. I assume that you know about the Windows
+functionality that allows a user to use the key combination of <b>ALT-Tab</b>
+to switch between active applications running on the system. When this
+functionality is triggered you generally see a small window appear in the
+middle of your screen showing the application icons of all the applications
+that are currently running, allowing you to select the application you
+want to become active.</font></font>
+<p><font face="Verdana"><font size=-1>The <b>ALT-Tab</b> functionality
+starts out working exactly as you would expect but when you've selected
+your desired application and you release the <b>ALT-Tab</b> key combination
+your chosen application becomes active but for some reason the application
+you were in is still on top. It's no longer the active application but
+it's still on top of the application that is active!</font></font>
+<p><font face="Verdana"><font size=-1>As far as I can tell, this bug first
+appeared in the original release of Win95 or to be more specific the Win95
+Shell. The Shell is the basic environment that allows Win95, and every
+version of the operating system since then, to do its magic. The Shell
+is also responsible for how the OS looks by controlling the painting of
+controls and system objects within the environment. With the release of
+the Win95 Shell, Microsoft</font></font><b><sup><font face="Arial,Helvetica"><font size=-2>&reg;</font></font></sup></b><font face="Verdana"><font size=-1>
+(MS) created a whole new set of window styles and added other features
+to make its OS look new and very fancy.</font></font>
+<p><font face="Verdana"><font size=-1>For those of you who aren't into
+low-level API programming, a window style is how the OS decides how a window
+should look and behave. There are two different types of window styles;
+the original window styles could be found in the all versions of the Windows
+operating system before Win95. Then there are the extended window styles,
+which were first introduced with Win95 to introduce extended functionality
+to the OS. You can tell that the API constant <b>WS_EX_TOOLWINDOW</b> is
+an extended window style because of the "EX" in the name. This particular
+window style, according to the Microsoft</font></font><b><sup><font face="Arial,Helvetica"><font size=-2>&reg;</font></font></sup></b><font face="Verdana"><font size=-1>
+Win32</font></font><b><sup><font face="Arial,Helvetica"><font size=-2>&reg;</font></font></sup></b><font face="Verdana"><font size=-1>
+API help file, was created to allow programmers to:</font></font>
+<blockquote><i><font face="Verdana"><font size=-1>"Create a tool window,
+which is a window intended to be used as a floating toolbar. A tool window
+has a title bar that is shorter than a normal title bar, and the window
+title is drawn using a smaller font. A tool window does not appear in the
+task bar or in the window that appears when the user presses ALT-TAB"</font></font></i></blockquote>
+<font face="Verdana"><font size=-1>As can be seen, MS fully intended this
+window style to bypass the standard <b>ALT-Tab</b> functionality. As a
+result of this new window style we now have those lovely floating toolbar
+windows that can be found in most MS applications.</font></font>
+<p><font face="Verdana"><font size=-1>Except that if you look at the floating
+toolbar windows found in most MS applications they don't look exactly like
+the toolbar windows that most development environments like Delphi, VB
+or even MSVC/C++ create. There is a very good reason for this and that
+reason is that a window that has the extended window style <b>WS_EX_TOOLWINDOW</b>
+causes the dreaded <b>ALT-Tab</b> bug!</font></font>
+<p><font face="Verdana"><font size=-1>To see this behavior take your favorite
+development language, mine is Borland's Delphi, and create a simple application
+with two windows in it. Now each IDE will be different but in Delphi there
+is a property for all windows called BorderStyle. If you set the BorderStyle
+of the second window to be bsToolWindow or even bsSizeToolWin you can demonstrate,
+with amazing results, the dreaded
+<b>ALT-Tab</b> bug. Execute the application,
+making sure that both windows are visible at runtime. Select the second
+window, also make sure that there is a second application running in the
+background so that you can <b>ALT-Tab</b> to it, press the
+<b>ALT-Tab</b>
+keys once.</font></font>
+<p><font face="Verdana"><font size=-1>You should now be able to do stuff
+in your second application but the test program you just wrote should be
+still on top, deactivated but on top! If you return to your test program
+and make the main form of your application focused and then try the <b>ALT-Tab</b>
+sequence again you should find that your application should behave normally
+and disappear to the background.</font></font>
+<p><font face="Verdana"><font size=-1>I can hear you now, "so just don't
+use windows that have that extended window style". Well that would be the
+nice simple solution, wouldn't it? Unfortunately that pesky window style
+gets used a lot, by things like hint windows. Which brings me to my second
+problem.</font></font>
+<p><font face="Verdana"><font size=-1>Hint windows, those wonderful little
+yellow boxes that provide us with so much, yet so little, information about
+things. Most hint windows do use that extended window style just for the
+reasons mentioned in the Window API help manual. If the hint window class
+you're using is constructed properly then it won't be a problem, but if
+it's not then you can once again suffer from the <b>ALT-Tab</b> bug.</font></font>
+<p><font face="Verdana"><font size=-1>Even MS themselves suffer from it,
+although you won't be able to find it in many of their applications these
+days. What you should be looking for are the hints that get displayed on
+the MS treeview common control. This class is defined in the ComCtl32.DLL
+library and is found on every single computer running at least Win95 or
+higher.</font></font>
+<p><font face="Verdana"><font size=-1>This bug is slightly harder to trigger
+than the last one, but once you have it figured out it's amazingly simple
+and very annoying. To get this one to happen requires another application
+with at least three windows. The main window in this application is irrelevant
+but necessary. The main focus to this demonstration is the two child windows,
+both of which must have a treeview control and one of them must also be
+a stay on top window. Arrange the windows in any fashion you want, set
+focus to the child window that is not stay on top and leave the mouse pointer
+over one of the child windows. Trigger the
+<b>ALT-Tab</b> and watch the
+behavior.</font></font>
+<p><font face="Verdana"><font size=-1>Depending on where the mouse pointer
+is when the <b>ALT-Tab</b> is triggered you will notice different behavior.
+If it is over one of the treeviews on a child window then the entire application
+will stay on top. If it is on a client or non-client area of a child window
+then just that window will stay on top. If the mouse pointer is not in
+one of the child windows then the bug never surfaces.</font></font>
+<p><font face="Verdana"><font size=-1>The treeview control and a window
+with the ability to stay on top are the main triggers for this one. A colleague
+of mine was finally able to trace this one back to a hint window that the
+treeview creates. There is a property of treeviews that allows it to display
+a hint if a treenodes label is off the right hand side of the control.</font></font>
+<p><font face="Verdana"><font size=-1>Moving the mouse over the node shows
+the hint allowing the node's full caption to be displayed. If a treeview
+is created with that property shut off then this bug never appears. If
+that property is turned on after the control has been created then the
+bug also never appears. Although if the property is turned on before a
+window handle has been assigned to the control then the bug does appear
+to return.</font></font>
+<p><font face="Verdana"><font size=-1>There is a work around for this treeview
+bug that I've come up with.&nbsp; The fix itself is not that hard but it
+requires creating a new TTreeview descendant and manually implementing
+the treeview's hint control.&nbsp; Once that is done the <b>ALT-Tab</b>
+doesn't appear and the application seems to work normally.</font></font>
+<p><font face="Verdana"><font size=-1>This <b>ALT-Tab</b> bug has appeared
+in a number of commercial applications that use the <b>WS_EX_TOOLWINDOW</b>
+window style and even in applications that don't specifically use it. For
+a long time my colleagues and I couldn't figure out what was actually causing
+it. Now that it appears that we've solved the non-obvious reason for the
+bug, I felt that it was necessary for me to bring it to light and let others
+know about it. I hope this paper has actually provided you with some insight
+and knowledge that is useful.</font></font>
+<p>For those of you who are not big in to developing VCL components, I've
+built a "ToolWindow" replacement and a TreeView like descendant that has
+had it's hint window fixed.&nbsp; You can find the TrmToolWinForm and the
+TrmPathTreeView in version 1.70 of the rmControl library.&nbsp; The rmControl
+library is a freeware (with source) library of controls and components
+that I've built up over the last couple of years.&nbsp; You can find the
+library on the following sites: <a href="http://delphi.icm.edu.pl">DSP</a>,
+<a href="http://www.torry.net">Torrys</a>, <a href="http://www.delphi32.com">Delphi32</a>
+and <a href="http://codecentral.borland.com/codecentral/ccweb.exe/listing?id=15887">CodeCentral</a>.
+<br>&nbsp;
+</body>
+</html>

@@ -1,0 +1,48 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{314D313D-8FAE-4898-B331-61DB5182225E}</ProjectGuid>
+		</PropertyGroup>
+		<ItemGroup>
+			<Projects Include="djsonrt.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="djsondsgn.dproj">
+				<Dependencies/>
+			</Projects>
+		</ItemGroup>
+		<ProjectExtensions>
+			<Borland.Personality>Default.Personality.12</Borland.Personality>
+			<Borland.ProjectType/>
+			<BorlandProject>
+				<Default.Personality/>
+			</BorlandProject>
+		</ProjectExtensions>
+		<Target Name="djsonrt">
+			<MSBuild Projects="djsonrt.dproj"/>
+		</Target>
+		<Target Name="djsonrt:Clean">
+			<MSBuild Targets="Clean" Projects="djsonrt.dproj"/>
+		</Target>
+		<Target Name="djsonrt:Make">
+			<MSBuild Targets="Make" Projects="djsonrt.dproj"/>
+		</Target>
+		<Target Name="djsondsgn">
+			<MSBuild Projects="djsondsgn.dproj"/>
+		</Target>
+		<Target Name="djsondsgn:Clean">
+			<MSBuild Targets="Clean" Projects="djsondsgn.dproj"/>
+		</Target>
+		<Target Name="djsondsgn:Make">
+			<MSBuild Targets="Make" Projects="djsondsgn.dproj"/>
+		</Target>
+		<Target Name="Build">
+			<CallTarget Targets="djsonrt;djsondsgn"/>
+		</Target>
+		<Target Name="Clean">
+			<CallTarget Targets="djsonrt:Clean;djsondsgn:Clean"/>
+		</Target>
+		<Target Name="Make">
+			<CallTarget Targets="djsonrt:Make;djsondsgn:Make"/>
+		</Target>
+		<Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+	</Project>

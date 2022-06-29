@@ -1,0 +1,1026 @@
+Cindy components V8.21.0
+
+2017-10-16 - cyBaseFilterCombobox.pas - Added property FilterChangeOption
+
+
+Cindy components V8.20.0
+
+2017-07-20 - cyBaseDBLookupComboBox.pas - Added property ListValue: string
+2017-06-21 - cyModalContainer.pas - Corrected ShowModalPanel() to keep font from its parent
+2017-06-12 - Cybasefiltercombobox.pas - Corrected to keep filter editor font from its parent
+2017-06-23 - cyVirtualChart.pas - Created unit 
+2017-06-14 - cyEditDate.pas - Added properties MinValue, MaxValue: TDate
+2017-06-13 - cyDBAdvClientLookupComboBox.pas - Corrected font assignment
+2017-06-13 - cyBaseDBGrid.pas - Added function CheckAllRecords
+2017-06-13 - cyBaseDBGrid.pas - Changed default value for AutoEnlargeColumn to false
+2017-06-05 - cyBaseDBGrid.pas - Corrected error 'GRID INDEX OUT OF RANGE' if not focused and AutoEnlargeColumn is true 
+2017-05-09 - cyDBAdvClientLookupCombobox.pas - Initial list position to first item instead of last
+
+
+Cindy components V8.12.0
+
+2017-05-03 - cyIniForm.pas - Added property AutoCorrectAttributes: TAutoCorrectAttributes
+2017-04-27 - cyDBAdvGrid.pas - Now you can read dataset field values on events OnBeforeDrawIndicatorCell / OnAfterDrawIndicatorCell 
+2017-04-27 - cyDBAdvGrid.pas - Added events OnAfterDrawTitleCell, OnAfterDrawIndicatorCell, OnAfterDrawColumnCell
+2017-04-06 cyCopyfiles.pas - some optimizations
+2017-04-06 cyCopyfiles.pas - Added new function: cyCopyFileToDir()
+2017-04-05 - cyButtonedEdit.pas - Added TcyButtonedEdit component
+2017-04-05 - cyEdit.pas - Added properties ChangeDelayInterval, OnChangeDelay
+2017-03-30 cyResizer.pas - corrected function TcyResizer.GetHandlingControlItemClientRect() for TWincontrol handling
+
+
+Cindy components V8.10.0
+
+2017-03-16 - cyEditDate.pas - TextHint display don' t respect CharCase anymore !
+2017-03-16 - cyDBAdvClientLookupComboBox.pas - Removed property DropDownControlOptions from published and added EditFilterResetMode
+
+
+Cindy components V8.04.0
+
+2017-01-30 - cyBaseLabel.pas - Added property BeforePaint
+2017-01-30 - cyBitBtn.pas - Added property HotBalanceMode: TDgradBalanceMode
+2017-01-30 - cySpeedButton.pas - Added property HotBalanceMode: TDgradBalanceMode
+
+
+Cindy components V8.03.1
+
+2017-01-23 - Replaced on all unites {$IFDEF DELPHI2009_OR_ABOVE} by {$IFDEF UNICODE}
+
+
+Cindy components V8.03.0
+
+2017-01-05 - cyBaseDBGrid.pas - Added sub-property MouseChangeMode: TcyContentCheckBoxMouseChangeMode on property ContentCheckBoxOptions
+2017-01-05 - cyEditDate.pas - When autoComplete and year defined with 4 digits, you can type now aonly 2 last digits !
+
+
+Cindy components V8.02.0
+
+2016-12-15 - cyAdvDBGrid.pas - Corrected bug when sorting column if you close and reopen a clientDataset base component
+2016-12-15 - cyAdvDBGrid.pas - Corrected bug on sorting column after moved column 
+2016-12-13 - cyBaseFilterComboBox.pas - Corrected dropdown list font and dropdown list height
+2016-12-09 - cyBaseDBGrid.pas - Activated parser for fields data type ftBCD, ftFMTBcd !
+2016-11-23 - cyBaseDBClientLookupComboBox.pas - Added OnUpdateInternalDataset event
+
+Cindy components V8.01.0
+
+2016-11-11 - cyBaseDBGrid.pas - Added function DoKeyDown() to navigate DBGrid by code
+2016-11-11 - cyAdvDBGrid.pas - Added property SortColumnsOnDataset: Boolean 
+2016-11-11 - cyDBAdvClientLookupComboBox.pas - Added sort on multiple columns !
+2016-11-11 - cyAdvDBGrid.pas - Added function ApplySortedColumnsToClientDataset
+2016-11-11 - cyAdvDBGrid.pas - Renamed function ApplySingleSortedColumnToClientDataset to ApplyFirstSortedColumnToClientDataset
+2016-11-11 - cyImage.pas - Added property Color: TColor for background (Transparent must be false)
+2016-11-08 - cyIniForm.pas - Moved autosave handling from Destroy to BeforeDestruction procedure 
+2016-11-04 - cyBaseDBGrid.pas - Moved OnSetFieldContentRendering from TcyDBAdvGrid to TcyBaseDBGrid
+2016-11-04 - cyBaseDBGrid.pas - Added function GetFieldContentRendering()
+2016-11-04 - cyAdvDBGrid.pas - Use of GetFieldContentRendering() to know if we can AutoEnlargeColumn and on function AdjustColumnsToContent()
+
+
+
+Cindy components V8.00.0
+
+Minor improvments 
+
+2016-10-27 - cyBaseEdit.pas - Added properties OnNotAllowedCharPressed and OnForbiddenCharPressed 
+2016-10-24 - cyBaseDBGrid.pas - Added NavigationOptions property group
+2016-10-24 - cyBaseDBGrid.pas - Added AutoEnlargeColumn: Boolean on NavigationOptions property
+2016-10-24 - cyBaseDBGrid.pas - Added EnterKeyBehavior on NavigationOptions property
+2016-10-24 - cyBaseDBGrid.pas - Added AutoEnlargeColumn: Boolean on EditorOptions property
+2016-10-21 - cyDBEdit.pas - Added properties TextHint and TextHintFont
+2016-10-20 - cyIniform.pas - Added functions IniFile_LoadGraphic() and IniFile_SaveGraphic()
+2016-10-06 - cyAdvGridPanel.pas - Added missing property RowCollection to published statement
+2016-10-06 - cyGridPanel.pas - Added missing property RowCollection to published statement
+2016-10-06 - cyBaseDBGrid.pas - Added fcPathEllipsis, fcEndEllipsis, fcWordEllipsis on type TFieldContentRendering 
+2016-10-04 - Moved procedure ShowModalRecords(aDataSet: TDataSet; DBGridWidth, DBGridHeight: Word) from cyModalContainer.pas to cyBaseDBGrid.pas 
+2016-10-04 - Added pkCindyDBCore*.dpk run-time package to pkCindyDBCtrlsPack*.dpk requires section
+2016-09-28 - XXX.pas - Corrected small bug and added propety AppendToExistingFile: Boolean
+2016-09-19 - cyScrollBox.pas - Added OnFocusChanged event
+2016-09-19 - cyEditDate.pas - Added ApplyDateFieldDisplayFormat()
+2016-09-16 - cyDBRichEdit.pas - Clear field if no text when exit control (may only contain rft format)
+
+Cindy components V7.25.0
+2016-08-05 - cyBaseComboBox.pas - Added property DropDownControlOptions
+2016-08-05 - cyBaseDBLookupComboBox.pas - Added property DropDownControlOptions
+2016-08-05 - cyBaseContainer.pas - Added parameters RestoreLastControlSize/RestoreLastControlPosition: Boolean = false on execute() functions 
+2016-08-05 - cyBaseContainer.pas - Added property LastControlCoords: TRect 
+
+2016-08-05 - cyBaseContainer.pas - Added functions ValidLastControlCoords and ExecuteFromLastControlCoords;
+
+Cindy components V7.24.0
+2016-07-22 cyBaseDBGrid.pas - Corrected bug GetRecordPosition/GotoRecordPosition/FreeRecordPosition if no record on dataset
+2016-07-19 - cyClipboard.pas - Returning files on clipboard no more limited to 255 chars
+2016-07-14 - cyDBRichEdit.pas - Corrected error  "Dataset not in edit or insert mode" exiting component when dataset state is dsBrowse (nothing modified)
+2016-07-13 - cySearchFiles.pas - Added function FindFile(FromPath: string; const aFileMask: string; const IncludeSubDirectories: Boolean): String;
+2016-07-06 - cyFieldLink.pas - Corrected small bug when changing dataSource at run time
+
+Cindy components V7.23
+2016-07-04 - cyPageControl.pas - Optimized ThinBorder bounds rect to remove completely left/right border when Style is not tabs
+2016-07-04 - cyTabControl.pas - Optimized ThinBorder bounds rect to remove completely left/right border when Style is not tabs
+2016-05-25 - cyBaseDBGrid.pas - Added property MouseWheelAppend: Boolean default false
+2016-05-25 - cyDBAdvGrid.pas - Added property MouseWheelAppend: Boolean default false
+
+Cindy components V7.22
+2016-05-25 - cyBaseDBGrid.pas - Deactivated AfterScroll on AdjustColumnsToContent()
+2016-05-25 - cyDBAdvGrid.pas - Deactivated AfterScroll on AdjustColumnsToContent()
+2016-05-19 - cyBaseFilterComboBox.pas - Improvments and corrected bug changing Sorted property
+2016-05-12 - cyCustomImage.pas - Added MouseOptions: TcyImageMouseOptions, OffsetX and OffsetY properties
+2016-05-12 - cyDBAdvClientLookupComboBox.pas - Added locate during user filter edit change 
+2016-05-11 - cyBaseFilterComboBox.pas - Added event OnInbuiltDrawFilteredItem
+
+Cindy components V7.21.1
+2016-05-11 - cyBaseFilterComboBox.pas - Corrected visual bug setting Sorted to true. 
+2016-05-10 - cyBaseFilterComboBox.pas - Corrected bug setting ItemIndex at run-time after modifying Items list. 
+2016-05-10 - Missing OnClick call when clicking on inbuilt drop down list
+2016-05-10 - cyBaseFilterComboBox.pas - Added BeforeDropDown event
+
+Cindy components V7.21
+2016-05-05 - cyDBAdvClientLookupComboBox.pas - Handling Ctrl + home / Ctrl end / page up and page down on TCyDBClientLookupCombBox TCyDBAdvClientLookupComboBox components
+2016-04-29 - cyBaseFilterComboBox.pas - Based on TcyComboBox, TcyFilterComboBox allow user filter edit!
+2016-04-27 - cyBaseComboBox.pas - Finally, TcyComboBox with DropDownControl feature !
+2016-04-27 - cyIniform.pas - Big improvments on code + Corrected AutoSave and AutoLoad when form maximized
+
+Cindy components V7.20
+2016-04-26 - User filter improvments on TCyDBClientLookupCombBox and TCyDBAdvClientLookupCombBox components regarding foNoPartialCompare on ListFilterOptions property. 
+2016-04-26 - Small bug fixed on TCyDBClientLookupCombBox and TCyDBAdvClientLookupComboBox components
+
+Cindy components V7.20
+2016-04-22 - cyDBAdvGrid - Added new sort column glyphs
+2016-04-19 - cyDBAdvGrid - Added procedure ApplySingleSortedColumnToClientDataset;
+2016-04-15 - cyFlyingContainer.pas - Added property CloseOnTabKey: Boolean
+2016-04-15 - cyFlyingContainer.pas - Renamed property escKey to CloseOnEscKey
+2016-04-11 - cyMathParser.pas - Added OnBeforeParse event 
+2016-04-11 - cyBaseDBGrid.pas - Small ClientColumn improvments
+2016-04-08 - Added TCyDBLookupCombBox, TCyDBClientLookupComboBox and TCyDBAdvClientLookupComboBox components
+2016-04-01 - cyBaseDBGrid.pas - Corrected ClientColumnByIndex() function. Now it works, no... really!
+
+Cindy components V7.11
+23/03/2016 - cyEditDate.pas - Corrected Modified turned to false by mistake
+23/03/2016 - cyEditFloat.pas - Corrected Modified turned to false by mistake
+23/03/2016 - cyEdit.pas - Corrected isLoaded bug with controls created dynamically
+23/03/2016 - cyEditFloat.pas - Added event OnPaint, property DisplayFormat: string  and property AutoComplete: Boolean (completion with Precision)
+10/03/2016 - cyBaseTabControl.pas - Modified DrawFlatButtonBackground() and DrawButtonBackground() in order to draw tabs as configured on TcyGradient properties
+04/03/2016 - cyIniform.pas - Center the form if no attributes found
+
+Cindy components V7.10
+19/02/2016 - cyIniform.pas - Added function GetIniDirectory: String and function GetIniFileDir: String;
+09/02/2016 - cyFlowPanel.pas - Added missed AutoWrap property
+
+Cindy components V7.05
+16/12/2015 - cyDBAdvGrid.pas - Modified function AdjustColumnsToContent() for better calc column width of boolean fields
+10/12/2015 - cyDBAdvGrid.pas - Added possibility to view image format instead of (Blob) or the image: 
+set ContentFieldsRender.GraphicField to gfImageFormat (use OnSetContentFieldRendering to specify FieldContentRendering)
+09/12/2015 - cyDebug.pas - Added LogOptions and CsvLogSeparation properties
+
+Cindy components V7.04
+27/11/2015 - TcyDBAdvGrid.pas - removed image rendering at design time (because image can be bmp/jpg etc ...)
+17/11/2015 - Improved corner buttons rendering
+
+Cindy components V7.03
+02/11/2015 - Added CopyFilesToClipboard() function 
+27/10/2015 - cyDatasetCsvExport - Added property Separation: Char default ';' 
+15/10/2015 - cyMaskEdit.pas - Added component
+14/10/2015 - cySkinArea.pas - Added OnPaint event 
+
+Cindy components V7.02
+25/09/2015 - cyBaseDBGrid.pas - Corrected error attempting to show vertical scroll (yes, again). Seems working now.
+
+Cindy components V7.01
+25/09/2015 - cyBaseDBGrid.pas - Corrected error attempting to show vertical scroll bar when passing from single record to several after calling CancelRange on dataset.  
+Cindy components V7.00.1
+15/09/2015 - cyBaseButton.pas - Corrected Delphi 7 compilation error 
+15/09/2015 - cyButton.pas - Corrected Delphi 7 compilation error 
+
+Cindy components V7.00
+13/09/2015 - Added support for Delphi 10
+13/08/2015 - cyButton.pas - Added TcyButton component 
+13/08/2015 - cyBaseButton.pas - renamed TcyBaseButton to TcyBaseBitBtn and added TcyBaseButton component based on TButton 
+13/08/2015 - cyBaseContainer.pas - Some optimization, better rendering (drop shadow effect) 
+13/08/2015 - cyBaseContainer.pas - Added property DontActivate: Boolean 
+12/08/2015 - cyEditWebsite.pas - Added TcyEditWebsite component
+12/08/2015 - cyEditMail.pas - Added TcyEditMail component
+12/08/2015 - cyEditFilename.pas - Added TcyEditFilename component
+12/08/2015 - cyEdit.pas - Added ForbiddenChars property
+07/08/2015 - cyBaseDBGrid.pas - Added themed checkBox drawing on DBGrids!
+05/08/2015 - cyRadioGroup.pas - Corrected type to TcyRadioGroup instead of tcyRadioGroup that is not the same on IDE registration and naming!
+05/08/2015 - cyEdit.pas - Added BreakLineReplace property: allow replacing #13#10 (return line) by another string
+
+Cindy components V6.85
+24/07/2015 - cyBaseDBGrid.pas - Added OnTitleDblClick, OnCellDblClick to DBGrid base component
+24/07/2015 - cyDBAdvGrid.pas - Added TcyCustomDBAdvGrid.AdjustColumnsToContent() function 
+22/07/2015 - cyBaseDBGrid.pas - GetGraphicClass() detached from TcyBaseDBGrid class
+17/07/2015 - cyBaseSpeedButton.pas - Added FlatDisabledStyle property to have new render on TcySpeedButton 
+02/07/2015 - cyCustomImage.pas - Optimized TcyImage rendering when Stretched
+
+Cindy components V6.84
+02/07/2015 - cyBaseSpeedButton.pas - Added FlatNormalStyle property to have new render on TcySpeedButton and TcyAdvSpeedButton
+30/06/2015 - cyBaseDBGrid.pas - Corrected AdjustColumnsToContent with TBlobField fields
+
+Cindy components V6.83
+24/06/2015 - Replaced TImageList object by TDragImageList on components properties. 
+04/06/2015 - cySearchfiles.pas - Added properties DirectoryInclude, DirectoryExclude
+04/06/2015 - cyCopyfiles.pas - Added properties DirectoryInclude, DirectoryExclude
+04/06/2015 - cyCustomGauge.pas - Optimized SetPosition function for better performance
+
+Cindy components V6.82
+02/06/2015 - Added TcyRadioGroup component with Key events! 
+25/05/2015 - Added TcyDBRichEdit component! Same as TDBRichEdit but without "Dataset not in edit or insert mode" on exit if ReadOnly is true ...
+
+Cindy components V6.81
+14/05/2015 - cyBaseDBGrid.pas - Corrected AdjustColumnsToContent() when Memo/graphic/blob fields in DBGrid
+12/05/2015 - cyEditFloat.pas - Corrected bug when regional decimal separator is not ","
+
+Cindy components V6.80
+22/04/2015 - Added support for Delphi XE8
+22/04/2015 - vcl.cyClasses.pas - Added TcyIntegerList class
+25/03/2015 - cyBaseDBGrid.pas - Added bfCheckBoxWithText to TBooleanFieldDisplay type 
+
+Cindy components V6.79
+04/02/2015 - cyMathParser.pas - Corrected when expression is "2 3" -> solved to value 23
+19/01/2015 - cyDebug.pas - Added function AddToLog() and property Logfile 
+
+Cindy components V6.78
+19/12/2014 - cyDatasetCsvExport.pas - Added TcyDatasetCsvExport component 
+
+Cindy components V6.77
+04/12/2014 - cyBaseDBGrid.pas - Corrected Embarcadero's Vertical scrollbar bug that disappear in some cases
+03/12/2014 - cyFieldLink.pas - Only do something if field value is really different and not just when editing record etc ...
+03/12/2014 - cyFieldLink.pas - OnCustomChangeValue wasn't called if Component and ComponentProperty assigned 
+07/11/2014 - cyBaseDBGrid.pas - Corrected function CalcColumnsWidth in order to ignore non visible columns
+06/11/2014 - cyBaseDBGrid.pas - Corrected layout bug when playing with CustomLayoutOptions properties calling Scroll(0) 
+
+Cindy components V6.75
+24/09/2014 - Added support for Delphi XE7
+16/09/2014 - cySpeedButton.pas - Corrected bug rendering with metro style when hot
+12/08/2014 - cyCheckBox.pas - Added TcyCheckBox component with OnClick (responding to user changes) / OnChange events 
+07/08/2014 - cyColorGrid.pas - Added new functions and reviewed all code
+31/07/2014 - cyScrollbox.pas - Added TcyScrollBox component with access to Canvas and OnPaint event 
+29/07/2014 - cyEditInteger.pas - Corrected MinValue/MaxValue handling
+29/07/2014 - cyEditFloat.pas - Corrected MinValue/MaxValue handling
+28/07/2014 - cyCustomImage.pas - Added TcyImage component with zoom and access to control Canvas
+17/07/2014 - Added OnDragDropFiles for TcyPanel, TcyAdvPanel, TcyGridPanel and TcyFlowPanel components
+17/07/2014 - cyBaseStaticText.pas - Added OnDragDropFiles for TcyStaticText and TcyAdvStaticText components
+17/07/2014 - cyBaseButton.pas - Added OnDragDropFiles for TcyBitBtn and TcyAdvButton components
+04/07/2014 - cyResizer.pas - Added events OnGetHandlingMouseInformation and OnGetHandlingKeyInformation to developpers who need to change default behavior
+
+Cindy components V6.73
+29/05/2014 - cyNavPanel.pas - New component: TcyNavPanel
+26/05/2014 - cyBaseDBGrid.pas - Corrected bug refreshing DBGrid after clicking selection checkbox
+21/05/2014 - cyBaseDBGrid.pas - Modified AdjustColumnsToContent() in order to limit rows for big datasets. Also added font size handling and max column size. 
+
+Cindy components V6.71
+05/05/2014 - cyEditFloat.pas - Added Precision property
+02/05/2014 - Corrected memory leak on TcyGradient when Orientation set to dgdAngle
+
+Cindy components V6.70
+30/04/2014 - Added support for Delphi XE6
+29/04/2014 - Solved some memory leaks
+15/04/2014 - cySplitter.pas - TcySplitter now herits from TCustomControl that allows child components
+15/04/2014 - cyColorMatrix.pas - Changed LoadFromBitmap to LoadFromGraphic
+26/03/2014 - cySpeedButton.pas - Developper can now set DrawBackground to true on BeforePaint event despite of button is set to Transparent 
+26/03/2014 - cyBaseSpeedButton.pas - always invalidate on Mouse enter/Mouse leave because developper can now change DrawBackground trigger on BeforePaint
+
+Cindy components V6.60
+19/02/2014 - cyBaseButton.pas - Added property DisabledColor: TColor
+19/02/2014 - cyBaseSpeedButton.pas - Added property DisabledColor: TColor
+19/02/2014 - cyBaseButton.pas - Added property DisabledGlyphDrawing mode
+19/02/2014 - cyBaseSpeedButton.pas - Added property DisabledGlyphDrawing mode 
+19/02/2014 - cySpeedButton.pas - Added public properties DefaultMetroFrameColor: TColor and DefaultMetroFrameWidth: Word 
+
+Cindy components V6.53
+13/01/2014 - cyCopyfiles.pas - Added FileAge() function 
+
+Cindy components V6.50
+05/11/2013 - cyAdvFlowPanel.pas - Added new component: TcyAdvFlowPanel
+05/11/2013 - cyAdvGridPanel.pas - Added new component: TcyAdvGridPanel
+05/11/2013 - cyFlowPanel.pas - Added new component: TcyFlowPanel
+05/11/2013 - cyGridPanel.pas - Added new component: TcyGridPanel
+01/11/2013 - cyEditDate.pas - Added new component: TcyEditDate
+01/11/2013 - cyEditTime.pas - Added new component: TcyEditTime
+31/10/2013 - cyEditInteger.pas - Added new component: TcyEditInteger
+31/10/2013 - cyEditFloat.pas - Added new component: TcyEditFloat
+30/10/2013 - cyBaseDBGrid.pas - Improvments and minor bug fixed. 
+30/10/2013 - cyBaseDBGrid.pas - Some improvments. 
+28/10/2013 - cyEdit.pas - Added new component: TcyEdit
+
+Cindy components V6.04
+09/10/2013 - cyBaseDBGrid.pas - Row dragging only starts when moving cursor to another row. 
+09/10/2013 - cyResizer.pas - Corrected memory leak and draw fix. 
+
+Cindy components V6.03
+02/10/2013 - Added support for Delphi XE5
+
+Cindy components V6.02
+24/07/2013 - cyBaseDBGrid.pas - Improved AdjustColumnsToContent() function 
+
+Cindy components V6.01.2
+05/07/2013 - cyBaseDBGrid.pas - Corrected scrollbar bug with when ClientColumn is enabled
+
+Cindy components V6.01.1
+04/07/2013 - cyBaseDBGrid.pas - Corrected scrollbar bug
+
+Cindy components V6.01
+03/07/2013 - cyResizer.pas - Corrected OnControlListInsert not always called 
+03/07/2013 - cyResizer.pas - Corrected bug (thanks Andreas) on OnControlListInsert "Control" parameter 
+02/07/2013 - cyRuntimeResize.pas - Added removing control notification
+26/06/2013 - cyBaseLed.pas - Added ShowHint to published properties
+13/06/2013 - cyTabControl.pas - Added property Values: TStrings 
+13/06/2013 - cyPageControl.pas - Added property Values: TStrings 
+22/05/2013 - cyBaseDBGrid.pas - Better handling Scrollbars view and corrected TDBGrid vertical scrollbar disappear
+15/05/2013 - cyBaseDBGrid.pas - Added AdjustColumnsToContent() function 
+
+Cindy components V6.00
+12/04/2013 - Windows 64 bits support platform
+
+Cindy components V5.14.1
+14/03/2013 - cyPageControl.pas - Corrected bug painting tabs when some not visible
+13/03/2013 - handled Images on TcyTabControl and TcyPageControl
+13/03/2013 - Added properties WordWrap, Margin, Spacing and Layout on TcyTabControl and TcyPageControl
+
+Cindy components V5.14
+15/02/2013 - Now may compile on Delphi XE2/XE3
+15/02/2013 - Removed some ..\Core\ units from package
+01/02/2013 - cyBaseDBGrid.pas - Again, changed ScrollBars visibility handling 
+24/01/2013 - cyBitBtn.pas - Added BeforePaint() to handle what will be painted 
+24/01/2013 - cySpeedButton.pas - Added BeforePaint() to handle what will be painted 
+21/01/2013 - cyPageControl.pas - minor bug fixed on painting tabs caption
+
+Cindy components V5.13
+21/12/2012 - cyAdvStaticText.pas - Created unit.
+20/12/2012 - cyBaseDBGrid.pas - Added OnScrollbarMouseDown and OnScrollbarMouseUp event
+20/12/2012 - cyBaseDBGrid.pas - Corrected Delphi 2009 bug: OnMouseDown never called!
+20/12/2012 - cyClasses.pas - Added bcGradientToNext style rendering to TcyBevels
+19/12/2012 - cyDBAdvGrid.pas - Added property InplaceEdit to public
+19/12/2012 - cyDBGrid.pas - Added property InplaceEdit to public
+19/12/2012 - cySpeedButton.pas/cyBitBtn.pas - Moved class TcyImagelistOptions to unit cyClasses.pas
+17/12/2012 - cyBaseDBGrid.pas - Corrected procedure TcyBaseDBGrid.DrawBooleanField(Rect: TRect; Field: TField);
+14/12/2012 - cyBaseSpeedButton.pas - Corrected function CalcTextSize().
+14/12/2012 - cyBaseSpeedButton.pas - Corrected function CalcTextSize().
+14/12/2012 - cyBaseButton.pas - Corrected function CalcTextSize().
+13/12/2012 - cyStaticText.pas - Created unit.
+13/12/2012 - cyBaseStaticText.pas - Created unit.
+
+Cindy components V5.12.2
+07/12/2012 - cyTabControl.pas - small visual bugs fix (multi-line support), added ThinBorder support to tab on left or right side.
+07/12/2012 - cyPageControl.pas - small visual bugs fix (multi-line support), added ThinBorder support to tab on left or right side.
+
+Cindy components V5.12.1
+02/12/2012 - cyTabControl.pas - small visual bugs fix
+02/12/2012 - cyPageControl.pas - small visual bugs fix
+02/12/2012  - cyBaseDBGrid.pas - corrected another bug on Scrollbars view handling
+
+Cindy components V5.12
+29/112012  - cyBaseDBGrid.pas - Added function CalcColumnsWidth: Integer
+29/112012  - cyBaseDBGrid.pas - corrected Scrollbars view handling and moved code from WndProc() to WMNCCalcSize()
+29/112012  - cyBaseDBGrid.pas - Corrected vertical scrollbar that disappears (bug herited from TDBGrid)
+29/112012  - cyGraphics.pas - Added procedure cyDrawSpeedButtonFace()
+29/112012  - cyGraphics.pas - Added procedure cyDrawSpeedButton()
+
+28/11/2012 - cyStatusBar.pas - Now handling Color property and corrected inside controls align/anchors problems
+24/11/2012 - cyBaseTabControl.pas - Created unit
+24/11/2012 - cyTabControl.pas - Created unit
+24/11/2012 - cyPageControl.pas - Created unit
+
+Cindy components V5.11.1
+06/11/2012 - cyBaseSpeedButton.pas - Added public property ButtonState: TButtonState
+06/11/2012 - cyBaseSpeedButton.pas - Added hsMetro to type TFlatHotStyle 
+06/11/2012 - cyBaseSpeedButton.pas - Added dsMetro to type TFlatDownStyle 
+
+Cindy components V5.10.2
+06/11/2012 - cyMathParser.pas - Now use of TFormatSettings instead of deprecated global variables like DecimalSeparator
+
+Cindy components V5.10
+26/10/2012 - cyBaseDBGrid.pas - Corrected bug on ClientColumnByIndex() if ColumnIndex invalid
+26/10/2012 - cyBaseDBGrid.pas - Corrected bug pressing key in DBGrid without DataSource
+
+Cindy components V5.09
+01/10/2012 - cyClasses.pas - Removed default value for TcyGradient.SpeedPercent
+
+Cindy components V5.06
+15/07/2012 - cyBook.pas - Added property LeftPageView.Margins
+
+Cindy components V5.05
+15/07/2012 - cyBook.pas - We can see now page behind on the turn page effect!
+14/07/2012 - cyBook.pas - Small bugs fixed + improvments
+14/07/2012 - cyBook.pas - Despite it is not coherent in real book, we can set page with odd (1,3,5 etc ...) numbers to CurrentLeftPage property
+
+Cindy components V5.04
+13/07/2012 - cyBook.pas - Added TTurnPageAnimation.DoubleBuffered: Boolean property
+13/07/2012 - cyBook.pas - Replaced use of BitmapResize() that is too low by DrawCanvas()
+12/07/2012 - cyBook.pas - Removed prFitMediumQuality and prStretchMediumQuality to TPageRender
+12/07/2012 - cyBook.pas - Modified BeforePreparePage event in order to able custom page rendering or/and use external page resizing engine. 
+12/07/2012 - cyBook.pas - Added OnLeftPageClick and OnRightPageClick events
+12/07/2012 - cyProgressionPanel.pas - Added property State to public declaration
+12/07/2012 - cyAdvProgressionPanel.pas - Small bug fixed on .Open procedure (avoid error if we call several times open();)
+12/07/2012 - cyAdvProgressionPanel.pas - Added property State to public declaration
+11/07/2012 - cyBook.pas - Some optimization and added read/write property access to TBookPageView (for exemple TBookPageView.Page: TBitmap)
+11/07/2012 - cyBook.pas - Turn page with mouse if page dragged and not clicked
+11/07/2012 - cyBook.pas - Added DblClick event
+11/07/2012 - cyBook.pas - Added boFitSmallImages and boStretchSmallImages to Options
+
+Cindy components V5.03
+10/07/2012 - cyDebug.pas - Added FirstDurationMs and LastDurationMs information
+10/07/2012 - cyBook.pas - Corrected some bugs
+10/07/2012 - cyBook.pas - Better speed on medium quality
+10/07/2012 - cyBook.pas - Added OnResize, BeforePreparePage and AfterPreparePage events
+09/07/2012 - cyBook.pas - Renamed ShowBitmaps() to SetCurrentGraphicPages()
+09/07/2012 - cyBook.pas - Renamed OnNeedBitmapPage to OnNeedPage
+09/07/2012 - cyBook.pas - Created LeftPageView.WallpaperOverPage, LeftPageView.WallpaperUnderPage
+09/07/2012 - cyBook.pas - Created RightPageView.WallpaperOverPage, RightPageView.WallpaperUnderPage
+09/07/2012 - cyBook.pas - Removed HeadBand.Wallpaper property
+05/07/2012 - cyBook.pas - Moved PaperColor and PaperShadeColor properties as subproperties of LeftPageView and RightPageView
+05/07/2012 - cyBook.pas - Added OnLeftPageChange and OnRightPageChange events
+
+Cindy components V5.02
+05/07/2012 - cyBook.pas - Created new component
+
+Cindy components V4.51
+26/06/2012 - cyFlyingContainer.pas - Added ShowStayOnTopControl() function
+26/06/2012 - cyModalContainer.pas - Added ShowModalPanel() function
+25/06/2012 - cyDBEdit.pas - Added TcyDBEdit component
+
+Cindy components V4.45
+15/06/2012 - cySpeedButton.pas - Added MouseOver property to public
+15/06/2012 - cyAdvSpeedButton.pas - Added MouseOver property to public
+05/06/2012 - cyResizer.pas - Added OnPaintControl event in order to allow to paint TwebBrowser with some code (see TcyResizer demo2)
+29/05/2012 - cyBaseDBGrid.pas - Added EditorOptions property
+18/05/2012 - cyBaseDBGrid.pas - Created TcyDBGridInplaceEdit to access DBGrid's Editor properties/events (on the OnShowEditor event)
+18/05/2012 - cyBaseDBGrid.pas - Added OnShowEditor event property
+18/05/2012 - cyBaseDBGrid.pas - Added OnEditorAcceptKey event property
+17/05/2012 - cyBaseDBGrid.pas - Added Parser functionnality to the InplaceEdit
+17/05/2012 - cyBaseDBGrid.pas - Added OnEditorSetFieldText event
+17/05/2012 - cyDBGrid.pas     - BUG - Initialized hidden ContentFieldsRender property to avoid change Boolean fields by click/space key press. 
+
+Cindy components V4.43
+09/03/2012 - cyBaseDBGrid.pas - Improved row moving handling/rendering
+09/03/2012 - cyBaseDBGrid.pas - Added public property MoujeJob: TMouseJob 
+09/03/2012 - cyBaseDBGrid.pas - Modified OnEndMoveRows parameters
+
+Cindy components V4.42
+07/02/2012 - cyMathParser.pas - Added LognFirstArg property in order to swith parameters on Logn() function 
+20/12/2011 - cyResizer.pas - Corrected TImage painting 
+20/12/2011 - cyAdvProgressionPanel.pas - Canvas locking on updating gauge on thread 
+15/11/2011 - cyFlyingContainer.pas - Added property CloseOnExit 
+15/11/2011 - cyFlyingContainer.pas - Added OnDeactivate event
+15/11/2011 - cyBaseContainer.pas - Added OnDeactivate event
+
+Cindy components V4.41
+10/11/2011 - cyClipboard.pas - Corrected compilation error for DelphiXE2
+
+Cindy components V4.40
+08/11/2011 - cyBaseDBGrid.pas - Added events OnBeforeMoveRows, OnMoveRows and OnEndMoveRows
+08/11/2011 - cyBaseDBGrid.pas - Added properties MoveRows: Boolean, MoveRowsColor: TColor and MoveRowRendering: TMoveRowRendering
+08/11/2011 - cyBaseDBGrid.pas - Moved GridLineWidth property to CutomLayoutOptions.GridLineWidth 
+04/11/2011 - cyDBAdvGrid.pas - Added properties: HotMode, HotColor and HotFontColor
+04/11/2011 - cyBaseDBGrid.pas - Created properties: HotMode, HotColor and HotFontColor
+04/11/2011 - cyBaseDBGrid.pas - Renamed TMouseWheelMode mwOriginal to mwDefault
+17/10/2011 - Added new component: TcyDebug
+04/10/2011 - cyDBX.pas - Added SQLGetDoubleExpr() and SQLGetDoubleParam() functions
+04/10/2011 - cyLabel.pas - Added OnPaint event to base component
+04/10/2011 - cyHotLabel.pas - Added OnPaint event to base component
+04/10/2011 - cyDBLabel.pas - Added OnPaint event to base component
+04/10/2011 - cyDBHotLabel.pas - Added OnPaint event to base component
+29/09/2011 - cybaseLabel.pas - Created Animation property 
+29/09/2011 - cyLabel.pas - Added Animation property to base component
+29/09/2011 - cyHotLabel.pas - Added Animation property to base component
+29/09/2011 - cyDBLabel.pas - Added Animation property to base component
+29/09/2011 - cyDBHotLabel.pas - Added Animation property to base component
+16/09/2011 - Added support for Delphi XE2, not yet tested
+16/09/2011 - cyDBAdvGrid.pas - Added property SortIndicatorsOptions.Style
+
+Cindy components V4.31
+14/09/2011 - compilation error fix for Delphi 2010 and Delphi XE
+
+Cindy components V4.30
+14/08/2011 - cyPanel.pas - Added published property DoubleBuffered: boolean
+14/08/2011 - cyAdvPanel.pas - Added published property DoubleBuffered: boolean
+09/08/2011 - cyResizer.pas - Added roOutsideParentRect in Options: user can' t move and resize outside its parent control
+09/08/2011 - cyResizer.pas - Added events AfterResizeSelection() and AfterMoveSelections 
+09/08/2011 - cyResizer.pas - Renamed OnBeforePaint to BeforePaint
+09/08/2011 - cyResizer.pas - Renamed OnAfterPaint to AfterPaint
+08/08/2011 - cyDBAdvGrid.pas - Added property ContentFieldsRender
+08/08/2011 - cyBaseDBGrid.pas - Created public property ColumnIndex: Integer
+08/08/2011 - cyBaseDBGrid.pas - Created some functions to handle Boolean field view and edit. 
+08/08/2011 - cyBaseDBGrid.pas - Created property ContentImageOptions
+08/08/2011 - cyBaseDBGrid.pas - Renamed EmbeddedGraphicView to ContentImageOptions
+08/08/2011 - cyBaseDBGrid.pas - Renamed EmbeddedMemoView to ContentMemoOptions
+08/08/2011 - cyBaseDBGrid.pas - Created property ContentFieldsRender
+08/08/2011 - cyBaseDBGrid.pas - Created property FieldDisplay: TcyFieldsDisplay to configure display fields type
+08/08/2011 - cyBaseDBGrid.pas - Added [fcCheckBox] to TFieldContentRendering class
+05/08/2011 - cyModalContainer.pas - Added procedure Execute(aCaption: String; aControl: TControl)
+03/08/2011 - cyBaseDBGrid.pas - Removed calls to AdjustClientColumn on loading component that solve uncorrect clientColumn width that occured in some cases. 
+02/08/2011 - cyModalContainer.pas - published property EnterKeyAction: TEnterKeyAction
+02/08/2011 - cyFlyingContainer.pas - published property EnterKeyAction: TEnterKeyAction
+02/08/2011 - cyBaseContainer.pas - Added property EnterKeyAction: TEnterKeyAction
+02/08/2011 - cyDBAdvSpeedButton.pas - New component!
+29/07/2011 - cyDBSpeedButton.pas - New component!
+29/07/2011 - cyDBLed.pas - Corrected GetFieldValue and UpdateDatafonctions to handle Boolean fields with ValueOn and ValueOff not empty
+29/07/2011 - cyDBAdvLed.pas - Corrected GetFieldValue and UpdateDatafonctions to handle Boolean fields with ValueOn and ValueOff not empty
+29/07/2011 - cyDBRadioButton - Corrected GetFieldValue and UpdateDatafonctions to handle Boolean fields with ValueOn and ValueOff not empty
+29/07/2011 - cyDBLed.pas - Remove CMButtonPressed() procedure 
+29/07/2011 - cyDBAdvLed.pas - Remove CMButtonPressed() procedure 
+
+Cindy components V4.20
+13/07/2011 - cyDBRadioButton.pas - Corrected CMButtonPressed() procedure 
+
+Cindy components V4.19
+21/07/2011 - cyModalContainer.pas - Added ModalResult property
+13/07/2011 - cyDBRadioButton.pas - created component
+
+Cindy components V4.181
+08/07/2011 - cyModalContaines.pas - corrected compilation error on olders Delphi. 
+08/07/2011 - cyResizer.pas - Corrected bug using TcyResizer on a TScrollBox.  
+08/07/2011 - cyDBAdvGrid.pas - Added SortColumns.GetSQLCode function to return "Order by" command to inject to Dataset sql statement. 
+08/07/2011 - cyDBAdvGrid.pas - Corrected bug trying to add a sort column indicator on first column by clicking on title column. 
+
+Cindy components V4.18
+05/07/2011 - cyBaseDBGrid.pas - Corrected changing CustomLayoutOptions.DataRowHeight property may not refresh with correct rows number. 
+16/05/2011 - cyStatusBar.pas  - Added TcyStatusBar component that accept controls at design time
+
+Cindy components V4.17
+15/05/2011 - cyBaseContainer.pas - Code optimized and added OnResize event property
+15/05/2011 - cyBaseContainer.pas - Code optimized
+15/05/2011 - cyModalContainer.pas - Code optimized
+
+Cindy components V4.161
+06/05/2011 - cyBaseContainer.pas - Added ShowHint: Boolean property
+31/05/2011 - cyPanel.pas - Added OnMouseWheel, OnMouseWheelDown and OnMouseWheelUp properties 
+31/05/2011 - cyAdvPanel.pas - Added OnMouseWheel, OnMouseWheelDown and OnMouseWheelUp properties 
+
+Cindy components V4.16
+30/05/2011 - cyClipboard.pas - Added OnClipboardContentChanged
+30/05/2011 - cyClipboard.pas - Added ClearContentBookmarks procedure 
+30/05/2011 - cyClipboard.pas - Renamed isBookmarked to isContentBookmarked
+30/05/2011 - cyClipboard.pas - Renamed Bookmark to BookmarkContent
+27/05/2011 - cyDBLed.pas - Corrected bug to handle negative values 
+27/05/2011 - cyDBAdvLed.pas - Corrected bug to handle negative values 
+
+Cindy components V4.15
+26/05/2011 - cyResizer.pas - Added ControlsFrame property
+26/05/2011 - cyResizer.pas - Added HandlingSingleControl.Frame property
+26/05/2011 - cyResizer.pas - Added HandlingMultipleControl.Frame property
+
+Cindy components V4.141
+10/05/2011 - cyDBLed.pas - corrected compilation errors for Delphi prior Delphi 2009
+10/05/2011 - cyDBAdvLed.pas - corrected compilation errors for Delphi prior Delphi 2009
+
+Cindy components V4.14
+06/05/2011 - cyBaseDBGrid.pas - Optimized visible scrollBars handling
+03/05/2011 - cySkinArea.pas - Renamed GetIndiceAreaByPos to GetAreaIndexByPos
+
+Cindy components V4.13
+03/05/2011 - cySkinArea.pas - corrected some bugs, passed UpdateArea() and DrawArea() to public.  
+28/04/2011 - cyDBLed.pas - Implemented handling to new Field type in GetFieldValue()
+28/04/2011 - cyDBAdvLed.pas - Implemented handling to new Field type in GetFieldValue()
+15/04/2011 - cyDBAdvGrid.pas - Custom change one of the 2 title cell background gradient color if its equal to Self.FixedColor with TColumn.Title.Color. 
+14/04/2011 - Added VertScrollbar.ScrollLineMode property 
+14/04/2011 - Added VertScrollbar.ScrollOptions property 
+14/04/2011 - cyBaseDBGrid.pas - Replaced VerticalScrollBar: Boolean with VertScrollbar.Visible: Boolean property 
+14/04/2011 - cyBaseDBGrid.pas - Replaced HorizontalScrollBar: Boolean with VertScrollbar.Visible: Boolean property
+
+Cindy components V4.12
+11/04/2011 - cyDDECmd.pas - Added IncludeDDE: Bool parameter to RegisterOpenCmd() procedure 
+11/04/2011 - cyDDECmd.pas - Renamed UnRegisterOpenCmd to UnRegisterCmds
+11/04/2011 - cyDDECmd.pas - Added RegisterPrintCmd()
+11/04/2011 - cyDDECmd.pas - Added IsRegisteredPrintCmd
+06/04/2011 - cyClipboard.pas - added CF_HTML constant 
+
+Cindy components V4.11
+
+30/03/2011
+cyResizer - Added OnMoveSelection and OnResizeSelection events
+cyResizer - Added OnKeyJobChange and OnMouseJobChange events
+cyResizer - Put procedure GetHandlingKeyInformation() into public declaration
+cyResizer - Added MouseHandling: Boolean, MouseHandlingJob: TMouseJob, KeyHandlingjob: TKeyJob properties in public declaration. 
+cyResizer - minor bugs corrected and small code improvments. 
+cyResizer - Added roMouseUnselectAll in Options property 
+
+29/03/2011
+cyResizer - Put Canvas property into Public declaration
+cyResizer - Added OnBeforePaint and OnAfterPaint event
+cyResizer - Added gsHorizontalLine and gsVerticalLine style to Grid.Style property. 
+
+26/03/2011
+cyBaseDBGrid - Added function FindColumnByFieldName(FieldName: String): TColumn;
+cyCustomLabel - Paint a frame at Design time if the component is transparent in order to see bounds
+
+Cindy components V4.1 - *** Added code library units in \core folder ***
+25/03/2011 - Added cyStrUtils unit 
+25/03/2011 - Added cyDateUtils unit 
+
+Cindy components V4.01
+24/03/2011
+cyBaseDBGrid - Corrected error drawing embedded RichText for the first time (The cell still empty). 
+23/03/2011 
+cyBaseDBGrid - Added EmbeddedMemoView.MaxCars and EmbeddedMemoView.MaxLines properties
+
+Cindy components V4.0
+14/02/2011 - 
+All units - replaced UpperCase() by AnsiUpperCase()
+All units - replaced LowerCase() by AnsiLowerCase()
+
+Minor bugs fixed. 
+TcyPanel - Added Parentbackground property. 
+TcyAdvPanel - Added Parentbackground property. 
+TcyBaseDBGrid - Corrected DrawGraphicField() function to handle TBlobField image. 
+TcyDBAdvGrid - Added ftBlob TBlobField.BlobType handling for embedded images views field on DBGrid. 
+Created TcyMathParser component demo
+TcyBaseDBGrid - Corrected error when destroying and using checkedList. 
+Created TcyMathParser component 
+Created TcyClipboard component 
+Created TcyClipboard component demo
+Created TcyDDECmd component
+Created TcyDDECmd component demo
+TcyIniform - Added property IniDirectory: TIniDirectory (program, common application data or user application data directory)
+TcyIniform - Added property IniSubDir: String 
+TcyIniform - Renamed LoadAttributes function to LoadDefinitions
+TcyIniform - Renamed SaveAttributes function to SaveDefinitions
+TcyIniform - Renamed DeleteAttributes function to DeleteDefinitions
+
+Cindy components V3.562
+10/12/2010
+cyBaseDBGrid - corrected small bug setting ClientColumn at Design time was not applied immediatly
+
+Cindy components V3.561
+07/12/2010
+cyBaseDBGrid - corrected small bug using ClientColumn when changing Indicators column width
+
+Cindy components V3.56
+01/12/2010
+cyBaseDBGrid - After drawing field richtext content, restore Canvas.Font (Otherwise others fields values will be displayed with richText font on the DBGrid)
+
+Cindy components V3.55
+18/11/2010
+cyClasses - Added tcyBevel.Assign method. 
+cyClasses - Added tcyRunTimeDesign.Assign method. 
+cyResizer - Added AlignSelectionToGrid, MakeSelectionSameSize, MakeSelectionSameWidth, MakeSelectionSameHeight, SpaceSelectionEquallyHorizontally, SpaceSelectionEquallyVertically and CenterSelection procedures
+
+Cindy components v3.543
+16/11/2010
+cyBaseDBGrid - corrected editing problem after going down with key and if AllowAppendRecord = false and AlwaysShowEditor in Options
+
+Cindy components v3.541
+15/11/2010
+cySearchFiles - Corrected maskInclude and maskExclude fill at design time
+
+Cindy components v3.54
+15/11/2010 
+cyResizer - Created AlignSelection() procedure 
+cySpeedButton - Added FImagelistOptions.Free; on procedure destroy 
+
+12/11/2010
+cyDbAdvGrid - property TcySortIndicatorsOptions.ReadOnly Changed default value to true
+
+
+
+Cindy components v3.53
+12/11/2010
+cyCustomPanel - Initialize ParentBackground to false in order to TjvGifAnimator (Jedi component) works. 
+
+11/11/2010 
+cyBaseSpeedButton - On CMMouseEnter, if Flat, invalidate if FFlatHotStyle <> hsHidden
+cyBaseSpeedButton - On CMMouseLeave, if Flat, invalidate if FFlatHotStyle <> hsHidden
+cyBaseSpeedButton - Corrected invalidating in SetFlatDownStyle procedure
+cyBaseSpeedButton - Corrected CalcLayout procedure
+cyBaseButton - Corrected CalcLayout procedure
+
+09/11/2010 
+cyDBAdvGrid - Corrected bug when calling FSortColumns.LocateField(Column.Field.FieldName): Column.Field can be nil 
+
+05/11/2010
+cyBaseSpeedButton - Using Glyph property instead of GlyphX property show message only at design time
+cyBaseButton - Using Glyph property instead of GlyphX property show message only at design time
+
+03/11/2010
+cyDBAdvGrid - Added OnSortColumnUserAdd event. 
+cyDBAdvGrid - Added OnSortColumnsUserDefine event. 
+
+29/10/2010
+cyDBAdvGrid - Free FInternalIndicators on destroying component 
+cyDBAdvGrid - Renamed CustomIndicatorsOptions.Indicators property to  CustomIndicatorsOptions.CustomIndicators
+cyDBAdvGrid - Renamed CustomIndicatorsOptions.IndicatorActiveIndex property to  CustomIndicatorsOptions.CustomActiveIndex
+cyDBAdvGrid - Renamed CustomIndicatorsOptions.IndicatorEditIndex property to  CustomIndicatorsOptions.CustomEditIndex
+cyDBAdvGrid - Renamed CustomIndicatorsOptions.IndicatorInsertIndex property to  CustomIndicatorsOptions.CustomInsertIndex
+cyDBAdvGrid - Renamed CustomIndicatorsOptions.IndicatorMultiIndex property to  CustomIndicatorsOptions.CustomMultiIndex
+cyDBAdvGrid - Renamed CustomIndicatorsOptions.IndicatorMultiActiveIndex property to  CustomIndicatorsOptions.CustomMultiActiveIndex
+cyDBAdvGrid - Renamed CustomIndicatorsOptions property to  IndicatorsOptions
+cyDBAdvGrid - Moved IndicatorsAlignment to IndicatorsOptions.Alignment
+
+28/10/2010
+cySkinArea - Added tcyArea collection item description on the IDE.
+cyClasses - Added tcyBevel collection item description on the IDE.
+cyDBAdvGrid - Added SortColumns: tcySortColumns property (to see sort glyph on column title). 
+cyDBAdvGrid - Added SortIndicatorsOptions: TcySortIndicatorsOptions property. 
+
+21/102010 
+cyBaseDBGrid - Added RichText rendering feature. 
+cyBaseDBGrid - Fixed bug customizing titles row height. 
+
+20/10/2010
+cyDBGrid - Added GridLineWidth property. 
+cyDBAdvGrid - Added GridLineWidth property. 
+
+18/10/2010 
+cyResizer - Added PopupMenu property 
+cyBaseSpeedButton - Created property GlyphX: TPicture to use Png/ico etc ...
+cyBaseButton - Created property GlyphX: TPicture to use Png/ico etc ...
+
+12/10/2010
+cyBaseDBGrid - Added GetRecordPosition, GotoRecordPosition and FreeRecordPosition procedures
+
+11/10/2010
+cyBaseDBGrid - property CheckBoxes.ColumnIndex is now Integer instead of Word
+cyBaseDBGrid - Added cmIndicatorsCol to TColumnMode for CheckBoxes in Indicators column
+cyBaseDBGrid - Created function PointInCheckBox(CellRect: TRect; X, Y: Integer): Boolean; to determine if a point is on the CheckBox 
+cyBaseDBGrid - Added property CheckBoxes.AlignLeft: Boolean property
+cyBaseDBGrid - Some improvments
+cyBaseDBGrid - Moved AdjustClientColumn from .MouseUp to .ColWidthsChanged method
+cyBaseDBGrid - Added OnColWidthsChanged event
+cyDBAdvGrid - Added property TitleWordWrap: boolean 
+
+08/10/2010
+cyBaseDBGrid - Corrected OnAfterScroll and OnAfterScrollPause were called after any field data changes
+
+30/09/2010
+cyModalContainer - Created unit for TcyModalContainer component
+cyPackPersonal.dpr - Corrected package definitions 
+
+29/09/2010
+cyBaseContainer - Added OnShow event property
+cyFlyingContainer - Added ExecuteAsSplashScreen to use for see a SplashScreen. 
+cyBaseDBGrid - Added ScrollPauseMSeconds and OnAfterScrollPause properties. 
+
+28/09/2010
+cyBaseContainer - Created unit for dynamic creation form base component. 
+cyFlyingContainer - component now is based on TcyBaseContainer component.  
+cyFlyingContainer - minor modifications made. 
+cyBaseContainer - Added properties Position, WindowState, AlphaBlend, AlphaBlendValue, TransparentColor and TransparentColorValue
+cyFlyingContainer - Declared properties AlphaBlend, AlphaBlendValue, TransparentColor and TransparentColorValue
+cyBaseDBGrid - Added OnAfterScroll event when we go to another record on the dbrid. 
+
+13/08/2010
+cyAdvSpeedButton - Overridden TRenderProp.Assign() procedure 
+cyAdvButton - Overridden TRenderProp.Assign() procedure 
+
+05/08/2010
+cySplitter - corrected controled component position error when resizing a control with align <> alNone
+
+30/07/2010
+cyBaseDBgrid - don' t let create a new record on press any key if FAllowAppendRecord = false and table is empty 
+
+29/07/2010
+cyBaseSpeedButton - optimized CalcLayout function for correct vertical text rendering and wordwrap rendering 
+cyBaseButton - optimized CalcLayout function for correct vertical text rendering  and wordwrap rendering 
+
+27/07/2010
+cyBaseLabel - changing CaptionOrientation property won' t redraw component if Autosize = true
+
+26/07/2010
+cyBaseDBGrid - on changing ClientColumn.FieldName property change ClientColumn.Mode to cmByFieldName and ClientColumn.Enabled to true
+
+22/07/2010
+cyBaseDBGrid - ClientColumnByIndex applies MinWidth value if Column width less than MinWidth. 
+
+28/06/2010 to 13/07/2010
+cyBaseCom - Created TcyBaseCom component for component base communication 
+cyCommunicate - Created TcyCommunicate component. 
+cyAppInstances - Created TcyAppInstanceServer component. 
+cyCommRoomConnector - Created TcyCommRoomConnector component.
+ 
+09/06/2010 
+cyBaseColorMatrix - Improved!
+
+08/06/2010
+cyResizer - Added roKeyUnselectAll in Options property. 
+cyResizer - Added roOnlyMultiSelectIfSameParent in Options property. 
+cyResizer - Added roOnlyMultiMoveIfSameParent in Options property. 
+cyResizer - Added roOnlyMultiResizeIfSameParent in Options property. 
+
+07/06/2010 
+cyBaseDBGrid - Execute OnMouseWheelDown and OnMouseWheelUp after internal handling. 
+
+28/05/2010
+cyColorMatrix - Rewritten TcyColorMatrix component. 
+
+26/05/2010
+cyAdvDBGrid - Added OnSetContentFieldRendering event to let the user set manually the field content rendering type. 
+
+25/05/2010
+cyBaseDBGrid - Added EmbeddedGraphicView sub-properties to view graphic fields directly on DBGrid. 
+cyBaseDBGrid - Added EmbeddedMemoView sub-properties to view memo fields directly on DBGrid. 
+
+24/05/2010
+cySpeedButton - Added ImageListOptions sub-property to use TImageList instead of Glyph property. 
+cyBitBtn - Added ImageListOptions sub-property to use TImageList instead of Glyph property. 
+cyAdvButton - Added ImageList property. 
+cyAdvSpeedButton - Added ImageList property. 
+
+21/05/2010
+cyBaseButton - Renamed MouseInside property to MouseOver. 
+cyBaseSpeedButton - Renamed MouseInside property to MouseOver. 
+cyCutomAdvDBGrid - Removed unit and passed the code to cyAdvDBGrid unit. 
+cyCutomDBGrid - Removed unit and passed the code to cyDBGrid unit. 
+cyCutomBitBtn - Removed unit and passed the code to cyBitBtn unit. 
+cyCutomSpeedButton - Removed unit and passed the code to cySpeedButton unit. 
+Some code reorganization and improvments. 
+
+20/05/2010 
+cyBaseDBGrid - agrouped some properties into one single sub-property. 
+cyBaseSpeedButton - Created unit for Graphic buttons base component. 
+cyBaseButton - Created unit for windows buttons base component. 
+
+19/05/2010
+cyCustomAdvDBGrid - agrouped some properties into one single sub-property. 
+cyCustomSpeedButton - Created TcyImagelistOptions sub-property to implement the use of TImageList. 
+cyCustomBitBtn - Created TcyImagelistOptions sub-property to implement the use of TImageList. 
+
+19/05/2010
+cyCustomProgressionPanel - avoid Close call on destroying the component when Application.Terminated 
+
+18/05/2010 
+cyCustomBitBtn - corrected CalcLayout() procedure 
+cyBaseDBGrid - Added CustomIndicatorColWidth and CustomSelectedDataRowHeight properties. 
+cyBaseAdvDBGrid - Added OnBeforeDrawTitleCell and OnBeforeDrawIndicatorCell events. 
+
+17/05/2010 
+cyCustomSpeedButton - corrected CalcLayout() procedure 
+
+14/05/2010
+cyCustomAdvDBGrid - Created FixedStyle property. 
+CyBaseDBGrid - Created property CustomIndicatorColumnWidth. 
+
+13/05/2010
+cyBasePanel - Corrected Caption rendering below bevels.
+cyBaseLabel - removed DoDrawVerticalText and replaced by cyDrawVerticalText on cyGraphics unit. 
+
+12/05/2010
+cyBasePanel - Added OnStartRunTimeDesign, OnDoRunTimeDesign and OnEndRunTimeDesign events. 
+cyBasePanel - Added WordWrap property.
+
+11/05/2010 
+cyBaseDBGrid - Added CustomTitleRowHeight and CustomDataRowHeight properties. 
+cyBaseDBGrid - Added procedure DrawBlobField(Rect: TRect; Field: TBlobField);
+cyBaseDBGrid - Added procedure DrawGraphicField(Rect: TRect; Field: TGraphicField);
+cyBaseDBGrid - Added procedure DrawMemoField(Rect: TRect; Field: TMemoField);
+cyCustomAdvDBGrid - We can now see Memo fields and Graphic fields directly from the column. 
+
+07/05/2010
+cyBasePanel - Added RunTimeDesign sub-properties for moving/resizing feature at run-time. 
+cyRunTimeResize - Created TcyRunTimeResize to resize single component if you don' t want to use a TcyResizer component that implement a design framework. 
+TcyRunTimeResize allows simple interactive (the handled component still respond to events like onClick) move and resize management of a single component. 
+
+06/05/2010
+cyBasePanel - Created MouseEnter, Mouseleave virtual methods. 
+
+03/05/2010
+cySkinArea - Added GroupIndex and AllowAllUp properties to TcyArea collection item. 
+
+28/04/2010
+cySkinArea - Most of the code reviewed and some properties have been renamed. 
+cySkinArea - The component can handle new states: mouse down when area down or not. 
+
+27/04/2010
+cySkinButton - Most of the code reviewed and some properties have been renamed. Can use any graphic type (bmp, png etc ...)
+cySkinButton - The component can handle new states: mouse down when button down or not. 
+
+26/04/2010
+cySplitter - Added Wallpaper property
+
+23/04/2010
+cySplitter - Corrected bug resizing when Autosnap and other minor bugs
+
+22/04/2010
+cySplitter - Renamed Grip.Length property to Grip.Width
+cySplitter - Grip drawing recoded
+cySplitter - Removed bug on Grip.SetStyle (it changed Height and Width properties). 
+
+21/04/2010
+cyColorGrid - renamed BoxIntervalX property to BoxSpacingWidth
+cyColorGrid - renamed BoxIntervalY property to BoxSpacingHeight
+
+01/04/2010
+cyCustomAdvDBGrid - Added property Wallpaper: TcyBgPicture for background image. 
+cyBaseDBGrid - Added virtual methods BeforePaint and AfterPaint and moved OnBeforePaint and FOnAfterPaint event to them. 
+cyBaseDBGrid - Added function ClientRectDataCells: TRect;
+cyCustomAdvDBGrid - Added code to draw Wallpaper
+cyAdvDBGrid - removed property FixedCols from public because of display errors 
+cyDBGrid - removed property FixedCols from public because of display errors 
+
+31/03/2010
+cyBaseDBGrid - Created procedure CalcCheckBoxColumnCellLayout() for determine layout for column with the checkboxes. 
+cyBaseDBGrid - Moved some code for rendering checkboxes cells to TcyCustomDBGrid. 
+cyCustomAdvDBGrid - Written code for rendering checkboxes cells in order to allow transparent background. 
+cyBaseDBGrid - Added ColumnMode and ColumnFieldNameproperties to CheckBoxes sub-property to set checkboxes column by fielName. 
+cyBaseDBGrid - Created GetCheckBoxColumnIndex to return ColumnIndex for CheckBoxes. 
+
+30/03/2010 
+cyBaseDBGrid - Added property dgColumnResizeMode for determine Resize or/and Move columns when dgColumnResize in Options. 
+cyBaseDBGrid - Added TcyClientColumn sub-property for one client column feature. 
+cyBaseDBGrid - Added procedure AdjustClientColumn and call it. 
+cyBaseDBGrid - Added procedure ClientColumnByFieldName(ColumnFieldName: String; MinWidth: Integer);
+cyBaseDBGrid - Added procedure ClientColumnByIndex(ColumnIndex: Integer; MinWidth: Integer);
+cyBaseDBGrid - Added missing FCheckBoxes.Free; on destroy DBGrid. 
+
+29/03/2010
+cyCustomAdvDBGrid - Added OnBeforeDrawColumnCell event for custom background and font painting. 
+cyCustomAdvDBGrid - Added ForceScrollRepaint property for custom row drawing (by row index) needs. 
+
+26/03/2010
+cyCustomAdvDBGrid - Added fixed cells gradient painting. 
+cyCustomAdvDBGrid - Added fixed cells flat or/and framed painting. 
+cyCustomAdvDBGrid - Added customizable selection background and font color. 
+
+25/03/2010 
+cyAdvDBGrid - created unit fore TcyAdvDbGrid component. 
+cyRegister - Added cyAdvDBGrid register component. 
+
+24/03/2010
+cyCustomAdvDBGrid - created base unit fore TcyAdvDbGrid component. 
+
+23/03/2010 
+cyBaseDBGrid - Optimized Checkbox painting code. 
+
+19/03/2010 
+cyBaseDBGrid - Created cyBaseDBgrid unit and moved TcyCustomDBGrid source code to it. TcyCustomDBGrid herits now from TcyCustomDBGrid. 
+cyBaseDBGrid - Created functions FirstDataRowIndex and FirstDataColIndex
+
+18/03/2010 
+cyCustomDBGrid - Avoid calls to OnKeyDown event by calling KeyDown to handle multi-selection with the mouse.
+cyCustomDBGrid - Added select records feature from current to bottom with Shift+Ctrl+End.
+cyCustomDBGrid - Added select records feature from current to begin of file with Shift+Ctrl+Home.
+cyCustomDBGrid - Added MoveBy records feature handling with Ctrl+Mouse wheel.
+
+17/03/2010 
+cyCustomDBGrid - Created cyCustomDBgrid unit and moved TcyDBGrid source code to it. TcyDBGrid herits now from TcyCustomDBGrid. 
+cyCustomDBGrid - Moved AllowAppendRecord, AllowInsertRecord and AllowDeleteRecord handling from KeyDown procedure to CanGridAcceptKey procedure.
+cyCustomDBGrid - Corrected multi selection record with Ctrl and shift key. 
+cyCustomDBGrid - Minor bugs fixed 
+
+15/03/2010
+TcyCustomLabel - added property Bevels: TcyBevels (frames) for use in TcyLabel and TcyDBLabel. 
+TcyCustomHotLabel - added property Bevels: TcyBevels (frames) for use in TcyHotLabel and TcyDBHotLabel. 
+TcyBaseLabel - added hint dialog "Note that it doesn' t work with all fonts!" when setting CaptionOrientation at design time. 
+
+05/03/2010
+TcyPlitter - bug fixed when resizing: in some cases, the components are not aligned in the correct order. 
+
+25/02/2010
+TcyIniForm - minor bug fixed when checking StoreVersion
+TcyIniForm - On CustomLoad... with StoreVersion parameter
+
+30/12/2009 
+TcyBitBtn - improved corners rendering 
+TcyAdvButton - improved corners rendering 
+TcySpeedButton - improved corners rendering 
+TcyAdvSpeedButton - improved corners rendering 
+
+29/12/2009
+TcyIniForm - Replaced TProcOnCustomFromRegistry name to TProcOnReadWriteRegistry
+TcyIniForm - Replaced TProcOnCustomFromFile name to TProcOnReadWriteFile
+TcyIniForm - added OnNotLoadFromFile/OnNotLoadFromRegistry property event called when StoreVersion value different from last stored
+TcyIniForm - added StoreVersion property to abort load if value different from last stored
+
+28/12/2009 
+TcySplitter - allow resizing forms. 
+
+22/12/2009 
+TcyBaseMeasure - Added ShowHint property. 
+cyCustomSpeedButton - Corrected Glyph position when no caption. 
+
+10/11/2009
+TcyDBGrid - minor bug partially solved for Delphi 2009 when AllowAppendRecord set to false
+
+05/11/2009 
+TcyColorGrid - added Selection and Hot Cursor rendering option properties. 
+
+14/10/2009 
+TcyColorGrid - added DefaultDrawBkgnd and DefaultDrawCellBkgnd methods
+TcyColorGrid - renamed PaintBox method to DoDrawBox. 
+
+13/10/2009
+TcyColorGrid - optimized drawing rendering speed
+TcyColorGrid - added ReadOnly property
+TcyColorGrid - renamed OnBeforePaintBoxes event to OnCustomDrawBkgnd. 
+TcyColorGrid - renamed OnAfterPaintBoxes event to OnAfterPaint. 
+TcyColorGrid - removed OnCustomDrawBoxBkgnd event. 
+
+12/10/2009
+TcyColorGrid - corrected some drawing bugs ...
+TcyColorGrid - Renammed ColorUnderMouse property to HotColor
+TcyColorGrid - Changed TBoxState = (bsNormal, bsUnderMouse, bsSelected) by TColorState = set of (csHot, csSelected)
+TcyColorGrid - removed Canvas property from published statement
+TcyColorGrid - moved ColorUnderMouse: TColor method on public statement
+TcyColorGrid - moved DefaultDrawBoxBkgnd(aRect: TRect; aState: TBoxState; aRow: integer; aCol: integer); method on public statement
+TcyColorGrid - moved DefaultDrawBox(aRect: TRect; aState: TBoxState; aRow: integer; aCol: integer; aColor: TColor); method on public statement
+TcyColorGrid - PartialPaint method renamed CanPartialPaint
+TcyColorGrid - Redefined Autosize default value to true
+TcyColorGrid - defined selection default value to clBlack
+
+07/10/2009
+TcyIniForm - corrected restoring form position when Form.Position in [poScreenCenter, poDesktopCenter, poMainFormCenter, poOwnerFormCenter]
+
+07/10/2009
+TcyIniForm - corrected error on saving to a ini file if this one is read only. 
+
+06/10/2009 
+TcySplitter - corrected bug on RequestAlign procedure that makes the component to be painted incorrectly when resizing. 
+
+No History report before 06/10/2009 ... 

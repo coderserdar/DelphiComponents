@@ -1,0 +1,55 @@
+package pkCindyDBXD10;
+
+{$R *.res}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE DEBUG}
+{$ENDIF IMPLICITBUILDING}
+{$DESCRIPTION 'Cindy DBExpress package'}
+{$RUNONLY}
+{$IMPLICITBUILD OFF}
+
+requires
+  DbxCommonDriver,
+  rtl,
+  vcl,
+  dbrtl,
+  dsnap,
+  dbexpress,
+  dbxcds,
+  xmlrtl,
+  pkCindyCoreD10,
+  pkCindyDBCoreD10;
+
+contains
+  cyDBX in 'cyDBX.pas',
+  cyDbxBaseTable in 'cyDbxBaseTable.pas',
+  cyDbxImportDataset in 'cyDbxImportDataset.pas',
+  cyDbxReconcileError in 'cyDbxReconcileError.pas',
+  cyDbxSimpleTable in 'cyDbxSimpleTable.pas',
+  cyDbxTable in 'cyDbxTable.pas',
+  cyDbxUpdateSql in 'cyDbxUpdateSql.pas', 
+  cyDbxBaseImport in 'cyDbxBaseImport.pas', 
+  cyDbxImportXML in 'cyDbxImportXML.pas';
+
+end.

@@ -1,0 +1,42 @@
+package DclEhlib50;
+
+{$R *.RES}
+{$R 'EhLibReg.dcr'}
+{$ALIGN ON}
+{$ASSERTIONS OFF}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS OFF}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'EhLib 3.4 Components'}
+{$DESIGNONLY}
+{$IMPLICITBUILD ON}
+
+requires
+  vcl50,
+  dclstd50,
+  Vcldb50,
+  Ehlib50;
+
+contains
+  RichEdEh in 'RichEdEh.pas' {RichStrEditDlgEh},
+  EhLibReg in 'EhLibReg.pas',
+  GridEhEd in 'GridEhEd.pas',
+  PropStorageEditEh in 'PropStorageEditEh.pas' {PropStorageEditEhForm};
+
+end.

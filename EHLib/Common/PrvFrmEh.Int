@@ -1,0 +1,86 @@
+{*******************************************************}
+{                                                       }
+{                       EhLib v3.4                      }
+{                  TPreviewFormEh form                  }
+{                                                       }
+{   Copyright (c) 1998-2004 by Dmitry V. Bolshakov      }
+{                                                       }
+{*******************************************************}
+
+unit PrvFrmEh;
+
+{$I EhLib.Inc}
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+{$IFDEF EH_LIB_6} Variants, {$ENDIF}
+{$IFDEF CIL}
+{$ELSE}
+{$ENDIF}
+  ImgList, PrViewEh, ComCtrls, Menus, ExtCtrls, ToolWin, StdCtrls;
+
+type
+  TPreviewFormEh = class(TForm)
+    PreviewEh1: TPreviewBox;
+    tbrMain: TToolBar;
+    tbtPrint: TToolButton;
+    tbtPrinterSetupDialog: TToolButton;
+    tbtScale: TToolButton;
+    tbtPrevPage: TToolButton;
+    tbtNextPage: TToolButton;
+    tbStop: TToolButton;
+    tbClose: TToolButton;
+    Splitter: TSplitter;
+    pmnScale: TPopupMenu;
+    mni500: TMenuItem;
+    mni200: TMenuItem;
+    mni150: TMenuItem;
+    mni100: TMenuItem;
+    mni75: TMenuItem;
+    mni50: TMenuItem;
+    mni25: TMenuItem;
+    mni10: TMenuItem;
+    mniWidth: TMenuItem;
+    mniFull: TMenuItem;
+    imlMain: TImageList;
+    stbMain: TStatusBar;
+    Timer1: TTimer;
+    procedure tbtPrintClick(Sender: TObject);
+    procedure tbtPrintDialogClick(Sender: TObject);
+    procedure tbtPrinterSetupDialogClick(Sender: TObject);
+    procedure tbtPrevPageClick(Sender: TObject);
+    procedure tbtNextPageClick(Sender: TObject);
+    procedure tbStopClick(Sender: TObject);
+    procedure tbCloseClick(Sender: TObject);
+    procedure mniScaleClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure SplitterCanResize(Sender: TObject; var NewSize: Integer; var Accept: Boolean);
+    procedure tbtScaleClick(Sender: TObject);
+    procedure PreviewEh1PrinterPreviewChanged(Sender: TObject);
+    procedure PreviewEh1OpenPreviewer(Sender: TObject);
+    procedure Timer1Timer(Sender: TObject);
+    procedure tbtNextPageMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure tbtNextPageMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure tbtPrevPageMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure tbtPrevPageMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure FormKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+  private
+    { Private declarations }
+    FPressedButton: TToolButton;
+    FNeedClose: Boolean;
+  public
+    { Public declarations }
+  end;
+
+var
+  PreviewFormEh: TPreviewFormEh;
+
+implementation

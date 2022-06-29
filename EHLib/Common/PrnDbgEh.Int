@@ -1,0 +1,151 @@
+{*******************************************************}
+{                                                       }
+{                       EhLib v3.4                      }
+{                TPrintDBGridEh component               }
+{                                                       }
+{   Copyright (c) 1998-2004 by Dmitry V. Bolshakov      }
+{                                                       }
+{*******************************************************}
+
+unit PrnDbgeh {$IFDEF CIL} platform{$ENDIF};
+
+interface
+
+{$I EhLib.Inc}
+
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, DBGridEh, PrntsEh,
+{$IFDEF CIL}
+  EhLibVCLNET,
+  System.Text,
+  System.Runtime.InteropServices,
+{$ELSE}
+  EhLibVCL,
+{$ENDIF}
+  ImgList, PrViewEh, Forms, DB, Grids, StdCtrls, DBGrids, ComCtrls;
+
+type
+  TMeasureUnits = (MM, Inches);
+  TPrintDBGridEhOption = (pghFitGridToPageWidth, pghColored, pghRowAutoStretch,
+    pghFitingByColWidths, pghOptimalColWidths);
+  TPrintDBGridEhOptions = set of TPrintDBGridEhOption;
+
+
+  TPageParams = class(TPersistent)
+  private
+//    FColumns: Integer;
+//    FColumnSpace: Currency;
+    FBottomMargin: Currency;
+    FRightMargin: Currency;
+    FLeftMargin: Currency;
+    FTopMargin: Currency;
+    procedure SetBottomMargin(const Value: Currency);
+//    procedure SetColumns(const Value: Integer);
+//    procedure SetColumnSpace(const Value: Currency);
+    procedure SetLeftMargin(const Value: Currency);
+    procedure SetRightMargin(const Value: Currency);
+    procedure SetTopMargin(const Value: Currency);
+  public
+    constructor Create;
+    procedure Assign(Source: TPersistent); override;
+  published
+    property BottomMargin: Currency read FBottomMargin write SetBottomMargin;
+    property LeftMargin: Currency read FLeftMargin write SetLeftMargin;
+    property RightMargin: Currency read FRightMargin write SetRightMargin;
+    property TopMargin: Currency read FTopMargin write SetTopMargin;
+//    property Columns:Integer read FColumns write SetColumns;
+//    property ColumnSpace:Currency read FColumnSpace write SetColumnSpace;
+  end;
+
+  TPageColontitleLineType = (pcltNon, pcltSingleLine, pcltDoubleLine);
+
+  TPageColontitle = class(TPersistent)
+  private
+    FCenterText: TStrings;
+    FFont: TFont;
+    FLeftText: TStrings;
+    FLineType: TPageColontitleLineType;
+    FRightText: TStrings;
+    procedure SetCenterText(const Value: TStrings);
+    procedure SetFont(const Value: TFont);
+    procedure SetLeftText(const Value: TStrings);
+    procedure SetLineType(const Value: TPageColontitleLineType);
+    procedure SetRightText(const Value: TStrings);
+  public
+    procedure Assign(Source: TPersistent); override;
+    constructor Create;
+    destructor Destroy; override;
+  published
+    property CenterText: TStrings read FCenterText write SetCenterText;
+    property Font: TFont read FFont write SetFont;
+    property LeftText: TStrings read FLeftText write SetLeftText;
+    property LineType: TPageColontitleLineType read FLineType write SetLineType default pcltNon;
+    property RightText: TStrings read FRightText write SetRightText;
+  end;
+
+  TPrintDBGridEh = class(TComponent)
+  private
+    FAfterGridText: TStrings;
+    FBeforeGridText: TStrings;
+    FColCellParamsEh: TColCellParamsEh;
+    FDBGridEh: TDBGridEh;
+    FOnAfterPrint: TNotifyEvent;
+    FOnBeforePrint: TNotifyEvent;
+    FOnPrinterSetupDialog: TNotifyEvent;
+    FOptions: TPrintDBGridEhOptions;
+    FPage: TPageParams;
+    FPageFooter: TPageColontitle;
+    FPageHeader: TPageColontitle;
+    FPrintFontName: String;
+    FSubstitutesNames: TStrings;
+    FSubstitutesValues: TStrings;
+    FTitle: TStrings;
+    FUnits: TMeasureUnits;
+    function GetAfterGridText: TStrings;
+    function GetBeforeGridText: TStrings;
+    function GridTextReplace(RichStrings: TStrings; const SearchStr, ReplaceStr: string;
+      StartPos, Length: Integer; Options: TSearchTypes; ReplaceAll: Boolean): Integer;
+    procedure ReadAfterGridText(Stream: TStream);
+    procedure ReadBeforeGridText(Stream: TStream);
+    procedure SetAfterGridText(const Value: TStrings);
+    procedure SetBeforeGridText(const Value: TStrings);
+    procedure SetDBGridEh(const Value: TDBGridEh);
+    procedure SetOptions(const Value: TPrintDBGridEhOptions);
+    procedure SetPage(const Value: TPageParams);
+    procedure SetPageFooter(const Value: TPageColontitle);
+    procedure SetPageHeader(const Value: TPageColontitle);
+    procedure SetPrintFontName(const Value: String);
+    procedure SetTitle(const Value: TStrings);
+    procedure SetUnits(const Value: TMeasureUnits);
+    procedure WriteAfterGridText(Stream: TStream);
+    procedure WriteBeforeGridText(Stream: TStream);
+  protected
+    procedure DefineProperties(Filer: TFiler); override;
+    procedure Notification(AComponent: TComponent; Operation: TOperation); override;
+    procedure PrinterSetupDialogPreview(Sender: TObject);
+  public
+    constructor Create(AOwner: TComponent); override;
+    destructor Destroy; override;
+    function PrinterSetupDialog: Boolean;
+    procedure Preview;
+    procedure Print;
+    procedure PrintTo(VPrinter: TVirtualPrinter);
+    procedure SetSubstitutes(ASubstitutes: array of const);
+  published
+    property AfterGridText: TStrings read GetAfterGridText write SetAfterGridText stored False;
+    property BeforeGridText: TStrings read GetBeforeGridText write SetBeforeGridText stored False;
+    property DBGridEh: TDBGridEh read FDBGridEh write SetDBGridEh;
+    property Options: TPrintDBGridEhOptions read FOptions write SetOptions;
+    property Page: TPageParams read FPage write SetPage;
+    property PageFooter: TPageColontitle read FPageFooter write SetPageFooter;
+    property PageHeader: TPageColontitle read FPageHeader write SetPageHeader;
+    property PrintFontName: String read FPrintFontName write SetPrintFontName;
+    property Title: TStrings read FTitle write SetTitle;
+    property Units: TMeasureUnits read FUnits write SetUnits;
+    property OnAfterPrint: TNotifyEvent read FOnAfterPrint write FOnAfterPrint;
+    property OnBeforePrint: TNotifyEvent read FOnBeforePrint write FOnBeforePrint;
+    property OnPrinterSetupDialog: TNotifyEvent read FOnPrinterSetupDialog write FOnPrinterSetupDialog;
+  end;
+
+
+implementation

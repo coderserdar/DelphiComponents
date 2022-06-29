@@ -1,0 +1,96 @@
+About EhLib 3
+
+
+What's new in version 3.0
+
+  In TDBDateTimeEditEh
+
+   + New values in TDateTimeKindEh type (property Kind).
+       TDateTimeKindEh = (dtkDateEh, dtkTimeEh, dtkDateTimeEh, dtkCustomEh);
+   + Added EditFormat property. Now you can type custom date/time format using
+     next format elements: 'YY', 'YYYY', 'MM', 'DD', 'HH', 'NN', 'SS'.
+
+
+  Library is divided to design-time and run-time packages.
+  EhLib[XX] - run-time package and DclEhLib[X] - design-time packages, 
+  where [XX] is digit number of VCL version:
+  [40] for Delphi 4, [50] for Delphi 5, etc;
+  And EhLibB[XX] with DclEhLibB[XX] for C++ Builder.
+
+
+  Upon installation, all components is placed to the separate page in
+  components palette with name - 'EhLib'.
+  Note that Delphi IDE does not move components to the new default 
+  place when you install new version of same component(s). So if you 
+  already has EhLib installed, then installation new (3.0) version 
+  does not move EhLib components to the 'EhLib' page on components palette.	
+  To force Delphi IDE to move compontes to the default place on 
+  components palette do next:
+  Open menu: Component->Configure Palette.
+             Select '[All]' line in Pages listbox.
+             Click 'Default Pages' button.
+
+
+  New componetns: TPropStorageEh, TIniPropStorageManEh, TRegPropStorageManEh.
+  Components realize technology to store components properties to/from settings 
+  storage such as ini files, registry etc.
+
+  Current version supports components to store/restore in/from 
+  ini files and registry.
+  Base component of the given technology is the TPropStorageEh. 
+  Place this component on the form, component properties of which 
+  you want to save in the storage.
+  Double click on the component at design-time to open properties 
+  storage editor window. 
+  In the tree of properties you can select required properties 
+  for storing. Properties list is a list of all published properties 
+  or declared in DefineProperty function of components with 
+  the exclusion of properties of TCollection class. Further to 
+  the list of all elements of the collection, the tree of properties 
+  will contain <ForAllItems> subproperty, when you select subproperty in the given 
+  branch, the component will save corresponding subproperty for each 
+  element of the collection.
+
+  Component TPropStorageEh can save/restore property values in the 
+  stream, however for redirect flow in the storage necessary 
+  to execute one of the following actions.
+
+  1. Place component that inherited from TPropStorageManagerEh on the form. 
+  In this version there are present such components, this is
+  TIniPropStorageManEh and TRegPropStorageManEh.
+  Set properties of these component and assign 
+  TPropStorageEh.StorageManager property to this component.
+
+  2. Or you can once write a code to register the global component -
+  DefaultPropStorageManager. All TPropStorageEh components in which  
+  StorageManager property is not assigned will use 
+  DefaultPropStorageManager manager for redirecting flow of the 
+  property values to the storage.
+
+  Code to register the global component can look like this:
+
+  ----------- MainUnit.Pas--------
+  ......
+  
+  var
+    IniPropStorageMan: TIniPropStorageManEh;
+
+  initialization
+   
+    IniPropStorageMan := TIniPropStorageManEh.Create(nil);
+    IniPropStorageMan.IniFileName := 'MyIniFile.Ini';
+    SetDefaultPropStorageManager(IniPropStorageMan);
+  end.
+  ----------------------------
+
+
+
+ + Added (in source included version only) design-time ClientDataSet edit window
+   See detail info in AdvTech\CDSDesign\readme.txt dir.
+
+  Contain design-time ClientDataSet edit window,
+  It inherited from TFieldsEditor window, include all features of 
+  FieldsEditor and allow to edit data in ClientDataSet at 
+  design-time. You can manually fill data at design-time in 
+  disconnected ClientDataSet without loading data from file or
+  copying from another dataset.

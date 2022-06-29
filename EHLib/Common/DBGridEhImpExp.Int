@@ -1,0 +1,421 @@
+{*******************************************************}
+{                                                       }
+{                       EhLib v3.4                      }
+{             DBGridEh import/export routines           }
+{                                                       }
+{   Copyright (c) 1998-2004 by Dmitry V. Bolshakov      }
+{                                                       }
+{*******************************************************}
+
+{$I EhLib.Inc}
+
+{$IFDEF EH_LIB_VCL}
+unit DBGridEhImpExp {$IFDEF CIL} platform {$ENDIF};
+{$ELSE}
+unit QDBGridEhImpExp;
+{$ENDIF}
+
+interface
+
+{$IFDEF EH_LIB_VCL}
+uses
+  Windows, SysUtils, Classes, Graphics, Dialogs, Grids, DBGrids, Controls,
+{$IFDEF EH_LIB_6}Variants, {$ENDIF}
+{$IFDEF CIL}
+  EhLibVCLNET,
+  System.Runtime.InteropServices, System.Reflection,
+{$ELSE}
+  EhLibVCL,
+{$ENDIF}
+  DBGridEh, Db, Clipbrd;
+{$ELSE}
+uses
+  SysUtils, Classes, QGraphics, QDialogs, QGrids, QDBGrids, QControls,
+  Variants, QDBGridEh, Db, QClipbrd;
+{$ENDIF}
+
+type
+
+//{$IFNDEF CIL}
+//  TFooterValues = array[0..MaxListSize - 1] of Currency;
+//  PFooterValues = ^TFooterValues;
+//{$ENDIF}
+  TFooterValues = array of Currency;
+
+  { TDBGridEhExport }
+
+  TDBGridEhExport = class(TObject)
+  private
+    FColCellParamsEh: TColCellParamsEh;
+    FDBGridEh: TCustomDBGridEh;
+    FExpCols: TColumnsEhList;
+    FStream: TStream;
+    function GetFooterValue(Row, Col: Integer): String;
+    procedure CalcFooterValues;
+  protected
+    FooterValues: TFooterValues;
+    procedure WritePrefix; virtual;
+    procedure WriteSuffix; virtual;
+    procedure WriteTitle(ColumnsList: TColumnsEhList); virtual;
+    procedure WriteRecord(ColumnsList: TColumnsEhList); virtual;
+    procedure WriteDataCell(Column: TColumnEh; FColCellParamsEh: TColCellParamsEh); virtual;
+    procedure WriteFooter(ColumnsList: TColumnsEhList; FooterNo: Integer); virtual;
+    procedure WriteFooterCell(DataCol, Row: Integer; Column: TColumnEh; AFont: TFont;
+      Background: TColor; Alignment: TAlignment; Text: String); virtual;
+    property Stream: TStream read FStream write FStream;
+    property ExpCols: TColumnsEhList read FExpCols write FExpCols;
+  public
+    constructor Create; virtual;
+    destructor Destroy; override;
+    procedure ExportToStream(AStream: TStream; IsExportAll: Boolean); virtual;
+    procedure ExportToFile(FileName: String; IsExportAll: Boolean); virtual;
+    property DBGridEh: TCustomDBGridEh read FDBGridEh write FDBGridEh;
+  end;
+
+  TDBGridEhExportClass = class of TDBGridEhExport;
+
+  { TDBGridEhExportAsText }
+
+  TDBGridEhExportAsText = class(TDBGridEhExport)
+  private
+    FirstRec: Boolean;
+    FirstCell: Boolean;
+  protected
+    procedure CheckFirstRec; virtual;
+    procedure CheckFirstCell; virtual;
+    procedure WritePrefix; override;
+    procedure WriteSuffix; override;
+    procedure WriteTitle(ColumnsList: TColumnsEhList); override;
+    procedure WriteFooter(ColumnsList: TColumnsEhList; FooterNo: Integer); override;
+    procedure WriteRecord(ColumnsList: TColumnsEhList); override;
+    procedure WriteDataCell(Column: TColumnEh; FColCellParamsEh: TColCellParamsEh); override;
+    procedure WriteFooterCell(DataCol, Row: Integer; Column: TColumnEh; AFont: TFont;
+      Background: TColor; Alignment: TAlignment; Text: String); override;
+  public
+    procedure ExportToStream(Stream: TStream; IsExportAll: Boolean); override;
+  end;
+
+  { TDBGridEhExportAsCSV }
+
+  TDBGridEhExportAsCSV = class(TDBGridEhExportAsText)
+  private
+    FSeparator: Char;
+  protected
+    procedure CheckFirstCell; override;
+    procedure WriteTitle(ColumnsList: TColumnsEhList); override;
+    procedure WriteDataCell(Column: TColumnEh; FColCellParamsEh: TColCellParamsEh); override;
+    procedure WriteFooterCell(DataCol, Row: Integer; Column: TColumnEh; AFont: TFont;
+      Background: TColor; Alignment: TAlignment; Text: String); override;
+  public
+    constructor Create; override;
+    property Separator: Char read FSeparator write FSeparator;
+  end;
+
+  { TDBGridEhExportAsHTML }
+
+  TDBGridEhExportAsHTML = class(TDBGridEhExport)
+  private
+    function GetAlignment(Alignment: TAlignment): String;
+    function GetColor(Color: TColor): String;
+    procedure PutText(Font: TFont; Text: String);
+    procedure Put(Text: String);
+    procedure PutL(Text: String);
+  protected
+    procedure WritePrefix; override;
+    procedure WriteSuffix; override;
+    procedure WriteTitle(ColumnsList: TColumnsEhList); override;
+    procedure WriteRecord(ColumnsList: TColumnsEhList); override;
+    procedure WriteDataCell(Column: TColumnEh; FColCellParamsEh: TColCellParamsEh); override;
+    procedure WriteFooter(ColumnsList: TColumnsEhList; FooterNo: Integer); override;
+    procedure WriteFooterCell(DataCol, Row: Integer; Column: TColumnEh; AFont: TFont;
+      Background: TColor; Alignment: TAlignment; Text: String); override;
+  end;
+
+  { TDBGridEhExportAsRTF }
+
+  TDBGridEhExportAsRTF = class(TDBGridEhExport)
+  private
+    FCacheStream: TMemoryStream;
+    ColorTblList: TStrings;
+    FontTblList: TStrings;
+    function GetFontIndex(FontName: String): Integer;
+    function GetColorIndex(Color: TColor): Integer;
+    function GetAlignment(Alignment: TAlignment): String;
+    function GetDataCellColor(ColumnsList: TColumnsEhList; ColIndex: Integer): TColor;
+    function GetFooterCellColor(ColumnsList: TColumnsEhList; ColIndex: Integer;
+      FooterNo: Integer): TColor;
+    procedure PutText(Font: TFont; Text: String; Background: TColor);
+    procedure Put(Text: String);
+    procedure PutL(Text: String);
+  protected
+    procedure WriteCellBorder(LeftBorder, TopBorder, BottomBorder, RightBorder: Boolean);
+    procedure WritePrefix; override;
+    procedure WriteSuffix; override;
+    procedure WriteTitle(ColumnsList: TColumnsEhList); override;
+    procedure WriteRecord(ColumnsList: TColumnsEhList); override;
+    procedure WriteDataCell(Column: TColumnEh; FColCellParamsEh: TColCellParamsEh); override;
+    procedure WriteFooter(ColumnsList: TColumnsEhList; FooterNo: Integer); override;
+    procedure WriteFooterCell(DataCol, Row: Integer; Column: TColumnEh; AFont: TFont;
+      Background: TColor; Alignment: TAlignment; Text: String); override;
+  public
+    procedure ExportToStream(AStream: TStream; IsExportAll: Boolean); override;
+  end;
+
+  { TDBGridEhExportAsXLS }
+
+  TDBGridEhExportAsXLS = class(TDBGridEhExport)
+  private
+    FCol, FRow: Word;
+    procedure WriteBlankCell;
+    procedure WriteIntegerCell(const AValue: Integer);
+    procedure WriteFloatCell(const AValue: Double);
+    procedure WriteStringCell(const AValue: String);
+    procedure IncColRow;
+  protected
+    procedure WritePrefix; override;
+    procedure WriteSuffix; override;
+    procedure WriteTitle(ColumnsList: TColumnsEhList); override;
+    procedure WriteDataCell(Column: TColumnEh; FColCellParamsEh: TColCellParamsEh); override;
+    procedure WriteFooterCell(DataCol, Row: Integer; Column: TColumnEh; AFont: TFont;
+      Background: TColor; Alignment: TAlignment; Text: String); override;
+  public
+    procedure ExportToStream(AStream: TStream; IsExportAll: Boolean); override;
+  end;
+
+  { TDBGridEhExportAsVCLDBIF }
+
+  {Internal format for interchange between DataSet based components}
+
+  { BOF (Beginning of File)
+
+   Byte       |  0    1    2    3    4    5    6 |  0 |  0    1    2    3 |
+              -------------------------------------------------------------
+   Contents   |  V |  C |  L |  D |  B |  I |  F |  1 |  X |  X |  X |  X |
+              -------------------------------------------------------------
+              |  Signatura                       |Vers|  Columns count    |
+              |                                  |ion |                   |
+
+
+    Fields Names
+
+   Byte       |  0 |  0    1    2    3   ...   X |  0 |  0    1    2    3   ...
+              ------------------------------------------------------------- ...
+   Contents   |  X |  N |  a |  m |  e |  1 |  0 |  X |  N |  a |  m |  e |  2 | 0
+              ------------------------------------------------------------- ...
+              |Colu| Null terminated field name  |Colu| Null terminated field name
+              |mn  |                             |mn  |
+              |visi|                             |visi|
+              |ble 1 or 0                        |ble 1 or 0
+
+    Values
+
+  ----------------
+    Unassigned, skip value
+    ftUnknown,  ftCursor, ftADT, ftArray, ftReference, ftDataSet, ftVariant,
+     ftInterface, ftIDispatch,
+
+   Byte       |  0 |
+              ------
+   Contents   |  1 |
+              ------
+              |Type|
+  ----------------
+    NULL
+
+   Byte       |  0 |
+              ------
+   Contents   |  2 |
+              ------
+              |Type|
+  ----------------
+    INTEGER32
+    ftSmallint, ftInteger, ftWord, ftBoolean, ftAutoInc
+
+   Byte       |  0 |  0    1    2    3 |
+              --------------------------
+   Contents   |  3 |  X |  X |  X |  X |
+              --------------------------
+              |Type|  Intetger value   |
+                   |   (Longint)       |
+  ----------------
+    FLOAT64
+    ftFloat, ftCurrency, ftBCD, ftDate, ftTime, ftDateTime,
+
+   Byte       |  0 |  0    1    2    3    4    5    6    7 |
+              ----------------------------------------------
+   Contents   |  4 |  X |  X |  X |  X |  X |  X |  X |  X |
+              ----------------------------------------------
+              |Type|  Float value (Double)                 |
+  ----------------
+    STRING
+    ftString, ftMemo, ftFixedChar, ftLargeint, ftOraClob, ftGuid
+
+   Byte       |  0 |  0    1    2    3 |  0    1    2   ...   N |
+              ---------------------------------------------------
+   Contents   |  5 |  X |  X |  X |  X |  a |  b |  c | ...   0 |
+              ---------------------------------------------------
+              |Type|  Size (Longint)   |  String body including |
+                                       |  null terminator       |
+  ----------------
+    BINARY DATA
+    ftBlob, ftGraphic, ftFmtMemo, ftParadoxOle, ftDBaseOle, ftOraBlob,
+     ftBytes, ftTypedBinary, ftVarBytes, ftWideString,
+
+   Byte       |  0 |  0    1    2    3 |  0    1    2   ...   N |
+              ---------------------------------------------------
+   Contents   |  6 |  X |  X |  X |  X |  a |  b |  c | ...   X |
+              ---------------------------------------------------
+              |Type|  Size (Longword)   |  data                  |
+  ----------------
+    EOF (End of File)
+
+   Byte       |  0 |
+              ------
+   Contents   |  0 |
+              ------
+              |Type|
+  }
+
+  TVCLDBIF_BOF = packed record
+    Signatura: array[0..6] of AnsiChar;
+    Version: Byte;
+    ColCount: Longint;
+  end;
+
+  TVCLDBIF_INTEGER32 = packed record
+    AType: Byte;
+    Value: Longint;
+  end;
+
+  TVCLDBIF_FLOAT64 = packed record
+    AType: Byte;
+    Value: Double;
+  end;
+
+  TVCLDBIF_STRING = packed record
+    AType: Byte;
+    Size: Longint;
+  end;
+
+  TVCLDBIF_BINARY_DATA = packed record
+    AType: Byte;
+    Size: Longint;
+  end;
+
+const
+  TVCLDBIF_TYPE_EOF = 0;
+  TVCLDBIF_TYPE_UNASSIGNED = 1;
+  TVCLDBIF_TYPE_NULL = 2;
+  TVCLDBIF_TYPE_INTEGER32 = 3;
+  TVCLDBIF_TYPE_FLOAT64 = 4;
+  TVCLDBIF_TYPE_STRING = 5;
+  TVCLDBIF_TYPE_BINARY_DATA = 6;
+
+type
+
+  TDBGridEhExportAsVCLDBIF = class(TDBGridEhExport)
+  private
+//    function CalcColCount:Word;
+    procedure WriteUnassigned;
+    procedure WriteNull;
+    procedure WriteInteger(AValue: Longint);
+    procedure WriteFloat(AValue: Double);
+    procedure WriteString(AValue: String);
+    procedure WriteBinaryData(AValue: String);
+  protected
+    procedure WritePrefix; override;
+    procedure WriteSuffix; override;
+    procedure WriteDataCell(Column: TColumnEh; FColCellParamsEh: TColCellParamsEh); override;
+  end;
+
+  { TDBGridEhImport }
+
+  TDBGridEhImport = class(TObject)
+  private
+    FDBGridEh: TCustomDBGridEh;
+    FStream: TStream;
+    FImpCols: TColumnsEhList;
+  protected
+    Eos: Boolean;
+    procedure ReadPrefix; virtual;
+    procedure ReadSuffix; virtual;
+    procedure ReadRecord(ColumnsList: TColumnsEhList); virtual;
+    procedure ReadDataCell(Column: TColumnEh); virtual;
+    property Stream: TStream read FStream write FStream;
+    property ImpCols: TColumnsEhList read FImpCols write FImpCols;
+  public
+    constructor Create; virtual;
+    procedure ImportFromStream(AStream: TStream; IsImportAll: Boolean); virtual;
+    procedure ImportFromFile(FileName: String; IsImportAll: Boolean); virtual;
+    property DBGridEh: TCustomDBGridEh read FDBGridEh write FDBGridEh;
+  end;
+
+  TDBGridEhImportClass = class of TDBGridEhImport;
+
+  { TDBGridEhImportAsText }
+
+  TImportTextSreamState = (itssChar, itssTab, itssNewLine, itssEof);
+
+  TDBGridEhImportAsText = class(TDBGridEhImport)
+  private
+    FLastChar: Char;
+    FLastState: TImportTextSreamState;
+    FLastString: String;
+    FIgnoreAll: Boolean;
+    function GetChar(var ch: Char): Boolean;
+    function CheckState: TImportTextSreamState;
+    function GetString(var Value: String): TImportTextSreamState;
+  protected
+    procedure ReadPrefix; override;
+    procedure ReadRecord(ColumnsList: TColumnsEhList); override;
+    procedure ReadDataCell(Column: TColumnEh); override;
+  public
+    procedure ImportFromStream(AStream: TStream; IsImportAll: Boolean); override;
+  end;
+
+  { TDBGridEhImportAsVCLDBIF }
+
+  TDBGridEhImportAsVCLDBIF = class(TDBGridEhImport)
+  private
+    Prefix: TVCLDBIF_BOF;
+    FIgnoreAll: Boolean;
+    LastValue: Variant;
+    FieldNames: TStringList;
+    UseFieldNames: Boolean;
+    procedure ReadValue;
+  protected
+    procedure ReadPrefix; override;
+    procedure ReadRecord(ColumnsList: TColumnsEhList); override;
+    procedure ReadDataCell(Column: TColumnEh); override;
+  public
+    procedure ImportFromStream(AStream: TStream; IsImportAll: Boolean); override;
+  end;
+
+  { Routines to import/export DBGridEh to/from file/stream }
+
+procedure SaveDBGridEhToExportFile(ExportClass: TDBGridEhExportClass;
+  DBGridEh: TCustomDBGridEh; const FileName: String; IsSaveAll: Boolean);
+procedure WriteDBGridEhToExportStream(ExportClass: TDBGridEhExportClass;
+  DBGridEh: TCustomDBGridEh; Stream: TStream; IsSaveAll: Boolean);
+
+procedure LoadDBGridEhFromImportFile(ImportClass: TDBGridEhImportClass;
+  DBGridEh: TCustomDBGridEh; const FileName: String; IsLoadToAll: Boolean);
+procedure ReadDBGridEhFromImportStream(ImportClass: TDBGridEhImportClass;
+  DBGridEh: TCustomDBGridEh; Stream: TStream; IsLoadToAll: Boolean);
+
+  { Routines to support clipboard for DBGridEh }
+
+var
+  CF_VCLDBIF: Word;
+
+var
+  ExtendedVCLDBIFImpExpRowSelect: Boolean = True;
+  DBGridEhImpExpCsvSeparator: Char = ';';
+
+procedure DBGridEh_DoCutAction(DBGridEh: TCustomDBGridEh; ForWholeGrid: Boolean);
+procedure DBGridEh_DoCopyAction(DBGridEh: TCustomDBGridEh; ForWholeGrid: Boolean);
+procedure DBGridEh_DoPasteAction(DBGridEh: TCustomDBGridEh; ForWholeGrid: Boolean);
+procedure DBGridEh_DoDeleteAction(DBGridEh: TCustomDBGridEh; ForWholeGrid: Boolean);
+
+
+implementation

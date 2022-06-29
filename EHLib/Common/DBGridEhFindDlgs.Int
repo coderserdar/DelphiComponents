@@ -1,0 +1,75 @@
+{*******************************************************}
+{                                                       }
+{                    EhLib v3.4                         }
+{                                                       }
+{        Find dialog for TDBGridEh component            }
+{                                                       }
+{     Copyright (c) 2004 by Dmitry V. Bolshakov         }
+{                                                       }
+{*******************************************************}
+
+unit DBGridEhFindDlgs  {$IFDEF CIL} platform{$ENDIF};
+
+interface
+
+uses
+  Windows, Messages, SysUtils, {$IFDEF EH_LIB_6} Variants, {$ENDIF}
+  Classes, Graphics, Controls, Forms,
+  Dialogs, DBCtrlsEh, StdCtrls, Mask, DBGridEh;
+
+type
+
+  TColumnFieldItemEh = record
+    Caption: String;
+    Column: TColumnEh;
+  end;
+
+  TColumnFieldsArrEh = array of TColumnFieldItemEh;
+
+  TDBGridEhFindDlg = class(TForm)
+    cbText: TDBComboBoxEh;
+    bFind: TButton;
+    bCancel: TButton;
+    Label1: TLabel;
+    cbFindIn: TDBComboBoxEh;
+    Label2: TLabel;
+    cbMatchinType: TDBComboBoxEh;
+    cbMatchType: TLabel;
+    cbFindDirection: TDBComboBoxEh;
+    Label3: TLabel;
+    cbCharCase: TDBCheckBoxEh;
+    cbUseFormat: TDBCheckBoxEh;
+    procedure bFindClick(Sender: TObject);
+    procedure bCancelClick(Sender: TObject);
+    procedure cbFindInChange(Sender: TObject);
+    procedure cbTextChange(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+  private
+    FGrid: TCustomDBGridEh;
+    IsFirstTry: Boolean;
+    FFindColumnsList: TColumnsEhList;
+    FCurInListColIndex: Integer;
+    FColumnFields: TColumnFieldsArrEh;
+    function ColText(Col: TColumnEh): String;
+  public
+    procedure FillFindColumnsList;
+    procedure FillColumnsList;
+    procedure Excecute(AGrid: TCustomDBGridEh; Text, ColumnFieldName: String;
+      ColumnFields: TColumnFieldsArrEh; Modal: Boolean);
+    property Grid: TCustomDBGridEh read FGrid;
+  end;
+
+var
+  DBGridEhFindDlg: TDBGridEhFindDlg;
+
+procedure ExcecuteDBGridEhFindDialog(Grid: TCustomDBGridEh; Text, FieldName: String;
+  ColumnFields: TColumnFieldsArrEh;  Modal: Boolean);
+
+type
+  TExcecuteDBGridEhFindDialogProc = procedure (Grid: TCustomDBGridEh; Text, FieldName: String;
+    ColumnFields: TColumnFieldsArrEh;  Modal: Boolean);
+var
+  ExcecuteDBGridEhFindDialogProc: TExcecuteDBGridEhFindDialogProc;
+
+implementation

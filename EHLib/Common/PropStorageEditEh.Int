@@ -1,0 +1,202 @@
+{*******************************************************}
+{                                                       }
+{                       EhLib v3.4                      }
+{                                                       }
+{                   PropStorage editor                  }
+{                                                       }
+{       Copyright (c) 2002-2004 by Dmitry V. Bolshakov  }
+{                                                       }
+{*******************************************************}
+
+{$I EhLib.Inc}
+//{$I EhLibClx.Inc}
+
+{$IFDEF EH_LIB_CLX}
+unit QPropStorageEditEh;
+{$ELSE}
+unit PropStorageEditEh {$IFDEF CIL} platform {$ENDIF};
+{$ENDIF}
+
+interface
+
+uses
+{$IFDEF EH_LIB_CLX}
+  QPropStorageEh, QPropFilerEh, QStdCtrls, QComCtrls, QButtons,
+  QControls, QForms, QImgList, QCheckLst, QExtCtrls,
+{$ELSE}
+  PropStorageEh, PropFilerEh, StdCtrls, ComCtrls, Buttons,
+  Controls, Forms, ImgList, CheckLst, ExtCtrls, Windows,
+
+{$IFDEF CIL}
+  EhLibVCLNET,
+{$ELSE}
+  EhLibVCL,
+{$ENDIF}
+
+{$ENDIF}
+  SysUtils, TypInfo, Classes;
+
+type
+  TNodeTypeEh = (nthProperty, nthControl, nthPropNode);
+
+  TNodeInfoEh = class
+    Checked: Integer; //0 - No or 1 - Yes or 2 - Partially yes
+    Instance: TObject;
+    NodeType: TNodeTypeEh;
+    IsVoidProperty: Boolean;
+    Name: String;
+    Path: String;
+  end;
+
+//  PNodeInfoEh = ^TNodeInfoEh;
+
+  TPropStorageEditEhForm = class(TForm)
+    spAddProp: TSpeedButton;
+    sbRemoveAllProps: TSpeedButton;
+    sbRemoveProp: TSpeedButton;
+    TreeView1: TTreeView;
+    TreeView2: TTreeView;
+    bOk: TButton;
+    bCancel: TButton;
+    Bevel1: TBevel;
+    ImageList1: TImageList;
+    cbPredifinedProps: TCheckListBox;
+    lCompsAndProps: TLabel;
+    lStoredProps: TLabel;
+    Edit1: TEdit;
+    Edit2: TEdit;
+    spSynchTrees: TSpeedButton;
+    procedure TreeView1MouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure TreeView1MouseMove(Sender: TObject; Shift: TShiftState; X,
+      Y: Integer);
+    procedure TreeView1MouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure TreeView1GetSelectedIndex(Sender: TObject; Node: TTreeNode);
+    procedure TreeView1Deletion(Sender: TObject; Node: TTreeNode);
+    procedure FormResize(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure spAddPropClick(Sender: TObject);
+    procedure sbRemovePropClick(Sender: TObject);
+    procedure TreeView1Change(Sender: TObject; Node: TTreeNode);
+    procedure TreeView2MouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure sbRemoveAllPropsClick(Sender: TObject);
+    procedure cbPredifinedPropsClickCheck(Sender: TObject);
+    procedure TreeView1Compare(Sender: TObject; Node1, Node2: TTreeNode;
+      Data: Integer; var Compare: Integer);
+    procedure TreeView1Expanding(Sender: TObject; Node: TTreeNode;
+      var AllowExpansion: Boolean);
+    procedure FormDestroy(Sender: TObject);
+    procedure spSynchTreesClick(Sender: TObject);
+  protected
+    function AddSortedChildObject(Parent: TTreeNode; const S: string; Data: TNodeInfoEh): TTreeNode;
+    function CompareNode(Node1, Node2: TTreeNode): Integer;
+    function CompareNodeData(Data1, Data2: TNodeInfoEh): Integer;
+    function CreateNodeInfo(Component: TComponent; Name, Path: String;
+      NodeType: TNodeTypeEh; IsVoidProperty: Boolean): TNodeInfoEh;
+    function FindChildNodeInfo(N2, N1: TTreeNode): TTreeNode;
+    function GetChildNodeByText(ParentNode: TTreeNode; Text: String): TTreeNode;
+    function GetObjectPropList(AObject: TObject; var ObjPropCount: Integer): TPropListArray;//PPropList;
+    function HaveCheckedChilds(N: TTreeNode): Boolean;
+    procedure AddCollectionProperties(N: TTreeNode; O: TCollection; Path: String);
+    procedure AddComponents(N: TTreeNode; O: TComponent; Path: String);
+    procedure AddParentChecked(N: TTreeNode);
+    procedure AddProperties(N: TTreeNode; O: TObject; Path: String; IsAddPropNode: Boolean);
+    procedure AddPropertyNode(N: TTreeNode);
+    procedure AddVoidProperty(N: TTreeNode);
+    procedure ExchangeNode(Parent: TTreeNode; L, R: Integer);
+    procedure MainAddPropertyNode(N: TTreeNode); overload;
+    procedure MainAddPropertyNode(Path: String); overload;
+    procedure MainDeletePropertyNode(N: TTreeNode); overload;
+    procedure MainDeletePropertyNode(Path: String); overload;
+    procedure MainToggle(N: TTreeNode);
+    procedure QuickSort(Parent: TTreeNode; L, R: Integer);
+    procedure RemovePropertyNode(N: TTreeNode);
+    procedure ResetChildNodes(N: TTreeNode);
+    procedure ResetParentNodes(N: TTreeNode);
+    procedure SlaveDeleteNode(SN: TTreeNode);
+  public
+    LeftBorderWidth, RightBorderWidth, ButtonSize, VBottomMargin: Integer;
+    OnIconDownNode: TTreeNode;
+    PropStorage: TPropStorageEh;
+    RootNode: TTreeNode;
+    StartBuildTicks: LongWord;
+
+
+    procedure BuildPredifinedProps;
+    procedure BuildPropertyList;
+    procedure BuildStoringPropertyList(PropList: TStrings);
+    procedure GetStoringPorps(PropList: TStrings);
+    procedure PropertyAdded(DN: TTreeNode);
+    procedure PropertyDeleting(DN: TTreeNode);
+    procedure UpdateButtonState;
+  end;
+
+{ TPredifinedPropsEh }
+
+  TPredifinedPropsEh = class
+  protected
+    FCkecked: Boolean;
+    FEditForm: TPropStorageEditEhForm;
+    function Caprion: String; virtual;
+    function PropertyAdded(Component: TComponent; PropPath: String): Boolean; virtual;
+    function PropertyDeleted(Component: TComponent; PropPath: String): Boolean; virtual;
+    procedure SetCkecked(AChecked: Boolean); virtual;
+    constructor Create(EditForm: TPropStorageEditEhForm); virtual;
+  end;
+
+  TPredifinedPropsEhClass = class of TPredifinedPropsEh;
+
+{ TPredifinedActiveControlEh }
+
+  TPredifinedActiveControlEh = class(TPredifinedPropsEh)
+  protected
+    FActiveControlAdded: Boolean;
+    function Caprion: String; override;
+    function PropertyAdded(Component: TComponent; PropPath: String): Boolean; override;
+    function PropertyDeleted(Component: TComponent; PropPath: String): Boolean; override;
+    procedure SetCkecked(AChecked: Boolean); override;
+  end;
+
+{ TPredifinedPosPropertiesEh }
+
+  TPredifinedPosPropertiesEh = class(TPredifinedPropsEh)
+  protected
+    FLeftAdded: Boolean;
+    FTopAdded: Boolean;
+    function Caprion: String; override;
+    function PropertyAdded(Component: TComponent; PropPath: String): Boolean; override;
+    function PropertyDeleted(Component: TComponent; PropPath: String): Boolean; override;
+    procedure SetCkecked(AChecked: Boolean); override;
+  end;
+
+{ TPredifinedSizePropertiesEh }
+
+  TPredifinedSizePropertiesEh = class(TPredifinedPropsEh)
+  protected
+    FHeightAdded: Boolean;
+    FPixelsPerInchAdded: Boolean;
+    FWidthAdded: Boolean;
+    function Caprion: String; override;
+    function PropertyAdded(Component: TComponent; PropPath: String): Boolean; override;
+    function PropertyDeleted(Component: TComponent; PropPath: String): Boolean; override;
+    procedure SetCkecked(AChecked: Boolean); override;
+  end;
+
+{ TPredifinedSizePropertiesEh }
+
+  TPredifinedStatePropertiesEh = class(TPredifinedPropsEh)
+  protected
+    FStateAdded: Boolean;
+    function Caprion: String; override;
+    function PropertyAdded(Component: TComponent; PropPath: String): Boolean; override;
+    function PropertyDeleted(Component: TComponent; PropPath: String): Boolean; override;
+    procedure SetCkecked(AChecked: Boolean); override;
+  end;
+
+procedure RegisterPredifinedPropsClass(PropsClass: TPredifinedPropsEhClass);
+
+function EditPropStorage(PropStorage: TPropStorageEh): Boolean;
+
+implementation

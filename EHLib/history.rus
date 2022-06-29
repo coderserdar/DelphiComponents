@@ -1,0 +1,21 @@
+История EhLib
+
+Версия 3.4
+
+  + Добавлена поддержка Delphi 8 (VCL.NET).
+
+  В  TDBGridEh
+   + Добавлено свойство ToolTips в Footer и в ColumnDefValues.Footer.
+   + Добавлено свойство SumValue: Variant в TColumnFooterEh.
+
+   + Добавлено свойство ShowImageAndText в TColumnEh. Позволяет выводить Изображение из ImageList 
+     и текст из поля в ячейке грида одновременно. Устанавливайте ImageIndex в событии OnGetCellParams.
+
+  В TCustomDBEditEh
+   + Добавлено свойство Images: TCustomImageList. Изображения из ImageList'а могут выводится в левой 
+    части TDBEditEh, TDBDateTimeEditEh, TDBNumberEditEh or TDBLookupComboboxEh.
+   + Добавлено событие OnGetImageIndex: TGetImageIndexEventEh.
+        TGetImageIndexEventEh = procedure(Sender: TObject; var ImageIndex: Integer) of object;
+     Событие вызывается когда Text or Value в TCustomDBEditEh изменяется. Устанавливайте ImageIndex 
+     в зависимости от Text or Value.
+

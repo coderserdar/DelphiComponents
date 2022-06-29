@@ -1,0 +1,105 @@
+{*******************************************************}
+{                                                       }
+{                       EhLib v3.4                      }
+{              Design window for TDBGridEh              }
+{                                                       }
+{   Copyright (c) 1998-2004 by Dmitry V. Bolshakov      }
+{                                                       }
+{*******************************************************}
+
+
+unit GridEhEd {$IFDEF CIL} platform{$ENDIF};
+
+{$I EhLib.Inc}
+interface
+
+uses
+  Windows, Messages, SysUtils,
+{$IFDEF CIL} Borland.Vcl.Design.DesignIntf,
+             Borland.Vcl.Design.DesignEditors,
+             Borland.Vcl.Design.ColnEdit,
+             Variants,
+{$ELSE}
+  ColnEdit,
+  {$IFDEF EH_LIB_6}Variants, DesignEditors, DesignIntf,
+  {$ELSE}DsgnWnds, DsgnIntf, LibIntf, {$ENDIF}
+{$ENDIF}
+  Graphics, Controls, Forms,
+  Dialogs, ImgList, Menus, ActnList, ExtCtrls, ComCtrls,
+  DBGridEh, DBGrids, DBLookupEh,
+{$IFDEF CIL}
+  EhLibVCLNET,
+{$ELSE}
+  EhLibVCL,
+{$ENDIF}
+//  ColectEditorEh,
+  ToolWin,
+  Classes;
+
+type
+  TDBGridEhColumnsEditor = class(TCollectionEditor)
+//  TDBGridEhColumnsEditor = class(TCollectionEditorEh)
+    N1: TMenuItem;
+    AddAllFields1: TMenuItem;
+    RestoreDefaults1: TMenuItem;
+    ToolButton6: TToolButton;
+    ToolButton7: TToolButton;
+    ToolButton8: TToolButton;
+    AddAllFieldsCmd: TAction;
+    RestoreDefaultsCmd: TAction;
+    procedure AddAllFieldsCmdExecute(Sender: TObject);
+    procedure RestoreDefaultsCmdExecute(Sender: TObject);
+    procedure AddAllFieldsCmdUpdate(Sender: TObject);
+    procedure RestoreDefaultsCmdUpdate(Sender: TObject);
+  private
+    { Private declarations }
+  protected
+    function CanAdd(Index: Integer): Boolean; override;
+  public
+    { Public declarations }
+  end;
+
+{ TDBGridEhColumnsProperty }
+
+  TDBGridEhColumnsProperty = class(TPropertyEditor {TClassProperty})
+    function GetAttributes: TPropertyAttributes; override;
+    function GetValue: string; override;
+    procedure Edit; override;
+  end;
+
+{ TDBGridEhEditor }
+
+  TDBGridEhEditor = class(TComponentEditor)
+    procedure ExecuteVerb(Index: Integer); override;
+    function GetVerb(Index: Integer): string; override;
+    function GetVerbCount: Integer; override;
+  end;
+
+{ TDBGridEhFieldProperty }
+
+  TDBGridEhFieldProperty = class(TStringProperty)
+  public
+    function GetAttributes: TPropertyAttributes; override;
+    procedure GetValueList(List: TStrings); virtual;
+    procedure GetValues(Proc: TGetStrProc); override;
+  end;
+
+{ TDBGridEhFieldProperty }
+
+  TDBGridEhFieldAggProperty = class(TDBGridEhFieldProperty)
+  public
+    procedure GetValueList(List: TStrings); override;
+  end;
+
+{ TDBLookupComboboxEhEditor }
+
+  TDBLookupComboboxEhEditor = class(TComponentEditor)
+    procedure ExecuteVerb(Index: Integer); override;
+    function GetVerb(Index: Integer): string; override;
+    function GetVerbCount: Integer; override;
+  end;
+
+var
+  DBGridEhColumnsEditor: TDBGridEhColumnsEditor;
+
+implementation

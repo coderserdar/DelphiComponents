@@ -1,0 +1,1190 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.72 [en] (Windows NT 5.0; U) [Netscape]">
+</head>
+<body link="#0000FF" vlink="#800080">
+<b>Table of Contents</b>:
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#Disclaimer">Disclaimer</a>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#Status">Library Status</a>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#History">History</a>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#Acknowledgments">Acknowledgments</a>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#Release">Release Notes</a>
+<br>&nbsp;
+<br>&nbsp;
+<table BORDER CELLPADDING=0 COLS=3 WIDTH="750" >
+<tr>
+<td VALIGN=CENTER COLSPAN="3" BGCOLOR="#000099">
+<center><b><font face="Verdana"><font color="#CCCCCC"><font size=+2>rmControls</font></font></font></b>
+<br><b><font color="#CCCCCC"><font size=-1>v1.80</font></font></b></center>
+</td>
+</tr>
+
+<tr>
+<td VALIGN=CENTER BGCOLOR="#00FFFF">
+<center><b>Enhanced Standard Components</b></center>
+</td>
+
+<td VALIGN=CENTER BGCOLOR="#00FFFF">
+<center><b>Compound Components</b></center>
+</td>
+
+<td VALIGN=CENTER BGCOLOR="#00FFFF">
+<center><b>Advanced Components</b></center>
+</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#00FFFF"><a href="#rmApplicationEvents">TrmApplicationEvents</a>
+<br><a href="#rmCCTabControl">TrmCCTabControl</a>
+<br><a href="#rmCCPageControl">TrmCCPageControl</a>
+<br><a href="#rmEditDrawGrid">TrmEditDrawGrid</a>
+<br><a href="#rmEditGrid">TrmEditGrid</a>
+<br><a href="#rmLabel">TrmLabel</a>
+<br><a href="#rmPanel">TrmPanel</a>
+<br><a href="#rmPathTreeView">TrmPathTreeView</a>
+<br><a href="#rmSpeedButton">TrmSpeedButton</a>
+<br><a href="#rmSplitter">TrmSplitter</a>
+<br><a href="#rmSpinButton">TrmSpinButton</a>
+<br><a href="#rmTabSet">TrmTabSet</a></td>
+
+<td VALIGN=TOP BGCOLOR="#00FFFF"><a href="#rmBtnCombo">TrmBtnCombo</a>
+<br><a href="#rmBtnEdit">TrmBtnEdit</a>
+<br><a href="#rmCalendar">TrmCalendar</a>
+<br><a href="#rmComboCalendar">TrmComboCalendar</a>
+<br><a href="#rmComboPathTreeView">TrmComboPathTreeView</a>
+<br><a href="#rmComboTreeView">TrmComboTreeView</a>
+<br><a href="#rmFloatSpinEdit">TrmFloatSpinEdit</a>
+<br><a href="#rmSpinCombo">TrmSpinCombo</a>
+<br><a href="#rmSpinEdit">TrmSpinEdit</a>
+<br><a href="#rmTimeSpinEdit">TrmTimeSpinEdit</a></td>
+
+<td VALIGN=TOP BGCOLOR="#00FFFF"><a href="#rmCollectionListBox">TrmCollectionListBox</a>
+<br><a href="#rmDGTree">TrmDGTree</a>
+<br><a href="#rmDiffEngine">TrmDiffEngine</a>
+<br><a href="#rmDiffMap">TrmDiffMap</a>
+<br><a href="#rmDiffMergeViewer">TrmDiffMergeViewer</a>
+<br><a href="#rmDiffViewer">TrmDiffViewer</a>
+<br><a href="#rmInspector">TrmInspector</a>
+<br><a href="#rmListControl">TrmListControl</a>
+<br><a href="#rmKeyBindings">TrmKeyBindings</a>
+<br><a href="#rmMemoryDataSet">TrmMemoryDataSet</a>
+<br><a href="#rmOutlookActionLink">TrmOutlookActionLink</a>
+<br><a href="#rmOutlookButtonList">TrmOutlookButtonList</a>
+<br><a href="#rmOutlookControl">TrmOutlookControl</a></td>
+</tr>
+
+<tr>
+<td VALIGN=CENTER BGCOLOR="#00FFFF">
+<center><b>Shell Related Components</b></center>
+</td>
+
+<td VALIGN=CENTER COLSPAN="2" BGCOLOR="#00FFFF">
+<center><b>Miscellanous Components</b></center>
+</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#00FFFF"><a href="#rmBrowseForFolder">TrmBrowseForFolder</a>
+<br><a href="#rmFileDrop">TrmFileDrop</a>
+<br><a href="#rmTrayIcon">TrmTrayIcon</a></td>
+
+<td ALIGN=LEFT VALIGN=TOP COLSPAN="2" BGCOLOR="#00FFFF">
+<table CELLSPACING=0 CELLPADDING=0 COLS=2 WIDTH="100%" >
+<tr>
+<td ALIGN=LEFT VALIGN=TOP><a href="#rmBinaryDataStorage">TrmBinaryDataStorage</a>
+<br><a href="#rmCaptionButtons">TrmCaptionButtons</a>
+<br><a href="#rmCheckBox">TrmCheckBox</a>
+<br><a href="#rmColorComboBox">TrmColorComboBox</a>
+<br><a href="#rmColumns">TrmColumns</a>
+<br><a href="#rmComboBox">TrmComboBox</a>
+<br><a href="#rmCornerGrip">TrmCornerGrip</a>
+<br><a href="#rmGuage">TrmGauge</a>
+<br><a href="#rmImageListGlyph">TrmImageListGlyph</a></td>
+
+<td ALIGN=LEFT VALIGN=TOP><a href="#rmImageListGraphic">TrmImageListGraphic</a>
+<br><a href="#rmMDIBackground">TrmMDIBackground</a>
+<br><a href="#rmNewComboBox">TrmNewComboBox</a>
+<br><a href="#rmTaskBar">TrmTaskBar</a>
+<br><a href="#rmTextDataStorage">TrmTextDataStorage</a>
+<br><a href="#rmTrackBar">TrmTrackBar</a>
+<br><a href="#rmTreeNonView">TrmTreeNonView</a>
+<br><a href="#rmToolWinForm">TrmToolWinForm</a>
+<br><a href="#rmwordtree">TrmWordTree</a></td>
+</tr>
+</table>
+</td>
+</tr>
+
+<tr>
+<td VALIGN=CENTER COLSPAN="3" BGCOLOR="#0000FF">
+<center><b><font color="#CCCCCC">rmLibrary Routines</font></b></center>
+</td>
+</tr>
+
+<tr>
+<td VALIGN=CENTER BGCOLOR="#00FFFF">
+<center><b>Conversion</b></center>
+</td>
+
+<td VALIGN=CENTER BGCOLOR="#00FFFF">
+<center><b>Math/Numeric</b></center>
+</td>
+
+<td VALIGN=CENTER BGCOLOR="#00FFFF">
+<center><b>Hardware</b></center>
+</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#00FFFF"><a href="#strtochar">StrToChar</a>
+<br><a href="#chartostr">CharToStr</a>
+<br><a href="#booltostr">BoolToStr</a>
+<br><a href="#strtobool">StrToBool</a>
+<br><a href="#sizeint">SizeInt</a></td>
+
+<td VALIGN=TOP BGCOLOR="#00FFFF"><a href="#intinrange">IntInRange</a>
+<br><a href="#compinrange">CompInRange</a>
+<br><a href="#setinrange">SetInRange</a>
+<br><a href="#greaterthanint">GreaterThanInt</a>
+<br><a href="#lessthanint">LessThanInt</a>
+<br><a href="Greaterthanfloat">GreaterThanFloat</a>
+<br><a href="#lessthanfloat">LessThanFloat</a>
+<br><a href="#RectHeight">RectHeight</a>
+<br><a href="#RectWidth">RectWidth</a>
+<br><a href="#RectDiameter">RectDiameter</a></td>
+
+<td VALIGN=TOP BGCOLOR="#00FFFF"><a href="#getmediainfo">GetMediaInfo</a></td>
+</tr>
+
+<tr>
+<td VALIGN=CENTER BGCOLOR="#00FFFF">
+<center><b>Graphic</b></center>
+</td>
+
+<td VALIGN=CENTER BGCOLOR="#00FFFF">
+<center><b>CRC32</b></center>
+</td>
+
+<td VALIGN=CENTER BGCOLOR="#00FFFF">
+<center><b>WinSock</b></center>
+</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#00FFFF"><a href="#gradientfill">GradientFill</a>
+<br><a href="#rotateimage">RotateImage</a>
+<br><a href="#rotatetext">RotateText</a>
+<br><a href="#replacecolors">ReplaceColors</a>
+<br><a href="#drawgraytext">DrawGrayText</a></td>
+
+<td VALIGN=TOP BGCOLOR="#00FFFF"><a href="#getfilecrc32">GetFileCRC32</a>
+<br><a href="#getstrcrc32">GetStrCRC32</a>
+<br><a href="#getstrmcrc32">GetStrmCRC32</a></td>
+
+<td VALIGN=TOP BGCOLOR="#00FFFF"><a href="#localip">LocalIP</a>
+<br><a href="#localname">LocalName</a></td>
+</tr>
+
+<tr>
+<td VALIGN=CENTER BGCOLOR="#00FFFF">
+<center><b>String</b></center>
+</td>
+
+<td VALIGN=CENTER BGCOLOR="#00FFFF">
+<center><b>Shell</b></center>
+</td>
+
+<td VALIGN=CENTER BGCOLOR="#00FFFF">
+<center><b>OS</b></center>
+</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#00FFFF"><a href="#parsesection">ParseSection</a>
+<br><a href="#countsections">CountSections</a>
+<br><a href="#leadingzero">LeadingZero</a>
+<br><a href="#padleft">PadLeft</a>
+<br><a href="#padright">PadRight</a>
+<br><a href="#stripstring">StripString</a>
+<br><a href="#rmdatetimetostr">rmDateTimeToStr</a>
+<br><a href="#maskstrcmp">MaskStrCmp</a>
+<br><a href="#soundex">SoundEx</a></td>
+
+<td VALIGN=TOP BGCOLOR="#00FFFF"><a href="#readshortcutfile">ReadShortCutFile</a>
+<br><a href="#writeshortcutfile">WriteShortCutFile</a>
+<br><a href="#getfiletype">GetFileType</a>
+<br><a href="#getfileicon">GetFileIcon</a>
+<br><a href="#getfileimageindex">GetFileImageIndex</a>
+<br><a href="#getfileimages">GetFileImages</a></td>
+
+<td VALIGN=TOP BGCOLOR="#00FFFF"><a href="#winosversion">WinOSVersion</a></td>
+</tr>
+</table>
+
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<table BORDER CELLPADDING=3 WIDTH="750" >
+<tr>
+<td VALIGN=CENTER BGCOLOR="#C0C0C0">
+<center><b>Name</b></center>
+</td>
+
+<td VALIGN=CENTER BGCOLOR="#C0C0C0">
+<center><b>Description</b></center>
+</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="rmApplicationEvents"></a>TrmApplicationEvents</td>
+
+<td VALIGN=CENTER BGCOLOR="#C0C0C0">This component allows for designtime
+assigning of the standard application events.&nbsp;
+<p><b><font color="#008000">Note</font></b>:&nbsp; It was originally created
+to correct a VCL bug in the original release version of Delphi5.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="rmCCTabControl"></a>TrmCCTabControl</td>
+
+<td VALIGN=CENTER BGCOLOR="#C0C0C0">This and the TrmCCPageControl were
+originally apart of the ComCtrls95 component set.&nbsp;
+<p>They have enhanced drawing functionality along with some of the original
+enhanced features of the original component set.&nbsp;</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="rmCCPageControl"></a>TrmCCPageControl</td>
+
+<td VALIGN=CENTER BGCOLOR="#C0C0C0">This and the TrmCCTabControl were originally
+apart of the ComCtrls95 component set.&nbsp;
+<p>They have enhanced drawing functionality along with some of the original
+enhanced features of the original component set.&nbsp;
+<p>The TrmCCPageControl has the ability to have it's pages ripped off to
+form floating forms that can then be reattached to the original control
+when closed.&nbsp;</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="rmEditDrawGrid"></a>TrmEditDrawGrid</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">This was originally a standard DrawGrid
+but a friend needed the ability to have an inplace editor in a cell and
+so I provided this and the TrmEditGrid as possible solutions.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="rmEditGrid"></a>TrmEditGrid</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">This was originally a standard StringGrid
+but a friend needed the ability to have an inplace editor in a cell and
+so I provided this and the TrmEditDrawGrid as possible solutions.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="rmLabel"></a>TrmLabel</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">This was one of the first components I
+ever wrote.&nbsp; It is basically an exercise in eye candy.&nbsp;
+<p>It provides the ability for borders, font textures and gradient shading.&nbsp;</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="rmPanel"></a>TrmPanel</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">This panel has a builtin splitter/sizer
+grip built in as well as a sizing button.&nbsp; Either one can be used
+separately or in conjunction with each other.&nbsp;
+<p><b><font color="#008000">Note</font></b>: Both of these features only
+work when the panel has been aligned to an edge.&nbsp;</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="rmPathTreeView"></a>TrmPathTreeView</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">This is treeview was originally based
+on the Delphi TTreeview.&nbsp; The addition of the pathing code allows
+nodes to be added via a path and indexed via paths very quickly.&nbsp;
+<p><b><font color="#008000">Note</font></b>: On average testing over 10000
+nodes were added to the rmPathTreeView in less than 2000ms and all nodes
+were indexed/accessed via the pathing routines in less than 100ms.&nbsp;</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="rmSpeedButton"></a>TrmSpeedButton</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">This enhanced speedbutton is used through
+out the rmControls library.&nbsp;
+<p>It has a couple of different drawing styles to allow for dropdown menus
+and combo boxes.&nbsp;</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="rmSplitter"></a>TrmSplitter</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">This was original created to over come
+a bug in an early version of the Delphi 4 VCL.&nbsp; That bug has sinced
+been fixed as of Delphi 5 and this is probably a redundant component.&nbsp;
+I always ment to do more with it but I think I superceded it with the TrmPanel
+functionality.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="rmSpinButton"></a>TrmSpinButton</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">This is an enhanced version of the Delphi
+Spin Button.&nbsp; It provides some greater flexibility when used for automatic
+repeats.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="rmTabSet"></a>TrmTabSet</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">This is an updated version of the old
+Win 3.1 Tabset component to be more resource friendly and to provide the
+ability for further drawing styles.&nbsp; (ah-la - Windows 2000 style tabset)</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="rmBtnCombo"></a>TrmBtnCombo</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">This component descends from the TrmBtnEdit.&nbsp;
+It implements an edit control that has an ellipsis button and has a dropdown
+combo list built in.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="rmBtnEdit"></a>TrmBtnEdit</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">This was another of my early components.&nbsp;
+As such it's probably one of the most worked on components in the library.&nbsp;
+It is used as a base control for a number of other rmControls.&nbsp;
+<p>It is an edit that has upto two ellipsis buttons.&nbsp;</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="rmCalendar"></a>TrmCalendar</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">This is a simple replacement for the M$
+common control calendar.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="rmComboCalendar"></a>TrmComboCalendar</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">This is a combobox that drops down a version
+of the TrmCalendar.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="rmComboPathTreeView"></a>TrmComboPathTreeView</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">This is a combobox that drops down a version
+of the TrmPathTreeView.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="rmComboTreeView"></a>TrmComboTreeView</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">This is a combobox that drops down a standard
+TTreeView.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="rmFloatSpinEdit"></a>TrmFloatSpinEdit</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">This is a spinedit for editing real numbers.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="rmSpinCombo"></a>TrmSpinCombo</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">This is a spinedit that has a dropdown
+list combo built in.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="rmSpinEdit"></a>TrmSpinEdit</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">This is the base spinedit for most of
+the spinedit rmControls.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="rmTimeSpinEdit"></a>TrmTimeSpinEdit</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">This is a spinedit for editing time values
+(24 and 12 hr time formats)</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="rmCollectionListBox"></a>TrmCollectionListBox</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">This is control similar to a listbox but
+instead of a string list it uses a collection.&nbsp; Each item can be multi-line
+and also can have an&nbsp;
+<br>image associated with it.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="rmDGTree"></a>TrmDGTree</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">This is a very specialized type of non-visual
+tree.&nbsp; I primarily use it in a spell-checker component/application
+that I've written.&nbsp;
+<p><b><font color="#008000">Note</font></b>: I haven't included the spell
+checker as a demo application, but it will be coming.&nbsp;</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="rmDiffEngine"></a>TrmDiffEngine</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">This is the non-visual difference engine
+that I developed from some C source I found on the net.&nbsp; It can be
+hooked up to multiple rmDiffViewers/rmDiffMergeViewers at once.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="rmDiffMap"></a>TrmDiffMap</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">This is a simple control that can be placed
+along side either an rmDiffViewer or rmDiffMergeViewer and can be linked&nbsp;
+to show where differences are located with in the two sources.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="rmDiffMergeViewer"></a>TrmDiffMergeViewer</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">This control allows the end user to create
+a new version of two diff'ed files.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="rmDiffViewer"></a>TrmDiffViewer</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">This control shows the differences found
+in two diff'ed files.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="rmInspector"></a>TrmInspector</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">This is a control similar to that found
+in Delphi's properties inspector.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="rmListControl"></a>TrmListControl</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">This control was originally created for
+the rmDiff viewer controls.&nbsp; It is essentially a listbox control but
+one that has a couple of extra properties and features.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="rmKeyBindings"></a>TrmKeyBindings</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">Personally I don't know why Borland didn't
+come up with something like this.&nbsp; This control allows the end user
+to customize the short-cut keys assigned in actionlists.&nbsp; The changes
+can then be saved/loaded at any time.&nbsp; The dialog that the end user
+sees is very similar to the one found in M$-Word.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="rmMemoryDataSet"></a>TrmMemoryDataSet</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">This is a Dataset descendant that can
+be used just like a regular dataset with on major exception.&nbsp; It doesn't
+hook up to a Database, a datasource or anything else.&nbsp; You can set
+up the columns at design time or runtime and the it operates almost exactly
+like a standard dataset but with out the overhead of having a DB lying
+around.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="rmOutlookButtonList"></a>TrmOutlookButtonList</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">This is similar to the M$ list control
+that you see in their outlook controls.&nbsp; It supports both the large
+and small Icon sizes.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="rmOutlookControl"></a>TrmOutlookControl</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">This is actually very similar to a PageControl
+is how you use it, but it looks and feels like the control found in M$
+Outlook.&nbsp; Hence the name.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="rmOutlookActionLink"></a>TrmOutlookActionLink</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">This component allows you to automatically
+build rmOutlookButtonLists and adds them to an rmOutlookControl from an
+ActionList.&nbsp; Each category in the ActionList becomes a page in the
+rmOutlookControl.
+<p>This component was written by Piotr Jurago of Poland.&nbsp; He sent
+it back to me and I've included it here.&nbsp; Thanks Piotr!</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="rmBrowseForFolder"></a>TrmBrowseForFolder</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">This is actually a couple of controls
+in one.&nbsp; It allows you to display the standard windows dialog for:
+Browse for folder, Browse for Computers, Browse for Printers and Browser
+for Files or Folders</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="rmFileDrop"></a>TrmFileDrop</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">Drop this component on a form and set
+a couple of properties and you can turn any TWinControl descendant in to
+a drop zone for files from the shell.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="rmTrayIcon"></a>TrmTrayIcon</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">This component allows you to place an
+icon in the windows tray and provide functionality to handle menus and
+the such.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="rmBinaryDataStorage"></a>TrmBinaryDataStorage</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">This component allows you to store binary
+data as a part of the forms resource.&nbsp; It can also load data directly
+from a files.&nbsp;
+<br>You can't load data at runtime but you can save the data to disk or
+stream it out from the component.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="rmCaptionButtons"></a>TrmCaptionButtons</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">This allows you to place buttons on the
+caption of the form that the component is owned by.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="rmCheckBox"></a>TrmCheckBox</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">This is a non-windows implementation of
+a Checkbox.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="rmColorComboBox"></a>TrmColorComboBox</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">This is a standard combo box that has
+been modified to display colors and their associated names.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="rmColumns"></a>TrmColumns</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">This component is tied to a TListView
+control and in the details view remembers the columns, their sizes and
+which on had sorting.&nbsp; It can save the data out and load it back in.&nbsp;
+Useful for storing and retrieving stuff to registry for multiple views.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="rmComboBox"></a>TrmComboBox</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">This combo box descends from the original
+Delphi TComboBox, but has extra features like look ahead completion and
+MRU history.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="rmCornerGrip"></a>TrmCornerGrip</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">This component is just placed on a form.&nbsp;
+If there is nothing aligned so as to cover the bottom-right corner of the
+form then you will see the standard SizeGrip rect on the form at runtime.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="rmGuage"></a>TrmGauge</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">This is a simple component that can be
+used to as a measuring gauge.&nbsp; It has multiple drawing styles and
+can support gradient color filling.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="rmImageListGlyph"></a>TrmImageListGlyph</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">This is a simple control that allows the
+user to attach an imagelist and change the displayed image via an imageindex
+property.&nbsp;
+<p>The difference between this component and the TrmImageListGraphic is
+that this one also allows you to have a caption attached to the image.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="rmImageListGraphic"></a>TrmImageListGraphic</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">This is a simple control that allows the
+user to attach an imagelist and change the displayed image via an imageindex
+property.&nbsp;
+<p>The difference between this component and the TrmImageListGlyph is that
+this one has NO caption property.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="rmMDIBackground"></a>TrmMDIBackground</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">This component allows you to place an
+image in the MDI Client area of a form or to change it's color.&nbsp; The
+image can be centered, tiled or stretched.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="rmNewComboBox"></a>TrmNewComboBox</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">This is my first attempt at doing a non
+M$ Win32 based component.&nbsp;
+<p>It is similar in behavior and operation to the TrmComboBox but it is
+NOT a subclassed M$ Comboboxl.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="rmTaskBar"></a>TrmTaskBar</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">This is similar to the M$ Windows Taskbar.&nbsp;
+It is to be used on an applications mainform and it shows all windows attached
+to the application.&nbsp; It is especially useful in MDI applications and
+has many useful functions like hiding the minimized MDI Child windows.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="rmTextDataStorage"></a>TrmTextDataStorage</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">This is similar to the TrmBinaryDataStorage,
+but it is different in that it uses a stringlist.&nbsp; This can be edited
+at designtime just like any other component that has a Stringlist in it.&nbsp;
+It can also load data directly from a files.&nbsp; You can't load data
+at runtime but you can save the data to disk or stream it out from the
+component.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="rmTrackBar"></a>TrmTrackBar</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">This is a replacement for the M$ common
+control trackbar component.&nbsp; It offers the ability to change the thumb
+and other customizations.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="rmTreeNonView"></a>TrmTreeNonView</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">This has to be the most useful component
+in the entire rmControl library.&nbsp; This is a non-visual treeview with
+the same pathing functionality as the TrmPathTreeView.&nbsp; The speed
+increases on this component are almost to amazing to believe, your just
+going to have to believe me.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="rmToolWinForm"></a>TrmToolWinForm</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">There is a very annoying bug in the M$
+implementation the ToolWin windows style. (ie. bsSizeToolWin and bsToolWindow)&nbsp;
+<br>It causes what's know as the ALT-Tab bug where any form with a toolwin
+style that has focus will not allow the application to change focus to
+another application via the ALT-Tab key sequence.&nbsp; (Check it out with
+the Delphi property inspector!!)&nbsp;
+<p>This form allows you to use a form that looks EXACTLY like a sizeable
+tool window but doesn't suffer from the ALT-Tab problem.&nbsp; Look under
+the 'File|New...' menu item and select the rmToolWinForm to get it.&nbsp;</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="rmwordtree"></a>TrmWordTree</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">This non-visual component attempts to
+provide a simple dictionary type word lookup interface.&nbsp; Given a list
+of words it will veryify words found in it's dictionary or provide a list
+of similar words found in its dictionary verified by a soundex algorithm.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="strtochar"></a>StrToChar</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">Takes a string and attempts to convert
+it to is character equivalent.&nbsp; (ie. '#65' to&nbsp; 'A')</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="chartostr"></a>CharToStr</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">Takes a character and converts it to is
+string equivalent.&nbsp; (ie. 'A' to '#65')</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="booltostr"></a>BoolToStr</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">Returns the strings 'True' or 'False'
+for the boolean value given.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="strtobool"></a>StrToBool</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">Attempts to return the Boolean value of
+the given string.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="sizeint"></a>SizeInt</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">Takes an integer value and returns the
+shorted string version.&nbsp; (ie 1024 to '1kb')</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="intinrange"></a>IntInRange</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">Determines whether an Integer value is
+within a given range.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="compinrange"></a>CompInRange</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">Determines whether a Comp value is within
+a given range.&nbsp;</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="setinrange"></a>SetInRange</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">Determines whether a value is with in
+a given range and sets it to one of the bounds if it isn't.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="greaterthanint"></a>GreaterThanInt</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">Returns the larger of the two integer
+values.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="lessthanint"></a>LessThanInt</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">Returns the smaller of the two integer
+values.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="greaterthanfloat"></a>GreaterThanFloat</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">Returns the larger of the two real number
+values.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="lessthanfloat"></a>LessThanFloat</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">Returns the smaller of the two real number
+values.</td>
+</tr>
+
+<tr>
+<td BGCOLOR="#C0C0C0"><a NAME="RectHeight"></a>RectHeight</td>
+
+<td BGCOLOR="#C0C0C0">Returns the height of the Rect</td>
+</tr>
+
+<tr>
+<td BGCOLOR="#C0C0C0"><a NAME="RectWidth"></a>RectWidth</td>
+
+<td BGCOLOR="#C0C0C0">Returns the width of the Rect</td>
+</tr>
+
+<tr>
+<td BGCOLOR="#C0C0C0"><a NAME="RectDiameter"></a>RectDiameter</td>
+
+<td BGCOLOR="#C0C0C0">Takes a TRect and returns what the circular diameter
+of the Rect is.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="getmediainfo"></a>GetMediaInfo</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">Returns information about a drive based
+on the flags passed into the call.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="gradientfill"></a>GradientFill</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">Draws a gradient fill on a canvas based
+upon a start and end color.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="rotateimage"></a>RotateImage</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">Rotates an image by a specified rotational
+angle.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="rotatetext"></a>RotateText</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">Draws text on an canvas specified by a
+rotational angle.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="replacecolors"></a>ReplaceColors</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">Takes a simple black and white bitmap
+and does a two color replacement.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="drawgraytext"></a>DrawGrayText</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">Similar to the DrawText command but draws
+the text disabled.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="getfilecrc32"></a>GetFileCRC32</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">Calculates a CRC32 value on a given filename.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="getstrcrc32"></a>GetStrCRC32</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">Calculates a CRC32 value on a given string.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="getstrmcrc32"></a>GetStrmCRC32</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">Calculates a CRC32 value on a given stream.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="localip"></a>LocalIP</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">Returns the Local machines IP address
+if available.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="localname"></a>LocalName</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">Returns the Local machines Name if available.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="parsesection"></a>ParseSection</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">Parses a returns data from a string separated
+by a specified character.&nbsp; (ie 'One|Two|Three|' the index 2 would
+return 'Two')</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="countsections"></a>CountSections</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">Counts the number of sections in a string
+separated by a specified character.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="leadingzero"></a>LeadingZero</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">Pads an integer value with leading zeros
+to a specified string length.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="padleft"></a>PadLeft</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">Pads a string with leading spaces to a
+specified string length.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="padright"></a>PadRight</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">Pads a string with trailing spaces to
+a specified string length.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="stripstring"></a>StripString</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">Strips a string of all characters from
+a specified character set.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="rmdatetimetostr"></a>rmDateTimeToStr</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">Returns the date time as a string in the
+format of&nbsp; 'yyyymmddhhnnsszzz'</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="maskstrcmp"></a>MaskStrCmp</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">Does a string comparison with the * and
+? wildcard characters</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="soundex"></a>SoundEx</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">Does a simple SoundEx calculation on a
+given string.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="readshortcutfile"></a>ReadShortCutFile</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">Reads a .LNK or .PIF file and returns
+the details of it in an TShortCutDetails record.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="writeshortcutfile"></a>WriteShortCutFile</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">Writes a .LNK file from the details given
+in a TShortCutDetails record.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="getfiletype"></a>GetFileType</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">Returns the Shell file type string for
+a given file extension.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="getfileicon"></a>GetFileIcon</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">Returns the icon for a given file extension.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="getfileimageindex"></a>GetFileImageIndex</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">Returns the shell icon image index for
+a given file extension.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="getfileimages"></a>GetFileImages</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">Returns the shells imagelist handle for
+displaying shell icons.&nbsp;
+<p>(<b><font color="#FF0000">Warning</font></b>: Use this function with
+caution.&nbsp; Read up on using shared imagelists before using.)</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP BGCOLOR="#C0C0C0"><a NAME="winosversion"></a>WinOSVersion</td>
+
+<td VALIGN=TOP BGCOLOR="#C0C0C0">This returns an enumerated type specifying
+the current operating system.</td>
+</tr>
+</table>
+
+<p><b><font color="#008000">Note</font></b>:&nbsp; There are other bits
+and pieces of this component set that I could tell you about but I'm not
+for the sake of yours and my sanity’s.&nbsp; If you are really interested
+and have and somewhat advanced knowledge of both Windows and Delphi programming
+then feel to browse the code.
+<p>
+<hr>
+<br>&nbsp;
+<p><a NAME="Disclaimer"></a>
+<center><table BORDER WIDTH="500" >
+<tr>
+<td VALIGN=CENTER BGCOLOR="#C0C0C0">
+<center><b><font color="#FF0000">Disclaimer</font></b>
+<p><font face="Tahoma"><font size=-1>THIS SOFTWARE AND THE ACCOMPANYING
+FILES ARE DISTRIBUTED "AS IS"&nbsp;</font></font>
+<br><font face="Tahoma"><font size=-1>AND WITHOUT WARRANTIES AS TO PERFORMANCE
+OF MERCHANTABILITY&nbsp;</font></font>
+<br><font face="Tahoma"><font size=-1>OR ANY OTHER WARRANTIES WHETHER EXPRESSED
+OR IMPLIED.&nbsp;</font></font>
+<p><font face="Tahoma"><font size=-1>Because of the various software environments
+into which this code may be used,&nbsp;</font></font>
+<br><font face="Tahoma"><font size=-1>NO WARRANTY OF FITNESS FOR A PARTICULAR
+PURPOSE IS OFFERED.&nbsp;</font></font>
+<p><font face="Tahoma"><font size=-1>Good data processing procedure dictates
+that any program based on this&nbsp;</font></font>
+<br><font face="Tahoma"><font size=-1>code be thoroughly tested with non-critical
+data before relying on it.&nbsp;</font></font>
+<p><font face="Tahoma"><font size=-1>THE USER MUST ASSUME THE ENTIRE RISK
+OF&nbsp;</font></font>
+<br><font face="Tahoma"><font size=-1>USING ANY OF THE ACCOMPANYING CODE.</font></font></center>
+</td>
+</tr>
+</table></center>
+
+<p>
+<hr>
+<p><a NAME="Status"></a><b><font color="#008000">Library Status</font></b>:
+This code is being released as freeware.&nbsp; I only ask that if you modify
+the code that you email a copy of the new source back to me.
+<p><b><font color="#008000">Contact Details</font></b>: My name is Ryan
+Mills, unfortunately I'm currently between home pages.&nbsp; Once I get
+a stable home page and email address I'll update the contact details here.
+<p>If you have source code updates you can email them to my work address,
+ryan.mills@quest.com.
+<p><b>I can't answer any question regarding the library at that email address,
+I will only respond if you have sent me source code updates.</b>
+<p>
+<hr>
+<p><a NAME="History"></a><b><font color="#008000">History</font></b>:&nbsp;
+I originally started this library in 1997 as the meControl library.&nbsp;
+It wasn't long after this that I found the Delphi Prefix Registry and discovered
+that the "me" prefix was already spoken for.&nbsp; Since then I have registered
+the "rm" prefix renamed all of the original components and produced a few
+new ones.
+<p>
+<hr>
+<p><a NAME="Acknowledgments"></a><b><font color="#008000">Acknowledgments</font></b>:
+I did not write all of the code found in this library and the code that
+I didn't write I have been asked to take over and maintain.&nbsp; If you
+look in the header comments of the units you will find the relevant comments
+giving credit to the original author.
+<p>
+<hr>
+<p><a NAME="Release"></a><b><font color="#008000">Release Notes</font></b>:
+<br>&nbsp;
+<table BORDER WIDTH="750" >
+<tr>
+<td VALIGN=CENTER>
+<center><b>Date Released</b></center>
+</td>
+
+<td VALIGN=CENTER>
+<center><b>Version</b></center>
+</td>
+
+<td VALIGN=CENTER WIDTH="71%">
+<center><b>Comments</b></center>
+</td>
+</tr>
+
+<tr>
+<td ALIGN=CENTER VALIGN=CENTER>&nbsp;06-22-2001</td>
+
+<td VALIGN=CENTER>
+<center>1.80</center>
+</td>
+
+<td VALIGN=CENTER>I finally got my copy of D6!&nbsp; Thus the bug jump
+in the version numbers.&nbsp; This release now supports both D5 and D6.&nbsp;
+The most changes had to occur in the design-time code.&nbsp; There were
+a couple of function deprication issues that I had to IFDEF out but for
+the most part this version of the code base is same.&nbsp; You shouldn't
+notice any difference.&nbsp;
+<p><font color="#CC0000">*****Please Note*****</font>
+<br>Just because I've gotten the entire component set compiled in D6 doesn't
+mean that at this time I have run a full regression test on all the code.&nbsp;
+Please notify me immediatly of any problems encountered while useing these
+components with Delphi 6.
+<br><font color="#CC0000">*****Please Note*****</font>
+<p>I have once again had an email address change: <b><font color="#FF0000">ryan.mills@quest.com</font></b>
+<br><font color="#000000">I am working on getting a more stable and permanent
+address but I haven't yet as I am moving in the next week or so.&nbsp;
+Please be patient with me.&nbsp; I do monitor the borland news groups if
+you can't seem to get ahold of me any other way.</font>
+<p>- Updated TrmTreeNonView and TrmPathTreeView with some speed enhancements
+<br>&nbsp;&nbsp; and a bug fix that caused the indexing to fail on the
+Items.assign function.&nbsp;
+<br>- Updated the ancestry of TrmImageListGlyph&nbsp;
+<br>- Updated with bug fixes TrmCalendarCombo, TrmDiffViewer, TrmNewComboBox
+<br>- Fixed a bug in TrmListControl that was causing a memory leak.&nbsp;
+Thanks to&nbsp;
+<br><i>&nbsp;&nbsp; Ingo Eckel</i> for finding it.
+<br>- Rewrote the clientarea code for the TrmPanel to properly handle multi-embeded
+<br>&nbsp;&nbsp; rmPanels
+<br>- Modified the rmConditionalDefines.INC file to include what I consider
+necessary&nbsp;
+<br>&nbsp;&nbsp; compiler defines.
+<br>- Rewrote the drawing code for the TrmTab3x component to allow for
+alTop&nbsp;
+<br>&nbsp;&nbsp; aligned tabs.&nbsp; All other alignments still work like
+the original alBottom alignment did.
+<p>Added <a href="#soundex">SoundEx</a>, <a href="#RectHeight">RectHeight</a>,
+<a href="#RectWidth">RectWidth</a>, <a href="#rmCheckBox">rmCheckBox</a>,
+<a href="#rmInspector">rmCheckboxInspectorItem</a>
+<br>&nbsp; <a href="#rmOutlookActionLink">rmOutlookActionLink</a> (written
+by Piotr Jurago of Poland)</td>
+</tr>
+
+<tr>
+<td VALIGN=CENTER>
+<center>05-03-2001</center>
+</td>
+
+<td VALIGN=CENTER>
+<center>1.70</center>
+</td>
+
+<td VALIGN=CENTER>- Updated the TrmMemoryDataSet.&nbsp; Mea Culpa, I included
+an 'in progress' copy of&nbsp;
+<br>&nbsp;&nbsp; the control instead of the working copy.&nbsp; Thanks
+to <i>Graeme D. Keast</i> for finding&nbsp;
+<br>&nbsp;&nbsp; that one.&nbsp;
+<br>- Updated the rmNewComboBox.&nbsp; I was again in the progress of changing
+over the&nbsp;
+<br>&nbsp;&nbsp; base component of the copy I sent out. Thanks to <i>Peter
+Giroux</i> for that one.&nbsp;
+<p>Added <a href="#rmToolWinForm">rmToolWinForm</a></td>
+</tr>
+
+<tr>
+<td VALIGN=CENTER>
+<center>04-19-2001</center>
+</td>
+
+<td VALIGN=CENTER>
+<center>1.65</center>
+</td>
+
+<td VALIGN=CENTER>Updated a number of components implementing bug fixes
+and enhancements.&nbsp;
+<p>Added <a href="#rmDGTree">rmDGTree</a>, <a href="#rmMemoryDataSet">rmMemoryDataSet</a>
+and <a href="#rmInspector">rmInspector</a>.</td>
+</tr>
+
+<tr>
+<td VALIGN=CENTER>
+<center>03-19-2001</center>
+</td>
+
+<td VALIGN=CENTER>
+<center>1.60</center>
+</td>
+
+<td VALIGN=CENTER>This is the original public release version.</td>
+</tr>
+</table>
+
+</body>
+</html>

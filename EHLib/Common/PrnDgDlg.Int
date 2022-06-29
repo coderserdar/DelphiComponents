@@ -1,0 +1,55 @@
+{*******************************************************}
+{                                                       }
+{                       EhLib v3.4                      }
+{             TfPrnDBGridEhSetupDialog form             }
+{                                                       }
+{   Copyright (c) 1998-2004 by Dmitry V. Bolshakov      }
+{                                                       }
+{*******************************************************}
+
+unit PrnDgDlg;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  StdCtrls, Printers, ExtCtrls;
+
+type
+  TfPrnDBGridEhSetupDialog = class(TForm)
+    gbPrintFields: TGroupBox;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    seUpMargin: TEdit;
+    seLowMargin: TEdit;
+    seLeftMargin: TEdit;
+    seRightMargin: TEdit;
+    cbFitWidthToPage: TCheckBox;
+    ePrintFont: TEdit;
+    cbAutoStretch: TCheckBox;
+    bPrinterSetupDialog: TButton;
+    bPrintFont: TButton;
+    bOk: TButton;
+    bCancel: TButton;
+    FontDialog1: TFontDialog;
+    PrinterSetupDialog1: TPrinterSetupDialog;
+    cbColored: TCheckBox;
+    rgFitingType: TRadioGroup;
+    cbOptimalColWidths: TCheckBox;
+    procedure bPrintFontClick(Sender: TObject);
+    procedure bPrinterSetupDialogClick(Sender: TObject);
+    procedure seMarginExit(Sender: TObject);
+    procedure fPrnDBGridEHSetupDialogShow(Sender: TObject);
+    procedure cbFitWidthToPageClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  fPrnDBGridEhSetupDialog: TfPrnDBGridEhSetupDialog;
+
+implementation

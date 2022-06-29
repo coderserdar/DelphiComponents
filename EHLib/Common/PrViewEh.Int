@@ -1,0 +1,181 @@
+{*******************************************************}
+{                                                       }
+{                       EhLib v3.4                      }
+{                  TPreviewBox component                }
+{                                                       }
+{   Copyright (c) 1998-2004 by Dmitry V. Bolshakov      }
+{                                                       }
+{*******************************************************}
+
+unit PrViewEh {$IFDEF CIL} platform{$ENDIF};
+
+{$I EhLib.Inc}
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, PrntsEh,
+{$IFDEF CIL}
+  WinUtils,
+{$ELSE}
+{$ENDIF}
+  ExtCtrls, Printers;
+
+type
+
+  TViewMode = (vm500, vm200, vm150, vm100, vm75, vm50, vm25, vm10, vmPageWidth, vmFullPage);
+
+{ TDrawPanel }
+
+  TDrawPanel = class(TPanel)
+  private
+    FOldMousePos: TPoint;
+    procedure WMCancelMode(var Message: TWMCancelMode); message WM_CANCELMODE;
+  protected
+    procedure CreateParams(var Params: TCreateParams); override;
+    procedure Paint; override;
+    procedure MouseDown(Button: TMouseButton; Shift: TShiftState; X, Y: Integer); override;
+    procedure MouseMove(Shift: TShiftState; X, Y: Integer); override;
+    procedure MouseUp(Button: TMouseButton; Shift: TShiftState; X, Y: Integer); override;
+  public
+    constructor Create(AOwner: TComponent); override;
+    property Canvas;
+  end;
+
+  TPrinterPreview = class;
+
+{ TPreviewBox }
+
+  TPreviewBox = class(TScrollBox)
+  private
+    FDrawPanel: TDrawPanel;
+    FOnOpenPreviewer: TNotifyEvent;
+    FOnPrinterPreviewChanged: TNotifyEvent;
+    FOnPrinterSetupChanged: TNotifyEvent;
+    FOnPrinterSetupDialog: TNotifyEvent;
+    FPageCount: Integer;
+    FPageIndex: Integer;
+    FPrinter: TPrinterPreview;
+    FPrinterSetupOwner: TComponent;
+    FViewMode: TViewMode;
+    pnlShadow: TPanel;
+//    FOnNeedOpenPreview: TNotifyEvent;
+    procedure SetPageIndex(Value: Integer);
+    procedure SetPrinter(const Value: TPrinterPreview);
+    procedure SetPrinterSetupOwner(const Value: TComponent);
+    procedure SetViewMode(const Value: TViewMode);
+    procedure WMGetDlgCode(var Msg: TWMGetDlgCode); message WM_GETDLGCODE;
+    procedure WMSize(var Message: TWMSize); message WM_SIZE;
+  protected
+    FScalePercent: Integer;
+    function DoMouseWheelDown(Shift: TShiftState; MousePos: TPoint): Boolean; override;
+    function DoMouseWheelUp(Shift: TShiftState; MousePos: TPoint): Boolean; override;
+    procedure CreateParams(var Params: TCreateParams); override;
+    procedure KeyDown(var Key: Word; Shift: TShiftState); override;
+    procedure MouseDown(Button: TMouseButton; Shift: TShiftState; X, Y: Integer); override;
+    procedure Notification(AComponent: TComponent; Operation: TOperation); override;
+  public
+    constructor Create(AOwner: TComponent); override;
+    destructor Destroy; override;
+    procedure PrintDialog;
+    procedure PrinterSetupDialog;
+    procedure UpdatePageSetup;
+    procedure UpdatePreview;
+    property OnPrinterSetupChanged: TNotifyEvent read FOnPrinterSetupChanged { write FOnPrinterSetupChanged};
+    property OnPrinterSetupDialog: TNotifyEvent read FOnPrinterSetupDialog { write FOnPrinterSetupDialog};
+    property PageCount: Integer read FPageCount;
+    property PageIndex: Integer read FPageIndex write SetPageIndex;
+    property Printer: TPrinterPreview read FPrinter write SetPrinter;
+    property PrinterSetupOwner: TComponent read FPrinterSetupOwner write SetPrinterSetupOwner;
+    property ViewMode: TViewMode read FViewMode write SetViewMode;
+  published
+    property OnOpenPreviewer: TNotifyEvent read FOnOpenPreviewer write FOnOpenPreviewer;
+    property OnPrinterPreviewChanged: TNotifyEvent read FOnPrinterPreviewChanged write FOnPrinterPreviewChanged;
+//    property OnNeedOpenPreview:TNotifyEvent read FOnNeedOpenPreview write FOnNeedOpenPreview;
+  end;
+
+//  TGetPreviewerEvent = function (Sender: TObject): TPreviewBox of object;
+
+{ TPrinterPreview }
+
+  TPrinterPreview = class(TVirtualPrinter)
+  private
+    FAborted: Boolean;
+    FMetafileCanvas: TMetafileCanvas;
+    FMetafileList: TList;
+    FOnPrinterSetupChanged: TNotifyEvent;
+    FOnPrinterSetupDialog: TNotifyEvent;
+    FPageNumber: Integer;
+    FPreviewer: TPreviewBox;
+    FPrinter: TPrinter;
+    FPrinterSetupOwner: TComponent;
+    FPrinting: Boolean;
+//    FOnGetPreviewer: TGetPreviewerEvent;
+//    FOnOpenPreviewer: TNotifyEvent;
+    function GetPropPrinter: TPrinter;
+    procedure SetOnPrinterSetupDialog(const Value: TNotifyEvent);
+    procedure SetPreviewer(const Value: TPreviewBox);
+//    function Previewer: TPreviewBox;
+  protected
+    function GetAborted: Boolean; override;
+    function GetCanvas: TCanvas; override;
+    function GetCapabilities: TPrinterCapabilities; override;
+    function GetFonts: TStrings; override;
+    function GetFullPageHeight: Integer; override;
+    function GetFullPageWidth: Integer; override;
+    function GetHandle: HDC; override;
+    function GetNumCopies: Integer; override;
+    function GetOrientation: TPrinterOrientation; override;
+    function GetPageHeight: Integer; override;
+    function GetPageNumber: Integer; override;
+    function GetPageWidth: Integer; override;
+    function GetPrinterIndex: Integer; override;
+    function GetPrinters: TStrings; override;
+    function GetPrinting: Boolean; override;
+    function GetTitle: String; override;
+    procedure DrawPage(Sender: TObject; Canvas: TCanvas; PageNumber: Integer);
+    procedure SetNumCopies(const Value: Integer); override;
+    procedure SetOrientation(const Value: TPrinterOrientation); override;
+    procedure SetPrinterIndex(const Value: Integer); override;
+    procedure SetTitle(const Value: string); override;
+    procedure ShowProgress(Percent: Integer); virtual;
+  public
+    constructor Create;
+    destructor Destroy; override;
+    procedure Abort; override;
+    procedure BeginDoc; override;
+    procedure EndDoc; override;
+{$IFDEF CIL}
+    procedure GetPrinter(ADevice, ADriver, APort: String; var ADeviceMode: IntPtr); override;
+    procedure SetPrinter(ADevice, ADriver, APort: String; ADeviceMode: IntPtr); override;
+{$ELSE}
+    procedure GetPrinter(ADevice, ADriver, APort: PChar; var ADeviceMode: THandle); override;
+    procedure SetPrinter(ADevice, ADriver, APort: PChar; ADeviceMode: THandle); override;
+{$ENDIF}
+    procedure NewPage; override;
+    procedure OpenPreview;
+    procedure Print;
+    property OnPrinterSetupChanged: TNotifyEvent read FOnPrinterSetupChanged write FOnPrinterSetupChanged;
+    property OnPrinterSetupDialog: TNotifyEvent read FOnPrinterSetupDialog write SetOnPrinterSetupDialog;
+    property Previewer: TPreviewBox read FPreviewer write SetPreviewer;
+    property Printer: TPrinter read GetPropPrinter;
+    property PrinterSetupOwner: TComponent read FPrinterSetupOwner write FPrinterSetupOwner;
+//    property OnGetPreviewer: TGetPreviewerEvent read FOnGetPreviewer write FOnGetPreviewer;
+//    property OnOpenPreviewer: TNotifyEvent read FOnOpenPreviewer write FOnOpenPreviewer;
+  end;
+
+
+function PrinterPreview: TPrinterPreview;
+function SetPrinterPreview(NewPrinterPreview: TPrinterPreview): TPrinterPreview;
+
+const
+  DefaultPrinterPhysicalOffSetX: Integer = 130;
+  DefaultPrinterPhysicalOffSetY: Integer = 150;
+  DefaultPrinterPageWidth: Integer = 4676;
+  DefaultPrinterPageHeight: Integer = 6744;
+  DefaultPrinterPixelsPerInchX: Integer = 600;
+  DefaultPrinterPixelsPerInchY: Integer = 600;
+  DefaultPrinterVerticalSizeMM: Integer = 285;
+  DefaultPrinterHorizontalSizeMM: Integer = 198;
+
+implementation

@@ -1,0 +1,77 @@
+{*******************************************************}
+{                                                       }
+{                       EhLib v3.4                      }
+{                 TVirtualPrinter object                }
+{                                                       }
+{   Copyright (c) 1998-2004 by Dmitry V. Bolshakov      }
+{                                                       }
+{*******************************************************}
+
+unit PrntsEh {$IFDEF CIL} platform{$ENDIF};
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Printers;
+
+type
+
+  TVirtualPrinter = class(TObject)
+  protected
+    function GetAborted: Boolean; virtual;
+    function GetCanvas: TCanvas; virtual;
+    function GetCapabilities: TPrinterCapabilities; virtual;
+    function GetFonts: TStrings; virtual;
+    function GetHandle: HDC; virtual;
+    function GetNumCopies: Integer; virtual;
+    function GetOrientation: TPrinterOrientation; virtual;
+    function GetPageHeight: Integer; virtual;
+    function GetPageWidth: Integer; virtual;
+    function GetPageNumber: Integer; virtual;
+    function GetPrinting: Boolean; virtual;
+    function GetTitle: String; virtual;
+    function GetFullPageWidth: Integer; virtual;
+    function GetFullPageHeight: Integer; virtual;
+    function GetPrinterIndex: Integer; virtual;
+    function GetPrinters: TStrings; virtual;
+    procedure SetPrinterIndex(const Value: Integer); virtual;
+    procedure SetNumCopies(const Value: Integer); virtual;
+    procedure SetOrientation(const Value: TPrinterOrientation); virtual;
+    procedure SetTitle(const Value: string); virtual;
+  public
+    constructor Create;
+    destructor Destroy; override;
+    procedure Abort; virtual;
+    procedure BeginDoc; virtual;
+    procedure EndDoc; virtual;
+    procedure NewPage; virtual;
+{$IFDEF CIL}
+    procedure GetPrinter(ADevice, ADriver, APort: String; var ADeviceMode: IntPtr); virtual;
+    procedure SetPrinter(ADevice, ADriver, APort: String; ADeviceMode: IntPtr); virtual;
+{$ELSE}
+    procedure GetPrinter(ADevice, ADriver, APort: PChar; var ADeviceMode: THandle); virtual;
+    procedure SetPrinter(ADevice, ADriver, APort: PChar; ADeviceMode: THandle); virtual;
+{$ENDIF}
+    property Aborted: Boolean read GetAborted;
+    property Canvas: TCanvas read GetCanvas;
+    property Capabilities: TPrinterCapabilities read GetCapabilities;
+    property Copies: Integer read GetNumCopies write SetNumCopies;
+    property Fonts: TStrings read GetFonts;
+    property Handle: HDC read GetHandle;
+    property Orientation: TPrinterOrientation read GetOrientation write SetOrientation;
+    property PageHeight: Integer read GetPageHeight;
+    property PageWidth: Integer read GetPageWidth;
+    property PageNumber: Integer read GetPageNumber;
+    property PrinterIndex: Integer read GetPrinterIndex write SetPrinterIndex;
+    property FullPageWidth: Integer read GetFullPageWidth;
+    property FullPageHeight: Integer read GetFullPageHeight;
+    property Printing: Boolean read GetPrinting;
+    property Printers: TStrings read GetPrinters;
+    property Title: String read GetTitle write SetTitle;
+  end;
+
+var
+  VirtualPrinter: TVirtualPrinter;
+//  PrinterPreview:TPrinterPreview;
+
+implementation

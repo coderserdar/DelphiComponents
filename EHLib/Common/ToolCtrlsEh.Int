@@ -1,0 +1,564 @@
+{*******************************************************}
+{                                                       }
+{                       EhLib v3.4                      }
+{                     Tool controls                     }
+{                                                       }
+{      Copyright (c) 2001-2004 by Dmitry V. Bolshakov   }
+{                                                       }
+{*******************************************************}
+
+{$I EhLib.Inc}
+
+{$IFDEF EH_LIB_VCL}
+unit ToolCtrlsEh {$IFDEF CIL} platform {$ENDIF};
+{$ELSE}
+unit QToolCtrlsEh;
+{$ENDIF}
+
+interface
+
+{$IFDEF EH_LIB_VCL}
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+{$IFDEF EH_LIB_5} Contnrs, {$ENDIF}
+{$IFDEF EH_LIB_6} Variants,  {$ENDIF}
+{$IFDEF CIL}
+  EhLibVCLNET,
+{$ELSE}
+  EhLibVCL,
+{$ENDIF}
+  StdCtrls, Mask, Db, DBCtrls, Buttons, ExtCtrls, Menus, ComCtrls, CommCtrl,
+  Imglist;
+{$ELSE}
+uses
+  QGraphics, QControls, QForms, QDialogs, Variants, QStdCtrls, QMask,
+  QDBCtrls, QButtons, QExtCtrls, QMenus, QComCtrls, QImglist,
+  Db, SysUtils, Classes;
+{$ENDIF}
+
+const
+  CM_IGNOREEDITDOWN = WM_USER + 102;
+
+type
+
+  IMemTableEh = interface
+    ['{A8C3C87A-E556-4BDB-B8A7-5B33497D1624}']
+//    property TreeViewMode: Boolean read GetTreeViewMode write SetTreeViewMode;
+    function FetchRecords(Count: Integer): Integer;
+    function GetInstantReadCurRow: Integer;
+    function GetTreeNodeExpanded(RowNum: Integer): Boolean; overload;
+    function GetTreeNodeExpanded: Boolean; overload;
+    function GetTreeNodeHasChields: Boolean;
+    function GetTreeNodeLevel: Integer;
+    function InstantReadIndexOfBookmark(Bookmark: TBookmarkStr): Integer;
+    function InstantReadRowCount: Integer;
+    function MemTableIsTreeList: Boolean;
+    function ParentHasNextSibling(ParenLevel: Integer): Boolean;
+    function SetTreeNodeExpanded(RowNum: Integer; Value: Boolean): Integer;
+    procedure InstantReadEnter(RowNum: Integer);
+    procedure InstantReadLeave;
+    property InstantReadCurRow: Integer read GetInstantReadCurRow;
+//    property TreeNodeCollapsed: Boolean read GetTreeNodeCollapsed write SetTreeNodeCollapsed;
+  end;
+
+  IComboEditEh = interface
+    ['{B64255B5-386A-4524-8BC7-7F49DDB410F4}']
+    procedure CloseUp(Accept: Boolean);
+  end;
+
+  TFieldsArrEh = array of TField;
+
+{ Standard events }
+
+  TButtonClickEventEh = procedure(Sender: TObject; var Handled: Boolean) of object;
+  TButtonDownEventEh = procedure(Sender: TObject; TopButton: Boolean;
+    var AutoRepeat: Boolean; var Handled: Boolean) of object;
+  TCloseUpEventEh = procedure(Sender: TObject; Accept: Boolean) of object;
+  TNotInListEventEh = procedure(Sender: TObject; NewText: String;
+    var RecheckInList: Boolean) of object;
+  TUpdateDataEventEh = procedure(Sender: TObject; var Handled: Boolean) of object;
+
+{ TEditButtonControlEh }
+
+  TEditButtonStyleEh = (ebsDropDownEh, ebsEllipsisEh, ebsGlyphEh, ebsUpDownEh,
+    ebsPlusEh, ebsMinusEh);
+
+  TEditButtonControlEh = class(TSpeedButton)
+  private
+    FActive: Boolean;
+    FAlwaysDown: Boolean;
+    FButtonNum: Integer;
+    FNoDoClick: Boolean;
+    FOnDown: TButtonDownEventEh;
+    FStyle: TEditButtonStyleEh;
+    FTimer: TTimer;
+    function GetTimer: TTimer;
+    procedure ResetTimer(Interval: Cardinal);
+    procedure SetActive(const Value: Boolean);
+    procedure SetAlwaysDown(const Value: Boolean);
+    procedure SetStyle(const Value: TEditButtonStyleEh);
+    procedure TimerEvent(Sender: TObject);
+    procedure UpdateDownButtonNum(X, Y: Integer);
+  protected
+    procedure MouseDown(Button: TMouseButton; Shift: TShiftState; X, Y: Integer); override;
+    procedure MouseMove(Shift: TShiftState; X, Y: Integer); override;
+    procedure MouseUp(Button: TMouseButton; Shift: TShiftState; X, Y: Integer); override;
+    procedure Paint; override;
+    property Timer: TTimer read GetTimer;
+  public
+    procedure Click; override;
+    procedure EditButtonDown(TopButton: Boolean; var AutoRepeat: Boolean);
+    procedure SetState(NewState: TButtonState; IsActive: Boolean; ButtonNum: Integer);
+    procedure SetWidthNoNotify(AWidth: Integer);
+    property Active: Boolean read FActive write SetActive;
+    property AlwaysDown: Boolean read FAlwaysDown write SetAlwaysDown;
+    property Style: TEditButtonStyleEh read FStyle write SetStyle default ebsDropDownEh;
+    property OnDown: TButtonDownEventEh read FOnDown write FOnDown;
+  end;
+
+  TSpeedButtonEh = class(TEditButtonControlEh)
+  published
+    property Active;
+    property Style;
+  end;
+
+  TEditButtonControlLineRec = record
+    ButtonLine: TShape;
+    EditButtonControl: TEditButtonControlEh;
+  end;
+
+  TEditButtonControlList = array of TEditButtonControlLineRec;
+
+{ TEditButtonEh }
+
+  TEditButtonEh = class(TCollectionItem)
+  private
+    FDropdownMenu: TPopupMenu;
+    FEditControl: TWinControl;
+    FGlyph: TBitmap;
+    FHint: String;
+    FNumGlyphs: Integer;
+    FOnButtonClick: TButtonClickEventEh;
+    FOnButtonDown: TButtonDownEventEh;
+    FOnChanged: TNotifyEvent;
+    FShortCut: TShortCut;
+    FStyle: TEditButtonStyleEh;
+    FVisible: Boolean;
+    FWidth: Integer;
+    function GetGlyph: TBitmap;
+    procedure SetGlyph(const Value: TBitmap);
+    procedure SetHint(const Value: String);
+    procedure SetNumGlyphs(Value: Integer);
+    procedure SetStyle(const Value: TEditButtonStyleEh);
+    procedure SetVisible(const Value: Boolean);
+    procedure SetWidth(const Value: Integer);
+  protected
+    function CreateEditButtonControl: TEditButtonControlEh; virtual;
+    procedure Changed; overload;
+  public
+    constructor Create(Collection: TCollection); overload; override;
+    constructor Create(EditControl: TWinControl); reintroduce; overload;
+    destructor Destroy; override;
+    procedure Assign(Source: TPersistent); override;
+    property OnChanged: TNotifyEvent read FOnChanged write FOnChanged;
+  published
+    property DropdownMenu: TPopupMenu read FDropdownMenu write FDropdownMenu;
+    property Glyph: TBitmap read GetGlyph write SetGlyph;
+    property Hint: String read FHint write SetHint;
+    property NumGlyphs: Integer read FNumGlyphs write SetNumGlyphs default 1;
+    //property ShortCut: TShortCut read FShortCut write FShortCut default 32808; //Menus.ShortCut(VK_DOWN, [ssAlt]);
+    property ShortCut: TShortCut read FShortCut write FShortCut default scNone;
+    property Style: TEditButtonStyleEh read FStyle write SetStyle default ebsDropDownEh;
+    property Visible: Boolean read FVisible write SetVisible default False;
+    property Width: Integer read FWidth write SetWidth default 0;
+    property OnClick: TButtonClickEventEh read FOnButtonClick write FOnButtonClick;
+    property OnDown: TButtonDownEventEh read FOnButtonDown write FOnButtonDown;
+  end;
+
+  TEditButtonEhClass = class of TEditButtonEh;
+
+{ TDropDownEditButtonEh }
+
+  TDropDownEditButtonEh = class(TEditButtonEh)
+  public
+    constructor Create(Collection: TCollection); overload; override;
+    constructor Create(EditControl: TWinControl); overload;
+  published
+    property ShortCut default 32808; //Menus.ShortCut(VK_DOWN, [ssAlt]);
+  end;
+
+
+{ TVisibleEditButtonEh }
+
+  TVisibleEditButtonEh = class(TEditButtonEh)
+  public
+    constructor Create(Collection: TCollection); overload; override;
+    constructor Create(EditControl: TWinControl); overload;
+  published
+    property ShortCut default 32808; //Menus.ShortCut(VK_DOWN, [ssAlt]);
+    property Visible default True;
+  end;
+
+{ TEditButtonsEh }
+
+  TEditButtonsEh = class(TCollection)
+  private
+    FOnChanged: TNotifyEvent;
+    function GetEditButton(Index: Integer): TEditButtonEh;
+    procedure SetEditButton(Index: Integer; Value: TEditButtonEh);
+  protected
+    FOwner: TPersistent;
+    function GetOwner: TPersistent; override;
+    procedure Update(Item: TCollectionItem); override;
+  public
+    constructor Create(Owner: TPersistent; EditButtonClass: TEditButtonEhClass);
+    function Add: TEditButtonEh;
+    property Items[Index: Integer]: TEditButtonEh read GetEditButton write SetEditButton; default;
+    property OnChanged: TNotifyEvent read FOnChanged write FOnChanged;
+  end;
+
+{ TSpecRowEh }
+
+  TSpecRowEh = class(TPersistent)
+  private
+    FCellsStrings: TStrings;
+    FCellsText: String;
+    FColor: TColor;
+    FFont: TFont;
+    FOnChanged: TNotifyEvent;
+    FOwner: TPersistent;
+    FSelected: Boolean;
+    FShortCut: TShortCut;
+    FShowIfNotInKeyList: Boolean;
+    FUpdateCount: Integer;
+    FValue: Variant;
+    FVisible: Boolean;
+    function GetCellText(Index: Integer): String;
+    function GetColor: TColor;
+    function GetFont: TFont;
+    function IsColorStored: Boolean;
+    function IsFontStored: Boolean;
+    function IsValueStored: Boolean;
+    procedure FontChanged(Sender: TObject);
+    procedure SetCellsText(const Value: String);
+    procedure SetColor(const Value: TColor);
+    procedure SetFont(const Value: TFont);
+    procedure SetShowIfNotInKeyList(const Value: Boolean);
+    procedure SetValue(const Value: Variant);
+    procedure SetVisible(const Value: Boolean);
+  protected
+    FColorAssigned: Boolean;
+    FFontAssigned: Boolean;
+    function GetOwner: TPersistent; override;
+    procedure Changed;
+  public
+    constructor Create(Owner: TPersistent);
+    destructor Destroy; override;
+    function DefaultColor: TColor;
+    function DefaultFont: TFont;
+    function LocateKey(KeyValue: Variant): Boolean;
+    procedure Assign(Source: TPersistent); override;
+    procedure BeginUpdate;
+    procedure EndUpdate;
+    property CellText[Index: Integer]: String read GetCellText;
+    property Selected: Boolean read FSelected write FSelected;
+    property UpdateCount: Integer read FUpdateCount;
+    property OnChanged: TNotifyEvent read FOnChanged write FOnChanged;
+  published
+    property CellsText: String read FCellsText write SetCellsText;
+    property Color: TColor read GetColor write SetColor stored IsColorStored;
+    property Font: TFont read GetFont write SetFont stored IsFontStored;
+    property ShortCut: TShortCut read FShortCut write FShortCut default 32814; //Menus.ShortCut(VK_DOWN, [ssAlt]);
+    property ShowIfNotInKeyList: Boolean read FShowIfNotInKeyList write SetShowIfNotInKeyList default True;
+    property Value: Variant read FValue write SetValue stored IsValueStored;
+    property Visible: Boolean read FVisible write SetVisible default False;
+  end;
+
+{ TSizeGripEh }
+
+  TSizeGripPostion = (sgpTopLeft, sgpTopRight, sgpBottomRight, sgpBottomLeft);
+  TSizeGripChangePosition = (sgcpToLeft, sgcpToRight, sgcpToTop, sgcpToBottom);
+
+  TSizeGripEh = class(TCustomControl)
+  private
+    FInitScreenMousePos: TPoint;
+    FInternalMove: Boolean;
+    FOldMouseMovePos: TPoint;
+    FParentRect: TRect;
+    FParentResized: TNotifyEvent;
+    FPosition: TSizeGripPostion;
+    FTriangleWindow: Boolean;
+    function GetVisible: Boolean;
+    procedure SetPosition(const Value: TSizeGripPostion);
+    procedure SetTriangleWindow(const Value: Boolean);
+    procedure SetVisible(const Value: Boolean);
+    procedure WMMove(var Message: TWMMove); message WM_MOVE;
+  protected
+    procedure CreateWnd; override;
+    procedure MouseDown(Button: TMouseButton; Shift: TShiftState; X, Y: Integer); override;
+    procedure MouseMove(Shift: TShiftState; X, Y: Integer); override;
+    procedure Paint; override;
+    procedure ParentResized; dynamic;
+  public
+    constructor Create(AOwner: TComponent); override;
+    procedure ChangePosition(NewPosition: TSizeGripChangePosition);
+    procedure UpdatePosition;
+    procedure UpdateWindowRegion;
+    property Position: TSizeGripPostion read FPosition write SetPosition default sgpBottomRight;
+    property TriangleWindow: Boolean read FTriangleWindow write SetTriangleWindow default True;
+    property Visible: Boolean read GetVisible write SetVisible;
+    property OnParentResized: TNotifyEvent read FParentResized write FParentResized;
+  end;
+
+const
+  cm_SetSizeGripChangePosition = WM_USER + 100;
+
+{ TPopupMonthCalendarEh }
+
+const
+  CM_CLOSEUPEH = WM_USER + 101;
+
+type
+
+  TPopupMonthCalendarEh = class(TMonthCalendar)
+  private
+    FBorderWidth: Integer;
+    procedure CMCloseUpEh(var Message: TMessage); message CM_CLOSEUPEH;
+    procedure CMCtl3DChanged(var Message: TMessage); message CM_CTL3DCHANGED;
+    procedure CMWantSpecialKey(var Message: TCMWantSpecialKey); message CM_WANTSPECIALKEY;
+    procedure WMGetDlgCode(var Message: TWMGetDlgCode); message WM_GETDLGCODE;
+    procedure WMKillFocus(var Message: TWMKillFocus); message WM_KILLFOCUS;
+    procedure WMNCCalcSize(var Message: TWMNCCalcSize); message WM_NCCALCSIZE;
+    procedure WMNCPaint(var Message: TWMNCPaint); message WM_NCPAINT;
+  protected
+    function CanAutoSize(var NewWidth, NewHeight: Integer): Boolean; override;
+    function DoMouseWheelDown(Shift: TShiftState; MousePos: TPoint): Boolean; override;
+    function DoMouseWheelUp(Shift: TShiftState; MousePos: TPoint): Boolean; override;
+    procedure CreateParams(var Params: TCreateParams); override;
+    procedure CreateWnd; override;
+    procedure DrawBorder; virtual;
+    procedure KeyDown(var Key: Word; Shift: TShiftState); override;
+    procedure MouseDown(Button: TMouseButton; Shift: TShiftState; X, Y: Integer); override;
+    procedure MouseUp(Button: TMouseButton; Shift: TShiftState; X, Y: Integer); override;
+    procedure PostCloseUp(Accept: Boolean);
+    procedure UpdateBorderWidth;
+  public
+    constructor Create(AOwner: TComponent); override;
+    property Color;
+    property Ctl3D;
+  end;
+
+  TListGetImageIndexEventEh = procedure(Sender: TObject; ItemIndex: Integer; var ImageIndex: Integer) of object;
+
+{ TPopupListboxEh }
+
+  TPopupListboxEh = class(TCustomListbox)
+  private
+    FBorderWidth: Integer;
+    FImageList: TCustomImageList;
+    FMousePos: TPoint;
+    FRowCount: Integer;
+    FSearchText: String;
+    FSearchTickCount: Longint;
+    FSizeGrip: TSizeGripEh;
+    FSizeGripResized: Boolean;
+    FOnGetImageIndex: TListGetImageIndexEventEh;
+    function CheckNewSize(var NewWidth, NewHeight: Integer): Boolean;
+    function GetBorderSize: Integer;
+    procedure CMCtl3DChanged(var Message: TMessage); message CM_CTL3DCHANGED;
+    procedure CMSetSizeGripChangePosition(var Message: TMessage); message cm_SetSizeGripChangePosition;
+    procedure CNDrawItem(var Message: TWMDrawItem); message CN_DRAWITEM;
+    procedure SetImageList(const Value: TCustomImageList);
+    procedure SetRowCount(Value: Integer);
+    procedure WMNCCalcSize(var Message: TWMNCCalcSize); message WM_NCCALCSIZE;
+    procedure WMNCPaint(var Message: TWMNCPaint); message WM_NCPAINT;
+    procedure WMSize(var Message: TWMSize); message WM_SIZE;
+    procedure WMWindowPosChanging(var Message: TWMWindowPosChanging); message WM_WINDOWPOSCHANGING;
+  protected
+    function DoMouseWheelDown(Shift: TShiftState; MousePos: TPoint): Boolean; override;
+    function DoMouseWheelUp(Shift: TShiftState; MousePos: TPoint): Boolean; override;
+    procedure CreateParams(var Params: TCreateParams); override;
+    procedure CreateWnd; override;
+    procedure DrawBorder; virtual;
+    procedure DrawItem(Index: Integer; ARect: TRect; State: TOwnerDrawState); override;
+    procedure KeyPress(var Key: Char); override;
+    procedure MouseMove(Shift: TShiftState; X, Y: Integer); override;
+    procedure UpdateBorderWidth;
+  public
+    constructor Create(Owner: TComponent); override;
+    procedure SetBounds(ALeft, ATop, AWidth, AHeight: Integer); override;
+    function CanFocus: Boolean; {$IFDEF EH_LIB_5} override; {$ENDIF}
+    function GetTextHeight: Integer;
+    property Color;
+    property Ctl3D;
+    property Font;
+    property ImageList: TCustomImageList read FImageList write SetImageList;
+    property IntegralHeight;
+    property ItemHeight;
+    property RowCount: Integer read FRowCount write SetRowCount;
+    property SizeGrip: TSizeGripEh read FSizeGrip;
+    property SizeGripResized: Boolean read FSizeGripResized write FSizeGripResized;
+    property OnMouseUp;
+    property OnGetImageIndex: TListGetImageIndexEventEh read FOnGetImageIndex write FOnGetImageIndex;
+  end;
+
+{ TMRUList }
+  TFilterMRUItemEventEh = procedure (Sender: TObject; var Accept: Boolean) of object;
+  TSetDropDownEventEh = procedure (Sender: TObject) of object;
+  TSetCloseUpEventEh = procedure (Sender: TObject; Accept: Boolean) of object;
+
+  TMRUListEh = class(TPersistent)
+  private
+    FActive: Boolean;
+    FAutoAdd: Boolean;
+    FCaseSensitive: Boolean;
+    FItems: TStrings;
+    FLimit: Integer;
+    FOnActiveChanged: TNotifyEvent;
+    FOnFilterItem: TFilterMRUItemEventEh;
+    FOnSetCloseUpEvent: TSetCloseUpEventEh;
+    FOnSetDropDown: TSetDropDownEventEh;
+    FOwner: TPersistent;
+    FRows: Integer;
+    FWidth: Integer;
+    FCancelIfKeyInQueue: Boolean;
+    procedure SetActive(const Value: Boolean);
+    procedure SetItems(const Value: TStrings);
+    procedure SetLimit(const Value: Integer);
+    procedure SetRows(const Value: Integer);
+  protected
+    FDroppedDown: Boolean;
+    procedure UpdateLimit;
+  public
+    constructor Create(AOwner: TPersistent);
+    destructor Destroy; override;
+    procedure Add(s: String);
+    procedure Assign(Source: TPersistent); override;
+    procedure CloseUp(Accept: Boolean); virtual;
+    procedure DropDown; virtual;
+    function FilterItemsTo(FilteredItems: TStrings; MaskText: String): Boolean;
+    property DroppedDown: Boolean read FDroppedDown write FDroppedDown;
+    property Width: Integer read FWidth write FWidth;
+    property OnActiveChanged: TNotifyEvent read FOnActiveChanged write FOnActiveChanged;
+    property OnSetCloseUp: TSetCloseUpEventEh read FOnSetCloseUpEvent write FOnSetCloseUpEvent;
+    property OnSetDropDown: TSetDropDownEventEh read FOnSetDropDown write FOnSetDropDown;
+    property OnFilterItem: TFilterMRUItemEventEh read FOnFilterItem write FOnFilterItem;
+    property CancelIfKeyInQueue: Boolean read FCancelIfKeyInQueue write FCancelIfKeyInQueue default True;
+  published
+    property AutoAdd: Boolean read FAutoAdd write FAutoAdd default True;
+    property Active: Boolean read FActive write SetActive default False;
+    property CaseSensitive: Boolean read FCaseSensitive write FCaseSensitive default False;
+    property Items: TStrings read FItems write SetItems;
+    property Limit: Integer read FLimit write SetLimit default 100;
+    property Rows: Integer read FRows write SetRows default 7;
+  end;
+
+{ TMRUListboxEh }
+
+  TMRUListboxEh = class(TPopupListboxEh)
+  private
+    FScrollBar: TScrollBar;
+    FScrollBarLockMove: Boolean;
+    procedure CMChanged(var Message: TCMChanged); message CM_CHANGED;
+    procedure CMMouseWheel(var Message: TCMMouseWheel); message CM_MOUSEWHEEL;
+    procedure CMSetSizeGripChangePosition(var Message: TMessage); message cm_SetSizeGripChangePosition;
+    procedure WMSize(var Message: TWMSize); message WM_SIZE;
+  protected
+    procedure CreateParams(var Params: TCreateParams); override;
+    procedure ScrollBarScrolled(Sender: TObject; ScrollCode: TScrollCode; var ScrollPos: Integer);
+    procedure ScrollBarWindowProc(var Message: TMessage);
+  public
+    constructor Create(Owner: TComponent); override;
+    procedure UpdateScrollBar;
+    procedure UpdateScrollBarPos;
+    property ParentCtl3D;
+    property ScrollBar: TScrollBar read FScrollBar;
+    property Sorted;
+    property OnMouseUp;
+  end;
+
+{$IFNDEF EH_LIB_5} // Delphi 4 doesn't have TObjectList but Delphi 8 required
+
+{ TObjectList class }
+
+  TObjectList = class(TList)
+  private
+    FOwnsObjects: Boolean;
+  protected
+    function GetItem(Index: Integer): TObject;
+    procedure SetItem(Index: Integer; AObject: TObject);
+  public
+    constructor Create; overload;
+    constructor Create(AOwnsObjects: Boolean); overload;
+
+    function Add(AObject: TObject): Integer;
+    function Remove(AObject: TObject): Integer;
+    function IndexOf(AObject: TObject): Integer;
+    function FindInstanceOf(AClass: TClass; AExact: Boolean = True; AStartAt: Integer = 0): Integer;
+    procedure Insert(Index: Integer; AObject: TObject);
+    property OwnsObjects: Boolean read FOwnsObjects write FOwnsObjects;
+    property Items[Index: Integer]: TObject read GetItem write SetItem; default;
+  end;
+
+{$ENDIF}
+
+  TDrawButtonControlStyleEh = (bcsDropDownEh, bcsEllipsisEh, bcsUpDownEh,
+    bcsCheckboxEh, bcsPlusEh, bcsMinusEh);
+  TTreeElementEh = (tehMinusUpDown, tehMinusUp, tehMinusDown,
+                   tehPlusUpDown, tehPlusUp, tehPlusDown,
+                   tehCrossUpDown, tehCrossUp, tehCrossDown,
+                   tehVLine);
+
+
+procedure PaintButtonControlEh(DC: HDC; ARect: TRect; ParentColor: TColor;
+  Style: TDrawButtonControlStyleEh; DownButton: Integer;
+  Flat, Active, Enabled: Boolean; State: TCheckBoxState);
+
+function GetDefaultFlatButtonWidth: Integer;
+
+var
+  FlatButtonWidth: Integer;
+
+type
+ TFieldTypes = set of TFieldType;
+
+const
+  ftNumberFieldTypes: TFieldTypes = [ftSmallint, ftInteger, ftWord, ftFloat, ftCurrency,
+    ftBCD{$IFDEF EH_LIB_6}, ftFMTBcd{$ENDIF}];
+
+procedure GetFieldsProperty(List: TList; DataSet: TDataSet;
+  Control: TComponent; const FieldNames: String); overload;
+
+function GetFieldsProperty(DataSet: TDataSet; Control: TComponent;
+  const FieldNames: String): TFieldsArrEh; overload;
+
+procedure DataSetSetFieldValues(DataSet: TDataSet; Fields: String; Value: Variant);
+
+function VarEquals(const V1, V2: Variant): Boolean;
+
+var UseButtonsBitmapCache: Boolean = True;
+
+procedure ClearButtonsBitmapCache;
+
+procedure DrawImage(DC: HDC; ARect: TRect; Images: TCustomImageList;
+  ImageIndex: Integer; Selected: Boolean);
+procedure DrawTreeElement(Canvas: TCanvas; ARect: TRect;
+  TreeElement: TTreeElementEh; BackDot: Boolean);
+
+function AlignDropDownWindowRect(MasterAbsRect: TRect; DropDownWin: TWinControl; Align: TDropDownAlign): TPoint;
+function AlignDropDownWindow(MasterWin, DropDownWin: TWinControl; Align: TDropDownAlign): TPoint;
+
+{$IFNDEF EH_LIB_5}
+function Supports(const Instance: IUnknown; const IID: TGUID; out Intf): Boolean; overload;
+function Supports(const Instance: TObject; const IID: TGUID; out Intf): Boolean; overload;
+{$ENDIF}
+
+var
+  DefaultCheckBoxWidth, DefaultCheckBoxHeight: Integer;
+
+function AdjustCheckBoxRect(ClientRect: TRect;  Alignment: TAlignment; Layout: TTextLayout): TRect;
+
+function IsDoubleClickMessage(OldPos, NewPos: TPoint; Interval: Longint): Boolean;
+function DefaultEditButtonHeight(EditButtonWidth: Integer; Flat: Boolean): Integer;
+
+implementation

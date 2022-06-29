@@ -1,0 +1,51 @@
+unit uFormJsonViewer;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, ExtCtrls, StdCtrls, Buttons, ActnList, StdActns, ImgList, Menus,
+  ComCtrls, jsontreeview, jsondoc;
+
+type
+  TForm18 = class(TForm)
+    Panel1: TPanel;
+    ActionList1: TActionList;
+    ImageList1: TImageList;
+    EditPaste1: TEditPaste;
+    EditClear1: TEditDelete;
+    BitBtn1: TBitBtn;
+    BitBtn2: TBitBtn;
+    ActionToggleVisibleChildrenCounts: TAction;
+    ActionToggleVisibleByteSizes: TAction;
+    PopupMenu1: TPopupMenu;
+    VisibleChildrenCounts1: TMenuItem;
+    VisibleByteSizes1: TMenuItem;
+    JSONTreeView1: TJSONTreeView;
+    JSONDocument1: TJSONDocument;
+    procedure ActionToggleVisibleChildrenCountsExecute(Sender: TObject);
+    procedure ActionToggleVisibleByteSizesExecute(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form18: TForm18;
+
+implementation
+
+{$R *.dfm}
+
+procedure TForm18.ActionToggleVisibleByteSizesExecute(Sender: TObject);
+begin
+//
+end;
+
+procedure TForm18.ActionToggleVisibleChildrenCountsExecute(Sender: TObject);
+begin
+//
+end;
+
+end.

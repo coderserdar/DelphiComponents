@@ -1,0 +1,41 @@
+package dclABPopup;
+
+{$R *.res}
+{$ALIGN 8}
+{ ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{ DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{ LOCALSYMBOLS OFF}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE OFF}
+{ STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $51000000}
+{$DESCRIPTION 'Borland User Components'}
+{$LIBSUFFIX '70'}
+{$DESIGNONLY}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl,
+  vcl,
+  designide,
+  vclactnband,
+  vclx;
+
+contains
+  ABPopupReg in 'ABPopupReg.pas',
+  ActnPopupCtrl in 'ActnPopupCtrl.pas';
+
+end.

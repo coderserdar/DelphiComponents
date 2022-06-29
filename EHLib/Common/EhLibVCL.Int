@@ -1,0 +1,136 @@
+{*******************************************************}
+{                                                       }
+{                       EhLib v3.4                      }
+{            Specific routines for VCL.Win32            }
+{                                                       }
+{      Copyright (c) 2004 by Dmitry V. Bolshakov        }
+{                                                       }
+{*******************************************************}
+
+unit EhLibVCL;
+
+interface
+
+{$WARNINGS OFF}
+
+uses
+  Windows, Forms, SysUtils, Classes, DB, TypInfo, Controls, Graphics, Messages;
+
+type
+  TCMParentFontChanged = TMessage;
+  IntPtr = Pointer;
+  TBytes = array of Byte;
+    
+procedure FillDWord(var Dest; Count, Value: Integer);
+function StackAlloc(Size: Integer): Pointer;
+procedure StackFree(P: Pointer);
+
+function DataSetCompareBookmarks(DataSet: TDataSet; Bookmark1, Bookmark2: TBookmarkStr): Integer;
+function DataSetBookmarkValid(DataSet: TDataSet; Bookmark: TBookmarkStr): Boolean;
+
+function GetMasterDataSet(FDataSet: TDataSet; APropInfo: PPropInfo): TDataSet;
+
+function DrawTextEh(hDC: HDC; Text: String; nCount: Integer;
+  var lpRect: TRect; uFormat: UINT): Integer;
+function WindowsDrawTextEx(DC: HDC; lpchText: String; cchText: Integer;
+  var p4: TRect;  dwDTFormat: UINT; DTParams: TDrawTextParams): Integer; overload;
+function WindowsDrawTextEx(DC: HDC; lpchText: String; cchText: Integer;
+  var p4: TRect;  dwDTFormat: UINT): Integer; overload;
+
+function WindowsExtTextOut(DC: HDC; X, Y: Integer; Options: Longint;
+  var Rect: TRect; Str: String; Count: Longint{; Dx: PInteger}): BOOL;
+
+function WindowsGetOutlineTextMetrics(DC: HDC; p2: UINT; var OTMetricStructs: TOutlineTextMetric): UINT;
+
+//function SendStructlParamMessage(hWnd: HWND; Msg: UINT; wParam: WPARAM; var lParam): LRESULT;
+function SendStructMessage(hWnd: HWND; Msg: UINT; wParam: WPARAM; var lParam): LRESULT;
+function SendTextMessage(hWnd: HWND; Msg: UINT; wParam: WPARAM; lParam: string): LRESULT;
+function SendGetTextMessage(hWnd: HWND; Msg: UINT; wParam: WPARAM; var lParam: string; BufferSize: Integer): LRESULT;
+
+function SystemParametersInfoEh(uiAction, uiParam: UINT; var pvParam; fWinIni: UINT): BOOL;
+function WindowsInvalidateRect(hWnd: HWND; var Rect: TRect; bErase: BOOL): BOOL;
+function WindowsValidateRect(hWnd: HWND; var Rect: TRect): BOOL;
+function WindowsScrollWindowEx(hWnd: HWND; dx, dy: Integer;
+  var prcScroll,  prcClip: TRect;
+  hrgnUpdate: HRGN; {prcUpdate: TRect; }flags: UINT): BOOL;
+function FindWindowEh(lpClassName, lpWindowName: String): HWND;
+
+function WindowsLPtoDP(DC: HDC; var ARect: TRect): BOOL;
+function WindowsCreatePolygonRgn(Points: array of TPoint; Count, FillMode: Integer): HRGN;
+
+// WindowsSetStdCursor
+
+function IsObjectAndIntegerRefSame(AObject: TObject; IntRef: Integer): Boolean;
+function IntPtrToObject(AIntPtr: Integer): TObject;
+function ObjectToIntPtr(AObject: TObject): Integer;
+function IntPtrToString(AIntPtr: Integer): String;
+
+procedure VarToMessage(var VarMessage; var Message: TMessage);
+function MessageToTMessage(var Message): TMessage;
+function MessageToTWMMouse(var Message): TWMMouse;
+function MessageToTWMKey(var Message): TWMKey;
+function UnwrapMessageEh(var Message): TMessage;
+
+function SmallPointToInteger(SmallPoint: TSmallPoint): Integer;
+
+procedure MessageSendGetSel(hWnd: HWND; var SelStart, SelEnd: Integer);
+
+function NlsUpperCase(const S: String): String;
+function NlsLowerCase(const S: String): String;
+function NlsCompareStr(const S1, S2: String): Integer;
+function NlsCompareText(const S1, S2: String): Integer;
+
+procedure BitmapLoadFromResourceName(Bmp: TBitmap; Instance: THandle; const ResName: String);
+function LoadBitmapEh(hInstance: HINST; lpBitmapID: Integer): HBITMAP;
+
+//procedure Clipboard_SetBuffer(AClipboard: TClipboard; Format: Word; Buffer: TBytes; Size: Integer);
+
+type
+  TPropListArray = array of PPropInfo;
+
+function GetPropListAsArray(ATypeInfo: PTypeInfo; TypeKinds: TTypeKinds): TPropListArray;
+
+function HexToBinEh(Text: TBytes; var Buffer: TBytes; Count: Integer): Integer;
+procedure BinToHexEh(Buffer: TBytes; var Text: String; Count: Integer);
+
+procedure StreamWriteBytes(Stream: TStream; Buffer: TBytes);
+procedure StreamReadBytes(Stream: TStream; var Buffer: TBytes; Count: Integer);
+
+function BytesOf(S: String): TBytes;
+
+function PropInfo_getPropType(APropInfo: PPropInfo): PTypeInfo;
+function PropInfo_getName(APropInfo: PPropInfo): String;
+function PropType_getKind(APropType: PTypeInfo): TTypeKind;
+
+procedure VarArrayRedimEh(var A : Variant; HighBound: Integer);
+
+{$IFNDEF EH_LIB_5}
+
+function GetObjectProp(Instance: TObject; PropInfo: PPropInfo): TObject;
+function GetObjectPropClass(Instance: TObject; PropInfo: PPropInfo): TClass;
+procedure SetObjectProp(Instance: TObject; PropInfo: PPropInfo; Value: TObject);
+
+{$ENDIF}
+
+function GetUltimateOwner(APersistent: TPersistent): TPersistent;
+
+type
+
+{ TFilerAccess }
+
+  TFilerAccess = class(TInterfacedObject) // Same as TFilerAccess in D8.
+  private
+    FPersistent: TPersistent;
+  public
+    constructor Create(APersistent: TPersistent);
+    procedure DefineProperties(AFiler: TFiler);
+    procedure GetChildren(Proc: TGetChildProc; Root: TComponent);
+    function GetChildOwner: TComponent;
+    function GetChildParent: TComponent;
+    procedure SetAncestor(Value: Boolean);
+    procedure SetChildOrder(Child: TComponent; Order: Integer);
+    procedure Updated;
+    procedure Updating;
+  end;
+
+implementation

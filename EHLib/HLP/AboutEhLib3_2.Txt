@@ -1,0 +1,69 @@
+Filtering data using STFitler in DBGridEh.
+
+
+One of the new feature in EhLib 3.2 is a STFilter - 
+ Ability to show special row (under title) where you user enter 
+ expressions in cells for filtering records in dataset. 
+ (Expression in the cell can look like: "1", ">=1", ">1 AND <=5", "%TestStr%")
+ When cursor reside in the filter cell they can press ENTER to apply filter.
+ Expression in every cell of the STFitler is united using (By default) 
+ logical operation AND.
+
+ When user press ENTER Grid call TDBGridEh.ApplyFilter.
+
+ At first, grid parse expression in every not empty filter cell.
+ For normally parsinging the expression in cell have to have next format:
+
+   [Operator1] Operand1 [)]  [AND|OR Operator2 Operand2 [)] ]
+
+  Where OperatorX is one of [ = | <> | != | > | < | >= | <= | ~ | !~ | in ( ] 
+  OperandX is a numeric, date or string value 
+  or for the operator 'IN' it is a list of values divided by comma.
+
+  For instance:
+   1
+   >=1
+   >1 AND <=5
+   ~ TestStr%
+   !~ TestStr_
+   in (1,2,3,4,5,6) and >100
+   in (Str1,Str2,Str3)
+
+  Next: If OnApplyFilter event is writed then grid call it,
+  else grid call DefaultApplyFilter.
+  DefaultApplyFilter apply to TDBGridEhDataService object that
+  in turn try to find registered TDatasetFeaturesEh object
+  for dataset that is linked to grid. If the TDatasetFeaturesEh object
+  is founded then DBGridEhDataService call ApplyFilter for
+  this DatasetFeatures object.
+
+  For automatically filtering data in dataset need to add one of the units 
+  EhLib... (EhLibADO, EhLibBDE, EhLibCDS) to 'uses' clause of any unit of your
+  project. This units have code to register TDatasetFeaturesEh for respective
+  DataSets.  Now EhLib have objects to filter data in the TClientDataSet, TQuery,
+  TTable and TADOQuery. You have to write and register your own object to filter 
+  data in DataSet that not present in this list or you can write 
+  TDBGridEh.OnApplyFilter event for every grid.
+
+  All of this DatasetFeatures class  based on the TSQLDatasetFeaturesEh that
+  use next rules to filter data in dataset.
+  1. If  STFilter.Local = True then
+    SQLDatasetFeatures class build expression for local filter of DataSet 
+    (TDataSet.Filter) and assign expression to TDataSet.Filter. TDataSet.Filtered 
+    have to TRUE, class does not assign this property.
+  2. If  STFilter.Local = False then
+    class build expression for SQL 'WHERE' clause in SQL string of dataset.
+    It tries to found the property that contain SQL expression.
+    It tries to found string that begining from '/*Filter*/' text (By default)  
+    in SQL expression and add filter expression after this text. 
+    So your SQL query have to have a line that begining from '/*Filter*/' like this:
+    ' select *  
+      from table name 
+      where
+      /*Filter*/ 1=1 '
+
+
+   To apply filtering on other types of datasets that is absent in above list, 
+   need to write new class that inherited from TDatasetFeaturesEh or 
+   TSQLDatasetFeaturesEh and register this class via RegisterDatasetFeaturesEh 
+   procedure.

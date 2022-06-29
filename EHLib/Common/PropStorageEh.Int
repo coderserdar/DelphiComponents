@@ -1,0 +1,194 @@
+{*******************************************************}
+{                                                       }
+{                       EhLib v3.4                      }
+{                                                       }
+{   TPropStorageManagerEh, TIniPropStorageManEh,        }
+{   TRegPropStorageManEh,  TPropStorageEh components    }
+{                                                       }
+{   Copyright (c) 2002-2004 by Dmitry V. Bolshakov      }
+{                                                       }
+{*******************************************************}
+
+{$I EhLib.Inc}
+//{$I EhLibClx.Inc}
+
+{$IFDEF EH_LIB_VCL}
+unit PropStorageEh {$IFDEF CIL} platform {$ENDIF};
+{$ELSE}
+unit QPropStorageEh;
+{$ENDIF}
+
+interface
+
+uses
+{$IFDEF EH_LIB_VCL}
+  Windows, Forms, Controls, Registry, PropFilerEh, Dialogs,
+  
+{$IFDEF CIL}
+  EhLibVCLNET,
+{$ELSE}
+  EhLibVCL,
+{$ENDIF}
+
+{$ELSE}
+  QForms, QControls, QPropFilerEh,
+{$ENDIF}
+  SysUtils, Classes, IniFiles, TypInfo;
+
+type
+
+  TPropStorageEh = class;
+  TPropertyNamesEh = class;
+
+{ TPropStorageManagerEh }
+
+  TPropStorageManagerEh = class(TComponent)
+  private
+    FWriteAsText: Boolean;
+  protected
+    property WriteAsText: Boolean read FWriteAsText write FWriteAsText default True;
+  public
+    constructor Create(AOwner: TComponent); override;
+    procedure ReadProperties(PropStorage: TPropStorageEh); virtual;
+    procedure ReadPropertiesStream(Stream: TStream; PropStorage: TPropStorageEh); virtual;
+    procedure WriteProperties(PropStorage: TPropStorageEh); virtual;
+    procedure WritePropertiesStream(PropStorage: TPropStorageEh; Stream: TStream); virtual;
+    procedure WritePropertiesText(PropStorage: TPropStorageEh; Text: String); virtual;
+  end;
+
+{ TIniPropStorageManEh }
+
+  TIniPropStorageManEh = class(TPropStorageManagerEh)
+  private
+    FIniFileName: String;
+  public
+    procedure ReadProperties(PropStorage: TPropStorageEh); override;
+    procedure WritePropertiesStream(PropStorage: TPropStorageEh; Stream: TStream); override;
+    procedure WritePropertiesText(PropStorage: TPropStorageEh; Text: String); override;
+  published
+    property IniFileName: String read FIniFileName write FIniFileName;
+    property WriteAsText;
+  end;
+
+{$IFDEF EH_LIB_VCL}
+
+{ TRegPropStorageManEh }
+
+  TRegistryKeyEh = (rkClassesRootEh, rkCurrentUserEh,
+      rkLocalMachineEh, rkUsersEh, rkPerformanceDataEh,
+      rkCurrentConfigEh, rkDynDataEh, rkCustomRegistryKeyEh);
+
+  TRegPropStorageManEh = class(TPropStorageManagerEh)
+  private
+    FKey: HKEY;
+    FPath: String;
+    FRegistryKey: TRegistryKeyEh;
+    procedure SerRegistryKey(const Value: TRegistryKeyEh);
+    procedure SetKey(const Value: HKEY);
+    procedure ReadPropertiesOld(PropStorage: TPropStorageEh);
+  public
+    constructor Create(AOwner: TComponent); override;
+    destructor Destroy; override;
+    procedure ReadProperties(PropStorage: TPropStorageEh); override;
+    procedure WritePropertiesStream(PropStorage: TPropStorageEh; Stream: TStream); override;
+    procedure WritePropertiesText(PropStorage: TPropStorageEh; Text: String); override;
+    property Key: HKEY read FKey write SetKey default HKEY_CURRENT_USER;
+  published
+    property RegistryKey: TRegistryKeyEh read FRegistryKey write SerRegistryKey default rkCurrentUserEh;
+    property Path: String read FPath write FPath;
+    property WriteAsText;
+  end;
+
+{$ENDIF}
+
+{ TPropStorageEh }
+
+  TWriteCustomPropsEventEh = procedure(Sender: TObject; Writer: TPropWriterEh) of object;
+  TReadPropEventEh = procedure(Sender: TObject; Reader: TPropReaderEh;
+    PropName: String; var Processed: Boolean) of object;
+
+  TPropStorageEh = class(TComponent)
+  private
+    FActive: Boolean;
+    FAfterLoadProps: TNotifyEvent;
+    FAfterSaveProps: TNotifyEvent;
+    FBeforeLoadProps: TNotifyEvent;
+    FBeforeSaveProps: TNotifyEvent;
+    FDestroying: Boolean;
+    FOnReadProp: TReadPropEventEh;
+    FOnWriteCustomProps: TWriteCustomPropsEventEh;
+    FOnSavePlacement: TNotifyEvent;
+    FSaved: Boolean;
+    FSaveFormCloseQuery: TCloseQueryEvent;
+    FSaveFormDestroy: TNotifyEvent;
+    FSaveFormShow: TNotifyEvent;
+    FSection: String;
+    FStorageManager: TPropStorageManagerEh;
+    FStoredProps: TPropertyNamesEh;
+    function GetForm: TForm;
+    function GetSection: String;
+    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+    procedure FormDestroy(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure RestoreEvents;
+    procedure SetEvents;
+    procedure SetSection(const Value: String);
+    procedure SetStorageManager(const Value: TPropStorageManagerEh);
+    procedure SetStoredProps(const Value: TPropertyNamesEh);
+  protected
+    procedure Loaded; override;
+    procedure Save; dynamic;
+    property Form: TForm read GetForm;
+    procedure Notification(AComponent: TComponent; Operation: TOperation); override;
+    procedure ReadProp(Reader: TPropReaderEh; PropName: String; var Processed: Boolean);
+    procedure WriteCustomProps(Writer: TPropWriterEh);
+  public
+    constructor Create(AOwner: TComponent); override;
+    destructor Destroy; override;
+    procedure LoadProperties;
+    procedure ReadPropValues(Stream: TStream);
+    procedure SaveProperties;
+    procedure WritePropValues(Stream: TStream);
+  published
+    property Active: Boolean read FActive write FActive default True;
+    property Section: String read GetSection write SetSection;
+    property StorageManager: TPropStorageManagerEh read FStorageManager write SetStorageManager;
+    property StoredProps: TPropertyNamesEh read FStoredProps write SetStoredProps;
+    property AfterLoadProps: TNotifyEvent read FAfterLoadProps write FAfterLoadProps;
+    property AfterSaveProps: TNotifyEvent read FAfterSaveProps write FAfterSaveProps;
+    property BeforeLoadProps: TNotifyEvent read FBeforeLoadProps write FBeforeLoadProps;
+    property BeforeSaveProps: TNotifyEvent read FBeforeSaveProps write FBeforeSaveProps;
+    property OnWriteCustomProps: TWriteCustomPropsEventEh read FOnWriteCustomProps write FOnWriteCustomProps;
+    property OnReadProp: TReadPropEventEh read FOnReadProp write FOnReadProp;
+  end;
+
+{ TPropertyNamesEh }
+
+  TPropertyNamesEh = class(TStringList)
+  private
+    FRoot: TComponent;
+    procedure SetRoot(const Value: TComponent);
+  protected
+    function CompareStrings(const S1, S2: string): Integer; {$IFDEF EH_LIB_6} override; {$ENDIF}
+    function CheckPropertyPath(Path: String): Boolean;
+    function CheckObjectPropertyPath(Instance: TObject; PropPath: String): Boolean;
+    procedure CheckPropertyNames;
+  public
+    function Add(const S: string): Integer; override;
+    property Root: TComponent read FRoot write SetRoot;
+  end;
+
+  procedure GetDefinePropertyList(AObject: TPersistent; sl: TStrings);
+
+  function DefaultPropStorageManager: TPropStorageManagerEh;
+  function SetDefaultPropStorageManager(NewStorageManager: TPropStorageManagerEh): TPropStorageManagerEh;
+
+{$IFDEF EH_LIB_VCL}
+
+function RegistryKeyToIdent(RootKey: Longint; var Ident: string): Boolean;
+function IdentToRegistryKey(const Ident: string; var RootKey: Longint): Boolean;
+procedure GetRegistryKeyValues(Proc: TGetStrProc);
+
+{$ENDIF}
+
+implementation

@@ -1,0 +1,156 @@
+{*******************************************************}
+{                                                       }
+{                       EhLib v3.4                      }
+{             Design time Rich Edit window              }
+{                                                       }
+{   Copyright (c) 1998-2004 by Dmitry V. Bolshakov      }
+{                                                       }
+{*******************************************************}
+
+unit RichEdEh {$IFDEF CIL} platform{$ENDIF};
+
+{$I EhLib.Inc}
+interface
+
+uses
+  SysUtils, Windows, Messages, Classes, Graphics, Controls, ImgList,
+
+{$IFDEF CIL} Borland.Vcl.Design.DesignIntf,
+             Borland.Vcl.Design.DesignEditors,
+             Borland.Vcl.Design.VCLEditors, Variants,
+             System.Drawing.Text,
+             EhLibVCLNET,
+             Types,
+{$ELSE}
+             EhLibVCL,
+  {$IFDEF EH_LIB_6}DesignIntf, DesignEditors,
+  {$ELSE}DsgnIntf, {$ENDIF}
+{$ENDIF}
+  Forms, Dialogs, StdCtrls, Buttons, ExtCtrls, Menus, ComCtrls, ClipBrd,
+  ToolWin, PrnDBGEh;
+
+type
+  TRichStrEditDlgEh = class(TForm)
+    MainMenu: TMainMenu;
+    FileNewItem: TMenuItem;
+    FileOpenItem: TMenuItem;
+    FileSaveItem: TMenuItem;
+    FileSaveAsItem: TMenuItem;
+    FilePrintItem: TMenuItem;
+    FileExitItem: TMenuItem;
+    EditUndoItem: TMenuItem;
+    EditCutItem: TMenuItem;
+    EditCopyItem: TMenuItem;
+    EditPasteItem: TMenuItem;
+    OpenDialog: TOpenDialog;
+    SaveDialog: TSaveDialog;
+    PrintDialog: TPrintDialog;
+    Ruler: TPanel;
+    FontDialog1: TFontDialog;
+    FirstInd: TLabel;
+    LeftInd: TLabel;
+    RulerLine: TBevel;
+    RightInd: TLabel;
+    N5: TMenuItem;
+    miEditFont: TMenuItem;
+    Editor: TRichEdit;
+    StatusBar: TStatusBar;
+    StandardToolBar: TToolBar;
+    OpenButton: TToolButton;
+    SaveButton: TToolButton;
+    PrintButton: TToolButton;
+    ToolButton5: TToolButton;
+    UndoButton: TToolButton;
+    CutButton: TToolButton;
+    CopyButton: TToolButton;
+    PasteButton: TToolButton;
+    ToolButton10: TToolButton;
+    FontName: TComboBox;
+    FontSize: TEdit;
+    ToolButton11: TToolButton;
+    UpDown1: TUpDown;
+    BoldButton: TToolButton;
+    ItalicButton: TToolButton;
+    UnderlineButton: TToolButton;
+    ToolButton16: TToolButton;
+    LeftAlign: TToolButton;
+    CenterAlign: TToolButton;
+    RightAlign: TToolButton;
+    ToolButton20: TToolButton;
+    BulletsButton: TToolButton;
+    ToolbarImages: TImageList;
+    ToolButton2: TToolButton;
+    Bevel1: TBevel;
+    Panel1: TPanel;
+    Panel2: TPanel;
+    OKButton: TButton;
+    CancelButton: TButton;
+    ToolButton1: TToolButton;
+    tbSelectFont: TToolButton;
+
+    procedure SelectionChange(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure ShowHint(Sender: TObject);
+    procedure FileOpen(Sender: TObject);
+    procedure FileSave(Sender: TObject);
+    procedure FileSaveAs(Sender: TObject);
+    procedure FilePrint(Sender: TObject);
+    procedure FileExit(Sender: TObject);
+    procedure EditUndo(Sender: TObject);
+    procedure EditCut(Sender: TObject);
+    procedure EditCopy(Sender: TObject);
+    procedure EditPaste(Sender: TObject);
+    procedure SelectFont(Sender: TObject);
+    procedure RulerResize(Sender: TObject);
+    procedure FormResize(Sender: TObject);
+    procedure FormPaint(Sender: TObject);
+    procedure BoldButtonClick(Sender: TObject);
+    procedure ItalicButtonClick(Sender: TObject);
+    procedure FontSizeChange(Sender: TObject);
+    procedure AlignButtonClick(Sender: TObject);
+    procedure FontNameChange(Sender: TObject);
+    procedure UnderlineButtonClick(Sender: TObject);
+    procedure BulletsButtonClick(Sender: TObject);
+    procedure RulerItemMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure RulerItemMouseMove(Sender: TObject; Shift: TShiftState; X,
+      Y: Integer);
+    procedure FirstIndMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure LeftIndMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure RightIndMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure FormShow(Sender: TObject);
+    procedure RichEditChange(Sender: TObject);
+    procedure EditorKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+  private
+    FFileName: string;
+    FUpdating: Boolean;
+    FDragOfs: Integer;
+    FDragging: Boolean;
+    function CurrText: TTextAttributes;
+    procedure GetFontNames;
+    procedure SetupRuler;
+    procedure SetEditRect;
+    procedure UpdateCursorPos;
+    procedure WMDropFiles(var Msg: TWMDropFiles); message WM_DROPFILES;
+    procedure PerformFileOpen(const AFileName: string);
+    procedure SetModified(Value: Boolean);
+  end;
+
+
+type
+  TRichEditStringsEh = class(TClassProperty)
+  public
+    function GetAttributes: TPropertyAttributes; override;
+    procedure Edit; override;
+  end;
+
+var
+  RichStrEditDlgEh: TRichStrEditDlgEh;
+
+procedure Register;
+
+implementation

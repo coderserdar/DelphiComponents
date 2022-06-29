@@ -1,0 +1,92 @@
+{*******************************************************}
+{                                                       }
+{                       EhLib v3.4                      }
+{             Specific routines for VLC.Net             }
+{                                                       }
+{      Copyright (c) 2004 by Dmitry V. Bolshakov        }
+{                                                       }
+{*******************************************************}
+
+unit EhLibVclNET platform;
+
+interface
+
+//{$WARNINGS OFF}
+
+uses
+  Windows, Forms, SysUtils, Classes, DB, TypInfo, Controls, Graphics, Messages,
+  Variants;
+
+function DataSetCompareBookmarks(DataSet: TDataSet; Bookmark1, Bookmark2: TBookmarkStr): Integer;
+function DataSetBookmarkValid(DataSet: TDataSet; Bookmark: TBookmarkStr): Boolean;
+
+function GetMasterDataSet(FDataSet: TDataSet; APropInfo: PPropInfo): TDataSet;
+
+function DrawTextEh(hDC: HDC; Text: String; nCount: Integer;
+  var lpRect: TRect; uFormat: UINT): Integer;
+function WindowsDrawTextEx(DC: HDC; lpchText: String; cchText: Integer;
+  var p4: TRect;  dwDTFormat: UINT; DTParams: TDrawTextParams): Integer; overload;
+function WindowsDrawTextEx(DC: HDC; lpchText: String; cchText: Integer;
+  var p4: TRect;  dwDTFormat: UINT): Integer; overload;
+
+function WindowsExtTextOut(DC: HDC; X, Y: Integer; Options: Longint;
+  var Rect: TRect; Str: String; Count: Longint{; Dx: PInteger}): BOOL;
+
+function WindowsGetOutlineTextMetrics(DC: HDC; p2: UINT; var OTMetricStructs: TOutlineTextMetric): UINT;
+
+function SendStructlParamMessage(hWnd: HWND; Msg: UINT; wParam: WPARAM; lParam: TObject; Dummy: Integer): LRESULT;
+
+function SystemParametersInfoEh(uiAction, uiParam: UINT; var pvParam: TRect; fWinIni: UINT): BOOL;
+function WindowsInvalidateRect(hWnd: HWND; var Rect: TRect; bErase: BOOL): BOOL;
+function WindowsValidateRect(hWnd: HWND; var Rect: TRect): BOOL;
+function WindowsScrollWindowEx(hWnd: HWND; dx, dy: Integer;
+  var prcScroll,  prcClip: TRect;
+  hrgnUpdate: HRGN; {prcUpdate: TRect; }flags: UINT): BOOL;
+
+function WindowsLPtoDP(DC: HDC; var ARect: TRect): BOOL;
+function WindowsCreatePolygonRgn(Points: array of TPoint; Count, FillMode: Integer): HRGN;
+// WindowsSetStdCursor
+
+function IsObjectAndIntegerRefSame(AObject: TObject; IntRef: Integer): Boolean;
+function IntPtrToObject(AIntPtr: Integer): TObject;
+function ObjectToIntPtr(AObject: TObject): Integer;
+function IntPtrToString(AIntPtr: Integer): String;
+
+procedure VarToMessage(var VarMessage; var Message: TMessage);
+function MessageToTMessage(var Message): TMessage;
+function MessageToTWMMouse(var Message): TWMMouse;
+function MessageToTWMKey(var Message): TWMKey;
+function UnwrapMessageEh(var Message): TMessage;
+
+function SmallPointToInteger(SmallPoint: TSmallPoint): Integer;
+
+procedure MessageSendGetSel(hWnd: HWND; var SelStart, SelEnd: Integer);
+
+function NlsUpperCase(const S: String): String;
+function NlsLowerCase(const S: String): String;
+function NlsCompareStr(const S1, S2: String): Integer;
+function NlsCompareText(const S1, S2: String): Integer;
+
+procedure BitmapLoadFromResourceName(Bmp: TBitmap; Instance: THandle; const ResName: String);
+function LoadBitmapEh(hInstance: HINST; lpBitmapID: Integer): HBITMAP;
+
+//procedure Clipboard_SetBuffer(AClipboard: TClipboard; Format: Word; Buffer: TBytes; Size: Integer);
+
+type
+  TPropListArray = TPropList;
+
+function GetPropListAsArray(ATypeInfo: TTypeInfo; TypeKinds: TTypeKinds): TPropList;
+
+function HexToBinEh(Text: String; Buffer: array of Byte; Count: Integer): Integer;
+procedure BinToHexEh(Buffer: array of Byte; Text: String; Count: Integer);
+
+procedure StreamWriteBytes(Stream: TStream; Buffer: TBytes);
+procedure StreamReadBytes(Stream: TStream; Buffer: TBytes; Count: Integer);
+
+function PropInfo_getPropType(APropInfo: PPropInfo): PTypeInfo;
+function PropInfo_getName(APropInfo: PPropInfo): String;
+function PropType_GetKind(APropType: PTypeInfo): TTypeKind;
+
+procedure VarArrayRedimEh(var A : Variant; HighBound: Integer);
+
+implementation

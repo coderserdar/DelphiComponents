@@ -1,0 +1,200 @@
+{*******************************************************}
+{                                                       }
+{                       EhLib v3.4                      }
+{                   TDBSumList component                }
+{                                                       }
+{   Copyright (c) 1998-2004 by Dmitry V. Bolshakov      }
+{                                                       }
+{*******************************************************}
+
+{$I EhLib.Inc}
+
+{$IFDEF EH_LIB_VCL}
+unit DBSumLst {$IFDEF CIL} platform {$ENDIF};
+{$ELSE}
+unit QDBSumLst;
+{$ENDIF}
+
+interface
+
+uses
+{$IFDEF EH_LIB_VCL}
+{$IFDEF CIL}
+  EhLibVCLNET,
+{$ELSE}
+  EhLibVCL,
+{$ENDIF}
+  Windows, Forms, Dialogs,  // For evaluation
+{$ENDIF}
+  SysUtils, Classes, DB,
+{$IFDEF EH_LIB_6} Variants, Contnrs, {$ENDIF}
+  TypInfo {,dbugintf};
+
+type
+  TGroupOperation = (goSum, goAvg, goCount);
+
+  TDBSum = class(TCollectionItem)
+  private
+    procedure SetGroupOperation(const Value: TGroupOperation);
+    procedure SetFieldName(const Value: String);
+  protected
+    FFieldName: String;
+    FGroupOperation: TGroupOperation;
+    Value: Currency;
+    // For Average
+    FNotNullRecordCount: Integer;
+    FSumValueAsSum: Currency;
+    VarValue: Variant;
+  public
+    SumValue: Currency;
+    constructor Create(Collection: TCollection); override;
+    procedure Assign(Source: TPersistent); override;
+  published
+    property FieldName: String read FFieldName write SetFieldName;
+    property GroupOperation: TGroupOperation read FGroupOperation write SetGroupOperation;
+  end;
+
+  TDBSumCollection = class(TCollection)
+  protected
+    FOwner: TPersistent;
+    function GetItem(Index: Integer): TDBSum;
+    function GetOwner: TPersistent; override;
+    procedure SetItem(Index: Integer; Value: TDBSum);
+    procedure Update(Item: TCollectionItem); override;
+  public
+    function GetSumByOpAndFName(AGroupOperation: TGroupOperation; AFieldName: String): TDBSum;
+    property Items[Index: Integer]: TDBSum read GetItem write SetItem; default;
+  end;
+
+  TDBSumListProducer = class(TPersistent)
+  private
+    FVirtualRecords: Boolean;
+  protected
+    Changing: Boolean;
+    FActive: Boolean;
+    FDataSet: TDataSet;
+    FDesignTimeWork: Boolean;
+    FEventsOverloaded: Boolean;
+    FExternalRecalc: Boolean;
+    Filter: String;
+    Filtered: Boolean;
+    FMasterDataset: TDataset;
+    FMasterPropInfo: PPropInfo;
+    FOldRecNo: Integer;
+    FOnAfterRecalcAll: TNotifyEvent;
+    FOnRecalcAll: TNotifyEvent;
+    FOwner: TComponent;
+    FSumCollection: TDBSumCollection;
+    FSumListChanged: TNotifyEvent;
+    FTryedInsert: Boolean;
+    FVirtualRecList: TStringList;
+    OldAfterCancel: TDataSetNotifyEvent;
+    OldAfterClose: TDataSetNotifyEvent;
+    OldAfterEdit: TDataSetNotifyEvent;
+    OldAfterInsert: TDataSetNotifyEvent;
+    OldAfterOpen: TDataSetNotifyEvent;
+    OldAfterPost: TDataSetNotifyEvent;
+    OldAfterScroll: TDataSetNotifyEvent;
+    OldBeforeDelete: TDataSetNotifyEvent;
+    OldMasterAfterScroll: TDataSetNotifyEvent;
+    function GetRecNo: Integer; virtual;
+    function FindVirtualRecord(Bookmark: TBookmarkStr): Integer; virtual;
+    function GetOwner: TPersistent; override;
+    procedure SetRecNo(const Value: Integer); virtual;
+    procedure SetVirtualRecords(const Value: Boolean);
+    procedure DataSetAfterCancel(DataSet: TDataSet); virtual;
+    procedure DataSetAfterClose(DataSet: TDataSet); virtual;
+    procedure DataSetAfterEdit(DataSet: TDataSet); virtual;
+    procedure DataSetAfterInsert(DataSet: TDataSet); virtual;
+    procedure DataSetAfterOpen(DataSet: TDataSet); virtual;
+    procedure DataSetAfterPost(DataSet: TDataSet); virtual;
+    procedure DataSetAfterScroll(DataSet: TDataSet); virtual;
+    procedure DataSetBeforeDelete(DataSet: TDataSet); virtual;
+    procedure DoSumListChanged;
+    procedure Loaded;
+    procedure MasterDataSetAfterScroll(DataSet: TDataSet);
+    procedure ResetMasterInfo;
+    procedure ReturnEvents; virtual;
+    procedure SetActive(const Value: Boolean);
+    procedure SetDataSet(Value: TDataSet);
+    procedure SetExternalRecalc(const Value: Boolean);
+    procedure SetSumCollection(const Value: TDBSumCollection);
+    procedure Update;
+  public
+    constructor Create(AOwner: TComponent);
+    destructor Destroy; override;
+    function IsSequenced: Boolean; virtual;
+    function RecordCount: Integer; virtual;
+    procedure Activate(ARecalcAll: Boolean);
+    procedure Assign(Source: TPersistent); override;
+    procedure ClearSumValues; virtual;
+    procedure Deactivate(AClearSumValues: Boolean);
+    procedure RecalcAll; virtual;
+    procedure SetDataSetEvents; virtual;
+    property Active: Boolean read FActive write SetActive default True;
+    property DataSet: TDataSet read FDataSet write SetDataSet;
+    property ExternalRecalc: Boolean read FExternalRecalc write SetExternalRecalc;
+    property RecNo: Integer read GetRecNo write SetRecNo;
+    property SumCollection: TDBSumCollection read FSumCollection write SetSumCollection;
+    property VirtualRecords: Boolean read FVirtualRecords write SetVirtualRecords;
+    property SumListChanged: TNotifyEvent read FSumListChanged write FSumListChanged;
+    property OnAfterRecalcAll: TNotifyEvent read FOnAfterRecalcAll write FOnAfterRecalcAll;
+    property OnRecalcAll: TNotifyEvent read FOnRecalcAll write FOnRecalcAll;
+  end;
+
+  TDBSumList = class(TComponent)
+  private
+    function GetActive: Boolean;
+    function GetDataSet: TDataSet;
+    function GetExternalRecalc: Boolean;
+    function GetOnAfterRecalcAll: TNotifyEvent;
+    function GetOnRecalcAll: TNotifyEvent;
+    function GetRecNo: Integer;
+    function GetSumCollection: TDBSumCollection;
+    function GetSumListChanged: TNotifyEvent;
+    function GetVirtualRecords: Boolean;
+    procedure SetOnAfterRecalcAll(const Value: TNotifyEvent);
+    procedure SetOnRecalcAll(const Value: TNotifyEvent);
+    procedure SetRecNo(const Value: Integer);
+    procedure SetSumListChanged(const Value: TNotifyEvent);
+    procedure SetVirtualRecords(const Value: Boolean);
+  protected
+    FSumListProducer: TDBSumListProducer;
+    procedure DataSetAfterClose(DataSet: TDataSet);
+    procedure DataSetAfterEdit(DataSet: TDataSet);
+    procedure DataSetAfterInsert(DataSet: TDataSet);
+    procedure DataSetAfterOpen(DataSet: TDataSet);
+    procedure DataSetAfterPost(DataSet: TDataSet);
+    procedure DataSetAfterScroll(DataSet: TDataSet);
+    procedure DataSetBeforeDelete(DataSet: TDataSet);
+    procedure DoSumListChanged;
+    procedure Loaded; override;
+    procedure MasterDataSetAfterScroll(DataSet: TDataSet);
+    procedure Notification(AComponent: TComponent; Operation: TOperation); override;
+    procedure SetActive(const Value: Boolean);
+    procedure SetDataSet(Value: TDataSet);
+    procedure SetExternalRecalc(const Value: Boolean);
+    procedure SetSumCollection(const Value: TDBSumCollection);
+  public
+    constructor Create(AOwner: TComponent); override;
+    destructor Destroy; override;
+    function IsSequenced: Boolean;
+    function RecordCount: Integer;
+    procedure Activate(ARecalcAll: Boolean);
+    procedure ClearSumValues; virtual;
+    procedure Deactivate(AClearSumValues: Boolean);
+    procedure RecalcAll; virtual;
+    procedure SetDataSetEvents;
+    property RecNo: Integer read GetRecNo write SetRecNo;
+  published
+    property Active: Boolean read GetActive write SetActive default True;
+    property DataSet: TDataSet read GetDataSet write SetDataSet;
+    property ExternalRecalc: Boolean read GetExternalRecalc write SetExternalRecalc;
+    property SumCollection: TDBSumCollection read GetSumCollection write SetSumCollection;
+    property VirtualRecords: Boolean read GetVirtualRecords write SetVirtualRecords;
+    property SumListChanged: TNotifyEvent read GetSumListChanged write SetSumListChanged;
+    property OnAfterRecalcAll: TNotifyEvent read GetOnAfterRecalcAll write SetOnAfterRecalcAll;
+    property OnRecalcAll: TNotifyEvent read GetOnRecalcAll write SetOnRecalcAll;
+  end;
+
+implementation

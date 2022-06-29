@@ -1,0 +1,107 @@
+Cindy components V8.21.0
+
+2017-10-20 - cyImageEn.pas - Corrected EncodeTiffToG4FAX() 
+2017-10-20 - cyImageEn.pas - Added function ReEncodeTiff(const SrcFileTIF, DestFileTIF: String; const NewCompression: TIOTIFFCompression; const BitsPerSample, SamplesPerPixel: Integer; var Modified: Boolean; const RemoveNoiseIteration: Integer = 0): Boolean;
+2017-09-22 - cyImageEn.pas - Corrected ConvertImage2Pdf() in order to set PDF_PaperWidth and PDF_PaperHeight 
+2017-09-14 - cyVirtualTrees - Added procedure VirtualStringTree_SetChildsNodeCheckState()
+2017-09-14 - cyVirtualTrees - Added procedure VirtualStringTree_InheritsChildNodesCheckState()
+
+
+Cindy components V8.20.0
+
+2017-08-02 - cyJedi.pas - Added funtions JvTreeView_SetChildsNodeChecked() and JvTreeView_InheritsChildNodesChecked()
+2017-07-00 - Added functions VirtualStringTree_DeleteNode, VirtualStringTree_GetNextVisibleFromSameLevel, VirtualStringTree_GetPriorVisibleFromSameLevel, VirtualStringTree_HandleKey, VirtualStringTree_ChildrenExpanded
+
+2017-06-12 - cyQuickRep.pas - Added function PixelsToMm(aQuickRep: TQuickRep; pxValue: Integer): Extended to Convert pixel value to quickreport pixel (seeing zoom) and finally to mm 
+
+2017-06-12 - cyQuickRep.pas - Renamed Qr_mmToPixels() to MmToQrPixels()
+2017-06-12 - cyQuickRep.pas - Renamed Qr_PixelsToMm() to QrPixelsToMm()
+
+2017-05-25 - cyDebenuPDFLibrary.pas - Added lot new functions for page manupulation !
+
+
+
+Cindy components V8.12.0
+2017-05-03 - cyDBXJedi.pas  - New unit with functions using Jedi and Cindy DBX components.
+2017-04-11 - cyImageEn.pas - Improved and new params on functions ConvertTiff2Pdf() and ConvertImage2PDF()
+
+
+Cindy components V8.10.0
+2017-03-10 - cyDebenuPDFLibrary.pas - Added function GetPdfFilePages(const PdfFile: string): Integer
+2017-03-07 - cyIndyMail.pas - Added function GetAttachmentFilename(aAttachment: TIdAttachment): String;
+2017-03-07 - cyIndyMail.pas - Added new unit and passed some code from cyIndy.pas 
+
+
+Cindy components V8.03.0
+
+2017-01-13 - cyImageEn.pas - Lot of corrections/new funtions for acquisition
+
+
+Cindy components V8.00.0
+
+Minor improvments 
+2016-10-20 - cyzlib.pas - Added unit using zlib (included on Indy project) for string, file and stream compression/decompression
+2016-10-19 - cyImageEn.pas - Optimized EncodeTiffToG4FAX() with RemoveNoise feature
+2016-10-19 - cyImageEn.pas - Added function TIFFRemoveNoise()
+2016-08-02 - cyVirtualTrees.pas - Added function VirtualStringTree_ChildrenExpanded()
+
+Cindy components V7.25.0
+2016-08-02 - cyVirtualTrees.pas - Added unit with functions for VirtualTrees components
+
+Cindy components V7.24.0
+2016-07-29 - cyImageEn.pas - Added SaveToPdf(), ConvertTiff2Pdf(), ConvertImage2Pdf() and ConvertImage2Tiff() functions
+2016-07-21 - cyDebenuPDFLibrary.pas - Added ExtractedPageTextToWords() function 
+2016-07-18 - cyImageEn.pas - Optimized EncodeTiffToG4FAX()
+
+Cindy components V7.10
+29/12/2015 - cyJedi.pas - Added function ConvertToJpeg(aDataset: TDataset; aBlobField: TBlobField; const QualityPercent: Integer = 90);
+
+Cindy components V7.05
+09/12/2015 - cyDebenuPDFLibrary.pas Added unit with some functions to use with DebenuPDFLibrary components
+04/12/2015 - cyJedi.pas Added unit with some funcitons to use with Jedi components
+
+Cindy components V7.04
+27/11/2015 - cyImageEn.pas - Added function ConvertTiffToTIFFG4FAX(SrcFileTIF, DestFileTIF: String; var Modified: Boolean): Boolean;
+24/11/2015 - cyJedi.pas - Added function GetStreamGraphicClass(aStream: TMemoryStream; const ReplaceTMetafileBy: TGraphicClass = Nil): TGraphicClass;
+24/11/2015 - cyJedi.pas - Added function GetBlobFieldGraphicClass(aBlobField: TBlobField; const ReplaceTMetafileBy: TGraphicClass = Nil): TGraphicClass;
+24/11/2015 - cyJedi.pas - Added function AssignBlobFieldToPicture(aBlobField: TBlobField; aPicture: TPicture; const ReplaceTMetafileBy: TGraphicClass = Nil): Boolean;
+
+24/11/2015 - cyJedi.pas - Created unit
+
+Cindy components V7.00
+23/07/2015 - F_QuickRep_PrintDBGrid.pas - Added Memo field print feature. 
+22/07/2015 - F_QuickRep_PrintDBGrid.pas - Optimized graphic field print feature using TcyDBAdvGrid.OnSetContentFieldRendering event
+13/07/2015 - Renamed unit cyImageEn5.pas to cyImageEn.pas
+
+Cindy components V6.84
+30/06/2015 - F_QuickRep_PrintDBGrid.pas - Added graphic field print feature. 
+29/06/2015 - F_QuickRep_PrintDBGrid.pas - Corrected bug on print selected rows with TcyDBAdvGrid. 
+29/06/2015 - F_QuickRep_PrintDBGrid.pas - Corrected bug on print summary if SpanPagesHorizontally = false
+
+Cindy components V6.81
+22/04/2015 - Added F_QuickRep_PrintDBGrid.pas form with print dataset/DBGrid functions
+
+Cindy components V6.80
+22/04/2015 - Added support for Delphi XE8
+
+Cindy components V6.79
+12/02/2015 - cyIndy.pas - Modified ForceDecodeHeader() in order to decode TIdMsg.From.Address
+
+Cindy components V6.76
+10/10/2014 - cyIndy.pas - Modified FTP_GetFiles() and FTP_GetDirectories() when TidFTP.UseMLIS = false
+
+Cindy components V6.75
+24/09/2014 - Added support for Delphi XE7
+30/06/2014 - cyIndy.pas - Made some modifications in order to compile with newest Indy components version
+
+Cindy components V6.73
+29/05/2014 - cyIndy.pas - Added function FTP_GetFiles(AIdFTP: TIdFTP; ADirectory: String; AList: TStrings): Boolean;
+29/05/2014 - cyIndy.pas - Added function FTP_GetDirectories(AIdFTP: TIdFTP; ADirectory: String; AList: TStrings): Boolean;
+29/05/2014 - cyIndy.pas - Added function FTP_DirectoryExists(AIdFTP: TIdFTP; ADirectory: String): Boolean;
+29/05/2014 - cyIndy.pas - Added function FTP_ForceAndChangeDirectories(AIdFTP: TIdFTP; Directories: String): Boolean;
+
+Cindy components V6.70
+11/03/2014 - cyImagenEn4 - Added functions ConvertTiff2Pdf() and SaveToTiff()
+
+Cindy components V6.60
+13/02/2013 - Added third party utilities

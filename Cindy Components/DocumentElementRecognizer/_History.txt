@@ -1,0 +1,185 @@
+Cindy components V8.20.0
+
+2017-07-05 cyDERDBUtils.pas - Improved date detection on functions GetValueFromVariant() and GetValueFromField()
+2017-03-14 - cyDocer.pas - Small Locate expression corrections 
+Corrected procedure TcyLocateOptions.Sanytize(var aText: string);
+
+
+Cindy components V8.10.0
+
+2017-03-14 - cyDocer.pas - Corrected small bug on GetOCRTextFromRect()
+2017-03-10 - cyDocer.pas - Added leSmartNumberRec to type TLocateExpressionOption
+2017-03-09 - cyDocer.pas - Added function GetOCRTextFromList(aExpressionList: TStrings; const SeparWithSpace: boolean): String;
+2017-03-09 - cyDocer.pas - Some optimizations
+
+2017-03-01 - cyDocer.pas - Optimized money and percentage detection on function DERExecute()
+2017-02-14 - cyDocer.pas - Added property LocateOptions: TcyLocateOptions
+2017-02-14 - cyDocer.pas - Renamed on of the GetAroundExpressions() function to LocateExpressionAround()
+2017-02-14 - cyDocer.pas - Renamed LocateText() to LocateExpressions() 
+
+
+Cindy components V8.04.0
+
+2017-02-14 - cyDocer.pas - Added procedure GetExpressionListFromRect()
+2017-02-14 - cyDocer.pas - Correct bug on keywords recognition when trying to separ keyword to its value (in procedure TrySplitOnRemainedExpression)
+2017-02-13 - cyDocer.pas - Minor improvments and bugs corrected 
+2017-02-02 - cyDERUtils.pas - Added etID to TElementsType type for invoice number/client number/contract number recognition
+2017-02-02 - cyDERUtils.pas - Added functions DERExtractID() and SanytizeID()
+2017-02-02 - cyDocer.pas - LocateExpression() ignored char '.' and now also '(' and ')'
+2017-02-02 - cyDocer.pas - Correct bug on procedure GetInsertIndexPosition() and renamed to GetExpressionListInsertExpressionIndex()
+2017-02-01 - cyDocer.pas - Modified/optimized function LocateExpression()
+2017-02-01 - cyDocer.pas - Added lePartialKeyWord and leRelativePositionWord on TLocateOption
+2017-02-01 - cyDocer.pas - Added function LocateText()
+2017-01-13 - cyDocer.pas - Modified/optimized function RecognizeElementKeyword() renamed to RecognizeNextExpressionElementKeyword()
+2017-01-13 - cyDocer.pas - Added property Elements[].Tag2: Integer 
+
+
+Cindy components V8.03.0
+
+2017-01-13 - cyDocer.pas - Added PatternValueSizeMm, ValueMinCars, ValueMaxCars properties to TElement class
+2017-01-13 - cyDocer.pas - Added function PatternRectDefined(): Boolean
+2017-01-13 - cyDocer.pas - You can now use PatternPageNumber, FPatternFromLeftMm, FPatternFromTopMm, FPatternFromRightMm, FPatternFromBottomMm with Keywords feature
+2017-01-13 - cyDocer.pas - Small bugs fixed and code improvments
+2017-01-13 - cyDocer.pas - Removed function PatternRecognition: Boolean 
+2017-01-04 - cyDocer.pas - Corrected float detection on DERExecute() 
+2016-12-27 - cyDocer.pas - Corrected bug on AddExpression: Integer that not returns real Expression index if merged with other expression
+2016-12-27 - cyDocer.pas - function ExpressionAdded: Integer now returns real Expression index if merged with other expression
+
+
+Cindy components V8.01.0
+
+2016-11-14 - cyDocER.pas - Corrected LoadFromFile() compatibility issue
+2016-11-14 - cyDocER.pas - Corrected loop bug on Pattern_RecognizeSingleValueFromList()
+
+
+
+Cindy components V8.00.0
+
+Lot improvments done!
+
+2016-10-17 - cyDocER.pas - GetNearestExpression()
+2016-10-17 - cyDocER.pas - Renamed type TSearchValueLocation to TSearchLocation
+2016-10-17 - cyDocER.pas - Added function ExpressionsInSameColumn()
+2016-10-14 - cyDocER.pas - Added property Elements[].KeywordLookingValueDirection
+2016-10-13 - cyDocER.pas - Removed event BeforeRecognizeElementsKeywords
+2016-10-10 - cyDocER.pas - Added function RecognizeDay(): Integer
+2016-10-10 - cyDocER.pas - Added property DayNumberSuffixes: TStrings for day recognition (1st januray)
+2016-10-10 - cyDocER.pas - Improvments in date recognition and etMonthYear type recognition !
+2016-10-10 - cyDERUtils.pas - Added etMonthYear to type TElementsType
+2016-10-06- cyDocER.pas - Added properties Description and TagStr: string to TElement TCollectionItem
+2016-07-25 - cyDERDbUtils.pas - Corrected bug on GetValueFromField() 
+
+Cindy components V7.24.0
+2016-07-25 - cyDERDbUtils.pas - Added unit with functions to interact with database. 
+2016-07-21 - cyDERQuickPdfUtils.pas - Added unit with functions to interact with DebenuQuickPdf tool. 
+
+Cindy components V7.23
+2016-06-20 - cyDocER.pas - Corrected call of/bug on ExpressionLoaded if no expression exists 
+
+Cindy components V7.11
+2016-03-31 - Added function RecognizedFloatValue: Extended and function RecognizedDateValue: TDate to TOCRExpression
+2016-03-XX - Small bugs fixed, regionalization fixed etc ...
+
+	
+Cindy components V7.04
+12/11/2015 - cyDocER.pas - Removed NewDocument() function: use ClearPages / NewPage() instead !
+12/11/2015 - cyDocER.pas - New: tcyDocER handle document resolution, width and height for each page! 
+11/11/2015 - cyDocER.pas - Added class TOCRPage used on property Pages[Index: Integer]: TOCRPage
+10/11/2015 - cyDocER.pas - bugs corrected 
+
+Cindy components V7.03
+27/10/2015 - cyDocER.pas - Some improvmemts / bugs corrected 
+14/10/2015 - cyDocER.pas - Added Mask property on TElement (See cyStrUtils.pas IsMatchMask function)
+
+Cindy components V7.01
+30/09/2015 - cyDocER.pas - Corrected big bug on semantic recognition that included own keywords expressions on element recognition expression list
+
+Cindy components V7.00
+13/09/2015 - Added support for Delphi 10
+12/08/2015 - cyDERUtils.pas - Moved isValidWebSiteChar(), isValidWebMailChar(), isValidwebSite() and isValidWebMail() to cyStrUtils.pas
+
+Cindy components V6.82
+01/06/2015 - cyDocER.pas - Corrected bug on function LoadFromStringList() if parameter (TStrings) is empty
+
+Cindy components V6.80
+22/04/2015 - Added support for Delphi XE8
+
+Cindy components V6.78
+08/01/2015 - cyDocER.pas - Corrected bug when merging 2 expressions when ExpressionOptions = [eoDERValueAsString]
+
+Cindy components V6.76
+30/10/2014 - cyDERUtils.pas - Corrected error on DERExecute() function 
+28/10/2014 - cyDERUtils.pas - Correct function isValidwebSite()
+
+Cindy components V6.75
+24/09/2014 - Added support for Delphi XE7
+
+Cindy components V6.74
+04/06/2014 - cyDocER.pas - Corrected bug on date recognition created on V6.72
+04/06/2014 - cyDERUtils.pas - Corrected bug on date recognition created on V6.72
+
+Cindy components V6.72
+19/05/2014 - cyDocER.pas - Numerical date detection on several expressions ("15" + "/" + "01" + "/" + "1977"). 
+19/05/2014 - cyDERUtils.pas - Forced date recognition on DERExecute function when letter "H" is in reality "11". Exemple: "3O/H/2OH"
+
+Cindy components V6.71
+13/05/2014 - cyDocER.pas - Corrected issue on retrieving text line values from rows
+
+Cindy components V6.70
+30/04/2014 - Added support for Delphi XE6
+
+Cindy components V6.53
+13/01/2014 - cyDocER.pas - Corrected small bug on RecognizeLongDates()
+
+Cindy components V6.52
+02/01/2014 - Corrected small bug on merging condition on function ExpressionAdded() 
+
+Cindy components V6.51
+17/12/2013 - cyDocER.pas - Added function IsExpressionsSameValue()
+04/12/2013 - cyDocER.pas - Added ExpressionOptions property to avoid String convertion when text is not retrieved from any OCR tool. 
+02/12/2013 - cyDocER.pas - Corrected small bug on pattern recognition when retrieving sorted ExpressionList by position
+
+Cindy components V6.50
+29/10/2013 - cyDocER.pas - corrected small bug on pattern recognition when expression already associated to an element
+23/10/2013 - cyDocER.pas - Added CloneExpression(aExpressionIndex: Integer): Integer;
+
+Cindy components V6.03
+02/10/2013 - Added support for Delphi XE5
+
+Cindy components V6.02
+23/07/2013 - cyDocER.pas - Minor improvments
+22/07/2013 - cyDERUtils.pas - Added etTextLine, etParagraph to TElementsType
+19/07/2013 - cyDocER.pas - Added property AutoMergeExpressionsRatio
+17/07/2013 - cyDocER.pas - Renamed function NewPage() to NewDocument()
+
+Cindy components V6.00
+12/04/2013 - Windows 64 bits support platform
+
+Cindy components V5.14.1
+10/04/2013 - cyDocER.pas - Added function RotatePageExpressions()
+01/03/2013 - cyDocER.pas - Replaced FExpressions: Array Of TOCRExpression with FExpressions: TList
+22/02/2013 - cyDocER.pas - GetAsDocumentOCRText and GetAsDocumentOCRTextFromRect()
+21/02/2013 - cyDocER.pas - Added ExpressionLoaded when expressions loaded from file/TStrings. 
+
+Cindy components V5.14
+15/02/2013 - Now may compile on Delphi XE2/XE3
+
+Cindy components V5.10.2
+06/11/2012 - cyDERUtils.pas - Now use of TFormatSettings instead of deprecated global variables like DecimalSeparator
+
+Cindy components V5.10
+24/10/2012 - cyDERUtils.pas - Improved speed on StringToDERCharSet() and on DERToDERNCharset()
+
+Cindy components V5.07
+11/09/2012 - cyDocER.pas - Added ShortMonthNames: TStrings property in order to set months if country recognition is different of windows system
+10/09/2012 - cyDocER.pas - Added '+' char to DERDefaultChars constant (to retrieve international phone numbers)
+24/07/2012 - cyDocER.pas - Added RecognizeElementsKeywords; and RecognizeElementsValues; that are called into RecognizeElements;
+
+Cindy components V5.06
+24/07/2012 - cyDocER.pas - Added functions GetOCRText(), GetOCRTextFromRect() and ExpressionInRect() 
+
+Cindy components V5.00
+
+27/06/2012 - TcyDocER component terminated
+03/11/2011 - Working on new component: TcyDocER on new palette "Cindy DER"
+

@@ -1,0 +1,358 @@
+{*******************************************************}
+{                                                       }
+{                       EhLib v3.4                      }
+{     TDBLookupGridEh, TPopupDataGridEh components      }
+{                                                       }
+{      Copyright (c) 2002-2004 by Dmitry V. Bolshakov   }
+{                                                       }
+{*******************************************************}
+
+{$I EhLib.Inc}
+
+{$IFDEF EH_LIB_VCL}
+unit DBLookupGridsEh {$IFDEF CIL} platform {$ENDIF};
+{$ELSE}
+unit QDBLookupGridsEh;
+{$ENDIF}
+
+interface
+
+{$IFDEF EH_LIB_VCL}
+uses
+  Windows, Messages, SysUtils, Classes, Controls, Grids, DBGridEh, ToolCtrlsEh,
+{$IFDEF EH_LIB_5} Contnrs, {$ENDIF}
+{$IFDEF EH_LIB_6}Variants, {$ENDIF}
+  DB, DBGrids, Graphics, StdCtrls;
+{$ELSE}
+  SysUtils, Classes, Types, QControls, QGrids, QDBGridEh, QToolCtrlsEh,
+  Variants, DB, QDBGrids, QGraphics, QStdCtrls, Qt;
+{$ENDIF}
+
+type
+
+  TDBLookupGridEh = class;
+
+{ TLookupGridDataLinkEh }
+
+  TLookupGridDataLinkEh = class(TDataLink)
+  private
+    FDBLookupGrid: TDBLookupGridEh;
+  protected
+    procedure ActiveChanged; override;
+{$IFDEF CIL}
+    procedure FocusControl(const Field: TField); override;
+{$ELSE}
+    procedure FocusControl(Field: TFieldRef); override;
+{$ENDIF}
+    procedure LayoutChanged; override;
+    procedure RecordChanged(Field: TField); override;
+  public
+    constructor Create;
+  end;
+
+{ TGridColumnSpecCellEh }
+
+  TGridColumnSpecCellEh = class(TPersistent)
+  private
+    FOwner: TPersistent;
+    FFont: TFont;
+    FColor: TColor;
+    FText: String;
+    function GetColor: TColor;
+    function GetFont: TFont;
+    function GetText: String;
+    function IsColorStored: Boolean;
+    function IsFontStored: Boolean;
+    function IsTextStored: Boolean;
+    procedure FontChanged(Sender: TObject);
+    procedure SetColor(const Value: TColor);
+    procedure SetFont(const Value: TFont);
+    procedure SetText(const Value: String);
+  protected
+    FColorAssigned: Boolean;
+    FFontAssigned: Boolean;
+    FTextAssigned: Boolean;
+    function DefaultColor: TColor;
+    function DefaultFont: TFont;
+    function DefaultText: String;
+    function GetOwner: TPersistent; override;
+  public
+    constructor Create(Owner: TPersistent);
+    destructor Destroy; override;
+    procedure Assign(Source: TPersistent); override;
+  published
+    property Text: String read GetText write SetText stored IsTextStored;
+    property Color: TColor read GetColor write SetColor stored IsColorStored;
+    property Font: TFont read GetFont write SetFont stored IsFontStored;
+  end;
+
+{ TDBLookupGridColumnEh }
+
+  TDBLookupGridColumnEh = class(TColumnEh)
+  private
+    FSpecCell: TGridColumnSpecCellEh;
+    function GetGrid: TDBLookupGridEh;
+    procedure SetSpecCell(const Value: TGridColumnSpecCellEh);
+  protected
+    procedure SetWidth(Value: Integer); override;
+    procedure SetIndex(Value: Integer); override;
+  public
+    constructor Create(Collection: TCollection); override;
+    destructor Destroy; override;
+    property Grid: TDBLookupGridEh read GetGrid;
+  published
+    property Alignment;
+    property AutoFitColWidth;
+    property Checkboxes;
+    property Color;
+    property EndEllipsis;
+    property FieldName;
+    property Font;
+    property ImageList;
+{$IFDEF EH_LIB_VCL}
+    property ImeMode;
+    property ImeName;
+{$ENDIF}
+    property KeyList;
+    property MaxWidth;
+    property MinWidth;
+    property NotInKeyListIndex;
+    property PickList;
+    property PopupMenu;
+    property ShowImageAndText;
+    property SpecCell: TGridColumnSpecCellEh read FSpecCell write SetSpecCell;
+    property Tag;
+    property Title;
+    property ToolTips;
+    property Visible;
+    property Width;
+    property OnGetCellParams; // { TODO : Remove event. Grid.Columns doesn't have parent and IDE can create event. }
+  end;
+
+{ TDBLookupGridColumnDefValuesEh}
+
+  TDBLookupGridColumnDefValuesEh = class(TColumnDefValuesEh)
+  published
+    property EndEllipsis;
+    property Title;
+    property ToolTips;
+  end;
+
+{ TDBLookupGridEh }
+
+  TDBLookupGridEh = class(TCustomDBGridEh)
+  private
+    FDataFieldName: string;
+    FDataFields: TFieldsArrEh;
+    FDataLink: TLookupGridDataLinkEh;
+    FHasFocus: Boolean;
+    FKeyFieldName: string;
+    FKeyFields: TFieldsArrEh;
+    FKeyRowVisible: Boolean;
+    FKeySelected: Boolean;
+    FKeyValue: Variant;
+    FListActive: Boolean;
+    FListField: TField;
+    FListFieldIndex: Integer;
+    FListFieldName: string;
+    FListFields: TObjectList;
+    //FListLink: TLookupCtrlListLinkEh;
+    FLockPosition: Boolean;
+    FLookupMode: Boolean;
+    FLookupSource: TDataSource;
+    FMasterFieldNames: string;
+    FMasterFields: TFieldsArrEh;
+    FMousePos: Integer;
+    FPopup: Boolean;
+    FRecordCount: Integer;
+    FRecordIndex: Integer;
+    FRowCount: Integer;
+    FSearchText: string;
+    FSelectedItem: string;
+    FSpecRow: TSpecRowEh;
+    FOptions: TDBLookupGridEhOptions;
+    function GetAutoFitColWidths: Boolean;
+    function GetDataField: TField;
+    function GetDataSource: TDataSource;
+    function GetKeyFieldName: string;
+    function GetListLink: TGridDataLinkEh;
+    function GetListSource: TDataSource;
+    function GetReadOnly: Boolean;
+    function GetShowTitles: Boolean;
+    function GetTitleRowHeight: Integer;
+    function GetUseMultiTitle: Boolean;
+    procedure CheckNotCircular;
+    procedure CheckNotLookup;
+{$IFDEF EH_LIB_VCL}
+    procedure CMRecreateWnd(var Message: TMessage); message CM_RECREATEWND;
+{$ENDIF}
+    procedure DataLinkRecordChanged(Field: TField);
+    procedure SelectCurrent;
+    procedure SelectItemAt(X, Y: Integer);
+    procedure SelectSpecRow;
+    procedure SetAutoFitColWidths(const Value: Boolean);
+    procedure SetDataFieldName(const Value: string);
+    procedure SetDataSource(Value: TDataSource);
+    procedure SetKeyFieldName(const Value: string);
+    procedure SetKeyValue(const Value: Variant);
+    procedure SetListFieldName(const Value: string);
+    procedure SetListSource(Value: TDataSource);
+    procedure SetLookupMode(Value: Boolean);
+    procedure SetOptions(const Value: TDBLookupGridEhOptions);
+    procedure SetReadOnly(Value: Boolean);
+    procedure SetRowCount(Value: Integer);
+    procedure SetShowTitles(const Value: Boolean);
+    procedure SetSpecRow(const Value: TSpecRowEh);
+    procedure SetUseMultiTitle(const Value: Boolean);
+{$IFDEF EH_LIB_VCL}
+    procedure WMGetDlgCode(var Message: TWMGetDlgCode); message WM_GETDLGCODE;
+    procedure WMKillFocus(var Message: TWMKillFocus); message WM_KILLFOCUS;
+    procedure WMSetCursor(var Msg: TWMSetCursor); message WM_SETCURSOR;
+    procedure WMSetFocus(var Message: TWMSetFocus); message WM_SETFOCUS;
+    procedure WMSize(var Message: TWMSize); message WM_SIZE;
+    procedure WMVScroll(var Message: TWMVScroll); message WM_VSCROLL;
+{$ENDIF}
+  protected
+    FSpecRowHeight: Integer;
+    FLGAutoFitColWidths: Boolean;
+    FInternalWidthSetting: Boolean;
+    FInternalHeightSetting: Boolean;
+    function CanDrawFocusRowRect: Boolean; override;
+    function CanModify: Boolean; virtual;
+    function CellHave3DRect(ACol, ARow: Longint; ARect: TRect; AState: TGridDrawState): Boolean; override;
+    function CompatibleVarValue(AFieldsArr: TFieldsArrEh; AVlaue: Variant): Boolean; virtual;
+    function CreateColumnDefValues: TColumnDefValuesEh; override;
+    function CreateColumns: TDBGridColumnsEh; override;
+{$IFDEF EH_LIB_VCL}
+    function DoMouseWheelDown(Shift: TShiftState; MousePos: TPoint): Boolean; override;
+    function DoMouseWheelUp(Shift: TShiftState; MousePos: TPoint): Boolean; override;
+{$ENDIF}
+    function GetBorderSize: Integer; virtual;
+    function GetKeyIndex: Integer;
+    function GetSpecRowHeight: Integer; virtual;
+    function GetSubTitleRows: Integer; override;
+    function GetDataRowHeight: Integer; virtual;
+    function HighlightDataCellColor(DataCol, DataRow: Integer; const Value: string;
+      AState: TGridDrawState; var AColor: TColor; AFont: TFont): Boolean; override;
+    procedure ColWidthsChanged; override;
+    procedure CreateWnd; override;
+    procedure DataChanged; override;
+    procedure DefineFieldMap; override;
+    procedure DrawSubTitleCell(ACol, ARow: Longint;  DataCol, DataRow: Integer;
+      CellType: TCellTypeEh; ARect: TRect; AState: TGridDrawState; var Highlighted: Boolean); override;
+    procedure GetDatasetFieldList(FieldList: TList); override;
+    procedure KeyDown(var Key: Word; Shift: TShiftState); override;
+    procedure KeyValueChanged; virtual;
+    procedure LayoutChanged; override;
+    procedure ListLinkDataChanged; virtual;
+    procedure LinkActive(Value: Boolean); override;
+    procedure MouseDown(Button: TMouseButton; Shift: TShiftState; X, Y: Integer); override;
+    procedure MouseMove(Shift: TShiftState; X, Y: Integer); override;
+    procedure MouseUp(Button: TMouseButton; Shift: TShiftState; X, Y: Integer); override;
+    procedure Notification(AComponent: TComponent; Operation: TOperation); override;
+    procedure ProcessSearchKey(Key: Char); virtual;
+//    procedure RowHeightsChanged; override;
+    procedure Scroll(Distance: Integer); override;
+    procedure SelectKeyValue(const Value: Variant); virtual;
+    procedure SpecRowChanged(Sender: TObject); virtual;
+    procedure TimerScroll; override;
+    procedure UpdateActive; override;
+    procedure UpdateColumnsList; virtual;
+    procedure UpdateDataFields; virtual;
+    procedure UpdateListFields; virtual;
+    procedure UpdateRowCount; override;
+    procedure UpdateScrollBar; override;
+    property HasFocus: Boolean read FHasFocus;
+    property ParentColor default False;
+    property TitleRowHeight: Integer read GetTitleRowHeight;
+  public
+    constructor Create(AOwner: TComponent); override;
+    destructor Destroy; override;
+    function DataRect: TRect;
+    function GetColumnsWidthToFit: Integer;
+    function LocateKey: Boolean; virtual;
+    procedure SetBounds(ALeft, ATop, AWidth, AHeight: Integer); override;
+    property AutoFitColWidths: Boolean read GetAutoFitColWidths write SetAutoFitColWidths;
+    property DataField: string read FDataFieldName write SetDataFieldName;
+    property DataSource: TDataSource read GetDataSource write SetDataSource;
+    property Field: TField read GetDataField;
+    property KeyField: string read GetKeyFieldName write SetKeyFieldName;
+    property KeyValue: Variant read FKeyValue write SetKeyValue;
+    property ListActive: Boolean read FListActive;
+    property ListField: string read FListFieldName write SetListFieldName;
+    property ListFieldIndex: Integer read FListFieldIndex write FListFieldIndex default 0;
+    property ListFields: TObjectList read FListFields;
+    property ListLink: TGridDataLinkEh read GetListLink;
+    property ListSource: TDataSource read GetListSource write SetListSource;
+    property Options: TDBLookupGridEhOptions read FOptions write SetOptions
+      default [dlgColLinesEh];
+    property ReadOnly: Boolean read GetReadOnly write SetReadOnly default False;
+    property SearchText: string read FSearchText write FSearchText;
+    property SelectedItem: String read FSelectedItem;
+    property SpecRow: TSpecRowEh read FSpecRow write SetSpecRow;
+    property ShowTitles: Boolean read GetShowTitles write SetShowTitles;
+    property RowCount: Integer read FRowCount write SetRowCount stored False;
+    property Color;
+    property UseMultiTitle: Boolean read GetUseMultiTitle write SetUseMultiTitle;
+    property OnClick;
+    property OnColumnMoved;
+    property OnDblClick;
+    property OnDragDrop;
+    property OnDragOver;
+    property OnEndDrag;
+    property OnEnter;
+    property OnExit;
+    property OnKeyDown;
+    property OnKeyPress;
+    property OnKeyUp;
+    property OnMouseDown;
+    property OnMouseMove;
+    property OnMouseUp;
+    property OnStartDrag;
+  end;
+
+{ TPopupDataGridEh }
+  TPopupDataGridEh = class(TDBLookupGridEh)
+  private
+    FOnMouseCloseUp: TCloseUpEventEh;
+    FOnUserKeyValueChange: TNotifyEvent;
+    FSizeGrip: TSizeGripEh;
+    FSizeGripResized: Boolean;
+    FUserKeyValueChanged: Boolean;
+    function CheckNewSize(var NewWidth, NewHeight: Integer): Boolean;
+{$IFDEF EH_LIB_VCL}
+    procedure CMCtl3DChanged(var Message: TMessage); message CM_CTL3DCHANGED;
+    procedure CMSetSizeGripChangePosition(var Message: TMessage); message cm_SetSizeGripChangePosition;
+    procedure WMEraseBkgnd(var Message: TWmEraseBkgnd); message WM_ERASEBKGND;
+    procedure WMMouseActivate(var Message: TWMMouseActivate); message WM_MOUSEACTIVATE;
+    procedure WMSize(var Message: TWMSize); message WM_SIZE;
+    procedure WMWindowPosChanging(var Message: TWMWindowPosChanging); message WM_WINDOWPOSCHANGING;
+{$ENDIF}
+  protected
+{$IFDEF EH_LIB_VCL}
+    procedure CreateParams(var Params: TCreateParams); override;
+{$ENDIF}
+    procedure DrawBorder; override;
+    procedure KeyValueChanged; override;
+    procedure MouseDown(Button: TMouseButton; Shift: TShiftState; X, Y: Integer); override;
+    procedure MouseMove(Shift: TShiftState; X, Y: Integer); override;
+    procedure MouseUp(Button: TMouseButton; Shift: TShiftState; X, Y: Integer); override;
+    procedure UpdateBorderWidth;
+  public
+    constructor Create(AOwner: TComponent); override;
+    destructor Destroy; override;
+    function CanFocus: Boolean; {$IFDEF EH_LIB_5} override; {$ENDIF}
+    procedure KeyDown(var Key: Word; Shift: TShiftState); override;
+    procedure KeyUp(var Key: Word; Shift: TShiftState); override;
+{$IFDEF EH_LIB_VCL}
+    property Ctl3D;
+    property ParentCtl3D;
+{$ENDIF}
+    property SizeGrip: TSizeGripEh read FSizeGrip;
+    property SizeGripResized: Boolean read FSizeGripResized write FSizeGripResized;
+    property OnDrawColumnCell;
+    property OnUserKeyValueChange: TNotifyEvent read FOnUserKeyValueChange write FOnUserKeyValueChange;
+    property OnMouseCloseUp: TCloseUpEventEh read FOnMouseCloseUp write FOnMouseCloseUp;
+  end;
+
+implementation

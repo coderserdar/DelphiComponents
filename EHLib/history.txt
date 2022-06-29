@@ -1,0 +1,909 @@
+EhLib history
+
+Version 3.4
+
+  + Added support of Delphi 8 (VCL.NET).
+
+  In TDBGridEh
+   + Added property ToolTips in Footer and ColumnDefValues.Footer.
+   + Added property SumValue: Variant in TColumnFooterEh.
+
+   + Added property ShowImageAndText in TColumnEh. Allows to show Image from ImageList 
+     and field Text in grid cell simultaneously. Set ImageIndex in OnGetCellParams event.
+
+  In TCustomDBEditEh
+   + Added property Images: TCustomImageList. Images from imagelist can appear at the left 
+       part of TDBEditEh, TDBDateTimeEditEh, TDBNumberEditEh or TDBLookupComboboxEh.
+   + Added event OnGetImageIndex: TGetImageIndexEventEh.
+        TGetImageIndexEventEh = procedure(Sender: TObject; var ImageIndex: Integer) of object;
+     Event is called when Text or Value in TCustomDBEditEh is changed. Set new ImageIndex 
+     depending on Text or Value.
+
+Version 3.3
+
+  For TDBGridEh
+   + Added new form 'DBGridEhFindDlgs' - find dialog in DBGridEh.  Dialog allows 
+     to find text in the grid: In specified column or on whole grid;
+     From any part of field, Whole field or From beging of the field.
+     Set new dghDialogFind value to OptionsEh to allows find dialog in DBGridEh.
+     Default shortcut to show find dialog in the grid is 'Ctrl-F'. When dghIncSearch 
+     also included in the OptionsEh then first pressing 'Ctrl-F' enters the grid in 
+     the Increment Search mode and holding 'Ctrl' press 'F' again will show the 
+     find dialog.
+
+  In TDBGridEh
+   + Added dghDialogFind value to the TDBGridEhOption type (property OptionsEh).
+
+  In TSTColumnFilterEh
+   + Added KeyField, ListField, ListSource properties. Now you can adjust combobox
+     in SubTitle Filter cell. If Column.STFilter.ListSource is not empty then grid
+     will create combobox for such filter cell. ListSource defines the list of values
+     in drop-down list, ListField defines field whose values are displayed in 
+     drop-down list, KeyField identifies the field in the ListSource dataset whose 
+     value will takes to build filter expression.
+     
+  In TSQLDatasetFeaturesEh
+   + Added SupportsLocalLike property. Determines if the dataset supports 'Like' 
+     keyword in Filter property. Modules from DataService directory of EhLib archive 
+     rewrited to support this property.
+
+  In TMRUListEh
+   + Added AutoAdd property of Boolean type. Determines that the edit control will 
+     add new Text in MRUList automagically when control loses focus. Default value 
+     for property is True. You can use it (set to False) to fill MRUList manually, 
+     for instance from database table.
+
+  * Some bugfixes.
+
+Version 3.2
+  
+  In TDBGridEh 
+   + Added ability to fill cell by the value from previous record. 
+     You can use "Ctrl+'" key to do it.
+
+   + Added dghDblClickOptimizeColWidth value to the TDBGridEhOption type
+     (property OptionsEh). Adding this value to OptionsEh property
+     allows grid to set optimal column width (to fit text in cells of column).
+     on double-click on ColSizing line.
+
+   + Added ability to show special row (under title) where you can enter 
+     expressions in cells for filtering records in dataset. 
+     (Expression in the cell can look like: "1", ">=1", ">1 AND <=5", "%TestStr%")
+     When cursor reside in the filter cell they can press ENTER to apply filter.
+
+     For automatically filtering data in dataset need to add one of the units 
+     EhLib... (EhLibADO, EhLibBDE, EhLibCDS) to 'uses' clause of any unit of your
+     project. Now EhLib have objects to filter data in the TClientDataSet, TQuery,
+     TTable and TADOQuery. You have to write and register your own object to filter 
+     data in DataSet that not present in this list or you can write 
+     TDBGridEh.OnApplyFilter event for every grid.
+
+     Added property - STFilter: TSTDBGridEhFilter with subproperties:
+       property Local: Boolean - grid does not use it, but object that
+         perform filtering can determine whether it will filter locally 
+         in dataset or on the server (by adding filter expressions in 
+         SQL 'WHERE' clause).
+       property Visible: Boolean - Specifies whether the filter row is visible.
+
+   + Added OnApplyFilter event.
+
+   + Added ApplyFilter function in TDatasetFeaturesEh class.
+
+   In TColumnEh
+    + Added new property - STFilter: TSTColumnFilterEh;
+      with properties
+	DataField: String - Specifies the field name that use to 
+          filter data if Column.FieldName is not fit for it.
+	Visible: Boolean - Specifies whether user can enter expressions
+          in filter row for this column.
+        ExpressionStr: String - text expression in StFilter cell.
+        Expression: TSTFilterExpressionEh - coded expression in StFilter cell.
+
+Version 3.1
+
+  * Changes in TRegPropStorageManEh:
+      'Key' property moved from 'published' to 'public' part.
+      (C++ Builder does not support HKEY type in published part).
+
+      Added RegistryKey property of TRegistryKeyEh type.
+
+  + Added (in source included version only) preview version of the
+    TMemTableEh component. Dataset, which hold all its data in memory, 
+    furthermore can fetch data from other dataset's, unload changes 
+    back to dataset and support special interface, that allow to 
+    view all data without changing active record.
+
+    See detail info in AdvTech\MemTableEh\readme.txt dir.
+
+  + In DBGridEh: Added support of IMemTableEh interface in DataSet 
+    that allow to view all data, without changing active record.
+
+
+Version 3.0
+
+  In TDBDateTimeEditEh
+
+   + New values in TDateTimeKindEh type (property Kind).
+       TDateTimeKindEh = (dtkDateEh, dtkTimeEh, dtkDateTimeEh, dtkCustomEh);
+   + Added EditFormat property. Now you can type custom date/time format using
+     next format elements: 'YY', 'YYYY', 'MM', 'DD', 'HH', 'NN', 'SS'.
+
+
+  Library is divided to design-time and run-time packages.
+  EhLib[XX] - run-time package and DclEhLib[X] - design-time packages, 
+  where [XX] is digit number of VCL version:
+  [40] for Delphi 4, [50] for Delphi 5, etc;
+  And EhLibB[XX] with DclEhLibB[XX] for C++ Builder.
+
+
+  Upon installation, all components is placed to the separate page in
+  components palette with name - 'EhLib'.
+  Note that Delphi IDE does not move components to the new default 
+  place when you install new version of same component(s). So if you 
+  already has EhLib installed, then installation new (3.0) version 
+  does not move EhLib components to the 'EhLib' page on components palette.	
+  To force Delphi IDE to move compontes to the default place on 
+  components palette do next:
+  Open menu: Component->Configure Palette.
+             Select '[All]' line in Pages listbox.
+             Click 'Default Pages' button.
+
+
+  New componetns: TPropStorageEh, TIniPropStorageManEh, TRegPropStorageManEh.
+  Components realize technology to store components properties to/from settings 
+  storage such as ini files, registry etc.
+
+  + Added (in source included version only) design-time ClientDataSet edit 
+     window. See detail info in AdvTech\CDSDesign\readme.txt dir.
+
+
+Version 2.6
+
+  + Added Windows XP themes support (Only under Delphi 7).
+
+  + Added (in source included version only) preview restricted 
+    version of EhLibCLX - EhLib under Borland Component Library for 
+    Cross-Platform.
+    See detail info in AdvTech\EhLibCLX\readme.txt dir.
+
+  + Added (in source included version only) preview version of technology 
+    to store components properties to/from settings storage such as 
+    ini files, registry etc.
+    See detail info in AdvTech\PropStorage\readme.txt dir.
+
+
+Version 2.5
+
+  + Added Delphi 7 support.
+
+  + New units: CalculatorEh - TCalculatorEh, TPopupCalculatorEh
+               DbUtilsEh - Utilities to sort data in DataSet from DBGrid
+               EhLibADO - Register object that sort data in TADOQuery
+               EhLibBDE - Register object that sort data in TQuery
+               EhLibCDS - Register object that sort data in TCustomClientDataSet
+
+  In TDbGridEh 
+  + Added possiblity to sort data in DataSet after sorting markers         
+    will be changed. You have to add dlgAutoSortMarkingEh to OptionsEh,
+    set TColumnEh.Title.TitleButton to True for required columns,
+    keep OnSortMarkingChanged event empty, add one of the units 
+    EhLib... (EhLibADO, EhLibBDE, EhLibCDS) to 'uses' clause of any unit of your
+    project. Now EhLib have objects to sort data in TClientDataSet, TQuery
+    and TADOQuery. You have to write and register your own object to sort data
+    in DataSet that not present in this list.
+
+  + Added SortLocal property in TDBGridEh. Objects that sort data in DataSet
+    can use this property to determine how to sort data, on client or on server.
+
+  + Changed highlight coloring in TDBGridEh for multiselected cells and
+    active cell when TDBGridEh have not focus when color mode have more then 
+    256 color. I recombinate you to use dgAlwaysShowSelection in Options
+    and dghRowHighlight in OptionsEh.
+    If you want to keep old method of highlighting for all grids set 
+    DBGridEhDefaultStyle.LuminateSelection to false (at run time).
+
+  In TDBNumberEditEh and TColumnEh 
+  + Added dropped down calculator in TDBNumberEditEh and TColumnEh for numbered 
+    fields (need set TColumnEh.ButtonStyle to cbsDropDown).
+
+  In TColumnEh
+  + Added DisplayFormat and EditMask properties.
+
+  In TColumnFooterEh
+  + Added DisplayFormat property.
+     
+
+Version 2.4
+
+  + Added MRUList property (Most recently used values) in all edit 
+    controls and TCloumnEh. If MRUList is Active then in time of edit text
+    the special listbox will be dropded down where users can select last entered
+    values. When user leave edit control or inplace editor in the grid the value
+    will be added in MRUList.
+
+  MRUList: TMRUListEh = class(TPersistent)
+    property Active: Boolean - MRU list will drop down in time of edit text.
+    property CaseSensitive: Boolean - take into account char case.
+    property Items: TStrings - list of items.
+    property Limit: Integer - max count of items. Old will be deleted.
+    property Rows: Integer - Count of rows in dtop down window.
+  end;
+
+  To distinguish MRU dropdown box from other, all other dropdown boxes have 3D border.
+
+  + Added new component - TDBCheckBoxEh.
+    Can works as in data-aware mode as in usual not data-aware mode.
+    If DataField and DataSource properties is not assigned then
+    checkbox works in usual not data-aware mode.
+
+    Have Flat and AlwaysShowBorder properties to show in the flat mode.
+
+  In TDropDownBoxEh  (TColumnEh.DropDownBox,  TLookupComboBoxEh.DropDownBox) added property 
+  + ListSource of TDataSource type.
+    This property will be used when lookup inplace editor in the grid or
+    LookupComboBox have focus. It allows to have different list of
+    lookup list values for different records of master data.
+
+  In TDBSumList 
+  + Added OnAfterRecalcAll event. Event is call after SumList recalculate 
+    aggregated values.
+
+  In TDbGridEh 
+  + Added OnSumListAfterRecalcAll event. 
+
+Version 2.3
+
+  + Added C++ Builder 6 support.
+
+  In TDBDateTimeEditEh and TDBComboBoxEh 
+    + Added OnCloseUp and OnDropDown events.
+
+  In TDBGridEhScrollBar class (DBGridEh.VertScrollBar, HorzScrollBar)
+    + Added property ExtScrollBar: TScrollBar.
+        Now you can attach external scrollbars to the grid.
+  DBGridEh.VertScrollBar can be show in three mode:
+   Always show, Never show, Auto show.
+   Use property DBGridEh.VertScrollBar.VisibleMode.
+
+  INCOMPATIBILITY: To be more look like DBGrid component the DBGridEh component
+   select row (multiselect) on first mouse click when Options have dgMultiSelect 
+   value and AllowedSelections have not gstRectangle value.
+
+Version 2.2
+
+  In TDBEditEh
+    + Added properties WantTabs and WantReturns.
+
+  INCOMPATIBILITY: In TColumnEh all published properties moved to public section. 
+    New TDBGridColumnEh object added that inherited from TColumnEh and have 
+    properties in published section. TDBGridEh uses TDBGridColumnEh to create 
+    columns. You can have incompatibility if you inherit TColumnEh object. 
+    Use TDBGridColumnEh object now.
+     
+  + Dropdown box in TDBLookupComboBoxEh and TColumnEh for look fields
+  now inherited from TCustomDBGridEh. Now dropdown box can have 
+  MultiTitle, can fit columns width to window width, can have column lines
+  and row lines, allows to change column widths, can have sortmarkers in titles,
+  have event that calls when user press title, allows to change characteristics
+  of individual column. 
+
+  RESTRICTION: In EhLIb compiled under Delphi 4 or CBuilder 4 dropdown box
+    can not resize or move columns or click the titles.
+
+  + Added new unit - DBLookupGrid.Pas, contains TPopupDataGridEh component that 
+    uses as Dropdown box in TDBLookupComboBoxEh and TColumnEh for look fields.
+
+  In TColumnEh 
+    + Added property DropDownBox of  TColumnDropDownBoxEh type
+      TColumnDropDownBoxEh = class(TPersistent)
+         property AutoFitColWidths: Boolean;
+         property ColumnDefValues: TColumnDefValuesEh;
+         property Columns: TDBGridColumnsEh;
+         property Options: TDBLookupGridEhOptions;
+         property UseMultiTitle: Boolean;
+      end;
+      using properties of DropDownBox property you can control 
+      dropdown box for inplace editor of columns that connected
+      to lookup fields.
+
+  In TDBLookupComboboxEh
+    + Added  
+         property AutoFitColWidths: Boolean;
+         property ColumnDefValues: TColumnDefValuesEh;
+         property Columns: TDBGridColumnsEh;
+         property Options: TDBLookupGridEhOptions;
+         property UseMultiTitle: Boolean;
+       in TLookupComboboxDropDownBoxEh object 
+       (TDBLookupComboboxEh.DropDownBox property)
+
+  In TColumnEh and TDBLookupComboboxEh
+    + Added events 
+       OnDropDownBoxCheckButton - Occurs to define is there title can be pressed.
+       OnDropDownBoxDrawColumnCell - Occurs when the dropdown box needs to paint a cell.
+       OnDropDownBoxGetCellParams - Occurs when the dropdown box needs to paint a cell.
+       OnDropDownBoxSortMarkingChanged - Occurs after changing sortmarker.
+       OnDropDownBoxTitleBtnClick - Occurs after clicking on title button.
+
+Version 2.1
+
+  Added new file EhLibConsts.Pas - contains resource of strings.
+
+  Added partially support of BiDirection.
+  Added partially support of the Double-Byte Character Set.
+
+  In TDBGridEh
+     + Added property FieldColumns;
+        property FieldColumns[const FieldName: String]: TColumnEh; default;
+       So you can use next syntax to access column by 
+       filed name: DBGridEh1['FieldName']
+
+  In TDBEditEh, TDBDateTimeEditEh, TDBComboBoxEh, TDBNumberEditEh and TColumnEh
+  added property 
+  + EditButtons of TEditButtonsEh type.
+  Class TEditButtonsEh is a collection of TEditButton classes.
+  So the edit controls and columns can have several edit buttons.
+
+  In TDropDownBoxEh added property 
+  + SpecRow of TSpecRowEh type.
+  In TColumnEh added property 
+  + DropDownSpecRow of TSpecRowEh type.
+  TSpecRowEh = class(TPersistent)
+    property CellsText: String;
+    property Color: TColor;
+    property Font: TFont;
+    property Value: Variant;
+    property Visible: Boolean;
+    property ShortCut: TShortCut
+    property ShowIfNotInKeyList: Boolean;
+  end;
+  TSpecRowEh represent the special row in dropdown box for lookup
+  fields in column of DBGridEh and in TDropDownBoxEh class of
+  TDBLookupComboboxEh component. This row will be active when lookup
+  field or lookupcombobox have value equals specrow value or when
+  value not in list of key value.
+  
+  * In the OnButtonClick event for TDBComboBoxEh, 
+    TDBLookupComboboxEh, TDBDateTimeEditEh the Sender parameter is
+    TEditButtonControlEh object. Use TEditButtonControlEh(Sender).Parent 
+    syntax to access the edit control whose button have been clicked.
+
+Version 2.0
+
+  EhLib 2.0 does not support Delphi 3 or C++ Builder 3.
+
+  In TDBGridEh
+     + For columns that attached to lookup Fields it support
+       possibility of changing values if TField.KeyFields and
+       TField.LookupKeyFields is kept a list of several
+       names of fields (list is separated by semicolon).
+
+     + In TDBGridEhOption type (OptionsEh propery) dghRowHighlight
+       value is added - it allows to highlight current record.
+
+     + Added crpDropDownRowsEh and crpDropDownWidthEh values
+       in TColumnEhRestoreParam type, it allows to save and restore
+       DropDownRows and DropDownWidth properties of TColumnEh
+       in/from the registry or ini file.   
+
+     + Added property AllowedSelections: TDBGridEhAllowedSelections;
+       TDBGridEhAllowedSelections = set of 
+           (gstRecordBookmarks, gstRectangle, gstColumns, gstAll);
+       Defines what types of selection is available in grid.
+       dgMultiSelect value in Options property also affects 
+       available of selection.
+
+     + Added property ColumnDefValues: TColumnDefValuesEh
+        TColumnDefValuesEh = class(TPersistent)
+          AlwaysShowEditButton: Boolean
+          EndEllipsis: Boolean
+          AutoDropDown: Boolean
+          DblClickNextVal: Boolean
+          ToolTips: Boolean
+          DropDownSizing: Boolean
+          DropDownShowTitles: Boolean
+          Title.Alignment: TAlignment
+          Title.Color: TColor
+          Title.TitleButton: Boolean
+          Title.EndEllipsis: Boolean
+          Title.ToolTips: Boolean
+          Title.Orientation: TTextOrientationEh
+
+       defines default values for newly created colonies.
+
+  In TColumEh
+       + Added OnNotInList event. Operates when user enter 
+          a text not kept in the list of values. If this event 
+          is assigned then user is automatically allowed to enter 
+          a text not kept in the list. Event makes sense if row
+          is based on lookup field or PickList is filled or
+          PickList and KeyList is filled.
+
+       +  Added OnGetCellParams event:
+            TGetColCellParamsEventEh = procedure (Sender: TObject; 
+               EditMode: Boolean; Params: TColCellParamsEh) of object;
+            TColCellParamsEh = class
+              property Col:Longint;
+              property Row:Longint;
+              property State: TGridDrawState;
+              property Font: TFont read FFont;
+              property Background: TColo;
+              property Alignment: TAlignment;
+              property ImageIndex: Integer;
+              property Text: String read;
+              property CheckboxState: TCheckBoxState;
+              property ReadOnly: Boolean;
+            end;
+          Requests the parameters of cell before draw/editing.
+
+        + Added OnUpdateData event:
+            TColCellUpdateDataEventEh = procedure(Sender: TObject; 
+               var Text: String; var Value: Variant; 
+               var UseText: Boolean; var Processed: Boolean) of object;
+
+           Operates when writing data from InplaceEditor in DataSet field.
+           You can change text or value, UseText defines what parameter 
+           is used for writing: Text or Value. You may themselves write 
+           data to the field and sets Processed in True.
+
+         + Added OnEditButtonClick event:
+            TButtonClickEventEh = procedure(Sender: TObject;
+              var Handled: Boolean) of object;
+
+         + Added OnEditButtonDown event:
+             TButtonDownEventEh = procedure(Sender: TObject; TopButton: Boolean;
+               var AutoRepeat: Boolean;  var Handled: Boolean) of object;
+           TopButton - when style of the button ebsUpDownEh, defines 
+             that pressed upper button.
+           AutoRepeat - repeat events if mouse is keeping pressed.
+
+
+  In TDBSumListProducer 
+       * State Of working group operations goCount is changed. When in 
+         TDBSum installed by GroupOperation = goCount and
+         FieldName <> '' that SumValue will contain an amount of records
+         for which field <FieldName> is not Null.
+
+  In TDBLookupComboboxEh
+
+   * Component has changed an ancestor, so possible inconsistency of
+     functioning with the preceding version.
+
+   + Supports working with lookup fields that containing in
+     TField.KeyFields and TField.LookupKeyFields properties the list of
+     the several names of fields, in the same way possible enter a list
+     of several names of fields in DataField and KeyField properties of
+     combobox. List of field names must be separated by semicolon
+     (For instance: 'CustNo;EmpNo').
+
+   + Added OnButtonDown event:
+       TButtonDownEventEh = procedure(Sender: TObject; TopButton: Boolean;
+          var AutoRepeat: Boolean;  var Handled: Boolean) of object;
+       TopButton - when style of the button ebsUpDownEh, defines
+       that pressed upper button.
+       AutoRepeat - repeat events if mouse is keeping pressed.
+
+  Added 4 new components:
+
+  TDBEditEh - to edit text values.
+  TDBDateTimeEditEh - to edit date or time values.
+  TDBComboBoxEh - to edit text values with capacity to
+                  select values from list.
+  TDBNumberEditEh - to edit numeric values.
+
+
+  Common features in all components.
+
+    Can works as in data-aware mode as in usual not data-aware mode.
+    If DataField and DataSource properties is not assigned then
+    component works in usual not data-aware mode.
+
+    Have Flat and AlwaysShowBorder properties to show
+    in the flat mode.
+
+
+    Have Text (String type) and Value (Variant type) properties.
+    Moreover Value can accept Null value or:
+    String type for TDBEditEh and TDBComboBoxEh,
+    TDateTime, TDate, TTime, Double type for TDBDateTimeEditEh,
+    all numeric types for TDBNumberEditEh.
+
+    Have an OnUpdateData event that occurs before writing data
+    in DataSet field or in internal variable when not data-aware mode.
+    Event is call when component lose the focus or
+    when DataSet send PostData event.
+
+
+  Individual features of components.
+
+    TDBEditEh, TDBComboBoxEh and TDBLookupComboboxEh have WordWrap
+    propertiy to show and edit multiline text. Don't forget to hang
+    up AutoSize propertiy if you want to change and fix a height of
+    the control.
+
+Version 1.7
+
+   + Added Delphi 6 support.
+
+   In TDBLookupComboboxEh
+     + Added AlwaysShowBorder propery.
+
+   * Some bugfixes.
+
+Version 1.61
+
+    In TDBLookupComboboxEh
+     + Added OnNotInList event. Event occurs when the user enters a value
+         that isn't in the lookup list.
+
+    In TDBSumListProducer
+     + Added group operation goAvg to calculate average values.
+
+    In TPrintDBGridEh
+     + Added OnBeforePrint and OnAfterPrint events to write specifyed action
+        before or after grid have been printed/previewed.
+
+    In TDBGridEh
+     + Added possibility to set aggregate fields in footers at design time.
+       So you can use more powerful mechanism of aggregate values imbedded
+       in TClientDataSet component.
+
+   * Some bugfixes.
+
+Version 1.6
+
+    + Added new component TDBLookupComboboxEh:
+      Provides all functionality of TDBLookupCombobox and adds 
+      several new features as follows:
+        Can have flat style.  
+        Allows assign values as to KeyValue property just and to 
+          display Text property.
+        Allows to type (assign) values to Text property not 
+          contained in data list (Style = csDropDownEh).
+        Allows to hold KeyValue and Text as not affecting to 
+          each other values. Take effect when KeyField, ListField, 
+          ListSource, DataField and DataSource properties is empty.
+        Drop down list can:
+          Show titles,
+          Have sizing grip,
+          Automaticaly set width as sum of DisplayWidth of 
+            the list fields (Width = -1),
+          Automaticaly drops on user pressed the key.
+        Edit button can:
+          Show DropDown, Ellipsis or Bitmap image.
+          Have specified width.
+        Have additional events: OnKeyValueChanged, OnButtonClick.
+
+   In TDBGridEh
+    + In Flat mode shows edit buttons just as flat.
+
+   In TColumnEh
+    + Added DropDownShowTitles property. 
+    
+   * Some bugfixes.
+
+
+Version 1.58
+
+   In TDBGridEh
+    + Added dghIncSearch and dghPreferIncSearch values in TDBGridEhOption 
+       type (property OptionsEh).
+         dghIncSearch value allows to do increment search in grid.
+         dghPreferIncSearch value determine that the grid prefer increment 
+         search to cell editing.
+        At run time you can use next key for increment searching:
+          Ctrl+F - to begin increment searching.
+          Ctrl+Enter - to search next matching.
+          Ctrl+Shift+Enter - to search prior matching.
+        If dghIncSearch in OptionsEh and column is read only then grid
+        will set increment search mode automatically on first key press 
+        and will set normal mode after 1.5 sec.
+ 
+   In TColumnEh
+    + Added Tag property. Tag has no predefined meaning. The Tag property 
+        is provided for the convenience of developers.
+    + Added DropDownSizing property. Set DropDownSizing to True to allow 
+        users to resize dropdown lookup or picklist window.
+
+   * Some bugfixes.
+
+Version 1.57
+
+   TPassthroughColumn class has been unloaded. In csDefault and csCustomized 
+    state uses the same class TColumnEh. It allows to inherit TDBGridEh class
+    and add new properties in TColumnEh class.  
+
+   In TColumnEh
+    + Allows to show tooltips text for KeyImage based columns. 
+        When you adjust column properies to show bitmaps depending on field 
+        values you can fill also PickList propery by values of tooltip text.
+        Set also Tooltips property to True and ShowHint property of DGBGridEh 
+        to True. At runtime by moving mouse above image will forces to show 
+        text from PickList in tooltips window.
+
+   In TColumnTitleEh 
+    + Added property Orientation: TTextOrientationEh;
+        TTextOrientationEh = (tohHorizontal, tohVertical);
+        Allows to draw text vertically. Only single line text support for
+        vertical orientation.  
+
+   * Some bugfixes.
+
+Version 1.56
+
+  Added new unit "DBGridEhImpExp.pas" that containt objects and routines:
+    1. To export DBGridEh at next formats: Text, Csv, HTML, RTF, XLS and
+        internal format for interchange between DBGridEh's (VCLDBIF).
+     procedure SaveDBGridEhToExportFile( ExportClass: TDBGridEhExportClass;
+       DBGridEh: TCustomDBGridEh; const FileName: String; IsSaveAll: Boolean);
+     procedure WriteDBGridEhToExportStream( ExportClass: TDBGridEhExportClass;
+       DBGridEh: TCustomDBGridEh; Stream: TStream; IsSaveAll: Boolean);
+
+     Where the ExportClass parameter is one of the next classes:
+        TDBGridEhExportAsText, TDBGridEhExportAsCsv, TDBGridEhExportAsHTML,
+        TDBGridEhExportAsRTF, TDBGridEhExportAsVCLDBIF or TDBGridEhExportAsXLS.
+            IsSaveAll parameter indicates whether to export whole grid or
+        only selection.
+
+    2. To import DBGridEh from Text and internal format (VCLDBIF).
+      procedure LoadDBGridEhFromImportFile( ImportClass: TDBGridEhImportClass;
+        DBGridEh: TCustomDBGridEh; const FileName: String; IsLoadToAll: Boolean);
+      procedure ReadDBGridEhFromImportStream(ImportClass: TDBGridEhImportClass;
+        DBGridEh: TCustomDBGridEh; Stream: TStream; IsLoadToAll: Boolean);
+
+     Where the ImportClass parameter is one of the next classes:
+        TDBGridEhImportAsText, TDBGridEhImportAsVCLDBIF.
+
+
+    3. To Copy, Paste, Cut DBGridEh to/from clipboard.
+      procedure DBGridEh_DoCutAction(DBGridEh: TCustomDBGridEh; ForWholeGrid:Boolean);
+      procedure DBGridEh_DoCopyAction(DBGridEh: TCustomDBGridEh; ForWholeGrid:Boolean);
+      procedure DBGridEh_DoPasteAction(DBGridEh: TCustomDBGridEh; ForWholeGrid:Boolean);
+      procedure DBGridEh_DoDeleteAction(DBGridEh: TCustomDBGridEh; ForWholeGrid:Boolean);
+
+  In TDBGridEh
+    + Added property EditActions: TDBGridEhEditActions.
+        TDBGridEhEditAction = (geaCutEh, geaCopyEh, geaPasteEh, geaDeleteEh,
+                               geaSelectAllEh);
+        TDBGridEhEditActions = set of TDBGridEhEditAction;
+        Specifies actions (inherited from TEditAction) that grid can update and
+          execute.
+    + Added some functions to support edit actions.
+
+  * Although this version of EhLib can export to XLS (Biff) format, MS Excel can not 
+     accept this data from clipboard. Probably I don't completely correct write to 
+     this format. Please let me know if you have detail information about Biff format.
+
+Version 1.55
+
+  In TDBGridEh
+    + Added dghTraceColSizing value in TDBGridEhOption type (property OptionsEh).
+         dghTraceColSizing: Determines whether the column size changes before
+         mouse button is released.
+      dghTraceColSizing is not supported under Delphi 3.
+    + Procedures SaveColumnsLayout, RestoreColumnsLayout, SaveGridLayout,
+        RestoreGridLayout overloaded to support TCustomIniFile in addition to
+        TRegIniFile.
+    + Added OnColWidthsChanged event. Occurs immediately after the column widths
+        change.
+    + Added Flat property. Makes the grid 3D borders more thinner, makes the
+        grid rows more narrow, makes the fixed line gray.
+
+  In TPrintDBGridEh
+    + Added support of the macro "&[Pages]" in PageColontitles.
+      &[Pages] substitutes the count of pages.
+
+
+Version 1.54
+
+  + Added C++ Builder 5 support.
+  In TDBGridEh
+    + Added dghEnterAsTab value in TDBGridEhOption type (property OptionsEh).
+         dghEnterAsTab: Enter key behaves as Tab key.
+
+
+Version 1.53
+
+  + Added allows to set focus to and resize of the frozen columns.
+
+  In TDBGridEh
+   + Added property FooterFont: TFont. Controls the attributes of the default
+      footer font.
+   + Added property FooterColor: TColor. Default background color of the footer.
+
+  In TColumnEh
+   + Added property ToolTips: Boolean. Allows to show hint for text that don't
+      fit in data cell.
+   + Added property Footers: TColumnFootersEh. Allows to assign individual footer
+      parameters for multiple footer rows.
+
+  In TColumnTitleEh
+   + Added property ToolTips: Boolean. Allows to show hint if text don't fit in
+      title cell.
+
+  In TPrintDBGridEh
+   + Added pghFitingByColWidths, pghOptimalColWidths values in
+      TPrintDBGridEhOption type.  pghFitingByColWidths: allows to fit grid to
+      page width by changing column widths (not scaling whole image).
+       pghOptimalColWidths: change column widths to fit text in the cells.
+   + Added BeforeGridText: TStrings property to print/preview the rich text
+      before grid.
+   + Added AfterGridText: TStrings property to print/preview the rich text after
+      grid.
+   + Added procedure SetSubstitutes to set substitutes for BeforeGridText and
+      AfterGridText.
+
+
+Version 1.52
+
+  In TPrintDBGridEh
+   + Added possibility to Print/Preview of the selected area of TDBGridEh.
+  In TDBGridEh
+   + Added property TitleImages to show bitmap in titles instead of caption.
+   + Added property AllowedOperations: TDBGridEhAllowedOperations;
+       TDBGridEhAllowedOperation = (alopInsertEh, alopUpdateEh,
+                                    alopDeleteEh, alopAppendEh)
+       to forbid/allow insert, append new records; delete, update records.
+  In TColumnEh
+   + Added cbsDropDown value in ButtonStyle property.
+  In TColumnTitleEh
+   + Added Hint property to show hint text above title for narrow columns.
+   + Added ImageIndex property to show bitmap instead of caption text.
+
+  + Mouse wheel support in TDBGridEh and TPreveiwBox
+  * Some bugfixes.
+
+Version 1.51
+
+  In TDBGridEh
+   + Added allows to create one title for several columns in frozen
+     and nonfrozen zones simultaneously (in MultiTitle mode).
+   * In RowSelect mode change column widths don't move view to
+     first column.
+   + Added selecting a columns and rectangle areas
+     Added property Selection: TDBGridEhSelection;
+       TDBGridEhSelection contains next properties
+          SelectionType: TDBGridEhSelectionType;
+             TDBGridEhSelectionType = (gstNon, gstRecordBookmarks,
+                                       gstRectangle, gstColumns, gstAll);
+
+          Columns: TDBGridEhSelectionCols;
+          Rect: TDBGridEhSelectionRect;
+          Rows: TBookmarkListEh;
+       see EhLib.hlp and DEMO1 for detail.
+   * Clicks on left top cell in grid sets SelectionType = gstAll, but not
+      selects all records.
+   + When DragMode = dmAutomatic and dgMultiSelect is included in Options
+      the grid enters in Dragging mode only when user pressed mouse on
+      multiselected data area (not includes title, indicator and
+      footer areas).
+
+      This version don't support print and preview of the selected area yet.
+
+ * Some bugfixes.
+
+Version 1.5
+
+  IMPORTANT FOR C++ BUILDER DEVELOPERS
+  ALL COMPLETIONS "EH" ARE REPLACED BY "Eh"
+
+ * Help file compiled under english localization settings
+ + Added Delphi 5 support.
+ + Added new component TPrintDBGridEh for printing and preview
+   of TDBGridEh.
+ + Added new component TPreviewBox for customizing preview form.
+ + Added new object TPrinterPreview to direct printable stuff to
+   the preview box.
+
+  In TDBGridEh
+   * Highlighted frozen cells in rowselect mode
+   * Allows press title buttons and move columns by left mouse
+       button simultaneously.
+
+  In TColumnEh
+   + Added cbsUpDown value in ButtonStyle property.
+   + Added Increment property. Works when ButtonStyle =  cbsUpDown.
+
+ * Some bugfixes.
+
+
+Version 1.03
+
+  New help file that can be inserted in Delphi help system.
+  Included support Borland C++ Builder versions 3 & 4.
+
+  In TDBGridEH
+    + Added dghAutoSortMarking, dghMultiSortMarking
+        values in TDBGridEhOption type (property OptionsEh).
+         dghAutoSortMarking         Automaticaly marking title
+                                    by SortMarking images.
+         dghMultiSortMarking        Allow sortmarking multiple columns.
+                                    At runtime use Ctrl + Mouse combination
+                                    for multisortmarking.
+    + Added event OnSortMarkingChanged : TNotifyEvent;
+    + Added procedure SaveGridLayout(ARegIni: TRegIniFile);
+    + Added procedure RestoreGridLayout(ARegIni: TRegIniFile;
+                RestoreParams:TDBGridEhRestoreParams);
+    + Added procedure SaveGridLayoutIni(IniFileName: String;
+                Section: String; DeleteSection: Boolean);
+    + Added procedure RestoreGridLayoutIni(IniFileName:
+                String; Section: String; RestoreParams:TDBGridEhRestoreParams);
+  In TColumnEH
+    + Added property Checkboxes: Boolean. Determine need show checkboxes
+       enstead of text. Checkboxes automativcaly true for boolean field.
+       For non boolean fill first line of KeyList for checked checkboxes.
+       Second line for nonchecked.
+
+  * Some bugfixes.
+
+Version 1.02
+
+  In TDBGridEH
+     + Added multyline editing.
+     + Added edit of memo fields.
+     + Added dghHighlightFocus, dghClearSelection, dghFitRowHeightToText
+        values in TDBGridEhOption type (property OptionsEh).
+  dghHighlightFocus              Highlight a focus cell
+        dghClearSelection              Clear selected rows after selecting
+        dghFitRowHeightToText          Fit row height to height of text lines
+     + Added multiselect by the mouse.
+     + Added trace a focus cell by the mouse.
+
+  * Some bugfixes.
+
+Version 1.01
+  In TDBGridEH
+     + Added HorzScrollBar and VertScrollBar properties to control 
+        the scrollbar in grid.
+     + Added OptionsEh properties to specifies various display and behavioral 
+        properties of grid.
+     + Added SaveColumnsLayoutIni and RestoreColumnsLayoutIni procedures to 
+        save and restore some grid parameters in/from ini file.
+     + Added support to show drop down calendar for TDate and TDateTime fields.
+
+  In TColumnEH
+     + Added DblClickNextVal property to set next value for some type of 
+        column on double mouse click.
+     + Added KeyList property to show bitmaps from ImageList depending on
+        field value and to show text from PickList.
+     + Added ImageList property to show bitmaps depending of field value.
+     + Added MaxWidth, MinWidth property to limit column width.
+     + Added NotinKeyListIndex to show image for null field value.
+  
+  In TDBSumList
+     + Added support to work with no sequenced dataset as with sequenced.
+
+  * Some bugfixes.
+
+Version 1.00 
+  In TDBGridEH
+       PROPERTY ROWSHEIGHT WAS RENAMED TO ROWHEIGHT.
+       EVENT ONDRAWFOTTERCELL WAS RENAMED TO ONDRAWFOOTERCELL.
+     + Added Footer property in TColumnEh object. Now you can sum
+        values without using the TDBSumList component.
+     + Added procedure InvalidateFooter.
+     + Added procedure DefaultDrawFooterCell;
+     + Added function GetFooterValue;
+     + Moved function CellRect to the public section;
+     + Added property SumList : TDBGridEhSumList;
+     + Added event OnSumListRecalcAll : TNotifyEvent;
+     + Added event OnDrawFooterCell : TDrawFooterCellEvent;
+     + Added event OnGetFooterParams : TGetFooterParamsEvent;
+     * Fixed a bug with an exception at design time when a column is 
+        selected in the object inspector and form while TDBGridEH is closing.
+     * Fixed a bug while renaming a Column.Title.Caption in 
+        UseMultyTitle mode.
+     * Fixed bug with unceasing redrawing of the grid if Column.ReadOnly = True
+        for second columns in title on several columns.
+     * Fixed bug that does not redraw data rows for some grid colors.
+   In TDBSumList
+     + Added property Active : Boolean.
+     + Added property ExternalRecalc : Boolean.
+     + Added event OnRecalcAll.
+     + Added procedures Activate, ClearSumValues, Deactivate.
+     * Fixed bug that does not recalculate when changing DataSet.Filter string.
+     * Master/detail support.
+
+
+15-Oct-1998
+  TDBGridEH  v1.01
+  TDBSumList v1.00

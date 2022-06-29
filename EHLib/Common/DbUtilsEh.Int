@@ -1,0 +1,188 @@
+{*******************************************************}
+{                                                       }
+{                       EhLib v3.4                      }
+{       Utilities to sort, filter data in DataSet       }
+{                                                       }
+{      Copyright (c) 2002-2004 by Dmitry V. Bolshakov   }
+{                                                       }
+{*******************************************************}
+
+{$I EhLib.Inc}
+
+{$IFDEF EH_LIB_VCL}
+unit DbUtilsEh {$IFDEF CIL} platform {$ENDIF};
+{$ELSE}
+unit QDbUtilsEh;
+{$ENDIF}
+
+interface
+
+{$IFDEF EH_LIB_VCL}
+uses
+{$IFDEF EH_LIB_6} Variants, {$ENDIF}
+
+{$IFDEF CIL}
+  EhLibVCLNET,
+  System.Runtime.InteropServices, System.Reflection,
+{$ELSE}
+  EhLibVCL,
+{$ENDIF}
+
+  DBGridEh, Db, SysUtils, Classes, TypInfo, Windows;
+
+{$ELSE}
+uses
+  Variants, QDBGridEh, Db, SysUtils, Classes, TypInfo;
+{$ENDIF}
+
+type
+
+  TDateValueToSQLStringProcEh = function(DataSet: TDataSet; Value: Variant): String;
+
+var
+
+  STFilterOperatorsStrMapEh: array[TSTFilterOperatorEh] of String =
+  ('', '=', '<>',
+    '>', '<', '>=', '<=',
+    '~', '!~',
+    'In', '!In',
+    {=}'Null', {<>}'Null',
+    'AND', 'OR',
+    '');
+
+const
+
+  STFldTypeMapEh: array[TFieldType] of TSTOperandTypeEh = (
+    botNon, botString, botNumber, botNumber, botNumber,
+    botBoolean, botNumber, botNumber, botNumber, botDateTime, botDateTime, botDateTime,
+    botNon, botNon, botNumber, botNon, botString, botNon, botString,
+    botNon, botNon, botNon, botNon, botString, botString,
+    botNumber, botNon, botNon, botNon, botNon
+{$IFDEF EH_LIB_5}
+    ,botNon, botNon, botNon, botNon, botNon, botString
+{$ENDIF}
+{$IFDEF EH_LIB_6}, botDateTime, botNumber{$ENDIF}
+    );
+
+  STFilterOperatorsSQLStrMapEh: array[TSTFilterOperatorEh] of String =
+  ('', '=', '<>',
+    '>', '<', '>=', '<=',
+    'LIKE', 'NOT LIKE',
+    'IN', 'NOT IN',
+    'IS NULL', 'IS NOT NULL',
+    'AND', 'OR',
+    '');
+
+procedure InitSTFilterOperatorsStrMap;
+
+{ FilterExpression }
+
+function ParseSTFilterExpressionEh(Exp: String; var FExpression: TSTFilterExpressionEh): Boolean;
+procedure ClearSTFilterExpression(var FExpression: TSTFilterExpressionEh);
+
+type
+  TOneExpressionFilterStringProcEh = function(O: TSTFilterOperatorEh; v: Variant;
+    FieldName: String; DataSet: TDataSet;
+    DateValueToSQLStringProc: TDateValueToSQLStringProcEh;
+    SupportsLike: Boolean): String;
+
+{ Useful routines to form filter string for dataset }
+
+function GetExpressionAsFilterString(AGrid: TCustomDBGridEh;
+  OneExpressionProc: TOneExpressionFilterStringProcEh;
+  DateValueToSQLStringProc: TDateValueToSQLStringProcEh;
+  UseFieldOrigin: Boolean = False;
+  SupportsLocalLike: Boolean = False): String;
+
+function GetOneExpressionAsLocalFilterString(O: TSTFilterOperatorEh;
+  v: Variant; FieldName: String; DataSet: TDataSet;
+  DateValueToSQLStringProc: TDateValueToSQLStringProcEh;
+  SupportsLike: Boolean): String;
+
+function GetOneExpressionAsSQLWhereString(O: TSTFilterOperatorEh; v: Variant;
+  FieldName: String; DataSet: TDataSet;
+  DateValueToSQLStringProc: TDateValueToSQLStringProcEh; SupportsLike: Boolean): String;
+
+function DateValueToDataBaseSQLString(DataBaseName: String; v: Variant): String;
+
+procedure ApplyFilterSQLBasedDataSet(Grid: TCustomDBGridEh;
+  DateValueToSQLString: TDateValueToSQLStringProcEh; IsReopen: Boolean;
+  SQLPropName: String);
+
+{ DatasetFeatures }
+type
+
+  TDataSetClass = class of TDataSet;
+
+  TDatasetFeaturesEh = class
+  private
+    FDataSetClass: TDataSetClass;
+  public
+    constructor Create; virtual;
+    procedure ApplySorting(Sender: TObject; DataSet: TDataSet; IsReopen: Boolean); virtual;
+    procedure ApplyFilter(Sender: TObject; DataSet: TDataSet; IsReopen: Boolean); virtual;
+  end;
+
+  TSQLDatasetFeaturesEh = class(TDatasetFeaturesEh)
+  private
+    FSortUsingFieldName: Boolean;
+    FSQLPropName: String;
+    FDateValueToSQLString: TDateValueToSQLStringProcEh;
+    FSupportsLocalLike: Boolean;
+  public
+    constructor Create; override;
+    procedure ApplySorting(Sender: TObject; DataSet: TDataSet; IsReopen: Boolean); override;
+    property SortUsingFieldName: Boolean read FSortUsingFieldName write FSortUsingFieldName;
+    procedure ApplyFilter(Sender: TObject; DataSet: TDataSet; IsReopen: Boolean); override;
+    property SQLPropName: String read FSQLPropName  write FSQLPropName;
+    property DateValueToSQLString: TDateValueToSQLStringProcEh read
+      FDateValueToSQLString write FDateValueToSQLString;
+    property SupportsLocalLike: Boolean read FSupportsLocalLike write FSupportsLocalLike;
+  end;
+
+  TCommandTextDatasetFeaturesEh = class(TSQLDatasetFeaturesEh)
+  public
+    constructor Create; override;
+  end;
+
+  TDatasetFeaturesEhClass = class of TDatasetFeaturesEh;
+
+{ Register/Unregister DatasetFeatures }
+
+procedure RegisterDatasetFeaturesEh(DatasetFeaturesClass: TDatasetFeaturesEhClass;
+  DataSetClass: TDataSetClass);
+procedure UnregisterDatasetFeaturesEh(DataSetClass: TDataSetClass);
+function GetDatasetFeaturesForDataSet(DataSet: TDataSet): TDatasetFeaturesEh;
+function GetDatasetFeaturesForDataSetClass(DataSetClass: TClass): TDatasetFeaturesEh;
+
+
+function IsSQLBasedDataSet(DataSet: TDataSet; var SQL: TStrings): Boolean;
+function IsDataSetHaveSQLLikeProp(DataSet: TDataSet; SQLPropName: String; var SQLPropValue: WideString): Boolean;
+
+procedure ApplySortingForSQLBasedDataSet(Grid: TCustomDBGridEh; DataSet: TDataSet;
+  UseFieldName: Boolean; IsReopen: Boolean; SQLPropName: String);
+
+var
+  SQLFilterMarker: String = '/*FILTER*/';
+
+resourcestring
+
+  // Filter expression operators
+  SNotOperatorEh = 'Not';
+  SAndOperatorEh = 'AND';
+  SOrOperatorEh = 'OR';
+  SLikePredicatEh = ''; // 'Like sign' //Use default sign '~'
+  SInPredicatEh = 'In';
+  SNullConstEh = 'Null';
+
+  // Error message
+  SQuoteIsAbsentEh = 'Quote is absent: ';
+  SLeftBracketExpectedEh = '''('' expected: ';
+  SRightBracketExpectedEh = ''')'' expected: ';
+  SErrorInExpressionEh = 'Error in expression: ';
+  SUnexpectedExpressionBeforeNullEh = 'Unexpected expression before Null: ';
+  SUnexpectedExpressionAfterOperatorEh = 'Unexpected expression after operator: ';
+  SIncorrectExpressionEh = 'Incorrect expression: ';
+  SUnexpectedANDorOREh = 'Unexpected AND or OR: ';
+
+implementation

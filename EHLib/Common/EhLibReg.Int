@@ -1,0 +1,41 @@
+{*******************************************************}
+{                                                       }
+{                       EhLib v3.4                      }
+{                    Registration unit                  }
+{                                                       }
+{   Copyright (c) 1998-2004 by Dmitry V. Bolshakov      }
+{                                                       }
+{*******************************************************}
+
+{$I EhLib.Inc}
+
+{$IFDEF EH_LIB_CLX}
+unit QEhLibReg;
+{$ELSE}
+unit EhLibReg {$IFDEF CIL} platform{$ENDIF};
+{$ENDIF}
+
+interface
+
+{$IFDEF CIL}
+
+{$R DBCtrlsEh.TDBCheckBoxEh.bmp}
+{$R DBCtrlsEh.TDBComboBoxEh.bmp}
+{$R DBCtrlsEh.TDBDateTimeEditEh.bmp}
+{$R DBCtrlsEh.TDBEditEh.bmp}
+{$R DBCtrlsEh.TDBNumberEditEh.bmp}
+{$R DBGridEh.TDBGridEh.bmp}
+{$R DBLookupEh.TDBLookupComboboxEh.bmp}
+{$R DBSumLst.TDBSumList.bmp}
+{$R PrnDbgeh.TPrintDBGridEh.bmp}
+{$R PrViewEh.TPreviewBox.bmp}
+{$R PropStorageEh.TIniPropStorageManEh.bmp}
+{$R PropStorageEh.TPropStorageEh.bmp}
+{$R PropStorageEh.TRegPropStorageManEh.bmp}
+
+{$ENDIF}
+
+
+procedure Register;
+
+implementation
