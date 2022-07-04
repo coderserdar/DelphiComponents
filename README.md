@@ -125,4 +125,13 @@ And I created a folder which is used to store compressed files of Delphi compone
 
 </details>
 
+<details>
+  <summary>Other Component Setups</summary>
+
+   1. *JEDI Component Library (JCL) Components (Delphi XE)*
+   2. *JEDI Visual Component Library (JVCL) Components (Delphi XE)*
+   3. *Speex Network Component*
+
+</details>
+
 If you wanna add some components to that repo or you want to share other things about **Delphi** you can communicate with me by [E-Mail](mailto:serdargul@outlook.com).
