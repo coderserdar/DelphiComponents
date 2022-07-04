@@ -1,0 +1,14 @@
+{$IFDEF CONDITIONALEXPRESSIONS}
+
+  {$IFDEF VER200}
+	{$DEFINE DELPHI2009UP}
+	{$ENDIF}
+
+  {$IFDEF VER210}
+	{$DEFINE DELPHI2009UP}
+	{$ENDIF}
+
+{$ELSE not CONDITIONALEXPRESSIONS}
+	Sorry, but this version of API_pack
+	does not support IDE you are using.
+{$ENDIF}

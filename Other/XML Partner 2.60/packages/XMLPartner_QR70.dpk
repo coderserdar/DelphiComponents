@@ -1,0 +1,49 @@
+package XMLPartner_QR70;
+
+{$R *.res}
+{$R '..\source\XpQXSLPr.dcr'}
+{$R '..\source\XpQFlRTF.dcr'}
+{$R '..\source\XpQFlXML.dcr'}
+{$R '..\source\XpQFlHTM.dcr'}
+{$ALIGN 8}
+{$ASSERTIONS OFF}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS OFF}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'TurboPower XMLPartner Professional Runtime package - CLX'}
+{$RUNONLY}
+{$IMPLICITBUILD OFF}
+
+requires
+  visualclx,
+  vcl,
+  XMLPartner_CR70;
+
+contains
+  XpQXSLPr in '..\source\XpQXSLPr.pas',
+  XpQFlBas in '..\source\XpQFlBas.pas',
+  XpQFlRTF in '..\source\XpQFlRTF.pas',
+  XpQFlXML in '..\source\XpQFlXML.pas',
+  XpQFlHTM in '..\source\XpQFlHTM.pas',
+  XpQXSLFO in '..\source\XpQXSLFO.pas',
+  XpQXSLT in '..\source\XpQXSLT.pas',
+  XpQFOHsh in '..\source\XpQFOHsh.pas',
+  XpAbout in '..\source\XpAbout.pas' {XpAboutBox};
+
+end.

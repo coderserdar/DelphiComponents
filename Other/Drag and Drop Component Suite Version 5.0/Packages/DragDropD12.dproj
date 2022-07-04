@@ -1,0 +1,200 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{ab5cf04a-df9d-400b-b8b0-5255a3f6a84d}</ProjectGuid>
+			<MainSource>DragDropD12.dpk</MainSource>
+			<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+			<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+			<DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
+			<DCC_DependencyCheckOutputName>..\Library\Delphi 11\DragDropD11.bpl</DCC_DependencyCheckOutputName>
+			<ProjectVersion>11.1</ProjectVersion>
+			<Config Condition="'$(Config)'==''">Debug</Config>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_Release)'!=''">
+			<Cfg_Release>true</Cfg_Release>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_Debug)'!=''">
+			<Cfg_Debug>true</Cfg_Debug>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Base)'!=''">
+			<DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+			<DCC_DcuOutput>..\Library\Delphi 12</DCC_DcuOutput>
+			<DCC_UnitSearchPath>..\Source;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+			<DCC_BplOutput>..\Library\Delphi 12</DCC_BplOutput>
+			<DCC_DcpOutput>..\Library\Delphi 12</DCC_DcpOutput>
+			<GenDll>true</GenDll>
+			<DCC_OutputNeverBuildDcps>true</DCC_OutputNeverBuildDcps>
+			<DCC_IntegerOverflowCheck>true</DCC_IntegerOverflowCheck>
+			<DCC_ImportedDataReferences>false</DCC_ImportedDataReferences>
+			<GenPackage>true</GenPackage>
+			<DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
+			<DCC_IOChecking>false</DCC_IOChecking>
+			<DesignOnlyPackage>true</DesignOnlyPackage>
+			<DCC_ImageBase>00456789</DCC_ImageBase>
+			<DCC_DependencyCheckOutputName>..\Library\Delphi 12\DragDropD12.bpl</DCC_DependencyCheckOutputName>
+			<DCC_Description>Drag and Drop Component Suite</DCC_Description>
+			<DCC_Define>DESIGNTIME;$(DCC_Define)</DCC_Define>
+			<DCC_Optimize>false</DCC_Optimize>
+			<DCC_RangeChecking>true</DCC_RangeChecking>
+			<DCC_Alignment>4</DCC_Alignment>
+			<DCC_TypedAtParameter>true</DCC_TypedAtParameter>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_Release)'!=''">
+			<DCC_IntegerOverflowCheck>True</DCC_IntegerOverflowCheck>
+			<Version>7.0</Version>
+			<DCC_ImportedDataReferences>False</DCC_ImportedDataReferences>
+			<DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+			<DCC_DebugInformation>False</DCC_DebugInformation>
+			<DCC_GenerateStackFrames>True</DCC_GenerateStackFrames>
+			<DCC_IOChecking>False</DCC_IOChecking>
+			<DCC_ObjPath>$(DELPHI)\Lib\Debug;$(DCC_ObjPath)</DCC_ObjPath>
+			<DCC_ImageBase>456789</DCC_ImageBase>
+			<DCC_ResourcePath>$(DELPHI)\Lib\Debug;$(DCC_ResourcePath)</DCC_ResourcePath>
+			<DCC_UnitSearchPath>$(DELPHI)\Lib\Debug;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+			<DCC_Define>DEBUG;RELEASE;$(DCC_Define)</DCC_Define>
+			<DCC_Optimize>False</DCC_Optimize>
+			<DCC_LocalDebugSymbols>False</DCC_LocalDebugSymbols>
+			<DCC_RangeChecking>True</DCC_RangeChecking>
+			<DCC_IncludePath>$(DELPHI)\Lib\Debug;$(DCC_IncludePath)</DCC_IncludePath>
+			<DCC_Alignment>4</DCC_Alignment>
+			<DCC_TypedAtParameter>True</DCC_TypedAtParameter>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_Debug)'!=''">
+			<DCC_DcpOutput>..\Library\Delphi 12</DCC_DcpOutput>
+			<DCC_HppOutput>..\Library\Delphi 11</DCC_HppOutput>
+			<DCC_IntegerOverflowCheck>True</DCC_IntegerOverflowCheck>
+			<DCC_DcuOutput>..\Library\Delphi 12</DCC_DcuOutput>
+			<Version>7.0</Version>
+			<DCC_ImportedDataReferences>False</DCC_ImportedDataReferences>
+			<DCC_GenerateStackFrames>True</DCC_GenerateStackFrames>
+			<DCC_IOChecking>False</DCC_IOChecking>
+			<DCC_ObjPath>$(DELPHI)\Lib\Debug;..\Source;$(DCC_ObjPath)</DCC_ObjPath>
+			<DCC_ImageBase>456789</DCC_ImageBase>
+			<DCC_ResourcePath>$(DELPHI)\Lib\Debug;..\Source;$(DCC_ResourcePath)</DCC_ResourcePath>
+			<DCC_UnitSearchPath>$(DELPHI)\Lib\Debug;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+			<DCC_Optimize>False</DCC_Optimize>
+			<DCC_ObjOutput>..\Library\Delphi 11</DCC_ObjOutput>
+			<DCC_RangeChecking>True</DCC_RangeChecking>
+			<DCC_IncludePath>$(DELPHI)\Lib\Debug;..\Source;$(DCC_IncludePath)</DCC_IncludePath>
+			<DCC_Alignment>4</DCC_Alignment>
+			<DCC_TypedAtParameter>True</DCC_TypedAtParameter>
+			<DCC_BplOutput>..\Library\Delphi 12</DCC_BplOutput>
+		</PropertyGroup>
+		<ItemGroup>
+			<DelphiCompile Include="DragDropD12.dpk">
+				<MainSource>MainSource</MainSource>
+			</DelphiCompile>
+			<DCCReference Include="..\Source\DragDrop.dcr"/>
+			<DCCReference Include="..\Source\DragDropContext.dcr"/>
+			<DCCReference Include="..\Source\DragDropFile.dcr"/>
+			<DCCReference Include="..\Source\DragDropGraphics.dcr"/>
+			<DCCReference Include="..\Source\DragDropHandler.dcr"/>
+			<DCCReference Include="..\Source\DragDropInternet.dcr"/>
+			<DCCReference Include="..\Source\DragDropPIDL.dcr"/>
+			<DCCReference Include="..\Source\DragDropText.dcr"/>
+			<DCCReference Include="..\Source\DropComboTarget.dcr"/>
+			<DCCReference Include="..\Source\DropHandler.dcr"/>
+			<DCCReference Include="..\Source\DropSource.dcr"/>
+			<DCCReference Include="..\Source\DropTarget.dcr"/>
+			<DCCReference Include="designide.dcp"/>
+			<DCCReference Include="rtl.dcp"/>
+			<DCCReference Include="..\Source\DragDrop.pas"/>
+			<DCCReference Include="..\Source\DragDropComObj.pas"/>
+			<DCCReference Include="..\Source\DragDropContext.pas"/>
+			<DCCReference Include="..\Source\DragDropDesign.pas"/>
+			<DCCReference Include="..\Source\DragDropFile.pas"/>
+			<DCCReference Include="..\Source\DragDropFormats.pas"/>
+			<DCCReference Include="..\Source\DragDropGraphics.pas"/>
+			<DCCReference Include="..\Source\DragDropHandler.pas"/>
+			<DCCReference Include="..\Source\DragDropInternet.pas"/>
+			<DCCReference Include="..\Source\DragDropPIDL.pas"/>
+			<DCCReference Include="..\Source\DragDropText.pas"/>
+			<DCCReference Include="..\Source\DropComboTarget.pas"/>
+			<DCCReference Include="..\Source\DropHandler.pas"/>
+			<DCCReference Include="..\Source\DropSource.pas"/>
+			<DCCReference Include="..\Source\DropTarget.pas"/>
+			<DCCReference Include="..\Source\DragDrop.dcr"/>
+			<DCCReference Include="..\Source\DragDropContext.dcr"/>
+			<DCCReference Include="..\Source\DragDropFile.dcr"/>
+			<DCCReference Include="..\Source\DragDropGraphics.dcr"/>
+			<DCCReference Include="..\Source\DragDropHandler.dcr"/>
+			<DCCReference Include="..\Source\DragDropInternet.dcr"/>
+			<DCCReference Include="..\Source\DragDropPIDL.dcr"/>
+			<DCCReference Include="..\Source\DragDropText.dcr"/>
+			<DCCReference Include="..\Source\DropComboTarget.dcr"/>
+			<DCCReference Include="..\Source\DropHandler.dcr"/>
+			<DCCReference Include="..\Source\DropSource.dcr"/>
+			<DCCReference Include="..\Source\DropTarget.dcr"/>
+			<BuildConfiguration Include="Base">
+				<Key>Base</Key>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Release">
+				<Key>Cfg_Release</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Debug">
+				<Key>Cfg_Debug</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+		</ItemGroup>
+		<Import Project="$(BDS)\Bin\CodeGear.Delphi.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Delphi.Targets')"/>
+		<ProjectExtensions>
+			<Borland.Personality>Delphi.Personality.12</Borland.Personality>
+			<Borland.ProjectType>Package</Borland.ProjectType>
+			<BorlandProject>
+				<Delphi.Personality>
+					<Parameters>
+						<Parameters Name="UseLauncher">False</Parameters>
+						<Parameters Name="LoadAllSymbols">True</Parameters>
+						<Parameters Name="LoadUnspecifiedSymbols">False</Parameters>
+					</Parameters>
+					<VersionInfo>
+						<VersionInfo Name="IncludeVerInfo">True</VersionInfo>
+						<VersionInfo Name="AutoIncBuild">False</VersionInfo>
+						<VersionInfo Name="MajorVer">5</VersionInfo>
+						<VersionInfo Name="MinorVer">0</VersionInfo>
+						<VersionInfo Name="Release">6</VersionInfo>
+						<VersionInfo Name="Build">53</VersionInfo>
+						<VersionInfo Name="Debug">False</VersionInfo>
+						<VersionInfo Name="PreRelease">False</VersionInfo>
+						<VersionInfo Name="Special">False</VersionInfo>
+						<VersionInfo Name="Private">False</VersionInfo>
+						<VersionInfo Name="DLL">True</VersionInfo>
+						<VersionInfo Name="Locale">1033</VersionInfo>
+						<VersionInfo Name="CodePage">1252</VersionInfo>
+					</VersionInfo>
+					<VersionInfoKeys>
+						<VersionInfoKeys Name="CompanyName">Anders Melander</VersionInfoKeys>
+						<VersionInfoKeys Name="FileDescription">Drag and Drop Component Suite</VersionInfoKeys>
+						<VersionInfoKeys Name="FileVersion">5.0.6.53</VersionInfoKeys>
+						<VersionInfoKeys Name="InternalName">DragDrop</VersionInfoKeys>
+						<VersionInfoKeys Name="LegalCopyright">Copyright © 1997-2008 Anders Melander</VersionInfoKeys>
+						<VersionInfoKeys Name="LegalTrademarks"/>
+						<VersionInfoKeys Name="OriginalFilename">DragDrop</VersionInfoKeys>
+						<VersionInfoKeys Name="ProductName">DragDrop</VersionInfoKeys>
+						<VersionInfoKeys Name="ProductVersion">5.0.0.0</VersionInfoKeys>
+						<VersionInfoKeys Name="Comments">This is freeware. Use as you please, but please give me credit.</VersionInfoKeys>
+						<VersionInfoKeys Name="mailto">anders@melander.dk</VersionInfoKeys>
+						<VersionInfoKeys Name="URL">http://melander.dk</VersionInfoKeys>
+					</VersionInfoKeys>
+					<Source>
+						<Source Name="MainSource">DragDropD12.dpk</Source>
+					</Source>
+					<Excluded_Packages>
+						<Excluded_Packages Name="$(BDS)\bin\dcloffice2k120.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+						<Excluded_Packages Name="$(BDS)\bin\dclofficexp120.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+					</Excluded_Packages>
+					<Language>
+						<Language Name="RootDir">D:\Projects\Library\DragDrop\5.0\DragDrop\Packages\</Language>
+					</Language>
+				</Delphi.Personality>
+			</BorlandProject>
+			<ProjectFileVersion>12</ProjectFileVersion>
+		</ProjectExtensions>
+	</Project>

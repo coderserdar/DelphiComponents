@@ -1,0 +1,170 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!-- C++Builder XML Project -->
+<PROJECT>
+  <MACROS>
+    <VERSION value="BCB.06.00"/>
+    <PROJECT value="v103ad61.bpl"/>
+    <OBJFILES value="v103ad61.obj ..\source\VpRegAd.obj ..\source\VpAdvDS.obj"/>
+    <RESFILES value="v103ad61.res"/>
+    <IDLFILES value=""/>
+    <IDLGENFILES value=""/>
+    <DEFFILE value=""/>
+    <RESDEPEN value="$(RESFILES)"/>
+    <LIBFILES value=""/>
+    <LIBRARIES value="ADSC50.lib vcldbx.lib"/>
+    <SPARELIBS value="rtl.lib vcl.lib vclx.lib dbrtl.lib vcldb.lib bdertl.lib vcldbx.lib 
+      ADSC50.lib V103_D51.lib"/>
+    <PACKAGES value="V101_D51.bpi vclx.bpi rtl.bpi vcl.bpi dbrtl.bpi vcldb.bpi bdertl.bpi"/>
+    <PATHCPP value=".;"/>
+    <PATHPAS value=".;..\source;..\source"/>
+    <PATHRC value=".;"/>
+    <PATHASM value=".;"/>
+    <DEBUGLIBPATH value="$(BCB)\lib\debug"/>
+    <RELEASELIBPATH value="$(BCB)\lib\release"/>
+    <LINKER value="ilink32"/>
+    <USERDEFINES value=""/>
+    <SYSDEFINES value="NO_STRICT;_VIS_NOLIB;USEPACKAGES"/>
+    <MAINSOURCE value="v103ad61.cpp"/>
+    <INCLUDEPATH value="..\source;$(BCB)\include;$(BCB)\include\vcl;..\source"/>
+    <LIBPATH value="..\source;$(BCB)\lib\obj;$(BCB)\lib;$(BCB)\lib\release;..\source"/>
+    <WARNINGS value="-w-par -w-8027 -w-8026"/>
+    <WARNOPTSTR value=""/>
+    <OTHERFILES value=""/>
+  </MACROS>
+  <OPTIONS>
+    <IDLCFLAGS value="-I..\source -I$(BCB)\include -I$(BCB)\include\vcl -I..\source 
+      -src_suffix cpp -boa"/>
+    <CFLAG1 value="-O2 -H=d:\borland\bcb5\CBUILD~1\lib\vcl60.csm -Hc -Vx -Ve -Tkh30000 -X- 
+      -a8 -b- -k- -vi -c -tWM"/>
+    <PFLAGS value="-$YD -$L- -$D- -$A8 -v -M -JPHNE"/>
+    <RFLAGS value=""/>
+    <AFLAGS value="/mx /w2 /zn"/>
+    <LFLAGS value="-D&quot;TurboPower Visual PlanIt 1.03 Advantage Support - VCL61&quot; -aa -Tpp -Gpd 
+      -x -Gn -Gl -Gi"/>
+    <OTHERFILES value=""/>
+  </OPTIONS>
+  <LINKER>
+    <ALLOBJ value="c0pkg32.obj $(PACKAGES) sysinit.obj sysinit.obj $(OBJFILES)"/>
+    <ALLRES value="$(RESFILES)"/>
+    <ALLLIB value="$(LIBFILES) $(LIBRARIES) import32.lib cp32mt.lib"/>
+    <OTHERFILES value=""/>
+  </LINKER>
+  <FILELIST>
+      <FILE FILENAME="v103ad61.cpp" FORMNAME="" UNITNAME="v103ad61" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="v103ad61.res" FORMNAME="" UNITNAME="v103ad61.res" CONTAINERID="ResTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\VpRegAd.pas" FORMNAME="" UNITNAME="VpRegAd" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\VpAdvDS.pas" FORMNAME="" UNITNAME="VpAdvDS" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="V101_D51.bpi" FORMNAME="" UNITNAME="V101_D51" CONTAINERID="BPITool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="vclx.bpi" FORMNAME="" UNITNAME="vclx" CONTAINERID="BPITool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="rtl.bpi" FORMNAME="" UNITNAME="rtl" CONTAINERID="BPITool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="vcl.bpi" FORMNAME="" UNITNAME="vcl" CONTAINERID="BPITool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="dbrtl.bpi" FORMNAME="" UNITNAME="dbrtl" CONTAINERID="BPITool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="vcldb.bpi" FORMNAME="" UNITNAME="vcldb" CONTAINERID="BPITool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="bdertl.bpi" FORMNAME="" UNITNAME="bdertl" CONTAINERID="BPITool" DESIGNCLASS="" LOCALCOMMAND=""/>
+  </FILELIST>
+  <BUILDTOOLS>
+  </BUILDTOOLS>
+
+  <IDEOPTIONS>
+[Version Info]
+IncludeVerInfo=1
+AutoIncBuild=0
+MajorVer=1
+MinorVer=0
+Release=3
+Build=0
+Debug=0
+PreRelease=0
+Special=0
+Private=0
+DLL=0
+Locale=1033
+CodePage=1252
+
+[Version Info Keys]
+CompanyName=TurboPower Software Company
+FileDescription=Visual PlanIt Advantage Support Package
+FileVersion=1.0.3.0
+InternalName=
+LegalCopyright=Copyright (c) 2002 TurboPower Software Co
+LegalTrademarks=
+OriginalFilename=
+ProductName=Visual PlanIt
+ProductVersion=1.0.3.0
+Comments=
+
+[HistoryLists\hlIncludePath]
+Count=11
+Item0=$(BCB)\include;$(BCB)\include\vcl;..\source
+Item1=D:\dev\vp;..\..\..\..\Components\VP;$(BCB)\include;$(BCB)\include\vcl;..\..\..\..\Components\hpp5
+Item2=..\..\..\..\Components\VP;$(BCB)\include;$(BCB)\include\vcl;..\..\..\..\Components\hpp5
+Item3=$(BCB)\include;$(BCB)\include\vcl;..\hpp5
+Item4=$(BCB)\include;$(BCB)\include\vcl;D:\Borland\Components\UI-One;D:\Borland\Components\UI-One\hpp5
+Item5=$(BCB)\include;$(BCB)\include\vcl
+Item6=$(BCB)\include;$(BCB)\include\vcl
+Item7=$(BCB)\include;$(BCB)\include\vcl
+Item8=$(BCB)\include;$(BCB)\include\vcl
+Item9=$(BCB)\include;$(BCB)\include\vcl
+Item10=$(BCB)\include;$(BCB)\include\vcl
+
+[HistoryLists\hlLibraryPath]
+Count=16
+Item0=$(BCB)\lib\obj;$(BCB)\lib;$(BCB)\lib\release;..\source
+Item1=D:\dev\vp;..\..\..\..\Components\VP;$(BCB)\lib\obj;$(BCB)\lib;$(BCB)\lib\release;..\..\Source\ToolsAPI
+Item2=;;;;;;;;;;;;;;;;..\..\..\..\Components\VP;$(BCB)\lib\obj;$(BCB)\lib;$(BCB)\lib\release;..\..\Source\ToolsAPI
+Item3=..\..\..\..\Components\VP;$(BCB)\lib\obj;$(BCB)\lib;$(BCB)\lib\release;..\..\Source\ToolsAPI
+Item4=..\..\BCB5\CBuilder5\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib;$(BCB)\lib\release;..\..\BCB5\CBuilder5\Source\ToolsAPI
+Item5=..\..\BCB5\CBuilder5\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib;$(BCB)\lib\release;D:\Borland\BCB5\CBuilder5\Source\ToolsAPI
+Item6=..\..\BCB5\CBuilder5\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib;$(BCB)\lib\release
+Item7=$(BCB)\lib\obj;$(BCB)\lib;$(BCB)\lib\release;D:\Borland\Components\UI-One
+Item8=$(BCB)\lib\obj;$(BCB)\lib;$(BCB)\lib\release
+Item9=$(BCB)\lib\obj;$(BCB)\lib
+Item10=$(BCB)\lib\obj;$(BCB)\lib
+Item11=$(BCB)\lib\obj;$(BCB)\lib
+Item12=$(BCB)\lib\obj;$(BCB)\lib
+Item13=$(BCB)\lib\obj;$(BCB)\lib
+Item14=$(BCB)\lib\obj;$(BCB)\lib
+Item15=$(BCB)\lib\obj;$(BCB)\lib
+
+[HistoryLists\hlDebugSourcePath]
+Count=1
+Item0=$(BCB)\source\vcl
+
+[HistoryLists\hlConditionals]
+Count=4
+Item0=USEPACKAGES
+Item1=TRIALRUN
+Item2=TRIALRUN;_RTLDLL;USEPACKAGES
+Item3=TRIALRUN;USEPACKAGES
+
+[Debugging]
+DebugSourceDirs=$(BCB)\source\vcl
+
+[Parameters]
+RunParams=
+Launcher=
+UseLauncher=0
+DebugCWD=
+HostApplication=
+RemoteHost=
+RemotePath=
+RemoteLauncher=
+RemoteCWD=
+RemoteDebug=0
+
+[Compiler]
+ShowInfoMsgs=0
+LinkDebugVcl=0
+LinkCGLIB=0
+
+[CORBA]
+AddServerUnit=1
+AddClientUnit=1
+PrecompiledHeaders=1
+
+[Linker]
+LibPrefix=
+LibSuffix=
+LibVersion=
+  </IDEOPTIONS>
+</PROJECT>

@@ -1,0 +1,142 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!-- C++Builder XML Project -->
+<PROJECT>
+  <MACROS>
+    <VERSION value="BCB.06.00"/>
+    <PROJECT value="EXMLTest.exe"/>
+    <OBJFILES value="EXMLTest.obj ExMain.obj"/>
+    <RESFILES value="EXMLTest.res"/>
+    <IDLFILES value=""/>
+    <IDLGENFILES value=""/>
+    <DEFFILE value=""/>
+    <RESDEPEN value="$(RESFILES) ExMain.dfm"/>
+    <LIBFILES value=""/>
+    <LIBRARIES value="vcl.lib rtl.lib"/>
+    <SPARELIBS value="rtl.lib vcl.lib"/>
+    <PACKAGES value="rtl.bpi vcl.bpi vclx.bpi vcljpg.bpi dsnap.bpi dbrtl.bpi vcldb.bpi 
+      bdertl.bpi bcbsmp.bpi ibsmp.bpi vcldbx.bpi qrpt.bpi teeui.bpi teedb.bpi 
+      tee.bpi dss.bpi nmfast.bpi inetdb.bpi inet.bpi dclocx.bpi"/>
+    <PATHCPP value=".;"/>
+    <PATHPAS value=".;"/>
+    <PATHRC value=".;"/>
+    <PATHASM value=".;"/>
+    <DEBUGLIBPATH value="$(BCB)\lib\debug"/>
+    <RELEASELIBPATH value="$(BCB)\lib\release"/>
+    <LINKER value="ilink32"/>
+    <USERDEFINES value=""/>
+    <SYSDEFINES value="_RTLDLL;NO_STRICT;_VIS_NOLIB"/>
+    <MAINSOURCE value="EXMLTest.cpp"/>
+    <INCLUDEPATH value="$(BCB)\include;$(BCB)\include\vcl;..\..\CBuildr6\XMLTest;..\..\..\headers\hpp6;..\..\..\hpp6"/>
+    <LIBPATH value="$(BCB)\lib\obj;$(BCB)\lib;..\..\CBuildr6\XMLTest;..\..\.."/>
+    <WARNINGS value="-w-par -w-8027 -w-8026"/>
+    <WARNOPTSTR value=""/>
+    <OTHERFILES value=""/>
+  </MACROS>
+  <OPTIONS>
+    <IDLCFLAGS value="-I$(BCB)\include -I$(BCB)\include\vcl -I..\..\CBuildr6\XMLTest 
+      -I..\..\..\headers\hpp6 -I..\..\..\hpp6 -src_suffix cpp -boa"/>
+    <CFLAG1 value="-Od -H=$(BCB)\lib\vcl60.csm -Hc -Vx -Ve -X- -r- -a8 -b- -k -y -v -vi- -c 
+      -tW -tWM"/>
+    <PFLAGS value="-$YD -$W -$O- -$A8 -v -JPHNE -M"/>
+    <RFLAGS value=""/>
+    <AFLAGS value="/mx /w2 /zd"/>
+    <LFLAGS value="-D&quot;&quot; -aa -Tpe -x -Gn -v"/>
+    <OTHERFILES value=""/>
+  </OPTIONS>
+  <LINKER>
+    <ALLOBJ value="c0w32.obj Memmgr.Lib sysinit.obj $(OBJFILES)"/>
+    <ALLRES value="$(RESFILES)"/>
+    <ALLLIB value="$(LIBFILES) $(LIBRARIES) import32.lib cp32mti.lib"/>
+    <OTHERFILES value=""/>
+  </LINKER>
+  <FILELIST>
+      <FILE FILENAME="EXMLTest.cpp" FORMNAME="" UNITNAME="EXMLTest" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="EXMLTest.res" FORMNAME="" UNITNAME="EXMLTest.res" CONTAINERID="ResTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="ExMain.cpp" FORMNAME="MainForm" UNITNAME="ExMain" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+  </FILELIST>
+  <BUILDTOOLS>
+  </BUILDTOOLS>
+
+  <IDEOPTIONS>
+[Version Info]
+IncludeVerInfo=0
+AutoIncBuild=0
+MajorVer=1
+MinorVer=0
+Release=0
+Build=0
+Debug=0
+PreRelease=0
+Special=0
+Private=0
+DLL=0
+Locale=1033
+CodePage=1252
+
+[Version Info Keys]
+CompanyName=
+FileDescription=
+FileVersion=1.0.0.0
+InternalName=
+LegalCopyright=
+LegalTrademarks=
+OriginalFilename=
+ProductName=
+ProductVersion=1.0.0.0
+Comments=
+
+[HistoryLists\hlIncludePath]
+Count=7
+Item0=$(BCB)\include;$(BCB)\include\vcl;..\..\CBuildr6\XMLTest;..\..\..\headers\hpp6;..\..\..\hpp6
+Item1=$(BCB)\include;$(BCB)\include\vcl;..\..\CBuildr6\XMLTest;..\..\..\headers\hpp6
+Item2=..\..\CBuildr6\XMLTest;..\..\CBuildr6\XMLTest;d:\xmlp;$(BCB)\include;$(BCB)\include\vcl;..\..\..\headers\hpp6
+Item3=..\..\CBuildr6\XMLTest;d:\xmlp;$(BCB)\include;$(BCB)\include\vcl;..\..\..\headers\hpp6
+Item4=..\..\CBuildr6\XMLTest;d:\xmlp;$(BCB)\include;$(BCB)\include\vcl;..\..\..\headers\hpp6
+Item5=$(BCB)\include;$(BCB)\include\vcl;..\..\..\headers\hpp6
+Item6=..\..\..;$(BCB)\include;$(BCB)\include\vcl
+
+[HistoryLists\hlLibraryPath]
+Count=7
+Item0=$(BCB)\lib\obj;$(BCB)\lib;..\..\CBuildr6\XMLTest;..\..\..
+Item1=..\..\CBuildr6\XMLTest;..\..\CBuildr6\XMLTest;$(BCB)\lib\obj;$(BCB)\lib;..\..\..
+Item2=..\..\CBuildr6\XMLTest;$(BCB)\lib\obj;$(BCB)\lib;..\..\..
+Item3=..\..\CBuildr6\XMLTest;d:\xmlp;$(BCB)\lib\obj;$(BCB)\lib;..\..\..
+Item4=$(BCB)\lib\obj;$(BCB)\lib;..\..\..
+Item5=$(BCB)\lib\obj;$(BCB)\lib
+Item6=..\..\..;$(BCB)\lib\obj;$(BCB)\lib
+
+[HistoryLists\hlDebugSourcePath]
+Count=1
+Item0=$(BCB)\source\vcl
+
+[Debugging]
+DebugSourceDirs=$(BCB)\source\vcl
+
+[Parameters]
+RunParams=
+Launcher=
+UseLauncher=0
+DebugCWD=
+HostApplication=
+RemoteHost=
+RemotePath=
+RemoteLauncher=
+RemoteCWD=
+RemoteDebug=0
+
+[Compiler]
+ShowInfoMsgs=0
+LinkDebugVcl=0
+LinkCGLIB=0
+
+[CORBA]
+AddServerUnit=1
+AddClientUnit=1
+PrecompiledHeaders=1
+
+[Language]
+ActiveLang=
+ProjectLang=
+RootDir=
+  </IDEOPTIONS>
+</PROJECT>

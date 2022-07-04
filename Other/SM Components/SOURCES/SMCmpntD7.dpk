@@ -1,0 +1,117 @@
+package SMCmpntD7;
+
+{$R *.res}
+{$R 'SMCVersInfo.dcr'}
+{$R 'BrazilCombo.dcr'}
+{$R 'charmap.dcr'}
+{$R 'Conerbtn.dcr'}
+{$R 'Edittype.dcr'}
+{$R 'FileNotify.dcr'}
+{$R 'Gradpnl.dcr'}
+{$R 'Limitfrm.dcr'}
+{$R 'Moneystr.dcr'}
+{$R 'RunText.dcr'}
+{$R 'Scrltool.dcr'}
+{$R 'sendmail.dcr'}
+{$R 'sensors.dcr'}
+{$R 'SMBar.dcr'}
+{$R 'SMBevel.dcr'}
+{$R 'SMDBAcc.dcr'}
+{$R 'SMDBComb.dcr'}
+{$R 'SMDBCtrl.dcr'}
+{$R 'SMDBFltr.dcr'}
+{$R 'Smdbgrid.dcr'}
+{$R 'SMDBGSet.dcr'}
+{$R 'SMDBStat.dcr'}
+{$R 'SMHLLbl.dcr'}
+{$R 'SMScale.dcr'}
+{$R 'SMTray.dcr'}
+{$R 'TVNavigator.dcr'}
+{$R 'URLLbl.dcr'}
+{$R 'SQLGen.dcr'}
+{$R 'SMSummInfo.dcr'}
+{$R 'SMBreakGrid.dcr'}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'Scalabium Software: freeware SMComponent library'}
+{$IMPLICITBUILD OFF}
+
+requires
+  vcl,
+  designide,
+  vclx,
+  bdertl,
+  vcldb,
+  VclSmp;
+
+contains
+  SMCVersInfo in 'SMCVersInfo.pas',
+  AngleLbl in 'AngleLbl.pas',
+  BrazilCombo in 'BrazilCombo.pas',
+  CharMap in 'charmap.pas',
+  ConerBtn in 'Conerbtn.pas',
+  EditType in 'Edittype.pas',
+  EditTypeDB in 'EditTypeDB.pas',
+  FileNotify in 'FileNotify.pas',
+  GradPnl in 'Gradpnl.pas',
+  LimitFrm in 'Limitfrm.pas',
+  MoneyStr in 'Moneystr.pas',
+  RunText in 'RunText.pas',
+  RXUtils in 'RXUtils.pas',
+  ScrlTool in 'Scrltool.pas',
+  SendMail in 'sendmail.pas',
+  Sensors in 'sensors.pas',
+  SMBar in 'SMBar.pas',
+  SMBevel in 'SMBevel.pas',
+  SMBox in 'SMBox.pas',
+  SMBoxReg in 'SMBoxReg.pas',
+  SMCalendar in 'SMCalendar.pas',
+  SMCnst in 'SMCnst.pas',
+  SMDBAcc in 'SMDBAcc.pas',
+  SMDBComb in 'SMDBComb.pas',
+  SMDBCombReg in 'SMDBCombReg.pas',
+  SMDBCtrl in 'SMDBCtrl.pas',
+  SMDBFind in 'SMDBFind.pas' {frmFind},
+  SMDBFltr in 'SMDBFltr.pas' {frmFilterDialog},
+  SMDBFltrFile in 'SMDBFltrFile.pas' {frmFilterFileDialog},
+  SMDBGrid in 'Smdbgrid.pas',
+  SMDBGSet in 'SMDBGSet.pas' {frmGridSetup},
+  SMDBStat in 'SMDBStat.pas',
+  SMHLLbl in 'SMHLLbl.pas',
+  SMLang in 'SMLang.pas',
+  SMLangR in 'SMLangR.pas',
+  SMPanel in 'SMPanel.pas',
+  SMScale in 'SMScale.pas',
+  SMScript in 'SMScript.pas',
+  SMToolBar in 'SMToolBar.pas',
+  SMTray in 'SMTray.pas',
+  SMultiBtn in 'SMultiBtn.pas',
+  SMSQLScript in 'SMSQLScript.pas',
+  TVNavigator in 'TVNavigator.pas',
+  URLLbl in 'URLLbl.pas',
+  SQLGen in 'SQLGen.pas',
+  Obj2XML in 'Obj2XML.pas',
+  SMSummInfo in 'SMSummInfo.pas',
+  SMBreakGrid in 'SMBreakGrid.pas',
+  SMDrawHTML in 'SMDrawHTML.pas';
+
+end.

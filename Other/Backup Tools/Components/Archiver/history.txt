@@ -1,0 +1,325 @@
+  HISTORY:
+  --------
+
+  ------------------------------------------------------------
+  * Version 1.00 (08/06/98) by Morgan Martinet (France)
+  ------------------------------------------------------------
+  * Version 1.01 (05/07/98) by Morgan Martinet (France)
+    - Added a CRC check, suggested by Oliver Buschjost
+    - Added default encryption with BlowFish, suggested by Oliver Buschjost
+    - Added comparison between size of compressed and uncompressed block, suggested by Oliver Buschjost
+  ------------------------------------------------------------
+  * Version 1.02 (10/07/98) by Morgan Martinet (France)
+    - Added storage of empty folders, suggested by Huanlin Tsai
+    - Changed type of ArchiveSize to Comp, suggested by Oliver Buschjost
+  ------------------------------------------------------------
+  * Version 1.03 (16/07/98) by Morgan Martinet (France)
+    - Fixed bug with empty folders
+    - Fixed bug with deletion of files
+    - Stored padding size of an encrypted block after the block itself instead of storing it
+      in the BlockSize.
+    - Gathered several boolean properties inside the property Options, suggested by Huanlin Tsai
+    - Added oEraseFirstDisk
+    - Added oCreateReadOnly, suggested by Oliver Buschjost
+    - In WinArchiver, changed the config form
+    - In WinArchiver, show the segment number in the Informations
+    - In WinArchiver, add the possibility to change the BlockSize
+    - Send an exception when we get a bad crc after decryption, telling the user
+      that its password was certainly bad.
+    - Allow encryption of files instead of the whole archive
+    - Check key length
+    - Ask confirmation of the key
+    - Show message if the new inserted disk doesn't contain enough free space.
+      And add an option to select this minimum.
+  ------------------------------------------------------------
+  * Version 1.04 (10/08/98) by Morgan Martinet (France)
+    - Removed all the use of the VCL to reduce the size of the code.
+      Now an application using only TExtractor (a self extracting archive
+      for instance) will use about 100 Kb !
+    - Removed 'Controls' from the uses clause of the Crypto units.
+    - Created a form for entering the key, that don't show the key (****)
+    - Added event OnGetSignature
+    - Splitted the component TArchiver in several pieces:
+
+       TArchiverRoot  (ArchiverRoot.pas)
+            |_ TCustomExtractor   (CustExtractor.pas)
+                    |_ TExtractor   (Extractor.pas)
+                    |_ TCustomArchiver  (CustArchiver.pas)
+                             |_ TArchiver   (Archiver.pas)
+
+       The TCustomXXX components don't implement compression or encryption.
+       But TExtractor and TArchiver implement a default compression (with the pasZLib)
+       and a default encryption with the Blowfish algorithm.
+       So, I suppressed the unit GZipArchiver, that should be replaced with Archiver.
+    - Fixed a bug with the Filter property: it filtered only the files in the
+      starting directory, and didn't walk in the sub-directories.
+    - Fixed a bug in the DeleteFiles method.
+  ------------------------------------------------------------
+  * Version 1.05 (11/08/98) by Morgan Martinet (France)
+    - Added a form in WinArchiver for entering a password
+    - Fixed a bug in method TArchiver.SelectFile: I forgot to use
+      the Title argument.
+    - Added 2 modes to the property RestoreAction: raExistingOnly, raUpdateExisting
+    - Added InitCompression virtual method in TArchiverRoot.
+    - Added a compression level.
+  ------------------------------------------------------------
+  * Version 1.06 (13/08/98) by Morgan Martinet (France)
+    - Changed the the type of TCompressionLevel.
+    - Fixed some bugs with the StartOffset property used by the
+      SFX program.
+  ------------------------------------------------------------
+  * Version 1.07 (19/08/98) by Morgan Martinet (France)
+    - Added a method to TArchiverRoot: Rename
+    - Added a menu option for renaming an archive in WinArchiver
+    - Fixed a small bug in WinArchiver when using encryption
+    - Added property ReserveSpace
+    - Added event OnWriteSFXCode and option oWriteSFXCode
+  ------------------------------------------------------------
+  * Version 1.08 (22/08/98) by Morgan Martinet (France)
+    - Display a key in front of each crypted file in WinArchiver
+    - Added event OnAfterHeaderUpdate
+    - Used SFX code from Oliver Buschjost
+    - Added property SFXCodeSize. Use this property instead of StartOffset.
+    - Fixed some problems with SFX segmented archives.
+    - Now, request the decrypt key only when needed (when extracting files)
+    - Added option oEncryptFiles
+    - Added option "Encrypt files ?" to the Add dialog box of WinArchiver
+    - Display more infos about the archive in the Information dialog box
+      of WinArchiver
+  ------------------------------------------------------------
+  * Version 1.09 (25/08/98) by Morgan Martinet (France)
+    - Store SFX code in a ressource
+    - Added "SFX configuration" dialog box
+    - Added a lgAutomatic to the TLanguage enumeration. This will try to
+      automatically set the language property according to the user language,
+      at the execution time !
+    - Use of the strings inside the version ressource of the SFX code,
+      to know the size of the code and the size of TagInfo record.
+  ------------------------------------------------------------
+  * Version 1.10 (03/09/98) by Morgan Martinet (France)
+    - Created a TSFXGenerator component
+  ------------------------------------------------------------
+  * Version 1.11 (07/09/98) by Morgan Martinet (France)
+    - When deleting files from a SFX archive, I must copy the SFX code in the
+      new created archive.
+    - When reseting files from a SFX archive, I must copy the SFX code in the
+      new created archive.
+    - When deleting files, Create temporary archive in Windows\Temp path instead
+      of the current path (useful for archives stored on floppies)
+    - Added method ExtractFileTo to TCustomExtractor
+    - Created SolidArchives: an uncompressed archive of files that is then compressed (it was suggested by Oliver Buschjost)
+    - In WinArchiver's Information dialog, removed the checkboxes for the attributes
+    - Added method IsEmpty to TArchiverRoot
+    - Added Archive Comment support:
+         added method SetArchiveComment to TCustomArchiver
+         Changed TArchiveHeader: added "Comment" field --> changed methods GetHeaderSize,
+         WriteHeader and ReadHeaderOfStream of TArchiverRoot
+  ------------------------------------------------------------
+  * Version 1.12 (10/09/98) by Morgan Martinet (France)
+    - Add method IsBusy to TArchiverRoot
+    - Fixed bug with solid archives: the comment was not properly displayed
+      when opening an archive.
+    - Fixed bug in WinArchiver when trying to close the application while
+      an operation was in progress. I added the method IsBusy and before
+      the execution of any operation on the archive (open, close, add, extract...)
+      I check the Busy status and report it to the user.
+    - Fixed bug with file which size is 0.
+    - Fiexed bug that prevented to do anything after an abortion.
+    - Fixed a bug in Delete with solid archives.
+    - Updated help.txt
+  ------------------------------------------------------------
+  * Version 1.13 (13/09/98) by Morgan Martinet (France)
+    - Fixed bug in progress ratio when an exception occurred
+      during a file extraction.
+    - Fixed bug with segmented archives and solid archives
+  ------------------------------------------------------------
+  * Version 1.14 (16/09/98) by Morgan Martinet (France)
+    - Fixed bugs with solid archives
+    - Added event OnShowComment
+  ------------------------------------------------------------
+  * Version 1.15 (17/09/98) by Morgan Martinet (France)
+    - Added a Yes / Yes To All / No / Cancel  Dialog when overwriting
+    - Added a Yes / Yes To All / No Dialog when an error occurs
+    - Fixed a bug with the progress ratio when enumerating a solid archive
+  ------------------------------------------------------------
+  * Version 1.16 (19/09/98) by Morgan Martinet (France)
+    - Added a "Time remaining" feature
+      --> added event OnShowTiming and properties ElapsedTime,
+          StartTime, EndTime, BytesPerMSec.
+    - Added Drag&Drop to WinArchiver
+  ------------------------------------------------------------
+  * Version 1.17 (28/09/98) by Morgan Martinet (France)
+    - When double clicking on a file in an archive, execute it or
+      view it.
+    - Translation of WinArchiver
+    - Added function GetDiskSizeAvail to ArchiverMisc. I got it from Inprise TI1630
+      and it accepts disk size greater than 4Gb, and it works with network drives.
+    - Fixed a bug in method TCustomExtractor.ExtractFile : it used a bad filename.
+    - Added option oMaintainFileDirectory
+    - Added event OnDisplayMessage to TArchiverRoot.
+    - Added event OnClearFileList to TArchiverRoot
+    - Added properties FileCount and Files
+    - Create an internal list of the content of the archive (maintain
+      a dynamic list of TFileEntry records).
+  ------------------------------------------------------------
+  * Version 1.18 (02/10/98) by Morgan Martinet (France)
+    - Replaced TStringGrid with TListView in WinArchiver
+    - Save columns width in the registry
+    - Sort columns on a click
+  ------------------------------------------------------------
+  * Version 1.19 (05/10/98) by Morgan Martinet (France)
+    - Added Tree view representation to WinArchiver
+    - Added Popup menu for the TListView
+    - Added version info to WinArchiver
+    - Added selection of the TListView mode : detail, list...
+    - Store the list of the last opened archives
+  ------------------------------------------------------------
+  * Version 1.20 (12/10/98) by Morgan Martinet (France)
+    - Replaced TListView with a TListBox and a THeaderControl,
+      because the TListView was so slow with a lot of items !
+    - Removed selection of the TListView mode : detail, list...
+      because there's no TListView anymore !
+    - Added progress bar when sorting
+    - Store Font size of the TextViewer in the Registry
+    - Added Ascending/Descending sort of a column : just click again on the
+      column and it will reverse the sorting mode.
+    - You can add files to the current directory.
+  ------------------------------------------------------------
+  * Version 1.21 (13/10/98) by Morgan Martinet (France)
+    - Store archive size in the first segment when segmentation occurs,
+      in order to avoid the swapping of the disks ! If you cancel the
+      update of the first segment, then it will use the last segment or
+      it will adjust itself after each segment.
+    - One progress bar for the solid archives: the extraction of the archive
+      is limited to 50%, then the enumeration is limited to 50% + 50%.
+    - Fixed the problem with a renamed segment than could not be accepted.
+  ------------------------------------------------------------
+  * Version 1.22 (15/10/98) by Morgan Martinet (France)
+    - Added a "View" button to WinArchiver
+    - Show icons for each file type.
+    - Fixed bug with segmented solid archives.
+    - Fixed bug with "Make SFX" and a solid archive : I delay the creation of SFX
+      until the archive is closed. It means that when the solid archive is compressed
+      in a new archive, this new archive is a SFX archive !
+  ------------------------------------------------------------
+  * Version 1.23 (19/10/98) by Morgan Martinet (France)
+    - Fixed bug with "Make SFX" and a solid archive : instead of delaying, close
+      the archive, compress it as SFX and reopen it.
+    - Added a log window for the errors
+    - Added Drop source behaviour.
+    - Added a method to check integrity of an archive (TCustExtractor.CheckIntegrity)
+    - Added Install button to WinArchiver
+  ------------------------------------------------------------
+  * Version 1.24 (21/10/98) by Morgan Martinet (France)
+    - Added function AdjustPath in ArchiverMisc.pas that shorten file names if they don't
+      fit to a specified size.
+    - Forbid a drag&drop with the source = target
+  ------------------------------------------------------------
+  * Version 1.25 (22/10/98) by Morgan Martinet (France)
+    - Fixed bug with the GetDiskFreeSpaceEx function that doesn't exist with
+      the first release of Win95.
+  ------------------------------------------------------------
+  * Version 1.26 (26/10/98) by Morgan Martinet (France)
+    - Added the selection of the main font in WinArchiver
+    - Added a menu for selecting the sort mode in WinArchiver
+  ------------------------------------------------------------
+  * Version 1.27 (30/10/98) by Morgan Martinet (France)
+    - Display the time elapsed in the report when an operation finishes (for WinArchiver)
+    - Replaced comp type with Extended in order to support C++ Builder
+    - Changed signature because I removed the comp type.
+  ------------------------------------------------------------
+  * Version 1.28 (11/11/98) by Morgan Martinet (France)
+    - Fixed some little bugs
+    - Adjustements for Delphi4
+  ------------------------------------------------------------
+  * Version 1.29 (23/11/98) by Morgan Martinet (France)
+    - Optimized search of translation strings with a dichotomical search
+    - Added a symbol on the columns that shows the sort order
+    - Check the position of the Main Form inside the screen
+    - Use the current folder for the temp archive if enough place,
+      in order to rename the old archive to the new one, instead
+      of copying it.
+    - Added OnAddToLog event
+  ------------------------------------------------------------
+  * Version 1.30 (17/12/98) by Morgan Martinet (France)
+    - Added option oNoSpanning
+    - Added methods CanAbort and RequestAbort to TArchiverRoot
+    - Added ReadMe.txt to the WinArchiver folder
+    - Added tutorial.txt to the Archiver folder
+  ------------------------------------------------------------
+  * Version 1.31 (28/02/99) by Morgan Martinet (France)
+    - Forced the optimization of code in the ArchiverMisc unit
+      for the GetDiskSizeAvail function, that crashed without it.
+    - In the AddDirectory method of TCustomArchiver, don't add
+      file if the file is the archive itself !
+      It's interesting if you want to store the archive in the
+      directory that you're archiving.
+    - Added event OnDeleteFileByIndex, useful when files are selected
+      in a list.
+    - Added event OnExtractFileByIndex, useful when files are selected
+      in a list.
+    - Renamed unit ZLib.pas to BZLib.pas to avoid a filename conflict with
+      the ZLib.pas distributed by Inprise.
+    - Added Danish language
+    - Added Dutch language
+    - Added Czech language
+    - Added 2 messages to TArchiverRoot : CanNotCreateFile and CanNotOpenFile
+      in order to catch the exceptions when creating or opening a file and
+      translate it on the fly.
+    - Added AssignTo method to TArchiverRoot, suggested by Hana Krizova
+    - changed GetFreeSpace method, enlarged kMinDiskSpace constant because
+      of system buffering, changed condition to test disk name to
+      access network disks --> done by Hana Krizova
+    - Added a new type for the file sizes : TFileSize = Integer
+    - Added a list of filters to include/exclude files to be added in WinArchiver
+    - protected methods (AddFile, AddDirectory, ExtractFiles...) if an operation is
+      already in progress. If the option oShowBusyMessage is enabled, then the
+      component will display a message before it exits.
+    - Added option oShowBusyMessage : if you try to do an operation while an operation
+      is already in progress, the component will display a warning message
+      before it exits.
+    - Added option oDoNotUpdateFirstSegment : lets you disable the action of requesting
+      the first segment when the adding process of a multi-segmented archive
+      finishes for updating the archive information that will be used when
+      opening/extracting. In that case, the component will ask for the last
+      disk instead of the first disk, but it is irritating when your archive
+      has only 2 segments.
+    - Renamed BackupTools.dpk to BackupTools_d3.dpk
+    - Added BackupTools_d4.dpk for Delphi4
+    - Fixed all warnings in Delphi4.
+    - Extended Tutorial.txt
+    - Added property AddMode to TCustomArchiver that lets you add and replace
+      files in an archive, update them or freshen them.
+    - Fixed a bug when extracting files with a network path,
+      the destination was ExtractPath+FilePath instead of FilePath
+      (thanks to Danjel Grosar).
+  ------------------------------------------------------------
+  * Version 1.32 (05/11/99) by Morgan Martinet (France)
+    - Added external stream support through the property Stream of TArchiver.
+      Now, you can set any stream to TArchiver (like a TMemoryStream or a TBlobStream)
+      and read/write an archive.
+    - Added Demo ExternalStream
+    - Fixed a small bug in the GetDiskSizeAvail2 function, which was wrong
+      which big partitions !
+    - Added method OpenNew to TArchiverRoot. It lets you force the creation
+      of a new archive, while opening an archive.
+    - Added BackupTool_d5.dpk for a Delphi5 installation.
+    - Fixed a bug in WinArchiver, thanks to Udo Joester (udo@joester.de):
+      There was a division by zero when a folder contains only one file.
+    - Forgot to implement the option oDoNotUpdateFirstSegment.
+      Thanks to Mauro Favagrossa (mrfava@tin.it)
+    - Added argument Filter to method GetDirectorySize, because
+      EraseDrive used the method GetDirectorySize, and if a filter
+      would not select any file, the return would be 0, and EraseDrive
+      would not erase any file !!!
+      Thanks to Mauro Favagrossa (mrfava@tin.it)
+    - Added a check on the serial num disk when requesting a new disk,
+      in order to avoid the deletion of the current segment.
+      Thanks to Mauro Favagrossa (mrfava@tin.it)
+    - Used TLargeInteger in function GetDiskFreeSpaceEx instead of Integer.
+      Thanks to Mauro Favagrossa (mrfava@tin.it)
+    - Some corrections in the italian strings.
+      Thanks to Mauro Favagrossa (mrfava@tin.it)
+    - Fixed a problem in the GetVersionInfo function of ArchiverMisc.pas 
+      that didn't work properly with NT.
+    - Introduced C++ Builder 3 and 4 compatibily

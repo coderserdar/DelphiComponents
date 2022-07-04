@@ -1,0 +1,75 @@
+//------------------------------------------------------------------------------
+// Component        TZip Component                                             .
+// Compilers:       Delphi 3 - Delphi 7, C++ Builder 3 - C++ Builder 5         .
+// Author:          Angus Johnson - angusj-AT-myrealbox-DOT-com                .
+// Copyright:       © 2001-2004 Angus Johnson                                  .
+// -----------------------------------------------------------------------------
+
+resourcestring
+  s_multidisk_prompt =
+    'Insert [ Disk %d ] of the Zip file into the floppy drive'+
+    #10+'before pressing [ OK ] to continue ...';
+  s_multidisk_prompt_last =
+    'This is [ Disk %d ] of a multiple disk Zip file.'#10+
+    'Insert the last disk of the Zip file before pressing [ OK ] to continue ...';
+  s_wait_caption = 'wait ...';
+  s_cancel_caption = '&Cancel';
+  s_index_range_error = 'Index range error';
+  s_password_too_long = 'Passwords must be 80 characters or less.';
+  s_unable_to_access_drive = 'Unable to access the selected drive!';
+  s_unable_to_create = 'Unable to create '#10'"%s"';
+  s_not_a_zip_file = '"%s"'#10'is not a valid Zip file.';
+  s_cfh_read_error = 'Error reading CentralFileHeader.';
+  s_cfh_write_error = 'Error writing CentralDirectory.';
+  s_eoch_read_error = 'Error reading EndOfCentralHeader.';
+  s_eoch_write_error = 'Error writing EndOfCentralHeader.';
+  s_new_password_required = 'A new password is required for "%s"';
+  s_invalid_password_retry = 'Password is invalid, please retry ...';
+  s_no_password_query_continue = 'No password was entered so the file will not be extracted...'#10+
+    'Do you wish to continue extracting other files?';
+  s_crc_error_query_extract =
+    '"%s" may be corrupted (CRC error).'#10'Extract this file anyway? ...';
+  s_older_file_query_extract =
+    '"%s" is older than the zipped file.'#10'Overwrite this file? ...';
+  s_newer_file_query_extract =
+    '"%s" is the same age or newer than the zipped file.'#10+
+    'Do you really want to overwrite this file? ...';
+  s_multidisk_op_error =
+    'Cannot Add, Delete or Extract from a multiple disk Zip file...'#10+
+    'Merge this Zip file onto the hard disk before retrying.';
+  s_extract_error_no_folder =
+    'Unable to extract files to:'#10'"%s"'#10'This folder does not exist.';
+  s_unable_to_load = 'Unable to load %s';
+  s_no_zip_no_op =
+    'A Zip file must be openned or created before'#10+
+    'Adding, Deleting or Extracting files.';
+  s_no_select_no_op = 'No files have been selected.';
+  s_need_multidisk_zip = 'This is not a multiple disk Zip file.';
+  s_merge_only_to_fixed_disk =
+   'A multiple disk Zip file can only be merged onto a fixed drive.';
+  s_multidisk_sig_error = 'Error reading multiple disk signature';
+  s_no_space_prompt =
+    'There is insufficient room on this floppy disk ...'#10+
+    'Insert another disk into the floppy drive'#10+
+    'before pressing [ OK ] to continue ...';
+  s_no_create_vol_label = 'Unable to create disk Volume Label';
+  s_create_multdisk_on_floppies_only =
+    'Multiple disk Zip files can only be created on floppy disks.';
+  s_source_file_cannot_be_on_floppy =
+    'The source file must not be on a floppy disk';
+  s_max_multidisk_at_least_256 = 'Maximum File Size must be at least 256k.';
+  s_min_space_disk1_at_least_256 = 'Minimum file size on Disk1 must be at least 256k.';
+  s_localheader_read_error = 'Unable to read LocalHeader';
+  s_localheader_write_error = 'Unable to write LocalHeader.';
+  s_local_data_write_error = 'Unable to write local data.';
+  s_comment_read_error = 'Unable to read main Zip comment.';
+  s_comment_write_error = 'Unable to write main Zip comment.';
+  s_not_an_sfx_file = '"%s"'#10+'is not a valid Self-extracting zip file.';
+  s_sfx_read_error = 'Error reading self-extracting zip file.';
+  s_no_icons = 'Error - unable to find any icons in the Exe File';
+  s_no_icon = 'Error - unable to find the specific icon in the Exe File';
+  s_no_matching_ico = 'Error - no icon in the Ico File matches the one in the Exe File.';
+  s_ico_copy_error = 'Error copying icon to Exe File.';
+  s_res_not_at_sec_start = 'Resources are not at the start of a section!!';
+  s_invalid_dll_version = 'Error - invalid version of ZipDll.dll or UnzDll.dll';
+

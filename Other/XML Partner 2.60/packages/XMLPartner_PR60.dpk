@@ -1,0 +1,50 @@
+package XMLPartner_PR60;
+
+{$R *.res}
+{$R '..\source\XpvXSLPr.dcr'}
+{$R '..\source\XpvFlHTM.dcr'}
+{$R '..\source\XpvFlPrt.dcr'}
+{$R '..\source\XpvFlRTF.dcr'}
+{$R '..\source\XpvFlXML.dcr'}
+{$ALIGN 8}
+{$ASSERTIONS OFF}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS OFF}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'TurboPower XMLPartner Professional Runtime package - VCL60'}
+{$RUNONLY}
+{$IMPLICITBUILD OFF}
+
+requires
+  vcl,
+  XMLPartner_CR60;
+
+contains
+  XpAboutw in '..\source\XpAboutw.pas' {XpAboutBox},
+  XpvXSLPr in '..\source\XpvXSLPr.pas',
+  XpvFlBas in '..\source\XpvFlBas.pas',
+  XpvFlHTM in '..\source\XpvFlHTM.pas',
+  XpvFlPrt in '..\source\XpvFlPrt.pas',
+  XpvFlRTF in '..\source\XpvFlRTF.pas',
+  XpvFlXML in '..\source\XpvFlXML.pas',
+  XpvXSLFO in '..\source\XpvXSLFO.pas',
+  XpvXSLT in '..\source\XpvXSLT.pas',
+  XpvFOHsh in '..\source\XpvFOHsh.pas';
+
+end.

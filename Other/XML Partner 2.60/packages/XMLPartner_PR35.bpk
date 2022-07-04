@@ -1,0 +1,186 @@
+# ---------------------------------------------------------------------------
+!if !$d(BCB)
+BCB = $(MAKEDIR)\..
+!endif
+
+# ---------------------------------------------------------------------------
+# IDE SECTION
+# ---------------------------------------------------------------------------
+# The following section of the project makefile is managed by the BCB IDE.
+# It is recommended to use the IDE to change any of the values in this
+# section.
+# ---------------------------------------------------------------------------
+
+VERSION = BCB.03
+# ---------------------------------------------------------------------------
+PROJECT = XMLPartner_pr35.bpl
+OBJFILES = XpParser.obj xpbase.obj xpchrflt.obj XpDOM.obj xpexcept.obj xpinet.obj \
+  xpAboutw.obj XpvFlBas.obj XpvFlHTM.obj XpvFlPrt.obj XpvFlRTF.obj XpvFlXML.obj \
+  XpHash.obj XpSort.obj XpXSLCon.obj XpvXSLFO.obj XpvXSLPr.obj XpvXSLT.obj \
+  XpvFOHsh.obj XMLPartner_pr35.obj
+RESFILES = XMLPartner_PR35.res XpvFlHTM.dcr XpvFlPrt.dcr XpvFlRTF.dcr XpvFlXML.dcr XpvXSLPr.dcr
+DEFFILE =
+RESDEPEN = $(RESFILES) xpAboutw.dfm
+LIBFILES =
+LIBRARIES =
+SPARELIBS = VCL35.lib
+PACKAGES = vcl35.bpi
+# ---------------------------------------------------------------------------
+PATHCPP = .;
+PATHASM = .;
+PATHPAS = .;
+PATHRC = .;
+DEBUGLIBPATH = $(BCB)\lib\debug
+RELEASELIBPATH = $(BCB)\lib\release
+# ---------------------------------------------------------------------------
+CFLAG1 = -O2 -Hc -w -Ve -k- -vi -c -b- -w-par -w-inl -Vx
+CFLAG2 = -D_RTLDLL;USEPACKAGES \
+  -Iexamples\delphi\xmledit;$(BCB)\include;$(BCB)\include\vcl \
+  -H=$(BCB)\lib\vcl35.csm
+CFLAG3 = -Tkh30000
+PFLAGS = -D_RTLDLL;USEPACKAGES \
+  -U..\xpdstd;examples\delphi\xmledit;$(BCB)\lib\obj;$(BCB)\lib;$(RELEASELIBPATH) \
+  -Iexamples\delphi\xmledit;$(BCB)\include;$(BCB)\include\vcl -$L- -$D- -v -JPHN -M
+RFLAGS = -D_RTLDLL;USEPACKAGES -iexamples\delphi\xmledit;$(BCB)\include;$(BCB)\include\vcl
+AFLAGS = /iexamples\delphi\xmledit /i$(BCB)\include /i$(BCB)\include\vcl /d_RTLDLL \
+  /dUSEPACKAGES /mx /w2 /zn
+LFLAGS = -L..\xpdstd;examples\delphi\xmledit;$(BCB)\lib\obj;$(BCB)\lib;$(RELEASELIBPATH) \
+  -D"TurboPower XMLPartner Professional Runtime package - VCL35" -aa -Tpp -Gpr -x -Gn \
+  -Gl -Gi
+IFLAGS =
+# ---------------------------------------------------------------------------
+ALLOBJ = c0pkg32.obj $(PACKAGES) sysinit.obj $(OBJFILES)
+ALLRES = $(RESFILES)
+ALLLIB = $(LIBFILES) $(LIBRARIES) import32.lib cp32mti.lib
+# ---------------------------------------------------------------------------
+!ifdef IDEOPTIONS
+
+[Version Info]
+IncludeVerInfo=1
+AutoIncBuild=0
+MajorVer=2
+MinorVer=6
+Release=0
+Build=0
+Debug=0
+PreRelease=0
+Special=0
+Private=0
+DLL=0
+Locale=1033
+CodePage=1252
+
+[Version Info Keys]
+CompanyName=TurboPower Software Company
+FileDescription=TurboPower XMLPartner Professional Runtime Package - VCL35
+FileVersion=2.6.0.0
+InternalName=XMLPartner_PR35
+LegalCopyright=Copyright © TurboPower Software Company 2002
+LegalTrademarks=
+OriginalFilename=XMLPartner_PR35.DPL
+ProductName=TurboPower XMLPartner Professional
+ProductVersion=2.6.0.0
+Comments=
+
+[HistoryLists\hlIncludePath]
+Count=2
+Item0=examples\delphi\xmledit;$(BCB)\include;$(BCB)\include\vcl
+Item1=$(BCB)\include;$(BCB)\include\vcl
+
+[HistoryLists\hlLibraryPath]
+Count=3
+Item0=..\xpdstd;examples\delphi\xmledit;$(BCB)\lib\obj;$(BCB)\lib
+Item1=examples\delphi\xmledit;$(BCB)\lib\obj;$(BCB)\lib
+Item2=$(BCB)\lib\obj;$(BCB)\lib
+
+[HistoryLists\hlDebugSourcePath]
+Count=1
+Item0=$(BCB)\source\vcl
+
+[HistoryLists\hlConditionals]
+Count=1
+Item0=_RTLDLL;USEPACKAGES
+
+[Debugging]
+DebugSourceDirs=$(BCB)\source\vcl
+
+[Parameters]
+RunParams=
+HostApplication=
+
+!endif
+
+# ---------------------------------------------------------------------------
+# MAKE SECTION
+# ---------------------------------------------------------------------------
+# This section of the project file is not used by the BCB IDE.  It is for
+# the benefit of building from the command-line using the MAKE utility.
+# ---------------------------------------------------------------------------
+
+.autodepend
+# ---------------------------------------------------------------------------
+!if !$d(BCC32)
+BCC32 = bcc32
+!endif
+
+!if !$d(DCC32)
+DCC32 = dcc32
+!endif
+
+!if !$d(TASM32)
+TASM32 = tasm32
+!endif
+
+!if !$d(LINKER)
+LINKER = ilink32
+!endif
+
+!if !$d(BRCC32)
+BRCC32 = brcc32
+!endif
+# ---------------------------------------------------------------------------
+!if $d(PATHCPP)
+.PATH.CPP = $(PATHCPP)
+.PATH.C   = $(PATHCPP)
+!endif
+
+!if $d(PATHPAS)
+.PATH.PAS = $(PATHPAS)
+!endif
+
+!if $d(PATHASM)
+.PATH.ASM = $(PATHASM)
+!endif
+
+!if $d(PATHRC)
+.PATH.RC  = $(PATHRC)
+!endif
+# ---------------------------------------------------------------------------
+$(PROJECT): $(OBJFILES) $(RESDEPEN) $(DEFFILE)
+    $(BCB)\BIN\$(LINKER) @&&!
+    $(LFLAGS) +
+    $(ALLOBJ), +
+    $(PROJECT),, +
+    $(ALLLIB), +
+    $(DEFFILE), +
+    $(ALLRES)
+!
+# ---------------------------------------------------------------------------
+.pas.hpp:
+    $(BCB)\BIN\$(DCC32) $(PFLAGS) {$< }
+
+.pas.obj:
+    $(BCB)\BIN\$(DCC32) $(PFLAGS) {$< }
+
+.cpp.obj:
+    $(BCB)\BIN\$(BCC32) $(CFLAG1) $(CFLAG2) $(CFLAG3) -n$(@D) {$< }
+
+.c.obj:
+    $(BCB)\BIN\$(BCC32) $(CFLAG1) $(CFLAG2) $(CFLAG3) -n$(@D) {$< }
+
+.asm.obj:
+    $(BCB)\BIN\$(TASM32) $(AFLAGS) $<, $@
+
+.rc.res:
+    $(BCB)\BIN\$(BRCC32) $(RFLAGS) -fo$@ $<
+# ---------------------------------------------------------------------------

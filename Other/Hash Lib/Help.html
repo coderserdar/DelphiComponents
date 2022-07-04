@@ -1,0 +1,230 @@
+<html>
+<head>
+  <title>HashLib! Help</title>
+</head>
+<body>
+  <h1>HashLib! Help</h1><br>
+  <font size=+1><b>Contents:</b></font><br>
+  <li><A href="Help.html#ABOUT">About HashLib!</A>
+  <li><A href="Help.html#IMPLALG">Implemented algorithms</A>
+  <li><A href="Help.html#CRYPTOAPI">CryptoAPI</A>
+  <li><A href="Help.html#TESTING">HashLib! testing</A>
+  <li><A href="Help.html#PERFOMANCE">Size & perfomance issues</A>
+  <li><A href="Help.html#EXAMPLES">Examples</A>
+  <li><A href="Help.html#FEEDBACK">Feedback</A>
+</body>
+<br><br>
+<table>
+
+<tr><td width="750">
+<p><A name="ABOUT"><font size=+1><br><b>About HashLib!</b></font></A><br>
+  HashLib! is a fast and flexible library for Delphi, where are implemented most of
+common hash algorithms. It provides easy to use low and high level functions.
+I decided to write this lib because of lack of such things for Delphi and quite
+a bad quality of them (this lib contais parts being rewritten in assembler).
+This library was written in Delphi (tested on Delphi5, Delphi6, Delphi7). Also it works
+fine in C++ Builder 4 (and it should work on newer verions). Source code is included
+and could be modified without any limitations.<br>
+</td></tr>
+
+<tr><td width="750">
+<p><A name="IMPLALG"><font size=+1><br><b>Implemented algorithms</b></font></A><br>
+- MD2 (RFC1319), MD4 (RFC1320), MD5 (RFC1321)<br>
+- SHA1(FIPS 180-1), SHA256, SHA384, SHA512 (FIPS PUB 180-2)<br>
+- Haval128, Haval160, Haval192, Haval224, Haval256 by Y. Zheng, J. Pieprzyk and J. Seberry<br>
+- Gost (GOST R 34.11-94)<br>
+- Tiger128, Tiger160, Tiger192 by Ross Anderson and Eli Biham<br>
+- RipeMD128, RipeMD160 by Hans Dobbertin, Antoon Bosselaers, and Bart Preneel<br>
+- CRC32, CRC32b<br>
+- Adler32<br>
+</td></tr>
+
+<tr><td width="750">
+  <A name="CRYPTOAPI"><font size=+1><br><b>CryptoAPI</b></font></A><br>
+  CryptoAPI unit provides common interface for using the algorithms.
+  <p><b>HashContext: </b><br>
+  Before calling the low level functions hash context should be allocated.<br>
+  You are not allowed modifying the IntData and HashType parts of the context!<br>
+  <br>
+  <pre>
+  THashContext = record
+    IntData: Pointer;      {Reserved for internal use} 
+    HashType: LongWord;    {Hash type}                 
+    lParam: LongWord;      {First Param}               
+    wParam: LongWord;      {Second Param}
+  end;
+  </pre>
+
+  <p><b>Availble hash types: </b><br>
+  HASH_MD2, HASH_MD4, HASH_MD5,<br>
+  HASH_CRC32, HASH_CRC32B,<br>
+  HASH_ADLER32,<br>
+  HASH_GOST,<br>
+  HASH_HAVAL128, HASH_HAVAL160,<br>
+  HASH_HAVAL192, HASH_HAVAL224,<br>
+  HASH_HAVAL256,<br>
+  HASH_SHA1, HASH_SHA256, HASH_SHA384, HASH_SHA512,<br>
+  HASH_TIGER128, HASH_TIGER160, HASH_TIGER192,<br>
+  HASH_RIPEMD128, HASH_RIPEMD160.<br>
+  
+
+
+  <p><b>Low-level functions:</b><br>
+  <i>function HashInit(Context: PHashContext; HashType: LongWord): LongWord;</i><br>
+  First of all you have to initialize hash context by calling the
+  HashInit function. If everything is ok, function returns HASH_NOERROR, otherwise you can call the HashErrorToStr function to
+  understand the error.  After calling HashInit you can change lParam and wParam:
+  in HASH_HAVAL(128-256) and HASH_TIGER(128-192) you can set lParam to specify
+  number of passes to use (default 3).<br><br>
+
+  <i>function HashUpdate(Context: PHashContext; SrcBuf: Pointer; BufLen: LongWord): LongWord;</i><br>
+  Every byte of the data buffer should be passed through HashUpdate function.
+  SrcBuf -- pointer to source buffer (or only the part of it), BufLen is the length of this buffer/part.
+  If everything is ok, function returns HASH_NOERROR.  <br><br>
+
+
+  <i>function HashFinal(Context: PHashContext; var DestHash: String): LongWord;</i><br>
+  After calling the HashInit function you MUST call HashFinal function to free
+  used data (Context isn't freed). If everything is ok, then hash of the buffer
+  is stored in the DestHash string and HASH_NOERROR is returned. You shouldn't
+  finalize initialized context more the one time.  <br><br>
+  
+  So, low level hashing consists of 3 parts:
+  Initializing, Updating and Finalizing.<br>
+  
+  Example:
+  <pre>
+  uses
+    CryptoAPI;
+  <......>
+  procedure TestHash;
+  var
+    buf: array[0..2] of Char;   //Source buffer
+    ctx: THashContext;          //Hash context
+    ret: LongWord;              //Error status
+    S: String;                  //String for hash
+  begin
+    buf[0] := 'a'; buf[1] := 'b'; buf[2] := 'c'; //store abc in the buffer
+    HashInit(@ctx, HASH_SHA1);  //Initialize
+    HashUpdate(@ctx, @buf, 3);  //Update the whole buffer
+    {
+      equivalent to:
+      HashUpdate(@ctx, @(buf[0]), 1); //Update first byte ('a')
+      HashUpdate(@ctx, @(buf[1]), 1); //Update second byte ('b')
+      HashUpdate(@ctx, @(buf[2]), 1); //Update third byte ('c')
+      equivalent to:
+      HashUpdate(@ctx, @(buf[0]), 1); //Update first byte ('a')
+      HashUpdate(@ctx, @(buf[1]), 2); //Update last two byts ('bc')
+    }
+    HashFinal(@ctx, S);         //Finalize
+    Memo1.Lines.Add(S);         //in this case S = a9993e364706816aba3e25717850c26c9cd0d89d, this is a hash of 'abc'
+  end;
+  </pre>
+
+  <p><b>High-level functions:</b><br>
+  <i>function HashStr(HashType: LongWord; SrcStr: String; var DestHash: String): LongWord;</i><br>
+  Get hash of a string, where SrcStr is the source string. DestHash receives hash of this string.<br><br>
+
+  <i>function HashBuf(HashType: LongWord; SrcBuf: Pointer; BufLen: LongWord; var DestHash: String): LongWord;</i><br>
+  Get hash of a buffer, where SrcStr is the source buffer and BufLen -- length of this buffer. <br><br>
+
+  <i>function HashFile(HashType: LongWord; FileName: String; var DestHash: String): LongWord;</i><br>
+  Get hash of a file, FileName -- path to file ('C:\file.txt'). <br><br>
+
+  <i>function HashFilePartial(HashType: LongWord; FileName: String; FlOffsetLow, FlOffsetHigh: LongWord; var DestHash: String): LongWord;</i><br>
+  Get hash of a part of the file, where FlOffetLow position of the first byte to hash from and FlOffsetHigh is the end position. <br><br>
+
+  Return values of theese function are the same as in low level.<br><br>
+
+  Example:
+  <pre>
+  uses
+    CryptoAPI;
+  <......>
+  procedure TestHash2;
+  var
+    S: String;
+    ret: LongWord;
+  begin
+    ret := HashStr(HASH_SHA1, 'abc', S);
+    if ret <> HASH_NOERROR then
+      Memo1.Lines.Add(HashErrorToStr(ret))
+    else
+      Memo1.Lines.Add(S);
+  end;
+
+  </pre>
+
+  <p><b>Misc. functions and constants:</b><br>
+  <i>function HashErrorToStr(Error: LongWord): String;</i><br>
+  This function converts decimal Error returned by hash function to it's string representation.
+  <br><br>
+
+  Use HASH_MAX_TYPES constant to get current amount of availbe algorithms.<br><br>
+  <i>function EnumHashTypes(StoreToArr: Pointer; MaxItems: LongWord): LongWord;</i><br>
+  StoreToArray is a pointer to array of LongWord which receives all avaible HashTypes, maximum number of elements in this array should be passed through the MaxItems param.
+  Number of elements stored in StoreToArr is returned as a result.<br><br>
+
+  Example:
+  <pre>
+  uses
+    CryptoAPI;
+  <......>
+  procedure DoSomething;
+  var
+    i, HAv: LongWord;
+    EnumArray: array[0..HASH_MAX_TYPES - 1] of LongWord;  
+  begin
+    HAv := EnumHashTypes(@EnumArray, SizeOf(EnumArray));
+    for i := 0 to HAv - 1 do
+    begin
+      { 
+        Do something with each HashType (EnumArray[i])
+      }
+    end;
+  end;
+  </pre>
+
+</td></tr>
+
+<tr><td width="750">
+  <A name="TESTING"><font size=+1><br><b>HashLib! testing</b></font></A><br>
+  I've made a unit(HashTest.pas) which helps with testing the whole library for proper working.
+  <br><br>
+  <i>function HashTestLibrary: LongWord;  </i><br>
+  This function verifies every hash algorithm and returns HASH_NOERROR if there are no errors, otherwise you can understand happend error by calling HashErrorToStr function with the return value.<br><br>
+
+  <i>function HashTestHash(HashType: LongWord): LongWord; </i><br>
+  This function verifies specified algorithm and returns error status as in HashTestLibrary.<br><br>
+
+  It's strongly recommended to test algorithms before using them.
+
+</td></tr>
+
+
+<tr><td width="750">
+  <A name="PERFOMANCE"><font size=+1><br><b>Size & perfomance issues</b></font></A><br>
+  You can remove {$DEFINE INCLUDE_...$} lines from CryptoAPI unit if you don't use this algorithm,
+  it will strongly reduce filesize, also pay attention on comments in source files:
+  some files contain {$DEFINE USE_ASM} line in the header, it's possible to remove
+  theese lines but it will decrease the overal perfomance of some algorithms.
+</td></tr>
+
+<tr><td width="750">
+<p><A name="EXAMPLES"><font size=+1><br><b>Examples</b></font></A><br>
+  Take a look at 'Examples' dir, where you can find examples for Delphi and C++ Builder.
+</td></tr>
+
+<tr><td width="750">
+<p><A name="FEEDBACK"><font size=+1><br><b>Feedback</b></font></A><br>
+  If you've got some questions/bugreports/etc, I'll answer them by mail <a href="mailto:alex@ritlabs.com">alex@ritlabs.com</a>
+  or ICQ: #4024781. <br>For latest versions of this lib checkout <a href="http://www.cobans.net">http://www.cobans.net</a>
+</td></tr>
+
+</table>
+
+  <br>
+  HashLib! 1.03<br>
+
+  (C) Alex Demchenko, 2002, Moldova, Chishinev.<br>
+</html>

@@ -1,0 +1,155 @@
+# * ***** BEGIN LICENSE BLOCK *****
+# * Version: MPL 1.1
+# *
+# * The contents of this file are subject to the Mozilla Public License 
+# * version 1.1 (the "License"); you may not use this file except in 
+# * compliance with the License. You may obtain a copy of the License at
+# * http://www.mozilla.org/MPL/
+# *
+# * Software distributed under the License is distributed on an "AS IS" basis,
+# * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+# * for the specific language governing rights and limitations under the
+# * License.
+# *
+# * The Original Code is TurboPower Visual PlanIt
+# *
+# * The Initial Developer of the Original Code is TurboPower Software
+# *
+# * Portions created by the TurboPower SOftware Co. are Copyright (C) 2002
+# * TurboPower Software Company. All Rights Reserved.
+# *
+# * Contributor(s):
+# *
+# * ***** END LICENSE BLOCK ***** 
+
+# ---------------------------------------------------------------------------
+VERSION = BCB.04.04
+# ---------------------------------------------------------------------------
+!ifndef BCB
+BCB = $(MAKEDIR)\..
+!endif
+# ---------------------------------------------------------------------------
+PROJECT = ExSimplePlanner.exe
+OBJFILES = ExSimplePlanner.obj ExSimplePlannerU1.obj
+RESFILES = ExSimplePlanner.res
+RESDEPEN = $(RESFILES) ExSimplePlannerU1.dfm
+LIBFILES =
+IDLGENFILES =
+IDLFILES =
+LIBRARIES = VCLDB40.lib VCLX40.lib Vcl40.lib
+SPARELIBS = Vcl40.lib VCLX40.lib VCLDB40.lib
+PACKAGES =
+PATHASM = .;
+PATHCPP = .;
+PATHPAS = .;
+PATHRC = .;
+DEBUGLIBPATH = $(BCB)\lib\debug
+RELEASELIBPATH = $(BCB)\lib\release
+SYSDEFINES = NO_STRICT
+USERDEFINES =
+DEFFILE =
+# ---------------------------------------------------------------------------
+CFLAG1 = -I..\..\source;$(BCB)\include;$(BCB)\include\vcl -Od -w -Ve -r- -a8 -k -y -v -vi- \
+  -D$(SYSDEFINES);$(USERDEFINES) -c -b- -w-par -w-inl -Vx -tWM
+CFLAG2 =
+CFLAG3 =
+IDLCFLAGS = -I..\..\source -I$(BCB)\include -I$(BCB)\include\vcl -src_suffixcpp
+PFLAGS = -U..\..\source;$(BCB)\lib\obj;$(BCB)\lib;$(BCB)\projects\lib;$(DEBUGLIBPATH) \
+  -I..\..\source;$(BCB)\include;$(BCB)\include\vcl \
+  -AWinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE -$YD \
+  -$W -$O- -v -JPHNV -M -JPHNE
+RFLAGS = -i..\..\source;$(BCB)\include;$(BCB)\include\vcl
+AFLAGS = /i..\..\source /i$(BCB)\include /i$(BCB)\include\vcl /mx /w2 /zd
+LFLAGS = -L..\..\source;$(BCB)\lib\obj;$(BCB)\lib;$(BCB)\projects\lib;$(DEBUGLIBPATH) -l. -aa \
+  -Tpe -x -v
+IFLAGS =
+LINKER = tlink32
+# ---------------------------------------------------------------------------
+ALLOBJ = c0w32.obj sysinit.obj $(OBJFILES)
+ALLRES = $(RESFILES)
+ALLLIB = $(LIBFILES) $(LIBRARIES) import32.lib cp32mt.lib
+# ---------------------------------------------------------------------------
+.autodepend
+
+!ifdef IDEOPTIONS
+
+[Version Info]
+IncludeVerInfo=0
+AutoIncBuild=0
+MajorVer=1
+MinorVer=0
+Release=0
+Build=0
+Debug=0
+PreRelease=0
+Special=0
+Private=0
+DLL=0
+Locale=1033
+CodePage=1252
+
+[HistoryLists\hlIncludePath]
+Count=2
+Item0=..\..\source;$(BCB)\include;$(BCB)\include\vcl
+Item1=..\..\source\;$(BCB)\include;$(BCB)\include\vcl
+
+[HistoryLists\hlLibraryPath]
+Count=3
+Item0=..\..\source;$(BCB)\lib\obj;$(BCB)\lib;$(BCB)\projects\lib
+Item1=..\..\source;$(BCB)\lib\obj;$(BCB)\lib
+Item2=..\..\source\;$(BCB)\lib\obj;$(BCB)\lib
+
+[HistoryLists\hlUnitAliases]
+Count=1
+Item0=WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE
+
+[HistoryLists\hIBPIOutputDir]
+Count=1
+Item0=.
+
+[Debugging]
+DebugSourceDirs=
+
+[Parameters]
+RunParams=
+HostApplication=
+RemoteHost=
+RemotePath=
+RemoteDebug=0
+
+[Compiler]
+InMemoryExe=0
+ShowInfoMsgs=0
+
+[CORBA]
+AddServerUnit=1
+AddClientUnit=1
+PrecompiledHeaders=1
+
+!endif
+
+$(PROJECT): $(IDLGENFILES) $(OBJFILES) $(RESDEPEN) $(DEFFILE)
+    $(BCB)\BIN\$(LINKER) @&&!
+    $(LFLAGS) +
+    $(ALLOBJ), +
+    $(PROJECT),, +
+    $(ALLLIB), +
+    $(DEFFILE), +
+    $(ALLRES) 
+!
+
+.pas.hpp:
+    $(BCB)\BIN\dcc32 $(PFLAGS) { $** }
+
+.pas.obj:
+    $(BCB)\BIN\dcc32 $(PFLAGS) { $** }
+
+.cpp.obj:
+    $(BCB)\BIN\bcc32 $(CFLAG1) $(CFLAG2) -o$* $* 
+
+.c.obj:
+    $(BCB)\BIN\bcc32 $(CFLAG1) $(CFLAG2) -o$* $**
+
+.rc.res:
+    $(BCB)\BIN\brcc32 $(RFLAGS) $<
+#-----------------------------------------------------------------------------

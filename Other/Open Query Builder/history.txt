@@ -1,0 +1,100 @@
+==============================================================================
+15 Oct 2003
+ver 4.01
+
+Moved to http://www.fast-report.com/en/qbuilder.php
+
+Fixes:
+- Minor bug fixes 
+
+Changes:
+- changes in OQB package names (was doqb40.dpk, now oqb40.dpk)
+- changes in engines package names (was doqbfib40.dpk, now oqbfib40.dpk)
+- changes in engine unit names (was oqbebde.pas, now qbebde.pas)
+
+
+Additions:
+- added design and run-time packages
+- added ADO, IBX, DBX engines
+- added packages for Delphi 5/6/7 and C++Builder 5/6
+
+==============================================================================
+
+07 Mar 1999
+ver 4.0a
+
+Fixes:
+- SQL generating bug - ';' symbol in the end of SQL statement;
+- some memory leaks are eliminated;
+
+
+Changes:
+
+- the process of generating SQL is moved to the base engine class TOQBEngine 
+  in QBuilder.pas unit;
+
+- all table and column names are converted to lowercase in the result 
+  SQL statement;
+
+
+Additions:
+
+  new components:
+  - TOQBEngineIBO - QBuilder Engine for accessing to InterBase via IBObjects; 
+  - TOQBEngineFIB - QBuilder Engine for accessing to InterBase via FreeIBComponents;
+
+  new functionality:
+   
+  - TOQBuilder component property property ShowButtons 
+    for showing/hidding some dialog's toolbar buttons;
+
+
+  - using '*' for the short form of selecting all columns in tables on the
+    Design Pane;
+  - support of auto-generated table aliases/correlation names
+    (this option may be disabled by TOQBEngine property UseTableAliases);
+  - support of ordering by an aggregate column 
+    ( using of number of aggregate column, for example: 
+        SELECT department, AVG(budget)
+        FROM department
+        GROUP BY department
+        ORDER BY 2
+       ^^^^^^^^^^^^                 
+    );   
+     
+
+
+==============================================================================
+28 Feb 1999
+ver. 4.0
+
+The first version of Open QBuilder: 
+
+The new generation of QBuilder with separated data access engine components
+architecture. This version included TOQBEngineBDE component to work with
+any BDE data sources.
+
+
+                           ...................
+
+
+==============================================================================
+1998
+Gimbal Software adopted QBuilder to IBObjects and included it into the Marathon -
+the SQL Tool for InterBase.
+
+
+==============================================================================
+1997
+The first public version of QBuidler for Delphi 3 was placed
+on http://www.geocities.com/SiliconValley/Way/9006/
+
+==============================================================================
+1996
+The first limited public version of QBuidler for Delphi 1&2
+
+==============================================================================
+1995
+The fisrt (internal) version of QBuilder for Delphi 1
+
+==============================================================================

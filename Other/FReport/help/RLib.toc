@@ -1,0 +1,103 @@
+:Base RLib.hlp>TRLReport
+:Title FortesReport Help
+1 FortesReport Help
+2 Units
+3 Implementação dos principais componentes e tipos do FortesReport.=RLReport
+3 Implementação dos componentes para código de barras.=RLBarcode
+3 Implementação do filtro de impressão draft.=RLDraftFilter
+3 Implementação do filtro padrão de impressão e classes abstratas para filtros de gravação e impressão.=RLFilters
+3 Implementação do filtro para criação de páginas web.=RLHTMLFilter
+3 Implementação do filtro padrão para impressoras.=RLSpoolFilter
+3 Implementação do componente de avaliação de expressões.=RLParser
+3 Implementação do filtro para criação de arquivos PDF.=RLPDFFilter
+3 Implementação dos componentes de pré-visualização.=RLPreview
+3 Implementação do form padrão de pré-visualização.=RLPreviewForm
+3 Implementação do diálogo de impressão e sua classe de setup.=RLPrintDialog
+3 Implementação do filtro para geração de arquivos no formato RichText.=RLRichFilter
+3 Definição de tipos comuns e rotinas de manipulação de tipos.=RLTypes
+3 Rotinas de uso geral.=RLUtils
+3 Implementação das classes e rotinas para manipulação de coleções gráficas.=RLMetaFile
+3 Implementação do diálogo de salvamento e sua classe de setup.=RLSaveDialog
+3 Variáveis para internacionalização e configuração.=RLConsts
+3 Implementação do filtro para criação de planilhas do Excel.=RLXLSFilter
+3 Implementação do wrapper para o objeto Printer.=RLPrinters
+3 Implementação dos componentes de impressão de texto no formato RichText.=RLRichText
+2 Componentes
+3 Caixa de texto padrão.=TRLLabel
+3 Caixa de texto de com rotação por ângulo.=TRLAngleLabel
+3 Caixa de texto ligada a campo de dataset.=TRLDBText
+3 Caixa de texto de resultado de operações matemáticas ou estatíticas com campos de dataset.=TRLDBResult
+3 Caixa de texto de com informações do sistema.=TRLSystemInfo
+3 Caixa de texto multilinhas.=TRLMemo
+3 Caixa de texto multilinhas ligada a campo de dataset.=TRLDBMemo
+3 Caixa de imagem.=TRLImage
+3 Caixa de imagem ligada a campo de dataset.=TRLDBImage
+3 Caixa de desenho para figuras geométricas.=TRLDraw
+3 Container para controles.=TRLPanel
+3 Banda de impressão.=TRLBand
+3 Banda de detalhe multi-colunas.=TRLDetailGrid
+3 Sequência de registros de dados.=TRLGroup
+3 Sub-relatório.=TRLSubDetail
+3 Componente principal na construção de relatórios.=TRLReport
+3 Componente para códigos de barras.=TRLBarcode
+3 Componente para códigos de barras dataware.=TRLDBBarcode
+3 Filtro de impressão para impressoras matriciais.=TRLDraftFilter
+3 Filtro para criação de páginas html a partir de um relatório.=TRLHTMLFilter
+3 Filtro de impressão padrão.=TRLSpoolFilter
+3 Avaliador de expressões.=TRLExpressionParser
+3 Filtro para criação de documentos PDF a partir de um relatório.=TRLPDFFilter
+3 Componente para pré-visualização das páginas geradas.=TRLPreview
+3 Caixa de visualização de página.=TRLPreviewBox
+3 Opções do diálogo de impressão.=TRLPrintDialogSetup
+3 Filtro para geração de arquivos no formato RichText (RTF).=TRLRichFilter
+3 Opções do diálogo de salvamento.=TRLSaveDialogSetup
+3 Filtro para criação de planilhas formato Excel XLS a partir de um relatório.=TRLXLSFilter
+3 Componente para texto multilinhas em formato RichText.=TRLRichText
+3 Componente para texto multilinhas em formato RichText ligado a campo de dataset.=TRLDBRichText
+2 Funções e Procedures
+3 Carrega e pré-visualiza relatório com diálogo.=LoadReportDialog
+3 Carrega e pré-visualiza relatório a partir de um arquivo.=LoadReportFromFile
+3 Envia páginas para um filtro de impressão ou salvamento.=FilterPages
+3 Retorna uma referência para um filtro de salvamento instanciado baseado na extensão do nome de arquivo informado.=SaveFilterByFileName
+3 Devolve uma string com a cor em formato RGB-Hexadecimal.=ColorToHex
+3 Codifica uma string padrão ascii em formato ISO para html.=EncodeISO
+3 Referência para o filtro padrão de impressora.=SpoolFilter
+3 Exibe o form padrão de pré-visualização com opções.=PreviewPagesWithOptions
+3 Exibe o form padrão de pré-visualização com as opções default.=PreviewPages
+3 Carrega o arquivo de relatório e exibe o form padrão de pré-visualização.=PreviewFromFile
+3 Carrega a stream de relatório e exibe o form padrão de pré-visualização.=PreviewFromStream
+3 Exibe diálogo para a carga de arquivo de relatório e exibe o form padrão de pré-visualização.=PreviewFromFileDialog
+3 Libera objeto se não for nil e em seguida limpa a variável.=FreeObj
+3 Libera ponteiro se não for nil e em seguida limpa a variável.=FreePtr
+3 Retorna o byte em notação hexadecimal de dois dígitos.=ByteToHex
+3 Retorna o valor hexadecimal como byte.=HexToByte
+3 Cria bitmap a partir de uma cadeia hexadecimal.=HexToBitmap
+3 Cria um gráfico qualquer a partir de uma cadeia hexadecimal.=HexToGraphic
+3 Cria um nome para um novo componente.=NewComponentName
+3 Retorna nome de arquivo temporário.=GetTempFileName
+3 Retorna a parte de número aIndex da string aTokenList cujas partes são separadas pelo caractere aTokenSeparator.=Token
+3 Executa um método ou procedure em segundo plano.=ThreadIt
+3 Adiciona ponto a uma extensão, se não houver.=FormatFileExt
+3 Adiciona filtro de arquivos com nome aFilter, descrição aDescription e extensão padrão aExt.=AddFileFilter
+3 Devolve a extensão padrão para arquivos correspondentes ao filtro aFilter.=GetFileFilterExt
+3 Rotaciona os pontos aPoints em 2D de acordo com o ângulo aAngle.=RotatePoints
+3 Rotaciona o bitmap TBitmap em 2D de acordo com o ângulo aAngle e devolve em aDest.=RotateBitmap
+3 Cria e devolve um bitmap compatível com o bitmap aSource rotacionado em 2D de acordo com o ângulo aAngle com tamanho calculado.=RotatedBitmap
+3 Retorna um retângulo delimitando a área definida pelos pontos aPoints.=PointsRect
+3 Retorna o tamanho da área definida pelos pontos aPoints.=PointsSize
+3 Modifica as dimensões dos pontos aPoints para que caibam no retângulo definido por aRect respeitando a proporção.=ScalePoints
+3 Amplia ou reduz as dimensões dos pontos aPoints para que caibam no retângulo definido por aRect.=StretchPoints
+3 Centraliza os pontos aPoints no retâgulo aRect.=CenterPoints
+3 Calcula as dimensões do texto aText de acordo com a fonte aFont e opcionalmente rotacionado em 2D de acordo com o ângulo aAngle.=TextBounds
+3 Desloca o retângulo horizontalmente de acordo com aX e verticalmente de acordo com aY.=MoveRect
+3 Retorna a largura do retângulo aRect.=RectWidth
+3 Retorna a largura do retângulo aRect.=RectHeight
+3 Retorna o retângulo aRect reduzido de acordo com os decrementos especificados em aPixels.=ReduceRect
+3 Retorna o retângulo aRect ampliado de acordo com os incrementos especificados em aPixels.=IncreaseRect
+3 Retorna a diferença entre os retângulos aRectOut e aRectIn, desde que aRectIn esteja dentro de aRectOut.=DiffRect
+3 Faz a justificação do texto distribuindo espaços.=IterateJustification
+3 Calcula a maior amostra do retângulo aSource escalonado de modo a caber em aTarget.=ScaleRect
+3 Registra um arquivo temporário para ser excluído na finalização.=RegisterTempFile
+3 Retira arquivo temporário da lista de arquivos a excluir na finalizacão.=UnregisterTempFile
+3 Destroi arquivos temporários registrados pela proc RegisterTempFile.=ClearTempFiles
+3 Cria um identificador para um novo grupo de elementos gráficos.=NewGroupId

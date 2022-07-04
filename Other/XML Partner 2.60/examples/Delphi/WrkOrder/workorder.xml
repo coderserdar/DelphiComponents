@@ -1,0 +1,684 @@
+<?xml version="1.0" ?>
+
+<!DOCTYPE WorkOrders [
+  <!ELEMENT WorkOrders (WorkOrder)*>
+  <!ELEMENT WorkOrder (RequestDate, DateNeeded,  Name,     Dept,   Number,
+                       email,       RequestDesc, Category, Status, AssignedTo,
+                       AssignDate)>
+  <!ELEMENT RequestDate  (#PCDATA)>
+  <!ELEMENT DateNeeded   (#PCDATA)>
+  <!ELEMENT Name         (#PCDATA)>
+  <!ELEMENT Dept         (#PCDATA)>
+  <!ELEMENT Number       (#PCDATA)>
+  <!ELEMENT email        (#PCDATA)>
+  <!ELEMENT RequestDesc  (#PCDATA)>
+  <!ELEMENT Category     (#PCDATA)>
+  <!ELEMENT Status       (#PCDATA)>
+  <!ELEMENT AssignedTo   (#PCDATA)>
+  <!ELEMENT AssignDate   (#PCDATA)>
+  <!ATTLIST WorkOrder number CDATA #IMPLIED>
+]>
+
+<WorkOrders>
+
+  <WorkOrder number="200120008" status="closed" old="yes">
+    <RequestDate>
+      7/9/2001
+    </RequestDate>
+
+    <DateNeeded>
+      7/16/2001
+    </DateNeeded>
+
+    <Name>
+      Regina Ball
+    </Name>
+
+    <Dept>
+      Advertising
+    </Dept>
+
+    <Number>
+      x3295
+    </Number>
+
+    <email>
+      rball@pccom.com
+    </email>
+
+    <RequestDesc>
+      I need QuarkExpress loaded onto my PC.
+    </RequestDesc>
+
+    <Category>
+      Technical
+    </Category>
+
+    <Status>
+      Assigned
+    </Status>
+
+    <AssignedTo>
+      Becky Newman
+    </AssignedTo>
+
+    <AssignDate>
+      7/16/2001
+    </AssignDate>
+
+  </WorkOrder>
+
+  <WorkOrder number="200122202" status="closed">
+    <RequestDate>
+      7/16/2001
+    </RequestDate>
+
+    <DateNeeded>
+      7/16/2001
+    </DateNeeded>
+
+    <Name>
+      J.B. Quick
+    </Name>
+
+    <Dept>
+      Finance
+    </Dept>
+
+    <Number>
+      x1234
+    </Number>
+
+    <email>
+      jquick@pccom.com
+    </email>
+
+    <RequestDesc>
+      Internet broswer will not come up.
+    </RequestDesc>
+
+    <Category>
+      Technical
+    </Category>
+
+    <Status>
+      Verified
+    </Status>
+
+    <AssignedTo>
+      Becky Newman
+    </AssignedTo>
+
+    <AssignDate>
+      7/16/2001
+    </AssignDate>
+  </WorkOrder>
+
+
+  <WorkOrder number="200120901" status="new">
+    <RequestDate>
+      7/17/2001
+    </RequestDate>
+
+    <DateNeeded>
+      12/1/2001
+    </DateNeeded>
+
+    <Name>
+      Peter Boyd
+    </Name>
+
+    <Dept>
+      Logistics
+    </Dept>
+
+    <Number>
+      x7651
+    </Number>
+
+    <email>
+      pboyd@pccom.com
+    </email>
+
+    <RequestDesc>
+      Our department needs our new ICS inventory system placed on the network. This system
+      requires access via the Internet. Sales personel and suppliers will access this
+      system reqularly. We expect the system to process an average of 50 gigabytes of data
+      per day with peaks of 100 gigabytes in a day. System security is imperative.
+    </RequestDesc>
+
+    <Category>
+      Network
+    </Category>
+
+    <Status>
+      Reviewing
+    </Status>
+
+    <AssignedTo>
+    </AssignedTo>
+
+    <AssignDate>
+    </AssignDate>
+  </WorkOrder>
+
+
+  <WorkOrder number="200120904" status="closed">
+    <RequestDate>
+      7/17/2001
+    </RequestDate>
+
+    <DateNeeded>
+      7/17/2001
+    </DateNeeded>
+
+    <Name>
+      Lori Bigo
+    </Name>
+
+    <Dept>
+      Administration
+    </Dept>
+
+    <Number>
+      x3416
+    </Number>
+
+    <email>
+      blori@pccom.com
+    </email>
+
+    <RequestDesc>
+      Locked out of email account
+    </RequestDesc>
+
+    <Category>
+      Technical
+    </Category>
+
+    <Status>
+      InProgress
+    </Status>
+
+    <AssignedTo>
+      Pete Sommers
+    </AssignedTo>
+
+    <AssignDate>
+      7/17/2001
+    </AssignDate>
+  </WorkOrder>
+
+
+  <WorkOrder number="200120114" status="closed">
+    <RequestDate>
+      7/18/2001
+    </RequestDate>
+
+    <DateNeeded>
+      7/23/2001
+    </DateNeeded>
+
+    <Name>
+      Ron Brown
+    </Name>
+
+    <Dept>
+      Sales
+    </Dept>
+
+    <Number>
+      x8325
+    </Number>
+
+    <email>
+      rbrown@pccom.com
+    </email>
+
+    <RequestDesc>
+      I need to checkout a laptop for a business trip from Jul 23rd through Jul 30th.
+    </RequestDesc>
+
+    <Category>
+      Admin
+    </Category>
+
+    <Status>
+      InProgress
+    </Status>
+
+    <AssignedTo>
+      Joe Netty
+    </AssignedTo>
+
+    <AssignDate>
+      7/18/2001
+    </AssignDate>
+  </WorkOrder>
+
+
+  <WorkOrder number="200120911" status="closed">
+    <RequestDate>
+      7/19/2001
+    </RequestDate>
+
+    <DateNeeded>
+      7/19/2001
+    </DateNeeded>
+
+    <Name>
+      Sue Bee
+    </Name>
+
+    <Dept>
+      Administration
+    </Dept>
+
+    <Number>
+      x7202
+    </Number>
+
+    <email>
+      sbee@pccom.com
+    </email>
+
+    <RequestDesc>
+      Monitor Flickers
+    </RequestDesc>
+
+    <Category>
+      Technical
+    </Category>
+
+    <Status>
+      InProgress
+    </Status>
+
+    <AssignedTo>
+      Bill Dundee
+    </AssignedTo>
+
+    <AssignDate>
+      7/19/2001
+    </AssignDate>
+  </WorkOrder>
+
+
+  <WorkOrder number="200120913" status="open">
+    <RequestDate>
+      7/19/2001
+    </RequestDate>
+
+    <DateNeeded>
+      8/15/2001
+    </DateNeeded>
+
+    <Name>
+      Ben Dover
+    </Name>
+
+    <Dept>
+      Marketing
+    </Dept>
+
+    <Number>
+      x7414
+    </Number>
+
+    <email>
+      bdover@pccom.com
+    </email>
+
+    <RequestDesc>
+      The Marketing department now produces video demonstrations. Our current network
+      bandwidth can not support the exchange of these videos between the people in our
+      department, management, or our distributors. We need the network upgraded to support
+      the exchange of these large video productions.
+    </RequestDesc>
+
+    <Category>
+      Network
+    </Category>
+
+    <Status>
+      InReview
+    </Status>
+
+    <AssignedTo>
+      Dink Redrum
+    </AssignedTo>
+
+    <AssignDate>
+      7/20/2001
+    </AssignDate>
+  </WorkOrder>
+
+
+  <WorkOrder number="200120915" status="new">
+    <RequestDate>
+      7/19/2001
+    </RequestDate>
+
+    <DateNeeded>
+      8/1/2001
+    </DateNeeded>
+
+    <Name>
+      Mike Globe
+    </Name>
+
+    <Dept>
+      Engineering
+    </Dept>
+
+    <Number>
+      x5263
+    </Number>
+
+    <email>
+      mglobe@pccom.com
+    </email>
+
+    <RequestDesc>
+      Need a new PC with standard software package installed in room 486 for a newly
+      hired employee.
+    </RequestDesc>
+
+    <Category>
+      Admin
+    </Category>
+
+    <Status>
+      InReview
+    </Status>
+
+    <AssignedTo>
+    </AssignedTo>
+
+    <AssignDate>
+    </AssignDate>
+  </WorkOrder>
+
+
+  <WorkOrder number="200122203" status="closed">
+    <RequestDate>
+      7/19/2001
+    </RequestDate>
+
+    <DateNeeded>
+      7/19/2001
+    </DateNeeded>
+
+    <Name>
+      Peter Bird
+    </Name>
+
+    <Dept>
+      Marketing
+    </Dept>
+
+    <Number>
+      x7342
+    </Number>
+
+    <email>
+      pbird@pccom.com
+    </email>
+
+    <RequestDesc>
+      Unable to connect to network. Keep getting "No domain" error.
+    </RequestDesc>
+
+    <Category>
+      Technical
+    </Category>
+
+    <Status>
+      Assigned
+    </Status>
+
+    <AssignedTo>
+      Drew Pits
+    </AssignedTo>
+
+    <AssignDate>
+      7/19/2001
+    </AssignDate>
+  </WorkOrder>
+
+
+  <WorkOrder number="200121203" status="open">
+    <RequestDate>
+      7/19/2001
+    </RequestDate>
+
+    <DateNeeded>
+      9/1/2001
+    </DateNeeded>
+
+    <Name>
+      Mark Redbull
+    </Name>
+
+    <Dept>
+      Administration
+    </Dept>
+
+    <Number>
+      x8123
+    </Number>
+
+    <email>
+      mredbull@pccom.com
+    </email>
+
+    <RequestDesc>
+      In preparation for the new Public Relations department, room 345 needs to be wired
+      for 21 workstations with network connectivity.
+    </RequestDesc>
+
+    <Category>
+      Network
+    </Category>
+
+    <Status>
+      InProgress
+    </Status>
+
+    <AssignedTo>
+      Sommer Erikson
+    </AssignedTo>
+
+    <AssignDate>
+      7/20/2001
+    </AssignDate>
+  </WorkOrder>
+
+
+  <WorkOrder number="200122217" status="closed">
+    <RequestDate>
+      7/20/2001
+    </RequestDate>
+
+    <DateNeeded>
+      7/20/2001
+    </DateNeeded>
+
+    <Name>
+      Eddie Powel
+    </Name>
+
+    <Dept>
+      Maintenance
+    </Dept>
+
+    <Number>
+      x4560
+    </Number>
+
+    <email>
+      epowel@pccom.com
+    </email>
+
+    <RequestDesc>
+      PC and network connection in back right corner of room 901 need to be moved to
+      back left corner because of upcoming room renovation.
+    </RequestDesc>
+
+    <Category>
+      Admin
+    </Category>
+
+    <Status>
+      Assigned
+    </Status>
+
+    <AssignedTo>
+      Becky Newman
+    </AssignedTo>
+
+    <AssignDate>
+      7/20/2001
+    </AssignDate>
+  </WorkOrder>
+
+
+  <WorkOrder number="200122218" status="closed">
+    <RequestDate>
+      7/20/2001
+    </RequestDate>
+
+    <DateNeeded>
+      8/1/2001
+    </DateNeeded>
+
+    <Name>
+      John Pinkney
+    </Name>
+
+    <Dept>
+      Engineering
+    </Dept>
+
+    <Number>
+      x9012
+    </Number>
+
+    <email>
+      jpinkney@pccom.com
+    </email>
+
+    <RequestDesc>
+      Need to replace harddrive in my pc and copy everything on old drive to new drive.
+    </RequestDesc>
+
+    <Category>
+      Technical
+    </Category>
+
+    <Status>
+      Waiting
+    </Status>
+
+    <AssignedTo>
+    </AssignedTo>
+
+    <AssignDate>
+    </AssignDate>
+  </WorkOrder>
+
+
+  <WorkOrder number="200122220" status="open">
+    <RequestDate>
+      7/20/2001
+    </RequestDate>
+
+    <DateNeeded>
+      7/20/2001
+    </DateNeeded>
+
+    <Name>
+      Dee Cline
+    </Name>
+
+    <Dept>
+      Maintenance
+    </Dept>
+
+    <Number>
+      x5187
+    </Number>
+
+    <email>
+      dcline@pccom.com
+    </email>
+
+    <RequestDesc>
+      Need NIC and drivers installed on laptop.
+    </RequestDesc>
+
+    <Category>
+      Technical
+    </Category>
+
+    <Status>
+      Assigned
+    </Status>
+
+    <AssignedTo>
+      Todd Lingerfelt
+    </AssignedTo>
+
+    <AssignDate>
+      7/20/2001
+    </AssignDate>
+  </WorkOrder>
+
+
+  <WorkOrder number="200122219" status="closed">
+    <RequestDate>
+      7/20/2001
+    </RequestDate>
+
+    <DateNeeded>
+      7/20/2001
+    </DateNeeded>
+
+    <Name>
+      Don King
+    </Name>
+
+    <Dept>
+      Marketing
+    </Dept>
+
+    <Number>
+      x3762
+    </Number>
+
+    <email>
+      dking@pccom.com
+    </email>
+
+    <RequestDesc>
+      Locked out of email account. Forgot password...again.
+    </RequestDesc>
+
+    <Category>
+      Technical
+    </Category>
+
+    <Status>
+      Assigned
+    </Status>
+
+    <AssignedTo>
+      Todd Lingerfelt
+    </AssignedTo>
+
+    <AssignDate>
+      7/20/2001
+    </AssignDate>
+  </WorkOrder>
+
+</WorkOrders>

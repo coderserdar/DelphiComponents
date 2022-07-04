@@ -1,0 +1,39 @@
+package OverbyteIcsD7Design;
+
+{$R *.res}
+{$ALIGN 8}
+{$ASSERTIONS OFF}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS OFF}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'Overbyte ICS Design-Time Package Delphi 7'}
+{$DESIGNONLY}
+{$IMPLICITBUILD ON}
+{$DEFINE USE_SSL}
+
+requires
+  rtl,
+  designide,
+  OverbyteIcsD7Run;
+
+contains
+  OverbyteIcsReg in 'OverbyteIcsReg.pas',
+  OverByteIcsWSocketE in 'OverByteIcsWSocketE.pas';
+
+end.

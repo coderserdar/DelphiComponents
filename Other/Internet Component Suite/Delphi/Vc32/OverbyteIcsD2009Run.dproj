@@ -1,0 +1,221 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{bcf796a6-a54b-49ba-8152-ea41410f9f61}</ProjectGuid>
+			<MainSource>OverbyteIcsD2009Run.dpk</MainSource>
+			<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+			<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+			<DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
+			<DCC_DependencyCheckOutputName>C:\Documents and Settings\All Users\Documents\RAD Studio\6.0\Bpl\OverbyteIcsD2009Run.bpl</DCC_DependencyCheckOutputName>
+			<ProjectVersion>11.1</ProjectVersion>
+			<Config Condition="'$(Config)'==''">Debug</Config>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_Release)'!=''">
+			<Cfg_Release>true</Cfg_Release>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_Debug)'!=''">
+			<Cfg_Debug>true</Cfg_Debug>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Base)'!=''">
+			<DCC_Define>USE_SSL;$(DCC_Define)</DCC_Define>
+			<RuntimeOnlyPackage>true</RuntimeOnlyPackage>
+			<DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+			<DCC_Description>Overbyte ICS Run-Time Package Delphi 2009</DCC_Description>
+			<DCC_DependencyCheckOutputName>C:\Dokumente und Einstellungen\All Users\Dokumente\RAD Studio\6.0\Bpl\OverbyteIcsD2009Run.bpl</DCC_DependencyCheckOutputName>
+			<DCC_RangeChecking>true</DCC_RangeChecking>
+			<DCC_IntegerOverflowCheck>true</DCC_IntegerOverflowCheck>
+			<GenDll>true</GenDll>
+			<GenPackage>true</GenPackage>
+			<DCC_ImageBase>00400000</DCC_ImageBase>
+			<DesignOnlyPackage>false</DesignOnlyPackage>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_Release)'!=''">
+			<Version>7.0</Version>
+			<DCC_DebugInformation>False</DCC_DebugInformation>
+			<DCC_LocalDebugSymbols>False</DCC_LocalDebugSymbols>
+			<DCC_Optimize>true</DCC_Optimize>
+			<DCC_IntegerOverflowCheck>True</DCC_IntegerOverflowCheck>
+			<DCC_RangeChecking>True</DCC_RangeChecking>
+			<DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+			<DCC_Define>RELEASE;USE_SSL</DCC_Define>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_Debug)'!=''">
+			<DCC_SymbolReferenceInfo>2</DCC_SymbolReferenceInfo>
+			<Version>7.0</Version>
+			<DCC_Optimize>False</DCC_Optimize>
+			<DCC_IntegerOverflowCheck>True</DCC_IntegerOverflowCheck>
+			<DCC_RangeChecking>True</DCC_RangeChecking>
+			<DCC_Define>DEBUG;USE_SSL</DCC_Define>
+			<DCC_ResourcePath>..\Vc32</DCC_ResourcePath>
+			<DCC_ObjPath>..\Vc32</DCC_ObjPath>
+			<DCC_IncludePath>..\Vc32</DCC_IncludePath>
+		</PropertyGroup>
+		<ItemGroup>
+			<DelphiCompile Include="OverbyteIcsD2009Run.dpk">
+				<MainSource>MainSource</MainSource>
+			</DelphiCompile>
+			<DCCReference Include="OverbyteIcsHttpSrv.dcr"/>
+			<DCCReference Include="OverbyteIcsFtpSrv.dcr"/>
+			<DCCReference Include="OverbyteIcsNntpCli.dcr"/>
+			<DCCReference Include="OverbyteIcsWSocket.dcr"/>
+			<DCCReference Include="OverbyteIcsFtpCli.dcr"/>
+			<DCCReference Include="OverbyteIcsHttpProt.dcr"/>
+			<DCCReference Include="OverbyteIcsWSocketS.dcr"/>
+			<DCCReference Include="OverbyteIcsSmtpProt.dcr"/>
+			<DCCReference Include="OverbyteIcsPop3Prot.dcr"/>
+			<DCCReference Include="OverbyteIcsTnCnx.dcr"/>
+			<DCCReference Include="OverbyteIcsEmulVT.dcr"/>
+			<DCCReference Include="OverbyteIcsTnEmulVT.dcr"/>
+			<DCCReference Include="OverbyteIcsPing.dcr"/>
+			<DCCReference Include="OverbyteIcsDnsQuery.dcr"/>
+			<DCCReference Include="OverbyteIcsTnScript.dcr"/>
+			<DCCReference Include="OverbyteIcsFingCli.dcr"/>
+			<DCCReference Include="OverbyteIcsLogger.dcr"/>
+			<DCCReference Include="OverbyteIcsMimeDec.dcr"/>
+			<DCCReference Include="OverbyteIcsMultipartFtpDownloader.dcr"/>
+			<DCCReference Include="OverbyteIcsMultipartHttpDownloader.dcr"/>
+			<DCCReference Include="OverbyteIcsMultiProgressBar.dcr"/>
+			<DCCReference Include="OverbyteIcsSslSessionCache.dcr"/>
+			<DCCReference Include="OverbyteIcsSslThrdLock.dcr"/>
+			<DCCReference Include="rtl.dcp"/>
+			<DCCReference Include="vcl.dcp"/>
+			<DCCReference Include="OverbyteIcsTypes.pas"/>
+			<DCCReference Include="OverbyteIcsWinsock.pas"/>
+			<DCCReference Include="OverbyteIcsWndControl.pas"/>
+			<DCCReference Include="OverbyteIcsWSockBuf.pas"/>
+			<DCCReference Include="OverByteIcsFtpSrvT.pas"/>
+			<DCCReference Include="OverbyteIcsWSocket.pas"/>
+			<DCCReference Include="OverbyteIcsFtpCli.pas"/>
+			<DCCReference Include="OverbyteIcsFtpSrv.pas"/>
+			<DCCReference Include="OverbyteIcsHttpProt.pas"/>
+			<DCCReference Include="OverbyteIcsWSocketS.pas"/>
+			<DCCReference Include="OverbyteIcsSmtpProt.pas"/>
+			<DCCReference Include="OverbyteIcsPop3Prot.pas"/>
+			<DCCReference Include="OverbyteIcsNntpCli.pas"/>
+			<DCCReference Include="OverbyteIcsTnCnx.pas"/>
+			<DCCReference Include="OverbyteIcsEmulVT.pas"/>
+			<DCCReference Include="OverbyteIcsTnEmulVT.pas"/>
+			<DCCReference Include="OverbyteIcsTnOptFrm.pas"/>
+			<DCCReference Include="OverbyteIcsPing.pas"/>
+			<DCCReference Include="OverbyteIcsDnsQuery.pas"/>
+			<DCCReference Include="OverbyteIcsTnScript.pas"/>
+			<DCCReference Include="OverbyteIcsFingCli.pas"/>
+			<DCCReference Include="OverbyteIcsLogger.pas"/>
+			<DCCReference Include="OverbyteIcsMD4.pas"/>
+			<DCCReference Include="OverbyteIcsMD5.pas"/>
+			<DCCReference Include="OverbyteIcsMimeUtils.pas"/>
+			<DCCReference Include="OverbyteIcsSha1.pas"/>
+			<DCCReference Include="OverbyteIcsUrl.pas"/>
+			<DCCReference Include="OverbyteIcsZlibHigh.pas"/>
+			<DCCReference Include="OverbyteIcsZLibObj.pas"/>
+			<DCCReference Include="OverbyteIcsDES.pas"/>
+			<DCCReference Include="OverbyteIcsHttpContCod.pas"/>
+			<DCCReference Include="OverbyteIcsIcmp.pas"/>
+			<DCCReference Include="OverbyteIcsNtlmMsgs.pas"/>
+			<DCCReference Include="OverbyteIcsStreams.pas"/>
+			<DCCReference Include="OverbyteIcsLIBEAY.pas"/>
+			<DCCReference Include="OverbyteIcsSSLEAY.pas"/>
+			<DCCReference Include="OverbyteIcsAvlTrees.pas"/>
+			<DCCReference Include="OverbyteIcsSslSessionCache.pas"/>
+			<DCCReference Include="OverbyteIcsSslThrdLock.pas"/>
+			<DCCReference Include="OverbyteIcsLibrary.pas"/>
+			<DCCReference Include="OverbyteIcsHttpSrv.pas"/>
+			<DCCReference Include="OverbyteIcsSspi.pas"/>
+			<DCCReference Include="OverbyteIcsNtlmSsp.pas"/>
+			<DCCReference Include="OverbyteIcsWinsock2.pas"/>
+			<DCCReference Include="OverbyteIcsMimeDec.pas"/>
+			<DCCReference Include="OverbyteIcsMultipartFtpDownloader.pas"/>
+			<DCCReference Include="OverbyteIcsMultipartHttpDownloader.pas"/>
+			<DCCReference Include="OverbyteIcsOneTimePw.pas"/>
+			<DCCReference Include="OverbyteIcsCRC.pas"/>
+			<DCCReference Include="OverbyteIcsUtils.pas"/>
+			<DCCReference Include="OverbyteIcsCharsetUtils.pas"/>
+			<DCCReference Include="OverbyteIcsMultiProgressBar.pas"/>
+			<DCCReference Include="OverbyteIcsDigestAuth.pas"/>
+			<DCCReference Include="OverbyteIcsHttpSrv.dcr"/>
+			<DCCReference Include="OverbyteIcsFtpSrv.dcr"/>
+			<DCCReference Include="OverbyteIcsNntpCli.dcr"/>
+			<DCCReference Include="OverbyteIcsWSocket.dcr"/>
+			<DCCReference Include="OverbyteIcsFtpCli.dcr"/>
+			<DCCReference Include="OverbyteIcsHttpProt.dcr"/>
+			<DCCReference Include="OverbyteIcsWSocketS.dcr"/>
+			<DCCReference Include="OverbyteIcsSmtpProt.dcr"/>
+			<DCCReference Include="OverbyteIcsPop3Prot.dcr"/>
+			<DCCReference Include="OverbyteIcsTnCnx.dcr"/>
+			<DCCReference Include="OverbyteIcsEmulVT.dcr"/>
+			<DCCReference Include="OverbyteIcsTnEmulVT.dcr"/>
+			<DCCReference Include="OverbyteIcsPing.dcr"/>
+			<DCCReference Include="OverbyteIcsDnsQuery.dcr"/>
+			<DCCReference Include="OverbyteIcsTnScript.dcr"/>
+			<DCCReference Include="OverbyteIcsFingCli.dcr"/>
+			<DCCReference Include="OverbyteIcsLogger.dcr"/>
+			<DCCReference Include="OverbyteIcsMimeDec.dcr"/>
+			<DCCReference Include="OverbyteIcsMultipartFtpDownloader.dcr"/>
+			<DCCReference Include="OverbyteIcsMultipartHttpDownloader.dcr"/>
+			<DCCReference Include="OverbyteIcsMultiProgressBar.dcr"/>
+			<DCCReference Include="OverbyteIcsSslSessionCache.dcr"/>
+			<DCCReference Include="OverbyteIcsSslThrdLock.dcr"/>
+			<BuildConfiguration Include="Base">
+				<Key>Base</Key>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Release">
+				<Key>Cfg_Release</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Debug">
+				<Key>Cfg_Debug</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+		</ItemGroup>
+		<Import Project="$(BDS)\Bin\CodeGear.Delphi.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Delphi.Targets')"/>
+		<ProjectExtensions>
+			<Borland.Personality>Delphi.Personality.12</Borland.Personality>
+			<Borland.ProjectType>Package</Borland.ProjectType>
+			<BorlandProject>
+				<Delphi.Personality>
+					<Parameters>
+						<Parameters Name="UseLauncher">False</Parameters>
+						<Parameters Name="LoadAllSymbols">True</Parameters>
+						<Parameters Name="LoadUnspecifiedSymbols">False</Parameters>
+					</Parameters>
+					<VersionInfo>
+						<VersionInfo Name="IncludeVerInfo">True</VersionInfo>
+						<VersionInfo Name="AutoIncBuild">False</VersionInfo>
+						<VersionInfo Name="MajorVer">1</VersionInfo>
+						<VersionInfo Name="MinorVer">0</VersionInfo>
+						<VersionInfo Name="Release">0</VersionInfo>
+						<VersionInfo Name="Build">0</VersionInfo>
+						<VersionInfo Name="Debug">False</VersionInfo>
+						<VersionInfo Name="PreRelease">False</VersionInfo>
+						<VersionInfo Name="Special">False</VersionInfo>
+						<VersionInfo Name="Private">False</VersionInfo>
+						<VersionInfo Name="DLL">False</VersionInfo>
+						<VersionInfo Name="Locale">1033</VersionInfo>
+						<VersionInfo Name="CodePage">1252</VersionInfo>
+					</VersionInfo>
+					<VersionInfoKeys>
+						<VersionInfoKeys Name="CompanyName"/>
+						<VersionInfoKeys Name="FileDescription"/>
+						<VersionInfoKeys Name="FileVersion">1.0.0.0</VersionInfoKeys>
+						<VersionInfoKeys Name="InternalName"/>
+						<VersionInfoKeys Name="LegalCopyright"/>
+						<VersionInfoKeys Name="LegalTrademarks"/>
+						<VersionInfoKeys Name="OriginalFilename"/>
+						<VersionInfoKeys Name="ProductName"/>
+						<VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys>
+						<VersionInfoKeys Name="Comments"/>
+					</VersionInfoKeys>
+					<Source>
+						<Source Name="MainSource">OverbyteIcsD2009Run.dpk</Source>
+					</Source>
+				</Delphi.Personality>
+			</BorlandProject>
+			<ProjectFileVersion>12</ProjectFileVersion>
+		</ProjectExtensions>
+	</Project>

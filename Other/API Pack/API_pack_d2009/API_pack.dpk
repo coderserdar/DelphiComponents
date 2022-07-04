@@ -1,0 +1,124 @@
+package API_pack;
+
+{$R *.res}
+{$include '..\API_source\inc\CompilerVersions.INC'}
+
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'API pack'}
+{$IMPLICITBUILD OFF}
+
+requires
+  rtl,
+  vcl,
+  vclx,
+  xmlrtl,
+  vclimg
+  {$IFNDEF DELPHI2009UP}
+  ,
+  vcljpg;
+  {$ELSE}
+  ;
+  {$ENDIF}
+
+contains
+  API_winprocess in '..\API_source\API_winprocess.pas',
+  API_confirmdlg in '..\API_source\API_confirmdlg.pas',
+  API_edit in '..\API_source\API_edit.pas',
+  API_eMail in '..\API_source\API_eMail.pas',
+  API_files in '..\API_source\API_files.pas',
+  API_gradient in '..\API_source\API_gradient.pas',
+  API_grbutton in '..\API_source\API_grbutton.pas',
+  API_inifile in '..\API_source\API_inifile.pas',
+  API_linechart in '..\API_source\API_linechart.pas',
+  API_logindlg in '..\API_source\API_logindlg.pas',
+  API_mailslot in '..\API_source\API_mailslot.pas',
+  API_memoquery in '..\API_source\API_memoquery.pas',
+  API_msg2dlg in '..\API_source\API_msg2dlg.pas',
+  API_msgdlg in '..\API_source\API_msgdlg.pas',
+  API_processlimit in '..\API_source\API_processlimit.pas',
+  API_progressbar in '..\API_source\API_progressbar.pas',
+  API_registry in '..\API_source\API_registry.pas',
+  API_statebmp in '..\API_source\API_statebmp.pas',
+  API_stringgrid in '..\API_source\API_stringgrid.pas',
+  API_tileimage in '..\API_source\API_tileimage.pas',
+  API_tools in '..\API_source\API_tools.pas',
+  API_trayicon in '..\API_source\API_trayicon.pas',
+  API_usermanager in '..\API_source\API_usermanager.pas',
+  API_valueholder in '..\API_source\API_valueholder.pas',
+  API_rs232 in '..\API_source\API_rs232.pas',
+  API_bk8x00 in '..\API_source\API_bk8x00.pas',
+  API_math in '..\API_source\API_math.pas',
+  API_logfile in '..\API_source\API_logfile.pas',
+  API_listbox in '..\API_source\API_listbox.pas',
+  API_richedit in '..\API_source\API_richedit.pas',
+  API_memo in '..\API_source\API_memo.pas',
+  API_timer in '..\API_source\API_timer.pas',
+  API_abform in '..\API_source\API_abform.pas',
+  API_printer in '..\API_source\API_printer.pas',
+  API_glpanel in '..\API_source\API_glpanel.pas',
+  API_ledgrid in '..\API_source\API_ledgrid.pas',
+  API_statusbar in '..\API_source\API_statusbar.pas',
+  API_framegrab in '..\API_source\API_framegrab.pas',
+  API_label in '..\API_source\API_label.pas',
+  API_msgcomm in '..\API_source\API_msgcomm.pas',
+  API_232rw in '..\API_source\API_232rw.pas',
+  API_sync in '..\API_source\API_sync.pas',
+  API_filestream in '..\API_source\API_filestream.pas',
+  API_trackbar in '..\API_source\API_trackbar.pas',
+  API_services in '..\API_source\API_services.pas',
+  API_chart in '..\API_source\API_chart.pas',
+  API_msexcel in '..\API_source\API_msexcel.pas',
+  API_workbook in '..\API_source\API_workbook.pas',
+  API_XMLDoc in '..\API_source\API_XMLDoc.pas',
+  API_soundfx in '..\API_source\API_soundfx.pas',
+  API_StorageFile in '..\API_source\API_StorageFile.pas',
+  API_audio in '..\API_source\API_audio.pas',
+  API_skin in '..\API_source\API_skin.pas',
+  API_thread in '..\API_source\API_thread.pas',
+  API_dirmonitor in '..\API_source\API_dirmonitor.pas',
+  API_keylog in '..\API_source\API_keylog.pas',
+  API_checkbox in '..\API_source\API_checkbox.pas',
+  API_XMLfile in '..\API_source\API_XMLfile.pas',
+  API_windows in '..\API_source\API_windows.pas',
+  API_globals in '..\API_source\API_globals.pas',
+  API_usb in '..\API_source\API_usb.pas',
+  API_modem in '..\API_source\API_modem.pas',
+  API_bk8x in '..\API_source\API_bk8x.pas',
+  API_strings in '..\API_source\API_strings.pas',
+  API_parser in '..\API_source\API_parser.pas',
+  API_base in '..\API_source\API_base.pas',
+  API_vfw in '..\API_source\API_vfw.pas',
+  u_3dsfile in '..\API_source\u_3dsfile.pas',
+  u_bk8x00_settings in '..\API_source\u_bk8x00_settings.pas',
+  u_confirmdlg in '..\API_source\u_confirmdlg.pas',
+  u_logindlg in '..\API_source\u_logindlg.pas',
+  u_memoquery in '..\API_source\u_memoquery.pas',
+  u_msg2dlg in '..\API_source\u_msg2dlg.pas',
+  u_msgdlg in '..\API_source\u_msgdlg.pas',
+  API_radiogroup in '..\API_source\API_radiogroup.pas',
+  API_graphics in '..\API_source\API_graphics.pas',
+  API_Language in '..\API_source\API_Language.pas',
+  API_compress in '..\API_source\API_compress.pas',
+  API_SRecordFile in '..\API_source\API_SRecordFile.pas';
+
+end.

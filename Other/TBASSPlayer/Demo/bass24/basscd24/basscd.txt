@@ -1,0 +1,234 @@
+BASSCD 2.4
+Copyright (c) 2003-2010 Un4seen Developments Ltd. All rights reserved.
+
+Files that you should have found in the BASSCD package
+======================================================
+BASSCD.TXT    This file
+BASSCD.DLL    The BASSCD module
+BASSCD.CHM    BASSCD documentation
+C\            C/C++ API and examples...
+  BASSCD.H      BASSCD C/C++ header file
+  BASSCD.LIB    BASSCD import library
+  BASSCD.DSW    Visual C++ workspace for examples
+  MAKEFILE      Makefile for all examples
+  CDTEST\       Example CD player
+    CDTEST.C
+    CDTEST.RC
+    CDTEST.DSP
+    MAKEFILE
+  WRITEWAV\     WAVE writer (ripping) example
+    WRITEWAV.C
+    WRITEWAV.DSP
+    MAKEFILE
+  BIN\          Precompiled examples
+    CDTEST.EXE
+    WRITEWAV.EXE
+VB\           Visual Basic API and examples...
+  BASSCD.BAS    BASSCD Visual Basic module
+  CDTEST\       Example CD player
+    PRJCDTEST.VBP
+    FRMCDTEST.FRM
+    MODCDTEST.BAS
+DELPHI\       Delphi API and examples...
+  BASSCD.PAS    BASSCD Delphi unit
+  CDTEST\       Example CD player
+    CDTEST.DPR
+    UNIT1.PAS
+    UNIT1.DFM
+
+NOTE: To run the example EXEs, first you will have to copy BASSCD.DLL and
+      BASS.DLL into the same directory as them.
+
+NOTE: To build the examples, you will need to copy the BASS API into the
+      same directory as the BASSCD API.
+
+
+What's the point?
+=================
+BASSCD is an extension to the BASS audio library, enabling the streaming
+and ripping of CD audio tracks.
+
+
+Requirements
+============
+BASS 2.4 is required.
+
+
+Using BASSCD
+=============
+The CD format is used in very much the same way as any of the built-in BASS
+stream formats, simply call the CD stream creation function instead of the
+standard BASS functions. The BASS plugin system (see BASS_PluginLoad) is also
+supported for CDA files.
+
+To use BASSCD with Borland C++ Builder, you'll first have to create a
+Borland C++ Builder import library for it. This is done by using the
+IMPLIB tool that comes with Borland C++ Builder. Simply execute this:
+
+	IMPLIB BASSCDBCB.LIB BASSCD.DLL
+
+... and then use BASSCDBCB.LIB in your projects to import BASSCD.
+
+To use BASSCD with LCC-Win32, you'll first have to create a compatible
+import library for it. This is done by using the PEDUMP and BUILDLIB
+tools that come with LCC-Win32. Run these 2 commands:
+
+	PEDUMP /EXP BASSCD.LIB > BASSCDLCC.EXP
+	BUILDLIB BASSCDLCC.EXP BASSCDLCC.LIB
+
+... and then use BASSCDLCC.LIB in your projects to import BASSCD.
+
+For the BASS functions that return strings (char*), VB users should use
+the VBStrFromAnsiPtr function to convert the returned pointer into a VB
+string.
+
+TIP: The BASSCD.CHM file should be put in the same directory as the BASS.CHM
+     file, so that the BASSCD documentation can be accessed from within the
+     BASS documentation.
+
+
+Latest Version
+==============
+The latest versions of BASSCD & BASS can be found at the BASS website:
+
+        www.un4seen.com
+
+
+Licence
+=======
+BASSCD is free to use with BASS.
+
+TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, BASSCD IS PROVIDED
+"AS IS", WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED,
+INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY
+AND/OR FITNESS FOR A PARTICULAR PURPOSE. THE AUTHORS SHALL NOT BE HELD
+LIABLE FOR ANY DAMAGE THAT MAY RESULT FROM THE USE OF BASSCD. YOU USE
+BASSCD ENTIRELY AT YOUR OWN RISK.
+
+Usage of BASSCD indicates that you agree to the above conditions.
+
+All trademarks and other registered names contained in the BASSCD
+package are the property of their respective owners.
+
+
+History
+=======
+These are the major (and not so major) changes at each version stage.
+There are of course bug fixes and other little improvements made along
+the way too! To make upgrading simpler, all functions affected by a
+change to the BASSCD interface are listed.
+
+2.4.4 - 27/10/2010
+------------------
+* Drive offset correction support
+	BASS_CD_SetOffset
+* Out-of-band sub-channel/C2 data reading
+	BASS_CD_StreamCreateEx
+	BASS_CD_StreamCreateFileEx
+	CDDATAPROC
+* Fix for analog playback regression
+	BASS_CD_Analog_Play/File
+
+2.4.3 - 2/12/2009
+-----------------
+* Support for drives with letter A/B
+
+2.4.2 - 16/3/2009
+-----------------
+* Support for C2 error info
+	BASS_CD_C2ERRORS (BASS_CD_StreamCreate/File flag)
+
+2.4 - 2/4/2008
+--------------
+* Drive access interface selection
+	BASS_CD_SetInterface
+* Support for limited/restricted user accounts
+	BASS_CD_IF_WIO (BASS_CD_SetInterface interface)
+* Drive description/letter moved to info structure
+	BASS_CD_INFO (vendor/product/rev/letter members)
+	BASS_CD_GetDriveDescription *removed*
+	BASS_CD_GetDriveLetter *removed*
+
+2.3.0.3 - 9/7/2007
+------------------
+* Vista compatibility fix
+
+2.3.0.2 - 25/11/2006
+--------------------
+* Drive letter support when using ASPI on NT-based Windows
+	BASS_CD_GetDriveLetter
+
+2.3.0.1 - 27/6/2006
+-------------------
+* Pregap length retrieval
+	BASS_CD_GetTrackPregap
+* MusicBrainz ID generation
+	BASS_CDID_MUSICBRAINZ (BASS_CD_GetID type)
+
+2.3 - 21/5/2006
+---------------
+* Adjustable read speed
+	BASS_CD_SetSpeed
+	BASS_CD_GetSpeed
+* Automatic speed reduction upon read errors
+	BASS_CONFIG_CD_AUTOSPEED (BASS_SetConfig option)
+	BASS_SYNC_CD_SPEED (BASS_ChannelSetSync type)
+* Configurable read error retries
+	BASS_CONFIG_CD_RETRY (BASS_SetConfig option)
+* Skip past read errors
+	BASS_CONFIG_CD_SKIPERROR (BASS_SetConfig option)
+* Error sync now triggered by every read error (not just ending playback)
+	BASS_SYNC_CD_ERROR (BASS_ChannelSetSync type)
+
+2.2 - 2/10/2005
+---------------
+* Support for new plugin system (BASS_PluginLoad)
+* Track changing
+	BASS_CD_StreamSetTrack
+	CDTEST example updated
+* FREEOLD flag replaced by a config option
+	BASS_CONFIG_CD_FREEOLD (BASS_SetConfig option)
+	BASS_CD_FREEOLD *removed*
+* Info structure "size" member removed
+	BASS_CD_INFO structure
+
+2.1 - 28/11/2004
+----------------
+* Support for the improved "mixtime" sync system (allows custom looping)
+* C/C++ examples reorganised, with makefiles & VC++ projects
+
+2.0 - 31/10/2003
+----------------
+* CDA file support
+	BASS_CD_StreamCreateFile
+* Syncing integrated into BASS.DLL
+	BASS_CD_ChannelSetSync *removed*
+* Analog playback (replaces the BASS.DLL built-in CD functions)
+	BASS_CD_Analog_Play
+	BASS_CD_Analog_PlayFile
+	BASS_CD_Analog_Stop
+	BASS_CD_Analog_IsActive
+	BASS_CD_Analog_GetPosition
+	BASS_CD_RWFLAG_READANALOG (BASS_INFO/rwflags flag)
+* Sub-channel data reading
+	BASS_CD_SUBCHANNEL (BASS_CD_StreamCreate/File flag)
+	BASS_CD_RWFLAG_READSUBCHAN/DI (BASS_CD_INFO/rwflags flags)
+* CDPLAYER.INI lookup ID generation
+	BASS_CDID_CDPLAYER (BASS_CD_GetID type)
+* Support for CDs that don't begin at track 1
+	BASS_CD_GetTrackLength
+	BASS_CD_StreamCreate
+* Force channels to use software mixing
+	BASS_SAMPLE_SOFTWARE (BASS_CD_StreamCreate/File flag)
+* Support for BASS_StreamGetFilePosition
+
+1.8 - 26/4/2003
+---------------
+* First release
+
+
+Bug reports, Suggestions, Comments, Enquiries, etc...
+=====================================================
+If you have any of the aforementioned please visit the BASS forum at
+the website.
+

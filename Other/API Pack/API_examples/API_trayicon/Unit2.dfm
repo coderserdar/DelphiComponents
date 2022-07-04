@@ -1,0 +1,29 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 339
+  ClientWidth = 635
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  OnActivate = FormActivate
+  PixelsPerInch = 96
+  TextHeight = 13
+  object API_trayicon1: TAPI_trayicon
+    DoNotHide = False
+    HideTitle = False
+    AutoShowIcon = True
+    AutoHideIcon = True
+    HintDelay = 500
+    Visible = False
+    OnClick = API_trayicon1Click
+    MinimizeOnStartup = False
+    Left = 56
+    Top = 48
+  end
+end

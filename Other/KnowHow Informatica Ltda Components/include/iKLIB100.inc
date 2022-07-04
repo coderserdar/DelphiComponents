@@ -1,0 +1,11 @@
+{.$DEFINE FOR_SALE}
+
+{$IFDEF FOR_SALE}
+	{$I s:\v100\include\iKLIB100_ForSale.inc}
+{$ELSE}
+	{$I s:\v100\include\iKLIB100_Internal.inc}
+{$ENDIF}
+
+{$IFDEF INTERNAL_VERSION}
+	{$UNDEF EXCLUDED_CLASSES}
+{$ENDIF}	

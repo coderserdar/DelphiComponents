@@ -1,0 +1,1 @@
+This release contains the last documentation set released by TurboPower. It may contain references to XMLPartner as a commercial product, or may contain references to a commercial license. Such references should be ignored as this is now licensed under MPL1.1

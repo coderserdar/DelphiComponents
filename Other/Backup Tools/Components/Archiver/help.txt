@@ -1,0 +1,682 @@
+  This help documents only the TArchiver component because it
+  is the last subclass and inherits from all other components.
+
+
+  DESCRIPTION
+  -----------
+
+  This component lets you add/extract files to/from an archive.
+
+  CLASS HIERARCHY
+  ---------------
+
+       TArchiverRoot  (ArchiverRoot.pas)
+            |_ TCustomExtractor   (CustExtractor.pas)
+                    |_ TExtractor     (Extractor.pas)
+                    |_ TCustomArchiver  (CustArchiver.pas)
+                             |_ TArchiver   (Archiver.pas)
+
+       The TCustomXXX components doesn't implement compression or encryption.
+       But TExtractor and TArchiver implement a default compression (with the pasZLib)
+       and a default encryption with the Blowfish algorithm.
+
+
+  FORMAT
+  ------
+
+  The archive format is:
+
+    Header:
+      Signature (Integer)
+      Version (Integer)
+      RandomID (Integer) --> Random number used to check the segments of an Archive (all segments must share the same id)
+      EndOffset (Integer) --> Next place to start adding a new file
+      Segment (Word) --> Current segment number of the Archive
+      BlockSize (Integer)  --> Size of a block used to compress data
+      FinalSegment (Boolean) --> is it the final segment ?
+      ArchiveFlag (TArchiveFlag)
+      ArchiveInfo (TDataInfo)
+        FileCount (Integer)
+        Size (Extended)
+        CompressedSize (Extended)
+      SegmentInfo (TDataInfo)
+        FileCount (Integer)
+        Size (Extended)
+        CompressedSize (Extended)
+      UserData
+        UserName (String[20])
+        Company  (String[20])
+        SerialNumber (String[20])
+        Date (TDateTime)
+        ProductId (Integer)
+        ProductVersion (Integer)
+      Reserved (64 Bytes)
+      Comment (String (size (integer) + n chars) )
+    n files (= FileCount):
+      File entry:
+        Name (String: len(int)+bytes of string)
+        Date (Extended)
+        Attr (Integer)
+        Segment (Word) --> First segment where the file is located
+        Offset (Integer) --> Offset of the file in the current segment
+        FileOffset (Integer) --> Offset of the source file beeing archived
+        FileFlag (TFileFlag) --> is it a File, an empty Directory or the last part of the file ?
+        ArchiveInfo (TFileInfo)
+          Size (Integer)
+          CompressedSize (Integer)
+        SegmentInfo (TFileInfo)
+          Size (Integer)
+          CompressedSize (Integer)
+      Data of file:
+        n Blocks (=(Size / BlockSize) + 1 if (Size mod BlockSize) > 0 )
+          CompressedBlockSize (Integer) see (De/En)codeBlockSize for the format
+          CRC of Block (Integer)
+          Block data
+            n bytes (= CompressedBlockSize)
+
+
+  When segmenting the archive, we create a new file with a name like
+  XXX-002.YYY (where XXX is the root Archive name and YYY is the extension.
+  The second segment always starts with 2).
+  Then we write the Header and if we were writing a file, we write the
+  current FileEntry and we continue writing the data.
+
+  You can add as many files as you want, but there's no check for duplicates.
+
+
+  Properties:
+  -----------
+    BlockSize                 Size of Block used for compressing a file.
+
+    ExtractPath               Directory where the files will be extracted, if
+                              PathStorage different from psWhole.
+
+    FileName                  Name of the Archive
+
+    Filter                    This filters the directory content when using function
+                              AddDirectory.
+
+    PathStorage               Lets you choose how the directories are stored:
+                                - psNone : only the filename
+                                - psWhole : the whole directory + filename
+                                - psRelative : the directories from the Starting
+                                  directory (the directory specified when calling AddDirectory)
+
+    RestoreAction             Lets you define what will be done if the file to be extracted
+                              already exists.
+                                - raOverwrite      : overwrites the file
+                                - raSkip           : skip the file
+                                - raUpdate         : overwrites the file only if it is newer
+                                - raAsk            : ask the user what to do
+                                - raExistingOnly   : restore the file only if it already exists
+                                - raUpdateExisting : restore the file only if it already exists
+                                                     and if it is newer.
+
+    Version                   Current version of the opened archive.
+
+    EndOffset                 Next place to start adding a new file.
+
+    Segment                   Number of the current segment of the archive.
+
+    CurrentFileEntry          Record that contains informations on the file
+                              beeing currently stored or restored.
+
+    Operation                 Current operation in progress : none, add a file,
+                              extract file, enumerate files, delete files or
+                              make a SFX archive.
+
+    CurrentBlockSize          Current size of a Block for the opened archive.
+                              When creating a new archive, we set BlockSize as
+                              the Current Block size. Then it will not be possible
+                              to change it.
+
+    Stream                    Current stream used for accessing the Archive.
+                              You may assign any external stream to this property.
+                              If you do it, then TArchiver first closes the current
+                              opened archive (if any), then assign the stream and
+                              defines the property ExternalStream to True.
+                              Then you call the Open method and TArchiver will try
+                              to create a new archive if the Stream size is zero,
+                              otherwise it will try to open an existing archive.
+                              When the archive is closed, it won't free your stream,
+                              but the Stream property is set to nil.
+                              Note that you can't read/write any solid archive, nor
+                              delete files from an archive.
+                              This is useful if you want to access an archive stored
+                              in a Blob field, or if you want to make an archive in
+                              memory with a TMemoryStream.
+
+
+    ExternalStream            True if you assigned a stream to the Stream property.
+
+    Language                  Lets you choose one language for the messages.
+                              If you choose lgAutomatic, then the component
+                              will try to use the user language.
+
+    Messages                  Contains all the strings needed by the component.
+                              It lets you change them, in order to translate them or
+                              to adapt them to your needs. If you want to change them,
+                              don't use the lgAutomatic language, otherwise it will
+                              override your changes.
+
+    CheckAvailableSpace       Lets you enable/disable the automatic segmentation according
+                              to disk space.
+
+    MaxSegmentSize            Maximum size allowed for a segment. If it is 0,
+                              then there's no maximum. We will use all the available
+                              space of the destination.
+
+    ReadOnly                  True if the archive was opened as readonly.
+
+    StartOffset               Offset used to seek from the beginning of the file in order
+                              to read the header. It's useful if you want to put an
+                              archive in a file after some data (like a self-extractor).
+
+    Options                   a set of boolean options:
+                                - oStoreEmptyFolders : if True, empty folders are stored in the
+                                  archive, but are not visible.
+
+                                - oShowEmptyFolders : if True, the empty folders are enumerated
+
+                                - oCreateReadOnly : if True, the archive will be created as ReadOnly.
+                                  It means that once created, it won't be possible to change it (add or
+                                  delete files).
+
+                                - oCreateSolidArchives : if True, we create a solid archive. It means that
+                                  we create an uncompressed archive that will be then compressed.
+                                  It's interesting with a lot of small files.
+
+                                - oCompress : if True, the archive must be compressed
+
+                                - oCrypt : Lets you specify if you crypt the data. You must then define
+                                  the events OnEnterCryptKey, OnRequestCryptKey, OnCryptBlock,
+                                  OnDecryptBlock.
+
+                                - oEraseFirstDisk : if True, we erase the removable disk before creating
+                                  a new archive. It's usefull if you use this component as a backup tool,
+                                  otherwise you should do it yourself, as we erase the disk only when we
+                                  create a new segment, but not for the first one.
+
+                                - OpenSingleSegment : Lets you specify if we should open only the segment specified
+                                  by FileName, and not to try to open all the segments of an
+                                  archive. It's useful only if you lost some segments and you
+                                  want to retrieve what you can.
+
+                                - oEraseNewDisk : Lets you specify if we should erase the content of new disk
+                                  when segmenting.
+
+                                - oConfirmFileDeletion : Lets you specify if we should ask confirmation to the user
+                                  before we erase the content of a new disk.
+
+                                - oEnumerateAfterOpen : Lets you specify if we need to enumerate the files
+                                  after the opening of an archive.
+
+                                - oSecureAccess : If true, we deny the write access when opening files to add to
+                                  the archive. It's useful if you want to backup active tables
+                                  without closing them, but it's not absolutely safe, as the BDE
+                                  uses a Cache.
+
+                                - oRecurseFolders : Lets AddDirectory work recursively or not.
+
+                                - oRestorePath : Lets you choose if the stored directories will be restored or not
+
+                                - oIncludeStartingDirectory : When using PathStorate psRelative, this property specifies
+                                  if we keep the starting directory.
+                                  For instance, we have the file:
+                                    c:\data\foo\bar.pas
+                                    if we do AddDirectory( 'c:\data\foo' ) we'll get:
+                                      * 'foo\bar.pas' if IncludeStartingDirectory is True
+                                      * 'bar.pas' if IncludeStartingDirectory is False
+
+                                - oWriteSFXCode : It will let you create a SFX archive.
+                                  TArchiver will trigger the event OnWriteSFXCode each time
+                                  it needs to create a new archive.
+
+                                - oEncryptFiles : it will encrypt new added files. It's different
+                                  from the Crypt option, that will allways crypt files added
+                                  to the archive.
+
+                                - oMaintainFileDirectory : it will maintain a list of the File entries
+                                  for you. It implies that the archive content will be read when
+                                  opening the archive, and it will override the oEnumerateAfterOpen
+                                  option.
+
+                                - oNoSpanning : stops the auto-spanning feature. Useful if you want
+                                  to make archives silently, without asking the user to select a
+                                  new place for the next segment.
+
+                                - oShowBusyMessage : if you try to an operation while an operation
+                                  is already in progress, the component will display a warning message
+                                  before it exits.
+
+                                - oDoNotUpdateFirstSegment : lets you disable the action of requesting
+                                  the first segment when the adding process of a multi-segmented archive
+                                  finishes for updating the archive information that will be used when
+                                  opening/extracting. In that case, the component will ask for the last
+                                  disk instead of the first disk, but it is irritating when your archive
+                                  has only 2 segments.
+
+    MinFreeSpace              Lets you specify (in bytes) what the minimum free space must be.
+
+    CompressionLevel          Lets you select the level of compression among:
+                                clMaximum
+                                clNormal (this is the default Value);
+                                clFast
+                                clSuperFast
+                                clNone
+
+    ReserveSpace              lets you reserve n bytes on the first segment of a
+                              segmented archive. It's usefull if you want to save some
+                              files on the first disk of a segmented archive.
+
+    SFXCodeSize               lets you define the size of the SFX code, in order to
+                              adjust automatically StartOffset when needed (when the
+                              current segment is a .EXE)
+
+    SFXGenerator              lets you connect the TArchiver (or TExtractor) to a TCustomSFXGenerator
+                              subclass that will handle the generation of (and the access to) a SFX archive.
+                              See the properties of the SFXGenerator (language...).
+
+    ElapsedTime               time elapsed since the start of an operation
+
+    StartTime                 start time of an operation
+
+    EndTime                   end time of an operation
+
+    BytesPerMSec              bytes / millisecond during an operation
+
+    BytesToProcess            number of bytes to process for the current operation
+
+    BytesProcessed            number of bytes processed for the current operation
+
+    Percent                   Actual progress ratio
+
+    Files                     List of file entries. It is maintained only if the option
+                              oMaintainFileDirectory is set.
+
+    FileCount                 Number of file entries in the list.
+
+    MinKeySize                Minimum size (in chars) of an encryption key.
+
+    AddMode                   Lets you define how files should be added:
+                                - amAdd : the files are simply added at the end of the
+                                  archive, even if a file with the same name already exists.
+                                  This is the default mode and the quicker, because no checking
+                                  is done and the components will work directly on the archive,
+                                  and not on a temporary one. It can work with segmented archives.
+                                - amAddAndReplace : this mode checks if a file was already added
+                                  with the same name. In that case, the file is replaced,
+                                  otherwise it is added at the end of the archive.
+                                  This mode uses a temporary archive and thus is not able to
+                                  work with a segmented archive.
+                                - amUpdate : same as the previous one, but replaces a file only if
+                                  it has changed.
+                                - amFreshen : this mode looks at all the files contained in the
+                                  archive and replace only those who have changed.
+
+                               Note that the modes amAddAndReplace, amUpdate and amFreshen activates
+                               the option oMaintainFileDirectory to do the checking.
+
+  Events:
+  -------
+    OnEnumeration             triggered for each file stored in the archive, when calling
+                              EnumerateFiles.
+
+    OnAddFile                 triggered before each file is added to the archive.
+
+    OnDeleteFile              triggered before each file is deleted from the archive.
+
+    FOnDeleteFileByIndex      triggered before each file is deleted from the archive but
+                              it references the file by its index in the list of files.
+                              You should enable the option oMaintainFileDirectory to use
+                              this feature.
+
+    OnExtractFile             triggered before each file is extracted from the archive.
+
+    OnExtractFileByIndex      triggered before each file is extracted from the archive but
+                              it references the file by its index in the list of files.
+                              You should enable the option oMaintainFileDirectory to use
+                              this feature.
+
+    OnFileAdded               triggered after a file has been successfully added to the archive.
+
+    OnFileExtracted           triggered after a file has been successfully extracted from the archive.
+
+    OnFileProgress            triggered during adding/extraction of a file.
+
+    OnStartOperation          triggered when you start an operation (add a file, extract...).
+                              You can make visible a Progress bar for instance.
+
+    OnFinishOperation         triggered when an operation finishes (add a file, extract...)
+                              You can make invisible a Progress bar for instance.
+
+    OnError                   triggered when an exception is caught. You can inspect the Exception
+                              and change ErrorAction to continue the operation or abort.
+                              Of course you can ask yoursefl the user to continue.
+
+    OnCompressBlock           triggered each time a block needs to be compressed.
+                              It lets you use any compression algorithm.
+
+    OnUncompressBlock         triggered each time a block needs to be uncompressed.
+                              It lets you use any compression algorithm.
+
+    OnWriteUserData           triggered each time a Header needs to be written.
+                              It lets you specify some informations about this
+                              archive, like the username, the serial number,
+                              the product ID, the product Version...
+
+    OnEnterCryptKey           triggered each time we create a new archive that we must crypt.
+                              (Property Crypt is True)
+
+    OnRequestCryptKey         triggered each time we open an existing crypted archive.
+                              (Header.Crypted is True)
+
+    OnCryptBlock              triggered each time we need to crypt a block of data.
+
+    OnDecryptBlock            triggered each time we need to decrypt a block of data.
+
+    OnAfterOpen               triggered each time an archive is opened (or created).
+
+    OnAfterClose              triggered each time an archive is closed.
+
+    OnNeedNewDisk             triggered each time we need a new removable disk for creating
+                              a new segment.
+
+    OnNeedNewFolder           triggered each time we need a new folder on a fixed disk for
+                              creating a new segment.
+
+    OnInsertDisk              triggered each time we need a removable disk containing an
+                              expected segment.
+
+    OnInsertLastDisk          triggered each time we need a removable disk containing the
+                              last segment of the archive.
+
+    OnLocateSegment           triggered each time we need to locate a segment in a fixed disk.
+
+    OnLocateLastSegment       triggered each time we need to locate the last segment in a fixed disk.
+
+    OnClearDisk               triggered each time we need to clear the content of a removable disk,
+                              before creating a new segment.
+
+    OnSegmentChanged          triggered each time a new segment is created or another segment is opened.
+
+    OnGetSignature            triggered each time a signature is needed for the archive.
+                              Usefull if you use another compression or encryption method,
+                              in order to avoid confusing the different algorithms.
+
+    OnWriteSFXCode            triggered each time we need to store the SFX code when creating
+                              a new SFX archive. It's triggered only if the option oWriteSFXCode is set.
+
+    OnAfterHeaderUpdate       triggered each time the header of the archive is updated.
+
+    OnShowComment             triggered each time an archive is opened and if it contains
+                              a comment.
+
+    OnShowTiming              triggered each time the progress ratio changes.
+                              You get the elapsed time and the remaining time for
+                              the current operation.
+
+    OnDisplayMessage          triggered each time the component wants to display a message.
+
+    OnClearFileList           triggered each time the file directory is cleared.
+                              Usefull when you want to map a grid to the file
+                              directory.
+
+    OnAddToLog                triggered each time the component wants to add information to
+                              the log.
+
+
+  Methods:
+  --------
+
+    IsOpen                    Returns true if the Archive is open, else False.
+
+    IsSolidArchive            Returns true if the opened archive is solid.
+
+    IsBusy                    Returns true if an operation is in progress.
+
+    Open                      Opens an archive, whose name is FileName.
+
+    OpenNew                   Opens a new archive, whose name is FileName.
+                              If the archive already exists, it is first deleted and
+                              if the option oEraseNewDisk is set, then the drive is
+                              erased (only if it's removable disk).
+                              If the component uses an external stream, the stream size
+                              is set to zero.
+
+    CreateTempFile            Creates and open a new archive, whose name is
+                              automatically generated and stored in the
+                              windows temp directory.
+
+    Close                     Closes the opened archive.
+
+    Reset                     Deletes, and recreates the archive.
+                              Returns True if it was Ok.
+
+    Delete                    Delete the archive.
+                              Returns True if it was Ok.
+
+    Rename                    Tries to rename an opened archive.
+                              Return True if it was Ok.
+
+    AddFile                   Add one file to the archive.
+                              Returns True if it was Ok.
+
+    AddFiles                  Add the content of the TStrings to the archive.
+                              If a string is a file, then it will call AddFile,
+                              or if it is a directory, then it will call AddDirectory.
+                              Returns True if it was Ok.
+
+    AddDirectory              Add the content of directory to the archive. The flag
+                              Recursive will allow or not to include the subdirectories.
+                              The property Filter can filter the directory content.
+                              Returns True if it was Ok.
+
+    EnumerateFiles            For each file stored in the archive, we trigger the event
+                              OnEnumeration.
+
+    ExtractFile               Extract one file stored in the archive in a directory
+                              specified by the property ExtractPath. You must specify
+                              the segment, offset and compressedSize because it will
+                              directly go to the right place and extract.
+
+    ExtractFileTo             Same as ExtractFile, but you can provide the filename
+                              of the destination file, instead of using the property
+                              ExtractPath and the filename stored in the FileEntry.
+
+    ExtractFiles              Extracts all the files stored in the archive in a directory
+                              specified by the property ExtractPath.
+
+    DeleteFiles               Enumerate each file of the archive and asks confirmation of
+                              deletion through the OnDeleteFile event, which is required.
+                              The deletion is done by recreating a new archive without the
+                              files that should be deleted, then deleting the original archive
+                              and at least renaming the temporary archive as the original archive.
+
+    MakeSFX                   If your opened archive is a normal archive (not .EXE) then
+                              it will create a new SFX archive from the opened one and
+                              name if FileName.EXE.
+                              If it already exists, then it is overwritten.
+                              The first archive remains open.
+
+    IndexOfFile               Will return the index of a filename if it exists in the list
+                              (the file directory). See properties Files and FileCount.
+
+    CheckIntegrity            Will check the integrity of the current archive.
+
+    CanAbort                  Call this method in order to know if the current operation
+                              may be aborted or not.
+
+    RequestAbort              Will ask the component to abort the current operation.
+
+
+
+  NOTES:
+  ------
+    * It's not necessary to call the Open method, because each action on an archive,
+      will try to open the archive before, but it is recommanded.
+
+    * If you want to be sure to have new archive and not an old archive opened,
+      then use the OpenNew method. It will make sure that any old archive is first
+      deleted. If the option oEraseFirstDisk is set, then the drive is erased
+      (only if it's removable disk).
+
+    * If you change the FileName property, then the archive is automatically closed.
+
+    * We check for disk space. If there's no more space, or if the segment size
+      has reached MaxSegmentSize, then we try to create a new segment.
+      If the drive of FileName is a removable disk, then we ask the user to
+      change it, else we ask the user to select a new location.
+      So, if you want to backup your files on a floppy, Archiver will automatically
+      split the archive as necessary to make it fit.
+      If you want to disable this feature, set CheckAvailableSpace to False (that's
+      what CreateTempFile does).
+
+    * You can't delete files from a segmented archive.
+
+    * Archiver will try to automatically open the segments if they're located in the current folder,
+      else it will ask the user to find them.
+      You can open any of them, it will ask for the last one, then the first one, and the following
+      segments.
+      We need to open the last segment only for retrieving the compressed size of the whole archive
+      in order to compute a progress ratio. If you lost the last segment or one of them,
+      just set the property OpenSingleSegment to True and try to open and extract each segment.
+
+    * You can backup Delphi Tables in live, but I can not guarrantee it,
+      as the BDE uses a cache.
+
+    * This is a more secure format than Zip, because we can read the content of
+      any archive segment, as we don't store a file table in the last segment.
+      So, if you loose one segment, you don't loose everything !
+
+    * For security purposes, we only erase the content of the removable disks.
+
+    * You should set the attribute oEraseFirstDisk in the Options when doing a backup,
+      because we clear a disk only when we need a new disk for the next segment.
+      Or you can do it yourself with: EraseDrive( ArchiveDrive )
+
+    * Use *.mmm as Extension, so that everybody shares the same extension.
+
+    * You can store some useful information about the backup (UserName, UserCompany,
+      Serial number, Backup name, Product Id, Product version...) with the
+      OnWriteUserData event.
+      Then you can use the OnAcceptArchive event to filter the backups according to
+      the Backup id or version or whatever you like.
+      You can use the "Free" array to store a record of your own.
+
+    * If you need to abort any operation, just use the RequestAbort method.
+      Don't forget to use the method CanAbort in the OnFileProgress event
+      in order to enable or not your Abort button
+      (btnAbort.Enabled := Archiver1.CanAbort).
+
+    * If you want to override the default encryption algorithm (Blowfish):
+        - Set property Crypt to True
+        - Define the event OnEnterCryptKey and ask your user the crypt key that
+          you'll use to crypt the data.
+        - Define the event OnCryptBlock and crypt the block with the key
+        - Define the event OnRequestCryptKey and ask your user the crypt key that
+          you'll use to decrypt the data.
+        - Define the event OnDecryptBlock and decrypt the block with the key
+        - Or you can override the EnterCryptKey, RequestCryptKey, GetMinKeySize,
+          CryptBlock and DecryptBlock methods.
+        - Note that there's no check on the key and that the block is crypted after being compressed,
+          so if you enter an incorrect key when decrypting, it will produce garbage data, and we won't
+          be able to uncompress the block, so there's 99% chances that we raise an EArchiverUncompress
+          exception.
+
+    * When compressing a file, we check that the compressed data is smaller than the
+      uncompressed one. If it isn't then we store the data uncompressed.
+
+    * Don't be surprised if you see that the compressed size of a file is greater than
+      the original size, and that the ratio is 0%. An uncompressed file will be split
+      in blocks, and each block of data is preceded by two integers (size and crc).
+      So, an uncompressed file will always need more space than the original file.
+
+    * If you set the option oCrypt to True before creating an archive, then it means
+      that all the content of the archive will be encrypted.
+      If you didn't do it, but want to crypt files, then set the option
+      oEncryptFiles to True.
+
+    * If you want to make a SFX archive, or access it, then drop a TSFXGenerator
+      on you form and connect it to the TArchiver through its property SFXGenerator.
+      Set the properties of the SFXGenerator like the language used in the SFX.
+      If you want to create a new SFX archive, you can :
+        - Set the option oWriteSFXCode and create a new archive
+        or
+        - Set the FileName with a '.exe' extension and create a new archive
+        or
+        - Open an existing archive and call the method MakeSFX
+
+      That's all !
+
+      If you want to make your own SFX code, then subclass the TCustomSFXGenerator and
+      override all virtual methods.
+
+    * If you want to define a comment for the whole archive then
+        - Open an archive
+        - Call the method SetArchiveComment with an unlimited string
+          containing the comment. This will only work with an empty archive,
+          because the comment has no fixed length and it is stored at the end
+          of the header, so once written, it can't be modified.
+      If you want to display the comment of an archive, then use the event
+      OnAfterOpen and write something like this:
+        with (Sender as TArchiver) do begin
+          if Header.Comment <> '' then
+            ShowMessage( Header.Comment );
+        end;
+
+    * Warning ! When an operation is in progress, you can't do actions like
+      close, open, add, extract...
+      To prevent it, use the IsBusy method and check it before any of these
+      actions. Don't forget the OnCloseQuery event of the Form and add:
+         CanClose := not Archiver1.IsBusy;
+         if not CanClose then begin
+           // Write a message here in order to warn the user, that he can't quit.
+           Exit;
+         end;
+         Archiver1.Close;
+      Note that now, all public methods are protected against the Busy problem.
+      They check if an operation is already in progress before anything.
+      If the option oShowBusyMessage is enabled, then it displays a message
+      before it exits. But you must still check the busy status in the
+      OnCloseQuery event.
+
+    * The option oCreateSolidArchives lets you create solid arhives. A solid
+      archive is an archive of uncompressed files, that is then included in
+      a compressed archive.
+      So, it's interesting when you want to archive a lot of small files, because
+      each file contains an header that is normally uncompressed. That way, all
+      headers will be compressed.
+      When we use a solid archive, we extract its unique file to the windows
+      temp directory and we switch to this extracted archive. That's why we can't
+      see the compression ratios and compressed size, because the temporary archive
+      is uncompressed. Then, when the archive is closed it is added to the real
+      archive with compression.
+
+    * The component can maintain a list of files for you if you set the option
+      oMaintainFileDirectory to True. Then you can use the properties Files and
+      FileCount to access to the TFileObject objects, that contain a TFileEntry
+      describing the file and a Tag that's free for your own use.
+
+    * If you need to access an archive that's stored in any kind of stream (not
+      a file stream), then you can create your own stream (like a TMemoryStream
+      or a TBlobStream), assign it to the Stream property of TArchiver and
+      open your archive.
+      If you do it then TArchiver will set the ExternalStream property to True
+      and it won't check for disk space of course. A filename is not required.
+      When assigning an external stream, it will automatically close the current
+      opened archive.
+      When the archive is closed, it won't free your stream, but the Stream property
+      is set to nil.
+      By default, when opening an archive, TArchiver checks the size of the stream,
+      if it's zero, then it will create a new archive, otherwise it will try to
+      open an existing archive.
+      Note, that you can't use/create a solid archive and that you can't delete files
+      inside an external stream.
+      Look at demo ExternalStream.
+
+
+
+
+      
+

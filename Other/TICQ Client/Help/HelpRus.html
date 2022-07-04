@@ -1,0 +1,436 @@
+<html>
+<head>
+  <title>TICQClient</title>
+</head>
+<body>
+  <h1>TICQClient</h1><br>
+  <font size=+1><b>Содержание:</b></font><br>
+  <li><A href="HelpRus.html#ABOUT">О TICQClient'е</A>
+  <li><A href="HelpRus.html#UNITS">Модули TICQClient'а</A>
+  <li><A href="HelpRus.html#DIRECT">Важная информация об ICQ протоколе</A>
+  <li><A href="HelpRus.html#PROPERTIES">Properties</A>
+  <li><A href="HelpRus.html#FUNCTIONS">Functions</A>
+  <li><A href="HelpRus.html#EVENTS">Events</A>
+  <li><A href="HelpRus.html#AUTHOR">Информация</A>
+</body>
+<br><br>
+
+<table>
+<tr><td width="750">
+<p><A name="ABOUT"><font size=+1><br><b>О TICQClient'е</b></font></A><br>
+  Это небольшая компонента, которая позволяет вам общаться с ICQ пользователями прямо из вашей программы.
+Исходники довольно хорошо описаны(правда, на английском), так что можно без проблем
+расширять возможности компоненты. Автор работает совершенно за бесплатно, так что
+за ошибки и разные недочеты и тд. и тп. бить меня не надо ;). Надеюсь, все это дело вам понравится.
+
+<p><b>ВНИМАНИЕ! Лучше использовать Help.chm сейчас, там более полная информация о компоненте, сорри, нехватает времени обновить русскую версию.</b>
+</td></tr>
+
+<tr><td width="750">
+<p><A name="UNITS"><font size=+1><br><b>Модули TICQClient'а</b></font></A><br>
+  ICQWorks.pas - содержит все низкоуровневые функции и константы.<br>
+  MySocket.pas - простая и удобная реализация сокетов, используется в TICQClient'е.<br>
+  ICQDirect.pas - объекты, реализующие поддержку прямых соединений.<br>
+  ICQClient.pas - компонента.<br>
+  ICQClient.dcr - иконка компоненты.<br>
+
+  <br>
+  Для начала вы должны установить TICQClient.
+  Запустите Delphi, потом в главном меню: Component > Install Component >
+  тут вы должны выбрать файл ICQClient.pas и нажать кнопку OK, затем в появившемся окне - кнопку Compile.<br>
+  Если были устновлены более ранние версии TICQClient'а, тогда вам нужно переустановить компонент таким же образом.
+</td></tr>
+
+<tr><td width="750">
+<p><A name="DIRECT"><font size=+1><br><b>Важная информация об ICQ протоколе</b></font></A><br>
+  ICQ протокол подразделяется на следующие части:<br>
+    <li>Серверный протокол, ипользуется для обменя информацией с сервером, последняя версия v8 (используется в ICQ2001b, ICQ2002a)
+    <li>Прямой(direct) протокол, используется напрямую между ICQ клиентами и не зависит от серверного протокола.<br>
+  Иногда прямые соединения не могут быть установлены между клиентами: возможно используется proxy, проблемы с сетью или какие-нить еще непонятные проблемы.<br>
+  TICQClient реализует эти оба протокола!<br>
+  Все функции & процедуры прямых соединений в этой помощи выделяются символами "<b>(DC)</b>".<br>
+  Есть пользователь запросит авторизацию(authorization request), тогда он будет автоматически авторизован.
+</td></tr>
+
+
+<tr><td width="750">
+<p><A name="PROPERTIES"><font size=+1><br><b>Properties(Свойства)</b></font></A><br>
+  <p><b>property Status: LongWord</b><br>
+  Позволяет получить/установить online статус клиента, после логина на сервер.<br>
+  Статус можен быть одним из:<br>
+  S_ONLINE<br>
+  S_INVISIBLE<br>
+  S_AWAY<br>
+  S_NA<br>
+  S_OCCUPIED<br>
+  S_DND<br>
+  S_FFC
+
+  <p><b>property LoggedIn: Boolean</b><br>
+  Если вы залогинились на сервер, тогда свойство вернет TRUE.
+
+  <!--<p><b>property Connecting: Boolean</b><br>
+  Property returns TRUE if you are connecting to server, but still hasn't logged in.-->
+
+  <p><b>property UIN: LongWord</b><br>
+  Свойство позволяет получить/установить UIN пользователя. Используется при логине.
+
+  <p><b>property Pasword: String</b><br>
+  Свойство позволяет получить/установить пароль пользователя.
+
+  <p><b>property ICQServer: String</b><br>
+  ICQ сервер, следует использовать: 'login.icq.com'
+
+  <p><b>property ICQPort: Word</b><br>
+  ICQ port, следует использовать: '5190'
+
+  <p><b>property ConvertToPlaintext: Boolean</b><br>
+  Если это свойство установить в TRUE, тогда сообщения, приходящие в RTF(Rich Text Format) формате, автоматически будут сконвертированы в простой текст(plain text).<br>
+  Пример RTF сообщения:<br>
+  {\rtf1\ansi\ansicpg1251\deff0\deflang1049{\fonttbl{\f0\fnil\fcharset204{\*\fname Times New Roman;}Times New Roman CYR;}}<br>
+  {\colortbl ;\red0\green64\blue0;}<br>
+  \viewkind4\uc1\pard\cf1\f0\fs20\'ef\'f0\'e8\'e2\'e5\'f2\par<br>
+  }<br>
+  Эквивалент в простом тексте:<br>
+  привет
+
+
+  <p><b>property ContactList: TStrings</b><br>
+  Контакт лист пользователя, *посылается только при логине*. Каждая строчка -- UIN номер. Если вы хотите добавить кого-либо в контакт лист после логина, используйте <b>AddContact procedure</b>.
+
+  <p><b>property VisibleList: TStrings</b><br>
+  Visible лист пользователя. Каждая строка -- UIN номер. Посылается, когда вы переходите в invisible статус. Добавлять пользователя можно в любое время.
+
+  <p><b>property InvisibleList: TStrings</b><br>
+  Invisible лист пользователя. Каждая строка -- UIN номер. Посылается, когда вы переходите в статус отличный от invisible. Добавлять пользователя можно в любое время.
+
+  <p><b>property AutoAwayMessage: String</b><br>
+  Авто-ответ пользователя. В обычной ICQ это ответ на 'Read Away-message'.
+</td></tr>
+
+<tr><td width="750">
+<p><A name="FUNCTIONS"><font size=+1><br><b>Functions(Функции)</b></font></A><br>
+
+  <p><b>procedure Login(Status: LongWord = S_ONLINE)</b><br>
+  Процедура устанавливает соединение с сервером, вы сразу переходите в 
+  статус Status, который по умолчанию S_ONLINE, можно залогиниться и с другим статусом,
+  спосок статусов в <b>property Status</b>.
+
+  <p><b>procedure Disconnect</b><br>  
+  Отсоединиться от сервера.
+
+  <p><b>procedure SendMessage(UIN: LongWord; Msg: String)</b><br>
+  Послать сообщение UIN'у.
+
+  <p><b>procedure SendURL(UIN: LongWord; const URL, Description: String);</b><br>
+  Послать URL(ссылку) UIN'у.
+
+  <p><b>function AddContact(UIN: LongWord): Boolean</b><br>  
+  Добавить UIN'а в ваш контакт лист после логина. UIN автоматически
+  добавляется в <b>ContactList TStrings</b>. После добавления UIN'а
+  в ваш контакт лист, вы будете получать извещения об изменениях его статуса.
+  Возвращает True, если пользователь с таким UIN'ом не был в вашем листе раньше.
+
+  <p><b>RemoveContact(UIN: LongWord) procedure</b><br>
+  Удаляет UIN из вашего контакт листа. Ипользуйте пока вы в онлайне.
+
+  <p><b>RemoveContactVisible(UIN: LongWord) procedure</b><br>
+  Удаляет UIN из вашего visible листа. Используйте пока вы в онлайне.
+
+  <p><b>RemoveContactInvisible(UIN: LongWord) procedure</b><br>
+  Удаляет UIN из invisible листа. Используйте пока вы в онлайне.
+
+
+  <p><b>RequestInfo(UIN: LongWord)</b><br>  
+  Запросить информацию об UIN'е. В ответ вы получите следующие извещения:
+    OnUserWorkInfo, OnUserInfoMore, OnUserInfoAbout, OnUserInfoInterests,
+    OnUserInfoMoreEmails, OnUserFound.
+
+  <p><b>procedure SearchByMail(Email: String)<br>
+  procedure SearchByUIN(UIN: LongWord)<br>
+  procedure SearchByName(FirstName, LastName, NickName, Email: String)<br></b>
+  Поиск пользователя по Mail'у, UIN'у или другой инфе. В ответ вы получите
+  <b>OnUserFound извещение(event)</b> если хотябы один человек был найден или <b>OnUserNotFound</b> если таких не существует.
+
+  <p><b>procedure SearchRandom(Group: Word)</b><br>
+  Поиск случайного пользователя по группе, где номер группы может быть одним из <b>RandGroups: array[1..11]...</b>(ICQWorks.pas) контанты</b>.
+  В ответ вы получите <b>OnUserFound извещение</b>, только один пользователь будет обязательно найден. (Это ограничение ICQ).
+
+  <p><b>procedure SearchWhitePages(First, Last, Nick, Email: String; MinAge, MaxAge: Word; Gender: Byte; Language, City, State: String; Country, Company, Department, Position: String; Occupation, Past, PastDesc, Interests, InterDesc, Affiliation, AffiDesc, HomePage: String; Online: Boolean);</b><br>
+  Поиск в 'White Pages'. В ответ вы получите
+  <b>OnUserFound извещение(event)</b> если хотябы один человек был найден или <b>OnUserNotFound</b> если таких не существует.
+
+  <p><b>procedure SetSelfInfoGeneral(NickName, FirstName, LastName, Email, City, State, Phone, Fax, Street, Cellular, Zip, Country: String; TimeZone: Byte; PublishEmail: Boolean);</b><br>
+  Залить на сервер инфо о себе. Парамерты могут быть пустыми строками('').
+
+  <p><b>procedure SetSelfInfoMore(Age: Word; Gender: Byte; HomePage: String; BirthYear: Word; BirthMonth, BirthDay: Byte; Language1, Language2, Language3: String);</b><br>
+  Залить на сервер дополнительную инфу о себе.
+
+  <p><b>procedure SetSelfInfoAbout(About: String);</b><br>
+  Залить на сервер about инфу о себе.
+
+
+  <p><b>procedure RequestContactList;</b><br>
+  Запросить контакт лист с сервера. Для более подробной информации смотрите: <b>OnServerListRecv event</b>.
+
+  <p><b>procedure DestroyUINList(var List: TList);</b><br>
+  Освободить память, в которой временно хранится контакт лист принятый с сервера.
+
+  <p><b>procedure SendSMS(const Destination, Text: String);</b><br>
+  Посылает SMS к Destination с текстом Text.<br>
+  Пример:
+  <pre>
+  ICQClient1.SendSMS('+3739401111', 'Hello, World!');
+  </pre>
+
+  <p><b>procedure SendMessageAdvanced(UIN: LongWord; const Msg: String; ID: Word; RTFFormat: Boolean);</b><br>
+  Посылает сообщение с дополнительными возможностями. После того как UIN получил ваше сообщение вы получите подтвреждение.
+  ID - случайное значение, такое же приходит к вам в подтверждениях(см. <b>OnAdvancedMsgAck event</b>).
+  Если ваше сообщение в RTF(Rich Text Format) формате, тогда RTFFormat должен быть True, бойтесь использовать RTF формат, потому как некоторые ICQ клоны его не поддерживают, в частности клоны под linux и win32, такие как: Miranda, YSM, mICQ, &RQ, StrICQ и другие.
+
+  <p><b>function SendMessageDirect(UIN: LongWord; const Msg: String; RTFFormat: Boolean): Word; (DC)</b><br>
+  Для большей информации смотрите <b>SendMessageAdnaced procedure</b>. Пока эта функция не поддерживает подтверждений, т.е. вы их получать не будете, хотя это возможно реализовать.
+  Возвращает ID как результат - уникальный идентификатор если прямое соединение с UIN было установлено, иначе - 0. В ответ вы получите <b>OnDirectPacketAck event</b> с этим ID.
+                                                     
+  <p><b>procedure RegisterNewUIN(const Password: String);</b><br>
+  Зарегистрировать новый UIN, параметр Password -- это пароль с каким вы хотите использовать новый номер. Процедура должна использоваться когда вы в офлайне(тобишь она сама логиниться и делает что надо :).
+  Если вам выделили новый номер, тогда вы получите <b>OnNewUINRegistered event</b>, иначе <b>OnNewUINRefused event</b>(например, когда вы хотите слишком много номеров).
+
+  <p><b>procedure RequestAwayMsg(UIN: LongWord; ID: Word; ReqStatus: Byte);</b><br>
+  Запросить авто-ответ UIN'а. ID - случайное значение которое придет вам в ответах на RequestAwayMsg.
+
+  ReqStatus - это тип авто-ответа, может быть одним из:<br>
+  GET_AWAY, - запросить away авто-ответ<br>
+  GET_OCCUPIED, - запросить occupied авто-ответ<br>
+  GET_NA, - запросить NA авто-ответ<br>
+  GET_DND, - запросить DND авто-ответ<br>
+  GET_FFC - запросить FFC(Free For Chat) авто-ответ.<br>
+  Другими словами ReqStatus -- это текущий статус UIN'а.<br>
+  В ответ вы получите<b>OnAutoMsgResponse event</b>.
+
+  <p><b>UnregisterUIN(const Password: String);</b><br>
+  Стереть с лица земли ваш UIN! Бойтесь использовать эту процедуру, т.к. можно навредить самому себе :)
+  Password -- это ваш текущий пароль. Если пароль который вы передали будет кривой, то вы получите
+  <b>OnUnregisterBadPassword event</b>, иначе <b>OnUnregisterOk event</b>(и будете автоматически отключены от сервера).
+
+  <p><b>procedure ChangePassword(const NewPassword: String);</b><br>
+  Меняет текущий пароль пользователя на NewPassword. Должно все это менятся пока вы в онлайне. <b>property Password: String</b> при этом не изменяется(вы должны это сделать самостоятельно).
+  После успешной смены пароля вы получите <b>OnChangePasswordOk event</b>.
+
+  <p><b>function DirectConnectionEstabilished(UIN: LongWord): Boolean; (DC)</b><br>
+  Возвращает True если примое соединение с UIN было установлено.
+
+  <p><b>function SendContacts(UIN: LongWord; Contacts: TStringList): Word; (DC)</b><br>
+  Посылает контакты UIN'у. Каждая строка Contacts TStirngList имеет следующий формат:<br>
+  UIN человека=его NickName, NickName может быть неуказан(пустым).<br>
+  Возвращает ID как результат - уникальный идентификатор если прямое соединение с UIN было установлено, иначе - 0. В ответ вы получите <b>OnDirectPacketAck event</b> с этим ID.<br>
+  Пример:<br>
+  <pre>
+  procedure TMainForm.Button2Click(Sender: TObject);
+  var
+    List: TStringList;
+  begin
+    List := TStringList.Create;
+    List.Add('52341243=Monica');
+    List.Add('12333391=Бритний Спеарзсс');
+    List.Add('8213876=');
+    List.Add('1234333=Bob');
+    List.Add('925464568=');
+    ICQClient1.SendContacts(4024781, List);
+    List.Free;
+  end;
+  </pre>
+
+  <p><b>function RequestContacts(UIN: LongWord; const Reason: String): Word; (DC)</b>
+  Посылает запрос контактов UIN'у.<br>
+  Возвращает ID как результат - уникальный идентификатор если прямое соединение с UIN было установлено, иначе - 0. В ответ вы получите <b>OnDirectPacketAck event</b> с этим ID.<br>
+  Пример: <br>
+  <pre>
+  procedure TMainForm.Button1Click(Sender: TObject);
+  begin
+    ICQClient1.RequestContacts(4024781, 'Кинь мне пару контактов плз :)');
+  end;
+  </pre>
+
+
+
+</td></tr>
+
+<tr><td width="750">
+<p><A name="EVENTS"><font size=+1><br><b>Events(События)</b></font></A><br>
+  <p><b>OnAddedYou(Sender: TObject; UIN: String)</b><br>
+  Вызывается, когда UIN добавляет вас в свой контакт лист.
+
+  <p><b>OnAdvancedMsgAck(Sender: TObject; UIN: String; ID: Word; AcceptType: Byte; AcceptMsg: String)</b><br>
+  Ответ на <b>SendMessageAdvanced procedure</b>.<br> Это подтверждение, что пользователь получил ваше сообщение. Если это извещение не получено, вы можете послать выше сообщение еще пару раз.<br>
+  ID - случайное значение, которое было передано в <b>SendMessageAdvanced procedure</b>.<br>
+  AcceptType может быть одним из:<br>
+  ACC_NORMAL - нормально принято<br>
+  ACC_NO_OCCUPIED - не принято, occupied статус<br>
+  ACC_NO_DND - не принято, dnd статус<br>
+  ACC_AWAY - принято но в away статусе<br>
+  ACC_NA - принято, но в na статусе<br>
+  ACC_CONTACTLST - принято в contact list (не мигать в трэе)<br>
+  AcceptMsg - это авто-ответ, вроде: "User is currently N/A. You can leave him/her a message".
+
+  <p><b>OnAutoMsgResponse(Sender: TObject; UIN: String; ID: Word; RespStatus: Byte; Msg: String);</b><br>
+  Ответ на <b>RequestAwayMsg procedure</b>. ID & RespStatus такие же как вы передавали в RequestAwayMsg procedure,
+    Msg -- это текст авто-ответа.
+
+  <p><b>OnChangePasswordOk(Sender: TObject);</b><br>
+  Ответ на <b>ChangePassword procedure</b>. Означает, что ваш пароль был успешно изменен.
+
+
+
+  <!--<p><b>OnConnect(Sender: TObject)</b><br>
+  Called every time after successfull connect to server. It's just a connect, not login, login sequence consists of 2 connects to two different servers (login server, where you receive a cookie and main(work) server).-->
+
+  <!--<p><b>OnConnectError(Sender: TObject)</b><br>
+  Called when connection to server failed. (if network is down or address specified is incorrect or smth else).-->
+
+  <p><b>OnConnectionFailed(Sender: TObject)</b><br>
+  Вызывается, когда вы не можете подключиться к серверу либо сервер вас отключил по другим причинам.
+
+  <p><b>OnContactListRecv(Sender: TObject; UIN: String; ContactList: TStringList); (DC)</b><br>
+  Вызывается, когда UIN посылет вам свои контакты. Каждая строка в ContactList имеет следующий формат:
+  UIN пользователя=его NickName. После использования ContactList TStringList вы *должны* его уничтожить (ContactList.Free).
+
+  <p><b>OnContactListRequest(Sender: TObject; UIN, Reason: String); (DC)</b><br>
+  Вызывается когда UIN запрашивает у вас контакты, не дайте ему умереть со скуки :)
+
+  <p><b>OnDirectPacketAck(Sender: TObject; ID: Word); (DC)</b><br>
+  Ответ на любой отосланый прямой пакет(SendMessageDirect, RequestContacts, и тд.), который был успешно получен и обработан ICQ'ей которой вы его посылали.
+  ID = значение которое возвращают DC (Direct Connection) функции.
+
+
+  <!--<p><b>OnDisconnect(Sender: TObject)</b><br>
+  Called when you disconnect from server.-->
+
+  <p><b>OnLogin(Sender: TObject)</b><br>
+  Вызывается при успешном логине.
+
+  <p><b>OnMessageRecv(Sender: TObject; Msg, UIN: String);</b><br>
+  Вызывается при получении сообщения (через сервер или напрямую).<br>
+
+  <p><b>OnNewUINRefused(Sender: TObject);</b><br>
+  Ответ на <b>RegisterNewUIN procedure</b>. Означает, что сервер не может выделить
+  вам номер, может вы хотите их слишком много или делаете это слишком часто? ;)
+
+  <p><b>OnNewUINRegistered(Sender: TObject; UIN: String);</b><br>
+  Ответ на <b>RegisterNewUIN procedure</b>. Вам выделен новый UIN, можете смело использовать его при следующем логине.
+
+  <p><b>OnOfflineMsgRecv(Sender: TObject; Msg, UIN: String);</b><br>
+  Вызывается когда UIN послал сообщение, пока вы были в офлайне.
+
+  <p><b>OnOfflineURLRecv(Sender: TObject; Description, URL, UIN: String);</b><br>
+  Вызывается когда URL послал сообщение, пока вы были в офлайне.
+
+  <p><b>OnPktDirectParse(Sender: TObject; Buffer: Pointer; BufLen: Cardinal; Incoming: Boolean); (DC)</b><br>
+  Вызывается каждый раз, когда TICQClient посылает или получает какой-либо пакет посланый через прямое соединение. Используется обычно разработчиками. Пакеты могут быть шифроваными.
+
+  <p><b>OnPktParse(Sender: TObject; Buffer: Pointer; BufLen: Cardinal; Incoming: Boolean);</b><br>
+  Вызывается каждый раз, когда TICQClient посылает или получает какой-либо пакет. Используется обычно разработчиками.
+
+  <p><b>OnServerListRecv(Sender: TObject; SrvContactList: TList);</b><br>
+  Ответ на <b>RequestContactList procedure</b>.<br> В конце вы *обязательно* должны вызвать
+  <b>DestroyUINList procedure</b> с параметром = SrvContactList, иначе у вашего приложения будут утечки памяти.
+  Каждый элемент SrvContactList'а это указатель на следующую структуру:
+  <pre>
+  TUINEntry = record
+    UIN: LongWord;            //UIN в контакт листе
+    Nick: ShortString;        //Nick, может быть пустым
+    CType: Word;              //Type, может быть U_NORMAL(нормальный пользователь), U_VISIBLE_LIST(пользователь в visible листе)
+                              //, U_INVISIBLE_LIST(пользователь в invisible листе), U_IGNORE_LIST(пользователь в ignore листе)
+    CTag: Word;               //Зарезервировано для внутренного использования
+    CGroup: ShortString;      //Группа в которой содержится пользователь (например General, Friends, etc).
+  end;
+  </pre>
+
+  Пример использования:
+  <pre>
+  procedure TMainForm.ICQClient1ServerListRecv(Sender: TObject;
+    SrvContactList: TList);
+  var
+    i: Word;
+    UserInfo: TUINEntry;
+  begin
+     if SrvContactList.Count > 0 then
+       for i := 0 to SrvContactList.Count - 1 do
+       begin
+         UserInfo := PUINEntry(SrvContactList.Items[i])^;
+         Memo1.Lines.Add(UserInfo.Nick + ' в группе ' + UserInfo.CGroup
+           + ' и его UIN ' + IntToStr(UserInfo.UIN));
+       end;
+     ICQClient1.DestroyUINList(SrvContactList);
+  end;
+  </pre>
+
+  <p><b>OnStatusChange(Sender: TObject; UIN: String; Status: Cardinal);</b><br>
+  Вызывается когда UIN из вашего контакт листа меняет стататус или идет в онлайн. Статусы можно найти в <b>property Status</b>.
+  Так же можно использовать <b>StatusToStr(Value: LongWord): String function</b> из ICQWorks.pas, чтоб сконвертировать из числового представления статуса в строковое.
+
+  <p><b>OnUnregisterBadPassword(Sender: TObject);</b><br>
+  Ответ на <b>UnregisterUIN</b> procedure. Значит, что пароль переданый в <b>UnregisterUIN</b> был неверным.
+
+  <p><b>OnUnregisterOk(Sender: TObject);</b><br>
+  Ответ на <b>UnregisterUIN</b> procedure. Вызвается как только ваш UIN был стерт.
+  После этого вы будете автоматически отключены от сервера.
+
+  <p><b>OnURLRecv(Sender: TObject; Description, URL, UIN: String);</b><br>
+  Вызывается когда вы получаете URL (через сервер или напрямую).
+
+  <p><b>OnUserFound(Sender: TObject; UIN, Nick, FirstName, LastName, Email: String; Status: Word; Gender, Age: Byte;
+    SearchComplete: Boolean);</b><br>
+  Ответ на <b>SearchByMail, SearchByUIN, SearchByName, SearchRandom, SearchWhitePages procedures</b>. 
+  SearchComplete = TRUE, когда вы получаете последнего найденого пользователя(т.е. окончание списка найденых людей).
+
+  <p><b>OnUserGeneralInfo(Sender: TObject; UIN, NickName, FirstName, LastName, Email, City, State, Phone, Fax, Street, Cellular, Zip, Country: String; TimeZone: Byte; PublishEmail: Boolean);</b><br>
+  Ответ на <b>RequestInfo procedure</b>. Чтобы сконвертировать TimeZone в нормальное представление(типа +2:00), вы должны сделать слудущее:
+  <pre>
+  var
+    S: String;
+  <....>
+  S := IntToStr(- ShortInt(TimeZone) div 2) + ':' + IntToStr(Abs(ShortInt(TimeZone) mod 2 * 30));
+  </pre>
+
+  <p><b>OnUserInfoAbout(Sender: TObject; UIN, About: String);</b><br>
+  Ответ на <b>RequestInfo procedure</b>.
+
+  <p><b>UserInfoBackground(Sender: TObject; UIN: String; Pasts, Affiliations: TStringList);</b><br>  
+  Ответ на <b>RequestInfo procedure</b>. Если у вас вызывается это событие, тогда вы *обязательно должны* разрушить
+  Pasts и Affiliations StringLists, после их использования(Pasts.Free; Affiliations.Free);
+
+  <p><b>OnInfoInterests(Sender: TObject; UIN: String; Interests: TStringList);</b><br>
+  Ответ на <b>RequestInfo procedure</b>. Если у вас вызывается это событие, тогда вы *обязательно должны* разрушить Interests StringList, после его использования(Interests.Free).
+
+  <p><b>OnUserInfoMore(Sender: TObject; UIN: String; Age: Word; Gender: Byte; HomePage: String; BirthYear, BirthMonth, BirthDay: Word; Lang1, Lang2, Lang3: String);</b><br>
+  Ответ на <b>RequestInfo procedure</b>.
+
+  <p><b>OnUserInfoMoreEmails(Sender: TObject; UIN: String; Emails: TStringList);</b><br>
+  Ответ на <b>RequestInfo procedure</b>. Если у вас вызывается это событие, тогда вы *обязательно должны* разрушить Emails StringList, после его использования(Emails.Free).
+
+  <p><b>OnUserNotFound(Sender: TObject);</b><br>
+  Ответ на <b>SearchByMail, SearchByUIN, SearchByName, SearchRandom, SearchWhitePages procedures</b>. Вызывается, когда такой пользователь не найден.
+
+  <p><b>OnUserOffline(Sender: TObject; UIN: String);</b><br>
+  Вызывается когда UIN из вашего листа уходит в офлайн.
+
+  <p><b>OnUserWorkInfo(Sender: TObject; UIN, WCity, WState, WPhone, WFax, FAddress, WZip, WCountry, WCompany, WDepartment, WPosition, WOccupation, WHomePage: String);</b><br>
+  Ответ на <b>RequestInfo procedure</b>.
+
+
+</td></tr>
+
+
+<tr><td width="750">
+<p><A name="AUTHOR"><font size=+1><br><b>Contact info</b></font></A><br>
+  Последние обновления можно найти всегда по адресу: <a href="http://www.cobans.net">http://www.cobans.net</a>.<br>
+
+  Если вы хотите получать email'ы об обновлении TICQClient'а, тогда пишите: <a href="mailto:alex@ritlabs.com?subject=join_ticqclient_update">mailto:alex@ritlabs.com?subject=join_ticqclient_update</a>.<br>
+  Есть какие-либо предложения, ошибки, пожелания? Тогда пишите: <a href="mailto: alex@ritlabs.com">alex@ritlabs.com</a>, ICQ: #<a href="http://web.icq.com/whitepages/about_me/1,,,00.html?Uin=4024781">4024781</a>.<br>
+  Если вы хотите вступить в клуб разработчиков TICQClient'а, пишите!<br>
+</table>
+<br>
+(C) 2002, Демченко Александр, Молдавия, Кишинев
+</body>
+</html>

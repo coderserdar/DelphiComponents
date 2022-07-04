@@ -1,0 +1,65 @@
+{
+=======================================================================
+
+    KLIB v100
+    Serious Software Made in Brazil
+    Copyright 1997-1999 by KnowHow Informatica Ltda.
+
+
+            home-page: www.knowhow-online.com.br
+    technical support: support@knowhow-online.com.br
+  general information: inf@knowhow-online.com.br
+
+
+    Unless otherwise noted, all materials provided in this release
+    are copyright © 1997-1999 by KnowHow Informatica Ltda.
+
+=======================================================================
+}
+
+{
+	Leave the explicity rebuild package option for this package because dependant
+	packages rely on this setting
+}
+package krpSystem100;
+
+{$R *.RES}
+{$ALIGN ON}
+{$ASSERTIONS OFF}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS OFF}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE ON}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $00400000}
+{$DESCRIPTION 'KnowHow System Package'}
+{$RUNONLY}
+{$IMPLICITBUILD OFF}
+
+requires
+  vcl40;
+
+contains
+  uksyUtils,
+  uksyConsts,
+  uksyResStr,
+  uksyTypes,
+  uksyClasses,
+  uksyShortCuts,
+  uksyRegCheck,
+  uksyPackReg;
+
+end.

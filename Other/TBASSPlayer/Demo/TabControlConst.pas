@@ -1,0 +1,96 @@
+unit TabControlConst;
+
+interface
+
+// TCM_* - Tab Control Message constants .
+
+const
+
+   TCM_FIRST = $1300;
+
+   TCM_GETIMAGELIST = (TCM_FIRST + 2);
+    // (HIMAGELIST)SNDMSG((hwnd), TCM_GETIMAGELIST, 0, 0L)
+
+   TCM_SETIMAGELIST = (TCM_FIRST + 3);
+    // (HIMAGELIST)SNDMSG((hwnd), TCM_SETIMAGELIST, 0, (LPARAM)(UINT)(HIMAGELIST)(himl))
+
+   TCM_GETITEMCOUNT = (TCM_FIRST + 4);
+    // (int)SNDMSG((hwnd), TCM_GETITEMCOUNT, 0, 0L)
+
+   TCM_GETITEMA = (TCM_FIRST + 5);
+
+   TCM_GETITEMW = (TCM_FIRST + 60);
+    // (BOOL)SNDMSG((hwnd), TCM_GETITEM, (WPARAM)(int)iItem, (LPARAM)(TC_ITEM FAR*)(pitem))
+
+   TCM_SETITEMA = (TCM_FIRST + 6);
+
+   TCM_SETITEMW = (TCM_FIRST + 61);
+    // (BOOL)SNDMSG((hwnd), TCM_SETITEM, (WPARAM)(int)iItem, (LPARAM)(TC_ITEM FAR*)(pitem))
+
+   TCM_INSERTITEMA = (TCM_FIRST + 7);
+
+   TCM_INSERTITEMW = (TCM_FIRST + 62);
+    // (int)SNDMSG((hwnd), TCM_INSERTITEM, (WPARAM)(int)iItem, (LPARAM)(const TC_ITEM FAR*)(pitem))
+
+   TCM_DELETEITEM = (TCM_FIRST + 8);
+    // (BOOL)SNDMSG((hwnd), TCM_DELETEITEM, (WPARAM)(int)(i), 0L)
+
+   TCM_DELETEALLITEMS = (TCM_FIRST + 9);
+    // (BOOL)SNDMSG((hwnd), TCM_DELETEALLITEMS, 0, 0L)
+
+   TCM_GETITEMRECT = (TCM_FIRST + 10);
+    // (BOOL)SNDMSG((hwnd), TCM_GETITEMRECT, (WPARAM)(int)(i), (LPARAM)(RECT FAR*)(prc))
+
+   TCM_GETCURSEL = (TCM_FIRST + 11);
+    // (int)SNDMSG((hwnd), TCM_GETCURSEL, 0, 0)
+
+   TCM_SETCURSEL = (TCM_FIRST + 12);
+    // (int)SNDMSG((hwnd), TCM_SETCURSEL, (WPARAM)i, 0)
+
+   TCM_HITTEST = (TCM_FIRST + 13);
+    // (int)SNDMSG((hwndTC), TCM_HITTEST, 0, (LPARAM)(TC_HITTESTINFO FAR*)(pinfo))
+
+   TCM_SETITEMEXTRA = (TCM_FIRST + 14);
+    // (BOOL)SNDMSG((hwndTC), TCM_SETITEMEXTRA, (WPARAM)(cb), 0L)
+
+   TCM_ADJUSTRECT = (TCM_FIRST + 40);
+    // (int)SNDMSG(hwnd, TCM_ADJUSTRECT, (WPARAM)(BOOL)bLarger, (LPARAM)(RECT FAR *)prc)
+
+   TCM_SETITEMSIZE = (TCM_FIRST + 41);
+    // (DWORD)SNDMSG((hwnd), TCM_SETITEMSIZE, 0, MAKELPARAM(x,y))
+
+   TCM_REMOVEIMAGE = (TCM_FIRST + 42);
+    //     (void)SNDMSG((hwnd), TCM_REMOVEIMAGE, i, 0L)
+
+   TCM_SETPADDING = (TCM_FIRST + 43);
+    //     (void)SNDMSG((hwnd), TCM_SETPADDING, 0, MAKELPARAM(cx, cy))
+
+   TCM_GETROWCOUNT = (TCM_FIRST + 44);
+    //     (int)SNDMSG((hwnd), TCM_GETROWCOUNT, 0, 0L)
+
+   TCM_GETCURFOCUS = (TCM_FIRST + 47);
+    // (int)SNDMSG((hwnd), TCM_GETCURFOCUS, 0, 0)
+
+   TCM_SETCURFOCUS = (TCM_FIRST + 48);
+    // SNDMSG((hwnd),TCM_SETCURFOCUS, i, 0)
+
+   TCM_SETMINTABWIDTH = (TCM_FIRST + 49);
+    //     (int)SNDMSG((hwnd), TCM_SETMINTABWIDTH, 0, x)
+
+   TCM_DESELECTALL = (TCM_FIRST + 50);
+    //     (void)SNDMSG((hwnd), TCM_DESELECTALL, fExcludeFocus, 0)
+
+   TCM_HIGHLIGHTITEM = (TCM_FIRST + 51);
+    // (BOOL)SNDMSG((hwnd), TCM_HIGHLIGHTITEM, (WPARAM)i, (LPARAM)MAKELONG (fHighlight, 0))
+
+   TCM_SETEXTENDEDSTYLE = (TCM_FIRST + 52); // optional wParam == mask
+    //     (DWORD)SNDMSG((hwnd), TCM_SETEXTENDEDSTYLE, 0, dw)
+
+   TCM_GETEXTENDEDSTYLE = (TCM_FIRST + 53);
+    //     (DWORD)SNDMSG((hwnd), TCM_GETEXTENDEDSTYLE, 0, 0)
+
+
+
+implementation
+
+end.

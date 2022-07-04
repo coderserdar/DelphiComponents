@@ -1,0 +1,166 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!-- C++Builder XML Project -->
+<PROJECT>
+  <MACROS>
+    <VERSION value="BCB.06.00"/>
+    <PROJECT value="EXMLPro.exe"/>
+    <OBJFILES value="EXMLPro.obj ExMain.obj 
+      ExAttr.obj ExCommnt.obj 
+      ExURL.obj ExText.obj 
+      ExUtil.obj ExSelAtt.obj 
+      ExProcIn.obj exPrefs.obj 
+      exErr.obj ExElemnt.obj 
+      ExChildW.obj ExView.obj 
+      ExProps.obj"/>
+    <RESFILES value="EXMLPro.res"/>
+    <IDLFILES value=""/>
+    <IDLGENFILES value=""/>
+    <DEFFILE value=""/>
+    <RESDEPEN value="$(RESFILES) ExMain.dfm 
+      ExAttr.dfm ExCommnt.dfm 
+      ExURL.dfm ExText.dfm 
+      ExSelAtt.dfm ExProcIn.dfm 
+      exPrefs.dfm exErr.dfm 
+      ExElemnt.dfm ExChildW.dfm 
+      ExView.dfm"/>
+    <LIBFILES value=""/>
+    <LIBRARIES value="X257PR61.lib X257CR61.lib vcl.lib rtl.lib"/>
+    <SPARELIBS value="rtl.lib vcl.lib X257CR61.lib X257PR61.lib"/>
+    <PACKAGES value="vclx.bpi rtl.bpi vcl.bpi dbrtl.bpi vcldb.bpi bdertl.bpi vcldbx.bpi 
+      bcbsmp.bpi dclocx.bpi qrpt.bpi teeui.bpi vclsmp.bpi teedb.bpi tee.bpi 
+      ibsmp.bpi nmfast.bpi inetdb.bpi inet.bpi"/>
+    <PATHCPP value=".;..\..\CBuildr5\EXMLPro;..\..\CBuildr5\EXMLPro;..\..\CBuildr5\EXMLPro;..\..\CBuildr5\EXMLPro;..\..\CBuildr5\EXMLPro;..\..\CBuildr5\EXMLPro;..\..\CBuildr5\EXMLPro;..\..\CBuildr5\EXMLPro;..\..\CBuildr5\EXMLPro;..\..\CBuildr5\EXMLPro;..\..\CBuildr5\EXMLPro;..\..\CBuildr5\EXMLPro;..\..\CBuildr5\EXMLPro"/>
+    <PATHPAS value=".;..\..\CBuildr5\EXMLPro"/>
+    <PATHRC value=".;"/>
+    <PATHASM value=".;"/>
+    <DEBUGLIBPATH value="$(BCB)\lib\debug"/>
+    <RELEASELIBPATH value="$(BCB)\lib\release"/>
+    <LINKER value="ilink32"/>
+    <USERDEFINES value="XPDPRO"/>
+    <SYSDEFINES value="NO_STRICT;_RTLDLL;_VIS_NOLIB"/>
+    <MAINSOURCE value="EXMLPro.cpp"/>
+    <INCLUDEPATH value="..\..\CBuildr5\EXMLPro;..\..\CBuildr6\EXMLPro;..\..\..;$(BCB)\projects;$(BCB)\include;$(BCB)\include\vcl;..\..\..\headers\hpp6;..\..\..\hpp6"/>
+    <LIBPATH value="..\..\CBuildr5\EXMLPro;..\..\CBuildr6\EXMLPro;..\..\..;$(BCB)\projects;$(BCB)\lib\obj;$(BCB)\lib"/>
+    <WARNINGS value="-w-par -w-8027 -w-8026"/>
+    <WARNOPTSTR value=""/>
+    <OTHERFILES value=""/>
+  </MACROS>
+  <OPTIONS>
+    <IDLCFLAGS value="-I..\..\CBuildr5\EXMLPro -I..\..\CBuildr6\EXMLPro -I..\..\.. 
+      -I$(BCB)\projects -I$(BCB)\include -I$(BCB)\include\vcl 
+      -I..\..\..\headers\hpp6 -I..\..\..\hpp6 -src_suffix cpp -DXPDPRO -boa"/>
+    <CFLAG1 value="-Od -H=e:\dev\bcb\5.0\lib\vcl60.csm -Hc -Vx -Ve -Tkh30000 -X- -r- -a8 -b- 
+      -k -y -v -vi- -c -tW -tWM"/>
+    <PFLAGS value="-$YD -$W -$O- -$A8 -v -M -JPHNE"/>
+    <RFLAGS value=""/>
+    <AFLAGS value="/mx /w2 /zi"/>
+    <LFLAGS value="-D&quot;&quot; -aa -Tpe -x -Gn -v"/>
+    <OTHERFILES value=""/>
+  </OPTIONS>
+  <LINKER>
+    <ALLOBJ value="c0w32.obj Memmgr.Lib sysinit.obj $(OBJFILES)"/>
+    <ALLRES value="$(RESFILES)"/>
+    <ALLLIB value="$(LIBFILES) $(LIBRARIES) import32.lib cp32mti.lib"/>
+    <OTHERFILES value=""/>
+  </LINKER>
+  <FILELIST>
+      <FILE FILENAME="EXMLPro.cpp" FORMNAME="" UNITNAME="EXMLPro" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="EXMLPro.res" FORMNAME="" UNITNAME="EXMLPro.res" CONTAINERID="ResTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="ExMain.cpp" FORMNAME="MainForm" UNITNAME="ExMain" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="ExAttr.cpp" FORMNAME="AttributeForm" UNITNAME="ExAttr" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="ExCommnt.cpp" FORMNAME="CommentForm" UNITNAME="ExCommnt" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="ExURL.cpp" FORMNAME="URLForm" UNITNAME="ExURL" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="ExText.cpp" FORMNAME="TextForm" UNITNAME="ExText" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="ExUtil.cpp" FORMNAME="" UNITNAME="ExUtil" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="ExSelAtt.cpp" FORMNAME="SelAttrsForm" UNITNAME="ExSelAtt" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="ExProcIn.cpp" FORMNAME="PIForm" UNITNAME="ExProcIn" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="exPrefs.cpp" FORMNAME="PrefsForm" UNITNAME="exPrefs" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="exErr.cpp" FORMNAME="frmErrors" UNITNAME="exErr" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="ExElemnt.cpp" FORMNAME="ElementForm" UNITNAME="ExElemnt" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="ExChildW.cpp" FORMNAME="XMLChild" UNITNAME="ExChildW" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="ExView.cpp" FORMNAME="frmPreview" UNITNAME="ExView" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="ExProps.pas" FORMNAME="" UNITNAME="ExProps" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+  </FILELIST>
+  <BUILDTOOLS>
+  </BUILDTOOLS>
+
+  <IDEOPTIONS>
+[Version Info]
+IncludeVerInfo=0
+AutoIncBuild=0
+MajorVer=1
+MinorVer=0
+Release=0
+Build=0
+Debug=0
+PreRelease=0
+Special=0
+Private=0
+DLL=0
+Locale=1033
+CodePage=1252
+
+[Version Info Keys]
+CompanyName=
+FileDescription=
+FileVersion=1.0.0.0
+InternalName=
+LegalCopyright=
+LegalTrademarks=
+OriginalFilename=
+ProductName=
+ProductVersion=1.0.0.0
+Comments=
+
+[HistoryLists\hlIncludePath]
+Count=4
+Item0=..\..\CBuildr6\EXMLPro;..\..\..;$(BCB)\projects;$(BCB)\include;$(BCB)\include\vcl;..\..\..\headers\hpp6;..\..\..\hpp6
+Item1=..\..\CBuildr5\EXMLPro;..\..\..;$(BCB)\projects;$(BCB)\include;$(BCB)\include\vcl;..\..\..\headers\hpp5;..\..\..\hpp5
+Item2=..\..\..;$(BCB)\projects;$(BCB)\include;$(BCB)\include\vcl;..\..\..\headers\hpp5;..\..\..\hpp5
+Item3=..\..\..;$(BCB)\projects;$(BCB)\include;$(BCB)\include\vcl;..\..\..\headers\hpp5
+
+[HistoryLists\hlLibraryPath]
+Count=3
+Item0=..\..\CBuildr6\EXMLPro;..\..\..;$(BCB)\projects;$(BCB)\lib\obj;$(BCB)\lib
+Item1=..\..\CBuildr5\EXMLPro;..\..\..;$(BCB)\projects;$(BCB)\lib\obj;$(BCB)\lib
+Item2=..\..\..;$(BCB)\projects;$(BCB)\lib\obj;$(BCB)\lib
+
+[HistoryLists\hlDebugSourcePath]
+Count=1
+Item0=$(BCB)\source\vcl
+
+[HistoryLists\hlConditionals]
+Count=1
+Item0=XPDPRO
+
+[Debugging]
+DebugSourceDirs=$(BCB)\source\vcl
+
+[Parameters]
+RunParams=
+Launcher=
+UseLauncher=0
+DebugCWD=
+HostApplication=
+RemoteHost=
+RemotePath=
+RemoteLauncher=
+RemoteCWD=
+RemoteDebug=0
+
+[Compiler]
+ShowInfoMsgs=0
+LinkDebugVcl=1
+LinkCGLIB=0
+
+[CORBA]
+AddServerUnit=1
+AddClientUnit=1
+PrecompiledHeaders=1
+
+[Language]
+ActiveLang=
+ProjectLang=
+RootDir=
+  </IDEOPTIONS>
+</PROJECT>

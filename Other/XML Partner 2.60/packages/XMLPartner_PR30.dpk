@@ -1,0 +1,58 @@
+package XMLPartner_PR30;
+
+{$R *.RES}
+{$R '..\source\XpvFlHTM.dcr'}
+{$R '..\source\XpvFlPrt.dcr'}
+{$R '..\source\XpvFlRTF.dcr'}
+{$R '..\source\XpvFlXML.dcr'}
+{$R '..\source\XpvXSLPr.dcr'}
+{$ALIGN ON}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $00400000}
+{$DESCRIPTION 'TurboPower XMLPartner Professional Runtime package - VCL30'}
+{$RUNONLY}
+{$IMPLICITBUILD OFF}
+
+requires
+  vcl30;
+
+contains
+  ..\source\XpAboutw,
+  ..\source\..\source\XpBase,
+  ..\source\XpChrflt,
+  ..\source\XpDOM,
+  ..\source\XpExcept,
+  ..\source\XpvFlBas,
+  ..\source\XpvFlHTM,
+  ..\source\XpvFlPrt,
+  ..\source\XpvFlRTF,
+  ..\source\XpvFlXML,
+  ..\source\XpvFOHsh,
+  ..\source\XpHash,
+  ..\source\XpInet,
+  ..\source\XpParser,
+  ..\source\XpSort,
+  ..\source\XpXSLCon,
+  ..\source\XpvXSLFO,
+  ..\source\XpvXSLPr,
+  ..\source\XpvXSLT;
+
+end.

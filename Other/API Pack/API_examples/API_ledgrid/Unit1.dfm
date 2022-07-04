@@ -1,0 +1,105 @@
+object Form1: TForm1
+  Left = 237
+  Top = 262
+  Width = 524
+  Height = 202
+  Caption = 'Form1'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  OldCreateOrder = False
+  OnCreate = FormCreate
+  OnResize = FormResize
+  PixelsPerInch = 96
+  TextHeight = 13
+  object API_ledgrid1: TAPI_ledgrid
+    Left = 0
+    Top = 0
+    Width = 416
+    Height = 168
+    Align = alClient
+    Color = clBackground
+    ParentColor = False
+    OnMouseMove = API_ledgrid1MouseMove
+    XCount = 15
+    YCount = 5
+    Transparent = False
+    TransparentColor = clBlack
+    Spacing = 2
+    BoolGradient = False
+    BoolTrue = clGreen
+    BoolTrue2 = 16512
+    BoolFalse = clRed
+    BoolFalse2 = clGray
+  end
+  object Panel1: TPanel
+    Left = 416
+    Top = 0
+    Width = 100
+    Height = 168
+    Align = alRight
+    TabOrder = 0
+    object Label1: TLabel
+      Left = 8
+      Top = 8
+      Width = 28
+      Height = 13
+      Caption = 'x=, y='
+    end
+    object API_trackbar1: TAPI_trackbar
+      Left = 6
+      Top = 27
+      Width = 91
+      Height = 24
+      Maximum = 20.000000000000000000
+      Minimum = 2.000000000000000000
+      Value = 10.000000000000000000
+      ColorBorder = clBlack
+      ColorBackground = clBtnFace
+      ColorThumb = clBlack
+      ColorThumbBorder = clSilver
+      ThumbWidth = 5
+      ThumbHeight = 20
+      ColorTrack1 = clGreen
+      ColorTrack1Border = clSilver
+      ColorTrack2 = clRed
+      ColorTrack2Border = clSilver
+      TrackHeight = 6
+      Orientation = TTO_horizontal
+      OnChange = API_trackbar1Change
+      Steps = 0
+    end
+    object API_trackbar2: TAPI_trackbar
+      Left = 6
+      Top = 57
+      Width = 91
+      Height = 24
+      Maximum = 20.000000000000000000
+      Minimum = 2.000000000000000000
+      Value = 10.000000000000000000
+      ColorBorder = clBlack
+      ColorBackground = clBtnFace
+      ColorThumb = clBlack
+      ColorThumbBorder = clSilver
+      ThumbWidth = 5
+      ThumbHeight = 20
+      ColorTrack1 = clGreen
+      ColorTrack1Border = clSilver
+      ColorTrack2 = clRed
+      ColorTrack2Border = clSilver
+      TrackHeight = 6
+      Orientation = TTO_horizontal
+      OnChange = API_trackbar1Change
+      Steps = 0
+    end
+  end
+  object Timer1: TTimer
+    Interval = 100
+    OnTimer = Timer1Timer
+    Left = 16
+    Top = 16
+  end
+end

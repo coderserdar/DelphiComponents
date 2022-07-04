@@ -1,0 +1,67 @@
+package RLibLinuxK2;
+
+{$R *.res}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'FortesReport CLX Library'}
+{$IMPLICITBUILD OFF}
+{$DEFINE KYLIX}
+{$DEFINE KYLIX2}
+{$DEFINE CLX}
+requires
+  std,
+  baseclx,
+  visualclx,
+  visualdbclx,
+  dataclx;
+
+contains
+  RLReport in 'RLReport.pas',
+  RLUtils in 'RLUtils.pas',
+  RLPreviewForm in 'RLPreviewForm.pas',
+  RLPreview in 'RLPreview.pas',
+  RLFeedBack in 'RLFeedBack.pas',
+  RLMetaFile in 'RLMetaFile.pas',
+  RLParser in 'RLParser.pas',
+  RLConsts in 'RLConsts.pas',
+  RLTypes in 'RLTypes.pas',
+  RLFilters in 'RLFilters.pas',
+  RLDraftFilter in 'RLDraftFilter.pas',
+  RLPrintDialog in 'RLPrintDialog.pas',
+  RLSaveDialog in 'RLSaveDialog.pas',
+  RLRichFilter in 'RLRichFilter.pas',
+  RLHTMLFilter in 'RLHTMLFilter.pas',
+  RLXLSFilter in 'RLXLSFilter.pas',
+  RLPrinters in 'RLPrinters.pas',
+  RLBarcode in 'RLBarcode.pas',
+  RLPDFFilter in 'RLPDFFilter.pas',
+  RLRichText in 'RLRichText.pas',
+  RLSpoolFilter in 'RLSpoolFilter.pas',
+  RLMetaCLX in 'RLMetaCLX.pas',
+  RLFindDialog in 'RLFindDialog.pas',
+  RLAbout in 'RLAbout.pas',
+  RLReg in 'RLReg.pas',
+  RLDesign in 'RLDesign.pas';
+
+
+end.
+

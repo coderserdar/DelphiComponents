@@ -1,0 +1,40 @@
+package tpxprod;
+
+{$R *.res}
+{$R '..\source\XpQReg.dcr'}
+{$ALIGN 8}
+{$ASSERTIONS OFF}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS OFF}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'XMLPartner Professional XX Designtime package - CLX'}
+{$DESIGNONLY}
+{$IMPLICITBUILD ON}
+requires
+  baseclx,
+  dataclx,
+  visualclx,
+  tpxpror;
+
+contains
+  XpQReg in '..\source\XpQReg.pas';
+
+
+
+end.

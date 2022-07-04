@@ -1,0 +1,40 @@
+package ScrCamD12_Package;
+
+{$R *.res}
+{$R '..\Source\scReg.dcr'}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'TScreenCamera v4.7.1.0'}
+{$IMPLICITBUILD ON}
+
+requires
+  vcljpg,
+  vcl,
+  rtl,
+  designide,
+  vclactnband,
+  vclx;
+
+contains
+  scReg in '..\Source\scReg.pas';
+
+end.

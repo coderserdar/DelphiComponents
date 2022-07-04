@@ -1,0 +1,140 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!-- C++Builder XML Project -->
+<PROJECT>
+  <MACROS>
+    <VERSION value="BCB.05.03"/>
+    <PROJECT value="v103f251.bpl"/>
+    <OBJFILES value="..\source\VpRegF2.obj ..\source\VpFF2DS.obj v103f251.obj"/>
+    <RESFILES value="v103f251.res"/>
+    <IDLFILES value=""/>
+    <IDLGENFILES value=""/>
+    <DEFFILE value=""/>
+    <RESDEPEN value="$(RESFILES)"/>
+    <LIBFILES value=""/>
+    <LIBRARIES value=""/>
+    <SPARELIBS value="vcl50.lib vclx50.lib vcldb50.lib"/>
+    <PACKAGES value="vclx50.bpi vcl50.bpi vcldb50.bpi V103_D51.bpi"/>
+    <PATHCPP value=".;"/>
+    <PATHPAS value=".;"/>
+    <PATHRC value=".;"/>
+    <PATHASM value=".;"/>
+    <DEBUGLIBPATH value="$(BCB)\lib\debug"/>
+    <RELEASELIBPATH value="$(BCB)\lib\release"/>
+    <LINKER value="ilink32"/>
+    <USERDEFINES value=""/>
+    <SYSDEFINES value="NO_STRICT;_VIS_NOLIB;USEPACKAGES"/>
+    <MAINSOURCE value="v103f251.cpp"/>
+    <INCLUDEPATH value="..\source;$(BCB)\include;$(BCB)\include\vcl;..\source"/>
+    <LIBPATH value="..\source;$(BCB)\lib\release;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib;$(BCB)\source\toolsapi;..\source"/>
+    <WARNINGS value="-w-par -w-8027 -w-8026"/>
+    <WARNOPTSTR value=""/>
+  </MACROS>
+  <OPTIONS>
+    <IDLCFLAGS value="-I..\source -I$(BCB)\include -I$(BCB)\include\vcl 
+      -ID:\TurboPower\FF2\. -I..\source -src_suffix cpp -boa"/>
+    <CFLAG1 value="-O2 -H=d:\borland\bcb5\CBUILD~1\lib\vcl50.csm -Hc -Vx -Ve -Tkh30000 -X- 
+      -a8 -b- -k- -vi -c -tWM"/>
+    <PFLAGS value="-$Y- -$L- -$D- -v -M -JPHNE"/>
+    <RFLAGS value=""/>
+    <AFLAGS value="/mx /w2 /zn"/>
+    <LFLAGS value="-D&quot;TurboPower Visual PlanIt 1.03 FlashFiler 2 Support Package - VCL51&quot; -aa 
+      -Tpp -Gpd -x -Gn -Gl -Gi"/>
+  </OPTIONS>
+  <LINKER>
+    <ALLOBJ value="c0pkg32.obj $(PACKAGES) sysinit.obj $(OBJFILES)"/>
+    <ALLRES value="$(RESFILES)"/>
+    <ALLLIB value="$(LIBFILES) $(LIBRARIES) import32.lib cp32mt.lib"/>
+  </LINKER>
+  <IDEOPTIONS>
+[Version Info]
+IncludeVerInfo=1
+AutoIncBuild=0
+MajorVer=1
+MinorVer=0
+Release=3
+Build=0
+Debug=0
+PreRelease=0
+Special=0
+Private=0
+DLL=0
+Locale=1033
+CodePage=1252
+
+[Version Info Keys]
+CompanyName=TurboPower Software Company
+FileDescription=Visual PlanIt FlashFiler 2 Support Package
+FileVersion=1.0.3.0
+InternalName=
+LegalCopyright=Copyright (c) 2002 TurboPower Software Co
+LegalTrademarks=
+OriginalFilename=
+ProductName=Visual PlanIt
+ProductVersion=1.0.3.0
+Comments=
+
+[HistoryLists\hlIncludePath]
+Count=12
+Item0=$(BCB)\include;$(BCB)\include\vcl;D:\TurboPower\FF2\;..\source
+Item1=..\source;$(BCB)\include;$(BCB)\include\vcl;D:\TurboPower\FF2\
+Item2=$(BCB)\include;$(BCB)\include\vcl;D:\TurboPower\FF2\
+Item3=..\source\;$(BCB)\include;$(BCB)\include\vcl;D:\TurboPower\FF2\
+Item4=..\..\..\..\Components\VP;$(BCB)\include;$(BCB)\include\vcl;D:\TurboPower\FF2\
+Item5=$(BCB)\include;$(BCB)\include\vcl;..\..\..\TurboPower\FF2
+Item6=$(BCB)\include;$(BCB)\include\vcl;D:\TurboPower\FF2
+Item7=$(BCB)\include;$(BCB)\include\vcl
+Item8=..\..\..\BCB4\CBuilder4\Projects;$(BCB)\include;$(BCB)\include\vcl
+Item9=..\ORPHEUS;$(BCB)\include;$(BCB)\include\vcl
+Item10=
+Item11=
+
+[HistoryLists\hlLibraryPath]
+Count=15
+Item0=$(BCB)\lib\release;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib;$(BCB)\source\toolsapi;..\source
+Item1=..\source;$(BCB)\lib\release;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib;$(BCB)\source\toolsapi
+Item2=$(BCB)\lib\release;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib;$(BCB)\source\toolsapi
+Item3=..\source\;D:\BCB5\CBuilder5\Projects\Lib\;$(BCB)\lib\release;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib;$(BCB)\source\toolsapi
+Item4=..\..\..\..\Components\VP;D:\BCB5\CBuilder5\Projects\Lib\;$(BCB)\lib\release;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib;$(BCB)\source\toolsapi;
+Item5=D:\BCB4\CBuilder4\Projects\Lib\;$(BCB)\lib\release;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib;$(BCB)\source\toolsapi;D:\TurboPower\FF2\
+Item6=..\..\BCB4\CBuilder4\Projects\Lib;$(BCB)\lib\release;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib;$(BCB)\source\toolsapi;D:\TurboPower\FF2\
+Item7=..\..\BCB4\CBuilder4\Projects\Lib;$(BCB)\lib\release;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib;D:\TurboPower\FF2\
+Item8=..\..\BCB4\CBuilder4\Projects\Lib;$(BCB)\lib\release;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib;..\..\..\TurboPower\FF2
+Item9=..\..\BCB4\CBuilder4\Projects\Lib;$(BCB)\lib\release;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib;D:\TurboPower\FF2
+Item10=..\..\BCB4\CBuilder4\Projects\Lib;$(BCB)\lib\release;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib
+Item11=$(BCB)\lib\release;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib
+Item12=..\..\..\BCB4\CBuilder4\Projects;$(BCB)\lib\release;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib
+Item13=..\borland\cbuilder4\lib\release;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib
+Item14=..\ORPHEUS;..\borland\cbuilder4\lib\release;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib
+
+[HistoryLists\hlDebugSourcePath]
+Count=3
+Item0=$(BCB)\source\vcl;$(BCB)\source\toolsapi
+Item1=$(BCB)\source\vcl;$(BCB)\source\designide
+Item2=$(BCB)\source\vcl
+
+[Debugging]
+DebugSourceDirs=$(BCB)\source\vcl;$(BCB)\source\toolsapi
+
+[Parameters]
+RunParams=
+HostApplication=
+RemoteHost=
+RemotePath=
+RemoteDebug=0
+
+[Compiler]
+ShowInfoMsgs=0
+LinkDebugVcl=0
+LinkCGLIB=0
+
+[CORBA]
+AddServerUnit=1
+AddClientUnit=1
+PrecompiledHeaders=1
+
+[Language]
+ActiveLang=
+ProjectLang=
+RootDir=
+  </IDEOPTIONS>
+</PROJECT>

@@ -1,0 +1,60 @@
+package tpxpror;
+
+{$R *.res}
+{$R '..\source\XpQXSLPr.dcr'}
+{$R '..\source\XpQFlHTM.dcr'}
+{$R '..\source\XpQFlXML.dcr'}
+{$ALIGN 8}
+{$ASSERTIONS OFF}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS OFF}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'XMLPartner Professional XX Runtime package - CLX'}
+{$RUNONLY}
+{$IMPLICITBUILD OFF}
+requires
+  visualclx,
+  dataclx,
+  baseclx,
+  designide;
+
+contains
+  XpBase in '..\source\XpBase.pas',
+  XpChrFlt in '..\source\XpChrFlt.pas',
+  XpDOM in '..\source\XpDOM.pas',
+  XpExcept in '..\source\XpExcept.pas',
+  XpParser in '..\source\XpParser.pas',
+  XpAbout in '..\source\XpAbout.pas' {TXpAboutBox},
+  XpInet in '..\source\XpInet.pas',
+  XpFtpSh in '..\source\XpFtpSh.pas',
+  XpHttpShell in '..\source\XpHttpShell.pas',
+  XpHash in '..\source\XpHash.pas',
+  XpXSLCon in '..\source\XpXSLCon.pas',
+  XpQFOHsh in '..\source\XpQFOHsh.pas',
+  XpQFlBas in '..\source\XpQFlBas.pas',
+  XpQXSLFO in '..\source\XpQXSLFO.pas',
+  XpQXSLPr in '..\source\XpQXSLPr.pas',
+  XpQXSLT in '..\source\XpQXSLT.pas',
+  XpSort in '..\source\XpSort.pas',
+  XpQFlHTM in '..\source\XpQFlHTM.pas',
+  XpQFlXML in '..\source\XpQFlXML.pas';
+
+
+
+end.

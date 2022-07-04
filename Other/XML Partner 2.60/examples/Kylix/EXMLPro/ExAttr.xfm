@@ -1,0 +1,69 @@
+object AttributeForm: TAttributeForm
+  Left = 412
+  Top = 248
+  Width = 249
+  Height = 153
+  HorzScrollBar.Range = 245
+  VertScrollBar.Range = 149
+  ActiveControl = AttrNameEdit
+  Caption = 'AttributeForm'
+  Color = clButton
+  PixelsPerInch = 75
+  TextHeight = 15
+  TextWidth = 7
+  object Label1: TLabel
+    Left = 8
+    Top = 8
+    Width = 208
+    Height = 15
+    Caption = 'Attribute &name (this cannot be blank):'
+    FocusControl = AttrNameEdit
+    Layout = tlCenter
+  end
+  object Label2: TLabel
+    Left = 8
+    Top = 68
+    Width = 84
+    Height = 15
+    Caption = 'Attribute &value:'
+    FocusControl = AttrValueEdit
+    Layout = tlCenter
+  end
+  object OkBtn: TButton
+    Left = 90
+    Top = 124
+    Width = 75
+    Height = 25
+    Caption = '&OK'
+    Default = True
+    ModalResult = 1
+    TabOrder = 2
+    OnClick = OkBtnClick
+  end
+  object CancelBtn: TButton
+    Left = 170
+    Top = 124
+    Width = 75
+    Height = 25
+    Cancel = True
+    Caption = '&Cancel'
+    ModalResult = 2
+    TabOrder = 3
+  end
+  object AttrNameEdit: TEdit
+    Left = 8
+    Top = 28
+    Width = 237
+    Height = 23
+    MaxLength = 32767
+    TabOrder = 4
+  end
+  object AttrValueEdit: TEdit
+    Left = 8
+    Top = 88
+    Width = 237
+    Height = 23
+    MaxLength = 32767
+    TabOrder = 5
+  end
+end

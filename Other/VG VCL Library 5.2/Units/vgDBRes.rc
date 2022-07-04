@@ -1,0 +1,76 @@
+/****************************************************************************
+
+vgDBRes.res
+
+  Vladimir Gaitanoff Delphi VCL Library
+  Copyright (c) 1997, 1998
+
+*****************************************************************************/
+
+#include "vgDBRes.pas"
+
+STRINGTABLE
+{
+  SConfirmDelete       , "Delete record?"
+  SOpenTableFailed     , "Cannot open table or query\n"\
+                         "'%s'\n"\
+                         "Retry?"
+  SEqualStr            , " (equal)"
+  SNotNullReqired      , "Field '%s' must have a value."
+  SNullReqired         , "Field '%s' must have an empty value."
+  SLengthTooSmall      , "Field '%s' must have at least %d chars."
+  SIntFieldOutOfRange  , "Field '%s' must have a value between %d and %d."
+  SFieldRequired       , "Field '%s' must have a value."
+  SNonZeroValueReq     , "Field '%s' must have a value more than zero."
+  SMoreThanReq         , "Field '%s' must have a value more than %d."
+  SLessThanReq         , "Field '%s' must have a value less than %d."
+  SEqualReq            , "Field '%s' must have a value equal to %d."
+  SNotEqualReq         , "Field '%s' must have a value equal to value in field '%s'."
+  SValueRange          , "Field '%s' must have a value between %.2f and %.2f."
+  SNumericSequenceReq  , "Field '%s' must have a value more%s than field '%s'."
+  SDateSequenceReq     , "Field '%s' must have a date more%s than field '%s'."
+  SRecordNotFound      , "Record not found."
+  SRecordNotFoundTbl   , "Record not found in table '%s'."
+  SInsertNotAvail      , "Cannot insert new record."
+  SEditNotAvail        , "Cannot edit record."
+  SDeleteNotAvail      , "Cannot delete record."
+
+  SInvalidUserName     , "Unknow username or password."
+  SDeadlock            , "Deadlock detected.\n"\
+                         "Try again."
+  SKeyViol             , "There is a record with same key fields."
+  SKeyDeleted          , "Cannot edit or delete record.\n"\
+                         "Remove aplied filter or refresh data."
+  SFKViolation         , "There is a null value or wrong reference found.\n"
+  SErrorCodeFmt        , "Error: %d\n"
+
+  SDBMenuInsert        , "&Insert"
+  SDBMenuEdit          , "&Edit"
+  SDBMenuDelete        , "&Delete"
+  SDBMenuFirst         , "&First record"
+  SDBMenuLast          , "&Last record"
+  SDBMenuRefresh       , "&Refresh"
+
+  SGetProviderError    , "Cannot create IProvider: DataSet and Provider not defined"
+  SDuplicateProvNames  , "%s: ProviderItem with ProviderName '%s' already exists";
+  SProvNotFound        , "IProvider '%s' not found"
+
+  SServicesNotFound    , "%s: Cannot find dataset services"
+  SServicesEmpty       , "Services property not assigned"
+  SCreateDataSetErr    , "%s: Cannot create DataSet"
+  SCreateDataSetEditErr, "%s: Cannot create editable DataSet"
+
+  SRemoteServerNeeded  , "RemoteServer property not assigned"
+
+  SProviderListNeeded  , "ProviderList property not assigned"
+
+  SInvalidDatabase     , "Invalid database provider"
+  SMissingDatabase     , "Database property not assigned"
+  SUnknownDatabase     , "Unknown database '%s'"
+  SDupProviderName     , "Provider '%s' already exists"
+  SDBFactoryMissing    , "DatabaseFactory property not assigned"
+  SNoDataModule        , "DataModule is not available"
+  SInvalidDatabaseName , "Invalid DatabaseName property"
+
+
+}

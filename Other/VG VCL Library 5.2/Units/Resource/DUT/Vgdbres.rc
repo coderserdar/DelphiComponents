@@ -1,0 +1,76 @@
+/****************************************************************************
+
+vgDBRes.res
+
+  Vladimir Gaitanoff Delphi VCL Library
+  Copyright (c) 1997, 1998
+
+*****************************************************************************/
+
+#include "vgDBRes.pas"
+
+STRINGTABLE
+{
+  SConfirmDelete       , "Record wissen?"
+  SOpenTableFailed     , "Table of Query kan niet geopend worden\n"\
+                         "'%s'\n"\
+                         "Opnieuw?"
+  SEqualStr            , " (gelijk aan)"
+  SNotNullReqired      , "Field '%s' moet een waarde bevatten."
+  SNullReqired         , "Field '%s' moet GEEN waarde bevatten."
+  SLengthTooSmall      , "Field '%s' moet minstens %d karakters bevatten."
+  SIntFieldOutOfRange  , "Field '%s' moet een waarde bevatten tussen %d en %d."
+  SFieldRequired       , "Field '%s' moet een waarde bevatten."
+  SNonZeroValueReq     , "Field '%s' moet een waarde bevatten groter dan nul."
+  SMoreThanReq         , "Field '%s' moet een waarde bevatten groter dan %d."
+  SLessThanReq         , "Field '%s' moet een waarde bevatten kleiner dan %d."
+  SEqualReq            , "Field '%s' moet een waarde bevatten gelijk aan %d."
+  SNotEqualReq         , "Field '%s' moet een waarde bevatten gelijk aan waarde in veld '%s'."
+  SValueRange          , "Field '%s' moet een waarde bevatten tussen %.2f en %.2f."
+  SNumericSequenceReq  , "Field '%s' moet een waarde bevatten groter dan %s veld '%s'."
+  SDateSequenceReq     , "Field '%s' moet een datum bevatten groter dan %s veld '%s'."
+  SRecordNotFound      , "Record niet gevonden."
+  SRecordNotFoundTbl   , "Record niet gevonden in tabel '%s'."
+  SInsertNotAvail      , "Nieuw record kan niet ingevoegd worden."
+  SEditNotAvail        , "Record kan niet gewijzigd worden."
+  SDeleteNotAvail      , "Record kan niet gewist worden."
+
+  SInvalidUserName     , "Onbekende gebruikersnaam of wachtwoord."
+  SDeadlock            , "Deadlock gedetecteerd.\n"\
+                         "Probeer opnieuw."
+  SKeyViol             , "Er is een record met dezelfde sleutelvelden aangetroffen."
+  SKeyDeleted          , "Record kan niet gewijzigd of gewist worden.\n"\
+                         "Verwijder het toegepaste filter of refresh de data."
+  SFKViolation         , "Er is een nul-waarde of een ongeldige referentie gevonden.\n"
+  SErrorCodeFmt        , "Foutmelding: %d\n"
+
+  SDBMenuInsert        , "&Toevoegen"
+  SDBMenuEdit          , "&Bewerken"
+  SDBMenuDelete        , "&Wissen"
+  SDBMenuFirst         , "&Eerste record"
+  SDBMenuLast          , "&Laatste record"
+  SDBMenuRefresh       , "&Verversen"
+
+  SGetProviderError    , "Kan IProvider niet aanmaken: DataSet en Provider niet gedefinieerd"
+  SDuplicateProvNames  , "%s: ProviderItem met ProviderName '%s' bestaat al";
+  SProvNotFound        , "IProvider '%s' not found"
+
+  SServicesNotFound    , "%s: Kan dataset services niet vinden"
+  SServicesEmpty       , "Services property niet toegewezen"
+  SCreateDataSetErr    , "%s: Kan DataSet niet aanmaken"
+  SCreateDataSetEditErr, "%s: Kan een bewerkbare DataSet niet aanmaken"
+
+  SRemoteServerNeeded  , "RemoteServer property niet toegewezen"
+
+  SProviderListNeeded  , "ProviderList property niet toegewezen"
+
+  SInvalidDatabase     , "Ongeldige database provider"
+  SMissingDatabase     , "Database property niet toegewezen"
+  SUnknownDatabase     , "Onbekende database '%s'"
+  SDupProviderName     , "Provider '%s' bestaat al"
+  SDBFactoryMissing    , "DatabaseFactory property niet toegewezen"
+  SNoDataModule        , "DataModule is niet beschikbaar"
+  SInvalidDatabaseName , "Ongeldige DatabaseName property"
+
+
+}

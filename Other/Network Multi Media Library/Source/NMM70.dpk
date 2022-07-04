@@ -1,0 +1,56 @@
+package NMM70;
+
+{$R *.res}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'Network MultiMedia: common package'}
+{$IMPLICITBUILD OFF}
+
+requires
+  rtl,
+  vcl,
+  vcljpg,
+  dclindy;
+
+contains
+  NMMCustomMultiBroadcastServer in 'NMMCustomMultiBroadcastServer.pas',
+  NMMCustomConnectionGroupThread in 'NMMCustomConnectionGroupThread.pas',
+  NMMCommon in 'NMMCommon.pas',
+  NMMReceiverList in 'NMMReceiverList.pas',
+  NMMStatistics in 'NMMStatistics.pas',
+  NMMUserData in 'NMMUserData.pas',
+  NMMConnectionHandle in 'NMMConnectionHandle.pas',
+  NMMConnectionHandles in 'NMMConnectionHandles.pas',
+  NMMCustomConnectionHandle in 'NMMCustomConnectionHandle.pas',
+  NMMCustomConnectionProcessor in 'NMMCustomConnectionProcessor.pas',
+  NMMCustomDataProcessors in 'NMMCustomDataProcessors.pas',
+  NMMCustomServer in 'NMMCustomServer.pas',
+  NMMCustomAuthChecker in 'NMMCustomAuthChecker.pas',
+  NMMBasicAuthChecker in 'NMMBasicAuthChecker.pas',
+  NMMCustomBroadcastServer in 'NMMCustomBroadcastServer.pas',
+  NMMCustomSimpleBroadcastServer in 'NMMCustomSimpleBroadcastServer.pas',
+  NMMCustomClient in 'NMMCustomClient.pas',
+  NMMP2PServer in 'NMMP2PServer.pas',
+  NMMCustomP2PServer in 'NMMCustomP2PServer.pas',
+  NMMServerGlobals in 'NMMServerGlobals.pas';
+
+end.

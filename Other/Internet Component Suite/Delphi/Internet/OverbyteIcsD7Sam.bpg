@@ -1,0 +1,103 @@
+#------------------------------------------------------------------------------
+VERSION = BWS.01
+#------------------------------------------------------------------------------
+!ifndef ROOT
+ROOT = $(MAKEDIR)\..
+!endif
+#------------------------------------------------------------------------------
+MAKE = $(ROOT)\bin\make.exe -$(MAKEFLAGS) -f$**
+DCC = $(ROOT)\bin\dcc32.exe $**
+BRCC = $(ROOT)\bin\brcc32.exe $**
+#------------------------------------------------------------------------------
+PROJECTS = OverbyteIcsD7Run.bpl OverbyteIcsD7Design.bpl OverbyteIcsConFtp.exe \
+  OverbyteIcsFtpTst.exe OverbyteIcsHttpTst.exe OverbyteIcsTcpSrv.exe \
+  OverbyteIcsWebServ.exe OverbyteIcsFtpServ.exe OverbyteIcsMailSnd.exe \
+  OverbyteIcsMailRcv.exe OverbyteIcsHttpPost.exe OverbyteIcsNewsReader.exe \
+  OverbyteIcsTelnetClient.exe OverbyteIcsPingTst.exe OverbyteIcsNsLookup.exe \
+  OverbyteIcsHttpMultipartDownload.exe OverbyteIcsFtpMultipartDownload.exe \
+  OverbyteIcsMailHtml.exe OverbyteIcsDnsLook.exe OverbyteIcsDnsResolver.exe \
+  OverbyteIcsConHttp.exe OverbyteIcsHttpAsy.exe OverbyteIcsHttpAsp.exe \
+  OverbyteIcsCliDemo.exe OverbyteIcsBinCliDemo.exe OverbyteIcsMimeDemo.exe
+#------------------------------------------------------------------------------
+default: $(PROJECTS)
+#------------------------------------------------------------------------------
+
+OverbyteIcsD7Run.bpl: ..\Vc32\OverbyteIcsD7Run.dpk
+  $(DCC)
+
+OverbyteIcsD7Design.bpl: ..\Vc32\OverbyteIcsD7Design.dpk
+  $(DCC)
+
+OverbyteIcsHttpTst.exe: OverbyteIcsHttpTst.dpr
+  $(DCC)
+
+OverbyteIcsTcpSrv.exe: OverbyteIcsTcpSrv.dpr
+  $(DCC)
+
+OverbyteIcsWebServ.exe: OverbyteIcsWebServ.dpr
+  $(DCC)
+
+OverbyteIcsFtpTst.exe: OverbyteIcsFtpTst.dpr
+  $(DCC)
+
+OverbyteIcsConFtp.exe: OverbyteIcsConFtp.dpr
+  $(DCC)
+
+OverbyteIcsFtpServ.exe: OverbyteIcsFtpServ.dpr
+  $(DCC)
+
+OverbyteIcsMailSnd.exe: OverbyteIcsMailSnd.dpr
+  $(DCC)
+
+OverbyteIcsMailRcv.exe: OverbyteIcsMailRcv.dpr
+  $(DCC)
+
+OverbyteIcsHttpPost.exe: OverbyteIcsHttpPost.dpr
+  $(DCC)
+
+OverbyteIcsNewsReader.exe: OverbyteIcsNewsReader.dpr
+  $(DCC)
+
+OverbyteIcsTelnetClient.exe: OverbyteIcsTelnetClient.dpr
+  $(DCC)
+
+OverbyteIcsPingTst.exe: OverbyteIcsPingTst.dpr
+  $(DCC)
+
+OverbyteIcsNsLookup.exe: OverbyteIcsNsLookup.dpr
+  $(DCC)
+
+OverbyteIcsHttpMultipartDownload.exe: OverbyteIcsHttpMultipartDownload.dpr
+  $(DCC)
+
+OverbyteIcsFtpMultipartDownload.exe: OverbyteIcsFtpMultipartDownload.dpr
+  $(DCC)
+
+OverbyteIcsMailHtml.exe: OverbyteIcsMailHtml.dpr
+  $(DCC)
+
+OverbyteIcsDnsLook.exe: OverbyteIcsDnsLook.dpr
+  $(DCC)
+
+OverbyteIcsDnsResolver.exe: OverbyteIcsDnsResolver.dpr
+  $(DCC)
+
+OverbyteIcsConHttp.exe: OverbyteIcsConHttp.dpr
+  $(DCC)
+
+OverbyteIcsHttpAsy.exe: OverbyteIcsHttpAsy.dpr
+  $(DCC)
+
+OverbyteIcsHttpAsp.exe: OverbyteIcsHttpAsp.dpr
+  $(DCC)
+
+OverbyteIcsCliDemo.exe: OverbyteIcsCliDemo.dpr
+  $(DCC)
+
+OverbyteIcsBinCliDemo.exe: OverbyteIcsBinCliDemo.dpr
+  $(DCC)
+
+OverbyteIcsMimeDemo.exe: OverbyteIcsMimeDemo.dpr
+  $(DCC)
+
+

@@ -1,0 +1,40 @@
+package kmNetUpdate_D6_Reg;
+
+{$R *.res}
+{$R 'kmNetUpdate.dcr'}
+{$ALIGN 8}
+{$ASSERTIONS OFF}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS OFF}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$IMPLICITBUILD OFF}
+
+requires
+  rtl,
+  vcl;
+
+contains
+  kmUtils in 'kmUtils.pas',
+  kmWinInet in 'kmWinInet.pas',
+  kmNetUpdate in 'kmNetUpdate.pas',
+  kmWizard in 'kmWizard.pas' {fmWizard},
+  kmTypes in 'kmTypes.pas',
+  nuServer in 'nuServer.pas';
+
+end.

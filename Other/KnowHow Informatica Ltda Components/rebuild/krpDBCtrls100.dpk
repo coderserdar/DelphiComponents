@@ -1,0 +1,60 @@
+{
+=======================================================================
+
+    KLIB v100
+    Serious Software Made in Brazil
+    Copyright 1997-1999 by KnowHow Informatica Ltda.
+
+
+            home-page: www.knowhow-online.com.br
+    technical support: support@knowhow-online.com.br
+  general information: inf@knowhow-online.com.br
+
+
+    Unless otherwise noted, all materials provided in this release
+    are copyright © 1997-1999 by KnowHow Informatica Ltda.
+
+=======================================================================
+}
+
+package krpDBCtrls100;
+
+{$R *.RES}
+{$ALIGN ON}
+{$ASSERTIONS OFF}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS OFF}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE ON}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $00400000}
+{$DESCRIPTION 'KnowHow DB Controls Package'}
+{$RUNONLY}
+{$IMPLICITBUILD ON}
+
+requires
+  vcl30,
+  vclDB30,
+  krpSystem100,
+  krpKernel100;
+
+contains
+  ukdcUtils,
+  ukdcCtrls,
+  ukdcPackReg,
+  ukdcConsts;
+
+end.

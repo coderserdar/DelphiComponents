@@ -1,0 +1,249 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!-- C++Builder XML Project -->
+<PROJECT>
+  <MACROS>
+    <VERSION value="BCB.06.00"/>
+    <PROJECT value="SMCmpntC6.bpl"/>
+    <OBJFILES value="..\SMCmpntC6.obj ..\SMCVersInfo.obj ..\AngleLbl.obj ..\BrazilCombo.obj 
+      ..\charmap.obj ..\Conerbtn.obj ..\EditType.obj ..\EditTypeDB.obj 
+      ..\FileNotify.obj ..\Gradpnl.obj ..\Limitfrm.obj ..\Moneystr.obj 
+      ..\RunText.obj ..\RXUtils.obj ..\Scrltool.obj ..\SendMail.obj 
+      ..\sensors.obj ..\SMBar.obj ..\SMBevel.obj ..\SMBox.obj ..\SMBoxReg.obj 
+      ..\SMCalendar.obj ..\SMCnst.obj ..\SMDBAcc.obj ..\SMDBComb.obj 
+      ..\SMDBCombReg.obj ..\SMDBCtrl.obj ..\SMDBFind.obj ..\SMDBFltr.obj 
+      ..\SMDBFltrFile.obj ..\SMDBGrid.obj ..\SMDBGSet.obj ..\SMDBStat.obj 
+      ..\SMHLLbl.obj ..\SMLang.obj ..\SMLangR.obj ..\SMPanel.obj ..\SMScale.obj 
+      ..\SMScript.obj ..\SMSQLScript.obj ..\SMToolBar.obj ..\SMTray.obj 
+      ..\SMultiBtn.obj ..\SQLGen.obj ..\TVNavigator.obj ..\URLLbl.obj"/>
+    <RESFILES value="SMCmpntC6.res SMCVersInfo.dcr BrazilCombo.dcr charmap.dcr Conerbtn.dcr 
+      EditType.dcr FileNotify.dcr Gradpnl.dcr Limitfrm.dcr Moneystr.dcr 
+      RunText.dcr Scrltool.dcr SendMail.dcr sensors.dcr SMBar.dcr SMBevel.dcr 
+      SMDBAcc.dcr SMDBComb.dcr SMDBCtrl.dcr SMDBFind.dcr SMDBFltr.dcr 
+      SMDBGrid.dcr SMDBGSet.dcr SMDBStat.dcr SMHLLbl.dcr SMLang.dcr SMScale.dcr 
+      SMScript.dcr SMTray.dcr SQLGen.dcr TVNavigator.dcr URLLbl.dcr"/>
+    <IDLFILES value=""/>
+    <IDLGENFILES value=""/>
+    <DEFFILE value=""/>
+    <RESDEPEN value="$(RESFILES) SMDBFind.dfm SMDBFltr.dfm SMDBFltrFile.dfm SMDBGSet.dfm"/>
+    <LIBFILES value=""/>
+    <LIBRARIES value="visualdbclx.lib soaprtl.lib inetdbxpress.lib inetdbbde.lib indy.lib 
+      dbxcds.lib dbexpress.lib nmfast.lib dsnapcon.lib dsnapcrba.lib teeqr.lib 
+      dss.lib tee.lib teedb.lib teeui.lib qrpt.lib bdecds.lib cds.lib 
+      ibxpress.lib vcldbx.lib adortl.lib"/>
+    <SPARELIBS value="rtl.lib vcldb.lib adortl.lib bdertl.lib vcldbx.lib ibxpress.lib cds.lib 
+      bdecds.lib qrpt.lib teeui.lib teedb.lib tee.lib dss.lib teeqr.lib 
+      dsnapcrba.lib dsnapcon.lib bcbsmp.lib nmfast.lib dbexpress.lib dbxcds.lib 
+      indy.lib bcbie.lib inetdbbde.lib inetdbxpress.lib soaprtl.lib 
+      visualdbclx.lib"/>
+    <PACKAGES value="rtl.bpi designide.bpi vcl.bpi vclx.bpi dbrtl.bpi vcldb.bpi bdertl.bpi 
+      vclsmp.bpi bcbsmp.bpi bcbie.bpi"/>
+    <PATHCPP value=".;"/>
+    <PATHPAS value=".;"/>
+    <PATHRC value=".;"/>
+    <PATHASM value=".;"/>
+    <DEBUGLIBPATH value="$(BCB)\lib\debug"/>
+    <RELEASELIBPATH value="$(BCB)\lib\release"/>
+    <LINKER value="ilink32"/>
+    <USERDEFINES value=""/>
+    <SYSDEFINES value="NO_STRICT;USEPACKAGES"/>
+    <MAINSOURCE value="SMCmpntC6.cpp"/>
+    <INCLUDEPATH value="&quot;D:\Program Files\Borland\CBuilder6\Bin&quot;;D:\MISHA\CBUILDER\ADD-INS6;$(BCB)\include;$(BCB)\include\vcl"/>
+    <LIBPATH value="$(BCB)\Projects\Lib;&quot;D:\Program Files\Borland\CBuilder6\Bin&quot;;D:\MISHA\CBUILDER\ADD-INS6;$(BCB)\lib\obj;$(BCB)\lib"/>
+    <WARNINGS value="-w-par"/>
+    <OTHERFILES value=""/>
+  </MACROS>
+  <OPTIONS>
+    <IDLCFLAGS value="-I&quot;D:\Program Files\Borland\CBuilder6\Bin&quot; -ID:\MISHA\CBUILDER\ADD-INS6 
+      -I$(BCB)\include -I$(BCB)\include\vcl -src_suffix cpp -boa"/>
+    <CFLAG1 value="-Od -Vx -Ve -X- -r- -a8 -b- -k -vi -c -tWM -tWM"/>
+    <CFLAG2 value=""/>
+    <CFLAG3 value=""/>
+    <PFLAGS value="-N2D:\MISHA\CBUILDER -N0D:\MISHA\CBUILDER -$Y- -$W -$O- -$L- -$D- -$C- 
+      -$A8 -v -JPHNE -M -LUDesignIde"/>
+    <RFLAGS value=""/>
+    <AFLAGS value="/mx /w2 /zd"/>
+    <LFLAGS value="-ID:\MISHA\CBUILDER -D&quot;Scalabium Software: freeware SMComponent library.&quot; 
+      -aa -Tpp -x -Gn -Gl -Gi"/>
+    <IFLAGS value=""/>
+    <OTHERFILES value=""/>
+  </OPTIONS>
+  <LINKER>
+    <ALLOBJ value="c0pkg32.obj $(PACKAGES) sysinit.obj $(OBJFILES)"/>
+    <ALLRES value="$(RESFILES)"/>
+    <ALLLIB value="$(LIBFILES) $(LIBRARIES) import32.lib cp32mt.lib"/>
+    <OTHERFILES value=""/>
+  </LINKER>
+  <FILELIST>
+      <FILE FILENAME="SMCmpntC6.res" FORMNAME="" UNITNAME="SMCmpntC6.res" CONTAINERID="ResTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="SMCmpntC6.cpp" FORMNAME="" UNITNAME="SMCmpntC6" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="D:\Program Files\Borland\CBuilder6\Lib\Release\rtl.bpi" FORMNAME="" UNITNAME="rtl" CONTAINERID="BPITool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="SMCVersInfo.pas" FORMNAME="" UNITNAME="SMCVersInfo" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="SMCVersInfo.dcr" FORMNAME="" UNITNAME="" CONTAINERID="DcrTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="AngleLbl.pas" FORMNAME="" UNITNAME="AngleLbl" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="BrazilCombo.pas" FORMNAME="" UNITNAME="BrazilCombo" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="BrazilCombo.dcr" FORMNAME="" UNITNAME="" CONTAINERID="DcrTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="charmap.pas" FORMNAME="" UNITNAME="CharMap" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="charmap.dcr" FORMNAME="" UNITNAME="" CONTAINERID="DcrTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Conerbtn.pas" FORMNAME="" UNITNAME="ConerBtn" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Conerbtn.dcr" FORMNAME="" UNITNAME="" CONTAINERID="DcrTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="EditType.pas" FORMNAME="" UNITNAME="EditType" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="EditType.dcr" FORMNAME="" UNITNAME="" CONTAINERID="DcrTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="EditTypeDB.pas" FORMNAME="" UNITNAME="EditTypeDB" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="FileNotify.pas" FORMNAME="" UNITNAME="FileNotify" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="FileNotify.dcr" FORMNAME="" UNITNAME="" CONTAINERID="DcrTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Gradpnl.pas" FORMNAME="" UNITNAME="GradPnl" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Gradpnl.dcr" FORMNAME="" UNITNAME="" CONTAINERID="DcrTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Limitfrm.pas" FORMNAME="" UNITNAME="LimitFrm" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Limitfrm.dcr" FORMNAME="" UNITNAME="" CONTAINERID="DcrTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Moneystr.pas" FORMNAME="" UNITNAME="MoneyStr" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Moneystr.dcr" FORMNAME="" UNITNAME="" CONTAINERID="DcrTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="RunText.pas" FORMNAME="" UNITNAME="RunText" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="RunText.dcr" FORMNAME="" UNITNAME="" CONTAINERID="DcrTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="RXUtils.pas" FORMNAME="" UNITNAME="RXUtils" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Scrltool.pas" FORMNAME="" UNITNAME="ScrlTool" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Scrltool.dcr" FORMNAME="" UNITNAME="" CONTAINERID="DcrTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="SendMail.pas" FORMNAME="" UNITNAME="SendMail" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="SendMail.dcr" FORMNAME="" UNITNAME="" CONTAINERID="DcrTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="sensors.pas" FORMNAME="" UNITNAME="Sensors" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="sensors.dcr" FORMNAME="" UNITNAME="" CONTAINERID="DcrTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="SMBar.pas" FORMNAME="" UNITNAME="SMBar" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="SMBar.dcr" FORMNAME="" UNITNAME="" CONTAINERID="DcrTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="SMBevel.pas" FORMNAME="" UNITNAME="SMBevel" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="SMBevel.dcr" FORMNAME="" UNITNAME="" CONTAINERID="DcrTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="SMBox.pas" FORMNAME="" UNITNAME="SMBox" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="SMBoxReg.pas" FORMNAME="" UNITNAME="SMBoxReg" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="SMCalendar.pas" FORMNAME="" UNITNAME="SMCalendar" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="SMCnst.pas" FORMNAME="" UNITNAME="SMCnst" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="SMDBAcc.pas" FORMNAME="" UNITNAME="SMDBAcc" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="SMDBAcc.dcr" FORMNAME="" UNITNAME="" CONTAINERID="DcrTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="SMDBComb.pas" FORMNAME="" UNITNAME="SMDBComb" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="SMDBComb.dcr" FORMNAME="" UNITNAME="" CONTAINERID="DcrTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="SMDBCombReg.pas" FORMNAME="" UNITNAME="SMDBCombReg" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="SMDBCtrl.pas" FORMNAME="" UNITNAME="SMDBCtrl" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="SMDBCtrl.dcr" FORMNAME="" UNITNAME="" CONTAINERID="DcrTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="SMDBFind.pas" FORMNAME="frmFind" UNITNAME="SMDBFind" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="SMDBFind.dcr" FORMNAME="" UNITNAME="" CONTAINERID="DcrTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="SMDBFltr.pas" FORMNAME="frmFilterDialog" UNITNAME="SMDBFltr" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="SMDBFltr.dcr" FORMNAME="" UNITNAME="" CONTAINERID="DcrTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="SMDBFltrFile.pas" FORMNAME="frmFilterFileDialog" UNITNAME="SMDBFltrFile" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="SMDBGrid.pas" FORMNAME="" UNITNAME="SMDBGrid" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="SMDBGrid.dcr" FORMNAME="" UNITNAME="" CONTAINERID="DcrTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="SMDBGSet.pas" FORMNAME="frmGridSetup" UNITNAME="SMDBGSet" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="SMDBGSet.dcr" FORMNAME="" UNITNAME="" CONTAINERID="DcrTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="SMDBStat.pas" FORMNAME="" UNITNAME="SMDBStat" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="SMDBStat.dcr" FORMNAME="" UNITNAME="" CONTAINERID="DcrTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="SMHLLbl.pas" FORMNAME="" UNITNAME="SMHLLbl" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="SMHLLbl.dcr" FORMNAME="" UNITNAME="" CONTAINERID="DcrTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="SMLang.pas" FORMNAME="" UNITNAME="SMLang" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="SMLang.dcr" FORMNAME="" UNITNAME="" CONTAINERID="DcrTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="SMLangR.pas" FORMNAME="" UNITNAME="SMLangR" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="SMPanel.pas" FORMNAME="" UNITNAME="SMPanel" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="SMScale.pas" FORMNAME="" UNITNAME="SMScale" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="SMScale.dcr" FORMNAME="" UNITNAME="" CONTAINERID="DcrTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="SMScript.pas" FORMNAME="" UNITNAME="SMScript" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="SMScript.dcr" FORMNAME="" UNITNAME="" CONTAINERID="DcrTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="SMSQLScript.pas" FORMNAME="" UNITNAME="SMSQLScript" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="SMToolBar.pas" FORMNAME="" UNITNAME="SMToolBar" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="SMTray.pas" FORMNAME="" UNITNAME="SMTray" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="SMTray.dcr" FORMNAME="" UNITNAME="" CONTAINERID="DcrTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="SMultiBtn.pas" FORMNAME="" UNITNAME="SMultiBtn" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="SQLGen.pas" FORMNAME="" UNITNAME="SQLGen" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="SQLGen.dcr" FORMNAME="" UNITNAME="" CONTAINERID="DcrTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="TVNavigator.pas" FORMNAME="" UNITNAME="TVNavigator" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="TVNavigator.dcr" FORMNAME="" UNITNAME="" CONTAINERID="DcrTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="URLLbl.pas" FORMNAME="" UNITNAME="URLLbl" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="URLLbl.dcr" FORMNAME="" UNITNAME="" CONTAINERID="DcrTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="D:\Program Files\Borland\CBuilder6\Lib\Release\designide.bpi" FORMNAME="" UNITNAME="designide" CONTAINERID="BPITool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="D:\Program Files\Borland\CBuilder6\Lib\Release\vcl.bpi" FORMNAME="" UNITNAME="vcl" CONTAINERID="BPITool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="D:\Program Files\Borland\CBuilder6\Lib\Release\vclx.bpi" FORMNAME="" UNITNAME="vclx" CONTAINERID="BPITool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="D:\Program Files\Borland\CBuilder6\Lib\Release\dbrtl.bpi" FORMNAME="" UNITNAME="dbrtl" CONTAINERID="BPITool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="D:\Program Files\Borland\CBuilder6\Lib\Release\vcldb.bpi" FORMNAME="" UNITNAME="vcldb" CONTAINERID="BPITool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="D:\Program Files\Borland\CBuilder6\Lib\Release\bdertl.bpi" FORMNAME="" UNITNAME="bdertl" CONTAINERID="BPITool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="D:\Program Files\Borland\CBuilder6\Lib\Release\vclsmp.bpi" FORMNAME="" UNITNAME="vclsmp" CONTAINERID="BPITool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="D:\Program Files\Borland\CBuilder6\Lib\Release\bcbsmp.bpi" FORMNAME="" UNITNAME="bcbsmp" CONTAINERID="BPITool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="D:\Program Files\Borland\CBuilder6\Lib\Release\bcbie.bpi" FORMNAME="" UNITNAME="bcbie" CONTAINERID="BPITool" DESIGNCLASS="" LOCALCOMMAND=""/>
+  </FILELIST>
+  <BUILDTOOLS>
+  </BUILDTOOLS>
+
+  <IDEOPTIONS>
+[Version Info]
+IncludeVerInfo=1
+AutoIncBuild=0
+MajorVer=1
+MinorVer=0
+Release=0
+Build=0
+Debug=0
+PreRelease=0
+Special=0
+Private=0
+DLL=0
+Locale=1049
+CodePage=1251
+
+[Version Info Keys]
+CompanyName=
+FileDescription=
+FileVersion=1.0.0.0
+InternalName=
+LegalCopyright=
+LegalTrademarks=
+OriginalFilename=
+ProductName=
+ProductVersion=1.0.0.0
+Comments=
+
+[HistoryLists\hlIncludePath]
+Count=1
+Item0=D:\Program Files\Borland\CBuilder6\Bin;D:\MISHA\CBUILDER\ADD-INS6;$(BCB)\include;$(BCB)\include\vcl
+
+[HistoryLists\hlLibraryPath]
+Count=1
+Item0=$(BCB)\Projects\Lib;D:\Program Files\Borland\CBuilder6\Bin;D:\MISHA\CBUILDER\ADD-INS6;$(BCB)\lib\obj;$(BCB)\lib
+
+[HistoryLists\hlDebugSourcePath]
+Count=1
+Item0=$(BCB)\source\vcl
+
+[HistoryLists\hlIntOutputDir]
+Count=2
+Item0=D:\MISHA\CBUILDER
+Item1=D:\MISHA\CBUILDER\ADD-INS6
+
+[Debugging]
+DebugSourceDirs=$(BCB)\source\vcl
+
+[Parameters]
+RunParams=
+Launcher=
+UseLauncher=0
+DebugCWD=
+HostApplication=
+RemoteHost=
+RemotePath=
+RemoteLauncher=
+RemoteCWD=
+RemoteDebug=0
+
+[Compiler]
+ShowInfoMsgs=0
+LinkDebugVcl=0
+LinkCGLIB=0
+
+[CORBA]
+AddServerUnit=1
+AddClientUnit=1
+PrecompiledHeaders=1
+
+[Language]
+ActiveLang=
+ProjectLang=
+RootDir=
+
+[Linker]
+LibPrefix=
+LibSuffix=
+LibVersion=
+  </IDEOPTIONS>
+</PROJECT>

@@ -1,0 +1,76 @@
+/****************************************************************************
+
+vgDBRes.res
+
+  Vladimir Gaitanoff Delphi VCL Library
+  Copyright (c) 1997, 1998
+
+*****************************************************************************/
+
+#include "vgDBRes.pas"
+
+STRINGTABLE
+{
+  SConfirmDelete       , "Effacer l''enregistrement?"
+  SOpenTableFailed     , "Ne peut ouvrir la table ou la requête\n"\
+                         "'%s'\n"\
+                         "Réessayer?"
+  SEqualStr            , " (égal)"
+  SNotNullReqired      , "Le champ '%s' ne peut être vide."
+  SNullReqired         , "Le champ '%s' doit être vide."
+  SLengthTooSmall      , "Le champ '%s' doit contenir au moins %d caractères."
+  SIntFieldOutOfRange  , "Le champ '%s' doit contenir une valeur entre %d et %d."
+  SFieldRequired       , "Le champ '%s' doit contenir une valeur."
+  SNonZeroValueReq     , "Le champ '%s' doit être plus grand que zéro."
+  SMoreThanReq         , "Le champ '%s' doit être plus grand que %d."
+  SLessThanReq         , "Le champ '%s' doit être plus petit que %d."
+  SEqualReq            , "Le champ '%s' doit être égal à %d."
+  SNotEqualReq         , "Le champ '%s' doit avoir une valeur égale au champ '%s'."
+  SValueRange          , "Le champ '%s' doit contenir une valeur situés entre %.2f et %.2f."
+  SNumericSequenceReq  , "Le champ '%s' doit contenir une valeur plus %s que le champ '%s'."
+  SDateSequenceReq     , "Le champ '%s' doit contenir une date plus %s que le champ '%s'."
+  SRecordNotFound      , "Enregistrement non-trouvé."
+  SRecordNotFoundTbl   , "Enregistrement non-trouvé dans la table '%s'."
+  SInsertNotAvail      , "Ne peut insérer un nouvel enregistrement."
+  SEditNotAvail        , "Ne peut éditer l''enregistrement."
+  SDeleteNotAvail      , "Ne peut effacer l''enregistrement."
+
+  SInvalidUserName     , "Nom d''utilisateur ou mot de passe inconnu."
+  SDeadlock            , "Deadlock détecté.\n"\
+                         "Réessayez."
+  SKeyViol             , "Il y a un enregistrement avec les mêmes champs clés."
+  SKeyDeleted          , "Ne peut éditer ou effacer l''enregistrement.\n"\
+                         "Retirer applique le filtre ou rafraichit les données."
+  SFKViolation         , "Valeur nulle ou mauvaise référence trouvée.\n"
+  SErrorCodeFmt        , "Erreur: %d\n"
+
+  SDBMenuInsert        , "&Insérer"
+  SDBMenuEdit          , "&Editer"
+  SDBMenuDelete        , "E&ffacer"
+  SDBMenuFirst         , "&Premier enregistrement"
+  SDBMenuLast          , "&Dernier enregistrement"
+  SDBMenuRefresh       , "&Rafraîchir"
+
+  SGetProviderError    , "Ne peut créer le IProvider: DataSet et Provider non-définis"
+  SDuplicateProvNames  , "%s: ProviderItem avec le ProviderName '%s' existe déjà";
+  SProvNotFound        , "IProvider '%s' non-trouvé"
+
+  SServicesNotFound    , "%s: Ne peut trouver les services dataset"
+  SServicesEmpty       , "Les propriétés des Services non-assignés"
+  SCreateDataSetErr    , "%s: Ne peut créer le DataSet"
+  SCreateDataSetEditErr, "%s: Ne peut créer de DataSet éditable"
+
+  SRemoteServerNeeded  , "La propriété RemoteServer n''est pas assignée"
+
+  SProviderListNeeded  , "La propriété ProviderList n''est pas assignée"
+
+  SInvalidDatabase     , "Provider de database invalide"
+  SMissingDatabase     , "La propriété database n''est pas assignée"
+  SUnknownDatabase     , "Database '%s' inconnue"
+  SDupProviderName     , "Le provider '%s' existe déjà"
+  SDBFactoryMissing    , "La propriété DatabaseFactory n''est pas assignée"
+  SNoDataModule        , "Le DataModule n''est pas disponible"
+  SInvalidDatabaseName , "La propriété DatabaseName est invalide"
+
+
+}

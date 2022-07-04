@@ -1,0 +1,77 @@
+/****************************************************************************
+
+vgDBRes.res
+
+  Vladimir Gaitanoff Delphi VCL Library
+  Copyright (c) 1997, 1998
+
+*****************************************************************************/
+
+#include "vgDBRes.pas"
+
+LANGUAGE LANG_RUSSIAN,1
+
+STRINGTABLE
+{
+  SConfirmDelete       , "Удалить запись?"
+  SOpenTableFailed     , "Неудачная попытка открытия таблицы или запроса\n"\
+                         "'%s'\n"\
+                         "Повторить?"
+  SEqualStr            , " (равно)"
+  SNotNullReqired      , "Требуется задать значение в поле '%s'"
+  SNullReqired         , "В поле '%s' должно быть пустое значение"
+  SLengthTooSmall      , "Значение в поле '%s' должно содержать не менее %d символов"
+  SIntFieldOutOfRange  , "Значение в поле '%s' должно находиться в диапазоне от %d до %d"
+  SFieldRequired       , "Необходимо задать значение поля '%s'"
+  SNonZeroValueReq     , "Значение в поле '%s' должно быть больше нуля"
+  SMoreThanReq         , "В поле '%s' требуется значение больше %d"
+  SLessThanReq         , "В поле '%s' требуется значение меньше %d"
+  SEqualReq            , "Значение в поле '%s' не может отличаться от %d"
+  SNotEqualReq         , "Значение в поле '%s' должно отличаться от значения в поле '%s'"
+  SValueRange          , "Значение в поле '%s' должно лежать между %.2f и %.2f"
+  SNumericSequenceReq  , "Число в поле '%s' должно быть больше%s числа в поле '%s'"
+  SDateSequenceReq     , "Дата в поле '%s' должна быть больше%s даты в поле '%s'"
+  SRecordNotFound      , "Запись не найдена"
+  SRecordNotFoundTbl   , "Запись в таблице '%s' не найдена"
+  SInsertNotAvail      , "Нельзя вставить новую запись"
+  SEditNotAvail        , "Нельзя отредактировать запись"
+  SDeleteNotAvail      , "Нельзя удалить запись"
+
+  SInvalidUserName     , "Неверное имя пользователя или пароль"
+  SDeadlock            , "Обнаружены взаимозависимые блокировки.\n"\
+                         "Попробуйте еще раз"
+  SKeyViol             , "Запись с такими ключевыми полями уже существует"
+  SKeyDeleted          , "Запись не может быть отредактирована или удалена.\n"\
+                         "Снимите наложенный фильтр или перечитайте данные"
+  SFKViolation         , "В поле пустое значение или ссылка на несуществующую запись.\n"
+  SErrorCodeFmt        , "Ошибка: %d\n"
+
+  SDBMenuInsert        , "&Добавить"
+  SDBMenuEdit          , "&Редактировать"
+  SDBMenuDelete        , "&Удалить"
+  SDBMenuFirst         , "&Начало таблицы"
+  SDBMenuLast          , "&Конец таблицы"
+  SDBMenuRefresh       , "&Перечитать данные"
+
+  SGetProviderError    , "Для создания IProvider необходимо задать DataSet или Provider"
+  SDuplicateProvNames  , "%s: ProviderItem с ProviderName '%s' уже существует"
+  SProvNotFound        , "IProvider '%s' не найден"
+
+  SServicesNotFound    , "%s: Невозможно найти сервисы"
+  SCreateDataSetErr    , "%s: Невозможно создать DataSet"
+  SCreateDataSetEditErr, "%s: Невозможно создать DataSet для редактирования"
+
+  SRemoteServerNeeded  , "Свойство RemoteServer не определено"
+
+  SProviderListNeeded  , "Свойство ProviderList не определено"
+
+  SInvalidDatabase     , "Неправильный провайдер базы данных"
+  SMissingDatabase     , "Свойство Database не определено"
+  SUnknownDatabase     , "Неизвестная база данных '%s'"
+  SDupProviderName     , "Провайдер '%s' уже существует"
+  SDBFactoryMissing    , "Свойство DatabaseFactory не определено"
+  SNoDataModule        , "DataModule не доступен"
+  SInvalidDatabaseName , "Неверное значение свойства DatabaseName"
+
+}
+

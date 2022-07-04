@@ -1,0 +1,114 @@
+ICS-SSL HOWTO
+=============
+
+How to create certificates for the demos ?
+
+See the batch file IcsSslBuildCerts.bat in /delphi/internet/SslCerts
+This batch file will use comand line OpenSSL to create a few certificates.
+You have to configure OpenSSL.conf text file (same dir) and also the
+batch file which initialize a few environment variables.
+
+Basically IcsSslBuildCerts.bat create a root CA, a server CA, a server
+certificate and a client certificate.
+The root and server CA are produced in two forms: one (pem file) suitable 
+to use with SslWebServ demo and one (p12 file) suitable for use with 
+Internet Explorer.
+Server and client certificates are produced only in pem format suitable
+for use with SslWebServ and HttpsTst demos.
+
+To have IE validate the server certificate, you have to import the
+root.p12 and ServerCA.p12 files into IE certificate stores. Root.p12
+goes to the main thrusted authorities, ServeCA.p12 goes into the
+intermediate authorities.
+
+-------
+
+How to display a certificate in human readable form ?
+
+    openssl x509 -noout -in root.pem -text
+
+-------
+
+How to convert a certificate and private key in PEM format to a 
+pkcs12 format suitable for IE ?
+
+    openssl pkcs12 -export -inkey 01key.pem -in 01cert.pem -out 01cert.p12
+
+    This example assume the certificate is in 01CERT.PEM file (that is 
+    the demo certificate delivered with ICS-SSL) and private key is in 
+    01KEY.PEM file (that is the demo private key related to 01CERT.PEM). 
+    The result is output to 01CERT.P12 which can be imported to IE.
+
+-------
+
+How to export a certificate already installed in IE so that it is 
+usable with ICS-SSL ?
+
+    Launch IE. Menu / Tools/ Options / Content / Certificates
+    Select the certificate you want to export, click Export.
+    Agree to export private key.
+    Select PKCS12 file format. Other options by default.
+    Enter the password protecting the exported certificate (We use
+    the word "password" as example).
+    Select any file name you like (We use IETEST.PFX here).
+
+    Now you have a pkcs12 file (pfx or p12 file).
+    Use the following format to convert it to PEM format:
+
+    openssl pkcs12 -in ietest.pfx -out ietest.pem -passin pass:password
+
+    You will be asked the enter the password given in IE when exporting
+    the certificate ("password" in the example above).
+
+    Now you have ietest.pem which contains both the certificate and
+    the private key. You can have to use ietest.pem for SslCertFile and
+    SslPrivKeyFile in the ICS-SSL components.
+
+    You can delete ietest.pfx file which is no more used.
+
+-------
+
+How to export Thawte certificate form IE and make it usable with OpenSSL ?
+
+    Run IE and export the certificate using X.509 format (.cer), use for
+    example the filename "ThawteServerCA.cer".
+    Then convert this file into PEM format using the command:
+
+    openssl x509 -in ThawteServerCA.cer -inform DER -text -outform PEM -out ThawteServerCA.pem
+
+-------
+
+How to produce  the hash of the certificate issuer's name ? This value is 
+used as filename for certificate in CAPath directory. The extension can be
+anything. If several certificates have same hash, then use a different
+extension. Using a numeric extension is handy.
+
+    openssl x509 -hash -noout -in CertFile.pem
+
+-------
+
+How to build OpenSSL using MinGW ?
+
+If you want to compile it yourself it should work fine if you do it that 
+way:
+1) download and install ActivePerl
+ftp://ftp.activestate.com/ActivePerl/Windows/5.6/ActivePerl-5.6.1.635-MSWin32-x86.msi
+2) download and install MinGW (full installation)
+http://downloads.sourceforge.net/mingw/MinGW-5.1.3.exe?modtime=1168794334&big_mirror=1
+3) add c:\MinGW\bin to your PATH system variable
+4) extract OpenSSL sources, open command line and go to the source path
+5) in command line type "perl Configure mingw"
+6a) type "ms\mingw32.bat"
+6b) wait and drink beer :-)
+7) check if all is well: "cd out", "..\ms\test"
+8) libssl32.dll and libleay32.dll are written to the OpenSSL root folder.
+9) Rename libssl32.dll to ssleay32.dll.
+
+And don't be as stupid as me, if you have other gcc tool chains like 
+phone compilers in the path variable, make sure that you set the mingw 
+path in front of others (at least for the time compiling OpenSSL)
+
+Cheers,
+Benjamin
+
+-------

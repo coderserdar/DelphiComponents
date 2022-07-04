@@ -1,0 +1,60 @@
+package NMMAudio70;
+
+{$R *.res}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'Network MultiMedia: Audio/Voice package'}
+{$IMPLICITBUILD OFF}
+
+requires
+  rtl,
+  vcl,
+  NMM70,
+  VclSmp,
+  vclx,
+  vcljpg,
+  dclindy;
+
+contains
+  NMMAudioSettings in 'NMMAudioSettings.pas',
+  NMMACMThread in 'NMMACMThread.pas',
+  NMMAudioDataPacket in 'NMMAudioDataPacket.pas',
+  NMMAudioPlayThread in 'NMMAudioPlayThread.pas',
+  NMMAudioQueues in 'NMMAudioQueues.pas',
+  NMMAudioRecordThread in 'NMMAudioRecordThread.pas',
+  NMMCustomAudioThread in 'NMMCustomAudioThread.pas',
+  NMMVoiceBroadcastServer in 'NMMVoiceBroadcastServer.pas',
+  NMMVoiceChatServer in 'NMMVoiceChatServer.pas',
+  NMMAudioCommon in 'NMMAudioCommon.pas',
+  NMMAudioGroupProcessor in 'NMMAudioGroupProcessor.pas',
+  NMMAudioRegister in 'NMMAudioRegister.pas',
+  NMMVoiceInClient in 'NMMVoiceInClient.pas',
+  NMMAudioSetup in 'Frames\NMMAudioSetup.pas',
+  frSelectAudio in 'Frames\frSelectAudio.pas' {SelectAudio: TFrame},
+  frSelectAudioInput in 'Frames\frSelectAudioInput.pas' {SelectAudioInput: TFrame},
+  frSelectAudioOutput in 'Frames\frSelectAudioOutput.pas' {SelectAudioOutput: TFrame},
+  CodecsInfo in 'Frames\CodecsInfo.pas' {frmCodecsInfo},
+  NMMAudioConnectionHandle in 'NMMAudioConnectionHandle.pas',
+  NMMP2PVoiceServer in 'NMMP2PVoiceServer.pas',
+  NMMVoiceClient in 'NMMVoiceClient.pas';
+
+end.

@@ -1,0 +1,1524 @@
+$B+  //Auto-increment build number (b)
+$C-  //Generate Delphi test project (c)
+$E-  //Generate a component registration unit (e)
+$R-  //Save DFM as resource (r)
+$V+  //Generate version information (v)
+$Z-  //Generate console app (z)
+
+// Not supported:
+//  Bit strings
+//  Time zones
+//  OCTET_LENGTH function
+//  COLLATE function 
+//  CONVERT function 
+//  UNION
+//  CAST function    
+//  OVERLAPS condition
+
+// 2.10 extensive changes throughout
+
+COMPILER FFSQL     
+
+DELPHI
+
+  USES (INTERFACE) FFSQLDef, FFSQLDB, Dialogs
+  
+  PRIVATE
+    FRootNode : TFFSQLStatement;
+    FReservedWordList : TStringList;
+    FAllowReservedWordNames : boolean;
+                                     
+    procedure Init;
+    procedure Final;
+    procedure InitReservedWordList;
+    
+    function CheckSQLName(const SQLNameString : string) : string;
+    function IsColumnList : Boolean;
+    function Matches(n : integer) : Boolean;
+    function IsSymbol(n: integer): boolean; {mwr}
+
+    function IsParenNonJoinTableExp : Boolean;
+    function IsParenJoinTableExp: Boolean;
+    function IsParenTableExp: Boolean;
+    function IsNonJoinTableExp : Boolean;
+    function IsJoinTableExp: Boolean;
+    function IsTableExp: Boolean;
+    function IsTableRef: Boolean;
+                
+  PUBLIC
+    property RootNode : TFFSqlStatement read FRootNode write FRootNode;
+    property AllowReservedWordNames : boolean read FAllowReservedWordNames write FAllowReservedWordNames;
+  CREATE
+    FRootNode := nil;
+    FReservedWordList := TStringList.Create;
+    FAllowReservedWordNames := True;
+  DESTROY                                
+    FReservedWordList.Free;
+    FReservedWordList := NIL;
+  ERRORS
+    200 : Result := 'Text after end of valid sql statement';
+    201 : Result := 'Nested aggregates are not allowed';
+    202 : Result := 'Aggregates may not appear in a WHERE clause';
+    203 : Result := 'Reserved word (' + data + ') not allowed';
+END_DELPHI
+
+(* Arbitrary Code *)
+
+procedure T-->Grammar<--.InitReservedWordList;
+begin
+  FReservedWordList.Add('ABS');                                        {!!.11}         
+  FReservedWordList.Add('ALL');
+  FReservedWordList.Add('AND');
+  FReservedWordList.Add('ANY');
+  FReservedWordList.Add('AS');
+  FReservedWordList.Add('ASC');
+  FReservedWordList.Add('AVG');
+  FReservedWordList.Add('BETWEEN');
+  FReservedWordList.Add('BOTH');
+  FReservedWordList.Add('BY');
+  FReservedWordList.Add('CASE');
+  FReservedWordList.Add('CEILING');                                    {!!.11}         
+  FReservedWordList.Add('CHARACTER_LENGTH');
+  FReservedWordList.Add('CHAR_LENGTH');
+  FReservedWordList.Add('COALESCE');
+  FReservedWordList.Add('COUNT');
+  FReservedWordList.Add('CROSS');                                               
+  FReservedWordList.Add('CURRENT_DATE');
+  FReservedWordList.Add('CURRENT_TIME');
+  FReservedWordList.Add('CURRENT_TIMESTAMP');
+  FReservedWordList.Add('CURRENT_USER');
+  FReservedWordList.Add('DATE');
+  FReservedWordList.Add('DAY');
+  FReservedWordList.Add('DEFAULT');                                             
+  FReservedWordList.Add('DELETE');                                              
+  FReservedWordList.Add('DESC');
+  FReservedWordList.Add('DISTINCT');
+  FReservedWordList.Add('ELSE');
+  FReservedWordList.Add('END');
+  FReservedWordList.Add('EXP');                                        {!!.11}         
+  FReservedWordList.Add('ESCAPE');
+  FReservedWordList.Add('EXISTS');
+  FReservedWordList.Add('EXTRACT');
+  FReservedWordList.Add('FALSE');
+  FReservedWordList.Add('FLOOR');                                      {!!.11}         
+  FReservedWordList.Add('FOR');
+  FReservedWordList.Add('FROM');
+  FReservedWordList.Add('FULL');
+  FReservedWordList.Add('GROUP');
+  FReservedWordList.Add('HAVING');
+  FReservedWordList.Add('HOUR');
+  FReservedWordList.Add('IN');
+  FReservedWordList.Add('INNER');                                               
+  FReservedWordList.Add('INSERT');                                              
+  FReservedWordList.Add('INTERVAL');
+  FReservedWordList.Add('IS');
+  FReservedWordList.Add('JOIN');                                                
+  FReservedWordList.Add('LEADING');
+  FReservedWordList.Add('LEFT');                                                
+  FReservedWordList.Add('LIKE');
+  FReservedWordList.Add('LOG');                                        {!!.11}         
+  FReservedWordList.Add('LOWER');
+  FReservedWordList.Add('MATCH');
+  FReservedWordList.Add('MAX');
+  FReservedWordList.Add('MIN');
+  FReservedWordList.Add('MINUTE');
+  FReservedWordList.Add('MONTH');
+  FReservedWordList.Add('NOINDEX');
+  FReservedWordList.Add('NOREDUCE');
+  FReservedWordList.Add('NOT');
+  FReservedWordList.Add('NULL');
+  FReservedWordList.Add('NULLIF');
+  FReservedWordList.Add('OR');
+  FReservedWordList.Add('ORDER');
+  FReservedWordList.Add('OUTER');                                               
+  FReservedWordList.Add('PARTIAL');
+  FReservedWordList.Add('POSITION');
+  FReservedWordList.Add('POWER');                                      {!!.11}         
+  FReservedWordList.Add('RAND');                                       {!!.11}         
+  FReservedWordList.Add('RIGHT');                                               
+  FReservedWordList.Add('ROUND');                                      {!!.11}         
+  FReservedWordList.Add('SECOND');
+  FReservedWordList.Add('SELECT');
+  FReservedWordList.Add('SESSION_USER');
+  FReservedWordList.Add('SET');                                                 
+  FReservedWordList.Add('SOME');
+  FReservedWordList.Add('SUBSTRING');
+  FReservedWordList.Add('SUM');
+  FReservedWordList.Add('SYSTEM_USER');
+  FReservedWordList.Add('TABLE');                                               
+  FReservedWordList.Add('THEN');
+  FReservedWordList.Add('TIME');
+  FReservedWordList.Add('TIMESTAMP');
+  FReservedWordList.Add('TO');
+  FReservedWordList.Add('TRAILING');
+  FReservedWordList.Add('TRIM');
+  FReservedWordList.Add('TRUE');
+  FReservedWordList.Add('UNIQUE');
+  FReservedWordList.Add('UNKNOWN');
+  FReservedWordList.Add('UPDATE');                                              
+  FReservedWordList.Add('UPPER');
+  FReservedWordList.Add('USER');
+  FReservedWordList.Add('USING');                                               
+  FReservedWordList.Add('VALUES');                                              
+  FReservedWordList.Add('WHEN');
+  FReservedWordList.Add('WHERE');
+  FReservedWordList.Add('YEAR');
+  FReservedWordList.Sorted := TRUE;
+end;
+
+procedure T-->Grammar<--.Init;
+begin
+  fRootNode := TFFSqlStatement.Create;
+  fRootNode.UseIndex := True;
+  fRootNode.Reduce := True;
+  InitReservedWordList;    
+end;
+
+procedure T-->Grammar<--.Final;
+begin
+  if successful and fRootNode.Reduce then
+    fRootNode.ReduceStrength;       
+end;
+
+function T-->Grammar<--.CheckSQLName(const SQLNameString : string) : string;
+var
+  Idx : integer;
+begin                                                               
+  Result := copy(SQLNameString,2,length(SQLNameString) - 2);
+  if NOT fAllowReservedWordNames 
+      AND fReservedWordList.Find(UpperCase(Result), Idx) then
+    SemError(203, Result); 
+end;
+      
+function T-->Grammar<--.IsSymbol(n : integer) : boolean;
+begin
+  if CurrentInputSymbol = n then
+    Result := True
+  else
+    Result := False;
+end;
+
+function T-->Grammar<--.Matches(n: integer): boolean;
+begin
+  Result := IsSymbol(n);
+  if Result then
+    Get;
+end; {Expect}
+
+function T-->Grammar<--.IsColumnList : boolean;
+var
+  BS: string;
+begin
+  Result := False;
+  BS := Bookmark;
+  try  
+    if not Matches(_lparenSym) then exit; 
+    if not Matches(identSym) 
+    and not Matches(SQLNameStringSym) then exit;
+    while (fCurrentInputSymbol = _commaSym) do begin
+      Get;
+      if not Matches(identSym) 
+      and not Matches(SQLNameStringSym) then exit;
+    end;
+    if not Matches(_rparenSym) then exit;
+    Result := True;
+  finally
+    GotoBookmark(BS); 
+  end;
+end; 
+
+function T-->Grammar<--.IsParenNonJoinTableExp : boolean;
+var
+  BS: string;
+begin
+  Result := False;
+  BS := Bookmark;
+  try  
+    if not Matches(_lparenSym) then exit; 
+    if not IsParenNonJoinTableExp 
+    and not (fCurrentInputSymbol in [SELECTsym, TABLEsym, VALUESsym]) then
+      exit; 
+    Result := True;
+  finally
+    GotoBookmark(BS); 
+  end;
+end; 
+
+function T-->Grammar<--.IsNonJoinTableExp : boolean;
+var
+  BS: string;
+begin
+  Result := False;
+  BS := Bookmark;
+  try  
+    if not IsParenNonJoinTableExp 
+    and not (fCurrentInputSymbol in [SELECTsym, TABLEsym, VALUESsym]) then
+      exit; 
+    Result := True;
+  finally
+    GotoBookmark(BS); 
+  end;
+end; 
+
+function T-->Grammar<--.IsTableRef : boolean;
+begin
+  Result := False;
+  if (fCurrentInputSymbol = identSym) OR
+   (fCurrentInputSymbol = SQLNameStringSym) then begin
+    Get;
+    if (fCurrentInputSymbol = _pointSym) then begin
+      Get;
+      Get;
+    end;
+    Result := True;
+  end;
+end;
+
+function T-->Grammar<--.IsParenJoinTableExp : boolean;
+var
+  BS: string;
+begin
+  Result := False;
+  BS := Bookmark;
+  try  
+    if not Matches(_lparenSym) then exit;
+    if not IsTableRef then exit; 
+    if not (fCurrentInputSymbol in [CROSSSym, NATURALSym, INNERSym, LEFTSym, RIGHTSym, FULLSym, UNIONSym, JOINSym]) then
+      exit;
+    Result := True;
+  finally
+    GotoBookmark(BS); 
+  end;
+end; 
+
+function T-->Grammar<--.IsJoinTableExp : boolean;
+var
+  BS: string;
+begin
+  Result := False;
+  BS := Bookmark;
+  try  
+    if not IsTableRef then exit; 
+    if IsSymbol(ASSym) then
+      Get;
+    if IsSymbol(identSym) then
+      Get;
+    if not (fCurrentInputSymbol in [CROSSSym, NATURALSym, INNERSym, LEFTSym, RIGHTSym, FULLSym, UNIONSym, JOINSym]) then
+      exit;
+    Result := True;
+  finally
+    GotoBookmark(BS); 
+  end;
+end; 
+
+function T-->Grammar<--.IsParenTableExp : boolean;
+begin
+  Result := IsParenNonJoinTableExp or IsParenJoinTableExp;
+end; 
+
+function T-->Grammar<--.IsTableExp : boolean;
+begin
+  Result := IsNonJoinTableExp or IsJoinTableExp or IsParenTableExp;
+end; 
+
+(* End of Arbitrary Code *)
+
+IGNORE CASE
+
+CHARACTERS
+  eol     = CHR(13) .
+  Special = '"' + "%&'()*+,-./:;<=>?|[]". 
+  Digit   = "0123456789" .
+  Letter  = CHR(33)..CHR(255) - Special - Digit .
+  noQuote = ANY - "'" - eol .
+  noDblQuote = ANY - '"' - eol .               
+
+TOKENS
+  ident     = Letter { Letter | Digit }.
+  integer_  = Digit { Digit }.
+  float     = [Digit { Digit }] "." Digit { Digit } .
+  SQLString = "'" { noQuote | "''" } "'" .
+  SQLNameString = '"' { noDblQuote } '"' . 
+      
+COMMENTS FROM "/*" TO "*/" NESTED
+COMMENTS FROM "--" TO eol
+COMMENTS FROM "//" TO eol
+
+IGNORE CHR(1)..CHR(32)
+
+PRODUCTIONS
+                                         
+FFSQL (. 
+         var TableExp: TffSqlTableExp; 
+         var InsertSt: TffSqlINSERT; 
+         var UpdateSt: TffSqlUPDATE;
+         var DeleteSt: TffSqlDELETE;  
+         .)  
+          =                       (. Init; .)
+          [ "NOINDEX"             (. fRootNode.UseIndex := False .) 
+            ] 
+          [ "NOREDUCE"            (. fRootNode.Reduce := False .)   
+            ]
+
+            (
+            IF IsTableExp THEN
+              BEGIN
+                TableExp<fRootNode, TableExp>
+                                  (. fRootNode.TableExp := TableExp; .)
+              END
+            |
+            InsertStatement <fRootNode, InsertSt>
+                                  (. fRootNode.Insert := InsertSt; .)
+            |
+            UpdateStatement <fRootNode, UpdateSt>
+                                  (. fRootNode.Update := UpdateSt; .)
+            |
+            DeleteStatement <fRootNode, DeleteSt>
+                                  (. fRootNode.Delete := DeleteSt; .)
+            )
+           
+          [ ";" ]
+                                  (. if fCurrentInputSymbol <> EOFSYMB then
+                                       SynError(200); 
+                                     Final; .)
+          .
+          
+SelectStatement <Parent: TFFSqlNode; 
+                 var Select : TFFSqlSELECT> 
+                                  (. var SelectionList : TFFSqlSelectionList;
+                                     var CondExp : TFFSqlCondExp; 
+                                     var GroupColumnList : TFFSqlGroupColumnList; 
+                                     var TableRefList : TFFSqlTableRefList; 
+                                     var OrderList : TFFSqlOrderList; .)
+           =     
+          "SELECT"                (. Select := TFFSqlSELECT.Create(Parent); .)
+           ["ALL" 
+            | "DISTINCT"          (. Select.Distinct := True; .) 
+            ] 
+          ( SelectionList <Select, SelectionList>                               
+                                  (. Select.SelectionList := SelectionList; .)
+          ) 
+          "FROM" TableRefList <Select, TableRefList>
+                                  (. Select.TableRefList := TableRefList; .) 
+          [ "WHERE" 
+                                  (. Select.InWhere := True; .)
+             CondExp <Select, CondExp>
+                                  (. Select.CondExpWhere := CondExp; .)
+                                  (. Select.InWhere := False; .) 
+          ]
+          ["GROUP" "BY" 
+            GroupColumnList <Select, GroupColumnList> 
+                                  (. Select.GroupColumnList := GroupColumnList; .) 
+          ]              
+          ["HAVING" CondExp <Select, CondExp>
+                                  (. Select.CondExpHaving := CondExp; .)
+          ]
+          ["ORDER" "BY" OrderList 
+              <Select, OrderList> (.Select.OrderList := OrderList; .) 
+          ]
+        .                                                     
+           
+InsertStatement <Parent: TFFSqlNode; 
+                 var InsertSt : TFFSqlINSERT>
+         (. var aSQLName: string;
+            var InsertColumnList: TffSqlInsertColumnList; 
+           var TableExp: TffSqlTableExp; 
+           .)
+         =                                  
+         "INSERT" "INTO" (. InsertSt := TFFSqlINSERT.Create(Parent); .)
+         SQLName<aSQLName> (. InsertSt.TableName := aSQLName; .)
+         ( "DEFAULT" "VALUES" (. InsertSt.DefaultValues := True; .) 
+           |
+           IF IsColumnList THEN  
+           BEGIN
+             '('
+             InsertColumnList<InsertSt, InsertColumnList>
+               (. InsertSt.InsertColumnList := InsertColumnList; .)
+             ')'
+             TableExp<InsertSt, TableExp> (. InsertSt.TableExp := TableExp; .)
+           END
+           |
+           TableExp<InsertSt, TableExp> (. InsertSt.TableExp := TableExp; .)
+         )
+       .         
+
+TableExp<Parent:TffSqlNode; var TableExp: TffSqlTableExp>
+  (. var NestedTableExp: TffSqlTableExp;
+     var JoinTableExp: TffSqlJoinTableExp;    
+     var TmpJoinTableExp: TffSqlJoinTableExp;
+     var TmpTableExp: TffSqlTableExp; 
+     var TableRef, TmpTableRef: TffSqlTableRef;              
+     var NonJoinTableExp: TffSqlNonJoinTableExp; .)
+  = (. TableExp := TffSqlTableExp.Create(Parent); .)
+  (
+    IF IsJoinTableExp THEN
+    BEGIN
+      (. JoinTableExp := TffSqlJoinTableExp.Create(TableExp); .)
+      (. TableExp.JoinTableExp := JoinTableExp; .)
+      
+      SimpleTableRefOrParenTableExp<JoinTableExp, TableRef>
+        (. JoinTableExp.TableRef1 := TableRef; .)
+      
+      JoinTableExp<TableExp, JoinTableExp>
+      
+      REPEAT             
+        // If we get here we have more than two table expressions to join.       
+        // Convert binary join just parsed to left leg of new binary join.
+        (. TmpJoinTableExp := JoinTableExp; .)
+        (. JoinTableExp := TffSqlJoinTableExp.Create(TableExp); .)
+        (. TableExp.JoinTableExp := JoinTableExp; .)
+        (. TmpTableRef := TffSqlTableRef.Create(JoinTableExp); .)
+        (. TmpTableExp := TffSqlTableExp.Create(TmpTableRef); .)
+        (. TmpJoinTableExp.Parent := TmpTableExp; .)
+        (. TmpTableExp.JoinTableExp := TmpJoinTableExp; .)
+        (. TmpTableRef.TableExp := TmpTableExp; .)
+        (. JoinTableExp.TableRef1 := TmpTableRef; .)
+        JoinTableExp<TableExp, JoinTableExp>
+      END_REPEAT
+    END
+    
+      | 
+      NonJoinTableExp<TableExp, NonJoinTableExp>
+       (. TableExp.NonJoinTableExp := NonJoinTableExp; .)
+      |
+      '('
+        TableExp<TableExp, NestedTableExp> 
+          (. TableExp.NestedTableExp := NestedTableExp; .)
+      ')'
+       )
+  .
+  
+JoinTableExp<Parent:TffSqlNode; const JoinTableExp: TffSqlJoinTableExp>
+  (. 
+    var TableRef: TffSqlTableRef; 
+     var CondExp: TFFSqlCondExp;
+     var UsingList : TFFSqlUsingList; 
+     .)
+  =
+  (
+    (
+    "CROSS" "JOIN" TableRef<JoinTableExp, TableRef>
+    (. JoinTableExp.JoinType := jtCross; .)
+    (. JoinTableExp.TableRef2 := TableRef; .) 
+    | ["NATURAL" (. JoinTableExp.Natural := True; .) ]
+      (. JoinTableExp.JoinType := jtInner; .) // default
+    [ "INNER" | 
+      "LEFT" ["OUTER"] (. JoinTableExp.JoinType := jtLeftOuter; .)| 
+      "RIGHT" ["OUTER"] (. JoinTableExp.JoinType := jtRightOuter; .)|
+      "FULL" ["OUTER"] (. JoinTableExp.JoinType := jtFullOuter; .)| 
+      "UNION" (. JoinTableExp.JoinType := jtUnion; .)
+    ]
+    "JOIN"                                   
+    SimpleTableRefOrParenTableExp<JoinTableExp, TableRef>
+    (. JoinTableExp.TableRef2 := TableRef; .)
+    [ (
+        ("ON" CondExp<JoinTableExp, CondExp>
+            (. JoinTableExp.CondExp := CondExp; .)
+        ) 
+       | ("USING" "(" UsingList<JoinTableExp, UsingList>
+          ")" (. JoinTableExp.UsingList := UsingList; .)
+         ) 
+      )
+    ]
+    )  
+  )
+  . 
+
+UsingList <Parent: TFFSqlNode;
+           var UsingList : TFFSqlUsingList>
+                                  (. var UsingItem : TFFSqlUsingItem; .)
+        =                         (. UsingList := TFFSqlUsingList.Create(Parent); .)
+          UsingItem <UsingList, UsingItem> 
+                                  (. UsingList.AddItem(UsingItem); .) 
+           { "," UsingItem<UsingList, UsingItem> 
+                                  (. UsingList.AddItem(UsingItem); .)
+           }
+        .
+        
+UsingItem <Parent: TFFSqlNode; 
+           var UsingItem : TFFSqlUsingItem>
+                                  (. var aSQLName: string; .)
+        =                         (. UsingItem := TFFSqlUsingItem.Create(Parent); .) 
+          SQLName <aSQLName>
+                                 (. UsingItem.ColumnName := aSQLName; .)
+        .
+                     
+NonJoinTableExp<Parent:TffSqlNode; var NonJoinTableExp: TffSqlNonJoinTableExp>
+  (. var NonJoinTableTerm: TffSqlNonJoinTableTerm; .)  
+  = (. NonJoinTableExp := TffSqlNonJoinTableExp.Create(Parent); .)
+    NonJoinTableTerm<NonJoinTableExp, NonJoinTableTerm>
+      (. NonJoinTableExp.NonJoinTableTerm := NonJoinTableTerm; .)
+  .
+    
+NonJoinTableTerm<Parent:TffSqlNode; var NonJoinTableTerm: TffSqlNonJoinTableTerm>
+  (. var NonJoinTablePrimary: TffSqlNonJoinTablePrimary; .)  
+  = (. NonJoinTableTerm := TffSqlNonJoinTableTerm.Create(Parent); .)
+  NonJoinTablePrimary<NonJoinTableTerm, NonJoinTablePrimary>
+    (. NonJoinTableTerm.NonJoinTablePrimary := NonJoinTablePrimary; .)
+  .
+  
+NonJoinTablePrimary<Parent: TffSqlNode; var NonJoinTablePrimary: TffSqlNonJoinTablePrimary>
+         (. var ValueList: TffSqlValueList;
+           var NonJoinTableExp: TffSqlNonJoinTableExp; 
+           var TableRef: TffSqlTableRef;
+           var SelectSt: TFFSqlSELECT; .)
+  =                    
+    (. NonJoinTablePrimary := TffSqlNonJoinTablePrimary.Create(Parent); .)
+  (  
+    IF IsParenNonJoinTableExp THEN   
+      BEGIN
+        "(" NonJoinTableExp<NonJoinTablePrimary, NonJoinTableExp> 
+          (. NonJoinTablePrimary.NonJoinTableExp := NonJoinTableExp; .)
+        ")"
+      END
+    |
+    SelectStatement<NonJoinTablePrimary, SelectSt> (. NonJoinTablePrimary.SelectSt := SelectSt; .)
+    |
+    "TABLE" TableRef<NonJoinTablePrimary, TableRef> (. NonJoinTablePrimary.TableRef := TableRef; .)  
+    |
+    TableConstructor<NonJoinTablePrimary, ValueList> (. NonJoinTablePrimary.ValueList := ValueList; .)
+  )    
+  .
+         
+TableConstructor<Parent: TFFSqlNode; var ValueList: TffSqlValueList>
+  =
+    "VALUES" "(" ValueList<Parent, ValueList> ")" 
+  .
+                                 
+InsertColumnList<Parent: TFFSqlNode;
+           var InsertColumnList : TFFSqlInsertColumnList>
+                                  (. var InsertItem : TFFSqlInsertItem; .)
+        =                         (. InsertColumnList := TFFSqlInsertColumnList.Create(Parent); .)
+          InsertItem <InsertColumnList, InsertItem> 
+                                  (. InsertColumnList.AddItem(InsertItem); .) 
+           { "," InsertItem <InsertColumnList, InsertItem> 
+                                  (. InsertColumnList.AddItem(InsertItem); .)
+           }
+        .
+
+InsertItem <Parent: TFFSqlNode; 
+           var InsertItem : TFFSqlInsertItem>
+                                  (. var aSQLName: string; .)
+        =                         (. InsertItem := TFFSqlInsertItem.Create(Parent); .) 
+           SQLName <aSQLName>     (. InsertItem.ColumnName := aSQLName; .)
+        .
+
+ValueList<Parent: TFFSqlNode;
+           var ValueList : TFFSqlValueList>
+                                  (. var ValueItem : TFFSqlValueItem; .)
+        =                         (. ValueList := TFFSqlValueList.Create(Parent); .)
+          ValueItem <ValueList, ValueItem> 
+                                  (. ValueList.AddItem(ValueItem); .) 
+           { "," ValueItem <ValueList, ValueItem> 
+                                  (. ValueList.AddItem(ValueItem); .)
+           }
+        .
+
+ValueItem <Parent: TFFSqlNode; 
+           var ValueItem : TFFSqlValueItem>
+                                  (. 
+                                  var Simplex : TFFSqlSimpleExpression; .)
+        =                         (. ValueItem := TFFSqlValueItem.Create(Parent); .)
+           (
+           "DEFAULT"                            (. ValueItem.Default := True; .)                            
+           |
+           "NULL"                            
+           |
+           SimpleExpression<ValueItem, Simplex> (. ValueItem.Simplex := Simplex; .)
+           )         
+        .
+
+
+DeleteStatement <Parent: TFFSqlNode; 
+                 var DeleteSt : TFFSqlDELETE>
+         (. var TableRef: TffSqlTableRef;
+            var CondExp: TFFSqlCondExp; .)
+         =                                  
+         "DELETE" "FROM" (. DeleteSt := TFFSqlDELETE.Create(Parent); .)
+         SimpleTableRef<DeleteSt, TableRef> (. DeleteSt.TableRef := TableRef; .)
+          [ "WHERE" 
+             CondExp <DeleteSt, CondExp>
+                                  (. DeleteSt.CondExpWhere := CondExp; .)
+          ]
+       .         
+                                                                                     
+UpdateStatement <Parent: TFFSqlNode; 
+                 var UpdateSt : TFFSqlUPDATE>
+         (. var TableRef: TffSqlTableRef;
+           var CondExp: TFFSqlCondExp; 
+           var UpdateList: TFFSqlUpdateList; .)
+         =                                  
+         "UPDATE" (. UpdateSt := TFFSqlUPDATE.Create(Parent); .)
+         SimpleTableRef<UpdateSt, TableRef> (. UpdateSt.TableRef := TableRef; .)
+         "SET" UpdateList<UpdateSt, UpdateList> 
+           (. UpdateSt.UpdateList := UpdateList; .)
+          [ "WHERE" 
+             CondExp <UpdateSt, CondExp>
+                                  (. UpdateSt.CondExpWhere := CondExp; .)
+          ]
+       .         
+                                                                                     
+UpdateList <Parent: TFFSqlNode;
+           var UpdateList : TFFSqlUpdateList>
+                                  (. var UpdateItem : TFFSqlUpdateItem; .)
+        =                         (. UpdateList := TFFSqlUpdateList.Create(Parent); .)
+          UpdateItem <UpdateList, UpdateItem> 
+                                  (. UpdateList.AddItem(UpdateItem); .) 
+           { "," UpdateItem <UpdateList, UpdateItem> 
+                                  (. UpdateList.AddItem(UpdateItem); .)
+           }
+        .
+        
+UpdateItem <Parent: TFFSqlNode; 
+           var UpdateItem : TFFSqlUpdateItem>
+                                  (. var Simplex : TFFSqlSimpleExpression;
+                                     var aSQLName : string; .)  
+        =                         (. UpdateItem := TFFSqlUpdateItem.Create(Parent); .) 
+           SQLName <aSQLName>     (. UpdateItem.ColumnName := aSQLName; .)
+           "="
+           ( "DEFAULT"            (. UpdateItem.Default := True; .)
+            | "NULL" 
+            | SimpleExpression<UpdateItem, Simplex> (. UpdateItem.Simplex := Simplex; .)
+           )
+        .
+         
+OrderList <Parent: TFFSqlNode;
+           var OrderList : TFFSqlOrderList>
+                                  (. var OrderItem : TFFSqlOrderItem; .)
+        =                         (. OrderList := TFFSqlOrderList.Create(Parent); .)
+          OrderItem <OrderList, OrderItem> 
+                                  (. OrderList.AddOrderItem(OrderItem); .) 
+           { "," OrderItem <OrderList, OrderItem> 
+                                  (. OrderList.AddOrderItem(OrderItem); .)
+           }
+        .
+        
+OrderItem <Parent: TFFSqlNode; 
+           var OrderItem : TFFSqlOrderItem>
+                                  (. var OrderColumn : TFFSqlOrderColumn; .)
+        =                         (. OrderItem := TFFSqlOrderItem.Create(Parent); .) 
+          ( OrderColumn <OrderItem, OrderColumn> 
+                                  (. OrderItem.Column := OrderColumn; .) 
+          | integer_              (. OrderItem.Index := LexString; .)
+          )
+          [ "ASC"
+            | "DESC"              (. OrderItem.Descending := True; .)
+          ]
+        .
+                     
+OrderColumn <Parent: TFFSqlNode; var Col : TFFSqlOrderColumn>
+                                  (. var 
+                                       aSQLName : string; .)  
+        =
+                                  (. Col := TFFSqlOrderColumn.Create(Parent);
+                                     aSQLName := ''; .)      
+          ( SQLName <aSQLName>  
+                                            
+          [ "."                   (. Col.TableName := aSQLName;
+                                     aSQLName := ''; .)    
+           SQLName <aSQLName>
+          ]                                           
+          )                       (. Col.FieldName := aSQLName; .)
+          .
+                                
+SelectionList <Parent: TFFSqlSELECT; var SelectionList: TFFSqlSelectionList>  
+          = 
+                                  (. SelectionList := TFFSqlSelectionList.Create(Parent); .) 
+              Selection <SelectionList> 
+              {"," Selection<SelectionList> }
+          .
+              
+Selection <SelectionList: TFFSqlSelectionList> 
+                                  (. var Selection : TFFSqlSelection;  
+                                     var Exp : TFFSqlSimpleExpression;
+                                     var Term: TFFSqlTerm;             
+                                     var Factor: TFFSqlFactor;         
+                                     var FieldRef: TFFSqlFieldRef;     
+                                     .) 
+          =                       (. Selection := TFFSqlSelection.Create(SelectionList); .)
+                                           
+             (
+               "*"                                                     
+                 (.                                                    
+                    Exp := TFFSqlSimpleExpression.Create(Selection);   
+                    Term := TFFSqlTerm.Create(Exp);                    
+                    Factor :=  TFFSqlFactor.Create(Term);              
+                    FieldRef := TFFSqlFieldRef.Create(Factor);         
+                    Factor.FieldRef := FieldRef;                       
+                    Term.AddFactor(Factor);                            
+                    Exp.AddTerm(Term);                                 
+                    Selection.SimpleExpression := Exp;                 
+                 .)                                                    
+               |                                                       
+               SimpleExpression <Selection, Exp>
+                                  (. Selection.SimpleExpression := Exp; .)
+               [ ColumnAlias<Selection>
+               ]
+             )
+                                  (. SelectionList.AddSelection(Selection); .)
+          .
+                                     
+ColumnAlias<var Selection : TFFSqlSelection> 
+  (. var Col : TFFSqlColumn;.) =
+  ["AS"] 
+     Column <Selection, Col>     
+      (. Selection.Column := Col; .)
+  .
+                                        
+Aggregate <Parent: TFFSqlNode; var Aggregate : TFFSqlAggregate>
+                                  (. var SimpleExpression : TFFSqlSimpleExpression; .) 
+          =                                              
+                                  (. if Parent.OwnerSelect.InWhere then
+                                       SynError(202);
+                                     Aggregate := TFFSqlAggregate.Create(Parent); .)
+              (
+              ( ("COUNT"          (. Aggregate.AgFunction := agCount; .)
+                "(" 
+                ("*" |
+                  ["ALL" | 
+                   "DISTINCT"      (. Aggregate.Distinct := True; .)
+                  ]
+                  SimpleExpression <Aggregate, SimpleExpression> 
+                                   (.Aggregate.SimpleExpression := SimpleExpression; .)
+                ) 
+                ")")             
+              )
+             |( 
+               ("MIN"             (. Aggregate.AgFunction := agMin; .)
+               | "MAX"            (. Aggregate.AgFunction := agMax; .)
+               | "SUM"            (. Aggregate.AgFunction := agSum; .)
+               | "AVG"            (. Aggregate.AgFunction := agAvg; .)
+               )
+               "(" 
+                  ["ALL" | 
+                  "DISTINCT"      (. Aggregate.Distinct := True; .)
+                  ]
+                  SimpleExpression <Aggregate, SimpleExpression> 
+                                  (. Aggregate.SimpleExpression := SimpleExpression; 
+                                     if Aggregate.SimpleExpression.IsAggregateExpression then
+                                       SynError(201); .)
+               ")"
+              )             
+              )                                           
+                                                         
+          .
+
+FieldRef <Parent: TFFSqlNode; var FieldRef: TFFSqlFieldRef>
+                                  (. var 
+                                       aSQLName : string; .)
+          =
+                                  (. FieldRef := TFFSqlFieldRef.Create(Parent);
+                                     aSQLName := ''; .)
+          (
+           ( SQLName <aSQLName> 
+          [ "."                   (. FieldRef.TableName :=  aSQLName; .)    
+           ( SQLName <aSQLName>    
+             | "*"                (. aSQLName := ''; .)
+           )
+          ]
+          )
+          )                       (. FieldRef.FieldName := aSQLName; .)
+          .
+                                     
+GroupColumnList <Parent: TFFSqlNode; 
+                 var ColumnList : TFFSqlGroupColumnList> 
+                                  (. var Col : TFFSqlGroupColumn; .) 
+          =                       (. ColumnList := TFFSqlGroupColumnList.Create(Parent); .) 
+             GroupColumn <Parent, Col>  
+                                  (. ColumnList.AddColumn(Col); .) 
+             { "," 
+               GroupColumn <Parent, Col> 
+                                  (. ColumnList.AddColumn(Col); .) 
+             }
+          .
+                 
+                                                          
+Column <Parent: TFFSqlNode; 
+        var Col : TFFSqlColumn>  
+        (. var ColumnName : string; .)                                 
+          =
+           (. Col := TFFSqlColumn.Create(Parent); .)      
+           // allow for quoted strings with spaces
+            SQLName<ColumnName>    (. Col.ColumnName := ColumnName; .) 
+          .
+
+                                
+GroupColumn <Parent: TFFSqlNode; 
+             var Col : TFFSqlGroupColumn>
+                                  (. var
+                                       aSQLName : string; .)  
+          =                       (. Col := TFFSqlGroupColumn.Create(Parent);
+                                     aSQLName := ''; .)      
+           ( SQLName <aSQLName> 
+                                                   
+          [ "."                   (. Col.TableName :=  aSQLName; .)    
+           ( SQLName <aSQLName> )
+          ]
+          )                       (. Col.FieldName := aSQLName; .)
+          .
+                                
+CondExp <Parent: TFFSqlNode; 
+         var CondExp: TFFSqlCondExp>
+                                  (. var CondTerm : TFFSqlCondTerm; .) 
+          =                       (. CondExp := TFFSqlCondExp.Create(Parent); .)
+  CondTerm <CondExp, CondTerm>    (. CondExp.AddCondTerm(CondTerm); .) 
+  { "OR" 
+     CondTerm <CondExp, CondTerm> (. CondExp.AddCondTerm(CondTerm); .) 
+  }
+           .
+           
+CondTerm <Parent: TFFSqlNode; 
+          var CondTerm : TFFSqlCondTerm> 
+                                  (. var CondFactor : TFFSqlCondFactor; .) 
+           =                      (. CondTerm := TFFSqlCondTerm.Create(Parent); .) 
+  CondFactor <CondTerm, CondFactor>         
+                                  (. CondTerm.AddCondFactor(CondFactor); .)
+  { "AND" 
+    CondFactor <CondTerm, CondFactor> 
+                                  (. CondTerm.AddCondFactor(CondFactor); .)
+  }  
+           .  
+
+CondFactor <Parent: TFFSqlNode; 
+            var CondFactor: TFFSqlCondFactor> 
+                                  (. var CondPrimary : TFFSqlCondPrimary; .) 
+          =                       (. CondFactor := TFFSqlCondFactor.Create(Parent); .) 
+           ["NOT"                 (. CondFactor.UnaryNot := True; .)
+           ] 
+            CondPrimary <CondFactor, CondPrimary> 
+                                  (. CondFactor.CondPrimary := CondPrimary; .)
+          .
+  
+CondPrimary <Parent: TFFSqlNode; 
+             var CondPrimary : TFFSqlCondPrimary>
+                                  (. var SimpleExpression : TFFSqlSimpleExpression; 
+                                     var RelOp : TFFSqlRelop; 
+                                     var BetweenClause : TFFSqlBetweenClause; 
+                                     var LikeClause : TFFSqlLikeClause; 
+                                     var InClause : TFFSqlInClause; 
+                                     var IsTest: TFFSqlIsTest; 
+                                     var AllOrAny : TFFSqlAllOrAnyClause; 
+                                     var ExistsClause : TFFSqlExistsClause; 
+                                     var UniqueClause : TFFSqlUniqueClause; 
+                                     var MatchClause : TFFSqlMatchClause; .)
+          =                       (. CondPrimary := TFFSqlCondPrimary.Create(Parent);
+                                     RelOp := roNone; .)
+      (
+         ExistsClause <CondPrimary, ExistsClause>   
+                                  (. CondPrimary.ExistsClause := ExistsClause; .)
+       |
+         UniqueClause <CondPrimary, UniqueClause>
+                                  (. CondPrimary.UniqueClause := UniqueClause; .)
+       |
+       (  
+        SimpleExpression <CondPrimary, SimpleExpression> 
+                                  (. CondPrimary.SimpleExp1 := SimpleExpression; .) 
+         [
+          (
+           ("="                   (. RelOp := roEQ; .) 
+            | "<="                (. RelOp := roLE; .)
+            | "<"                 (. RelOp := roL; .)
+            | ">"                 (. RelOp := roG; .)
+            | ">="                (. RelOp := roGE; .)
+            | "<>"                (. RelOp := roNE; .)
+           )                      (. CondPrimary.RelOp := RelOp; .)
+          (AllOrAnyClause <CondPrimary, AllOrAny> 
+                                  (. CondPrimary.AllOrAnyClause := AllOrAny; .)
+            | SimpleExpression<CondPrimary, SimpleExpression> 
+                                  (. CondPrimary.SimpleExp2 := SimpleExpression; .)
+           )
+            | BetweenClause <CondPrimary, BetweenClause, False> 
+                                  (. CondPrimary.BetweenClause := BetweenClause; .)
+            | LikeClause <CondPrimary, LikeClause, False>       
+                                  (. CondPrimary.LikeClause := LikeClause; .)
+            | InClause <CondPrimary, InClause, False>           
+                                  (. CondPrimary.InClause := InClause; .)
+            | MatchClause <CondPrimary, MatchClause>            
+                                  (. CondPrimary.MatchClause := MatchClause; .)
+            | "NOT"
+              (
+               BetweenClause <CondPrimary, BetweenClause, True> 
+                                  (. CondPrimary.BetweenClause := BetweenClause; .)
+               | LikeClause <CondPrimary, LikeClause, True>       
+                                  (. CondPrimary.LikeClause := LikeClause; .)
+               | InClause <CondPrimary, InClause, True>           
+                                  (. CondPrimary.InClause := InClause; .)
+              )
+           )    
+          | IsTest<CondPrimary, IsTest>  
+                                  (. CondPrimary.IsTest := IsTest;
+                                     CondPrimary.RelOp := RoNone; .) 
+         ]
+        )                
+       )             
+          .
+
+AllOrAnyClause <Parent: TFFSqlNode; 
+                var AllOrAny: TFFSqlAllOrAnyClause>
+                                  (. var Select : TFFSqlSelect; .)
+          =                       (. AllOrAny := TFFSqlAllOrAnyClause.Create(Parent); .)
+             ( "ALL"              (. AllOrAny.All := True; .) 
+               | "ANY" | "SOME" )                                               
+ 
+             "(" 
+             
+             SelectStatement <AllOrAny, Select>   
+                                  (. AllOrAny.SubQuery := Select; .)
+             
+             ")"
+           .           
+                                               
+ExistsClause <Parent: TFFSqlNode; 
+              var Exists: TFFSqlExistsClause>
+                                  (. var Select : TFFSqlSelect; .)
+           =                      (. Exists := TFFSqlExistsClause.Create(Parent); .)
+              "EXISTS"   
+             "(" 
+             SelectStatement <Exists, Select>   
+                                  (. Exists.SubQuery := Select; .)
+             ")"
+           .           
+                                               
+UniqueClause <Parent: TFFSqlNode; 
+              var Unique: TFFSqlUniqueClause>
+                                  //(. var Select : TFFSqlSelect; .)
+                                  (. var TableExp : TFFSqlTableExp; .)
+           =                      (. Unique := TFFSqlUniqueClause.Create(Parent); .)
+              "UNIQUE" "(" 
+             TableExp<Unique, TableExp>
+                                  (. Unique.SubQuery := TableExp; .)
+             ")"
+           .           
+                                               
+IsTest <Parent: TFFSqlNode; 
+        var IsTest: TFFSqlIsTest> 
+           = 
+  "IS"                            (. IsTest := TFFSqlIsTest.Create(Parent); .) 
+    ["NOT"                        (. IsTest.UnaryNot := True; .)
+    ] ("NULL"                     (. IsTest.IsOp := ioNull; .) 
+       | "TRUE"                   (. IsTest.IsOp := ioTrue; .)
+       | "FALSE"                  (. IsTest.IsOp := ioFalse; .)
+       | "UNKNOWN"                (. IsTest.IsOp := ioUnknown; .)
+      )
+           .
+                 
+BetweenClause <Parent: TFFSqlNode; 
+               var BetweenClause: TFFSqlBetweenClause; 
+               Negated: Boolean> 
+                                  (. var SimpleExpression : TFFSqlSimpleExpression; .)
+           =                      (. BetweenClause := TFFSqlBetweenClause.Create(Parent);
+                                     BetweenClause.Negated := Negated; .)
+              "BETWEEN" SimpleExpression <BetweenClause, SimpleExpression>
+                                  (. BetweenClause.SimpleLow := SimpleExpression; .) 
+                "AND" SimpleExpression <BetweenClause, SimpleExpression> 
+                                  (. BetweenClause.SimpleHigh := SimpleExpression; .) 
+          .
+                          
+LikeClause <Parent: TFFSqlNode; 
+            var LikeClause: TFFSqlLikeClause; 
+            Negated: Boolean> 
+                                  (. var SimpleExpression : TFFSqlSimpleExpression; .)
+          =                       (. LikeClause := TFFSqlLikeClause.Create(Parent); .) 
+                                  (. LikeClause.Negated := Negated; .)
+              "LIKE" SimpleExpression <LikeClause, SimpleExpression>        
+                                  (. LikeClause.SimpleExp := SimpleExpression; .)
+              ["ESCAPE" SimpleExpression <LikeClause, SimpleExpression> 
+                                  (. LikeClause.EscapeExp := SimpleExpression; .)
+              ]
+              ["IGNORE" "CASE"    (. LikeClause.IgnoreCase := True; .) // !!.13
+              ]  
+          .
+                          
+InClause <Parent: TFFSqlNode; 
+          var InClause: TFFSqlInClause; 
+          Negated: Boolean> 
+                                  (. var SimpleExpressionList : TFFSqlSimpleExpressionList; 
+                                     var Select : TFFSqlSelect; .)
+                                     //var TableExp : TFFSqlTableExp; .)
+          =                       (. InClause := TFFSqlInClause.Create(Parent); .) 
+                                  (. InClause.Negated := Negated; .)
+              "IN" "("
+                (
+                  SelectStatement <InClause, Select>   
+                                  (. InClause.SubQuery := Select; .)
+                | SimpleExpressionList <InClause, SimpleExpressionList>
+                                  (. Inclause.SimpleExpList := SimpleExpressionList; .)
+                )
+                 ")" 
+          .
+
+MatchClause <Parent: TFFSqlNode; 
+             var MatchClause: TFFSqlMatchClause> 
+                                  (. var Select : TFFSqlSelect; .)
+          =                       (. MatchClause := TFFSqlMatchClause.Create(Parent); .) 
+              "MATCH"
+              ["UNIQUE"           (. MatchClause.Unique := True; .)
+              ]            
+                                  (. MatchClause.Option := moUnspec; .)
+              [ ("PARTIAL"        (. MatchClause.Option := moPartial; .)
+                 | "FULL"         (. MatchClause.Option := moFull; .)
+                )
+              ]
+              "("  
+                SelectStatement <MatchClause, Select>   
+                                  (. MatchClause.SubQuery := Select; .)
+                 ")" 
+          .
+
+SimpleExpressionList <Parent: TFFSqlNode; 
+                      var SimpleExpressionList: TFFSqlSimpleExpressionList>
+                                  (. var SimpleExpression : TFFSqlSimpleExpression; .)
+          =                       (. SimpleExpressionList := TFFSqlSimpleExpressionList.Create(Parent); .)
+            SimpleExpression <SimpleExpressionList, SimpleExpression>                   
+                                  (. SimpleExpressionList.AddExpression(SimpleExpression); .)
+                { ","
+                  SimpleExpression <SimpleExpressionList, SimpleExpression>
+                                  (. SimpleExpressionList.AddExpression(SimpleExpression); .)
+                }
+             .
+                                        
+SimpleExpression <Parent: TFFSqlNode; 
+                  var SimpleExpression : TFFSqlSimpleExpression>
+                                  (. var Term : TFFSqlTerm;  
+                                     var AO : TFFSqlAddOp; .)
+          =                       (. SimpleExpression := TFFSqlSimpleExpression.Create(Parent); .) 
+    Term <SimpleExpression, Term, aoPlus>
+                                  (. SimpleExpression.AddTerm(Term); .) 
+      { 
+      ("+"                        (. AO := aoPlus; .) 
+       | 
+       "-"                        (. AO := aoMinus; .)           
+       |
+       "||"                       (. AO := aoConcat; .)
+       )
+      Term <SimpleExpression, Term, AO> 
+                                  (. SimpleExpression.AddTerm(Term); .) 
+      }
+                 . 
+                                                       
+Term <Parent: TFFSqlNode; var Term : TFFSqlTerm; AddOp : TFFSqlAddOp>
+                                  (. var Factor : TFFSqlFactor;
+                                     var MO : TFFSqlMulOp; .) 
+         =                                                             
+                                  (. Term := TFFSqlTerm.Create(Parent);
+                                     Term.AddOp := AddOp;               .)
+                                       
+  Factor <Term, Factor, moMul>    (. Term.AddFactor(Factor); .) 
+    { ("*"                        (. MO := moMul; .)
+       | "/"                      (. MO := moDiv; .) 
+      ) 
+      Factor <Term, Factor, MO>   (. Term.AddFactor(Factor); .) 
+    }
+     .
+              
+Factor <Parent: TFFSqlNode; 
+        var Factor : TFFSqlFactor; 
+        MulOp: TFFSqlMulOp> 
+                                  (. var FieldRef : TFFSqlFieldRef; 
+                                     var CondExp : TFFSqlCondExp;
+                                     var Literal : TFFSqlLiteral; 
+                                     var Param : TFFSqlParam; 
+                                     var Select : TFFSqlSELECT; 
+                                     var Agg : TFFSqlAggregate; 
+                                     var Func : TFFSqlScalarFunc; .) 
+          =                       (. Factor :=  TFFSqlFactor.Create(Parent);
+                                     Factor.MulOp := MulOp; .)
+    [ "-"                         (. Factor.UnaryMinus := True; .) 
+      ] 
+     (("("
+        (
+          CondExp <Factor, CondExp> (. Factor.CondExp := CondExp; .)
+          | 
+          SelectStatement <Factor, Select>   
+                                    (. Factor.SubQuery := Select; .)
+        )
+       ")" 
+      ) 
+         | FieldRef <Factor, FieldRef>        
+                                  (. Factor.FieldRef := FieldRef; .)
+         | Literal <Factor, Literal>          
+                                  (. Factor.Literal := Literal; .)         
+         | Param <Factor, Param>  (. Factor.Param := Param; .)
+         | Aggregate <Factor, Agg> 
+                                  (. Factor.Aggregate := Agg; .)
+         | ScalarFunction <Factor, Func>      
+                                  (. Factor.ScalarFunc := Func; .) 
+     )
+          .         
+
+ScalarFunction <Parent: TFFSqlNode; 
+                var Func: TFFSqlScalarFunc>
+                                  (. var Exp : TFFSqlSimpleExpression; 
+                                     var CaseExp : TFFSqlCaseExpression; 
+                                     var CoalesceExp : TFFSqlCoalesceExpression; .)
+          =                       (. Func := TFFSqlScalarFunc.Create(Parent); .)
+       (
+            "CASE" 
+            CaseExpression <Func, CaseExp> 
+                                  (. Func.CaseExp := CaseExp; .)
+                                  (. Func.SQLFunction := sfCase; .)  
+         |  ("CHARACTER_LENGTH" 
+             | "CHAR_LENGTH") 
+             "(" SimpleExpression <Func, Exp> ")"
+                                  (. Func.SQLFunction := sfCharLen; .)  
+                                  (. Func.Arg1 := Exp; .)
+         | "COALESCE" 
+           CoalesceExpression <Func, CoalesceExp> 
+                                  (. Func.CoalesceExp := CoalesceExp; .)
+                                  (. Func.SQLFunction := sfCoalesce; .)  
+         | "CURRENT_DATE"         (. Func.SQLFunction := sfCurrentDate; .) 
+         | "CURRENT_TIME"         (. Func.SQLFunction := sfCurrentTime; .) 
+         | "CURRENT_TIMESTAMP"    (. Func.SQLFunction := sfCurrentTimestamp; .) 
+         | ("CURRENT_USER" 
+              | "USER" )          (. Func.SQLFunction := sfCurrentUser; .)
+         | "LOWER" "(" SimpleExpression <Func, Exp> ")"
+                                  (. Func.SQLFunction := sfLower; .)  
+                                  (. Func.Arg1 := Exp .) 
+         | "UPPER" 
+           "(" 
+              SimpleExpression <Func, Exp> ")"
+                                  (. Func.SQLFunction := sfUpper;  
+                                     Func.Arg1 := Exp; .) 
+         | "POSITION" 
+           "(" 
+              SimpleExpression <Func, Exp> 
+                                  (. Func.SQLFunction := sfPosition;  
+                                     Func.Arg1 := Exp; .)           
+              ("," | "IN" )
+               
+              SimpleExpression <Func, Exp>                        
+                                  (. Func.Arg2 := Exp; .)           
+           ")" 
+         | "SESSION_USER"         (. Func.SQLFunction := sfSessionUser; .)
+         | "SUBSTRING" 
+           "(" 
+              SimpleExpression <Func, Exp> 
+                                  (. Func.SQLFunction := sfSubstring;  
+                                     Func.Arg1 := Exp; .)           
+              "FROM" 
+              SimpleExpression <Func, Exp>                        
+                                  (. Func.Arg2 := Exp; .)
+              [ "FOR" 
+                SimpleExpression <Func, Exp>                        
+                                  (. Func.Arg3 := Exp; .)
+              ]                                   
+           ")" 
+                                               
+         | "SYSTEM_USER"          (. Func.SQLFunction := sfSystemUser; .)
+         | "TRIM" "("             (. Func.SQLFunction := sfTrim;
+                                     Func.LTB := ltbBoth; .) 
+           ["LEADING"             (. Func.LTB := ltbLeading; .)
+            |"TRAILING"           (. Func.LTB := ltbTrailing; .)
+            | "BOTH"
+           ]
+           [SimpleExpression <Func, Exp> 
+                                  (. Func.Arg1 := Exp; .)]
+           [ "FROM"
+             SimpleExpression <Func, Exp> 
+                                  (. Func.Arg2 := Exp .)
+           ]
+           ")"
+         | "EXTRACT" "("          (. Func.SQLFunction := sfExtract; .)
+           ("YEAR"                (. Func.xDef := iYear; .)
+            | "MONTH"             (. Func.xDef := iMonth; .)
+            | "DAY"               (. Func.xDef := iDay; .)
+            | "HOUR"              (. Func.xDef := iHour; .)
+            | "MINUTE"            (. Func.xDef := iMinute; .)
+            | "SECOND"            (. Func.xDef := iSecond; .)
+           )                        
+           "FROM"
+             SimpleExpression <Func, Exp> 
+                                  (. Func.Arg1 := Exp; .)
+           ")"   
+         | "NULLIF" "("           (. Func.SQLFunction := sfNullIf; .)
+                    SimpleExpression <Func, Exp>
+                                  (. Func.Arg1 := Exp; .)           
+                     "," SimpleExpression <Func, Exp>                        
+                                  (. Func.Arg2 := Exp; .)           
+                    ")"
+         | "ABS" "("  (. Func.SQLFunction := sfAbs; .)
+                    SimpleExpression <Func, Exp>
+                                  (. Func.Arg1 := Exp; .)           
+                    ")"            
+         | "CEILING" "("  (. Func.SQLFunction := sfCeil; .)
+                    SimpleExpression <Func, Exp>
+                                  (. Func.Arg1 := Exp; .)           
+                    ")"            
+         | "FLOOR" "("  (. Func.SQLFunction := sfFloor; .)
+                    SimpleExpression <Func, Exp>
+                                  (. Func.Arg1 := Exp; .)           
+                    ")"            
+         | "EXP" "("  (. Func.SQLFunction := sfExp; .)
+                    SimpleExpression <Func, Exp>
+                                  (. Func.Arg1 := Exp; .)           
+                    ")"            
+         | "LOG" "("  (. Func.SQLFunction := sfLog; .)
+                    SimpleExpression <Func, Exp>
+                                  (. Func.Arg1 := Exp; .)           
+                    ")"            
+         | "POWER" "("  (. Func.SQLFunction := sfPower; .)
+                    SimpleExpression <Func, Exp>
+                                  (. Func.Arg1 := Exp; .)           
+                     "," SimpleExpression <Func, Exp>                        
+                                  (. Func.Arg2 := Exp; .)           
+                    ")"
+         | "RAND"  (. Func.SQLFunction := sfRand; .)
+         | "ROUND" "("  (. Func.SQLFunction := sfRound; .)
+                    SimpleExpression <Func, Exp>
+                                  (. Func.Arg1 := Exp; .)           
+                    ")"
+       )
+          .
+                                                                  
+CoalesceExpression <Parent: TFFSqlNode; 
+                    var CoalesceExp: TFFSqlCoalesceExpression>
+                                  (. var Exp : TFFSqlSimpleExpression; .)
+          =                       (. CoalesceExp := TFFSqlCoalesceExpression.Create(Parent); .)
+      "("
+        SimpleExpression <CoalesceExp, Exp> 
+                                  (. CoalesceExp.AddArg(Exp); .)
+      { "," SimpleExpression <CoalesceExp, Exp> 
+                                  (. CoalesceExp.AddArg(Exp); .)
+      }
+      ")"   
+    .
+                           
+CaseExpression <Parent: TFFSqlNode; 
+                var CaseExp: TFFSqlCaseExpression>
+                                  (. var WhenClauseList : TFFSqlWhenClauseList;
+                                     var  Exp : TFFSqlSimpleExpression; .)
+          =
+                                  (. CaseExp := TFFSqlCaseExpression.Create(Parent); .)
+    WhenClauseList <CaseExp, WhenClauseList> 
+                                  (. CaseExp.WhenClauseList := WhenClauseList; .)
+    ["ELSE" 
+      ("NULL"
+        | SimpleExpression <CaseExp, Exp> 
+                                  (. CaseExp.ElseExp := Exp; .)
+      )
+    ]
+    "END"
+    .
+    
+WhenClauseList <Parent: TFFSqlNode; 
+               var WhenClauseList : TFFSqlWhenClauseList>
+                                  (. var WhenClause : TFFSqlWhenClause; .) 
+    =
+                                  (. WhenClauseList := TFFSqlWhenClauseList.Create(Parent); .)
+    WhenClause <WhenClauseList, WhenClause> 
+                                  (. WhenClauseList.AddWhenClause(WhenClause); .)
+     { WhenClause <WhenClauseList, WhenClause> 
+                                  (. WhenClauseList.AddWhenClause(WhenClause); .) }
+    .                                                            
+    
+WhenClause <Parent : TFFSqlNode; 
+            var WhenClause : TFFSqlWhenClause>
+                                  (. var CondExp : TFFSqlCondExp;
+                                     Exp : TFFSqlSimpleExpression; .) 
+    =
+                                  (. WhenClause := TFFSqlWhenClause.Create(Parent); .)    
+    "WHEN" CondExp <WhenClause, CondExp>       
+                                  (. WhenClause.WhenExp := CondExp; .)
+    "THEN" 
+      ("NULL" 
+        | SimpleExpression <WhenClause, Exp>         
+                                  (. WhenClause.ThenExp := Exp; .)
+      )
+    .    
+                                                   
+Param <Parent: TFFSqlNode; 
+       var Param: TFFSqlParam> =
+                                  (. Param := TFFSqlParam.Create(Parent); .) 
+       "?"
+      .
+                          
+Literal <Parent: TFFSqlNode; 
+         var Literal: TFFSqlLiteral>       
+                                  (. var FloatLiteral : TFFSqlFloatLiteral;
+                                     var IntegerLiteral : TFFSqlIntegerLiteral;
+                                     var StringLiteral : TFFSqlStringLiteral; 
+                                     var DateLiteral : TFFSqlDateLiteral;
+                                     var TimeLiteral : TFFSqlTimeLiteral;
+                                     var TimestampLiteral : TFFSqlTimestampLiteral; 
+                                     var IntervalLiteral : TFFSqlIntervalLiteral; 
+                                     var BooleanLiteral : TFFSqlBooleanLiteral; .) 
+  =                               (. Literal := TFFSqlLiteral.Create(Parent); .)
+     (
+     FloatLiteral <Literal, FloatLiteral>           
+                                  (. Literal.FloatLiteral := FloatLiteral; .)
+     | IntegerLiteral <Literal, IntegerLiteral>     
+                                  (. Literal.IntegerLiteral := IntegerLiteral; .)
+     | StringLiteral <Literal, StringLiteral>       
+                                  (. Literal.StringLiteral := StringLiteral; .)
+     | DateLiteral <Literal, DateLiteral>           
+                                  (. Literal.DateLiteral := DateLiteral; .)      
+     | TimeLiteral <Literal, TimeLiteral>           
+                                  (. Literal.TimeLiteral := TimeLiteral; .)      
+     | TimestampLiteral <Literal, TimestampLiteral> 
+                                  (. Literal.TimestampLiteral := TimestampLiteral; .)      
+     | IntervalLiteral <Literal, IntervalLiteral>   
+                                  (. Literal.IntervalLiteral := IntervalLiteral; .)
+     | BooleanLiteral <Literal, BooleanLiteral>                        
+                                  (. Literal.BooleanLiteral := BooleanLiteral; .) 
+     )
+     .
+  
+BooleanLiteral<Parent: TFFSqlNode; var BooleanLiteral: TFFSqlBooleanLiteral>
+  = (. BooleanLiteral := TFFSqlBooleanLiteral.Create(Parent); .)
+    (
+    'TRUE' (. BooleanLiteral.Value := True; .) 
+    | 
+    'FALSE'
+    ) 
+  .
+                                  
+FloatLiteral <Parent: TFFSqlNode; 
+              var FloatLiteral: TFFSqlFloatLiteral> 
+     =                            (. FloatLiteral := TFFSqlFloatLiteral.Create(Parent); .) 
+             float                (. FloatLiteral.Value := LexString; .)                
+     .
+             
+IntegerLiteral <Parent: TFFSqlNode; 
+                var IntegerLiteral: TFFSqlIntegerLiteral> 
+     =                            (. IntegerLiteral := TFFSqlIntegerLiteral.Create(Parent); .) 
+       integer_                   (. IntegerLiteral.Value := LexString; .)
+     .                        
+                                    
+StringLiteral <Parent: TFFSqlNode; 
+               var StringLiteral: TFFSqlStringLiteral> 
+     =                            (. StringLiteral := TFFSqlStringLiteral.Create(Parent); .) 
+       SQLString                  (. StringLiteral.Value := LexString; .)
+              .
+                                                                                                                                    
+DateLiteral <Parent: TFFSqlNode; 
+             var DateLiteral: TFFSqlDateLiteral> 
+     =                            (. DateLiteral := TFFSqlDateLiteral.Create(Parent); .)
+       "DATE" 
+       SQLString                  (. DateLiteral.Value := LexString; .)
+     .
+                                                                                                                                    
+TimeLiteral <Parent: TFFSqlNode; 
+            var TimeLiteral: TFFSqlTimeLiteral> 
+     =                            (. TimeLiteral := TFFSqlTimeLiteral.Create(Parent); .)
+       "TIME" 
+       SQLString                  (. TimeLiteral.Value := LexString; .)
+              .
+              
+TimestampLiteral <Parent: TFFSqlNode; 
+                  var TimestampLiteral: TFFSqlTimestampLiteral> 
+     =                            (. TimestampLiteral := TFFSqlTimestampLiteral.Create(Parent); .)
+       "TIMESTAMP" 
+       SQLString                  (. TimestampLiteral.Value := LexString; .)
+              .
+                                                                                                                                    
+IntervalLiteral <Parent: TFFSqlNode; 
+                 var IntervalLiteral: TFFSqlIntervalLiteral> 
+     =                            (. IntervalLiteral := TFFSqlIntervalLiteral.Create(Parent); .)
+       "INTERVAL"                 (. IntervalLiteral.StartDef := iUnspec; .)
+       SQLString                  (. IntervalLiteral.Value := LexString; .)
+       ("YEAR"                    (. IntervalLiteral.StartDef := iYear; .)
+        | "MONTH"                 (. IntervalLiteral.StartDef := iMonth; .)
+        | "DAY"                   (. IntervalLiteral.StartDef := iDay; .)
+        | "HOUR"                  (. IntervalLiteral.StartDef := iHour; .)
+        | "MINUTE"                (. IntervalLiteral.StartDef := iMinute; .)
+        | "SECOND"                (. IntervalLiteral.StartDef := iSecond; .)
+       )                                                
+                                  (. IntervalLiteral.EndDef := iUnspec; .)
+       ["TO"
+       ("YEAR"                    (. IntervalLiteral.EndDef := iYear; .)
+        | "MONTH"                 (. IntervalLiteral.EndDef := iMonth; .)
+        | "DAY"                   (. IntervalLiteral.EndDef := iDay; .)
+        | "HOUR"                  (. IntervalLiteral.EndDef := iHour; .)
+        | "MINUTE"                (. IntervalLiteral.EndDef := iMinute; .)
+        | "SECOND"                (. IntervalLiteral.EndDef := iSecond; .)
+       )                                                
+       ]
+     .
+                                                                                                                                    
+TableRefList <Parent: TFFSqlNode; 
+              var TableRefList: TFFSqlTableRefList>
+              (. var TableRef: TffSqlTableRef; .)
+  =                               (. TableRefList := TFFSqlTableRefList.Create(Parent); .) 
+   TableRef <TableRefList, TableRef> (. TableRefList.AddTableRef(TableRef); .) 
+   { "," TableRef <TableRefList, TableRef> (. TableRefList.AddTableRef(TableRef); .) 
+   }
+                  .
+                  
+SimpleTableRef<Parent: TFFSqlNode; var TableRef: TffSqlTableRef>
+                                  (. var aSQLName : string; .)
+  =                               (. TableRef := TFFSqlTableRef.Create(Parent); .)
+  SQLName <aSQLName>            (. TableRef.TableName := aSQLName; .)
+    [
+    "." SQLName <aSQLName>
+     // previous ident was really a database name      
+      (. TableRef.DatabaseName := TableRef.TableName; TableRef.TableName := aSQLName; .)
+    ]
+    [ SimpleAlias<TableRef>
+    ]                                    
+      .
+
+SimpleTableRefOrParenTableExp<Parent: TFFSqlNode; var TableRef: TffSqlTableRef>
+                                  (.   var TableExp: TffSqlTableExp;  
+                                   var aSQLName : string; .) 
+  =                               (. TableRef := TFFSqlTableRef.Create(Parent); .)
+  (
+  SQLName <aSQLName>            (. TableRef.TableName := aSQLName; .)
+    [
+    "." SQLName <aSQLName>
+     // previous ident was really a database name      
+      (. TableRef.DatabaseName := TableRef.TableName; TableRef.TableName := aSQLName; .)
+    ]
+    [ SimpleAlias<TableRef>
+    ]                                    
+  |
+    "("                              
+    TableExp<TableRef, TableExp>
+    (. TableRef.TableExp := TableExp; .)
+    ")"              
+    [ SimpleAlias<TableRef>
+    ]
+  )  
+      .
+      
+TableRef<Parent: TFFSqlNode; var TableRef: TffSqlTableRef>
+                                  (. var aSQLName : string; 
+                                     var TableExp: TffSqlTableExp;  
+                                     var ColumnList : TFFSqlInsertColumnList; .)
+  =                               (. TableRef := TFFSqlTableRef.Create(Parent); .)
+  
+  IF IsTableExp THEN   
+    BEGIN
+      TableExp<TableRef, TableExp>
+      (. TableRef.TableExp := TableExp; .)
+      [ SimpleAlias<TableRef>
+      ]
+      [ "(" InsertColumnList<TableRef, ColumnList> ")"
+       (. TableRef.ColumnList := ColumnList; .) 
+      ]
+    END
+   ELSE
+     BEGIN
+   SQLName <aSQLName>            (. TableRef.TableName := aSQLName; .)
+    [
+    "." SQLName <aSQLName>
+     // previous ident was really a database name      
+      (. TableRef.DatabaseName := TableRef.TableName; TableRef.TableName := aSQLName; .)
+    ]
+    [ SimpleAlias<TableRef>
+    ]
+     END                                 
+      .
+
+SimpleAlias<var TableRef: TffSqlTableRef>
+  (. var aSQLName: string; .) 
+  = 
+  [ "AS" ] SQLName<aSQLName> (. TableRef.Alias := aSQLName; .) .
+
+SQLName <var aName : string> 
+      =
+           ident                  (. aName := LexString; .) 
+           | SQLNameString        (. aName := CheckSQLName(LexString); .)
+      .
+      
+END FFSQL.
+

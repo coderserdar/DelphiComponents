@@ -1,0 +1,56 @@
+//------------------------------------------------------------------------------
+// Component        TZip Component                                             .
+// Compilers:       Delphi 3 - Delphi 7, C++ Builder 3 - C++ Builder 5         .
+// Author:          Angus Johnson - angusj-AT-myrealbox-DOT-com                .
+// Copyright:       © 2001-2004 Angus Johnson                                  .
+// Translated:      Petr Palicka - petr.palicka-AT-seznam-DOT-cz               .
+// Languaje:        Èeština                                                    .
+// -----------------------------------------------------------------------------
+
+resourcestring
+  s_multidisk_prompt = 'Vlož [ disk %d ] zip souboru do mechaniky pøed stisknutím [ OK ] pro pokraèování...';
+  s_multidisk_prompt_last = 'Toto je [ disk %d ] vícediskového zip souboru. Vlož poslední disk zip souboru pøed stisknutím [ OK ] pro pokraèování...';
+  s_wait_caption = 'èekej...';
+  s_cancel_caption = '&Storno';
+  s_index_range_error = 'Chyba rozsahu indexu';
+  s_password_too_long = 'Heslo musí být do délky 80 znakù.';
+  s_unable_to_access_drive = 'Nemohu pøistupovat k vybrané mechanice!';
+  s_unable_to_create = 'Nemohu vytvoøit "%s"';
+  s_not_a_zip_file = '"%s" není správný zip soubor.';
+  s_cfh_read_error = 'Chyba ètení ''CentralFileHeader''!';
+  s_cfh_write_error = 'Chyba zápisu ''CentralDirectory''!';
+  s_eoch_read_error = 'Chyba ètení ''EndOfCentralHeader''!';
+  s_eoch_write_error = 'Chyba zápisu ''EndOfCentralHeader''.';
+  s_new_password_required = 'Potøebuju nový heslo pro "%s"';
+  s_invalid_password_retry = 'Špatný heslo, prosím opakovat...';
+  s_crc_error_query_extract = '"%s" asi je to rozbitý (CRC chyba).'#10'Mám to pøesto rozbalit?';
+  s_older_file_query_extract = '"%s" je starší než zabalený soubor.'#10'Mám ho pøepsat?...';
+  s_newer_file_query_extract = '"%s" je stejnì starý nebo novìjší než zabalený soubor. Opravdu to chceš pøepsat?';
+  s_multidisk_op_error = 'Nezvládnu pøidat, smazat nebo rozbalit z vícediskovýho zip souboru. Nejdøív tento zip spoj na lokální pevný disk.';
+  s_extract_error_no_folder = 'Nemùžu rozbalit soubory do "%s". Tato složka neexistuje.';
+  s_unable_to_load = 'Nemùžu naèíst %s';
+  s_no_zip_no_op = 'Zip soubor musí vytvoøen a otevøen døíve než se zaènou pøidávat, mazat nebo rozbalovat soubory.';
+  s_no_select_no_op = 'Nejsou vybraný žádný soubory.';
+  s_need_multidisk_zip = 'Tohle není vícediskový soubor zip.';
+  s_merge_only_to_fixed_disk = 'Vícediskový zip soubor mùže být spojen jedinì na lokální pevný disk.';
+  s_multidisk_sig_error = 'Chyba ètení vícediskovýho podpisu';
+  s_no_space_prompt = 'Málo místa na disku. Vlož jiný disk do mechaniky pøed stisknutím [ OK ] pro pokraèování...';
+  s_no_create_vol_label = 'Nezvládnu vytvoøit návìští disku.';
+  s_create_multdisk_on_floppies_only = 'Vícediskový zip soubor mùže být vytvoøen pouze na výmìný disky.';
+  s_source_file_cannot_be_on_floppy = 'Zdrojový soubor nesmí být na disketì.';
+  s_max_multidisk_at_least_256 = 'Maximální velikost souboru musí být nejménì 256kB.';
+  s_min_space_disk1_at_least_256 = 'Minimální velikost souboru na prvním disku musí být nejménì 256kB.';
+  s_localheader_read_error = 'Nemùžu pøeèíst LocalHeader';
+  s_localheader_write_error = 'Nemùžu zapsat LocalHeader.';
+  s_local_data_write_error = 'Nemùžu zapsat local data.';
+  s_comment_read_error = 'Nemùžu pøeèíst hlavní komentáø.';
+  s_comment_write_error = 'Nemùžu zapsat hlavní komentáø.';
+  s_not_an_sfx_file = '"%s" není správný samorozbalovazí zip soubor.';
+  s_sfx_read_error = 'Chyba ètení samorozbalovazí zip soubor.';
+  s_no_icons = 'Chyba - nemùžu najít žádný ikony v exe souboru';
+  s_no_icon = 'Chyba - nemùžu najít konkrétní ikonu v exe souboru';
+  s_no_matching_ico = 'Chyba - žádná ikona v ico souboru nepasuje na nìkterou v exe souboru.';
+  s_ico_copy_error = 'Chyba pøi kopírování ikony do exe souboru.';
+  s_res_not_at_sec_start = 'Zdroje nejsou na zaèátku sekce!!';
+  s_no_password_query_continue = 'Nebylo zadaný žádný heslo, takže soubor nebude rozbalen... Chceš pokraèovat v rozbalování dalších souborù?';
+  s_invalid_dll_version = 'Error - Nesprávná verze ZipDll.dll nebo UnzDll.dll';

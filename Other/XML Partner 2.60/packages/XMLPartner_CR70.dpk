@@ -1,0 +1,44 @@
+package XMLPartner_CR70;
+
+{$R *.res}
+{$ALIGN 8}
+{$ASSERTIONS OFF}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS OFF}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'TurboPower XMLPartner Professional Common Runtime package - CLX'}
+{$RUNONLY}
+{$IMPLICITBUILD OFF}
+
+requires
+  vcl,
+  rtl;
+
+contains
+  XpDom in '..\source\XpDOM.pas',
+  XpParser in '..\source\XpParser.pas',
+  XpInet in '..\source\XpInet.pas',
+  XpChrFlt in '..\source\XpChrFlt.pas',
+  XpExcept in '..\source\XpExcept.pas',
+  XpBase in '..\source\XpBase.pas',
+  XpHash in '..\source\XpHash.pas',
+  XpSort in '..\source\XpSort.pas',
+  XpXSLCon in '..\source\XpXSLCon.pas';
+
+end.

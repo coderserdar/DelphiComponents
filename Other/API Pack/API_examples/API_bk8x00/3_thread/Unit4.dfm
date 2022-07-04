@@ -1,0 +1,242 @@
+object Form1: TForm1
+  Left = 192
+  Top = 107
+  Caption = 'Unsynchronized Thread Example'
+  ClientHeight = 388
+  ClientWidth = 708
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  OldCreateOrder = False
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  DesignSize = (
+    708
+    388)
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Bevel1: TBevel
+    Left = 94
+    Top = 8
+    Width = 272
+    Height = 49
+  end
+  object Label1: TLabel
+    Left = 102
+    Top = 15
+    Width = 30
+    Height = 13
+    Caption = 'Online'
+  end
+  object Label2: TLabel
+    Left = 102
+    Top = 34
+    Width = 30
+    Height = 13
+    Caption = 'Status'
+  end
+  object API_ledgrid1: TAPI_ledgrid
+    Left = 8
+    Top = 91
+    Width = 177
+    Height = 86
+    XCount = 8
+    YCount = 4
+    Transparent = False
+    TransparentColor = clBlack
+    Spacing = 2
+    BoolGradient = False
+    BoolTrue = clGreen
+    BoolTrue2 = 45056
+    BoolFalse = clRed
+    BoolFalse2 = 6711039
+  end
+  object Label3: TLabel
+    Left = 8
+    Top = 72
+    Width = 38
+    Height = 13
+    Caption = 'Input(s):'
+  end
+  object API_ledgrid2: TAPI_ledgrid
+    Left = 191
+    Top = 91
+    Width = 175
+    Height = 86
+    OnMouseDown = API_ledgrid2MouseDown
+    XCount = 8
+    YCount = 4
+    Transparent = False
+    TransparentColor = clBlack
+    Spacing = 2
+    BoolGradient = False
+    BoolTrue = clGreen
+    BoolTrue2 = 45056
+    BoolFalse = clRed
+    BoolFalse2 = 6711039
+  end
+  object Label4: TLabel
+    Left = 191
+    Top = 72
+    Width = 46
+    Height = 13
+    Caption = 'Output(s):'
+  end
+  object API_chart1: TAPI_chart
+    Left = 8
+    Top = 192
+    Width = 692
+    Height = 188
+    Anchors = [akLeft, akTop, akRight, akBottom]
+    Color = clBtnFace
+    ParentColor = False
+    Sorted = False
+    Title = 'Thread Cycletime (ms)'
+    TitleColor = clPurple
+    ColorBackground1 = 8421631
+    ColorBackground2 = clBackground
+    ChartType = ctLine
+    XAxisFormat = '0.0'
+    YAxisFormat = '0.0'
+    XAxisShowItem = False
+    YAxisShowItem = False
+    XAxisShowExt = True
+    YAxisShowExt = True
+    MaxValues = 0
+    XAxisSpacing = 5
+    YAxisSpacing = 5
+    ColorDefault = clYellow
+    ColorGrid = clGray
+  end
+  object API_grbutton1: TAPI_grbutton
+    Left = 8
+    Top = 8
+    Width = 80
+    Height = 25
+    Alignment = taLeftJustify
+    BorderWidth = 1
+    Caption = 'open settings'
+    Color = clBtnFace
+    Enabled = True
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clBlack
+    Font.Height = -11
+    Font.Name = 'Arial'
+    Font.Style = []
+    ParentFont = False
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 0
+    VerticalAlignment = taVerticalCenter
+    OnClick = API_grbutton1Click
+    LedExists = False
+    LedState = False
+    LedChangeOnClick = False
+    LedColorOn = clGreen
+    LedStyle = lsellipse
+    LedPosition = lpright
+    LedColorOff = clRed
+    ColorBorder = clBlack
+    GradientEnd = clWhite
+    FontMouseOver.Charset = DEFAULT_CHARSET
+    FontMouseOver.Color = clWindowText
+    FontMouseOver.Height = -11
+    FontMouseOver.Name = 'Tahoma'
+    FontMouseOver.Style = []
+    ColorOver = clSilver
+    ColorDown = clGray
+    ShowCaption = True
+    WordWrap = False
+  end
+  object API_grbutton2: TAPI_grbutton
+    Left = 8
+    Top = 32
+    Width = 80
+    Height = 25
+    Alignment = taLeftJustify
+    BorderWidth = 1
+    Caption = 'start/stop'
+    Color = clBtnFace
+    Enabled = True
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clBlack
+    Font.Height = -11
+    Font.Name = 'Arial'
+    Font.Style = []
+    ParentFont = False
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 1
+    VerticalAlignment = taVerticalCenter
+    OnClick = API_grbutton2Click
+    LedExists = True
+    LedState = False
+    LedChangeOnClick = False
+    LedColorOn = clGreen
+    LedStyle = lsbox
+    LedPosition = lpright
+    LedColorOff = clRed
+    ColorBorder = clBlack
+    GradientEnd = clWhite
+    FontMouseOver.Charset = DEFAULT_CHARSET
+    FontMouseOver.Color = clWindowText
+    FontMouseOver.Height = -11
+    FontMouseOver.Name = 'Tahoma'
+    FontMouseOver.Style = []
+    ColorOver = clSilver
+    ColorDown = clGray
+    ShowCaption = True
+    WordWrap = False
+  end
+  object ListBox1: TListBox
+    Left = 372
+    Top = 8
+    Width = 327
+    Height = 169
+    Anchors = [akLeft, akTop, akRight]
+    ItemHeight = 13
+    Items.Strings = (
+      'Error Message History')
+    TabOrder = 2
+  end
+  object API_bk8x001: TAPI_bk8x00
+    LastError = 0
+    OnError = API_bk8x001Error
+    CloseOnError = True
+    BusAddress = 11
+    MessageIdent = 1
+    OutputLength = 1
+    InputLength = 0
+    InputWaitCycles = 10
+    Open = False
+    OpenRetries = 2
+    ClearBuffersOnFailedRead = True
+    ClearBuffersOnFailedWrite = True
+    Port = 0
+    Baudrate = 38400
+    ThreadEvent = API_bk8x001ThreadEvent
+    ThreadDelay = 1
+    ThreadPriority = tpTimeCritical
+    ThreadActive = False
+    TheaadAutoActivate = True
+    ThreadSynchronized = False
+    Left = 224
+    Top = 24
+  end
+  object Timer1: TTimer
+    Interval = 700
+    OnTimer = Timer1Timer
+    Left = 192
+    Top = 24
+  end
+  object Timer2: TTimer
+    Interval = 200
+    OnTimer = Timer2Timer
+    Left = 256
+    Top = 24
+  end
+end

@@ -1,0 +1,123 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!-- C++Builder XML Project -->
+<PROJECT>
+  <MACROS>
+    <VERSION value="BCB.05.03"/>
+    <PROJECT value="EXMLPro.exe"/>
+    <OBJFILES value="ExProps.obj EXMLPro.obj ExMain.obj ExAttr.obj ExCommnt.obj ExURL.obj 
+      ExText.obj ExUtil.obj ExSelAtt.obj ExProcIn.obj exPrefs.obj exErr.obj 
+      ExElemnt.obj ExChildW.obj ExView.obj"/>
+    <RESFILES value="EXMLPro.res"/>
+    <IDLFILES value=""/>
+    <IDLGENFILES value=""/>
+    <DEFFILE value=""/>
+    <RESDEPEN value="$(RESFILES) ExMain.dfm ExAttr.dfm ExCommnt.dfm ExURL.dfm ExText.dfm 
+      ExSelAtt.dfm ExProcIn.dfm exPrefs.dfm exErr.dfm ExElemnt.dfm ExChildW.dfm 
+      ExView.dfm"/>
+    <LIBFILES value=""/>
+    <LIBRARIES value="vcl50.lib"/>
+    <SPARELIBS value="vcl50.lib"/>
+    <PACKAGES value="vclx50.bpi vcl50.bpi vcldb50.bpi vclbde50.bpi vcldbx50.bpi bcbsmp50.bpi 
+      dclocx50.bpi qrpt50.bpi teeui50.bpi vclsmp50.bpi teedb50.bpi tee50.bpi 
+      ibsmp50.bpi nmfast50.bpi inetdb50.bpi inet50.bpi"/>
+    <PATHCPP value=".;"/>
+    <PATHPAS value=".;"/>
+    <PATHRC value=".;"/>
+    <PATHASM value=".;"/>
+    <DEBUGLIBPATH value="$(BCB)\lib\debug"/>
+    <RELEASELIBPATH value="$(BCB)\lib\release"/>
+    <LINKER value="ilink32"/>
+    <USERDEFINES value="XPDPRO"/>
+    <SYSDEFINES value="NO_STRICT;_RTLDLL;_VIS_NOLIB"/>
+    <MAINSOURCE value="EXMLPro.cpp"/>
+    <INCLUDEPATH value="..\..\..;$(BCB)\projects;$(BCB)\include;$(BCB)\include\vcl;..\..\..\headers\hpp5;..\..\..\hpp5"/>
+    <LIBPATH value="..\..\..;$(BCB)\projects;$(BCB)\lib\obj;$(BCB)\lib"/>
+    <WARNINGS value="-w-par -w-8027 -w-8026"/>
+    <WARNOPTSTR value=""/>
+  </MACROS>
+  <OPTIONS>
+    <IDLCFLAGS value="-I..\..\.. -I$(BCB)\projects -I$(BCB)\include -I$(BCB)\include\vcl 
+      -I..\..\..\headers\hpp5 -I..\..\..\hpp5 -src_suffix cpp -DXPDPRO -boa"/>
+    <CFLAG1 value="-Od -H=e:\dev\bcb\5.0\lib\vcl50.csm -Hc -Vx -Ve -Tkh30000 -X- -r- -a8 -b- 
+      -k -y -v -vi- -c -tW -tWM"/>
+    <PFLAGS value="-$YD -$W -$O- -v -M -JPHNE"/>
+    <RFLAGS value=""/>
+    <AFLAGS value="/mx /w2 /zi"/>
+    <LFLAGS value="-D&quot;&quot; -aa -Tpe -x -Gn -v"/>
+  </OPTIONS>
+  <LINKER>
+    <ALLOBJ value="c0w32.obj Memmgr.Lib sysinit.obj $(OBJFILES)"/>
+    <ALLRES value="$(RESFILES)"/>
+    <ALLLIB value="$(LIBFILES) $(LIBRARIES) import32.lib cp32mti.lib"/>
+  </LINKER>
+  <IDEOPTIONS>
+[Version Info]
+IncludeVerInfo=0
+AutoIncBuild=0
+MajorVer=1
+MinorVer=0
+Release=0
+Build=0
+Debug=0
+PreRelease=0
+Special=0
+Private=0
+DLL=0
+Locale=1033
+CodePage=1252
+
+[Version Info Keys]
+CompanyName=
+FileDescription=
+FileVersion=1.0.0.0
+InternalName=
+LegalCopyright=
+LegalTrademarks=
+OriginalFilename=
+ProductName=
+ProductVersion=1.0.0.0
+Comments=
+
+[HistoryLists\hlIncludePath]
+Count=2
+Item0=..\..\..;$(BCB)\projects;$(BCB)\include;$(BCB)\include\vcl;..\..\..\headers\hpp5;..\..\..\hpp5
+Item1=..\..\..;$(BCB)\projects;$(BCB)\include;$(BCB)\include\vcl;..\..\..\headers\hpp5
+
+[HistoryLists\hlLibraryPath]
+Count=1
+Item0=..\..\..;$(BCB)\projects;$(BCB)\lib\obj;$(BCB)\lib
+
+[HistoryLists\hlDebugSourcePath]
+Count=1
+Item0=$(BCB)\source\vcl
+
+[HistoryLists\hlConditionals]
+Count=1
+Item0=XPDPRO
+
+[Debugging]
+DebugSourceDirs=$(BCB)\source\vcl
+
+[Parameters]
+RunParams=
+HostApplication=
+RemoteHost=
+RemotePath=
+RemoteDebug=0
+
+[Compiler]
+ShowInfoMsgs=0
+LinkDebugVcl=1
+LinkCGLIB=0
+
+[CORBA]
+AddServerUnit=1
+AddClientUnit=1
+PrecompiledHeaders=1
+
+[Language]
+ActiveLang=
+ProjectLang=
+RootDir=
+  </IDEOPTIONS>
+</PROJECT>

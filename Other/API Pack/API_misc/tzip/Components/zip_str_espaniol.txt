@@ -1,0 +1,76 @@
+//------------------------------------------------------------------------------
+// Component        TZip Component                                             .
+// Compilers:       Delphi 3 - Delphi 7, C++ Builder 3 - C++ Builder 5         .
+// Author:          Angus Johnson - angusj-AT-myrealbox-DOT-com                .
+// Copyright:       © 2001-2004 Angus Johnson                                  .
+// Translated:      Unevil - UneXMen@Yahoo.com - http://www.xune.com.ar        .
+// Languaje:        Español                                                    .
+// -----------------------------------------------------------------------------
+
+resourcestring
+  s_multidisk_prompt =
+    'Inserte [ Disk %d ] del archivo Zip en la disquetera'+
+    #10+'antes de presionar [ OK ] para continuar ...';
+  s_multidisk_prompt_last =
+    'Este es [ Disk %d ] de un archivo Zip multiparte.'#10+
+    'Inserte el último disco del archivo Zip antes de presionar [ OK ] para continuar ...';
+  s_wait_caption = 'espere...';
+  s_cancel_caption = '&Cancelar';
+  s_index_range_error = 'Error en el índice de rangos';
+  s_password_too_long = 'La contraseña no debe superar los 80 caracteres.';
+  s_unable_to_access_drive = 'No se puede acceder al dispositivo seleccionado!';
+  s_unable_to_create = 'No se puede crear '#10'"%s"';
+  s_not_a_zip_file = '"%s"'#10'no es un archivo Zip válido.';
+  s_cfh_read_error = 'Error leyendo CentralFileHeader.';
+  s_cfh_write_error = 'Error escribiendo CentralDirectory.';
+  s_eoch_read_error = 'Error leyendo EndOfCentralHeader.';
+  s_eoch_write_error = 'Error escribiendo EndOfCentralHeader.';
+  s_new_password_required = 'Se necesita una nueva contraseña para "%s"';
+  s_invalid_password_retry = 'La contraseña es incorrecta, intente nuevamente...';
+  s_no_password_query_continue = 'El archivo no será extraído ya que no se ha ingresado una contraseña...'#10+
+    '¿Desea continuar extrayendo los demás archivos?';
+  s_crc_error_query_extract =
+    '"%s" puede estar corrupto (Error CRC).'#10'¿Desea continuar con la extracción? ...';
+  s_older_file_query_extract =
+    '"%s" es mas viejo que el archivo Zip.'#10'¿Desea sobrescribirlo? ...';
+  s_newer_file_query_extract =
+    '"%s" tiene la misma edad o es mas reciente que el archivo comprimido.'#10+
+    '¿Realmente desea sobrescribir este archivo? ...';
+  s_multidisk_op_error =
+    'No se puede Agregar, Eliminar o Extraer de un archivo Zip multiparte...'#10+
+    'Arme este archivo en el disco antes de reintentarlo.';
+  s_extract_error_no_folder =
+    'No se pueden extraer los archivos a:'#10'"%s"'#10'Este directorio no existe.';
+  s_unable_to_load = 'No se puede cargar %s';
+  s_no_zip_no_op =
+    'Debe abrirse o crearse un archivo Zip antes de'#10+
+    'Agregar, Eliminar o Extraer archivos.';
+  s_no_select_no_op = 'No se han seleccionado archivos.';
+  s_need_multidisk_zip = 'Este no es un archivo Zip multiparte.';
+  s_merge_only_to_fixed_disk =
+   'Un archivo Zip multiparte solo puede ser juntado en un disco fijo.';
+  s_multidisk_sig_error = 'Error leyendo la firma multiparte';
+  s_no_space_prompt =
+    'No hay espacio suficiente en este disquete...'#10+
+    'Inserte otra unidad en la disquetera'#10+
+    'antes de presionar [ OK ] para continuar ...';
+  s_no_create_vol_label = 'No se puede crear la etiqueta del disco';
+  s_create_multdisk_on_floppies_only =
+    'Archivos Zip multiparte solo pueden ser creados en disquetes.';
+  s_source_file_cannot_be_on_floppy =
+    'El archivo de origen no debe estar en un disquete';
+  s_max_multidisk_at_least_256 = 'El tamaño máximo de archivo debe ser de al menos de 256k.';
+  s_min_space_disk1_at_least_256 = 'El tamaño mínimo en Disk1 debe ser al menos de 256k.';
+  s_localheader_read_error = 'No es posible leer LocalHeader';
+  s_localheader_write_error = 'No es posible escribir LocalHeader.';
+  s_local_data_write_error = 'No se puede escribir local data.';
+  s_comment_read_error = 'No se puede leer el comentario del Zip.';
+  s_comment_write_error = 'No se puede escribir el comentario del Zip.';
+  s_not_an_sfx_file = '"%s"'#10+'no es un archivo auto extraíble válido.';
+  s_sfx_read_error = 'Error leyendo el archivo Zip auto extraíble.';
+  s_no_icons = 'Error - No se han podido encontrar iconos en el archivo Exe';
+  s_no_icon = 'Error - No se ha podido encontrar el icono especificado en el archivo Exe';
+  s_no_matching_ico = 'Error - Ningún icono en el archivo ICO coincide con el del archivo Exe.';
+  s_ico_copy_error = 'Error copiando el icono al archivo.';
+  s_res_not_at_sec_start = 'Los Resources no están al inicio de una sección!!!';
+  s_invalid_dll_version = 'Error - Versión no válida de ZipDll.dll o UnzDll.dll';

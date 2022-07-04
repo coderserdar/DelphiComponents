@@ -1,0 +1,481 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{45C3E936-BFAA-45ED-A383-0D98666A7F5B}</ProjectGuid>
+			<ProjectType>CppPackage</ProjectType>
+			<MainSource>OverbyteIcsCB2009Run.cpp</MainSource>
+			<Config Condition="'$(Config)'==''">Debug</Config>
+			<ProjectVersion>12.0</ProjectVersion>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_1)'!=''">
+			<Cfg_1>true</Cfg_1>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_2)'!=''">
+			<Cfg_2>true</Cfg_2>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Base)'!=''">
+			<LinkPackageStatics>rtl.lib;vcl.lib</LinkPackageStatics>
+			<DCC_Define>USE_SSL;$(DCC_Define)</DCC_Define>
+			<Defines>USE_SSL;$(Defines)</Defines>
+			<ILINK_Description>Overbyte ICS Run-Time Package C++ Builder 2009</ILINK_Description>
+			<DesignOnlyPackage>false</DesignOnlyPackage>
+			<DCC_SYMBOL_DEPRECATED>false</DCC_SYMBOL_DEPRECATED>
+			<DCC_SYMBOL_PLATFORM>false</DCC_SYMBOL_PLATFORM>
+			<RuntimeOnlyPackage>true</RuntimeOnlyPackage>
+			<DCC_UNIT_PLATFORM>false</DCC_UNIT_PLATFORM>
+			<BCC_PCHCache>true</BCC_PCHCache>
+			<DCC_IncludePath>$(BDS)\lib;$(BDS)\lib\obj;$(BDS)\source\toolsapi;$(DCC_IncludePath)</DCC_IncludePath>
+			<ILINK_AppType>Windows</ILINK_AppType>
+			<TASM_Defines>_RTLDLL;USEPACKAGES;NO_STRICT;$(TASM_Defines)</TASM_Defines>
+			<BRCC_Defines>_RTLDLL;USEPACKAGES;NO_STRICT;$(BRCC_Defines)</BRCC_Defines>
+			<BCC_IncludePath>$(BDS)\include;$(BDS)\include\dinkumware;$(BDS)\include\vcl;$(BCC_IncludePath)</BCC_IncludePath>
+			<BRCC_IncludePath>$(BDS)\include;$(BDS)\include\dinkumware;$(BDS)\include\vcl;$(BRCC_IncludePath)</BRCC_IncludePath>
+			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
+			<TASM_IncludePath>$(BDS)\include;$(BDS)\include\dinkumware;$(BDS)\include\vcl;$(TASM_IncludePath)</TASM_IncludePath>
+			<UsePackages>true</UsePackages>
+			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
+			<OutputExt>bpl</OutputExt>
+			<DynamicRTL>true</DynamicRTL>
+			<ILINK_WinAppType>Package</ILINK_WinAppType>
+			<AllPackageLibs>rtl.lib;vcl.lib</AllPackageLibs>
+			<BCC_GenerateMultithreaded>true</BCC_GenerateMultithreaded>
+			<BCC_Defines>NO_STRICT;$(BCC_Defines)</BCC_Defines>
+			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
+			<DCC_UnitSearchPath>$(BDS)\lib;$(BDS)\lib\obj;$(BDS)\source\toolsapi;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+			<BCC_GenerateDLL>true</BCC_GenerateDLL>
+			<Multithreaded>true</Multithreaded>
+			<ILINK_LibraryPath>$(BDS)\lib;$(BDS)\lib\obj;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_1)'!=''">
+			<BCC_Defines>_DEBUG;$(BCC_Defines);$(BCC_Defines)</BCC_Defines>
+			<BCC_UserSuppliedOptions> -k</BCC_UserSuppliedOptions>
+			<ILINK_LibraryPath>$(BDS)\lib\debug;$(ILINK_LibraryPath);$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<DCC_Define>DEBUG;$(DCC_Define);$(DCC_Define)</DCC_Define>
+			<BCC_SourceDebuggingOn>true</BCC_SourceDebuggingOn>
+			<IntermediateOutputDir>Debug_Build</IntermediateOutputDir>
+			<ILINK_FullDebugInfo>true</ILINK_FullDebugInfo>
+			<ILINK_DisableIncrementalLinking>true</ILINK_DisableIncrementalLinking>
+			<BCC_DisableOptimizations>true</BCC_DisableOptimizations>
+			<TASM_Debugging>Full</TASM_Debugging>
+			<BCC_InlineFunctionExpansion>false</BCC_InlineFunctionExpansion>
+			<TASM_DisplaySourceLines>true</TASM_DisplaySourceLines>
+			<BCC_DebugLineNumbers>true</BCC_DebugLineNumbers>
+			<DCC_DebugInfoInExe>true</DCC_DebugInfoInExe>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_2)'!=''">
+			<BCC_Defines>NDEBUG;$(BCC_Defines);$(BCC_Defines)</BCC_Defines>
+			<IntermediateOutputDir>Release_Build</IntermediateOutputDir>
+			<BCC_OptimizeForSpeed>true</BCC_OptimizeForSpeed>
+			<BCC_UserSuppliedOptions> -r</BCC_UserSuppliedOptions>
+			<TASM_Debugging>None</TASM_Debugging>
+			<DCC_AdditionalSwitches> -$O+</DCC_AdditionalSwitches>
+			<ILINK_LibraryPath>$(BDS)\lib\release;$(ILINK_LibraryPath);$(ILINK_LibraryPath)</ILINK_LibraryPath>
+		</PropertyGroup>
+		<ItemGroup>
+			<ResFiles Include="OverbyteIcsTnScript.dcr">
+				<BuildOrder>-1</BuildOrder>
+				<BuildOrder>53</BuildOrder>
+			</ResFiles>
+			<DelphiCompile Include="OverbyteIcsStreams.pas">
+				<BuildOrder>54</BuildOrder>
+				<BuildOrder>1</BuildOrder>
+			</DelphiCompile>
+			<DelphiCompile Include="OverbyteIcsTnScript.pas">
+				<BuildOrder>52</BuildOrder>
+				<BuildOrder>2</BuildOrder>
+			</DelphiCompile>
+			<DelphiCompile Include="OverbyteIcsLIBEAY.pas">
+				<BuildOrder>50</BuildOrder>
+				<BuildOrder>3</BuildOrder>
+			</DelphiCompile>
+			<DelphiCompile Include="OverbyteIcsSSLEAY.pas">
+				<BuildOrder>51</BuildOrder>
+				<BuildOrder>4</BuildOrder>
+			</DelphiCompile>
+			<ResFiles Include="OverbyteIcsTnEmulVT.dcr">
+				<BuildOrder>-1</BuildOrder>
+				<BuildOrder>58</BuildOrder>
+			</ResFiles>
+			<DelphiCompile Include="OverbyteIcsTnOptFrm.pas">
+				<BuildOrder>6</BuildOrder>
+				<BuildOrder>59</BuildOrder>
+			</DelphiCompile>
+			<DelphiCompile Include="OverbyteIcsTnEmulVT.pas">
+				<BuildOrder>7</BuildOrder>
+				<BuildOrder>57</BuildOrder>
+			</DelphiCompile>
+			<DelphiCompile Include="OverbyteIcsTnCnx.pas">
+				<BuildOrder>8</BuildOrder>
+				<BuildOrder>55</BuildOrder>
+			</DelphiCompile>
+			<ResFiles Include="OverbyteIcsTnCnx.dcr">
+				<BuildOrder>-1</BuildOrder>
+				<BuildOrder>56</BuildOrder>
+			</ResFiles>
+			<DelphiCompile Include="OverbyteIcsPop3Prot.pas">
+				<BuildOrder>43</BuildOrder>
+				<BuildOrder>10</BuildOrder>
+			</DelphiCompile>
+			<ResFiles Include="OverbyteIcsPop3Prot.dcr">
+				<BuildOrder>-1</BuildOrder>
+				<BuildOrder>44</BuildOrder>
+			</ResFiles>
+			<ResFiles Include="OverbyteIcsPing.dcr">
+				<BuildOrder>-1</BuildOrder>
+				<BuildOrder>42</BuildOrder>
+			</ResFiles>
+			<ResFiles Include="OverbyteIcsNntpCli.dcr">
+				<BuildOrder>-1</BuildOrder>
+				<BuildOrder>40</BuildOrder>
+			</ResFiles>
+			<DelphiCompile Include="OverbyteIcsPing.pas">
+				<BuildOrder>41</BuildOrder>
+				<BuildOrder>14</BuildOrder>
+			</DelphiCompile>
+			<DelphiCompile Include="OverbyteIcsSslSessionCache.pas">
+				<BuildOrder>48</BuildOrder>
+				<BuildOrder>15</BuildOrder>
+			</DelphiCompile>
+			<ResFiles Include="OverbyteIcsSslSessionCache.dcr">
+				<BuildOrder>-1</BuildOrder>
+				<BuildOrder>49</BuildOrder>
+			</ResFiles>
+			<DelphiCompile Include="OverbyteIcsSha1.pas">
+				<BuildOrder>47</BuildOrder>
+				<BuildOrder>17</BuildOrder>
+			</DelphiCompile>
+			<DelphiCompile Include="OverbyteIcsSmtpProt.pas">
+				<BuildOrder>45</BuildOrder>
+				<BuildOrder>18</BuildOrder>
+			</DelphiCompile>
+			<ResFiles Include="OverbyteIcsSmtpProt.dcr">
+				<BuildOrder>-1</BuildOrder>
+				<BuildOrder>46</BuildOrder>
+			</ResFiles>
+			<ResFiles Include="OverbyteIcsMultipartHttpDownloader.dcr">
+				<BuildOrder>-1</BuildOrder>
+				<BuildOrder>73</BuildOrder>
+			</ResFiles>
+			<DelphiCompile Include="OverbyteIcsOneTimePw.pas">
+				<BuildOrder>74</BuildOrder>
+				<BuildOrder>21</BuildOrder>
+			</DelphiCompile>
+			<DelphiCompile Include="OverbyteIcsMultipartHttpDownloader.pas">
+				<BuildOrder>72</BuildOrder>
+				<BuildOrder>22</BuildOrder>
+			</DelphiCompile>
+			<DelphiCompile Include="OverbyteIcsMultipartFtpDownloader.pas">
+				<BuildOrder>70</BuildOrder>
+				<BuildOrder>23</BuildOrder>
+			</DelphiCompile>
+			<ResFiles Include="OverbyteIcsMultipartFtpDownloader.dcr">
+				<BuildOrder>-1</BuildOrder>
+				<BuildOrder>71</BuildOrder>
+			</ResFiles>
+			<DelphiCompile Include="OverbyteIcsMultiProgressBar.pas">
+				<BuildOrder>78</BuildOrder>
+				<BuildOrder>25</BuildOrder>
+			</DelphiCompile>
+			<ResFiles Include="OverbyteIcsMultiProgressBar.dcr">
+				<BuildOrder>-1</BuildOrder>
+				<BuildOrder>79</BuildOrder>
+			</ResFiles>
+			<DelphiCompile Include="OverbyteIcsCharsetUtils.pas">
+				<BuildOrder>77</BuildOrder>
+				<BuildOrder>27</BuildOrder>
+			</DelphiCompile>
+			<DelphiCompile Include="OverbyteIcsUtils.pas">
+				<BuildOrder>75</BuildOrder>
+				<BuildOrder>28</BuildOrder>
+			</DelphiCompile>
+			<DelphiCompile Include="OverbyteIcsCRC.pas">
+				<BuildOrder>76</BuildOrder>
+				<BuildOrder>29</BuildOrder>
+			</DelphiCompile>
+			<DelphiCompile Include="OverbyteIcsZLibDll.pas">
+				<BuildOrder>63</BuildOrder>
+				<BuildOrder>30</BuildOrder>
+			</DelphiCompile>
+			<DelphiCompile Include="OverbyteIcsZLibObj.pas">
+				<BuildOrder>64</BuildOrder>
+				<BuildOrder>31</BuildOrder>
+			</DelphiCompile>
+			<DelphiCompile Include="OverbyteIcsZlibHigh.pas">
+				<BuildOrder>62</BuildOrder>
+				<BuildOrder>32</BuildOrder>
+			</DelphiCompile>
+			<DelphiCompile Include="OverbyteIcsSslThrdLock.pas">
+				<BuildOrder>60</BuildOrder>
+				<BuildOrder>33</BuildOrder>
+			</DelphiCompile>
+			<ResFiles Include="OverbyteIcsSslThrdLock.dcr">
+				<BuildOrder>-1</BuildOrder>
+				<BuildOrder>61</BuildOrder>
+			</ResFiles>
+			<DelphiCompile Include="OverbyteIcsMimeDec.pas">
+				<BuildOrder>68</BuildOrder>
+				<BuildOrder>35</BuildOrder>
+			</DelphiCompile>
+			<ResFiles Include="OverbyteIcsMimeDec.dcr">
+				<BuildOrder>-1</BuildOrder>
+				<BuildOrder>69</BuildOrder>
+			</ResFiles>
+			<DelphiCompile Include="OverbyteIcsWinsock2.pas">
+				<BuildOrder>67</BuildOrder>
+				<BuildOrder>37</BuildOrder>
+			</DelphiCompile>
+			<DelphiCompile Include="OverbyteIcsNtlmSsp.pas">
+				<BuildOrder>65</BuildOrder>
+				<BuildOrder>38</BuildOrder>
+			</DelphiCompile>
+			<DelphiCompile Include="OverbyteIcsSspi.pas">
+				<BuildOrder>66</BuildOrder>
+				<BuildOrder>39</BuildOrder>
+			</DelphiCompile>
+			<DelphiCompile Include="OverbyteIcsWSocketS.pas">
+				<BuildOrder>40</BuildOrder>
+				<BuildOrder>13</BuildOrder>
+			</DelphiCompile>
+			<ResFiles Include="OverbyteIcsWSocketS.dcr">
+				<BuildOrder>-1</BuildOrder>
+				<BuildOrder>14</BuildOrder>
+			</ResFiles>
+			<ResFiles Include="OverbyteIcsWSocket.dcr">
+				<BuildOrder>-1</BuildOrder>
+				<BuildOrder>12</BuildOrder>
+			</ResFiles>
+			<DelphiCompile Include="OverbyteIcsWSockBuf.pas">
+				<BuildOrder>43</BuildOrder>
+				<BuildOrder>10</BuildOrder>
+			</DelphiCompile>
+			<DelphiCompile Include="OverbyteIcsWSocket.pas">
+				<BuildOrder>44</BuildOrder>
+				<BuildOrder>11</BuildOrder>
+			</DelphiCompile>
+			<ResFiles Include="OverbyteIcsDnsQuery.dcr">
+				<BuildOrder>-1</BuildOrder>
+				<BuildOrder>18</BuildOrder>
+			</ResFiles>
+			<DelphiCompile Include="OverbyteIcsEmulVT.pas">
+				<BuildOrder>46</BuildOrder>
+				<BuildOrder>19</BuildOrder>
+			</DelphiCompile>
+			<DelphiCompile Include="OverbyteIcsDnsQuery.pas">
+				<BuildOrder>47</BuildOrder>
+				<BuildOrder>17</BuildOrder>
+			</DelphiCompile>
+			<DelphiCompile Include="OverbyteIcsAvlTrees.pas">
+				<BuildOrder>48</BuildOrder>
+				<BuildOrder>15</BuildOrder>
+			</DelphiCompile>
+			<DelphiCompile Include="OverbyteIcsDES.pas">
+				<BuildOrder>49</BuildOrder>
+				<BuildOrder>16</BuildOrder>
+			</DelphiCompile>
+			<ResFiles Include="OverbyteIcsCB2009Run.res">
+				<BuildOrder>50</BuildOrder>
+				<BuildOrder>3</BuildOrder>
+			</ResFiles>
+			<DelphiCompile Include="OverbyteIcsLogger.pas">
+				<BuildOrder>51</BuildOrder>
+				<BuildOrder>4</BuildOrder>
+			</DelphiCompile>
+			<PackageImport Include="vcl.bpi">
+				<BuildOrder>52</BuildOrder>
+				<BuildOrder>2</BuildOrder>
+			</PackageImport>
+			<CppCompile Include="OverbyteIcsCB2009Run.cpp">
+				<BuildOrder>-1</BuildOrder>
+				<BuildOrder>0</BuildOrder>
+			</CppCompile>
+			<PackageImport Include="rtl.bpi">
+				<BuildOrder>-1</BuildOrder>
+				<BuildOrder>1</BuildOrder>
+			</PackageImport>
+			<DelphiCompile Include="OverbyteIcsWinsock.pas">
+				<BuildOrder>8</BuildOrder>
+				<BuildOrder>55</BuildOrder>
+			</DelphiCompile>
+			<DelphiCompile Include="OverbyteIcsWndControl.pas">
+				<BuildOrder>9</BuildOrder>
+				<BuildOrder>56</BuildOrder>
+			</DelphiCompile>
+			<DelphiCompile Include="OverbyteIcsTypes.pas">
+				<BuildOrder>7</BuildOrder>
+				<BuildOrder>57</BuildOrder>
+			</DelphiCompile>
+			<ResFiles Include="OverbyteIcsLogger.dcr">
+				<BuildOrder>-1</BuildOrder>
+				<BuildOrder>5</BuildOrder>
+			</ResFiles>
+			<DelphiCompile Include="OverbyteIcsLibrary.pas">
+				<BuildOrder>6</BuildOrder>
+				<BuildOrder>59</BuildOrder>
+			</DelphiCompile>
+			<DelphiCompile Include="OverbyteIcsUrl.pas">
+				<BuildOrder>60</BuildOrder>
+				<BuildOrder>33</BuildOrder>
+			</DelphiCompile>
+			<DelphiCompile Include="OverbyteIcsNtlmMsgs.pas">
+				<BuildOrder>61</BuildOrder>
+				<BuildOrder>34</BuildOrder>
+			</DelphiCompile>
+			<ResFiles Include="OverbyteIcsHttpProt.dcr">
+				<BuildOrder>-1</BuildOrder>
+				<BuildOrder>32</BuildOrder>
+			</ResFiles>
+			<DelphiCompile Include="OverbyteIcsHttpContCod.pas">
+				<BuildOrder>63</BuildOrder>
+				<BuildOrder>30</BuildOrder>
+			</DelphiCompile>
+			<DelphiCompile Include="OverbyteIcsHttpProt.pas">
+				<BuildOrder>64</BuildOrder>
+				<BuildOrder>31</BuildOrder>
+			</DelphiCompile>
+			<DelphiCompile Include="OverbyteIcsIcmp.pas">
+				<BuildOrder>65</BuildOrder>
+				<BuildOrder>38</BuildOrder>
+			</DelphiCompile>
+			<DelphiCompile Include="OverbyteIcsNntpCli.pas">
+				<BuildOrder>66</BuildOrder>
+				<BuildOrder>39</BuildOrder>
+			</DelphiCompile>
+			<ResFiles Include="OverbyteIcsHttpSrv.dcr">
+				<BuildOrder>-1</BuildOrder>
+				<BuildOrder>37</BuildOrder>
+			</ResFiles>
+			<DelphiCompile Include="OverbyteIcsMimeUtils.pas">
+				<BuildOrder>68</BuildOrder>
+				<BuildOrder>35</BuildOrder>
+			</DelphiCompile>
+			<DelphiCompile Include="OverbyteIcsHttpSrv.pas">
+				<BuildOrder>69</BuildOrder>
+				<BuildOrder>36</BuildOrder>
+			</DelphiCompile>
+			<DelphiCompile Include="OverbyteIcsFtpCli.pas">
+				<BuildOrder>70</BuildOrder>
+				<BuildOrder>23</BuildOrder>
+			</DelphiCompile>
+			<ResFiles Include="OverbyteIcsFtpCli.dcr">
+				<BuildOrder>-1</BuildOrder>
+				<BuildOrder>24</BuildOrder>
+			</ResFiles>
+			<ResFiles Include="OverbyteIcsFingCli.dcr">
+				<BuildOrder>-1</BuildOrder>
+				<BuildOrder>22</BuildOrder>
+			</ResFiles>
+			<ResFiles Include="OverbyteIcsEmulVT.dcr">
+				<BuildOrder>-1</BuildOrder>
+				<BuildOrder>20</BuildOrder>
+			</ResFiles>
+			<DelphiCompile Include="OverbyteIcsFingCli.pas">
+				<BuildOrder>74</BuildOrder>
+				<BuildOrder>21</BuildOrder>
+			</DelphiCompile>
+			<DelphiCompile Include="OverbyteIcsMD5.pas">
+				<BuildOrder>75</BuildOrder>
+				<BuildOrder>28</BuildOrder>
+			</DelphiCompile>
+			<DelphiCompile Include="OverbyteIcsMD4.pas">
+				<BuildOrder>76</BuildOrder>
+				<BuildOrder>29</BuildOrder>
+			</DelphiCompile>
+			<ResFiles Include="OverbyteIcsFtpSrv.dcr">
+				<BuildOrder>-1</BuildOrder>
+				<BuildOrder>27</BuildOrder>
+			</ResFiles>
+			<DelphiCompile Include="OverByteIcsFtpSrvT.pas">
+				<BuildOrder>78</BuildOrder>
+				<BuildOrder>25</BuildOrder>
+			</DelphiCompile>
+			<DelphiCompile Include="OverbyteIcsFtpSrv.pas">
+				<BuildOrder>79</BuildOrder>
+				<BuildOrder>26</BuildOrder>
+			</DelphiCompile>
+			<DelphiCompile Include="OverbyteIcsDigestAuth.pas">
+				<BuildOrder>80</BuildOrder>
+			</DelphiCompile>
+			<BuildConfiguration Include="Base">
+				<Key>Base</Key>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Release">
+				<Key>Cfg_2</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Debug">
+				<Key>Cfg_1</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+		</ItemGroup>
+		<Import Project="$(BDS)\Bin\CodeGear.Cpp.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Cpp.Targets')"/>
+		<ProjectExtensions>
+			<Borland.Personality>CPlusPlusBuilder.Personality.12</Borland.Personality>
+			<Borland.ProjectType>CppPackage</Borland.ProjectType>
+			<BorlandProject>
+				<CPlusPlusBuilder.Personality>
+					<VersionInfo>
+						<VersionInfo Name="IncludeVerInfo">True</VersionInfo>
+						<VersionInfo Name="AutoIncBuild">False</VersionInfo>
+						<VersionInfo Name="MajorVer">1</VersionInfo>
+						<VersionInfo Name="MinorVer">0</VersionInfo>
+						<VersionInfo Name="Release">0</VersionInfo>
+						<VersionInfo Name="Build">0</VersionInfo>
+						<VersionInfo Name="Debug">False</VersionInfo>
+						<VersionInfo Name="PreRelease">False</VersionInfo>
+						<VersionInfo Name="Special">False</VersionInfo>
+						<VersionInfo Name="Private">False</VersionInfo>
+						<VersionInfo Name="DLL">False</VersionInfo>
+						<VersionInfo Name="Locale">1033</VersionInfo>
+						<VersionInfo Name="CodePage">1252</VersionInfo>
+					</VersionInfo>
+					<VersionInfoKeys>
+						<VersionInfoKeys Name="CompanyName"/>
+						<VersionInfoKeys Name="FileDescription"/>
+						<VersionInfoKeys Name="FileVersion">1.0.0.0</VersionInfoKeys>
+						<VersionInfoKeys Name="InternalName"/>
+						<VersionInfoKeys Name="LegalCopyright"/>
+						<VersionInfoKeys Name="LegalTrademarks"/>
+						<VersionInfoKeys Name="OriginalFilename"/>
+						<VersionInfoKeys Name="ProductName"/>
+						<VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys>
+						<VersionInfoKeys Name="Comments"/>
+					</VersionInfoKeys>
+					<Debugging>
+						<Debugging Name="DebugSourceDirs"/>
+					</Debugging>
+					<Parameters>
+						<Parameters Name="RunParams"/>
+						<Parameters Name="Launcher"/>
+						<Parameters Name="UseLauncher">False</Parameters>
+						<Parameters Name="DebugCWD"/>
+						<Parameters Name="HostApplication"/>
+						<Parameters Name="RemoteHost"/>
+						<Parameters Name="RemotePath"/>
+						<Parameters Name="RemoteParams"/>
+						<Parameters Name="RemoteLauncher"/>
+						<Parameters Name="UseRemoteLauncher">False</Parameters>
+						<Parameters Name="RemoteCWD"/>
+						<Parameters Name="RemoteDebug">False</Parameters>
+						<Parameters Name="Debug Symbols Search Path"/>
+						<Parameters Name="LoadAllSymbols">True</Parameters>
+						<Parameters Name="LoadUnspecifiedSymbols">False</Parameters>
+					</Parameters>
+					<Source>
+						<Source Name="MainSource">OverbyteIcsCB2009Run.cpp</Source>
+					</Source>
+					<ProjectProperties>
+						<ProjectProperties Name="AutoShowDeps">False</ProjectProperties>
+						<ProjectProperties Name="ManagePaths">True</ProjectProperties>
+						<ProjectProperties Name="VerifyPackages">True</ProjectProperties>
+					</ProjectProperties>
+				</CPlusPlusBuilder.Personality>
+			</BorlandProject>
+			<ProjectFileVersion>12</ProjectFileVersion>
+		</ProjectExtensions>
+	</Project>

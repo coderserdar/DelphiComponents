@@ -1,0 +1,96 @@
+{* ***** BEGIN LICENSE BLOCK *****                                            *}
+{* Version: MPL 1.1                                                           *}
+{*                                                                            *}
+{* The contents of this file are subject to the Mozilla Public License        *}
+{* Version 1.1 (the "License"); you may not use this file except in           *}
+{* compliance with the License. You may obtain a copy of the License at       *}
+{* http://www.mozilla.org/MPL/                                                *}
+{*                                                                            *}
+{* Software distributed under the License is distributed on an "AS IS" basis, *}
+{* WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License   *}
+{* for the specific language governing rights and limitations under the       *}
+{* License.                                                                   *}
+{*                                                                            *}
+{* The Original Code is TurboPower Visual PlanIt                              *}
+{*                                                                            *}
+{* The Initial Developer of the Original Code is TurboPower Software          *}
+{*                                                                            *}
+{* Portions created by TurboPower Software Inc. are Copyright (c) 2002        *}
+{* TurboPower Software Inc. All Rights Reserved.                              *}
+{*                                                                            *}
+{* Contributor(s):                                                            *}
+{*                                                                            *}
+{* ***** END LICENSE BLOCK *****                                              *}
+
+package VpRuntime;
+
+{$R *.RES}
+{$ALIGN ON}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $00400000}
+{$DESCRIPTION 'TurboPower Visual-PlanIt Runtime Package'}
+{$RUNONLY}
+{$IMPLICITBUILD OFF}
+
+requires
+  vcl40;
+
+contains
+  VpAlarmDlg in 'VpAlarmDlg.pas' {AlarmNotifyForm},
+  VpBase in 'VpBase.pas',
+  VpBaseDS in 'VpBaseDS.pas',
+  VpBDEDS in 'VpBDEDS.pas',
+  VpCalendar in 'VpCalendar.pas',
+  VpCanvasUtils in 'VpCanvasUtils.pas',
+  VpClock in 'VpClock.pas',
+  VpConst in 'VpConst.pas',
+  VpContactEditDlg in 'VpContactEditDlg.pas' {ContactEditForm},
+  VpContactGrid in 'VpContactGrid.pas',
+  VpData in 'VpData.pas',
+  VpDateEdit in 'VpDateEdit.pas',
+  VpDayView in 'VpDayView.pas',
+  VpDBDS in 'VpDBDS.pas',
+  VpDlg in 'VpDlg.pas',
+  VpEdPop in 'VpEdPop.pas',
+  VpEvntEditDlg in 'VpEvntEditDlg.pas' {DlgEventEdit},
+  VpException in 'VpException.pas',
+  VpFlxDS in 'VpFlxDS.pas',
+  VpLEDLabel in 'VpLEDLabel.pas',
+  VpMisc in 'VpMisc.pas',
+  VpMonthView in 'VpMonthView.pas',
+  VpNavBar in 'VpNavBar.pas',
+  VpPrtFmt in 'VpPrtFmt.pas',
+  VpPrtFmtCBox in 'VpPrtFmtCBox.pas',
+  VpPrtPrv in 'VpPrtPrv.pas',
+  VpPrtPrvDlg in 'VpPrtPrvDlg.pas' {frmPrintPreview},
+  VpResEditDlg in 'VpResEditDlg.pas' {ResEditForm},
+  VpSR in 'VpSR.pas',
+  VpTaskEditDlg in 'VpTaskEditDlg.pas' {TaskEditForm},
+  VpTaskList in 'VpTaskList.pas',
+  VpTimerPool in 'VpTimerPool.pas',
+  VpWavDlg in 'VpWavDlg.pas' {FrmSoundDialog},
+  VpWavPE in 'VpWavPE.pas',
+  VpWeekView in 'VpWeekView.pas',
+  VpXBase in 'VpXBase.pas',
+  VpXChrFlt in 'VpXChrFlt.pas',
+  VpXParsr in 'VpXParsr.pas';
+
+end.

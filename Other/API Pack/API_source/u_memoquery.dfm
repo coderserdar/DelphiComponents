@@ -1,0 +1,114 @@
+object f_memoquery: Tf_memoquery
+  Left = 232
+  Top = 130
+  AlphaBlend = True
+  AlphaBlendValue = 0
+  ClientHeight = 191
+  ClientWidth = 431
+  Color = clBtnFace
+  ParentFont = True
+  OldCreateOrder = False
+  Position = poOwnerFormCenter
+  DesignSize = (
+    431
+    191)
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Memo1: TMemo
+    Left = 8
+    Top = 8
+    Width = 415
+    Height = 147
+    Anchors = [akLeft, akTop, akRight, akBottom]
+    BorderStyle = bsNone
+    TabOrder = 0
+    ExplicitHeight = 218
+  end
+  object API_grbutton1: TAPI_grbutton
+    Left = 8
+    Top = 161
+    Width = 80
+    Height = 25
+    Anchors = [akLeft, akBottom]
+    BorderWidth = 1
+    Caption = 'Ok'
+    Color = clBtnFace
+    Enabled = True
+    TabOrder = 1
+    VerticalAlignment = taVerticalCenter
+    OnClick = BitBtn1Click
+    FontMouseOver.Charset = DEFAULT_CHARSET
+    FontMouseOver.Color = clWindowText
+    FontMouseOver.Height = -11
+    FontMouseOver.Name = 'Tahoma'
+    FontMouseOver.Style = []
+    LedExists = False
+    LedState = False
+    LedChangeOnClick = False
+    LedStyle = lsEllipse
+    LedPosition = lpRight
+    LedColorOn = clGreen
+    LedColorOff = clRed
+    LedHeight = 8
+    ColorOver = clSilver
+    ColorDown = 10724259
+    ColorDisabled = clGray
+    GradientEnd = clWhite
+    GradientStyle = gsVertical
+    GradinetFlip = False
+    ColorBorder = clWhite
+    Elliptic = False
+    CornerRadius = 5
+    ShowCaption = True
+    WordWrap = False
+    ExplicitTop = 232
+  end
+  object API_grbutton2: TAPI_grbutton
+    Left = 344
+    Top = 161
+    Width = 80
+    Height = 25
+    Anchors = [akRight, akBottom]
+    BorderWidth = 1
+    Caption = 'Cancel'
+    Color = clBtnFace
+    Enabled = True
+    TabOrder = 2
+    VerticalAlignment = taVerticalCenter
+    OnClick = BitBtn2Click
+    FontMouseOver.Charset = DEFAULT_CHARSET
+    FontMouseOver.Color = clWindowText
+    FontMouseOver.Height = -11
+    FontMouseOver.Name = 'Tahoma'
+    FontMouseOver.Style = []
+    LedExists = False
+    LedState = False
+    LedChangeOnClick = False
+    LedStyle = lsEllipse
+    LedPosition = lpRight
+    LedColorOn = clGreen
+    LedColorOff = clRed
+    LedHeight = 8
+    ColorOver = clSilver
+    ColorDown = 10724259
+    ColorDisabled = clGray
+    GradientEnd = clWhite
+    GradientStyle = gsVertical
+    GradinetFlip = False
+    ColorBorder = clWhite
+    Elliptic = False
+    CornerRadius = 5
+    ShowCaption = True
+    WordWrap = False
+    ExplicitTop = 232
+  end
+  object API_abform1: TAPI_abform
+    Active = True
+    AlphaStart = 0
+    AlphaStop = 255
+    TimeDelay = 1
+    StepSize = 5
+    Left = 48
+    Top = 44
+  end
+end

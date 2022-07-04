@@ -1,0 +1,64 @@
+package RLibWinD5;
+
+{$R *.RES}
+{$ALIGN ON}
+{$ASSERTIONS OFF}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS OFF}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'FortesReport VCL Library'}
+{$IMPLICITBUILD OFF}
+{$DEFINE DELPHI}
+{$DEFINE DELPHI5}
+{$DEFINE VCL}
+
+requires
+  VCLDB50,
+  VCL50;
+
+contains
+  RLReport in 'RLReport.pas',
+  RLUtils in 'RLUtils.pas',
+  RLPreviewForm in 'RLPreviewForm.pas',
+  RLPreview in 'RLPreview.pas',
+  RLFeedBack in 'RLFeedBack.pas',
+  RLMetaFile in 'RLMetaFile.pas',
+  RLParser in 'RLParser.pas',
+  RLConsts in 'RLConsts.pas',
+  RLTypes in 'RLTypes.pas',
+  RLFilters in 'RLFilters.pas',
+  RLDraftFilter in 'RLDraftFilter.pas',
+  RLPrintDialog in 'RLPrintDialog.pas',
+  RLSaveDialog in 'RLSaveDialog.pas',
+  RLRichFilter in 'RLRichFilter.pas',
+  RLHTMLFilter in 'RLHTMLFilter.pas',
+  RLPrinters in 'RLPrinters.pas',
+  RLBarcode in 'RLBarcode.pas',
+  RLPDFFilter in 'RLPDFFilter.pas',
+  RLXLSFilter in 'RLXLSFilter.pas',
+  RLRichText in 'RLRichText.pas',
+  RLSpoolFilter in 'RLSpoolFilter.pas',
+  RLMetaVCL in 'RLMetaVCL.pas',
+  RLFindDialog in 'RLFindDialog.pas',
+  RLAbout in 'RLAbout.pas',
+  RLReg in 'RLReg.pas',
+  RLDesign in 'RLDesign.pas';
+
+end.
+

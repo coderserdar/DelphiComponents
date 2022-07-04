@@ -1,0 +1,79 @@
+//------------------------------------------------------------------------------
+// Component        TZip Component                                             .
+// Compilers:       Delphi 3 - Delphi 7, C++ Builder 3 - C++ Builder 5         .
+// Author:          Angus Johnson - angusj-AT-myrealbox-DOT-com                .
+// Copyright:       © 2001-2004 Angus Johnson                                  .
+// Translated:      Tony MASSÉ - tony.masse-AT-wanadoo-DOT-fr                  .
+//                  http://perso.wanadoo.fr/tony.masse                         .
+// Langue:          Français (traduit le 2003.11.13)                           .
+// -----------------------------------------------------------------------------
+
+resourcestring
+  s_multidisk_prompt =
+    'Inserez le [ Disque %d ] de l''archive Zip découpée dans le lecteur de disquette'+
+    #10+'ensuite pressez [ OK ] pour continuer ...';
+  s_multidisk_prompt_last =
+    'Ceci est le [ Disque %d ] de l''archive Zip découpée.'#10+
+    'Inserez la dernière disquette de cette archive puis pressez [ OK ] pour continuer ...';
+  s_wait_caption = 'attendez ...';
+  s_cancel_caption = '&Annuler';
+  s_index_range_error = 'Dépassement d''index';
+  s_password_too_long = 'le mot de passe ne doit pas contenir plus de 80 charactères.';
+  s_unable_to_access_drive = 'Impossible d''accéder à l''unité, disque ou lecteur sélectionné !';
+  s_unable_to_create = 'Impossible de créer '#10'"%s"';
+  s_not_a_zip_file = '"%s"'#10'n''est pas une archive Zip valide.';
+  s_cfh_read_error = 'Erreur lors de la lecture du bloc CentralFileHeader.';
+  s_cfh_write_error = 'Erreur lors de l''écriture du bloc CentralDirectory.';
+  s_eoch_read_error = 'Erreur lors de la lecture du bloc EndOfCentralHeader.';
+  s_eoch_write_error = 'Erreur lors de l''écriture du bloc EndOfCentralHeader.';
+  s_new_password_required = 'Un nouveau mot de passe pour "%s" est nécessaire';
+  s_invalid_password_retry = 'Mot de passe invalide, veuillez réessayer ...';
+  s_no_password_query_continue = 'Aucun mot de passe n''a été saisi, le fichier ne peut donc pas être extrait...'#10+
+    'Voulez-vous essayer d''extraire les autres fichiers ?';
+  s_crc_error_query_extract =
+    '"%s" est peut être corrompu ou altéré (erreur de CRC).'#10'Extraire ce fichier quand même ? ...';
+  s_older_file_query_extract =
+    '"%s" est plus vieux que le fichier archivé.'#10'Ecraser ce fichier ? ...';
+  s_newer_file_query_extract =
+    '"%s" est aussi vieux ou plus récent que le fichier archivé.'#10+
+    'Voulez-vous vraiment écraser ce fichier ? ...';
+  s_multidisk_op_error =
+    'Ne peut pas Ajouter, Supprimer ou Extraire depuis une archive découpée...'#10+
+    'Fusionnez cette archive sur le disque dur puis réessayez.';
+  s_extract_error_no_folder =
+    'Impossible d''extraire le(s) fichier(s) vers :'#10'"%s"'#10'Ce dossier n''existe pas.';
+  s_unable_to_load = 'Impossible d''ouvrir %s';
+  s_no_zip_no_op =
+    'Une archive Zip doit tout d''abord être ouverte ou créée'#10+
+    'avant de pouvoir y Ajouter, Supprimer ou Extraire des fichiers.';
+  s_no_select_no_op = 'Aucun fichier n''a été sélectionné.';
+  s_need_multidisk_zip = 'Ceci n''est pas une archive découpée.';
+  s_merge_only_to_fixed_disk =
+   'Une archive Zip découpée ne peut être fusionnée que sur un disque dure.';
+  s_multidisk_sig_error = 'Erreur lors de la lecture de la signature de la disquette d''archive découpée';
+  s_no_space_prompt =
+    'Il n''y a pas assez d''espace sur cette disquette ...'#10+
+    'Merci d''en inserer une autre dans le lecteur de disquette'#10+
+    'puis pressez [ OK ] pour continuer ...';
+  s_no_create_vol_label = 'Impossible de créer le Label du volume (disque/disquette)';
+  s_create_multdisk_on_floppies_only =
+    'Les archives découpée ne peuvent être crées que sur disquettes.';
+  s_source_file_cannot_be_on_floppy =
+    'Le fichier source ne peux pas être sur une disquette';
+  s_max_multidisk_at_least_256 = 'La taille maximum du fichier doit être d''au moins 256 ko.';
+  s_min_space_disk1_at_least_256 = 'La taille minimum du fichier sur Disque1 doit être d''au moins 256 ko.';
+  s_localheader_read_error = 'Impossible de lire le bloc LocalHeader';
+  s_localheader_write_error = 'Impossible d''écrire le bloc LocalHeader.';
+  s_local_data_write_error = 'Impossible d''écrire les données locales.';
+  s_comment_read_error = 'Impossible de lire le commentaire principale de l''archive Zip.';
+  s_comment_write_error = 'Impossible d''écrire le commentaire principale de l''archive Zip.';
+  s_not_an_sfx_file = '"%s"'#10+'n''est pas une archive auto-extractible valide.';
+  s_sfx_read_error = 'Erreur lors de la lecture de l''archive auto-extractible.';
+  s_no_icons = 'Erreur - impossible de trouver une icône dans le fichier Exe';
+  s_no_icon = 'Error - impossible de trouver l''icône spécifiée dans le fichier Exe';
+  s_no_matching_ico = 'Erreur - aucune icône dans le fichier Ico ne correspond à celle présente dans le fichier Exe.';
+  s_ico_copy_error = 'Erreur lors de la copie du fichier Exe.';
+  s_res_not_at_sec_start = 'Les ressources ne sont pas au début de la section !!';
+  s_invalid_dll_version = 'Erreur - version de ZipDll.dll ou de UnzDll.dll invalide';
+
+

@@ -1,0 +1,60 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{B6BAFDDB-7AD7-40FB-BC50-E45031ED9C12}</ProjectGuid>
+		</PropertyGroup>
+		<ItemGroup>
+			<Projects Include="RLibWinD2010.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="Testes\TestadorRLib.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="Debug\RLDebug.dproj">
+				<Dependencies/>
+			</Projects>
+		</ItemGroup>
+		<ProjectExtensions>
+			<Borland.Personality>Default.Personality.12</Borland.Personality>
+			<Borland.ProjectType/>
+			<BorlandProject>
+				<Default.Personality/>
+			</BorlandProject>
+		</ProjectExtensions>
+		<Target Name="RLibWinD2010">
+			<MSBuild Projects="RLibWinD2010.dproj"/>
+		</Target>
+		<Target Name="RLibWinD2010:Clean">
+			<MSBuild Targets="Clean" Projects="RLibWinD2010.dproj"/>
+		</Target>
+		<Target Name="RLibWinD2010:Make">
+			<MSBuild Targets="Make" Projects="RLibWinD2010.dproj"/>
+		</Target>
+		<Target Name="TestadorRLib">
+			<MSBuild Projects="Testes\TestadorRLib.dproj"/>
+		</Target>
+		<Target Name="TestadorRLib:Clean">
+			<MSBuild Targets="Clean" Projects="Testes\TestadorRLib.dproj"/>
+		</Target>
+		<Target Name="TestadorRLib:Make">
+			<MSBuild Targets="Make" Projects="Testes\TestadorRLib.dproj"/>
+		</Target>
+		<Target Name="RLDebug">
+			<MSBuild Projects="Debug\RLDebug.dproj"/>
+		</Target>
+		<Target Name="RLDebug:Clean">
+			<MSBuild Targets="Clean" Projects="Debug\RLDebug.dproj"/>
+		</Target>
+		<Target Name="RLDebug:Make">
+			<MSBuild Targets="Make" Projects="Debug\RLDebug.dproj"/>
+		</Target>
+		<Target Name="Build">
+			<CallTarget Targets="RLibWinD2010;TestadorRLib;RLDebug"/>
+		</Target>
+		<Target Name="Clean">
+			<CallTarget Targets="RLibWinD2010:Clean;TestadorRLib:Clean;RLDebug:Clean"/>
+		</Target>
+		<Target Name="Make">
+			<CallTarget Targets="RLibWinD2010:Make;TestadorRLib:Make;RLDebug:Make"/>
+		</Target>
+		<Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+	</Project>

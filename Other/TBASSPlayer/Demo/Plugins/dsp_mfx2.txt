@@ -1,0 +1,190 @@
+ MuchFX2 Winamp Plug-in 1.1.1K
+ 
+ Releases Log
+----------------------------------------------------------------------------------------------
+ 1.1.1K     05/03/02	이 플러그인은 Marc S. Ressl이라는 사람이 만든 것입니다.
+			MuchFX2 Winamp plug-in 1.0111.1 버전을 기본으로 한것이며
+			파일명은 동일하게 사용합니다. 그러나 내부에 표기한것은
+			MuchFX2 Winamp Plug-in 1.1.1K로 표기 하였습니다.
+			한글 윈도우 2000과 XP에서 작동하지 않았던 이유는 유니코드
+			때문인것 같습니다.
+
+			그 부분을 조금 수정하였습니다.
+
+			수정자는 http://comchobo.co.kr 사이트입니다.
+
+			이 플러그인의 모든 권한은 Marc S. Ressl분에게 있음을 밝힙니다.
+
+			이울러 MuchFX2 is GPL/Freeware.
+			 To see the license for GPL, please refer to the program's webpages.
+
+----------------------------------------------------------------------------------------------
+
+ MuchFX2 Winamp Plug-in 1.0111.1
+ Copyright (C) 1998-2002 by Marc S. Ressl
+ ============================================================================
+
+ Description
+ ----------------------------------------------------------------------------
+ MuchFX2 is a DSP plug-in stacker for Winamp 2.x.
+
+ It allows to:
+
+	* Stack several DSP plugins.
+	* Use Winamp 1.x DSP plugins in Winamp 2.x
+
+ For example, you can stack an effect mixer (DiabloSampler), an
+ audiocompressor, and ShoutCast to transmit a Winamp-radio program.
+
+
+ Installation & Usage
+ ----------------------------------------------------------------------------
+ Copy the DSP_MFX2.DLL file to the Winamp PLUGINS directory. Run Winamp,
+ go to the preferences/DSP dialog, and choose the plugin. Press OK.
+
+ MuchFX2 behaves like Winamp's playlist editor or equalizer. Press F1 or
+ ? for help while MuchFX2 is in focus.
+
+ Important: To make Winamp 1.x plugins work, rename them DSP_*.DLL .
+
+ Tip: You can press the key R to reload a plug-in.
+
+ Tip: You can change MuchFX2's skin, by getting MuchFX2's source codes, and
+  recompiling with a new bitmap.
+
+ Note: This program creates a file named DSP_MFX2.PIC, which is a plug-in
+  cache for MuchFX.
+
+ Finally, please report incompatible plug-ins. Thanks!
+
+
+ Keyboard reference
+ ----------------------------------------------------------------------------
+  F1/?		Help
+
+  C/ENTER	Configures a plugin
+  SPACE 	Toggles a plugin
+
+  +/INS 	Adds a plugin
+  -/DEL 	Removes a plugin
+
+  L		Loads a list
+  S		Save a list
+
+  R		Reloads a plugin (useful with ShoutCAST!)
+
+  ALT-ARROWS	Moves a plugin in the list
+
+  ALT-F4	Closes MuchFX2 window temporarily (To reopen, go to
+		Winamp's preferences dialog, and press OK)
+
+
+ About this Program
+ ----------------------------------------------------------------------------
+ MuchFX2 is GPL/freeware. You can optionally register. To do so, send me a
+ postcard of your place to:
+
+	Marc S. Ressl
+	Wilde 592 bis (Wilde esq. Brassey)
+	2000 Rosario
+	Argentina
+
+
+ Releases Log
+ ----------------------------------------------------------------------------
+ 1.0111.1     11/01/02	Wow! Finally a release after 3 years. It is amazing
+			MuchFX2 is still so alive. Fixes: ShoutCast problems.
+			Finally, I really don't have time to work on this
+			project. MuchFX2 is GPL now, if anything is wrong
+			fix it yourself, I most post it on the website.
+
+ 0.9901.1     20/01/99	Wow! Almost one year MuchFX! And still a new MuchFX
+			release. New grapic interface, compatibility with
+			Winamp 1.x and 2.x DSP plugins. Load/save settings,
+			and a plugin cache!
+
+			Just NO ONE sent me a postcard =(...
+
+ 0.983.4      20/03/98	This fixes the PLUGINS\ directory problem.
+
+ 0.983.3      03/03/98	This is a good release. The problem was not only
+			the minimize button, but also the icons. Had to
+			remove them. BTW: I apologize for releasing so many
+			versions, won't happen anymore.
+
+ 0.983.2.1    02/03/98	This is just a temporary version. It doesn't
+			brighten the minimize button when minimizing, since
+			the problem is there, but the solution is far from
+			there =(.
+
+ 0.983.2      02/03/98	Fixed a bug that screwed the Windows GUI.
+
+ 0.983.1      01/03/98	New release number! New UI, and new icons.
+
+ 0.982.6      23/02/98	Just an update. Fixed some internal stuff, and
+			added the SaveMinimized mode.
+
+ 0.982.5      19/02/98	Keeps the best of release 4, and multiple-
+			configurations is now default (Means you can open
+			several configuration windows at the same time).
+			Fixed a configuration window bug while closing
+			MuchFX.
+
+ 0.982.4      17/02/98	Remembers window position now, added INS/DEL key
+			support, and there are now two "hidden" modes:
+			Multiple Configurations and Set to Foreground.
+			(This version was so buggy, it had to be removed
+			within the day)
+
+ 0.982.3      08/02/98	MuchFX is no longer beta! Fixed a hWindow bug in a
+			special case, and added checkboxes to plug-ins.
+			And the X close box is finally disabled!
+
+ 0.982.2beta  07/02/98	Fixed lots of bugs: MuchFX runs now as a thread.
+			No more crash-while-playing, and multiple instances
+			of a plug-in are no longer allowed. Main window
+			system messages are now handled =), and so TAB and
+			ENTER work now. Also sent MuchFX on diet, the .dll
+			is now smaller, and fixed a visual bug when more
+			than 4 plug-ins were loaded.
+
+ 0.982.1beta  02/02/98	Configuration is now saved in plugin.ini. Added a
+			double-click shortcut for quick configuration.
+
+ 0.982beta    01/02/98	Scans now for the Winamp directory. Fixed some
+			configuration stuff, dll-calls are now correctly
+			done, fixed a memory leak too.
+
+ 0.981beta    30/01/98	First release! Some time travel with the version
+			number, and this one "worked"! Plugin's had to be
+			in a special directory though, and only half of
+			the plugins worked.
+
+ 0.999beta    29/01/98	Not released... In fact, it didn't work =) And
+			don't ask, .999 was before .981! Yeah, I know!
+
+
+ Contact
+ ----------------------------------------------------------------------------
+ The program's pages:
+	http://www.ressl.com.ar/muchfx
+
+ Other useful things for Winamp:
+	http://www.ressl.com.ar
+
+ Email:
+	muchfx@ressl.com.ar
+
+
+ Legal Stuff
+ ----------------------------------------------------------------------------
+ MuchFX2 is GPL/Freeware. To see the license for GPL, please refer to the
+ program's webpages.
+
+ To register this program, send a postcard of your place to:
+
+	Marc S. Ressl
+	Wilde 301 (Wilde esq. Brassey)
+	2000 Rosario
+	Argentina
+

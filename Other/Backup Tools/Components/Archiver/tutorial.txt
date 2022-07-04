@@ -1,0 +1,273 @@
+This is the tutorial for the TArchiver components
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Last updated on 12 may 1999
+
+Summary
+~~~~~~~
+1) Building a simple backup/restore project
+2) Selecting archives
+3) Filtering files
+4) Creating a Self-Extracting archive
+5) Creating your own Self-Extracting archive, for an install program.
+
+
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+1) Building a simple backup/restore project
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- Drop a TArchiver component on the form.
+- Drop a TProgressBar component and make it invisible.
+- Drop a TEdit and name it 'edPath', then clear the Text property.
+- Drop a TEdit and name it 'edArchive', then set its property Text
+  to "a:\backup.mmm"
+- Drop a TLabel in front of edPath and set its caption to "Path:"
+- Drop a TLabel in front of edArchive and set its caption to "Archive:"
+- Drop a TButton and name it 'btnBackup', then set its caption
+  to "Backup"
+- Drop a TButton and name it 'btnRestore', then set its caption
+  to "Restore"
+- Drop a TButton and name it 'btnAbort', then set its caption
+  to "Abort" and make it invisible.
+- Drop a TLabel and name it 'lStatus', then make it invisible.
+- Double-click on the "OnCloseQuery" event of the form and
+  add the following code :
+      CanClose := not Archiver1.IsBusy;
+      if not CanClose then
+        MessageDlg( 'An operation is in progress. You must click on abort before !', mtWarning, [mbOk], 0 );
+- Activate the option oEraseFirstDisk in property Options of Archiver1.
+- Double-click on the "OnStartOperation" event of Archiver1
+  and add the following code :
+      lStatus.Visible := True;
+      ProgressBar1.Visible := True;
+      btnAbort.Visible := True;
+- Double-click on the "OnFinishOperation" event of Archiver1
+  and add the following code :
+      lStatus.Visible := False;
+      ProgressBar1.Visible := False;
+      btnAbort.Visible := False;
+- Double-click on the "OnFileProgress" event of Archiver1
+  and add the following code :
+      btnAbort.Enabled := Archiver1.CanAbort;
+      ProgressBar1.Position := Percent;
+      Application.ProcessMessages;
+- Double-click on the btnAbort
+  and add the following code :
+      Archiver1.RequestAbort;
+- Double-click on the btnBackup
+  and add the following code :
+      with Archiver1 do
+        begin
+          FileName := edArchive.Text;
+          Open;
+          try
+            AddDirectory( edPath.Text );
+          finally
+            Close;
+          end;
+        end;
+- Double-click on the btnRestore
+  and add the following code :
+      if not FileExists(edArchive.Text) then
+        begin
+          MessageDlg( Format( 'Archive %s does not exist !', [edArchive.Text]), mtError, [mbOk], 0 );
+          Exit;
+        end;
+      with Archiver1 do
+        begin
+          FileName := edArchive.Text;
+          ExtractPath := edPath.Text;
+          Open;
+          try
+            ExtractFiles;
+          finally
+            Close;
+          end;
+        end;
+- Double-click on the "OnDisplayMessage" event of Archiver1
+  and add the following code :
+      lStatus.Caption := msg;
+
+
+Run the application, enter a directory to backup in the
+path edit control.
+Change the Archive name if you want to (create it in
+c: for instance).
+Then click on Backup.
+
+Look at the folder specified in the Archive name:
+it should contain the archive.
+
+If you want to restore the archive, then change
+the path to a new directory where you want to extract
+the files, then click on Restore and look at the
+specified directory (it should contain all the files
+of the archive).
+
+You can change the different options of TArchiver and
+look at the result.
+
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+2) Selecting archives
+   ~~~~~~~~~~~~~~~~~~
+
+You can extend the previous project in order to select the archives that
+your program may import. This is especially useful if you've got several
+applications that use the same backup technology and you want to avoid 
+your users to restore a backup in the wrong application !!!
+
+- select the TArchiver component and double-click on the OnWriteUserData event
+  and enter the following code :
+      with UserData do begin
+        UserName         := 'John Doe'; // The current user (Max 20 chars)
+        Company          := Copy('World Company', 1, 20 ); // The current user company
+        SerialNumber     := '123456-xyz-23'; // the serial number of your product
+        BackupName       := 'XYZ';
+        Date             := Now;
+        ProductId        := 1234; // Your special Id for the product
+        ProductVersion   := 21; // the current version of your product
+      end;
+
+  if you want to add some special informations of your own, then declare a new type
+  of record of maximum 32 bytes, fill it with your data and copy it in the
+  UserData.Free field. For instance:
+
+    procedure TForm1.Archiver1WriteUserData(Sender: TObject;
+    var UserData: TUserData);
+    type
+      TMyInfos = record
+        a : Integer; 4 bytes
+        b : String[9]; 10 bytes
+        c : Extended; 10 bytes
+      end; // Total = 24 bytes
+    var
+      mi : TMyInfos;
+    begin
+      with mi do begin
+        a := 123;
+        b := 'hello';
+        c := 123.456789;
+      end;
+      Move( mi, UserData.Free, sizeof(mi) );
+    end;
+
+- select the TArchiver component and double-click on the OnAcceptArchive event
+  and enter the following code :
+     
+      with Header.UserData do begin
+        Accept := (ProductId = 1234) and (ProductVersion <= 21);
+      end;
+
+  If you have used the free section, then do something like:
+
+    type
+      TMyInfos = record
+        a : Integer; 4 bytes
+        b : String[9]; 10 bytes
+        c : Extended; 10 bytes
+      end; // Total = 24 bytes
+    var
+      mi : TMyInfos;
+    begin
+      Move( Header.UserData.Free, mi, sizeof(mi) );
+      Accept := (mi.a = 123) and (mi.b = 'hello') and (mi.c < 500);
+    end;
+
+  That's all !
+
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+3) Filtering files
+   ~~~~~~~~~~~~~~~
+
+Let's say you want to backup a folder but you don't need the temporary files (*.~*), or the
+*.dcu.
+
+Select the TArchiver component and double-click on the OnAddFile event and add the
+following code :
+
+procedure TForm1.Archiver1AddFile(Sender: TObject;
+  var FileEntry: TFileEntry; var Accept: Boolean);
+var
+  ext : String;
+begin
+  ext := UpperCase( ExtractFileExt(FileEntry.Name) );
+  Accept := (ext <> '.DCU') and (Pos('~', ext) = 0);
+end;
+
+Note, that if you only want one kind of extension (i.e. only the *.doc), then use
+the property "Filter" of the TArchiver.
+
+That's all !
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+4) Creating a Self-Extracting archive
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- Drop a TSFXGenerator component
+- Connect the TSFXGenerator component to the TArchiver component, through the 
+  SFXGenerator property of the TArchiver.
+- Adjust the SFX settings using the TagInfo record of the TSFXGenerator.
+  For instance:
+    with SFXGenerator1.TagInfo do
+      begin
+        ExecuteFileAfterExtract := True;
+        UserChooseFilesToExtract := False;
+        UserChooseOverwriteMode := True;
+        UserAllowedToDontRunTheFile := False;
+        DefaultOwerwriteMode := overwrite;
+        CommandLine := '<AD>setup.exe';
+        // or CommandLine := '<AD>MyProgram.exe|arg1 arg2 arg3';
+        Caption := 'This is my SFX Title';
+        DefaultExtractPath := '<PF>MyCompany\MyProduct';
+        Language := lgAutomatic;
+      end;
+
+You've got 2 possibilities :
+
+a) you want to create a new archive
+   (this is interesting, because your SFX archive may be spanned)
+
+  Simply use a FileName with .exe at the end.
+  For instance:
+    Archiver1.FileName := 'test.exe';
+    Archiver1.Open;
+    try
+      Archiver1.AddDirectory( 'c:\xyz' );
+    finally
+      Archier1.Close;
+    end;
+
+b) you want to convert an existing archive
+
+  Simply open the existing archive and call the method MakeSFX. It will
+  automatically create a new SFX archive from the current archive, with
+  the same name in the same folder.
+
+That's all !
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+5) Creating your own Self-Extracting archive, for an install program.
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- Create your Project with a TExtractor inside. Use Application.ExeName as the FileName
+  of the TExtractor. 
+- before opening the archive, add the following line :
+     Extractor1.SFXCodeSize = 123456; // a dummy size
+- Compile your application and look at its size (in bytes)
+- put this size into the previous line. Compile and check again if the size
+  written in the app corresponds to the final application size.
+- Create an archive containing all your needed files (i.e. data.mmm)
+- in a DOS box, go to the folder containing your project (and the archive)
+- type the following command:
+     copy /b project1.exe+data.mmm MyInstaller.exe
+- now, execute MyInstaller.exe, it should be fine !
+
+Note, that for debugging purposes you should first develop your application
+using an external archive (instead of Application.ExeName and SFXCodeSize).
+When all's running fine, then do the previous steps.
+
+That's all !  
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+*** END ***

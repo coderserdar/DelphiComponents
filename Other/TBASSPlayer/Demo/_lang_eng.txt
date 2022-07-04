@@ -1,0 +1,185 @@
+// & : Set caption property, $ : Set text property, * : Set hint property, ^ : Representative item 
+// (For the lines starting with &, $, ^ symbol : The string between symbol character thru '=' is the name of component ) 
+// The lines starting with no special symbols above : Texts which can be susbstituted with local language.
+// Add a '%' character at header if the 1st character of the text to be substituted is '&', '$', '*' or '^'.  
+// The preceeding and trailing double quotation marks(") are used to secure space(s). 
+// The line starting with double slash(//) is ignored.
+// [Common] defines the common entries and it should be put first if needed
+// This file can be used as a skeleton for easy adaption of local language.
+// Edit this file according to your local language, then save as appropriate file name, 
+//  ex: lang_German.txt
+
+[Common]
+&btnClose=Close
+&btnConfigure=Configure
+&lbl_Detected=Detected Plug-ins
+Confirm=
+Warning=
+Error=
+Information=
+
+[TBASSPlayer]
+Cannot support dual channel mode. (Failed to get buffer)=
+Cannot run Winamp visualization plug-ins=
+Specified visualization plug-in does not exist=
+DSP buffer is not ready=
+Specified DSP plug-in is not operative=
+Specified DSP plug-in is invalid=
+Invalid module number=
+Player is not ready !=
+Invalid or unsupported stream file.=
+Cannot run Winamp input plug-ins. (Faild to get buffer) !=
+Load BASSWMA.DLL or Winamp input plug-in for ASF/WMA file.=
+None of sound font is loaded.=
+Invalid or unsupported URL stream.=
+Error at buffering process.=
+Playback reposition of opened stream is not allowed.=
+Can't play the specified stream.=
+Could not open the channel for play.=
+ 
+[MainForm]
+&gbSoundEffects=" Sound effects "
+&cbFlanger=Flanger
+&cbEcho=Echo
+&cbReverb=Reverb
+&cbRotate=Rotate
+BASS.DLL is not ready to operate=
+Following Library files are not loaded=
+Following Library file is not loaded=
+Not a valid URL format=
+Cannot open file (BASSPlayer is not ready)=
+Opened a file from internet=
+Connected to net radio=
+Being decoded by Winamp plug-in=
+Being decoded by=
+Opened a local file=
+MIDI sound ready !=
+MIDI soundfont "Chorium.SF2" loaded=
+MIDI soundfont "Chorium.SF2" not loaded=
+You can get it from,=
+Stream Format :=
+Standby=
+Ready to play=
+Stopped=
+Paused=
+Playing=
+BASS native files=
+All playable files=
+Winamp plug-in supported files=
+BASS add-on supported files=
+Ended=
+Winamp GPP for lyrics loaded=
+The supported file formats :=
+
+// Followiings are for memu items
+%&Open local file=
+Open &URL=
+%&Bass Addon Setup=
+%&Input Plugin Setup=
+%&DSP Plugin Setup=
+%&Vis Plugin Setup=
+View &Status=
+%&Expanded View=
+%&Hide Window=
+%&About BASSPlay=
+E&xit=
+
+[URLInputForm]
+&URLInputForm=Input URL
+&btnNetOpen=Open
+&Label_Warn1=Select an item of comboBox then click "Open" button for the streams from net.
+$ComboBox1=" Or, you can enter URL here." 
+The allowed format of URL is "http://..." or "mms://..."=
+&lbl_note1=note) The acceptable form of URL is "http://..." or "mms://..."
+&lbl_note2=The program adds "http://" if URL dose not starts with "http://" or "mms://".
+
+[AddonConfigForm]
+&AddonConfigForm=BASS Add-on Configuration
+&lbl_Note_1=Note : Put BASS add-ons in <program_directory>\Plugins directory.
+&lbl_Note_2=Only the add-ons which support the playback of additional file formats are acceptable
+&lbl_Note_3=Maximum 8 add-ons can be loaded simultaneously.
+&lbl_Detected=Detected add-ons
+&lbl_Loaded=Loaded add-ons
+&btnLoad=Load
+&btnUnload=Unload
+// Cell_00, Cell_01 and Cell_02 represent the title of the header column of list. 
+^Cell_00=Name
+^Cell_10=Decsription
+^Cell_20=Playable File Types
+No add-ons are loaded=
+Select an add-on to unload first=
+Cannot unload : add-on is in use=
+Cannot get the handle of add-on=
+Not a valid add-on=
+
+[PluginConfigForm]
+&PluginConfigForm=Winamp Input plug-in Configuration
+&lbl_Note_1=Note : Put plug-ins in <program_directory>\Plugins directory.
+&lbl_Note_2=The latest plug-ins may not work normally. (Use plug-ins for Winamp 2.x )
+&cbPluginFirst=Plug-in First  ( if checked then Winamp plug-in is applied for the file types which can
+&lbl_PluginFirst=be decoded by both BASS and Winamp plug-in ) 
+&lbl_Loaded=Loaded plug-ins
+&btnLoad=Load
+&btnUnload=Unload
+&btnAbout=About
+// Cell_00, Cell_01 and Cell_02 represent the title of the header column of list.
+^Cell_00=Name
+^Cell_10=Decsription
+^Cell_20=Playable File Types
+No plug-in to load=
+Select plug-in to load first=
+Load denied : Output plug-in is not ready=
+Load denied : Already loaded before=
+Load denied : Max. number of plug-ins loaded=  
+Load denied : Unknown Error=
+Load denied : Not a valid Winamp input plug-in=
+No plug-ins are loaded=
+Select plug-in to unload first=
+Cannot unload : Unknown Error=
+Cannot unload : Plug-in is not loaded=
+Cannot unload : Plug-in is in use=
+Select plug-in to query first=
+No plug-ins to query are loaded=
+Select plug-in to configure first=
+No plug-ins to configure are loaded=
+
+[DSPControlForm]
+&DSPControlForm=Winamp DSP plug-in control
+&lbl_Note_1=Note : Put plug-ins in <program_directory>\Plugins directory.
+&lbl_Note_2=The latest plug-ins may not work normally.(Use plug-ins for Winamp 2.x )
+&lbl_Descripion=Description of library
+&lbl_Modules=Available modules
+&btnStart=Start
+&btnStop=Stop
+Invalid plug-in.=
+Unknown error in plug-in.=
+
+[VisControlForm]
+&VisControlForm=Winamp Visualization plug-in control
+&lbl_Note_1=Note : Put plug-ins in <program_directory>\Plugins directory.
+&lbl_Note_2=The latest plug-ins may not work normally. (tested upto Milkdrop 2.0e)
+&lbl_VisScale=Spectrum Scale (used to adjust output data of FFT)
+&lbl_UseWinampLook=Use Winamp-like visualization window (effective for Winamp 5 plug-in only)
+&lbl_Description=Description of library 
+&lbl_Modules=Available modules 
+&btnStart=Start
+&btnStop=Stop
+Close plug-in's Configuration window first.=
+Unknown error in plug-in.=
+Mainform's Visualization panel is invisible.=
+Visualization starts in a descrete window.=
+
+[PlayListConfigForm]
+&PlayListConfigForm=Playlist
+No selected item=
+No valid stream file=
+Already registered stream file=
+Selected item is in playing or paused state=
+Cannot open file (BASSPlayer is not ready)=
+Non-local, unsupported or invalid stream file=
+Skipped an item which is in use=
+Playlist is empty=
+Playlist is being rewritten, OK to proceed ?=
+Playlist is being cleared, OK to proceed ?=
+Not a valid URL=
+Already registered URL=

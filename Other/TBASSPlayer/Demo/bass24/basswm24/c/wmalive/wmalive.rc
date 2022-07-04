@@ -1,0 +1,18 @@
+#include "windows.h"
+
+1000 DIALOGEX 200, 100, 259, 39
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "BASSWMA live broadcast"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "Title:",-1,5,5,16,8
+    EDITTEXT        11,25,3,79,12,ES_AUTOHSCROLL
+    LTEXT           "Bitrate:",-1,109,5,23,8
+    COMBOBOX        12,135,3,45,82,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    PUSHBUTTON      "Start",10,190,3,55,13
+    LTEXT           "Caption:",-1,5,23,27,8
+    EDITTEXT        13,36,21,79,12,ES_AUTOHSCROLL | WS_DISABLED
+    CTEXT           "",20,125,21,120,13,SS_CENTERIMAGE,WS_EX_STATICEDGE
+    CONTROL         "",30,"Static",SS_BLACKFRAME,250,3,5,32
+END

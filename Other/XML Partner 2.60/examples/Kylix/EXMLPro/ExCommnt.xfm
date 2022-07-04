@@ -1,0 +1,51 @@
+object CommentForm: TCommentForm
+  Left = 206
+  Top = 348
+  Width = 375
+  Height = 86
+  HorzScrollBar.Range = 372
+  VertScrollBar.Range = 81
+  Caption = 'CommentForm'
+  Color = clBackground
+  OnShow = FormShow
+  PixelsPerInch = 75
+  TextHeight = 15
+  TextWidth = 7
+  object Label1: TLabel
+    Left = 3
+    Top = 8
+    Width = 54
+    Height = 15
+    Caption = '&Comment:'
+    FocusControl = CommentEdit
+    Layout = tlCenter
+  end
+  object CommentEdit: TEdit
+    Left = 3
+    Top = 28
+    Width = 369
+    Height = 23
+    MaxLength = 32767
+    TabOrder = 1
+  end
+  object OkBtn: TButton
+    Left = 215
+    Top = 56
+    Width = 75
+    Height = 25
+    Caption = '&OK'
+    Default = True
+    ModalResult = 1
+    TabOrder = 2
+  end
+  object CancelBtn: TButton
+    Left = 295
+    Top = 56
+    Width = 75
+    Height = 25
+    Cancel = True
+    Caption = '&Cancel'
+    ModalResult = 2
+    TabOrder = 3
+  end
+end

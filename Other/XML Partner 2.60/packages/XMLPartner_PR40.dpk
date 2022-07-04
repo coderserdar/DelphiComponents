@@ -1,0 +1,58 @@
+package XMLPartner_PR40;
+
+{$R *.RES}
+{$R '..\source\XpvFlHTM.dcr'}
+{$R '..\source\XpvFlPrt.dcr'}
+{$R '..\source\XpvFlRTF.dcr'}
+{$R '..\source\XpvFlXML.dcr'}
+{$R '..\source\XpvXSLPr.dcr'}
+{$ALIGN ON}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $00400000}
+{$DESCRIPTION 'TurboPower XMLPartner Professional Runtime package - VCL40'}
+{$RUNONLY}
+{$IMPLICITBUILD OFF}
+
+requires
+  vcl40;
+
+contains
+  XpExcept in '..\source\XpExcept.pas',
+  XpBase in '..\source\XpBase.pas',
+  XpChrFlt in '..\source\XpChrFlt.pas',
+  XpDom in '..\source\XpDOM.pas',
+  XpAboutw in '..\source\XpAboutw.pas' {XpAboutBox},
+  XpHash in '..\source\XpHash.pas',
+  XpInet in '..\source\XpInet.pas',
+  XpParser in '..\source\XpParser.pas',
+  XpvFOHsh in '..\source\XpvFOHsh.pas',
+  XpSort in '..\source\XpSort.pas',
+  XpvFlBas in '..\source\XpvFlBas.pas',
+  XpvFlHTM in '..\source\XpvFlHTM.pas',
+  XpvFlPrt in '..\source\XpvFlPrt.pas',
+  XpvFlRTF in '..\source\XpvFlRTF.pas',
+  XpvFlXML in '..\source\XpvFlXML.pas',
+  XpXSLCon in '..\source\XpXSLCon.pas',
+  XpvXSLFO in '..\source\XpvXSLFO.pas',
+  XpvXSLPr in '..\source\XpvXSLPr.pas',
+  XpvXSLT in '..\source\XpvXSLT.pas';
+
+end.

@@ -1,0 +1,63 @@
+package DragDropD6;
+
+{$R *.res}
+{$R 'DragDrop.dcr'}
+{$R 'DropSource.dcr'}
+{$R 'DropTarget.dcr'}
+{$R 'DragDropText.dcr'}
+{$R 'DragDropFile.dcr'}
+{$R 'DragDropGraphics.dcr'}
+{$R 'DragDropPIDL.dcr'}
+{$R 'DragDropInternet.dcr'}
+{$R 'DropComboTarget.dcr'}
+{$R 'DragDropHandler.dcr'}
+{$R 'DragDropContext.dcr'}
+{$R 'DropHandler.dcr'}
+{$ALIGN 4}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA OFF}
+{$IOCHECKS OFF}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS ON}
+{$RANGECHECKS ON}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS ON}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $456789}
+{$DESCRIPTION 'Drag and Drop Component Suite'}
+{$DESIGNONLY}
+{$IMPLICITBUILD OFF}
+{$DEFINE DEBUG}
+
+requires
+  Vcl,
+  designide;
+
+contains
+  DropSource in 'DropSource.pas',
+  DropTarget in 'DropTarget.pas',
+  DragDropPIDL in 'DragDropPIDL.pas',
+  DragDropFormats in 'DragDropFormats.pas',
+  DropComboTarget in 'DropComboTarget.pas',
+  DragDropFile in 'DragDropFile.pas',
+  DragDropText in 'DragDropText.pas',
+  DragDrop in 'DragDrop.pas',
+  DragDropGraphics in 'DragDropGraphics.pas',
+  DragDropInternet in 'DragDropInternet.pas',
+  DragDropContext in 'DragDropContext.pas',
+  DragDropHandler in 'DragDropHandler.pas',
+  DragDropComObj in 'DragDropComObj.pas',
+  DropHandler in 'DropHandler.pas',
+  DragDropDesign in 'DragDropDesign.pas';
+
+end.

@@ -1,0 +1,48 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{221E8E06-099F-49C6-961C-D12882174995}</ProjectGuid>
+		</PropertyGroup>
+		<ItemGroup>
+			<Projects Include="..\Delphi\Vc32\OverbyteIcsCB2009Run.cbproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="..\Delphi\Vc32\OverbyteIcsCB2009Design.cbproj">
+				<Dependencies/>
+			</Projects>
+		</ItemGroup>
+		<ProjectExtensions>
+			<Borland.Personality>Default.Personality.12</Borland.Personality>
+			<Borland.ProjectType/>
+			<BorlandProject>
+				<Default.Personality/>
+			</BorlandProject>
+		</ProjectExtensions>
+		<Target Name="OverbyteIcsCB2009Run">
+			<MSBuild Projects="..\Delphi\Vc32\OverbyteIcsCB2009Run.cbproj"/>
+		</Target>
+		<Target Name="OverbyteIcsCB2009Run:Clean">
+			<MSBuild Targets="Clean" Projects="..\Delphi\Vc32\OverbyteIcsCB2009Run.cbproj"/>
+		</Target>
+		<Target Name="OverbyteIcsCB2009Run:Make">
+			<MSBuild Targets="Make" Projects="..\Delphi\Vc32\OverbyteIcsCB2009Run.cbproj"/>
+		</Target>
+		<Target Name="OverbyteIcsCB2009Design">
+			<MSBuild Projects="..\Delphi\Vc32\OverbyteIcsCB2009Design.cbproj"/>
+		</Target>
+		<Target Name="OverbyteIcsCB2009Design:Clean">
+			<MSBuild Targets="Clean" Projects="..\Delphi\Vc32\OverbyteIcsCB2009Design.cbproj"/>
+		</Target>
+		<Target Name="OverbyteIcsCB2009Design:Make">
+			<MSBuild Targets="Make" Projects="..\Delphi\Vc32\OverbyteIcsCB2009Design.cbproj"/>
+		</Target>
+		<Target Name="Build">
+			<CallTarget Targets="OverbyteIcsCB2009Run;OverbyteIcsCB2009Design"/>
+		</Target>
+		<Target Name="Clean">
+			<CallTarget Targets="OverbyteIcsCB2009Run:Clean;OverbyteIcsCB2009Design:Clean"/>
+		</Target>
+		<Target Name="Make">
+			<CallTarget Targets="OverbyteIcsCB2009Run:Make;OverbyteIcsCB2009Design:Make"/>
+		</Target>
+		<Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+	</Project>

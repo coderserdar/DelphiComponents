@@ -1,0 +1,254 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{43c6ddca-5c27-48af-a4ea-177005c72e11}</ProjectGuid>
+  </PropertyGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Projects Include="Adapters\Adapter.dproj" />
+    <Projects Include="AsyncSource with Filestreams\AsyncFTPClient.dproj" />
+    <Projects Include="AsyncSource\AsyncTransferSource.dproj" />
+    <Projects Include="AsyncTarget\AsyncTransferTarget.dproj" />
+    <Projects Include="AutoScroll\AutoScroll.dproj" />
+    <Projects Include="ComboTargetDemo\ComboTargetDemo.dproj" />
+    <Projects Include="CustomFormat1\CustomFormat1.dproj" />
+    <Projects Include="CustomFormat2\CustomFormat2.dproj" />
+    <Projects Include="DetailedDemo\DragDropDemo.dproj" />
+    <Projects Include="ExtractDemo\ExtractDemo.dproj" />
+    <Projects Include="MultipleTargets\MultiTarget.dproj" />
+    <Projects Include="Outlook\OutlookDemo.dproj" />
+    <Projects Include="PIDLDemo\PIDLDemo.dproj" />
+    <Projects Include="ShellContextMenuHandlerSimple\SimpleContextMenuHandlerShellExt.dproj" />
+    <Projects Include="ShellContextMenuHandler\ContextMenuHandlerShellExt.dproj" />
+    <Projects Include="ShellDragDropHandler\DragDropHandlerShellExt.dproj" />
+    <Projects Include="ShellDropHandler\DropHandlerShellExt.dproj" />
+    <Projects Include="ShellDropHandler\FoobarEdit.dproj" />
+    <Projects Include="SourceAnalyzer\SourceAnalyzer.dproj" />
+    <Projects Include="SourceDemo\SimpleSourceDemo.dproj" />
+    <Projects Include="TargetDemo\SimpleTargetDemo.dproj" />
+    <Projects Include="VirtualFileStream\VirtualFileStream.dproj" />
+    <Projects Include="VirtualFile\VirtualFile.dproj" />
+  </ItemGroup>
+  <ProjectExtensions>
+    <Borland.Personality>Default.Personality</Borland.Personality>
+    <Borland.ProjectType />
+    <BorlandProject>
+  <BorlandProject xmlns=""> <Default.Personality> </Default.Personality> </BorlandProject></BorlandProject>
+  </ProjectExtensions>
+  <Target Name="SimpleSourceDemo">
+    <MSBuild Projects="SourceDemo\SimpleSourceDemo.dproj" Targets="" />
+  </Target>
+  <Target Name="SimpleSourceDemo:Clean">
+    <MSBuild Projects="SourceDemo\SimpleSourceDemo.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="SimpleSourceDemo:Make">
+    <MSBuild Projects="SourceDemo\SimpleSourceDemo.dproj" Targets="Make" />
+  </Target>
+  <Target Name="SimpleTargetDemo">
+    <MSBuild Projects="TargetDemo\SimpleTargetDemo.dproj" Targets="" />
+  </Target>
+  <Target Name="SimpleTargetDemo:Clean">
+    <MSBuild Projects="TargetDemo\SimpleTargetDemo.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="SimpleTargetDemo:Make">
+    <MSBuild Projects="TargetDemo\SimpleTargetDemo.dproj" Targets="Make" />
+  </Target>
+  <Target Name="MultiTarget">
+    <MSBuild Projects="MultipleTargets\MultiTarget.dproj" Targets="" />
+  </Target>
+  <Target Name="MultiTarget:Clean">
+    <MSBuild Projects="MultipleTargets\MultiTarget.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="MultiTarget:Make">
+    <MSBuild Projects="MultipleTargets\MultiTarget.dproj" Targets="Make" />
+  </Target>
+  <Target Name="ComboTargetDemo">
+    <MSBuild Projects="ComboTargetDemo\ComboTargetDemo.dproj" Targets="" />
+  </Target>
+  <Target Name="ComboTargetDemo:Clean">
+    <MSBuild Projects="ComboTargetDemo\ComboTargetDemo.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="ComboTargetDemo:Make">
+    <MSBuild Projects="ComboTargetDemo\ComboTargetDemo.dproj" Targets="Make" />
+  </Target>
+  <Target Name="DragDropDemo">
+    <MSBuild Projects="DetailedDemo\DragDropDemo.dproj" Targets="" />
+  </Target>
+  <Target Name="DragDropDemo:Clean">
+    <MSBuild Projects="DetailedDemo\DragDropDemo.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="DragDropDemo:Make">
+    <MSBuild Projects="DetailedDemo\DragDropDemo.dproj" Targets="Make" />
+  </Target>
+  <Target Name="Adapter">
+    <MSBuild Projects="Adapters\Adapter.dproj" Targets="" />
+  </Target>
+  <Target Name="Adapter:Clean">
+    <MSBuild Projects="Adapters\Adapter.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="Adapter:Make">
+    <MSBuild Projects="Adapters\Adapter.dproj" Targets="Make" />
+  </Target>
+  <Target Name="CustomFormat1">
+    <MSBuild Projects="CustomFormat1\CustomFormat1.dproj" Targets="" />
+  </Target>
+  <Target Name="CustomFormat1:Clean">
+    <MSBuild Projects="CustomFormat1\CustomFormat1.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="CustomFormat1:Make">
+    <MSBuild Projects="CustomFormat1\CustomFormat1.dproj" Targets="Make" />
+  </Target>
+  <Target Name="CustomFormat2">
+    <MSBuild Projects="CustomFormat2\CustomFormat2.dproj" Targets="" />
+  </Target>
+  <Target Name="CustomFormat2:Clean">
+    <MSBuild Projects="CustomFormat2\CustomFormat2.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="CustomFormat2:Make">
+    <MSBuild Projects="CustomFormat2\CustomFormat2.dproj" Targets="Make" />
+  </Target>
+  <Target Name="AutoScroll">
+    <MSBuild Projects="AutoScroll\AutoScroll.dproj" Targets="" />
+  </Target>
+  <Target Name="AutoScroll:Clean">
+    <MSBuild Projects="AutoScroll\AutoScroll.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="AutoScroll:Make">
+    <MSBuild Projects="AutoScroll\AutoScroll.dproj" Targets="Make" />
+  </Target>
+  <Target Name="ExtractDemo">
+    <MSBuild Projects="ExtractDemo\ExtractDemo.dproj" Targets="" />
+  </Target>
+  <Target Name="ExtractDemo:Clean">
+    <MSBuild Projects="ExtractDemo\ExtractDemo.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="ExtractDemo:Make">
+    <MSBuild Projects="ExtractDemo\ExtractDemo.dproj" Targets="Make" />
+  </Target>
+  <Target Name="OutlookDemo">
+    <MSBuild Projects="Outlook\OutlookDemo.dproj" Targets="" />
+  </Target>
+  <Target Name="OutlookDemo:Clean">
+    <MSBuild Projects="Outlook\OutlookDemo.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="OutlookDemo:Make">
+    <MSBuild Projects="Outlook\OutlookDemo.dproj" Targets="Make" />
+  </Target>
+  <Target Name="PIDLDemo">
+    <MSBuild Projects="PIDLDemo\PIDLDemo.dproj" Targets="" />
+  </Target>
+  <Target Name="PIDLDemo:Clean">
+    <MSBuild Projects="PIDLDemo\PIDLDemo.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="PIDLDemo:Make">
+    <MSBuild Projects="PIDLDemo\PIDLDemo.dproj" Targets="Make" />
+  </Target>
+  <Target Name="VirtualFile">
+    <MSBuild Projects="VirtualFile\VirtualFile.dproj" Targets="" />
+  </Target>
+  <Target Name="VirtualFile:Clean">
+    <MSBuild Projects="VirtualFile\VirtualFile.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="VirtualFile:Make">
+    <MSBuild Projects="VirtualFile\VirtualFile.dproj" Targets="Make" />
+  </Target>
+  <Target Name="VirtualFileStream">
+    <MSBuild Projects="VirtualFileStream\VirtualFileStream.dproj" Targets="" />
+  </Target>
+  <Target Name="VirtualFileStream:Clean">
+    <MSBuild Projects="VirtualFileStream\VirtualFileStream.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="VirtualFileStream:Make">
+    <MSBuild Projects="VirtualFileStream\VirtualFileStream.dproj" Targets="Make" />
+  </Target>
+  <Target Name="AsyncTransferSource">
+    <MSBuild Projects="AsyncSource\AsyncTransferSource.dproj" Targets="" />
+  </Target>
+  <Target Name="AsyncTransferSource:Clean">
+    <MSBuild Projects="AsyncSource\AsyncTransferSource.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="AsyncTransferSource:Make">
+    <MSBuild Projects="AsyncSource\AsyncTransferSource.dproj" Targets="Make" />
+  </Target>
+  <Target Name="AsyncTransferTarget">
+    <MSBuild Projects="AsyncTarget\AsyncTransferTarget.dproj" Targets="" />
+  </Target>
+  <Target Name="AsyncTransferTarget:Clean">
+    <MSBuild Projects="AsyncTarget\AsyncTransferTarget.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="AsyncTransferTarget:Make">
+    <MSBuild Projects="AsyncTarget\AsyncTransferTarget.dproj" Targets="Make" />
+  </Target>
+  <Target Name="AsyncFTPClient">
+    <MSBuild Projects="AsyncSource with Filestreams\AsyncFTPClient.dproj" Targets="" />
+  </Target>
+  <Target Name="AsyncFTPClient:Clean">
+    <MSBuild Projects="AsyncSource with Filestreams\AsyncFTPClient.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="AsyncFTPClient:Make">
+    <MSBuild Projects="AsyncSource with Filestreams\AsyncFTPClient.dproj" Targets="Make" />
+  </Target>
+  <Target Name="SourceAnalyzer">
+    <MSBuild Projects="SourceAnalyzer\SourceAnalyzer.dproj" Targets="" />
+  </Target>
+  <Target Name="SourceAnalyzer:Clean">
+    <MSBuild Projects="SourceAnalyzer\SourceAnalyzer.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="SourceAnalyzer:Make">
+    <MSBuild Projects="SourceAnalyzer\SourceAnalyzer.dproj" Targets="Make" />
+  </Target>
+  <Target Name="SimpleContextMenuHandlerShellExt">
+    <MSBuild Projects="ShellContextMenuHandlerSimple\SimpleContextMenuHandlerShellExt.dproj" Targets="" />
+  </Target>
+  <Target Name="SimpleContextMenuHandlerShellExt:Clean">
+    <MSBuild Projects="ShellContextMenuHandlerSimple\SimpleContextMenuHandlerShellExt.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="SimpleContextMenuHandlerShellExt:Make">
+    <MSBuild Projects="ShellContextMenuHandlerSimple\SimpleContextMenuHandlerShellExt.dproj" Targets="Make" />
+  </Target>
+  <Target Name="ContextMenuHandlerShellExt">
+    <MSBuild Projects="ShellContextMenuHandler\ContextMenuHandlerShellExt.dproj" Targets="" />
+  </Target>
+  <Target Name="ContextMenuHandlerShellExt:Clean">
+    <MSBuild Projects="ShellContextMenuHandler\ContextMenuHandlerShellExt.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="ContextMenuHandlerShellExt:Make">
+    <MSBuild Projects="ShellContextMenuHandler\ContextMenuHandlerShellExt.dproj" Targets="Make" />
+  </Target>
+  <Target Name="DragDropHandlerShellExt">
+    <MSBuild Projects="ShellDragDropHandler\DragDropHandlerShellExt.dproj" Targets="" />
+  </Target>
+  <Target Name="DragDropHandlerShellExt:Clean">
+    <MSBuild Projects="ShellDragDropHandler\DragDropHandlerShellExt.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="DragDropHandlerShellExt:Make">
+    <MSBuild Projects="ShellDragDropHandler\DragDropHandlerShellExt.dproj" Targets="Make" />
+  </Target>
+  <Target Name="DropHandlerShellExt">
+    <MSBuild Projects="ShellDropHandler\DropHandlerShellExt.dproj" Targets="" />
+  </Target>
+  <Target Name="DropHandlerShellExt:Clean">
+    <MSBuild Projects="ShellDropHandler\DropHandlerShellExt.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="DropHandlerShellExt:Make">
+    <MSBuild Projects="ShellDropHandler\DropHandlerShellExt.dproj" Targets="Make" />
+  </Target>
+  <Target Name="FoobarEdit">
+    <MSBuild Projects="ShellDropHandler\FoobarEdit.dproj" Targets="" />
+  </Target>
+  <Target Name="FoobarEdit:Clean">
+    <MSBuild Projects="ShellDropHandler\FoobarEdit.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="FoobarEdit:Make">
+    <MSBuild Projects="ShellDropHandler\FoobarEdit.dproj" Targets="Make" />
+  </Target>
+  <Target Name="Build">
+    <CallTarget Targets="SimpleSourceDemo;SimpleTargetDemo;MultiTarget;ComboTargetDemo;DragDropDemo;Adapter;CustomFormat1;CustomFormat2;AutoScroll;ExtractDemo;OutlookDemo;PIDLDemo;VirtualFile;VirtualFileStream;AsyncTransferSource;AsyncTransferTarget;AsyncFTPClient;SourceAnalyzer;SimpleContextMenuHandlerShellExt;ContextMenuHandlerShellExt;DragDropHandlerShellExt;DropHandlerShellExt;FoobarEdit" />
+  </Target>
+  <Target Name="Clean">
+    <CallTarget Targets="SimpleSourceDemo:Clean;SimpleTargetDemo:Clean;MultiTarget:Clean;ComboTargetDemo:Clean;DragDropDemo:Clean;Adapter:Clean;CustomFormat1:Clean;CustomFormat2:Clean;AutoScroll:Clean;ExtractDemo:Clean;OutlookDemo:Clean;PIDLDemo:Clean;VirtualFile:Clean;VirtualFileStream:Clean;AsyncTransferSource:Clean;AsyncTransferTarget:Clean;AsyncFTPClient:Clean;SourceAnalyzer:Clean;SimpleContextMenuHandlerShellExt:Clean;ContextMenuHandlerShellExt:Clean;DragDropHandlerShellExt:Clean;DropHandlerShellExt:Clean;FoobarEdit:Clean" />
+  </Target>
+  <Target Name="Make">
+    <CallTarget Targets="SimpleSourceDemo:Make;SimpleTargetDemo:Make;MultiTarget:Make;ComboTargetDemo:Make;DragDropDemo:Make;Adapter:Make;CustomFormat1:Make;CustomFormat2:Make;AutoScroll:Make;ExtractDemo:Make;OutlookDemo:Make;PIDLDemo:Make;VirtualFile:Make;VirtualFileStream:Make;AsyncTransferSource:Make;AsyncTransferTarget:Make;AsyncFTPClient:Make;SourceAnalyzer:Make;SimpleContextMenuHandlerShellExt:Make;ContextMenuHandlerShellExt:Make;DragDropHandlerShellExt:Make;DropHandlerShellExt:Make;FoobarEdit:Make" />
+  </Target>
+  <Import Condition="Exists('$(MSBuildBinPath)\Borland.Group.Targets')" Project="$(MSBuildBinPath)\Borland.Group.Targets" />
+</Project>

@@ -1,0 +1,50 @@
+package NMMRC70;
+
+{$R *.res}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'Network MultiMedia: Remote Control package'}
+{$IMPLICITBUILD OFF}
+
+requires
+  rtl,
+  NMM70,
+  dclindy,
+  vcljpg,
+  vcl;
+
+contains
+  NMMRCServer in 'NMMRCServer.pas',
+  NMMRCCommon in 'NMMRCCommon.pas',
+  NMMRCRegister in 'NMMRCRegister.pas',
+  NMMBmpColorReducer in 'NMMBmpColorReducer.pas',
+  NMMCustomImageSource in 'NMMCustomImageSource.pas',
+  NMMTileComparer in 'NMMTileComparer.pas',
+  NMMTiles in 'NMMTiles.pas',
+  NMMRCConnectionProcessor in 'NMMRCConnectionProcessor.pas',
+  NMMScreenCapturer in 'NMMScreenCapturer.pas',
+  NMMScrnCap in 'NMMScrnCap.pas',
+  NMMBmp2Jpg in 'NMMBmp2Jpg.pas',
+  NMMRCClient in 'NMMRCClient.pas',
+  NMMRCQueue in 'NMMRCQueue.pas';
+
+end.

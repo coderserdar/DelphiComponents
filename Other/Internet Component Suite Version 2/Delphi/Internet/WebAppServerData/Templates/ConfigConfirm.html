@@ -1,0 +1,27 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+  <head>
+    <title>Overbyte ICS Web Application Server Demo - Confirmation</title>
+  </head>
+
+  <body>
+      Please confirm to save the configuration:<br>
+      <form action="<#ACTION>" method="get">
+        <table>
+          <tr><td>Port</td>
+              <td><#PORT></td></tr>
+          <tr><td>Logo</td>
+              <td><img src="<#LOGO>"></td></tr>
+          <tr><td><input type="submit" name="submit" value="Cancel"></td>
+              <td><input type="submit" name="submit" value="OK"></td></tr>
+        </table>
+      </form>
+      <br>
+      Note 1: After changing the logo, you'll have to refresh all pages showing
+              the logo to see the new one.<br>
+      Note 2: When you change the port, you have to restart the server to
+              have the new value take effect.
+  </body>
+</html>
+

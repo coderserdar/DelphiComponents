@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<TopProducts>
+  <Product company="Volcano" name="Throat lozenges"/>
+  <Product company="SoftSpell" name="Car seat cushion"/>
+  <Product company="Bunyon" name="Magicsoft toilet paper"/>
+  <Product company="RedHat" name="Linux 7.1"/>
+  <Product company="GoogleEye" name="Field binoculars"/>
+  <Product company="Longshot" name="10-gauge shotgun"/>
+  <Product company="Sparrow" name="stunt kite"/>
+  <Product company="Plasticmaid" name="storage box"/>
+  <Product company="Dullsworth" name="steak knife set"/>
+  <Product company="Squinty" name="Eye scraper"/>
+
+  <xsl:stylesheet version="1.0"
+   xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+   
+  <xsl:template match="/">
+    <xsl:text>StuffMart's </xsl:text>
+    <xsl:value-of select="count(/TopProducts/Product)"/>
+    <xsl:text> Most Sold Products</xsl:text>
+    <br/>
+    <ul>
+      <xsl:for-each select="/TopProducts/Product">
+        <li>
+          <xsl:value-of select="@company"/>
+          <xsl:text> </xsl:text>
+          <xsl:value-of select="@name"/>
+        </li>
+      </xsl:for-each>
+    </ul>      
+  </xsl:template>
+
+  </xsl:stylesheet>
+
+</TopProducts>
