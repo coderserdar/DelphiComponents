@@ -106,14 +106,22 @@ And I created a folder which is used to store compressed files of Delphi compone
    16. *mx Exports*
    17. *mx Native Excel*
    18. *mx Caption Button*
-   19. *MSO Demo Toolbar*
-   20. *Project Xplorer For Delphi 7*
-   21. *TwoDesk Component Suite*
-   22. *LMD EIPack Special Edition*
-   23. *AVIB Query*
-   24. *Pro VCL Extensions Library*
-   25. *Unit Expert*
-   26. *Globus Lib*
+   19. *mx Calendar*
+   20. *mx FlatPack*
+   21. *mx Debugger*
+   22. *mx Protector*
+   23. *mx Storage*
+   24. *mx Symbol Dialog*
+   25. *mx Tip Dialog*
+   26. *mx Web Update*
+   27. *MSO Demo Toolbar*
+   28. *Project Xplorer For Delphi 7*
+   29. *TwoDesk Component Suite*
+   30. *LMD EIPack Special Edition*
+   31. *AVIB Query*
+   32. *Pro VCL Extensions Library*
+   33. *Unit Expert*
+   34. *Globus Lib*
 
 </details>
 
