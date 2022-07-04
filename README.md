@@ -19,6 +19,7 @@ In this repo there are components about
 
 Repo folder structure is like this
  - [**Embarcadero Code Central**](https://github.com/coderserdar/DelphiComponents/tree/main/Embarcadero%20Code%20Central/)
+ - [**Other Components**](https://github.com/coderserdar/DelphiComponents/tree/main/Other/)
  - [**Torry's Delphi Pages**](https://github.com/coderserdar/DelphiComponents/tree/main/Torry's%20Delphi%20Pages)
    - [**Bars & Status Bars**](https://github.com/coderserdar/DelphiComponents/tree/main/Torry's%20Delphi%20Pages/Bars%20and%20Status%20Bars)
    - [**Buttons & Check Boxes**](https://github.com/coderserdar/DelphiComponents/tree/main/Torry's%20Delphi%20Pages/Buttons%20and%20CheckBoxes)
@@ -31,6 +32,7 @@ Repo folder structure is like this
      - [**Packs**](https://github.com/coderserdar/DelphiComponents/tree/main/Torry's%20Delphi%20Pages/DB%20Aware/Packs)
      - [**Visual**](https://github.com/coderserdar/DelphiComponents/tree/main/Torry's%20Delphi%20Pages/DB%20Aware/Visual)
    - [**Experts & IDE Plug-Ins**](https://github.com/coderserdar/DelphiComponents/tree/main/Torry's%20Delphi%20Pages/Experts%2C%20IDE)
+   - [**Max Components**](https://github.com/coderserdar/DelphiComponents/tree/main/Torry's%20Delphi%20Pages/Max%20Components)
 
 
 I want to add **Read Me** files to folder based components. Most of components have readme file. So when you see the folder contents, you can see the component is suitable for which *Delphi IDE*s.
