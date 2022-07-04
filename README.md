@@ -83,4 +83,36 @@ And I created a folder which is used to store compressed files of Delphi compone
 
 </details>
 
+<details>
+  <summary>Torry's Delphi Pages Setups</summary>
+
+   1. *MySQL Components Pro (Delphi 7)*
+   2. *Opus Direct Access 3.5.6*
+   3. *Devart Virtual Table Standard Edition For Delphi 7*
+   4. *Debug Space 0.85*
+   5. *Delight Expert*
+   6. *Component Bar*
+   7. *mdLib*
+   8. *abf Components For Delphi 7*
+   9. *RiversoftAVG Charting Component Suite*
+   10. *LMD Tools Standard Edition For Delphi 7 & Delphi XE*
+   11. *DFM Check*
+   12. *TMS IDE Rich*
+   13. *IBrowser For Delphi 7*
+   14. *Ez Specials*
+   15. *DDev Extensions*
+   16. *mx Exports*
+   17. *mx Native Excel*
+   18. *mx Caption Button*
+   19. *MSO Demo Toolbar*
+   20. *Project Xplorer For Delphi 7*
+   21. *TwoDesk Component Suite*
+   22. *LMD EIPack Special Edition*
+   23. *AVIB Query*
+   24. *Pro VCL Extensions Library*
+   25. *Unit Expert*
+   26. *Globus Lib*
+
+</details>
+
 If you wanna add some components to that repo or you want to share other things about **Delphi** you can communicate with me by [E-Mail](mailto:serdargul@outlook.com).
