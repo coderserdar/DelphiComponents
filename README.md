@@ -2,9 +2,9 @@
 
 ![GitHub stars](https://img.shields.io/github/stars/coderserdar/DelphiComponents?style=social) ![GitHub forks](https://img.shields.io/github/forks/coderserdar/DelphiComponents?style=social) ![GitHub watchers](https://img.shields.io/github/watchers/coderserdar/DelphiComponents?style=social) ![GitHub repo size](https://img.shields.io/github/repo-size/coderserdar/DelphiComponents?style=plastic) ![GitHub language count](https://img.shields.io/github/languages/count/coderserdar/DelphiComponents?style=plastic) ![GitHub top language](https://img.shields.io/github/languages/top/coderserdar/DelphiComponents?style=plastic) ![GitHub last commit](https://img.shields.io/github/last-commit/coderserdar/DelphiComponents?color=red&style=plastic)
 
-In this repo, I want to combine some kind of *freeware* **Delphi VCL and Non-VCL Components** which are from *Embarcadero Code Central*. Generally the components are for **older** Delphi IDE versions like *Delphi 5*, *Delphi 6*, *Delphi 7* etc.
+In this repo, I want to combine some kind of *freeware* **Delphi VCL and Non-VCL Components** which are from *Embarcadero Code Central*, *Torry's Delphi Pages* etc. Generally the components are for **older** Delphi IDE versions like *Delphi 5*, *Delphi 6*, *Delphi 7* etc.
 
-But some components like [**JSON**](https://github.com/coderserdar/DelphiComponents/tree/main/JSON%204.5), [**CSV**](https://github.com/coderserdar/DelphiComponents/tree/main/CSV%205.6), [**Cindy Component Suite**](https://github.com/coderserdar/DelphiComponents/tree/main/Cindy%20Components) can be used in most common Delphi IDEs like *Delphi 10 Rio* etc.
+But some components like [**JSON**](https://github.com/coderserdar/DelphiComponents/tree/main/Embarcadero%20Code%20Central/JSON%204.5), [**CSV**](https://github.com/coderserdar/DelphiComponents/tree/main/Embarcadero%20Code%20Central/CSV%205.6), [**Cindy Component Suite**](https://github.com/coderserdar/DelphiComponents/tree/main/Embarcadero%20Code%20Central/Cindy%20Components) can be used in most common Delphi IDEs like *Delphi 10 Rio* etc.
 
 In this repo there are components about
  - **DB Aware**
