@@ -1,0 +1,187 @@
+# * ***** BEGIN LICENSE BLOCK *****
+# * Version: MPL 1.1
+# *
+# * The contents of this file are subject to the Mozilla Public License Version
+# * 1.1 (the "License"); you may not use this file except in compliance with
+# * the License. You may obtain a copy of the License at
+# * http://www.mozilla.org/MPL/
+# *
+# * Software distributed under the License is distributed on an "AS IS" basis,
+# * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+# * for the specific language governing rights and limitations under the
+# * License.
+# *
+# * The Original Code is TurboPower Essentials Vol I
+# *
+# * The Initial Developer of the Original Code is
+# * TurboPower Software
+# *
+# * Portions created by the Initial Developer are Copyright (C) 1997-2002
+# * the Initial Developer. All Rights Reserved.
+# *
+# * Contributor(s):
+# *
+# * ***** END LICENSE BLOCK ***** 
+
+<?xml version='1.0' encoding='utf-8' ?>
+<!-- C++Builder XML Project -->
+<PROJECT>
+  <MACROS>
+    <VERSION value="BCB.06.00"/>
+    <PROJECT value="E111_R61.bpl"/>
+    <OBJFILES value="E111_R61.obj Esbase.obj EsCal.obj EsCalc.obj EsClrCbx.obj EsConst.obj 
+      esdata.obj EsEdCal.obj esedcalc.obj EsEdPop.obj EsGrad.obj Eslabel.obj 
+      EsMarque.obj EsMnuBtn.obj esrollup.obj EsSrmgr.obj EsTile.obj esutil.obj"/>
+    <RESFILES value="E111_R61.res"/>
+    <IDLFILES value=""/>
+    <IDLGENFILES value=""/>
+    <DEFFILE value=""/>
+    <RESDEPEN value="$(RESFILES)"/>
+    <LIBFILES value=""/>
+    <LIBRARIES value="A405_R61.lib X256QR61.lib X256CR61.lib X256PR61.lib"/>
+    <SPARELIBS value="rtl.lib bcbsmp.lib X256PR61.lib X256CR61.lib X256QR61.lib A405_R61.lib"/>
+    <PACKAGES value="rtl.bpi vcl.bpi bcbsmp.bpi"/>
+    <PATHCPP value=".;"/>
+    <PATHPAS value=".;"/>
+    <PATHRC value=".;"/>
+    <PATHASM value=".;"/>
+    <DEBUGLIBPATH value="$(BCB)\lib\debug"/>
+    <RELEASELIBPATH value="$(BCB)\lib\release"/>
+    <LINKER value="ilink32"/>
+    <USERDEFINES value=""/>
+    <SYSDEFINES value="_RTLDLL;NO_STRICT;USEPACKAGES"/>
+    <MAINSOURCE value="E111_R61.cpp"/>
+    <INCLUDEPATH value="&quot;D:\Borland Compilers\CBuilder6\Projects&quot;;$(BCB)\include;$(BCB)\include\vcl;e:\Essence"/>
+    <LIBPATH value="$(BCB)\Projects\Lib;$(BCB)\Lib\Debug;&quot;D:\Borland Compilers\CBuilder6\Projects&quot;;$(BCB)\lib\obj;$(BCB)\lib;E:\Essence;&quot;D:\Borland Compilers\CBuilder6\Lib\Release&quot;"/>
+    <WARNINGS value="-w-par"/>
+    <OTHERFILES value=""/>
+  </MACROS>
+  <OPTIONS>
+    <IDLCFLAGS value="-I&quot;D:\Borland Compilers\CBuilder6\Projects&quot; -I$(BCB)\include 
+      -I$(BCB)\include\vcl -Ie:\Essence -src_suffix cpp -boa"/>
+    <CFLAG1 value="-O2 -H=$(BCB)\lib\vcl60.csm -Hc -Vx -Ve -X- -a8 -b- -k- -vi -c -tWM"/>
+    <PFLAGS value="-$Y- -$L- -$D- -$A8 -v -JPHNE -M"/>
+    <RFLAGS value=""/>
+    <AFLAGS value="/mx /w2 /zn"/>
+    <LFLAGS value="-D&quot;TurboPower Essentials 1.11 Runtime package - VCL61&quot; -aa -Tpp -Gpr -x 
+      -Gn -Gl -Gi"/>
+    <OTHERFILES value=""/>
+  </OPTIONS>
+  <LINKER>
+    <ALLOBJ value="c0pkg32.obj $(PACKAGES) Memmgr.Lib sysinit.obj $(OBJFILES)"/>
+    <ALLRES value="$(RESFILES)"/>
+    <ALLLIB value="$(LIBFILES) $(LIBRARIES) import32.lib cp32mti.lib"/>
+    <OTHERFILES value=""/>
+  </LINKER>
+  <FILELIST>
+      <FILE FILENAME="E111_R61.res" FORMNAME="" UNITNAME="E111_R61.res" CONTAINERID="ResTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="E111_R61.cpp" FORMNAME="" UNITNAME="E111_R61" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="D:\Borland Compilers\CBuilder6\Lib\rtl.bpi" FORMNAME="" UNITNAME="rtl" CONTAINERID="BPITool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Esbase.pas" FORMNAME="" UNITNAME="EsBase" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="D:\Borland Compilers\CBuilder6\Lib\vcl.bpi" FORMNAME="" UNITNAME="vcl" CONTAINERID="BPITool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="EsCal.pas" FORMNAME="" UNITNAME="EsCal" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="EsCalc.pas" FORMNAME="" UNITNAME="EsCalc" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="EsClrCbx.pas" FORMNAME="" UNITNAME="EsClrCbx" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="EsConst.pas" FORMNAME="" UNITNAME="EsConst" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="esdata.pas" FORMNAME="" UNITNAME="EsData" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="EsEdCal.PAS" FORMNAME="" UNITNAME="EsEdCal" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="esedcalc.pas" FORMNAME="" UNITNAME="EsEdCalc" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="EsEdPop.pas" FORMNAME="" UNITNAME="EsEdPop" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="EsGrad.pas" FORMNAME="" UNITNAME="EsGrad" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Eslabel.pas" FORMNAME="" UNITNAME="EsLabel" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="EsMarque.pas" FORMNAME="" UNITNAME="EsMarque" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="EsMnuBtn.pas" FORMNAME="" UNITNAME="EsMnuBtn" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="esrollup.pas" FORMNAME="" UNITNAME="EsRollUp" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="EsSrmgr.pas" FORMNAME="" UNITNAME="EsSrMgr" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="EsTile.pas" FORMNAME="" UNITNAME="EsTile" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="esutil.PAS" FORMNAME="" UNITNAME="EsUtil" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="D:\Borland Compilers\CBuilder6\Lib\bcbsmp.bpi" FORMNAME="" UNITNAME="bcbsmp" CONTAINERID="BPITool" DESIGNCLASS="" LOCALCOMMAND=""/>
+  </FILELIST>
+  <BUILDTOOLS>
+  </BUILDTOOLS>
+
+  <IDEOPTIONS>
+[Version Info]
+IncludeVerInfo=1
+AutoIncBuild=0
+MajorVer=1
+MinorVer=11
+Release=0
+Build=0
+Debug=0
+PreRelease=0
+Special=0
+Private=0
+DLL=0
+Locale=1033
+CodePage=1252
+
+[Version Info Keys]
+CompanyName=TurboPower Software
+FileDescription=
+FileVersion=1.11.0.0
+InternalName=
+LegalCopyright=(c) TurboPower Software Co, 1997-2002
+LegalTrademarks=
+OriginalFilename=
+ProductName=Essentials
+ProductVersion=1.11
+Comments=
+
+[Excluded Packages]
+d:\borland\cbuilder6\Projects\Bpl\dclusr60.bpl=Borland User Components
+
+[HistoryLists\hlIncludePath]
+Count=3
+Item0=D:\Borland Compilers\CBuilder6\Projects;$(BCB)\include;$(BCB)\include\vcl;e:\Essence
+Item1=D:\Borland Compilers\CBuilder6\Projects;$(BCB)\include;$(BCB)\include\vcl;e:\Essence;
+Item2=D:\Borland Compilers\CBuilder6\Projects;$(BCB)\include;$(BCB)\include\vcl
+
+[HistoryLists\hlLibraryPath]
+Count=6
+Item0=$(BCB)\Projects\Lib;$(BCB)\Lib\Debug;D:\Borland Compilers\CBuilder6\Projects;$(BCB)\lib\obj;$(BCB)\lib;E:\Essence;D:\Borland Compilers\CBuilder6\Lib\Release
+Item1=$(BCB)\Lib\Debug;D:\Borland Compilers\CBuilder6\Projects;$(BCB)\lib\obj;$(BCB)\lib;E:\Essence;D:\Borland Compilers\CBuilder6\Lib\Release
+Item2=$(BCB)\Lib\Debug;D:\Borland Compilers\CBuilder6\Projects;$(BCB)\lib\obj;$(BCB)\lib;E:\Essence
+Item3=D:\Borland Compilers\CBuilder6\Projects;$(BCB)\lib\obj;$(BCB)\lib;E:\Essence
+Item4=D:\Borland Compilers\CBuilder6\Projects;$(BCB)\lib\obj;$(BCB)\lib;E:\Essence;
+Item5=D:\Borland Compilers\CBuilder6\Projects;$(BCB)\lib\obj;$(BCB)\lib
+
+[HistoryLists\hlDebugSourcePath]
+Count=1
+Item0=$(BCB)\source\vcl
+
+[HistoryLists\hlConditionals]
+Count=1
+Item0=_DEBUG
+
+[Debugging]
+DebugSourceDirs=$(BCB)\source\vcl
+
+[Parameters]
+RunParams=
+Launcher=
+UseLauncher=0
+DebugCWD=
+HostApplication=
+RemoteHost=
+RemotePath=
+RemoteLauncher=
+RemoteCWD=
+RemoteDebug=0
+
+[Compiler]
+ShowInfoMsgs=0
+LinkDebugVcl=0
+LinkCGLIB=0
+
+[CORBA]
+AddServerUnit=1
+AddClientUnit=1
+PrecompiledHeaders=1
+
+[Linker]
+LibPrefix=
+LibSuffix=
+LibVersion=
+  </IDEOPTIONS>
+</PROJECT>

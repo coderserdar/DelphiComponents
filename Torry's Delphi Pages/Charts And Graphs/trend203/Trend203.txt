@@ -1,0 +1,56 @@
+Trend Component - Version 2.03
+
+Added Properties:
+
+About			version and author info
+BackGroundColor		color of the background
+GridStyle		style of the grid:
+				gsNone - no grid
+				gsXGrid - grid for X values
+				gsYGrid - grid for Y values
+				gsFull - grid for X and Y values
+GridColor		color of the grid lines
+GridXstep		distance of X grid lines (must be greater than 0)
+GridYstep		distance of Y grid lines (must be greater than 0)
+AutoScale		scale Y axis automatically (not valid for demo mode)
+
+Added options:
+
+toTransparent		Values draw transparent 
+toRotated		Values vertical (only TrueType or Adobe PS, not for .fon Fonts)
+toNoZeros		do not display values = 0 when toValues in Options
+
+
+Additional:
+
+Some more error checking and additional fixing, mostly marked by // jbk 
+
+
+Installation:
+
+Install	JBKTrendD5.dpk		Delphi 5
+
+	JBKTrendD6.dpk		Delphi 6  Runtime Library
+	DclJBKTrendD6.dpk	Delphi 6  Designtime Library
+
+	JBKTrendD7.dpk		Delphi 7  Runtime Library
+	DclJBKTrendD7.dpk	Delphi 7  Designtime Library
+
+	JBKTrendD9.dpk		Delphi 2005  Runtime Library
+	DclJBKTrendD9.dpk	Delphi 2005  Designtime Library
+
+
+Version:
+
+2.01	split packages for Delphi 6 into runtime and designtime
+	should be compatible with Delphi 7 too.
+
+2.02	made compatible with Delphi 7
+	use jedi.inc for compiler directives
+	features unchanged
+
+2.03	made compatible with Delphi 2005
+	Some changes by Bart Michel in Paint procedure.
+	Font.Name, Font.Size, Font.Style and Font.Color now used.
+	Added options: toTransparent, toRotated, toNoZeros
+

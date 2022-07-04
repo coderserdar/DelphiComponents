@@ -1,0 +1,223 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+<meta name="GENERATOR" content="PasDoc 0.11.0">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<title>SqlitePass Database Objects: User Guide</title>
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body bgcolor="#ffffff" text="#000000" link="#0000ff" vlink="#800080" alink="#FF0000">
+<h1 class="externalitem">User's Guide for SqlitePass Database Components</h1>
+ 
+
+<p><b>Version 0.51 - Last Revision 2010-05-16</b>
+
+<p>The SqlitePass components project planes to provide a easy and fast access to sqlite databases. The Installation packages registers three components in the IDE : </p>
+
+<ul class="paragraph_spacing">
+  <li><p>A Database Component (<a class="normal"  href="SqlitePassDbo.TSqlitePassDatabase.html">TSqlitePassDatabase</a>)</p></li>
+  <li><p>A Dataset Component (<a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html">TSqlitePassDataset</a>)</p></li>
+  <li><p>A DBActionList Component (<a class="normal"  href="SqlitePassVisualTools.TSqlitePassDBActionList.html">TSqlitePassDBActionList</a>) and associated DbActions dedicated to work on <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html">TSqlitePassDataset</a> : <a class="normal"  href="SqlitePassVisualTools.TSqlitePassDatasetSortAsc.html">TSqlitePassDatasetSortAsc</a>, <a class="normal"  href="SqlitePassVisualTools.TSqlitePassDatasetSortDesc.html">TSqlitePassDatasetSortDesc</a>, <a class="normal"  href="SqlitePassVisualTools.TSqlitePassDatasetSort.html">TSqlitePassDatasetSort</a>, <a class="normal"  href="SqlitePassVisualTools.TSqlitePassDatasetFilterOnSelection.html">TSqlitePassDatasetFilterOnSelection</a>, <a class="normal"  href="SqlitePassVisualTools.TSqlitePassDatasetFilter.html">TSqlitePassDatasetFilter</a>, <a class="normal"  href="SqlitePassVisualTools.TSqlitePassDatasetFilterOnOff.html">TSqlitePassDatasetFilterOnOff</a>,<a class="normal"  href="SqlitePassVisualTools.TSqlitePassDatasetLocate.html">TSqlitePassDatasetLocate</a>, <a class="normal"  href="SqlitePassVisualTools.TSqlitePassDatasetLocateFirst.html">TSqlitePassDatasetLocateFirst</a>, <a class="normal"  href="SqlitePassVisualTools.TSqlitePassDatasetLocatePrior.html">TSqlitePassDatasetLocatePrior</a>, <a class="normal"  href="SqlitePassVisualTools.TSqlitePassDatasetLocateNext.html">TSqlitePassDatasetLocateNext</a>, <a class="normal"  href="SqlitePassVisualTools.TSqlitePassDatasetLocateLast.html">TSqlitePassDatasetLocateLast</a>.</p></li>
+</ul>
+
+<p>
+
+<p><br> At the moment, these components support reading from / writing to databases created with : </p>
+
+<ul class="paragraph_spacing">
+  <li><p>The Kexi project (for Linux and Windows)</p></li>
+  <li><p>The Sqlite Expert (for Windows)</p></li>
+  <li><p>SQLite Administrator (Database manager for Windows)</p></li>
+  <li><p>Sqlite4Fpc (Database component for FPC)</p></li>
+  <li><p>SqliteToolbox (The demo program included with SqlitePass components, for windows and Linux)</p></li>
+  <li><p>or your own custom sqlite database using Database.DataTypeOptions (<a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html">TSqlitePassDatabaseDataTypeOptions</a>)</p></li>
+</ul>
+
+<p> <br> <br> <i>This project is open source, released under LGPL license.</i> <br> <i>Libraries and components are free and currently tested with Delphi 4 &amp; 6, Delphi 2009 &amp; 2010 - Lazarus 0.9.29 – FPC 2.4.1.</i> <br> <i>From 0.45 version, the components should be &quot;unicode friendly&quot;.</i> <br> <br> The library will not be considered as &quot;stable&quot; until the 1.0 release. Let me know in you want to use those components with other Delphi versions. <br> <br> <br> <ol>
+<li><a href="#_PackagesInstallation">Packages Installation</a>
+<ol>
+<li><a href="#_PackagesInstallationDelphi">Packages Installation for Delphi users</a>
+</li>
+<li><a href="#_PackagesInstallationLazarus">Packages Installation for Lazarus users  (>=0.9.20)</a>
+</li>
+</ol>
+</li>
+<li><a href="#_QuickStart">Quick Start</a>
+<ol>
+<li><a href="#_QuickStartDemoApp">A Demo application : SqliteToolbox</a>
+</li>
+<li><a href="#_QuickStartSampleApp">A simple application</a>
+</li>
+</ol>
+</li>
+<li><a href="#_PackagesDescription">Packages Description - Content of /SQLitePass_x.xx Directory</a>
+<ol>
+<li><a href="#_SQLitePassDocumentationDirectory">Content of /Documentation Directory</a>
+</li>
+<li><a href="#_SQLitePassPackagesDirectory">Content of /Packages Directory</a>
+</li>
+<li><a href="#_SQLitePassSourceDirectory">Content of /Sources Directory</a>
+<ol>
+<li><a href="#_SQLitePassSourceDesignTimeDirectory">Content of /Sources/DesignTimeEditors</a>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+ <br> <br> <br> <h2 class=""><a name="_PackagesInstallation"></a>Packages Installation</h2>
+ <b>At first, you need to install the SQLite library.</b> <br> From version 0.51, SqlitePass components don't need a special Sqlite library version anymore and use directly the one provided at <a  target="_parent" href="http://www.sqlite.org/download.html">http://www.sqlite.org/download.html</a> <br> </p>
+
+<ul class="paragraph_spacing">
+  <li><p>Windows users : Download sqlitedll-3_x_xx_x.zip, Unzip and copy the sqlite3.dll in a system directory, ..\Windows\system32 or ..\Windows\SysWOW64 for example.</p></li>
+  <li><p>For linux users : Download, sqlite-amalgamation-3.x.xx.x.tar.gz. Use the classic installation procedure : Unpack the file in your favorite folder, /home/MyFavoriteDir/ for example. Open the console application and go to the extracted files : 'cd /home/MyFavoriteDir/sqlite-3.x.xx.x', then type './configure', 'make', 'make install' or 'sudo make install' in you use ubuntu. Depending on your linux distribution, You may need to be logged as root to perform the final 'make install' step. You can also use synaptic or any package manager in order to install the library. The resulting libsqlite3.so file is generally located in /usr/local/lib or /usr/lib.</p></li>
+</ul>
+
+<p> <br> <br> <h3 class=""><a name="_PackagesInstallationDelphi"></a>Packages Installation for Delphi users</h3>
+ <b>Delphi users (Delphi 4 example. Should apply for further Delphi versions) :</b> <br> </p>
+
+<ol class="paragraph_spacing">
+  <li value="1"><p>Uninstall any previous version of <a class="normal"  href="SqlitePassDbo.html">SqlitePassDbo</a> components : Choose [Components] [Install Packages] from IDE menu.</p></li>
+  <li value="2"><p>Select the SqlitePass package and click Remove.</p></li>
+  <li value="3"><p>Compile Runtime package : Choose [File] [Open] from the IDE menu and select ..\SQLitePass\Packages\Delphi4\D4_SqlitePassDbo_Runtime.dpk. Compile this package and move the resulting file from SQLitePass_vX.XX\Packages\Delphi4\D4_SqlitePassDbo_Runtime.bpl to a directory inluded in the Delphi search path (like ..\Delphi4\Bin or ..\Windows\system32 for example). Delete or overwrite any previous D4_SqlitePassDbo_Runtime.bpl.</p></li>
+  <li value="4"><p>Compile and install Designtime package : Choose [File] [Open] from the IDE menu and select ..\SQLitePass\Packages\Delphi4\D4_SqlitePassDbo_Designtime.dpk. Compile this package, then choose install.</p></li>
+  <li value="5"><p>Check installation : Select <a class="normal"  href="SqlitePassDbo.html">SqlitePassDbo</a> on component palette pages and drop a SqlitePassDatabase and a SqlitePassDataset on a new form. Check the components versions are correct in object inspector.</p></li>
+</ol>
+
+<p> <br> <br> <h3 class=""><a name="_PackagesInstallationLazarus"></a>Packages Installation for Lazarus users  (&gt;=0.9.20)</h3>
+ </p>
+
+<ol class="paragraph_spacing">
+  <li value="1"><p>Uninstall any previous version of <a class="normal"  href="SqlitePassDbo.html">SqlitePassDbo</a> components : Choose [Components] [Configure Installed Packages] from IDE menu</p></li>
+  <li value="2"><p>Select the Laz_SqlitePassDbo_Runtime and Laz_SqlitePassDbo_Designtime packages and click [Uninstall the selection] then [Save and quit the dialog].</p></li>
+  <li value="3"><p>Compile the Laz_SqlitePassDbo_Runtime package. Compile and install the Designtime package : Choose [File] [Open] from the IDE menu and select ..\SQLitePass\Packages\Lazarus\Laz_SqlitePassDbo_Designtime.lpk. In package dialog, Choose compile - this way, the Laz_SqlitePassDbo_Runtime will automatically be compiled. Then select install to rebuild the IDE.</p></li>
+  <li value="4"><p>Check installation : Select <a class="normal"  href="SqlitePassDbo.html">SqlitePassDbo</a> on Component palette pages and drop a SqlitePassDatabase and a SqlitePassDataset on a new form. Check the components versions are correct in object inspector.</p></li>
+</ol>
+
+<p> <br> <br> <br> <h2 class=""><a name="_QuickStart"></a>Quick Start</h2>
+ <h3 class=""><a name="_QuickStartDemoApp"></a>A Demo application : SqliteToolbox</h3>
+ A demo application with source is available from <a  target="_parent" href="http://source.online.free.fr">http://source.online.free.fr</a> <br> This application was first developped as a simple test program for the SqlitePass components. Du to many changes during developpement process and to avoid problems when changing properties behavior in IDE, the SqlitePassDatabase and SqlitePassDataset components are directly created by code at runtime. <br> This application tests also the designtime dialogs boxes used by the IDE Object Inspector. To do so, it links directly to *.pas | *.dfm | *.lfm files stored in ..\SQLitePass_x.xx\Sources\DesignTimeEditors directory. The source code is available on request, is self documented and should cover the basic usage of the components. <br> <br> <br> <h3 class=""><a name="_QuickStartSampleApp"></a>A simple application</h3>
+ Another way is to describe a simple application using SqlitePass component. <br> It could look like this : </p>
+
+<ol class="paragraph_spacing">
+  <li value="1"><p>Place a SqlitePassDatabase component on a form,</p></li>
+  <li value="2"><p>Choose Database file the Database property (a database *.kexi file from ..\SQLitePass_x.xx\Demo\Databases for example),</p></li>
+  <li value="3"><p>Set Connected property to True,</p></li>
+  <li value="4"><p>Place a SqlitePassDataset component on the form</p></li>
+  <li value="5"><p>Set Database property to the name of SqlitePassDatabase component (by default this is SqlitePassDatabase1),</p></li>
+  <li value="6"><p>Select a dataset from the DatasetName property dialog editor,</p></li>
+  <li value="7"><p>Set Active property to True.</p></li>
+  <li value="8"><p>Place a standart Delphi or Lazarus DataSource component on the page,</p></li>
+  <li value="9"><p>Set DataSet property to the name of the SqlitePassDataset component (by default this is SqlitePassDataset1)</p></li>
+  <li value="10"><p>Place any DBAware component like DBGrid, DBNavigator...etc, on the form.</p></li>
+  <li value="11"><p>Set DBGrid's, DBNavigator...etc, DataSource property to the name of DataSource component (by default this is DataSource1)</p></li>
+  <li value="12"><p>This is it !</p></li>
+</ol>
+
+<p> <br> <br> <br> <h2 class=""><a name="_PackagesDescription"></a>Packages Description - Content of /SQLitePass_x.xx Directory</h2>
+ <br> <h3 class=""><a name="_SQLitePassDocumentationDirectory"></a>Content of /Documentation Directory</h3>
+ <b>/UserGuide</b> <br> The file you are reading... <br> Changes.odt or Changes.pdf Latest changes – Versions history <br> <br> <br> <h3 class=""><a name="_SQLitePassPackagesDirectory"></a>Content of /Packages Directory</h3>
+ <b>Packages/Delphi4</b> <br> D4_SqlitePassDbo_Runtime.dpk <br> Runtime package. Shoul be compiled first (see the installation section) <br>
+
+<p>D4_SqlitePassDbo_Designtime.dpk <br> Designtime package, used to : </p>
+
+<ul class="paragraph_spacing">
+  <li><p>Register and display components in Delphi IDE,</p></li>
+  <li><p>Register property editors in Delphi IDE.</p></li>
+</ul>
+
+<p> <br> <br> <b>Packages/Delphi6</b> <br> D6_SqlitePassDbo_Runtime.dpk <br> Runtime package. Shoul be compiled first (see the installation section) <br>
+
+<p>D6_SqlitePassDbo_Designtime.dpk <br> Designtime package, used to : <br> </p>
+
+<ul class="paragraph_spacing">
+  <li><p>Register and display components in Delphi IDE,</p></li>
+  <li><p>Register property editors in Delphi IDE.</p></li>
+</ul>
+
+<p> <br> <br> <b>Packages/Delphi7</b> <br> D7_SqlitePassDbo_Runtime.dpk <br> Runtime package. Shoul be compiled first (see the installation section) <br>
+
+<p>D7_SqlitePassDbo_Designtime.dpk <br> Designtime package, used to : <br> </p>
+
+<ul class="paragraph_spacing">
+  <li><p>Register and display components in Delphi IDE,</p></li>
+  <li><p>Register property editors in Delphi IDE.</p></li>
+</ul>
+
+<p><br> <br> <br> <b>Packages/Delphi2009</b> <br> D2009_SqlitePassDbo_Runtime.dpk <br> Runtime package. Shoul be compiled first (see the installation section) <br>
+
+<p>D2009_SqlitePassDbo_Designtime.dpk <br> Designtime package, used to : <br> </p>
+
+<ul class="paragraph_spacing">
+  <li><p>Register and display components in Delphi IDE,</p></li>
+  <li><p>Register property editors in Delphi IDE.</p></li>
+</ul>
+
+<p> <br> <br> <b>Packages/Delphi2010</b> <br> D2010_SqlitePassDbo_Runtime.dpk <br> Runtime package. Shoul be compiled first (see the installation section) <br>
+
+<p>D2010_SqlitePassDbo_Designtime.dpk <br> Designtime package, used to : <br> </p>
+
+<ul class="paragraph_spacing">
+  <li><p>Register and display components in Delphi IDE,</p></li>
+  <li><p>Register property editors in Delphi IDE.</p></li>
+</ul>
+
+<p><br> <br> <b>Packages/Packages/Lazarus</b> <br> Laz_SqlitePassDbo_Runtime.dpk <br> Runtime package. Shoul be compiled first (see the installation section) <br>
+
+<p>Laz_SqlitePassDbo_Designtime.dpk <br> Designtime package, used to : <br> </p>
+
+<ul class="paragraph_spacing">
+  <li><p>Register and display components in Delphi IDE,</p></li>
+  <li><p>Register property editors in Delphi IDE.</p></li>
+</ul>
+
+<p> <br> <br> <h3 class=""><a name="_SQLitePassSourceDirectory"></a>Content of /Sources Directory</h3>
+ Components source files. Sources files are shared by Delphi and Lazarus <br> SqlitePassApi_v3.pas : Loads the external Sqlite engine library (sqlite3.dll or libsqlite3.so) and registers the sqlite functions to be used by the SqlitePass components. SqlitePassDbo.inc : Include file used to define compiler settings...etc <br> SqlitePassDbo.pas : SqlitePass Database Objects interfaces definitions. Implementations are stored in </p>
+
+<ul class="paragraph_spacing">
+  <li><p>SlitePassDatabase.inc,</p></li>
+  <li><p>SqlitePassDatabaseParts.inc,</p></li>
+  <li><p>SqlitePassDataset..inc,</p></li>
+  <li><p>SqlitePassRecordset.inc,</p></li>
+  <li><p>SqlitePassSelectStmt.inc,</p></li>
+  <li><p>SqlitePassEngine.pas.</p></li>
+</ul>
+
+<p> <br> SqlitePassDbo.lrs : Lazarus ressource file used to dipslay components icons in IDE. SqlitePassConst.pas : Constant definitions <br> SqlitePassErrorLang.pas : Ressource strings for language support. To translate this file : </p>
+
+<ul class="paragraph_spacing">
+  <li><p>Backup the original file and translate the strings in your own language.</p></li>
+  <li><p>Replace the SqlitePassErrorLang.pas with your own file.</p></li>
+  <li><p>Compile and overwrite any existing runtime package. (see installation section).</p></li>
+</ul>
+
+<p> <br> <i>Only English file is available so far. A French one will be done shortly. Translators are welcome !</i> <br> SqlitePassUtils.pas : Implements a TObjectList (The code is just a copy from FCL) and other objects, mainly to provide code compatibility between Delphi 4 and Lazarus. <br> <br> <h4 class=""><a name="_SQLitePassSourceDesignTimeDirectory"></a>Content of /Sources/DesignTimeEditors</h4>
+ The ../Sources/DesignTimeEditors : Dialogs boxes to help you during design process in IDE. </p>
+
+<ul class="paragraph_spacing">
+  <li><p>*.pas files are shared by Delphi and Lazarus projects</p></li>
+  <li><p>*.dfm files are used by Delphi</p></li>
+  <li><p>*.lfm and *.lrs files are used by Lazarus</p></li>
+</ul>
+
+<p> <br> <br> <br> <b>Designtime Editors Files descriptions : </b> <br> <br> RegisterSqlitePassDbo.pas <br> Registers and displays components and property editors in IDE. <br> <br> SqlitePassChooseDatasetDialog.pas <br> Used by TsqlitePassDataset.Dataset property. Displays an treeview of available dataset in the current database. <br><br> <img src="image_0.png" alt="ChooseDataset" /> <br><br><br>
+
+<p>SqlitePassIndexedByDialog.pas Used by <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#Indexes">TsqlitepassDataset.Indexes</a> property. Displays a dialog to manage tables in memory indexes. <br><br> <img src="image_1.png" alt="IndexedBy Editor" /> <br><br><br>
+
+<p>SqlitePassIndexesDialog.pas <br> Used by <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#IndexDefs">TsqlitepassDataset.IndexDefs</a> property. Displays a dialog to manage tables indexes. <br><br> <img src="image_2.png" alt="IndexesDefDialog" /> <br><br><br>
+
+<p>SqlitePassCustomFieldDefsDialog.pas <br> Used by TsqlitePassDatabase.DataTypeOptions.CustomFieldDefs property. Display a dialog to manage custom field definitions <br><br> <img src="image_3.png" alt="CustomFieldDefs" /> <br><br><br>
+
+<p>SqlitePassFieldDefsDialog.pas <br> Used by TsqlitepassDataset.FieldDefsInfo property. Display a dialog showing field definitions of the currently selected dataset. <br><br> <img src="image_4.png" alt="Fields definitions for dataset" /> <br><br><br>
+
+<p>SqlitePassSortByDialog.pas <br> Used by <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#SortedBy">TsqlitepassDataset.SortedBy</a> property. Displays a dialog to select fields to be sorted . <br><br> <img src="image_5.png" alt="SortByDialog" /> <br><br><br>
+
+<p>SqlitePassDataTypesDialog.pas <br> Used by TsqlitePassDatabase.DataTypeOptions.TranslationRules property. Display a dialog to manage TranslationRules. <br><br> <img src="image_6.png" alt="DataTypesMapping" /> <br><br><br>
+
+<p>SqlitePassMasterDetailFieldsDialog.pas <br> Used by <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#MasterFields">TsqlitepassDataset.MasterFields</a> property. Displays a dialog to link Master and Detail fields. <br><br> <img src="image_7.png" alt="MasterDetail" /> <br><br><br>
+
+<p>SqlitePassDesignErrorLang.pas <br> Defines DesignTime error messages. <br> <br> CreateNewIndex.pas <br> Used by the indexes dialog when creating new table index. <br><br> <img src="image_8.png" alt="Create a new index" /> <br><br><br>
+
+<p>RenameItem.pas <br> Used by the indexes dialog when renaming a existing table index. <br><br> <img src="image_9.png" alt="Rename a database item" /> <br><br><br><hr noshade size="1"><span class="appinfo"><em>Generated by <a  target="_parent" href="http://pasdoc.sourceforge.net/">PasDoc 0.11.0</a> on 2010-05-16 23:39:45</em>
+</span>
+</body></html>

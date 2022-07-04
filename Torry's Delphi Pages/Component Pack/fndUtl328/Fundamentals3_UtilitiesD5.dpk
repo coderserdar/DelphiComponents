@@ -1,0 +1,66 @@
+package Fundamentals3_UtilitiesD5;
+
+{$R *.RES}
+{$R 'System\cSysComponents.dcr'}
+{$R 'XML\cXMLComponents.dcr'}
+{$ALIGN ON}
+{$ASSERTIONS OFF}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS OFF}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'Fundamentals 3 Utilities'}
+{$DESIGNONLY}
+{$IMPLICITBUILD OFF}
+
+requires
+  Vcl50;
+
+contains
+  cUtils in 'Utils\cUtils.pas',
+  cStrings in 'Utils\cStrings.pas',
+  cDateTime in 'Utils\cDateTime.pas',
+  cRandom in 'Utils\cRandom.pas',
+  cHash in 'Utils\cHash.pas',
+  cTypes in 'DataStructs\cTypes.pas',
+  cArrays in 'DataStructs\cArrays.pas',
+  cDictionaries in 'DataStructs\cDictionaries.pas',
+  cSparseArrays in 'DataStructs\cSparseArrays.pas',
+  cLinkedLists in 'DataStructs\cLinkedLists.pas',
+  cUnicode in 'Unicode\cUnicode.pas',
+  cUnicodeChar in 'Unicode\cUnicodeChar.pas',
+  cUnicodeCodecs in 'Unicode\cUnicodeCodecs.pas',
+  cUnicodeReader in 'Unicode\cUnicodeReader.pas',
+  cDynLib in 'System\cDynLib.pas',
+  cFileUtils in 'System\cFileUtils.pas',
+  cRegistry in 'System\cRegistry.pas',
+  cWindows in 'System\cWindows.pas',
+  cThreads in 'System\cThreads.pas',
+  cLog in 'System\cLog.pas',
+  cReaders in 'Streams\cReaders.pas',
+  cWriters in 'Streams\cWriters.pas',
+  cStreams in 'Streams\cStreams.pas',
+  cInternetUtils in 'Internet\cInternetUtils.pas',
+  cURL in 'Internet\cURL.pas',
+  cXMLFunctions in 'XML\cXMLFunctions.pas',
+  cXMLDocument in 'XML\cXMLDocument.pas',
+  cXMLParser in 'XML\cXMLParser.pas',
+  cSysComponents in 'System\cSysComponents.pas',
+  cXMLComponents in 'XML\cXMLComponents.pas';
+
+end.

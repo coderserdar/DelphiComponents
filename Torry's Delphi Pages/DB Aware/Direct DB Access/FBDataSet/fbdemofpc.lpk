@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<CONFIG>
+  <Package Version="2">
+    <PathDelim Value="\"/>
+    <Name Value="fbdemofpc"/>
+    <Author Value="Lagunov A.A."/>
+    <CompilerOptions>
+      <Version Value="5"/>
+      <PathDelim Value="\"/>
+      <SearchPaths>
+        <OtherUnitFiles Value="$(LazarusDir)\ideintf\units\$(TargetCPU)\$(TargetOS)\;$(LazarusDir)\components\uib\source\"/>
+        <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
+      </SearchPaths>
+      <CodeGeneration>
+        <Generate Value="Faster"/>
+        <TargetProcessor Value="3"/>
+      </CodeGeneration>
+      <Other>
+        <CompilerPath Value="$(CompPath)"/>
+      </Other>
+    </CompilerOptions>
+    <License Value="MPL
+"/>
+    <Version Major="1" Release="25" Build="30"/>
+    <Files Count="6">
+      <Item1>
+        <Filename Value="fbcustomdataset.pas"/>
+        <UnitName Value="fbcustomdataset"/>
+      </Item1>
+      <Item2>
+        <Filename Value="mydbunit.pas"/>
+        <UnitName Value="mydbunit"/>
+      </Item2>
+      <Item3>
+        <Filename Value="fb_define.inc"/>
+        <Type Value="Include"/>
+      </Item3>
+      <Item4>
+        <Filename Value="metadatasqlgenerator.pas"/>
+        <HasRegisterProc Value="True"/>
+        <UnitName Value="metadatasqlgenerator"/>
+      </Item4>
+      <Item5>
+        <Filename Value="jvuibstoredproc.pas"/>
+        <UnitName Value="jvuibstoredproc"/>
+      </Item5>
+      <Item6>
+        <Filename Value="fbdatasetregister.pas"/>
+        <HasRegisterProc Value="True"/>
+        <UnitName Value="FBDataSetRegister"/>
+      </Item6>
+    </Files>
+    <Type Value="RunAndDesignTime"/>
+    <RequiredPkgs Count="5">
+      <Item1>
+        <PackageName Value="UIBLaz"/>
+      </Item1>
+      <Item2>
+        <PackageName Value="SynEdit"/>
+      </Item2>
+      <Item3>
+        <PackageName Value="LCL"/>
+      </Item3>
+      <Item4>
+        <PackageName Value="IDEIntf"/>
+      </Item4>
+      <Item5>
+        <PackageName Value="FCL"/>
+        <MinVersion Major="1" Valid="True"/>
+      </Item5>
+    </RequiredPkgs>
+    <UsageOptions>
+      <UnitPath Value="$(PkgOutDir)\"/>
+    </UsageOptions>
+    <PublishOptions>
+      <Version Value="2"/>
+      <DestinationDirectory Value="$(TestDir)\publishedpackage\"/>
+      <IgnoreBinaries Value="False"/>
+    </PublishOptions>
+  </Package>
+</CONFIG>

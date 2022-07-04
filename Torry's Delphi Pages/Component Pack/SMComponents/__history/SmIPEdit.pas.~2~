@@ -1,0 +1,82 @@
+unit SmIPEdit;
+
+interface
+
+uses
+  SysUtils, Classes, Controls, Windows, Messages, CommCtrl, StdCtrls, Forms;
+
+type
+  TEditCharCase = (ecNormal, ecUpperCase, ecLowerCase);
+
+  TSelection = record
+    StartPos, EndPos: Integer;
+  end;
+
+  TSmIPEdit = class(TWinControl)
+  private
+  protected
+    procedure CreateParams(var Params: TCreateParams); override;
+  public
+    constructor Create(AOwner: TComponent); override;
+    destructor Destroy; override;
+  published
+    //property TabOrder;
+    //property TabStop;
+    //property Ctl3D;
+  end;
+
+const
+  BorderStyles: array[TBorderStyle] of DWORD = (0, WS_BORDER);
+
+procedure Register;
+
+implementation
+
+procedure Register;
+begin
+  RegisterComponents('SoftMaster', [TSmIPEdit]);
+end;
+
+constructor TSmIPEdit.Create(AOwner: TComponent);
+begin
+  inherited Create(AOwner);
+  Width := 121;
+  Height := 25; 
+end;
+
+destructor TSmIPEdit.Destroy;
+begin
+  inherited Destroy;
+end;
+
+procedure TSmIPEdit.CreateParams(var Params: TCreateParams);
+const
+  Passwords: array[Boolean] of DWORD = (0, ES_PASSWORD);
+  ReadOnlys: array[Boolean] of DWORD = (0, ES_READONLY);
+  CharCases: array[TEditCharCase] of DWORD = (0, ES_UPPERCASE, ES_LOWERCASE);
+  HideSelections: array[Boolean] of DWORD = (ES_NOHIDESEL, 0);
+  OEMConverts: array[Boolean] of DWORD = (0, ES_OEMCONVERT);
+begin
+  //InitCommonControl(ICC_TREEVIEW_CLASSES);
+  inherited CreateParams(Params);
+  CreateSubClass(Params, WC_IPADDRESS);
+  with Params do
+  begin
+    //Style := Style or (ES_AUTOHSCROLL or ES_AUTOVSCROLL) or
+      //BorderStyles[FBorderStyle] or Passwords[FPasswordChar <> #0] or
+      //ReadOnlys[FReadOnly] or CharCases[FCharCase] or
+      //HideSelections[FHideSelection] or OEMConverts[FOEMConvert];
+    //if NewStyleControls and Ctl3D {and (FBorderStyle = bsSingle)} then
+    //begin
+    //  Style := Style and not WS_BORDER;
+    //  ExStyle := ExStyle or WS_EX_CLIENTEDGE;
+    //end;
+  end;
+end;
+
+
+
+
+
+
+end.

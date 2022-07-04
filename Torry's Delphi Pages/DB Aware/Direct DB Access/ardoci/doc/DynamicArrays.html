@@ -1,0 +1,1471 @@
+<HTML>
+<HEAD>
+<TITLE>Dynamic Arrays</TITLE>
+</HEAD>
+<BODY >
+
+<table width="100%" border="0" cellpadding="5" cellspacing="0">
+   <tr>
+   <td align=center bgColor=#009999 bgcolor="#264b99">
+    <font face="verdana,arial" size="5" color="#FFFFFF">
+     <b>Динамические  Массивы <br>(Arrays)</b></font><br>
+<font face="verdana,arial" size="2" color="#FFFFFF"><b> Version 2.0</b><br></font>
+ </td>
+   </tr>
+</table>
+
+<font face="verdana,arial" size=2>
+
+<p>Copyright &copy; 1998-2001 by Andrey Romanchenko<br>
+All rights reserved.
+
+<p><table cellspacing=2 cellpadding=0>
+<tr>
+   <td><font face="verdana,arial" size=2>
+    <i>e-mail:&nbsp;&nbsp;</i></font>
+	</td>
+	<td><font face="verdana,arial" size=2>
+	 <a href="mailto:lasersquard@yahoo.com?subject=Dynamic Arrays version 2.0">lasersquad@tut.by</a></font>
+	</td>
+</tr>
+<tr>
+   <td><font face="verdana,arial" size=2>
+    <i>web site:&nbsp;&nbsp;</i></font>
+   </td>
+   <td><font face="verdana,arial" size=2>
+    <a href="http://DynamicArrays.narod.ru" target=_new>http://DynamicArrays.narod.ru/</a></font>
+	</td>
+</tr>
+<tr>
+   <td></td>
+   <td><font face="verdana,arial" size=2>
+   <!-- (другой адрес: <a href="http://www.dynamicarrays.cjb.net/" target=_new>http://www.dynamicarrays.cjb.net/</a>)</font>-->
+	</td>
+</tr>
+
+</table>
+
+<h3>Содержание</h3>
+<ul>
+ <li> <a href="#commondescr">Общее описание</a>
+ <li> <a href="#instalation">Инсталяция</a>
+ <li> <a href="#globals">Глобальные определения</a>
+ <li> Классы
+  <ul>
+ <li> <a href="#THArray">THArray</a>
+ <li> <a href="#THArrayInteger">THArrayInteger</a>
+ <li> <a href="#THArrayByte">THArrayByte</a> 
+ <li> <a href="#THArraySmallInt">THArraySmallInt</a>
+ <li> <a href="#THArrayWord">  THArrayWord</a>
+ <li> <a href="#THArrayLongWord">THArrayLongWord</a>
+ <li> <a href="#THArrayInt64">THArrayInt64</a>
+ <li> <a href="#THArrayBoolean">THArrayBoolean</a>
+ <li> <a href="#THArrayPointer">THArrayPointer</a>
+ <li> <a href="#THArrayObjects">THArrayObjects</a>
+ <li> <a href="#THArrayCurrency">THArrayCurrency</a>
+ <li> <a href="#THArrayDouble">  THArrayDouble</a>
+ <li> <a href="#THArrayExtended">THArrayExtended</a>
+ <li> <a href="#THArrayString"> THArrayString</a>
+ <li> <a href="#THArrayStringFix">THArrayStringFix</a>
+ <li> <a href="#THArrayWideStrings"> THArrayWideStrings</a>
+ </ul>
+</ul>
+
+<hr>
+
+<a name="commondescr"></a>
+<h3>Общее описание</h3>
+
+ Динамические массивы это мощное средство для хранения, быстрого поиска и манипулирования
+ данными различных типов используемых в среде <strong>Delphi</strong>. <br><br>
+
+ Память под хранимые данные выделяется динамически по мере роста 
+ количества элементов в массиве.<br><br>
+
+ Память выделяется на немного большее количество элементов по специальному
+ алгоритму что бы минимизировать количество запросов на выделение памяти к системе
+ что повышает производительность.<br><br>
+
+ Все поиски в динамических массивах реализованы на ассемблере и работают очень быстро.<br><br>
+ Все массивы zero based т.е. первый элемент массива имеет индекс 0, второй 1 и т.д.
+
+ <br><br>
+<hr>
+
+<a name="instalation"></a>
+<h3>Инсталяция</h3>
+
+Динамические массивы не требуют никакой инсталяции. Достаточно включить модуль <strong>DynamicArrays.pas</strong> в секцию 
+<strong>uses</strong> нужного модуля вашего проекта и все. 
+Только не забудьте указать <strong>Delphi</strong> путь где вы разместили файл <strong>DynamicArrays.pas</strong>.
+Это можно сделать либо в 
+ <ul>
+  <li>/Tools/Environment Options/Library/Library Path/
+ </ul>
+ либо в
+ <ul>
+  <li>/Project/Project Options/Directories Conditionals/Search Path/
+ </ul>
+ 
+ 
+<hr>
+
+<a name="globals"></a>
+<h3>Глобальные определения</h3> 
+  В <strong>DynamicArrays.pas</strong> определены некоторые глобальные типы которые вы можете использовать в своих программах.<br>
+  Два типа данных:<br>
+  <font face="Courier New">
+  &nbsp;<strong>pboolean</strong>  = ^boolean;<br>
+  &nbsp;<strong>ppointer</strong>  = ^pointer;<br>
+</font>
+<br>
+ А так же три callback функции:
+ <a name="FindProc"></a>
+ <a name="CompareProc"></a>
+ <a name="SwapProc"></a>
+<ul>
+	<li><font face="Courier New"> <strong>TCompareProc</strong> = function(arr : THArray;i,j : integer) : integer;</li><br></font>
+	      &nbsp;&nbsp; Пользовательская функция сравнения 2-х элементов (с индексами i и j).<br>
+		  &nbsp;&nbsp; Должна возвращать:<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0 - элементы одинаковы <br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1 - arr[i] > arr[j]    <br>
+          &nbsp;&nbsp;&nbsp;&nbsp;-1 - arr[i] < arr[j].    <br>
+          &nbsp;&nbsp; Используется в вызовах <a href="#Sort">Sort</a> и <a href="#QuickSort">QuickSort</a>.   
+	<li><font face="Courier New"> <strong>TSwapProc</strong> = procedure(arr : THArray;i,j : integer) of object;</li></font><br>
+	&nbsp;&nbsp;Пользовательская функция для более эффективного обмена местами 2-х значений.<br>
+	&nbsp;&nbsp;Используется ф-цией <a href="#QuickSort">QuickSort</a>.
+	<li><font face="Courier New"> <strong>TFindProc</strong> = function(arr : THArray;i : integer; FindData:pointer):integer of object;</li></font><br>
+	&nbsp;&nbsp;Используется в функции <a href="#QuickFind">QuickFind</a>
+</ul>
+  
+<br>
+<hr>
+
+<a name="THArray"></a>
+<h3>THArray</h3> 
+
+ Обобщеный динамический массив элементов. <br>
+ Хранит элементы любой природы и любой сложности, все что он знает это размер одного элемента в байтах 
+ (<a href="#ItemSize">ItemSize</a>). <br>
+ Не содержит абстрактных методов и поэтому позволяет создавать экземпляры класса <strong>THArray</strong>, 
+ а не только его наследников для хранения  <em>любых</em> элементов.<br>
+ Является предком всех классов динамических массивов. <br>
+ От <strong>THArray</strong> наследуются :
+<ul>
+ <li> <a href="#THArrayInteger">THArrayInteger</a>
+ <li> <a href="#THArrayByte">THArrayByte</a> 
+ <li> <a href="#THArraySmallInt">THArraySmallInt</a>
+ <li> <a href="#THArrayWord">  THArrayWord</a>
+ <li> <a href="#THArrayLongWord">THArrayLongWord</a>
+ <li> <a href="#THArrayInt64">THArrayInt64</a>
+ <li> <a href="#THArrayBoolean">THArrayBoolean</a>
+ <li> <a href="#THArrayPointer">THArrayPointer</a>
+ <li> <a href="#THArrayObjects">THArrayObjects</a>
+ <li> <a href="#THArrayCurrency">THArrayCurrency</a>
+ <li> <a href="#THArrayDouble">  THArrayDouble</a>
+ <li> <a href="#THArrayExtended">THArrayExtended</a>
+ <li> <a href="#THArrayString"> THArrayString</a>
+ <li> <a href="#THArrayStringFix">THArrayStringFix</a>
+ <li> <a href="#THArrayWideStrings"> THArrayWideStrings</a>
+</ul>
+
+
+ Все методы класса <strong>THArray</strong> работают с указателями на данные в памяти 
+ (указатели типа pointer) т.к. тип хранимых данных для THArray не определен.
+ Например функция <a href="#Add">Add</a>(pValue:pointer) добавляет в конец массива <a href="#ItemSize">ItemSize</a> 
+ байтов взятых из памяти по адресу pValue. Аналогично работают все другие методы класса <strong>THArray</strong>.<br>
+ 
+ Класс <a href="#THArrayString"> THArrayString</a> является просто надстройкой над <strong>THArray </strong>для работы со <strong>string</strong>.<br>
+ Класс <a href="#THArrayStringFix"> THArrayStringFix</a> работает со строками строго фиксированой длины (например строковые поля в базе).<br>
+
+<br>
+
+<table cellspacing="0" cellpadding="5" border="1">
+<tr bgcolor="#009999">
+    <td colspan="2" align="center" valign="middle"> <font face="verdana,arial" size=4>
+	 Свойства </font></td>
+</tr>
+
+<tr>
+<a name="Capacity"></a>
+    <td><font face="Courier New" size=2>
+	 <strong>Capacity</strong>:integer;</td>
+    <td><font face="verdana,arial" size=2>
+	 На сколько элементов (<a href="#ItemSize">ItemSize</a> байт каждый) захвачено памяти </td>
+</tr>
+
+<tr>
+    <td><font face="Courier New" size=2>
+	 <strong>Count</strong>:integer;</td>
+    <td><font face="verdana,arial" size=2>
+	 Количество элементов в массиве</td>
+</tr>
+
+<tr>
+<a Name="ItemSize"></a>
+    <td><font face="Courier New" size=2>
+	  <strong>ItemSize</strong>:integer;</td>
+    <td><font face="verdana,arial" size=2>
+	 Размер каждого элемента. При изменении <strong>ItemSize </strong>значения выполняется 
+	    <a href="#ClearMem">ClearMem</a> и все данные теряются. </font></td>
+</tr>
+<tr>
+    <td><font face="Courier New" size=2>
+	 <strong>Memory</strong>:pointer;</td>
+    <td><font face="verdana,arial" size=2>
+	 Указатель на начало массива элементов.</td>
+</tr>
+<tr bgcolor="#009999">
+    <td colspan="2" align="center" valign="middle"> <font face="verdana,arial" size=4>
+	 Методы </font></td>
+</tr>
+<tr>
+<a name="Add"></a>
+  <td><font face="Courier New" size=2>
+     function <strong>Add</strong>(pValue:pointer):integer;virtual;</td>
+  <td><font face="verdana,arial" size=2>
+       Добавляет в конец массива значение находящееся по адресу <strong>pValue</strong>. Размер берется из <a href="#ItemSize">ItemSize</a>.
+    Возвращает номер позиции, куда было добавлено значение.
+</td>
+</tr>
+
+<tr>
+  <td><font face="Courier New" size=2>
+     procedure <strong>AddMany</strong>(pValue:pointer;Count:integer); </td>
+  <td><font face="verdana,arial" size=2>
+       Добавляет несколько значений в конец массива. Можно использовать для копирования
+    одного массива в другой.
+</td>
+</tr>
+<tr>
+  <td><font face="Courier New" size=2>
+    procedure <strong>AddFillValues</strong>(ACount:integer); </td>
+  <td><font face="verdana,arial" size=2>
+       Добавляет <strong>ACount</strong> элементов в конец массива. Память занимаемая добавляемыми элементами обнуляется.</td>
+</tr>
+
+
+<tr>
+    <td><font face="Courier New" size=2>
+	  procedure<strong> Clear</strong>;virtual;</td>
+    <td><font face="verdana,arial" size=2>
+	    Чистит массив, но память не освобождает (остатется для хранения новых данных).
+    Если часто чистится перезаписывается массив, но размер примерно одинаков,
+    память чистить не обязательно - следующий раз не будет захватываться память.
+	См. также метод <a href="#ClearMem">ClearMem</a>.
+	</td>
+</tr>
+<tr>
+<a name="ClearMem"></a>
+  <td><font face="Courier New" size=2>
+    procedure<strong> ClearMem</strong>;virtual;</td>
+  <td><font face="verdana,arial" size=2>
+      Чистит массив, при этом освобождая всю память.</td>
+</tr>
+<tr>
+  <td><font face="Courier New" size=2>
+    procedure <strong>Delete</strong>(num:integer);virtual; </td>
+  <td><font face="verdana,arial" size=2>
+       Удаляет элемент в позиции <strong>num</strong>. Все следующие значения сдвигаются к
+    началу. Память при этом не освобождается. См. метод <a href="#Hold">Hold</a> для освобождения незанятой памяти.
+</td>
+</tr>
+
+<tr>
+  <td><font face="Courier New" size=2>
+    function <strong>Insert</strong>(num:integer;pValue:pointer):integer;virtual; </td>
+  <td><font face="verdana,arial" size=2>
+       Добавляет значение, но не в конец, а в позицию <strong>num</strong>. Все следующие элементы
+    сдвигаются. Возвращает номер позиции, куда было добавлено значение.
+</td>
+</tr>
+
+<tr>
+  <td><font face="Courier New" size=2>
+    procedure <strong>InsertMany</strong>(num:integer;pValue:pointer;Count:integer); </td>
+  <td><font face="verdana,arial" size=2>
+       То же самое, но несколько значений.</td>
+</tr>
+
+<tr>
+	<td><font face="Courier New" size=2>
+	function <strong>IndexOf</strong>(Value:pointer):integer;
+	</td>
+	<td><font face="verdana,arial" size=2>
+	Возвращает индекс первого встреченого значения на которое указывает <strong>Value</strong>. 
+	Если ничего не нашла то возвращает <strong>-1</strong>. <br>
+	Если в массиве хранится массив записей то
+	Value может быть указателем на запись которую нужно найти.
+	Для поиска следующего значения можно использовать метод <a href="#IndexOfFrom">IndexOfFrom</a>.
+	Каждый класс наследник имеет свой метод <strong>IndexOf</strong> оптимизированный для поиска
+	 элементов определенного типа
+	(тип элементов зависит от класса - например <a href="#THArrayInteger">THArrayInteger</a>
+	 хранит элементы <strong>integer</strong>), поэтому если используется класс наследник 
+	 <strong>THArray</strong> то всегда лучше использовать его метод <strong>IndexOf</strong> для поиска.
+	</td>
+</tr>
+<tr>
+<a name="IndexOfFrom"></a>
+	<td><font face="Courier New" size=2>
+	function <strong>IndexOfFrom</strong>(Value:pointer;Start:integer):integer;
+	</td>
+	<td><font face="verdana,arial" size=2>
+	Возвращает индекс значения на которое указывает <strong>Value</strong>, 
+	поиск начинает с элемента с индексом <strong>Start</strong>. 
+	Если ничего не нашла то возвращает <strong>-1</strong>. 
+	Используется для инкрементального поиска.<br>
+    Каждый класс наследник имеет свой метод <strong>IndexOfFrom</strong> оптимизированны для поиска 
+	элементов определенного типа
+	(тип элементов зависит от класса, например <a href="#THArrayDouble">THArrayDouble</a>
+	 хранит элементы <strong>Double</strong>) поэтому если используется класс наследник 
+	 <strong>THArray</strong> то всегда лучше использовать его метод <strong>IndexOfFrom</strong> для поиска. 
+
+	</td>
+</tr>
+
+<tr>
+<a name="Hold"></a>
+  <td><font face="Courier New" size=2>
+     procedure <strong>Hold</strong>;</td>
+  <td><font face="verdana,arial" size=2>
+      Отдать лишнюю память системе. Остается память только для тех значений,
+      которые есть в массиве. Но в дальнейшем добавлять значения можно без
+    проблем, просто это вызовет захват новой памяти при добавлении первого
+    же значения.
+ </td>
+</tr>
+
+<tr>
+  <td><font face="Courier New" size=2>
+    procedure <strong>Grow</strong>; </td>
+  <td><font face="verdana,arial" size=2>
+   Увеличивает захваченую память <a href="#Capacity">(Capacity)</a> для хранения новых элементов по специальному алгоритму. 
+   Для больших массивов (больше <strong>64</strong> элементов) память увеличивается на <strong>25%</strong>.
+</td>
+</tr>
+
+<tr>
+  <td><font face="Courier New" size=2>
+    procedure <strong>GrowTo</strong>(Count:integer); </td>
+  <td><font face="verdana,arial" size=2>
+   Увеличивает захваченую память <a href="#Capacity">(Capacity)</a> для хранения новых элементов. Новый размер захваченой 
+   памяти вычисляется по следующей формуле
+    <strong>Capacity:=max(Capacity вычисленая по специальному алгоритму, Count)</strong>.
+</td>
+</tr>
+
+
+<tr>
+  <td><font face="Courier New" size=2>
+    procedure <strong>Get</strong>(num:integer;pValue:pointer);virtual; </td>
+  <td><font face="verdana,arial" size=2>
+       Получить значение элемента с номером <strong>num</strong>. Нужно передать сюда адрес куска памяти <strong>pValue</strong>,
+    а функция скопирует туда значение. Для внутреннего пользования.
+</td>
+</tr>
+
+<tr>
+  <td><font face="Courier New" size=2>
+    function <strong>GetAddr</strong>(num:integer):pointer; </td>
+  <td><font face="verdana,arial" size=2>
+       Получить адрес элемента <strong>num</strong>. Адрес вычисляется как <strong>Memory+num*ItemSize</strong>.</td>
+</tr>
+
+<tr>
+<a name="LoadFromStream"></a>
+  <td><font face="Courier New" size=2>
+    procedure <strong>LoadFromStream</strong>(s:TStream);virtual; </td>
+  <td><font face="verdana,arial" size=2>
+  Читает массив из потока. Первым должно идти число <strong>integer</strong> - количество элементов
+  в массиве, а затем сами элементы в виде непрерывного куска памяти. 
+  Для корректной работы записывайте и читайте поток экземплярами класса одного типа.
+  Например если поток записан с помощью <strong>THArrayInteger</strong> 
+  то и читать его нужно с помощью <strong>THArrayInteger</strong>. 
+  <strong>THArraySmallInt</strong> ошибки не выдаст, но вычитает ерунду из этого потока.
+  Если же записывать поток с помощью <strong>THArraySmallInt</strong> а пытаться читать с помощью 
+  <strong>THArrayInteger</strong> то возникнет ошибка доступа к памяти т.к. массив
+  <strong>THArraySmallInt</strong> занимает меньше места в памяти чем <strong>THArrayInteger</strong>.<br>
+  Медод является виртуальным и может быть переопределен.<br>
+  См. так же <a href="#SaveToStream">SaveToStream</a>
+</td>
+</tr>
+
+<tr>
+<a name="SaveToStream"></a>
+  <td><font face="Courier New" size=2>
+    procedure <strong>SaveToStream</strong>(s:TStream);virtual; </td>
+  <td><font face="verdana,arial" size=2>
+  Записывает массив в поток. Первым записывается идти число <strong>integer</strong> - количество 
+  элементов в массиве, а затем элементы в виде непрерывного куска памяти.<br>
+  Медод является виртуальным и может быть переопределен.<br>
+  См. так же <a href="#LoadFromStream">LoadFromStream</a>
+</td>
+</tr>
+
+<tr>
+  <td><font face="Courier New" size=2>
+     procedure <strong>MoveData</strong>(FromPos,Count,Offset:integer);virtual;</td>
+  <td><font face="verdana,arial" size=2>
+       Переместить записи в массиве, начиная с <strong>FromPos</strong> количеством <strong>Count</strong> 
+	   на смещение <strong>Offset</strong>. </td>
+</tr>
+
+<tr>
+<a name="QuickFind"></a>
+  <td><font face="Courier New" size=2>
+    function <strong>QuickFind</strong>(FindProc:TFindProc;FindData:pointer):integer; </td>
+  <td><font face="verdana,arial" size=2>
+  Быстрый поиск в ОТСОРТИРОВАННОМ массиве с помощью пользовательской ф-ции <a href="#FindProc">FindProc</a>. 
+  <strong>FindData</strong> указатель на значение которое нужно найти (передается в <a href="#FindProc">FindProc</a>).
+  Метод используется в редких случаях когда сравнение 2-х элементов не тривиальная задача, например если <strong>THArray</strong>
+  хранит структуры либо какие то более сложно организованные данные.
+  
+</td>
+</tr>
+
+<tr>
+<a name="QuickSort"></a>
+  <td><font face="Courier New" size=2>
+    procedure <strong>QuickSort</strong>(CompareProc:TCompareProc;SwapProc:TSwapProc=nil); </td>
+  <td><font face="verdana,arial" size=2>
+    Сортировка элементов массива методом быстрой сортировки. 
+	Для сравнения 2-х элементов используется пользовательская функция <a href="#CompareProc">CompareProc</a>,
+	а для обмена их местами необязательная пользовательская ф-ция SwapProc. Если <a href="#SwapProc">SwapProc</a> не указана то
+	для обмена элементов местами используется метод <a href="#Swap">Swap</a>.
+</td>
+</tr>
+
+<tr>
+  <td><font face="Courier New" size=2>
+    procedure <strong>SetCapacity</strong>(Value:integer); </td>
+  <td><font face="verdana,arial" size=2>
+       Захватить память под <strong>Value</strong> значений. Если значений в массиве было больше,
+    лишние удаляются.
+</td>
+</tr>
+
+<tr>
+<a name="Sort"></a>
+  <td><font face="Courier New" size=2>
+    procedure <strong>Sort</strong>(CompareProc : TCompareProc); </td>
+  <td><font face="verdana,arial" size=2>
+    Сортировка элементов массива методом пузырька. 
+	Для сравнения 2-х элементов используется пользовательская функция <a href="#CompareProc">CompareProc</a>.  
+  </td>
+</tr>
+
+
+<tr>
+<a name="Swap"></a>
+  <td><font face="Courier New" size=2>
+    procedure <strong>Swap</strong>(Index1,Index2:integer);virtual; </td>
+  <td><font face="verdana,arial" size=2>
+  Меняет местами значения с индексами <strong>Index1</strong> и <strong>Index2</strong>. 
+  Не использует функцию <a href="#SwapProc">TSwapProc</a>.
+  </td>
+</tr>
+
+
+<tr>
+  <td><font face="Courier New" size=2>
+    procedure <strong>Update</strong>(num:integer;pValue:pointer);virtual;</td>
+  <td><font face="verdana,arial" size=2>
+       Устанавливает элемент массива с индексом num в значение находящееся по адресу <strong>pValue</strong>.</td>
+</tr>
+
+<tr>
+  <td><font face="Courier New" size=2>
+    procedure <strong>UpdateMany</strong>(num:integer;pValue:pointer;Count:integer); </td>
+  <td><font face="verdana,arial" size=2>
+       То же но для нескольких значений.</td>
+</tr>
+
+<tr>
+  <td><font face="Courier New" size=2>
+    procedure <strong>Zero</strong>; </td>
+  <td><font face="verdana,arial" size=2>
+  Обнуляет память где хранятся данные. Используйте этот метод осторожно т.к. он затирает все хранимые данные
+  и их восстановить будет уже невозможно.
+</td>
+</tr>
+
+</table>
+<br>
+
+
+<hr>
+
+ <a Name="THArrayInteger"></a>
+ <h3>THArrayInteger</h3>
+ Массив для хранения целых чисел. <br>
+ При попытке обращения к несуществующему индексу выдает исключение <strong>ERangeError</strong>. <br>
+ Может использоваться в качестве стека. Для этого содержит методы <a href="#Push">Push</a>
+  и <a href="#Pop">Pop</a>. Первый добавляет 
+ значение в конец массива, а второй читает и удаляет последнее значение. Методы <a href="#Push">Push</a>
+  и <a href="#Pop">Pop</a> есть только у 
+ <strong>THArrayInteger</strong>. Если такие методы будут нужны для других классов пишите добавлю.<br>
+ <strong> THArrayInteger</strong> имеет два уникальных метода для импорта и экспорта списка значений 
+ в строку - <a href="#AddFromString">AddFromString</a>, <a href="#GetAsString">GetAsString</a> . 
+ 
+ <br><br>
+ 
+ <table cellspacing="0" cellpadding="5" border="1">
+<tr bgcolor="#009999">
+	<td colspan="2" align="center" valign="middle"><font face="verdana,arial" size=4>
+      Свойства
+	</td>
+
+</tr>
+<tr>
+	<td> <font face="Courier New" size=2>
+	  property <strong>Value</strong>[Index:integer]:integer; default;</td>
+	<td><font face="verdana,arial" size=2>
+	 Извлекает либо устанавливает значение по индексу. Если индекс не существует то выдает исключение <strong>ERangeError</strong>.</td>
+</tr>
+<tr bgcolor="#009999">
+	<td colspan="2" align="center" valign="middle"><font face="verdana,arial" size=4>
+	Методы
+	</td>
+
+</tr>
+<tr>
+<a name="AddFromString"></a>
+	<td><font face="Courier New" size=2>
+	  procedure <strong>AddFromString</strong>(InputString,Delimiters:string);</td>
+	<td><font face="verdana,arial" size=2>
+	  Добавляет группу значений из строки <strong>InputString</strong> разделенных разделителями <strong>Delimiters</strong>. 
+	  Несколько подряд идущих разделителей воспринимаются как один.
+	</td>
+</tr>
+<tr>
+	<td><font face="Courier New" size=2>
+	 function <strong>AddValue</strong>(Value:integer):integer;</td>
+	<td><font face="verdana,arial" size=2>
+	 Добавляет значение <strong>Value</strong> в конец массива. Возвращает индекс добавленого элемента.
+	</td>
+</tr>
+<tr>
+	<td><font face="Courier New" size=2>
+	function <strong>CalcMax</strong>:integer;
+	</td>
+	<td><font face="verdana,arial" size=2>
+	 Возвращает максимальное значение в массиве. Если массив пустой то возвращает <strong>-1</strong>.
+	</td>
+</tr>
+
+<tr>
+	<td><font face="Courier New" size=2>
+	function <strong>IndexOf</strong>(Value:integer):integer;
+	</td>
+	<td><font face="verdana,arial" size=2>
+	Возвращает индекс первого встреченого значения <strong>Value</strong>. Если ничего не нашла то возвращает <strong>-1</strong>. Для поиска 
+	следующего значения можно использовать функцию <a href="#IntegerIndexOfFrom">IndexOfFrom</a>
+	</td>
+</tr>
+<tr>
+<a name="IntegerIndexOfFrom"></a>
+	<td><font face="Courier New" size=2>
+	function <strong>IndexOfFrom</strong>(Value:integer;Start:integer):integer;
+	</td>
+	<td><font face="verdana,arial" size=2>
+	Возвращает индекс значения <strong>Value</strong>, поиск начинает с элемента с индексом <strong>Start</strong>. Если ничего не нашла то возвращает <strong>-1</strong>. 
+	Используется для инкрементального поиска.
+	</td>
+</tr>
+<tr>
+<a name="GetAsString"></a>
+	<td><font face="Courier New" size=2>
+	   function <strong>GetAsString</strong>:string;
+	</td>
+	<td><font face="verdana,arial" size=2>
+	  Выгоняет все значения массива в строку. Значения в строке разделены пробелом.
+	</td>
+</tr>
+<tr>
+<a name="Pop"></a>
+	<td><font face="Courier New" size=2>
+	   function <strong>Pop</strong>:integer;
+	</td>
+	<td><font face="verdana,arial" size=2>
+	Восстанавливает значение из стека. А на самом деле достает и удаляет последнее значение в массиве. 
+	Если массив пустой то возбуждается исключение <strong>ERangeError</strong>.
+	</td>
+</tr>
+<tr>
+<a name="Push"></a>
+	<td><font face="Courier New" size=2>
+	 procedure <strong>Push</strong>(Value:integer);
+	</td>
+	<td><font face="verdana,arial" size=2>
+	 Вталкивает значение в стек. А на самом деле добавляет значение в конец массива.
+	</td>
+</tr>
+</table>
+<br>
+<br>
+
+ <a Name="THArrayByte"></a>
+ <h3>THArrayByte</h3>
+ Массив для хранения чисел <strong>byte</strong>, то есть массива байтов. <br>
+ <strong>Byte</strong> представляет собой 8 битовое беззнаковое целое число - 
+ минимальная единица хранения информации.<br><br>
+ 
+<table cellspacing="0" cellpadding="5" border="1">
+<tr bgcolor="#009999">
+	<td colspan="2" align="center" valign="middle"><font face="verdana,arial" size=4>
+      Свойства
+	</td>
+
+</tr>
+<tr>
+	<td> <font face="Courier New" size=2>
+	  property <strong>Value</strong>[Index:integer]:byte; default;</td>
+	<td><font face="verdana,arial" size=2>
+	 Извлекает либо устанавливает значение по индексу. 
+	 Если индекс не существует то выдает исключение <strong>ERangeError</strong>.</td>
+</tr>
+<tr bgcolor="#009999">
+	<td colspan="2" align="center" valign="middle"><font face="verdana,arial" size=4>
+	Методы
+	</td>
+
+</tr>
+<tr>
+	<td><font face="Courier New" size=2>
+	 function <strong>AddValue</strong>(Value:byte):integer;</td>
+	<td><font face="verdana,arial" size=2>
+	 Добавляет значение <strong>Value</strong> в конец массива. Возвращает индекс добавленого элемента.
+	</td>
+</tr>
+<tr>
+	<td><font face="Courier New" size=2>
+	function <strong>IndexOf</strong>(Value:byte):integer;
+	</td>
+	<td><font face="verdana,arial" size=2>
+	Возвращает индекс первого встреченого значения <strong>Value</strong>. 
+	Если ничего не нашла то возвращает <strong>-1</strong>. 
+	Для поиска следующего значения можно использовать функцию <a href="#ByteIndexOfFrom">IndexOfFrom</a>
+	</td>
+</tr>
+<tr>
+<a name="ByteIndexOfFrom"></a>
+	<td><font face="Courier New" size=2>
+	function <strong>IndexOfFrom</strong>(Value:byte;Start:integer):integer;
+	</td>
+	<td><font face="verdana,arial" size=2>
+	Возвращает индекс значения <strong>Value</strong>, поиск начинает с элемента с индексом <strong>Start</strong>.
+	Если ничего не нашла то возвращает <strong>-1</strong>. 
+	Используется для инкрементального поиска.
+	</td>
+</tr>
+
+</table>
+<br>
+<br>
+
+ <a Name="THArraySmallInt"></a>
+ <h3>THArraySmallInt</h3>
+ Массив для хранения чисел <strong>SmallInt</strong>. <br>
+ Формат <strong>SmallInt</strong> представляет собой 16 битовое знаковое целое число.<br><br>
+ 
+<table cellspacing="0" cellpadding="5" border="1">
+<tr bgcolor="#009999">
+	<td colspan="2" align="center" valign="middle"><font face="verdana,arial" size=4>
+      Свойства
+	</td>
+
+</tr>
+<tr>
+	<td> <font face="Courier New" size=2>
+	  property <strong>Value</strong>[Index:integer]:SmallInt; default;</td>
+	<td><font face="verdana,arial" size=2>
+	 Извлекает либо устанавливает значение по индексу. Если индекс не существует то выдает исключение <strong>ERangeError</strong>.</td>
+</tr>
+<tr bgcolor="#009999">
+	<td colspan="2" align="center" valign="middle"><font face="verdana,arial" size=4>
+	Методы
+	</td>
+
+</tr>
+<tr>
+	<td><font face="Courier New" size=2>
+	 function <strong>AddValue</strong>(Value:SmallInt):integer;</td>
+	<td><font face="verdana,arial" size=2>
+	 Добавляет значение <strong>Value</strong> в конец массива. Возвращает индекс добавленого элемента.
+	</td>
+</tr>
+<tr>
+	<td><font face="Courier New" size=2>
+	function <strong>IndexOf</strong>(Value:SmallInt):integer;
+	</td>
+	<td><font face="verdana,arial" size=2>
+	Возвращает индекс первого встреченого значения <strong>Value</strong>. 
+	Если ничего не нашла то возвращает <strong>-1</strong>. 
+	Для поиска следующего значения можно использовать функцию <a href="#SmallIntIndexOfFrom">IndexOfFrom</a>
+	</td>
+</tr>
+<tr>
+<a name="SmallIntIndexOfFrom"></a>
+	<td><font face="Courier New" size=2>
+	function <strong>IndexOfFrom</strong>(Value:SmallInt;Start:integer):integer;
+	</td>
+	<td><font face="verdana,arial" size=2>
+	Возвращает индекс значения <strong>Value</strong>, поиск начинает с элемента с индексом <strong>Start</strong>.
+	Если ничего не нашла то возвращает <strong>-1</strong>. 
+	Используется для инкрементального поиска.
+	</td>
+</tr>
+
+</table>
+<br>
+<br>
+
+ 
+ <a Name="THArrayWord">  </a>
+  <h3>THArrayWord</h3>
+  Массив для хранения чисел в формате <strong>Word</strong>.<br>
+  Формат <strong>Word</strong> представляет собой 16 битовое беззнаковое целое число.<br><br>
+  
+<table cellspacing="0" cellpadding="5" border="1">
+<tr bgcolor="#009999">
+	<td colspan="2" align="center" valign="middle"><font face="verdana,arial" size=4>
+      Свойства
+	</td>
+
+</tr>
+<tr>
+	<td> <font face="Courier New" size=2>
+	  property <strong>Value</strong>[Index:integer]:Word; default;</td>
+	<td><font face="verdana,arial" size=2>
+	 Извлекает либо устанавливает значение по индексу. Если индекс не существует то выдает исключение <strong>ERangeError</strong>.</td>
+</tr>
+<tr bgcolor="#009999">
+	<td colspan="2" align="center" valign="middle"><font face="verdana,arial" size=4>
+	Методы
+	</td>
+
+</tr>
+<tr>
+	<td><font face="Courier New" size=2>
+	 function <strong>AddValue</strong>(Value:Word):integer;</td>
+	<td><font face="verdana,arial" size=2>
+	 Добавляет значение <strong>Value</strong> в конец массива. Возвращает индекс добавленого элемента.
+	</td>
+</tr>
+
+<tr>
+	<td><font face="Courier New" size=2>
+	function <strong>IndexOf</strong>(Value:Word):integer;
+	</td>
+	<td><font face="verdana,arial" size=2>
+	Возвращает индекс первого встреченого значения <strong>Value</strong>. 
+	Если ничего не нашла то возвращает <strong>-1</strong>. 
+	Для поиска следующего значения можно использовать функцию <a href="#WordIndexOfFrom">IndexOfFrom</a>
+	</td>
+</tr>
+<tr>
+<a name="WordIndexOfFrom"></a>
+	<td><font face="Courier New" size=2>
+	function <strong>IndexOfFrom</strong>(Value:Word;Start:integer):integer;
+	</td>
+	<td><font face="verdana,arial" size=2>
+	Возвращает индекс значения <strong>Value</strong>, поиск начинает с элемента с индексом <strong>Start</strong>.
+	Если ничего не нашла то возвращает <strong>-1</strong>. 
+	Используется для инкрементального поиска.
+	</td>
+</tr>
+
+</table>
+ <br>
+ <br>
+
+  
+ <a Name="THArrayLongWord"></a>
+ <h3>THArrayLongWord</h3>
+  Массив для хранения чисел в формате <strong>LongWord</strong>.<br>
+  Формат <strong>LongWord</strong> представляет собой 32 битовое беззнаковое целое число.<br><br>  
+  
+<table cellspacing="0" cellpadding="5" border="1">
+<tr bgcolor="#009999">
+	<td colspan="2" align="center" valign="middle"><font face="verdana,arial" size=4>
+      Свойства
+	</td>
+
+</tr>
+<tr>
+	<td> <font face="Courier New" size=2>
+	  property <strong>Value</strong>[Index:integer]:LongWord; default;</td>
+	<td><font face="verdana,arial" size=2>
+	 Извлекает либо устанавливает значение по индексу. Если индекс не существует то выдает исключение <strong>ERangeError</strong>.</td>
+</tr>
+<tr bgcolor="#009999">
+	<td colspan="2" align="center" valign="middle"><font face="verdana,arial" size=4>
+	Методы
+	</td>
+
+</tr>
+<tr>
+	<td><font face="Courier New" size=2>
+	 function <strong>AddValue</strong>(Value:LongWord):integer;</td>
+	<td><font face="verdana,arial" size=2>
+	 Добавляет значение <strong>Value</strong> в конец массива. Возвращает индекс добавленого элемента.
+	</td>
+</tr>
+<tr>
+	<td><font face="Courier New" size=2>
+	function <strong>IndexOf</strong>(Value:LongWord):integer;
+	</td>
+	<td><font face="verdana,arial" size=2>
+	Возвращает индекс первого встреченого значения <strong>Value</strong>.
+	Если ничего не нашла то возвращает <strong>-1</strong>. Для поиска 
+	следующего значения можно использовать функцию <a href="#LongWordIndexOfFrom">IndexOfFrom</a>
+	</td>
+</tr>
+<tr>
+<a name="LongWordIndexOfFrom"></a>
+	<td><font face="Courier New" size=2>
+	function <strong>IndexOfFrom</strong>(Value:LongWord;Start:integer):integer;
+	</td>
+	<td><font face="verdana,arial" size=2>
+	Возвращает индекс значения <strong>Value</strong>, поиск начинает с элемента с индексом <strong>Start</strong>. 
+	Если ничего не нашла то возвращает <strong>-1</strong>. 
+	Используется для инкрементального поиска.
+	</td>
+</tr>
+
+</table>
+<br>
+<br>
+
+
+ <a Name="THArrayInt64"></a>
+  <h3>THArrayInt64</h3>
+  Массив для хранения чисел в формате <strong>Int64</strong>.<br>
+  Формат <strong>Int64</strong> представляет собой 64 битовое знаковое целое число.<br><br>  
+  
+ <table cellspacing="0" cellpadding="5" border="1">
+<tr bgcolor="#009999">
+	<td colspan="2" align="center" valign="middle"><font face="verdana,arial" size=4>
+      Свойства
+	</td>
+
+</tr>
+<tr>
+	<td> <font face="Courier New" size=2>
+	  property <strong>Value</strong>[Index:integer]:Int64; default;</td>
+	<td><font face="verdana,arial" size=2>
+	 Извлекает либо устанавливает значение по индексу. Если индекс не существует то выдает исключение <strong>ERangeError</strong>.</td>
+</tr>
+<tr bgcolor="#009999">
+	<td colspan="2" align="center" valign="middle"><font face="verdana,arial" size=4>
+	Методы
+	</td>
+
+</tr>
+<tr>
+	<td><font face="Courier New" size=2>
+	 function <strong>AddValue</strong>(Value:Int64):integer;</td>
+	<td><font face="verdana,arial" size=2>
+	 Добавляет значение <strong>Value</strong> в конец массива. Возвращает индекс добавленого элемента.
+	</td>
+</tr>
+<tr>
+	<td><font face="Courier New" size=2>
+	function <strong>IndexOf</strong>(Value:int64):integer;
+	</td>
+	<td><font face="verdana,arial" size=2>
+	Возвращает индекс первого встреченого значения <strong>Value</strong>. 
+	Если ничего не нашла то возвращает <strong>-1</strong>. 
+	Для поиска следующего значения можно использовать функцию <a href="#int64IndexOfFrom">IndexOfFrom</a>
+	</td>
+</tr>
+<tr>
+<a name="int64IndexOfFrom"></a>
+	<td><font face="Courier New" size=2>
+	function <strong>IndexOfFrom</strong>(Value:int64;Start:integer):integer;
+	</td>
+	<td><font face="verdana,arial" size=2>
+	Возвращает индекс значения <strong>Value</strong>, поиск начинает с элемента с индексом <strong>Start</strong>.
+	Если ничего не нашла то возвращает <strong>-1</strong>. 
+	Используется для инкрементального поиска.
+	</td>
+</tr>
+
+</table>
+
+<br>
+<br>
+ 
+ 
+ <a Name="THArrayBoolean"></a>
+ <h3>THArrayBoolean</h3>
+  Массив для хранения чисел в формате <strong>Boolean</strong>.<br>
+  Каждый <strong>boolean</strong> хранится как один байт (Delphi представление).<br><br>
+
+<table cellspacing="0" cellpadding="5" border="1">
+<tr bgcolor="#009999">
+	<td colspan="2" align="center" valign="middle"><font face="verdana,arial" size=4>
+      Свойства
+	</td>
+
+</tr>
+<tr>
+	<td> <font face="Courier New" size=2>
+	  property <strong>Value</strong>[Index:integer]:boolean; default;</td>
+	<td><font face="verdana,arial" size=2>
+	 Извлекает либо устанавливает значение по индексу. Если индекс не существует то выдает исключение <strong>ERangeError</strong>.</td>
+</tr>
+<tr bgcolor="#009999">
+	<td colspan="2" align="center" valign="middle"><font face="verdana,arial" size=4>
+	Методы
+	</td>
+
+</tr>
+<tr>
+	<td><font face="Courier New" size=2>
+	 function <strong>AddValue</strong>(Value:boolean):integer;</td>
+	<td><font face="verdana,arial" size=2>
+	 Добавляет значение <strong>Value</strong> в конец массива. Возвращает индекс добавленого элемента.
+	</td>
+</tr>
+
+<tr>
+	<td><font face="Courier New" size=2>
+	function <strong>IndexOf</strong>(Value:boolean):integer;
+	</td>
+	<td><font face="verdana,arial" size=2>
+	Возвращает индекс первого встреченого значения <strong>Value</strong>. 
+	Если ничего не нашла то возвращает <strong>-1</strong>. 
+	Для поиска следующего значения можно использовать функцию <a href="#BooleanIndexOfFrom">IndexOfFrom</a>
+	</td>
+</tr>
+<tr>
+<a name="BooleanIndexOfFrom"></a>
+	<td><font face="Courier New" size=2>
+	function <strong>IndexOfFrom</strong>(Value:boolean;Start:integer):integer;
+	</td>
+	<td><font face="verdana,arial" size=2>
+	Возвращает индекс значения <strong>Value</strong>, поиск начинает с элемента с индексом <strong>Start</strong>.
+	Если ничего не нашла то возвращает <strong>-1</strong>. 
+	Используется для инкрементального поиска.
+	</td>
+</tr>
+
+</table>
+  
+<br>
+<br>
+  
+ <a Name="THArrayPointer"></a>
+ <h3>THArrayPointer</h3>
+ 
+  Массив для хранения указателей. <br>
+  Указатели могут указывать куда угодно. Никаких специальных операций над
+  хранимыми данными <strong>THArrayPointer</strong> не производит.<br><br>
+
+<table cellspacing="0" cellpadding="5" border="1">
+<tr bgcolor="#009999">
+	<td colspan="2" align="center" valign="middle"><font face="verdana,arial" size=4>
+      Свойства
+	</td>
+
+</tr>
+<tr>
+	<td> <font face="Courier New" size=2>
+	  property <strong>Value</strong>[Index:integer]:pointer; default;</td>
+	<td><font face="verdana,arial" size=2>
+	 Извлекает либо устанавливает значение по индексу. Если индекс не существует то выдает исключение <strong>ERangeError</strong>.</td>
+</tr>
+<tr bgcolor="#009999">
+	<td colspan="2" align="center" valign="middle"><font face="verdana,arial" size=4>
+	Методы
+	</td>
+
+</tr>
+<tr>
+	<td><font face="Courier New" size=2>
+	 function <strong>AddValue</strong>(Value:pointer):integer;</td>
+	<td><font face="verdana,arial" size=2>
+	 Добавляет значение <strong>Value</strong> в конец массива. Возвращает индекс добавленого элемента.
+	</td>
+</tr>
+<tr>
+	<td><font face="Courier New" size=2>
+	function <strong>IndexOf</strong>(Value:pointer):integer;
+	</td>
+	<td><font face="verdana,arial" size=2>
+	Возвращает индекс первого встреченого значения <strong>Value</strong>. Если ничего не нашла то возвращает <strong>-1</strong>. Для поиска 
+	следующего значения можно использовать функцию <a href="#PointerIndexOfFrom">IndexOfFrom</a>
+	</td>
+</tr>
+<tr>
+<a name="PointerIndexOfFrom"></a>
+	<td><font face="Courier New" size=2>
+	function <strong>IndexOfFrom</strong>(Value:pointer;Start:integer):integer;
+	</td>
+	<td><font face="verdana,arial" size=2>
+	Возвращает индекс значения <strong>Value</strong>, поиск начинает с элемента с индексом <strong>Start</strong>. Если ничего не нашла то возвращает <strong>-1</strong>. 
+	Используется для инкрементального поиска.
+	</td>
+</tr>
+
+</table>
+ <br>
+ <br>
+ 
+ <a Name="THArrayObjects"></a>
+ <h3>THArrayObjects</h3>
+  Массив для хранения указателей на классы Delphi.<br>  
+  Содержит несколько дополнительных методов для работы в элементами как с указателями на <strong>TObject</strong>.
+  ВНИМАНИЕ! При разрушении автоматически разрушает все сохраненые обьекты, вызывая для каждого обьекта метод Free.
+  Для разрушения массива без разрушения сохраненных обьектов используйте класс <a href="#THArrayPointer">THArrayPointer</a>.
+  <br><br>
+  
+  
+<table cellspacing="0" cellpadding="5" border="1">
+<tr bgcolor="#009999">
+	<td colspan="2" align="center" valign="middle"><font face="verdana,arial" size=4>
+      Свойства
+	</td>
+
+</tr>
+<tr>
+	<td> <font face="Courier New" size=2>
+	  property <strong>Value</strong>[Index:integer]:TObject; default;</td>
+	<td><font face="verdana,arial" size=2>
+	 Извлекает либо устанавливает значение по индексу. Если индекс не существует то выдает исключение <strong>ERangeError</strong>.</td>
+</tr>
+<tr bgcolor="#009999">
+	<td colspan="2" align="center" valign="middle"><font face="verdana,arial" size=4>
+	Методы
+	</td>
+
+</tr>
+<tr>
+	<td><font face="Courier New" size=2>
+	 function <strong>AddValue</strong>(Value:TObject):integer;</td>
+	<td><font face="verdana,arial" size=2>
+	 Добавляет значение <strong>Value</strong> в конец массива. Возвращает индекс добавленого элемента.
+	</td>
+</tr>
+<tr>
+<a name="ObjectsClearMem"></a>
+  <td><font face="Courier New" size=2>
+    procedure<strong> ClearMem</strong>;</td>
+  <td><font face="verdana,arial" size=2>
+      Чистит массив, при этом освобождая всю память и разрушая все сохраненые обьекты! Что бы удалить только ссылки на 
+	  обьекты вызывай <a href="#SafeClearMem">SafeClearMem</a>.
+  </td>
+</tr>
+
+<tr>
+  <td><font face="Courier New" size=2>
+    procedure <strong>Delete</strong>(num:integer); </td>
+  <td><font face="verdana,arial" size=2>
+       Удаляет элемент в позиции <strong>num</strong>, разрушая при этом сам обьект! Для удаления только ссылки на обьект см. 
+	   <a href="#SafeDelete">SafeDelete</a>.<br>
+	    Все следующие значения сдвигаются к
+    началу. Память при этом не освобождается. См. метод <a href="#Hold">Hold</a> для освобождения незанятой памяти.
+</td>
+</tr>
+<tr>
+	<td><font face="Courier New" size=2>
+	function <strong>IndexOf</strong>(Value:TObject):integer;
+	</td>
+	<td><font face="verdana,arial" size=2>
+	Возвращает индекс первого встреченого значения <strong>Value</strong>. 
+	Если ничего не нашла то возвращает <strong>-1</strong>. 
+	Для поиска следующего значения можно использовать функцию <a href="#ObjectsIndexOfFrom">IndexOfFrom</a>
+	</td>
+</tr>
+<tr>
+<a name="ObjectsIndexOfFrom"></a>
+	<td><font face="Courier New" size=2>
+	function <strong>IndexOfFrom</strong>(Value:TObject;Start:integer):integer;
+	</td>
+	<td><font face="verdana,arial" size=2>
+	Возвращает индекс значения <strong>Value</strong>, поиск начинает с элемента с индексом <strong>Start</strong>.
+	Если ничего не нашла то возвращает <strong>-1</strong>. 
+	Используется для инкрементального поиска.
+	</td>
+</tr>
+
+<tr>
+<a name="SafeClearMem"></a>
+  <td><font face="Courier New" size=2>
+    procedure<strong> SafeClearMem</strong>;</td>
+  <td><font face="verdana,arial" size=2>
+      Чистит массив, при этом освобождая всю память. Удаляет только ссылки на обьекты, сами обьекты не разрушаются.</td>
+</tr>
+
+<tr>
+<a name="SafeDelete"></a>
+  <td><font face="Courier New" size=2>
+    procedure <strong>SafeDelete</strong>(num:integer); </td>
+  <td><font face="verdana,arial" size=2>
+       Удаляет элемент в позиции <strong>num</strong>. При этом сам обьект не разрушается а удаляется только ссылка на него.<br>
+	   Все следующие значения сдвигаются к началу. Память при этом не освобождается. 
+	   См. метод <a href="#Hold">Hold</a> для освобождения незанятой памяти.
+</td>
+</tr>
+
+</table>  
+<br>
+
+
+ <a Name="THArrayCurrency"></a>
+ <h3>THArrayCurrency</h3>
+  Массив для хранения плавающих чисел в формате <strong>Currency</strong>.<br>
+  <strong>Currency</strong> это специальный плавающий тип данных в Delphi для представления денежной информации.<br><br>  
+
+<table cellspacing="0" cellpadding="5" border="1">
+<tr bgcolor="#009999">
+	<td colspan="2" align="center" valign="middle"><font face="verdana,arial" size=4>
+      Свойства
+	</td>
+
+</tr>
+<tr>
+	<td> <font face="Courier New" size=2>
+	  property <strong>Value</strong>[Index:integer]:Currency; default;</td>
+	<td><font face="verdana,arial" size=2>
+	 Извлекает либо устанавливает значение по индексу. Если индекс не существует то выдает исключение <strong>ERangeError</strong>.</td>
+</tr>
+<tr bgcolor="#009999">
+	<td colspan="2" align="center" valign="middle"><font face="verdana,arial" size=4>
+	Методы
+	</td>
+
+</tr>
+<tr>
+	<td><font face="Courier New" size=2>
+	 function <strong>AddValue</strong>(Value:Currency):integer;</td>
+	<td><font face="verdana,arial" size=2>
+	 Добавляет значение <strong>Value</strong> в конец массива. Возвращает индекс добавленого элемента.
+	</td>
+</tr>
+<tr>
+	<td><font face="Courier New" size=2>
+	function <strong>IndexOf</strong>(Value:Currency):integer;
+	</td>
+	<td><font face="verdana,arial" size=2>
+	Возвращает индекс первого встреченого значения <strong>Value</strong>. 
+	Если ничего не нашла то возвращает <strong>-1</strong>. 
+	Для поиска следующего значения можно использовать функцию <a href="#CurrencyIndexOfFrom">IndexOfFrom</a>
+	</td>
+</tr>
+<tr>
+<a name="CurrencyIndexOfFrom"></a>
+	<td><font face="Courier New" size=2>
+	function <strong>IndexOfFrom</strong>(Value:Currency;Start:integer):integer;
+	</td>
+	<td><font face="verdana,arial" size=2>
+	Возвращает индекс значения <strong>Value</strong>, поиск начинает с элемента с индексом <strong>Start</strong>.
+	Если ничего не нашла то возвращает <strong>-1</strong>. 
+	Используется для инкрементального поиска.
+	</td>
+</tr>
+
+</table>  
+<br>
+  
+ <a Name="THArrayDouble"></a>
+ <h3>THArrayDouble</h3>
+  Массив для хранения плавающих чисел в формате <strong>Double</strong>.<br>
+  <br><br>  
+
+<table cellspacing="0" cellpadding="5" border="1">
+<tr bgcolor="#009999">
+	<td colspan="2" align="center" valign="middle"><font face="verdana,arial" size=4>
+      Свойства
+	</td>
+
+</tr>
+<tr>
+	<td> <font face="Courier New" size=2>
+	  property <strong>Value</strong>[Index:integer]:Double; default;</td>
+	<td><font face="verdana,arial" size=2>
+	 Извлекает либо устанавливает значение по индексу. Если индекс не существует то выдает исключение <strong>ERangeError</strong>.</td>
+</tr>
+<tr bgcolor="#009999">
+	<td colspan="2" align="center" valign="middle"><font face="verdana,arial" size=4>
+	Методы
+	</td>
+
+</tr>
+<tr>
+	<td><font face="Courier New" size=2>
+	 function <strong>AddValue</strong>(Value:Double):integer;</td>
+	<td><font face="verdana,arial" size=2>
+	 Добавляет значение <strong>Value</strong> в конец массива. Возвращает индекс добавленого элемента.
+	</td>
+</tr>
+<tr>
+	<td><font face="Courier New" size=2>
+	function <strong>IndexOf</strong>(Value:Double):integer;
+	</td>
+	<td><font face="verdana,arial" size=2>
+	Возвращает индекс первого встреченого значения <strong>Value</strong>. 
+	Если ничего не нашла то возвращает <strong>-1</strong>. 
+	Для поиска следующего значения можно использовать функцию <a href="#DoubleIndexOfFrom">IndexOfFrom</a>
+	</td>
+</tr>
+<tr>
+<a name="DoubleIndexOfFrom"></a>
+	<td><font face="Courier New" size=2>
+	function <strong>IndexOfFrom</strong>(Value:Double;Start:integer):integer;
+	</td>
+	<td><font face="verdana,arial" size=2>
+	Возвращает индекс значения <strong>Value</strong>, поиск начинает с элемента с индексом <strong>Start</strong>.
+	Если ничего не нашла то возвращает <strong>-1</strong>. 
+	Используется для инкрементального поиска.
+	</td>
+</tr>
+
+</table>  
+<br>  
+  
+ <a Name="THArrayExtended"></a>
+ <h3>THArrayExtended</h3>
+  Массив для хранения плавающих чисел в формате <strong>Extended</strong>.<br>
+  Формат <strong>Extended</strong> представляет собой 10 байтовойе число с плавающей точкой.
+  Применяется для вычислений с повышеной точностью.<br><br>  
+
+<table cellspacing="0" cellpadding="5" border="1">
+<tr bgcolor="#009999">
+	<td colspan="2" align="center" valign="middle"><font face="verdana,arial" size=4>
+      Свойства
+	</td>
+
+</tr>
+<tr>
+	<td> <font face="Courier New" size=2>
+	  property <strong>Value</strong>[Index:integer]:Extended; default;</td>
+	<td><font face="verdana,arial" size=2>
+	 Извлекает либо устанавливает значение по индексу. Если индекс не существует то выдает исключение <strong>ERangeError</strong>.</td>
+</tr>
+<tr bgcolor="#009999">
+	<td colspan="2" align="center" valign="middle"><font face="verdana,arial" size=4>
+	Методы
+	</td>
+
+</tr>
+<tr>
+	<td><font face="Courier New" size=2>
+	 function <strong>AddValue</strong>(Value:Extended):integer;</td>
+	<td><font face="verdana,arial" size=2>
+	 Добавляет значение <strong>Value</strong> в конец массива. Возвращает индекс добавленого элемента.
+	</td>
+</tr>
+<tr>
+	<td><font face="Courier New" size=2>
+	function <strong>IndexOf</strong>(Value:Extended):integer;
+	</td>
+	<td><font face="verdana,arial" size=2>
+	Возвращает индекс первого встреченого значения <strong>Value</strong>. 
+	Если ничего не нашла то возвращает <strong>-1</strong>. 
+	Для поиска следующего значения можно использовать функцию <a href="#ExtendedIndexOfFrom">IndexOfFrom</a>
+	</td>
+</tr>
+<tr>
+<a name="ExtendedIndexOfFrom"></a>
+	<td><font face="Courier New" size=2>
+	function <strong>IndexOfFrom</strong>(Value:Extended;Start:integer):integer;
+	</td>
+	<td><font face="verdana,arial" size=2>
+	Возвращает индекс значения <strong>Value</strong>, поиск начинает с элемента с индексом <strong>Start</strong>.
+	Если ничего не нашла то возвращает <strong>-1</strong>. 
+	Используется для инкрементального поиска.
+	</td>
+</tr>
+
+</table>  
+<br>
+    
+ <a Name="THArrayString"> </a>
+ <h3>THArrayString</h3>
+  Массив для хранения строк любой длины.<br>
+  На самом деле представляет собой массив указателей на строки.<br><br>  
+
+<table cellspacing="0" cellpadding="5" border="1">
+<tr bgcolor="#009999">
+	<td colspan="2" align="center" valign="middle"><font face="verdana,arial" size=4>
+      Свойства
+	</td>
+
+</tr>
+<tr>
+	<td> <font face="Courier New" size=2>
+	  property <strong>Value</strong>[Index:integer]:String; default;</td>
+	<td><font face="verdana,arial" size=2>
+	 Извлекает либо устанавливает значение по индексу. Если индекс не существует то выдает исключение <strong>ERangeError</strong>.</td>
+</tr>
+<tr bgcolor="#009999">
+	<td colspan="2" align="center" valign="middle"><font face="verdana,arial" size=4>
+	Методы
+	</td>
+
+</tr>
+<tr>
+	<td><font face="Courier New" size=2>
+	 function <strong>AddValue</strong>(Value:String):integer;</td>
+	<td><font face="verdana,arial" size=2>
+	 Добавляет значение <strong>Value</strong> в конец массива. Возвращает индекс добавленого элемента.
+	</td>
+</tr>
+<tr>
+	<td><font face="Courier New" size=2>
+	function <strong>IndexOf</strong>(Value:string):integer;
+	</td>
+	<td><font face="verdana,arial" size=2>
+	Возвращает индекс первого встреченого значения <strong>Value</strong>. 
+	Если ничего не нашла то возвращает <strong>-1</strong>. 
+	Для поиска следующего значения можно использовать функцию <a href="#StringIndexOfFrom">IndexOfFrom</a>
+	</td>
+</tr>
+<tr>
+<a name="StringIndexOfFrom"></a>
+	<td><font face="Courier New" size=2>
+	function <strong>IndexOfFrom</strong>(Value:string;Start:integer):integer;
+	</td>
+	<td><font face="verdana,arial" size=2>
+	Возвращает индекс значения <strong>Value</strong>, поиск начинает с элемента с индексом <strong>Start</strong>.
+	Если ничего не нашла то возвращает <strong>-1</strong>. 
+	Используется для инкрементального поиска.
+	</td>
+</tr>
+
+</table>  
+<br>
+  
+ <a Name="THArrayStringFix"></a>
+ <h3>THArrayStringFix</h3>
+  Массив для хранения строк фиксированой длины. Полезен для хранения полей таблиц баз данных. <br>
+  Для создания экземпляра этого класса используйте специальный конструктор <a href="#CreateSize">CreateSize(Size:integer)</a>.<br><br>  
+  
+  <table cellspacing="0" cellpadding="5" border="1">
+<tr bgcolor="#009999">
+	<td colspan="2" align="center" valign="middle"><font face="verdana,arial" size=4>
+      Свойства
+	</td>
+
+</tr>
+<tr>
+	<td> <font face="Courier New" size=2>
+	  property <strong>Value</strong>[Index:integer]:String; default;</td>
+	<td><font face="verdana,arial" size=2>
+	 Извлекает либо устанавливает значение по индексу. Если индекс не существует то выдает исключение <strong>ERangeError</strong>.</td>
+</tr>
+<tr bgcolor="#009999">
+	<td colspan="2" align="center" valign="middle"><font face="verdana,arial" size=4>
+	Методы
+	</td>
+
+</tr>
+<tr>
+<a name="CreateSize"></a>
+	<td><font face="Courier New" size=2>
+	 constructor <strong>CreateSize</strong>(Size:integer);
+	<td><font face="verdana,arial" size=2>
+	 Для создания экземпляра этого класса вместо обычного конструктора без параметров используйте конструктор 
+	 <strong>CreateSize</strong> в который передается размер строки в байтах <br>Size. Вызов обычного конструктора 
+	 (<strong>Create</strong> без параметров) вызовет генерацию исключения.
+	</td>
+</tr>
+
+<tr>
+	<td><font face="Courier New" size=2>
+	 function <strong>AddValue</strong>(Value:string):integer;</td>
+	<td><font face="verdana,arial" size=2>
+	 Добавляет значение <strong>Value</strong> в конец массива. Возвращает индекс добавленого элемента.
+	</td>
+</tr>
+<tr>
+	<td><font face="Courier New" size=2>
+	function <strong>IndexOf</strong>(Value:string):integer;
+	</td>
+	<td><font face="verdana,arial" size=2>
+	Возвращает индекс первого встреченого значения <strong>Value</strong>. 
+	Если ничего не нашла то возвращает <strong>-1</strong>. 
+	Для поиска следующего значения можно использовать функцию <a href="#StringFixIndexOfFrom">IndexOfFrom</a>
+	</td>
+</tr>
+<tr>
+<a name="StringFixIndexOfFrom"></a>
+	<td><font face="Courier New" size=2>
+	function <strong>IndexOfFrom</strong>(Value:string;Start:integer):integer;
+	</td>
+	<td><font face="verdana,arial" size=2>
+	Возвращает индекс значения <strong>Value</strong>, поиск начинает с элемента с индексом <strong>Start</strong>.
+	Если ничего не нашла то возвращает <strong>-1</strong>. 
+	Используется для инкрементального поиска.
+	</td>
+</tr>
+
+</table>  
+<br>
+  
+ <a Name="THArrayWideStrings"></a>
+ <h3>THArrayWideStrings</h3>
+  Массив для хранения строк в формате <strong>Unicode</strong> (<strong>WideString</strong> в Delphi).<br>
+  <br><br>  
+
+<table cellspacing="0" cellpadding="5" border="1">
+<tr bgcolor="#009999">
+	<td colspan="2" align="center" valign="middle"><font face="verdana,arial" size=4>
+      Свойства
+	</td>
+
+</tr>
+<tr>
+	<td> <font face="Courier New" size=2>
+	  property <strong>Value</strong>[Index:integer]:WideString; default;</td>
+	<td><font face="verdana,arial" size=2>
+	 Извлекает либо устанавливает значение по индексу. Если индекс не существует то выдает исключение <strong>ERangeError</strong>.</td>
+</tr>
+<tr bgcolor="#009999">
+	<td colspan="2" align="center" valign="middle"><font face="verdana,arial" size=4>
+	Методы
+	</td>
+
+</tr>
+<tr>
+	<td><font face="Courier New" size=2>
+	 function <strong>AddValue</strong>(Value:WideString):integer;</td>
+	<td><font face="verdana,arial" size=2>
+	 Добавляет значение <strong>Value</strong> в конец массива. Возвращает индекс добавленого элемента.
+	</td>
+</tr>
+<tr>
+	<td><font face="Courier New" size=2>
+	function <strong>IndexOf</strong>(Value:WideString):integer;
+	</td>
+	<td><font face="verdana,arial" size=2>
+	Возвращает индекс первого встреченого значения <strong>Value</strong>. Если ничего не нашла то возвращает <strong>-1</strong>. Для поиска 
+	следующего значения можно использовать функцию <a href="#WideStringIndexOfFrom">IndexOfFrom</a>
+	</td>
+</tr>
+<tr>
+<a name="WideStringIndexOfFrom"></a>
+	<td><font face="Courier New" size=2>
+	function <strong>IndexOfFrom</strong>(Value:WideString;Start:integer):integer;
+	</td>
+	<td><font face="verdana,arial" size=2>
+	Возвращает индекс значения <strong>Value</strong>, поиск начинает с элемента с индексом <strong>Start</strong>. Если ничего не нашла то возвращает <strong>-1</strong>. 
+	Используется для инкрементального поиска.
+	</td>
+</tr>
+
+</table>  
+
+<br><br><br><br><br><br>
+
+
+<br><br><br>
+
+   
+
+
+
+</BODY>
+</HTML>

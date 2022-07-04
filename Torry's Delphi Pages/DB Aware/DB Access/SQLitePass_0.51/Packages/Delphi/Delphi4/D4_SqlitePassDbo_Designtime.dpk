@@ -1,0 +1,60 @@
+package D4_SqlitePassDbo_Designtime;
+
+{$R *.RES}
+{$ALIGN ON}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $00400000}
+{$DESCRIPTION 'SqlitePass Database Components - Designtime Package'}
+{$DESIGNONLY}
+{$IMPLICITBUILD OFF}
+
+requires
+  vcl40,
+  Vcldb40,
+  Vclx40,
+  D4_SqlitePassDbo_Runtime;
+
+contains
+  SqlitePassSortByDialog in '..\..\..\Sources\DesignTimeEditors\SqlitePassSortByDialog.pas' {SqlitePassSortedByDialog},
+  RegisterSqlitePassDbo in '..\..\..\Sources\DesignTimeEditors\RegisterSqlitePassDbo.pas',
+  SqlitePassChooseDatasetDialog in '..\..\..\Sources\DesignTimeEditors\SqlitePassChooseDatasetDialog.pas' {SqlitePassChooseDatasetDialog},
+  SqlitePassCustomFieldDefsDialog in '..\..\..\Sources\DesignTimeEditors\SqlitePassCustomFieldDefsDialog.pas' {SqlitePassCustomFieldDefsDlg},
+  SqlitePassDataTypesDialog in '..\..\..\Sources\DesignTimeEditors\SqlitePassDataTypesDialog.pas' {SqlitePassDatatypesDlg},
+  SqlitePassDesignErrorLang in '..\..\..\Sources\DesignTimeEditors\SqlitePassDesignErrorLang.pas',
+  SqlitePassFieldDefsDialog in '..\..\..\Sources\DesignTimeEditors\SqlitePassFieldDefsDialog.pas' {SqlitePassFieldDefsDialog},
+  SqlitePassFiltersDialog in '..\..\..\Sources\DesignTimeEditors\SqlitePassFiltersDialog.pas' {SqlitePassFilterDialog},
+  SqlitePassIndexesDialog in '..\..\..\Sources\DesignTimeEditors\SqlitePassIndexesDialog.pas' {SqlitePassIndexDefsDialog},
+  SqlitePassMasterDetailFieldsDialog in '..\..\..\Sources\DesignTimeEditors\SqlitePassMasterDetailFieldsDialog.pas' {SqlitePassMasterDetailDialog},
+  SqlitePassLocateDialog in '..\..\..\Sources\DesignTimeEditors\SqlitePassLocateDialog.pas' {SqlitePassLocateDlg},
+  SqlitePassCreateNewDatabaseDialog in '..\..\..\Sources\DesignTimeEditors\SqlitePassCreateNewDatabaseDialog.pas' {SqlitePassCreateNewDatabaseDlg},
+  SqlitePassCreateTableDialog in '..\..\..\Sources\DesignTimeEditors\SqlitePassCreateTableDialog.pas' {SqlitePassCreateTableDlg},
+  SqlitePassErrorLogDialog in '..\..\..\Sources\DesignTimeEditors\SqlitePassErrorLogDialog.pas' {SqlitePassErrorLogDlg},
+  SqlitePassVisualTools in '..\..\..\Sources\DesignTimeEditors\SqlitePassVisualTools.pas',
+  SqlitePassVisualToolsLang in '..\..\..\sources\designtimeeditors\SqlitePassVisualToolsLang.pas',
+  SqlitePassFilterValues in '..\..\..\Sources\DesignTimeEditors\SqlitePassFilterValues.pas' {SqlitePassFilterValuesDlg},
+  SqlitePassDataTypeOptions in '..\..\..\Sources\DesignTimeEditors\SqlitePassDataTypeOptions.pas' {SqlitePassDatatypeOptionsDlg},
+  SqlitePassParserDialog in '..\..\..\Sources\DesignTimeEditors\SqlitePassParserDialog.pas' {SqlitePassParserDlg},
+  SqlitePassCreateNewIndex in '..\..\..\Sources\DesignTimeEditors\SqlitePassCreateNewIndex.pas' {SqlitePassFormCreateNewIndex},
+  SqlitePassRenameItem in '..\..\..\Sources\DesignTimeEditors\SqlitePassRenameItem.pas' {SqlitePassFormRenameItem},
+  SqlitePassFiltersDialogTemplate in '..\..\..\Sources\DesignTimeEditors\SqlitePassFiltersDialogTemplate.pas' {SqlitePassFilterDialogTemplate},
+  SqlitePassIndexedByDialog in '..\..\..\Sources\DesignTimeEditors\SqlitePassIndexedByDialog.pas' {SqlitePassIndexedByDialog};
+
+end.

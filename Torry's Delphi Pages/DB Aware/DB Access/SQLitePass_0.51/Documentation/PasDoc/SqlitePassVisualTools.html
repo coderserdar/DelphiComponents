@@ -1,0 +1,473 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+<meta name="GENERATOR" content="PasDoc 0.11.0">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<title>SqlitePass Database Objects: SqlitePassVisualTools</title>
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body bgcolor="#ffffff" text="#000000" link="#0000ff" vlink="#800080" alink="#FF0000">
+<h1 class="unit">Unit SqlitePassVisualTools</h1>
+<table class="sections wide_list">
+<tr>
+<td><a class="section"  href="#%40Description">Description</a></td><td><a class="section"  href="#%40Uses">uses</a></td><td><a class="section"  href="#%40Classes">Classes, Interfaces, Objects and Records</a></td><td><a class="section"  href="#%40FuncsProcs">Functions and Procedures</a></td><td><a class="section"  href="#%40Types">Types</a></td><td><a class="section"  href="#%40Constants">Constants</a></td><td>Variables</td></tr></table>
+<a name="%40Description"></a><h2 class="description">Description</h2>
+<p>
+The unit <code>SqlitePassVisualTools</code> implements the generic <a class="normal"  href="SqlitePassVisualTools.TSqlitePassDBAction.html">TSqlitePassDBAction</a> class and preset actions like <a class="normal"  href="SqlitePassVisualTools.TSqlitePassDatasetFilter.html">TSqlitePassDatasetFilter</a>, <a class="normal"  href="SqlitePassVisualTools.TSqlitePassDatasetFilterOnOff.html">TSqlitePassDatasetFilterOnOff</a>, <a class="normal"  href="SqlitePassVisualTools.TSqlitePassDatasetFilterOnSelection.html">TSqlitePassDatasetFilterOnSelection</a>, <a class="normal"  href="SqlitePassVisualTools.TSqlitePassDatasetLocate.html">TSqlitePassDatasetLocate</a>, etc...
+
+<p>&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash; This library is free software; you can redistribute it and/or modify it under the terms of the GNU Library General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Library General Public License for more details.
+
+<p>You should have received a copy of the GNU Library General Public License along with this library; if not, write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+
+<p>&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;
+
+<p>Author : Luc DAVID Email: luckylazarus@free.fr Last update : 2009-08-20
+
+<p>&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;</p>
+<a name="%40Uses"></a><h2 class="uses">uses</h2>
+<ul class="useslist"><li>ActnList</li><li>Buttons</li><li>Classes</li><li>Controls</li><li>Db</li><li>DBActns</li><li>DBCtrls</li><li>DbGrids</li><li>Extctrls</li><li>Forms</li><li>Graphics</li><li>Grids</li><li>LCLProc</li><li>LCLType</li><li>LResources</li><li>Menus</li><li>Messages</li><li><a   href="SqlitePassDbo.html">SqlitePassDbo</a></li><li>SqlitePassVisualToolsLang</li><li>stdctrls</li><li>SysUtils</li><li>TypInfo</li></ul><h2 class="overview">Overview</h2>
+<a name="%40Classes"></a><h3 class="cio">Classes, Interfaces, Objects and Records</h3>
+<table class="classestable wide_list">
+<tr class="listheader">
+<th class="itemname">Name</th>
+<th class="itemdesc">Description</th>
+</tr>
+<tr class="list">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassVisualTools.TSPVTCtrlGrid.html"><code>TSPVTCtrlGrid</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+<tr class="list2">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassVisualTools.TSPVTCtrlGridNavigator.html"><code>TSPVTCtrlGridNavigator</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+<tr class="list">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassVisualTools.TSPVTDBItem.html"><code>TSPVTDBItem</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+<tr class="list2">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassVisualTools.TSPVTDBItemList.html"><code>TSPVTDBItemList</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+<tr class="list">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassVisualTools.TSPVTDBTreeView.html"><code>TSPVTDBTreeView</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+<tr class="list2">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassVisualTools.TSqlitePassActiveControlWatcher.html"><code>TSqlitePassActiveControlWatcher</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+<tr class="list">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassVisualTools.TSqlitePassDatasetFilter.html"><code>TSqlitePassDatasetFilter</code></a></td>
+<td class="itemdesc"><code>TSqlitePassDatasetFilter</code> shows a custom dialog to choose the dataset Filter parameters <br> <br> <img src="image_10.png" alt="FilterDialog" /></td>
+</tr>
+<tr class="list2">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassVisualTools.TSqlitePassDatasetFilterOnOff.html"><code>TSqlitePassDatasetFilterOnOff</code></a></td>
+<td class="itemdesc"><code>TSqlitePassDatasetFilterOnOff</code> activates or desactivates the current filter designed with <a class="normal"  href="SqlitePassVisualTools.TSqlitePassDatasetFilter.html">TSqlitePassDatasetFilter</a>.</td>
+</tr>
+<tr class="list">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassVisualTools.TSqlitePassDatasetFilterOnSelection.html"><code>TSqlitePassDatasetFilterOnSelection</code></a></td>
+<td class="itemdesc"><code>TSqlitePassDatasetFilterOnSelection</code> filters the dataset on the active control datafield</td>
+</tr>
+<tr class="list2">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassVisualTools.TSqlitePassDatasetLocate.html"><code>TSqlitePassDatasetLocate</code></a></td>
+<td class="itemdesc"><code>TSqlitePassDatasetLocate</code> shows a custom dialog to define locate parameters.</td>
+</tr>
+<tr class="list">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassVisualTools.TSqlitePassDatasetLocateFirst.html"><code>TSqlitePassDatasetLocateFirst</code></a></td>
+<td class="itemdesc"><code>TSqlitePassDatasetLocateFirst</code> moves to the first located record</td>
+</tr>
+<tr class="list2">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassVisualTools.TSqlitePassDatasetLocateLast.html"><code>TSqlitePassDatasetLocateLast</code></a></td>
+<td class="itemdesc"><code>TSqlitePassDatasetLocateLast</code> moves to the last located record</td>
+</tr>
+<tr class="list">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassVisualTools.TSqlitePassDatasetLocateNext.html"><code>TSqlitePassDatasetLocateNext</code></a></td>
+<td class="itemdesc"><code>TSqlitePassDatasetLocateNext</code> moves to the next located record.</td>
+</tr>
+<tr class="list2">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassVisualTools.TSqlitePassDatasetLocatePrior.html"><code>TSqlitePassDatasetLocatePrior</code></a></td>
+<td class="itemdesc"><code>TSqlitePassDatasetLocatePrior</code> moves to the prior located record.</td>
+</tr>
+<tr class="list">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassVisualTools.TSqlitePassDatasetSort.html"><code>TSqlitePassDatasetSort</code></a></td>
+<td class="itemdesc"><a class="normal"  href="SqlitePassVisualTools.TSqlitePassDatasetSortAsc.html">TSqlitePassDatasetSortAsc</a> shows a custom dialog to choose the dataset sort parameters <br> <br> <img src="image_5.png" alt="SortByDialog" /></td>
+</tr>
+<tr class="list2">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassVisualTools.TSqlitePassDatasetSortAsc.html"><code>TSqlitePassDatasetSortAsc</code></a></td>
+<td class="itemdesc"><code>TSqlitePassDatasetSortAsc</code> sorts the dataset on active control ascending order</td>
+</tr>
+<tr class="list">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassVisualTools.TSqlitePassDatasetSortDesc.html"><code>TSqlitePassDatasetSortDesc</code></a></td>
+<td class="itemdesc"><a class="normal"  href="SqlitePassVisualTools.TSqlitePassDatasetSortAsc.html">TSqlitePassDatasetSortAsc</a> sorts the dataset on active control descending order</td>
+</tr>
+<tr class="list2">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassVisualTools.TSqlitePassDBAction.html"><code>TSqlitePassDBAction</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+<tr class="list">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassVisualTools.TSqlitePassDBActionList.html"><code>TSqlitePassDBActionList</code></a></td>
+<td class="itemdesc"><code>TSqlitePassDBActionList</code> is derived from TActionList to provide additional features related to <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabase.html">TSqlitePassDatabase</a> or <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html">TSqlitePassDataset</a>.</td>
+</tr>
+<tr class="list2">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassVisualTools.TSqlitePassDBLocateMoveAction.html"><code>TSqlitePassDBLocateMoveAction</code></a></td>
+<td class="itemdesc"><code>TSqlitePassDBLocateMoveAction</code> is an internal generic <a class="normal"  href="SqlitePassVisualTools.TSqlitePassDBAction.html">TSqlitePassDBAction</a> designed to navigate through located records.</td>
+</tr>
+</table>
+<a name="%40FuncsProcs"></a><h3 class="summary">Functions and Procedures</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassVisualTools.html#DisplayImage">DisplayImage</a></b>(Grid: TDrawGrid; Col, Row: Integer; Rect: TRect; ImageList: TImageList; ImageIndex: Integer; HAlignment: TAlignment; VAlignment: <a   href="SqlitePassVisualTools.html#TSPVTVAlignment">TSPVTVAlignment</a>; Margins: TRect);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassVisualTools.html#DisplayText">DisplayText</a></b>(Grid: TDrawGrid; Col, Row: Integer; Rect: TRect; Text: String; Font: TFont; HAlignment: TAlignment; VAlignment: <a   href="SqlitePassVisualTools.html#TSPVTVAlignment">TSPVTVAlignment</a>; Margins: TRect; Autosize: Boolean = True);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassVisualTools.html#ResetColumnTitles">ResetColumnTitles</a></b>(DbGrid: TDBGrid);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassVisualTools.html#SortDbGrid">SortDbGrid</a></b>(DbGrid: TdbGrid; Column: TColumn);</code></td>
+</tr>
+</table>
+<a name="%40Types"></a><h3 class="summary">Types</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassVisualTools.html#TSPVTCtrlGridNotifyEvent">TSPVTCtrlGridNotifyEvent</a></b> = procedure(CtrlGrid: <a   href="SqlitePassVisualTools.TSPVTCtrlGrid.html">TSPVTCtrlGrid</a>) of object;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassVisualTools.html#TSPVTCtrlGridState">TSPVTCtrlGridState</a></b> = (...);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassVisualTools.html#TSPVTDBItemType">TSPVTDBItemType</a></b> = (...);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassVisualTools.html#TSPVTDBItemTypes">TSPVTDBItemTypes</a></b> = set of <a   href="SqlitePassVisualTools.html#TSPVTDBItemType">TSPVTDBItemType</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassVisualTools.html#TSPVTNavButtons">TSPVTNavButtons</a></b> = (...);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassVisualTools.html#TSPVTVAlignment">TSPVTVAlignment</a></b> = (...);</code></td>
+</tr>
+</table>
+<a name="%40Constants"></a><h3 class="summary">Constants</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassVisualTools.html#AttachedItemImageIndex">AttachedItemImageIndex</a></b> = 13;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassVisualTools.html#DatabaseImageIndex">DatabaseImageIndex</a></b> = 3;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassVisualTools.html#EmptyImageIndex">EmptyImageIndex</a></b> = -1;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassVisualTools.html#MinusImageIndex">MinusImageIndex</a></b> = 1;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassVisualTools.html#PlusImageIndex">PlusImageIndex</a></b> = 0;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassVisualTools.html#QueryImageIndex">QueryImageIndex</a></b> = 5;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassVisualTools.html#QueryItemImageIndex">QueryItemImageIndex</a></b> = 12;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassVisualTools.html#SelectedImageIndex">SelectedImageIndex</a></b> = 2;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassVisualTools.html#SPVTNavButtonName">SPVTNavButtonName</a></b>: array[<a   href="SqlitePassVisualTools.html#TSPVTNavButtons">TSPVTNavButtons</a>] of PChar = ('FIRST', 'PRIOR', 'NEXT',
+    'LAST', 'INSERT', 'APPEND', 'DELETE', 'UP', 'DOWN');</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassVisualTools.html#SQLImageIndex">SQLImageIndex</a></b> = 8;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassVisualTools.html#SQLItemImageIndex">SQLItemImageIndex</a></b> = 11;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassVisualTools.html#SystemTableImageIndex">SystemTableImageIndex</a></b> = 9;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassVisualTools.html#TableImageIndex">TableImageIndex</a></b> = 4;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassVisualTools.html#TableItemImageIndex">TableItemImageIndex</a></b> = 10;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassVisualTools.html#TriggerImageIndex">TriggerImageIndex</a></b> = 7;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassVisualTools.html#WiewImageIndex">WiewImageIndex</a></b> = 6;</code></td>
+</tr>
+</table>
+<h2 class="description">Description</h2>
+<h3 class="detail">Functions and Procedures</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="DisplayImage"></a><code>procedure <b>DisplayImage</b>(Grid: TDrawGrid; Col, Row: Integer; Rect: TRect; ImageList: TImageList; ImageIndex: Integer; HAlignment: TAlignment; VAlignment: <a   href="SqlitePassVisualTools.html#TSPVTVAlignment">TSPVTVAlignment</a>; Margins: TRect);</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="DisplayText"></a><code>procedure <b>DisplayText</b>(Grid: TDrawGrid; Col, Row: Integer; Rect: TRect; Text: String; Font: TFont; HAlignment: TAlignment; VAlignment: <a   href="SqlitePassVisualTools.html#TSPVTVAlignment">TSPVTVAlignment</a>; Margins: TRect; Autosize: Boolean = True);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+DrawGrid utility Functions</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="ResetColumnTitles"></a><code>procedure <b>ResetColumnTitles</b>(DbGrid: TDBGrid);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+DbGrid utility Functions</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SortDbGrid"></a><code>procedure <b>SortDbGrid</b>(DbGrid: TdbGrid; Column: TColumn);</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<h3 class="detail">Types</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TSPVTCtrlGridNotifyEvent"></a><code><b>TSPVTCtrlGridNotifyEvent</b> = procedure(CtrlGrid: <a   href="SqlitePassVisualTools.TSPVTCtrlGrid.html">TSPVTCtrlGrid</a>) of object;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TSPVTCtrlGridState"></a><code><b>TSPVTCtrlGridState</b> = (...);</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;<h6 class="description_section">Values</h6>
+<ul>
+<li>
+cgsBrowse: &nbsp;</li>
+<li>
+cgsEdit: &nbsp;</li>
+<li>
+cgsInsert: &nbsp;</li>
+<li>
+cgsAppend: &nbsp;</li>
+<li>
+cgsOrder: &nbsp;</li>
+</ul>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TSPVTDBItemType"></a><code><b>TSPVTDBItemType</b> = (...);</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;<h6 class="description_section">Values</h6>
+<ul>
+<li>
+itDatabase: &nbsp;</li>
+<li>
+itTable: &nbsp;</li>
+<li>
+itQuery: &nbsp;</li>
+<li>
+itView: &nbsp;</li>
+<li>
+itTrigger: &nbsp;</li>
+<li>
+itTableSystem: &nbsp;</li>
+<li>
+itSql: &nbsp;</li>
+<li>
+itSqlSelect: &nbsp;</li>
+<li>
+itSqlCreate: &nbsp;</li>
+<li>
+itSqlCreateTable: &nbsp;</li>
+<li>
+itSqlUpdate: &nbsp;</li>
+<li>
+itSqlInsert: &nbsp;</li>
+<li>
+itSqlDelete: &nbsp;</li>
+<li>
+itSqlOthers: &nbsp;</li>
+</ul>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TSPVTDBItemTypes"></a><code><b>TSPVTDBItemTypes</b> = set of <a   href="SqlitePassVisualTools.html#TSPVTDBItemType">TSPVTDBItemType</a>;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TSPVTNavButtons"></a><code><b>TSPVTNavButtons</b> = (...);</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;<h6 class="description_section">Values</h6>
+<ul>
+<li>
+NavFirst: &nbsp;</li>
+<li>
+NavPrior: &nbsp;</li>
+<li>
+NavNext: &nbsp;</li>
+<li>
+NavLast: &nbsp;</li>
+<li>
+NavInsert: &nbsp;</li>
+<li>
+NavAppend: &nbsp;</li>
+<li>
+NavDelete: &nbsp;</li>
+<li>
+NavMoveUp: &nbsp;</li>
+<li>
+NavMoveDown: &nbsp;</li>
+</ul>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TSPVTVAlignment"></a><code><b>TSPVTVAlignment</b> = (...);</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;<h6 class="description_section">Values</h6>
+<ul>
+<li>
+vaTop: &nbsp;</li>
+<li>
+vaCenter: &nbsp;</li>
+<li>
+vaBottom: &nbsp;</li>
+</ul>
+</td></tr>
+</table>
+<h3 class="detail">Constants</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AttachedItemImageIndex"></a><code><b>AttachedItemImageIndex</b> = 13;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="DatabaseImageIndex"></a><code><b>DatabaseImageIndex</b> = 3;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="EmptyImageIndex"></a><code><b>EmptyImageIndex</b> = -1;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="MinusImageIndex"></a><code><b>MinusImageIndex</b> = 1;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="PlusImageIndex"></a><code><b>PlusImageIndex</b> = 0;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="QueryImageIndex"></a><code><b>QueryImageIndex</b> = 5;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="QueryItemImageIndex"></a><code><b>QueryItemImageIndex</b> = 12;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SelectedImageIndex"></a><code><b>SelectedImageIndex</b> = 2;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SPVTNavButtonName"></a><code><b>SPVTNavButtonName</b>: array[<a   href="SqlitePassVisualTools.html#TSPVTNavButtons">TSPVTNavButtons</a>] of PChar = ('FIRST', 'PRIOR', 'NEXT',
+    'LAST', 'INSERT', 'APPEND', 'DELETE', 'UP', 'DOWN');</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SQLImageIndex"></a><code><b>SQLImageIndex</b> = 8;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SQLItemImageIndex"></a><code><b>SQLItemImageIndex</b> = 11;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SystemTableImageIndex"></a><code><b>SystemTableImageIndex</b> = 9;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TableImageIndex"></a><code><b>TableImageIndex</b> = 4;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TableItemImageIndex"></a><code><b>TableItemImageIndex</b> = 10;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TriggerImageIndex"></a><code><b>TriggerImageIndex</b> = 7;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="WiewImageIndex"></a><code><b>WiewImageIndex</b> = 6;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<hr noshade size="1"><span class="appinfo"><em>Generated by <a  target="_parent" href="http://pasdoc.sourceforge.net/">PasDoc 0.11.0</a> on 2010-05-16 23:39:44</em>
+</span>
+</body></html>

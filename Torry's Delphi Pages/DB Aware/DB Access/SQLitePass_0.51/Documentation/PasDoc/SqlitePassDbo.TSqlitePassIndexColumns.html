@@ -1,0 +1,169 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+<meta name="GENERATOR" content="PasDoc 0.11.0">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<title>SqlitePass Database Objects: SqlitePassDbo: Class TSqlitePassIndexColumns</title>
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body bgcolor="#ffffff" text="#000000" link="#0000ff" vlink="#800080" alink="#FF0000">
+<a name="TSqlitePassIndexColumns"></a><h1 class="cio">Class TSqlitePassIndexColumns</h1>
+<table class="sections wide_list">
+<tr>
+<td><a class="section"  href="#%40Description">Description</a></td><td><a class="section"  href="#%40Hierarchy">Hierarchy</a></td><td>Fields</td><td><a class="section"  href="#%40Methods">Methods</a></td><td><a class="section"  href="#%40Properties">Properties</a></td></tr></table>
+<a name="%40Description"></a><h2 class="unit">Unit</h2>
+<p class="unitlink">
+<a   href="SqlitePassDbo.html">SqlitePassDbo</a></p>
+<h2 class="declaration">Declaration</h2>
+<p class="declaration">
+<code>type TSqlitePassIndexColumns = class(<a class="normal"  href="SqlitePassUtils.TSqlitePassObjectList.html">TSqlitePassObjectList</a>)</code></p>
+<h2 class="description">Description</h2>
+<div class="nodescription">no description available, TSqlitePassObjectList description follows</div><div class="nodescription">no description available, TSqlitePassList description follows</div><a name="%40Hierarchy"></a><h2 class="hierarchy">Hierarchy</h2>
+<ul class="hierarchy"><li class="ancestor">TObject</li>
+<li class="ancestor"><a class="normal"  href="SqlitePassUtils.TSqlitePassList.html">TSqlitePassList</a></li>
+<li class="ancestor"><a class="normal"  href="SqlitePassUtils.TSqlitePassObjectList.html">TSqlitePassObjectList</a></li>
+<li class="thisitem">TSqlitePassIndexColumns</li></ul><h2 class="overview">Overview</h2>
+<a name="%40Methods"></a><h3 class="summary">Methods</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>constructor <b><a   href="SqlitePassDbo.TSqlitePassIndexColumns.html#Create">Create</a></b>(Owner: <a   href="SqlitePassDbo.TSqlitePassIndex.html">TSqlitePassIndex</a>);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>destructor <b><a   href="SqlitePassDbo.TSqlitePassIndexColumns.html#Destroy">Destroy</a></b>; override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.TSqlitePassIndexColumns.html#ColumnByName">ColumnByName</a></b>(const Value: String): <a   href="SqlitePassDbo.TSqlitePassIndexColumn.html">TSqlitePassIndexColumn</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.TSqlitePassIndexColumns.html#FindColumn">FindColumn</a></b>(const Value: String): <a   href="SqlitePassDbo.TSqlitePassIndexColumn.html">TSqlitePassIndexColumn</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.TSqlitePassIndexColumns.html#GetItem">GetItem</a></b>(Index: Integer): <a   href="SqlitePassDbo.TSqlitePassIndexColumn.html">TSqlitePassIndexColumn</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.TSqlitePassIndexColumns.html#AddColumns">AddColumns</a></b>(Source: <a   href="SqlitePassDbo.TSqlitePassIndexColumns.html">TSqlitePassIndexColumns</a>);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.TSqlitePassIndexColumns.html#Assign">Assign</a></b>(const Source: <a   href="SqlitePassDbo.TSqlitePassIndexColumns.html">TSqlitePassIndexColumns</a>);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.TSqlitePassIndexColumns.html#ClearAndFreeItems">ClearAndFreeItems</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.TSqlitePassIndexColumns.html#SetItem">SetItem</a></b>(Index: Integer; const Value: <a   href="SqlitePassDbo.TSqlitePassIndexColumn.html">TSqlitePassIndexColumn</a>);</code></td>
+</tr>
+</table>
+<a name="%40Properties"></a><h3 class="summary">Properties</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassIndexColumns.html#Count">Count</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassIndexColumns.html#Items">Items</a></b>[Index: Integer]: <a   href="SqlitePassDbo.TSqlitePassIndexColumn.html">TSqlitePassIndexColumn</a> read <a   href="SqlitePassDbo.TSqlitePassIndexColumns.html#GetItem">GetItem</a> write <a   href="SqlitePassDbo.TSqlitePassIndexColumns.html#SetItem">SetItem</a>;</code></td>
+</tr>
+</table>
+<h2 class="description">Description</h2>
+<h3 class="detail">Methods</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Create"></a><code>constructor <b>Create</b>(Owner: <a   href="SqlitePassDbo.TSqlitePassIndex.html">TSqlitePassIndex</a>);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Destroy"></a><code>destructor <b>Destroy</b>; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="ColumnByName"></a><code>function <b>ColumnByName</b>(const Value: String): <a   href="SqlitePassDbo.TSqlitePassIndexColumn.html">TSqlitePassIndexColumn</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="FindColumn"></a><code>function <b>FindColumn</b>(const Value: String): <a   href="SqlitePassDbo.TSqlitePassIndexColumn.html">TSqlitePassIndexColumn</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="GetItem"></a><code>function <b>GetItem</b>(Index: Integer): <a   href="SqlitePassDbo.TSqlitePassIndexColumn.html">TSqlitePassIndexColumn</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="AddColumns"></a><code>procedure <b>AddColumns</b>(Source: <a   href="SqlitePassDbo.TSqlitePassIndexColumns.html">TSqlitePassIndexColumns</a>);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Assign"></a><code>procedure <b>Assign</b>(const Source: <a   href="SqlitePassDbo.TSqlitePassIndexColumns.html">TSqlitePassIndexColumns</a>);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="ClearAndFreeItems"></a><code>procedure <b>ClearAndFreeItems</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="SetItem"></a><code>procedure <b>SetItem</b>(Index: Integer; const Value: <a   href="SqlitePassDbo.TSqlitePassIndexColumn.html">TSqlitePassIndexColumn</a>);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<h3 class="detail">Properties</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Count"></a><code>property <b>Count</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Items"></a><code>property <b>Items</b>[Index: Integer]: <a   href="SqlitePassDbo.TSqlitePassIndexColumn.html">TSqlitePassIndexColumn</a> read <a   href="SqlitePassDbo.TSqlitePassIndexColumns.html#GetItem">GetItem</a> write <a   href="SqlitePassDbo.TSqlitePassIndexColumns.html#SetItem">SetItem</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<hr noshade size="1"><span class="appinfo"><em>Generated by <a  target="_parent" href="http://pasdoc.sourceforge.net/">PasDoc 0.11.0</a> on 2010-05-16 23:39:44</em>
+</span>
+</body></html>

@@ -1,0 +1,44 @@
+package oksDBQueryBuilder_HomeEdition;
+
+{$R *.res}
+{$R 'oksDBQueryBuilder.dcr'}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$IMPLICITBUILD OFF}
+
+requires
+  rtl,
+  vcl,
+  designide,
+  dbrtl,
+  oksDBEngine_HomeEdition,
+  vclactnband,
+  vclx;
+
+contains
+  oksDBQueryBuilder_register in '..\Quellcode\oksDBQueryBuilder_register.pas',
+  oksDBQueryBuilder_1 in '..\Quellcode\oksDBQueryBuilder_1.pas',
+  oksDBQueryBuilder_2 in '..\Quellcode\oksDBQueryBuilder_2.pas' {Form_QueryBuilder},
+  oksDBQueryBuilder_3 in '..\Quellcode\oksDBQueryBuilder_3.pas' {Form_Define1},
+  oksDBQueryBuilder_4 in '..\Quellcode\oksDBQueryBuilder_4.pas' {Form_About};
+
+end.

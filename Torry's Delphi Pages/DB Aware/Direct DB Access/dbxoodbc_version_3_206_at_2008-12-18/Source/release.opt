@@ -1,0 +1,18 @@
+@echo off
+
+rem Common options
+
+  set UsePack=0
+  set EurekaLog=0
+  set DEBUG=0
+  set MAPFILE=1
+  set JDBG=1
+  set JDBG_LINK=0
+  set CleanDcc32Log=1
+  set DEBUG_BATCH=1
+  set TRACE_STACK_SOURCE=1
+
+  set UserCOpt=-D_RELEASE_ -$R-,O+
+
+  set UserLib=.
+  rem if %DBASE% GTR 10 set UserLib=D11UP

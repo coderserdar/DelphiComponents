@@ -1,0 +1,263 @@
+{************************************************************************************}
+{                               HISTORY                                              }
+{************************************************************************************}
+12.10.2007
+ver 1.27 (RC4)
+  + in SQL editor for FBDataSet create find text 
+  - fix error in FBDataSet.Refresh 
+  - fix display DateTime in Linux for last version of FPC
+  + In compiler params for lazarus output dir for libs set to lib/$(TargetCPU)-$(TargetOS)
+  + works on optimaze internal buffer's
+  + new property MasterScrollBehavior
+  - minor fix in docs
+  + New flag in Options poRefreshBeforeEdit 
+    call Refresh before edit data
+  - fix EOL stile in src files
+  + for assign values for new record from master dataset used standart metod 
+    Field.Assign
+  + after set  FBDataSet.DataBase if FBDataSet.Transaction.DataBase = FBDataSet.DataBase
+    FBDataSet.Transaction not cleared
+  - fix lcal sorting in metod SortOnField
+  + add file patches.txt - list of recived pathes
+  + add new compiller define for Delphi2006/BCB2006 - nomix_class_obj
+
+12.09.2007
+ver 1.26
+ + Added support for BigInt fields in Lazarus
+ + In Lazarus removed TFBTimeField type - used TTimeField (fcl-db work)
+ + In folder lazUIBEditors design time package for UIB in lazarus - ported from
+   original delphi source
+ - Fix registration TFBAnsiMemoField 
+ - Fix critical bug in CashedUpdates mode
+
+26.08.2007
+ver 1.25
+ + Field.OldValues is now working (Lityagin, Alexandr)
+ - fix error on metod SortOnField(s) (Lityagin, Alexandr)
+ + publishing events - AfterRefresh, BeforeRefresh;
+ + for FPC - not using TFBStringField - use TStringField, in Lazarus now working 
+   persistent fields 
+
+18.07.2007
+ver 1.24
+ + in lazarus all design time funtion moved to package dcl_fb_id_dataset.lpk
+ + in lazarus save position and font name for SQLEditor window
+ - in lazarus fix error on change editors SQLEditor window
+ + in lazarus create text find SQLEditor window
+ - in lazarus change font buttin in SQLEditor work for all editors
+ + in lazarus add status line for SQLEditor window
+
+25.06.2007
+ver 1.23
+ + fix procedure CloseOpen - before close call DisableControls, 
+   after open - EnableControls (v-t-l)
+ + new flag in property Options - poFillEmptyEPFromParams.
+ + new metod
+     procedure TFBDataSet.SortOnFields(FieldNames: string; Asc: array of boolean);
+ + add new property TFBDataSet.RefreshTransactionKind:TTransactionKind 
+     TTransactionKind = (tkDefault, tkReadTransaction, tkUpdateTransaction);
+ + in SQL editor add button for insert name of field from master dataset
+
+31.05.2007
+ver 1.22
+ - fix call Refresh for field ftDate (alexs)
+
+19.04.2007
+ver 1.21
+ - fix call Refresh on empty dataset (alexs)
+ - minor bug fix (Lityagin, Alexandr)
+
+
+{************************************************************************************
+                                    FEATURE
+************************************************************************************}
+Autolinking Fields maps: provided since 1.20
+provided 4 speed access to Fields skipping their search with method FieldByName. Map - is a link between
+variable of type : tField and a string FieldName. to work with maps intended methods RegisterMap, ForgetMap.
+maped variable must not recate since rigistring;
+template of work:
+1) in a source create variables : tField; this ones must be registred before use - thus if ones used in Event handler OnCalc 
+   they are must be registred in process of loading components before call Loaded. 4 this purpous provided a new efvents BeforeInit, 
+   AfretInit.
+2) Create event BeforeInit handler.
+3) in this handler register all variables with their names
+4) this is all. all maped variables willbe updated after Opening, and reseted after Close
+this thechnique intended 4 speed work of OnCalc handler.
+
+
+03.04.2007
+ver 1.20
+ - Fix delete last record in CashedUpdates mode - DBGrid show deleted record
+ + if FBDataSet.Active = false - RecordCount = 0
+ + full rewrite work with BLOB 
+   (‹¨âï£¨­ €«¥ªá ­¤à ‚« ¤¨¬¨à®¢¨ç  <alexrainpe196.at.newmail.ru>)
+25.11.2006
+ver 1.19
+ - Fix error in SQL in Linux 
+ - Fix local sort field with type  ftFloat
+ - Fix edit master dataset in master-detail 
+ - Fix metod CloneRecord
+ + working prefix NEW_ ¨ OLD_ in sql 
+ - fix refresh record - field with null values not display new value
+ - in local sort fix sorting fields with null values
+ - fix save empty Blob fields
+24.05.2006
+ver 1.18
+ +  procedure CloseOpen(AFetchAll:boolean = false);
+    for parametrs AFetchAll  - default value = false
+ - fix error with display Date, Time and Timestamp fields on Lazarus
+   (fix for Windows and Linux)
+ - minor bugfix
+ + update package for BCB (Korecek Vaclav <korecek@rcd.cz>)
+ + create internal metod BookmarkValid 
+
+04.04.2006
+ver 1.17
+ - fix error on add new record
+ - fix local sorting error on empty result
+ - fix display empty buffer after delete all records 
+ + add option poFetchAll in property TFBDataSet.Options. 
+     fetch all records after open TFBDataSet
+12.02.2006
+ver 1.16
+ + Display in editor SQL of the description of fields is added
+ + The filtration in editor SQL of tables is added
+ + Support calc fields (thanks ochnap2) is added
+ - The mistake of loss of a format of the fields established manually 
+   (informed about a problem ochnap2) is corrected
+ + Support AddRecord (informed about a problem ochnap2) is realized
+ + Editor SQL is modified
+ - minor bugfix
+
+25.01.2006
+ver 1.15
+ - if FBDataSet closed,  GetActiveBuffer = nil.
+ - method Locate is correctly declared as override;
+ - bug fix open dataset if present manual added field
+ - bug fix create update sql
+
+
+15.01.2006
+ver 1.14
+ - bug fix work with multiselect DBGrid 
+18.12.2005
+ver 1.13
+ + Add new metods - CloneRecord and  CloneCurRecord
+ - bugfix on edit blob field
+
+ver 1.12
+23.11.2005
+ - bugfix compatibility from Delphi and Lazarus
+ + add simple sql editor for SQLEdit, SQLRefresh, SQLInsert, SQLDelete
+     (from v.scozzaro 'v.scozzaro@tiscali.it')
+ver 1.11
+31.10.2005
+ + Event OnFetchRecord is added
+ + Property FetchedRecordCount - quantity really fetched records from server is added 
+ - The mistake of removal of records in a mode CashedUpdates is corrected
+ + Property UpdateRecordTypes is added
+ - Before  local sorting occurs fetch all records
+ + In default formats for fields Numeric and Integer are added
+ + For Lazarus for corrected mistakes has redefined are standard TFloatField
+ - If the inquiry about updating has not been filled, in not dependences on operation (the insert, updating) - was given out a mistake
+ - In a mode CashedUpdates  at repeated change just the added record - at record the status added was not kept
+
+ver 1.9
+15.08.2005
+ + rename packages for Delphi and Lazarus
+ + add new component - TMetaDataSQLGenerator
+ - bug fix on refresh string field
+ + close all FBDataSet on JvUIBDataBase disconected
+ - bug fix on work with bookmark after cloase and open dataset
+ + add image for TFBDataSet
+ + add package for BCB (from Koreèek Václav <korecek@rcd.cz>)
+ + fix problem with work on Memo fields in Lazarus
+ + more bug fix
+
+ver 1.8
+11.03.2005
+ - bug fix on work with string field
+ - bug fix on save null values
+ + add simple demo for FPC and Delphi
+
+ver 1.7
+06.03.2005
+ + add support for blob field in read-write mode (not for chashed upd)
+
+ver 1.6 
+05.03.2005
+ + compile with Free Pascal Compiler version 1.9.8 [2005/02/25] in
+   Lazarus 0.9.6
+ + add support for blob field in read only mode
+ver 1.5
+01.02.2005
+ - in fb_define.inc add define for replase SQLEditor to standart strings editor
+ + add metod Locate - port from RxLib (not work in Lazarus - I do not know why?)
+22.01.2005
+ - bug fix in SQL editors on show field names for table
+ + in Lazarus full rewrite editor for SQL property
+12.01.2005
+ + in Lazarus replase standart TStringField  to TFBStringFiled - 
+   TStringField does not allow to enter symbols with code > #155 (bug in Lazarus?)
+07.01.2005
+ - bug fix on FetchAll on SQL with empty result
+ver 1.4
+04.01.2005
+ - I do not use more jvuib.inc (Lazarus does not allow).
+ + Path for libraries are ordered (thanks jesusr).
+ + After installation of a package in Lazarus at all the component 
+   with property FieldName appears the editor as in Delphi.
+
+02.01.2005
+ - bug fix on edit,diplay TIMESTAMP field
+ - bug fix on SQLs Editor in Lazarus - after change active tab 
+   SQLEditor not activated
+ - bug fix on edit,diplay DATE field
+ - bug fix on edit,diplay TIME field
+ + Add property - DefaultFormats
+ - bug fix on open stored dataset with Active=true 
+
+ver 1.3
+31.12.2004
+ + new property - Description of component
+ + add local filtring (based on OnFilterRecord event) 
+ + add Cashed updates
+
+ver 1.2
+24.12.2004
+ + new property - UpdateTransaction
+ + new property - AutoCommit
+ + property AllowedUpdateKinds is completely functions
+ - bug fix on append record at empty dataset
+ - bug fix on master refresh after post record
+
+p.s. 
+  in lazarus property UpdateTransaction not displayed in
+  object inspector - bug lazarus?  
+
+
+21.12.2004
+ + Macros based on RxQuery from RxLib
+
+ver 1.1
+19.12.2004
+ + add SQLInsert property
+ + add metods for process append record on detail dataset
+   with copy data from master field from master dataset
+ + add support for autoincremet field (based on generators)
+ + bug fix on refresh metod
+ + add support for refresh master dataset after insert/edit/delete on detail 
+   datase
+17.12.2004
+ + add SQL editor for SQL property (Lazarus)
+16.12.2004
+ + add metods: FetchAll, FetchNext(FCount), CloseOpen
+ + add metods for Master-Detail mechanism
+ + add SQL editor for SQL property (Delphi)
+15.12.2004
+ + add local buffer sorting
+ + add interface module for DbGridEh from EhLib
+
+ver 1.0
+14.12.2004 - first relaise
+ 

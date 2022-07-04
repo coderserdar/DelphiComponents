@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+<meta name="GENERATOR" content="PasDoc 0.11.0">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<title>SqlitePass Database Objects: SqlitePassKexiDef</title>
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body bgcolor="#ffffff" text="#000000" link="#0000ff" vlink="#800080" alink="#FF0000">
+<h1 class="unit">Unit SqlitePassKexiDef</h1>
+<table class="sections wide_list">
+<tr>
+<td><a class="section"  href="#%40Description">Description</a></td><td>uses</td><td>Classes, Interfaces, Objects and Records</td><td>Functions and Procedures</td><td>Types</td><td><a class="section"  href="#%40Constants">Constants</a></td><td>Variables</td></tr></table>
+<a name="%40Description"></a><h2 class="description">Description</h2>
+<p>
+This library is free software; you can redistribute it and/or modify it under the terms of the GNU Library General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Library General Public License for more details.
+
+<p>You should have received a copy of the GNU Library General Public License along with this library; if not, write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+
+<p>&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;
+
+<p>Basic SQL Parser Author : Luc DAVID Email: luckylazarus@free.fr 2007 - 2008
+
+<p>Major changes are indicated in the \Documentation\changes.pdf file Last update : 31.05.2008
+
+<p>&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;</p>
+<a name="%40Uses"></a><h2 class="overview">Overview</h2>
+<a name="%40Constants"></a><h3 class="summary">Constants</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassKexiDef.html#KexiBlobs_CreateSQLStmt">KexiBlobs_CreateSQLStmt</a></b> = 'CREATE TABLE kexi__blobs (o_id INTEGER PRIMARY KEY, o_data BLOB, o_name Text(200), o_caption Text(200), o_mime Text(200) NOT NULL, o_folder_id Integer UNSIGNED);';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassKexiDef.html#KexiDb_CreateSQLStmt">KexiDb_CreateSQLStmt</a></b> = 'CREATE TABLE kexi__db (db_property Text(32), db_value CLOB);';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassKexiDef.html#KexiFieldConstraints">KexiFieldConstraints</a></b> = 'NoConstraints,AutoInc,Unique,PrimaryKey,ForeignKey,NotNull,NotEmpty,Indexed';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassKexiDef.html#KexiFields_CreateSQLStmt">KexiFields_CreateSQLStmt</a></b> = 'CREATE TABLE kexi__fields (t_id Integer UNSIGNED, f_type Byte UNSIGNED, f_name Text(200), f_length Integer, f_precision Integer, f_constraints Integer, f_options Integer, f_default Text(200), f_order Integer, f_caption Text(200), f_help CLOB);';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassKexiDef.html#KexiObjectData_CreateSQLStmt">KexiObjectData_CreateSQLStmt</a></b> = 'CREATE TABLE kexi__objectdata (o_id Integer UNSIGNED NOT NULL, o_data CLOB, o_sub_id Text(200));';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassKexiDef.html#KexiObjects_CreateSQLStmt">KexiObjects_CreateSQLStmt</a></b> = 'CREATE TABLE kexi__objects (o_id INTEGER PRIMARY KEY, o_type Byte UNSIGNED, o_name Text(200), o_caption Text(200), o_desc CLOB);';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassKexiDef.html#KexiParts_CreateSQLStmt">KexiParts_CreateSQLStmt</a></b> = 'CREATE TABLE kexi__parts (p_id INTEGER PRIMARY KEY, p_name Text(200), p_mime Text(200), p_url Text(200));';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassKexiDef.html#KexiSystemTables">KexiSystemTables</a></b>:array[0..7] of string =
+           ('kexi__db',
+            'kexi__fields',
+            'kexi__final',
+            'kexi__objects',
+            'kexi__objectdata',
+            'kexi__parts',
+            'kexi__useractions',
+            'kexi__blobs');</code></td>
+</tr>
+</table>
+<h2 class="description">Description</h2>
+<h3 class="detail">Constants</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="KexiBlobs_CreateSQLStmt"></a><code><b>KexiBlobs_CreateSQLStmt</b> = 'CREATE TABLE kexi__blobs (o_id INTEGER PRIMARY KEY, o_data BLOB, o_name Text(200), o_caption Text(200), o_mime Text(200) NOT NULL, o_folder_id Integer UNSIGNED);';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="KexiDb_CreateSQLStmt"></a><code><b>KexiDb_CreateSQLStmt</b> = 'CREATE TABLE kexi__db (db_property Text(32), db_value CLOB);';</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+SQL Stqtements used to create system tables needed by Kexi (used by <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabase.html#CreateDatabase">TSqlitePassDatabase.CreateDatabase</a>)</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="KexiFieldConstraints"></a><code><b>KexiFieldConstraints</b> = 'NoConstraints,AutoInc,Unique,PrimaryKey,ForeignKey,NotNull,NotEmpty,Indexed';</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+NoConstraints = 0, AutoInc = 1, ? Unique = 2, ? PrimaryKey = 4, ? ForeignKey = 8, -&gt; FieldType NotNull = 16, ? NotEmpty = 32, ? //!&lt; only legal for string-like and blob fields Indexed = 64 -&gt; IsIndexField</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="KexiFields_CreateSQLStmt"></a><code><b>KexiFields_CreateSQLStmt</b> = 'CREATE TABLE kexi__fields (t_id Integer UNSIGNED, f_type Byte UNSIGNED, f_name Text(200), f_length Integer, f_precision Integer, f_constraints Integer, f_options Integer, f_default Text(200), f_order Integer, f_caption Text(200), f_help CLOB);';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="KexiObjectData_CreateSQLStmt"></a><code><b>KexiObjectData_CreateSQLStmt</b> = 'CREATE TABLE kexi__objectdata (o_id Integer UNSIGNED NOT NULL, o_data CLOB, o_sub_id Text(200));';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="KexiObjects_CreateSQLStmt"></a><code><b>KexiObjects_CreateSQLStmt</b> = 'CREATE TABLE kexi__objects (o_id INTEGER PRIMARY KEY, o_type Byte UNSIGNED, o_name Text(200), o_caption Text(200), o_desc CLOB);';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="KexiParts_CreateSQLStmt"></a><code><b>KexiParts_CreateSQLStmt</b> = 'CREATE TABLE kexi__parts (p_id INTEGER PRIMARY KEY, p_name Text(200), p_mime Text(200), p_url Text(200));';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="KexiSystemTables"></a><code><b>KexiSystemTables</b>:array[0..7] of string =
+           ('kexi__db',
+            'kexi__fields',
+            'kexi__final',
+            'kexi__objects',
+            'kexi__objectdata',
+            'kexi__parts',
+            'kexi__useractions',
+            'kexi__blobs');</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Kexi system tables</p>
+</td></tr>
+</table>
+<hr noshade size="1"><span class="appinfo"><em>Generated by <a  target="_parent" href="http://pasdoc.sourceforge.net/">PasDoc 0.11.0</a> on 2010-03-11 14:30:51</em>
+</span>
+</body></html>

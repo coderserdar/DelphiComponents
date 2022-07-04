@@ -1,0 +1,48 @@
+package ColorControlsD7;
+
+{$R *.res}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'Color controls v 1.0 by Kuzovkov Peter'}
+{$IMPLICITBUILD OFF}
+
+requires
+  rtl,
+  vcl,
+  dbrtl,
+  vclx,
+  vcldb;
+
+contains
+  ColorValueListEditor in 'ColorValueListEditor.pas',
+  ColorCheckListBox in 'ColorCheckListBox.pas',
+  ColorComboBox in 'ColorComboBox.pas',
+  ColorDBComboBox in 'ColorDBComboBox.pas',
+  ColorDBGrid in 'ColorDBGrid.pas',
+  ColorDBListBox in 'ColorDBListBox.pas',
+  ColorDBLookup in 'ColorDBLookup.pas',
+  ColorDrawGrid in 'ColorDrawGrid.pas',
+  ColorListBox in 'ColorListBox.pas',
+  ColorPresets in 'ColorPresets.pas',
+  ColorStringGrid in 'ColorStringGrid.pas';
+
+end.

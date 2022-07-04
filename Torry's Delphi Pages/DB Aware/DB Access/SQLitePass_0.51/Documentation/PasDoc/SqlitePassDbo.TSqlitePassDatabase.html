@@ -1,0 +1,629 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+<meta name="GENERATOR" content="PasDoc 0.11.0">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<title>SqlitePass Database Objects: SqlitePassDbo: Class TSqlitePassDatabase</title>
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body bgcolor="#ffffff" text="#000000" link="#0000ff" vlink="#800080" alink="#FF0000">
+<a name="TSqlitePassDatabase"></a><h1 class="cio">Class TSqlitePassDatabase</h1>
+<table class="sections wide_list">
+<tr>
+<td><a class="section"  href="#%40Description">Description</a></td><td><a class="section"  href="#%40Hierarchy">Hierarchy</a></td><td>Fields</td><td><a class="section"  href="#%40Methods">Methods</a></td><td><a class="section"  href="#%40Properties">Properties</a></td></tr></table>
+<a name="%40Description"></a><h2 class="unit">Unit</h2>
+<p class="unitlink">
+<a   href="SqlitePassDbo.html">SqlitePassDbo</a></p>
+<h2 class="declaration">Declaration</h2>
+<p class="declaration">
+<code>type TSqlitePassDatabase = class(TComponent)</code></p>
+<h2 class="description">Description</h2>
+<p>
+The <code>TSqlitePassDatabase</code> component is the main link between your application and the sqlite library. It currently supports sqlite <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabase.html#Engine">engine</a> version 3.xx and gives you direct acces to a wide range of sqlite <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabase.html#Databases">databases</a> created using <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabase.html#Database">database</a> management progams like kexi, sqlite administrator, sqliteToolbox...etc. With proper setting, you can also use it to read and write to your own custom sqlite <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabase.html#Databases">databases</a>.</p>
+<a name="%40Hierarchy"></a><h2 class="hierarchy">Hierarchy</h2>
+<ul class="hierarchy"><li class="ancestor">TComponent</li>
+<li class="thisitem">TSqlitePassDatabase</li></ul><h2 class="overview">Overview</h2>
+<a name="%40Methods"></a><h3 class="summary">Methods</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>Constructor <b><a   href="SqlitePassDbo.TSqlitePassDatabase.html#Create">Create</a></b>(AOwner : TComponent); override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>Destructor <b><a   href="SqlitePassDbo.TSqlitePassDatabase.html#Destroy">Destroy</a></b>; override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>Function <b><a   href="SqlitePassDbo.TSqlitePassDatabase.html#AttachDatabase">AttachDatabase</a></b>(FAttachedDatabase, DatabaseAlias: String): Boolean;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>Function <b><a   href="SqlitePassDbo.TSqlitePassDatabase.html#Compact">Compact</a></b>: Integer;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>Function <b><a   href="SqlitePassDbo.TSqlitePassDatabase.html#CreateAggFunction">CreateAggFunction</a></b>(FuncName: String; ArgCount: ShortInt; FuncStep: <a   href="SqlitePassApi_v3.html#TFuncHandler">TFuncHandler</a>; FuncFinal: <a   href="SqlitePassApi_v3.html#TFuncFinalizer">TFuncFinalizer</a>; UserData: Pointer; DefaultEncoding: Byte = <a   href="SqlitePassApi_v3.html#SQLITE_ANY">SQLITE_ANY</a>): Boolean;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>Function <b><a   href="SqlitePassDbo.TSqlitePassDatabase.html#CreateDatabase">CreateDatabase</a></b>(DbName: String; DbType: <a   href="SqlitePassDbo.html#TSqlitePassDatabaseType">TSqlitePassDatabaseType</a>; DbEncoding: <a   href="SqlitePassDbo.html#TSqlitePassEncoding">TSqlitePassEncoding</a> = UTF8; PageSize: <a   href="SqlitePassDbo.html#TSqlitePassPageSize">TSqlitePassPageSize</a> = 4096; AutoVacuum: <a   href="SqlitePassDbo.html#TSqlitePassAutoVacuumType">TSqlitePassAutoVacuumType</a> = avNone): Boolean;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>Function <b><a   href="SqlitePassDbo.TSqlitePassDatabase.html#CreateFunction">CreateFunction</a></b>(FuncName: String; ArgCount: ShortInt; Func: <a   href="SqlitePassApi_v3.html#TFuncHandler">TFuncHandler</a>; UserData: Pointer; DefaultEncoding: Byte = <a   href="SqlitePassApi_v3.html#SQLITE_ANY">SQLITE_ANY</a>): Boolean;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>Function <b><a   href="SqlitePassDbo.TSqlitePassDatabase.html#DeleteDatabase">DeleteDatabase</a></b>(Const DbName: String): Boolean;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>Function <b><a   href="SqlitePassDbo.TSqlitePassDatabase.html#DeleteFunction">DeleteFunction</a></b>(FuncName: String): Boolean;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>Function <b><a   href="SqlitePassDbo.TSqlitePassDatabase.html#DetachDatabase">DetachDatabase</a></b>(DatabaseAlias: String): Boolean;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>Function <b><a   href="SqlitePassDbo.TSqlitePassDatabase.html#IsSystemTable">IsSystemTable</a></b>(TableName: String): Boolean;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.TSqlitePassDatabase.html#CheckIntegrity">CheckIntegrity</a></b>(MsgList: TStringList; MaxErrorCount: Integer = 100);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>Procedure <b><a   href="SqlitePassDbo.TSqlitePassDatabase.html#Close">Close</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>Procedure <b><a   href="SqlitePassDbo.TSqlitePassDatabase.html#Open">Open</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.TSqlitePassDatabase.html#RefreshDefinitions">RefreshDefinitions</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>Procedure <b><a   href="SqlitePassDbo.TSqlitePassDatabase.html#Loaded">Loaded</a></b>; override;</code></td>
+</tr>
+</table>
+<a name="%40Properties"></a><h3 class="summary">Properties</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDatabase.html#Connected">Connected</a></b>            : Boolean Read GetFConnected        Write SetFConnected Default False;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDatabase.html#Database">Database</a></b>             : String  Read FDatabase            Write SetFDatabase;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDatabase.html#DatabaseError">DatabaseError</a></b>: <a   href="SqlitePassDbo.TSqlitePassDatabaseError.html">TSqlitePassDatabaseError</a> Read FDatabaseError;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDatabase.html#Databases">Databases</a></b>: <a   href="SqlitePassDbo.TSqlitePassDatabasesAttached.html">TSqlitePassDatabasesAttached</a> Read FDatabases;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDatabase.html#DatabaseType">DatabaseType</a></b>         : <a   href="SqlitePassDbo.html#TSqlitePassDatabaseType">TSqlitePassDatabaseType</a> Read FDatabaseType Write FDatabaseType;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDatabase.html#Datasets">Datasets</a></b>: <a   href="SqlitePassDbo.TSqlitePassDatasets.html">TSqlitePassDatasets</a> Read FDatasets Write FDatasets;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDatabase.html#DatatypeOptions">DatatypeOptions</a></b>      : <a   href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html">TSqlitePassDatabaseDataTypeOptions</a> Read FDatatypeOptions Write FDatatypeOptions;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDatabase.html#Engine">Engine</a></b>: <a   href="SqlitePassDbo.TSqlitePassEngine.html">TSqlitePassEngine</a> Read GetFEngine;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDatabase.html#IndexDefs">IndexDefs</a></b>: <a   href="SqlitePassDbo.TSqlitePassDatabaseIndexDefs.html">TSqlitePassDatabaseIndexDefs</a>  Read FIndexDefs Write FIndexDefs;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDatabase.html#OnAfterConnect">OnAfterConnect</a></b>       : <a   href="SqlitePassDbo.html#TConnectEvent">TConnectEvent</a> Read FAfterConnect        Write FAfterConnect;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDatabase.html#OnAfterDisconnect">OnAfterDisconnect</a></b>    : <a   href="SqlitePassDbo.html#TConnectEvent">TConnectEvent</a> Read FAfterDisconnect     Write FAfterDisconnect;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDatabase.html#OnBeforeConnect">OnBeforeConnect</a></b>      : <a   href="SqlitePassDbo.html#TConnectEvent">TConnectEvent</a> Read FBeforeConnect       Write FBeforeConnect;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDatabase.html#OnBeforeDisconnect">OnBeforeDisconnect</a></b>   : <a   href="SqlitePassDbo.html#TConnectEvent">TConnectEvent</a> Read FBeforeDisconnect    Write FBeforeDisconnect;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDatabase.html#OnDataTypeConversion">OnDataTypeConversion</a></b> : <a   href="SqlitePassDbo.html#TDataTypeConversion">TDataTypeConversion</a> Read FDataTypeConversion Write FDataTypeConversion;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDatabase.html#Options">Options</a></b>              : <a   href="SqlitePassDbo.TSqlitePassDatabaseOptions.html">TSqlitePassDatabaseOptions</a> Read FOptions Write FOptions;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDatabase.html#QueryDefs">QueryDefs</a></b>: <a   href="SqlitePassDbo.TSqlitePassQueryDefs.html">TSqlitePassQueryDefs</a> Read FQueryDefs Write FQueryDefs;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDatabase.html#QueryTimeout">QueryTimeout</a></b>         : Integer Read FQueryTimeout        Write FQueryTimeout;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDatabase.html#ReadOnly">ReadOnly</a></b>             : Boolean Read FReadOnly            Write SetFReadOnly default False;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDatabase.html#ShowSystemObjects">ShowSystemObjects</a></b>    : Boolean Read FShowSysObjects      Write SetFShowSysObjects;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDatabase.html#SQLiteLibrary">SQLiteLibrary</a></b>        : String  Read FSQLiteLibrary       Write SetFSQLiteLibrary;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDatabase.html#SQLStmtDefs">SQLStmtDefs</a></b>: <a   href="SqlitePassDbo.TSqlitePassSQLStmtDefs.html">TSqlitePassSQLStmtDefs</a> Read FSQLStmtDefs Write FSQLStmtDefs;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDatabase.html#SystemEncoding">SystemEncoding</a></b>: <a   href="SqlitePassDbo.html#TSqlitePassSystemEncoding">TSqlitePassSystemEncoding</a> Read FSystemEncoding;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDatabase.html#TableDefs">TableDefs</a></b>: <a   href="SqlitePassDbo.TSqlitePassTableDefs.html">TSqlitePassTableDefs</a> Read FTableDefs Write FTableDefs;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDatabase.html#Translator">Translator</a></b>: <a   href="SqlitePassDbo.TSqlitePassTranslator.html">TSqlitePassTranslator</a> Read FTranslator;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDatabase.html#Triggers">Triggers</a></b>: <a   href="SqlitePassDbo.TSqlitePassTriggers.html">TSqlitePassTriggers</a> Read FTriggers Write FTriggers;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDatabase.html#VersionInfo">VersionInfo</a></b>          : <a   href="SqlitePassDbo.TSqlitePassDatabaseVersionInfo.html">TSqlitePassDatabaseVersionInfo</a>  Read FVersionInfo   Write FVersionInfo;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDatabase.html#Views">Views</a></b>: <a   href="SqlitePassDbo.TSqlitePassViews.html">TSqlitePassViews</a> Read FViews Write FViews;</code></td>
+</tr>
+</table>
+<h2 class="description">Description</h2>
+<h3 class="detail">Methods</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Create"></a><code>Constructor <b>Create</b>(AOwner : TComponent); override;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+&mdash;&ndash; Constructor / Destructor &mdash;&ndash;</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Destroy"></a><code>Destructor <b>Destroy</b>; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="AttachDatabase"></a><code>Function <b>AttachDatabase</b>(FAttachedDatabase, DatabaseAlias: String): Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Enables to attach one or several foreign <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabase.html#Databases">databases</a> to the current one. The attached <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabase.html#Databases">databases</a> must be compatible with the current one (the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabase.html#Databases">databases</a> must have been created with the same <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabase.html#Database">database</a> manager application). Once a <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabase.html#Database">database</a> is attached, its content becomes available as part of the current <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabase.html#Database">database</a>. Then you can access to tables, queries... as if they were part of the main <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabase.html#Database">database</a>. Usage : <code>AttachDatabase</code>(DatabasePath: String);</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Compact"></a><code>Function <b>Compact</b>: Integer;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Compacts the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabase.html#Database">database</a> content and free unused space</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="CreateAggFunction"></a><code>Function <b>CreateAggFunction</b>(FuncName: String; ArgCount: ShortInt; FuncStep: <a   href="SqlitePassApi_v3.html#TFuncHandler">TFuncHandler</a>; FuncFinal: <a   href="SqlitePassApi_v3.html#TFuncFinalizer">TFuncFinalizer</a>; UserData: Pointer; DefaultEncoding: Byte = <a   href="SqlitePassApi_v3.html#SQLITE_ANY">SQLITE_ANY</a>): Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+CreateAggFunc References a new Aggregate User Defined function in the Sqlite <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabase.html#Engine">Engine</a> API As an Example, you can use an SumOdd function to get the Sum of Odd Values : <br> 1 - Reference the SumOdd function in Sqlite <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabase.html#Engine">Engine</a> Unit... var SumOddResult: Integer;
+
+<p>procedure TMainForm.Button1Click(Sender: TObject); begin SumOddResult := 0; db.CreateAggFunction('SumOdd', 1, @SumOddStep, @SumOddFinal, @SumOddResult); end; <br> 2 - Execute a query that uses the SumOdd function for instance &quot; Select SumOdd(IntegerField) From IntegerTable;&quot; @be 3 - The SumOdd Function is called every time SQLite processes a row returned by the query <br> 4 - Now, the Query returns the sum of odd Values... <br> Note : The function must be declared 'cdecl'. Please, have a look at SQLite online help for further information on UDF Functions. <br> <br> Procedure SumOdd implementation : <br> procedure SumOddStep(Context: Pointer; nArgs: Integer; Args: <a class="normal"  href="SqlitePassUtils.html#PPSqliteValue">ppSqliteValue</a>); cdecl; var TempRes, Res:integer; begin // We get the initial value of the current row returned by the query TempRes := StrToIntDef(<a class="normal"  href="SqlitePassApi_v3.html#SqliteDbv3_value_text">SqlitePassApi_v3.SqliteDbv3_value_text</a>(Args&circ;),0); // We do something with TempRes if (TempRes mod 2) &gt; 0 then SumOddResult := SumOddResult + TempRes; end;
+
+<p>procedure SumOddFinal(Context: Pointer); cdecl; begin // Send back the final result to SQLite <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabase.html#Engine">Engine</a> <a class="normal"  href="SqlitePassApi_v3.html#SqliteDbv3_result_int">SqlitePassApi_v3.SqliteDbv3_result_int</a>(Context,SumOddResult); // Reset the value for another query SumOddResult := 0; end;</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="CreateDatabase"></a><code>Function <b>CreateDatabase</b>(DbName: String; DbType: <a   href="SqlitePassDbo.html#TSqlitePassDatabaseType">TSqlitePassDatabaseType</a>; DbEncoding: <a   href="SqlitePassDbo.html#TSqlitePassEncoding">TSqlitePassEncoding</a> = UTF8; PageSize: <a   href="SqlitePassDbo.html#TSqlitePassPageSize">TSqlitePassPageSize</a> = 4096; AutoVacuum: <a   href="SqlitePassDbo.html#TSqlitePassAutoVacuumType">TSqlitePassAutoVacuumType</a> = avNone): Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Creates a new <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabase.html#Database">database</a></p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="CreateFunction"></a><code>Function <b>CreateFunction</b>(FuncName: String; ArgCount: ShortInt; Func: <a   href="SqlitePassApi_v3.html#TFuncHandler">TFuncHandler</a>; UserData: Pointer; DefaultEncoding: Byte = <a   href="SqlitePassApi_v3.html#SQLITE_ANY">SQLITE_ANY</a>): Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+CreateFunc References a new scalar User Defined function in the Sqlite <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabase.html#Engine">Engine</a> API As an Example, you can use an IsOdd function to filter the records returned by a query : <br> 1 - Reference the IsOdd function in Sqlite <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabase.html#Engine">Engine</a> procedure TMainForm.Button1Click(Sender: TObject); begin db.CreateFunction('IsOdd',1,@IsOdd, nil); end; <br> 2 - Execute a query that uses the IsOdd function for instance &quot; Select IntegerField from &quot;IntegerTable&quot; where IsOdd(IntegerField)&gt;0;&quot; @be 3 - The IsOdd Function is called every time SQLite processes a row returned by the query <br> 4 - Now, the Query returns Only Odd Values... <br> Note : The function must be declared 'cdecl'. Please, have a look at SQLite online help for further information on UDF Functions. <br> <br> Procedure IsOdd implementation (From SqliteToolBox) : <br> procedure IsOdd(Context: Pointer; nArgs: Integer; Args: <a class="normal"  href="SqlitePassUtils.html#PPSqliteValue">ppSqliteValue</a>); cdecl; var TempRes, Res:integer; begin // We get the initial value of the current row returned by the query TempRes := StrToIntDef(<a class="normal"  href="SqlitePassApi_v3.html#SqliteDbv3_value_text">SqlitePassApi_v3.SqliteDbv3_value_text</a>(Args&circ;),0); // We do something with TempRes if (TempRes mod 2) &gt; 0 then Res := TempRes else Res := 0; // We send back the changed value to Sqlite <a class="normal"  href="SqlitePassApi_v3.html#SqliteDbv3_result_int">SqlitePassApi_v3.SqliteDbv3_result_int</a>(Context,Res); end;</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="DeleteDatabase"></a><code>Function <b>DeleteDatabase</b>(Const DbName: String): Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Deletes a <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabase.html#Database">database</a> file. Use with caution...</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="DeleteFunction"></a><code>Function <b>DeleteFunction</b>(FuncName: String): Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Remove a previously referenced User Defined Function</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="DetachDatabase"></a><code>Function <b>DetachDatabase</b>(DatabaseAlias: String): Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Detaches a previously attached <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabase.html#Database">database</a>.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="IsSystemTable"></a><code>Function <b>IsSystemTable</b>(TableName: String): Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Returns True if the Table is a system table</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="CheckIntegrity"></a><code>procedure <b>CheckIntegrity</b>(MsgList: TStringList; MaxErrorCount: Integer = 100);</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Checks the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabase.html#Database">database</a> integrity and returns the results messages in MsgList</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Close"></a><code>Procedure <b>Close</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Same as <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabase.html#Connected">Connected</a> := False</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Open"></a><code>Procedure <b>Open</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Same as <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabase.html#Connected">Connected</a> := True</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="RefreshDefinitions"></a><code>procedure <b>RefreshDefinitions</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Updates the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabase.html#Database">database</a> definition content (<a class="normal"  href="SqlitePassDbo.TSqlitePassDatabase.html#TableDefs">TableDefs</a>, <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabase.html#QueryDefs">QueryDefs</a>...) from file</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="Loaded"></a><code>Procedure <b>Loaded</b>; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<h3 class="detail">Properties</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="Connected"></a><code>property <b>Connected</b>            : Boolean Read GetFConnected        Write SetFConnected Default False;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Set this property to True to connect the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabase.html#Database">database</a> defined in the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabase.html#Database">database</a> property. Set it to False to disconnect the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabase.html#Database">database</a> and all the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabase.html#Datasets">datasets</a> associated with it. You can also verify if a <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabase.html#Database">database</a> is <code>connected</code> using : <code>if MyDatabase.Connected then...</code></p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="Database"></a><code>property <b>Database</b>             : String  Read FDatabase            Write SetFDatabase;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Represents the physical <code>database</code> file you want to connect. At design time, shows up a file selection dialog box.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="DatabaseError"></a><code>property <b>DatabaseError</b>: <a   href="SqlitePassDbo.TSqlitePassDatabaseError.html">TSqlitePassDatabaseError</a> Read FDatabaseError;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+A utility object to log errors</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Databases"></a><code>property <b>Databases</b>: <a   href="SqlitePassDbo.TSqlitePassDatabasesAttached.html">TSqlitePassDatabasesAttached</a> Read FDatabases;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+A collection of attached <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabase.html#Database">database</a> to the current one</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="DatabaseType"></a><code>property <b>DatabaseType</b>         : <a   href="SqlitePassDbo.html#TSqlitePassDatabaseType">TSqlitePassDatabaseType</a> Read FDatabaseType Write FDatabaseType;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Represents the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabase.html#Database">database</a> type detected from the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabase.html#Database">database</a> file extension you are using. (*.kexi for kexi <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabase.html#Database">database</a> for example). Once the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabase.html#Database">database</a> type is recognised, the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabase.html">TsqlitePassDatabase</a> component sets this property and creates an internal <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabase.html#Translator">translator</a> to take care of the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabase.html#Database">database</a> specifications. You can also define this property by yourself if the file extension doesn't match the correct <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabase.html#Database">database</a> type.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Datasets"></a><code>property <b>Datasets</b>: <a   href="SqlitePassDbo.TSqlitePassDatasets.html">TSqlitePassDatasets</a> Read FDatasets Write FDatasets;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+A collection of all the <code>datasets</code> that use the current <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabase.html#Database">database</a> component</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="DatatypeOptions"></a><code>property <b>DatatypeOptions</b>      : <a   href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html">TSqlitePassDatabaseDataTypeOptions</a> Read FDatatypeOptions Write FDatatypeOptions;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+One of the main difficulties when working with Sqlite <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabase.html#Databases">databases</a> is to detect and translate properly the fields.datatypes since sqlite datatype are not formely defined. SqlitePass implements several ways to define a datatype. The Database.DatatypeOptions property gives you the opportunity to set custom or default behaviors for a given <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabase.html#Database">database</a> and lets you also define how fields.datatype will be retrieved and translated into pascal datatypes using TranslationRules and CustomFieldDefs</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Engine"></a><code>property <b>Engine</b>: <a   href="SqlitePassDbo.TSqlitePassEngine.html">TSqlitePassEngine</a> Read GetFEngine;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Internal object to access the sqlite <code>engine</code></p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="IndexDefs"></a><code>property <b>IndexDefs</b>: <a   href="SqlitePassDbo.TSqlitePassDatabaseIndexDefs.html">TSqlitePassDatabaseIndexDefs</a>  Read FIndexDefs Write FIndexDefs;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+The <code>IndexDefs</code> property is a collection that gives you access to the indexes definitions stored in the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabase.html#Database">database</a>.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="OnAfterConnect"></a><code>property <b>OnAfterConnect</b>       : <a   href="SqlitePassDbo.html#TConnectEvent">TConnectEvent</a> Read FAfterConnect        Write FAfterConnect;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+&mdash;&ndash; Events &mdash;&ndash;</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="OnAfterDisconnect"></a><code>property <b>OnAfterDisconnect</b>    : <a   href="SqlitePassDbo.html#TConnectEvent">TConnectEvent</a> Read FAfterDisconnect     Write FAfterDisconnect;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="OnBeforeConnect"></a><code>property <b>OnBeforeConnect</b>      : <a   href="SqlitePassDbo.html#TConnectEvent">TConnectEvent</a> Read FBeforeConnect       Write FBeforeConnect;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="OnBeforeDisconnect"></a><code>property <b>OnBeforeDisconnect</b>   : <a   href="SqlitePassDbo.html#TConnectEvent">TConnectEvent</a> Read FBeforeDisconnect    Write FBeforeDisconnect;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="OnDataTypeConversion"></a><code>property <b>OnDataTypeConversion</b> : <a   href="SqlitePassDbo.html#TDataTypeConversion">TDataTypeConversion</a> Read FDataTypeConversion Write FDataTypeConversion;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="Options"></a><code>property <b>Options</b>              : <a   href="SqlitePassDbo.TSqlitePassDatabaseOptions.html">TSqlitePassDatabaseOptions</a> Read FOptions Write FOptions;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Represents the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabase.html#Database">database</a> optional settings.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="QueryDefs"></a><code>property <b>QueryDefs</b>: <a   href="SqlitePassDbo.TSqlitePassQueryDefs.html">TSqlitePassQueryDefs</a> Read FQueryDefs Write FQueryDefs;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+The <code>QueryDefs</code> property is a collection that gives you access to the queries definitons stored in the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabase.html#Database">database</a>.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="QueryTimeout"></a><code>property <b>QueryTimeout</b>         : Integer Read FQueryTimeout        Write FQueryTimeout;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="ReadOnly"></a><code>property <b>ReadOnly</b>             : Boolean Read FReadOnly            Write SetFReadOnly default False;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Same as classic dataset behavior</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="ShowSystemObjects"></a><code>property <b>ShowSystemObjects</b>    : Boolean Read FShowSysObjects      Write SetFShowSysObjects;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="SQLiteLibrary"></a><code>property <b>SQLiteLibrary</b>        : String  Read FSQLiteLibrary       Write SetFSQLiteLibrary;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Represents an alternative library file to be used instead of the default one. By default, sqlitepassDatabase tries to use the sqlitepass3.dll or libsqlitepass3.so file located in the system path directory (..\windows\system32\ or ..\user\lib for example). Enter a complete library file path to use a different library. From version 0.28 <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabase.html">TsqlitePassDatabase</a> needs the sqlite library compiled with the ENABLE_METADATA precompiler directive. These libraries are available from <a  target="_parent" href="http://source.online.free.fr">http://source.online.free.fr</a> or you can compile your own following the tutorial available on the same internet site.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="SQLStmtDefs"></a><code>property <b>SQLStmtDefs</b>: <a   href="SqlitePassDbo.TSqlitePassSQLStmtDefs.html">TSqlitePassSQLStmtDefs</a> Read FSQLStmtDefs Write FSQLStmtDefs;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="SystemEncoding"></a><code>property <b>SystemEncoding</b>: <a   href="SqlitePassDbo.html#TSqlitePassSystemEncoding">TSqlitePassSystemEncoding</a> Read FSystemEncoding;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+<code>SystemEncoding</code> lets you know how pascal compiler handles unicode strings.
+
+<p><b>sysUTF8</b> : For Delphi, prior Delphi 2009, and Lazarus, Database.SystemEncoding default value is sysUTF8.
+
+<p><b>sysUTF16</b> : For Delphi 2009 and up : Database.SystemEncoding default value is sysUTF16.
+
+<p><code>SystemEncoding</code> show how the SQL statements sent to the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabase.html#Database">database</a> <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabase.html#Engine">engine</a> have to be encoded according to the compiler setting. You shouldn't have to care to much about this since the component will handle this for you.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="TableDefs"></a><code>property <b>TableDefs</b>: <a   href="SqlitePassDbo.TSqlitePassTableDefs.html">TSqlitePassTableDefs</a> Read FTableDefs Write FTableDefs;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+The <code>TableDefs</code> property is a collection that gives you access to the tables definitons stored in the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabase.html#Database">database</a>.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Translator"></a><code>property <b>Translator</b>: <a   href="SqlitePassDbo.TSqlitePassTranslator.html">TSqlitePassTranslator</a> Read FTranslator;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+translation object used to get or set data that depend on the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabase.html#DatabaseType">DatabaseType</a> property</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Triggers"></a><code>property <b>Triggers</b>: <a   href="SqlitePassDbo.TSqlitePassTriggers.html">TSqlitePassTriggers</a> Read FTriggers Write FTriggers;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+The TriggerDefs property is a collection that gives you access to the <code>Triggers</code> definitons stored in the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabase.html#Database">database</a>.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="VersionInfo"></a><code>property <b>VersionInfo</b>          : <a   href="SqlitePassDbo.TSqlitePassDatabaseVersionInfo.html">TSqlitePassDatabaseVersionInfo</a>  Read FVersionInfo   Write FVersionInfo;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Views"></a><code>property <b>Views</b>: <a   href="SqlitePassDbo.TSqlitePassViews.html">TSqlitePassViews</a> Read FViews Write FViews;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+The ViewDefs property is a collection that gives you access to the <code>views</code> definitons stored in the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabase.html#Database">database</a>.</p>
+</td></tr>
+</table>
+<hr noshade size="1"><span class="appinfo"><em>Generated by <a  target="_parent" href="http://pasdoc.sourceforge.net/">PasDoc 0.11.0</a> on 2010-05-16 23:39:43</em>
+</span>
+</body></html>

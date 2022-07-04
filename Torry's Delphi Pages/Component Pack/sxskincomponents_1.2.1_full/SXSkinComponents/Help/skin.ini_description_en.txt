@@ -1,0 +1,1328 @@
+                 ----------------------------------------
+                          Description of SKIN.INI-file
+                 ----------------------------------------
+
+      CONTENTS
+
+   1. Sections names and descriptions
+
+ 1.1.  Static sections
+ 1.2.  General style sections
+ 1.3.  Component-associated styles sections
+ 1.4.  Other sections
+
+   2. Values of standard properites
+
+ 2.1.  Color
+ 2.2.  Rectangle
+ 2.3.  Polygon (polyline)
+ 2.4.  Region
+
+   3. Properties for description of standard objects
+
+ 3.1.  Font
+ 3.2.  Filter
+ 3.3.  Transform Effect
+
+   4. Description of static sections
+
+ 4.1.  BasedOn
+ 4.2.  Strings
+
+   5. Skin styles
+   6. General skin styles
+
+ 6.1. General skin style properties
+ 6.2. Skin style elements
+
+   7. Selective skin styles
+   8. Component-associated styles properties
+
+ 8.1.  Label
+ 8.2.  Button
+ 8.3.  CheckBox
+ 8.4.  RadioButton
+ 8.5.  Edit
+ 8.6.  GroupBox
+ 8.7.  MultiState
+ 8.8.  MultiStateCheck
+ 8.9.  Form
+ 8.10. UpDown
+ 8.11. SpinEdit
+
+   9. Arithmetic operations
+
+------------------------------------------------------------------------
+
+  ====================================
+   1. Sections names and descriptions
+  ====================================
+
+   File SKIN.INI consists of sections. Every section contains any number of
+properties. Here is an example of a section:
+
+   [SectionName]
+   Property1_Name=Property1_Value
+   Property2_Name=Property2_Value
+   Property3_Name=Property3_Value
+
+     1.1. Static sections
+     ====================
+
+   You can use these static sections (sections with fixed file names):
+   [BasedOn] - contains paths list of parent skin files
+   [Strings] - contains skin file parameters and variables
+
+     1.2. General style sections
+     ===========================
+
+   Name of a general skin MUST NOT start with:
+     _Label
+     _Button
+     _CheckBox
+     _RadioButton
+     _Edit
+     _GroupBox
+     _MultiState
+     _MultiStateCheck
+     _Selective
+     _Form
+     _UpDown
+     _SpinEdit
+   and MUST NOT be equal to BasedOn or Strings.
+
+     1.3. Component-associated styles sections
+     =========================================
+
+   [_Label]             - default TSXSkinLabel  style
+   [_Label*]            - custom  TSXSkinLabel  style
+   [_Button]            - default TSXSkinButton style
+   [_Button*]           - custom  TSXSkinButton style
+   [_CheckBox]          - default TSXSkinCheckBox style
+   [_CheckBox*]         - custom  TSXSkinCheckBox style
+   [_RadioButton]       - default TSXSkinRadioButton style
+   [_RadioButton*]      - custom  TSXSkinRadioButton style
+   [_Edit]              - default TSXSkinEdit style
+   [_Edit*]             - custom  TSXSkinEdit style
+   [_GroupBox]          - default TSXSkinGroupBox style
+   [_GroupBox*]         - custom  TSXSkinGroupBox style
+   [_Form]              - default TSXSkinForm style
+   [_FormSmallCaption]  - default TSXSkinForm style
+   [_Form*]             - custom  TSXSkinForm style
+   [_UpDown]            - default TSXSkinUpDown style (vertical)
+   [_UpDownH]           - default TSXSkinUpDown style (horizontal)
+   [_UpDown*]           - custom  TSXSkinUpDown style
+   [_SpinEditLH]        - default TSXSkinSpinEdit style (left, horiz)
+   [_SpinEditLV]        - default TSXSkinSpinEdit style (left, vert)
+   [_SpinEditRH]        - default TSXSkinSpinEdit style (right, horiz)
+   [_SpinEditRV]        - default TSXSkinSpinEdit style (right, vert)
+
+     1.4. Other sections
+     ===================
+
+   [_MultiState*]       - TSXSkinButton or TSXSkinGroupBox glyph
+   [_MultiStateCheck* ] - TSXSkinButton or TSXSkinGroupBox glyph with
+                          checked state (CanBeDown in VCL)
+   [_Selective*]        - style, which is painted depending on region
+                          width and height
+
+
+  ==================================
+   2. Values of standard properites
+  ==================================
+
+     2.1. Color
+     ==========
+
+   Color can be set in various ways:
+    - default Windows scheme color - one of ScrollBar, Background,
+      ActiveCaption, InactiveCaption, Menu, Window, WindowFrame,
+      MenuText, WindowText, CaptionText, ActiveBorder, InactiveBorder,
+      AppWorkSpace, Highlight, HighlightText, BtnFace, BtnShadow,
+      GrayText, BtnText, InactiveCaptionText, BtnHighlight, 3DDkShadow,
+      3DLight, InfoText, InfoBk, HotLight, GradientActiveCaption,
+      GradientInactiveCaption, MenuHighlight, MenuBar
+      (e.g. ColorPropertyName=HighlightText);
+    - setting 3 hexadecimal values of color components, value MUST
+      start with $ or #: $RRGGBB, RR - red component, GG - green
+      component, BB - blue component (e.g. ColorPropertyName=$FF0000
+      gives red color, ColorPropertyName=$FFFF00 - yellow color, etc);
+    - setting 3 hexadecimal values of color components with alpha
+      channel using format: $AARRGGBB or #AARRGGBB, AA - transparency
+      level of the color: 00 - invisible, FF - opaque
+      (e.g. ColorPropertyName=$8000FF00 - semi-transparent green);
+    - using of decimal notation for alpha and 3 color components in
+      format: A,R,G,B (e.g. ColorPropertyName=255,0,0,255 - solid blue).
+
+     2.2. Rectangle
+     ==============
+
+   Rectangle coordinates are set by four integer values: X1,Y1,X2,Y2,
+where point (X1,Y1) - left-top corner of a rectangle, and (X2,Y2) -
+right-bottom corner+1 pixel (like in all Windows GDI functions).
+   e.g. RectanglePropertyName=10,10,150,50
+   Also you can use style-specific variables and arithmetic operations.
+   Every general style has only two variables set:
+    * W - equals to the width of some element;
+    * H - equals to the height of some element.
+   e.g. RectanglePropertyName=0,0,W,H
+   See section 9 to look through supported arithmetic operations list.
+
+     2.3. Polygon (polyline)
+     =======================
+
+   Polygon (polyline) is defined as X,Y-coordinates, separated with
+commas. You can use spaces to separate points. Format of polygon value:
+      PolyProperty=X1,Y1, X2,Y2, X3,Y3, X4,Y4, ...
+   You can use variables and arithmetic operations to specify
+coordinates (see sections 2.2 and 9). Unlike rectangles, polygons and
+polylines can be defined with floating-point numbers.
+
+     2.4. Region
+     ===========
+
+   Regions are used to specify some areas (e.g. Mouse Capture) with the
+use of combination of some standard geometrical figures.
+   Region is a comma-separated list of parameters.
+   Format of a region:
+      RegionProperty=Action1,Action2,Action3,...
+   where Action is one of:
+    - Full;
+    - Param1,AdditionalParams where Param1 is a concatenation of
+      inverse symbol (optional), operation symbol (optional) and
+      figure name;
+      Inverse symbol is "!" or "~" (without quotes).
+      Operation symbol is one of:
+       * "+" or "&" for combining (default);
+       * "*" for intersecting;
+       * "-" for excluding;
+       * "^" for exclusive or operation.
+      Figure name is one of:
+       * Rect: AdditionalParams is X1,Y1,X2,Y2 (see section 2.2);
+       * Ellipse: AdditionalParams is X1,Y1,X2,Y2 as for Rect;
+       * RoundRect: AdditionalParams is X1,Y1,X2,Y2,Roundness;
+       * Polygon: AdditionalParams is PtNum,X1,Y1,X2,Y2,X3,Y3,...
+         where PtNum - the number of points in a polygon;
+       * Image: AdditionalParams is FilePath,Width,Height,Color,ColorMask
+         Figure is a one-colour area of an image, FilePath is path of
+         JPEG or PNG-file, Width and Height can be set if image resizing
+         is needed, Color is in #AARRGGBB form and defines TRANSPARENT (!)
+         area color (transparent area is excluded from result region),
+         ColorMask is also in #AARRGGBB format. See following examples to
+         undertand, how ColorMask works:
+         e.g. Color=#00000000 MaskColor=#FF000000 - all fully-transparent
+                 regions will be excluded;
+              Color=#FFFF0000 MaskColor=#FFFF0000 - only fully-solid reg
+                 areas will be excluded;
+              Color=#00FF0000 MaskColor=#00FF0000 - all regions, color of
+                 which has non-zero red component, will be excluded.
+       * ImageO: same as Image, but with image offset specified:
+            FilePath,OffsetX,OffsetY,Width,Height,Color,ColorMask
+       * BoxTile: AdditionalParams is:
+             PathMask,ResizeMode.Width,Height,Color,
+             ColorMask,Left,Right,Top,Bottom
+         PathMask is some string in format dir_path\file_*.ext, where
+         asterisk means that files dir_path\file_topleft.ext, ..._top.ext,
+         ..._topright.ext, ..._left.ext, ..._center.ext, ..._right.ext,
+         ..._bottomleft.ext, ..._bottom.ext and ..._bottomright.ext exist.
+         Left, Right, Top and Bottom are corresponding width and height of
+         corner images of BoxTile;
+       * BoxTileO: same as BoxTile, but with offset specified:
+            PathMask,ResizeMode,OffsetX,OffsetY,Width,Height,
+            Color,ColorMask,Left,Right,Top,Bottom
+
+   Examples:
+
+   1. Rounded ractangle with a round hole inslide:
+      RegionProperty=RoundRect,10,10,90,90,5,-Ellipse,40,40,50,50
+   2. Opaque area with a triangle hole inside:
+      RegionProperty=!Polygon,3,20,10,10,30,30,30
+   3. Semicircular region:
+      RegionProperty=Ellipse,0,0,50,50,*Rect,0,0,25,50
+
+
+  ===================================================
+   3. Properties for description of standard objects
+  ===================================================
+
+     3.1. Font
+     =========
+
+   Font object can be described with these properites:
+    - FontName (e.g. xxxx_FontName=Times New Roman);
+    - FontSize (e.g. xxxx_FontSize=12);
+    - FontColor - see section 2.1 (e.g. xxxx_FontColor=#FF0000);
+    - HasTextShadow - 1 to enable shadow: text shadow is drawn with a
+      1-pixel right-bottom shift (e.g. xxxx_HasTextShadow=1);
+    - ShadowColor - see section 2.1, used only when HastTextShadow=1
+      (e.g. ShadowColor=#A0808080);
+    - SmoothLevel - digital velue between 1 and 4, inclusive.
+      Smoothed text is drawn slower, I don't recommend to use smooth
+      level equal to 3 or 4 (e.g. xxxx_SmoothLevel=2);
+    - DoPrepaint - 1 to enable the prepaint feature. I recommend to use
+      DoPrepaint when SmoothLevel property is set, this will accelerate
+      redrawing of a smoothed text;
+    - FontStyle - a string of letters, each letter means that font
+      style parameter is set: B or b - bold, I or i - italic,
+      U or u - underlined, S or s - strike out
+      (e.g. xxxx_FontStyle=bi for bold italic font);
+   When no font object properties are set in skin.ini-files, they are
+taken from TControl.Font property.
+
+     3.2. Filter
+     ===========
+
+   Filter object is set using these properties:
+    - Filter - is one of:
+      * Lighten - adding constant values to red, green and blue color
+                  components for each pixel of an image;
+      * LightenHorizG - Lighten, but with horizontal gradient;
+      * LightenVertG - Lighten, but with vertical gradient;
+      * Darken - subtracting constant values from red, green and blue
+                 color components for each pixel of an image;
+      * DarkenHorizG - Darken, but with horizontal gradient;
+      * DarkenVertG - Darken, but with vertical gradient;
+      * Alpha - multiplying each pixel's alpha component value by the
+                FilterValue and dividing it by 255;
+      * Monochrome - making image black-and-white;
+      * ColorOverlay - using monotonous transparent image overlay;
+      * ColorOverlayHorizG - using horizontal gradient transparent
+                             image overlay;
+      * ColorOverlayVertG - using vertical gradient transparent image
+                            overlay;
+      (e.g. xxxx_Filter=LightenHorizG);
+    - FilterColor - see section 2.1: is used when Filter is equal to
+      Lighten, Darken or ColorOverlay;
+    - FilterColor1 - see section 2.1: is used when Filter is equal to
+      LightenHorizG, DarkenHorizG or ColorOverlayHorizG to specify
+      left start color of a gradient; LightenVertG, DarkenVertG or
+      ColorOverlayVertG to specify top start color of a gradient;
+    - FilterColor2 - see section 2.1: is used when Filter is equal to
+      LightenHorizG, DarkenHorizG or ColorOverlayHorizG to specify
+      right finish color of a gradient; LightenVertG, DarkenVertG or
+      ColorOverlayVertG to specify bottom finish color of a gradient;
+    - FilterValue - value between 0 and 255, inclusive; is used when
+      Filter is set to Alpha.
+
+     3.3. Transform Effect
+     =====================
+
+   Transform effect data containts information about the way of changing
+one image to another (e.g. when you put mouse cursor over a button, it is
+highlighted). Image can be changed in a moment: the first frame - an old
+image is drawn, the second frame - a new image is drawn). If more than
+2 frames are used for describing a trransform, some rules are used for
+computing intermediate frames form the second till the next to last,
+inclusive. Intermediate frames are drawn in this way: first, an old
+image (with some changes) is drawn, and then a new image (with some
+changes) is drawn.
+   Transform effect data is set with these properties:
+    - TransformO - can be set to one of these values:
+       * Blend
+       * Clear
+       * Fade
+       * OverDraw
+       * Slide
+      Defines a type of changes for an old image used in intermediate
+      frames.
+    - TransformDirO - can be set to one of these values:
+       * Right
+       * Top
+       * Bottom
+       * LeftRight
+       * TopBottom
+       * LeftTop
+       * LeftBottom
+       * RightTop
+       * RightBottom
+    - TransformOutO - can be set to 1;
+    - TransformInvertO - cen be set to 1;
+    - TransformN - the same as TransformO, but for a new image;
+    - TransformDirN - the same as TransformDirO, but for a new image;
+    - TransformOutN - can be set to 1;
+    - TransformInvertN - can be set to 1;
+    - TransformOffset - any integer value;
+    - TransformOldOnTop - can be set to 1 if a new image should be drawn
+      first, and only then an old one;
+    - TransformDrawCaption - can be set to 1;
+    - StepsNum - integer number of transformation frames.
+    - Transform - using one of transform effect presets:
+       * None
+       * SlideLeft
+       * SlideTop
+       * SlideRight
+       * SlideBottom
+       * SlideLeftTop
+       * SlideLeftBottom
+       * SlideRightTop
+       * SlideRightBottom
+       * OverDrawLeft
+       * OverDrawTop
+       * OverDrawRight
+       * OverDrawBottom
+       * OverDrawLeftTop
+       * OverDrawLeftBottom
+       * OverDrawRightTop
+       * OverDrawRightBottom
+       * OverDrawLeftRight
+       * OverDrawTopBottom
+       * OverDrawLeftRightOut
+       * OverDrawTopBottomOut
+
+
+  ===================================
+   4. Description of static sections
+  ===================================
+
+     4.1. BasedOn
+     ============
+
+   This section is not obligatory. Format of this section:
+
+   [BasedOn]
+   1=Skin1_Name\skin.ini
+   2=Skin2_Name\skin.sxs
+   3=Skin3_Name.zip
+
+   As stated in the example, you can specify a skin files paths list:
+INI, SXS and ZIP files are supported.
+   If a skin file is listed in BasedOn section, it means that it is
+loaded (all styles from this skin files are loaded) before the styles
+from the current skin file.
+
+     4.2. Strings
+     ============
+
+   This section is obligatory for those skins, which should be added to
+the Select Skin dialog. In such files SkinName property must exist too:
+
+   [String]
+   SkinName=WindowsXP Blue Scheme
+
+   You can add any properties for your personal use to this section.
+   Also this section contains skin-file internal variables. Format of
+internal variable declaration:
+      VariableName=VariableValue
+   Later you can use this variable in the skin-file:
+      SomePropertyName=$VariableName
+   Internal variables usage example:
+
+   [String]
+   DefaultFont=Arial
+   DefaultFontSize=12
+
+   [_Label]
+   N_FontName=$DefaultFont
+   N_FontSize=$DefaultFontSize
+
+
+  ================
+   5. Skin styles
+  ================
+
+   Every skin styles is defined in a separate section. All sections
+except BasedOn and Strings define skin styles. Section name is set to
+skin style name. The first (but not obligatory) property in a section is
+BaseSkin (unlike it's name, this property points to skin style, not
+skin). BaseSkin can be used for copying all parameters from another skin
+style to the current skin style. See example:
+
+   [MySkinStyle1]
+   Property1=Value1
+   Property2=Value2
+
+   [MySkinStyle2]
+   BaseSkin=MySkinStyle1
+   Property1=Value3
+   
+   In this example the skin style MySkinStyle2 will have Property1 set
+to Value3 and Property2 set to Value2.
+
+
+  ========================
+   6. General skin styles
+  ========================
+
+   All skin style those don't have special prefixes in their names
+(e.g. _Label or _Button) are general skin styles.
+   General skin is a set of rules, which are used for drawing some
+static image (e.g. button face or group box border).
+
+     6.1. General skin style properties
+     ==================================
+
+   These properties can be used with general skin styles:
+    - Transparent - can be set to 1, shouldn't be set if skin style is
+      opaque, this accelerates drawing routines;
+    - MouseCapture - can be one of these values:
+      * ByTransparency;
+      * Full (default);
+      Also you can specify Mouse Capture Region as value of this
+      property (see section 2.4).
+    - MouseCaptureTransparencyLimit - integer between 0 and 255,
+      inclusive. Is used only when MouseCapture=ByTransparency.
+      By default, MouseCaptureTransparencyLimit=250;
+    - UseBuffering - can be set to 1 if a style should be first painted
+      to a temporary bitmap and only then to a destination bitmap.
+
+     6.2. Skin style elements
+     ========================
+
+   Skin style consists of a skin style elements list. To add a new element
+to a skin style use this syntax:
+      ElementX=ElementName,ElementType
+   ElementX means Element1,Element2,...,Element12,Element13,...
+depending on the number of the current element.
+   ElementName is user-defined, but I recommend to use the shortest forms
+of ElementName: E1,E2,E3,E4,...
+   ElementType is one of:
+    - IMAGE - defines Image Element;
+    - PNG_IMAGE (do not use, use IMAGE instead);
+    - JPEG_IMAGE (do not use, use IMAGE instead);
+    - BOX_TILE - defines BoxTile Element;
+    - RECT - defines Figure Element;
+    - ELLIPSE - defines Figure Element;
+    - CIRCLE - defines Figure Element;
+    - ROUND_RECT - defines Figure Element;
+    - LINE - defines Figure Element;
+    - POLYGON - defines Figure Element;
+    - SOLID_FILL - defines Figure Element;
+    - FOCUS_RECT - defines Figure Element;
+    - ERASE_RECT - defines Figure Element;
+    - TEXT - defines Text Element;
+    - STYLE - defines Style Element.
+   For each element you can specify properties in this way:
+      ElementName.PropertyName=PropertyValue
+   Make sure that ElementName was added before setting it's property.
+
+          IMAGE ELEMENT
+          -------------
+   Properties of Image Element:
+    - Path - relative path to JPEG or PNG file;
+    - Transparent - should be set to 1 if image is not opaque. This
+      properties is used for drawing acceleration only.
+    - ResizeMode - one of these values:
+       * None (default)
+       * Tile
+       * Stretch
+    - Stretch - one of these values (is used if ResizeMode=Stretch):
+       * Nearest (default)
+       * Linear
+       * Spline
+       * Lanczos
+       * Mitchell
+    - OffsetX - integer value (is used if ResizeMode=Tile);
+    - OffsetY - integer value (is used if ResizeMode=Tile);
+    - Width - integer value (is used when ResizeMode isn't None);
+    - Height - integer value (is used when ResizeMode isn't None);
+    - Rect - image painting destination (see section 2.2);
+    - Centered - can be set to "1" if image shouldn't be scaled and has
+      to be horizontally and vertically centered;
+    - filter properties with no prefix used (see section 3.2).
+
+          BOXTILE ELEMENT
+          ---------------
+   BoxTile is an element, which consists of 9 images:
+
+      11222222222233
+      44555555555566
+      44555555555566
+      77888888888899 
+
+   Properties of BoxTile Element:
+    - Transparent - should be set to 1 if style is not opaque;
+    - Center - path to the center image;
+    - Left - path to the left image;
+    - Top - path to the top image;
+    - Right - path to the right image;
+    - Bottom - path to the bottom image;
+    - TopLeft - path to the top left corner image;
+    - TopRight - path to the top right corner image;
+    - BottomRight - path to the bottom right corner image;
+    - BottomLeft - path to the bottom left corner image;
+    - Paths - this property is used for fast setting of all path
+      properties. Format of the Paths property:
+         ElementName.Paths=Some_Path\prefix_*.png
+      Asterisk is replaced with "center", "left", "right", "bottom",
+      "topleft", "topright", "bottomright" and "bottomleft" for
+      appropriate path properties;
+    - Rect - drawing destination rectangle (see section 2.2);
+    - ResizeMode - one of Stretch and Tile, is used for Top, Left, Right,
+      Bottom and Center images;
+    - filter properties with no prefix used (see section 3.2).
+
+          FIGURE ELEMENT
+          --------------
+   Properties of Figure Element:
+    - HasBorder - is set to 1 if a border is drawn;
+    - HasFill - is set to 1 if a figure is filled;
+    - Antialiased - is set to 0 if antialiasing shouldn't be used;
+    - Rect - drawing destination rectangle, is used when ElementType is
+      one of RECT, ELLIPSE, CIRCLE, ROUND_RECT, FOCUS_RECT and ERASE_RECT
+      (see section 2.2);
+    - Poly - polygon or polyline coordinations, is used when ElementType
+      equals to LINE or POLYGON (see section 2.3);
+    - Fill - is one of these values (is used when HasFill=1):
+       * SOLID (default);
+       * GRADIENT_V - vertical gradient;
+       * GRADIENT_H - horizontal gradient.
+    - BorderColor - is used when HasBorder=1 (see section 2.1);
+    - FillColor - is used when HasFill=1 and Fill=SOLID (see section 2.1);
+    - FillColor1 - is used when HasFill=1 and Fill is not equal to SOLID,
+      defines the left color for horizontal fill and the top color for
+      vertical fill (see section 2.1);
+    - FillColor2 - is used when HasFill=1 and Fill is not equal to SOLID,
+      defines the right color for horizontal fill and the bottom color
+      for vertical fill (see section 2.1);
+    - Roundness - integer number for ElementType equal to ROUND_RECT;
+    - CornersStyle - is used for ROUND_RECT, defines, which corners of
+      a round rectange must be rounded:
+
+            | Left Top | Right Top | Right Bottom | Left Bottom |
+       *  0 |     -    |     -     |       -      |      -      |
+       *  1 |     +    |     -     |       -      |      -      |
+       *  2 |     -    |     +     |       -      |      -      |
+       *  3 |     +    |     +     |       -      |      -      |
+       *  4 |     -    |     -     |       +      |      -      |
+       *  5 |     +    |     -     |       +      |      -      |
+       *  6 |     -    |     +     |       +      |      -      |
+       *  7 |     +    |     +     |       +      |      -      |
+       *  8 |     -    |     -     |       -      |      +      |
+       *  9 |     +    |     -     |       -      |      +      |
+       * 10 |     -    |     +     |       -      |      +      |
+       * 11 |     +    |     +     |       -      |      +      |
+       * 12 |     -    |     -     |       +      |      +      |
+       * 13 |     +    |     -     |       +      |      +      |
+       * 14 |     -    |     +     |       +      |      +      |
+       * 15 |     +    |     +     |       +      |      +      |
+
+      "+" - corner is rounded, "-" - corner is sharp.
+      As you noted, binary form is used here.
+    - BorderThickness - floating-point number, default value is 1.
+      I recommend to use 1 for RECT, ELLIPSE (CIRCLE) and
+      ROUND_RECT - this makes painting mush faster.
+
+          TEXT ELEMENT
+          ------------
+   Properties of Text Element:
+    - Text - text string, which is drawn;
+    - Align - horizontal text alignment in a destination rectangle:
+      can be set to Left (default), Right or Center;
+    - VAlign - vertical text alignment in a destination rectangle:
+      can be set to Top (default), Bottom or Center;
+    - Rect - defines a destination rectangle (see section 2.2).
+
+          STYLE ELEMENT
+          -------------
+   Properties of Style Element:
+    - Style - a name of a General or Selective skin style;
+    - Rect - defines a destination drawing rectangle (see section 2.2);
+    - filter properties with no prefix used (see section 3.2).
+
+
+  ==========================
+   7. Selective skin styles
+  ==========================
+
+   Selective-style is a set of rules, those indicates, which general skin
+style to use depending on drawing region width and height. For example,
+selective-style can be useful in this situation: you have to draw an icon
+of variable size (e.g. 10x10, 27x27, 38x38, 123x123, ...) in your program,
+but you have some icons of standard size: 16x16, 32x32 and 128x128. Always
+to use 128x128-icon is not a good idea, because it contains some little
+elements, which looks disgustingly for size 32x32 and lower. So you should
+select appropriate icon depending on destination region width:
+
+           if width<=16px then use 16x16-icon
+      else if width<=32px then use 32x32-icon
+      else                     use 128x128-icon
+
+   Names of selective-styles must have "_Selective" at the beginning.
+   Section, which defines a selective-style contains these properties:
+    - any number of conditional styles selections in format:
+         StyleX=Condition,StyleName
+      where StyleX is Style1, Style2, ... , Style10, Style11, ...
+            Condition is conditional expression with these variables:
+             * W - destination region width;
+             * H - destination region height.
+             See section 9 to find arithmetic operations, which can be
+             used in Condition.
+            StyleName is a general skin style name.
+    - default skin style, which is used when none of condition is
+      fulfilled. Syntax, which is used to define default skin style:
+         Default=StyleName
+   Conditions are checked in order they are defined.
+   Example (with conditions described above):
+
+      [_Selective_MainIcon]
+      Style1=W<=16,Icon16
+      Style2=W<=32,Icon32
+      Default=Icon128
+
+
+  ===========================================
+   8. Component-associated styles properties
+  ===========================================
+
+     8.1. Label
+     ==========
+
+   Names of all skin styles for TSXSkinLabel component have "_Label"
+at the beginning. I will name them label-styles.
+   Label-style has 3 states: normal, highlighted and read-only
+(disabled). Properties for these states are set using this notation:
+      N_PropertyName=PropertyValue  (for normal state)
+      H_PropertyName=PropertyValue  (for highlighted state)
+      R_PropertyName=PropertyValue  (for read-only state)
+   PropertyName can be:
+    - font properties with only state prefix (see section 3.1).
+   Example:
+
+      [_Label_Hyperlink]
+      N_FontColor=#0000FF
+      H_FontStyle=u
+      D_FontColor=#A0A0A0
+
+   TSXSkinLabel with SkinStyle='_Label_Hyperlink' is blue, is underlined
+when mouse is over and is gray when disabled.
+
+     8.2. Button
+     ===========
+
+   Names of all skin styles for TSXSkinButton component have "_Button"
+at the beginning. I will name them button-styles.
+   According to SXSkinComponents ideology a button can be:
+    * normal / highlighted (mouse is over);
+    * enabled / disabled;
+    * focused / unfocused;
+    * normal / down (pressed);
+    * checked / unchecked (the same as Down property in VCL).
+   Depending on whether a button can be checked (Down in VCL), there
+are two ways of button-style states naming:
+    - NU, NF, HU, HF, DF and RU,
+      the first letter means: N - normal, H - highlighted,
+                              D - down (pressed), R - read-only (disabled),
+      the second button means: U - unfocused, F - focused;
+    - NUU, NFU, HUU, HFU, DFU, RUU, NUC, NFC, HUC, HFC, DFC and RUC,
+      the first two letters - the same meaning,
+      the third letter means: U - unchecked, C - checked (Down in VCL).
+   However, all two-letter states XX are equal to XXU.
+   I will call these two and three-letter abbreviations StatePrefixes.
+   Properties for these states are set using this notation:
+      StatePrefix_PropertyName=PropertyValue
+   PropertyName can be one of these:
+    - Style - name of general skin style for button background;
+    - OverStyle - name of another general skin style, unlike Style, it is
+      not used in Transform Effects (usually contains FOCUS_RECT element
+      for all focused states);
+    - CaptionLeftOffset - positive integer value (caption is glyph, text
+      and drop-down glyph with offsets between them);
+    - CaptionTopOffset;
+    - CaptionRightOffset;
+    - CaptionBottomOffset;
+    - DefGlyph* - default glyph filter for current state (see section 3.2);
+    - font properties without additional prefixes (see section 3.1).
+   The heredity principle is used when setting state properties. The
+"lowest" state is NUU (NU), it means that properties for all other states
+depend on properties of NUU state. E.g. if you set NU_FontName=Arial and
+don't set property HU_FontName, then HU_FontName=Arial too. This table
+describes, which states are taken into account to set properties for each
+state (if some properties are missing):
+
+      ----------------------------------------------------------
+      NUU  NFU  HUU  HFU  DFU  RUU  NUC  NFC  HUC  HFC  DFC  RUC
+      ----------------------------------------------------------
+           NUU  NUU  HUU  NFU  NUU  NUU  NUC  NUC  HUC  DFU  NUC
+                     NFU  NUU            NFU  HUU  HFU  NFC  RUU
+                     NUU                 NUU  NUU  HUU  NFU  NUU
+                                                   NFC  NUC
+                                                   NUC  NUU
+                                                   NFU
+                                                   NUU
+
+      Example: if NFU_FontColor=#FF0000,
+                  HUU_FontColor=#808080,
+                  HFU_FontColor=#00FFFF,
+                  NUU_FontColor=#FFFFFF,
+
+             then NUU_FontColor=#FFFFFF,    NFU_FontColor=#FF0000,
+                  HUU_FontColor=#808080,    HFU_FontColor=#00FFFF,
+                  DFU_FontColor=#FF0000,    RUU_FontColor=#FFFFFF,
+                  NUC_FontColor=#FFFFFF,    NFC_FontColor=#FF0000,
+                  HUC_FontColor=#808080,    HFC_FontColor=#00FFFF,
+                  DFC_FontColor=#FF0000,    RUC_FontColor=#FFFFFF.
+
+      Note: If NUU font parameters are not set, then TSXSkinButton.Font
+            is used instead (with no shadow and no smoothing).
+
+   Common properties for all states (use without state prefixes):
+    - HighlightInButton* - parameters of the transform effect, which is
+      used when button state changes from normal to highlighted
+      (see section 3.3);
+    - HighlightOutButton* - state changes from highlighted to normal;
+    - CheckButton* - state changes from unchecked to checked;
+    - UncheckButton* - state changes from checked to unchecked;
+    - DownButton* - state changes from normal (highlighted) to down;
+    - UpButton* - state changes from down to normal;
+    - EnableButton* - state changes from read-only (disabled) to enabled;
+    - DisableButton* - state changes from enabled to read-only (disabled);
+    - FocusButton* - state changes from unfocused to focused;
+    - UnfocusButton* - state changes from focused to unfocused;
+    - HighlightInGlyph* - the same as HighlightOutButton*, but for glyph;
+    - HighlightOutGlyph*;
+    - CheckGlyph*;
+    - UncheckGlyph*;
+    - DownGlyph*;
+    - UpGlyph*;
+    - EnableGlyph*;
+    - DisableGlyph*;
+    - FocusGlyph*;
+    - UnfocusGlyph*;
+    - HighlightInDDGlyph* - effect for highlighting of drop-down glyph;
+    - HighlightOutDDGlyph*;
+    - CheckDDGlyph*;
+    - UncheckDDGlyph*;
+    - DownDDGlyph*;
+    - UpDDGlyph*;
+    - EnableDDGlyph*;
+    - DisableDDGlyph*;
+    - FocusDDGlyph*;
+    - UnfocusDDGlyph*;
+    - DropDownGlyphWidth - integer pixels number;
+    - DropDownGlyphHeight - integer pixels number;
+    - DropDownGlyphOffset - pixels number between text and drop-down glyph.
+
+   Variables, those can be used when defining general skin styles
+elements parameters:
+    * W - TSXSkinButton.Width;
+    * H - TSXSkinButton.Height;
+    * GlX - X-coordinate of glyph position;
+    * GlY - Y-coordinate of glyph position;
+    * GlW - glyph width;
+    * GlH - glyph height.
+
+     8.3. CheckBox
+     =============
+
+   Names of all skin styles for TSXSkinCheckBox component have "_CheckBox"
+at the beginning. I will name them checkbox-styles.
+   According to SXSkinComponents ideology a checkbox can be:
+    * normal / highlighted (mouse is over);
+    * enabled / disabled;
+    * focused / unfocused;
+    * normal / down (pressed);
+    * checked / unchecked / grayed (for tristate checkboxes).
+   There is an exhaustive list of checkbox states:
+      NUU, NFU, HUU, HFU, DFU, RUU, NUC, NFC, HUC,
+      HFC, DFC, RUC, NUG, NFG, HUG, HFG, DFG, RUG
+   The first button means: N - normal, H - highlighted,
+                           D - down (pressed), R - read-only (disabled).
+   The second button: U - unfocused, F - focused.
+   The third button: U - unchecked, C - checked, G - grayed.
+   I will call these three-letter abbreviations StatePrefixes.
+   Properties for these states are set using this notation:
+      StatePrefix_PropertyName=PropertyValue
+   PropertyName can be one of these:
+    - Style - name of general skin style for checkbox background;
+    - OverStyle - name of another general skin style, unlike Style, it is
+      not used in Transform Effects (usually contains FOCUS_RECT element
+      for all focused states);
+    - Glyph - name of general skin style, which is uses as glyph;
+    - GlyphWidth - integer number;
+    - GlyphHeight - integer number;
+    - CaptionLeftOffset - positive integer value (caption is glyph and
+      text with offset between them);
+    - CaptionTopOffset;
+    - CaptionRightOffset;
+    - CaptionBottomOffset;
+    - TextLeftOffset - integer value (offset inside a caption);
+    - TextTopOffset;
+    - TextRightOffset;
+    - TextBottomOffset;
+    - font properties without additional prefixes (see section 3.1).
+   The heredity principle is used when setting state properties. The
+"lowest" state is NUU, it means that properties for all other states
+depend on properties of NUU state. E.g. if you set NUU_FontName=Arial and
+don't set property HUU_FontName, then HUU_FontName=Arial too. This table
+describes, which states are taken into account to set properties for each
+state (if some properties are missing):
+
+  -----------------------------------------------------------------------
+  NUU NFU HUU HFU DFU RUU NUC NFC HUC HFC DFC RUC NUG NFG HUG HFG DFG RUG
+  -----------------------------------------------------------------------
+      NUU NUU HUU NFU NUU NUU NUC NUC HUC DFU NUC NUC NUG NUG HUG DFC NUG
+              NFU NUU         NFU HUU HFU NFC RUU NUU NFC HUC HFC DFU RUC
+              NUU             NUU NUU HUU NFU NUU     NUC NUC HUC NFG NUC
+                                      NFC NUC         NFU HUU HFU NFC RUU
+                                      NUC NUU         NUU NUU HUU NFU NUU
+                                      NFU                     NFG NUG
+                                      NUU                     NUG NUC
+                                                              NFC NUU
+                                                              NUC
+                                                              NFU
+                                                              NUU
+
+   See inherited properties example in section 8.2.
+
+   Common properties for all states (use without state prefixes):
+    - HighlightInCheckBox* - parameters of the transform effect, which is
+      used when checkbox state changes from normal to highlighted
+      (see section 3.3);
+    - HighlightOutCheckBox* - state changes from highlighted to normal;
+    - CheckCheckBox* - state changes from unchecked to checked;
+    - UncheckCheckBox* - state changes from checked to unchecked;
+    - DownCheckBox* - state changes from normal (highlighted) to pressed;
+    - UpCheckBox* - state changes from pressed to normal (highlighted);
+    - EnableCheckBox* -state changes from disabled to enabled;
+    - DisableCheckBox* - state changes from enabled to disabled;
+    - FocusCheckBox* - state changes from unfocused to focused;
+    - UnfocusCheckBox* -state changes from focused to unfocused;
+    - HighlightInGlyph* - the same as HighlightOutCheckBox*, but for glyph;
+    - HighlightOutGlyph*;
+    - CheckGlyph*;
+    - UncheckGlyph*;
+    - DownGlyph*;
+    - UpGlyph*;
+    - EnableGlyph*;
+    - DisableGlyph*;
+    - FocusGlyph*;
+    - UnfocusGlyph*.
+
+   Variables, those can be used when defining general skin styles
+elements parameters:
+    * W - TSXSkinCheckBox.Width;
+    * H - TSXSkinCheckBox.Height;
+    * GlX - X-coordinate of glyph position;
+    * GlY - Y-coordinate of glyph position;
+    * GlW - glyph width;
+    * GlH - glyph height;
+    * TL - TextRect.Left;
+    * TT - TextRect.Top;
+    * TR - TextRect.Right;
+    * TB - TextRect.Bottom.
+
+     8.4. RadioButton
+     ================
+
+   Names of all skin styles for TSXSkinRadioButton component have
+"_CheckBox" at the beginning. I will name them radiobutton-styles.
+   According to SXSkinComponents ideology a radio button can be:
+    * normal / highlighted (mouse is over);
+    * enabled / disabled;
+    * focused / unfocused;
+    * normal / down (pressed);
+    * checked / unchecked.
+   There is an exhaustive list of radio button states:
+      NUU, NFU, HUU, HFU, DFU, RUU, NUC, NFC, HUC, HFC, DFC, RUC
+   The first button means: N - normal, H - highlighted,
+                           D - down (pressed), R - read-only (disabled).
+   The second button: U - unfocused, F - focused.
+   The third button: U - unchecked, C - checked.
+   I will call these three-letter abbreviations StatePrefixes.
+   Properties for these states are set using this notation:
+      StatePrefix_PropertyName=PropertyValue
+   PropertyName can be one of these:
+    - Style - name of general skin style for radio button background;
+    - OverStyle - name of another general skin style, unlike Style, it is
+      not used in Transform Effects (usually contains FOCUS_RECT element
+      for all focused states);
+    - Glyph - name of general skin style, which is uses as glyph;
+    - GlyphWidth - integer number;
+    - GlyphHeight - integer number;
+    - CaptionLeftOffset - positive integer value (caption is glyph and
+      text with offset between them);
+    - CaptionTopOffset;
+    - CaptionRightOffset;
+    - CaptionBottomOffset;
+    - TextLeftOffset - integer value (offset inside a caption);
+    - TextTopOffset;
+    - TextRightOffset;
+    - TextBottomOffset;
+    - font properties without additional prefixes (see section 3.1).
+   The heredity principle is used when setting state properties. The
+"lowest" state is NUU, it means that properties for all other states
+depend on properties of NUU state. E.g. if you set NUU_FontName=Arial and
+don't set property HUU_FontName, then HUU_FontName=Arial too. This table
+describes, which states are taken into account to set properties for each
+state (if some properties are missing):
+
+      ----------------------------------------------------------
+      NUU  NFU  HUU  HFU  DFU  RUU  NUC  NFC  HUC  HFC  DFC  RUC 
+      ----------------------------------------------------------
+           NUU  NUU  HUU  NFU  NUU  NUU  NUC  NUC  HUC  DFU  NUC
+                     NFU  NUU            NFU  HUU  HFU  NFC  RUU
+                     NUU                 NUU  NUU  HUU  NFU  NUU
+                                                   NFC  NUC
+                                                   NUC  NUU
+                                                   NFU
+                                                   NUU
+
+   See inherited properties example in section 8.2.
+
+   Common properties for all states (use without state prefixes):
+    - HighlightInRadioButton* - parameters of the transform effect,
+      which is used when checkbox state changes from normal to highlighted
+      (see section 3.3);
+    - HighlightOutRadioButton* - state changes from highlighted to normal;
+    - CheckRadioButton* - state changes from unchecked to checked;
+    - UncheckRadioButton* - state changes from checked to unchecked;
+    - DownRadioButton* - state changes from normal (highlighted) to
+      pressed;
+    - UpRadioButton* - state changes from pressed to normal (highlighted);
+    - EnableRadioButton* -state changes from disabled to enabled;
+    - DisableRadioButton* - state changes from enabled to disabled;
+    - FocusRadioButton* - state changes from unfocused to focused;
+    - UnfocusRadioButton* -state changes from focused to unfocused;
+    - HighlightInGlyph* - the same as HighlightOutCheckBox*, but for glyph;
+    - HighlightOutGlyph*;
+    - CheckGlyph*;
+    - UncheckGlyph*;
+    - DownGlyph*;
+    - UpGlyph*;
+    - EnableGlyph*;
+    - DisableGlyph*;
+    - FocusGlyph*;
+    - UnfocusGlyph*.
+
+   Variables, those can be used when defining general skin styles
+elements parameters:
+    * W - TSXSkinRadioButton.Width;
+    * H - TSXSkinRadioButton.Height;
+    * GlX - X-coordinate of glyph position;
+    * GlY - Y-coordinate of glyph position;
+    * GlW - glyph width;
+    * GlH - glyph height;
+    * TL - TextRect.Left;
+    * TT - TextRect.Top;
+    * TR - TextRect.Right;
+    * TB - TextRect.Bottom.
+
+     8.5. Edit
+     =========
+
+   Names of all skin styles for TSXSkinEdit component have "_Edit" at the
+beginning. I will name them edit-styles.
+   There is an exhaustive list of radio button states:
+      NU, NF, HU, HF, RU
+   The first letter means: N - normal, H - highlighted, R - disabled.
+   The second letter: U - unfocused, F - focused.
+   I will call these two-letter abbreviations StatePrefixes.
+   Properties for these states are set using this notation:
+      StatePrefix_PropertyName=PropertyValue
+   PropertyName can be one of these:
+    - Style - name of general skin style for radio button background
+      (background is everything except text);
+    - font properties without additional prefixes (see section 3.1).
+   The heredity principle is used when setting state properties. The
+"lowest" state is NU, it means that properties for all other states
+depend on properties of NU state. E.g. if you set NU_FontName=Arial and
+don't set property HU_FontName, then HU_FontName=Arial too. This table
+describes, which states are taken into account to set properties for each
+state (if some properties are missing):
+
+      ======================
+      NU   NF   HU   HF   RU
+      ======================
+           NU   NU   HU   NU
+                     NF
+                     NU
+
+   See inherited properties example in section 8.2.
+
+   Common properties for all states (use without state prefixes):
+    - HighlightInEdit* - parameters of the transform effect, which is
+      used when edit state changes from normal to highlighted
+      (see section 3.3);
+    - HighlightOutEdit* - state changes from highlighted to normal;
+    - EnableEdit* - state changes from disabled to enabled;
+    - DisableEdit* - state changes from enabled to disabled;
+    - FocusEdit* - state changes from unfocused to focused;
+    - UnfocusEdit* - state changes from focused to unfocused;
+    - TextLeftOffset - width of the left border in pixels;
+    - TextTopOffset - width of the top border in pixels;
+    - TextRightOffset - width of the right border in pixels;
+    - TextBottomOffset - width of the bottom border in pixels.
+
+   Variables, those can be used when defining general skin styles
+elements parameters:
+    * W - TSXSkinEdit.Width;
+    * H - TSXSkinEdit.Height.
+
+     8.6. GroupBox
+     =============
+
+   Names of all skin styles for TSXSkinGroupBox component have "_GroupBox"
+at the beginning. I will name them groupbox-styles.
+   There is an exhaustive list of group box states:
+      NU, NF, HU, HF, RU
+   The first letter means: N - normal, H - highlighted, R - disabled.
+   The second letter: U - unfocused, F - focused.
+   States NF, HU, HF are important only when group box is combines with
+check box or radio button.
+   I will call these two-letter abbreviations StatePrefixes.
+   Properties for these states are set using this notation:
+      StatePrefix_PropertyName=PropertyValue
+   PropertyName can be one of these:
+    - Style - name of general skin style for group box background;
+    - OverStyle - name of general skin style for top background layer;
+    - CaptionPosition - left or right (depending on caption alignment
+      mode) offset of caption in pixels;
+    - CaptionLeftOffset - offset of glyph and text inside the caption;
+    - CaptionTopOffset;
+    - CaptionRightOffset;
+    - CaptionBottomOffset;
+    - TextLeftOffset;
+    - TextTopOffset;
+    - TextRightOffset;
+    - TextBottomOffset;
+    - TransparentRect - since a group box is usually drawn as a frame with
+      a caption, inner area of it is transparent; this property specifies
+      this transparent area for drawing acceleration (see section 2.2).
+   The heredity principle is used when setting state properties. The
+"lowest" state is NU, it means that properties for all other states
+depend on properties of NU state. E.g. if you set NU_FontName=Arial and
+don't set property HU_FontName, then HU_FontName=Arial too. This table
+describes, which states are taken into account to set properties for each
+state (if some properties are missing):
+
+      ======================
+      NU   NF   HU   HF   RU
+      ======================
+           NU   NU   HU   NU
+                     NF
+                     NU
+
+   See inherited properties example in section 8.2.
+
+   Common properties for all states (use without state prefixes):
+    - LabelStyle - name of label-style, which is used for drawing of group
+      box caption by default;
+    - GlyphWidth;
+    - GlyphHeight;
+    - ClientRect - data for calculating component ClientRect property in
+      TWinControl.AdjustClientRect (see section 2.2).
+
+   Variables, those can be used when defining StatePrefix_TransparentRect,
+ClientRect and general skin styles elements parameters:
+    * W - TSXSkinGroupBox.Width;
+    * H - TSXSkinGroupBox.Height;
+    * CL - CaptionRect.Left;
+    * CT - CaptionRect.Top;
+    * CR - CaptionRect.Right;
+    * CB - CaptionRect.Bottom;
+    * GlX - X-coordinate of glyph position;
+    * GlY - Y-coordinate of glyph position;
+    * GlW - glyph width;
+    * GlH - glyph height;
+    * TL - TextRect.Left;
+    * TT - TextRect.Top;
+    * TR - TextRect.Right;
+    * TB - TextRect.Bottom.
+
+     8.7. MultiState
+     ===============
+
+   All multistate-styles have "_MultiState" at the beginning of their
+names. Multistate-style have these states:
+    * normal;
+    * highlighted;
+    * down (pressed);
+    * read-only (disabled).
+   Properties of multistate-style (not state):
+    - NStyle - general skin style, which is used for drawing when state
+      is normal;
+    - HStyle - general skin style for highlighted state;
+    - DStyle - general skin style for down (pressed) state;
+    - RStyle - general skin style for read-only (disabled) state.
+   Multistate-styles usually are used as glyphs.
+
+     8.8. MultiStateCheck
+     ====================
+
+   All multistatecheck-styles have "_MultiStateCheck" at the beginning
+of their names. Multistatecheck-style have these states:
+      NU, HU, DU, RU, NC, HC, DC, RC
+   The first letter means: N - normal, H - highlighted,
+                           D - down (pressed), R - read-only (disabled).
+   The second letter: U - unchecked, C - checked.
+   Properties of multistatecheck-style (not state):
+    - NUStyle;
+    - HUStyle;
+    - DUStyle;
+    - RUStyle;
+    - NCStyle;
+    - HCStyle;
+    - DCStyle;
+    - RCStyle.
+   Multistatecheck-styles usually are used as glyphs for buttons with
+CanBeChecked property set to True.
+
+     8.9. Form
+     =========
+
+   All form-styles have "_Form" at the beginning of their names.
+   All standard skins (which contain styles of buttons, check boxes, radio
+buttons etc.) define two form-styles: "_Form" and "_FormSmallCaption", one
+of which is choosen depending on BorderStyle property of parent TForm
+conmponent (if BorderStyle in [bsDialog, bsSingle, bsSizeable], then _Form
+is used, otherwise _FormSmallCaption is used).
+   Form-style have these states:
+      NU, MU, XU, NF, MF, XF
+   The first letter means: N - normal, M - minimized, X - maximized,
+   The second letter: U - unfocused (inactive), F - focused (active).
+   I will call these two-letter abbreviations StatePrefixes.
+   Properties for these states are set using this notation:
+      StatePrefix_PropertyName=PropertyValue
+   The foregoing list of states is temporal and will be extended in the
+next version of SXSkinComponents library.
+   Properties of form-state aren't finally defined too. Now they are:
+    - MaskLeftWidth;
+    - MaskRightWidth;
+    - MaskTopHeight;
+    - MaskBottomHeight;
+    - MaskTopLeft;
+    - MaskTopRight;
+    - MaskBottomLeft;
+    - MaskBottomRight;
+    - MaskLeft;
+    - MaskRight;
+    - MaskTop;
+    - MaskBottom;
+    - FullMask;
+    - ResizeTopLeft;
+    - ResizeTopRight;
+    - ResizeBottomLeft;
+    - ResizeBottomRight;
+    - ResizeLeft;
+    - ResizeRight;
+    - ResizeTop;
+    - ResizeBottom;
+    - CaptionRegion;
+    - Caption;
+    - LeftFrame;
+    - RightFrame;
+    - BottomFrame;
+    - IconRect;
+    - TextRect;
+    - CloseRect;
+    - MaximizeRect;
+    - MinimizeRect;
+    - HelpRect;
+    - CloseButton;
+    - MaximizeButton;
+    - MinimizeButton;
+    - RestoreButton;
+    - HelpButton;
+    - TextAlignment.
+   Common properties for all states (use without state prefixes):
+    - CaptionHeight;
+    - LeftFrameWidth;
+    - RightFrameWidth;
+    - BottomFrameHeight.
+
+     8.10. UpDown
+     ============
+
+   All updown-styles have "_UpDown" at the beginning of their names. I
+will name them updown-styles.
+   There is an exhaustive list of updown states:
+      NU, NF, HU, HF, DF, RU
+   The first letter means: N - normal, H - highlighted, D - down (pressed),
+                           R - disabled.
+   The second letter: U - unfocused, F - focused.
+   I will call these two-letter abbreviations StatePrefixes.
+   Properties for these states are set using this notation:
+      StatePrefix_PropertyName=PropertyValue
+   PropertyName can be one of these:
+    - Style - name of general skin style for updown control background,
+      which is painted behind updown buttons;
+    - OverStyle - name of general skin style for updown control
+      foreground, which is painted in front of updown buttons.
+   The heredity principle is used when setting state properties. The
+"lowest" state is NU, it means that properties for all other states
+depend on properties of NU state. E.g. if you set NU_Style=UpDown_N and
+don't set property HU_Style, then HU_Style=UpDown_N too. This table
+describes, which states are taken into account to set properties for each
+state (if some properties are missing):
+
+      ===========================
+      NU   NF   HU   HF   DF   RU
+      ===========================
+           NU   NU   HU   NF   NU
+                     NF   NU
+                     NU
+
+   See inherited properties example in section 8.2.
+
+   Common properties for all states (use without state prefixes):
+    - HighlightInUpDown* - parameters of the transform effect, which is
+      used when updown state changes from normal to highlighted
+      (see section 3.3);
+    - HighlightOutUpDown* - state changes from highlighted to normal;
+    - DownUpDown* - state changes from normal to down (pressed);
+    - UpUpDown* - state changes from down (pressed) to normal;
+    - EnableUpDown* - state changes from disabled to enabled;
+    - DisableUpDown* - state changes from enabled to disabled;
+    - FocusUpDown* - state changes from unfocused to focused;
+    - UnfocusUpDown* - state changes from focused to unfocused;
+    - UpButton - button-style, used to paint up-button (see section 8.2);
+    - DownButton - button-style, used to paint down-button;
+    - UpButtonRect - destination rectangle, where up-button is painted
+      (see section 2.2);
+    - DownButtonRect - destination rectangle, where down-button is painted;
+
+   Variables, those can be used when defining general skin styles
+elements parameters:
+    * W - TSXSkinUpDown.Width;
+    * H - TSXSkinUpDown.Height;
+    * UL - up-button left coordinate;
+    * UT - up-button top coordinate;
+    * UR - up-button right coordinate;
+    * UB - up-button bottom coordinate;
+    * DL - down-button left coordinate;
+    * DT - down-button top coordinate;
+    * DR - down-button right coordinate;
+    * DB - down-button bottom coordinate.
+
+     8.11. SpinEdit
+     ==============
+
+   All updown-styles have "_SpinEdit" at the beginning of their names. I
+will name them spinedit-styles.
+   Properties of spinedit-styles:
+    - Edit - edit-syle, which is used to paint SpinEdit (see section 8.5);
+    - UpDown - updown-style (see section 8.10);
+    - EditRect - coordinates of the rectangle, where Edit is drawn
+      (see section 2.2);
+    - UpDownRect - coordinates of the rectangle, where UpDown is drawn.
+
+
+  ==========================
+   9. Arithmetic operations
+  ==========================
+
+   These arithmetic operations are supported:
+    * addition (+): A+B;
+    * subtraction (-): A-B;
+    * multiplication (*): A*B;
+    * integer division (/): A/B (5/2=2, 2/3=0);
+    * division with rounding (|): A|B (5|2=3, 2|3=1);
+    * residue of division (%): A%B (5%2=1, 9%3=0);
+    * square root ($): $A;
+    * parenthesis: (A+B)*C.
+   When defining selective-style rules, you can also use these logical and
+comparison operations:
+    * logical AND (&&): A=B&&C=D;
+    * logical OR (||): A=B||C=D;
+    * logical NOT (!): !(A=B);
+    * equality (=): A=B;
+    * inequality (!=): A!=B;
+    * larger (>): A>B;
+    * less (<): A<B;
+    * larger or equal (>=): A>=B;
+    * less or equal (<=): A<=B.
+
+Web Site: http://www.saarixx.info/sxskincomponents/en/
+E-Mail: sxskincomponents@saarixx.info
+
+Copyright (C) 2006-2007, Alexey Sadovnikov. All Rights Reserved.

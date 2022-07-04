@@ -1,0 +1,57 @@
+package vgDDB7;
+
+{$R *.res}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'VG Library DB Components'}
+{$DESIGNONLY}
+{$IMPLICITBUILD ON}
+
+requires
+  dcldb,
+  dclbde,
+  vgDVCL7;
+
+contains
+  vgDBRg in 'vgDBRg.pas',
+  vgDBUtl in 'vgDBUtl.pas',
+  vgBDEUtl in 'vgBDEUtl.pas',
+  vgDBCtrl in 'vgDBCtrl.pas',
+  vgDBTree in 'vgDBTree.pas',
+  vgBDECon in 'vgBDECon.pas',
+  vgConvEd in 'vgConvEd.pas',
+  vgDBConv in 'vgDBConv.pas',
+  vgDBRes in 'vgDBRes.pas',
+  ConvAdd in 'ConvAdd.pas' {ConvertItemsAddForm},
+  vgDBPrms in 'vgDBPrms.pas',
+  vgDB in 'vgDB.pas',
+  vgBDE in 'vgBDE.pas',
+  ExplrDB in 'ExplrDB.pas',
+  ExplrBDE in 'ExplrBDE.pas',
+  vgWPDB in 'vgWPDB.pas',
+  vgWPBDE in 'vgWPBDE.pas',
+  vgCanExp in 'vgCanExp.pas',
+  vgDBExpr in 'vgDBExpr.pas',
+  vgBCDUtl in 'vgBCDUtl.pas',
+  UpdSqlE in 'UpdSQLE.pas' {UpdateSQLEditorForm};
+
+end.

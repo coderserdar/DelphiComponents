@@ -1,0 +1,43 @@
+package DCLCBP60;
+
+{$R *.res}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS OFF}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'ComboBoxPlus and DBComboBoxPlus design time package'}
+{$IMPLICITBUILD ON}
+{$DEFINE DEMO}
+
+requires
+  designide,
+  vcl,
+  rtl,
+  dbrtl,
+  vcldb,
+  bdertl,
+  VclSmp,
+  VCLCBP60;
+
+contains
+  cbplus in 'cbplus.pas',
+  cellsdlg in 'cellsdlg.pas' {CellsForm};
+
+end.

@@ -1,0 +1,42 @@
+package GTDBControlsD6;
+
+{$R *.res}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'GT DB Controls'}
+{$IMPLICITBUILD OFF}
+
+requires
+  rtl,
+  vcl,
+  dbrtl,
+  vcldb,
+  VclSmp;
+
+contains
+  o_GTDBGridExporter in 'Source\o_GTDBGridExporter.pas',
+  o_GTDBControls in 'Source\o_GTDBControls.pas',
+  o_GTDBControlsReg in 'Source\o_GTDBControlsReg.pas',
+  o_GTDBLookUpEdit in 'Source\o_GTDBLookUpEdit.pas',
+  o_GTDBColumnManager in 'Source\o_GTDBColumnManager.pas' {gtFrmColumnManager};
+
+end.

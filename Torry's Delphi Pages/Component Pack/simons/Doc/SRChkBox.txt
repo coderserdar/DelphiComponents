@@ -1,0 +1,185 @@
+TSRCheckBox und TEnhancedCheckBox (C)opyright 2005 Version 1.40
+
+  Autor : Simon Reinhardt
+  eMail : reinhardt@picsoft.de
+  Internet : http://www.picsoft.de
+
+  Die Komponente TSRCheckBox ist eine Checkbox-Komponente mit Autosize-,
+  Transparent- und WordWrap-Eigenschaften. Außerdem wird kein OnClick-Ereignis
+  abgefeuert, wenn die Checked-Eigenschaft per Programmcode geändert wird.
+  Die Komponente ist abgeleteitet von TGraphicControl.
+
+  Die Komponente TEnhancedCheckBox entspricht der Komponente TSRCheckBox,
+  ist aber von TCustomControl abgeleitet und kann deshalb auch den Eingabefokus
+  bekommen. Dafür entfällt die "Transparent"-Eigenschaft.
+
+  Die Komponenten sind Public Domain, das Urheberrecht liegt aber beim Autor. 
+
+
+Dateiumfang:
+------------
+
+SRChkBox.txt 	- Diese Datei
+SRChkBox.pas	- Quelltext der Komponente
+SRChkBox.d16	- Resourcendatei der 16-Bit-Komponente für Delphi 1
+SRChkBox.d32	- Resourcendatei der 32-Bit-Komponente für Delphi ab Version 2
+SRDefine.inc	- Include-Datei
+
+
+Installation:
+-------------
+
+In Delphi 1:
+------------
+1. Alle Dateien in das Delphi-Komponenten-Verzeichnis entpacken.
+2. Menü Optionen: Komponente installieren
+3. Schaltfläche Hinzufügen / Durchsuchen
+4. Datei SRChkBox.pas im Delphi-Komponenten-Verzeichnis suchen und mit
+   OK bestätigen.
+5. Die Komponenten erscheinen in der Komponenten-Gruppe "Simon"
+
+In Delphi 2:
+------------
+1. Alle Dateien in das Delphi-Komponenten-Verzeichnis entpacken.
+2. Menü Komponente:  installieren
+3. Schaltfläche Hinzufügen / Durchsuchen
+4. Datei SRChkBox.pas im Delphi-Komponenten-Verzeichnis suchen und mit
+   OK bestätigen.
+5. Die Komponenten erscheinen in der Komponenten-Gruppe "Simon"
+
+Ab Delphi 3:
+------------
+1. Alle Dateien in das Delphi-Komponenten-Verzeichnis entpacken.
+2. Menü Komponente:  Komponente installieren
+3. Schaltfläche Durchsuchen (hinter dem Eingabefeld für den Unit-Namen)
+4. Datei SRChkBox.pas im Delphi-Komponenten-Verzeichnis suchen und mit
+   OK bestätigen.
+5. Die Rückfrage nach dem Neukompilieren des Packages bestätigen.
+6. Die Komponenten erscheinen in der Komponenten-Gruppe "Simon"
+   (Evtl. muß eine bereits installierte, ältere Version der Komponenten
+    zuvor entfernt werden)
+
+
+Funktion:
+---------
+
+Die Komponenten funktionieren ähnlich wie die Delphi-Komponente TCheckBox. 
+Zusätzlich gibt es eine "Autosize"-Eigenschaft, die dafür sorgt, daß die
+Größe der Komponente an den Text in der Eigenschaft "Caption" angepasst
+wird (wie bei TLabel). Der Text kann dank der "WordWrap"-Eigenschaft auch
+mehrzeilig sein. Auch die Eigenschaft "Transparent" von TSRCheckBox hat 
+den gleichen Effekt wie bei TLabel.
+
+A) neue Eigenschaften:
+----------------------
+
+Alignment: TLeftRight;
+  Aurichtung des Textes und der Checkbox:
+    - taLeftJustify: Die Checkbox wird links neben dem Text angezeigt.
+    - taRightJustify: Die Checkbox wird rechts neben dem Text angezeigt.
+
+AllowAllUnchecked: boolean 
+  Wenn die Eigenschaft "Grouped"=true ist, kann der Zustand einer Checkbox mit 
+  "State=cbChecked" nur dann auf cbUnchecked geändert werden, wenn
+  AllowAllUnchecked=true (ähnlich der AllowAllUp-Eigenschaft von TSpeedButton).
+
+AllowGrayed: boolean;
+  Nur wenn AllowGrayed=true, kann die Eiegnschaft "State" der CheckBox den Wert
+  cbGrayed annehmen.
+
+AutoSize: boolean;
+  wie bei TLabel: Die Größe des Controls wir dan den Text in der Eigenschaft
+  "Caption" angepasst.
+
+CheckSize: integer;
+  Die Größe (Höhe und Breite) der CheckBox in Pixeln
+
+Glyph: TBitmap;
+  Ein bis vier Bilder in einem Bitmap für den Checboxstil csBitmap. Wenn Glyph
+  vier Bilder enthält, werden diese für die Checkbox-Zustände
+  Checked, Grayed, Unchecked, Disabled angezeigt.
+
+Grouped: boolean;
+  Wenn Grouped=true, verhält sich die CheckBox wie TRadioButton, sonst wie 
+  TCheckBox.
+
+HoverActive: boolean;
+  Nur wenn HoverActive=true, haben die folgenden Hover-Eigenschaften eine 
+  Auswirkung, wenn der Mauszeiger über die Komponente bewegt wird.
+
+HoverColor: TColor;
+  Die Hintergrundfarbe der Komponente, wenn der Mauszeiger über die 
+  Komponente bewegt wird.
+
+HoverCursor: TCursor;
+  Die Cursorform, wenn der Mauszeiger über die Komponente bewegt wird.
+
+HoverFontColor: TColor;
+  Die Schriftfarbe der Komponente, wenn der Mauszeiger über die Komponente 
+  bewegt wird.
+
+Layout: TCheckboxLayout;
+  Die relative Position der Checkbox zum Text (oben/mitte/unten).
+
+NumGlyphs: TNumGlyphs
+  Anzahl der Bilder im der Glyph-Eigenschaft zugewiesenen Bitmap.
+
+Spacing: integer;
+  Der Abstand des Textes zur Checkbox in Pixeln. "-1": automatisch anpassen.
+
+State: TCheckBoxState;
+  Der Zustand der CheckBox (cbUnChecked, cbChecked, cbGrayed)
+  Der Wert cbGrayed wird nur angenommen, wenn AllowGrayed=true.
+
+Style: TCheckStyle;
+  Das Aussehen der Checkbox:
+    - csBitmap: Das Symbol für den Checkboxzustand wird aus dem der Glyph-
+                Eigenschaft zugewiesenen Bitmap ausgelesen.
+    - csCheckBox: wie TCheckBox
+    - csDiamond: Die Checkbox hat die Form einer Raute
+    - csPushButton: Die Checkbox sieht aus wie ein TSpeedButton
+    - csRadioButton: wie TRadioButton
+    - csTrafficLight: Für die verscheidenen Zustände werden 
+	              Grüne, Rote oder Gelbe Kreise gezeichnet
+
+Transparent: boolean;
+  wie bei TLabel
+
+UnderlineOnEnter: boolean;
+  Wenn HoverActive=true und UnderlineOnEnter=true, wird die Beschriftung
+  der Komponente unterstrichen, wenn der Mauszeiger über die Komponente 
+  bewegt wird.
+
+WordWrap: boolean;
+  wie bei TLabel: der Text wird automatisch umgebrochen, wenn er die Breite
+  des Controls übersteigt.
+
+
+
+B) neue Ereignisse:
+-------------------
+
+OnChange: TNotifyEvent
+  dieses Ereignis wird bei jeder Änderung des Wertes der "State"-Eigenschaft 
+  ausgelöst, auch wenn der Wert dieser Eigenschaft per Programmcode geändert 
+  wird.
+
+OnClick: TNotifyEvent
+  dieses Ereignis wird (nur dann) ausgelöst, wenn die Komponente angeklickt 
+  wird und sich dadurch der Wert der "State"-Eigenschaft ändert. Es wird kein 
+  OnClick-Ereignis abgefeuert, wenn die Checked-Eigenschaft per Programmcode 
+  geändert wird.
+
+OnMouseEnter: TNotifyEvent
+  Wird ausgelöst, wenn die Maus über die Komponente bewegt wird.
+
+OnMouseExit: TNotifyEvent
+  Wird ausgelöst, wenn die Maus die Komponente verlässt.
+
+
+Die anderen Ereignisse entsprechen denen von TCheckBox. Da die TSRCheckBox-
+Komponente von TGraphicControl abgeleitet ist, kann sie keinen Eingabefokus 
+erhalten und hat deswegen auch keine OnKey*-Ereignisse.
+
+Die Funktion der Komponente läßt sich außerdem im beigefügten Demo-Programm 
+im Ordner "Demo" sehen.

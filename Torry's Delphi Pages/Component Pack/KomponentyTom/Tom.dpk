@@ -1,0 +1,51 @@
+package Tom;
+
+{$R *.res}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'TOM Components (TB)'}
+{$RUNONLY}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl,
+  vcl;
+
+contains
+  F_FileName in 'F_FileName.pas',
+  FileNameDialog in 'FileNameDialog.pas',
+  HeadListBox in 'HeadListBox.pas',
+  InPanel in 'InPanel.pas',
+  Pipes in 'Pipes.pas',
+  PipeStatus in 'PipeStatus.pas',
+  PJVersionInfo in 'PJVersionInfo.pas',
+  TerminalBox in 'TerminalBox.pas',
+  ThreadTimer in 'ThreadTimer.pas',
+  WaveList in 'WaveList.pas',
+  Wavez in 'Wavez.pas',
+  TrayIcon in 'TrayIcon.pas',
+  SSStringGrid in 'SSStringGrid.pas',
+  Klawiatura in 'Klawiatura.pas',
+  F_Klaw in 'F_Klaw.pas',
+  Hex in 'Hex.pas';
+
+end.

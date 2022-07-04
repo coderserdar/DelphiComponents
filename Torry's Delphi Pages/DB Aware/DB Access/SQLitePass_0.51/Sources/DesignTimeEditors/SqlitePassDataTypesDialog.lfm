@@ -1,0 +1,297 @@
+object SqlitePassDatatypesDlg: TSqlitePassDatatypesDlg
+  Left = 435
+  Top = 164
+  BorderIcons = []
+  BorderStyle = bsDialog
+  Caption = 'Datatypes Mapping Editor'
+  ClientHeight = 420
+  ClientWidth = 514
+  Color = clBtnFace
+  Font.Charset = ANSI_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Arial'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poScreenCenter
+  PixelsPerInch = 96
+  TextHeight = 14
+  object PanelBottom: TPanel
+    Left = 0
+    Top = 355
+    Width = 514
+    Height = 65
+    Align = alBottom
+    BevelInner = bvLowered
+    BevelOuter = bvNone
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 0
+    object BtOk: TButton
+      Left = 387
+      Top = 34
+      Width = 110
+      Height = 25
+      Caption = '&Ok'
+      Default = True
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ModalResult = 1
+      ParentFont = False
+      TabOrder = 0
+      OnClick = BtOkClick
+    end
+    object BtnResetAll: TButton
+      Left = 129
+      Top = 33
+      Width = 110
+      Height = 25
+      Hint = 'Reset the translation rules to the previous settings'
+      Caption = '&Reset All'
+      TabOrder = 1
+      OnClick = BtnResetAllClick
+    end
+    object BtDefault: TButton
+      Left = 129
+      Top = 6
+      Width = 110
+      Height = 25
+      Hint = 'Clear the customized rules and load the default rules for the current database type (SQLiteToolbox, kexi, SQLite Expert...etc).'
+      Caption = '&Load Default'
+      TabOrder = 2
+      OnClick = BtDefaultClick
+    end
+    object BtnSaveToDatabase: TButton
+      Left = 13
+      Top = 33
+      Width = 110
+      Height = 25
+      Hint = 'Save the translation rules setting to the database.'
+      Caption = '&Save to Database'
+      TabOrder = 3
+      OnClick = BtnSaveToDatabaseClick
+    end
+    object BtnLoadFromDatabase: TButton
+      Left = 13
+      Top = 6
+      Width = 110
+      Height = 25
+      Hint = 'Load the translation rules setting from the database.'
+      Caption = '&Load from Database'
+      TabOrder = 4
+      OnClick = BtnLoadFromDatabaseClick
+    end
+  end
+  object PanelDatatypes: TPanel
+    Left = 9
+    Top = 8
+    Width = 496
+    Height = 343
+    TabOrder = 1
+    object PanelCtrlGridHeader: TPanel
+      Left = 1
+      Top = 1
+      Width = 494
+      Height = 72
+      Align = alTop
+      BevelOuter = bvNone
+      TabOrder = 0
+      object Bevel5: TBevel
+        Left = 97
+        Top = 24
+        Width = 385
+        Height = 9
+        Shape = bsTopLine
+      end
+      object Shape5: TShape
+        Left = 2
+        Top = 14
+        Width = 119
+        Height = 22
+        Brush.Color = 16774380
+        Pen.Color = clSilver
+        Pen.Width = 2
+        Shape = stRoundRect
+      end
+      object Label6: TLabel
+        Left = 10
+        Top = 18
+        Width = 104
+        Height = 14
+        Caption = 'Datatypes Mapping'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Transparent = True
+      end
+      object StaticText1: TStaticText
+        Left = 164
+        Top = 47
+        Width = 137
+        Height = 18
+        Alignment = taCenter
+        AutoSize = False
+        BorderStyle = sbsSunken
+        Caption = 'Mapping Mode'
+        TabOrder = 0
+      end
+      object StaticText2: TStaticText
+        Left = 303
+        Top = 47
+        Width = 130
+        Height = 18
+        Alignment = taCenter
+        AutoSize = False
+        BorderStyle = sbsSunken
+        Caption = 'Result Datatype'
+        TabOrder = 1
+      end
+      object StaticText6: TStaticText
+        Left = 673
+        Top = 143
+        Width = 99
+        Height = 18
+        Alignment = taCenter
+        AutoSize = False
+        BorderStyle = sbsSunken
+        Caption = 'Collating Order'
+        TabOrder = 2
+      end
+      object StaticText4: TStaticText
+        Left = 25
+        Top = 47
+        Width = 137
+        Height = 18
+        Alignment = taCenter
+        AutoSize = False
+        BorderStyle = sbsSunken
+        Caption = 'Datatype Name'
+        TabOrder = 3
+      end
+    end
+    object PanelCtrlGrid: TPanel
+      Left = 1
+      Top = 73
+      Width = 494
+      Height = 245
+      Align = alClient
+      BevelOuter = bvNone
+      TabOrder = 1
+      object PanelMappingRules: TPanel
+        Left = 0
+        Top = 0
+        Width = 494
+        Height = 26
+        Align = alTop
+        BevelOuter = bvNone
+        Color = 14869218
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 0
+        object ImageCustomized: TImage
+          Left = 442
+          Top = 5
+          Width = 16
+          Height = 16
+          Hint = 'This field translation rule is customized and will override the default translation.'
+          Picture.Data = {
+            07544269746D617036040000424D360400000000000036000000280000001000
+            0000100000000100200000000000000400000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            00000000000000000000000000000000000000000000000000000707074B0606
+            0689060606890707074B00000000000000000000000000000000000000000000
+            00000000000000000000000000000A0A0A4A090909870808082209090987E7D7
+            D7FFE3D3D3FF0909098708080822090909870A0A0A4A00000000000000000000
+            000000000000000000000E0E0E49444141A4D8CBCBFF282727910F0F0F85D3C6
+            C6FFD3C6C6FF0F0F0F8528272791D8CBCBFF444141A40E0E0E49000000000000
+            0000000000000000000016161682D0C6C6FFBAB1B1FFCCC3C3FF9B9494E0D4CA
+            CAFFD4CACAFF9B9494E0CCC3C3FFBAB1B1FFD0C6C6FF16161682000000000000
+            00000000000000000000181818203331318CCCC6C6FFC3BDBDFFE4D9D9FFF7E8
+            E8FFF7E8E8FFE4D9D9FFC3BDBDFFCCC6C6FF3331318C18181820000000000000
+            000000000000222222442323237C2323237C949292DFD3CFCFFFBBB1B1CF3533
+            337D3533337DBBB1B1CFD3CFCFFF949292DF2323237C2323237C222222440000
+            0000000000002A2A2A79C4C4C4FFBBBBBBFFC4C4C4FFD6D3D3FF2F2F2F820000
+            0000000000002F2F2F82D6D3D3FFC4C4C4FFBBBBBBFFC4C4C4FF2A2A2A790000
+            00000000000032323276CBCCCCFFBEBFBFFFC6C7C7FFD2D2D2FF2D2D2D870000
+            0000000000002D2D2D87D2D2D2FFC6C7C7FFBEBFBFFFCBCCCCFF323232760000
+            000000000000383838403737377337373773A0A0A0DCD3D4D4FFA5A5A5D72B2C
+            2C952B2C2C95A5A5A5D7D3D4D4FFA0A0A0DC3737377337373773383838400000
+            000000000000000000003737371C5252527FD1D2D2FFD0D1D1FFDDDEDEFFE1E2
+            E2FFE1E2E2FFDDDEDEFFD0D1D1FFD1D2D2FF5252527F3737371C000000000000
+            000000000000000000004646466DE0E0E0FFCACBCBFFE4E4E4FFB3B3B3DBE4E4
+            E4FFE4E4E4FFB3B3B3DBDCDDDDFFCACBCBFFE0E0E0FF4646466D000000000000
+            000000000000000000004949493B77777790EAEAEAFF6060607A4A4A4A6BE5E6
+            E6FFE5E6E6FF4A4A4A6B6060607AEAEAEAFF777777904949493B000000000000
+            00000000000000000000000000004F4F4F3A505050694C4C4C1B50505069FAFA
+            FAFFF6F6F6FF505050694C4C4C1B505050694F4F4F3A00000000000000000000
+            0000000000000000000000000000000000000000000000000000515151395252
+            5267525252675151513900000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000
+          }
+        end
+        object EditDatatypeName: TEdit
+          Left = 25
+          Top = 2
+          Width = 137
+          Height = 22
+          TabOrder = 0
+          OnEnter = EditDatatypeNameEnter
+          OnKeyDown = EditDatatypeNameKeyDown
+        end
+        object CbMappingMode: TComboBox
+          Left = 163
+          Top = 2
+          Width = 138
+          Height = 22
+          Style = csDropDownList
+          Ctl3D = False
+          ItemHeight = 14
+          Items.Strings = (
+            'mmExact'
+            'mmExactNoCase'
+            'mmPartial'
+            'mmPartialNoCase'
+            'mmAll'
+          )
+          ParentCtl3D = False
+          TabOrder = 1
+          OnEnter = EditDatatypeNameEnter
+          OnKeyDown = EditDatatypeNameKeyDown
+        end
+        object CbResultDataType: TComboBox
+          Left = 302
+          Top = 2
+          Width = 132
+          Height = 22
+          Style = csDropDownList
+          Ctl3D = False
+          ItemHeight = 14
+          ParentCtl3D = False
+          Sorted = True
+          TabOrder = 2
+          OnEnter = EditDatatypeNameEnter
+          OnKeyDown = EditDatatypeNameKeyDown
+        end
+      end
+    end
+    object PanelCtrlGridNav: TPanel
+      Left = 1
+      Top = 318
+      Width = 494
+      Height = 24
+      Align = alBottom
+      BevelOuter = bvLowered
+      Color = cl3DLight
+      TabOrder = 2
+    end
+  end
+end

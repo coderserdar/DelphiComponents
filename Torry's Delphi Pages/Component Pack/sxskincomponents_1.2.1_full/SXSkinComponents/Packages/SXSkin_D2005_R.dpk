@@ -1,0 +1,60 @@
+package SXSkin_D2005_R;
+
+{$R *.res}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'SXSkinComponents'}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl,
+  vcl,
+  vcljpg,
+  GR32_D2005;
+
+contains
+  SXSkinUtils in '..\SXSkinUtils.pas',
+  SXBitmap32Utils in '..\SXBitmap32Utils.pas',
+  SXMathEval in '..\SXMathEval.pas',
+  SXPNGUtils in '..\SXPNGUtils.pas',
+  SXSkinButton in '..\SXSkinButton.pas',
+  SXSkinCheckBox in '..\SXSkinCheckBox.pas',
+  SXSkinControl in '..\SXSkinControl.pas',
+  SXSkinEdit in '..\SXSkinEdit.pas',
+  SXSkinGroupBox in '..\SXSkinGroupBox.pas',
+  SXSkinImage in '..\SXSkinImage.pas',
+  SXSkinLabel in '..\SXSkinLabel.pas',
+  SXSkinLibrary in '..\SXSkinLibrary.pas',
+  SXSkinNotebook in '..\SXSkinNotebook.pas',
+  SXSkinPanel in '..\SXSkinPanel.pas',
+  SXSkinRadioButton in '..\SXSkinRadioButton.pas',
+  SXSkinPaintBox in '..\SXSkinPaintBox.pas',
+  SXSkinBitmapManager in '..\SXSkinBitmapManager.pas',
+  SXZipUtils in '..\SXZipUtils.pas',
+  SXZLib in '..\SXZLib.pas',
+  SXZLibCompress in '..\SXZLibCompress.pas',
+  SXSkinForm in '..\SXSkinForm.pas',
+  SXSkinRegionManager in '..\SXSkinRegionManager.pas',
+  SXSkinUpDown in '..\SXSkinUpDown.pas',
+  SXSkinSpinEdit in '..\SXSkinSpinEdit.pas';
+
+end.

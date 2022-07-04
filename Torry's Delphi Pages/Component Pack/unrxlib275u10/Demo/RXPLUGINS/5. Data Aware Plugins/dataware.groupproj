@@ -1,0 +1,44 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{bfcd8d34-b5af-4471-b377-9c9229e02084}</ProjectGuid>
+  </PropertyGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Projects Include="DataPlugin.dproj" />
+    <Projects Include="PlugInDemo.dproj" />
+  </ItemGroup>
+  <ProjectExtensions>
+    <Borland.Personality>Default.Personality</Borland.Personality>
+    <Borland.ProjectType />
+    <BorlandProject>
+  <BorlandProject xmlns=""> <Default.Personality> </Default.Personality> </BorlandProject></BorlandProject>
+  </ProjectExtensions>
+  <Target Name="DataPlugin">
+    <MSBuild Projects="DataPlugin.dproj" Targets="" />
+  </Target>
+  <Target Name="DataPlugin:Clean">
+    <MSBuild Projects="DataPlugin.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="DataPlugin:Make">
+    <MSBuild Projects="DataPlugin.dproj" Targets="Make" />
+  </Target>
+  <Target Name="PlugInDemo">
+    <MSBuild Projects="PlugInDemo.dproj" Targets="" />
+  </Target>
+  <Target Name="PlugInDemo:Clean">
+    <MSBuild Projects="PlugInDemo.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="PlugInDemo:Make">
+    <MSBuild Projects="PlugInDemo.dproj" Targets="Make" />
+  </Target>
+  <Target Name="Build">
+    <CallTarget Targets="DataPlugin;PlugInDemo" />
+  </Target>
+  <Target Name="Clean">
+    <CallTarget Targets="DataPlugin:Clean;PlugInDemo:Clean" />
+  </Target>
+  <Target Name="Make">
+    <CallTarget Targets="DataPlugin:Make;PlugInDemo:Make" />
+  </Target>
+  <Import Condition="Exists('$(MSBuildBinPath)\Borland.Group.Targets')" Project="$(MSBuildBinPath)\Borland.Group.Targets" />
+</Project>

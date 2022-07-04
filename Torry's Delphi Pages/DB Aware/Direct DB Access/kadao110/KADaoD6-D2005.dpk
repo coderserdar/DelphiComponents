@@ -1,0 +1,46 @@
+package KADao;
+
+{$R *.res}
+{$R 'KDaoDataBase.dcr'}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS ON}
+{$RANGECHECKS ON}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'KADao'}
+{$DESIGNONLY}
+{$IMPLICITBUILD ON}
+
+requires
+  vcl,
+  vclx,
+  vcldb,
+  designide;
+
+contains
+  KDaoTable in 'KDaoTable.pas',
+  KDaoDataBase in 'KDaoDataBase.pas',
+  KADaoInfo in 'KADaoInfo.pas',
+  KADaoReg in 'KADaoReg.pas',
+  KDaoDBEngine in 'KDaoDBEngine.pas',
+  KDaoWorkspace in 'KDaoWorkspace.pas',
+  KADAOEncrypter in 'KADAOEncrypter.pas',
+  KADaoConnectionCheck in 'KADaoConnectionCheck.pas';
+
+end.

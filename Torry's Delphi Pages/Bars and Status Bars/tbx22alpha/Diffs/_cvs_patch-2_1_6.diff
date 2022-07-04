@@ -1,0 +1,3944 @@
+Index: TB2Acc.pas
+===================================================================
+RCS file: /data/cvs/tb2k/Source/TB2Acc.pas,v
+retrieving revision 1.7
+diff -u -r1.7 TB2Acc.pas
+--- TB2Acc.pas	6 Jan 2005 03:56:50 -0000	1.7
++++ TB2Acc.pas	1 Dec 2005 16:21:33 -0000
+@@ -160,7 +160,7 @@
+ implementation
+ 
+ uses
+-  {$IFDEF JR_D6} Variants, {$ENDIF} ActiveX, Menus, TB2Common;
++  {$IFDEF JR_D6} Variants, {$ENDIF} ActiveX, Menus, TB2Common, TB2Dock;
+ 
+ const
+   { Constants from OleAcc.h }
+@@ -592,15 +592,20 @@
+ function TTBViewAccObject.get_accName(varChild: OleVariant;
+   out pszName: WideString): HRESULT;
+ var
+-  S: String;
++  S: WideString;
+ begin
+   try
+     if not Check(varChild, Result) then
+       Exit;
+     if Assigned(FView.ParentView) and Assigned(FView.ParentView.OpenViewer) then
+-      S := StripAccelChars(TTBItemViewerAccess(FView.ParentView.OpenViewer).GetCaptionText);
++      S := StripAccelCharsW(TTBItemViewerAccess(FView.ParentView.OpenViewer).GetCaptionText);
+     if S = '' then
+-      S := TControlAccess(FView.Window).Caption;
++    begin
++      if FView.Window is TTBFloatingWindowParent then
++        S := TTBFloatingWindowParent(FView.Window).Caption
++      else
++        S := TControlAccess(FView.Window).Caption;
++    end;
+     pszName := S;
+     Result := S_OK;
+   except
+@@ -1055,21 +1060,21 @@
+ function TTBItemViewerAccObject.get_accKeyboardShortcut(varChild: OleVariant;
+   out pszKeyboardShortcut: WideString): HRESULT;
+ var
+-  C: Char;
++  C: WideChar;
+ begin
+   try
+     if not Check(varChild, Result) then
+       Exit;
+     Result := S_FALSE;
+     if TTBItemViewerAccess(FViewer).CaptionShown then begin
+-      C := FindAccelChar(TTBItemViewerAccess(FViewer).GetCaptionText);
++      C := FindAccelCharW(TTBItemViewerAccess(FViewer).GetCaptionText);
+       if C <> #0 then begin
+-        CharLowerBuff(@C, 1);  { like standard menus, always use lowercase... }
++        CharLowerBuffW(@C, 1);  { like standard menus, always use lowercase... }
+         if FViewer.View.IsPopup then
+           pszKeyboardShortcut := C
+         else begin
+           { Prefix 'Alt+' }
+-          pszKeyboardShortcut := GetAltKeyName + '+' + C;
++          pszKeyboardShortcut := WideString(GetAltKeyName + '+') + C;
+         end;
+         Result := S_OK;
+       end;
+@@ -1082,12 +1087,12 @@
+ function TTBItemViewerAccObject.get_accName(varChild: OleVariant;
+   out pszName: WideString): HRESULT;
+ var
+-  C, S: String;
++  C, S: WideString;
+ begin
+   try
+     if not Check(varChild, Result) then
+       Exit;
+-    C := StripAccelChars(TTBItemViewerAccess(FViewer).GetCaptionText);
++    C := StripAccelCharsW(TTBItemViewerAccess(FViewer).GetCaptionText);
+     if not FViewer.IsToolbarStyle then
+       S := FViewer.Item.GetShortCutText;
+     if S = '' then
+Index: TB2Common.pas
+===================================================================
+RCS file: /data/cvs/tb2k/Source/TB2Common.pas,v
+retrieving revision 1.31
+diff -u -r1.31 TB2Common.pas
+--- TB2Common.pas	29 Jun 2005 20:10:10 -0000	1.31
++++ TB2Common.pas	1 Dec 2005 16:21:33 -0000
+@@ -55,6 +55,17 @@
+   const NewSize, OldSize: TSize; const Brush: HBRUSH; BrushLast: HBRUSH);
+ function EscapeAmpersands(const S: String): String;
+ function FindAccelChar(const S: String): Char;
++function _DrawTextW(hDC: HDC; lpString: PWideChar; nCount: Integer; var lpRect: TRect; uFormat: UINT): Integer;
++function WideGetMenuString(hMenu: HMENU; uIDItem: UINT; uFlag: UINT): WideString;
++function GetTextWidthW(DC: HDC; const S: WideString; StripAccelChar: Boolean): Integer;
++procedure DrawRotatedTextW(DC: HDC; AText: WideString; const ARect: TRect; const AFormat: Cardinal);
++function EscapeAmpersandsW(const S: WideString): WideString;
++function FindAccelCharW(const S: WideString): WideChar;
++function StripAccelCharsW(const S: WideString): WideString;
++function StripTrailingPunctuationW(const S: WideString): WideString;
++function GetShortHintW(const Hint: WideString): WideString;
++function GetLongHintW(const Hint: WideString): WideString;
++function LocaleCharToUnicode(Code: Word): WideChar;
+ {$IFNDEF JR_D5}
+ procedure FreeAndNil(var Obj);
+ {$ENDIF}
+@@ -86,6 +97,12 @@
+ function StripTrailingPunctuation(const S: String): String;
+ function UsingMultipleMonitors: Boolean;
+ 
++{ routines to support design time wide strings }
++procedure FilerWriteWideString(Writer: TWriter; const S: WideString);
++function FilerReadWideString(Reader: TReader): WideString;
++function ACPScrambleWideString(const S: WideString): AnsiString;
++function ACPUnscrambleWideString(const S: AnsiString): WideString;
++
+ const
+   PopupMenuWindowNCSize = 3;
+   DT_HIDEPREFIX = $00100000;
+@@ -96,7 +113,7 @@
+ implementation
+ 
+ uses
+-  TB2Version;
++  TB2Version, RTLConsts;
+ 
+ function ApplicationIsActive: Boolean;
+ { Returns True if the application is in the foreground }
+@@ -885,40 +902,82 @@
+ procedure DrawRotatedText(const DC: HDC; AText: String; const ARect: TRect;
+   const AFormat: Cardinal);
+ { Like DrawText, but draws the text at a 270 degree angle.
+-  The only format flag this function respects is DT_HIDEPREFIX. Text is always
+-  drawn centered. }
++  The format flag this function respects are
++  DT_NOPREFIX, DT_HIDEPREFIX, DT_CENTER, DT_END_ELLIPSIS, DT_NOCLIP }
+ var
+   RotatedFont, SaveFont: HFONT;
+   TextMetrics: TTextMetric;
+-  X, Y, P, I, SU, FU: Integer;
++  X, Y, P, I, SU, FU, W: Integer;
+   SaveAlign: UINT;
+   SavePen, Pen: HPEN;
++  Clip: Boolean;
++
++  function GetSize(DC: HDC; const S: string): Integer;
++  var
++    Size: TSize;
++  begin
++    GetTextExtentPoint32(DC, PChar(S), Length(S), Size);
++    Result := Size.cx;
++  end;
++
+ begin
++  if Length(AText) = 0 then Exit;
++
+   RotatedFont := CreateRotatedFont(DC);
+   SaveFont := SelectObject(DC, RotatedFont);
+ 
+   GetTextMetrics(DC, TextMetrics);
+   X := ARect.Left + ((ARect.Right - ARect.Left) - TextMetrics.tmHeight) div 2;
+-  Y := ARect.Top + ((ARect.Bottom - ARect.Top) - GetTextWidth(DC, AText, True)) div 2;
++
++  Clip := (AFormat and DT_NOCLIP) <> DT_NOCLIP;
+ 
+   { Find the index of the character that should be underlined. Delete '&'
+     characters from the string. Like DrawText, only the last prefixed character
+     will be underlined. }
+   P := 0;
+   I := 1;
+-  while I <= Length(AText) do begin
+-    if AText[I] in LeadBytes then
+-      Inc(I)
+-    else if AText[I] = '&' then begin
+-      Delete(AText, I, 1);
+-      { Note: PChar cast is so that if Delete deleted the last character in
+-        the string, we don't step past the end of the string (which would cause
+-        an AV if AText is now empty), but rather look at the null character
+-        and treat it as an accelerator key like DrawText. }
+-      if PChar(AText)[I-1] <> '&' then
+-        P := I;
++  if AFormat and DT_NOPREFIX <> 0 then
++    while I <= Length(AText) do begin
++      if AText[I] in LeadBytes then
++        Inc(I)
++      else if AText[I] = '&' then begin
++        Delete(AText, I, 1);
++        { Note: PChar cast is so that if Delete deleted the last character in
++          the string, we don't step past the end of the string (which would cause
++          an AV if AText is now empty), but rather look at the null character
++          and treat it as an accelerator key like DrawText. }
++        if PChar(AText)[I-1] <> '&' then
++          P := I;
++      end;
++      Inc(I);
++    end;
++
++  if AFormat and DT_END_ELLIPSIS <> 0 then
++  begin
++    if (Length(AText) > 1) and (GetSize(DC, AText) > ARect.Bottom - ARect.Top) then
++    begin
++      W := ARect.Bottom - ARect.Top;
++      if W > 2 then
++      begin
++        Delete(AText, Length(AText), 1);
++        while (Length(AText) > 1) and (GetSize(DC, AText + '...') > W) do
++          Delete(AText, Length(AText), 1);
++      end
++      else AText := AText[1];
++      if P > Length(AText) then P := 0;
++      AText := AText + '...';
+     end;
+-    Inc(I);
++  end;
++
++  if (AFormat and DT_CENTER) = DT_CENTER then
++    Y := ARect.Top + ((ARect.Bottom - ARect.Top) - GetSize(DC, AText)) div 2
++  else
++    Y := ARect.Top;
++
++  if Clip then
++  begin
++    SaveDC(DC);
++    with ARect do IntersectClipRect(DC, Left, Top, Right, Bottom);
+   end;
+ 
+   SaveAlign := SetTextAlign(DC, TA_BOTTOM);
+@@ -937,10 +996,268 @@
+     DeleteObject(Pen);
+   end;
+ 
++  if Clip then RestoreDC(DC, -1);
++
++  SelectObject(DC, SaveFont);
++  DeleteObject(RotatedFont);
++end;
++
++{ WideString support }
++
++function _DrawTextW(hDC: HDC; lpString: PWideChar; nCount: Integer; var lpRect: TRect; uFormat: UINT): Integer;
++var
++  ANSI: AnsiString;
++begin
++  if Win32Platform = VER_PLATFORM_WIN32_NT then
++    Result := Windows.DrawTextW(hDC, lpString, nCount, lpRect, uFormat)
++  else
++  begin
++    if nCount < 0 then ANSI := WideString(lpString)
++    else ANSI := Copy(WideString(lpString), 1, nCount);
++    Result := DrawTextA(hDC, PAnsiChar(ANSI), Length(ANSI), lpRect, uFormat);
++  end;
++end;
++
++function WideGetMenuString(hMenu: HMENU; uIDItem: UINT; uFlag: UINT): WideString;
++var
++  WideBuf: array[0..1024] of WideChar;
++  AnsiBuf: array[0..1024] of AnsiChar;
++begin
++  if Win32Platform = VER_PLATFORM_WIN32_NT then
++  begin
++    if Windows.GetMenuStringW(hMenu, uIDItem, WideBuf, 1024, uFlag) > 0 then Result := WideBuf
++    else Result := '';
++  end
++  else
++  begin
++    if Windows.GetMenuStringA(hMenu, uIDItem, AnsiBuf, 1024, uFlag) > 0 then Result := AnsiBuf
++    else Result := '';
++  end;
++end;
++
++
++function GetTextWidthW(DC: HDC; const S: WideString; StripAccelChar: Boolean): Integer;
++var
++  Size: TSize;
++  S2: WideString;
++begin
++  if StripAccelChar then
++  begin
++    S2 := StripAccelCharsW(S);
++    if not GetTextExtentPoint32W(DC, PWideChar(S2), Length(S2), Size) then RaiseLastOSError;
++  end
++  else GetTextExtentPoint32W(DC, PWideChar(S), Length(S), Size);
++  Result := Size.cx;
++end;
++
++procedure DrawRotatedTextW(DC: HDC; AText: WideString; const ARect: TRect; const AFormat: Cardinal);
++{ Like DrawText, but draws the text at a 270 degree angle.
++  The format flag this function respects are
++  DT_NOPREFIX, DT_HIDEPREFIX, DT_CENTER, DT_END_ELLIPSIS, DT_NOCLIP }
++var
++  RotatedFont, SaveFont: HFONT;
++  TextMetrics: TTextMetric;
++  X, Y, P, I, SU, FU, W: Integer;
++  SaveAlign: UINT;
++  Clip: Boolean;
++  Pen, SavePen: HPEN;
++
++  function GetSize(DC: HDC; const S: WideString): Integer;
++  var
++    Size: TSize;
++  begin
++    if not GetTextExtentPoint32W(DC, PWideChar(S), Length(S), Size) then RaiseLastOSError;
++    Result := Size.cx;
++  end;
++
++begin
++  if Length(AText) = 0 then Exit;
++
++  RotatedFont := CreateRotatedFont(DC);
++  SaveFont := SelectObject(DC, RotatedFont);
++
++  GetTextMetrics(DC, TextMetrics);
++  X := ARect.Left + ((ARect.Right - ARect.Left) - TextMetrics.tmHeight) div 2;
++
++  Clip := AFormat and DT_NOCLIP = 0;
++
++  { Find the index of the character that should be underlined. Delete '&'
++    characters from the string. Like DrawText, only the last prefixed character
++    will be underlined. }
++  P := 0;
++  I := 1;
++  if AFormat and DT_NOPREFIX = 0 then
++    while I <= Length(AText) do
++    begin
++      if AText[I] = '&' then
++      begin
++        Delete(AText, I, 1);
++        if PWideChar(AText)[I - 1] <> '&' then P := I;
++      end;
++      Inc(I);
++    end;
++
++  if AFormat and DT_END_ELLIPSIS <> 0 then
++  begin
++    if (Length(AText) > 1) and (GetSize(DC, AText) > ARect.Bottom - ARect.Top) then
++    begin
++      W := ARect.Bottom - ARect.Top;
++      if W > 2 then
++      begin
++        Delete(AText, Length(AText), 1);
++        while (Length(AText) > 1) and (GetSize(DC, AText + '...') > W) do
++          Delete(AText, Length(AText), 1);
++      end
++      else AText := AText[1];
++      if P > Length(AText) then P := 0;
++      AText := AText + '...';
++    end;
++  end;
++
++  if AFormat and DT_CENTER <> 0 then
++    Y := ARect.Top + ((ARect.Bottom - ARect.Top) - GetSize(DC, AText)) div 2
++  else
++    Y := ARect.Top;
++
++  if Clip then
++  begin
++    SaveDC(DC);
++    with ARect do IntersectClipRect(DC, Left, Top, Right, Bottom);
++  end;
++
++  SaveAlign := SetTextAlign(DC, TA_BOTTOM);
++  TextOutW(DC, X, Y, PWideChar(AText), Length(AText));
++  SetTextAlign(DC, SaveAlign);
++
++  { Underline }
++  if (P > 0) and (AFormat and DT_HIDEPREFIX = 0) then
++  begin
++    SU := GetTextWidthW(DC, Copy(AText, 1, P - 1), False);
++    FU := SU + GetTextWidthW(DC, PWideChar(AText)[P - 1], False);
++    Inc(X, TextMetrics.tmDescent - 2);
++    Pen := CreatePen(PS_SOLID, 1, GetTextColor(DC));
++    SavePen := SelectObject(DC, Pen);
++    MoveToEx(DC, X, Y + SU, nil);
++    LineTo(DC, X, Y + FU);
++    SelectObject(DC, SavePen);
++    DeleteObject(Pen);
++  end;
++
++  if Clip then RestoreDC(DC, -1);
++
+   SelectObject(DC, SaveFont);
+   DeleteObject(RotatedFont);
+ end;
+ 
++function EscapeAmpersandsW(const S: WideString): WideString;
++var
++  I: Integer;
++begin
++  Result := S;
++  I := 1;
++  while I <= Length(Result) do
++  begin
++    if Result[I] = '&' then
++    begin
++      Inc(I);
++      Insert('&', Result, I);
++    end;
++    Inc(I);
++  end;
++end;
++
++function FindAccelCharW(const S: WideString): WideChar;
++var
++  PStart, P: PWideChar;
++begin
++  { locate the last char with '&' prefix }
++  Result := #0;
++  if Length(S) > 0 then
++  begin
++    PStart := PWideChar(S);
++    P := PStart;
++    Inc(P, Length(S) - 2);
++    while P >= PStart do
++    begin
++      if P^ = '&' then
++      begin
++        if (P = PStart) or (PWideChar(Integer(P) - 2)^ <> '&') then
++        begin
++          Result := PWideChar(Integer(P) + 2)^;
++          Exit;
++        end
++        else Dec(P);
++      end;
++      Dec(P);
++    end;
++  end;
++end;
++
++function StripAccelCharsW(const S: WideString): WideString;
++var
++  I: Integer;
++begin
++  Result := S;
++  I := 1;
++  while I <= Length(Result) do
++  begin
++    if Result[I] = '&' then System.Delete(Result, I, 1);
++    Inc(I);
++  end;
++end;
++
++function StripTrailingPunctuationW(const S: WideString): WideString;
++var
++  L: Integer;
++begin
++  Result := S;
++  L := Length(Result);
++  if (L > 1) and (Result[L] = ':') then SetLength(Result, L - 1)
++  else if (L > 3) and (Result[L - 2] = '.') and (Result[L - 1] = '.') and
++     (Result[L] = '.') then SetLength(Result, L - 3);
++end;
++
++function GetShortHintW(const Hint: WideString): WideString;
++var
++  I: Integer;
++begin
++  for I := 1 to Length(Hint) do
++    if Hint[I] = '|' then
++    begin
++      Result := Copy(Hint, 1, I - 1);
++      Exit;
++    end;
++  Result := Hint;
++end;
++
++function GetLongHintW(const Hint: WideString): WideString;
++var
++  I: Integer;
++begin
++  for I := 1 to Length(Hint) do
++    if Hint[I] = '|' then
++    begin
++      Result := Copy(Hint, I + 1, MaxInt);
++      Exit;
++    end;
++end;
++
++function LocaleCharToUnicode(Code: Word): WideChar;
++var
++  A: AnsiChar;
++begin
++{ For controls with non-unicode handle, WM_CHAR and similar messages pass
++  character codes using the active input locale. This function converts those
++  codes back to Unicode }
++  if Code <= $FF then
++  begin
++    A := AnsiChar(Code);
++    MultiByteToWideChar(GetInputLocaleCodePage, MB_USEGLYPHCHARS, @A, 1, @Result, 1);
++  end
++  else
++    Result := WideChar(Code);
++end;
++
+ function NeedToPlaySound(const Alias: String): Boolean;
+ { This function checks the registry to see if the specified sound event alias
+   is assigned to a file.
+@@ -1040,4 +1357,113 @@
+     Result := CP_ACP;
+ end;
+ 
++type
++  TWriterAccess = class(TWriter);
++  TReaderAccess = class(TReader);
++
++procedure FilerWriteWideString(Writer: TWriter; const S: WideString);
++var
++  L: Integer;
++begin
++  TWriterAccess(Writer).WriteValue(vaWString);
++  L := Length(S);
++  Writer.Write(L, SizeOf(Integer));
++  Writer.Write(Pointer(S)^, L * 2);
++end;
++
++function FilerReadWideString(Reader: TReader): WideString;
++begin
++  if Reader.NextValue in [vaLString, vaString] then Result := Reader.ReadString
++  else Result := Reader.ReadWideString;
++end;
++
++function ACPScrambleWideString(const S: WideString): AnsiString;
++var
++  P: PWideChar;
++
++  function HasChar(const S: WideString; C: WideChar): Boolean;
++  var
++    I: Integer;
++  begin
++    Result := True;
++    for I := 1 to Length(S) do if S[I] = C then Exit;
++    Result := False;
++  end;
++
++  function NeedsEncoding(WC: WideChar): Boolean;
++  begin
++    if WC < #$7F then Result := False
++    else if WideString(AnsiString(WideString(WC))) = WC then Result := False
++    else Result := True;
++  end;
++
++begin
++  if Length(S) = 0 then SetLength(Result, 0)
++  else
++  begin
++    if not HasChar(S, '\') and (WideString(AnsiString(S)) = S) then Result := AnsiString(S)
++    else
++    begin
++      SetLength(Result, 0);
++      P := PWideChar(S);
++      while P^ <> #0 do
++      begin
++        if P^ = '\' then Result := Result + '\\'
++        else if NeedsEncoding(P^) then Result := Result + '\#' + IntToHex(Integer(P^), 2) + ';'
++        else Result := Result + P^;
++        Inc(P);
++      end;
++    end;
++  end;
++end;
++
++function ACPUnscrambleWideString(const S: AnsiString): WideString;
++const
++  HexDigits = ['0'..'9', 'A'..'F', 'a'..'f'];
++var
++  P: PChar;
++  CharCode: Cardinal;
++
++  function GetHexDigit(C: Char): Cardinal;
++  begin
++    if (C >= '0') and (C <= '9') then Result := Integer(C) - Integer('0')
++    else if (C >= 'A') and (C <= 'F') then Result := Integer(C) - Integer('A') + 10
++    else if (C >= 'a') and (C <= 'f') then Result := Integer(C) - Integer('a') + 10
++    else Result := 0;
++  end;
++
++begin
++  if Length(S) = 0 then SetLength(Result, 0)
++  else
++  begin
++    SetLength(Result, 0);
++    P := PChar(S);
++    while P^ <> #0 do
++    begin
++      if P^ = '\' then
++      begin
++        Inc(P);
++        if P^ = '\' then Result := Result + '\'
++        else
++        begin
++          if P^ <> '#' then raise Exception.Create('Invalid string');
++          Inc(P);
++          if not (P^ in HexDigits) then raise Exception.Create('Invalid string');
++          CharCode := 0;
++          while P^ in HexDigits do
++          begin
++            CharCode := CharCode shl 4 + GetHexDigit(P^);
++            Inc(P);
++          end;
++          if P^ <> ';' then raise Exception.Create('Invalid string');
++          if (CharCode > 0) and (CharCode <= 65535) then Result := Result + WideChar(CharCode)
++          else raise Exception.Create('Invalid character code');
++        end;
++      end
++      else Result := Result + AnsiString(P^);
++      Inc(P);
++    end;
++  end;
++end;
++
+ end.
+Index: TB2Dock.pas
+===================================================================
+RCS file: /data/cvs/tb2k/Source/TB2Dock.pas,v
+retrieving revision 1.99
+diff -u -r1.99 TB2Dock.pas
+--- TB2Dock.pas	15 Jul 2005 19:35:03 -0000	1.99
++++ TB2Dock.pas	1 Dec 2005 16:21:33 -0000
+@@ -23,7 +23,7 @@
+   GPL. If you do not delete the provisions above, a recipient may use your
+   version of this file under either the "Toolbar2000 License" or the GPL.
+ 
+-  $jrsoftware: tb2k/Source/TB2Dock.pas,v 1.99 2005/07/15 19:35:03 jr Exp $
++  $jrsoftware: tb2k/Source/TB2Dock.pas,v 1.100 2005/10/24 05:32:10 jr Exp $
+ }
+ 
+ interface
+@@ -42,6 +42,21 @@
+ type
+   TTBCustomForm = {$IFDEF JR_D3} TCustomForm {$ELSE} TForm {$ENDIF};
+ 
++  { TTBHintWindow }
++
++  TTBHintWindow = class(THintWindow)
++  private
++    FActivating: Boolean;
++    FDisableResize: Boolean;
++    procedure CMTextChanged(var Message: TMessage); message CM_TEXTCHANGED;
++  protected
++    function CanResize(var NewWidth, NewHeight: Integer): Boolean; override;
++    procedure Paint; override;
++  public
++    procedure ActivateHint(Rect: TRect; const AHint: string); override;
++    function CalcHintRect(MaxWidth: Integer; const AHint: string; AData: Pointer): TRect; override;
++  end;
++
+   { TTBDock }
+ 
+   TTBDockBoundLinesValues = (blTop, blBottom, blLeft, blRight);
+@@ -79,9 +94,6 @@
+     FDisableArrangeToolbars: Integer;  { Increment to disable ArrangeToolbars }
+     FArrangeToolbarsNeeded: Boolean;
+     FNonClientWidth, FNonClientHeight: Integer;
+-    DockList: TList;  { List of the toolbars docked, and those floating and have LastDock
+-                        pointing to the dock. Items are casted in TTBCustomDockableWindow's. }
+-    DockVisibleList: TList;  { Similar to DockList, but lists only docked and visible toolbars }
+ 
+     { Property access methods }
+     //function GetVersion: TToolbar97Version;
+@@ -99,14 +111,11 @@
+     { Internal }
+     procedure BackgroundChanged(Sender: TObject);
+     procedure ChangeDockList(const Insert: Boolean; const Bar: TTBCustomDockableWindow);
+-    procedure ChangeWidthHeight(const NewWidth, NewHeight: Integer);
+     procedure CommitPositions;
+     procedure DrawNCArea(const DrawToDC: Boolean; const ADC: HDC;
+       const Clip: HRGN);
+     function GetDesignModeRowOf(const XY: Integer): Integer;
+-    function HasVisibleToolbars: Boolean;
+     procedure RelayMsgToFloatingBars(var Message: TMessage);
+-    function ToolbarVisibleOnDock(const AToolbar: TTBCustomDockableWindow): Boolean;
+     procedure ToolbarVisibilityChanged(const Bar: TTBCustomDockableWindow;
+       const ForceRemove: Boolean);
+ 
+@@ -125,21 +134,30 @@
+     procedure WMPrintClient(var Message: TMessage); message WM_PRINTCLIENT;
+     procedure WMSysCommand(var Message: TWMSysCommand); message WM_SYSCOMMAND;
+   protected
++    DockList: TList;  { List of the toolbars docked, and those floating and have LastDock
++                        pointing to the dock. Items are casted in TTBCustomDockableWindow's. }
++    DockVisibleList: TList;  { Similar to DockList, but lists only docked and visible toolbars }
++    function Accepts(ADockableWindow: TTBCustomDockableWindow): Boolean; virtual;
+     procedure AlignControls(AControl: TControl; var Rect: TRect); override;
++    procedure ChangeWidthHeight(const NewWidth, NewHeight: Integer);
+     procedure DrawBackground(DC: HDC; const DrawRect: TRect); virtual;
+     function GetPalette: HPALETTE; override;
++    function HasVisibleToolbars: Boolean;
+     procedure InvalidateBackgrounds;
+     procedure Loaded; override;
+     procedure Notification(AComponent: TComponent; Operation: TOperation); override;
+     procedure SetParent(AParent: TWinControl); override;
++    function ToolbarVisibleOnDock(const AToolbar: TTBCustomDockableWindow): Boolean;
+     procedure Paint; override;
+     function UsingBackground: Boolean; virtual;
++    property ArrangeToolbarsNeeded: Boolean read FArrangeToolbarsNeeded write FArrangeToolbarsNeeded;
++    property DisableArrangeToolbars: Integer read FDisableArrangeToolbars write FDisableArrangeToolbars;
+   public
+     constructor Create(AOwner: TComponent); override;
+     procedure CreateParams(var Params: TCreateParams); override;
+     destructor Destroy; override;
+ 
+-    procedure ArrangeToolbars;
++    procedure ArrangeToolbars; virtual;
+     procedure BeginUpdate;
+     procedure EndUpdate;
+     function GetCurrentRowSize(const Row: Integer; var AFullSize: Boolean): Integer;
+@@ -188,11 +206,13 @@
+   TTBFloatingWindowParentClass = class of TTBFloatingWindowParent;
+   TTBFloatingWindowParent = class(TCustomForm)
+   private
++    FCaption: WideString;
+     FCloseButtonDown: Boolean; { True if Close button is currently depressed }
+     FDockableWindow: TTBCustomDockableWindow;
+     FParentForm: TTBCustomForm;
+     FShouldShow: Boolean;
+ 
++    procedure SetCaption(const Value: WideString);
+     procedure SetCloseButtonState(Pushed: Boolean);
+     procedure RedrawNCArea(const RedrawWhat: TTBToolWindowNCRedrawWhat);
+ 
+@@ -223,6 +243,7 @@
+     property ParentForm: TTBCustomForm read FParentForm;
+     constructor Create(AOwner: TComponent); override;
+     destructor Destroy; override;
++    property Caption: WideString read FCaption write SetCaption;
+   end;
+ 
+   { TTBCustomDockableWindow }
+@@ -260,6 +281,8 @@
+   private
+     { Property variables }
+     FAutoResize: Boolean;
++    FCaption: WideString;
++    FDblClickUndock: Boolean;
+     FDockPos, FDockRow, FEffectiveDockPos, FEffectiveDockRow: Integer;
+     FDocked: Boolean;
+     FCurrentDock, FDefaultDock, FLastDock: TTBDock;
+@@ -283,6 +306,7 @@
+     FInsertRowBefore: Boolean;
+ 
+     { Misc. }
++    FUpdatingCaption: Boolean;
+     FUpdatingBounds,           { Incremented while internally changing the bounds. This allows
+                                  it to move the toolbar freely in design mode and prevents the
+                                  SizeChanging protected method from begin called }
+@@ -311,6 +335,7 @@
+     function IsWidthAndHeightStored: Boolean;
+     procedure SetAutoResize(Value: Boolean);
+     procedure SetBorderStyle(Value: TBorderStyle);
++    procedure SetCaption(const Value: WideString);
+     procedure SetCloseButton(Value: Boolean);
+     procedure SetCloseButtonWhenDocked(Value: Boolean);
+     procedure SetCurrentDock(Value: TTBDock);
+@@ -343,6 +368,8 @@
+     procedure UpdateVisibility;
+     procedure ReadSavedAtRunTime(Reader: TReader);
+     procedure WriteSavedAtRunTime(Writer: TWriter);
++    procedure ReadCaptionProperty(Reader: TReader);
++    procedure WriteCaptionProperty(Writer: TWriter);
+ 
+     { Messages }
+     procedure CMColorChanged(var Message: TMessage); message CM_COLORCHANGED;
+@@ -422,6 +449,7 @@
+     { Methods accessible to descendants }
+     procedure Arrange;
+     function CalcNCSizes: TPoint; virtual;
++    function CanDockTo(ADock: TTBDock): Boolean; virtual;
+     procedure ChangeSize(AWidth, AHeight: Integer);
+     function ChildControlTransparent(Ctl: TControl): Boolean; dynamic;
+     procedure Close;
+@@ -446,7 +474,10 @@
+     procedure ResizeTrack(var Rect: TRect; const OrigRect: TRect); dynamic;
+     procedure ResizeTrackAccept; dynamic;
+     procedure SizeChanging(const AWidth, AHeight: Integer); virtual;
++    property EffectiveDockPosAccess: Integer read FEffectiveDockPos write FEffectiveDockPos;
++    property EffectiveDockRowAccess: Integer read FEffectiveDockRow write FEffectiveDockRow;
+   public
++    property DblClickUndock: Boolean read FDblClickUndock write FDblClickUndock default True;
+     property Docked: Boolean read FDocked;
+     property Canvas;
+     property CurrentDock: TTBDock read FCurrentDock write SetCurrentDock stored False;
+@@ -462,6 +493,7 @@
+     property LastDock: TTBDock read FLastDock write SetLastDock stored IsLastDockStored;
+     property NonClientWidth: Integer read GetNonClientWidth;
+     property NonClientHeight: Integer read GetNonClientHeight;
++    property ParentBackground default False;
+ 
+     constructor Create(AOwner: TComponent); override;
+     destructor Destroy; override;
+@@ -487,6 +519,7 @@
+     procedure RemoveDockForm(const Form: TTBCustomForm);
+     procedure WritePositionData(const Data: TTBWritePositionData); dynamic;
+   published
++    property Caption: WideString read FCaption write SetCaption stored False;
+     property Height stored IsWidthAndHeightStored;
+     property Width stored IsWidthAndHeightStored;
+   end;
+@@ -549,10 +582,12 @@
+ function TBValidToolWindowParentForm(const ToolWindow: TTBCustomDockableWindow):
+   TTBCustomForm;
+ 
++function DrawCaptionTempW(wnd: HWND; dc: HDC; const rect: TRect; font: HFONT; icon: HICON; str: LPCWSTR; flags: UINT): BOOL; stdcall;
++
+ implementation
+ 
+ uses
+-  Registry, IniFiles, Consts, Menus,
++  Registry, IniFiles, Consts, Menus, CommCtrl,
+   TB2Common, TB2Hook, TB2Consts;
+ 
+ type
+@@ -594,6 +629,7 @@
+ threadvar
+   FloatingToolWindows: TList;
+ 
++function DrawCaptionTempW; external user32 name 'DrawCaptionTempW';
+ 
+ { Misc. functions }
+ 
+@@ -847,6 +883,73 @@
+   end;
+ end;
+ 
++{ TTBHintWindow }
++
++procedure TTBHintWindow.ActivateHint(Rect: TRect; const AHint: string);
++begin
++  FActivating := True;
++  try
++    inherited;
++  finally
++    FActivating := False;
++  end;
++end;
++
++function TTBHintWindow.CalcHintRect(MaxWidth: Integer; const AHint: string; AData: Pointer): TRect;
++var
++  WideHint: WideString;
++begin
++  WideHint := UTF8Decode(AHint);
++  Result := Rect(0, 0, MaxWidth, 0);
++  _DrawTextW(Canvas.Handle, PWideChar(WideHint), Length(WideHint), Result, DT_CALCRECT or DT_LEFT or
++    DT_WORDBREAK or DT_NOPREFIX or DrawTextBiDiModeFlagsReadingOnly);
++  Inc(Result.Right, 6);
++  Inc(Result.Bottom, 2);
++end;
++
++function TTBHintWindow.CanResize(var NewWidth, NewHeight: Integer): Boolean;
++begin
++  if FDisableResize then Result := False
++  else Result := inherited CanResize(NewWidth, NewHeight);
++end;
++
++procedure TTBHintWindow.CMTextChanged(var Message: TMessage);
++var
++  WideHint: WideString;
++  TextSize: TPoint;
++  R: TRect;
++begin
++  { prevent inherited CM_TEXTCHANGED from changing window size }
++  FDisableResize := True;
++  try
++    inherited;
++  finally
++    FDisableResize := False;
++  end;
++
++  if FActivating then Exit;
++  WideHint := UTF8Decode(Caption);
++  Windows.GetTextExtentPoint32W(Canvas.Handle, PWideChar(WideHint), Length(WideHint), TSize(TextSize));
++  R := Self.BoundsRect;
++  R.Right := R.Left + TextSize.X + 6;
++  R.Bottom := R.Top + TextSize.Y + 4;
++  BoundsRect := R;
++end;
++
++procedure TTBHintWindow.Paint;
++var
++  R: TRect;
++  WideHint: WideString;
++begin
++  R := ClientRect;
++  Inc(R.Left, 2);
++  Inc(R.Top, 2);
++  WideHint := UTF8Decode(Caption);
++  Canvas.Font.Color := Screen.HintFont.Color;
++  _DrawTextW(Canvas.Handle, PWideChar(WideHint), Length(WideHint), R, DT_LEFT or DT_NOPREFIX or
++    DT_WORDBREAK or DrawTextBiDiModeFlagsReadingOnly);
++end;
++
+ 
+ { TTBDock - internal }
+ 
+@@ -1014,6 +1117,11 @@
+   end;
+ end;
+ 
++function TTBDock.Accepts(ADockableWindow: TTBCustomDockableWindow): Boolean;
++begin
++  Result := AllowDrag;
++end;
++
+ procedure TTBDock.AlignControls(AControl: TControl; var Rect: TRect);
+ begin
+   ArrangeToolbars;
+@@ -2121,6 +2229,15 @@
+   RedrawNCArea([twrdCaption]);
+ end;
+ 
++procedure TTBFloatingWindowParent.SetCaption(const Value: WideString);
++begin
++  if FCaption <> Value then
++  begin
++    FCaption := Value;
++    Perform(CM_TEXTCHANGED, 0, 0);
++  end;
++end;
++
+ function GetCaptionRect(const Control: TTBFloatingWindowParent;
+   const AdjustForBorder, MinusCloseButton: Boolean): TRect;
+ begin
+@@ -2462,12 +2579,16 @@
+         { Caption }
+         if twrdCaption in RedrawWhat then begin
+           R := GetCaptionRect(Self, True, FDockableWindow.FCloseButton);
+-          { Note that Delphi's Win32 help for DrawCaption is totally wrong!
+-            I got updated info from www.microsoft.com/msdn/sdk/ }
+-          DrawCaption(Handle, DC, R, DC_TEXT or DC_SMALLCAP or
++
++          {  DrawCaption(Handle, DC, R, DC_TEXT or DC_SMALLCAP or
++              ActiveCaptionFlags[FDockableWindow.FInactiveCaption] or
++              GradientCaptionFlags[Gradient]);    }
++
++          DrawCaptionTempW(Handle, DC, R, 0, 0, PWideChar(Caption), DC_TEXT or DC_SMALLCAP or
+             ActiveCaptionFlags[FDockableWindow.FInactiveCaption] or
+             GradientCaptionFlags[Gradient]);
+ 
++
+           { Line below caption }
+           R := GetCaptionRect(Self, True, False);
+           SavePen := SelectObject(DC, CreatePen(PS_SOLID, 1, GetSysColor(COLOR_BTNFACE)));
+@@ -2526,6 +2647,7 @@
+   FActivateParent := True;
+   FBorderStyle := bsSingle;
+   FCloseButton := True;
++  FDblClickUndock := True;
+   FDockableTo := [dpTop, dpBottom, dpLeft, dpRight];
+   FDockableWindowStyles := [tbdsResizeEightCorner, tbdsResizeClipCursor];
+   FDockPos := -1;
+@@ -2537,6 +2659,7 @@
+   FSmoothDrag := True;
+   FUseLastDock := True;
+ 
++  ParentBackground := False;
+   Color := clBtnFace;
+ 
+   if not(csDesigning in ComponentState) then
+@@ -2974,11 +3097,23 @@
+   Writer.WriteBoolean(True);
+ end;
+ 
++procedure TTBCustomDockableWindow.ReadCaptionProperty(Reader: TReader);
++begin
++  Caption := FilerReadWideString(Reader);
++end;
++
++procedure TTBCustomDockableWindow.WriteCaptionProperty(Writer: TWriter);
++begin
++  FilerWriteWideString(Writer, Caption);
++end;
++
+ procedure TTBCustomDockableWindow.DefineProperties(Filer: TFiler);
+ begin
+   inherited;
+   Filer.DefineProperty('SavedAtRunTime', ReadSavedAtRunTime,
+     WriteSavedAtRunTime, not(csDesigning in ComponentState));
++  Filer.DefineProperty('Caption',
++    ReadCaptionProperty, WriteCaptionProperty, Length(Caption) > 0); 
+ end;
+ 
+ procedure TTBCustomDockableWindow.Loaded;
+@@ -3023,6 +3158,11 @@
+   RemoveFromList(FDockForms, Form);
+ end;
+ 
++function TTBCustomDockableWindow.CanDockTo(ADock: TTBDock): Boolean;
++begin
++  Result := ADock.Position in DockableTo; 
++end;
++
+ function TTBCustomDockableWindow.IsAutoResized: Boolean;
+ begin
+   Result := AutoResize or Assigned(CurrentDock) or Floating;
+@@ -3684,6 +3824,7 @@
+ procedure TTBCustomDockableWindow.CMTextChanged(var Message: TMessage);
+ begin
+   inherited;
++  if not FUpdatingCaption then Caption := inherited Caption;
+   if Parent is TTBFloatingWindowParent then
+     TTBFloatingWindowParent(Parent).Caption := Caption;
+ end;
+@@ -3991,11 +4132,6 @@
+ 
+   procedure BuildDockList;
+ 
+-    function AcceptableDock(const D: TTBDock): Boolean;
+-    begin
+-      Result := D.FAllowDrag and (D.Position in DockableTo);
+-    end;
+-
+     procedure Recurse(const ParentCtl: TWinControl);
+     var
+       D: TTBDockPosition;
+@@ -4012,7 +4148,7 @@
+           if (Controls[I] is TWinControl) and not(Controls[I] is TTBDock) then
+             Recurse(TWinControl(Controls[I]));
+       end;
+-      if (ParentCtl is TTBDock) and AcceptableDock(TTBDock(ParentCtl)) and
++      if (ParentCtl is TTBDock) and TTBDock(ParentCtl).Accepts(Self) and CanDockTo(TTBDock(ParentCtl)) and
+          (DockList.IndexOf(ParentCtl) = -1) then
+         DockList.Add(ParentCtl);
+     end;
+@@ -4024,7 +4160,7 @@
+   begin
+     { Manually add CurrentDock to the DockList first so that it gets priority
+       over other docks }
+-    if Assigned(CurrentDock) and AcceptableDock(CurrentDock) then
++    if Assigned(CurrentDock) and CurrentDock.Accepts(Self) and CanDockTo(CurrentDock) then
+       DockList.Add(CurrentDock);
+     ParentForm := TBGetToolWindowParentForm(Self);
+     DockFormsList := TList.Create;
+@@ -4316,19 +4452,20 @@
+ procedure TTBCustomDockableWindow.DoubleClick;
+ begin
+   if Docked then begin
+-    if DockMode = dmCanFloat then begin
++    if DblClickUndock and (DockMode = dmCanFloat) then begin
+       Floating := True;
+       MoveOnScreen(True);
+     end;
+   end
+-  else
+-  if Assigned(LastDock) then
+-    Parent := LastDock
+-  else
+-  if Assigned(DefaultDock) then begin
+-    FDockRow := ForceDockAtTopRow;
+-    FDockPos := ForceDockAtLeftPos;
+-    Parent := DefaultDock;
++  else if Floating then begin
++    if Assigned(LastDock) then
++      Parent := LastDock
++    else
++    if Assigned(DefaultDock) then begin
++      FDockRow := ForceDockAtTopRow;
++      FDockPos := ForceDockAtLeftPos;
++      Parent := DefaultDock;
++    end;
+   end;
+ end;
+ 
+@@ -4938,6 +5075,25 @@
+   end;
+ end;
+ 
++procedure TTBCustomDockableWindow.SetCaption(const Value: WideString);
++var
++  AnsiCaption: AnsiString;
++begin
++  if FCaption <> Value then
++  begin
++    FCaption := Value;
++    FUpdatingCaption := True;
++    try
++      { just in case, keep the AnsiVersion of the caption in sync }
++      AnsiCaption := Value;
++      Perform(WM_SETTEXT, 0, Longint(PChar(AnsiCaption)));
++      Perform(CM_TEXTCHANGED, 0, 0);
++    finally
++      FUpdatingCaption := False;
++    end;
++  end;
++end;
++
+ procedure TTBCustomDockableWindow.SetDragHandleStyle(Value: TTBDragHandleStyle);
+ begin
+   if FDragHandleStyle <> Value then begin
+@@ -5356,7 +5512,7 @@
+         with TTBCustomDockableWindow(ToolWindow) do begin
+           {}{should skip over toolbars that are neither Docked nor Floating }
+           if Name = '' then
+-            raise Exception.Create(STBToolWinNameNotSet);
++            Continue;
+           Rev := ReadIntProc(Name, rvRev, 0, ExtraData);
+           if Rev = 2000 then begin
+             Visible := ReadIntProc(Name, rvVisible, Ord(Visible), ExtraData) <> 0;
+@@ -5392,7 +5548,7 @@
+     if OwnerComponent.Components[I] is TTBCustomDockableWindow then
+       with TTBCustomDockableWindow(OwnerComponent.Components[I]) do begin
+         if Name = '' then
+-          raise Exception.Create(STBToolwinNameNotSet);
++          Continue;
+         if Floating then
+           N := rdDockedToFloating
+         else if Docked then begin
+Index: TB2DsgnItemEditor.dfm
+===================================================================
+RCS file: /data/cvs/tb2k/Source/TB2DsgnItemEditor.dfm,v
+retrieving revision 1.11
+diff -u -r1.11 TB2DsgnItemEditor.dfm
+Binary files /tmp/cvsJoX5Mt and TB2DsgnItemEditor.dfm differ
+Index: TB2DsgnItemEditor.pas
+===================================================================
+RCS file: /data/cvs/tb2k/Source/TB2DsgnItemEditor.pas,v
+retrieving revision 1.55
+diff -u -r1.55 TB2DsgnItemEditor.pas
+--- TB2DsgnItemEditor.pas	27 Jan 2005 06:48:53 -0000	1.55
++++ TB2DsgnItemEditor.pas	1 Dec 2005 18:57:27 -0000
+@@ -23,7 +23,7 @@
+   GPL. If you do not delete the provisions above, a recipient may use your
+   version of this file under either the "Toolbar2000 License" or the GPL.
+ 
+-  $jrsoftware: tb2k/Source/TB2DsgnItemEditor.pas,v 1.55 2005/01/27 06:48:53 jr Exp $
++  $jrsoftware: tb2k/Source/TB2DsgnItemEditor.pas,v 1.56 2005/08/19 03:16:10 jr Exp $
+ }
+ 
+ interface
+@@ -40,6 +40,9 @@
+     DsgnIntf, DsgnWnds, LibIntf;
+   {$ENDIF}
+ 
++const
++  CM_DEFERUPDATE = WM_USER + 100;
++
+ type
+   TTBItemEditForm = class(TDesignWindow)
+     TreeView: TTreeView;
+@@ -101,12 +104,13 @@
+     FSettingSel, FRebuildingTree, FRebuildingList: Integer;
+     function AddListViewItem(const Index: Integer;
+       const Item: TTBCustomItem): TListItem;
++    procedure CMDeferUpdate(var Message: TMessage); message CM_DEFERUPDATE;
+     procedure Copy;
+     procedure CreateNewItem(const AClass: TTBCustomItemClass);
+     procedure Cut;
+     procedure Delete;
+     procedure DeleteItem(const Item: TTBCustomItem);
+-    function GetItemTreeCaption(AItem: TTBCustomItem): String;
++    function GetItemTreeCaption(AItem: TTBCustomItem): WideString;
+     procedure GetSelItemList(const AList: TList);
+     procedure ItemNotification(Ancestor: TTBCustomItem; Relayed: Boolean;
+       Action: TTBItemChangedAction; Index: Integer; Item: TTBCustomItem);
+@@ -121,6 +125,8 @@
+       Drop: Boolean): Boolean;
+     procedure UnregisterAllNotifications;
+   protected
++    procedure FixTreeCaptions;
++    procedure FixListCaptions;
+     procedure Notification(AComponent: TComponent; Operation: TOperation); override;
+     function UniqueName(Component: TComponent): String; override;
+   public
+@@ -152,6 +158,12 @@
+ procedure TBRegisterItemClass(AClass: TTBCustomItemClass;
+   const ACaption: String; ResInstance: HINST);
+ 
++type
++  TTBDsgnEditorHook = procedure(Sender: TTBItemEditForm) of object;
++
++procedure TBRegisterDsgnEditorHook(Hook: TTBDsgnEditorHook);
++procedure TBUnregisterDsgnEditorHook(Hook: TTBDsgnEditorHook);
++
+ implementation
+ 
+ {$R *.DFM}
+@@ -179,6 +191,7 @@
+ var
+   ItemClasses: TList;
+   ItemImageList: TImageList;
++  EditFormHooks: TList;
+ 
+ {$IFNDEF JR_D6}
+ function CreateSelectionList: TDesignerSelectionList;
+@@ -240,7 +253,18 @@
+   const ACaption: String; ResInstance: HINST);
+ var
+   Info: PItemClassInfo;
++  I: Integer;
+ begin
++  if ItemClasses <> nil then
++    for I := ItemClasses.Count - 1 downto 0 do
++    begin
++      Info := ItemClasses[I];
++      if Info.ItemClass = AClass then
++      begin
++        Dispose(Info);
++        ItemClasses.Delete(I);
++      end;
++    end;
+   New(Info);
+   Info.ItemClass := AClass;
+   Info.Caption := ACaption;
+@@ -337,6 +361,85 @@
+     [mbOK], 0);
+ end;
+ 
++procedure SetTreeNodeText(const Node: TTreeNode; const NewText: WideString);
++var
++  TVH: HWND;
++  ItemW: TTVItemW;
++  ItemA: TTVItemA;
++  S: AnsiString;
++begin
++  TVH := Node.TreeView.Handle;
++  if SendMessage(TVH, TVM_GETUNICODEFORMAT, 0, 0) = 1 then
++    with ItemW do
++    begin
++      mask := TVIF_TEXT;
++      hItem := Node.ItemId;
++      pszText := PWideChar(NewText);
++      SendMessageW(TVH, TVM_SETITEMW, 0, Longint(@ItemW));
++    end
++  else
++    with ItemA do
++    begin
++      S := NewText;
++      mask := TVIF_TEXT;
++      hItem := Node.ItemId;
++      pszText := PChar(S);
++      SendMessageA(TVH, TVM_SETITEMA, 0, Longint(@ItemA));
++    end;
++end;
++
++procedure SetListItemImageIndex(const ListItem: TListItem; ImageIndex: Integer);
++var
++  LVH: HWND;
++  ItemW: TLVItemW;
++  ItemA: TLVItemA;
++begin
++  LVH := ListItem.ListView.Handle;
++  if SendMessage(LVH, LVM_GETUNICODEFORMAT, 0, 0) = 1 then
++  begin
++    ItemW.mask := LVIF_IMAGE;
++    ItemW.iItem := ListItem.Index;
++    ItemW.iSubItem := 0;
++    ItemW.iImage := ImageIndex;
++    SendMessageW(LVH, LVM_SETITEMW, 0, Longint(@ItemW));
++  end
++  else
++  begin
++    ItemA.mask := LVIF_IMAGE;
++    ItemA.iItem := ListItem.Index;
++    ItemA.iSubItem := 0;
++    ItemA.iImage := ImageIndex;
++    SendMessageA(LVH, LVM_SETITEMA, 0, Longint(@ItemA));
++  end;
++end;
++
++procedure SetListItemText(const ListItem: TListItem; SubItem: Integer; const NewText: WideString);
++var
++  LVH: HWND;
++  ItemW: TLVItemW;
++  ItemA: TLVItemA;
++  S: AnsiString;
++begin
++  LVH := ListItem.ListView.Handle;
++  if SendMessage(LVH, LVM_GETUNICODEFORMAT, 0, 0) = 1 then
++  begin
++    ItemW.mask := LVIF_TEXT;
++    ItemW.iItem := ListItem.Index;
++    ItemW.iSubItem := SubItem;
++    ItemW.pszText := PWideChar(NewText);
++    SendMessageW(LVH, LVM_SETITEMW, 0, Longint(@ItemW));
++  end
++  else
++  begin
++    S := NewText;
++    ItemA.mask := LVIF_TEXT;
++    ItemA.iItem := ListItem.Index;
++    ItemA.iSubItem := SubItem;
++    ItemA.pszText := PAnsiChar(S);
++    SendMessageA(LVH, LVM_SETITEMA, 0, Longint(@ItemA));
++  end;
++end;
++
+ 
+ { TTBItemEditForm }
+ 
+@@ -350,6 +453,7 @@
+   FNotifyItemList := TList.Create;
+   ToolbarItems.SubMenuImages := ItemImageList;
+   ListView.SmallImages := ItemImageList;
++
+   { Populate the 'More' menu }
+   for I := 0 to ItemClasses.Count-1 do begin
+     Info := ItemClasses[I];
+@@ -360,6 +464,12 @@
+     Item.OnClick := MoreItemClick;
+     MoreMenu.Add(Item);
+   end;
++
++  { Run the hooks }
++
++  if EditFormHooks <> nil then
++    for I := 0 to EditFormHooks.Count - 1 do
++      TTBDsgnEditorHook(EditFormHooks[I]^)(Self);
+ end;
+ 
+ destructor TTBItemEditForm.Destroy;
+@@ -380,6 +490,10 @@
+ 
+ procedure TTBItemEditForm.FormActivate(Sender: TObject);
+ begin
++  SendMessage(TreeView.Handle, TVM_SETUNICODEFORMAT, 1, 0);
++  SendMessage(ListView.Handle, LVM_SETUNICODEFORMAT, 1, 0);
++  FixTreeCaptions;
++  FixListCaptions;
+   SetSelParentItem(FSelParentItem);
+ end;
+ 
+@@ -456,7 +570,6 @@
+   ListItem: TListItem;
+   TreeNode: TTreeNode;
+   I: Integer;
+-  C: String;
+ begin
+   { Manipulate the list view when items are inserted, deleted, or their Caption
+     changes }
+@@ -477,8 +590,11 @@
+     tbicInvalidateAndResize:
+       if (Ancestor = FSelParentItem) and not Relayed then begin
+         ListItem := ListView.FindData(0, Item, True, False);
+-        if Assigned(ListItem) and (ListItem.Caption <> TTBCustomItem(Item).Caption) then
+-          ListItem.Caption := TTBCustomItem(Item).Caption;
++        if Assigned(ListItem) then
++        begin
++          SetListItemText(ListItem, 0, TTBCustomItem(Item).Caption);
++          SetListItemText(ListItem, 1, TTBCustomItem(Item).ClassName);
++        end;
+       end;
+   end;
+   { Update tree view when an item is deleted, or a Caption changes }
+@@ -501,9 +617,7 @@
+         end
+         else begin
+           { tbicInvalidateAndResize, tbicNameChanged: }
+-          C := GetItemTreeCaption(Item);
+-          if TreeNode.Text <> C then
+-            TreeNode.Text := C;
++          SetTreeNodeText(TreeNode, GetItemTreeCaption(Item));
+         end;
+         Break;
+       end;
+@@ -512,7 +626,7 @@
+   end;
+ end;
+ 
+-function TTBItemEditForm.GetItemTreeCaption(AItem: TTBCustomItem): String;
++function TTBItemEditForm.GetItemTreeCaption(AItem: TTBCustomItem): WideString;
+ begin
+   if AItem <> FRootItem then begin
+     Result := AItem.Caption;
+@@ -531,12 +645,13 @@
+     I: Integer;
+     NewNode: TTreeNode;
+     ChildItem: TTBCustomItem;
++    S: WideString;
+   begin
+     {}AParentItem.FreeNotification(Self);
+     AParentItem.RegisterNotification(ItemNotification);
+     FNotifyItemList.Add(AParentItem);
+-    NewNode := TreeView.Items.AddChild(ATreeNode, GetItemTreeCaption(AParentItem));
+-    NewNode.Data := AParentItem;
++    S := GetItemTreeCaption(AParentItem);
++    NewNode := TreeView.Items.AddNode(nil, ATreeNode, '-', AParentItem, naAddChild);
+     if AParentItem = FSelParentItem then
+       FoundSelParentItem := NewNode;
+     for I := 0 to AParentItem.Count-1 do begin
+@@ -565,6 +680,7 @@
+     finally
+       TreeView.Items.EndUpdate;
+     end;
++    FixTreeCaptions;
+   finally
+     Dec(FRebuildingTree);
+   end;
+@@ -576,14 +692,14 @@
+   Result := ListView.Items.Insert(Index);
+   Result.Data := Item;
+   if not(Item is TTBControlItem) then begin
+-    Result.Caption := Item.Caption;
+-    Result.Subitems.Add(Item.ClassName);
+-    Result.ImageIndex := GetItemClassImage(TTBCustomItemClass(Item.ClassType));
++    SetListItemText(Result, 0, Item.Caption);
++    SetListItemText(Result, 1, Item.ClassName);
++    SetListItemImageIndex(Result, GetItemClassImage(TTBCustomItemClass(Item.ClassType)));
+   end
+   else begin
+-    Result.Caption := '(Control)';
+-    Result.Subitems.Add(Item.ClassName);
+-    Result.ImageIndex := -1;
++    SetListItemText(Result, 0, '(Control)');
++    SetListItemText(Result, 1, Item.ClassName);
++    SetListItemImageIndex(Result, -1);
+   end;
+ end;
+ 
+@@ -591,6 +707,7 @@
+ var
+   ChildItem: TTBCustomItem;
+   I: Integer;
++  LI: TListItem;
+ begin
+   Inc(FRebuildingList);
+   try
+@@ -608,7 +725,10 @@
+             AddListViewItem(I, ChildItem);
+         end;
+         { Add an empty item to the end }
+-        ListView.Items.Add.ImageIndex := -1;
++        LI := ListView.Items.Add;
++        SetListItemText(LI, 0, '');
++        SetListItemText(LI, 1, '');
++        SetListItemImageIndex(LI, -1);
+       end;
+     finally
+       ListView.Items.EndUpdate;
+@@ -883,13 +1003,22 @@
+   SetSelParentItem(FSelParentItem);
+ end;
+ 
++procedure TTBItemEditForm.CMDeferUpdate(var Message: TMessage);
++begin
++  SetSelParentItem(FSelParentItem);
++end;
++
+ procedure TTBItemEditForm.ListViewChange(Sender: TObject; Item: TListItem;
+   Change: TItemChange);
++var
++  Msg: TMsg;
+ begin
+   if (FRebuildingList > 0) or (FSettingSel > 0) or (Change <> ctState) or
+      (csDestroying in ListView.ComponentState) then
+     Exit;
+-  SetSelParentItem(FSelParentItem);
++  if not PeekMessage(Msg, Handle, CM_DEFERUPDATE, CM_DEFERUPDATE,
++     PM_NOREMOVE or PM_NOYIELD) then
++    PostMessage(Handle, CM_DEFERUPDATE, 0, 0);
+ end;
+ 
+ procedure TTBItemEditForm.ListViewEnter(Sender: TObject);
+@@ -1001,6 +1130,8 @@
+   end;
+ end;
+ 
++type TCustomTreeViewAccess = class(TCustomTreeView);
++
+ procedure TTBItemEditForm.ListViewDragOver(Sender, Source: TObject; X,
+   Y: Integer; State: TDragState; var Accept: Boolean);
+ { List item dragged over the list view }
+@@ -1273,6 +1404,51 @@
+   DoConvert(FSelParentItem, FParentComponent.Owner);
+ end;
+ 
++procedure TTBItemEditForm.FixTreeCaptions;
++var
++  TreeNode: TTreeNode;
++  Item: TTBCustomItem;
++begin
++  TreeNode := TreeView.Items.GetFirstNode;
++  while Assigned(TreeNode) do
++  begin
++    Item := TreeNode.Data;
++    if Assigned(Item) then
++      SetTreeNodeText(TreeNode, GetItemTreeCaption(Item));
++    TreeNode := TreeNode.GetNext;
++  end;
++end;
++
++procedure TTBItemEditForm.FixListCaptions;
++var
++  I: Integer;
++  ListItem: TListItem;
++  Item: TTBCustomItem;
++  S: WideString;
++  Idx: Integer;
++begin
++  for I := 0 to ListView.Items.Count - 1 do
++  begin
++    ListItem := ListView.Items[I];
++    Item := ListItem.Data;
++    if Assigned(Item) then
++    begin
++      if Item is TTBControlItem then
++      begin
++        S := '(Control)';
++        Idx := -1;
++      end
++      else
++      begin
++        S := Item.Caption;
++        Idx := GetItemClassImage(TTBCustomItemClass(Item.ClassType));
++      end;
++      SetListItemText(ListItem, 0, S);
++      SetListItemText(ListItem, 1, Item.ClassName);
++      SetListItemImageIndex(ListItem, Idx);
++    end;
++  end;
++end;
+ 
+ { TTBItemsEditor }
+ 
+@@ -1335,14 +1511,46 @@
+   Result := '(TB2000 Items)';
+ end;
+ 
++
++procedure TBRegisterDsgnEditorHook(Hook: TTBDsgnEditorHook);
++var
++  H: ^TTBDsgnEditorHook;
++begin
++  New(H);
++  H^ := Hook;
++  EditFormHooks.Add(H);
++end;
++
++procedure TBUnregisterDsgnEditorHook(Hook: TTBDsgnEditorHook);
++var
++  H: ^TTBDsgnEditorHook;
++  I: Integer;
++begin
++  for I := EditFormHooks.Count - 1 downto 0 do
++  begin
++    H := EditFormHooks[I];
++    if (TMethod(H^).Code = TMethod(Hook).Code) and
++      (TMethod(H^).Data = TMethod(Hook).Data) then
++    begin
++      Dispose(H);
++      EditFormHooks.Delete(I);
++//      Break;
++    end;
++  end;
++end;
++
++
++
+ initialization
+   ItemImageList := TImageList.Create(nil);
+   ItemImageList.Handle := ImageList_LoadImage(HInstance, 'TB2_DSGNEDITORIMAGES',
+     16, 0, clFuchsia, IMAGE_BITMAP, 0);
+   ItemClasses := TList.Create;
++  EditFormHooks := TList.Create;
+   AddModuleUnloadProc(UnregisterModuleItemClasses);
+ finalization
+   RemoveModuleUnloadProc(UnregisterModuleItemClasses);
+   FreeItemClasses;
+   FreeAndNil(ItemImageList);
++  FreeAndNil(EditFormHooks);
+ end.
+Index: TB2ExtItems.pas
+===================================================================
+RCS file: /data/cvs/tb2k/Source/TB2ExtItems.pas,v
+retrieving revision 1.63
+diff -u -r1.63 TB2ExtItems.pas
+--- TB2ExtItems.pas	4 Jul 2005 02:49:52 -0000	1.63
++++ TB2ExtItems.pas	1 Dec 2005 16:21:33 -0000
+@@ -47,30 +47,36 @@
+   TTBEditItem = class;
+   TTBEditItemViewer = class;
+ 
+-  TTBAcceptTextEvent = procedure(Sender: TObject; var NewText: String;
++  TTBAcceptTextEvent = procedure(Sender: TObject; var NewText: WideString;
+     var Accept: Boolean) of object;
+   TTBBeginEditEvent = procedure(Sender: TTBEditItem; Viewer: TTBEditItemViewer;
+-    EditControl: TEdit) of object;
++    EditControlHandle: HWND) of object;
+ 
+   TTBEditAction = class(TAction)
+   private
+     FEditOptions: TTBEditItemOptions;
+-    FEditCaption: String;
++    FEditCaption: WideString;
+     FEditWidth: Integer;
+     FOnAcceptText: TTBAcceptTextEvent;
+-    FText: String;
+-    procedure SetEditCaption(Value: String);
++    FText: WideString;
++    procedure SetEditCaption(Value: WideString);
+     procedure SetEditOptions(Value: TTBEditItemOptions);
+     procedure SetEditWidth(Value: Integer);
+     procedure SetOnAcceptText(Value: TTBAcceptTextEvent);
+-    procedure SetText(Value: String);
++    procedure SetText(Value: WideString);
++  protected
++    procedure DefineProperties(Filer: TFiler); override;
++    procedure ReadEditCaptionProperty(Reader: TReader);
++    procedure ReadTextProperty(Reader: TReader);
++    procedure WriteEditCaptionProperty(Writer: TWriter);
++    procedure WriteTextProperty(Writer: TWriter);
+   public
+     constructor Create(AOwner: TComponent); override;
+   published
+-    property EditCaption: String read FEditCaption write SetEditCaption;
++    property EditCaption: WideString read FEditCaption write SetEditCaption stored False;
+     property EditOptions: TTBEditItemOptions read FEditOptions write SetEditOptions default EditItemDefaultEditOptions;
+     property EditWidth: Integer read FEditWidth write SetEditWidth default EditItemDefaultEditWidth;
+-    property Text: String read FText write SetText;
++    property Text: WideString read FText write SetText stored False;
+ 
+     property OnAcceptText: TTBAcceptTextEvent read FOnAcceptText write SetOnAcceptText;
+   end;
+@@ -83,39 +89,48 @@
+     function IsEditWidthLinked: Boolean; virtual;
+     function IsOnAcceptTextLinked: Boolean; virtual;
+     function IsTextLinked: Boolean; virtual;
+-    procedure SetEditCaption(const Value: String); virtual;
++    procedure SetEditCaption(const Value: WideString); virtual;
+     procedure SetEditOptions(Value: TTBEditItemOptions); virtual;
+     procedure SetEditWidth(const Value: Integer); virtual;
+     procedure SetOnAcceptText(Value: TTBAcceptTextEvent); virtual;
+-    procedure SetText(const Value: String); virtual;
++    procedure SetText(const Value: WideString); virtual;
+   end;
+ 
+   TTBEditItem = class(TTBCustomItem)
+   private
++    FActiveViewer: TTBEditItemViewer;
+     FCharCase: TEditCharCase;
+-    FEditCaption: String;
++    FEditCaption: WideString;
+     FEditOptions: TTBEditItemOptions;
+     FEditWidth: Integer;
++    FExtendedAccept: Boolean;
+     FMaxLength: Integer;
++    FText: WideString;
+     FOnAcceptText: TTBAcceptTextEvent;
+-    FOnBeginEdit: TTBBeginEditEvent;
+-    FText: String;
+     function IsEditCaptionStored: Boolean;
+     function IsEditOptionsStored: Boolean;
+     function IsEditWidthStored: Boolean;
+     function IsTextStored: Boolean;
+     procedure SetCharCase(Value: TEditCharCase);
+-    procedure SetEditCaption(Value: String);
++    procedure SetEditCaption(Value: WideString);
+     procedure SetEditOptions(Value: TTBEditItemOptions);
+     procedure SetEditWidth(Value: Integer);
+     procedure SetMaxLength(Value: Integer);
+-    procedure SetText(Value: String);
++    procedure SetText(Value: WideString);
+   protected
+     procedure ActionChange(Sender: TObject; CheckDefaults: Boolean); override;
+-    procedure DoBeginEdit(Viewer: TTBEditItemViewer); virtual;
++    procedure DefineProperties(Filer: TFiler); override;
++    function DoAcceptText(var NewText: WideString): Boolean; virtual;
++    procedure DoTextChanging(const OldText: WideString; var NewText: WideString); virtual;
++    procedure DoTextChanged; virtual;
+     function GetActionLinkClass: TTBCustomItemActionLinkClass; override;
+     function GetItemViewerClass(AView: TTBView): TTBItemViewerClass; override;
+     function NeedToRecreateViewer(AViewer: TTBItemViewer): Boolean; override;
++    procedure ReadEditCaptionProperty(Reader: TReader);
++    procedure ReadTextProperty(Reader: TReader);
++    procedure WriteEditCaptionProperty(Writer: TWriter);
++    procedure WriteTextProperty(Writer: TWriter);
++    property ExtendedAccept: Boolean read FExtendedAccept write FExtendedAccept default False;
+   public
+     constructor Create(AOwner: TComponent); override;
+     procedure Clear;
+@@ -127,7 +142,7 @@
+     property CharCase: TEditCharCase read FCharCase write SetCharCase default ecNormal;
+     property Checked;
+     property DisplayMode;
+-    property EditCaption: String read FEditCaption write SetEditCaption stored IsEditCaptionStored;
++    property EditCaption: WideString read FEditCaption write SetEditCaption stored IsEditCaptionStored;
+     property EditOptions: TTBEditItemOptions read FEditOptions write SetEditOptions stored IsEditOptionsStored;
+     property EditWidth: Integer read FEditWidth write SetEditWidth stored IsEditWidthStored;
+     property MaxLength: Integer read FMaxLength write SetMaxLength default 0;
+@@ -138,40 +153,52 @@
+     property ImageIndex;
+     property RadioItem;
+     property ShortCut;
+-    property Text: String read FText write SetText stored IsTextStored;
++    property Text: WideString read FText write SetText stored False;
+     property Visible;
+ 
+     property OnAcceptText: TTBAcceptTextEvent read FOnAcceptText write FOnAcceptText;
+-    property OnBeginEdit: TTBBeginEditEvent read FOnBeginEdit write FOnBeginEdit;
+     property OnClick;
+     property OnSelect;
+   end;
+ 
++  TEditClass = class of TEdit;
++
+   TTBEditItemViewer = class(TTBItemViewer)
+   private
+-    FEditControl: TEdit;
++    FDefaultEditWndProc: Pointer;
++    FEditControlColor: TColor;
++    FEditControlBrush: HBrush; // need this to handle message reflection
++    FEditControlFont: TFont;
++    FEditControlHandle: HWND;
+     FEditControlStatus: set of (ecsContinueLoop, ecsAccept, ecsClose);
+-    function EditLoop(const CapHandle: HWND): Boolean;
++    function  EditLoop(const CapHandle: HWND): Boolean;
+     procedure EditWndProc(var Message: TMessage);
+     procedure MouseBeginEdit;
+   protected
+-    procedure CalcSize(const Canvas: TCanvas; var AWidth, AHeight: Integer);
+-      override;
++    FInMessageLoop: Boolean;
++    FUpdating: Boolean;
++    procedure CalcSize(const Canvas: TCanvas; var AWidth, AHeight: Integer); override;
+     function CaptionShown: Boolean; override;
++    procedure AdjustEditControlStyle(var Style, ExStyle: Cardinal;
++      var Color: TColor); virtual;
++    procedure AdjustEditControlFont(Font: TFont); virtual;
+     function DoExecute: Boolean; override;
+     function GetAccRole: Integer; override;
+     function GetAccValue(var Value: WideString): Boolean; override;
+-    function GetCaptionText: String; override;
++    function GetCaptionText: WideString; override;
+     procedure GetCursor(const Pt: TPoint; var ACursor: HCURSOR); override;
+     procedure GetEditRect(var R: TRect); virtual;
++    function GetEditMargins: TRect; virtual;
++    function HandleEditMessage(var Message: TMessage): Boolean; virtual;
+     procedure MouseDown(Shift: TShiftState; X, Y: Integer;
+       var MouseDownOnMenu: Boolean); override;
+     procedure MouseUp(X, Y: Integer; MouseWasDownOnMenu: Boolean); override;
+     procedure Paint(const Canvas: TCanvas; const ClientAreaRect: TRect;
+       IsSelected, IsPushed, UseDisabledShadow: Boolean); override;
++    procedure SetEditControlText(const S: WideString);
++    procedure SetupEditControl(EditControlHandle: HWND); virtual;
+     function UsesSameWidth: Boolean; override;
+-  public
+-    property EditControl: TEdit read FEditControl;
++    property EditControlHandle: HWND read FEditControlHandle;
+   end;
+ 
+   { TTBVisibilityToggleItem }
+@@ -204,7 +231,9 @@
+     property OnClick;
+     property OnSelect;
+   end;
+-  
++
++function GetHandleTextW(const Handle: HWND): WideString;
++procedure SetHandleTextW(const Handle: HWND; const S: WideString);
+ 
+ implementation
+ 
+@@ -217,7 +246,55 @@
+ 
+ type
+   TControlAccess = class(TControl);
+-  TEditAccess = class(TEdit);
++
++function GetHandleTextW(const Handle: HWND): WideString;
++var
++  S: ANSIString;
++  L: Integer;
++begin
++  SetLength(Result, 0);
++  if Handle = 0 then Exit;
++  if IsWindowUnicode(Handle) then
++  begin
++    L := GetWindowTextLengthW(Handle);
++    SetLength(Result, L + 1);
++    GetWindowTextW(Handle, PWideChar(Result), L + 1);
++    SetLength(Result, L);
++  end
++  else
++  begin
++    L := GetWindowTextLength(Handle);
++    SetLength(S, L + 1);
++    GetWindowText(Handle, PChar(S), L + 1);
++    SetLength(S, L);
++    Result := S;
++  end;
++end;
++
++procedure SetHandleTextW(const Handle: HWND; const S: WideString);
++begin
++  if IsWindowUnicode(Handle) then SetWindowTextW(Handle, PWideChar(S))
++  else SetWindowText(Handle, PAnsiChar(AnsiString(S)));
++end;
++
++function EditWndProcW(Wnd: HWnd; Msg: Cardinal; WParam, LParam: Longint): Longint; stdcall;
++var
++  V: TTBEditItemViewer;
++  Message: TMessage;
++begin
++  V := TTBEditItemViewer(GetWindowLongW(Wnd, GWL_USERDATA));
++  if Assigned(V) then
++  begin
++    Message.Msg := Msg;
++    Message.WParam := WParam;
++    Message.LParam := LParam;
++    Message.Result := 0;
++    V.EditWndProc(Message);
++    Result := Message.Result;
++  end
++  else Result := DefWindowProcW(Wnd, Msg, WParam, LParam);
++end;
++
+ 
+ 
+ { TTBEditAction }
+@@ -230,7 +307,24 @@
+   DisableIfNoHandler := False;
+ end;
+ 
+-procedure TTBEditAction.SetEditCaption(Value: String);
++procedure TTBEditAction.DefineProperties(Filer: TFiler);
++begin
++  inherited;
++  Filer.DefineProperty('EditCaption', ReadEditCaptionProperty, WriteEditCaptionProperty, Length(EditCaption) > 0);
++  Filer.DefineProperty('Text', ReadTextProperty, WriteTextProperty, Length(Text) > 0);
++end;
++
++procedure TTBEditAction.ReadEditCaptionProperty(Reader: TReader);
++begin
++  EditCaption := FilerReadWideString(Reader);
++end;
++
++procedure TTBEditAction.ReadTextProperty(Reader: TReader);
++begin
++  Text := FilerReadWideString(Reader);
++end;
++
++procedure TTBEditAction.SetEditCaption(Value: WideString);
+ var
+   I: Integer;
+ begin
+@@ -282,7 +376,7 @@
+   end;
+ end;
+ 
+-procedure TTBEditAction.SetText(Value: String);
++procedure TTBEditAction.SetText(Value: WideString);
+ var
+   I: Integer;
+ begin
+@@ -296,6 +390,16 @@
+ end;
+ 
+ 
++procedure TTBEditAction.WriteEditCaptionProperty(Writer: TWriter);
++begin
++  FilerWriteWideString(Writer, EditCaption);
++end;
++
++procedure TTBEditAction.WriteTextProperty(Writer: TWriter);
++begin
++  FilerWriteWideString(Writer, Text);
++end;
++
+ { TTBEditItemActionLink }
+ 
+ procedure TTBEditItemActionLink.AssignClient(AClient: TObject);
+@@ -344,7 +448,7 @@
+     Result := False;
+ end;
+ 
+-procedure TTBEditItemActionLink.SetEditCaption(const Value: String);
++procedure TTBEditItemActionLink.SetEditCaption(const Value: WideString);
+ begin
+   if IsEditCaptionLinked then TTBEditItem(FClient).EditCaption := Value;
+ end;
+@@ -364,9 +468,9 @@
+   if IsOnAcceptTextLinked then TTBEditItem(FClient).OnAcceptText := Value;
+ end;
+ 
+-procedure TTBEditItemActionLink.SetText(const Value: String);
++procedure TTBEditItemActionLink.SetText(const Value: WideString);
+ begin
+-  if IsTextLinked then TTBEditItem(FClient).Text := Value;
++  if IsTextLinked then TTBEditItem(FClient).SetText(Value);
+ end;
+ 
+ 
+@@ -390,7 +494,7 @@
+       if not CheckDefaults or (Self.EditOptions = []) then
+         Self.EditOptions := EditOptions;
+       if not CheckDefaults or (Self.Text = '') then
+-        Self.Text := Text;
++        Self.SetText(Text);
+       if not CheckDefaults or not Assigned(Self.OnAcceptText) then
+         Self.OnAcceptText := OnAcceptText;
+     end;
+@@ -425,12 +529,6 @@
+   inherited;
+ end;
+ 
+-procedure TTBEditItem.DoBeginEdit(Viewer: TTBEditItemViewer);
+-begin
+-  if Assigned(FOnBeginEdit) then
+-    FOnBeginEdit(Self, Viewer, Viewer.EditControl);
+-end;
+-
+ function TTBEditItem.IsEditOptionsStored: Boolean;
+ begin
+   Result := (EditOptions <> EditItemDefaultEditOptions) and
+@@ -473,7 +571,7 @@
+   end;
+ end;
+ 
+-procedure TTBEditItem.SetEditCaption(Value: String);
++procedure TTBEditItem.SetEditCaption(Value: WideString);
+ begin
+   if FEditCaption <> Value then begin
+     FEditCaption := Value;
+@@ -497,60 +595,124 @@
+   end;
+ end;
+ 
+-procedure TTBEditItem.SetText(Value: String);
++function TTBEditItem.DoAcceptText(var NewText: WideString): Boolean;
++begin
++  Result := True;
++  if Assigned(FOnAcceptText) then FOnAcceptText(Self, NewText, Result);
++end;
++
++procedure TTBEditItem.DoTextChanging(const OldText: WideString; var NewText: WideString);
+ begin
+   case FCharCase of
+-    ecUpperCase: Value := AnsiUpperCase(Value);
+-    ecLowerCase: Value := AnsiLowerCase(Value);
++    ecUpperCase: NewText := WideUpperCase(NewText);
++    ecLowerCase: NewText := WideLowerCase(NewText);
+   end;
++end;
++
++procedure TTBEditItem.SetText(Value: WideString);
++begin
++  DoTextChanging(FText, Value);
+   if FText <> Value then begin
+     FText := Value;
++    if Assigned(FActiveViewer) then FActiveViewer.SetEditControlText(Value);
+     Change(False);
++    DoTextChanged;
+   end;
+ end;
+ 
++procedure TTBEditItem.DoTextChanged;
++begin
++end;
++
++procedure TTBEditItem.DefineProperties(Filer: TFiler);
++begin
++  inherited;
++  Filer.DefineProperty('EditCaption', ReadEditCaptionProperty, WriteEditCaptionProperty, Length(EditCaption) > 0);
++  Filer.DefineProperty('Text', ReadTextProperty, WriteTextProperty, (Length(Text) > 0) and IsTextStored);
++end;
++
++procedure TTBEditItem.ReadEditCaptionProperty(Reader: TReader);
++begin
++  EditCaption := FilerReadWideString(Reader);
++end;
++
++procedure TTBEditItem.ReadTextProperty(Reader: TReader);
++begin
++  Text := FilerReadWideString(Reader);
++end;
++
++procedure TTBEditItem.WriteTextProperty(Writer: TWriter);
++begin
++  FilerWriteWideString(Writer, Text);
++end;
++
++procedure TTBEditItem.WriteEditCaptionProperty(Writer: TWriter);
++begin
++  FilerWriteWideString(Writer, EditCaption);
++end;
+ 
+ { TTBEditItemViewer }
+ 
++procedure TTBEditItemViewer.AdjustEditControlFont(Font: TFont);
++begin
++end;
++
++procedure TTBEditItemViewer.AdjustEditControlStyle(var Style, ExStyle: Cardinal; var Color: TColor);
++begin
++end;
++
+ procedure TTBEditItemViewer.EditWndProc(var Message: TMessage);
+-var
+-  Item: TTBEditItem;
+ 
+   procedure AcceptText;
+   var
+-    S: String;
+-    Accept: Boolean;
++    S: WideString;
+   begin
+-    S := FEditControl.Text;
+-    Accept := True;
+-    if Assigned(Item.FOnAcceptText) then
+-      Item.FOnAcceptText(Self, S, Accept);
+-    if Accept then
+-      Item.Text := S;
++    S := GetHandleTextW(FEditControlHandle);
++    if TTBEditItem(Item).DoAcceptText(S) then TTBEditItem(Item).SetText(S);
+   end;
+ 
+ begin
+-  Item := TTBEditItem(Self.Item);
+-  if FEditControl = nil then
+-    Exit;
+-  if Message.Msg = WM_CHAR then
+-    case TWMChar(Message).CharCode of
+-      VK_TAB: begin
+-          FEditControlStatus := [ecsAccept];
+-          AcceptText;
+-          Exit;
+-        end;
+-      VK_RETURN: begin
+-          FEditControlStatus := [ecsAccept, ecsClose];
+-          AcceptText;
+-          Exit;
+-        end;
+-      VK_ESCAPE: begin
+-          FEditControlStatus := [];
+-          Exit;
+-        end;
+-    end;
+-  TEditAccess(FEditControl).WndProc(Message);
++  if FEditControlHandle = 0 then Exit;
++  if FInMessageLoop and HandleEditMessage(Message) then Exit;
++
++  case Message.Msg of
++    WM_CHAR:
++      case TWMChar(Message).CharCode of
++        VK_TAB: begin
++            FEditControlStatus := [ecsAccept];
++            AcceptText;
++            Exit;
++          end;
++        VK_RETURN: begin
++            FEditControlStatus := [ecsAccept, ecsClose];
++            AcceptText;
++            Exit;
++          end;
++        VK_ESCAPE: begin
++            FEditControlStatus := [];
++            Exit;
++          end;
++      end;
++
++    CN_CTLCOLORMSGBOX..CN_CTLCOLORSTATIC:
++      if FEditControlBrush <> 0 then
++      begin
++        { handle message reflection (search msdn for defails) }
++        SetTextColor(Message.WParam, ColorToRGB(FEditControlFont.Color));
++        SetBkColor(Message.WParam, ColorToRGB(FEditControlColor));
++        Message.Result := FEditControlBrush;
++        Exit;
++      end;
++  end;
++
++  with Message do
++  begin
++    if IsWindowUnicode(FEditControlHandle) then
++      Result := CallWindowProcW(FDefaultEditWndProc, FEditControlHandle, Msg, WParam, LParam)
++    else
++      Result := CallWindowProcA(FDefaultEditWndProc, FEditControlHandle, Msg, WParam, LParam);
++  end;
++
+   if Message.Msg = WM_KILLFOCUS then begin
+     { Someone has stolen the focus from us, so 'cancel mode'. (We have to
+       handle WM_KILLFOCUS in addition to the upstream WM_CANCELMODE handling
+@@ -560,6 +722,14 @@
+   end;
+ end;
+ 
++function TTBEditItemViewer.GetEditMargins: TRect;
++begin
++  Result.Left := 3;
++  Result.Top := 3;
++  Result.Right := 3;
++  Result.Bottom := 3;
++end;
++
+ procedure TTBEditItemViewer.GetEditRect(var R: TRect);
+ var
+   Item: TTBEditItem;
+@@ -571,7 +741,7 @@
+     SelectObject(DC, View.GetFont.Handle);
+     R := BoundsRect;
+     if not View.IsToolbar and (Item.EditCaption <> '') then begin
+-      Inc(R.Left, GetTextWidth(DC, Item.EditCaption, True) +
++      Inc(R.Left, GetTextWidthW(DC, Item.EditCaption, True) +
+         EditMenuMidWidth + EditMenuTextMargin * 2);
+     end;
+   finally
+@@ -592,7 +762,7 @@
+   AWidth := Item.FEditWidth;
+   AHeight := TextHeight;
+   if not IsToolbarStyle and (Item.EditCaption <> '') then begin
+-    Inc(AWidth, GetTextWidth(DC, Item.EditCaption, True) + EditMenuMidWidth +
++    Inc(AWidth, GetTextWidthW(DC, Item.EditCaption, True) + EditMenuMidWidth +
+       EditMenuTextMargin * 2);
+   end;
+   MinHeight := AHeight + (EditMenuTextMargin * 2) + 1;
+@@ -607,7 +777,7 @@
+   Result := not IsToolbarStyle and inherited CaptionShown;
+ end;
+ 
+-function TTBEditItemViewer.GetCaptionText: String;
++function TTBEditItemViewer.GetCaptionText: WideString;
+ begin
+   Result := TTBEditItem(Item).EditCaption;
+ end;
+@@ -619,7 +789,7 @@
+   TextColors: array[Boolean] of TColor = (clGrayText, clWindowText);
+ var
+   Item: TTBEditItem;
+-  S: String;
++  S: WideString;
+   R: TRect;
+   W: Integer;
+ begin
+@@ -629,7 +799,7 @@
+   { Caption }
+   if not IsToolbarStyle and (Item.EditCaption <> '') then begin
+     S := Item.EditCaption;
+-    W := GetTextWidth(Canvas.Handle, S, True) + EditMenuTextMargin * 2;
++    W := GetTextWidthW(Canvas.Handle, S, True) + EditMenuTextMargin * 2;
+     R.Right := R.Left + W;
+     if IsSelected then
+       Canvas.FillRect(R);
+@@ -658,7 +828,7 @@
+     S := Item.Text;
+     Canvas.Brush.Style := bsClear;  { speed optimization }
+     Canvas.Font.Color := TextColors[Item.Enabled];
+-    DrawText(Canvas.Handle, PChar(S), Length(S), R, DT_SINGLELINE or DT_NOPREFIX);
++    _DrawTextW(Canvas.Handle, PWideChar(S), Length(S), R, DT_SINGLELINE or DT_NOPREFIX);
+   end;
+ end;
+ 
+@@ -676,6 +846,8 @@
+ end;
+ 
+ function TTBEditItemViewer.EditLoop(const CapHandle: HWND): Boolean;
++const
++  CharCases: array [TEditCharCase] of DWORD = (0, ES_UPPERCASE, ES_LOWERCASE);
+ 
+   procedure ControlMessageLoop;
+ 
+@@ -695,8 +867,8 @@
+ 
+     function ContinueLoop: Boolean;
+     begin
+-      Result := (ecsContinueLoop in FEditControlStatus) and
+-        not View.IsModalEnding and FEditControl.Focused and Item.Enabled;
++      Result := (ecsContinueLoop in FEditControlStatus) and not View.IsModalEnding and
++        (Windows.GetFocus = FEditControlHandle) and Item.Enabled;
+       { Note: View.IsModalEnding is checked since TTBView.CancelMode doesn't
+         destroy popup windows; it merely hides them and calls EndModal. So if
+         IsModalEnding returns True we can infer that CancelMode was likely
+@@ -711,7 +883,7 @@
+     try
+       while ContinueLoop do begin
+         { Examine the next message before popping it out of the queue }
+-        if not PeekMessage(Msg, 0, 0, 0, PM_NOREMOVE) then begin
++        if not PeekMessageW(Msg, 0, 0, 0, PM_NOREMOVE) then begin
+           WaitMessage;
+           Continue;
+         end;
+@@ -750,16 +922,16 @@
+           WM_NCMBUTTONDOWN, WM_NCMBUTTONDBLCLK: begin
+               { If a mouse click outside the edit control is in the queue,
+                 exit and let the upstream message loop deal with it }
+-              if Msg.hwnd <> FEditControl.Handle then
++              if Msg.hwnd <> FEditControlHandle then
+                 Exit;
+             end;
+           WM_MOUSEMOVE, WM_NCMOUSEMOVE: begin
+               if GetCapture = CapHandle then begin
+-                if PointInWindow(FEditControl.Handle, Msg.pt) then
++                if PointInWindow(FEditControlHandle, Msg.pt) then
+                   ReleaseCapture;
+               end
+               else if GetCapture = 0 then begin
+-                if not PointInWindow(FEditControl.Handle, Msg.pt) then
++                if not PointInWindow(FEditControlHandle, Msg.pt) then
+                   SetCapture(CapHandle);
+               end;
+               if GetCapture = CapHandle then
+@@ -767,14 +939,14 @@
+             end;
+         end;
+         { Now pop the message out of the queue }
+-        if not PeekMessage(Msg, 0, Msg.message, Msg.message, PM_REMOVE or PM_NOYIELD) then
++        if not PeekMessageW(Msg, 0, Msg.message, Msg.message, PM_REMOVE or PM_NOYIELD) then
+           Continue;
+         if ((Msg.message >= WM_MOUSEFIRST) and (Msg.message <= WM_MOUSELAST)) and
+            (Msg.hwnd = CapHandle) then
+           { discard, so that the selection doesn't get changed }
+         else begin
+           TranslateMessage(Msg);
+-          DispatchMessage(Msg);
++          DispatchMessageW(Msg);
+         end;
+       end;
+     finally
+@@ -788,6 +960,8 @@
+   Item: TTBEditItem;
+   R: TRect;
+   ActiveWnd, FocusWnd: HWND;
++  Style, ExStyle: Cardinal;
++  S: WideString;
+ begin
+   Item := TTBEditItem(Self.Item);
+   GetEditRect(R);
+@@ -800,38 +974,89 @@
+   FocusWnd := GetFocus;
+ 
+   { Create the edit control }
+-  InflateRect(R, -3, -3);
+-  //View.FreeNotification(Self);
+-  FEditControl := TEdit.Create(nil);
++  with GetEditMargins do
++  begin
++    Inc(R.Left, Left);
++    Inc(R.Top, Top);
++    Dec(R.Right, Right);
++    Dec(R.Bottom, Bottom);
++  end;
++  //View.FreeNotification (Self);
++
++  Style := WS_CHILD or ES_LEFT or ES_AUTOHSCROLL or ES_AUTOVSCROLL or CharCases[Item.FCharCase];
++  ExStyle := 0;
++  FEditControlColor := clWindow;
++
++  AdjustEditControlStyle(Style, ExStyle, FEditControlColor);
++
++  FEditControlFont := TFont.Create;
+   try
+-    FEditControl.Name := Format('%s_edit_control_%p', [ClassName,
+-      Pointer(FEditControl)]);
+-    FEditControl.Visible := False;
+-    FEditControl.BorderStyle := bsNone;
+-    FEditControl.AutoSize := False;
+-    FEditControl.Font.Assign(View.GetFont);
+-    FEditControl.Text := Item.Text;
+-    FEditControl.CharCase := Item.FCharCase;
+-    FEditControl.MaxLength := Item.FMaxLength;
+-    FEditControl.BoundsRect := R;
+-    FEditControl.WindowProc := EditWndProc;
+-    FEditControl.ParentWindow := View.Window.Handle;
+-    FEditControl.SelectAll;
+-    Item.DoBeginEdit(Self);
+-    FEditControl.Visible := True;
+-    FEditControl.SetFocus;
+-    if GetActiveWindow <> ActiveWnd then
+-      { don't gray out title bar of old active window }
+-      SendMessage(ActiveWnd, WM_NCACTIVATE, 1, 0)
+-    else
+-      ActiveWnd := 0;
++    FEditControlFont.Assign(View.GetFont);
++    AdjustEditControlFont(FEditControlFont);
+ 
+-    FEditControlStatus := [ecsContinueLoop];
+-    ControlMessageLoop;
++    { create a brush for background painting and to handle message reflection }
++    if FEditControlColor < 0 then FEditControlBrush := GetSysColorBrush(FEditControlColor and $000000FF)
++    else FEditControlBrush := CreateSolidBrush(FEditControlColor);
++
++    { create standard win32 edit control with unicode handle }
++    FEditControlHandle := CreateWindowExW(ExStyle, 'EDIT', nil, Style,
++      R.Left, R.Top, R.Right - R.Left, R.Bottom - R.Top,
++      View.Window.Handle, 0, HInstance, Self);
++    if FEditControlHandle = 0 then RaiseLastOSError;
++    SetHandleTextW(FEditControlHandle, Item.Text);
++
++    FDefaultEditWndProc := Pointer(GetWindowLongW(FEditControlHandle, GWL_WNDPROC));
++    SetWindowLongW(FEditControlHandle, GWL_USERDATA, Integer(Self));
++    SetWindowLongW(FEditControlHandle, GWL_WNDPROC, Integer(@EditWndProcW));
++    try
++      SendMessageW(FEditControlHandle, WM_SETFONT, FEditControlFont.Handle, 0);
++
++      { setup the rest of the edit control properties }
++      SetupEditControl(FEditControlHandle);
++
++      { show and focus onto the edit control }
++      SetWindowPos(FEditControlHandle, 0, 0, 0, 0, 0,
++        SWP_NOSIZE + SWP_NOMOVE + SWP_NOZORDER + SWP_NOACTIVATE + SWP_SHOWWINDOW);
++      Windows.SetFocus(FEditControlHandle);
++      Windows.InvalidateRect(FEditControlHandle, nil, True);
++
++      if GetActiveWindow <> ActiveWnd then
++        { don't gray out title bar of old active window }
++        SendMessage(ActiveWnd, WM_NCACTIVATE, 1, 0)
++      else
++        ActiveWnd := 0;
++
++      FEditControlStatus := [ecsContinueLoop];
++      Assert(Item.FActiveViewer = nil);
++      Item.FActiveViewer := Self;
++      FInMessageLoop := True;
++      try
++        ControlMessageLoop;
++      finally
++        FInMessageLoop := False;
++        Item.FActiveViewer := nil;
++      end;
++      S := GetHandleTextW(FEditControlHandle);
++
++    finally
++      DeleteObject(FEditControlBrush);
++      FEditControlBrush := 0;
++      FEditControlFont.Free;
++      FEditControlFont := nil;
++      FEditControlColor := clNone;
++      SetWindowLongW(FEditControlHandle, GWL_WNDPROC, Integer(FDefaultEditWndProc));
++      FDefaultEditWndProc := nil;
++      if not Windows.DestroyWindow(FEditControlHandle) then RaiseLastOSError;
++    end;
+   finally
+-    FreeAndNil(FEditControl);
++    FEditControlFont.Free;
++    FEditControlFont := nil;
+   end;
+ 
++  with TTBEditItem(Item) do
++  if (FEditControlStatus = [ecsContinueLoop]) and ExtendedAccept then
++    if DoAcceptText(S) then SetText(S);
++
+   { ensure the area underneath the edit control is repainted immediately }
+   View.Window.Update;
+   { If app is still active, set focus to previous control and restore capture
+@@ -860,6 +1085,12 @@
+   end;
+ end;
+ 
++function TTBEditItemViewer.HandleEditMessage(var Message: TMessage): Boolean;
++begin
++  { Override in descendants to simplify subclassing }
++  Result := False;
++end;
++
+ function TTBEditItemViewer.DoExecute: Boolean;
+ begin
+   { Close any delay-close popup menus before entering the edit loop }
+@@ -899,6 +1130,24 @@
+     inherited;
+ end;
+ 
++procedure TTBEditItemViewer.SetEditControlText(const S: WideString);
++begin
++  if not FUpdating and (EditControlHandle <> 0) then
++  try
++    FUpdating := True;
++    SetHandleTextW(EditControlHandle, S);
++  finally
++    FUpdating := False;
++  end;
++end;
++
++procedure TTBEditItemViewer.SetupEditControl(EditControlHandle: HWND);
++begin
++  SendMessage(EditControlHandle, EM_LIMITTEXT, TTBEditItem(Item).MaxLength, 0);
++  SendMessage(EditControlHandle, EM_SETSEL, 0, -1);
++  SendMessage(EditControlHandle, EM_SETMARGINS, EC_LEFTMARGIN or EC_RIGHTMARGIN, 0);
++end;
++
+ function TTBEditItemViewer.UsesSameWidth: Boolean;
+ begin
+   Result := False;
+Index: TB2Item.pas
+===================================================================
+RCS file: /data/cvs/tb2k/Source/TB2Item.pas,v
+retrieving revision 1.277
+diff -u -r1.277 TB2Item.pas
+--- TB2Item.pas	23 Jun 2005 21:55:44 -0000	1.277
++++ TB2Item.pas	1 Dec 2005 16:21:33 -0000
+@@ -41,6 +41,14 @@
+   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+   StdCtrls, CommCtrl, Menus, ActnList, ImgList, TB2Anim;
+ 
++const
++  WM_TB2K_POPUPSHOWING = WM_USER + 554;
++
++  { Parameter in LParam of WM_TB2K_POPUPSHOWING }
++  TPS_ANIMSTART     = 1;   // animation query: if Result <> 0, do not animate!
++  TPS_ANIMFINISHED  = 2;   // only fired when animation thread is done
++  TPS_NOANIM        = 3;   // fired when animation is done, or if showing with no animation
++
+ type
+   TTBCustomItem = class;
+   TTBCustomItemClass = class of TTBCustomItem;
+@@ -82,7 +90,7 @@
+   TTBItemStyle = set of (tbisSubmenu, tbisSelectable, tbisSeparator,
+     tbisEmbeddedGroup, tbisClicksTransparent, tbisCombo, tbisNoAutoOpen,
+     tbisSubitemsEditable, tbisNoLineBreak, tbisRightAlign, tbisDontSelectFirst,
+-    tbisRedrawOnSelChange, tbisRedrawOnMouseOverChange);
++    tbisRedrawOnSelChange, tbisRedrawOnMouseOverChange, tbisStretch);
+   TTBPopupAlignment = (tbpaLeft, tbpaRight, tbpaCenter);
+   TTBPopupEvent = procedure(Sender: TTBCustomItem; FromLink: Boolean) of object;
+   TTBSelectEvent = procedure(Sender: TTBCustomItem; Viewer: TTBItemViewer;
+@@ -97,19 +105,31 @@
+   {$IFNDEF JR_D5}
+   TImageIndex = type Integer;
+   {$ENDIF}
++  TTBPopupPositionRec = record
++    PositionAsSubmenu: Boolean;
++    Alignment: TTBPopupAlignment;
++    Opposite: Boolean;
++    MonitorRect: TRect;
++    ParentItemRect: TRect;
++    NCSizeX: Integer;
++    NCSizeY: Integer;
++    X, Y, W, H: Integer;
++    AnimDir: TTBAnimationDirection;
++    PlaySound: Boolean;
++  end;
+ 
+   TTBCustomItem = class(TComponent)
+   private
+     FActionLink: TTBCustomItemActionLink;
+     FAutoCheck: Boolean;
+-    FCaption: String;
++    FCaption: WideString;
+     FChecked: Boolean;
+     FDisplayMode: TTBItemDisplayMode;
+     FEnabled: Boolean;
+     FEffectiveOptions: TTBItemOptions;
+     FGroupIndex: Integer;
+     FHelpContext: THelpContext;
+-    FHint: String;
++    FHint: WideString;
+     FImageIndex: TImageIndex;
+     FImages: TCustomImageList;
+     FImagesChangeLink: TTBImageChangeLink;
+@@ -160,7 +180,7 @@
+     procedure Notify(Action: TTBItemChangedAction; Index: Integer; Item: TTBCustomItem);
+     procedure RefreshOptions;
+     procedure SetAction(Value: TBasicAction);
+-    procedure SetCaption(Value: String);
++    procedure SetCaption(const Value: WideString);
+     procedure SetChecked(Value: Boolean);
+     procedure SetDisplayMode(Value: TTBItemDisplayMode);
+     procedure SetEnabled(Value: Boolean);
+@@ -176,18 +196,25 @@
+     procedure SetVisible(Value: Boolean);
+     procedure SubMenuImagesChanged;
+     procedure TurnSiblingsOff;
++    procedure ReadCaptionProperty(Reader: TReader);
++    procedure ReadHintProperty(Reader: TReader);
++    procedure WriteCaptionProperty(Writer: TWriter);
++    procedure WriteHintProperty(Writer: TWriter);
+   protected
+     procedure ActionChange(Sender: TObject; CheckDefaults: Boolean); dynamic;
+     procedure Change(NeedResize: Boolean); virtual;
+     function CreatePopup(const ParentView: TTBView; const ParentViewer: TTBItemViewer;
+       const PositionAsSubmenu, SelectFirstItem, Customizing: Boolean;
+       const APopupPoint: TPoint; const Alignment: TTBPopupAlignment): TTBPopupWindow; virtual;
++    procedure DefineProperties(Filer: TFiler); override;
+     procedure DoPopup(Sender: TTBCustomItem; FromLink: Boolean); virtual;
+     procedure EnabledChanged; virtual;
+     function GetActionLinkClass: TTBCustomItemActionLinkClass; dynamic;
+     function GetChevronParentView: TTBView; virtual;
+     procedure GetChildren(Proc: TGetChildProc; Root: TComponent); override;
+     function GetItemViewerClass(AView: TTBView): TTBItemViewerClass; virtual;
++    procedure GetPopupPosition(ParentView: TTBView;
++      PopupWindow: TTBPopupWindow; var PopupPositionRec: TTBPopupPositionRec); virtual;
+     function GetPopupWindowClass: TTBPopupWindowClass; virtual;
+     procedure IndexError;
+     procedure Loaded; override;
+@@ -200,7 +227,7 @@
+     procedure SetChildOrder(Child: TComponent; Order: Integer); override;
+     procedure SetName(const NewName: TComponentName); override;
+     procedure SetParentComponent(Value: TComponent); override;
+-
++    procedure WriteCaption(const Value: WideString);
+     property ActionLink: TTBCustomItemActionLink read FActionLink write FActionLink;
+     property ItemStyle: TTBItemStyle read FItemStyle write FItemStyle;
+   public
+@@ -214,7 +241,7 @@
+     procedure Click; virtual;
+     function ContainsItem(AItem: TTBCustomItem): Boolean;
+     procedure Delete(Index: Integer);
+-    function GetShortCutText: String;
++    function GetShortCutText: WideString;
+     function IndexOf(AItem: TTBCustomItem): Integer;
+     procedure InitiateAction; virtual;
+     procedure Insert(NewIndex: Integer; AItem: TTBCustomItem);
+@@ -232,7 +259,7 @@
+ 
+     property Action: TBasicAction read GetAction write SetAction;
+     property AutoCheck: Boolean read FAutoCheck write FAutoCheck {$IFDEF JR_D6} stored IsAutoCheckStored {$ENDIF} default False;
+-    property Caption: String read FCaption write SetCaption stored IsCaptionStored;
++    property Caption: WideString read FCaption write SetCaption stored False;
+     property Count: Integer read FItemCount;
+     property Checked: Boolean read FChecked write SetChecked stored IsCheckedStored default False;
+     property DisplayMode: TTBItemDisplayMode read FDisplayMode write SetDisplayMode default nbdmDefault;
+@@ -240,7 +267,7 @@
+     property Enabled: Boolean read FEnabled write SetEnabled stored IsEnabledStored default True;
+     property GroupIndex: Integer read FGroupIndex write SetGroupIndex default 0;
+     property HelpContext: THelpContext read FHelpContext write FHelpContext stored IsHelpContextStored default 0;
+-    property Hint: String read FHint write FHint stored IsHintStored;
++    property Hint: WideString read FHint write FHint stored False;
+     property ImageIndex: TImageIndex read FImageIndex write SetImageIndex stored IsImageIndexStored default -1;
+     property Images: TCustomImageList read FImages write SetImages;
+     property InheritOptions: Boolean read FInheritOptions write SetInheritOptions default True;
+@@ -319,16 +346,16 @@
+     function CaptionShown: Boolean; dynamic;
+     function DoExecute: Boolean; virtual;
+     procedure DrawItemCaption(const Canvas: TCanvas; ARect: TRect;
+-      const ACaption: String; ADrawDisabledShadow: Boolean; AFormat: UINT); virtual;
+-    procedure Entering; virtual;
++      const ACaption: WideString; ADrawDisabledShadow: Boolean; AFormat: UINT); virtual;
++    procedure Entering(OldSelected: TTBItemViewer); virtual;
+     function GetAccRole: Integer; virtual;
+     function GetAccValue(var Value: WideString): Boolean; virtual;
+-    function GetCaptionText: String; virtual;
++    function GetCaptionText: WideString; virtual;
+     procedure GetCursor(const Pt: TPoint; var ACursor: HCURSOR); virtual;
+     function GetImageList: TCustomImageList;
+     function ImageShown: Boolean;
+     function IsRotated: Boolean;
+-    function IsToolbarSize: Boolean;
++    function IsToolbarSize: Boolean; virtual;
+     function IsPtInButtonPart(X, Y: Integer): Boolean; virtual;
+     procedure KeyDown(var Key: Word; Shift: TShiftState); virtual;
+     procedure Leaving; virtual;
+@@ -355,9 +382,9 @@
+     destructor Destroy; override;
+     procedure Execute(AGivePriority: Boolean);
+     function GetAccObject: IDispatch;
+-    function GetHintText: String;
++    function GetHintText: WideString;
+     function IsAccessible: Boolean;
+-    function IsToolbarStyle: Boolean;
++    function IsToolbarStyle: Boolean; virtual;
+     function ScreenToClient(const P: TPoint): TPoint;
+   end;
+   PTBItemViewerArray = ^TTBItemViewerArray;
+@@ -455,6 +482,8 @@
+     procedure KeyDown(var Key: Word; Shift: TShiftState); virtual;
+     procedure Notification(AComponent: TComponent; Operation: TOperation); override;
+     procedure SetAccelsVisibility(AShowAccels: Boolean);
++    procedure SetState(AState: TTBViewState);
++    property DoneActionData: TTBDoneActionData read FDoneActionData write FDoneActionData;
+   public
+     constructor CreateView(AOwner: TComponent; AParentView: TTBView;
+       AParentItem: TTBCustomItem; AWindow: TWinControl;
+@@ -487,7 +516,7 @@
+     function IndexOf(AViewer: TTBItemViewer): Integer;
+     function IsModalEnding: Boolean;
+     function NextSelectable(CurViewer: TTBItemViewer; GoForward: Boolean): TTBItemViewer;
+-    function NextSelectableWithAccel(CurViewer: TTBItemViewer; Key: Char;
++    function NextSelectableWithAccel(CurViewer: TTBItemViewer; Key: WideChar;
+       RequirePrimaryAccel: Boolean; var IsOnlyItemWithAccel: Boolean): TTBItemViewer;
+     procedure NotifyFocusEvent;
+     function OpenChildPopup(const SelectFirstItem: Boolean): Boolean;
+@@ -666,10 +695,12 @@
+     procedure WMPrint(var Message: TMessage); message WM_PRINT;
+     procedure WMPrintClient(var Message: TMessage); message WM_PRINTCLIENT;
+     procedure WMTB2kStepAnimation(var Message: TMessage); message WM_TB2K_STEPANIMATION;
++    procedure WMTB2kAnimationEnded (var Message: TMessage); message WM_TB2K_ANIMATIONENDED;
+   protected
+     procedure CreateParams(var Params: TCreateParams); override;
+     procedure CreateWnd; override;
+     procedure DestroyWindowHandle; override;
++    function GetNCSize: TPoint; dynamic;
+     function GetViewClass: TTBViewClass; dynamic;
+     procedure Paint; override;
+     procedure PaintScrollArrows; virtual;
+@@ -814,20 +845,6 @@
+ var
+   ToolbarFont: TFont;
+ 
+-
+-implementation
+-
+-uses
+-  MMSYSTEM, TB2Consts, TB2Common, IMM, TB2Acc;
+-
+-var
+-  LastPos: TPoint;
+-
+-threadvar
+-  ClickWndRefCount: Integer;
+-  ClickWnd: HWND;
+-  ClickList: TList;
+-
+ type
+   TTBModalHandler = class
+   private
+@@ -845,6 +862,23 @@
+     property Wnd: HWND read FWnd;
+   end;
+ 
++function ProcessDoneAction(const DoneActionData: TTBDoneActionData;
++  const ReturnClickedItemOnly: Boolean): TTBCustomItem;
++
++implementation
++
++uses
++  MMSYSTEM, TB2Consts, TB2Common, TB2Dock, IMM, TB2Acc, Consts;
++
++var
++  LastPos: TPoint;
++
++threadvar
++  ClickWndRefCount: Integer;
++  ClickWnd: HWND;
++  ClickList: TList;
++
++type
+   PItemChangedNotificationData = ^TItemChangedNotificationData;
+   TItemChangedNotificationData = record
+     Proc: TTBItemChangedProc;
+@@ -1681,10 +1715,11 @@
+ var
+   PlayedSound: Boolean = False;
+ 
+-function TTBCustomItem.CreatePopup(const ParentView: TTBView;
+-  const ParentViewer: TTBItemViewer; const PositionAsSubmenu, SelectFirstItem,
+-  Customizing: Boolean; const APopupPoint: TPoint;
+-  const Alignment: TTBPopupAlignment): TTBPopupWindow;
++procedure TTBCustomItem.GetPopupPosition(ParentView: TTBView;
++  PopupWindow: TTBPopupWindow; var PopupPositionRec: TTBPopupPositionRec);
++var
++  X2, Y2: Integer;
++  RepeatCalcX: Boolean;
+ 
+   function CountObscured(X, Y, W, H: Integer): Integer;
+   var
+@@ -1708,114 +1743,9 @@
+     end;
+   end;
+ 
+-var
+-  EventItem, ParentItem: TTBCustomItem;
+-  Opposite: Boolean;
+-  ChevronParentView: TTBView;
+-  X, X2, Y, Y2, W, H: Integer;
+-  P: TPoint;
+-  RepeatCalcX: Boolean;
+-  ParentItemRect: TRect;
+-  MonitorRect: TRect;
+-  AnimDir: TTBAnimationDirection;
+ begin
+-  EventItem := ItemContainingItems(Self);
+-  if EventItem <> Self then
+-    EventItem.DoPopup(Self, True);
+-  DoPopup(Self, False);
+-
+-  ChevronParentView := GetChevronParentView;
+-  if ChevronParentView = nil then
+-    ParentItem := Self
+-  else
+-    ParentItem := ChevronParentView.FParentItem;
+-
+-  Opposite := Assigned(ParentView) and (vsOppositePopup in ParentView.FState);
+-  Result := GetPopupWindowClass.CreatePopupWindow(nil, ParentView, ParentItem,
+-    Customizing);
+-  try
+-    if Assigned(ChevronParentView) then begin
+-      ChevronParentView.FreeNotification(Result.View);
+-      Result.View.FChevronParentView := ChevronParentView;
+-      Result.View.FIsToolbar := True;
+-      Result.View.Style := Result.View.Style +
+-        (ChevronParentView.Style * [vsAlwaysShowHints]);
+-      Result.Color := clBtnFace;
+-    end;
+-
+-    { Calculate ParentItemRect, and MonitorRect (the rectangle of the monitor
+-      that the popup window will be confined to) }
+-    if Assigned(ParentView) then begin
+-      ParentView.ValidatePositions;
+-      ParentItemRect := ParentViewer.BoundsRect;
+-      P := ParentView.FWindow.ClientToScreen(Point(0, 0));
+-      OffsetRect(ParentItemRect, P.X, P.Y);
+-      if not IsRectEmpty(ParentView.FMonitorRect) then
+-        MonitorRect := ParentView.FMonitorRect
+-      else
+-        MonitorRect := GetRectOfMonitorContainingRect(ParentItemRect, False);
+-    end
+-    else begin
+-      ParentItemRect.TopLeft := APopupPoint;
+-      ParentItemRect.BottomRight := APopupPoint;
+-      MonitorRect := GetRectOfMonitorContainingPoint(APopupPoint, False);
+-    end;
+-    Result.View.FMonitorRect := MonitorRect;
+-
+-    { Initialize item positions and size of the popup window }
+-    if ChevronParentView = nil then
+-      Result.View.FMaxHeight := (MonitorRect.Bottom - MonitorRect.Top) -
+-        (PopupMenuWindowNCSize * 2)
+-    else
+-      Result.View.WrapOffset := (MonitorRect.Right - MonitorRect.Left) -
+-        (PopupMenuWindowNCSize * 2);
+-    if SelectFirstItem then
+-      Result.View.Selected := Result.View.FirstSelectable;
+-    Result.View.UpdatePositions;
+-    W := Result.Width;
+-    H := Result.Height;
+-
+-    { Calculate initial X,Y position of the popup window }
+-    if Assigned(ParentView) then begin
+-      if not PositionAsSubmenu then begin
+-        if ChevronParentView = nil then begin
+-          if (ParentView = nil) or (ParentView.FOrientation <> tbvoVertical) then begin
+-            if GetSystemMetrics(SM_MENUDROPALIGNMENT) = 0 then
+-              X := ParentItemRect.Left
+-            else
+-              X := ParentItemRect.Right - W;
+-            Y := ParentItemRect.Bottom;
+-          end
+-          else begin
+-            X := ParentItemRect.Left - W;
+-            Y := ParentItemRect.Top;
+-          end;
+-        end
+-        else begin
+-          if ChevronParentView.FOrientation <> tbvoVertical then begin
+-            X := ParentItemRect.Right - W;
+-            Y := ParentItemRect.Bottom;
+-          end
+-          else begin
+-            X := ParentItemRect.Left - W;
+-            Y := ParentItemRect.Top;
+-          end;
+-        end;
+-      end
+-      else begin
+-        X := ParentItemRect.Right - PopupMenuWindowNCSize;
+-        Y := ParentItemRect.Top - PopupMenuWindowNCSize;
+-      end;
+-    end
+-    else begin
+-      X := APopupPoint.X;
+-      Y := APopupPoint.Y;
+-      case Alignment of
+-        tbpaRight: Dec(X, W);
+-        tbpaCenter: Dec(X, W div 2);
+-      end;
+-    end;
+-
++  with PopupPositionRec do
++  begin
+     { Adjust the Y position of the popup window }
+     { If the window is going off the bottom of the monitor, try placing it
+       above the parent item }
+@@ -1824,7 +1754,7 @@
+       if not PositionAsSubmenu then
+         Y2 := ParentItemRect.Top
+       else
+-        Y2 := ParentItemRect.Bottom + PopupMenuWindowNCSize;
++        Y2 := ParentItemRect.Bottom + NCSizeY;
+       Dec(Y2, H);
+       { Only place it above the parent item if it isn't going to go off the
+         top of the monitor }
+@@ -1900,17 +1830,17 @@
+         X2 := X;
+         if Opposite or (X2 + W > MonitorRect.Right) then begin
+           if Assigned(ParentView) then
+-            X2 := ParentItemRect.Left + PopupMenuWindowNCSize;
++            X2 := ParentItemRect.Left + NCSizeX;
+           Dec(X2, W);
+           if not Opposite then
+-            Include(Result.View.FState, vsOppositePopup)
++            Include(PopupWindow.View.FState, vsOppositePopup)
+           else begin
+             if X2 < MonitorRect.Left then begin
+               Opposite := False;
+               RepeatCalcX := True;
+             end
+             else
+-              Include(Result.View.FState, vsOppositePopup);
++              Include(PopupWindow.View.FState, vsOppositePopup);
+           end;
+         end;
+       until not RepeatCalcX;
+@@ -1937,8 +1867,141 @@
+       else
+         Include(AnimDir, tbadLeft);
+     end;
+-    Result.FAnimationDirection := AnimDir;
++  end;
++end;
+ 
++function TTBCustomItem.CreatePopup(const ParentView: TTBView;
++  const ParentViewer: TTBItemViewer; const PositionAsSubmenu, SelectFirstItem,
++  Customizing: Boolean; const APopupPoint: TPoint;
++  const Alignment: TTBPopupAlignment): TTBPopupWindow;
++var
++  EventItem, ParentItem: TTBCustomItem;
++  Opposite: Boolean;
++  ChevronParentView: TTBView;
++  X, Y, W, H: Integer;
++  P: TPoint;
++  ParentItemRect: TRect;
++  MonitorRect: TRect;
++  PopupRec: TTBPopupPositionRec;
++  NCSize: TPoint;
++begin
++  EventItem := ItemContainingItems(Self);
++  if EventItem <> Self then
++    EventItem.DoPopup(Self, True);
++  DoPopup(Self, False);
++
++  ChevronParentView := GetChevronParentView;
++  if ChevronParentView = nil then
++    ParentItem := Self
++  else
++    ParentItem := ChevronParentView.FParentItem;
++
++  Opposite := Assigned(ParentView) and (vsOppositePopup in ParentView.FState);
++  Result := GetPopupWindowClass.CreatePopupWindow(nil, ParentView, ParentItem,
++    Customizing);
++  try
++    if Assigned(ChevronParentView) then begin
++      ChevronParentView.FreeNotification(Result.View);
++      Result.View.FChevronParentView := ChevronParentView;
++      Result.View.FIsToolbar := True;
++      Result.View.Style := Result.View.Style +
++        (ChevronParentView.Style * [vsAlwaysShowHints]);
++      Result.Color := clBtnFace;
++    end;
++
++    { Calculate ParentItemRect, and MonitorRect (the rectangle of the monitor
++      that the popup window will be confined to) }
++    if Assigned(ParentView) then begin
++      ParentView.ValidatePositions;
++      ParentItemRect := ParentViewer.BoundsRect;
++      P := ParentView.FWindow.ClientToScreen(Point(0, 0));
++      OffsetRect(ParentItemRect, P.X, P.Y);
++      if not IsRectEmpty(ParentView.FMonitorRect) then
++        MonitorRect := ParentView.FMonitorRect
++      else
++        MonitorRect := GetRectOfMonitorContainingRect(ParentItemRect, False);
++    end
++    else begin
++      ParentItemRect.TopLeft := APopupPoint;
++      ParentItemRect.BottomRight := APopupPoint;
++      MonitorRect := GetRectOfMonitorContainingPoint(APopupPoint, False);
++    end;
++    Result.View.FMonitorRect := MonitorRect;
++
++    { Initialize item positions and size of the popup window }
++    NCSize := Result.GetNCSize;
++    if ChevronParentView = nil then
++      Result.View.FMaxHeight := (MonitorRect.Bottom - MonitorRect.Top) -
++        (NCSize.Y * 2)
++    else
++      Result.View.WrapOffset := (MonitorRect.Right - MonitorRect.Left) -
++        (NCSize.X * 2);
++    if SelectFirstItem then
++      Result.View.Selected := Result.View.FirstSelectable;
++    Result.View.UpdatePositions;
++    W := Result.Width;
++    H := Result.Height;
++
++    { Calculate initial X,Y position of the popup window }
++    if Assigned(ParentView) then begin
++      if not PositionAsSubmenu then begin
++        if ChevronParentView = nil then begin
++          if (ParentView = nil) or (ParentView.FOrientation <> tbvoVertical) then begin
++            if GetSystemMetrics(SM_MENUDROPALIGNMENT) = 0 then
++              X := ParentItemRect.Left
++            else
++              X := ParentItemRect.Right - W;
++            Y := ParentItemRect.Bottom;
++          end
++          else begin
++            X := ParentItemRect.Left - W;
++            Y := ParentItemRect.Top;
++          end;
++        end
++        else begin
++          if ChevronParentView.FOrientation <> tbvoVertical then begin
++            X := ParentItemRect.Right - W;
++            Y := ParentItemRect.Bottom;
++          end
++          else begin
++            X := ParentItemRect.Left - W;
++            Y := ParentItemRect.Top;
++          end;
++        end;
++      end
++      else begin
++        X := ParentItemRect.Right - NCSize.X;
++        Y := ParentItemRect.Top - NCSize.Y;
++      end;
++    end
++    else begin
++      X := APopupPoint.X;
++      Y := APopupPoint.Y;
++      case Alignment of
++        tbpaRight: Dec(X, W);
++        tbpaCenter: Dec(X, W div 2);
++      end;
++    end;
++
++    PopupRec.PositionAsSubmenu := PositionAsSubmenu;
++    PopupRec.Alignment := Alignment;
++    PopupRec.Opposite := Opposite;
++    PopupRec.MonitorRect := MonitorRect;
++    PopupRec.ParentItemRect := ParentItemRect;
++    PopupRec.NCSizeX := NCSize.X;
++    PopupRec.NCSizeY := NCSize.Y;
++    PopupRec.X := X;
++    PopupRec.Y := Y;
++    PopupRec.W := W;
++    PopupRec.H := H;
++    PopupRec.AnimDir := [];
++    PopupRec.PlaySound := True;
++    GetPopupPosition(ParentView, Result, PopupRec);
++    X := PopupRec.X;
++    Y := PopupRec.Y;
++    W := PopupRec.W;
++    H := PopupRec.H;
++    Result.FAnimationDirection := PopupRec.AnimDir;
+     Result.SetBounds(X, Y, W, H);
+     if Assigned(ParentView) then begin
+       Result.FreeNotification(ParentView);
+@@ -1952,7 +2015,7 @@
+       end;
+     end;
+     Include(Result.View.FState, vsDrawInOrder);
+-    if not NeedToPlaySound('MenuPopup') then begin
++    if not PopupRec.PlaySound or not NeedToPlaySound('MenuPopup') then begin
+       { Don't call PlaySound if we don't have to }
+       Result.Visible := True;
+     end
+@@ -2130,19 +2193,55 @@
+   Result := False;
+ end;
+ 
+-function TTBCustomItem.GetShortCutText: String;
++function TTBCustomItem.GetShortCutText: WideString;
+ var
+   P: Integer;
++  B: Byte;
++
++  function GetSpecialNameW(ShortCut: TShortCut): WideString;
++  var
++    ScanCode: Integer;
++    KeyName: array [0..255] of WideChar;
++  begin
++    Result := '';
++    ScanCode := MapVirtualKeyW(WordRec(ShortCut).Lo, 0) shl 16;
++    if ScanCode <> 0 then
++    begin
++      GetKeyNameTextW(ScanCode, KeyName, SizeOf(KeyName));
++      Result := KeyName;
++    end;
++  end;
++
+ begin
+-  P := Pos(#9, Caption);
+-  if P = 0 then begin
+-    if ShortCut <> 0 then
+-      Result := ShortCutToText(ShortCut)
+-    else
+-      Result := '';
+-  end
++  for P := 1 to Length(FCaption) do
++    if FCaption[P] = #9 then
++    begin
++      Result := Copy(FCaption, P + 1, MaxInt);
++      Exit;
++    end;
++
++  if ShortCut = 0 then Result := ''
+   else
+-    Result := Copy(Caption, P+1, Maxint);
++  begin
++    B := WordRec(ShortCut).Lo;
++    if (Win32Platform <> VER_PLATFORM_WIN32_NT) or
++      (B in [$08, $09, $0D, $1B, $20..$28, $2D..$2E, $70..87]) then
++      Result := Menus.ShortCutToText(ShortCut)
++    else
++    begin
++      if B in [$30..$39, $41..$5A, $60..$69] then
++        Result := WideChar(MapVirtualKeyW(B, 2))
++      else
++        Result := GetSpecialNameW(ShortCut);
++
++      if Result <> '' then
++      begin
++        if ShortCut and scAlt <> 0 then Result := SmkcAlt + Result;
++        if ShortCut and scCtrl <> 0 then Result := SmkcCtrl + Result;
++        if ShortCut and scShift <> 0 then Result := SmkcShift + Result;
++      end;
++    end;
++  end;   
+ end;
+ 
+ procedure TTBCustomItem.Change(NeedResize: Boolean);
+@@ -2201,7 +2300,7 @@
+   end;
+ end;
+ 
+-procedure TTBCustomItem.SetCaption(Value: String);
++procedure TTBCustomItem.SetCaption(const Value: WideString);
+ begin
+   if FCaption <> Value then begin
+     FCaption := Value;
+@@ -2209,6 +2308,11 @@
+   end;
+ end;
+ 
++procedure TTBCustomItem.WriteCaption(const Value: WideString);
++begin
++  FCaption := Value;
++end;
++
+ procedure TTBCustomItem.SetChecked(Value: Boolean);
+ begin
+   if FChecked <> Value then begin
+@@ -2399,6 +2503,33 @@
+   end;
+ end;
+ 
++procedure TTBCustomItem.DefineProperties(Filer: TFiler);
++begin
++  inherited;
++  Filer.DefineProperty('Caption', ReadCaptionProperty, WriteCaptionProperty, IsCaptionStored);
++  Filer.DefineProperty('Hint', ReadHintProperty, WriteHintProperty, IsHintStored);
++end;
++
++procedure TTBCustomItem.ReadCaptionProperty(Reader: TReader);
++begin
++  Caption := FilerReadWideString(Reader);
++end;
++
++procedure TTBCustomItem.ReadHintProperty(Reader: TReader);
++begin
++  Hint := FilerReadWideString(Reader);
++end;
++
++procedure TTBCustomItem.WriteCaptionProperty(Writer: TWriter);
++begin
++  FilerWriteWideString(Writer, Caption);
++end;
++
++procedure TTBCustomItem.WriteHintProperty(Writer: TWriter);
++begin
++  FilerWriteWideString(Writer, Hint);
++end;
++
+ 
+ { TTBGroupItem }
+ 
+@@ -2618,37 +2749,47 @@
+   Result := Show or OffEdge or Clipped;
+ end;
+ 
+-function TTBItemViewer.GetCaptionText: String;
++function TTBItemViewer.GetCaptionText: WideString;
+ var
+   P: Integer;
+ begin
+   Result := Item.Caption;
+-  P := Pos(#9, Result);
+-  if P <> 0 then
+-    SetLength(Result, P-1);
++  for P := 1 to Length(Result) - 1 do
++    if Result[P] = #9 then
++    begin
++      SetLength(Result, P - 1);
++      Exit;
++    end;
+ end;
+ 
+-function TTBItemViewer.GetHintText: String;
++function TTBItemViewer.GetHintText: WideString;
++var
++  AnsiHint, SaveAnsiHint: AnsiString;
+ begin
+-  Result := GetShortHint(Item.Hint);
++  Result := GetShortHintW(Item.Hint);
+   { If there is no short hint, use the caption for the hint. Like Office,
+     strip any trailing colon or ellipsis. }
+   if (Result = '') and not(tboNoAutoHint in Item.EffectiveOptions) and
+      (not(tbisSubmenu in Item.ItemStyle) or (tbisCombo in Item.ItemStyle) or
+       not CaptionShown) then
+-    Result := StripAccelChars(StripTrailingPunctuation(GetCaptionText));
++    Result := StripAccelCharsW(StripTrailingPunctuationW(GetCaptionText));
++
+   { Call associated action's OnHint event handler to post-process the hint }
+   if Assigned(Item.ActionLink) and
+      (Item.ActionLink.Action is TCustomAction) then begin
+-    if not TCustomAction(Item.ActionLink.Action).DoHint(Result) then
+-      Result := '';
++    AnsiHint := Result;
++    SaveAnsiHint := AnsiHint;
++    if not TCustomAction(Item.ActionLink.Action).DoHint(AnsiHint) then
++      AnsiHint := '';
++    if AnsiHint <> SaveAnsiHint then Result := AnsiHint;
+     { Note: TControlActionLink.DoShowHint actually misinterprets the result
+       of DoHint, but we get it right... }
+   end;
++
+   { Add shortcut text }
+   if (Result <> '') and Application.HintShortCuts and
+      (Item.ShortCut <> scNone) then
+-    Result := Format('%s (%s)', [Result, ShortCutToText(Item.ShortCut)]);
++    Result := Result + ' (' + ShortCutToText(Item.ShortCut) + ')';
+ end;
+ 
+ function TTBItemViewer.CaptionShown: Boolean;
+@@ -2706,7 +2847,7 @@
+   TextMetrics: TTextMetric;
+   H, LeftMargin: Integer;
+   ImgList: TCustomImageList;
+-  S: String;
++  S: WideString;
+   RotatedFont, SaveFont: HFONT;
+ begin
+   ToolbarStyle := IsToolbarStyle;
+@@ -2724,7 +2865,8 @@
+     if not IsRotated then begin
+       GetTextMetrics(DC, TextMetrics);
+       Inc(AHeight, TextMetrics.tmHeight);
+-      Inc(AWidth, GetTextWidth(DC, GetCaptionText, True));
++      S := GetCaptionText;
++      Inc(AWidth, GetTextWidthW(DC, S, True));
+       if ToolbarStyle then
+         Inc(AWidth, 6);
+     end
+@@ -2735,7 +2877,7 @@
+       SaveFont := SelectObject(DC, RotatedFont);
+       GetTextMetrics(DC, TextMetrics);
+       Inc(AWidth, TextMetrics.tmHeight);
+-      Inc(AHeight, GetTextWidth(DC, GetCaptionText, True));
++      Inc(AHeight, GetTextWidthW(DC, GetCaptionText, True));
+       if ToolbarStyle then
+         Inc(AHeight, 6);
+       SelectObject(DC, SaveFont);
+@@ -2785,16 +2927,16 @@
+ end;
+ 
+ procedure TTBItemViewer.DrawItemCaption(const Canvas: TCanvas; ARect: TRect;
+-  const ACaption: String; ADrawDisabledShadow: Boolean; AFormat: UINT);
++  const ACaption: WideString; ADrawDisabledShadow: Boolean; AFormat: UINT);
+ var
+   DC: HDC;
+ 
+   procedure Draw;
+   begin
+     if not IsRotated then
+-      DrawText(DC, PChar(ACaption), Length(ACaption), ARect, AFormat)
++      _DrawTextW(DC, PWideChar(ACaption), Length(ACaption), ARect, AFormat)
+     else
+-      DrawRotatedText(DC, ACaption, ARect, AFormat);
++      DrawRotatedTextW(DC, ACaption, ARect, AFormat);
+   end;
+ 
+ var
+@@ -2944,7 +3086,7 @@
+ var
+   ToolbarStyle, ImageIsShown: Boolean;
+   R, RC, RD: TRect;
+-  S: String;
++  S: WideString;
+   ImgList: TCustomImageList;
+   I, X, Y: Integer;
+   Points: array[0..11] of TPoint;
+@@ -3286,7 +3428,7 @@
+   View.Invalidate(Self);
+ end;
+ 
+-procedure TTBItemViewer.Entering;
++procedure TTBItemViewer.Entering(OldSelected: TTBItemViewer);
+ begin
+   if Assigned(Item.FOnSelect) then
+     Item.FOnSelect(Item, Self, True);
+@@ -4089,7 +4231,7 @@
+     if Assigned(Value) then begin
+       if tbisRedrawOnSelChange in Value.Item.ItemStyle then
+         Invalidate(Value);
+-      Value.Entering;
++      Value.Entering(OldSelected);
+     end;
+     NotifyFocusEvent;
+ 
+@@ -4382,7 +4524,7 @@
+             HighestHeightOnLine := TotalSize.Y;
+           end;
+           { Make separators on toolbars as tall/wide as the tallest/widest item }
+-          if tbisSeparator in Item.ItemStyle then begin
++          if [tbisSeparator, tbisStretch] * Item.ItemStyle <> [] then begin
+             if AOrientation <> tbvoVertical then
+               Pos.BoundsRect.Bottom := Pos.BoundsRect.Top + HighestHeightOnLine
+             else
+@@ -5289,13 +5431,13 @@
+ end;
+ 
+ function TTBView.NextSelectableWithAccel(CurViewer: TTBItemViewer;
+-  Key: Char; RequirePrimaryAccel: Boolean; var IsOnlyItemWithAccel: Boolean): TTBItemViewer;
++  Key: WideChar; RequirePrimaryAccel: Boolean; var IsOnlyItemWithAccel: Boolean): TTBItemViewer;
+ 
+   function IsAccelItem(const Index: Integer;
+     const Primary, EnabledItems: Boolean): Boolean;
+   var
+-    S: String;
+-    LastAccel: Char;
++    S: WideString;
++    LastAccel: WideChar;
+     Viewer: TTBItemViewer;
+     Item: TTBCustomItem;
+   begin
+@@ -5307,14 +5449,14 @@
+        Item.Visible and Viewer.CaptionShown then begin
+       S := Viewer.GetCaptionText;
+       if S <> '' then begin
+-        LastAccel := FindAccelChar(S);
++        LastAccel := FindAccelCharW(S);
+         if Primary then begin
+           if LastAccel <> #0 then
+-            Result := AnsiCompareText(LastAccel, Key) = 0;
++            Result := WideCompareText(LastAccel, Key) = 0;
+         end
+         else
+           if (LastAccel = #0) and (Key <> ' ') then
+-            Result := AnsiCompareText(S[1], Key) = 0;
++            Result := WideCompareText(S[1], Key) = 0;
+       end;
+     end;
+   end;
+@@ -5670,6 +5812,11 @@
+   Result := GetRootView.FCaptureWnd;
+ end;
+ 
++procedure TTBView.SetState(AState: TTBViewState);
++begin
++  FState := AState;
++end;
++
+ procedure TTBView.CancelMode;
+ var
+   View: TTBView;
+@@ -5913,7 +6060,7 @@
+     while Assigned(View.FOpenViewerView) and Assigned(View.FOpenViewerView.FSelected) do
+       View := View.FOpenViewerView;
+     if Assigned(View.FSelected) then
+-      Application.Hint := GetLongHint(View.FSelected.Item.Hint)
++      Application.Hint := Utf8Encode(GetLongHintW(View.FSelected.Item.Hint))
+     else
+       Application.Hint := '';
+   end;
+@@ -6055,7 +6202,7 @@
+                 if not MouseIsDown then begin
+                   View := GetActiveView;
+                   Viewer := View.NextSelectableWithAccel(View.FSelected,
+-                    Chr(Msg.WParam), False, IsOnlyItemWithAccel);
++                    WideChar(Msg.WParam), False, IsOnlyItemWithAccel);
+                   if Viewer = nil then begin
+                     if (Msg.WParam in [VK_SPACE, Ord('-')]) and
+                        not RootView.FIsPopup and (View = RootView) and
+@@ -6184,9 +6331,10 @@
+ 
+ procedure TTBPopupView.AutoSize(AWidth, AHeight: Integer);
+ begin
+-  with FWindow do
+-    SetBounds(Left, Top, AWidth + (PopupMenuWindowNCSize * 2),
+-      AHeight + (PopupMenuWindowNCSize * 2));
++  with TTBPopupWindow(FWindow) do
++    with GetNCSize do
++      SetBounds(Left, Top, AWidth + (X * 2),
++        AHeight + (Y * 2));
+ end;
+ 
+ function TTBPopupView.GetFont: TFont;
+@@ -6263,6 +6411,12 @@
+   inherited;
+ end;
+ 
++function TTBPopupWindow.GetNCSize: TPoint;
++begin
++  Result.X := PopupMenuWindowNCSize;
++  Result.Y := PopupMenuWindowNCSize;
++end;
++
+ function TTBPopupWindow.GetViewClass: TTBViewClass;
+ begin
+   Result := TTBPopupView;
+@@ -6346,8 +6500,12 @@
+      SystemParametersInfo(SPI_GETMENUANIMATION, 0, @Animate, 0) and Animate then begin
+     Blend := SystemParametersInfo(SPI_GETMENUFADE, 0, @Animate, 0) and Animate;
+     if Blend or (FAnimationDirection <> []) then begin
+-      TBStartAnimation(WindowHandle, Blend, FAnimationDirection);
+-      Exit;
++      if SendMessage(WindowHandle, WM_TB2K_POPUPSHOWING, TPS_ANIMSTART, 0) = 0 then
++      begin
++        { Start animation only if WM_TB2K_POPUPSHOWING returns zero (or not handled) }
++        TBStartAnimation(WindowHandle, Blend, FAnimationDirection);
++        Exit;
++      end;
+     end;
+   end;
+   {$ENDIF}
+@@ -6360,6 +6518,12 @@
+     TBEndAnimation(WindowHandle);
+   end;
+   SetWindowPos(WindowHandle, 0, 0, 0, 0, 0, ShowFlags[Showing]);
++  if Showing then SendNotifyMessage(WindowHandle, WM_TB2K_POPUPSHOWING, TPS_NOANIM, 0);
++end;
++
++procedure TTBPopupWindow.WMTB2kAnimationEnded(var Message: TMessage);
++begin
++  SendNotifyMessage(WindowHandle, WM_TB2K_POPUPSHOWING, TPS_ANIMFINISHED, 0);
+ end;
+ 
+ procedure TTBPopupWindow.WMTB2kStepAnimation(var Message: TMessage);
+@@ -6429,8 +6593,8 @@
+ 
+ procedure TTBPopupWindow.WMNCCalcSize(var Message: TWMNCCalcSize);
+ begin
+-  InflateRect(Message.CalcSize_Params^.rgrc[0],
+-    -PopupMenuWindowNCSize, -PopupMenuWindowNCSize);
++  with GetNCSize do
++    InflateRect(Message.CalcSize_Params^.rgrc[0], -X, -Y);
+   inherited;
+ end;
+ 
+@@ -6490,7 +6654,8 @@
+     HintStr := '';
+     if Assigned(FView.Selected) then begin
+       CursorRect := FView.Selected.BoundsRect;
+-      HintStr := FView.FSelected.GetHintText;
++      HintStr := UTF8Encode(FView.FSelected.GetHintText);
++      HintWindowClass := TTBHintWindow;
+     end;
+   end;
+ end;
+Index: TB2MDI.pas
+===================================================================
+RCS file: /data/cvs/tb2k/Source/TB2MDI.pas,v
+retrieving revision 1.13
+diff -u -r1.13 TB2MDI.pas
+--- TB2MDI.pas	6 Jan 2005 03:56:50 -0000	1.13
++++ TB2MDI.pas	1 Dec 2005 16:21:33 -0000
+@@ -223,7 +223,7 @@
+   M: HMENU;
+   State, ID: UINT;
+   Item: TTBCustomItem;
+-  Buf: array[0..1023] of Char;
++  Buf: array[0..1024] of WideChar;
+ begin
+   inherited;
+   Clear;
+@@ -241,7 +241,7 @@
+       Item := TTBCustomItem.Create(Self);
+       if State and MF_GRAYED <> 0 then
+         Item.Enabled := False;
+-      if GetMenuString(M, I, Buf, SizeOf(Buf), MF_BYPOSITION) = 0 then
++      if GetMenuStringW(M, I, Buf, 1024, MF_BYPOSITION) = 0 then
+         Buf[0] := #0;
+       Item.Caption := Buf;
+       ID := GetMenuItemID(M, I);
+@@ -632,7 +632,6 @@
+   M: HMENU;
+   Item: TTBCustomItem;
+   ItemCount: Integer;
+-  Buf: array[0..1023] of Char;
+ begin
+   inherited;
+   if csDesigning in ComponentState then
+@@ -661,9 +660,7 @@
+   for I := 0 to ItemCount-1 do begin
+     Item := Items[I];
+     Item.Tag := GetMenuItemID(M, I+1);
+-    if GetMenuString(M, I+1, Buf, SizeOf(Buf), MF_BYPOSITION) = 0 then
+-      Buf[0] := #0;
+-    Item.Caption := Buf;
++    Item.Caption := WideGetMenuString(M, I + 1, MF_BYPOSITION);
+     Item.Checked := GetMenuState(M, I+1, MF_BYPOSITION) and MF_CHECKED <> 0;
+   end;
+   if Assigned(FOnUpdate) then
+Index: TB2MRU.pas
+===================================================================
+RCS file: /data/cvs/tb2k/Source/TB2MRU.pas,v
+retrieving revision 1.23
+diff -u -r1.23 TB2MRU.pas
+--- TB2MRU.pas	6 Jan 2005 03:56:50 -0000	1.23
++++ TB2MRU.pas	1 Dec 2005 16:21:33 -0000
+@@ -53,6 +53,7 @@
+     procedure SetMaxItems(Value: Integer);
+   protected
+     property Container: TTBCustomItem read FContainer;
++    function GetFirstKey: Integer; virtual;
+     function GetItemClass: TTBCustomItemClass; virtual;
+     procedure SetItemCaptions; virtual;
+   public
+@@ -107,7 +108,7 @@
+     procedure Delete(Index: Integer); override;
+     function Get(Index: Integer): String; override;
+     function GetCount: Integer; override;
+-    function IndexOf(const S: String): Integer; override; 
++    function IndexOf(const S: String): Integer; override;
+     procedure Insert(Index: Integer; const S: String); override;
+     procedure Move(CurIndex, NewIndex: Integer); override;
+     procedure Put(Index: Integer; const S: String); override;
+@@ -296,20 +297,21 @@
+ 
+ procedure TTBMRUList.SetItemCaptions;
+ var
+-  I, J: Integer;
++  I, J, N: Integer;
+   Key: Char;
+   S: String;
+   Buf: array[0..MAX_PATH-1] of Char;
+ begin
+   while FList.Count > FMaxItems do
+     FList.Delete(FList.Count-1);
++  N := GetFirstKey;
+   for I := 0 to FContainer.Count-1 do begin
+     Key := #0;
+-    if I < 9 then
+-      Key := Chr(Ord('1') + I)
++    if N < 9 then
++      Key := Chr(Ord('1') + N)
+     else begin
+       { No more numbers; try letters }
+-      J := I - 9;
++      J := N - 9;
+       if J < 26 then
+         Key := Chr(Ord('A') + J);
+     end;
+@@ -321,6 +323,7 @@
+       FContainer[I].Caption := Format('&%s %s', [Key, S])
+     else
+       FContainer[I].Caption := S;
++    Inc(N);
+   end;
+ end;
+ 
+@@ -361,6 +364,11 @@
+   Result := TTBCustomItem;
+ end;
+ 
++function TTBMRUList.GetFirstKey: Integer;
++begin
++  Result := 0;
++end;
++
+ 
+ { TTBMRUListItem }
+ 
+Index: TB2Reg.pas
+===================================================================
+RCS file: /data/cvs/tb2k/Source/TB2Reg.pas,v
+retrieving revision 1.28
+diff -u -r1.28 TB2Reg.pas
+--- TB2Reg.pas	6 Jan 2005 03:56:50 -0000	1.28
++++ TB2Reg.pas	1 Dec 2005 16:21:33 -0000
+@@ -32,17 +32,10 @@
+ 
+ uses
+   Windows, SysUtils, Classes, Graphics, Controls, Dialogs, ActnList, ImgList,
+-  {$IFDEF JR_D6} DesignIntf, DesignEditors, VCLEditors, {$ELSE} DsgnIntf, {$ENDIF}
+-  TB2Toolbar, TB2ToolWindow, TB2Dock, TB2Item, TB2ExtItems, TB2MRU, TB2MDI,
++  {$IFDEF JR_D6} DesignIntf, DesignEditors, VCLEditors, TypInfo, {$ELSE} DsgnIntf, {$ENDIF}
++  TB2Common, TB2Toolbar, TB2ToolWindow, TB2Dock, TB2Item, TB2ExtItems, TB2MRU, TB2MDI,
+   TB2DsgnItemEditor;
+ 
+-procedure Register;
+-
+-implementation
+-
+-uses
+-  ImgEdit;
+-
+ {$IFDEF JR_D5}
+ 
+ { TTBImageIndexPropertyEditor }
+@@ -67,6 +60,55 @@
+       const ARect: TRect; ASelected: Boolean); {$IFNDEF JR_D6} override; {$ENDIF}
+   end;
+ 
++{ TTBItemImageIndexPropertyEditor }
++
++type
++  TTBItemImageIndexPropertyEditor = class(TTBImageIndexPropertyEditor)
++  public
++    function GetImageListAt (Index: Integer): TCustomImageList; override;
++  end;
++
++{$ENDIF}
++
++{$IFNDEF JR_D9}
++  TACPWideStringProperty = class(TPropertyEditor, ICustomPropertyDrawing)
++  private
++    FPropList: PInstPropList;
++    FSaveValue: WideString;
++  protected
++    function  GetWideStrValue: WideString;
++    function  GetWideStrValueAt(Index: Integer): WideString;
++    function  GetWideDisplayValue: WideString;
++    procedure SetPropEntry(Index: Integer; AInstance: TPersistent; APropInfo: PPropInfo); override;
++    procedure SetWideStrValue(const Value: WideString);
++  public
++    constructor Create(const ADesigner: IDesigner; APropCount: Integer); override;
++    destructor Destroy; override;
++    function AllEqual: Boolean; override;
++    function GetEditLimit: Integer; override;
++    function GetValue: string; override;
++    procedure SetValue(const Value: string); override;
++    { ICustomPropertyDrawing methods }
++    procedure PropDrawName(ACanvas: TCanvas; const ARect: TRect; ASelected: Boolean);
++    procedure PropDrawValue(ACanvas: TCanvas; const ARect: TRect; ASelected: Boolean);
++  end;
++
++  TACPWideCaptionProperty = class(TACPWideStringProperty)
++    function GetAttributes: TPropertyAttributes; override;
++  end;
++{$ENDIF}
++
++procedure CanvasTextRectW(Canvas: TCanvas; Rect: TRect; X, Y: Integer; const Text: WideString);
++
++procedure Register;
++
++implementation
++
++uses
++  ImgEdit;
++
++{$IFDEF JR_D5}
++
+ function TTBImageIndexPropertyEditor.GetAttributes: TPropertyAttributes;
+ begin
+   Result := [paMultiSelect, paValueList, paRevertable];
+@@ -128,12 +170,6 @@
+ 
+ { TTBItemImageIndexPropertyEditor }
+ 
+-type
+-  TTBItemImageIndexPropertyEditor = class(TTBImageIndexPropertyEditor)
+-  protected
+-    function GetImageListAt(Index: Integer): TCustomImageList; override;
+-  end;
+-
+ function TTBItemImageIndexPropertyEditor.GetImageListAt(Index: Integer): TCustomImageList;
+ var
+   C: TPersistent;
+@@ -207,6 +243,139 @@
+     Result := '';
+ end;
+ 
++type
++  TCanvasAccess = class(TCanvas);
++
++procedure CanvasTextRectW(Canvas: TCanvas; Rect: TRect; X, Y: Integer; const Text: WideString);
++var
++  Options: Longint;
++  DC: HDC;
++  OldFont: HFONT;
++begin
++  with TCanvasAccess(Canvas) do
++  begin
++    Changing;
++    RequiredState([csHandleValid, csFontValid, csBrushValid]);
++    Options := ETO_CLIPPED or TextFlags;
++    if Brush.Style <> bsClear then Options := Options or ETO_OPAQUE;
++
++    DC := Handle;
++    OldFont := Windows.SelectObject(DC, GetStockObject(DEFAULT_GUI_FONT));
++    if ((TextFlags and ETO_RTLREADING) <> 0) and (CanvasOrientation = coRightToLeft) then
++      Inc(X, GetTextWidthW(DC, Text, False) + 1);
++    Windows.ExtTextOutW(DC, X, Y, Options, @Rect, PWideChar(Text), Length(Text), nil);
++    Windows.SelectObject(DC, OldFont);
++    Changed;
++  end;
++end;
++
++{$IFNDEF JR_D9}
++
++{ TACPWideStringProperty }
++
++function TACPWideStringProperty.AllEqual: Boolean;
++var
++  I: Integer;
++  V: WideString;
++begin
++  Result := False;
++  if PropCount > 1 then
++  begin
++    V := GetWideStrValue;
++    for I := 1 to PropCount - 1 do if GetWideStrValueAt(I) <> V then Exit;
++  end;
++  Result := True;
++end;
++
++constructor TACPWideStringProperty.Create(const ADesigner: IDesigner; APropCount: Integer);
++begin
++  inherited Create(ADesigner, APropCount);
++  GetMem(FPropList, APropCount * SizeOf(TInstProp));
++end;
++
++destructor TACPWideStringProperty.Destroy;
++begin
++  if Assigned(FPropList) then FreeMem(FPropList);
++  inherited;
++end;
++
++function TACPWideStringProperty.GetEditLimit: Integer;
++begin
++  Result := MaxInt;
++end;
++
++function TACPWideStringProperty.GetValue: string;
++begin
++  FSaveValue := GetWideStrValue;
++  Result := ACPScrambleWideString(FSaveValue);
++end;
++
++function TACPWideStringProperty.GetWideDisplayValue: WideString;
++begin
++  if AllEqual then Result := GetWideStrValue
++  else Result := '';
++end;
++
++function TACPWideStringProperty.GetWideStrValue: WideString;
++begin
++  Result := GetWideStrValueAt(0);
++end;
++
++function TACPWideStringProperty.GetWideStrValueAt(Index: Integer): WideString;
++begin
++  with FPropList^[Index] do Result := GetWideStrProp(Instance, PropInfo);
++end;
++
++procedure TACPWideStringProperty.PropDrawName(ACanvas: TCanvas; const ARect: TRect; ASelected: Boolean);
++begin
++  DefaultPropertyDrawName(Self, ACanvas, ARect);
++end;
++
++procedure TACPWideStringProperty.PropDrawValue(ACanvas: TCanvas; const ARect: TRect; ASelected: Boolean);
++begin
++  CanvasTextRectW(ACanvas, ARect, ARect.Left + 1, ARect.Top + 1, GetWideDisplayValue);
++end;
++
++procedure TACPWideStringProperty.SetPropEntry(Index: Integer; AInstance: TPersistent; APropInfo: PPropInfo);
++begin
++  inherited;
++  with FPropList^[Index] do
++  begin
++    Instance := AInstance;
++    PropInfo := APropInfo;
++  end;
++end;
++
++procedure TACPWideStringProperty.SetValue(const Value: string);
++var
++  S: WideString;
++begin
++  try
++    S := ACPUnscrambleWideString(Value);
++  except
++    S := FSaveValue;
++  end;
++  SetWideStrValue(S);
++end;
++
++procedure TACPWideStringProperty.SetWideStrValue(const Value: WideString);
++var
++  I: Integer;
++begin
++  for I := 0 to PropCount - 1 do with FPropList^[I] do SetWideStrProp(Instance, PropInfo, Value);
++  Modified;
++end;
++
++{ TACPWideCaptionProperty }
++
++function TACPWideCaptionProperty.GetAttributes: TPropertyAttributes;
++begin
++  Result := inherited GetAttributes + [paAutoUpdate];
++end;
++
++
++{$ENDIF}
++
+ 
+ procedure Register;
+ begin
+@@ -238,6 +407,13 @@
+   RegisterPropertyEditor(TypeInfo(TShortCut), TTBCustomItem, '',
+     TShortCutProperty);
+   {$ENDIF}
++  {$IFNDEF JR_D9}
++  RegisterPropertyEditor(TypeInfo(WideString), TTBCustomDockableWindow, 'Caption', TACPWideCaptionProperty);
++  RegisterPropertyEditor(TypeInfo(WideString), TTBCustomItem, 'Caption', TACPWideCaptionProperty);
++  RegisterPropertyEditor(TypeInfo(WideString), TTBCustomItem, 'Hint', TACPWideStringProperty);
++  RegisterPropertyEditor(TypeInfo(WideString), TTBEditItem, 'EditCaption', TACPWideCaptionProperty);
++  RegisterPropertyEditor(TypeInfo(WideString), TTBEditItem, 'Text', TACPWideCaptionProperty);
++  {$ENDIF}
+ 
+   { Link in images for the toolbar buttons }
+   {$R TB2DsgnItemEditor.res}
+Index: TB2ToolWindow.pas
+===================================================================
+RCS file: /data/cvs/tb2k/Source/TB2ToolWindow.pas,v
+retrieving revision 1.18
+diff -u -r1.18 TB2ToolWindow.pas
+--- TB2ToolWindow.pas	6 Jan 2005 03:56:50 -0000	1.18
++++ TB2ToolWindow.pas	1 Dec 2005 16:21:33 -0000
+@@ -195,14 +195,24 @@
+ begin
+   Result.X := FBarWidth;
+   Result.Y := FBarHeight;
+-  if Assigned(ADock) and (FullSize or Stretch) then begin
+-    { If docked and stretching, return the minimum size so that the toolbar
+-      can shrink below FBarWidth/FBarHeight }
+-    if not(ADock.Position in [dpLeft, dpRight]) then
+-      Result.X := FMinClientWidth
+-    else
+-      Result.Y := FMinClientHeight;
+-  end;
++  if Assigned(ADock) then
++    if FullSize then
++    begin
++      { If docked and full size, return the size corresponding to docked size }
++      if not(ADock.Position in [dpLeft, dpRight]) then
++        Result.X := ADock.ClientWidth - (Width - ClientWidth)
++      else
++        Result.Y := ADock.ClientHeight - (Height - ClientHeight);
++    end
++    else if Stretch then
++    begin
++      { If docked and stretching, return the minimum size so that the toolbar
++        can shrink below FBarWidth/FBarHeight }
++      if not(ADock.Position in [dpLeft, dpRight]) then
++        Result.X := FMinClientWidth
++      else
++        Result.Y := FMinClientHeight;
++    end;
+ end;
+ 
+ procedure TTBToolWindow.GetBaseSize(var ASize: TPoint);
+Index: TB2Toolbar.pas
+===================================================================
+RCS file: /data/cvs/tb2k/Source/TB2Toolbar.pas,v
+retrieving revision 1.108
+diff -u -r1.108 TB2Toolbar.pas
+--- TB2Toolbar.pas	30 Jul 2005 18:17:20 -0000	1.108
++++ TB2Toolbar.pas	1 Dec 2005 16:21:33 -0000
+@@ -85,7 +85,7 @@
+     function CalcWrapOffset(const ADock: TTBDock): Integer;
+     function CreateWrapper(Index: Integer; Ctl: TControl): TTBControlItem;
+     function FindWrapper(Ctl: TControl): TTBControlItem;
+-    function GetChevronHint: String;
++    function GetChevronHint: WideString;
+     function GetImages: TCustomImageList;
+     function GetItems: TTBCustomItem;
+     function GetLinkSubitems: TTBCustomItem;
+@@ -93,7 +93,7 @@
+     procedure InstallMainWindowHook;
+     function IsChevronHintStored: Boolean;
+     class function MainWindowHook(var Message: TMessage): Boolean;
+-    procedure SetChevronHint(const Value: String);
++    procedure SetChevronHint(const Value: WideString);
+     procedure SetChevronMoveItems(Value: Boolean);
+     procedure SetChevronPriorityForNewItems(Value: TTBChevronPriorityForNewItems);
+     procedure SetFloatingWidth(Value: Integer);
+@@ -135,6 +135,7 @@
+     procedure BuildPotentialSizesList(SizesList: TList); dynamic;
+     procedure ControlExistsAtPos(const P: TPoint; var ControlExists: Boolean);
+       override;
++    procedure DefineProperties(Filer: TFiler); override;
+     function DoArrange(CanMoveControls: Boolean; PreviousDockType: TTBDockType;
+       NewFloating: Boolean; NewDock: TTBDock): TPoint; override;
+     {$IFDEF JR_D5}
+@@ -158,6 +159,8 @@
+     procedure ResizeTrackAccept; override;
+     procedure ResizeEnd; override;
+     procedure SetChildOrder(Child: TComponent; Order: Integer); override;
++    procedure ReadChevronHintProperty(Reader: TReader);
++    procedure WriteChevronHintProperty(Writer: TWriter);
+ 
+     property SystemFont: Boolean read FSystemFont write SetSystemFont default True;
+     property OnShortCut: TShortCutEvent read FOnShortCut write FOnShortCut;
+@@ -170,11 +173,11 @@
+     procedure GetTabOrderList(List: TList); override;
+     procedure InitiateAction; override;
+     function IsShortCut(var Message: TWMKey): Boolean;
+-    function KeyboardOpen(Key: Char; RequirePrimaryAccel: Boolean): Boolean;
++    function KeyboardOpen(Key: WideChar; RequirePrimaryAccel: Boolean): Boolean;
+     procedure ReadPositionData(const Data: TTBReadPositionData); override;
+     procedure WritePositionData(const Data: TTBWritePositionData); override;
+ 
+-    property ChevronHint: String read GetChevronHint write SetChevronHint stored IsChevronHintStored;
++    property ChevronHint: WideString read GetChevronHint write SetChevronHint stored False;
+     property ChevronMoveItems: Boolean read FChevronMoveItems write SetChevronMoveItems default True;
+     property ChevronPriorityForNewItems: TTBChevronPriorityForNewItems read FChevronPriorityForNewItems
+       write SetChevronPriorityForNewItems default tbcpHighest;
+@@ -266,7 +269,7 @@
+   TTBChevronItem = class(TTBCustomItem)
+   private
+     FToolbar: TTBCustomToolbar;
+-    function GetDefaultHint: String;
++    function GetDefaultHint: WideString;
+   public
+     constructor Create(AOwner: TComponent); override;
+     function GetChevronParentView: TTBView; override;
+@@ -361,7 +364,7 @@
+   FToolbar := AOwner as TTBCustomToolbar;
+   ItemStyle := ItemStyle + [tbisSubMenu, tbisNoAutoOpen];
+   Hint := GetDefaultHint;
+-  Caption := EscapeAmpersands(GetShortHint(Hint));
++  Caption := EscapeAmpersandsW(GetShortHintW(Hint));
+ end;
+ 
+ function TTBChevronItem.GetChevronParentView: TTBView;
+@@ -369,7 +372,7 @@
+   Result := FToolbar.FView;
+ end;
+ 
+-function TTBChevronItem.GetDefaultHint: String;
++function TTBChevronItem.GetDefaultHint: WideString;
+ begin
+   Result := STBChevronItemMoreButtonsHint;
+ end;
+@@ -730,7 +733,8 @@
+     if Assigned(V) then begin
+       if not IsRectEmpty(V.BoundsRect) then begin
+         CursorRect := V.BoundsRect;
+-        HintStr := V.GetHintText;
++        HintStr := UTF8Encode(V.GetHintText);
++        HintWindowClass := TTBHintWindow;
+       end;
+     end;
+   end;
+@@ -781,31 +785,23 @@
+ 
+ procedure TTBCustomToolbar.WMSysCommand(var Message: TWMSysCommand);
+ var
+-  AnsiKey: Char;
++  C: WideChar;
+ begin
+   if FMenuBar and Enabled and Showing then
+     with Message do
+       if (CmdType and $FFF0 = SC_KEYMENU) and (Key <> VK_SPACE) and
+-         (GetCapture = 0) then begin
+-        if Win32Platform = VER_PLATFORM_WIN32_NT then begin
+-          { On Windows NT 4/2000/XP, Key is a wide character, so we have to
+-            convert it. Pressing Alt+N in a Russian input locale, for example,
+-            results in a Key value of $0442.
+-            This could perhaps be considered a bug in Windows NT since the
+-            character codes in other messages such as WM_SYSCHAR aren't left
+-            in Unicode form.
++         (GetCapture = 0) then
++      begin
++        C := WideChar(Key);
++        if Win32Platform <> VER_PLATFORM_WIN32_NT then
++          { On Windows NT 4/2000/XP, Key is a wide character, so we leave it unchanged.
++            On Windows 95/98/Me, Key is not a wide character.
+             The conversion isn't done with the system code page, but rather
+             with the code page of the currently active input locale, like
+             Windows does when sending WM_(SYS)CHAR messages. }
+-          if WideCharToMultiByte(GetInputLocaleCodePage, 0, @WideChar(Key), 1,
+-             @AnsiKey, 1, nil, nil) <> 1 then
+-            Exit;  { shouldn't fail, but if it does, we can't continue }
+-        end
+-        else begin
+-          { On Windows 95/98/Me, Key is not a wide character. }
+-          AnsiKey := Char(Key);
+-        end;
+-        if not KeyboardOpen(AnsiKey, False) then begin
++          C := LocaleCharToUnicode(Key);
++
++        if not KeyboardOpen(C, False) then begin
+           if Key = Ord('-') then Exit;
+           MessageBeep(0);
+         end;
+@@ -842,7 +838,7 @@
+   { On toolbars that aren't menu bars, handle CM_DIALOGCHAR instead of
+     WM_SYSCOMMAND }
+   if not FMenuBar and Enabled and Showing and (Message.CharCode <> 0) then
+-    if KeyboardOpen(Chr(Message.CharCode), True) then begin
++    if KeyboardOpen(LocaleCharToUnicode(Message.CharCode), True) then begin
+       Message.Result := 1;
+       Exit;
+     end;
+@@ -891,9 +887,14 @@
+     if Assigned(FView.Selected) then begin
+       Item := FView.Selected.Item;
+       if not(tboLongHintInMenuOnly in Item.EffectiveOptions) then
+-        Hint := Item.Hint
++        Hint := Utf8Encode(Item.Hint)
+       else
+         Hint := '';
++
++      with TTBItemViewerAccess(FView.Find(Item)) do
++      begin
++        MouseMove(X - BoundsRect.Left, Y - BoundsRect.Top);
++      end;
+     end
+     else
+       Hint := '';
+@@ -934,7 +935,7 @@
+   inherited;
+ end;
+ 
+-function TTBCustomToolbar.KeyboardOpen(Key: Char;
++function TTBCustomToolbar.KeyboardOpen(Key: WideChar;
+   RequirePrimaryAccel: Boolean): Boolean;
+ var
+   I: TTBItemViewer;
+@@ -1010,15 +1011,15 @@
+     Arrange;
+ end;
+ 
+-function TTBCustomToolbar.GetChevronHint: String;
++function TTBCustomToolbar.GetChevronHint: WideString;
+ begin
+   Result := FChevronItem.Hint;
+ end;
+ 
+-procedure TTBCustomToolbar.SetChevronHint(const Value: String);
++procedure TTBCustomToolbar.SetChevronHint(const Value: WideString);
+ begin
+   FChevronItem.Hint := Value;
+-  FChevronItem.Caption := EscapeAmpersands(GetShortHint(Value));
++  FChevronItem.Caption := EscapeAmpersandsW(GetShortHintW(Value));
+ end;
+ 
+ procedure TTBCustomToolbar.SetChevronMoveItems(Value: Boolean);
+@@ -1708,4 +1709,20 @@
+     Application.UnhookMainWindow(MainWindowHook);
+ end;
+ 
++procedure TTBCustomToolbar.DefineProperties(Filer: TFiler);
++begin
++  inherited;
++  Filer.DefineProperty('ChevronHint', ReadChevronHintProperty, WriteChevronHintProperty, IsChevronHintStored);
++end;
++
++procedure TTBCustomToolbar.ReadChevronHintProperty(Reader: TReader);
++begin
++  ChevronHint := FilerReadWideString(Reader);
++end;
++
++procedure TTBCustomToolbar.WriteChevronHintProperty(Writer: TWriter);
++begin
++  FilerWriteWideString(Writer, ChevronHint);
++end;
++
+ end.
+

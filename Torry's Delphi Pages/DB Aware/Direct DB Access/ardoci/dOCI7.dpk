@@ -1,0 +1,51 @@
+package dOCI7;
+
+{$R *.res}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'dOCI components for Direct ORACLE Access'}
+{$IMPLICITBUILD OFF}
+
+requires
+  designide,
+  dbrtl,
+  vcldb;
+
+contains
+  VirtualDataSet in 'src\VirtualDataSet.pas',
+  ADataSet in 'src\ADataSet.pas',
+  AMemoryDataSet in 'src\AMemoryDataSet.pas',
+  AOraSQL in 'src\AOraSQL.pas',
+  AOraUpdateSQL in 'src\AOraUpdateSQL.pas',
+  AOraUpdateSQLEd in 'src\AOraUpdateSQLEd.pas' {AOraUpdateSQLEditForm},
+  DataSetQuery in 'src\DataSetQuery.pas',
+  dOCIMessages in 'src\dOCIMessages.pas',
+  DynamicArrays in 'src\DynamicArrays.pas',
+  GoodDate in 'src\GoodDate.pas',
+  MemoryDataSet in 'src\MemoryDataSet.pas',
+  OraDB in 'src\OraDB.pas',
+  OraDefines in 'src\OraDefines.pas',
+  OraError in 'src\OraError.pas',
+  OraSQL in 'src\OraSQL.pas',
+  OraUtils in 'src\OraUtils.pas';
+
+end.

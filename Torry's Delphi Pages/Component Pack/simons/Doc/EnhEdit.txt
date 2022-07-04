@@ -1,0 +1,122 @@
+TEnhancedEdit (C)opyright 2001   Version 1.50
+Autor : Simon Reinhardt
+eMail : reinhardt@picsoft.de
+Internet : http://www.picsoft.de
+
+  Diese Komponente ist eine Ableitung von TEdit, welche eine Ausrichtung
+  des Textes erlaubt und neben anderen zusätzlichen Funktionen auch
+  Value-Eigenschaften für Zahlenwerte bietet. Sie ist Public Domain,
+  das Urheberrecht liegt aber beim Autor.
+
+  Fragen und Verbesserungsvorschläge sind immer willkommen.
+
+
+
+Dateiumfang:
+------------
+
+EnhEdit.txt	- Diese Datei
+EnhEdit.pas	- Quelltext der Komponente
+EnhEdit.d16	- Resourcendatei der 16Bit-Komponente für Delphi 1
+EnhEdit.d32	- Resourcendatei der 32Bit-Komponente für Delphi 2 bis 5
+SRDefine.inc	- Include-Datei für die Komponente
+SRUtils.pas	- verschiedende Prozeduren und Funktionen für die Komponente
+                  (Eine Beschreibung findet man im Interface der Unit)  
+	
+Ordner	EditDemo	- TEnhancedEdit-Demo-Projekt für Delphi 2 oder höher
+	EditMain.dfm	- Formulardatei der MainForm
+	EditMain.pas	- Quelltext der MainForm-Unit
+	EditDemo.dof	- Compileroptionen des Demo-Projekts
+	EditDemo.dpr	- Quelltext des Demo-Projekts
+	EditDemo.res	- Resourcendatei des Demo-Projekts
+
+
+Installation:
+-------------
+
+In Delphi 1:
+------------
+1. Alle Dateien in das Delphi-Komponenten-Verzeichnis entpacken.
+2. Menü Optionen : Komponente installieren
+3. Schaltfläche Hinzufügen / Durchsuchen
+4. Datei EnhEdit.pas im Delphi-Komponenten-Verzeichnis suchen und mit
+   OK bestätigen.
+5. Die Komponente erscheint in der Komponenten-Gruppe "Simon"
+
+In Delphi 2:
+------------
+1. Alle Dateien in das Delphi-Komponenten-Verzeichnis entpacken.
+2. Menü Komponente :  installieren
+3. Schaltfläche Hinzufügen / Durchsuchen
+4. Datei EnhEdit.pas im Delphi-Komponenten-Verzeichnis suchen und mit
+   OK bestätigen.
+5. Die Komponente erscheint in der Komponenten-Gruppe "Simon"
+
+Ab Delphi 3:
+------------
+1. Alle Dateien in das Delphi-Komponenten-Verzeichnis entpacken.
+2. Menü Komponente :  Komponente installieren
+3. Schaltfläche Durchsuchen (hinter dem Eingabefeld für den Unit-Namen)
+4. Datei EnhEdit.pas im Delphi-Komponenten-Verzeichnis suchen und mit
+   OK bestätigen.
+5. Die Rückfrage nach dem Neukompilieren des Packages bestätigen.
+6. Die Komponente erscheint in der Komponenten-Gruppe "Simon"
+   (Evtl. muß eine bereits installierte, ältere Version von TEnhancedEdit
+    zuvor entfernt werden)
+
+
+
+Funktion:
+---------
+
+Die Komponente funktioniert genauso, wie die Delphi-Komponente TEdit 
+mit folgenden Erweiterungen:
+
+Neue Eigenschaften:
+-------------------
+
+1. Nur wenn die Eigenschaft "AcceptChars" den Wert "true" hat, akzeptiert die Komponente
+   Buchstaben und Zeichen als Eingabe. Ansonsten können nur Ziffern, das Minuszeichen,
+   das Dezimal-Trennzeichen und das Tausender-Trennzeichen eingegeben werden.
+2. Die Eigenschaft "Alignment" bestimmt die Textausrichtung in der Komponente und kann die
+   Werte taLeftAlign, taCenter oder taRightAlign annehmen.
+3. Die Eigenschaft "Digits" hat zwei Funktionen:
+   a) Wird der Eigenschaft "Value" ein Float-Wert zugewiesen, bestimmt die Eigenschaft
+      "Digits", wieviele Nachkommastellen in der TEnhEdit-Komponente angezeigt werden.
+   b) Wird der Eigenschaft "ValueInt" ein Integer-Wert zugewiesen, bestimmt die Eigenschaft
+      "Digits", auf wieviele Stellen die Zahl in der TEnhEdit-Komponente mit führenden
+      Nullen aufgefüllt wird.
+4. Wenn die Eigenschaft "ExitOnEnterKey" den Wert "true" hat, hat [Enter] die gleiche Funktion 
+   wie [Tab].
+5. Der Wert der Eigenschaft "Format" bestimmt, wie der Text der Komponente formatiert wird, wenn
+   sich der Wert der Eigenschaft "Value" ändert. "Format" kann folgende Werte annehmen:
+   - ffCurrency
+   - ffExponent
+   - ffFixed
+   - ffGeneral
+   - ffNumber
+   Die Bedeutung der Werte ist in der Delphi-Hilfe zum Thema "FloatToStrF" nachzulesen.
+6. [Nicht in der 16Bit-Version für Delphi1:]
+   Wenn die Eigenschaft "GrayDisabled" den Wert "true" hat, wird der Text -wie üblich-
+   grau dargestellt, wenn die Eigenschaft "Enabled" den Wert "false" hat. Ist GrayDisabled
+   false, wird der Text genauso angezeigt, als wenn "Enabled" den Wert "true" hätte.
+7. Die Eigenschaft "Precision" bestimmt, mit welcher Genauigkeit die Umwandlung des "Value"-Wertes
+   in einen String erfolgt. (siehe Funktion FloatToStrF)
+8. Wenn die Eigenschaft "UndoOnEscKey" den Wert "true" hat, wird der Text bei Eingabe von
+   [Esc] auf den Wert zurückgesetzt, den er hatte, als das Control den Eingabefokus bekam.
+9. Falls sich der Text der Komponente in einen Fließkommawert umwandeln läßt, enthält die 
+   Eigenschaft "Value" den Float-Wert.
+10.Falls sich der Text der Komponente in einen Integerwert umwandeln läßt, enthält die 
+   Eigenschaft "ValueInt" den Integer-Wert.
+
+Neue Funktionen:
+----------------
+
+1. Die [Enter]-Taste wird abgefangen, es folgt kein MessageBeep. Wenn die Eigenschaft 
+   "ExitOnEnterKey" den Wert "true" hat, hat [Enter] die gleiche Funktion wie [Tab].
+2. Wenn die Eigenschaft "UndoOnEscKey" den Wert "true" hat, wird der Text bei Eingabe von
+   [Esc] auf den Wert zurückgesetzt, den er hatte, als das Control den Eingabefokus bekam.
+
+Alle anderen Eigenschaften und Ereignisse entsprechen denen der TEdit-Komponente
+und sind in der Online-Hilfe nachzulesen. Die Funktion der Komponente läßt sich außerdem
+sehr schön im beigefügten Demo-Programm im Ordner "EditDemo" sehen.

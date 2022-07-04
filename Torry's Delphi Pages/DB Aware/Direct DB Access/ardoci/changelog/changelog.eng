@@ -1,0 +1,123 @@
+
+I am waiting your comments or questions.
+
+e-mails:   lasersquard@yahoo.com
+	   lasersquad@tut.by
+
+	Andrey Romanchenko
+
+
+CHANGE LOG
+----------
+v 1.18_1 (06.12.2002)
+ * File structure was changed for convenient. Some files were moved to the new directories.
+
+v 1.18 (01.12.2002)
+ * added clearing FieldDefs and Fields on change query.
+ 
+v 1.17 (5.11.2002)
+ * All "raise Exception.Create()" were replaced by raise "EDatabaseError.Create(...)".
+ * EOraError derived from EDatabaseError.
+
+v 1.16 (not available)
+ * Method OpenAll became virtual and moved to the TADataSet.
+ * Improoved internal processing of FieldDefs and Fields in TDataSetQuery (VOpen & VInitFieldDefs).
+ * Fixed bug with ValuesNull in TOraField.add.
+ * Property Preferences was added into TOraDB.
+ * Properties RollbackOnDisconnect, ConnectAs, SQLTrace were added into TOraDB.
+ * Added new unit OraUtils.pas with various useful functions.
+ * Functions ADatabaseError and ADatabaseErrorFmt were moved from ADataSet.pas to OraError.pas.
+ * Two new error messages sOraErrOCIVersionInfoAbsen and sOraErrOCINotInstalled. added into 
+   .lang files.
+ * Added property editor for TOraDB.DBServer property. There is a combo box with SQL*Net8
+   aliases from tnsnames.ora file.
+ * Fixed bug if oci.dll is not in PATH variable. 
+ * The registy is used to path to the oci.dll.
+ * Automatic determining the oci.dll version.
+
+v 1.15 (27.04.2002)
+ *  All resource strings (error messages and etc.) moves to the one common 
+    file dOCIMessages_YOURLANGUAGE.lang. Now it is easy to translate 
+    message to the various languages. 
+    To create messages file with your language you need
+     to make a copy of any existing .lang file, 
+     translate messages in it to needed language, 
+     assign a properly name (dOCIMessages_YOURLANGUAGE.lang) to it,
+     create (or uncomment) line {$DEFINE dOCI_YOURLANGUAGE} in dOCI.inc,
+     add next lines in dOCIMessages.pas:
+      {$ifdef dOCI_ENGLISH}
+       {$INCLUDE  dOCIMessages_YOURLANGUAGE.lang}
+      {$endif}
+    Or you can send me your language file and I will include it in 
+    distribute.
+ *  Many little changes in AOraUpdateSQLEd.pas
+ *  Property Active moved from TOraDB to TADatabase.
+ *  Added abstract methods SetActive, GetActive, Open, Close in TADatabase.
+
+v 1.14 (8.04.2002)
+ *  Added example EditableSataSet (see folder Examples) which demonstrates 
+    how to use dOCI components to make editable dataset
+ *  Added property LoginPrompt to the TOraDB component.
+ *  All functions ADatabaseError and ADatabaseErrorFmt was replaced by my 
+    own ADatabaseError and ADatabaseErrorFmt from ADataSet.pas module.
+v 1.13 (15.11.2001)
+ *  Added documentation on Dynamic Arrays. See DynamicArrays.html and DynamicHashes.html.
+ *  Some fixes and many additionals in DynamicArrays.pas.
+v 1.11 (25.09.2001)
+ *  Fixed error 'OCI no data' on TAOraSQL.Close() with Oracle 8.1.6 or higher.
+ *  Some error messages moved to resourcestring constants at the begin of each module.
+ *  Some comments added into source files.
+ *  Some comments translated into english.
+ *  Added check for the presence of all needed OCI functions in oci.dll in OraDB.pas.
+    If one or more functions does not exists in oci.dll exception with list of absent
+    function names raised.
+v 1.10 (06.04.2001)
+ *  Added virtual method CreateAField. Now TADataSet can hold list of fields descendances  
+    of TAField.
+ *  Removed method AddField from TAOraSQL. CreateAField works insted of AddField.
+ *  Added check on empty query text. Now you will see instead of strange "Zero iteration 
+    counter" "SQL statement is empty."
+v 1.09 (19.03.2001)
+ *  Added method OpenDatabase in AOraSQL.
+ *  Added editor for AOraUpdateSQL as standart Delphi Query Editor. Now you don't need 
+    to create queries by hands.
+
+v 1.08 (27.02.2001)
+ *  In error message errorcode appeared twice.
+ *  Errors with code 20010-20050 are reserved for user information messages
+    EOraError cuts all debug information from this messages.
+    For additional information see OraError.pas
+v 1.07 (08.01.2001)
+ *  Events BeforeInitOCI and AfterInitOCI added. You can change OCI libriary 
+    name, disable initialization.
+ *  Property OraSessionIsolationLevel ¨ OraTransIsolationLevel added.
+    You can customise Isolation level for whole session or for each transaction.
+    You can see ORACLE documentation for additional information about isolation
+    levels.
+v 1.06 (21.12.2000)
+ *  CopyStructure(DataSet:TDataSet) and CopyStructure(ADataSet:TAdataSet) added.
+    in TADataSet.
+v 1.05
+ *  in ADataSet.pas some comments translated into English.
+ *  Check source code of AOraSQL.pas ADataSet.pas AMemoryDataSet.pas and correct
+    error messages and some bugs.
+ *  Rename some methods in TADataSet.
+ *  Move method AddField from TAMemoryDataSet to TADataSet.
+ *  List of params is creates in TADataSet not in your descendants.
+v 1.04
+ *  GetLobLength added in TAOraSQL.
+v 1.03
+ *  In TDataSetQuery field Query moves from public to protected. 
+    It helps easy find erors if migrate from ver 0.9 to 1.03 and later.
+v 1.02
+ *  Added events to TOraDB: 
+     BeforeLogin (have param Accept), 
+     AfterLogin, BeforeCommit, AfterCommit,OnStartTransaction.
+v 1.01
+ *  Fixed bug with OldValue if no edit present.
+ *  Method Refresh reopens query.
+v 1.0:
+ *  Many fixes. More compability with standart Delphi components.
+ *  BLOB support added in TOraSQL (readonly). For write you can use TAOraSQL.
+ *  Autocreate list of Params from SQL query.
+

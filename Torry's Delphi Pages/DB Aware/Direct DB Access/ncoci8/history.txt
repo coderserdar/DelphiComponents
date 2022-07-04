@@ -1,0 +1,575 @@
+History
+-------
+Legend:
+   / - changed, corrected, optimized
+   + - new, added functionality
+   - - deleted
+
+NC OCI8 v 1.0.6 (Jan, 4, 2007)
+    /  Fixed D5 incompatibility
+    /  Fixed SQL property issue
+
+NC OCI8 v 1.0.5 (Sept, 19, 2006)
+    +  Delphi 2006 support
+
+NC OCI8 v 1.0.4 (Feb, 8, 2006)
+    +  Support of Oracle 10g (Uwe Schuster and Sergei Klochkov)
+    +  Support for temporary BLOB's (Sergei Klochkov)
+    +  Delphi 2005 support
+    /E: Sometimes was calling TOCILobLocator.GetLength for NULL BLOB's
+    /E: TOciParam.GetAsVariants was returning NULL for otNumber
+    /E: TOCISelectItem.GetDataSize was raising error on large NUMBER's
+    /E: Fixed russian NCOciMsg.pas 
+
+
+NC OCI8 v 1.0.3 (Oct, 25, 2004)
+    Collection of last years fixes.
+
+NC OCI8 v 1.0.2 (Feb, 13, 2002)
+    /E: Bug with reconnecting to restarted server (Thanks
+        to Sheka Michail)
+    /E: Probable hang up at connection closing (Thanks to 
+        Vladimir Muravlev)
+    /E: Bug in TOCINestedDataSet (Thanks to Erik Ivanov)
+     +  MIDAS support by TOCINestedDataSet (Thanks to Erik Ivanov)
+
+NC OCI8 v 1.0.2 (Feb, 13, 2002)
+    + support of Oracle9i (thanks to Stefan Baltov and all other guys !)
+    + TOCIDataSet.OnError, TOCIDataSet.OnWarning event handlers
+      (if ORA-xxxxx will be raised during Open/ExecSQL, it will
+       be routed to this event)
+
+NC OCI8 v 1.0.1 (Feb, 8, 2002)
+    / Naming Expert moved from Companion into base NCOCI8 set
+      and better integrated with NCOCI8
+    /E: In case of error NCOCI8 BreakIt dialog may
+        appear on screen (Thanks to Labutin Andrey)
+    /E: AV at TOCIStoredProc & proc with record type param
+        (Thanks to Vladimir Muravlev)
+    /E: Fixed bug with RecordCount (Thanks to Demon)
+    /E: Fixed bug with chr(13) & wrapped packages creation
+    /E: Verified and fixed issues in all demos
+    /E: Fixed incompatibility of 3d party with v 1.0.0
+
+NC OCI8 v 1.0.0 (Jan, 30, 2002)
+    + Delphi 6, BCB 5 support
+    + automatic extraction of name of update table from SELECT (NOB10)
+    + automatic stripping of ORDER BY from records counting (NOB10)
+    + new component: TOCIBDEDatabase, and demo: BDE
+    + PL/SQL Wrapper Objects code generator
+    /E: AV in TransactionManager in MT mode (Thanks to Alexander Mohr)
+    /E: DefaultExpression = NULL -> exception (Thanks to Vladimir Muravlev)
+    /E: Wrong handling of RAW fields (Thanks to Alexandr Redko)
+    /E: Fixed small memory leak (Thanks to Marco Antonio Soto R.)
+    /E: In non blocking mode processor utilization was 100%
+    /E: Fixed bug with chr(13) in PL/SQL anonymous blocks
+    /E: Wrong reaction of BreakDlg on Mouse clicks (Thanks to Vladimir Muravlev)
+    / Big redesign of ASTA server. Today it is most compatible server
+      with all ASTA software <g>
+
+NC OCI8 0.9.3 betta (Jun, 16, 2001)
+    /E: if TNSNames.ora have too many closing braces, then
+        you will see wrong list of services (Thanks to Norman
+        Dunbar NDunbar@LynxFinancialSystems.co.uk)
+    /E: Call to Halt will raise AV in NCOCI8 (Thanks to 
+        Eugeney Slavjansky sj@kzts.krm.net.ua)
+    /E: If TOCIQuery.RecordCountMode = cmExactAllways, then
+        call of RecordCount in edit mode will raise exception
+    /E: NOE171/UPS - Record has been deleted by another user
+        if to Edit record, then Delete it and ApplyUpdates
+        (Many thanks to very, very patient Vladimir Muravlev :)
+    /E: NCSQLMon & DLL COM Server = combination, that can hangup
+        (thanks to Andy Dandy)
+    / Now NCOCI8 is more "correct" in case if user pressed
+      Cancel in Login dialog (Thanks to David Ng klng@tm.net.my)
+    + Spain resources (Thanks to John Lohmeyer jlohmeyer@retemail.es)
+    + Expression evaluator now knows 'NULL'. Very usable for
+      default expressions.
+
+NC OCI8 0.9.2 betta (Jan, 8, 2001)
+    /E: OnExecError have wrong value of offset
+    /E: "NOE/121" when open dataset with long field and it is empty
+    /E: wrong (0) record count if count mode is exact on fetch
+    /E: if TOCIQuery.CheckParams = False, then AV will be raised
+        after assignment of SQL
+    /E: SQLMacroChar is changed to be '%' in place of '#'. Last
+        conflicts with Oracle names, that have '#' inside.
+    / TOCIParam.LoadFromFile now accept ftString also
+    / If EnableLongString = True, then default value
+      for otString parameters equal 4000
+    + TOCISequence.AutoPost property. If it is True, then
+      TOCISequence will automatically call TOCISequence.Post.
+
+NC OCI8 0.9.1 betta (Nov, 1, 2000)
+    /E: If TOCIDataFormat.StrsEmpty2Null = True, then
+        reading '' from string field returns IsNull = False
+    /E: TOCIStoredProc generates wrong PL/SQL block, when
+        parameter have unnamed RECORD type, like MyTable%ROWTYPE
+    /E: NCOCI8 was using only first ORACLE_HOME. Now NCOCI8 !REALLY!
+        works with multiple oracle homes.
+    /E: AV on some queries, that returning OCI_WARNING
+    /E: returns wrong data and generate wrong SQL in case
+        of ftVarBytes fields (RAW)
+    /E: >> Just as a small point, there are two spelling mistakes associated with TOCIUpdateSQL, which as I am
+        >> English keep catching me out. 
+        >> lmPesimistic (TOCILockMode) should be spelt lmPessimistic
+        >> lpDefered (TOCILockPoint) should be spelt lpDeferred
+    /E: >> If I refer to any of the UpdateSQL TStrings text in the OnSQLGenerate, e.g. SQLUpdate.Text or
+        >> SQLUpdate.Strings[1] I get stack overflows.
+    /E: "ORA-Fetch out of sequence" when TOCIDataSet with TDataSetField
+        scrolls past last records (EOF)
+    /E: possible AV with zero length fields
+    /E: Errors of different kinds, when editing query, that
+        contains fields with name longer, than 26 characters
+    /E: Possible "NOE103/DB" in multithreaded applications
+    /E: In case of server error during Post/Delete and if
+        TOCIDataSet.OnXXXError assigned and it sets Action to
+        daRetry, "List out of index" or NOE63/DEADCRS is raised
+    /E: 8.1.6 & LONG/LONG RAW was not working correctly. Result
+        of this was: garbage in data, AV, other errors.
+    /E: 8.1.6 & quoted params not in upper case raising ORA-01036
+    /E: Record deletion from TOCIQuery, that have parameters in
+        SQL, with the same name as some of fields, raise "NOE171/UPS"
+    /E: In master/detail if master is not opened, then during open
+        detail we can get "Field '#0' not found" exception
+    / Now NCOCI8 automatically pads from right all otChar
+      values upto data size
+    / NCOciBreakDlg now is timer drived
+    / TOCIDatabase.ApplyUpdates, CancelUpdates, CommitUpdates
+      does not require now manual posts/cancel/refresh.
+    / TOCIDataSet, that have nested datasets now bidirectional
+    / optimized TOCIParam.LoadFromStream: in case of LONG, LONG RAW
+      it uses 1 x <size>, in case of BLOB, CLOB it uses 60kb. It is
+      possible in first case to reduce memory usage to amount as in
+      second case. If somebody need this, let me know ...
+    / updated "Demos from Delphi5"
+    + TOCIDataFormat.EnableRequired - if False, disables
+      setting TField.Required into True.
+    + prop: TOCIStmtDataSet.OnExecError, changed interface of
+      TOCIQuery.ExecSQL and TOCIQuery.ExecSQLArray. Now is
+      possible to handle Array DML errors without complete
+      reexecuting of SQL.
+    + prop: TOCIDatabase.ShowWaitForm - if False, then NCOCI8
+      will not show "Wait" form.
+   
+NC OCI8 0.9.0 betta (Aug, 24, 2000)
+    /E: In different places NOE101/DB
+    /E: TOCIStoredProc can't work with public synonyms
+    /E: TOCIStoredProc incorrectly works with double
+        quoted object names
+    /E: Incorrect behavior in case of inserting and
+        TOCIUpdateSQL.LockMode = lmPesimistic and    
+        TOCIUpdateSQL.LockPoint = lpImmediate
+    /E: If insert is not in TOCIDataSet.AllowedOperation,
+        then after inserting and exception is raised there
+        is empty record
+    / NCOCI8 now live on 'Data Access' page. Why we are
+      worst, than DOA ?!
+    / updated EN, DK, FR, RU resources
+    + Database Level Cached Updates
+      props: TOCIDatabase.CachedUpdates, UpdatesPending,
+             UpdatesCount, TOCIDataSet.CachedUpdatesArea
+      methods: TOCIDatabase.ApplyUpdates, CancelUpdates,
+               CommitUpdates
+   
+NC OCI8 0.8.3 betta (Aug, 11, 2000)
+    /E: Now TOCIStoredProc can work with synonyms for
+        packages and for stand alone objects
+    /E: In MIDAS TOCIDataSet does not assign value to
+        parameters
+    /E: TOCIDataSet.Locate on multiple fields raises AV
+        on second and other executions    
+    /E: TOCIDatabase.ServerVersionNo show -1    
+    /E: In MIDAS and ThreadingModel <> tmSingle, TOCIDataSet's
+        from new created remoted datamodules, will be connected
+        to TOCIDatabase from first created. So, i have added global
+        variable FOCIDatabaseNameExpandMode, that handles automatic
+        database name generation for multy threaded environment.
+        Also special templates symbols %T, %O, %P in database name
+        for the same purposes
+    /E: NCOCI8 application will hang up, if you creates TOCIDatabase
+        not in main thread
+    + prop: TOCIDataSet.AllowedOperations
+    + prop: TOCIDataSet.FieldIsChanged
+    + prop: TOCIDatabase.OnError, OnWarning
+    + new demo projects - MIDAS, ProcUpd
+    / parameter list of follow procedures: TOCIDatabase.FindDatabase,
+      DatabaseByName. They have now second parameter. For compatibility
+      with previos implementation it have default value nil.
+    / some optimization
+   
+NC OCI8 0.8.2 betta (Aug, 02, 2000)
+    /E: otBCD support has errors
+    /E: If CachedUpdates = True, then new inserted records
+        disappears from dataset
+    /E: ORA-XXXXX during TOCIQuery open, and this TOCIQuery have
+        macroses and RecordCountMode = cmExactOnOpen
+    /E: If TOCIQuery return 0 rows and Unidirectional = True, then
+        it will return TOCIQuery.FetchParams.RowsetSize empty rows
+    /E: TNCDBTreeView has some errors
+    / Controlled error raised - Database 'Default' unknown. Now
+      it is excluded.
+    + TOCIDataSet.LoadDefaults, LoadConstraints - give ability
+      to load constraints and defaults from Oracle dicitonary into
+      TOCIDataSet.
+   
+NC OCI8 0.8.1 betta (Jul, 02, 2000)
+    /E: if TDBGrid is connected to TOCIDataSet, then
+        dgMultiSelect does not work.
+    /E: truncated otChar data. So, you can't properly assign
+        otChar parameter value.
+    /E: some incompatibilities between Delphi and BCB.
+    /E: incompatible with D3.
+
+NC OCI8 0.8.0 betta (Jun, 19, 2000)
+    /E: if update fails, can't repeat update to this record
+    /E: NOE10/VAR during post with assign long value to string field
+    /E: master-detail is late on one record
+    /E: NOE7/VAR in TOCIUpdateSQL with user defined queries
+    /E: AV after call to refresh and during that refresh server
+        raise error
+    /E: NOE59/DEADCRS when posting updates and filter losted
+        after refresh of TOCIQuery
+    /E: all *.SQL files was missed from demos
+    /E: OCI_SUCCESS_WITH_INFO raise error.
+        Now it sets TOCIDatabase.Warning to not NIL value.
+    + MIDAS 3 support
+    + new comp: TOCINestedDataSet
+      full support of otCursor data type
+      partial support of otNestedDataSet (ftDataSet) data type
+      now call of TOCIStoredProc.Open is possible
+
+NC OCI8 0.7.5 betta (Jun, 04, 2000)
+    /E: TOCIDatabase.AutoCommit changing during design time
+    /E: NOB13 (after editing record changed position randomly)
+    /E: if UpdateRecordTypes differs from default, dataset was sequenced
+    /E: NOB16 (sometimes AV after editing dataset with BLOB's)
+    /E: "Field -1 not found" after posting updates to dataset
+        with calculated fields
+    /E: TOCIDataSet hide update errors    
+    /E: TOCIDataSet.AfterPost event does not fire
+    /E: AV during destroying form with TOCIDataSet and connected TOCIUpdateSQL
+    /E: NOB11 (transaction+locking behavior of TOCIDataSet, TOCIUpdateSQL)
+    /E: if after query preparation parameter type has been changed,
+        then during execute server gets garbage
+    /E: AV updating LONG/LONG RAW fields
+    /E: if TOCIDataSet.CachedUpdate = True and TOCIUpdateSQL.
+        LockMode = lmPessimistic, then each time edit occur record
+        is locked more than once 
+    / enhanced TOCIMacro: + TOCIMacro.DataType, +TOCIMacro.AsDate,
+      + TOCIDataFormat.*Date*Format
+    / better support of russian param, macro names
+    / default size of LONG/LONG RAW params was 4000, now it is 0
+    / if HOME_COUNTER = 0 then NCOCI8 works, as if HOME_COUNTER = 1
+    / under 8.0.3 loads ora803.dll
+
+NC OCI8 0.7.4 betta (May, 26, 2000)
+    /E: after 0.7.3 - ROWID 19 byte
+    /E: fields have wrong FieldNo
+    /E: FR, HR resource was actually missing
+    / optimize updates
+    + D3 support   
+   
+NC OCI8 0.7.3 betta (May, 23, 2000)
+    / now suports VARCHAR(0)
+    /E: loPartialKey does not work
+    /E: hang up on some returning clauses
+    /E: FieldDefs is not updated after DataFormat change
+    /E: in case of UpdateMode = upWhereChanged incorrectly
+        determines WHERE phrase
+    /E: key fields can be incorrectly determined
+    /E: when key fields undefined, refresh jumps to wrong record
+    /E: access by index < 0 to TOCIParams.As*s[index] does not
+        raise exception
+    /E: AV during destroying/unprepare TOCICustomQuery, if before
+        there was editings
+    /E: most errors related to BLOB's
+    /E: sometimes NOE171/UPS with new, inserted records
+    /E: extra Unlock after Cancel
+    / rewrite some NCOCI8 internals, after that can fetch rowsets
+      with BLOB's using RowSetSize > 2
+    / By default InRecDataSize now is 4000, after that
+      select * from tab$ does not hang up  
+    + Complete tests of compatibility with BDE db access components
+    + TOCIParam is Assign compatible with TParam
+    + Support for ftBCD and oracle native NUMBERS with precision up to 38
+    + Support for 3d party component librarys:
+        - Korzh Simple Query component set;
+        - Sergey Orlik Open QBuilder;
+        - InfoPower component library;
+        - ASTA-Internet Client Server.
+    + FR resources
+
+NC OCI8 0.7.2 betta (Apr, 23, 2000)
+    /E: insert with all unmodified fields generates wrong SQL
+    /E: insert/append sends NULL values to server (after 0.7.1)
+    /E: last record is not visible in dataset (after 0.7.1)
+    / NOE12/VAR now excluded. odUnknown now is like odIn
+    / optimization of havy used code
+    + HR resources
+   
+NC OCI8 0.7.1 betta (Apr, 19, 2000)
+    /E: COM initialization was skipped and TNCSQLMonitorClient does not work
+    /E: After ApplyUpdates, RevertRecord cursor jumps to random position
+    /E: OnUpdateError, OnUpdateRecord shows invalid UpdateKind
+    /E: If TOCIQuery is used as LookupDataSet, then error raised during form load
+    /E: If current record is out of filter condition, then after resync([])
+        it remains in dataset
+    /E: TOCIDataSet.Lookup allways returns NULL
+    /E: Master-detail raise error if master is inactive
+    /E: If TOCIDataSet.DataFormat.EnableInteger = True, then
+        NUMBER(10) -> ftInteger but NUMBER -> ftSmallInt.
+    /E: Expression parser works with float constants only if DecimalSeparator = '.'
+    /E: "Field readonly" during dataset refresh.
+    / Now TOCICustomQuery is more compatible with TQuery
+    / optimization of havy used code. Speed up some operations up to 5 times.
+    + TOCIDatabase.ApplyUpdates
+    + Standard Delphi demos from catalog <Delphi5>\Demos\DB ported to NCOCI8.
+      See "NCOCI8\Demos\From Delphi5".
+   
+NC OCI8 0.7.0 betta (Apr, 10, 2000)
+    + DK resources
+    + TOCIDataSet.Constraints, TField.*Constraint, TField.DefaultExpression
+    + comp: TOCISequence, function NEXTVAL/CURRVAL('<seq name>') in OCI expr. lang.
+    + prop: TOCIFilter.UseInApplyUpdates
+    + prop: TOCIDataSet.InApplyUpdates
+    + met: TOCIDataSet.RefreshRecord
+    + prop: TOCIDataSet.KeyFields
+    + prop: TOCIDatabase.MaxCursors, TOCIDataSet.UsageCount,
+      now TOCIDatabase take care about maximum number of opened cursors
+    / Make CU more stable in case of programmer errors
+    / Now TOCIDatabase can store or not in registry passwords
+      (On -> suStorePassword in TOCIDatabase.ConnectStringUsages)
+    /E: in CU&E - NOE170/UPS, NOE55/DEADCRS
+    /E: In edit state assign the same value to any field of
+        TOCIDataSet, do post -> NOE170/UPS
+    /E: if in CU&E server raise a error, then record may be doubled
+    /E: in ApplyUpdates only filtered records are posted to server
+    /E: in CU TOCIDataSet.Delete can raise AV    
+    /E: in CU TOCIDataSet.Delete for deleted record decrement record count    
+    /E: in CU TOCIDataSet.CommitUpdates & CancelUpdates can give invalid
+        data in cursor
+    /E: TOCIDatabase.GetServicesList now handles correctly names with numbers
+    /E: AV in ORA*.DLL during execute SQL with RETURNING clause
+    /E: NOE122/BLOB when opening empty dataset with BLOB/CLOB fields
+    /E: TOCIUpdateSQL internal querys can have duplicated params
+    /E: Expressions like 10 * 20 + 30 raise 'invalid variant conversion'
+        during TOCIExpressionParser.BuildExpression (parse) 
+    /E: Errors related to detecting valid ORACLE_HOME. Make diagnostic better.
+    /E: AV related to picewise fetch. It was related to $W.
+
+NC OCI8 0.6.1 betta (Mar, 12, 2000)
+    + BCB4 files
+    + RU, UA, EN resources
+    / some improvements in cached updates and editing
+
+NC OCI8 0.6.0 betta (Mar, 05, 2000)
+    + Support of Live Query's: TOCIDataSet methods:
+      Edit/Insert/Post/Cancel now works
+    + Support of Cached Updates: TOCIDataSet props &
+      methods & events: CachedUpdates, UpdatesPending,
+      UpdateRecordTypes, UpdateObject, OnUpdateRecord,
+      OnUpdateError, ApplyUpdates, CancelUpdates, CommitUpdates,
+      RevertRecord
+    + New component TOCIUpdateSQL
+    + Support of quoted param names
+    + prop: TOCIDataSet.OFieldDefs
+    / Optimization - reduce number of OCI8 calls
+    /E: when multiple ORACLE_HOME's we can find invalid NET8 home
+    /E: if path to Oracle bin, that is in PATH variable, have '\'
+        at end, then NCOCI8 can't recognize it as valid
+    /E: ExecSQL shows in SQLMonitor output data with 0 recs
+    /E: ROWID data shows in SQLMonitor as 'ROWID'
+    /E: with 8.1.5 client and NonBlockingMode = True call off
+        OCIDescribeAny shows error OCI_STILL_EXECUTING    
+    /E: OCIReset not found in Oracle client dll v 8.0.5.0.0
+    /E: "Client ID is not unique" when using TNCSQLMonitorClient
+   
+NC OCI8 0.5.2 betta (Feb, 20, 2000)
+    /E: describe shows in SQLMonitor OCIStmtFetch
+    /E: OCIReset not found in Oracle client dll v 8.0.5.0.0
+    / Now for use distributed (global) transactions, You must
+      include dmDistributed in TOCIDatabase.InitModes. In this
+      mode You can't use PL/SQL functions in SQL, if this
+      functions read/write package state and some other things
+    + prop: TNCSQLMonitorClient.TraceFormat
+    + support of multiple ORACLE_HOME's
+
+NC OCI8 0.5.1 betta (Feb, 14, 2000)
+    /E: LONG fields with size > InrecDataSize have truncated values
+    /E: string parameters with size > InrecDataSize can give AV
+    /E: memory loss on close dataset when it have fields with
+        size > InrecDataSize
+    /E: AV or program/IDE termination if SQLMonitor is running
+        and dataset have fields with size > InrecDataSize
+    /E: "Previos operation must be completed" on TOCIDatabase.Connect
+        using 8.0.5 or higher client
+    /E: some errors related to non blocking mode
+    /E: loss of TOCIParam.ParamType value, when assign one
+        param to other
+    /E: "change password" does not work
+    /E: if NonBlockingMode = True and SilentMode = True
+        NCOCI8 show "break query" dialog
+    /E: store TOCIDatabase TM related props with connected TM
+    /E: TOCIQuery.Params defaults to OParamType = odUnknown
+    /E: TOCIStoredProc.Params not use DataFormat, FetchParams
+    / some wight loss :-))
+    + props: TOCIDatabase.TransactionManagersSerialize
+    + events: TOCIDatabase.OnYield, BeforeTMConnect, AfterTMConnect
+    + support of dicrete transactions
+    + WIP: support of multiple ORACLE_HOME's
+    + WIP: help file
+
+NC OCI8 0.5.0 betta (Feb, 9, 2000)
+    /E: AV when KeepConnections = False and close/open
+        TOCIDataSet
+    /E: date conversion Delphi <-> Oracle was incorrect
+    /E: LIKE in filter with args = NULL, raise exception
+    /E: ORA-28002 now lids only to message, not exception
+    /E: ORA-32255 when select with LONG/LONG RAW
+    /E: can't assign to LONG/LONG RAW
+    /E: some checks are added to TOCIVariable
+    /E: when TOCIDataSet.Unidirectional = True fields
+        shows data from first fetch only
+    /E: if {$O-} then pieced fetch raise AV in OCIStmtExecute
+    /E: los TOCIStoredProc.Params values after unprepare
+    + Validation of fetch parameters 
+    + Near-natural language filter language constructions
+    + Partial support in filter language of func's TO_CHAR,
+      TO_DATE, TO_NUMBER    
+    + New component TNCSQLMonitorClient and added support
+      for it in NCOCI8 classes
+    + New component TOCITransactionManager and added
+      transaction-aware support to NCOCI8
+    + New companion components, units and expert:
+      C: TNCDBTreeView, TNCCompNamer, TNCDblListBox, TNCMemoDialog,
+      U: NCUtil, NCUIUtil, NCDTUtil
+      X: component naming expert
+
+NC OCI8 0.4.3 betta (Dec, 13, 1999)
+    + Propertie categories for D5
+    /E: Filter auto type conversion does not work correctly
+        for string values
+    /E: Missing NEXT_DAY filter function
+    /E: TOCIParams.Assign(Strings) lost elements
+    /E: some other error's corrected
+    / Lookup/Locate minor optimization (for small datasets)
+    / Package renamed NCOCI8.DPK -> NCOCI8x.DPK,
+      where x - Delphi version (4,5,...)
+
+NC OCI8 0.4.2 betta (Nov, 11, 1999)
+    //E: TOCIQuery.Unidirectional = True does not work correctly
+    /E: TOCIQuery.Unidirectional and empty rowset
+    /E: last record lost
+    /E: AV when TOCIQuery try open -> Error -> try open
+    + Filter's can be on calculated fields
+   
+NC OCI8 0.4.1 betta (Nov, 09, 1999)
+    /E: Invalid {$IFDEF OCI_BCB} in some files.
+    /E: Filter does not correctly work with ftFixedChar.
+    /E: Filter does not correctly work with BLOB fields.
+    /E: Filter does not work with ftOraBLOB, ftOraCLOB as BLOB's.
+    /E: If when executing a filter was found error, then
+        this error will raised for each record. Now only
+        first time.
+    + Filter function ROWNUM
+    / Filter functions now have 2 arguments
+    /E: AV when TOCIDataSet includes ROWID field
+    /E: Work with BOOLEAN does not work correctly
+    /E: TOCIQuery.Unidirectional = True does not work correctly
+    /E: Exact fetch does not work correctly
+    /E: On rowset end TOCIQuery hang up, if query returns
+        BLOB fields and LONG fields
+    /E: TNCOciLoginFrm some errors
+    + TDBNavigator to NC O8 Console child window
+    + TOCIDataFormat props:
+        * StrsTrim
+        * StrsEmpty2Null
+    + TOCIDataSet prop:
+        * RecordCountMode
+        * BeforeRecordCount
+        * AfterRecordCount
+    / TOCIQuery.FetchAll optimized
+    / Renamed archive from NCOCI8D4.ZIP -> NCOCI8.ZIP
+    / some minor improvements & optimization
+
+NC OCI8 0.4 betta (Nov, 06, 1999)
+    /E: When assign in Design Time '<schema>.<func/proc>' to
+        TOCIStoredProc.StoredProcName raised error
+        ORA-4043 Object <schema> not found.
+    /E: AV in very strange place :-))
+    /E: in INSTR, SUBSTR filter functions: don't work when 
+        argument "position in str" <= 0.
+    /E: Auto type conversion in filter expression don't work
+    / TOCIFetchParams, TOCIDataFormat now inherits values
+      from parent (TOCIDataSet from TOCIDatabase)
+    / Compiler directives gets from NCOciDef.inc unit
+    / Under D5 TOCIDatabase have parent class TCustomConnection
+    / Type of TOCIDatabase.OnLogin event has changed for
+      compatibility with D5
+    + proc OCIAddFunc for UDF in filter
+    + TOCIDatabase props:
+        * ConnectStringUsage
+        * KeepConnection
+        * SilentMode
+    + TOCIDatabase.Break proc
+    + TOCICustomQuery.Refresh proc
+    + ready to work in multythreaded environment, in NT services
+    + now NCOCI8 is D4, BCB4, D5 ready
+    + new demo projects: Services, Threads
+    + new component TNCTimer - thread driven timer
+
+NC OCI8 0.3 betta (Oct, 31, 1999)
+    /E: AV when TOCICustomQuery is open and set Prepared to False
+    /E: Work with macros corrected
+    /E: Work with ftDateTime fields rewrited correctly:
+        - Assign date to TOCIParam.Value raise 'NOE8/VAR'
+        - Garbage in TDateTimeField value
+    /E: NC O8 Console project corrected
+    /E: Exception 'NOE11/VAR' when exists BLOB params and
+        nothing erronios ...
+    /E: Property inspector for TOCIDataSet.DatabaseName told,
+        that database 'Default' does not exists
+    /E: TOCILOBStream.CheckWrite declaration incorrect
+    /E: TOCIStoredProc.Prepare for PL/SQL function, that returns
+        VC2 raise 'NOE5/VAR'
+    /E: AV when open anonymous block or exec select
+    /E: lookup & locate works only with one field
+    + Filters - support of full set of Oracle's scalar functions
+    + TOCICustomQuery.Unidirectional
+    + TOCIParams/TOCICustomQuery .ParamBindMode
+    + TOCIParam.AssignIncludeBlobs
+    + TOCIDatabase.DefaultDataFormat, TOCIDataSet.DataFormat
+    + TOCIDatabase.Before/After + StTrans/Commit/Rollback
+    + TOCICustomQuery.Before/After + Prepare/UnPrepare
+    + new Demo projects: Filters, PLSQLTables
+    / some minor improvements & optimization
+
+NC OCI8 0.2.1 betta (Oct, 27, 1999)
+    /E: AV when open/prepare TOCIDataSet with unexists database
+    /E: AV when close/open TOCIDataSet with Filtered = True
+    /E: Assign to TOCIMacro.Value does not unprepare TOCIQuery
+    + other places in code where insert calls to StartWait/EndWait
+    / NC O8 Console now full functional MDI application
+    + Component glyphs
+    / some minor improvements
+
+NC OCI8 0.2 betta (Oct, 24, 1999)
+    / rewrite TOCIMacros code - completed
+        - prop MacrosText
+        + prop Macros
+    + client filters:
+        + NCOciFilter.pas, NCOciUtil.pas
+        + TOCIDataSet: props: Filter*, procs: Find*, Locate, Lookup
+    + TOCIDatabase: StartWait, EndWait, WaitCursor
+    / some minor improvements
+
+NC OCI8 0.1.1 betta (Oct, 19, 1999)
+    / corrected O8Console project file
+    / corrected TOCIDM data module
+    / optimization of havy used code
+
+NC OCI8 0.1 betta (Oct, 17, 1999)
+    Initial betta release available on Internet.
+
+NC OCI8 first line of code (Aug, 15, 1999)

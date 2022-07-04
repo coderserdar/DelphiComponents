@@ -1,0 +1,227 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+<meta name="GENERATOR" content="PasDoc 0.11.0">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<title>SqlitePass Database Objects: SqlitePassVisualTools: Class TSPVTDBItem</title>
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body bgcolor="#ffffff" text="#000000" link="#0000ff" vlink="#800080" alink="#FF0000">
+<a name="TSPVTDBItem"></a><h1 class="cio">Class TSPVTDBItem</h1>
+<table class="sections wide_list">
+<tr>
+<td><a class="section"  href="#%40Description">Description</a></td><td><a class="section"  href="#%40Hierarchy">Hierarchy</a></td><td>Fields</td><td><a class="section"  href="#%40Methods">Methods</a></td><td><a class="section"  href="#%40Properties">Properties</a></td></tr></table>
+<a name="%40Description"></a><h2 class="unit">Unit</h2>
+<p class="unitlink">
+<a   href="SqlitePassVisualTools.html">SqlitePassVisualTools</a></p>
+<h2 class="declaration">Declaration</h2>
+<p class="declaration">
+<code>type TSPVTDBItem = class(TObject)</code></p>
+<h2 class="description">Description</h2>
+<a name="%40Hierarchy"></a><h2 class="hierarchy">Hierarchy</h2>
+<ul class="hierarchy"><li class="ancestor">TObject</li>
+<li class="thisitem">TSPVTDBItem</li></ul><h2 class="overview">Overview</h2>
+<a name="%40Methods"></a><h3 class="summary">Methods</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>constructor <b><a   href="SqlitePassVisualTools.TSPVTDBItem.html#Create">Create</a></b>(_Caption: String; _ItemType:<a   href="SqlitePassVisualTools.html#TSPVTDBItemType">TSPVTDBItemType</a>; _Font: TFont; _Color: TColor; _ImageIndexSelected: Integer; _ImageIndex: Integer; _Attached: Boolean; _Enabled: Boolean; _Visible: Boolean);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>destructor <b><a   href="SqlitePassVisualTools.TSPVTDBItem.html#Destroy">Destroy</a></b>; override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a   href="SqlitePassVisualTools.TSPVTDBItem.html#AddChildItem">AddChildItem</a></b>(_Caption: String; _ItemType: <a   href="SqlitePassVisualTools.html#TSPVTDBItemType">TSPVTDBItemType</a>; _Font: TFont; _Color: TColor; _ImageIndexSelected: Integer; _ImageIndex: Integer; _Attached: Boolean; _Enabled: Boolean; _Visible: Boolean): <a   href="SqlitePassVisualTools.TSPVTDBItem.html">TSPVTDBItem</a>;</code></td>
+</tr>
+</table>
+<a name="%40Properties"></a><h3 class="summary">Properties</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassVisualTools.TSPVTDBItem.html#Attached">Attached</a></b>: Boolean read FAttached;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassVisualTools.TSPVTDBItem.html#Caption">Caption</a></b>: String read FCaption write FCaption;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassVisualTools.TSPVTDBItem.html#Children">Children</a></b>: <a   href="SqlitePassVisualTools.TSPVTDBItemList.html">TSPVTDBItemList</a> read FChildren;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassVisualTools.TSPVTDBItem.html#Color">Color</a></b>: TColor read FColor write FColor;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassVisualTools.TSPVTDBItem.html#Enabled">Enabled</a></b>: Boolean read FEnabled write FEnabled;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassVisualTools.TSPVTDBItem.html#Expanded">Expanded</a></b>: Boolean read FExpanded write FExpanded;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassVisualTools.TSPVTDBItem.html#Font">Font</a></b>: TFont read FFont write FFont;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassVisualTools.TSPVTDBItem.html#HasChildren">HasChildren</a></b>: Boolean read GetFHasCHildren;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassVisualTools.TSPVTDBItem.html#ImageIndex">ImageIndex</a></b>: Integer read FImageIndex write FImageIndex;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassVisualTools.TSPVTDBItem.html#ImageIndexSelected">ImageIndexSelected</a></b>: Integer read FImageIndexSelected write FImageIndexSelected;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassVisualTools.TSPVTDBItem.html#ItemType">ItemType</a></b>: <a   href="SqlitePassVisualTools.html#TSPVTDBItemType">TSPVTDBItemType</a> read FItemType write FItemType;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassVisualTools.TSPVTDBItem.html#Parent">Parent</a></b>: <a   href="SqlitePassVisualTools.TSPVTDBItem.html">TSPVTDBItem</a> read FParent;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassVisualTools.TSPVTDBItem.html#Visible">Visible</a></b>: Boolean read FVisible write FVisible;</code></td>
+</tr>
+</table>
+<h2 class="description">Description</h2>
+<h3 class="detail">Methods</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Create"></a><code>constructor <b>Create</b>(_Caption: String; _ItemType:<a   href="SqlitePassVisualTools.html#TSPVTDBItemType">TSPVTDBItemType</a>; _Font: TFont; _Color: TColor; _ImageIndexSelected: Integer; _ImageIndex: Integer; _Attached: Boolean; _Enabled: Boolean; _Visible: Boolean);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Destroy"></a><code>destructor <b>Destroy</b>; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="AddChildItem"></a><code>function <b>AddChildItem</b>(_Caption: String; _ItemType: <a   href="SqlitePassVisualTools.html#TSPVTDBItemType">TSPVTDBItemType</a>; _Font: TFont; _Color: TColor; _ImageIndexSelected: Integer; _ImageIndex: Integer; _Attached: Boolean; _Enabled: Boolean; _Visible: Boolean): <a   href="SqlitePassVisualTools.TSPVTDBItem.html">TSPVTDBItem</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<h3 class="detail">Properties</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Attached"></a><code>property <b>Attached</b>: Boolean read FAttached;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Caption"></a><code>property <b>Caption</b>: String read FCaption write FCaption;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Children"></a><code>property <b>Children</b>: <a   href="SqlitePassVisualTools.TSPVTDBItemList.html">TSPVTDBItemList</a> read FChildren;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Color"></a><code>property <b>Color</b>: TColor read FColor write FColor;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Enabled"></a><code>property <b>Enabled</b>: Boolean read FEnabled write FEnabled;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Expanded"></a><code>property <b>Expanded</b>: Boolean read FExpanded write FExpanded;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Font"></a><code>property <b>Font</b>: TFont read FFont write FFont;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="HasChildren"></a><code>property <b>HasChildren</b>: Boolean read GetFHasCHildren;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="ImageIndex"></a><code>property <b>ImageIndex</b>: Integer read FImageIndex write FImageIndex;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="ImageIndexSelected"></a><code>property <b>ImageIndexSelected</b>: Integer read FImageIndexSelected write FImageIndexSelected;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="ItemType"></a><code>property <b>ItemType</b>: <a   href="SqlitePassVisualTools.html#TSPVTDBItemType">TSPVTDBItemType</a> read FItemType write FItemType;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Parent"></a><code>property <b>Parent</b>: <a   href="SqlitePassVisualTools.TSPVTDBItem.html">TSPVTDBItem</a> read FParent;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Visible"></a><code>property <b>Visible</b>: Boolean read FVisible write FVisible;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<hr noshade size="1"><span class="appinfo"><em>Generated by <a  target="_parent" href="http://pasdoc.sourceforge.net/">PasDoc 0.11.0</a> on 2010-05-16 23:39:44</em>
+</span>
+</body></html>

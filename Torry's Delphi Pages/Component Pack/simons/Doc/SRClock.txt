@@ -1,0 +1,223 @@
+TSRClock (C)opyright 2005 Version 3.00
+Autor : Simon Reinhardt
+eMail : reinhardt@picsoft.de
+Internet : http://www.picsoft.de
+
+  Die SRClock-Komponente stellt eine analoge oder digitale Uhr in verschiedenen
+  Designs dar. Die Uhr kann auch als Stopuhr verwendet werden und verfügt über
+  eine Alarmfunktion.
+
+  Diese Komponente ist Public Domain, das Urheberrecht liegt aber beim Autor.
+
+
+Dateiumfang:
+------------
+
+SRClock.txt 	- Diese Datei
+SRClock.pas	- Quelltext der Komponente
+SRClock.dcr,
+SRClock.res	- Resourcendateien der Komponente
+SRDefine.inc	- Inculdedatei mit Compilerdirektiven 
+SRUtils.pas	- verschiedende Prozeduren und Funktionen für die Komponente
+                  (Eine Beschreibung findet man im Interface der Unit)  
+rr.inc		- Inculdedateie für die rrColors-Unit
+rrColors.pas	- Funktionen zur RGB-HSL-Umrechnung
+	
+Ordner	Demo		- TSRClock-Demo-Projekt für Delphi 2 bis 5
+	ClockMain.dfm	- Formulardatei der MainForm
+	ClockMain.pas	- Quelltext der MainForm-Unit
+	ClockDemo.cfg	- Compileroptionen des Demo-Projekts
+	ClockDemo.dpr	- Quelltext des Demo-Projekts
+	ClockDemo.res	- Resourcendatei des Demo-Projekts
+
+
+Installation:
+-------------
+
+In Delphi 2:
+------------
+1. Alle Dateien in das Delphi-Komponenten-Verzeichnis entpacken.
+2. Menü Komponente :  installieren
+3. Schaltfläche Hinzufügen / Durchsuchen
+4. Datei SRClock.pas im Delphi-Komponenten-Verzeichnis suchen und mit
+   OK bestätigen.
+5. Die Komponente erscheint in der Komponenten-Gruppe "Simon"
+
+Ab Delphi 3:
+------------
+1. Alle Dateien in das Delphi-Komponenten-Verzeichnis entpacken.
+2. Menü Komponente :  Komponente installieren
+3. Schaltfläche Durchsuchen (hinter dem Eingabefeld für den Unit-Namen)
+4. Datei SRClock.pas im Delphi-Komponenten-Verzeichnis suchen und mit
+   OK bestätigen.
+5. Die Rückfrage nach dem Neukompilieren des Packages bestätigen.
+6. Die Komponente erscheint in der Komponenten-Gruppe "Simon"
+   (Evtl. muß eine bereits installierte, ältere Version der Komponente
+    zuvor entfernt werden)
+
+
+
+Eigenschaften:
+--------------
+
+I. Published:
+
+AlarmActive [boolean]
+  Wenn "AlarmActive"=true wird das Ereignis "OnAlarm" ausgelöst, sobald das in 
+  "AlarmTime" festgelegte Datum/Uhrzeit erreicht ist. 
+
+AlarmTime [TDateTime]
+  Datum und Uhrzeit, wann das Ereignis "OnAlarm" ausgelöst werden soll.
+
+AutoUpdate [boolean]
+  Wenn  "AutoUpdate"=true, wird die angezeigte Uhrzeit periodisch aus der 
+  Systemzeit ausgelesen. Falls bereits ein anderer Timer im Projekt benutzt wird, 
+  kann man diesen zur Aktualisierung der Zeitanzeige nutzen und diese Eigenschaft 
+  auf false setzen. Der interne Timer wird dann deaktiviert.
+
+BevelStyle [TClockBevel]
+  Stil des Rahmens um die Anzeige:
+   - cbLowered: Die Anzeige hat einen abgeschrägten abgesenkten Rahmen.
+   - cbNone: Die Anzeige hat keinen Rahmen.
+   - cbRaised: Die Anzeige hat einen abgeschrägten hervorgehobenen Rahmen.
+   - cbSingle: Die Anzeige hat eine einfache Linie als Rahmen.
+
+BevelWidth [TBevelWidth]
+  Die Breite des Rahmens um die Uhr in Pixeln (1..10).
+
+BorderWidth [TBorderWidth]
+  Die Breite eines Randes um die Uhr in Pixeln (0..20). Der Rand hat die in 
+  Colors.Border festgelegte Farbe.
+
+Colors [TClockColors]
+  Background - Die Hintergrundfarbe des Ziffernblattes.
+  Border - Die Farbe des Randes um die Uhr
+  Date - Die Farbe der Datumsanzeige
+  Hands - Die Farbe der Stunden- und Minutenzeiger
+  Numbers - Die Farbe der Ziffern und des Sekundenzeigers
+
+DigitLineWidth [byte]
+  Die Dicke der Anzeigesegmente für Style=csDigital in Pixeln (1..255).
+
+Enabled [boolean]
+  Falls Enabled=false, wird auch der Timer für die AutoUpdate-Funktion deaktiviert.
+
+Kind [TClockKind]
+  - ckRealTime: Die Uhr zeigt die Systemzeit an.
+  - ckStopWatch: Die Uhr funktioniert als Stopuhr. Zur Steuerung der Stopuhrfunktionen 
+      dienen dann die Methoden Reset, Start und Stop.
+
+LEDContrast [TContrast]
+   Kontrast zwischen leuchtender und abgeschalteter LED (0..9)
+     - 0: Kein Helligkeitsunterschied 
+     ...
+     - 9: Maximaler Helligkeitsunterschied
+
+MarkingStyle [TMarkingStyle]
+  Gibt die Art der Beschriftung für den Stil csClassic vor:
+    - msNone: Es werden keine Zahlen angezeigt
+    - msQuarters: Es werden nur die Zahlen der Viertelstunden angezeigt
+    - msAll: Es werden alle 12 Zahlen angezeigt.
+
+Options [TClockptions]
+  Legt verschiedene Anzeigeoptionen fest:
+  - coDrawDigitShapes
+     Um die Anzeigesegmente wird eine Linie gezeichnet.
+  - coFadingColor
+     Die Farbe des Stunden-/Minutenzeigers ändert sich abhängig von der Minutenzahl. 
+     Je näher die Minutenzahl an die volle Stunde (also >59 Minuten) rückt, desto 
+     heller wird die Zeigerfarbe. Bei der vollen Stunde (also 0 Minuten) entspricht 
+     die Zeigerfarbe der in der Eigenschaft "Colors.Hands" angegebenen Farbe. Bei 
+     1 Minute wird diese Farbe um 60% abgedunkelt. Diese Funktion ist nur aktiv, 
+     wenn ClockStyle=csMovingPoints oder ClockStyle=csPieSlice.
+  - coShowAlarm
+     Zeigt ein Alarmsymbol, wenn "AlarmActive"=true.
+  - coShowDate
+     Das aktuelle Systemdatum wird angezeigt.
+  - coShowKind
+     Zeigt ein Stoppuhrsymbol, wenn "Kind"=ckStopWatch.
+  - coShowSeconds
+     Ein Sekundenzeiger wird angezeigt.
+  - coShowTicks
+     Stundenmarken werden am Uhrenrand angezeigt.
+
+Separator [TSeparator]
+  Das Trennzeichen zwischen Stunden/Minuten und Minuten/Sekunden im Stil csDigital:
+    - dsApostrophe: Ein Hochkomma
+    - dsComma: Ein Komma
+    - dsDoublePoint: Ein Doppelpunkt
+    - dsHyphen: Ein Trennstrich (Minus)
+    - dsNone: Kein Trennzeichen
+    - dsPoint: Ein Punkt
+    - dsSemicolon: Ein Semikolon
+
+Style [TClockStyle]
+  Diese Eigenschaft bestimmt das Aussehen der Uhr:
+    - csClassic: Eine "klassische" analoge Uhr mit drei Zeigern
+    - csDigital: Eine Digitaluhr mit Sieben-Segment-LED-Anzeige
+    - csMovingPoints: Stunden und Minuten werden von einem Symbol angezeigt, 
+       dessen Winkel die Stunden und dessen Abstand zum Uhrenmittelpunkt die Minuten 
+       repräsentieren. Die Sekunden werden durch einen wandernden Punkt symbolisiert.
+    - csPieslice: Stunden und Minuten werden von einem "Kuchenstück" angezeigt, 
+       dessen Winkel die Stunden und dessen Breite die Minuten repräsentieren. Die 
+       Sekunden werden durch einen wandernden Punkt symbolisiert.
+
+UpdateInterval [integer]
+  Bestimmt das Intervall, nach dem die Uhrzeit durch den internen Timer aktualisiert wird, 
+  wenn AutoUpdate=true (>15).
+
+
+II. Public:
+-----------
+
+Hour [word]
+  Die aktuelle Stunde der Eigenschaft "Time" (nur lesen).
+
+Minute [word]
+  Die aktuelle Minute der Eigenschaft "Time" (nur lesen).
+
+Second [word] 
+  Die aktuelle Sekunde der Eigenschaft "Time" (nur lesen).
+
+Summertime [boolean]
+  Gibt an, ob die angezeigte Zeit Sommerzeit darstellt (nur lesen).
+
+Time [TTime]
+  Die angezeigte Uhrzeit. Die Zeit wird als ein 24tel eines Tages angegeben. 
+  Um die Uhr z.B. auf zehn Uhr zu stellen, kann man angeben: Time:=10/24
+  Um die Uhr z.B. auf zehn Uhr dreißig zu stellen, kann man angeben: Time:=10.5/24
+
+
+Ereignisse:
+-----------
+
+OnAlarm [TNotifyEvent]
+  wird ausgelöst, wenn "AlarmActive"=true und die Uhrzeit dem in "AlarmTime" festglegten
+  Datum/Uhrzeiot entspricht.
+
+OnMouseEnter [TNotifyEvent]
+  wird ausgelöst, wenn die Maus über das Control bewegt wird.
+
+OnMouseExit [TNotifyEvent]
+  wird ausgelöst, wenn die Maus das Control verlässt.
+
+OnTimer  [TNotifyEvent]
+  wird bei jedem Timer-Ereignis des SRClock-Timers ausgelöst (wie bei TTimer).
+
+
+Methoden:
+---------
+
+1. Reset
+     Die Zeit wird im Modus ckStopWatch auf 0 gesetzt.
+
+2. Start
+     Im Modus ckStopWatch wir die Zeitzählung gestartet.
+
+3. Stop
+     Im Modus ckStopWatch wir die Zeitzählung angehalten.
+
+
+Einige Eigenschaften und Ereignisse sind in Delphiversionen<5 evtl. nicht verfügbar.
+Die grundsätzliche Funktion der Komponente kann man sich mit dem beigefügten Demo-
+Programm im Ordner "Demo" ansehen.

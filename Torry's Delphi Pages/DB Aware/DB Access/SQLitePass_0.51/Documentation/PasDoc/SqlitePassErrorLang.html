@@ -1,0 +1,773 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+<meta name="GENERATOR" content="PasDoc 0.11.0">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<title>SqlitePass Database Objects: SqlitePassErrorLang</title>
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body bgcolor="#ffffff" text="#000000" link="#0000ff" vlink="#800080" alink="#FF0000">
+<h1 class="unit">Unit SqlitePassErrorLang</h1>
+<table class="sections wide_list">
+<tr>
+<td><a class="section"  href="#%40Description">Description</a></td><td>uses</td><td>Classes, Interfaces, Objects and Records</td><td>Functions and Procedures</td><td>Types</td><td><a class="section"  href="#%40Constants">Constants</a></td><td>Variables</td></tr></table>
+<a name="%40Description"></a><h2 class="description">Description</h2>
+<p>
+The unit <code>SqlitePassErrorLang</code> defines all the generic error messages for the library. You can easily set your own translation by copying or overwriting this file.
+
+<p>This program is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License as published by the Free Software Foundation; either version 2.1 of the License, or (at your option) any later version.
+
+<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more details.
+
+<p>You should have received a copy of the GNU Lesser General Public License along with this program; if not, write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+
+<p>&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;
+
+<p>Messages localisation unit Author : Luc DAVID Email: luckylazarus@free.fr 2006-2010
+
+<p>Major changes are indicated in the \Documentation\changes.pdf file Last update : 10.03.2010
+
+<p>&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;</p>
+<a name="%40Uses"></a><h2 class="overview">Overview</h2>
+<a name="%40Constants"></a><h3 class="summary">Constants</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#CRLF">CRLF</a></b> = #13#10;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#Msg1000">Msg1000</a></b> = 'Error';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#Msg1001">Msg1001</a></b> = 'Unknown';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#Msg1002">Msg1002</a></b> = 'No Error';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#Msg1005">Msg1005</a></b> = 'TSqlitePassDatabase.Open : Database property is not defined.';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#Msg1007">Msg1007</a></b> = 'TSqlitePassDatabase.Open : Unable to open the database.';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#Msg1010">Msg1010</a></b> = '%s : Cannot set the %s property while Database is connected.';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#Msg1038">Msg1038</a></b> = 'Cannot find Database :';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#Msg1040">Msg1040</a></b> = 'TSqlitePassDataset.GetRecord, No record found, dataset is empty.';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#Msg1041">Msg1041</a></b> = 'TSqlitePassDatabase.AttachDatabase : Database type mismatch.';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#Msg1042">Msg1042</a></b> = 'TSqlitePassDatabase.SetFDatabaseType : Do you want to replace your DatatypeOptions by the default ones for this database type ? ';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#Msg1044">Msg1044</a></b> =   'TSqlitePassDatabase.DataTypeOptions.LoadFromDatabase : Error while loading data from database. '
+          + 'The &quot;SqlitePass__DbSettings&quot; table is corrupted or was created using an old version of this component. '
+          + ' Do you want to remove the &quot;SqlitePass__DbSettings&quot; from your database ? (A new table will be created on database closing).';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#Msg1046">Msg1046</a></b> = 'TSqlitePassDatabase.DeleteDatabase : Unable to delete the file %s .';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#Msg1100">Msg1100</a></b> = 'Select the Ellipsis button';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#Msg1800">Msg1800</a></b> = 'TSqlitePassDatabasesAttached.DatabaseByName : Database %s not found.';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#Msg2002">Msg2002</a></b> = 'TSqlitePassDataset.ExecSQL : Cannot execute SQL query while Database is not Assigned or Connected.';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#Msg2003">Msg2003</a></b> = 'TSqlitePassDataset.ExecuteSQL : Cannot execute SQL query while Database is not Assigned or Connected.';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#Msg2011">Msg2011</a></b> = 'TSqlitePassDataset.SetFDatabase : Cannot set Database while Dataset is active.';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#Msg2012">Msg2012</a></b> = 'TSqlitePassDataset.SetFDatasetName : Cannot set DatasetName while Dataset is active.';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#Msg2015">Msg2015</a></b> = 'TSqlitePassDataset.SetFSQL : Cannot set SQL while a Table, Query or View is selected.';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#Msg2016">Msg2016</a></b> = 'TSqlitePassDataset.SetFSQL : Cannot set SQL while Dataset is selected.';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#Msg2018">Msg2018</a></b> = 'TSqlitePassDataset.Open : Missing Database Property';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#Msg2019">Msg2019</a></b> = 'TSqlitePassDataset.Open : Missing DatasetName, or SQL is empty.';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#Msg2020">Msg2020</a></b> = 'TSqlitePassDataset.Open : Unable to open Dataset because the Database is not connected';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#Msg2021">Msg2021</a></b> = 'TSqlitePassDataset.Open : Unable to open Dataset because the Database is not connected. Check the components create order '
+          + 'of your form. The database must be created before the datasets';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#Msg2022">Msg2022</a></b> = 'TSqlitePassDataset.Post : Error while posting record. The PrimaryKey value is already present in the dataset or an internal constraint prevents data change...';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#Msg2024">Msg2024</a></b> = 'TSqlitePassDataset.Delete : Error while deleting record.';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#Msg2025">Msg2025</a></b> = 'TSqlitePassDataset.InitFieldDefs : Columns count from parsed SQL statement doesn''t match SQLite engine columns count.';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#Msg2026">Msg2026</a></b> = 'TSqlitePassDataset.SetMasterDataSource : Datasource circular reference not supported';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#Msg2027">Msg2027</a></b> = 'TSqlitePassDataset.InitFieldDefs : Cannot retrieve FieldDefs because dataset is closed.';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#Msg2028">Msg2028</a></b> = 'TSqlitePassDataset.SetFDatasetName : This will clear all defined fields. Do ou want to continue ?';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#Msg2029">Msg2029</a></b> = 'TSqlitePassDataset.InternalOpen : Cannot Open Dataset.';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#Msg2030">Msg2030</a></b> = 'TSqlitePassDataset.SetFLookUpCache : Cannot set LookUpCache while Dataset is active.';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#Msg2031">Msg2031</a></b> = 'TSqlitePassDataset : Cannot set % while Dataset is active.';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#Msg2032">Msg2032</a></b> = 'TSqlitePassDataset.SetDataField : Cannot set data. This field is readonly.';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#Msg2033">Msg2033</a></b> = 'TSqlitePassDataset.SetFWriteMode : Cannot set WriteMode while Dataset is active.';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#Msg2040">Msg2040</a></b> = 'TSqlitePassDataset.ParseFilterText : Syntax error found while parsing filter text.';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#Msg2045">Msg2045</a></b> = 'TSqlitePassDataset.SetFDatabase : Cannot set Database while Dataset is active.';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#Msg2047">Msg2047</a></b> = 'TSqlitePassDataset.SetFLookupDisplayedRecordsOnly : Cannot set this property while Dataset is active.';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#Msg2049">Msg2049</a></b> = 'TSqlitePassDataset.SetFCalcDisplayedRecordsOnly : Cannot set this property while Dataset is active.';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#Msg2070">Msg2070</a></b> = 'TSqlitePassDatasets.DatasetByName : Dataset %s not found.';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#Msg2100">Msg2100</a></b> = 'TSqlitePassFieldFilters.FilterByFieldName : Requested filter not found';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#Msg3000">Msg3000</a></b> = 'The function %s was not found in the current installed Sqlite library';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#Msg3001">Msg3001</a></b> = 'file %s not found in path';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#Msg3010">Msg3010</a></b> = 'TSqlitePassEngine.BindParam : invalid format for blob data.';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#Msg3011">Msg3011</a></b> = 'TSqlitePassEngine.BindValue : Unknown field type : %s';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#Msg3012">Msg3012</a></b> = 'TSqlitePassEngine.CreateDatabase : the database was not created. The file %s already exists';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#Msg3013">Msg3013</a></b> = 'Unable to execute SQL query : %s%s';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#Msg3014">Msg3014</a></b> = 'Database engine is not available %s';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#Msg3016">Msg3016</a></b> = 'Error while posting the record.';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#Msg3100">Msg3100</a></b> = 'TSqlitePassTableDefs.TableByName : Requested table not found';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#Msg3200">Msg3200</a></b> = 'TSqlitePassIndexDefs.IndexByName : Requested index not found';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#Msg3210">Msg3210</a></b> = 'TSqlitePassIndexColumns.ColumnByName : Requested column not found';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#Msg3220">Msg3220</a></b> = 'TSqlitePassIndex.SetFIndexName : %s is not a valid index name. '
+         +'First character must be like [A..Z, a..z, _ ] and others like '
+         +'[A..Z, a..z, 0..9, _ ]';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#Msg3300">Msg3300</a></b> = 'TSqlitePassQueryDefs.QueryByName : Requested query not found';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#Msg3400">Msg3400</a></b> = 'TSqlitePassViews.ViewByName : Requested view not found';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#Msg3500">Msg3500</a></b> = 'TSqlitePassTriggers.TriggerByName : Requested Trigger not found';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#Msg3600">Msg3600</a></b> = 'TSqlitePassFieldDefs.FieldByName : Requested FieldDef not found';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#Msg3700">Msg3700</a></b> = 'TSqlitePassTableDefs.TableByName : Requested TableDef not found';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#Msg3800">Msg3800</a></b> = 'TSqlitePassStmtSection.SectionByName : Requested Section not found';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#Msg3900">Msg3900</a></b> = 'TSqlitePassSelectStmt.BuildSchema : Table or field not found ';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#Msg3910">Msg3910</a></b> = 'TSqlitePassSelectStmt.FieldDefs.FieldByName : Requested FieldDefByName not found';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#Msg3950">Msg3950</a></b> = 'TSqlitePassSelectStmts.SQLStmtByName : Requested SQLStmt not found';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#Msg3980">Msg3980</a></b> = 'TSqlitePassTranslator.GetDatabaseTableFieldDefs : Unable to retrieve fields definitions for table %s .';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#Msg4000">Msg4000</a></b> = 'TSqlitePassTranslator_Kexi.GetDatabaseTableFieldDefs : Error while opening system dataset : %s';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#SqlitePassListCapacityError">SqlitePassListCapacityError</a></b>= 'List capacity exceeded';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#SqlitePassListCountError">SqlitePassListCountError</a></b> = 'List count error';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassErrorLang.html#SqlitePassListIndexError">SqlitePassListIndexError</a></b> = 'Error while accessing list item %s';</code></td>
+</tr>
+</table>
+<h2 class="description">Description</h2>
+<h3 class="detail">Constants</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="CRLF"></a><code><b>CRLF</b> = #13#10;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+******************************************************* DatabaseError Messages</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="Msg1000"></a><code><b>Msg1000</b> = 'Error';</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Generic messages</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="Msg1001"></a><code><b>Msg1001</b> = 'Unknown';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="Msg1002"></a><code><b>Msg1002</b> = 'No Error';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="Msg1005"></a><code><b>Msg1005</b> = 'TSqlitePassDatabase.Open : Database property is not defined.';</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+SqlitePassDatabase messages</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="Msg1007"></a><code><b>Msg1007</b> = 'TSqlitePassDatabase.Open : Unable to open the database.';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="Msg1010"></a><code><b>Msg1010</b> = '%s : Cannot set the %s property while Database is connected.';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="Msg1038"></a><code><b>Msg1038</b> = 'Cannot find Database :';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="Msg1040"></a><code><b>Msg1040</b> = 'TSqlitePassDataset.GetRecord, No record found, dataset is empty.';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="Msg1041"></a><code><b>Msg1041</b> = 'TSqlitePassDatabase.AttachDatabase : Database type mismatch.';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="Msg1042"></a><code><b>Msg1042</b> = 'TSqlitePassDatabase.SetFDatabaseType : Do you want to replace your DatatypeOptions by the default ones for this database type ? ';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="Msg1044"></a><code><b>Msg1044</b> =   'TSqlitePassDatabase.DataTypeOptions.LoadFromDatabase : Error while loading data from database. '
+          + 'The &quot;SqlitePass__DbSettings&quot; table is corrupted or was created using an old version of this component. '
+          + ' Do you want to remove the &quot;SqlitePass__DbSettings&quot; from your database ? (A new table will be created on database closing).';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="Msg1046"></a><code><b>Msg1046</b> = 'TSqlitePassDatabase.DeleteDatabase : Unable to delete the file %s .';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="Msg1100"></a><code><b>Msg1100</b> = 'Select the Ellipsis button';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="Msg1800"></a><code><b>Msg1800</b> = 'TSqlitePassDatabasesAttached.DatabaseByName : Database %s not found.';</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+SqlitePassDatabasesAttached messages</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="Msg2002"></a><code><b>Msg2002</b> = 'TSqlitePassDataset.ExecSQL : Cannot execute SQL query while Database is not Assigned or Connected.';</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+SqlitePassDataset</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="Msg2003"></a><code><b>Msg2003</b> = 'TSqlitePassDataset.ExecuteSQL : Cannot execute SQL query while Database is not Assigned or Connected.';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="Msg2011"></a><code><b>Msg2011</b> = 'TSqlitePassDataset.SetFDatabase : Cannot set Database while Dataset is active.';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="Msg2012"></a><code><b>Msg2012</b> = 'TSqlitePassDataset.SetFDatasetName : Cannot set DatasetName while Dataset is active.';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="Msg2015"></a><code><b>Msg2015</b> = 'TSqlitePassDataset.SetFSQL : Cannot set SQL while a Table, Query or View is selected.';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="Msg2016"></a><code><b>Msg2016</b> = 'TSqlitePassDataset.SetFSQL : Cannot set SQL while Dataset is selected.';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="Msg2018"></a><code><b>Msg2018</b> = 'TSqlitePassDataset.Open : Missing Database Property';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="Msg2019"></a><code><b>Msg2019</b> = 'TSqlitePassDataset.Open : Missing DatasetName, or SQL is empty.';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="Msg2020"></a><code><b>Msg2020</b> = 'TSqlitePassDataset.Open : Unable to open Dataset because the Database is not connected';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="Msg2021"></a><code><b>Msg2021</b> = 'TSqlitePassDataset.Open : Unable to open Dataset because the Database is not connected. Check the components create order '
+          + 'of your form. The database must be created before the datasets';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="Msg2022"></a><code><b>Msg2022</b> = 'TSqlitePassDataset.Post : Error while posting record. The PrimaryKey value is already present in the dataset or an internal constraint prevents data change...';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="Msg2024"></a><code><b>Msg2024</b> = 'TSqlitePassDataset.Delete : Error while deleting record.';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="Msg2025"></a><code><b>Msg2025</b> = 'TSqlitePassDataset.InitFieldDefs : Columns count from parsed SQL statement doesn''t match SQLite engine columns count.';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="Msg2026"></a><code><b>Msg2026</b> = 'TSqlitePassDataset.SetMasterDataSource : Datasource circular reference not supported';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="Msg2027"></a><code><b>Msg2027</b> = 'TSqlitePassDataset.InitFieldDefs : Cannot retrieve FieldDefs because dataset is closed.';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="Msg2028"></a><code><b>Msg2028</b> = 'TSqlitePassDataset.SetFDatasetName : This will clear all defined fields. Do ou want to continue ?';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="Msg2029"></a><code><b>Msg2029</b> = 'TSqlitePassDataset.InternalOpen : Cannot Open Dataset.';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="Msg2030"></a><code><b>Msg2030</b> = 'TSqlitePassDataset.SetFLookUpCache : Cannot set LookUpCache while Dataset is active.';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="Msg2031"></a><code><b>Msg2031</b> = 'TSqlitePassDataset : Cannot set % while Dataset is active.';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="Msg2032"></a><code><b>Msg2032</b> = 'TSqlitePassDataset.SetDataField : Cannot set data. This field is readonly.';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="Msg2033"></a><code><b>Msg2033</b> = 'TSqlitePassDataset.SetFWriteMode : Cannot set WriteMode while Dataset is active.';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="Msg2040"></a><code><b>Msg2040</b> = 'TSqlitePassDataset.ParseFilterText : Syntax error found while parsing filter text.';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="Msg2045"></a><code><b>Msg2045</b> = 'TSqlitePassDataset.SetFDatabase : Cannot set Database while Dataset is active.';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="Msg2047"></a><code><b>Msg2047</b> = 'TSqlitePassDataset.SetFLookupDisplayedRecordsOnly : Cannot set this property while Dataset is active.';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="Msg2049"></a><code><b>Msg2049</b> = 'TSqlitePassDataset.SetFCalcDisplayedRecordsOnly : Cannot set this property while Dataset is active.';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="Msg2070"></a><code><b>Msg2070</b> = 'TSqlitePassDatasets.DatasetByName : Dataset %s not found.';</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+<a class="normal"  href="SqlitePassDbo.TSqlitePassDatasets.html">TSqlitePassDatasets</a></p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="Msg2100"></a><code><b>Msg2100</b> = 'TSqlitePassFieldFilters.FilterByFieldName : Requested filter not found';</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+<a class="normal"  href="SqlitePassDbo.TSqlitePassFieldFilters.html">TSqlitePassFieldFilters</a></p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="Msg3000"></a><code><b>Msg3000</b> = 'The function %s was not found in the current installed Sqlite library';</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Sqlite library messages</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="Msg3001"></a><code><b>Msg3001</b> = 'file %s not found in path';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="Msg3010"></a><code><b>Msg3010</b> = 'TSqlitePassEngine.BindParam : invalid format for blob data.';</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+SqlitePassEngine</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="Msg3011"></a><code><b>Msg3011</b> = 'TSqlitePassEngine.BindValue : Unknown field type : %s';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="Msg3012"></a><code><b>Msg3012</b> = 'TSqlitePassEngine.CreateDatabase : the database was not created. The file %s already exists';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="Msg3013"></a><code><b>Msg3013</b> = 'Unable to execute SQL query : %s%s';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="Msg3014"></a><code><b>Msg3014</b> = 'Database engine is not available %s';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="Msg3016"></a><code><b>Msg3016</b> = 'Error while posting the record.';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="Msg3100"></a><code><b>Msg3100</b> = 'TSqlitePassTableDefs.TableByName : Requested table not found';</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+<a class="normal"  href="SqlitePassDbo.TSqlitePassTableDefs.html">TSqlitePassTableDefs</a></p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="Msg3200"></a><code><b>Msg3200</b> = 'TSqlitePassIndexDefs.IndexByName : Requested index not found';</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+TSqlitePassIndexes</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="Msg3210"></a><code><b>Msg3210</b> = 'TSqlitePassIndexColumns.ColumnByName : Requested column not found';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="Msg3220"></a><code><b>Msg3220</b> = 'TSqlitePassIndex.SetFIndexName : %s is not a valid index name. '
+         +'First character must be like [A..Z, a..z, _ ] and others like '
+         +'[A..Z, a..z, 0..9, _ ]';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="Msg3300"></a><code><b>Msg3300</b> = 'TSqlitePassQueryDefs.QueryByName : Requested query not found';</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+<a class="normal"  href="SqlitePassDbo.TSqlitePassQueryDefs.html">TSqlitePassQueryDefs</a></p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="Msg3400"></a><code><b>Msg3400</b> = 'TSqlitePassViews.ViewByName : Requested view not found';</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+<a class="normal"  href="SqlitePassDbo.TSqlitePassViews.html">TSqlitePassViews</a></p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="Msg3500"></a><code><b>Msg3500</b> = 'TSqlitePassTriggers.TriggerByName : Requested Trigger not found';</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+<a class="normal"  href="SqlitePassDbo.TSqlitePassTriggers.html">TSqlitePassTriggers</a></p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="Msg3600"></a><code><b>Msg3600</b> = 'TSqlitePassFieldDefs.FieldByName : Requested FieldDef not found';</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+TSqlitePassFieldDefs</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="Msg3700"></a><code><b>Msg3700</b> = 'TSqlitePassTableDefs.TableByName : Requested TableDef not found';</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+<a class="normal"  href="SqlitePassDbo.TSqlitePassTableDefs.html">TSqlitePassTableDefs</a></p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="Msg3800"></a><code><b>Msg3800</b> = 'TSqlitePassStmtSection.SectionByName : Requested Section not found';</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+TSqlitePassStmtSections</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="Msg3900"></a><code><b>Msg3900</b> = 'TSqlitePassSelectStmt.BuildSchema : Table or field not found ';</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+<a class="normal"  href="SqlitePassDbo.TSqlitePassSelectStmt.html">TSqlitePassSelectStmt</a></p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="Msg3910"></a><code><b>Msg3910</b> = 'TSqlitePassSelectStmt.FieldDefs.FieldByName : Requested FieldDefByName not found';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="Msg3950"></a><code><b>Msg3950</b> = 'TSqlitePassSelectStmts.SQLStmtByName : Requested SQLStmt not found';</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+TSqlitePassSelectStmts</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="Msg3980"></a><code><b>Msg3980</b> = 'TSqlitePassTranslator.GetDatabaseTableFieldDefs : Unable to retrieve fields definitions for table %s .';</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+<a class="normal"  href="SqlitePassDbo.TSqlitePassTranslator.html">TSqlitePassTranslator</a></p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="Msg4000"></a><code><b>Msg4000</b> = 'TSqlitePassTranslator_Kexi.GetDatabaseTableFieldDefs : Error while opening system dataset : %s';</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+<a class="normal"  href="SqlitePassDbo.TSqlitePassTranslator_Kexi.html">TSqlitePassTranslator_Kexi</a></p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqlitePassListCapacityError"></a><code><b>SqlitePassListCapacityError</b>= 'List capacity exceeded';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqlitePassListCountError"></a><code><b>SqlitePassListCountError</b> = 'List count error';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqlitePassListIndexError"></a><code><b>SqlitePassListIndexError</b> = 'Error while accessing list item %s';</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+SqlitePassUtilsmessages</p>
+</td></tr>
+</table>
+<hr noshade size="1"><span class="appinfo"><em>Generated by <a  target="_parent" href="http://pasdoc.sourceforge.net/">PasDoc 0.11.0</a> on 2010-05-16 23:39:44</em>
+</span>
+</body></html>

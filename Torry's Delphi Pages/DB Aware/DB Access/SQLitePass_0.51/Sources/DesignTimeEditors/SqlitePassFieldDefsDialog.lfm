@@ -1,0 +1,422 @@
+object SqlitePassFieldDefsDialog: TSqlitePassFieldDefsDialog
+  Left = 75
+  Height = 516
+  Top = 71
+  Width = 841
+  BorderStyle = bsDialog
+  Caption = 'FieldDefs Dialog'
+  ClientHeight = 516
+  ClientWidth = 841
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  OnDestroy = FormDestroy
+  Position = poScreenCenter
+  LCLVersion = '0.9.29'
+  object Panel1: TPanel
+    Left = 0
+    Height = 507
+    Top = 9
+    Width = 841
+    Align = alClient
+    Caption = 'Panel1'
+    ClientHeight = 507
+    ClientWidth = 841
+    TabOrder = 0
+    object PanelFieldDefs: TPanel
+      Left = 1
+      Height = 30
+      Top = 1
+      Width = 839
+      Align = alTop
+      ClientHeight = 30
+      ClientWidth = 839
+      Color = clWhite
+      ParentColor = False
+      TabOrder = 0
+      object Label16: TLabel
+        Left = 36
+        Height = 14
+        Top = 7
+        Width = 194
+        Caption = 'Fields definitions for this dataset :'
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+      end
+      object Image9: TImage
+        Left = 16
+        Height = 16
+        Top = 6
+        Width = 16
+        AutoSize = True
+        Center = True
+        Picture.Data = {
+          07544269746D617036040000424D360400000000000036000000280000001000
+          0000100000000100200000000000000400000000000000000000000000000000
+          0000000000060000000300000003000000030000000300000003000000030000
+          0003000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000FF000000FF000000FF000000FF000000FF000000FF000000FF0000
+          00FF000000FF000000FF000000FF000000FF000000FF000000FF000000FF0000
+          00FF000000FFC9C9C9FFC9C9C9FFC9C9C9FFC9C9C9FF7B7B7BFFC9C9C9FFC9C9
+          C9FFC9C9C9FFC9C9C9FF7B7B7BFFC9C9C9FFC9C9C9FFC9C9C9FFC9C9C9FF0000
+          00FF000000FFFFFFFFFFECECECFFECECECFFECECECFFABABABFFECECECFFECEC
+          ECFFECECECFFECECECFFABABABFFECECECFFECECECFFECECECFFC9C9C9FF0000
+          00FF000000FFE7E7E7FFABABABFFABABABFFABABABFFABABABFFABABABFFABAB
+          ABFFABABABFFABABABFFABABABFFABABABFFABABABFFABABABFF7B7B7BFF0000
+          00FF000000FFFFFFFFFFECECECFFECECECFFECECECFFABABABFFECECECFFECEC
+          ECFFECECECFFECECECFFABABABFFECECECFFECECECFFECECECFFC9C9C9FF0000
+          00FF000000FFFFFFFFFFECECECFFECECECFFECECECFFABABABFFECECECFFECEC
+          ECFFECECECFFECECECFFABABABFFECECECFFECECECFFECECECFFC9C9C9FF0000
+          00FF000000FFE7E7E7FFABABABFFABABABFFABABABFFABABABFFABABABFFABAB
+          ABFFABABABFFABABABFFABABABFFABABABFFABABABFFABABABFF7B7B7BFF0000
+          00FF000000FFFFFFFFFFECECECFFECECECFFECECECFFABABABFFECECECFFECEC
+          ECFFECECECFFECECECFFABABABFFECECECFFECECECFFECECECFFC9C9C9FF0000
+          00FF000000FFFFFFFFFFECECECFFECECECFFECECECFFABABABFFECECECFFECEC
+          ECFFECECECFFECECECFFABABABFFECECECFFECECECFFECECECFFC9C9C9FF0000
+          00FF000000FFE7E7E7FFABABABFFABABABFFABABABFFABABABFFABABABFFABAB
+          ABFFABABABFFABABABFFABABABFFABABABFFABABABFFABABABFF7D7D7DFF0000
+          00FF000000FFFFFFFFFFECECECFFECECECFFECECECFFABABABFFECECECFFECEC
+          ECFFECECECFFECECECFFABABABFFECECECFFECECECFFECECECFFC9C9C9FF0000
+          00FF000000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE7E7E7FFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFE7E7E7FFFFFFFFFFFFFFFFFFFFFFFFFFDDDDDDFF0000
+          00FF000000FF000000FF000000FF000000FF000000FF000000F8000000F60000
+          00F3000000F1000000EF000000ED000000EB000000E9000000E7000000E50000
+          00FC000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000
+        }
+      end
+    end
+    object Panel10: TPanel
+      Left = 1
+      Height = 475
+      Top = 31
+      Width = 839
+      Align = alClient
+      BevelOuter = bvNone
+      Caption = 'Panel10'
+      ClientHeight = 475
+      ClientWidth = 839
+      TabOrder = 1
+      object ScrollBarHorizontal: TScrollBar
+        Left = 0
+        Height = 17
+        Top = 458
+        Width = 839
+        Align = alBottom
+        PageSize = 0
+        TabOrder = 0
+        OnScroll = ScrollBarHorizontalScroll
+      end
+      object ScrollBoxFieldDefsPropertiesValues: TScrollBox
+        Left = 137
+        Height = 430
+        Top = 28
+        Width = 685
+        Align = alClient
+        BorderStyle = bsNone
+        ClientHeight = 430
+        ClientWidth = 685
+        Color = 14869218
+        ParentColor = False
+        TabOrder = 1
+        object ImageCheck: TImage
+          Left = 11
+          Height = 16
+          Top = 6
+          Width = 14
+          AutoSize = True
+          Center = True
+          Picture.Data = {
+            07544269746D6170F6020000424DF60200000000000036000000280000000E00
+            0000100000000100180000000000C00200000000000000000000000000000000
+            0000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFF0000FFFFFFFFFFFFFFFFFFFFFFFFFDFFFEFBFFFC
+            000200FDFFFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FFFFFFFFFFFF
+            FFFFFFFFFFFFFBFFFC0006006D7E70000300FDFFFFFFFFFFFFFFFFFFFEFFFFFE
+            FFFFFFFF0000FFFFFFFFFFFFFFFFFFFCFFFD0004008DA6928CA793000400FBFF
+            FEFDFFFFFEFEFEFFFEFFFFFEFFFFFFFF0000FFFFFFFFFFFFFDFFFEFBFFFC0006
+            0088A89064866E476052000300FBFFFEFFFFFFFDFFFFFDFFFFFFFFFF0000FFFF
+            FFFFFFFFFBFFFC0005008FA59288A8905E80685C7C6B000600FAFFFEFFFFFFFD
+            FFFFFDFFFFFFFFFF0000FFFFFFFFFFFF0003008CA68F8BA88E6B816F0007005F
+            84704A6A59000300FEFEFEFFFFFFFFFFFFFFFFFF0000FFFFFFFDFFFE0004008B
+            A88F78957C00050000050050735F658776000400FBFFFEFDFFFFFFFFFFFFFFFF
+            0000FDFFFE00030092A3958FA592000700000300F8FFFC0007006B857753675B
+            000300FBFFFEFFFFFFFFFEFF0000FDFFFE000300A8B6AA818F83000400FDFFFE
+            FBFFFE00040083978B6C8577000600FAFFFEFFFFFFFFFEFF0000FFFFFFFDFFFE
+            000200000200FDFFFCFFFFFEFDFFFEFBFFFE0004007C99894C695A000200FFFE
+            FFFFFFFF0000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFFEFEFEFE0003
+            008EA89A698677000300FBFFFFFDFFFF0000FFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFBFFFE00050081978B5E7468000400FBFFFE0000FFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDFFFE000300AFBEB672
+            837A000500FBFFFE0000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFDFFFE000100000100FBFFFEFDFFFF0000FFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            0000
+          }
+          Transparent = True
+          Visible = False
+        end
+      end
+      object Panel32: TPanel
+        Left = 0
+        Height = 28
+        Top = 0
+        Width = 839
+        Align = alTop
+        Caption = 'Panel32'
+        ClientHeight = 28
+        ClientWidth = 839
+        TabOrder = 2
+        object ScrollboxFieldDefsFieldNames: TScrollBox
+          Left = 137
+          Height = 26
+          Top = 1
+          Width = 701
+          Align = alClient
+          BorderStyle = bsNone
+          Color = clBtnFace
+          ParentColor = False
+          TabOrder = 0
+        end
+        object Panel33: TPanel
+          Left = 1
+          Height = 26
+          Top = 1
+          Width = 136
+          Align = alLeft
+          BevelOuter = bvNone
+          Caption = 'FieldDefsColumns'
+          TabOrder = 1
+        end
+      end
+      object ScrollBoxFieldDefsPropertiesNames: TScrollBox
+        Left = 0
+        Height = 430
+        Top = 28
+        Width = 137
+        Align = alLeft
+        BorderStyle = bsNone
+        ClientHeight = 430
+        ClientWidth = 137
+        Color = clBtnFace
+        ParentColor = False
+        TabOrder = 3
+        object Panel11: TPanel
+          Left = 3
+          Height = 22
+          Top = 3
+          Width = 130
+          BevelInner = bvSpace
+          BevelOuter = bvLowered
+          Caption = 'DataType'
+          TabOrder = 0
+        end
+        object Panel12: TPanel
+          Left = 3
+          Height = 22
+          Top = 25
+          Width = 130
+          BevelInner = bvSpace
+          BevelOuter = bvLowered
+          Caption = 'AutoInc'
+          TabOrder = 1
+        end
+        object Panel13: TPanel
+          Left = 3
+          Height = 22
+          Top = 47
+          Width = 130
+          BevelInner = bvSpace
+          BevelOuter = bvLowered
+          Caption = 'DefaultValue'
+          TabOrder = 2
+        end
+        object Panel14: TPanel
+          Left = 3
+          Height = 22
+          Top = 69
+          Width = 130
+          BevelInner = bvSpace
+          BevelOuter = bvLowered
+          Caption = 'DisplayName'
+          TabOrder = 3
+        end
+        object Panel15: TPanel
+          Left = 3
+          Height = 22
+          Top = 91
+          Width = 130
+          BevelInner = bvSpace
+          BevelOuter = bvLowered
+          Caption = 'FieldNo'
+          TabOrder = 4
+        end
+        object Panel30: TPanel
+          Left = 3
+          Height = 22
+          Top = 113
+          Width = 130
+          BevelInner = bvSpace
+          BevelOuter = bvLowered
+          Caption = 'FieldFullName'
+          TabOrder = 5
+        end
+        object Panel16: TPanel
+          Left = 3
+          Height = 22
+          Top = 135
+          Width = 130
+          BevelInner = bvSpace
+          BevelOuter = bvLowered
+          Caption = 'ForeignKey'
+          TabOrder = 6
+        end
+        object Panel17: TPanel
+          Left = 3
+          Height = 22
+          Top = 157
+          Width = 130
+          BevelInner = bvSpace
+          BevelOuter = bvLowered
+          Caption = 'Hint'
+          TabOrder = 7
+        end
+        object Panel18: TPanel
+          Left = 3
+          Height = 22
+          Top = 179
+          Width = 130
+          BevelInner = bvSpace
+          BevelOuter = bvLowered
+          Caption = 'Indexed'
+          TabOrder = 8
+        end
+        object Panel19: TPanel
+          Left = 3
+          Height = 22
+          Top = 201
+          Width = 130
+          BevelInner = bvSpace
+          BevelOuter = bvLowered
+          Caption = 'InternalPrimaryKey'
+          TabOrder = 9
+        end
+        object Panel20: TPanel
+          Left = 3
+          Height = 22
+          Top = 223
+          Width = 130
+          BevelInner = bvSpace
+          BevelOuter = bvLowered
+          Caption = 'NativeDataType'
+          TabOrder = 10
+        end
+        object Panel22: TPanel
+          Left = 3
+          Height = 22
+          Top = 245
+          Width = 130
+          BevelInner = bvSpace
+          BevelOuter = bvLowered
+          Caption = 'NativeDataTypeCode'
+          TabOrder = 11
+        end
+        object Panel23: TPanel
+          Left = 3
+          Height = 22
+          Top = 267
+          Width = 130
+          BevelInner = bvSpace
+          BevelOuter = bvLowered
+          Caption = 'NotEmpty'
+          TabOrder = 12
+        end
+        object Panel24: TPanel
+          Left = 3
+          Height = 22
+          Top = 289
+          Width = 130
+          BevelInner = bvSpace
+          BevelOuter = bvLowered
+          Caption = 'NoConstraints'
+          TabOrder = 13
+        end
+        object Panel25: TPanel
+          Left = 3
+          Height = 22
+          Top = 311
+          Width = 130
+          BevelInner = bvSpace
+          BevelOuter = bvLowered
+          Caption = 'NotNull'
+          TabOrder = 14
+        end
+        object Panel26: TPanel
+          Left = 3
+          Height = 22
+          Top = 333
+          Width = 130
+          BevelInner = bvSpace
+          BevelOuter = bvLowered
+          Caption = 'Precision'
+          TabOrder = 15
+        end
+        object Panel27: TPanel
+          Left = 3
+          Height = 22
+          Top = 355
+          Width = 130
+          BevelInner = bvSpace
+          BevelOuter = bvLowered
+          Caption = 'PrimaryKey'
+          TabOrder = 16
+        end
+        object Panel28: TPanel
+          Left = 3
+          Height = 22
+          Top = 377
+          Width = 130
+          BevelInner = bvSpace
+          BevelOuter = bvLowered
+          Caption = 'Size'
+          TabOrder = 17
+        end
+        object Panel29: TPanel
+          Left = 3
+          Height = 22
+          Top = 399
+          Width = 130
+          BevelInner = bvSpace
+          BevelOuter = bvLowered
+          Caption = 'Unique'
+          TabOrder = 18
+        end
+      end
+      object ScrollBarVertical: TScrollBar
+        Left = 822
+        Height = 430
+        Top = 28
+        Width = 17
+        Align = alRight
+        Kind = sbVertical
+        Max = 200
+        PageSize = 0
+        TabOrder = 4
+        OnScroll = ScrollBarVerticalScroll
+      end
+    end
+  end
+  object PanelTop: TPanel
+    Left = 0
+    Height = 9
+    Top = 0
+    Width = 841
+    Align = alTop
+    TabOrder = 1
+  end
+end

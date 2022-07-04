@@ -1,0 +1,96 @@
+# ---------------------------------------------------------------------------
+VERSION = BCB.03
+# ---------------------------------------------------------------------------
+!ifndef BCB
+BCB = $(MAKEDIR)\..
+!endif
+# ---------------------------------------------------------------------------
+PROJECT = RxGIFAnm.exe
+OBJFILES = Gifmain.obj Gifpal.obj Gifprvw.obj About.obj RxGIFAnm.obj
+RESFILES = Rxgifanm.res
+RESDEPEN = $(RESFILES) Gifmain.dfm Gifpal.dfm Gifprvw.dfm
+LIBFILES =
+LIBRARIES = RXCTL.lib vclx35.lib vcl35.lib
+SPARELIBS = vcl35.lib vclx35.lib RXCTL.lib
+PACKAGES = VCLX35.bpi VCL35.bpi VCLMID35.bpi RXCTL.bpi
+PATHASM = .;
+PATHCPP = .;
+PATHPAS = .;
+PATHRC = .;
+DEBUGLIBPATH = $(BCB)\lib\debug
+RELEASELIBPATH = $(BCB)\lib\release
+DEFFILE =
+# ---------------------------------------------------------------------------
+CFLAG1 = -O2 -w -Ve -k- -vi -c -b- -w-par -w-inl -Vx
+CFLAG2 = -I$(BCB)\rx\units;$(BCB)\include;$(BCB)\include\vcl;e:\work\rxcb3 \
+  -H=$(BCB)\lib\vcl.csm
+CFLAG3 =
+PFLAGS = -AWinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE \
+  -U$(BCB)\rx\units;$(BCB)\lib\obj;$(BCB)\lib;e:\work\rxcb3;$(DEBUGLIBPATH) \
+  -I$(BCB)\rx\units;$(BCB)\include;$(BCB)\include\vcl;e:\work\rxcb3 -v -JPHNV -M
+RFLAGS = -i$(BCB)\rx\units;$(BCB)\include;$(BCB)\include\vcl;e:\work\rxcb3
+AFLAGS = /i$(BCB)\rx\units /i$(BCB)\include /i$(BCB)\include\vcl /ie:\work\rxcb3 /mx /w2 \
+  /zd
+LFLAGS = -L$(BCB)\rx\units;$(BCB)\lib\obj;$(BCB)\lib;e:\work\rxcb3;$(DEBUGLIBPATH) -aa \
+  -Tpe -x
+IFLAGS =
+LINKER = ilink32
+# ---------------------------------------------------------------------------
+ALLOBJ = c0w32.obj sysinit.obj $(OBJFILES)
+ALLRES = $(RESFILES)
+ALLLIB = $(LIBFILES) $(LIBRARIES) import32.lib cp32mt.lib
+# ---------------------------------------------------------------------------
+.autodepend
+
+!ifdef IDEOPTIONS
+
+[Version Info]
+IncludeVerInfo=0
+AutoIncBuild=0
+MajorVer=1
+MinorVer=0
+Release=0
+Build=0
+Debug=0
+PreRelease=0
+Special=0
+Private=0
+DLL=0
+Locale=1049
+CodePage=1251
+
+[Debugging]
+DebugSourceDirs=
+
+[Parameters]
+RunParams=
+HostApplication=
+
+!endif
+
+# ---------------------------------------------------------------------------
+$(PROJECT): $(OBJFILES) $(RESDEPEN) $(DEFFILE)
+    $(BCB)\BIN\$(LINKER) @&&!
+    $(LFLAGS) +
+    $(ALLOBJ), +
+    $(PROJECT),, +
+    $(ALLLIB), +
+    $(DEFFILE), +
+    $(ALLRES) 
+!
+
+.pas.hpp:
+    $(BCB)\BIN\dcc32 $(PFLAGS) { $** }
+
+.pas.obj:
+    $(BCB)\BIN\dcc32 $(PFLAGS) { $** }
+
+.cpp.obj:
+    $(BCB)\BIN\bcc32 $(CFLAG1) $(CFLAG2) -o$* $* 
+
+.c.obj:
+    $(BCB)\BIN\bcc32 $(CFLAG1) $(CFLAG2) -o$* $**
+
+.rc.res:
+    $(BCB)\BIN\brcc32 $(RFLAGS) $<
+#-----------------------------------------------------------------------------

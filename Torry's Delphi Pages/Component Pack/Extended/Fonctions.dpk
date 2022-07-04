@@ -1,0 +1,82 @@
+package Fonctions;
+
+{$R *.res}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'Fonctions MICROCELT'}
+{$RUNONLY}
+{$IMPLICITBUILD OFF}
+{$DEFINE ADO}
+
+requires
+  vcl,
+  rtl,
+  dbrtl,
+  vcldb,
+  dclado,
+  designdgm,
+  vclx,
+  designide,
+  vclactnband,
+  dcldb,
+  vcldesigner,
+  dclstd,
+  adortl,
+  VclSmp,
+  bdertl,
+  dbexpress,
+  vcljpg,
+  JvDBD10R,
+  VirtualTreesD10,
+  JvXPCtrlsD10D,
+  JvCoreD10R,
+  JvXPCtrlsD10R,
+  JvStdCtrlsD10R,
+  JvSystemD10R,
+  ZParseSql,
+  ZCore,
+  ZDbc,
+  ZPlain,
+  ZComponent,
+  VampyreImagingPackage,
+  JclVcl,
+  Jcl;
+
+contains
+  fonctions_version in 'fonctions\fonctions_version.pas',
+  fonctions_erreurs in 'fonctions\fonctions_erreurs.pas',
+  fonctions_proprietes in 'fonctions\fonctions_proprietes.pas',
+  fonctions_string in 'fonctions\fonctions_string.pas',
+  fonctions_variant in 'fonctions\fonctions_variant.pas',
+  fonctions_init in 'fonctions\fonctions_init.pas',
+  fonctions_images in 'fonctions\fonctions_images.pas',
+  U_About in 'forms\U_About.pas',
+  unite_messages in 'fonctions\unite_messages.pas',
+  fonctions_array in 'fonctions\fonctions_array.pas',
+  fonctions_components in 'fonctions\fonctions_components.pas',
+  fonctions_dbcomponents in 'fonctions\fonctions_dbcomponents.pas',
+  fonctions_db in 'fonctions\fonctions_db.pas',
+  fonctions_web in 'fonctions\fonctions_web.pas',
+  StoHtmlHelp in 'fonctions\StoHtmlHelp.pas',
+  u_zconnection in 'forms\u_zconnection.pas';
+
+end.

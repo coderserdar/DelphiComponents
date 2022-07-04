@@ -1,0 +1,103 @@
+object Form1: TForm1
+  Caption = 'Form1'
+  ClientHeight = 343
+  ClientWidth = 545
+  PixelsPerInch = 96
+  Position = poDesktopCenter
+  HorzScrollBar.Page = 544
+  VertScrollBar.Page = 342
+  Left = 368
+  Height = 343
+  Top = 222
+  Width = 545
+  object dbGrid1: TdbGrid
+    Align = alTop
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    Color = clWhite
+    Columns = <>
+    DataSource = Datasource1
+    FixedColor = clBtnFace
+    Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+    Scrollbars = ssBoth
+    Height = 283
+    Width = 545
+  end
+  object CheckBox1: TCheckBox
+    Anchors = [akLeft, akBottom]
+    Caption = 'Open'
+    OnClick = CheckBox1Click
+    TabOrder = 0
+    Left = 6
+    Height = 23
+    Top = 292
+    Width = 90
+  end
+  object Button1: TButton
+    Anchors = [akLeft, akBottom]
+    BorderSpacing.OnChange = nil
+    Caption = 'Locate'
+    OnClick = Button1Click
+    TabOrder = 1
+    Left = 320
+    Height = 25
+    Top = 292
+    Width = 75
+  end
+  object Edit1: TEdit
+    Anchors = [akLeft, akBottom]
+    BorderSpacing.OnChange = nil
+    TabOrder = 2
+    Text = 'Edit1'
+    Left = 128
+    Height = 23
+    Top = 292
+    Width = 171
+  end
+  object JvUIBDataBase1: TJvUIBDataBase
+    Params.Strings = (
+      'sql_dialect=3'
+      'lc_ctype=WIN1251'
+      'user_name=sysdba'
+      'password=masterkey'
+    )
+    DatabaseName = 'C:\Work\Bases\water_108.gdb'
+    Connected = True
+    CharacterSet = csWIN1251
+    UserName = 'sysdba'
+    PassWord = 'masterkey'
+    LibraryName = 'gds32.dll'
+    left = 19
+    top = 27
+  end
+  object JvUIBTransaction1: TJvUIBTransaction
+    DataBase = JvUIBDataBase1
+    Options = [tpConcurrency, tpWait, tpRead, tpReadCommitted]
+    left = 19
+    top = 57
+  end
+  object Datasource1: TDatasource
+    DataSet = FBDataSet1
+    left = 61
+    top = 24
+  end
+  object FBDataSet1: TFBDataSet
+    AllowedUpdateKinds = []
+    AutoUpdateOptions.IncrementBy = 1
+    DataBase = JvUIBDataBase1
+    Macros = <>
+    Option = [poTrimCharFields, poRefreshAfterPost]
+    Transaction = JvUIBTransaction1
+    UpdateTransaction = JvUIBTransaction1
+    SQLSelect.Strings = (
+      'select'
+      '  *'
+      'from'
+      '  STREET'
+      'order by'
+      '  STREET.NAME_STREET'
+    )
+    Active = True
+    left = 61
+    top = 57
+  end
+end

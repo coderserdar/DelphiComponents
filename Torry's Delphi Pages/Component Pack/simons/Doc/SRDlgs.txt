@@ -1,0 +1,101 @@
+SRDialogs (C)opyright 2000 Version 2.11
+
+  TExtOpenDialog, TExtSaveDialog,
+  TCSVOpenDialog, TCSVSaveDialog,
+  TSliderOpenDialog, TSliderSaveDialog,
+
+  Autor : Simon Reinhardt
+  eMail : reinhardt@picsoft.de
+  Internet : http://www.picsoft.de
+
+  Diese Komponenten sind von TOpenDialog abgeleitete, erweiterte
+  Dialoge. Sie sind Public Domain, das Urheberrechtt liegt aber
+
+
+Dateiumfang:
+------------
+
+SRDlgs.txt 	- Diese Datei
+SRDlgs.pas	- Quelltext der Komponente
+SRDlgs.dcr	- Resourcendatei für die Bibliothek-Icons
+SRDlgs.res	- Resourcendatei mit den Dialogtemplates
+
+
+Installation:
+-------------
+
+In Delphi 2:
+------------
+1. Alle Dateien in das Delphi-Komponenten-Verzeichnis entpacken.
+2. Menü Komponente :  installieren
+3. Schaltfläche Hinzufügen / Durchsuchen
+4. Datei SRDlgs.pas im Delphi-Komponenten-Verzeichnis suchen und mit
+   OK bestätigen.
+5. Die Komponenten erscheinen in der Komponenten-Gruppe "Simon"
+
+Ab Delphi 3:
+------------
+1. Alle Dateien in das Delphi-Komponenten-Verzeichnis entpacken.
+2. Menü Komponente :  Komponente installieren
+3. Schaltfläche Durchsuchen (hinter dem Eingabefeld für den Unit-Namen)
+4. Datei SRDlgs.pas im Delphi-Komponenten-Verzeichnis suchen und mit
+   OK bestätigen.
+5. Die Rückfrage nach dem Neukompilieren des Packages bestätigen.
+6. Die Komponenten erscheinen in der Komponenten-Gruppe "Simon"
+
+
+Beschreibung TExtOpenDialog / TExtSaveDialog:
+---------------------------------------------
+
+Die Komponenten funktionieren genauso, wie die Delphi-Komponente 
+TOpenDialog/TSaveDialog. Zusätzlich steht am unteren Rand des Dialogs
+ein weiteres Eingabefeld zur Verfügung, dessen Beschriftung geändert 
+werden kann. Die Komponente besitzt dazu folgende neue Eigenschaften:
+
+1. "Description" - Die Beschriftung des zusätzlichen Eingabefelds
+2. "ExtraText" - Der Text im zusätzlichen Eingabefeld
+
+
+Beschreibung TCSVOpenDialog / TCSVSaveDialog:
+---------------------------------------------
+
+Die Komponenten funktionieren genauso, wie die Delphi-Komponente 
+TOpenDialog/TSaveDialog. Sie sind speiziell für das Öffnen von csv-Dateien
+vorgesehen, für die das Trennzeichen im Dialog eingegeben werden kann.
+Dafür stehen am unteren Rand des Dialogs ein weiteres Eingabefeld für ein 
+einzelnes ASCII-Zeichen, sowie eine Checkbox zur Verfügung. Die Komponente 
+besitzt dazu folgende neue Eigenschaften:
+
+1. "Separator"      - Das Trennzeichen für die csv-Datei (char)
+2. "SepDescription" - Die Beschriftung des Eingabefelds für das Trennzeichen
+3. "TabSeparator"   - Wenn diese Eigenschaft den Wert "true" hat, soll das 
+                      [Tab]-Zeichen als Trenner verwendet werden. Das Eingabe-
+                      feld für das Trennzeichen wird dann deaktiviert.
+4. "TabDescription" - Die Beschriftung der Tabulator-Checkbox
+
+
+Beschreibung TSliderOpenDialog / TSliderSaveDialog:
+---------------------------------------------------
+
+Die Komponenten funktionieren genauso, wie die Delphi-Komponente 
+TOpenDialog/TSaveDialog. Sie sind vor allem für das Öffnen und speichern
+von komprimierten, bzw zu komprimierenden Dateien vorgesehen. Dazu verfügen
+die Dialoge zusätzlich über eine Scrollbar am unteren Dialogrand.
+Die Komponente besitzt dazu folgende neue Eigenschaften:
+
+1. "Description" - Die Beschriftung der ScrollBar.
+2. "LargeChange" - Die Schrittweite der Änderung des "Value"-Wertes, wenn der
+                   Anwender auf die Scrollbar klickt oder [Bild-Auf] bzw.
+                   [Bild-Ab] eintippt.
+   		   Diese Eigenschaft entspricht der "LargeChange"-Eigenschaft 
+		   von TScrollBar.
+3. "MaxDescr"    - Die Beschriftung der Maximalposition der ScrollBar.
+4. "MaxValue"    - Der Maximalwert der ScrollBar.
+5. "MinDescr"    - Die Beschriftung der Minimalposition der ScrollBar.
+6. "MinValue"    - Der Minimalwert der ScrollBar.
+7. "SmallChange" - Die Schrittweite der Änderung des "Value"-Wertes, wenn der
+                   Anwender auf die Pfeiltasten der Scrollbar klickt oder 
+		   [Bild-Auf] bzw. [Bild-Ab] eintippt.
+   		   Diese Eigenschaft entspricht der "SmallChange"-Eigenschaft 
+		   von TScrollBar.
+8. "Value" 	 - Die Position der ScrollBar.

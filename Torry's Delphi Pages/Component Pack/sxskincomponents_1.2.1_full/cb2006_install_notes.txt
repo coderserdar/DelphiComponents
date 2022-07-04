@@ -1,0 +1,25 @@
+If your BDS2006 compiler find errors in GR32_Transforms.hpp, just comment
+all lines in the range from 451 to 468:
+
+//extern PACKAGE float IdentityMatrix[3][3];
+//extern PACKAGE bool FullEdge;
+//extern PACKAGE void __fastcall Adjoint( * M);
+//extern PACKAGE float __fastcall Determinant( const * M);
+//extern PACKAGE void __fastcall Scale( * M, float Factor);
+//extern PACKAGE void __fastcall Invert( * M);
+//extern PACKAGE TFloatMatrix __fastcall Mult( const * M1,  const * M2);
+//extern PACKAGE TVector3f __fastcall VectorTransform( const * M, float const * V);
+//extern PACKAGE Gr32::TArrayOfArrayOfFixedPoint __fastcall TransformPoints(Gr32::TArrayOfArrayOfFixedPoint Points, TTransformation* Transformation);
+//extern PACKAGE void __fastcall Transform(Gr32::TBitmap32* Dst, Gr32::TBitmap32* Src, TTransformation* Transformation)/* overload */;
+//extern PACKAGE void __fastcall Transform(Gr32::TBitmap32* Dst, Gr32::TBitmap32* Src, TTransformation* Transformation, const Types::TRect &DstClip)/* overload */;
+//extern PACKAGE void __fastcall Transform(Gr32::TBitmap32* Dst, Gr32::TBitmap32* Src, TTransformation* Transformation, Gr32_rasterizers::TRasterizer* Rasterizer)/* overload */;
+//extern PACKAGE void __fastcall Transform(Gr32::TBitmap32* Dst, Gr32::TBitmap32* Src, TTransformation* Transformation, Gr32_rasterizers::TRasterizer* Rasterizer, const Types::TRect &DstClip)/* overload */;
+//extern PACKAGE void __fastcall SetBorderTransparent(Gr32::TBitmap32* ABitmap, const Types::TRect &ARect);
+//extern PACKAGE void __fastcall RasterizeTransformation(Gr32_vectormaps::TVectorMap* Vectormap, TTransformation* Transformation, const Types::TRect &DstRect, Gr32_vectormaps::TVectorCombineMode CombineMode = (Gr32_vectormaps::TVectorCombineMode)(0x0), Gr32_vectormaps::TVectorCombineEvent CombineCallback = 0x0);
+//extern PACKAGE TFixedMatrix __fastcall FixedMatrix( const * FloatMatrix)/* overload */;
+//extern PACKAGE TFloatMatrix __fastcall FloatMatrix( const * FixedMatrix)/* overload */;
+
+Web Site: http://www.saarixx.info/sxskincomponents/en/
+E-Mail: sxskincomponents@saarixx.info
+
+Copyright (C) 2006-2007, Alexey Sadovnikov. All Rights Reserved.

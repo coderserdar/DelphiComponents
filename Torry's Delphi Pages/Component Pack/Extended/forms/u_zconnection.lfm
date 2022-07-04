@@ -1,0 +1,224 @@
+object F_ZConnectionWindow: TF_ZConnectionWindow
+  Left = 448
+  Height = 337
+  Top = 218
+  Width = 694
+  ActiveControl = cbx_Protocol
+  Caption = 'Se Connecter vers  une base de travail'
+  ClientHeight = 337
+  ClientWidth = 694
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Position = poMainFormCenter
+  LCLVersion = '0.9.26.2'
+  object Label1: TLabel
+    Left = 24
+    Height = 14
+    Top = 117
+    Width = 154
+    Caption = 'Nom de la base de données'
+    Color = clBtnFace
+    Font.Color = clBlack
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    ParentColor = False
+    ParentFont = False
+    Transparent = False
+  end
+  object Label2: TLabel
+    Left = 24
+    Height = 14
+    Top = 94
+    Width = 27
+    Caption = 'Hote'
+    Color = clBtnFace
+    Font.Color = clBlack
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    ParentColor = False
+    ParentFont = False
+    Transparent = False
+  end
+  object Label3: TLabel
+    Left = 24
+    Height = 14
+    Top = 166
+    Width = 74
+    Caption = 'Mot de passe'
+    Color = clBtnFace
+    Font.Color = clBlack
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    ParentColor = False
+    ParentFont = False
+    Transparent = False
+  end
+  object Label4: TLabel
+    Left = 24
+    Height = 14
+    Top = 190
+    Width = 57
+    Caption = 'Catalogue'
+    Color = clBtnFace
+    Font.Color = clBlack
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    ParentColor = False
+    ParentFont = False
+    Transparent = False
+  end
+  object Label5: TLabel
+    Left = 24
+    Height = 14
+    Top = 142
+    Width = 57
+    Caption = 'Utilisateur'
+    Color = clBtnFace
+    Font.Color = clBlack
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    ParentColor = False
+    ParentFont = False
+    Transparent = False
+  end
+  object Label6: TLabel
+    Left = 24
+    Height = 14
+    Top = 69
+    Width = 52
+    Caption = 'Protocole'
+    Color = clBtnFace
+    Font.Color = clBlack
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    ParentColor = False
+    ParentFont = False
+    Transparent = False
+  end
+  object Label7: TLabel
+    Left = 136
+    Height = 33
+    Top = 16
+    Width = 461
+    Caption = 'Sauver une base dans le fichier INI'
+    Color = clBtnFace
+    Font.Color = clBlack
+    Font.Height = -27
+    Font.Name = 'Tahoma'
+    ParentColor = False
+    ParentFont = False
+    Transparent = False
+  end
+  object lb_Collation: TLabel
+    Left = 24
+    Height = 14
+    Top = 214
+    Width = 135
+    Caption = 'Caractères de l''interface'
+    Color = clBtnFace
+    Font.Color = clBlack
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    ParentColor = False
+    ParentFont = False
+    Transparent = False
+  end
+  object ed_Base: TEdit
+    Left = 284
+    Height = 21
+    Top = 112
+    Width = 376
+    OnEnter = ed_BaseEnter
+    TabOrder = 0
+  end
+  object ed_Host: TEdit
+    Left = 284
+    Height = 21
+    Top = 88
+    Width = 376
+    OnEnter = ed_HostEnter
+    TabOrder = 1
+    Text = 'localhost'
+  end
+  object ed_Password: TEdit
+    Left = 284
+    Height = 21
+    Top = 160
+    Width = 376
+    OnEnter = ed_PasswordEnter
+    TabOrder = 2
+  end
+  object ed_Catalog: TEdit
+    Left = 284
+    Height = 21
+    Top = 184
+    Width = 376
+    OnEnter = ed_CatalogEnter
+    TabOrder = 3
+  end
+  object ed_User: TEdit
+    Left = 284
+    Height = 21
+    Top = 136
+    Width = 376
+    OnEnter = ed_UserEnter
+    TabOrder = 4
+  end
+  object Test: TJvXPButton
+    Left = 56
+    Height = 32
+    Top = 256
+    Width = 75
+    Caption = 'Tester'
+    TabOrder = 5
+    OnClick = TestClick
+  end
+  object Save: TJvXPButton
+    Left = 181
+    Height = 33
+    Top = 256
+    Width = 139
+    Caption = 'Sauver et quitter'
+    TabOrder = 6
+    OnClick = SaveClick
+  end
+  object quitall: TJvXPButton
+    Left = 501
+    Height = 32
+    Top = 256
+    Width = 107
+    Caption = 'Tout quitter'
+    TabOrder = 7
+    OnClick = quitallClick
+  end
+  object quit: TJvXPButton
+    Left = 365
+    Height = 33
+    Top = 256
+    Width = 91
+    Caption = 'Quitter'
+    TabOrder = 8
+    OnClick = quitClick
+  end
+  object cbx_Protocol: TComboBox
+    Left = 284
+    Height = 27
+    Top = 61
+    Width = 376
+    AutoComplete = False
+    Ctl3D = False
+    ItemHeight = 0
+    ItemWidth = 0
+    MaxLength = 65535
+    TabOrder = 9
+  end
+  object ed_Collation: TEdit
+    Left = 284
+    Height = 21
+    Top = 208
+    Width = 376
+    OnEnter = ed_CollationEnter
+    TabOrder = 10
+    Text = 'latin1'
+  end
+end

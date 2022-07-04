@@ -1,0 +1,107 @@
+<html>
+
+<head>
+<title>No title</title>
+<meta name="author" content="Albert Drent">
+<meta name="generator" content="Namo WebEditor">
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="purple" alink="red">
+<table border="1" cellspacing="0" bordercolordark="white" bordercolorlight="black" width="746">
+    <tr>
+        <td width="195" align="left" valign="top" rowspan="22">
+            <p><img src="img4.gif" border="0"></p>
+        </td>
+        <td width="541" colspan="2"><font color="blue">blue</font> properties are only available in TASGSQLite3 for SQLite3 components, not in the TASGSQLite&nbsp;for&nbsp;SQLite2 components.</td>
+    </tr>
+    <tr>
+        <td width="126"><font face="Arial"><span style="font-size:9pt;">Active</span></font></td>
+        <td width="411"><font face="Arial"><span style="font-size:9pt;">Set to true to open the table. Same effect can be achieved by the method 'Open'</span></font></td>
+    </tr>
+    <tr>
+        <td width="126"><font face="Arial"><span style="font-size:9pt;">AutoCalcFields</span></font></td>
+        <td width="411"><font face="Arial"><span style="font-size:9pt;">Set to true for automatic calculation of fields. See Borland documentation.</span></font></td>
+    </tr>
+    <tr>
+        <td width="126"><font face="Arial"><span style="font-size:9pt;">Autocommit</span></font></td>
+        <td width="411"><font face="Arial"><span style="font-size:9pt;">Set to true if you want to autocommit your changes. The transaction type used depends on the declaration in the appropiate property. If not set the transactiontype of the connection will be used. </span></font></td>
+    </tr>
+    <tr>
+        <td width="126"><font face="Arial" color="red"><span style="font-size:9pt;">Connection</span></font></td>
+        <td width="411"><font face="Arial"><span style="font-size:9pt;">Connector for the TASQLite3DB component</span></font></td>
+    </tr>
+    <tr>
+        <td width="126"><font face="Arial"><span style="font-size:9pt;">Filter</span></font></td>
+        <td width="411"><font face="Arial"><span style="font-size:9pt;">Placeholder for a filter. You can enter any valid argument here including 'group by', 'having' and 'order'. It will be appended to the generated sql.</span></font></td>
+    </tr>
+    <tr>
+        <td width="126"><font face="Arial"><span style="font-size:9pt;">Filtered</span></font></td>
+        <td width="411"><font face="Arial"><span style="font-size:9pt;">If set, then the Filter property will be used, otherwise ignored</span></font></td>
+    </tr>
+    <tr>
+        <td width="126"><font face="Arial"><span style="font-size:9pt;">Master fields</span></font></td>
+        <td width="411"><font face="Arial"><span style="font-size:9pt;">Contains refrences to the master fields used for a master-detail relationship</span></font></td>
+    </tr>
+    <tr>
+        <td width="126"><font face="Arial" color="red"><span style="font-size:9pt;">Mastersource</span></font></td>
+        <td width="411"><font face="Arial"><span style="font-size:9pt;">Connector for a TDatasource component, needed to setup a master-detail relationship</span></font></td>
+    </tr>
+    <tr>
+        <td width="126"><font face="Arial"><span style="font-size:9pt;">MaxResult</span></font></td>
+        <td width="411"><font face="Arial"><span style="font-size:9pt;">Limits count of resultset to the number of records entered here. Keep 0 to retrieve full resultset (which might consume a lot of time and memory on large resultsets since these will be stored within a in-memory table.</span></font></td>
+    </tr>
+    <tr>
+        <td width="126"><font face="Arial"><span style="font-size:9pt;">Name</span></font></td>
+        <td width="411"><font face="Arial"><span style="font-size:9pt;">Name of the component</span></font></td>
+    </tr>
+    <tr>
+        <td width="126"><font face="Arial"><span style="font-size:9pt;">PrimaryAutoInc</span></font></td>
+        <td width="411"><font face="Arial"><span style="font-size:9pt;">If set, and the table has been created with 'integer primary key' then inserting a record will automatically generate a unique key.</span></font></td>
+    </tr>
+    <tr>
+        <td width="126"><font face="Arial"><span style="font-size:9pt;">ReadOnly</span></font></td>
+        <td width="411"><font face="Arial"><span style="font-size:9pt;">If set, inserts, updates and deletes will generate an exception. (It will generate this only at post time)</span></font></td>
+    </tr>
+    <tr>
+        <td width="126"><font face="Arial"><span style="font-size:9pt;">SQLCursor</span></font></td>
+        <td width="411"><font face="Arial"><span style="font-size:9pt;">If set, an SQL cursor will appear on database access.</span></font></td>
+    </tr>
+    <tr>
+        <td width="126"><font face="Arial"><span style="font-size:9pt;">SQLiteDateFormat</span></font></td>
+        <td width="411">
+            <p><font face="Arial"><span style="font-size:9pt;">If set, datetime values will be stored in the standardformat <b>&nbsp;yyyy-mm-dd hh:nn:ss.zzz </b>This format is independent to locale settings.</span></font></p>
+        </td>
+    </tr>
+    <tr>
+        <td width="126"><font face="Arial"><span style="font-size:9pt;">StartResult</span></font></td>
+        <td width="411"><font face="Arial"><span style="font-size:9pt;">If not 0 this is the first row of the resultset to be returned. I.e. if StartResult=100 and Maxresult=10 then records 100 t/m 110 will be returned (it will generate the <i>limit x,y</i> sql clause)</span></font></td>
+    </tr>
+    <tr>
+        <td width="126"><font face="Arial"><span style="font-size:9pt;">TableDateFormat</span></font></td>
+        <td width="411"><font face="Arial"><span style="font-size:9pt;">Needed for backward compatibility. If date values in the database are stored in a locale way then entering a format here will make the values readable. If you want to update the table with the same dateformat you need to set the shortdateformat and dateseparator global variables in your application too.</span></font></td>
+    </tr>
+    <tr>
+        <td width="126"><font face="Arial"><span style="font-size:9pt;">Tablename</span></font></td>
+        <td width="411"><font face="Arial"><span style="font-size:9pt;">Name of the table to use. (Dropdown box will reveil all tables within the database)</span></font></td>
+    </tr>
+    <tr>
+        <td width="126"><font face="Arial"><span style="font-size:9pt;">Tag</span></font></td>
+        <td width="411"><font face="Arial"><span style="font-size:9pt;">Tag (see Borland documentation)</span></font></td>
+    </tr>
+    <tr>
+        <td width="126"><span style="font-size:9pt;"><font face="Arial" color="blue">TransactionType</font></span></td>
+        <td width="411"><font face="Arial"><span style="font-size:9pt;">Can be set to blank (= default), default, deferred, immediate and exclusive). For usage see the sqlite documentation on </span></font><span style="font-size:9pt;"><a href="http://www.sqlite.org."><font face="Arial">www.sqlite.org.</font></a></span><font face="Arial"><span style="font-size:9pt;"> This value is used when using transactions without declaring it's type.</span></font></td>
+    </tr>
+    <tr>
+        <td width="126">UniDirectional</td>
+        <td width="411">Create a unidirectonal resultset. This will prevent the creation of an internal storage of the resultset. It's very useful for large resultsets without the need for DBGrids.</td>
+    </tr>
+    <tr>
+        <td width="126"><font face="Arial"><span style="font-size:9pt;">TypeLess</span></font></td>
+        <td width="411"><font face="Arial"><span style="font-size:9pt;">If set typecasting of the fields is disabled. No conversion between the database field and Delphi will be performed.</span></font></td>
+    </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+
+</html>

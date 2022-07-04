@@ -1,0 +1,24 @@
+
+***** НИЖЕСЛЕДУЮЩАЯ ИНФОРМАЦИЯ КАСАЕТСЯ ТОЛЬКО Delphi 6 и 7 ****
+
+!Что бы Delphi 6 проекты использующие dOCI компоненты нормально 
+компилировались не забудьте прописать runtime package 'designide':
+
+1. Если вы не используете runtime пакеты :
+Project/Options/закладка Packages/Build with runtime packages должна быть 
+включена. 
+А в строке под ней стерите все названия и впишите только designide. После 
+этого проект должен скомпилиться без ошибки "File not found Proxies.dcu".
+
+2. Если вы используете runtime пакеты то птичка
+Project/Options/закладка Packages/Build with runtime packages
+у вас уже включена. Тогда просто добавьте designide к списку ваших runtime 
+пакетов и перекомпилируйте проект.
+
+Такие шаманства связаны с тем что в Delphi 6 вам запрещено по лицензии 
+распространять design time части (property editors, component editors). 
+DesignIDE.bpl не является свободно распространяемым, вы имеете
+право использовать его только на машине на которой установлена Delphi,
+подобно Component libraries.
+
+

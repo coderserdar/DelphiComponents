@@ -1,0 +1,709 @@
+<!doctype html public "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta name="generator" content=
+  "HTML Tidy for Windows (vers 1st November 2003), see www.w3.org" />
+
+  <title>TMPHexEditor/TMPHexEditorEx readme</title>
+  <meta http-equiv="content-type" content=
+  "text/html; charset=us-ascii" />
+  <meta http-equiv="content-language" content="en" />
+  <meta name="description" content=
+  "TMPHexEditor/TMPHexEditorEx readme" />
+  <meta name="author" content="markus stephany" />
+  <style type="text/css">
+  /*<![cdata[*/
+  h1 {
+  vertical-align:bottom;
+  margin:0;
+  padding:2px;
+  padding-left:4px;
+  font-weight:bold;
+  font-size:130%;
+  background:#ecf1f1;
+  color:#576565;
+  margin-bottom:24px;
+  }
+  h2 {
+  margin:0;
+  padding:2px;
+  padding-left:4px;
+  font-weight:bold;
+  font-size:110%;
+  background:#ecf1f1;
+  color:#576565;
+  }
+  td.su {
+  padding:8px;
+  border-style:none;
+  border-bottom-style:solid;
+  border-width:1px;
+  border-color:#ecf1f1;
+  font-size:100%;
+  }
+  body {
+  font-family:verdana,helvetica,arial,sans-serif;
+  color:black;
+  background:white;
+  font-size:12px;
+  line-height:normal;
+  }
+  a:link {text-decoration:underline; color:black;}
+  a:visited {text-decoration:underline; color:#576565;}
+  a:hover {text-decoration:underline; color:black; background-color: #fcbc05}
+  a:active {text-decoration:underline; color:#576565;}
+  a:focus {text-decoration:underline; color:black; background-color: #fcbc05}
+  div.top {
+  font-size:75%;
+  margin:0;
+  margin-top:16px;
+  margin-bottom:36px;
+  }
+  li { margin-bottom:8px; text-align:left;}
+
+  /*]]>*/
+  </style>
+</head>
+
+<body text="black" bgcolor="white" link="black" alink="gray"
+vlink="black">
+  <a name="_top" id="_top"></a>
+
+  <h1>TMPHexEditor/TMPHexEditorEx components by <a href=
+  "http://www.mirkes.de">mirkes.de</a></h1>
+
+  <p><b>TMPHexEditor</b> is a TCustomGrid descendant to view and
+  edit binary files in hexadecimal and textual format.</p>
+
+  <p><b>TMPHexEditorEx</b> is an advanced hex editor, is supports
+  OLE drag and drop, printing, print preview and more.</p>
+
+  <div class="top" align="right">
+    <a href="#_top">top</a>
+  </div>
+
+  <h2><a name="contents" id="contents"></a>contents:</h2>
+
+  <table summary="" border="0" cellspacing="0" cellpadding="0"
+  width="100%">
+    <tr>
+      <td class="su"><b><a href="#version">version</a></b>:
+      &nbsp;&nbsp;version of the package</td>
+    </tr>
+
+    <tr>
+      <td class="su"><b><a href="#target">target</a></b>:
+      &nbsp;&nbsp;supported borland ides</td>
+    </tr>
+
+    <tr>
+      <td class="su"><b><a href="#sources">sources</a></b>:
+      &nbsp;&nbsp;status of the sourcecode</td>
+    </tr>
+
+    <tr>
+      <td class="su"><b><a href="#history">history</a></b>:
+      &nbsp;&nbsp;version history of the package</td>
+    </tr>
+
+    <tr>
+      <td class="su"><b><a href=
+      "#installation">installation</a></b>: &nbsp;&nbsp;how to
+      install the package</td>
+    </tr>
+
+    <tr>
+      <td class="su"><b><a href="#usage">usage</a></b>:
+      &nbsp;&nbsp;how to use the package</td>
+    </tr>
+
+    <tr>
+      <td class="su"><b><a href="#contact">contact</a></b>:
+      &nbsp;&nbsp;how to contact the author of the package</td>
+    </tr>
+
+    <tr>
+      <td class="su"><b><a href="#license">license</a></b>:
+      &nbsp;&nbsp;license of the package</td>
+    </tr>
+  </table>
+
+  <div class="top" align="right">
+    <a href="#_top">top</a>
+  </div>
+
+  <h2><a name="version" id="version"></a>version:</h2>
+
+  <p>version 02-06-2006, released february 06, 2006</p>
+
+  <div class="top" align="right">
+    <a href="#_top">top</a>
+  </div>
+
+  <h2><a name="target" id="target"></a>target:</h2>
+
+  <p>the package has been tested and should work in
+  Borland Delphi 4, 6 and 7 and C++ Builder 6.</p>
+
+  <div class="top" align="right">
+    <a href="#_top">top</a>
+  </div>
+
+  <h2><a name="sources" id="sources"></a>sources:</h2>
+
+  <p>the component sources are included in the package.</p>
+
+  <div class="top" align="right">
+    <a href="#_top">top</a>
+  </div>
+
+  <h2><a name="history" id="history"></a>history:</h2>
+
+  <p>version 02-06-2006: february 06, 2006</p>
+
+  <ul>
+      <li>changed key handling (VK_INSERT, no action if a control key is pressed)</li>
+      <li>fixed an access violation in CursorOverSelection when moving the cursor over
+           a large selection</li>
+      <li>added conditional defines for delphi 8 and delphi 2005 in MPDELVER.INC</li>
+      <li>removed FastPointer property, use the GetFastPointer function instead (it checks boundaries)</li>
+  </ul>
+
+  <p>version 05-23-2005: may 23, 2005</p>
+
+  <ul>
+    <li>fixed an access violation in the undo storage code when reallocating memory during storing of undo data</li>
+    <li>the secondary focus frame on the hex pane now is painted around the whole actual data value (4 digits if unicode, 2 digits otherwise)</li>
+    <li>added procedure CenterCursorPosition</li>
+    <li>in InsertBuffer and Replace now the position parameter is checked</li>
+  </ul>
+
+  <p>version 12-29-2004: december 29, 2004</p>
+
+  <ul>
+    <li>initialized Result to '' in some string functions/methods to avoid non empty Result vars 
+    at function startup due to compiler optimizations (particularly on d4), e.g. printing did not 
+    work correctly under d4</li>
+    <li>updated some of the sample projects (fixed the broken bcb6 sample, added printing to the 
+    hex viewer and the bcb6 editor sample)</li>
+  </ul>
+
+  <p>version 12-28-2004: december 28, 2004</p>
+
+  <ul>
+    <li>changed the progress event calling part in Find and FindWithWildcard to avoid a 
+    division by zero error when working on files &lt; 500 bytes</li>
+  </ul>
+
+  <p>version 12-21-2004: december 21, 2004</p>
+
+  <ul>
+    <li>changed PrepareFindReplaceData method to avoid an exception when
+    the string parameter is empty</li>
+    <li>TMPHexEditorEx: support for CF_HTML clipboard format</li>
+  </ul>
+
+  <p>version 11-12-2004: november 12, 2004</p>
+
+  <ul>
+    <li>changed mouse selection in insert mode, now it's more text editor-like</li>
+    <li>Undo and Redo disabled when ReadonlyView is True</li>
+    <li>TMPHexEditorEx: ole drag and drop move operation is now disabled if the editor's
+    ReadOnlyView property is set to True</li>
+    <li>some small other modifications</li>
+  </ul>
+
+  <p>version 10-26-2004: october 26, 2004</p>
+
+  <ul>
+    <li>fixed a typecasting bug in the Undo method (integer overflow)</li>
+    <li>added some utility functions for unsigned int64 arithmetics (AddU64, TryAddU64, SubtractU64, TrySubtractU64, MultiplyU64, TryMultiplyU64, DivideU64, TryDivideU64, ModuloU64, TryModuloU64)</li>
+  </ul>
+
+  <p>version 08-29-2004: august 29, 2004</p>
+
+  <ul>
+    <li>added ActiveFieldBackground color property</li>
+    <li>added print flag pfIncludeRuler in TMPHexEditorEx</li>
+  </ul>
+
+  <p>version 08-14-2004: august 14, 2004</p>
+
+  <ul>
+    <li>the caret was not set properly when switching from
+    hex to char pane if no data was in the editor</li>
+    <li>MaskedChars property added</li>
+    <li>changed printing in TMPHexEditorEx (color handling, pfSelectionBold meaning)</li>
+  </ul>
+
+  <p>version 06-15-2004: june 15, 2004</p>
+
+  <ul>
+    <li>added DrawDataPosition and IsDrawDataSelected
+    properties</li>
+
+    <li>changes in drawing/invalidating to avoid unnecessary
+    painting</li>
+
+    <li>OnMouseDown is now called also if offset pane or ruler
+    are clicked</li>
+
+    <li>if BytesPerUnit is changed, the selection is reset if
+    (SelCount mod BytesPerUnit) &lt;&gt; 0</li>
+  </ul>
+
+  <p>version 06-10-2004: june 10, 2004</p>
+
+  <ul>
+    <li>added RulerNumberBase property</li>
+
+    <li>overwritten CanFocus method due to vcl bug (see <a href=
+    "http://info.borland.com/devsupport/delphi/fixes/delphi4/vcl.html">
+    http://info.borland.com/devsupport/delphi/fixes/delphi4/vcl.html</a>,
+    ref 279</li>
+  </ul>
+
+  <p>version 06-07-2004: june 07, 2004</p>
+
+  <ul>
+    <li>fixed a crash ("Grid index out of range") when switching
+    from unicode</li>
+
+    <li>SyncView method modified to be able to synchronize the
+    view of editors with different data sizes/layouts, also with
+    offset</li>
+
+    <li>on changing TopRow/LeftCol the caret is
+    repositionned</li>
+
+    <li>overwritten mouse wheel handling to allow page
+    scrolling</li>
+
+    <li>manual handling of MaskChar property streaming due to bug
+    reports ("Invalid Property Value")</li>
+  </ul>
+
+  <p>version 05-30-2004: may 30, 2004</p>
+
+  <ul>
+    <li>fixed broken CanOpenFile routine (files were always
+    marked read-only)</li>
+  </ul>
+
+  <p>version 05-27-2004: may 27, 2004</p>
+
+  <ul>
+    <li>added IsMaxOffset property</li>
+
+    <li>the control gets focused when the mouse is clicked even
+    when the mouse is over the selection</li>
+  </ul>
+
+  <p>version 05-13-2004: may 13, 2004</p>
+
+  <ul>
+    <li>OnDrawCell is now also called for the top left cell</li>
+
+    <li>setting UnicodeChars to False now correctly sets
+    BytesPerUnit to 1</li>
+  </ul>
+
+  <p>version 04-18-2004: april 18, 2004</p>
+
+  <ul>
+    <li>parameters aBuffer and bBuffer were interchanged in the
+    CopyMemory call in TranslateBufferFromAnsi</li>
+
+    <li>GetOffsetString can now be called in OnGetOffsetText
+    without crashing (infinite recursion = stack overflow)</li>
+  </ul>
+
+  <p>version 01-08-2004: january 08, 2004</p>
+
+  <ul>
+    <li>added some explicit pointer typecasts for {$T+}
+    compatibility</li>
+
+    <li>removed FindTable and FindTableI properties under BCB
+    (BCB doesn't like array properties)</li>
+  </ul>
+
+  <p>version 12-16-2003: december 16, 2003</p>
+
+  <ul>
+    <li>setting the DataSize property is now undoable</li>
+
+    <li>added the public SetDataSizeFillByte property to be able
+    to control what byte is used to enlarge the data</li>
+
+    <li>now checking NoSizeChange before allowing to set
+    DataSize</li>
+
+    <li>CreateUndo is no longer a function, but a procedure. now
+    an exception is raised when no undo record can be
+    created</li>
+  </ul>
+
+  <p>version 12-10-2003: december 10, 2003</p>
+
+  <ul>
+    <li>renamed OnLoadSaveProgress to OnProgress</li>
+
+    <li>added property FindProgress</li>
+
+    <li>added custom find methods OnFind, OnWildcardFind</li>
+
+    <li>Find and FindWithWildcard speeded up by using precompiled
+    character tables</li>
+
+    <li>Find and FindWithWildcard now also fire the OnProgress
+    event if FindProgress is set to true</li>
+
+    <li>fixed a bug in mouse handling (weird selection or line
+    offsets when doublecklicking ruler bar/offset panel)</li>
+
+    <li>modified selection code to better support double byte
+    selection (unicode)</li>
+  </ul>
+
+  <p>version 09-24-2003: september 24, 2003</p>
+
+  <ul>
+    <li>modified the BCB6 package</li>
+  </ul>
+
+  <p>version 09-09-2003: september 09, 2003</p>
+
+  <ul>
+    <li>changed some constants, classes and types from MPTH... to
+    MPH...</li>
+
+    <li>changed MPHCustTransFieldFrom/To to
+    MPHCustomCharConv</li>
+
+    <li>BytesPerBlock and SeparateBlocksInCharField
+    propert&iacute;es added</li>
+
+    <li>DataSize property is writeable now</li>
+
+    <li>Page down key now also reaches the last row</li>
+
+    <li>added OnGetOffsetText property</li>
+
+    <li>added AddSelectionUndo procedure</li>
+
+    <li>added defines for delphi7, renamed delver.inc to
+    mpdelver.inc</li>
+
+    <li>added wildcard search (FindWithWildcard)</li>
+
+    <li>added SeekToEOF</li>
+
+    <li>changed keyboard handling, so OnKeyDown should work
+    better</li>
+
+    <li>added GotoBookmark method to set cursor to a bookmarked
+    position</li>
+
+    <li>added OnBookmarkChanged property</li>
+
+    <li>support for unsigned int64 radix conversions</li>
+
+    <li>Replace method added</li>
+  </ul>
+
+  <p>version 07-05-2003: july 05, 2003</p>
+
+  <ul>
+    <li>better handling of odd sized files when BytesPerUnit
+    &lt;&gt; 1</li>
+
+    <li>added support for pasting clipboard data in fixed
+    filesize mode in TMPHexEditorEx</li>
+
+    <li>added RegEdit_HexData clipboard support in
+    TMPHexEditorEx</li>
+  </ul>
+
+  <p>version 05-25-2003-b: may 25, 2003</p>
+
+  <ul>
+    <li>fixed a bug (moving the cursor beyond eof)</li>
+  </ul>
+
+  <p>version 05-25-2003: may 25, 2003</p>
+
+  <ul>
+    <li>added some kind of ownerdraw (see OnDrawCell)</li>
+
+    <li>no ':' is printed when offset display is not used</li>
+
+    <li>added hpp generating statements for bcb
+    compatibility</li>
+  </ul>
+
+  <p>version 05-20-2003: may 20, 2003</p>
+
+  <ul>
+    <li>renamed, added and changed some methods, classes and
+    properties</li>
+
+    <li>fixed some bugs in the ruler display (e.g. when
+    BytesPerRow is changed)</li>
+
+    <li>fixed some bugs when BytesPerUnit &lt;&gt; 1</li>
+
+    <li>added some unicode support (UnicodeChars and
+    UnicodeBigEndian)</li>
+
+    <li>fixed some half byte (nibble) related bugs</li>
+  </ul>
+
+  <p>version 05-17-2003: may 17, 2003</p>
+
+  <ul>
+    <li>added DisplayStart and DisplayEnd functions to retrieve
+    the data bounds currently displayed</li>
+
+    <li>added BytesPerUnit and RulerBytesPerUnit properties to
+    treat words/dwords/qwords as a unit</li>
+
+    <li>added SyncView procedure and OnSelectionChanged property
+    to synchronize position and selection with another
+    editor</li>
+
+    <li>added ShowPositionIfNotFocused property to show the
+    current position if the editor is not focused</li>
+
+    <li>corrected bottom margin handling when printing</li>
+
+    <li>corrected upper/lowercase hex chars in printing</li>
+
+    <li>the current unit is selected now when doubleclicking
+    data</li>
+
+    <li>added flags pfCurrentViewOnly (just print the currently
+    visible data) to PrintOptions.Flags</li>
+  </ul>
+
+  <p>version 10-25-2002: october 25, 2002</p>
+
+  <ul>
+    <li>corrected the BytesPerColumn default value</li>
+  </ul>
+
+  <p>version 08-18-2002: august 18, 2002</p>
+
+  <ul>
+    <li>modified painting and selection</li>
+
+    <li>implemented an additional ruler bar at the top</li>
+
+    <li>new properties: ShowRuler, DrawGutter3D</li>
+  </ul>
+
+  <p>version 08-12-2002: august 12, 2002</p>
+
+  <ul>
+    <li>modified Changed calls to get correct Modified property
+    in OnChange handler</li>
+  </ul>
+
+  <p>version 08-09-2002: august 09, 2002</p>
+
+  <ul>
+    <li>included missing include file delver.inc</li>
+
+    <li>added OnChange event</li>
+  </ul>
+
+  <p>version 07-21-2002: july 21, 2002</p>
+
+  <p>too many changes to mention here (completely rewritten,
+  basic and advanced versions TMPHexEditor and TMPHexEditorEx),
+  please read the documentation included with this package for
+  more information</p>
+
+  <div class="top" align="right">
+    <a href="#_top">top</a>
+  </div>
+
+  <p>v 1.16: 02/02/99</p>
+
+  <ul>
+    <li>added WMGetDlgCode to avoid problems with
+    shortcut-controls on the form</li>
+
+    <li>changed the property name ReadOnly to ReadOnlyFile ( to
+    avoid confusion, sorry )</li>
+
+    <li>fixed updating when the font gets changed</li>
+
+    <li>added OnKeyPress-support ( now you can modify the key
+    before THexEditor will parse it in this event )</li>
+
+    <li>property WantTabs : Boolean ; if true, you can navigate
+    between char and hex field with the TAB key, if false, you
+    can navigate between your form's controls with the TAB key,
+    to change the current field in THexEditor, you have to use
+    CTRL+T.</li>
+
+    <li>property ReadOnlyView : Boolean ; if true, than the
+    text/data in THexEditor can't get edited via key presses,
+    just selection , moving and scrolling are still
+    available</li>
+  </ul>
+
+  <p>v 1.15: 01/03/99</p>
+
+  <ul>
+    <li>added option odOctal to TOffsetDisplayStyle to display
+    line offset in octal system ("8"-based)</li>
+
+    <li>fixed a problem on creating a THexEditor dynamically (
+    thanks to John Shailes , JohnShailes _at_ email.msn.com
+    )</li>
+
+    <li>property AllowInsertMode : Boolean ; if this is set to
+    true, THexEditor doesn't overwrite but insert values at the
+    current cursor position ( this cannot be set if NoSizeChange
+    is True )</li>
+
+    <li>property IsInsertMode : Boolean ; readonly, if it returns
+    true, the current mode is inserting (see above )</li>
+
+    <li>property AutoCaretMode : Boolean ; if true, the caret
+    will be set to a block in overwrite mode and to a left line
+    in insert mode automatically</li>
+  </ul>
+
+  <p>v 1.14: not released</p>
+
+  <ul>
+    <li>fixed some bugs</li>
+
+    <li>added currently unsupported variable line lengths</li>
+
+    <li>added NoSizeChange property</li>
+  </ul>
+
+  <p>v 1.13: 11/07/98</p>
+
+  <p>added AsText and AsHex property ( and converting functions
+  for "aa00bb" style hex files ) , MaskWhiteSpaces property to
+  avoid the '.' if you have a font that can display chars from #0
+  to #31; also typing capitals rather than lowercase chars in the
+  char field is now possible ( most of this stuff has been
+  suggested from Philippe Chessa , Philippe_Chessa _at_
+  compuserve.com, thanks )</p>
+
+  <p>v 1.12: 10/25/98</p>
+
+  <ul>
+    <li>added Half Byte (Nibble) support (insert/delete, swap
+    hi/lo nibbles in hex view)</li>
+
+    <li>better performance</li>
+
+    <li>the markers are now available for reading/writing</li>
+
+    <li>added support for some different code types in the char
+    view : ANSI , 8 Bit ASCII ( OEM / Dos style ) , 7 Bit ASCII ,
+    Macintosh(TM) character set , IBM(TM) EBCDIC cp 038 also
+    conversion of the file's contents (or a range of them) from
+    one to another code type is possible (many thanks to
+    Christophe LE CORFEC, CLC _at_ khalif.com for ebcdic and half
+    byte suggestions)</li>
+  </ul>
+
+  <p>v 1.1 : 10/04/98</p>
+
+  <ul>
+    <li>added find,seek, customizable layout (many thanks to John
+    Hamm, John _at_ TEMPUS.COM )</li>
+  </ul>
+
+  <p>v 1.0 Beta 1 : 08/15/98</p>
+
+  <ul>
+    <li>first public release</li>
+  </ul>
+
+  <div class="top" align="right">
+    <a href="#_top">top</a>
+  </div>
+
+  <h2><a name="installation" id=
+  "installation"></a>installation:</h2>
+
+  <ul>
+    <li>Delphi 7: open, compile and install the package
+    MPHexEditor_D7.dpk under the vcl\Delphi-7 directory</li>
+
+    <li>Delphi 6: open, compile and install the package
+    MPHexEditor_D6.dpk under the vcl\Delphi-6 directory</li>
+
+    <li>Delphi 4: open, compile and install the package
+    MPHexEditor_D4.dpk under the vcl\Delphi-4 directory</li>
+
+    <li>BCB 6: open, compile and install the package
+    MPHexEditor_BCB6.bpk under the vcl\BCB-6 directory</li>
+
+    <li>others: copy all files under the \vcl subdir in a
+    directory contained in delphi's search path. add
+    MPHexEditorReg.pas to one of your library packages (e.g.
+    "Borland Delphi User Components") and recompile this package.
+    After successfull recompiling, the two components
+    TMPHexEditor and TMPHexEditorEx should be available on the
+    "mirkes.de" tab.</li>
+  </ul>
+
+  <div class="top" align="right">
+    <a href="#_top">top</a>
+  </div>
+
+  <h2><a name="usage" id="usage"></a>usage:</h2>
+
+  <p>read the help file included in this package (under the \doc
+  path).</p>
+
+  <div class="top" align="right">
+    <a href="#_top">top</a>
+  </div>
+
+  <h2><a name="contact" id="contact"></a>contact:</h2>
+
+  <p>the author of this package is markus stephany, losheim am
+  see, saarland, germany.</p>
+
+  <p><a href=
+  "mailto:vcl[at]mirkes[dot]de">mailto:vcl[at]mirkes[dot]de</a>
+  (<b>change the obvious!</b>)</p>
+
+  <p><a href="http://www.mirkes.de">http://www.mirkes.de</a></p>
+
+  <div class="top" align="right">
+    <a href="#_top">top</a>
+  </div>
+
+  <h2><a name="license" id="license"></a>license:</h2>
+  <pre>
+Copyright : &copy; markus stephany, all rights reserved
+
+    This source code is freeware. You may use, change, and distribute without
+    charge the source code as you like. This unit can be used freely in any
+    commercial applications. However, it may not be sold as a standalone product
+    and the source code may not be included in a commercial product. This unit
+    is provided as is with no warrent or support. Make sure to read relevant
+    information and documentation from Microsoft before using this unit.
+</pre>
+
+  <div class="top" align="right">
+    <a href="#_top">top</a>
+  </div>
+
+  <h2>-end-</h2>
+</body>
+</html>

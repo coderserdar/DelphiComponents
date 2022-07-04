@@ -1,0 +1,22 @@
+
+***** INFORMATION BELOW APPLIES ONLY TO Delphi 6 ¨ 7 ****
+
+To compile your Delphi 6 projects which uses dOCI components do not
+forget customize runtime package 'desingide' in project options as described below.
+
+1. If you do not use runtime packages in your project then go
+Project/Options/Packages tab/Runtime packages 
+and check checkbox "Build with runtime packages", remove all from edit box below,
+type designide (only one word!)  and press OK.
+
+2. If you are using runtime packages in your project then
+checkbox "Build with runtime packages" in
+Project/Options/Packages tab/Runtime packages already checked.
+You only need to add designide word to the list of your runtime packages.
+
+
+After manipulations above the error "File not found 
+Proxies.dcu" will not appeares any more.
+
+
+

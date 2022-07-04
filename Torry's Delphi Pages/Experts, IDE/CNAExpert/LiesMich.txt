@@ -1,0 +1,93 @@
+              *******************************************
+              *    Component Naming Assistant (CNA)     *
+              *                                         *
+              *          by TheUnknownOnes              *
+              *           chaosben@web.de               *
+              *          MarcoWarm@gmx.net              *
+              *******************************************
+
+Was ist es und was tut es?
+==========================
+
+CNA ist ein IDE Experte für Delphi 6,7 und 2005. Er ermöglicht das benennen und 
+initialisieren von Komponenenten in dem Moment, da sie auf den Formulardesigner 
+gezogen werden.
+
+Installation
+============
+
+WICHTIG!!!
+Bevor du CNA installierst solltest du alle geöffneten Formulardesigner 
+schließen!!!
+
+Kopiere einfach die Datei CNAExpertxx.bpl in ein Verzeichnis deiner Wahl und 
+installiere das Package wie gewohnt über Komponente->Packages installieren.
+
+Und jetzt?
+==========
+
+CNA registiert sich im Menü von Delphi unter dem Eintrag Tools. Dieser 
+Menüeintrag startet den Konfigurationsdialog.
+Falls du Delphi 6 oder 7 verwendest, kannst du über diesen Menüpunkt ebenfalls 
+das aktive Profil wechseln.
+Und für alle Delphi 2005 Nutzer wird über der Komponentenpalette eine 
+zusätzliche Schaltfläche erscheinen, mit deren Hilfe man das aktive Profil 
+wechseln kann.
+
+Profile ... was ist das und warum solltest du sie benutzen?
+===========================================================
+
+Profile helfen dabei verschiedene Einstellungen zu verwalten. Nehmen wir an, du 
+möchtest in einem Projekt alle Buttons btn_MeinName nennen und in einem anderen 
+jedoch ButMeinName. Dafür erzeugst du einfach zwei verschiedene Profile, und in 
+konfigurierst die Gruppen nach deinen jeweiligen Vorstellungen.
+
+Gruppen ... klingt schlimmer als es ist
+=======================================
+
+Jedes Profil sollte mindestens eine Komponentengruppe enthalten. Eine solche
+Gruppe stellt die Schnittmenge aller Eigenschaften der Komponenten dar, die
+darin enthalten sind. Wähle einfach eine Komponenten aus der ComboBox und füge 
+sie in die ausgewählte oder in eine neue Gruppe ein. 
+Du kannst jetzt natürlich lediglich die Eigenschaften ändern, die alle 
+Komponenten der Gruppe gemeinsam haben. D.h. du kannst keine Standard-Caption 
+für einen TButton festlegen, wenn die Gruppe auch ein TEdit enthält.
+
+Auf ans Werk
+============
+
+Durch Rechtsklick im Treeview solltest du zunächst ein neues Profil anlegen.
+Wähle dann eine Gruppe im Treeview aus oder lege sie (per Rechtsklick) an. 
+Jetzt siehst du eine Liste aller Eigenschaften und ob sie gesetzt wurden und 
+mit welchem Standardwert. Klicke einfach doppelt auf einen solchen Eintrag und 
+du kannst ihn ändern.
+
+Wert löschen: Diese Eigenschaft wird nicht vom CNA initialisiert
+Zeige Eingabedialog: Vor der Änderung der Eigenschaft fragt CNA nach, ob der 
+Standardwert übernommen werden soll.
+
+Worüber du stolpern könntest ... Was mach ich, wenn
+===================================================
+
+F: ... ich mir vollkommen sicher bin, daß ich eine bestimmte Komponente 
+   installiert habe, ich sie aber nicht in der Objektauswahl finde?
+
+A: Das könnte aufgrund einer neuen Funktion von Delphi 2005 passieren. Dabei 
+   werden ausgewählte Packages bei Bedarf (on demand) geladen. Um trotzdem an
+   die Komponente zu kommen erzeuge sie einfach auf einem Formulardesigner und 
+   dann kannst du sie auch verwenden.
+   Für genauere Informationen schau dort nach:
+      http://blogs.borland.com/abauer/archive/2004/11/15/1833.aspx
+
+F: ... ein Fehler wiederholt auftritt und nicht von mir verursacht wird? :)
+
+A: Schliesse dann bitte dein Delphi und überschreibe die CNAExpertxx.bpl
+   mit der CNAExpertxx.bpl aus dem deutsch_debug-Verzeichniss dieses Archivs.
+   Starte dann Delphi neu und provoziere den Fehler. Jetzt sollte ein anderer
+   Fehlerdialog erscheinen, der es ermöglicht einen Bug-Report zu senden.
+   Tu das bitte entsprechend den Anweisungen. Abschließend solltest du dein
+   Delphi wieder schliessen und die originale CNAExpertxx.bpl wiederherstellen.
+
+-------------------------------------------------------------------------------
+Grammatische und orthographische Fehler sind beabsichtigt und sollen der 
+Belustigung des Lesers dienen.

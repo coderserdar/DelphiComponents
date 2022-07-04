@@ -1,0 +1,174 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{863FFB97-95C5-4F8B-9E08-2DDB4D3A6A0A}</ProjectGuid>
+			<MainSource>D2010_SqlitePassDbo_Designtime.dpk</MainSource>
+			<ProjectVersion>12.0</ProjectVersion>
+			<Config Condition="'$(Config)'==''">Release</Config>
+			<DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_1)'!=''">
+			<Cfg_1>true</Cfg_1>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Débogage' or '$(Cfg_2)'!=''">
+			<Cfg_2>true</Cfg_2>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Base)'!=''">
+			<DCC_SymbolReferenceInfo>1</DCC_SymbolReferenceInfo>
+			<DCC_UnitSearchPath>..\..\..\Sources\DesignTimeEditors;..\..\..\Sources;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+			<DesignOnlyPackage>false</DesignOnlyPackage>
+			<BRCC_IncludePath>..\..\..\Sources;..\..\..\Sources\DesignTimeEditors;$(BRCC_IncludePath)</BRCC_IncludePath>
+			<DCC_ImageBase>00400000</DCC_ImageBase>
+			<GenPackage>true</GenPackage>
+			<DCC_DependencyCheckOutputName>C:\Users\Public\Documents\RAD Studio\7.0\Bpl\D2010_SqlitePassDbo_Designtime.bpl</DCC_DependencyCheckOutputName>
+			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;$(DCC_UnitAlias)</DCC_UnitAlias>
+			<DCC_Platform>x86</DCC_Platform>
+			<DCC_E>false</DCC_E>
+			<DCC_S>false</DCC_S>
+			<GenDll>true</GenDll>
+			<DCC_N>false</DCC_N>
+			<DCC_F>false</DCC_F>
+			<DCC_K>false</DCC_K>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_1)'!=''">
+			<DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
+			<DCC_Define>RELEASE;$(DCC_Define)</DCC_Define>
+			<DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+			<DCC_DebugInformation>false</DCC_DebugInformation>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_2)'!=''">
+			<DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
+		</PropertyGroup>
+		<ItemGroup>
+			<DelphiCompile Include="D2010_SqlitePassDbo_Designtime.dpk">
+				<MainSource>MainSource</MainSource>
+			</DelphiCompile>
+			<DCCReference Include="rtl.dcp"/>
+			<DCCReference Include="D2010_SqlitePassDbo_Runtime.dcp"/>
+			<DCCReference Include="Designide.dcp"/>
+			<DCCReference Include="vcldb.dcp"/>
+			<DCCReference Include="..\..\..\Sources\DesignTimeEditors\SqlitePassSortByDialog.pas">
+				<Form>SqlitePassSortedByDialog</Form>
+			</DCCReference>
+			<DCCReference Include="..\..\..\Sources\DesignTimeEditors\RegisterSqlitePassDbo.pas"/>
+			<DCCReference Include="..\..\..\Sources\DesignTimeEditors\SqlitePassChooseDatasetDialog.pas">
+				<Form>SqlitePassChooseDatasetDialog</Form>
+			</DCCReference>
+			<DCCReference Include="..\..\..\Sources\DesignTimeEditors\SqlitePassCustomFieldDefsDialog.pas">
+				<Form>SqlitePassCustomFieldDefsDlg</Form>
+			</DCCReference>
+			<DCCReference Include="..\..\..\Sources\DesignTimeEditors\SqlitePassDataTypesDialog.pas">
+				<Form>SqlitePassDatatypesDlg</Form>
+			</DCCReference>
+			<DCCReference Include="..\..\..\Sources\DesignTimeEditors\SqlitePassDesignErrorLang.pas"/>
+			<DCCReference Include="..\..\..\Sources\DesignTimeEditors\SqlitePassFieldDefsDialog.pas">
+				<Form>SqlitePassFieldDefsDialog</Form>
+			</DCCReference>
+			<DCCReference Include="..\..\..\Sources\DesignTimeEditors\SqlitePassFiltersDialog.pas">
+				<Form>SqlitePassFilterDialog</Form>
+			</DCCReference>
+			<DCCReference Include="..\..\..\Sources\DesignTimeEditors\SqlitePassIndexesDialog.pas">
+				<Form>SqlitePassIndexDefsDialog</Form>
+			</DCCReference>
+			<DCCReference Include="..\..\..\Sources\DesignTimeEditors\SqlitePassMasterDetailFieldsDialog.pas">
+				<Form>SqlitePassMasterDetailDialog</Form>
+			</DCCReference>
+			<DCCReference Include="..\..\..\Sources\DesignTimeEditors\SqlitePassLocateDialog.pas">
+				<Form>SqlitePassLocateDlg</Form>
+			</DCCReference>
+			<DCCReference Include="..\..\..\Sources\DesignTimeEditors\SqlitePassCreateNewDatabaseDialog.pas">
+				<Form>SqlitePassCreateNewDatabaseDlg</Form>
+			</DCCReference>
+			<DCCReference Include="..\..\..\Sources\DesignTimeEditors\SqlitePassCreateTableDialog.pas">
+				<Form>SqlitePassCreateTableDlg</Form>
+			</DCCReference>
+			<DCCReference Include="..\..\..\Sources\DesignTimeEditors\SqlitePassErrorLogDialog.pas">
+				<Form>SqlitePassErrorLogDlg</Form>
+			</DCCReference>
+			<DCCReference Include="..\..\..\Sources\DesignTimeEditors\SqlitePassVisualTools.pas"/>
+			<DCCReference Include="..\..\..\sources\designtimeeditors\SqlitePassVisualToolsLang.pas"/>
+			<DCCReference Include="..\..\..\Sources\DesignTimeEditors\SqlitePassFilterValues.pas">
+				<Form>SqlitePassFilterValuesDlg</Form>
+			</DCCReference>
+			<DCCReference Include="..\..\..\Sources\DesignTimeEditors\SqlitePassDataTypeOptions.pas">
+				<Form>SqlitePassDatatypeOptionsDlg</Form>
+			</DCCReference>
+			<DCCReference Include="..\..\..\Sources\DesignTimeEditors\SqlitePassParserDialog.pas">
+				<Form>SqlitePassParserDlg</Form>
+			</DCCReference>
+			<DCCReference Include="..\..\..\Sources\DesignTimeEditors\SqlitePassCreateNewIndex.pas">
+				<Form>SqlitePassFormCreateNewIndex</Form>
+			</DCCReference>
+			<DCCReference Include="..\..\..\Sources\DesignTimeEditors\SqlitePassRenameItem.pas">
+				<Form>SqlitePassFormRenameItem</Form>
+			</DCCReference>
+			<DCCReference Include="..\..\..\Sources\DesignTimeEditors\SqlitePassFiltersDialogTemplate.pas">
+				<Form>SqlitePassFilterDialogTemplate</Form>
+			</DCCReference>
+			<DCCReference Include="..\..\..\Sources\DesignTimeEditors\SqlitePassIndexedByDialog.pas">
+				<Form>SqlitePassIndexedByDialog</Form>
+			</DCCReference>
+			<BuildConfiguration Include="Base">
+				<Key>Base</Key>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Débogage">
+				<Key>Cfg_2</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Release">
+				<Key>Cfg_1</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+		</ItemGroup>
+		<Import Project="$(BDS)\Bin\CodeGear.Delphi.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Delphi.Targets')"/>
+		<ProjectExtensions>
+			<Borland.Personality>Delphi.Personality.12</Borland.Personality>
+			<Borland.ProjectType>Package</Borland.ProjectType>
+			<BorlandProject>
+				<Delphi.Personality>
+					<Source>
+						<Source Name="MainSource">D2010_SqlitePassDbo_Designtime.dpk</Source>
+					</Source>
+					<Parameters>
+						<Parameters Name="UseLauncher">False</Parameters>
+						<Parameters Name="LoadAllSymbols">True</Parameters>
+						<Parameters Name="LoadUnspecifiedSymbols">False</Parameters>
+					</Parameters>
+					<VersionInfo>
+						<VersionInfo Name="IncludeVerInfo">True</VersionInfo>
+						<VersionInfo Name="AutoIncBuild">False</VersionInfo>
+						<VersionInfo Name="MajorVer">0</VersionInfo>
+						<VersionInfo Name="MinorVer">5</VersionInfo>
+						<VersionInfo Name="Release">0</VersionInfo>
+						<VersionInfo Name="Build">0</VersionInfo>
+						<VersionInfo Name="Debug">False</VersionInfo>
+						<VersionInfo Name="PreRelease">False</VersionInfo>
+						<VersionInfo Name="Special">False</VersionInfo>
+						<VersionInfo Name="Private">False</VersionInfo>
+						<VersionInfo Name="DLL">False</VersionInfo>
+						<VersionInfo Name="Locale">1036</VersionInfo>
+						<VersionInfo Name="CodePage">1252</VersionInfo>
+					</VersionInfo>
+					<VersionInfoKeys>
+						<VersionInfoKeys Name="CompanyName"/>
+						<VersionInfoKeys Name="FileDescription"/>
+						<VersionInfoKeys Name="FileVersion">0.5.0.0</VersionInfoKeys>
+						<VersionInfoKeys Name="InternalName"/>
+						<VersionInfoKeys Name="LegalCopyright"/>
+						<VersionInfoKeys Name="LegalTrademarks"/>
+						<VersionInfoKeys Name="OriginalFilename"/>
+						<VersionInfoKeys Name="ProductName"/>
+						<VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys>
+						<VersionInfoKeys Name="Comments"/>
+					</VersionInfoKeys>
+				</Delphi.Personality>
+			</BorlandProject>
+			<ProjectFileVersion>12</ProjectFileVersion>
+		</ProjectExtensions>
+	</Project>

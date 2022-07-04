@@ -1,0 +1,51 @@
+#   File generated automatically by Lazarus Package Manager
+#
+#   Makefile.fpc for lazextcomponents 1.0
+#
+#   This file was generated on 19-10-08
+
+[package]
+name=lazextcomponents
+version=1.0
+
+[compiler]
+unittargetdir=lib/$(CPU_TARGET)-$(OS_TARGET)
+unitdir=composants/ ../../../../../../../usr/lib/lazarus/components/synedit/units/$(CPU_TARGET)-$(OS_TARGET)/ lib/$(CPU_TARGET)-$(OS_TARGET)/ ../../Lazarus/composants/virtualtreeview/linux/lib/$(CPU_TARGET)-$(OS_TARGET)/ ../../Lazarus/composants/jvXP/lib/$(CPU_TARGET)-$(OS_TARGET)/ ../../Lazarus/composants/Imaging/Source/Projects/lib/$(CPU_TARGET)-/ ../../Lazarus/composants/rxfpc/lib/ ../../../../../../../usr/lib/lazarus/components/rx/lib/ ../../../../../../../usr/lib/lazarus/ideintf/units/$(CPU_TARGET)-$(OS_TARGET)/ ../../Lazarus/composants/lazrichview/lib/$(CPU_TARGET)-$(OS_TARGET)/ ../../../../../../../usr/lib/lazarus/components/printers/lib/$(CPU_TARGET)-$(OS_TARGET)/$(LCL_PLATFORM)/ ../../../../../../../usr/lib/lazarus/lcl/units/$(CPU_TARGET)-$(OS_TARGET)/ ../../../../../../../usr/lib/lazarus/lcl/units/$(CPU_TARGET)-$(OS_TARGET)/$(LCL_PLATFORM)/ ../../../../../../../usr/lib/lazarus/packager/units/$(CPU_TARGET)-$(OS_TARGET)/ ./
+includedir=composants/ ./
+options=-dLCL -dLCL$(LCL_PLATFORM) -MObjFPC -Sgi
+
+[target]
+units=lazextcomponents.pas
+
+[clean]
+files=$(wildcard $(COMPILER_UNITTARGETDIR)/*$(OEXT)) \
+      $(wildcard $(COMPILER_UNITTARGETDIR)/*$(PPUEXT)) \
+      $(wildcard $(COMPILER_UNITTARGETDIR)/*$(RSTEXT)) \
+      $(wildcard $(COMPILER_UNITTARGETDIR)/*.compiled) \
+      $(wildcard *$(OEXT)) $(wildcard *$(PPUEXT)) $(wildcard *$(RSTEXT))
+[prerules]
+# LCL Platform
+ifndef LCL_PLATFORM
+ifeq ($(OS_TARGET),win32)
+LCL_PLATFORM=win32
+else
+ifeq ($(OS_TARGET),win64)
+LCL_PLATFORM=win32
+else
+ifeq ($(OS_TARGET),darwin)
+LCL_PLATFORM=carbon
+else
+LCL_PLATFORM=gtk
+endif
+endif
+endif
+endif
+export LCL_PLATFORM
+
+[rules]
+.PHONY: cleartarget all
+
+cleartarget:
+        -$(DEL) $(COMPILER_UNITTARGETDIR)/lazextcomponents$(PPUEXT)
+
+all: cleartarget $(COMPILER_UNITTARGETDIR) lazextcomponents$(PPUEXT)

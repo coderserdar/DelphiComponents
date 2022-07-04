@@ -1,0 +1,70 @@
+VG VCL Library 5.2
+------------------
+New languages
+  German, Italian
+
+New components
+  TAppIniFile
+  TPropStorage
+  TvgPanel
+  TvgLabel
+  TvgListBox
+  TvgComboBox
+  TvgListView 
+  TvgTreeView
+  TvgTreeViewCombo
+  TvgDBListBox
+  TvgDBComboBox
+  TvgDBText
+
+New properties and methods
+  TItemList.ItemByName
+  TExplorerNodes.AnsiSort, Sorted, DefaultSort, SortedChanged, ParentDrawing, GetDrawingParams,
+  TExplorerNodes.Changed, ChangedChildren moved to public
+  ExplorerControls: ExplorerDrawing
+  TCustomComboBoxEdit.DropDown
+  TClickEdit.Flat
+  TvgTranslator.AppIniFile
+  TMoneyString.Billion
+  TvgThread.OnException
+  TCustomPoolInstance.PoolManager
+  TCustomPoolManager.ClearUnused
+  TvgThreadList.BeginRead, EndRead, BeginWrite, EndWrite
+  TClassList.Clear
+  TMSSCScript.Methods, Timeout, ProxyManager
+
+New functions
+  vgUtils.pas
+    GetFileNames, ReplaceStr, WordCount, WordPosition, ExtractWord
+    StringsHistoryInsertObject, StringsHistoryInsert
+    StringsHistoryAddObject, StringsHistoryAdd
+    ListAssign
+    SaveStream
+
+  vgDBUtl.pas
+    IsBlobField, GetFieldValue, GetFieldValuesEx
+
+Other changes   
+  Significant scripting enhancements:
+  The implementation of IDispatch interface for TObject provides an easy 
+  VCL integration into OLE automation scripting environments (TMSSCScript).
+
+  Fixed C++Builder installation problems.
+
+VG Middleware Library 5.2
+-------------------------
+New languages
+  German, Italian
+
+New properties, methods, events:
+  TvgCustomRemoteServer.OnConnectError
+  TvgClientDatabase.CreateDatabase, CreateParams
+
+Other changes   
+  Fixed C++Builder 3.0 installation problems.
+
+-------------------------------------------
+Vladimir Gaitanoff
+WWW:             http://www.tsinet.ru/~vg/
+E-mail:          vg@tsinet.ru
+                                                    

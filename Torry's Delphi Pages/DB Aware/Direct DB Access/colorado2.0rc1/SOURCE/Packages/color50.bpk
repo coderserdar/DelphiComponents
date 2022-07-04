@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!-- C++Builder XML Project -->
+<PROJECT>
+  <MACROS>
+    <VERSION value="BCB.05.00"/>
+    <PROJECT value="color50.bpl"/>
+    <OBJFILES value="color50.obj ..\colorado\cadodb.obj ..\colorado\cconsts.obj 
+      ..\colorado\cfields.obj ..\colorado\cdlink.obj ..\colorado\cmsdasc.obj 
+      ..\colorado\colorado.obj ..\colorado\cschema.obj ..\colorado\cmdacver.obj 
+      ..\colorado\cerrdlg.obj ..\colorado\oledbadm.obj ..\colorado\cblobdat.obj 
+      ..\colorx\cadoxdb.obj ..\colorx\colorx.obj"/>
+    <RESFILES value="color.res"/>
+    <DEFFILE value=""/>
+    <RESDEPEN value="$(RESFILES)"/>
+    <LIBFILES value=""/>
+    <LIBRARIES value=""/>
+    <SPARELIBS value="vcl50.lib vcldb50.lib"/>
+    <PACKAGES value="vcl50.bpi vcldb50.bpi"/>
+    <PATHCPP value=".;"/>
+    <PATHPAS value=".;..\colorado;..\colorx"/>
+    <PATHRC value=".;"/>
+    <PATHASM value=".;"/>
+    <DEBUGLIBPATH value="$(BCB)\lib\debug"/>
+    <RELEASELIBPATH value="$(BCB)\lib\release"/>
+    <LINKER value="ilink32"/>
+    <USERDEFINES value=""/>
+    <SYSDEFINES value="NO_STRICT;_RTLDLL;USEPACKAGES"/>
+    <MAINSOURCE value="color50.cpp"/>
+    <INCLUDEPATH value="..\colorx;..\colorado;$(BCB)\include;$(BCB)\include\vcl"/>
+    <LIBPATH value="..\colorx;..\colorado;$(BCB)\lib\obj;$(BCB)\lib;..\..\lib"/>
+    <WARNINGS value="-w-par"/>
+    <OTHERFILES value=""/>
+  </MACROS>
+  <OPTIONS>
+    <CFLAG1 value="-O2 -H=$(BCB)\lib\vcl50.csm -Hc -Vx -Ve -X- -pr -a4 
+      -b- -k- -vi -c -tWM"/>
+    <PFLAGS value="-$YD -$W -$O- -$A8 -v -JPHNE -M -E..\..\LIB -N..\..\LIB -N1..\..\LIB -N2..\..\LIB -N3..\..\LIB -LN..\..\LIB -LE..\..\LIB"/>
+    <RFLAGS value=""/>
+    <AFLAGS value="/mx /w2 /zn"/>
+    <LFLAGS value="-l..\..\LIB -I..\..\LIB -D&quot;colorADO Database Components&quot; -aa -Tpp -Gpr -x -Gn -Gl -Gi"/>
+    <OTHERFILES value=""/>
+  </OPTIONS>
+  <LINKER>
+    <ALLOBJ value="c0pkg32.obj $(PACKAGES) Memmgr.Lib sysinit.obj $(OBJFILES)"/>
+    <ALLRES value="$(RESFILES)"/>
+    <ALLLIB value="$(LIBFILES) $(LIBRARIES) import32.lib cp32mti.lib"/>
+    <OTHERFILES value=""/>
+  </LINKER>
+  <IDEOPTIONS>
+[Version Info]
+IncludeVerInfo=0
+  </IDEOPTIONS>
+</PROJECT>

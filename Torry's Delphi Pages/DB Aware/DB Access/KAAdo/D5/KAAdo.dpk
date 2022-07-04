@@ -1,0 +1,55 @@
+package KAAdo;
+
+{$R *.RES}
+{$R 'KAAdoDataBase.dcr'}
+{$ALIGN ON}
+{$ASSERTIONS OFF}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS OFF}
+{$LOCALSYMBOLS OFF}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'KAAdo'}
+{$IMPLICITBUILD OFF}
+
+requires
+  Vcl50,
+  Vcldb50;
+
+contains
+  KAAdoDatabase in 'KAAdoDatabase.pas',
+  KAAdoOLEDBApi in 'KAAdoOLEDBApi.pas',
+  KAAdoConnectDialog in 'KAAdoConnectDialog.pas',
+  KAAdoApi in 'KAAdoApi.pas',
+  KAAdoAccess in 'KAAdoAccess.pas',
+  KAAdoDBLoginUnit in 'KAAdoDBLoginUnit.pas',
+  KAJROApi in 'KAJROApi.pas',
+  KAAdoUtils in 'KAAdoUtils.pas',
+  KAAdoTable in 'KAAdoTable.pas',
+  KAAdoXApi in 'KAAdoXApi.pas',
+  KAAdoSortByDialog in 'KAAdoSortByDialog.pas',
+  KAAdoMasterDetailFormUnit in 'KAAdoMasterDetailFormUnit.pas',
+  KAAdoQueryDefDialogUnit in 'KAAdoQueryDefDialogUnit.pas',
+  KAAdoCSDialogUnit in 'KAAdoCSDialogUnit.pas',
+  KAAdoEncrypter in 'KAAdoEncrypter.pas',
+  KAAdoXML in 'KAAdoXML.pas',
+  KAAdoPropertiesUnit in 'KAAdoPropertiesUnit.pas',
+  KAAdoReg in 'KAAdoReg.pas',
+  KAXMLHTTP in 'KAXMLHTTP.pas',
+  KAMSXMLAPI in 'KAMSXMLAPI.pas';
+
+end.

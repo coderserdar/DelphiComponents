@@ -1,0 +1,44 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{81eca152-4ad5-47b6-a44e-2ea29828567e}</ProjectGuid>
+  </PropertyGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Projects Include="ExceptionPlugin.dproj" />
+    <Projects Include="PlugInDemo.dproj" />
+  </ItemGroup>
+  <ProjectExtensions>
+    <Borland.Personality>Default.Personality</Borland.Personality>
+    <Borland.ProjectType />
+    <BorlandProject>
+  <BorlandProject xmlns=""> <Default.Personality> </Default.Personality> </BorlandProject></BorlandProject>
+  </ProjectExtensions>
+  <Target Name="ExceptionPlugin">
+    <MSBuild Projects="ExceptionPlugin.dproj" Targets="" />
+  </Target>
+  <Target Name="ExceptionPlugin:Clean">
+    <MSBuild Projects="ExceptionPlugin.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="ExceptionPlugin:Make">
+    <MSBuild Projects="ExceptionPlugin.dproj" Targets="Make" />
+  </Target>
+  <Target Name="PlugInDemo">
+    <MSBuild Projects="PlugInDemo.dproj" Targets="" />
+  </Target>
+  <Target Name="PlugInDemo:Clean">
+    <MSBuild Projects="PlugInDemo.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="PlugInDemo:Make">
+    <MSBuild Projects="PlugInDemo.dproj" Targets="Make" />
+  </Target>
+  <Target Name="Build">
+    <CallTarget Targets="ExceptionPlugin;PlugInDemo" />
+  </Target>
+  <Target Name="Clean">
+    <CallTarget Targets="ExceptionPlugin:Clean;PlugInDemo:Clean" />
+  </Target>
+  <Target Name="Make">
+    <CallTarget Targets="ExceptionPlugin:Make;PlugInDemo:Make" />
+  </Target>
+  <Import Condition="Exists('$(MSBuildBinPath)\Borland.Group.Targets')" Project="$(MSBuildBinPath)\Borland.Group.Targets" />
+</Project>

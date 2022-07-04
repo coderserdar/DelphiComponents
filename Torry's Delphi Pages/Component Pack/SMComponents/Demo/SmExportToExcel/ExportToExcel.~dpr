@@ -1,0 +1,13 @@
+program ExportToExcel;
+
+uses
+  Forms,
+  Main in 'Main.pas' {Export};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.CreateForm(TExport, Export);
+  Application.Run;
+end.

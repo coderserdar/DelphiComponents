@@ -1,0 +1,33 @@
+object PrintStatusForm: TPrintStatusForm
+  Left = 1299
+  Height = 80
+  Top = 933
+  Width = 248
+  BorderIcons = []
+  BorderStyle = bsDialog
+  Caption = 'Print status'
+  ClientHeight = 80
+  ClientWidth = 248
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  FormStyle = fsStayOnTop
+  Position = poScreenCenter
+  LCLVersion = '0.9.29'
+  object LBPage: TLabel
+    Left = 8
+    Height = 14
+    Top = 16
+    Width = 36
+    Caption = 'LBPage'
+    ParentColor = False
+  end
+  object BUAbort: TButton
+    Left = 88
+    Height = 25
+    Top = 48
+    Width = 75
+    Caption = '&Abort'
+    OnClick = BUAbortClick
+    TabOrder = 0
+  end
+end

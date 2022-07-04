@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+<CONFIG>
+  <Package Version="2">
+    <PathDelim Value="\"/>
+    <Name Value="fblib"/>
+    <Author Value="Alessandro Batisti"/>
+    <CompilerOptions>
+      <Version Value="5"/>
+      <PathDelim Value="\"/>
+      <SearchPaths>
+        <OtherUnitFiles Value="$(LazarusDir)\lcl\units\$(TargetCPU)-$(TargetOS)\"/>
+        <UnitOutputDirectory Value="lib\$(TargetCPU)-$(Target_OS)\"/>
+      </SearchPaths>
+      <CodeGeneration>
+        <Generate Value="Faster"/>
+      </CodeGeneration>
+      <Other>
+        <CompilerPath Value="$(CompPath)"/>
+      </Other>
+    </CompilerOptions>
+    <Description Value="FbLib Firebird Library		
+"/>
+    <License Value="LGPL
+"/>
+    <Version Minor="8" Release="3"/>
+    <Files Count="17">
+      <Item1>
+        <Filename Value="FBLDatabase.pas"/>
+        <UnitName Value="FBLDatabase"/>
+      </Item1>
+      <Item2>
+        <Filename Value="FBLTransaction.pas"/>
+        <UnitName Value="FBLTransaction"/>
+      </Item2>
+      <Item3>
+        <Filename Value="FBLDsql.pas"/>
+        <UnitName Value="FBLDsql"/>
+      </Item3>
+      <Item4>
+        <Filename Value="FBLMetadata.pas"/>
+        <UnitName Value="FBLMetadata"/>
+      </Item4>
+      <Item5>
+        <Filename Value="FBLScript.pas"/>
+        <UnitName Value="FBLScript"/>
+      </Item5>
+      <Item6>
+        <Filename Value="FBLService.pas"/>
+        <UnitName Value="FBLService"/>
+      </Item6>
+      <Item7>
+        <Filename Value="FBLEvents.pas"/>
+        <UnitName Value="FBLEvents"/>
+      </Item7>
+      <Item8>
+        <Filename Value="FBLParamDsql.pas"/>
+        <UnitName Value="FBLParamDsql"/>
+      </Item8>
+      <Item9>
+        <Filename Value="FBLReg.pas"/>
+        <HasRegisterProc Value="True"/>
+        <UnitName Value="FBLReg"/>
+      </Item9>
+      <Item10>
+        <Filename Value="FBLConst.pas"/>
+        <UnitName Value="FBLConst"/>
+      </Item10>
+      <Item11>
+        <Filename Value="FBLExcept.pas"/>
+        <UnitName Value="FBLExcept"/>
+      </Item11>
+      <Item12>
+        <Filename Value="FBLHtmlExport.pas"/>
+        <UnitName Value="FBLHtmlExport"/>
+      </Item12>
+      <Item13>
+        <Filename Value="FBLmixf.pas"/>
+        <UnitName Value="FBLmixf"/>
+      </Item13>
+      <Item14>
+        <Filename Value="FBLTableToSqlScriptExport.pas"/>
+        <UnitName Value="FBLTableToSqlScriptExport"/>
+      </Item14>
+      <Item15>
+        <Filename Value="FBLTextGridExport.pas"/>
+        <UnitName Value="FBLTextGridExport"/>
+      </Item15>
+      <Item16>
+        <Filename Value="ibase_h.pas"/>
+        <UnitName Value="ibase_h"/>
+      </Item16>
+      <Item17>
+        <Filename Value="iberror_h.pas"/>
+        <UnitName Value="iberror_h"/>
+      </Item17>
+    </Files>
+    <Type Value="RunAndDesignTime"/>
+    <RequiredPkgs Count="1">
+      <Item1>
+        <PackageName Value="FCL"/>
+        <MinVersion Major="1" Valid="True"/>
+      </Item1>
+    </RequiredPkgs>
+    <UsageOptions>
+      <UnitPath Value="$(PkgOutDir)\"/>
+    </UsageOptions>
+    <PublishOptions>
+      <Version Value="2"/>
+      <DestinationDirectory Value="$(TestDir)\publishedpackage\"/>
+      <IgnoreBinaries Value="False"/>
+    </PublishOptions>
+  </Package>
+</CONFIG>

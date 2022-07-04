@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+<meta name="GENERATOR" content="PasDoc 0.11.0">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<title>SqlitePass Database Objects: SqlitePassDbo: Class TSqlitePassTranslator_Kexi</title>
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body bgcolor="#ffffff" text="#000000" link="#0000ff" vlink="#800080" alink="#FF0000">
+<a name="TSqlitePassTranslator_Kexi"></a><h1 class="cio">Class TSqlitePassTranslator_Kexi</h1>
+<table class="sections wide_list">
+<tr>
+<td><a class="section"  href="#%40Description">Description</a></td><td><a class="section"  href="#%40Hierarchy">Hierarchy</a></td><td>Fields</td><td><a class="section"  href="#%40Methods">Methods</a></td><td>Properties</td></tr></table>
+<a name="%40Description"></a><h2 class="unit">Unit</h2>
+<p class="unitlink">
+<a   href="SqlitePassDbo.html">SqlitePassDbo</a></p>
+<h2 class="declaration">Declaration</h2>
+<p class="declaration">
+<code>type TSqlitePassTranslator_Kexi = class(<a class="normal"  href="SqlitePassDbo.TSqlitePassTranslator.html">TSqlitePassTranslator</a>)</code></p>
+<h2 class="description">Description</h2>
+<p>
+Specific translator for Kexi databases</p>
+<a name="%40Hierarchy"></a><h2 class="hierarchy">Hierarchy</h2>
+<ul class="hierarchy"><li class="ancestor">TObject</li>
+<li class="ancestor"><a class="normal"  href="SqlitePassDbo.TSqlitePassTranslator.html">TSqlitePassTranslator</a></li>
+<li class="thisitem">TSqlitePassTranslator_Kexi</li></ul><h2 class="overview">Overview</h2>
+<a name="%40Methods"></a><h3 class="summary">Methods</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.TSqlitePassTranslator_Kexi.html#GetNativeFieldTypeName">GetNativeFieldTypeName</a></b>(FieldType: Word): String;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.TSqlitePassTranslator_Kexi.html#IsSystemTable">IsSystemTable</a></b>(TableName: String): Boolean; override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.TSqlitePassTranslator_Kexi.html#ConvertNativeFieldTypeToPascalFieldType">ConvertNativeFieldTypeToPascalFieldType</a></b>(FieldDef: <a   href="SqlitePassDbo.TSqlitePassTableFieldDef.html">TSqlitePassTableFieldDef</a>);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.TSqlitePassTranslator_Kexi.html#GetDatabaseQueryDefs">GetDatabaseQueryDefs</a></b>(QueryDefs: <a   href="SqlitePassDbo.TSqlitePassQueryDefs.html">TSqlitePassQueryDefs</a>); override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>Procedure <b><a   href="SqlitePassDbo.TSqlitePassTranslator_Kexi.html#GetDatabaseTableFieldDefs">GetDatabaseTableFieldDefs</a></b>(TableDef: <a   href="SqlitePassDbo.TSqlitePassTableDef.html">TSqlitePassTableDef</a>; FieldDefsRecordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>); override;</code></td>
+</tr>
+</table>
+<h2 class="description">Description</h2>
+<h3 class="detail">Methods</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="GetNativeFieldTypeName"></a><code>function <b>GetNativeFieldTypeName</b>(FieldType: Word): String;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="IsSystemTable"></a><code>function <b>IsSystemTable</b>(TableName: String): Boolean; override;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Utilities</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="ConvertNativeFieldTypeToPascalFieldType"></a><code>procedure <b>ConvertNativeFieldTypeToPascalFieldType</b>(FieldDef: <a   href="SqlitePassDbo.TSqlitePassTableFieldDef.html">TSqlitePassTableFieldDef</a>);</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Field Datatype Conversion</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="GetDatabaseQueryDefs"></a><code>procedure <b>GetDatabaseQueryDefs</b>(QueryDefs: <a   href="SqlitePassDbo.TSqlitePassQueryDefs.html">TSqlitePassQueryDefs</a>); override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="GetDatabaseTableFieldDefs"></a><code>Procedure <b>GetDatabaseTableFieldDefs</b>(TableDef: <a   href="SqlitePassDbo.TSqlitePassTableDef.html">TSqlitePassTableDef</a>; FieldDefsRecordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>); override;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Gets information on database parts</p>
+</td></tr>
+</table>
+<hr noshade size="1"><span class="appinfo"><em>Generated by <a  target="_parent" href="http://pasdoc.sourceforge.net/">PasDoc 0.11.0</a> on 2010-05-16 23:39:44</em>
+</span>
+</body></html>

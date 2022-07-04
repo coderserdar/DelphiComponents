@@ -1,0 +1,307 @@
+TSRCalendar (C)opyright 2005 Version 2.02
+Autor : Simon Reinhardt
+eMail : reinhardt@picsoft.de
+Internet : http://www.picsoft.de
+
+  Die Komponente TSRCalendar ist eine Weiterentwicklung der
+  TCalendar-Komponente aus den Beispielkomponenten der Delphi-VCL.
+  Sie enthält viele Zusatzinformationen, wie Feiertage,
+  Sternzeichen und verschiedene astronomische Daten.
+
+  Die Routinen aus der Unit TimeFunc stammen aus der TMoon-Komponente
+  von Andreas Hörstemeier: http://www.hoerstemeier.com
+  Andreas hat die Routinen aus dem Buch "Astronomical Algorithms" von Jean Meeus.
+
+  Die GetWeekOfYear-Funktion, die die Wochennummer nach DIN 1355 ermittelt,
+  stammt von Christoph Kremer, Aachen.
+
+  Vielen Dank auch an:
+  - Edmund Matzke <edmund_matzke@gmx.de> für die Korrektur der
+    Schleswig-Holsteinischen Feiertage,
+  - Ralph Kerzig <ralph.kerzig@t-online.de> für die Korrektur der
+    sächsischen Feiertage,
+  - Matthias Frey <info@Matthias-Frey.de> für die Korrektur der
+    Advents-Berechnung.
+  - Thomas Stahmer <TStahmer@pdv-online.de> für die Korrektur der 
+    Jahreszeit-Berechnungen.
+
+  Diese Komponente ist Public Domain, das Urheberrecht liegt aber beim Autor.
+
+
+Dateiumfang:
+------------
+
+SRCal.txt 	- Diese Datei
+SRCal.pas	- Quelltext der Komponente
+SRCal.d16	- Resourcendatei der 16Bit-Komponente für Delphi 1
+SRCal.d32	- Resourcendatei der 32Bit-Komponente für Delphi 2 bis 5
+TimeFunc.pas	- Quelltext der Unit mit Zeitroutinen
+MyMath.pas	- Mathematische Funktionen für Zeitberechnungen
+SRDefine.inc
+SRUtils.pas	- verschiedende Prozeduren und Funktionen für die Komponente
+                  (Eine Beschreibung findet man im Interface der Unit)  
+	
+Ordner	KalDemo		- TSRCalendar-Demo-Projekt für Delphi 2 bis 5
+	KalMain.dfm	- Formulardatei der MainForm
+	KalMain.pas	- Quelltext der MainForm-Unit
+	KalDemo.dof	- Compileroptionen des Demo-Projekts
+	KalDemo.dpr	- Quelltext des Demo-Projekts
+	KalDemo.res	- Resourcendatei des Demo-Projekts
+
+
+Installation:
+-------------
+
+In Delphi 1:
+------------
+1. Alle Dateien in das Delphi-Komponenten-Verzeichnis entpacken.
+2. Menü Optionen : Komponente installieren
+3. Schaltfläche Hinzufügen / Durchsuchen
+4. Datei SRCal.pas im Delphi-Komponenten-Verzeichnis suchen und mit
+   OK bestätigen.
+5. Die Komponente erscheint in der Komponenten-Gruppe "Simon"
+
+In Delphi 2:
+------------
+1. Alle Dateien in das Delphi-Komponenten-Verzeichnis entpacken.
+2. Menü Komponente :  installieren
+3. Schaltfläche Hinzufügen / Durchsuchen
+4. Datei SRCal.pas im Delphi-Komponenten-Verzeichnis suchen und mit
+   OK bestätigen.
+5. Die Komponente erscheint in der Komponenten-Gruppe "Simon"
+
+Ab Delphi 3:
+------------
+1. Alle Dateien in das Delphi-Komponenten-Verzeichnis entpacken.
+2. Menü Komponente :  Komponente installieren
+3. Schaltfläche Durchsuchen (hinter dem Eingabefeld für den Unit-Namen)
+4. Datei SRCal.pas im Delphi-Komponenten-Verzeichnis suchen und mit
+   OK bestätigen.
+5. Die Rückfrage nach dem Neukompilieren des Packages bestätigen.
+6. Die Komponente erscheint in der Komponenten-Gruppe "Simon"
+   (Evtl. muß eine bereits installierte, ältere Version der Komponente
+    zuvor entfernt werden)
+
+
+
+Die Komponente funktioniert genauso, wie die Delphi-Beispielkomponente TCalendar 
+mit folgenden Erweiterungen:
+
+Neue Eigenschaften:
+-------------------
+
+I. Published:
+-------------
+BackgroundColors: TCalendarColors
+  Die Werte dieser Eigenschaften bestimmen die Hintergrundfarben für die Kalenderzellen:
+     Headers: für Spaltenüberschriften
+     Holiday: für Feiertage.
+     Marked: für in der Eigenschaft "Marks" markierte Tage.
+     Selected: für das ausgewählte Datum.
+     Standard: für normale Tage.
+     Today: für das aktuelle Systemdatum.
+     Weekend: für Sonntage.
+
+CalendarOptions: TCalendarOptions 
+  In dieser Eigenschaft werden verschiedene Einstellungen zusammengefasst:
+     coAstronomicalData: die astronomischen Daten (Mond- und Sonnendaten) werden bei einem 
+                         Datumswechsel berechnet. Ohne Berechnung der astronomischen Daten
+                         beschleunigt sich der Datumswechsel.
+     coAutoDeleteMarks: alle Markierungen in der Eigenschaft "Marks" werden bei einem Monats- 
+                        oder Jahreswechsel gelöscht.
+     coCalcHolidays: Die deutschen Feiertage werden berechnet und angezeigt. Die Eienschaft
+                     Holiday enthält dann den Namen des Feiertags.
+     coFrameSelection: Das ausgewählte Datum wird mit einem Rahmen markiert.
+     coGridLines: Im Kalender werden Gitterlinien zwischen den Tagen gezeichnet.
+     coReadOnly: Der Kalender dient nur zur Anzeige und erlaubt keine Datumsauswahl.
+     coShowMarks: Die in der Eigenschaft "Marked" als markierte gespeicherten Tage werden 
+                  farbig angezeigt.
+     coUseCurrentDate: Der Kalender zeigt nach seiner Erstellung immer das aktuelle
+                       Systemdatum an.  
+
+DrawStyle: TCalendarDrawStyle 
+  bestimmt den Stil der Komponente und kann folgende Werte annehmen:
+   - cdsColorGrid: Feiertage, Wochenenden, etc. werden in den Farben gezeichnet, die in den 
+     entsprechenden Eigenschaften festgelegt sind.
+   - cdsMonoGrid: Alle Tage im Kalender werden mit der in der Eigenschaft "Color" angegebenen 
+     Hintergrundfarbe und mit der Textfarbe der Eigenschaft "Font" gezeichnet. 
+   - cdsButtons: Die Tage im Kalender werden als anklickbare Buttons gezeichnet.
+
+GermanState: TGermanState 
+  Diese Eigenschaft ist für die korrekte Berechnung der Feiertage auf das gewünschte 
+  deutsche Bundesland zu setzen. Dadurch werden außerdem in den Eigenschaften "Longitude" 
+  und "Latitude" die Längen- und Breitengrade des geographischen Zentrums des jeweiligen 
+  Bundeslandes zur Berechnung der astronomischen Daten eingetragen.
+   (gsBaden_Wuerttemberg, gsBayern, gsBerlin, gsBrandenburg, gsBremen, gsHamburg,
+    gsHessen, gsMecklenburg_Vorpommern, gsNiedersachsen, gsNordrhein_Westfalen,
+    gsRheinland_Pfalz, gsSaarland, gsSachsen, gsSachsen_Anhalt, gsSchleswig_Holstein,
+    gsThueringen, gsNone);
+  Die deutschen Bezeichnungen erhält man mit "Bundesland[ord(GermanState)]".
+
+Latitude: single 
+  Der Breitengrad zur korrekten Berechnung der astronomischen Daten. (-90..90)
+
+Longitude: single 
+  Der Längengrad zur korrekten Berechnung der astronomischen Daten. (-180..180)
+
+SaturdayAsSunday: boolean 
+  Wenn diese Eigenschaft den Wert "true" hat, werden Samstage wie Sonntage gezeichnet, 
+  ansonsten wie normale Wochentage.
+
+StartOfWeek: TDayOfWeek 
+  Diese Eigenschaft legt den Wochentag fest, mit dem die Kalenderdarstellung beginnt (also
+  der Wochentag ganz links im Gitter).
+
+TextColors: TCalendarColors 
+  Die Werte dieser Eigenschaften bestimmen die Schriftfarben für die Kalenderzellen:
+     Headers: für Spaltenüberschriften
+     Holiday: für Feiertage.
+     Marked: für in der Eigenschaft "Marks" markierte Tage.
+     Selected: für das ausgewählte Datum.
+     Standard: für normale Tage.
+     Today: für das aktuelle Systemdatum.
+     Weekend: für Sonntage.
+
+II. Public:
+-----------
+Date: TDateTime
+  Diese Eigenschaft speichert das Datum.
+
+DayOfYear: integer 
+  gibt an, der wievielte Tag im Jahr das in der Eigenschaft "Date" angegebene Datum ist.
+
+DaysThisMonth: integer 
+  gibt die Anzahl der Tage im Monat zurück, der in der Eigenschaft "Month" gespeichert ist.
+
+Holiday: string 
+  Falls das in der Eigenschaft "Date" gespeicherte Datum ein Feiertag oder ein Sondertag ist, 
+  enthält diese Eigenschaft den deutschen Namen des Feier- oder Sondertages.
+
+HolidayNr: integer 
+  Falls das in der Eigenschaft "Date" gespeicherte Datum ein deustcher Feiertag oder ein 
+  Sondertag ist, enthält diese Eigenschaft die Nummer des Feier- oder Sondertages. Diese 
+  Eigenschaft kann folgende Werte annehmen:
+    0 : Kein Feier- oder Sondertag
+   >0 : Feiertag
+   <0 : Sondertag
+  Die deutschen Bezeichnungen kann man aus der Eigenschaft "Holiday" auslesen.
+
+Holidays[Index: integer]: integer 
+  In dieser Eigenschaft werden alle Feiertags- und Sondertagsnummern des aktuellen Monats 
+  gespeichert.
+  Die deutschen Bezeichnungen erhält man mit 
+   Feiertag[Holidays[Index]] 		wenn Holidays[Index]>0 		und
+   Sondertag[abs(Holidays[Index])] 	wenn Holidays[Index]<0.
+
+Marked[Index: integer]: boolean 
+  Diese Eigenschaft speichert markierte Tage.
+
+MoonDistance: extended 
+  gibt die Entfernung des Mondes zur Erde in Kilometern an.
+
+MoonPhase: TMoonPhase 
+  gibt die Mondphase an und kann folgende Werte annehmen:
+   (mpNewmoon, mpFirstQuarter, mpFullmoon, mpLastQuarter)
+  Die deutschen Bezeichnungen erhält man mit "Mondphase[ord(MoonPhase)]".
+
+MoonRise: TDateTime 
+  gibt die Uhrzeit des Mondaufganges im Format TDateTime an.
+
+MoonSet: TDateTime 
+  gibt die Uhrzeit des Mondunterganges im Format TDateTime an.
+
+MoonTransit: TDateTime 
+  gibt die Uhrzeit des Mondhöchststandes im Format TDateTime an.
+
+Season: TSeason 
+  gibt die Jahreszeit an, in der der in der Eigenschaft "Date" gespeicherte Tag liegt.
+   (seWinter, seSpring, seSummer, seAutumn, seNone)
+  Die deutschen Bezeichnungen erhält man mit "Jahreszeit[ord(Season)]".
+
+SunDistance: extended
+ gibt die Entfernung der Sonne zur Erde in Kilometern an.
+
+SunRise: TDateTime 
+  gibt die Uhrzeit des Sonnenaufganges im Format TDateTime an.
+
+SunSet: TDateTime 
+  gibt die Uhrzeit des Sonnenunterganges im Format TDateTime an.
+
+SunTransit: TDateTime 
+  gibt die Uhrzeit des Sonnenhöchststandes im Format TDateTime an.
+
+WeekOfYear: integer 
+  gibt an, in der wievielten Woche im Jahr (nach DIN 1355) das in der Eigenschaft 
+  "Date" angegebene Datum ist.
+
+ZodiacSign: TZodiacSign 
+  gibt das Sternzeichen eines am in der Eigenschaft "Date" angegebenen Datum 
+  geborenen an.
+   (zsAquarius, zsPisces, zsAries, zsTaurus, zsGemini, zsCancer, zsLeo,
+    zsVirgo, zsLibra, zsScorpio, zsSagittarius, zsCapricorn, zsNone);
+  Die deutschen Bezeichnungen erhält man mit "Sternzeichen[ord(ZodiacSign)]".
+
+Ereignisse:
+-----------
+
+OnBeforeChange: TNotifyEvent
+  tritt vor der Änderung der Eigenschaft "Date" auf.
+
+OnMonthChange: TNotifyEvent
+  tritt bei einem Wechsel des Monats oder des Jahres auf, die
+  in den Eigenschaften "Month" und "Year" bzw. "Date" gespeichert sind.
+
+OnYearChange: TNotifyEvent
+  tritt bei einem Wechsel des Jahres auf, das in den 
+  Eigenschaften "Year" bzw. "Date" gespeichert ist.
+
+
+Methoden:
+---------
+
+function GetHolidayNr(WhatDate:TDateTime;Land:integer):integer;
+  ermittelt, ob das in "WhatDate" übergebene Datum im in der Variablen "Land" über-
+  gebenen Bundesland ein Feier- oder Sondertag ist und gibt als Ergebnis dessen Nummer oder 
+  Null zurück.
+
+procedure MouseToCell(X, Y: Integer; ACol, ARow: longint);
+  Mit der Methode "MouseToCell"  ermittelt man die Spalte und Zeile des Kalenders, über der
+  der Mauszeiger steht.
+
+function MouseToDate(X, Y: Integer):TDateTime;
+  Mit der Methode "MouseToDate"  ermittelt man das Datum der Kalenderzelle, über der
+  der Mauszeiger steht.
+
+procedure NextMonth;
+  setzt das Kalenderdatum auf den gleichen Tag im folgenden Monat.
+
+procedure NextYear;
+  setzt das Kalenderdatum auf den gleichen Tag und den gleichen Monat im folgenden Jahr.
+
+procedure PrevMonth;
+  setzt das Kalenderdatum auf den gleichen Tag im vorhergehenden Monat.
+
+procedure PrevYear;
+  setzt das Kalenderdatum auf den gleichen Tag und den gleichen Monat im vorhergehenden Jahr.
+
+
+Neue Funktionen:
+----------------
+
+1. Die Navigation durch den Kalender per Tastatur wurde verbessert: 
+   -Falls die letzte Zelle einer Zeile gewählt ist und die [Pfeil-nach-rechts]-Taste 
+    gedrückt wird, wird der folgende Tag in der ersten Spalte der nächsten Zeile markiert.
+   -Falls die erste Zelle einer Zeile gewählt ist und die [Pfeil-nach-links]-Taste 
+    gedrückt wird, wird der vorherige Tag in der letzten Spalte der vorherigen Zeile markiert.
+   -Falls der letzte Tag im Monat gewählt ist und die [Pfeil-nach-rechts]-Taste 
+    gedrückt wird, wird das Datum auf den ersten Tag des folgenden Monats gesetzt.
+   -Falls der erste Tag im Monat gewählt ist und die [Pfeil-nach-links]-Taste 
+    gedrückt wird, wird das Datum auf den letzten Tag des vorherigen Monats gesetzt.
+   -Falls ein Tag in der letzten Zeile des Kalenders gewählt ist und die [Pfeil-nach-unten]-Taste 
+    gedrückt wird, wird das Datum auf den ersten Tag des folgenden Monats gesetzt.
+   -Falls ein Tag in der ersten Zeile des Kalenders gewählt ist und die [Pfeil-nach-oben]-Taste 
+    gedrückt wird, wird das Datum auf den letzten Tag des vorherigen Monats gesetzt.
+
+Alle anderen Eigenschaften und Ereignisse entsprechen denen der TCalendar-Komponente
+und sind in der Online-Hilfe nachzulesen. Die Funktion der Komponente läßt sich außerdem
+im beigefügten Demo-Programm im Ordner "KalDemo" sehen.

@@ -1,0 +1,164 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+<meta name="GENERATOR" content="PasDoc 0.11.0">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<title>SqlitePass Database Objects: SqlitePassDbo: Class TSqlitePassSelectStmtTableDef</title>
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body bgcolor="#ffffff" text="#000000" link="#0000ff" vlink="#800080" alink="#FF0000">
+<a name="TSqlitePassSelectStmtTableDef"></a><h1 class="cio">Class TSqlitePassSelectStmtTableDef</h1>
+<table class="sections wide_list">
+<tr>
+<td><a class="section"  href="#%40Description">Description</a></td><td><a class="section"  href="#%40Hierarchy">Hierarchy</a></td><td>Fields</td><td><a class="section"  href="#%40Methods">Methods</a></td><td><a class="section"  href="#%40Properties">Properties</a></td></tr></table>
+<a name="%40Description"></a><h2 class="unit">Unit</h2>
+<p class="unitlink">
+<a   href="SqlitePassDbo.html">SqlitePassDbo</a></p>
+<h2 class="declaration">Declaration</h2>
+<p class="declaration">
+<code>type TSqlitePassSelectStmtTableDef = class(<a class="normal"  href="SqlitePassDbo.TSqlitePassGenericTableDef.html">TSqlitePassGenericTableDef</a>)</code></p>
+<h2 class="description">Description</h2>
+<p>
+<code>TSqlitePassSelectStmtTableDef</code> : When a <a class="normal"  href="SqlitePassDbo.TSqlitePassGenericTableDef.html#Sql">SQL</a> select statement is executed, a <code>TSqlitePassSelectStmtTableDef</code> is generated for each table used in the <a class="normal"  href="SqlitePassDbo.TSqlitePassGenericTableDef.html#Sql">SQL</a> statement. Each <code>TSqlitePassSelectStmtTableDef</code> stores information on one table in order to know how to insert, update or delete records.
+
+<p>for an insert statement, we need to know the : name of the table (from <a class="normal"  href="SqlitePassDbo.TSqlitePassGenericTableDef.html#TableName">TSqlitePassGenericTableDef.TableName</a> or FullTableName properties) fields names (from the <a class="normal"  href="SqlitePassDbo.TSqlitePassSelectStmtTableDef.html#FieldDefs">fieldDefs</a> property) fields values to be inserted (from the recordset) fields Datatype (from the <a class="normal"  href="SqlitePassDbo.TSqlitePassSelectStmtTableDef.html#FieldDefs">fieldDefs</a> property) fields BufferSize (from the <a class="normal"  href="SqlitePassDbo.TSqlitePassSelectStmtTableDef.html#FieldDefs">fieldDefs</a> property)
+
+<p>for an update statement, we need to know the : if the record was modified (at least one field was modified) from the recordset name of the table rowid number of the record (from the recordset) fields values to be inserted (from the recordset and translate it to ) fields index fields Datatype fields BufferSize
+
+<p>for a delete statement, we need to know the name of the table rowid number of the record</p>
+<a name="%40Hierarchy"></a><h2 class="hierarchy">Hierarchy</h2>
+<ul class="hierarchy"><li class="ancestor">TObject</li>
+<li class="ancestor"><a class="normal"  href="SqlitePassDbo.TSqlitePassGenericTableDef.html">TSqlitePassGenericTableDef</a></li>
+<li class="thisitem">TSqlitePassSelectStmtTableDef</li></ul><h2 class="overview">Overview</h2>
+<a name="%40Methods"></a><h3 class="summary">Methods</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>Constructor <b><a   href="SqlitePassDbo.TSqlitePassSelectStmtTableDef.html#Create">Create</a></b>(Owner: <a   href="SqlitePassDbo.TSqlitePassSelectStmtTableDefs.html">TSqlitePassSelectStmtTableDefs</a>);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>Destructor <b><a   href="SqlitePassDbo.TSqlitePassSelectStmtTableDef.html#Destroy">Destroy</a></b>; override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.TSqlitePassSelectStmtTableDef.html#Assign">Assign</a></b>(Source: <a   href="SqlitePassDbo.TSqlitePassTableDef.html">TSqlitePassTableDef</a>);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.TSqlitePassSelectStmtTableDef.html#PostDelete">PostDelete</a></b>(Const RowId: Int64; Const RecordBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.TSqlitePassSelectStmtTableDef.html#PostInsert">PostInsert</a></b>(Const RecordBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.TSqlitePassSelectStmtTableDef.html#PostUpdate">PostUpdate</a></b>(Const RowId: Int64; Const RecordBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.TSqlitePassSelectStmtTableDef.html#PrepareInsertDeleteSQLStmts">PrepareInsertDeleteSQLStmts</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.TSqlitePassSelectStmtTableDef.html#UnprepareSQLStmts">UnprepareSQLStmts</a></b>;</code></td>
+</tr>
+</table>
+<a name="%40Properties"></a><h3 class="summary">Properties</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassSelectStmtTableDef.html#AvailableOperations">AvailableOperations</a></b>: <a   href="SqlitePassDbo.html#TSqlitePassAvailableOperations">TSqlitePassAvailableOperations</a> Read FAvailableOperations;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassSelectStmtTableDef.html#FieldDefs">FieldDefs</a></b>: <a   href="SqlitePassDbo.TSqlitePassSelectStmtFieldDefs.html">TSqlitePassSelectStmtFieldDefs</a> Read FFieldDefs;</code></td>
+</tr>
+</table>
+<h2 class="description">Description</h2>
+<h3 class="detail">Methods</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Create"></a><code>Constructor <b>Create</b>(Owner: <a   href="SqlitePassDbo.TSqlitePassSelectStmtTableDefs.html">TSqlitePassSelectStmtTableDefs</a>);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Destroy"></a><code>Destructor <b>Destroy</b>; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Assign"></a><code>procedure <b>Assign</b>(Source: <a   href="SqlitePassDbo.TSqlitePassTableDef.html">TSqlitePassTableDef</a>);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="PostDelete"></a><code>procedure <b>PostDelete</b>(Const RowId: Int64; Const RecordBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="PostInsert"></a><code>procedure <b>PostInsert</b>(Const RecordBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="PostUpdate"></a><code>procedure <b>PostUpdate</b>(Const RowId: Int64; Const RecordBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="PrepareInsertDeleteSQLStmts"></a><code>procedure <b>PrepareInsertDeleteSQLStmts</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="UnprepareSQLStmts"></a><code>procedure <b>UnprepareSQLStmts</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<h3 class="detail">Properties</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="AvailableOperations"></a><code>property <b>AvailableOperations</b>: <a   href="SqlitePassDbo.html#TSqlitePassAvailableOperations">TSqlitePassAvailableOperations</a> Read FAvailableOperations;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="FieldDefs"></a><code>property <b>FieldDefs</b>: <a   href="SqlitePassDbo.TSqlitePassSelectStmtFieldDefs.html">TSqlitePassSelectStmtFieldDefs</a> Read FFieldDefs;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<hr noshade size="1"><span class="appinfo"><em>Generated by <a  target="_parent" href="http://pasdoc.sourceforge.net/">PasDoc 0.11.0</a> on 2010-05-16 23:39:44</em>
+</span>
+</body></html>

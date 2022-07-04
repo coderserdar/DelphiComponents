@@ -1,0 +1,184 @@
+TAudioTools (C)opyright 2005   Version 2.07
+Autor : Simon Reinhardt
+eMail : reinhardt@picsoft.de
+Internet : http://www.picsoft.de
+
+  Unsichtbare Komponente für Pegelmanipulationen in RIFF-Audiodateien (*.wav) 
+
+  Die Komponente ist Public Domain, das Urheberrecht liegt aber beim Autor.
+  Fragen und Verbesserungsvorschläge sind immer willkommen.
+
+
+Dateiumfang:
+------------
+
+Readme.txt 	- Diese Datei
+AudTools.pas	- Quelltext der Komponente
+AudTools.dcr	- Resourcendatei der Komponente
+SRDefine.inc	- Inculdedatei für die Komponente
+	
+
+Installation:
+-------------
+
+In Delphi 2:
+------------
+1. Alle Dateien in das Delphi-Komponenten-Verzeichnis entpacken.
+2. Menü Komponente :  installieren
+3. Schaltfläche Hinzufügen / Durchsuchen
+4. Datei IniList.pas im Delphi-Komponenten-Verzeichnis suchen und mit
+   OK bestätigen.
+5. Die Komponente erscheint in der Komponenten-Gruppe "Simon"
+
+Ab Delphi 3:
+------------
+1. Alle Dateien in das Delphi-Komponenten-Verzeichnis entpacken.
+2. Menü Komponente :  Komponente installieren
+3. Schaltfläche Durchsuchen (hinter dem Eingabefeld für den Unit-Namen)
+4. Datei IniList.pas im Delphi-Komponenten-Verzeichnis suchen und mit
+   OK bestätigen.
+5. Die Rückfrage nach dem Neukompilieren des Packages bestätigen.
+6. Die Komponente erscheint in der Komponenten-Gruppe "Simon"
+   (Evtl. muß eine bereits installierte, ältere Version der Komponente
+    zuvor entfernt werden)
+
+
+
+Funktion:
+---------
+
+TAudioTools bietet verschiedene Funktionen für die Pegelveränderung in RIFF-Audiodateien.
+Nach Angabe von FileName und optional TargetName kann eine der Funktionen zur Pegelbearbeitung
+aufgerufen werden. Vor, während und nach der Berechnung wird ein Ereignis gefeuert. Im
+Ereignishandler kann dann jeweils der Fortschritt der Bearbeitung ausgelesen werden.
+
+A) Eigenschaften:
+-----------------
+
+I. Public:
+----------
+
+BackupFileName [string]
+  Pegeländerungen werden grundsätzlich in einer neuen Datei gespeichert. Falls kein Name für
+  "TargetFile" angegeben wurde, wird eine temporäre Datei erzeugt. Der Name der temporären
+  Datei kann aus dieser Eigenschaft ausgelesen werden. (ReadOnly)
+
+BitsPerSample [byte]
+  Enthält nach Zuweisung einer gültigen Audiodatei die Wortbreite der einzelnen Samples der
+  Datei. (ReadOnly)
+
+BytesPerSample [byte]
+  Enthält nach Zuweisung einer gültigen Audiodatei die Anzahl der Bytes, die zur Speicherung
+  eines einzelnen Samples der Datei benötigt werden. (ReadOnly)
+
+Chunks [TStringList]
+  Eine Liste aller im Header der aktuellen Audiodatei gefundenen WAV-Chunks.
+
+CompressionName [string]
+  Enthält nach Zuweisung einer gültigen Audiodatei die Bezeichnung der in der Datei 
+  angewandten Audiokompression. (ReadOnly)
+
+DataSize [Int64]
+  Enthält nach Zuweisung einer gültigen Audiodatei die Größe des Datenblocks, also der 
+  Audiosamples ohne Headerdaten. (ReadOnly)
+
+ErrorCode [TErrorCode]
+  Dieser Eigenschaft wird nach jeder Operation ein Wert zugewiesen:
+   - errNone: Die Operation wurde fehlerfrei ausgeführt.
+   - errNoOperation: Es wurde keine Operation durchgeführt.
+   - errClip: Bei der Pegeländerung wurde mindestens ein Samplewert abgeschnitten, 
+      weil dieser den gültigen Wertebereich für Samplewerte überstieg (Clipping).
+   - errFileExists: Wird von den Kopiermethoden zurückgegeben, wenn "FailIfExists"=true und
+      die Zieldatei bereits existiert.
+   - errRead: I/O-Fehler beim Lesen aus der Quelldatei "FileName".
+   - errWrite: I/O-Fehler beim Schreiben in die Zieldatei "TargetFile" bzw. "BackupFileName".
+  Die Methode "GetErrorMessage" liefert den Fehlercode im Klartext.
+
+Length [double]
+  Enthält nach Zuweisung einer gültigen Audiodatei die Länge der Datei in Sekunden. (ReadOnly)
+
+NumChannels [byte]
+  Enthält nach Zuweisung einer gültigen Audiodatei die Anzahl der Audiokanäle. (ReadOnly)
+
+NumSamples [integer]
+  Enthält nach Zuweisung einer gültigen Audiodatei die Anzahl der Samplewerte. (ReadOnly)
+
+SampleRate [integer]
+  Enthält nach Zuweisung einer gültigen Audiodatei die Samplerate, also die Anzahl von
+  Samples pro Sekunde. (ReadOnly)
+
+ValidFormat [boolean]
+  "ValidFormat" ist nach Zuweisung einer Audiodatei "true", wenn das Format der Datei von der
+  TAudioTools-Komponente verarbeitet werden kann. (ReadOnly)
+
+
+II. Published:
+-------------
+
+FileName [string]
+  Der Name der zu bearbeitenden Audiodatei.
+
+TargetName [string]
+  Pegeländerungen werden grundsätzlich in einer neuen Datei gespeichert. Falls kein Name für
+  "TargetFile" angegeben wurde, wird eine temporäre Datei erzeugt. 
+
+
+B) Ereignisse:
+--------------
+
+OnOperationDone [TOperationDoneEvent]
+  Dieses Ereignis wird gefeuert, wenn eine Operation abgeschlossen wurde. 
+  Im Parameter "Operation" wird die Art der Operation übergeben:
+  - opChangeBalance: Die Balance zwischen linkem und rechtem Kanal wurde geändert.
+  - opChangeLevel: Der Pegel wurde geändert.
+  - opCopyAndAnalyzeFile: Die Datei wurde kopiert und der Maximalpegel ausgelesen.
+  - opCopyFile: Die Datei wurde kopiert.
+  - opGetMaxSampleValue: Der höchste Samplewert der Datei wurde ausgelesen.
+  - opNormalize: Die Datei wurde normalisiert.
+  - opSetLevel: Der Maximalpegel der Datei wurde auf einen vorgegbenen Wert gesetzt.
+  Im Parameter "ErrorCode" wird der Fehlercode der Operation übergeben (siehe "ErrorCode").
+
+OnProgress [TProgressEvent]
+  Dieses Ereignis wird wiederholt während einer Operation gefeuert. 
+  Im Parameter "Progress" wird der Fortschritt der Operation (0 % .. 100 %) übergeben.
+
+
+C) Methoden:
+------------
+
+function ChangeBalance(const Offset:double):boolean; 
+  Die Balance zwischen linkem und rechtem Kanal wird um den Faktor "Offset" verändert.
+
+function ChangeLevel(const Offset:double):boolean; 
+  Der Pegel der Datei wird um den Faktor "Offset" verändert.
+
+function CheckHeader(const CheckOption:TCheckOption):boolean; 
+  Wenn CheckOption=coLength wird überprüft, ob die aus "FDataSize" berechnete
+  Länge mit der in "Length" gespeicherten Länge übereinstimmt.
+
+function CopyFile(const FailIfExists:boolean):boolean; 
+  Die Datei wird kopiert. Wenn "FailIfExists"=true, wird der ErrorCode "errFileExists" 
+  zurückgegeben und die Datei wird nicht kopiert.
+
+function CopyAndAnalyzeFile(var MaximumLevel:double;const FailIfExists:boolean):boolean; 
+  Die Datei wird kopiert und der Maximalpegel der Datei wird in "MaximumLevel" 
+  zurückgegeben (in dBFS). Wenn "FailIfExists"=true, wird der ErrorCode "errFileExists" 
+  zurückgegeben und die Datei wird nicht kopiert.
+
+function GetErrorMessage:string; 
+  Diese Methode liefert den in "ErrorCode" gespeicherten Fehlercode im Klartext.
+
+function GetMaximumLevel:double; 
+  Der Maximalpegel der Datei wird ermittelt. 
+
+function GetMaxPossibleSampleValue:integer; 
+  Der höchste mögliche Samplewert für die Datei wird ermittelt. 
+
+function Normalize:double; virtual;
+  Der Maximalpegel der Datei wird auf 0 dBFS geändert.
+
+function SetLevel(const Level:double):double; overload; 
+function SetLevel(const Level:double;const FadeInTime,FadeOutTime:word):double; overload; 
+  Der Maximalpegel der Datei wird auf "Level" (in dBFS) geändert. Wenn FadeInTime 
+  und FadeOutTime übergeben werden, wird der Pegel über die angegebenen 
+  Intervalle (in ms) linear ein- und ausgeblendet.

@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<CONFIG>
+  <Package Version="2">
+    <PathDelim Value="\"/>
+    <Name Value="dcl_fb_id_dataset"/>
+    <Author Value="Lagunov A.A."/>
+    <CompilerOptions>
+      <Version Value="5"/>
+      <PathDelim Value="\"/>
+      <SearchPaths>
+        <OtherUnitFiles Value="$(LazarusDir)\ideintf\units\$(TargetCPU)\$(TargetOS)\;$(LazarusDir)\components\uib\source\"/>
+        <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
+      </SearchPaths>
+      <CodeGeneration>
+        <Generate Value="Faster"/>
+      </CodeGeneration>
+      <Other>
+        <CompilerPath Value="$(CompPath)"/>
+      </Other>
+    </CompilerOptions>
+    <Description Value="designer package for FBDataSet
+"/>
+    <License Value="MPL
+"/>
+    <Version Major="1" Build="1"/>
+    <Files Count="14">
+      <Item1>
+        <Filename Value="fb_ib_edt_ins_master_field_unit.lfm"/>
+        <Type Value="LFM"/>
+      </Item1>
+      <Item2>
+        <Filename Value="fb_ib_edt_ins_master_field_unit.lrs"/>
+        <Type Value="LRS"/>
+      </Item2>
+      <Item3>
+        <Filename Value="fb_ib_edt_ins_master_field_unit.pas"/>
+        <UnitName Value="fb_ib_edt_ins_master_field_unit"/>
+      </Item3>
+      <Item4>
+        <Filename Value="fbcustomdatasetpropeditorl.pas"/>
+        <HasRegisterProc Value="True"/>
+        <UnitName Value="fbcustomdatasetpropeditorl"/>
+      </Item4>
+      <Item5>
+        <Filename Value="fbcustomdatasetautoupdateoptionseditorl.lfm"/>
+        <Type Value="LFM"/>
+      </Item5>
+      <Item6>
+        <Filename Value="fbcustomdatasetautoupdateoptionseditorl.lrs"/>
+        <Type Value="LRS"/>
+      </Item6>
+      <Item7>
+        <Filename Value="fbcustomdatasetautoupdateoptionseditorl.pas"/>
+        <UnitName Value="fbcustomdatasetautoupdateoptionseditorl"/>
+      </Item7>
+      <Item8>
+        <Filename Value="fbcustomdatasetsqleditorl.lfm"/>
+        <Type Value="LFM"/>
+      </Item8>
+      <Item9>
+        <Filename Value="fbcustomdatasetsqleditorl.lrs"/>
+        <Type Value="LRS"/>
+      </Item9>
+      <Item10>
+        <Filename Value="fbcustomdatasetsqleditorl.pas"/>
+        <UnitName Value="fbcustomdatasetsqleditorl"/>
+      </Item10>
+      <Item11>
+        <Filename Value="listboxrelationsdblclick.inc"/>
+        <Type Value="Include"/>
+      </Item11>
+      <Item12>
+        <Filename Value="fbcustomdatasetsqleditortestl.lfm"/>
+        <Type Value="LFM"/>
+      </Item12>
+      <Item13>
+        <Filename Value="fbcustomdatasetsqleditortestl.lrs"/>
+        <Type Value="LRS"/>
+      </Item13>
+      <Item14>
+        <Filename Value="fbcustomdatasetsqleditortestl.pas"/>
+        <UnitName Value="FBCustomDataSetSQLEditorTestL"/>
+      </Item14>
+    </Files>
+    <Type Value="DesignTime"/>
+    <RequiredPkgs Count="6">
+      <Item1>
+        <PackageName Value="fbdemofpc"/>
+      </Item1>
+      <Item2>
+        <PackageName Value="FCL"/>
+        <MinVersion Major="1" Valid="True"/>
+      </Item2>
+      <Item3>
+        <PackageName Value="IDEIntf"/>
+      </Item3>
+      <Item4>
+        <PackageName Value="LCL"/>
+      </Item4>
+      <Item5>
+        <PackageName Value="UIBLaz"/>
+      </Item5>
+      <Item6>
+        <PackageName Value="CodeTools"/>
+      </Item6>
+    </RequiredPkgs>
+    <UsageOptions>
+      <UnitPath Value="$(PkgOutDir)\"/>
+    </UsageOptions>
+    <PublishOptions>
+      <Version Value="2"/>
+      <IgnoreBinaries Value="False"/>
+    </PublishOptions>
+  </Package>
+</CONFIG>

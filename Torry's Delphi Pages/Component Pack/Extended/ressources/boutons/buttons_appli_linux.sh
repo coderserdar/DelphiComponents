@@ -1,0 +1,1 @@
+./lazres ./u_buttons_appli.lrs ./tfwcancel.xpm ./tfwcopy.xpm ./tfwclose.xpm ./tfwdocument.xpm ./tfwerase.xpm ./tfwinsert.xpm ./tfwok.xpm ./tfwpreview.xpm ./tfwinit.xpm ./tfwprint.xpm ./tfwquit.xpm ./tfwsaveas.xpm ./tfwdelete.xpm ../GroupView/TFWInAll.png ../GroupView/TFWInSelect.png ../GroupView/TFWOutAll.png ../GroupView/TFWOutSelect.png

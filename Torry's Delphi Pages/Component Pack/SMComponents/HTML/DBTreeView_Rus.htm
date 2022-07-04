@@ -1,0 +1,241 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Компонент DBTreeView</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+</head>
+
+<body>
+<table width="75%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="6%" valign="top"><strong><img src="2.jpg" width="45" height="44"></strong></td>
+    <td width="40%" valign="middle"><strong>Компонент DBTreeView </strong></td>
+    <td width="54%"><div align="right"><a href="ReadMe_Rus.htm">Главная страница</a></div></td>
+  </tr>
+  <tr>
+    <td colspan="3"><p>&nbsp;</p>
+      <p>Компонент DBTreeView предназначен
+            для отображения и управлением древовидной иерархической структурой
+            в базе данных. Он отображает информацию в виде некой виртуальной файловой
+            системе: в виде папок и объектов. Под управлением дерева понимается
+            перенос объекта или ветки (включая вложенные объекты или папки) в другую
+            ветвь.</p>      <table width="75%" border="0" cellspacing="5" cellpadding="0">
+        <tr>
+          <td><p><strong><img src="1.jpg" width="400" height="352"></strong></p>
+          <p align="center">рис.1.</p></td>
+          <td>Подсоединение компонента
+              DBTreeView к базе данных осуществляется при помощи ADO. Данный
+              компонент был протестирован в совместной работе с MS SQL, ACCESS.
+              Однако при верной настройки ODBC его можно использовать для подключения
+              и
+              к другим
+              базам данных. Для правильной работы компонента необходимы две таблицы
+              в базе данных. Одна таблица хранит информацию о папках и структуре,
+              а другая содержит информацию о объектах.</td>
+        </tr>
+      </table>
+      <p>&nbsp;</p>
+      <p>Структура таблицы, используемая
+          для хранения структуры папок (дерева):</p>
+      <table width="622" border="1" cellpadding="0" cellspacing="0">
+        <tr>
+          <td width="27%"><p><strong>Имя
+                  поля - id</strong></p>
+              <p><strong>Тип поля -
+                    автоинкримент</strong></p>
+          </td>
+          <td width="21%"><p><strong>Имя
+                  поля - Owner</strong></p>
+              <p><strong>Тип поля -
+                    integer</strong></p>
+          </td>
+          <td width="52%"><p><strong>Имя
+                  поля - Name</strong></p>
+              <p><strong>Тип поля -
+                    varchar</strong></p>
+          </td>
+        </tr>
+        <tr>
+          <td align="center">1</td>
+          <td align="center">0</td>
+          <td>Поставщики</td>
+        </tr>
+        <tr>
+          <td align="center">2</td>
+          <td align="center">0</td>
+          <td>Покупатели</td>
+        </tr>
+        <tr>
+          <td align="center">3</td>
+          <td align="center">0</td>
+          <td>Банки</td>
+        </tr>
+        <tr>
+          <td align="center">4</td>
+          <td align="center">1</td>
+          <td>Иностранные поставщики</td>
+        </tr>
+        <tr>
+          <td align="center">5</td>
+          <td align="center">1</td>
+          <td>Отечественные поставщики</td>
+        </tr>
+        <tr>
+          <td align="center">6</td>
+          <td align="center">2</td>
+          <td>Покупатели с юга</td>
+        </tr>
+        <tr>
+          <td align="center">7</td>
+          <td align="center">2</td>
+          <td>Покупатели с севера</td>
+        </tr>
+        <tr>
+          <td align="center">8</td>
+          <td align="center">6</td>
+          <td>Покупатели города Мумба</td>
+        </tr>
+        <tr>
+          <td align="center">9</td>
+          <td align="center">6</td>
+          <td>Покупатели города Занзибар</td>
+        </tr>
+      </table>
+      <p>Структура таблицы, используемая
+          для хранения объектов</p>
+      <table width="623" border="1" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="26%"><p><strong>Имя
+                  поля - id</strong></p>
+              <p><strong>Тип поля -
+                    автоинкримент</strong></p>
+          </td>
+          <td width="22%"><p><strong>Имя
+                  поля - Folder_id</strong></p>
+              <p><strong>Тип поля -
+                    integer</strong></p>
+          </td>
+          <td width="52%"><p><strong>Имя
+                  поля - Name</strong></p>
+              <p><strong>Тип поля -
+                    varchar</strong></p>
+          </td>
+        </tr>
+        <tr>
+          <td align="center">1</td>
+          <td align="center">0</td>
+          <td>Агент без категории</td>
+        </tr>
+        <tr>
+          <td align="center">2</td>
+          <td align="center">3</td>
+          <td>Банк &quot;Капитал-кредит&quot;</td>
+        </tr>
+        <tr>
+          <td align="center">3</td>
+          <td align="center">5</td>
+          <td>Поставщик мяса &quot;Рога
+              и копыта&quot;</td>
+        </tr>
+        <tr>
+          <td align="center">4</td>
+          <td align="center">6</td>
+          <td>Супермаркет &quot;Мумбар&quot;</td>
+        </tr>
+        <tr>
+          <td align="center">5</td>
+          <td align="center">6</td>
+          <td>Отель &quot;Континенталь&quot;</td>
+        </tr>
+        <tr>
+          <td align="center">6</td>
+          <td align="center">9</td>
+          <td>Бар &quot;Черная кошка&quot;</td>
+        </tr>
+        <tr>
+          <td align="center">7</td>
+          <td align="center">9</td>
+          <td>Отель &quot;У погибшего
+              альпиниста&quot;</td>
+        </tr>
+        <tr>
+          <td align="center">8</td>
+          <td align="center">3</td>
+          <td>Банк &quot;Альфа-групп&quot;</td>
+        </tr>
+        <tr>
+          <td align="center">9</td>
+          <td align="center">5</td>
+          <td>Поставщик крабовых палок</td>
+        </tr>
+      </table>
+      <br>
+      <strong><em>Примечание:</em></strong> 
+      <ol>
+        <li> В таблице для хранения
+            структуры папок, значение поля Owner ссылается на значение поля id
+            таблицы для хранения структуры папок.</li>
+        <li> В таблице для хранения
+            объектов, значение поля Folder_id ссылается на значение поля id таблицы
+            для хранения структуры папок.</li>
+      </ol>
+      <p>Компонент DBTreeView является
+          наследником компонента TreeView, он наследует все свойства, методы
+          и события указанного компонента. В компонент DBTreeView добавлены следующие
+          новые свойства и методы:</p>
+      <ul>
+        <li><strong>property</strong> NameFolderTable:
+            string - определяет имя таблицы, используемой для хранения структуры
+            папок (дерева)</li>
+        <li><strong>property</strong> NameObjectTable:
+            string - определяет имя таблицы, используемой для хранения объектов</li>
+        <li><strong>property</strong> Connection:
+            TADOConnection - присваивается значение действующего ADOConnection</li>
+        <li><strong>method</strong> Open - производит соединение с базой данных и загружает структуру
+          папок и объектов</li>
+        <li><strong>method</strong> CheckOnFolder(Node:
+            TTreeNode): Boolean - производит проверку, является ли указанный
+            нод папкой или он является объектом. Если нод является папкой то
+            функция возвращает True инача False/</li>
+      </ul>
+      <p>Для кооректной работы компонента,
+    параметру Images необходимо сопоставить компонент ImageList в котором необходимо
+    хранить 3 картинки первая картинка соответствует закрытой папке, вторая картинка
+    соответствует, выбранной(открытой) папке, и третья картинка соотвествует
+    изображению объекта.</p>
+    <p>При загрузке структуры(дерева) и объектов каждой ветки, объекту в параметр
+      StateIndex присваивается значение соответствующего id соответствующей таблицы.
+      Например, папкам присваивается id из таблицы для хранения структуры, а
+      объектам из таблицы для хранения объектов.</p>
+    <p>Пример создания компонента в run-time и загрузки информации.</p>
+	<PRE>
+    <strong>var</strong>
+       DBTreeView1: TDBTreeView;
+    <strong>begin</strong>
+       DBTreeView1 := TDBTreeView.Create(<strong>nil</strong>);
+       DBTreeView1.NameFolderTable := 'Folder_Objects';
+       DBTreeView1.NameObjectTanle := 'Objects';
+       DBTreeView1.Open;
+    <strong>end</strong>;
+	</PRE>
+    <p>Пример получения типа и индентификатор выбранной папки или объекта</p>
+    <PRE>
+   <strong>procedure</strong> TForm1.DBTreeView1DblClick(Sender: TObject);
+   <strong>var</strong>
+       Sel: integer;
+       Folder: Boolean;
+   <strong>begin</strong>
+      Sel := DBTreeView1.Selected.StateIndex;
+      Folder := DBTreeView1.CheckOnFolder(DBTreeView1.Selected);
+      <strong>if</strong> Folder = True <strong>then</strong>
+        ShowMessage('Папка № '+IntToStr(Sel))
+      <strong>else</strong>
+        ShowMessage('Объект № '+IntToStr(Sel));
+   <strong>end</strong>;
+  </PRE>    </p>
+    </td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

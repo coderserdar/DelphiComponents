@@ -1,0 +1,63 @@
+TABExtProgressBar
+Version 1.1
+
+Copyright © 2001-2002 Aaron Bockover.
+Portions Copyright © 2000 Harold Howe and bcbdev.com.
+
+TABExtProgressBar is to be governed under the same terms and conditions
+set for TxGauge by Harold Howe. To review these terms, please read the
+hhreadme.txt file located in the same directory as this file.
+
+INSTALLATION:
+Under BCB6, you can simply install using the provided package.
+If you are running BCB5 or lower, you will need to create your own
+package for TABExtProgressBar. TABExtProgressBar has been tested under
+BCB5 and 6.
+
+OVERVIEW:
+TABExtProgressBar is an extension of Harold Howe's TxGauge control. 
+Harold's original control was designed as an alternative to the VCL's 
+TCGauge control, which did not allow you to choose the inverted ForeColor 
+(see hhreadme.txt).
+
+TxGauge was extended by Aaron Bockover for private use in Wav2Mp3 
+(www.aaronbock.net). The only change was that it supported 64 bit integers, 
+something Wav2Mp3 required.
+
+Over a year later, TxGauge was further extended by Aaron Bockover into
+TABExtProgressBar, which is the current control. 
+
+A number of new properties were added by Aaron to TABExtProgressBar:
+
+ - AlignText
+ - FillStyle
+ - InnerBorderSize
+ - PercentAt
+ - SingleBorderColor
+ - Step
+ - Text
+
+Also, two simple step methods (as well as the step property) were added to 
+provide easier migration from the Windows TProgressBar control:
+
+ - StepIt(void);
+ - StepBy(int);
+
+Finally, a new Border type is available, gbFatRaised, which is gbDeepSunken,
+except inverted.
+
+There are a few things to note:
+
+I still have a few things to work out with the FillStyle gsDashed. It will 
+look much better if you set InnerBorderSize to 1.
+
+I am hoping to add much more functionality to this control in the future.
+
+Lastly, I would just like to thank Harold for doing such a wonderful 
+job on TxGauge! 
+
+-Aaron Bockover
+ mail@aaronbock.net
+ www.aaronbock.net
+
+TxGauqe is Copyright (C) 2000 by Harold Howe and bcbdev.com.

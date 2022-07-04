@@ -1,0 +1,74 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Component TSmWinList</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+</head>
+
+<body>
+<table width="75%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="6%"><img src="4.jpg" width="40" height="42"></td>
+    <td width="40%"><strong>Component TSmWinList</strong></td>
+    <td width="54%"><div align="right"><a href="ReadMe_Eng.htm">Main page</a></div></td>
+  </tr>
+  <tr>
+    <td colspan="3"><p>&nbsp;</p>
+      <p>Component TSmLogEvent intend for getting list of open windows, and their
+        hadles. There is possible filtering of list: all windows or just visible.
+        Besides there is possible pick out the name and handle of the active
+        window.</p>      
+      <p><font size="+1"><strong>Property</strong></font></p>
+      <ul>
+        <li><strong>property</strong> ActiveWinHdl:
+            LongWord - handle of active window</li>
+        <li><strong>property</strong> ActiveWinName:
+        string - name of active window</li>
+        <li><strong>property</strong> Count: integer - the count of open windows</li>
+        <li><strong>property</strong> WinType: TTypeOfWindows - type of getting
+          list: all window or just visible. </li>
+        <li><strong>Type</strong> TTypeOfWindows
+            = (wnAll, wnVisible); wnAll - all windows, wnVisible - visible windows.</li>
+        <li><strong>property</strong> Items[Index: integer]: TWinList; - Individual
+          window.</li>
+        <li> TWinList = <strong>record</strong><br>
+WinName: string; - <font color="#0099FF">name of window</font><br>
+Hdl: HWND; - <font color="#0099FF">handle of window</font><br>
+<strong>end</strong>;</li>
+      </ul>      
+      <p><font size="+1"><strong>Methods</strong></font></p>
+      <ul>
+        <li><strong>method</strong> Refresh;
+              - refresh the list of opening windows.</li>
+      </ul>      <p><font size="+1"></font></p>
+      <p>Example  creation of component in run-time,
+        getting the list of visible windows and extraction of the active window.</p>
+	   <PRE>
+      <strong>var</strong>
+          SmWinList1: TSmWinList;
+          i: integer; 
+      <strong>begin</strong>
+          SmWinList1 := TSmWinList.Create(<strong>nil</strong>);
+          SmWinList1.WinType := wnVisible;<font color="#0066FF">      //Defining that we need only visible windows</font>
+          SmWinList1.Refresh; <font color="#0066FF">        //Getting the list of windows</font>
+          <strong>for</strong> i:=0 <strong>to</strong> SmWinList1.Count-1 <strong>do</strong> <font color="#0066FF">       //Processing the list open windows</font>
+              <strong>begin</strong>
+              StringGrid1.Cells[0,i+1] := SmWinList1[i].WinName;
+              StringGrid1.Cells[1,i+1] := IntToStr(SmWinList1[i].Hdl);
+             <strong>end</strong>;<br>
+         StringGrid1.RowCount := SmWinList1.Count+1;
+         Edit1.Text := IntToStr(SmWinList1.Count); <font color="#0066FF">       //Count of windows</font>
+         Edit2.Text := SmWinList1.ActiveWinName; <font color="#0066FF">      //The name of active window</font>
+         Edit3.Text := IntToStr(SmWinList1.ActiveWinHdl); <font color="#0066FF">     //Handle of active window</font>
+     <strong>end;</strong>
+	  </PRE>
+	       </p>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">&nbsp;</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

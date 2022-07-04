@@ -1,0 +1,22 @@
+2000/2005: DFM:
+  object SQLConnection: TSQLConnection
+    DriverName = '@'
+    GetDriverFunc = 'getSQLDriverODBCW'
+    LibraryName = 'dbxoodbc.dll'
+    LoginPrompt = False
+    Params.Strings = (
+      '@ TransIsolation=ReadCommited'
+      'Database=?'
+      'User_Name='
+      'Password='
+      'RowsetSize=20'
+      'BlobSize=-1'
+      'Trim Char=True'
+
+        'Custom String=coConnectionString=DRIVER=SQL Server;Trusted_Conne' +
+        'ction=Yes;SERVER=127.0.0.1\SQLEXPRESS2005;DATABASE=dbxoodbc;LANG' +
+        'UAGE='#1088#1091#1089#1089#1082#1080#1081)
+    VendorLib = 'sqlsrv32.dll;odbc32.dll'
+    Left = 518
+    Top = 24
+  end

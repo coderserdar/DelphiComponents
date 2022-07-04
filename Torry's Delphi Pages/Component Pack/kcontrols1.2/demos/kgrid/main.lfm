@@ -1,0 +1,608 @@
+object Form1: TForm1
+  Left = 235
+  Height = 603
+  Top = 104
+  Width = 838
+  Caption = 'KGridDemo'
+  ClientHeight = 603
+  ClientWidth = 838
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  Position = poScreenCenter
+  LCLVersion = '0.9.29'
+  object PCMain: TPageControl
+    Left = 0
+    Height = 603
+    Top = 0
+    Width = 838
+    ActivePage = TabSheet2
+    Align = alClient
+    TabIndex = 1
+    TabOrder = 0
+    object TabSheet1: TTabSheet
+      Caption = 'Main demo'
+      ClientHeight = 577
+      ClientWidth = 830
+      object GBSpecial: TGroupBox
+        Left = 545
+        Height = 67
+        Top = 503
+        Width = 280
+        Anchors = [akTop, akRight]
+        Caption = 'Special features'
+        ClientHeight = 49
+        ClientWidth = 276
+        TabOrder = 0
+        object CBEnabled: TCheckBox
+          Left = 141
+          Height = 19
+          Top = 2
+          Width = 90
+          Caption = 'Grid is enabled'
+          Checked = True
+          OnClick = CBEnabledClick
+          State = cbChecked
+          TabOrder = 1
+        end
+        object CBAlignLastCol: TCheckBox
+          Left = 4
+          Height = 19
+          Top = 3
+          Width = 99
+          Caption = 'Align last column'
+          OnClick = CBAlignLastColCLick
+          TabOrder = 0
+        end
+        object CBAutosizeGrid: TCheckBox
+          Left = 4
+          Height = 19
+          Top = 27
+          Width = 205
+          Caption = 'Autosize rows on column width change'
+          OnClick = CBAutosizeGridClick
+          TabOrder = 2
+        end
+      end
+      object GBSelection: TGroupBox
+        Left = 545
+        Height = 45
+        Top = 374
+        Width = 280
+        Anchors = [akTop, akRight]
+        Caption = 'Selection'
+        ClientHeight = 27
+        ClientWidth = 276
+        TabOrder = 1
+        object CBRowSelect: TCheckBox
+          Left = 4
+          Height = 19
+          Top = 3
+          Width = 86
+          Caption = 'Row selection'
+          OnClick = CBRowSelectClick
+          TabOrder = 0
+        end
+        object CBRangeSelect: TCheckBox
+          Left = 141
+          Height = 19
+          Top = 3
+          Width = 96
+          Caption = 'Range selection'
+          Checked = True
+          OnClick = CBRangeSelectClick
+          State = cbChecked
+          TabOrder = 1
+        end
+      end
+      object GBEditing: TGroupBox
+        Left = 545
+        Height = 45
+        Top = 323
+        Width = 280
+        Anchors = [akTop, akRight]
+        Caption = 'Editing cells'
+        ClientHeight = 27
+        ClientWidth = 276
+        TabOrder = 2
+        object CBEditing: TCheckBox
+          Left = 5
+          Height = 19
+          Top = 3
+          Width = 52
+          Caption = 'Editing'
+          Checked = True
+          OnClick = CBEditingClick
+          State = cbChecked
+          TabOrder = 0
+        end
+        object CBNoSelEditedText: TCheckBox
+          Left = 141
+          Height = 19
+          Top = 3
+          Width = 105
+          Caption = 'Select edited text'
+          Checked = True
+          OnClick = CBNoSelEditedTextClick
+          State = cbChecked
+          TabOrder = 1
+        end
+      end
+      object GBColsRows: TGroupBox
+        Left = 545
+        Height = 91
+        Top = 226
+        Width = 280
+        Anchors = [akTop, akRight]
+        Caption = 'Column/row related features'
+        ClientHeight = 73
+        ClientWidth = 276
+        TabOrder = 3
+        object CBColMoving: TCheckBox
+          Left = 4
+          Height = 19
+          Top = 3
+          Width = 101
+          Caption = 'Movable columns'
+          Checked = True
+          OnClick = CBColMovingClick
+          State = cbChecked
+          TabOrder = 0
+        end
+        object CBRowMoving: TCheckBox
+          Left = 141
+          Height = 19
+          Top = 3
+          Width = 86
+          Caption = 'Movable rows'
+          Checked = True
+          OnClick = CBRowMovingClick
+          State = cbChecked
+          TabOrder = 1
+        end
+        object CBColSizing: TCheckBox
+          Left = 4
+          Height = 19
+          Top = 26
+          Width = 100
+          Caption = 'Sizeable columns'
+          Checked = True
+          OnClick = CBColSizingClick
+          State = cbChecked
+          TabOrder = 2
+        end
+        object CBRowSizing: TCheckBox
+          Left = 141
+          Height = 19
+          Top = 26
+          Width = 85
+          Caption = 'Sizeable rows'
+          OnClick = CBRowSizingClick
+          TabOrder = 3
+        end
+        object CBColSorting: TCheckBox
+          Left = 4
+          Height = 19
+          Top = 49
+          Width = 101
+          Caption = 'Sortable columns'
+          OnClick = CBColSortingClick
+          TabOrder = 4
+        end
+        object CBRowSorting: TCheckBox
+          Left = 141
+          Height = 19
+          Top = 49
+          Width = 86
+          Caption = 'Sortable rows'
+          Checked = True
+          OnClick = CBRowSortingClick
+          State = cbChecked
+          TabOrder = 5
+        end
+      end
+      object Button2: TButton
+        Left = 690
+        Height = 25
+        Top = 133
+        Width = 135
+        Action = ACSplit
+        Anchors = [akTop, akRight]
+        TabOrder = 4
+      end
+      object BUMerge: TButton
+        Left = 545
+        Height = 25
+        Top = 133
+        Width = 135
+        Action = ACMerge
+        Anchors = [akTop, akRight]
+        TabOrder = 5
+      end
+      object BUSortRows: TButton
+        Left = 545
+        Height = 25
+        Top = 102
+        Width = 135
+        Anchors = [akTop, akRight]
+        Caption = 'Sort rows randomly'
+        OnClick = BUSortRowsClick
+        TabOrder = 6
+      end
+      object BUInsertSortedRow: TButton
+        Left = 690
+        Height = 25
+        Top = 102
+        Width = 135
+        Action = ACInsertSortedRow
+        Anchors = [akTop, akRight]
+        TabOrder = 7
+      end
+      object BUModifyCell: TButton
+        Left = 690
+        Height = 25
+        Top = 71
+        Width = 135
+        Anchors = [akTop, akRight]
+        Caption = 'Modify random cell'
+        OnClick = BUModifyCellClick
+        TabOrder = 8
+      end
+      object BUDeleteCol: TButton
+        Left = 545
+        Height = 25
+        Top = 71
+        Width = 135
+        Action = ACDeleteCol
+        Anchors = [akTop, akRight]
+        TabOrder = 9
+      end
+      object BUAddColAfter: TButton
+        Left = 545
+        Height = 25
+        Top = 40
+        Width = 135
+        Action = ACAddColAfter
+        Anchors = [akTop, akRight]
+        TabOrder = 10
+      end
+      object BUDeleteRows: TButton
+        Left = 690
+        Height = 25
+        Top = 40
+        Width = 135
+        Action = ACDeleteRows
+        Anchors = [akTop, akRight]
+        TabOrder = 11
+      end
+      object BUAdd5000Rows: TButton
+        Left = 690
+        Height = 25
+        Top = 8
+        Width = 135
+        Action = ACAdd5000Rows
+        Anchors = [akTop, akRight]
+        TabOrder = 12
+      end
+      object BUAddColBefore: TButton
+        Left = 545
+        Height = 25
+        Top = 8
+        Width = 135
+        Action = ACAddColBefore
+        Anchors = [akTop, akRight]
+        TabOrder = 13
+      end
+      object GBAppearance: TGroupBox
+        Left = 545
+        Height = 71
+        Top = 425
+        Width = 280
+        Anchors = [akTop, akRight]
+        Caption = 'Cell appearance'
+        ClientHeight = 53
+        ClientWidth = 276
+        TabOrder = 14
+        object CBThemedCells: TCheckBox
+          Left = 4
+          Height = 19
+          Top = 3
+          Width = 106
+          Caption = 'OS themes in cells'
+          Checked = True
+          OnClick = CBThemedCellsClick
+          State = cbChecked
+          TabOrder = 0
+        end
+        object CBMouseOverCells: TCheckBox
+          Left = 4
+          Height = 19
+          Top = 27
+          Width = 94
+          Caption = 'Cell highlighting'
+          Checked = True
+          OnClick = CBMouseOverCellsClick
+          State = cbChecked
+          TabOrder = 2
+        end
+        object CBClippedCells: TCheckBox
+          Left = 141
+          Height = 19
+          Top = 3
+          Width = 78
+          Caption = 'Clipped cells'
+          OnClick = CBClippedCellsClick
+          TabOrder = 1
+        end
+        object CBDoubleBufferedCells: TCheckBox
+          Left = 141
+          Height = 19
+          Top = 27
+          Width = 121
+          Caption = 'Double buffered cells'
+          Checked = True
+          OnClick = CBDoubleBufferedCellsClick
+          State = cbChecked
+          TabOrder = 3
+        end
+      end
+      object KGrid1: TKGrid
+        Left = 0
+        Height = 577
+        Top = 0
+        Width = 537
+        Align = alLeft
+        Anchors = [akTop, akLeft, akRight, akBottom]
+        ColCount = 8
+        Options = [goAlwaysShowEditor, goColMoving, goColSizing, goDrawFocusSelected, goEditing, goEnterMoves, goFixedHorzLine, goFixedVertLine, goHeader, goHeaderAlignment, goHorzLine, goIndicateHiddenCells, goMouseCanHideCells, goMouseOverCells, goRangeSelect, goRowMoving, goRowSorting, goTabs, goThemes, goThemedCells, goVertLine]
+        OptionsEx = [gxEnterAppendsRow, gxEnterWraps, gxFixedCellClickSelect, gxTabAppendsRow, gxTabWraps]
+        RowCount = 8
+        TabOrder = 15
+        OnBeginColSizing = KGrid1BeginColSizing
+        OnBeginRowSizing = KGrid1BeginColSizing
+        OnColWidthsChanged = KGrid1ColWidthsChanged
+        OnCompareCells = KGrid1CompareCells
+        OnDrawCell = KGrid1DrawCell
+        OnEditorCreate = KGrid1EditorCreate
+        OnEditorDataFromGrid = KGrid1EditorDataFromGrid
+        OnEditorDataToGrid = KGrid1EditorDataToGrid
+        OnEditorKeyPreview = KGrid1EditorKeyPreview
+        OnEditorResize = KGrid1EditorResize
+        OnEditorSelect = KGrid1EditorSelect
+        OnMeasureCell = KGrid1MeasureCell
+        OnPrintPaint = KGrid1PrintPaint
+        ColWidths = (
+          64
+          64
+          64
+          65
+          64
+          64
+          64
+          64
+        )
+        RowHeights = (
+          21
+          21
+          21
+          21
+          21
+          21
+          21
+          21
+        )
+      end
+      object BUPreview: TButton
+        Left = 545
+        Height = 25
+        Top = 164
+        Width = 135
+        Anchors = [akTop, akRight]
+        Caption = 'Preview...'
+        OnClick = BUPreviewClick
+        TabOrder = 16
+      end
+      object BUPrint: TButton
+        Left = 690
+        Height = 25
+        Top = 164
+        Width = 135
+        Anchors = [akTop, akRight]
+        Caption = 'Print...'
+        OnClick = BUPrintClick
+        TabOrder = 17
+      end
+      object BUAutoSizeCol: TButton
+        Left = 545
+        Height = 25
+        Top = 195
+        Width = 135
+        Anchors = [akTop, akRight]
+        Caption = 'Autosize random col.'
+        OnClick = BUAutoSizeColClick
+        TabOrder = 18
+      end
+      object BUAutosizeRow: TButton
+        Left = 690
+        Height = 25
+        Top = 195
+        Width = 135
+        Anchors = [akTop, akRight]
+        Caption = 'Autosize random row'
+        OnClick = BUAutosizeRowClick
+        TabOrder = 19
+      end
+    end
+    object TabSheet2: TTabSheet
+      Caption = 'Merged header cells demo'
+      ClientHeight = 577
+      ClientWidth = 830
+      ImageIndex = 1
+      object KGrid2: TKGrid
+        Left = 0
+        Height = 577
+        Top = 0
+        Width = 830
+        Align = alClient
+        ColCount = 12
+        FixedRows = 3
+        Options = [goAlwaysShowEditor, goClippedCells, goColSizing, goDrawFocusSelected, goEditing, goEnterMoves, goFixedHorzLine, goFixedVertLine, goHeaderAlignment, goHorzLine, goIndicateHiddenCells, goMouseCanHideCells, goMouseOverCells, goRangeSelect, goRowMoving, goRowSorting, goTabs, goThemes, goThemedCells, goVertLine]
+        RangeSelectStyle = rsMS_Excel
+        RowCount = 20
+        TabOrder = 0
+        OnDrawCell = KGrid2DrawCell
+        OnEditorDataToGrid = KGrid2EditorDataToGrid
+        ColWidths = (
+          64
+          64
+          64
+          64
+          64
+          64
+          64
+          64
+          64
+          64
+          64
+          64
+        )
+        RowHeights = (
+          21
+          21
+          21
+          21
+          21
+          21
+          21
+          21
+          21
+          21
+          21
+          21
+          21
+          21
+          21
+          21
+          21
+          21
+          21
+          21
+        )
+      end
+    end
+    object TabSheet3: TTabSheet
+      Caption = 'Virtual grid demo'
+      ClientHeight = 577
+      ClientWidth = 830
+      ImageIndex = 2
+      object KGrid3: TKGrid
+        Left = 0
+        Height = 577
+        Top = 0
+        Width = 830
+        Align = alClient
+        ColCount = 12
+        Options = [goAlwaysShowEditor, goClippedCells, goColMoving, goColSizing, goColSorting, goDrawFocusSelected, goEditing, goEnterMoves, goFixedHorzLine, goFixedVertLine, goHeader, goHeaderAlignment, goHorzLine, goIndicateHiddenCells, goMouseCanHideCells, goMouseOverCells, goRangeSelect, goRowMoving, goRowSorting, goTabs, goThemes, goThemedCells, goVertLine, goVirtualGrid]
+        RangeSelectStyle = rsMS_Excel
+        RowCount = 20
+        TabOrder = 0
+        OnCompareCells = KGrid3CompareCells
+        OnDrawCell = KGrid3DrawCell
+        OnEditorCreate = KGrid3EditorCreate
+        OnEditorDataFromGrid = KGrid3EditorDataFromGrid
+        OnEditorDataToGrid = KGrid3EditorDataToGrid
+        OnExchangeCols = KGrid3ExchangeCols
+        OnExchangeRows = KGrid3ExchangeRows
+        ColWidths = (
+          64
+          64
+          64
+          64
+          64
+          64
+          64
+          64
+          64
+          64
+          64
+          64
+        )
+        RowHeights = (
+          21
+          21
+          21
+          21
+          21
+          21
+          21
+          21
+          21
+          21
+          21
+          21
+          21
+          21
+          21
+          21
+          21
+          21
+          21
+          21
+        )
+      end
+    end
+  end
+  object ActionList1: TActionList
+    left = 472
+    top = 16
+    object ACAddColBefore: TAction
+      Caption = 'Add column before...'
+      OnExecute = ACAddColBeforeExecute
+    end
+    object ACAddColAfter: TAction
+      Caption = 'Add column after...'
+      OnExecute = ACAddColBeforeExecute
+    end
+    object ACDeleteCol: TAction
+      Caption = 'Delete column...'
+      OnExecute = ACDeleteColExecute
+      OnUpdate = ACDeleteColUpdate
+    end
+    object ACAdd5000Rows: TAction
+      Caption = 'Add 5000 rows'
+      OnExecute = ACAdd5000RowsExecute
+    end
+    object ACDeleteRows: TAction
+      Caption = 'Delete selected rows'
+      OnExecute = ACDeleteRowsExecute
+      OnUpdate = ACDeleteRowsUpdate
+    end
+    object ACInsertSortedRow: TAction
+      Caption = 'Insert sorted row'
+      OnExecute = ACInsertSortedRowExecute
+      OnUpdate = ACInsertSortedRowUpdate
+    end
+    object ACMerge: TAction
+      Caption = 'Merge selected'
+      OnExecute = ACMergeExecute
+      OnUpdate = ACMergeUpdate
+    end
+    object ACSplit: TAction
+      Caption = 'Split merged cell'
+      OnExecute = ACSplitExecute
+      OnUpdate = ACSplitUpdate
+    end
+  end
+  object PSDMain: TKPrintSetupDialog
+    Control = KGrid1
+    SelAvail = False
+    left = 437
+    top = 16
+  end
+  object PPDMain: TKPrintPreviewDialog
+    Control = KGrid1
+    left = 504
+    top = 16
+  end
+end

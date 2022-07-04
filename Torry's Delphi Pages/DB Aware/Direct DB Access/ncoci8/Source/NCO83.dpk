@@ -1,0 +1,53 @@
+package NCO83;
+
+{$R *.RES}
+{$ALIGN ON}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $00400000}
+{$DESCRIPTION 'NCOCI8 v 1.0.0 for D3'}
+{$IMPLICITBUILD ON}
+
+requires
+  vcl30,
+  vcldb30;
+
+contains
+  NCSQLMon,
+  NCOciBreakDlg,
+  NCOciBuff,
+  NCOciDB,
+  NCOciDM,
+  NCOciErrorDlg,
+  NCOciFilter,
+  NCOciLoginDlg,
+  NCOciMsg,
+  NCOciParams,
+  NCOciReg,
+  NCOciUpdateSQL,
+  NCOciUtil,
+  NCOciWrapper,
+  NCOci,
+  NCOciCompNamer,
+  NCOciCompNamerSetupDlg,
+  NCOciPLSQLGenSetupDlg,
+  NCOciPLSQLGen;
+
+end.

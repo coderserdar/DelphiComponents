@@ -1,0 +1,74 @@
+TNumericEdit (C)opyright 2001 Version 1.00
+
+  Autor : Simon Reinhardt
+  eMail : reinhardt@picsoft.de
+  Internet : http://www.picsoft.de
+
+  Die Komponente TNumericEdit dient der alphanumerischen
+  Eingabe eines Fließkommawerts. Zahlenwerte können direkt eingetippt
+  werden oder man kann über SpinButtons einzelne Stellen ändern.
+
+  Die Komponente ist Public Domain, das Urheberrecht liegt aber 
+  beim Autor.
+
+
+
+Funktion:
+---------
+
+Um einen Wert einzustellen, kann man diesen direkt eintippen oder auf die 
+SpinButtons klicken, um einzelne Stellen der zahl zu ändern. Mit der Eingabe 
+von "+" oder "-" kann man das Vorzeichen des Wertes ändern.
+
+Es folgt eine kurze Aufstellung aller von TPanel abweichenden Eigenschaften 
+und Ereignisse:
+
+A) Eigenschaften:
+-----------------
+
+AutoSize: boolean;
+  Bestimmt, ob die Höhe des Controls automatisch an die eingestellte 
+  Schriftart angepasst wird.
+
+BtnHeight: integer;
+  Höhe der Spinbuttons
+
+DecSeparator: char;
+  Das Dezimaltrennzeichen, wenn DecSeparatorPos>0
+
+DecSeparatorPos: byte;
+  Die Position des Dezimal-Trennzeichens (von rechts)
+
+EditPos: byte;
+  Die aktuelle Eingabeposition. Auf diese Position beziehen sich alle 
+  Tastatureingaben, also direkte Zahleneingaben oder Cursortasten.
+
+FrameColor: TColor read FFrameColor write SetFrameColor;
+  Die Farbe des Rahmens um die Wertanzeige
+
+MaxValue: extended;
+  Höchster einzustellender Wert
+
+MinValue: extended;
+  Niedrigster einzustellender Wert
+
+NumDigits: TNumDigits;
+  Anzahl der Dezimalstellen der TNumericEdit-Komponente
+
+Value: extended;
+  Der eingestellte Wert
+
+
+B) Ereignisse:
+--------------
+
+OnChange: TNotifyEvent;
+  wird bei jeder Änderung der Value-Eigenschaft ausgelöst.
+
+OnSpinBtnClick: TNESpinBtnClick;
+  wird ausgelöst wenn einer der SpinButtons der TNumericEdit-Komponente
+  angeklickt wurde.
+
+
+Die Funktion der Komponenten läßt sich außerdem im beigefügten Demo-Programm im 
+Ordner "Demo" sehen.

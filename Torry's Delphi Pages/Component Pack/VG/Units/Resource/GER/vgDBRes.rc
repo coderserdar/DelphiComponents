@@ -1,0 +1,76 @@
+/****************************************************************************
+
+vgDBRes.res
+
+  Vladimir Gaitanoff Delphi VCL Library
+  Copyright (c) 1997, 1998
+
+*****************************************************************************/
+
+#include "vgDBRes.pas"
+
+STRINGTABLE
+{
+  SConfirmDelete       , "Satz löschen ?"
+  SOpenTableFailed     , "Kann Tabelle oder Query nicht öffnen\n"\
+                         "'%s'\n"\
+                         "Wiederholen ?"
+  SEqualStr            , " (gleich)"
+  SNotNullReqired      , "Feld '%s' muss einen Wert haben."
+  SNullReqired         , "Feld '%s' muss leer sein."
+  SLengthTooSmall      , "Feld '%s' muss mindestens %d Zeichen enthalten."
+  SIntFieldOutOfRange  , "Feld '%s' muss zwischen %d und %d liegen."
+  SFieldRequired       , "Feld '%s' muss einen Wert haben."
+  SNonZeroValueReq     , "Feld '%s' muss größer Null sein."
+  SMoreThanReq         , "Feld '%s' muss größer sein als %d."
+  SLessThanReq         , "Feld '%s' muss kleiner sein als %d."
+  SEqualReq            , "Feld '%s' muss gleich %d sein."
+  SNotEqualReq         , "Feld '%s' muss den selben Wert haben wie das Feld '%s'."
+  SValueRange          , "Feld '%s' muss zwischen %.2f und %.2f liegen."
+  SNumericSequenceReq  , "Feld '%s' muss einen Wert gr”áer%s als Feld '%s' haben."
+  SDateSequenceReq     , "Feld '%s' muss ein Datum gr”áer%s als Feld '%s' haben."
+  SRecordNotFound      , "Satz nicht gefunden."
+  SRecordNotFoundTbl   , "Satz in Tabelle '%s' nicht gefunden."
+  SInsertNotAvail      , "Kann neuen Satz nicht einfügen."
+  SEditNotAvail        , "Kann Satz nicht ändern."
+  SDeleteNotAvail      , "Kann Satz nicht löschen."
+
+  SInvalidUserName     , "Unbekannter Benutzer oder Passwort."
+  SDeadlock            , "Deadlock festgestellt.\n"\
+                         "Wiederholen Sie die Aktion."
+  SKeyViol             , "Es gibt bereits einen Satz mit den selben Schlüsselfeldern."
+  SKeyDeleted          , "Kann Satz nicht ändern oder löschen.\n"\
+                         "Entfernen Sie den Filter oder lesen Sie die Daten erneut ein."
+  SFKViolation         , "Nullwert oder falsche Referenz gefunden.\n"
+  SErrorCodeFmt        , "Fehler: %d\n"
+
+  SDBMenuInsert        , "Ei&nfügen"
+  SDBMenuEdit          , "Än&dern"
+  SDBMenuDelete        , "&Löschen"
+  SDBMenuFirst         , "&Erster Satz"
+  SDBMenuLast          , "Let&zter Satz"
+  SDBMenuRefresh       , "&Refresh"
+
+  SGetProviderError    , "Kann IProvider nicht erzeugen: DataSet und Provider nicht definiert"
+  SDuplicateProvNames  , "%s: ProviderItem mit ProviderName '%s' existiert bereits";
+  SProvNotFound        , "IProvider '%s' nicht gefunden"
+
+  SServicesNotFound    , "%s: Kann dataset services nicht finden"
+  SServicesEmpty       , "Services property nicht zugewiesen"
+  SCreateDataSetErr    , "%s: Kann DataSet nicht erzeugen"
+  SCreateDataSetEditErr, "%s: Kann änderbares DataSet nicht erzeugen"
+
+  SRemoteServerNeeded  , "RemoteServer property nicht zugewiesen"
+
+  SProviderListNeeded  , "ProviderList property nicht zugewiesen"
+
+  SInvalidDatabase     , "Ungültiger database provider"
+  SMissingDatabase     , "Database property nicht zugewiesen"
+  SUnknownDatabase     , "Unbekannte Datenbank '%s'"
+  SDupProviderName     , "Provider '%s' existiert bereits"
+  SDBFactoryMissing    , "DatabaseFactory property nicht zugewiesen"
+  SNoDataModule        , "DataModule nicht verfügbar"
+  SInvalidDatabaseName , "Ungültige DatabaseName property"
+
+
+}

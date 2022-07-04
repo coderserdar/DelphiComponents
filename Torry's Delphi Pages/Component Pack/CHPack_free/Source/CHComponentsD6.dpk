@@ -1,0 +1,72 @@
+package CHComponentsD6;
+
+{$R *.res}
+{$R 'CHPACK.dcr'}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'Christian Hämmerle - Component Pack'}
+{$IMPLICITBUILD OFF}
+
+requires
+  rtl,
+  vcl,
+  vcljpg,
+  vclx;
+
+contains
+  _CHClassFunction in '_CHClassFunction.pas',
+  _CHClassProperty in '_CHClassProperty.pas',
+  __SRCal in '_SRCal.pas',
+  __TimeFunc in '_TimeFunc.pas',
+  CHEdit in 'CHEdit.pas',
+  CHCheckBox in 'CHCheckBox.pas',
+  CHRadioButton in 'CHRadioButton.pas',
+  CHPanel in 'CHPanel.pas',
+  CHMultiGradient in 'CHMultiGradient.pas',
+  CHImage in 'CHImage.pas',
+  CHRichedit in 'CHRichedit.pas',
+  CHApplication in 'CHApplication.pas',
+  CHColorPicker in 'CHColorPicker.pas',
+  CHLed in 'CHLed.pas',
+  CHMoveContainer in 'CHMoveContainer.pas',
+  CHPerformance in 'CHPerformance.pas',
+  CHThreadTimer in 'CHThreadTimer.pas',
+  CHForm in 'CHForm.pas',
+  CHMouse in 'CHMouse.pas',
+  CHAdvancedTimer in 'CHAdvancedTimer.pas',
+  CHCrypt in 'CHCrypt.pas',
+  CHHighResTimer in 'CHHighResTimer.pas',
+  CHTrayIcon in 'CHTrayIcon.pas',
+  CHShape in 'CHShape.pas',
+  CHAdvancedLabel in 'CHAdvancedLabel.pas',
+  CHDataSharing in 'CHDataSharing.pas',
+  CHEditBtn in 'CHEditBtn.pas',
+  CHPageControl in 'CHPageControl.pas',
+  CHStringGrid in 'CHStringgrid.pas',
+  CHCryptPro in 'CHCryptPro.pas',
+  CHDateDialog in 'CHDateDialog.pas',
+  CHFolderDialog in 'CHFolderDialog.pas',
+  CHButton in 'CHButton.pas',
+  CHLogfile in 'CHLogfile.pas',
+  CHStringList in 'CHStringList.pas';
+
+end.

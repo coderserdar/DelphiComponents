@@ -1,0 +1,43 @@
+package VolgaPD6;
+
+{$R *.res}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'VolgaDB Controls Library'}
+{$RUNONLY}
+{$IMPLICITBUILD ON}
+
+requires
+  vcl,
+  vcldb;
+
+contains
+  VolDBConst in 'VolDBConst.pas',
+  VolDBEdit in 'VolDBEdit.pas',
+  VolDBGrid in 'VolDBGrid.pas',
+  VolCalend in 'VolCalend.pas',
+  VolPeriod in 'VolPeriod.pas',
+  VolFndEd in 'VolFndEd.pas',
+  VolMeter in 'VolMeter.pas',
+  VolCalc in 'VolCalc.pas';
+
+end.

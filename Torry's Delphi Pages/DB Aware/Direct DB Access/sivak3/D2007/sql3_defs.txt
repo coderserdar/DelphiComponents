@@ -1,0 +1,669 @@
+unit sql3_defs;
+
+interface
+
+{ SQLite3 data components
+  - TSivak3Database
+      database connection
+      published to component palette
+
+  - TSivak3SimpleTable
+      not a TDataset descendant
+      published to component palette
+      very fast, usable to fill some string list, string grid, list view, etc...
+      see GetValues procedure(s)
+
+  - TSivak3Exec
+      not a TDataset descendant
+      published to component palette
+      usable for executing SQL, one or more SQL commands, separated by semicolon
+      if the SQL command(s) returns a cursor, individual records are
+      taken by "OnFetchRecord" event
+
+  - TSivak3Command
+      base TDataset descendant, not published to component palette
+      fully usable, no abstract or empty methods
+      you can use in runtime as a simplified query ( TSivak3Command.Create... )
+      ancestor for standard dataset objects (TSivak3Query, TSivak3Table)
+
+  - TSivak3Query
+      TDataset (TSivak3Command) descendant
+      published to component palette
+
+  - TSivak3Table
+      TDataset (TSivak3Command) descendant
+      published to component palette
+                                                         (c) 2010 Ivan Sivak
+                                                         sivak@filedepot.eu
+                                                         http://www.filedepot.eu
+}
+
+{$I db_sql.inc}
+
+uses
+  Windows, Messages, SysUtils, Classes, Variants, DB;
+
+const
+  SQLITE_ERROR       =   1;
+  SQLITE_INTERNAL    =   2;
+  SQLITE_PERM        =   3;
+  SQLITE_ABORT       =   4;
+  SQLITE_BUSY        =   5;
+  SQLITE_LOCKED      =   6;
+  SQLITE_NOMEM       =   7;
+  SQLITE_READONLY    =   8;
+  SQLITE_INTERRUPT   =   9;
+  SQLITE_IOERR       =  10;
+  SQLITE_CORRUPT     =  11;
+  SQLITE_NOTFOUND    =  12;
+  SQLITE_FULL        =  13;
+  SQLITE_CANTOPEN    =  14;
+  SQLITE_PROTOCOL    =  15;
+  SQLITE_EMPTY       =  16;
+  SQLITE_SCHEMA      =  17;
+  SQLITE_TOOBIG      =  18;
+  SQLITE_CONSTRAINT  =  19;
+  SQLITE_MISMATCH    =  20;
+  SQLITE_MISUSE      =  21;
+  SQLITE_NOLFS       =  22;
+  SQLITE_AUTH        =  23;
+  SQLITE_FORMAT      =  24;
+  SQLITE_RANGE       =  25;
+  SQLITE_NOTADB      =  26;
+  SQLITE_ROW         = 100;
+  SQLITE_DONE        = 101;
+
+  SQLITE_INTEGER     =   1;
+  SQLITE_FLOAT       =   2;
+  SQLITE_TEXT        =   3;
+  SQLITE_BLOB        =   4;
+  SQLITE_NULL        =   5;
+
+  SQLITE_UTF8        =   1;
+  SQLITE_UTF16LE     =   2;
+  SQLITE_UTF16BE     =   3;
+  SQLITE_UTF16       =   4;
+  SQLITE_ANY         =   5;
+  SQLITE_UTF16_ALIGNED=  8;
+
+  FIELD_PRIMARY_FLAG = $00000001;
+  FIELD_INTEGER_FLAG = $00000002;
+  FIELD_ROWID_FLAG   = $00000003;
+  FIELD_NOTNULL_FLAG = $00000004;
+  FIELD_ALL_FLAG     = $00000007;
+
+  SYSTEM_TABLE       = 'sqlite_master';
+
+// Database --------------------------------------------------------------------
+
+type
+  TUserCollation8  = function(user: Pointer; lenA: Integer; a: PAnsiChar; lenB: Integer; b:PAnsiChar): Integer; cdecl;
+  TUserCollation16 = function(user: Pointer; lenA: Integer; a: PWideChar; lenB: Integer; b:PWideChar): Integer; cdecl;
+
+  TDatabaseEncoding = (deUTF_8, deUTF_16le, deUTF_16be);
+  TTransIsolation   = (tiSerializable, tiDirtyRead);
+  TTransationType   = (ttDefault, ttDeferred, ttImmediate, ttExclusive);
+  TDefaultCollation = (dcNative, dcBinary);
+  TPragmaOption = (
+    poForeignKeysSupport,
+    poCaseSensitiveLike,
+    poCountChanges,
+    poFullColumnNames,
+    poShortColumnNames,
+    poRecursiveTriggers,
+    poAutomaticIndex,
+    poReverseUnorderedSelects,
+    poSecureDelete);
+
+  TPragmaOptions = set of TPragmaOption;
+
+  TSivak3Database = class(TComponent)
+  private
+    extrn_Open: function(dbname: PAnsiChar; var db: Pointer): Integer; cdecl;
+    extrn_Close: function(db: Pointer): Integer; cdecl;
+    extrn_LibVersion: function: PAnsiChar; cdecl;
+    extrn_ErrorString: function(db: Pointer): PAnsiChar; cdecl;
+    extrn_GetTable: function(db: Pointer; SQLStatement: PAnsiChar; var ResultPtr: Pointer; var RowCount: cardinal; var ColCount: cardinal; var ErrMsg: PAnsiChar): Integer; cdecl;
+    extrn_FreeTable: procedure(Table: PAnsiChar); cdecl;
+    extrn_FreeMem: procedure(P: Pointer); cdecl;
+    extrn_LastInsertRow: function(db: Pointer): Integer; cdecl;
+    extrn_Changes: function(db: Pointer): Integer; cdecl;
+    extrn_Prepare: function(db: Pointer; SQLStatement: PAnsiChar; Bytes: Integer; var hstatement: Pointer; var Tail: PAnsiChar): Integer; cdecl;
+    extrn_Prepare16: function(db: Pointer; SQLStatement: PWideChar; Bytes: Integer; var hstatement: Pointer; var Tail: PWideChar): Integer; cdecl;
+    extrn_Finalize: function(hstatement: Pointer): Integer; cdecl;
+    extrn_Step: function(hstatement: Pointer): Integer; cdecl;
+    extrn_Exec: function(db: Pointer; SQLStatement: PAnsiChar; CallbackPtr: Pointer; Sender: TObject; var ErrMsg: PAnsiChar): Integer; cdecl;
+    extrn_Get_Autocommit: function(db: Pointer): Integer; cdecl;
+
+    extrn_Column_blob: function(hstatement: Pointer; Col: Integer): Pointer; cdecl;
+    extrn_Column_bytes: function(hstatement: Pointer; Col: integer): Integer; cdecl;
+    extrn_Column_count: function(hstatement: Pointer): Integer; cdecl;
+    extrn_Column_decltype: function(hstatement: Pointer; Col: integer): PAnsiChar; cdecl;
+    extrn_Column_double: function(hstatement: Pointer; Col: Integer): Double; cdecl;
+    extrn_Column_int: function(hstatement: Pointer; Col: Integer): Integer; cdecl;
+    extrn_Column_int64: function(hstatement: Pointer; Col: Integer): Int64; cdecl;
+    extrn_Column_name: function(hstatement: Pointer; Col: Integer): PAnsiChar; cdecl;
+    extrn_Column_text: function(hstatement: Pointer; Col: Integer): PAnsiChar; cdecl;
+    extrn_Column_text16: function(hstatement: Pointer; Col: Integer): PWideChar; cdecl;
+    extrn_Column_type: function(hstatement: Pointer; Col: Integer): Integer; cdecl;
+
+    extrn_Bind_Blob: function(hstatement: Pointer; Col: Integer; buf: PAnsiChar; n: Integer; DestroyPtr: Pointer): Integer; cdecl;
+    extrn_Bind_Text: function(hstatement: Pointer; Col: Integer; buf: PAnsiChar; n: Integer; DestroyPtr: Pointer): Integer; cdecl;
+    extrn_Bind_Text16: function(hstatement: Pointer; Col: Integer; buf: PWideChar; n: Integer; DestroyPtr: Pointer): Integer; cdecl;
+    extrn_Bind_Int: function(hstatement: Pointer; Col: Integer; value: Integer): Integer; cdecl;
+    extrn_Bind_Int64: function(hstatement: Pointer; Col: Integer; value: Int64): Integer; cdecl;
+    extrn_Bind_Double: function(hstatement: Pointer; Col: Integer; value: Double): Integer; cdecl;
+    extrn_Bind_Null: function(hstatement: Pointer; Col: Integer): Integer; cdecl;
+    extrn_Bind_Parameter_Count: function(hstatement: Pointer): Integer; cdecl;
+    extrn_Bind_Parameter_Index: function(hstatement: Pointer; zName: PAnsiChar): Integer; cdecl;
+    extrn_Bind_Parameter_Name: function(hstatement: Pointer; zIndex: Integer): PAnsiChar; cdecl;
+
+    extrn_create_collationA: function(db: Pointer; zName: PAnsiChar; eTextRep: Integer; userData: Pointer; func: TUserCollation8): Integer; cdecl;
+    extrn_create_collationU: function(db: Pointer; zName: PWideChar; eTextRep: Integer; userData: Pointer; func: TUserCollation16): Integer; cdecl;
+    
+  private
+    DLLHandle: HMODULE;
+    FDBHandle: Pointer;
+    FPragmaOptions: TPragmaOptions;
+    FParams: String;
+    FTransIsolation: TTransIsolation;
+    FDefaultCollation: TDefaultCollation;
+    FMustExists: Boolean;
+    FConnected: Boolean;
+    FStreamConnect: Boolean;
+    FUnicode: Boolean;
+    FLoaded: Boolean;
+    FDriverDLL: TFileName;
+    FDatabaseFile: TFileName;
+    FVersion: AnsiString;
+    FDescription: String;
+    FAfterConnect: TNotifyEvent;
+    FAfterDisconnect: TNotifyEvent;
+    FBeforeConnect: TNotifyEvent;
+    FBeforeDisconnect: TNotifyEvent;
+
+    procedure SetDriverDll(const Value: TFileName);
+    procedure SetDatabase(const Value: TFileName);
+    procedure SetConnected(Value: Boolean); virtual;
+    procedure CheckDBConnected(RaiseIfNotConnected: Boolean);
+    procedure CheckDBError(CommandHandle: Pointer);
+    procedure GetVersion;
+    procedure SetPragmaValue(ValueName, Value: String);
+    procedure GetDBObjectList(ObjectType: String; list: TStrings; ForTable: String = '');
+    procedure CommandClose(var CommandHandle: Pointer);
+    procedure CommandStep(CommandHandle: Pointer);
+
+    function GetConnected: Boolean;
+    function CommandExec(CommandText: String; AParams: TParams; var ColCount: Cardinal): Pointer;
+    function LoadLib(DriverFile: String): boolean;
+    function GetDriverDll: TFileName;
+    function GetRowsAffected: Integer;
+    function GetLastInsertedRow: Int64;
+    function GetPragmaValue(ValueName: String): String;
+    function GetObjectType(Value: String): String;
+    function CreateIndexDef(Owner: TIndexDefs; IndexName: String): TIndexDef;
+    function GetInTransaction: Boolean;
+    function GetAutoCommitMode: Boolean;
+
+    function actual_size(CommandHandle: Pointer; index: Cardinal): Integer;
+    function blob_data(CommandHandle: Pointer; index: Cardinal): Pointer;
+    function get_field_name(CommandHandle: Pointer; index: Cardinal): String;
+    function get_field_type(CommandHandle: Pointer; index: Cardinal): String;
+    function get_field_attrib(CommandHandle: Pointer; index: Cardinal): Integer;
+    function as_ansi_string(CommandHandle: Pointer; index: Cardinal): PAnsiChar;
+    function as_wide_string(CommandHandle: Pointer; index: Cardinal): PWideChar;
+    function as_integer(CommandHandle: Pointer; index: Cardinal): Integer;
+    function as_int64(CommandHandle: Pointer; index: Cardinal): Int64;
+    function as_double(CommandHandle: Pointer; index: Cardinal): Double;
+    function as_datetime(CommandHandle: Pointer; index: Cardinal): TDateTime;
+  protected
+    FLastError: Integer;
+    DefaultFormatSettings: TFormatSettings;
+    FClients: TList;
+
+    procedure Loaded; override;
+    procedure DoConnect; virtual;
+    procedure DoDisconnect; virtual;
+    procedure RegisterClient(Client: TObject); virtual;
+    procedure UnRegisterClient(Client: TObject); virtual;
+    procedure CreateCollationA(CollationName: AnsiString; CompareFunction: TUserCollation8);
+    procedure CreateCollationU(CollationName: WideString; CompareFunction: TUserCollation16);
+  public
+    constructor Create(AOwner: TComponent); override;
+    destructor Destroy; override;
+    procedure Open;
+    procedure Close;
+    procedure CreateDatabase(encoding: TDatabaseEncoding; FailIfExists: Boolean; FileName: String = ''; Description: String = '');
+    procedure Execute(CommandText: String; AParams: TParams = nil);
+    procedure GetTableNames(list: TStrings; SystemTable: Boolean = false);
+    procedure GetViewNames(list: TStrings);
+    procedure GetTriggerNames(list: TStrings; ForTable: String = '');
+    procedure GetIndexNames(list: TStrings; ForTable: String = '');
+    procedure GetFieldNames(list: TStrings; ForTable: String);
+    procedure GetForeignKeyList(list: TStrings; ForTable: String);
+    procedure GetIndexDefs(IndexDefs: TIndexDefs; TableName: String);
+    procedure StartTransaction(TransationType: TTransationType = ttDefault);
+    procedure Commit;
+    procedure Rollback;
+
+    function GetDBObjectBody(ObjectType, ObjectName: String): String;
+
+    property Handle: Pointer read FDBHandle;
+    property RowsAffected: Integer read GetRowsAffected;
+    property LastInsertedRow: Int64 read GetLastInsertedRow;
+    property Pragma[ValueName: String]: String read GetPragmaValue write SetPragmaValue;
+    property ObjectType[ObjectName: String]: String read GetObjectType;
+    property InTransaction: Boolean read GetInTransaction;
+    property AutoCommitMode: Boolean read GetAutoCommitMode;
+    property Unicode16: Boolean read FUnicode;
+    property Version: AnsiString read FVersion;
+  published
+    property Connected: Boolean read GetConnected write SetConnected default false;
+    property DatabaseFile: TFileName read FDatabaseFile write SetDatabase;
+    property Collation: TDefaultCollation read FDefaultCollation write FDefaultCollation default dcNative;
+    property Driver: TFileName read GetDriverDLL write SetDriverDll;
+    property MustExists: Boolean read FMustExists write FMustExists default true;
+    property Options: TPragmaOptions read FPragmaOptions write FPragmaOptions default [poShortColumnNames];
+    property Params: String read FParams write FParams;
+    property TransIsolation: TTransIsolation read FTransIsolation write FTransIsolation default tiSerializable;
+    property Description: String read FDescription write FDescription;
+
+    property AfterConnect: TNotifyEvent read FAfterConnect write FAfterConnect;
+    property BeforeConnect: TNotifyEvent read FBeforeConnect write FBeforeConnect;
+    property AfterDisconnect: TNotifyEvent read FAfterDisconnect write FAfterDisconnect;
+    property BeforeDisconnect: TNotifyEvent read FBeforeDisconnect write FBeforeDisconnect;
+  end;
+
+// Simple table ----------------------------------------------------------------
+
+  TSivak3SimpleTable = class(TComponent)
+  private
+    FDatabase: TSivak3Database;
+    FieldList: String;
+    ResultPtr: Pointer;
+    FRowCount: Integer;
+    FColCount: Integer;
+    Status: Integer;
+    FEmpty: Boolean;
+    FTableName: String;
+    FOrderField: String;
+    FFilter: String;
+    FEmptyStr: String;
+
+    procedure set_table_name(Value: String);
+    procedure set_database(Value: TSivak3Database);
+
+    function get_field_name(index: Integer): String;
+    function get_field_value(col, row: Integer): String;
+    function get_field_value_by_name(field_name: String; row: Integer): String;
+    function get_empty_str: String;
+  protected
+    procedure Notification(AComponent: TComponent; Operation: TOperation); override;
+  public
+    constructor Create(AOwner: TComponent); reintroduce;
+    destructor Destroy; override;
+    procedure Open(CommandText: String = '');
+    procedure Close;
+    procedure GetValues(Col: Integer; list: TStrings; RowidCol: Integer = -1); overload;
+    procedure GetValues(ColumnName: String; list: TStrings; RowidName: String = ''); overload;
+    function  FieldIndex(FieldName: String): Integer;
+
+    property IsEmpty: Boolean read FEmpty;
+    property RowCount: Integer read FRowCount;
+    property ColCount: Integer read FColCount;
+    property ColumnName[index: Integer]: String read get_field_name;
+    property ColumnValue[Col, Row: Integer]: String read get_field_value;
+    property ColumnValueByName[ColumnName: String; Row: Integer]: String read get_field_value_by_name;
+
+  published
+    property ColumnList: String read FieldList write FieldList;
+    property Database: TSivak3Database read FDatabase write set_database;
+    property TableName: String read FTableName write set_table_name;
+    property OrderField: String read FOrderField write FOrderField;
+    property Filter: String read FFilter write FFilter;
+    property StringIfEmpty: String read get_empty_str write FEmptyStr;
+  end;
+
+// TSivak3Command --------------------------------------------------------------
+
+const
+  ftBlobTypes    = [ftBlob, ftMemo, ftGraphic];
+  ftSupported    = [ftString, ftWideString,
+                    ftInteger, ftWord, ftSmallint, ftLargeint,
+                    ftFloat, ftCurrency, ftBoolean, ftDateTime, ftDate, ftTime,
+                    ftBlob, ftMemo, ftGraphic];
+
+type
+{$IFNDEF D9_UP}
+  TRecordBuffer = PAnsiChar;
+
+{ Less than Delphi 2009 and TWideStringField.
+  -------------------------------------------
+  Podpora WideStringFields u nizsich verzi, nez 2009 je omezena a v podstate funguje pouze s ADO.
+  Toto rozsireni umozni nacitat wide stringy i ze SQLite3, pokud je databaze vytvorena s UTF-16
+  Nicmene bezne DataControls (DBGrid, DBEdit...) u techto verzi nejsou unicode a plni se jako ANSI string }
+
+  TWideStringField = class(DB.TWideStringField)
+  private
+    procedure SetAsWString(const Value: WideString);
+    function GetAsWString: WideString;
+    function GetValue(var aValue: WideString): Boolean;
+  protected
+    procedure SetAsString(const Value: string); override;
+    function GetAsString: String; override;
+  public
+    property Value: WideString read GetAsWString write SetAsWString;
+  end;
+{$ENDIF}
+
+  TBookmarkData = PAnsiChar;
+  PMemBookmarkInfo = ^TMemBookmarkInfo;
+  TMemBookmarkInfo = record
+    BookmarkData: TBookmarkData;
+    BookmarkFlag: TBookmarkFlag;
+  end;
+
+  PBlobRecord =^TBlobRecord;
+  TBlobRecord = packed record
+    blob_flag: Byte;
+    blob_size: Cardinal;
+    blob_data: PAnsiChar;
+  end;
+
+  TSivak3BlobStream = class(TStream)
+  private
+    FField: TBlobField;
+    FRecord: PBlobRecord;
+    FBuffer: PAnsiChar;
+    FBufferSize: Cardinal;
+    FMode: TBlobStreamMode;
+    FOpened: Boolean;
+    FModified: Boolean;
+    FPosition: Longint;
+  public
+    constructor Create(Field: TBlobField; Mode: TBlobStreamMode);
+    destructor Destroy; override;
+    function Read(var Buffer; Count: Longint): Longint; override;
+    function Write(const Buffer; Count: Longint): Longint; override;
+    function Seek(Offset: Longint; Origin: Word): Longint; override;
+    function GetBlobSize: Longint;
+  end;
+
+  TSivak3Command = class(TDataSet)
+  private
+    FDatabase: TSivak3Database;
+    FCommandHandle: Pointer;
+    FColCount: Cardinal;
+    FRecordPos: Integer;
+    FDataSize: Integer; //size of data fields only
+    FBookmarkOfs: Integer;
+    FRecBufSize: Integer;
+    FRowIDIndex: Integer;
+    FLevel: Integer;
+    FOffsets: PWordArray;
+    FSqIndex: PWordArray;
+    FParams: TParams;
+    FChangeList: TStringList;
+    FNoSeekRowid: Boolean;
+    FDataActive: Boolean;
+    FFetchBlobs: Boolean;
+    FRequestLive: Boolean;
+    FIsView: Boolean;
+    FComplette: Boolean;
+    FRecordSet: TList;
+    FNewBuffer: TRecordBuffer;
+    FRowIDFieldName: String;
+    FCommandText: String;
+
+    procedure DeleteRecord(Index: Integer);
+    procedure ClearRecords;
+    procedure SetSQL(Value: String);
+    procedure SetParams(Value: TParams);
+    procedure SetDatabase(Value: TSivak3Database);
+    procedure CheckRequestLive;
+    procedure RecordToBuffer(Rec: PAnsiChar; Buffer: TRecordBuffer);
+    procedure UpdateCurrentRowID(NewRowid: Int64; Buffer: TRecordBuffer = nil);
+    procedure PrepareCommand;
+
+    function FetchRecord: PAnsiChar;
+    function FindFieldData(Buffer: Pointer; Field: TField): Pointer;
+    function GetMemoryRecord(Index: Integer): PAnsiChar;
+    function CheckConnected(TryConnect: Boolean): Boolean;
+    function Unicode: Boolean;
+    function RecordFilter: Boolean;
+    function ReadRecords(ToRowID: Int64 = -1): Integer;
+    function GetActiveDataBuf(var RecBuffer: TRecordBuffer): Boolean;
+    function DataSetLocate(const KeyFields: string; const KeyValues: Variant; Options: TLocateOptions): Boolean;
+    function GetCurrentRowID: Int64;
+    function Step: Cardinal;
+  protected
+    procedure Notification(AComponent: TComponent; Operation: TOperation); override;
+    procedure FreeRecordBuffer(var Buffer: TRecordBuffer); override;
+    procedure ClearCalcFields(Buffer: TRecordBuffer); override;
+    procedure SetFiltered(Value: Boolean); override;
+    procedure SetOnFilterRecord(const Value: TFilterRecordEvent); override;
+    procedure SetFieldData(Field: TField; Buffer: Pointer); override;
+    procedure GetBookmarkData(Buffer: TRecordBuffer; Data: Pointer); override;
+    procedure SetBookmarkFlag(Buffer: TRecordBuffer; Value: TBookmarkFlag); override;
+    procedure SetBookmarkData(Buffer: TRecordBuffer; Data: Pointer); override;
+    procedure SetRecNo(Value: Integer); override;
+    procedure DoBeforeInsert; override;
+    procedure DoBeforeEdit; override;
+    procedure DoAfterOpen; override;
+    procedure InternalOpen; override;
+    procedure InternalClose; override;
+    procedure InternalFirst; override;
+    procedure InternalLast; override;
+    procedure InternalPost; override;
+    procedure InternalDelete; override;
+    procedure InternalRefresh; override;
+    procedure InternalHandleException; override;
+    procedure InternalInitFieldDefs; override;
+    procedure InternalInitRecord(Buffer: TRecordBuffer); override;
+    procedure InternalAddRecord(Buffer: Pointer; Append: Boolean); override;
+    procedure InternalGotoBookmark(Bookmark: Pointer); override;
+    procedure InternalSetToRecord(Buffer: TRecordBuffer); override;
+
+    function AllocRecordBuffer: TRecordBuffer; override;
+    function IsCursorOpen: Boolean; override;
+    function GetRecordCount: Integer; override;
+    function GetRecNo: Integer; override;
+    function GetBookmarkFlag(Buffer: TRecordBuffer): TBookmarkFlag; override;
+    function GetRecord(Buffer: TRecordBuffer; GetMode: TGetMode; DoCheck: Boolean): TGetResult; override;
+    function GetRecordSize: Word; override;
+    function GetFieldClass(FieldType: TFieldType): TFieldClass; override;
+
+    property Records[Index: Integer]: PAnsiChar read GetMemoryRecord;
+  public
+    constructor Create(AOwner: TComponent); override;
+    destructor Destroy; override;
+
+    procedure Execute(SQLCommand: String); overload;
+    procedure Execute; overload;
+    procedure Insert;
+    procedure InsertRecord(const Values: array of const);
+
+    function BookmarkValid(Bookmark: TBookmark): Boolean; override;
+    function CompareBookmarks(Bookmark1, Bookmark2: TBookmark): Integer; override;
+    function CreateBlobStream(Field: TField; Mode: TBlobStreamMode): TStream; override;
+    function GetFieldData(Field: TField; Buffer: Pointer): Boolean; override;
+    function GetCurrentRecord(Buffer: TRecordBuffer): Boolean; override;
+    function IsSequenced: Boolean; override;
+    function Locate(const KeyFields: string; const KeyValues: Variant; Options: TLocateOptions): Boolean; override;
+    function Lookup(const KeyFields: string; const KeyValues: Variant; const ResultFields: string): Variant; override;
+
+    property CommandHandle: Pointer read FCommandHandle;
+    property FieldDefs;
+    property Params: TParams read FParams write SetParams;
+    property ObjectView default False;
+    property RowidField: String read FRowIDFieldName;
+    property CurrentRowid: Int64 read GetCurrentRowID;
+    property RequestLive: Boolean read FRequestLive write FRequestLive default false;
+    property CommandText: String read FCommandText write SetSQL;
+    property Database: TSivak3Database read FDatabase write SetDatabase;
+    property FetchBlobs: Boolean read FFetchBlobs write FFetchBlobs default True;
+  end;
+
+// TSivak3Query ----------------------------------------------------------------
+
+  TSivak3Query = class(TSivak3Command)
+  private
+    FSQL: TStrings;
+    procedure SetSQL(Value: TStrings);
+  protected
+    procedure DoBeforeOpen; override;
+  public
+    constructor Create(AOwner: TComponent); override;
+    destructor Destroy; override;
+    procedure Prepare;
+    procedure ExecSQL;
+    function ParamByName(ParamName: String): TParam;
+  published
+    property SQL: TStrings read FSQL write SetSQL;
+    property Params stored false;
+    
+    property RequestLive;
+    property Active;
+    property AutoCalcFields;
+    property Filtered;
+    property Database;
+    property FetchBlobs;
+
+    property BeforeOpen;
+    property AfterOpen;
+    property BeforeClose;
+    property AfterClose;
+    property BeforeScroll;
+    property AfterScroll;
+    property OnCalcFields;
+    property OnFilterRecord;
+    property BeforeInsert;
+    property AfterInsert;
+    property BeforeEdit;
+    property AfterEdit;
+    property BeforePost;
+    property AfterPost;
+    property BeforeCancel;
+    property AfterCancel;
+    property BeforeDelete;
+    property AfterDelete;
+    property OnDeleteError;
+    property OnEditError;
+    property OnNewRecord;
+    property OnPostError;
+  end;
+
+// TSivak3Table ----------------------------------------------------------------
+
+  TSivak3Table = class(TSivak3Command)
+  private
+    FIndexDefs: TIndexDefs;
+    FMasterLink: TMasterDataLink;
+    FAutoRefresh: Boolean;
+    FLinkMap: String;
+    FTableName: String;
+    FIndexFieldNames: String;
+    FIndexName: String;
+    procedure MasterChanged(Sender: TObject);
+    procedure MasterDisabled(Sender: TObject);
+    procedure SetMasterFields(const Value: string);
+    procedure SetMasterSource(const Value: TDataSource);
+    procedure SetIndexDefs(Value: TIndexDefs);
+    procedure SetReadOnly(Value: Boolean);
+    procedure SetTableName(Value: String);
+    procedure SetIndexFieldNames(Value: String);
+    procedure SetIndexName(Value: String);
+    procedure CheckTableName;
+
+    function GetReadOnly: Boolean;
+    function CreateCommandText: String;
+    function GetMasterSource: TDataSource;
+    function MasterActive: Boolean;
+    function MapLinks: TStringList;
+  protected
+    procedure InternalRefresh; override;
+    procedure InternalInitFieldDefs; override;
+    procedure DoBeforeOpen; override;
+    procedure DoAfterPost; override;
+    procedure SetFilterText(const Value: string); override;
+    procedure SetFiltered(Value: Boolean); override;
+  public
+    constructor Create(AOwner: TComponent); override;
+    destructor Destroy; override;
+    procedure RefreshTable;
+  published
+    property TableName: String read FTableName write SetTableName;
+    property IndexDefs: TIndexDefs read FIndexDefs write SetIndexDefs stored false;
+    property MasterFields: String read FLinkMap write SetMasterFields;
+    property MasterSource: TDataSource read GetMasterSource write SetMasterSource;
+    property ReadOnly: Boolean read GetReadOnly write SetReadOnly default false;
+    property IndexFieldNames: String read FIndexFieldNames write SetIndexFieldNames;
+    property IndexName: String read FIndexName write SetIndexName;
+    property AutoRefresh: Boolean read FAutoRefresh write FAutoRefresh default false;
+
+    property Active;
+    property Database;
+    property FetchBlobs;
+    property AutoCalcFields;
+    property Filter;
+    property Filtered;
+
+    property BeforeOpen;
+    property AfterOpen;
+    property BeforeClose;
+    property AfterClose;
+    property BeforeScroll;
+    property AfterScroll;
+    property OnCalcFields;
+    property OnFilterRecord;
+    property BeforeInsert;
+    property AfterInsert;
+    property BeforeEdit;
+    property AfterEdit;
+    property BeforePost;
+    property AfterPost;
+    property BeforeCancel;
+    property AfterCancel;
+    property BeforeDelete;
+    property AfterDelete;
+    property OnDeleteError;
+    property OnEditError;
+    property OnNewRecord;
+    property OnPostError;
+  end;
+
+// TSivak3Exec -----------------------------------------------------------------
+
+  TSivak3OnRecord = procedure(Sender: TObject; ColCount: Integer; Values, Names: Array of String; var Cancel: Boolean) of Object;
+
+  TSivak3Exec = class(TComponent)
+  private
+    FDatabase: TSivak3Database;
+    FInTransaction: Boolean;
+    FSQL: TStrings;
+    FResult: Integer;
+    FOnRecord: TSivak3OnRecord;
+    procedure SetSQL(Value: TStrings);
+  protected
+    procedure Notification(AComponent: TComponent; Operation: TOperation); override;
+  public
+    constructor Create(AOwner: TComponent); override;
+    destructor Destroy; override;
+    procedure Execute;
+  published
+    property CommandText: TStrings read FSQL write SetSQL;
+    property Database: TSivak3Database read FDatabase write FDatabase;
+    property InTransaction: Boolean read FInTransaction write FInTransaction  default false;
+    property OnFetchRecord: TSivak3OnRecord read FOnRecord write FOnRecord;
+  end;
+
+function CheckQuotation(dbObjectName: String): String;
+//if the object name (table name, field name, index name, trigger name)
+//contains characters other than ASCII ['a' .. 'z', 'A' .. 'Z', '0' .. '9']
+//(national alphabet characters, spaces or special characters), or begins with a digit
+//it must be in the SQL statement in quotation marks
+//if "dbObjectName" contains these characters, the function returns "dbObjectName" in quotes
+
+function GetParamName(FieldName: String): String;
+
+implementation

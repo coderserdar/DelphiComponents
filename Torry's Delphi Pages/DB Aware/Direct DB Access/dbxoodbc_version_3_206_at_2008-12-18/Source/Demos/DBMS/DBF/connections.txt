@@ -1,0 +1,103 @@
+//
+// Delphi 7: ODBC Ansi (GetDriverFunc = 'getSQLDriverODBC')
+//
+  object SQLConnection: TSQLConnection
+    DriverName = 'DbxMSJetDBase'
+    GetDriverFunc = 'getSQLDriverODBC'
+    LibraryName = 'dbxoodbc.dll'
+    LoginPrompt = False
+    Params.Strings = (
+      'DbxMSJetDBase TransIsolation=ReadCommited'
+        'Database=DRIVER={Microsoft dBase Driver (*.dbf)};DefaultDir=C:\P' +
+        'rojects\#CVS\dbxoodbc\devel\source\Demos\DBMS\DBF\DB;DriverId=53' +
+        '3;MaxBufferSize=2048;PageTimeout=17'
+      'RowsetSize=20'
+      'BlobSize=-1'
+      'Trim Char=True'
+      'Custom String=coLockMode=-1;coCatPrefix=DefaultDir')
+    TableScope = [tsTable]
+    VendorLib = 'odbcjt32.dll;odbc32.dll'
+    AfterConnect = SQLConnectionAfterConnect
+    AfterDisconnect = SQLConnectionAfterDisconnect
+    Connected = True
+    Left = 148
+    Top = 28
+  end
+
+//
+// Delphi 7: ODBC Unicode (GetDriverFunc = 'getSQLDriverODBCAW')
+//
+  object SQLConnection: TSQLConnection
+    DriverName = 'DbxMSJetDBase'
+    GetDriverFunc = 'getSQLDriverODBCAW'
+    LibraryName = 'dbxoodbc.dll'
+    LoginPrompt = False
+    Params.Strings = (
+      'DbxMSJetDBase TransIsolation=ReadCommited'
+        'Database=DRIVER={Microsoft dBase Driver (*.dbf)};DefaultDir=C:\P' +
+        'rojects\#CVS\dbxoodbc\devel\source\Demos\DBMS\DBF\DB;DriverId=53' +
+        '3;MaxBufferSize=4096;MaxScanRows=16;PageTimeout=17;SafeTransacti' +
+        'ons=1;Statistics=0;Threads=3;UserCommitSync=Yes'
+      'RowsetSize=20'
+      'BlobSize=-1'
+      'Trim Char=True'
+      'Custom String=coLockMode=-1;coCatPrefix=DefaultDir')
+    TableScope = [tsTable]
+    VendorLib = 'odbcjt32.dll;odbc32.dll'
+    AfterConnect = SQLConnectionAfterConnect
+    AfterDisconnect = SQLConnectionAfterDisconnect
+    Left = 148
+    Top = 28
+  end
+
+//
+// Delphi 2006, 2007: ODBC Unicode (GetDriverFunc = 'getSQLDriverODBCW')
+//
+  object SQLConnection: TSQLConnection
+    DriverName = 'DbxMSJetDBase'
+    GetDriverFunc = 'getSQLDriverODBCW'
+    LibraryName = 'dbxoodbc.dll'
+    LoginPrompt = False
+    Params.Strings = (
+      'DbxMSJetDBase TransIsolation=ReadCommited'
+        'Database=DRIVER={Microsoft dBase Driver (*.dbf)};DefaultDir=C:\P' +
+        'rojects\#CVS\dbxoodbc\devel\source\Demos\DBMS\DBF\DB;DriverId=53' +
+        '3;MaxBufferSize=4096;MaxScanRows=16;PageTimeout=17;SafeTransacti' +
+        'ons=1;Statistics=0;Threads=3;UserCommitSync=Yes'
+      'RowsetSize=20'
+      'BlobSize=-1'
+      'Trim Char=True'
+      'Custom String=coLockMode=-1;coCatPrefix=DefaultDir')
+    TableScope = [tsTable]
+    VendorLib = 'odbcjt32.dll;odbc32.dll'
+    AfterConnect = SQLConnectionAfterConnect
+    AfterDisconnect = SQLConnectionAfterDisconnect
+    Left = 148
+    Top = 28
+  end
+
+//
+// Delphi 2006, 2007: ODBC Ansi (GetDriverFunc = 'getSQLDriverODBCWA')
+//
+  object SQLConnection: TSQLConnection
+    DriverName = 'DbxMSJetDBase'
+    GetDriverFunc = 'getSQLDriverODBCWA'
+    LibraryName = 'dbxoodbc.dll'
+    LoginPrompt = False
+    Params.Strings = (
+      'DbxMSJetDBase TransIsolation=ReadCommited'
+        'Database=DRIVER={Microsoft dBase Driver (*.dbf)};DefaultDir=C:\P' +
+        'rojects\#CVS\dbxoodbc\devel\source\Demos\DBMS\DBF\DB;DriverId=53' +
+        '3;MaxBufferSize=4096;MaxScanRows=16;PageTimeout=17;SafeTransacti' +
+        'ons=1;Statistics=0;Threads=3;UserCommitSync=Yes'
+      'RowsetSize=20'
+      'BlobSize=-1'
+      'Trim Char=True'
+      'Custom String=coLockMode=-1;coCatPrefix=DefaultDir')
+    TableScope = [tsTable]
+    VendorLib = 'odbcjt32.dll;odbc32.dll'
+    AfterConnect = SQLConnectionAfterConnect
+    AfterDisconnect = SQLConnectionAfterDisconnect
+    Left = 148
+    Top = 28
+  end

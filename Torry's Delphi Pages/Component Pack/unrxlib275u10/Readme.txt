@@ -1,0 +1,1 @@
+Unofficial version RX library for Delphi 2005/2006/2007/2009/2010/XE

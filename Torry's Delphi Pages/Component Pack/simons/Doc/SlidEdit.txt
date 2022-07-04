@@ -1,0 +1,98 @@
+TSliderEdit (C)opyright 2004 Version 1.01
+
+  Autor : Simon Reinhardt
+  eMail : reinhardt@picsoft.de
+  Internet : http://www.picsoft.de
+
+  Die Komponente TSliderEdit dient der Einstellung eines Ganzzahlenwerts 
+  mit der Maus. Dazu wird einfach ein Schiebesteller an die gewünschte 
+  Position gezogen. 
+
+  Die Komponente ist Public Domain, das Urheberrecht liegt aber 
+  beim Autor.
+
+
+
+Funktion:
+---------
+
+Um einen Wert einzustellen, kann man an eine bestimmte Stelle klicken, den
+Schiebesteller mit der Maus dorthin ziehen oder auf die SpinButtons klicken.
+
+Man kann den Wert auch mit den Cursortasten verstellen. Die Cursortasten ändern
+den Wert um die in SmallChange eingestellte Differenz. Hält man dabei die
+Umschalttaste gedrückt, ändert sich der Wert um die in MediumChange eingestellte 
+Differenz. Hält man dabei die Strg-Taste gedrückt, ändert sich der Wert um die in 
+LargeChange eingestellte Differenz.
+
+Es folgt eine kurze Aufstellung aller von TPanel abweichenden Eigenschaften 
+und Ereignisse:
+
+A) Eigenschaften:
+-----------------
+
+Colors: TColors;
+  Background		- Hintergrundfarbe
+  NumBackground		- Die Hintergrundfabre der Wertanzeige
+  NumFrame		- hat nur eine Funktion, wenn die Komponente Teil einer
+                          TSRValueEdit-Komponente ist
+  SpinBorder		- Randfarbe des SpinControls (Drehknopfes)
+  SpinTop		- Oberflächenfarbe des SpinControls (Drehknopfes) und
+			  des TSliderEdit-Rulers
+  SpinMark		- Farbe der Markierung des SpinControls (Drehknopfes)
+			  und der TSliderEdit-Markierung.
+  SliderBackground	- Hintergrundfarbe der TSliderEdit-Komponente
+  Ticks           	- Farbe der Positionsmarkierungen
+
+DisplayWidth: integer;
+  Die Breite der Wertanzeige bei RulerDirection=rdHorizontal.
+
+FocusRect: boolean;
+  Bestimmt, ob ein Fokusrahmen auf dem Control gezeichnet werden soll.
+
+LargeChange: integer;
+  Der Wert, um den "Value" geändert wird, wenn beim Klick auf einen SpinButton
+  die [Strg]-Taste gedrückt wird.
+
+MaxValue: integer;
+  Höchster einzustellender Wert
+
+MediumChange: integer;
+  Der Wert, um den "Value" geändert wird, wenn beim Klick auf einen SpinButton
+  die Umschalttaste gedrückt wird.
+
+MinValue: integer;
+  Niedrigster einzustellender Wert
+
+RulerDirection: TRulerDirection;
+  rdHorizontal - die TSliderEdit-Komponente wird horizontal angezeigt.
+  rdVertical   - die TSliderEdit-Komponente wird vertikal angezeigt.
+
+SliderWidth: integer;
+  Breite des TSliderEdit-Sliders
+
+SmallChange: integer;
+  Der Wert, um den "Value" beim Klick auf einen SpinButton geändert wird.
+
+SpinBtnHeight: integer;
+  Höhe der Spinbuttons der TNumericEdit-Komponente
+
+TickStyle : TTickStyle;
+  tsAll		- Es werden zehn Positionsmarkierungen gezeichnet
+  tsMinMax	- Es werden nur das Minimum, das Maximum und die 
+                  Nullstellung markiert.
+  tsNone	- Es werden keine Positionsmarkierungen gezeichnet.
+
+Value: integer;
+  Der eingestellte Wert
+
+
+B) Ereignisse:
+--------------
+
+OnChange: TNotifyEvent;
+  wird bei jeder Änderung der Value-Eigenschaft ausgelöst.
+
+
+Die Funktion der Komponenten läßt sich außerdem im beigefügten Demo-Programm im 
+Ordner "Demo" sehen.

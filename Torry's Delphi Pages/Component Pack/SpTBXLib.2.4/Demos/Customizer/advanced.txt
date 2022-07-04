@@ -1,0 +1,55 @@
+
+Advanced Techniques:
+
+1) How can I embed the customizer?
+
+You can embed the customizer to another control, but the form of this control cannot be modal or the drag & drop will not work.
+You also need to close the customizer explicitly by calling the Close method.
+
+SpTBXCustomizer1.ShowEmbedded(Panel1);
+
+2) How can I store more options related to the items customizations?
+
+To load and store your custom data use the OnLoad and OnSave events:
+
+procedure TForm1.SpTBXCustomizer1Save(Sender: TObject;
+  LayoutName: String; ExtraOptions: TStringList);
+begin
+  // Save the Form's font size
+  ExtraOptions.Values['FontSize'] := IntToStr(Font.Size);
+end;
+
+procedure TForm1.SpTBXCustomizer1Load(Sender: 
+TObject; LayoutName: String; ExtraOptions: TStringList);
+var
+  S: string;
+begin
+  // Restore the Form's font size
+  S := ExtraOptions.Values['FontSize'];
+  if S <> '' then
+    Font.Size := StrToInt(S);
+end;
+
+3) How can I store more options related to a specific layout?
+
+The layout is just the position and visibility of the toolbars and dockable panels, but you can store more options related to a layout.
+To load and store your custom data use the OnLayoutLoad and OnLayoutSave events:
+
+procedure TForm1.SpTBXCustomizer1LayoutSave(Sender: 
+TObject;
+  LayoutName: String; ExtraOptions: TStringList);
+begin
+  // Save the Form's WindowState
+  ExtraOptions.Values['MyOption'] := IntToStr(Ord(WindowState));
+end;
+
+procedure TForm1.SpTBXCustomizer1LayoutLoad(Sender: 
+TObject; LayoutName: String; ExtraOptions: TStringList);
+var
+  S: string;
+begin
+  // Restore the Form's WindowState
+  S := ExtraOptions.Values['MyOption'];
+  if S <> '' then
+    WindowState := TWindowState(StrToInt(S));
+end;

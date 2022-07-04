@@ -1,0 +1,62 @@
+package TomD;
+
+{$R *.res}
+{$R 'FileNameDialog_.dcr'}
+{$R 'HeadListBox_.dcr'}
+{$R 'Pipes_.dcr'}
+{$R 'PJVersionInfo_.dcr'}
+{$R 'TerminalBox_.dcr'}
+{$R 'ThreadTimer_.dcr'}
+{$R 'WaveFile_.dcr'}
+{$R 'WaveList_.dcr'}
+{$R 'Wavez_.dcr'}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'TOM Components (TB)'}
+{$DESIGNONLY}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl,
+  vcl;
+
+contains
+  U_TomReg in 'U_TomReg.pas',
+  F_FileName in 'F_FileName.pas',
+  HeadListBox in 'HeadListBox.pas',
+  InPanel in 'InPanel.pas',
+  Klawiatura in 'Klawiatura.pas',
+  Pipes in 'Pipes.pas',
+  PipesStatus in 'PipesStatus.pas',
+  PJVersionInfo in 'PJVersionInfo.pas',
+  SSStringGrid in 'SSStringGrid.pas',
+  TerminalBox in 'TerminalBox.pas',
+  ThreadTimer in 'ThreadTimer.pas',
+  TrayIcon in 'TrayIcon.pas',
+  WaveList in 'WaveList.pas',
+  Wavez in 'Wavez.pas',
+  PipeStatus in 'PipeStatus.pas',
+  FileNameDialog in 'FileNameDialog.pas',
+  F_Klaw in 'F_Klaw.pas',
+  Hex in 'D:\BUSZ\Zobrazowanie\Hex.pas';
+
+end.

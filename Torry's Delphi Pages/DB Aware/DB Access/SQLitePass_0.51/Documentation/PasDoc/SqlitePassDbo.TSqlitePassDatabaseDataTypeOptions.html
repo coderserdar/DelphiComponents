@@ -1,0 +1,442 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+<meta name="GENERATOR" content="PasDoc 0.11.0">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<title>SqlitePass Database Objects: SqlitePassDbo: Class TSqlitePassDatabaseDataTypeOptions</title>
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body bgcolor="#ffffff" text="#000000" link="#0000ff" vlink="#800080" alink="#FF0000">
+<a name="TSqlitePassDatabaseDataTypeOptions"></a><h1 class="cio">Class TSqlitePassDatabaseDataTypeOptions</h1>
+<table class="sections wide_list">
+<tr>
+<td><a class="section"  href="#%40Description">Description</a></td><td><a class="section"  href="#%40Hierarchy">Hierarchy</a></td><td>Fields</td><td><a class="section"  href="#%40Methods">Methods</a></td><td><a class="section"  href="#%40Properties">Properties</a></td></tr></table>
+<a name="%40Description"></a><h2 class="unit">Unit</h2>
+<p class="unitlink">
+<a   href="SqlitePassDbo.html">SqlitePassDbo</a></p>
+<h2 class="declaration">Declaration</h2>
+<p class="declaration">
+<code>type TSqlitePassDatabaseDataTypeOptions = class(TPersistent)</code></p>
+<h2 class="description">Description</h2>
+<p>
+The <code>TSqlitePassDatabaseDataTypeOptions</code> is used by the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabase.html#DatatypeOptions">TSqlitePassDatabase.DatatypeOptions</a> property and gives you the opportunity to set custom or default behaviors for a given <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#Database">database</a>. It lets you also define how fields.datatype will be retrieved and translated into pascal datatypes using <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#TranslationRules">TranslationRules</a> and <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#CustomFieldDefs">CustomFieldDefs</a>.</p>
+<a name="%40Hierarchy"></a><h2 class="hierarchy">Hierarchy</h2>
+<ul class="hierarchy"><li class="ancestor">TPersistent</li>
+<li class="thisitem">TSqlitePassDatabaseDataTypeOptions</li></ul><h2 class="overview">Overview</h2>
+<a name="%40Methods"></a><h3 class="summary">Methods</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>constructor <b><a   href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#Create">Create</a></b>(Database: <a   href="SqlitePassDbo.TSqlitePassDatabase.html">TSqlitePassDatabase</a>);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>destructor <b><a   href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#Destroy">Destroy</a></b>; override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#ApplyCustomFieldDefs">ApplyCustomFieldDefs</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>Procedure <b><a   href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#LoadFromDatabase">LoadFromDatabase</a></b>(_LoadOptions: <a   href="SqlitePassDbo.html#TSqlitePassDataTypeStorageLoadOptions">TSqlitePassDataTypeStorageLoadOptions</a> = []);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>Procedure <b><a   href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#SaveToDatabase">SaveToDatabase</a></b>(_SaveOptions: <a   href="SqlitePassDbo.html#TSqlitePassDataTypeStorageSaveOptions">TSqlitePassDataTypeStorageSaveOptions</a> = []);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#SetDefaultPropertiesValues">SetDefaultPropertiesValues</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#DefineProperties">DefineProperties</a></b>(Filer: TFiler); override;</code></td>
+</tr>
+</table>
+<a name="%40Properties"></a><h3 class="summary">Properties</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#BooleanFormat">BooleanFormat</a></b>        : String Read FBooleanFormat Write SetFBooleanFormat;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#BooleanStorage">BooleanStorage</a></b>       : <a   href="SqlitePassDbo.html#TSqlitePassBooleanStorage">TSqlitePassBooleanStorage</a> Read FBooleanStorage Write FBooleanStorage;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#CustomFieldDefs">CustomFieldDefs</a></b>      : <a   href="SqlitePassDbo.TSqlitePassCustomFieldDefs.html">TSqlitePassCustomFieldDefs</a> Read FCustomFieldDefs Write FCustomFieldDefs;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#Database">Database</a></b>: <a   href="SqlitePassDbo.TSqlitePassDatabase.html">TSqlitePassDatabase</a> Read FDatabase;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#DateFormat">DateFormat</a></b>           : String Read FDateFormat Write SetFDateFormat;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#DateStorage">DateStorage</a></b>          : <a   href="SqlitePassDbo.html#TSqlitePassDateStorage">TSqlitePassDateStorage</a> Read FDateStorage Write FDateStorage;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#DateTimeFormat">DateTimeFormat</a></b>       : String Read FDateTimeFormat Write SetFDateTimeFormat;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#DateTimeStorage">DateTimeStorage</a></b>      : <a   href="SqlitePassDbo.html#TSqlitePassDateTimeStorage">TSqlitePassDateTimeStorage</a> Read FDateTimeStorage Write FDateTimeStorage;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#DecimalSeparator">DecimalSeparator</a></b>     : Char Read FDecimalSeparator Write FDecimalSeparator;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#DefaultFieldType">DefaultFieldType</a></b>     : TFieldType Read FDefaultFieldType Write FDefaultFieldType;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#DetectionMode">DetectionMode</a></b>        : <a   href="SqlitePassDbo.html#TSqlitePassDataTypeDetectionMode">TSqlitePassDataTypeDetectionMode</a> Read FDetectionMode Write FDetectionMode;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#LoadOptions">LoadOptions</a></b>          : <a   href="SqlitePassDbo.html#TSqlitePassDataTypeStorageLoadOptions">TSqlitePassDataTypeStorageLoadOptions</a> Read FLoadOptions Write FLoadOptions;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#SaveOptions">SaveOptions</a></b>          : <a   href="SqlitePassDbo.html#TSqlitePassDataTypeStorageSaveOptions">TSqlitePassDataTypeStorageSaveOptions</a> Read FSaveOptions Write FSaveOptions;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#TimeFormat">TimeFormat</a></b>           : String Read FTimeFormat Write SetFTimeFormat;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#TimeStorage">TimeStorage</a></b>          : <a   href="SqlitePassDbo.html#TSqlitePassTimeStorage">TSqlitePassTimeStorage</a> Read FTimeStorage Write FTimeStorage;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#TranslationRules">TranslationRules</a></b>     : <a   href="SqlitePassDbo.TSqlitePassFieldTypesTranslationRules.html">TSqlitePassFieldTypesTranslationRules</a> Read FFieldTypesTranslationRules Write FFieldTypesTranslationRules;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#UnicodeEncoding">UnicodeEncoding</a></b>       : <a   href="SqlitePassDbo.html#TSqlitePassUnicodeEncoding">TSqlitePassUnicodeEncoding</a> Read FUnicodeEncoding Write SetFUnicodeEncoding;</code></td>
+</tr>
+</table>
+<h2 class="description">Description</h2>
+<h3 class="detail">Methods</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Create"></a><code>constructor <b>Create</b>(Database: <a   href="SqlitePassDbo.TSqlitePassDatabase.html">TSqlitePassDatabase</a>);</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+&mdash;&ndash; Constructor / Destructor &mdash;&ndash;</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Destroy"></a><code>destructor <b>Destroy</b>; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="ApplyCustomFieldDefs"></a><code>procedure <b>ApplyCustomFieldDefs</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+&mdash;</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="LoadFromDatabase"></a><code>Procedure <b>LoadFromDatabase</b>(_LoadOptions: <a   href="SqlitePassDbo.html#TSqlitePassDataTypeStorageLoadOptions">TSqlitePassDataTypeStorageLoadOptions</a> = []);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="SaveToDatabase"></a><code>Procedure <b>SaveToDatabase</b>(_SaveOptions: <a   href="SqlitePassDbo.html#TSqlitePassDataTypeStorageSaveOptions">TSqlitePassDataTypeStorageSaveOptions</a> = []);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="SetDefaultPropertiesValues"></a><code>procedure <b>SetDefaultPropertiesValues</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="DefineProperties"></a><code>procedure <b>DefineProperties</b>(Filer: TFiler); override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<h3 class="detail">Properties</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="BooleanFormat"></a><code>property <b>BooleanFormat</b>        : String Read FBooleanFormat Write SetFBooleanFormat;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+a String used as a Boolean formating template. The <code>BooleanFormat</code> is only active when the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#BooleanStorage">BooleanStorage</a> property is set to &quot;asText&quot;. In this case it is used to read or write boolean values stored as text to the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#Database">database</a> <code>BooleanFormat</code> is separated into two sections : The left part represents the text statements used for True, a separator '-' The right part represents the text statements used for False
+
+<p><i> Usualy <code>BooleanFormat</code> takes one of the following value : 'Yes,True,On,1,-No,False,Off,0'</i>
+
+<p>When <code>BooleanFormat</code> is set to &quot;asText&quot; the first value of the &quot;True&quot; section ('Yes' in the example) and the first value of the &quot;False&quot; sections ('No' in the example) are used as text representation to write boolean value to <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#Database">database</a></p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="BooleanStorage"></a><code>property <b>BooleanStorage</b>       : <a   href="SqlitePassDbo.html#TSqlitePassBooleanStorage">TSqlitePassBooleanStorage</a> Read FBooleanStorage Write FBooleanStorage;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+<code>BooleanStorage</code> determines how the Boolean values are stored in the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#Database">database</a>. It can take one of the following values : asInteger : the field value is stored as an integer. asText : the field value is stored as formated text, using the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#BooleanFormat">BooleanFormat</a> property setting</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="CustomFieldDefs"></a><code>property <b>CustomFieldDefs</b>      : <a   href="SqlitePassDbo.TSqlitePassCustomFieldDefs.html">TSqlitePassCustomFieldDefs</a> Read FCustomFieldDefs Write FCustomFieldDefs;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+<code>CustomFieldDefs</code> : A collection of custom fielddefs.
+
+<p>A custom fielddef can be used to overwrite the fielddefs translation already done by the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#DetectionMode">DetectionMode</a> and the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#TranslationRules">TranslationRules</a> properties.
+
+<p>A custom fielddef is made of : A TableName and a FieldName to identify the field A FieldType: TfieldType (ftinteger, ftstring...etc) A FieldSize A FieldPrecision
+
+<p>This property can be very usefull when a fielddef cannot be built on the datatype. <i>For example, you created a table with two BLOB fields declared with the same datatype (CLOB) in the table <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#Create">create</a> statement. If you want to store MemoText in the first blob and store graphic data in the second, you just need to <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#Create">create</a> two custom fielddefs using the designtime editor or the sqliteToolbox program and store them in your <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#Database">database</a> using <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#LoadOptions">LoadOptions</a> and <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#SaveOptions">SaveOptions</a>.</i>
+
+<p>At design time, a specific editor lets you define the translation rules.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Database"></a><code>property <b>Database</b>: <a   href="SqlitePassDbo.TSqlitePassDatabase.html">TSqlitePassDatabase</a> Read FDatabase;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="DateFormat"></a><code>property <b>DateFormat</b>           : String Read FDateFormat Write SetFDateFormat;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+a String used as a Date formating template. The <code>DateFormat</code> is only active when the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#DateStorage">DateStorage</a> property is set to asText. In this case it is used to read or write date values stored as text to the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#Database">database</a> <code>DateFormat</code> accepts <b>only Uppercases</b> to match Day (D), Month (M), Year (Y) Any other character is treated as literal and is included is the formated String
+
+<p><i> usualy <code>DateFormat</code> takes one of the following value : DD-MM-YYYY YYYY-MM-DD DD/MM/YYYY YYYY/MM/DD</i></p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="DateStorage"></a><code>property <b>DateStorage</b>          : <a   href="SqlitePassDbo.html#TSqlitePassDateStorage">TSqlitePassDateStorage</a> Read FDateStorage Write FDateStorage;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+<code>DateStorage</code> determines how the Date values are stored in the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#Database">database</a>. It can take one of the following values : asInteger : the field value is stored as an integer. asText : the field value is stored as formated text, using the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#DateFormat">DateFormat</a> property setting</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="DateTimeFormat"></a><code>property <b>DateTimeFormat</b>       : String Read FDateTimeFormat Write SetFDateTimeFormat;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+a String used as a DateTime formating template. The <code>DateTimeFormat</code> is only active when the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#DateTimeStorage">DateTimeStorage</a> property is set to &quot;asText&quot;. In this case it is used to read or write datetime value stored as text to the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#Database">database</a> <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#DateFormat">DateFormat</a> accepts <b>only Uppercases for the Date part and only lowercases for the Time part</b> to match Days (D), Months (M), Years (Y), Hours (h), Minutes (m), Secondes (s) and Msecs (z) Any other character is treated as literal and is included is the formated String
+
+<p><i> usualy <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#DateFormat">DateFormat</a> takes one of the following value : DD-MM-YYYY hh:mm:ss DD/MM/YYYY hh:mm:ss DD-MM-YYYY hh:mm:ss:zzz DD/MM/YYYY hh:mm:ss:zzz</i> Note : Kexi databases format DateTime as DD-MM-YYYYThh:mm:ss )</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="DateTimeStorage"></a><code>property <b>DateTimeStorage</b>      : <a   href="SqlitePassDbo.html#TSqlitePassDateTimeStorage">TSqlitePassDateTimeStorage</a> Read FDateTimeStorage Write FDateTimeStorage;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+<code>DateTimeStorage</code> determines how the DateTime values are stored in the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#Database">database</a>. It can take one of the following values : dtsDateTime : the field value is stored as a double value. dtsJulian : the field value is stored as a double value converted to a julian date. dtsText : the field value is stored as formated text, using the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#DateTimeFormat">DateTimeFormat</a> property setting dtsUnix : the field value is stored as a int64 value converted to an Unix date. dtsMac : the field value is stored as a int64 value converted to an Apple Mac date.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="DecimalSeparator"></a><code>property <b>DecimalSeparator</b>     : Char Read FDecimalSeparator Write FDecimalSeparator;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Decimal separator : not used</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="DefaultFieldType"></a><code>property <b>DefaultFieldType</b>     : TFieldType Read FDefaultFieldType Write FDefaultFieldType;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Determines the default field type used when field type translations fails. It is usually set to ftUnknow or ftString</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="DetectionMode"></a><code>property <b>DetectionMode</b>        : <a   href="SqlitePassDbo.html#TSqlitePassDataTypeDetectionMode">TSqlitePassDataTypeDetectionMode</a> Read FDetectionMode Write FDetectionMode;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+The <code>DetectionMode</code> controls how the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabase.html">TsqlitePassDatabase</a> component will behave when it tries to retrieve the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#Database">database</a> fields definition. It can have on of the following values :
+
+<p><b>dmTypeName</b><br> FieldTypes are retrieved from the initial SQL <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#Create">CREATE</a> statement of the table for example : '<a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#Create">CREATE</a> TABLE cars_names (id INTEGER PRIMARY KEY, companycode Integer, name Text(200))' Then the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#Database">database</a> uses the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#TranslationRules">TranslationRules</a> (a collection of translation Rule) to match the datatypes names found in the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#Database">database</a> table, for example 'integer' with a pascal datatype (ftInteger in this example).
+
+<p><b>dmDbSpecific</b><br> Field.datatypes are set directly by sqlitepass, depending on the Database.Databasetype value. Note : This can only be used with the 'dbtKexi' Databasetype.
+
+<p><b>dmCustom</b><br> Field.datatypes are first preset directly by sqlitepass, depending on the Database.Databasetype value. If the first match fails, it uses the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#TranslationRules">TranslationRules</a> if you defined some Finally, it fires the OnDataTypeConversion event letting you modified directly the Field.Datatype Of course, the OnDataTypeConversion Event must be assigned...
+
+<p><b>dmForceStr</b><br> Converts any Datatype to ftString;</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="LoadOptions"></a><code>property <b>LoadOptions</b>          : <a   href="SqlitePassDbo.html#TSqlitePassDataTypeStorageLoadOptions">TSqlitePassDataTypeStorageLoadOptions</a> Read FLoadOptions Write FLoadOptions;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+if SoManual is not selected (default behavior) your optional settings are retrieved directly from a special table named &quot;SQLitePass__DbSettings&quot; every time you open a <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#Database">database</a>
+
+<p>The <code>LoadOptions</code> property determines which parts of the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#Database">database</a> DataTypeOptions are retrieved from the table It can take one or more of the following values : soProperties : It retrieves your settings for BooleanExtension; <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#BooleanStorage">BooleanStorage</a>; <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#DateFormat">DateFormat</a>; <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#DateStorage">DateStorage</a>; <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#DateTimeFormat">DateTimeFormat</a>; <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#DateTimeStorage">DateTimeStorage</a>; <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#DecimalSeparator">DecimalSeparator</a>; <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#DefaultFieldType">DefaultFieldType</a>; <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#DetectionMode">DetectionMode</a>; <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#TimeFormat">TimeFormat</a>; <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#TimeStorage">TimeStorage</a>;
+
+<p>soTranslationRules : It retrieves and fills the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#TranslationRules">TranslationRules</a> collection. soCustomFieldDefs : It retrieves and fills the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#CustomFieldDefs">CustomFieldDefs</a> collection.
+
+<p>soManual : The selected parts are not retrieved automatically. You will then have to call <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#LoadFromDatabase">LoadFromDatabase</a> to load your <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#Database">database</a> settings.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="SaveOptions"></a><code>property <b>SaveOptions</b>          : <a   href="SqlitePassDbo.html#TSqlitePassDataTypeStorageSaveOptions">TSqlitePassDataTypeStorageSaveOptions</a> Read FSaveOptions Write FSaveOptions;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+if SoManual is not selected (default behavior) your optional settings are stored directly to a special table named &quot;SQLitePass__DbSettings&quot; every time you close a <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#Database">database</a>.
+
+<p>The <code>SaveOptions</code> property determines which parts of the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#Database">database</a> DataTypeOptions are saved from the table It can take one or more of the following values : soProperties : It saves your settings for BooleanExtension; <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#BooleanStorage">BooleanStorage</a>; <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#DateFormat">DateFormat</a>; <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#DateStorage">DateStorage</a>; <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#DateTimeFormat">DateTimeFormat</a>; <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#DateTimeStorage">DateTimeStorage</a>; <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#DecimalSeparator">DecimalSeparator</a>; <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#DefaultFieldType">DefaultFieldType</a>; <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#DetectionMode">DetectionMode</a>; <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#TimeFormat">TimeFormat</a>; <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#TimeStorage">TimeStorage</a>;
+
+<p>soTranslationRules : It saves the the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#TranslationRules">TranslationRules</a> collection to the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#Database">database</a>. soCustomFieldDefs : It saves the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#CustomFieldDefs">CustomFieldDefs</a> collection to the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#Database">database</a>.
+
+<p>soManual : The selected parts are not saved automatically. You will then have to call <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#SaveToDatabase">SaveToDatabase</a> to save your <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#Database">database</a> settings.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="TimeFormat"></a><code>property <b>TimeFormat</b>           : String Read FTimeFormat Write SetFTimeFormat;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+a String used as a Time formating template. The <code>TimeFormat</code> is only active when the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#DateStorage">DateStorage</a> property is set to &quot;asText&quot;. In this case it is used to read or write Time values stored as text to the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#Database">database</a> <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#DateFormat">DateFormat</a> accepts <b>only lowercases</b> to match Hours (h), Minutes (m), Secondes (s) and Msecs (z) Any other character is treated as literal and is included is the formated String <i> usualy <code>TimeFormat</code> takes one of the following value : hh:mm:ss hh:mm:ss:zzz hh-mm-ss hh-mm-ss-zzz</i></p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="TimeStorage"></a><code>property <b>TimeStorage</b>          : <a   href="SqlitePassDbo.html#TSqlitePassTimeStorage">TSqlitePassTimeStorage</a> Read FTimeStorage Write FTimeStorage;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+<code>TimeStorage</code> dtermines how the Time values are stored in the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#Database">database</a>. It can take one of the following values : asInteger : the field value is stored as an integer. asText : the field value is stored as formated text, using the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#TimeFormat">TimeFormat</a> property setting</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="TranslationRules"></a><code>property <b>TranslationRules</b>     : <a   href="SqlitePassDbo.TSqlitePassFieldTypesTranslationRules.html">TSqlitePassFieldTypesTranslationRules</a> Read FFieldTypesTranslationRules Write FFieldTypesTranslationRules;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+<code>TranslationRules</code> : A collection of translation rules. <code>TranslationRules</code> are stored in *.DFM or *.LFM file but can also be stored directly in the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#Database">database</a> using the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#LoadOptions">LoadOptions</a> and <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#SaveOptions">SaveOptions</a> properties.
+
+<p>A translation rule is made of : A datatype name (whatever you want depending on how fields datatypes are named inside the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#Database">database</a> or the table <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#Create">create</a> statement) A matching rule (mmExact, mmExactNoCase, mmPartial, mmPartialNoCase, mmAll); A resulting datatype (ft... pascal fieldtype)
+
+<p>The matching rule can be set for each translation rule and can be one of the following values:
+
+<p><b>mmExact</b> the datatype found in the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#Database">database</a> table definition must match exactly the rule datatype name. It is case sensitive.
+
+<p><i>For example if the 'Int' name is found in the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#Database">database</a> table definition then it will not match the ('Integer',mmExact,ftInteger) rule thus ftUnknown will be returned</i>
+
+<p><b>mmExactNoCase</b> Same as mmExact but not case sensitive
+
+<p><b>mmPartial</b> the datatype found in the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#Database">database</a> table definition can partially match the rule datatype name. It is case sensitive. <i>For example if the 'Int' name is found in the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#Database">database</a> table definition then it will match the ('Integer',mmExact,ftInteger) rule and will return ftInteger</i>
+
+<p><b>mmPartialNoCase</b> Same as mmPartial but not case sensitive
+
+<p><b>mmAll (Default)</b> Tries to determine the datatype using mmExact. If it fails then another try is done using mmPartial If the matching rule failed, the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#DefaultFieldType">DefaultFieldType</a> is returned (ftUnknown as default).
+
+<p>At design time, a specific editor lets you define the translation rules.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="UnicodeEncoding"></a><code>property <b>UnicodeEncoding</b>       : <a   href="SqlitePassDbo.html#TSqlitePassUnicodeEncoding">TSqlitePassUnicodeEncoding</a> Read FUnicodeEncoding Write SetFUnicodeEncoding;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Unicode UTF8 and UTF16 support : The components are now 'unicode friendly' with UTF8 and UTF16 support for SQL statements, Table names, field names, field Data...etc.
+
+<p>The property <code>UnicodeEncoding</code> sets how text, strings or memo are retrieved from the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#Database">database</a>, encoded, displayed and eventually put back to the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#Database">database</a>. <br> This property is independant of the Database.Options.Encoding property which is readonly : you can read or write strings as UTF16 from an UTF8 <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#Database">Database</a> and vice-versa. // TODO : To be tested... <br> <code>UnicodeEncoding</code> can take one of the following value (ueAuto, ueUTF8, ueUTF16, ueRawText). <code>UnicodeEncoding</code> doesn't really change the way text is encoded. It simply overwrite the field definition for a given table column, changing the original ftString to ftWideString, ftMemo to ftWideMemo or vice-versa. <br> Whatever delphi or fpc version you use (unless you set <code>UnicodeEncoding</code> to ueRawText), SqlitePassDatabase uses the following rules : </p>
+
+<ul class="paragraph_spacing">
+  <li><p>A ftString field is ALWAYS encoded as UTF8,</p></li>
+  <li><p>A ftMemo field is ALWAYS encoded as UTF8,</p></li>
+  <li><p>A ftWideString field is ALWAYS encoded as UTF16,</p></li>
+  <li><p>A ftWideMemo field is ALWAYS encoded as UTF16.</p></li>
+</ul>
+
+<p> <br> The fields conversions applies only for dynamically created fields (not the ones already set at design time). If a custom conversion rule is already set for a given table field, it will always have the priority for the final field definition. . <br> The <code>UnicodeEncoding</code> default value is ueAuto. </p>
+
+<ul class="paragraph_spacing">
+  <li><p>ueAuto: For Delphi prior 2009 and fpc = ueUTF8 ; ueUTF16 for Delphi 2009 and up</p></li>
+  <li><p>ueUtf8: ftWideString fields are converted to ftString, ftWideMemo are converted to ftMemo,</p></li>
+  <li><p>ueUtf16: ftString fields are converted to ftWideString, ftMemo are converted to ftWideMemo,</p></li>
+  <li><p>ueRawText: no change is done to the fieldDefs, no encoding is done when retrieving data.</p></li>
+</ul>
+
+<p> <br> <br> Note : Delphi, prior Delphi 2009, doesn't handle Unicode in classic vcl. In order to write Unicode applications you have to use third part libraries like tnt unicode controls or utf8-vcl (freeware). The delphi 4 demo program uses utf8-vcl which is not very reliable (memory leaks and pointers crashes) but good enougth to test the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#Database">database</a> components.
+
+<p>Delphi 2009 offers native Unicode support as UTF16. Lazarus-fpc offers native Unicode support as UTF8 : it is a nice alternative to Delphi prior Delphi 2009 to build unicode applications.</p>
+<h6 class="description_section">See also</h6>
+<dl class="see_also">
+  <dt><a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#CustomFieldDefs">TSqlitePassDatabaseDataTypeOptions.CustomFieldDefs</a></dt>
+  <dd><code>CustomFieldDefs</code> : A collection of custom fielddefs.</dd>
+</dl>
+</td></tr>
+</table>
+<hr noshade size="1"><span class="appinfo"><em>Generated by <a  target="_parent" href="http://pasdoc.sourceforge.net/">PasDoc 0.11.0</a> on 2010-05-16 23:39:43</em>
+</span>
+</body></html>

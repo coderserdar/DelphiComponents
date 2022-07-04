@@ -1,0 +1,46 @@
+package NCComp5;
+
+{$R *.RES}
+{$ALIGN ON}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS OFF}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'NC OCI8 Companion components V0.1.0 betta for D5'}
+{$IMPLICITBUILD ON}
+
+requires
+  vcl50,
+  Vcldb50,
+  NCO85;
+
+contains
+  NCTimer in 'NCTimer.pas',
+  NCDBTree in 'NCDBTree.pas',
+  NCUtil in 'NCUtil.pas',
+  NCDTUtil in 'NCDTUtil.pas',
+  NCUIUtil in 'NCUIUtil.pas',
+  NCDBUtil in 'NCDBUtil.pas',
+  NCMemo in 'Ncmemo.pas' {NCMemoEditDlg},
+  NCCompReg in 'NCCompReg.pas',
+  NCStrs in 'NCStrs.pas',
+  NCDblLst in 'NCDblLst.pas',
+  NCFldEdt in 'Ncfldedt.pas' {NCFieldsEditFrm};
+
+end.

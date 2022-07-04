@@ -1,0 +1,55 @@
+package tbx_d9;
+
+{$R *.res}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $2FC00000}
+{$DESCRIPTION 'Toolbar2000 -- TBX Extensions (Alex Denisov)'}
+{$IMPLICITBUILD ON}
+
+requires
+  vcl,
+  tb2k_d9,
+  rtl;
+
+contains
+  TBX in '..\TBX.pas',
+  TBXThemes in '..\TBXThemes.pas',
+  TBXDefaultTheme in '..\TBXDefaultTheme.pas',
+  TBXStripesTheme in '..\TBXStripesTheme.pas',
+  TBXOfficeXPTheme in '..\TBXOfficeXPTheme.pas',
+  TBXAluminumTheme in '..\TBXAluminumTheme.pas',
+  TBXMDI in '..\TBXMDI.pas',
+  TBXSwitcher in '..\TBXSwitcher.pas',
+  TBXExtItems in '..\TBXExtItems.pas',
+  TBXLists in '..\TBXLists.pas',
+  TBXUtils in '..\TBXUtils.pas',
+  TBXGraphics in '..\TBXGraphics.pas',
+  TBXStrUtils in '..\TBXStrUtils.pas',
+  TBXUxThemes in '..\TBXUxThemes.pas',
+  TBXDkPanels in '..\TBXDkPanels.pas',
+  TBXToolPals in '..\TBXToolPals.pas',
+  TBXStatusBars in '..\TBXStatusBars.pas',
+  TBXControls in '..\TBXControls.pas',
+  TBXGraphicsZLIB in '..\TBXGraphicsZLIB.pas',
+  TBXGraphicsPNG in '..\TBXGraphicsPNG.pas';
+
+end.

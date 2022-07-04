@@ -1,0 +1,177 @@
+{
+    Firesoft - ExportSuite
+    Copyright (C) 1997-2006 Federico Firenze
+
+    This library is free software; you can redistribute it and/or modify it
+    under the terms of the GNU Library General Public License as published
+    by the Free Software Foundation; either version 2 of the License,
+    or (at your option) any later version.
+
+    This library is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    Library General Public License for more details.
+
+    You should have received a copy of the GNU Library General Public
+    License along with this library; if not, write to the Free
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+    Federico Firenze,
+    Buenos Aires, Argentina
+    webmaster@delphi.com.ar
+
+}
+
+{ Definición de versiones inferiores a... }
+{$IFDEF VER80}
+  // Delphi 1
+  {$DEFINE LESS90}
+  {$DEFINE LESS100}
+  {$DEFINE LESS110}
+  {$DEFINE LESS120}
+  {$DEFINE LESS130}
+  {$DEFINE LESS140}
+  {$DEFINE LESS150}
+  {$DEFINE LESS160}
+  {$DEFINE LESS170}
+{$ENDIF}
+{$IFDEF VER90}
+  // Delphi 2
+  {$DEFINE LESS100}
+  {$DEFINE LESS110}
+  {$DEFINE LESS120}
+  {$DEFINE LESS130}
+  {$DEFINE LESS140}
+  {$DEFINE LESS150}
+  {$DEFINE LESS160}
+  {$DEFINE LESS170}
+{$ENDIF}
+{$IFDEF VER100}
+  // Delphi 3
+  {$DEFINE LESS110}
+  {$DEFINE LESS120}
+  {$DEFINE LESS130}
+  {$DEFINE LESS140}
+  {$DEFINE LESS150}
+  {$DEFINE LESS160}
+  {$DEFINE LESS170}
+{$ENDIF}
+{$IFDEF VER110}
+  // Delphi 4
+  {$DEFINE LESS120}
+  {$DEFINE LESS130}
+  {$DEFINE LESS140}
+  {$DEFINE LESS150}
+  {$DEFINE LESS160}
+  {$DEFINE LESS170}
+{$ENDIF}
+{$IFDEF VER120}
+  // Delphi 5
+  {$DEFINE LESS130}
+  {$DEFINE LESS140}
+  {$DEFINE LESS150}
+  {$DEFINE LESS160}
+  {$DEFINE LESS170}
+{$ENDIF}
+{$IFDEF VER130}
+  // Delphi 6
+  {$DEFINE LESS140}
+  {$DEFINE LESS150}
+  {$DEFINE LESS160}
+  {$DEFINE LESS170}
+{$ENDIF}
+{$IFDEF VER140}
+  // Delphi 7
+  {$DEFINE LESS150}
+  {$DEFINE LESS160}
+  {$DEFINE LESS170}
+{$ENDIF}
+{$IFDEF VER150}
+  // Delphi 8
+  {$DEFINE LESS160}
+  {$DEFINE LESS170}
+{$ENDIF}
+{$IFDEF VER160}
+  // Delphi 9 / 2005
+  {$DEFINE LESS170}
+{$ENDIF}
+{$IFDEF VER170}
+  // Delphi 10 / 2006
+{$ENDIF}
+
+{ Definición de versiones superiores a... }
+{$IFDEF VER80}
+  // Delphi 1
+{$ENDIF}
+{$IFDEF VER90}
+  // Delphi 2
+  {$DEFINE MORE80}
+{$ENDIF}
+{$IFDEF VER100}
+  // Delphi 3
+  {$DEFINE MORE80}
+  {$DEFINE MORE90}
+{$ENDIF}
+{$IFDEF VER110}
+  // Delphi 4
+  {$DEFINE MORE80}
+  {$DEFINE MORE90}
+  {$DEFINE MORE100}
+{$ENDIF}
+{$IFDEF VER120}
+  // Delphi 5
+  {$DEFINE MORE80}
+  {$DEFINE MORE90}
+  {$DEFINE MORE100}
+  {$DEFINE MORE110}
+{$ENDIF}
+{$IFDEF VER130}
+  // Delphi 6
+  {$DEFINE MORE80}
+  {$DEFINE MORE90}
+  {$DEFINE MORE100}
+  {$DEFINE MORE110}
+  {$DEFINE MORE120}
+{$ENDIF}
+{$IFDEF VER140}
+  // Delphi 7
+  {$DEFINE MORE80}
+  {$DEFINE MORE90}
+  {$DEFINE MORE100}
+  {$DEFINE MORE110}
+  {$DEFINE MORE120}
+  {$DEFINE MORE130}
+{$ENDIF}
+{$IFDEF VER150}
+  // Delphi 8
+  {$DEFINE MORE80}
+  {$DEFINE MORE90}
+  {$DEFINE MORE100}
+  {$DEFINE MORE110}
+  {$DEFINE MORE120}
+  {$DEFINE MORE130}
+  {$DEFINE MORE140}
+{$ENDIF}
+{$IFDEF VER160}
+  // Delphi 9 / 2005
+  {$DEFINE MORE80}
+  {$DEFINE MORE90}
+  {$DEFINE MORE100}
+  {$DEFINE MORE110}
+  {$DEFINE MORE120}
+  {$DEFINE MORE130}
+  {$DEFINE MORE140}
+  {$DEFINE MORE150}
+{$ENDIF}
+{$IFDEF VER170}
+  // Delphi 10 / 2006
+  {$DEFINE MORE80}
+  {$DEFINE MORE90}
+  {$DEFINE MORE100}
+  {$DEFINE MORE110}
+  {$DEFINE MORE120}
+  {$DEFINE MORE130}
+  {$DEFINE MORE140}
+  {$DEFINE MORE150}
+  {$DEFINE MORE160}
+{$ENDIF}

@@ -1,0 +1,33 @@
+#------------------------------------------------------------------------------
+VERSION = BWS.01
+#------------------------------------------------------------------------------
+!ifndef ROOT
+ROOT = $(MAKEDIR)\..
+!endif
+#------------------------------------------------------------------------------
+MAKE = $(ROOT)\bin\make.exe -$(MAKEFLAGS) -f$**
+DCC = $(ROOT)\bin\dcc32.exe $**
+BRCC = $(ROOT)\bin\brcc32.exe $**
+#------------------------------------------------------------------------------
+PROJECTS = GTComponentsPackD6.bpl GTMenuRelatedControlsD6.bpl \
+  GTUserAccessControlsD6.bpl SettingControlsD6.bpl GTDBControlsD6.bpl
+#------------------------------------------------------------------------------
+default: $(PROJECTS)
+#------------------------------------------------------------------------------
+
+GTComponentsPackD6.bpl: GTComponentPack\GTComponentsPackD6.dpk
+  $(DCC)
+
+GTMenuRelatedControlsD6.bpl: GTMenuRelatedControls\GTMenuRelatedControls\GTMenuRelatedControlsD6.dpk
+  $(DCC)
+
+GTUserAccessControlsD6.bpl: GTUserAccessControls\GTUserAccessControlsD6.dpk
+  $(DCC)
+
+SettingControlsD6.bpl: GTSettingControls\SettingControlsD6.dpk
+  $(DCC)
+
+GTDBControlsD6.bpl: GTDBControls\GTDBControlsD6.dpk
+  $(DCC)
+
+

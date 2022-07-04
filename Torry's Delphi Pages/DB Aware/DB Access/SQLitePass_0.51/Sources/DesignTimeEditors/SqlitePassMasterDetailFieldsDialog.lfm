@@ -1,0 +1,282 @@
+object SqlitePassMasterDetailDialog: TSqlitePassMasterDetailDialog
+  Left = 325
+  Height = 454
+  Top = 149
+  Width = 491
+  BorderStyle = bsDialog
+  Caption = 'Master Detail Fields'
+  ClientHeight = 454
+  ClientWidth = 491
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Position = poScreenCenter
+  LCLVersion = '0.9.29'
+  object TPanel
+    Left = 0
+    Height = 41
+    Top = 413
+    Width = 491
+    Align = alBottom
+    BevelInner = bvLowered
+    BevelOuter = bvNone
+    ClientHeight = 41
+    ClientWidth = 491
+    TabOrder = 0
+    object BtOk: TButton
+      Left = 401
+      Height = 25
+      Top = 8
+      Width = 75
+      Caption = '&Ok'
+      ModalResult = 1
+      OnClick = BtOkClick
+      TabOrder = 0
+    end
+    object BtCancel: TButton
+      Left = 317
+      Height = 25
+      Top = 8
+      Width = 75
+      Caption = '&Cancel'
+      ModalResult = 2
+      TabOrder = 1
+    end
+    object BtnReset: TButton
+      Left = 229
+      Height = 25
+      Top = 8
+      Width = 75
+      Caption = '&Reset'
+      TabOrder = 2
+    end
+  end
+  object Panel1: TPanel
+    Left = 0
+    Height = 413
+    Top = 0
+    Width = 491
+    Align = alClient
+    BevelOuter = bvNone
+    ClientHeight = 413
+    ClientWidth = 491
+    TabOrder = 1
+    object Panel2: TPanel
+      Left = 8
+      Height = 185
+      Top = 216
+      Width = 473
+      BevelInner = bvLowered
+      BevelOuter = bvNone
+      Caption = 'Panel2'
+      ClientHeight = 185
+      ClientWidth = 473
+      TabOrder = 0
+      object Label3: TLabel
+        Left = 11
+        Height = 14
+        Top = 7
+        Width = 62
+        Caption = '&Joined Fields'
+        ParentColor = False
+      end
+      object ImageArrowRight: TImage
+        Left = 390
+        Height = 16
+        Top = 88
+        Width = 16
+        AutoSize = True
+        Center = True
+        Picture.Data = {
+          07544269746D617036050000424D360500000000000036040000280000001000
+          0000100000000100080000000000000100000000000000000000000100000001
+          000000000000000080000080000000808000800000008000800080800000C0C0
+          C000C0DCC000F0CAA6000020400000206000002080000020A0000020C0000020
+          E00000400000004020000040400000406000004080000040A0000040C0000040
+          E00000600000006020000060400000606000006080000060A0000060C0000060
+          E00000800000008020000080400000806000008080000080A0000080C0000080
+          E00000A0000000A0200000A0400000A0600000A0800000A0A00000A0C00000A0
+          E00000C0000000C0200000C0400000C0600000C0800000C0A00000C0C00000C0
+          E00000E0000000E0200000E0400000E0600000E0800000E0A00000E0C00000E0
+          E00040000000400020004000400040006000400080004000A0004000C0004000
+          E00040200000402020004020400040206000402080004020A0004020C0004020
+          E00040400000404020004040400040406000404080004040A0004040C0004040
+          E00040600000406020004060400040606000406080004060A0004060C0004060
+          E00040800000408020004080400040806000408080004080A0004080C0004080
+          E00040A0000040A0200040A0400040A0600040A0800040A0A00040A0C00040A0
+          E00040C0000040C0200040C0400040C0600040C0800040C0A00040C0C00040C0
+          E00040E0000040E0200040E0400040E0600040E0800040E0A00040E0C00040E0
+          E00080000000800020008000400080006000800080008000A0008000C0008000
+          E00080200000802020008020400080206000802080008020A0008020C0008020
+          E00080400000804020008040400080406000804080008040A0008040C0008040
+          E00080600000806020008060400080606000806080008060A0008060C0008060
+          E00080800000808020008080400080806000808080008080A0008080C0008080
+          E00080A0000080A0200080A0400080A0600080A0800080A0A00080A0C00080A0
+          E00080C0000080C0200080C0400080C0600080C0800080C0A00080C0C00080C0
+          E00080E0000080E0200080E0400080E0600080E0800080E0A00080E0C00080E0
+          E000C0000000C0002000C0004000C0006000C0008000C000A000C000C000C000
+          E000C0200000C0202000C0204000C0206000C0208000C020A000C020C000C020
+          E000C0400000C0402000C0404000C0406000C0408000C040A000C040C000C040
+          E000C0600000C0602000C0604000C0606000C0608000C060A000C060C000C060
+          E000C0800000C0802000C0804000C0806000C0808000C080A000C080C000C080
+          E000C0A00000C0A02000C0A04000C0A06000C0A08000C0A0A000C0A0C000C0A0
+          E000C0C00000C0C02000C0C04000C0C06000C0C08000C0C0A000F0FBFF00A4A0
+          A000808080000000FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFF
+          FF00FDFDFDFDFDFDFDFDFDFDFDFDFDFDFDFDFDFDFDFDFD00FDFDFDFDFDFDFDFD
+          FDFDFDFDFDFDFD0000FDFDFDFDFDFDFDFDFDFDFDFDFDFD900000FDFDFDFDFDFD
+          FDFDFDFDFDFDFD90900000FDFDFDFDFDFDFDFDFDFDFDFD9090900000FDFDFDFD
+          FDFDFDFDFDFDFD909090900000FDFDFDFDFDFDFDFDFDFD90909090900000FDFD
+          FDFDFDFDFDFDFD909090909090FDFDFDFDFDFDFDFDFDFD9090909090FDFDFDFD
+          FDFDFDFDFDFDFD90909090FDFDFDFDFDFDFDFDFDFDFDFD909090FDFDFDFDFDFD
+          FDFDFDFDFDFDFD9090FDFDFDFDFDFDFDFDFDFDFDFDFDFD90FDFDFDFDFDFDFDFD
+          FDFDFDFDFDFDFDFDFDFDFDFDFDFDFDFDFDFDFDFDFDFDFDFDFDFDFDFDFDFDFDFD
+          FDFD
+        }
+        Transparent = True
+        Visible = False
+      end
+      object GridJoinedFields: TDrawGrid
+        Left = 9
+        Height = 153
+        Top = 23
+        Width = 368
+        ColCount = 3
+        DefaultColWidth = 128
+        DefaultRowHeight = 18
+        ExtendedSelect = False
+        FixedCols = 0
+        Font.CharSet = ANSI_CHARSET
+        Font.Height = -11
+        Font.Name = 'Arial'
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goRowSelect]
+        ParentFont = False
+        RowCount = 10
+        ScrollBars = ssVertical
+        TabOrder = 0
+        TitleFont.CharSet = ANSI_CHARSET
+        TitleFont.Height = -11
+        TitleFont.Name = 'Arial'
+        OnDrawCell = GridJoinedFieldsDrawCell
+      end
+      object BtnDelete: TButton
+        Left = 384
+        Height = 25
+        Top = 21
+        Width = 82
+        Caption = '&Delete'
+        Enabled = False
+        OnClick = BtnDeleteClick
+        TabOrder = 1
+      end
+      object BtnClear: TButton
+        Left = 384
+        Height = 25
+        Top = 53
+        Width = 82
+        Caption = '&Clear'
+        Enabled = False
+        OnClick = BtnClearClick
+        TabOrder = 2
+      end
+    end
+    object Panel3: TPanel
+      Left = 8
+      Height = 201
+      Top = 8
+      Width = 473
+      BevelOuter = bvLowered
+      ClientHeight = 201
+      ClientWidth = 473
+      TabOrder = 1
+      object Label2: TLabel
+        Left = 10
+        Height = 14
+        Top = 7
+        Width = 63
+        Caption = '&Master Fields'
+        FocusControl = ListBoxMasterFields
+        ParentColor = False
+      end
+      object SbAddField: TSpeedButton
+        Left = 384
+        Height = 22
+        Top = 171
+        Width = 82
+        Caption = 'Add'
+        Color = clBtnFace
+        Enabled = False
+        Flat = True
+        Glyph.Data = {
+          DE000000424DDE0000000000000076000000280000000D0000000D0000000100
+          0400000000006800000000000000000000001000000010000000000000000000
+          80000080000000808000800000008000800080800000C0C0C000808080000000
+          FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00FFFFFFFFFFFF
+          F000FFFFF444FFFFF000FFFFF444FFFFF000FFFFF444FFFFF000FFFFF444FFFF
+          F000F44444444444F000F44444444444F000F44444444444F000FFFFF444FFFF
+          F000FFFFF444FFFFF000FFFFF444FFFFF000FFFFF444FFFFF000FFFFFFFFFFFF
+          F000
+        }
+        NumGlyphs = 0
+        OnClick = SbAddFieldClick
+      end
+      object Label1: TLabel
+        Left = 197
+        Height = 14
+        Top = 6
+        Width = 58
+        Caption = 'D&etail Fields'
+        ParentColor = False
+      end
+      object LabelMasterSource: TLabel
+        Left = 10
+        Height = 14
+        Top = 23
+        Width = 33
+        Caption = 'From...'
+        Color = clBtnFace
+        FocusControl = ListBoxMasterFields
+        Font.Color = clNavy
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        ParentColor = False
+        ParentFont = False
+        Transparent = False
+      end
+      object LabelDetailSource: TLabel
+        Left = 197
+        Height = 14
+        Top = 22
+        Width = 33
+        Caption = 'From...'
+        Color = clBtnFace
+        Font.Color = clNavy
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        ParentColor = False
+        ParentFont = False
+        Transparent = False
+      end
+      object ListBoxMasterFields: TListBox
+        Left = 9
+        Height = 147
+        Top = 40
+        Width = 180
+        IntegralHeight = True
+        ItemHeight = 0
+        OnClick = ListBoxMasterFieldsClick
+        Sorted = True
+        TabOrder = 0
+      end
+      object ListBoxDetailFields: TListBox
+        Left = 195
+        Height = 147
+        Top = 40
+        Width = 180
+        IntegralHeight = True
+        ItemHeight = 0
+        OnClick = ListBoxDetailFieldsClick
+        Sorted = True
+        TabOrder = 1
+      end
+    end
+  end
+end

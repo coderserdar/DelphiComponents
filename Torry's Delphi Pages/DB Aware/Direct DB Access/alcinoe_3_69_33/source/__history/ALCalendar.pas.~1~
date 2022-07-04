@@ -1,0 +1,424 @@
+{*************************************************************
+www:          http://sourceforge.net/projects/alcinoe/              
+Author(s):    Stéphane Vander Clock (svanderclock@arkadia.com)
+Sponsor(s):   Arkadia SA (http://www.arkadia.com)
+
+product:      ALCalendar
+Version:      3.50
+
+Description:  Functions to draw a calendar on a canvas
+
+Legal issues: Copyright (C) 1999-2008 by Arkadia Software Engineering
+
+              This software is provided 'as-is', without any express
+              or implied warranty.  In no event will the author be
+              held liable for any  damages arising from the use of
+              this software.
+
+              Permission is granted to anyone to use this software
+              for any purpose, including commercial applications,
+              and to alter it and redistribute it freely, subject
+              to the following restrictions:
+
+              1. The origin of this software must not be
+                 misrepresented, you must not claim that you wrote
+                 the original software. If you use this software in
+                 a product, an acknowledgment in the product
+                 documentation would be appreciated but is not
+                 required.
+
+              2. Altered source versions must be plainly marked as
+                 such, and must not be misrepresented as being the
+                 original software.
+
+              3. This notice may not be removed or altered from any
+                 source distribution.
+
+              4. You must register this software by sending a picture
+                 postcard to the author. Use a nice stamp and mention
+                 your name, street address, EMail address and any
+                 comment you like to say.
+
+Know bug :
+
+History :     31/03/2007: rename the function in AL*
+              12/01/2008: renove call to Controls.pas !
+
+Link :
+
+Please send all your feedback to svanderclock@arkadia.com
+**************************************************************}
+unit ALCalendar;
+
+interface
+
+uses Windows,
+     types,
+     Graphics,
+     SysUtils;
+
+Type
+
+  {----------------}
+  TALDaybox = Record
+    R : Trect;
+    BackgroundColor : Tcolor;
+    FontColor : Tcolor;
+  end;
+  TALLstDayBox = array of TALDayBox;
+
+{********************************}
+Function ALDrawCalendar(C:Tcanvas;
+                        Font, HeaderFont, disableFont:Tfont;
+                        Color, HeaderColor, BorderColorLo, BorderColorHi : Tcolor;
+                        Year : Integer;
+                        FormatSettings: TformatSettings;
+                        Var WCalendar : Integer;
+                        Var HCalendar : Integer;
+                        Var LstDayBox: TALLstdayBox): Boolean;
+
+implementation
+
+uses dateutils,
+     ALFcnString;
+
+{**********************************************************************************************}
+Procedure ALDrawCalendarBox(Text: String; BackColor, FontColor : Tcolor; Rect:Trect; C:TCanvas);
+Var Wt,Ht,xt,yt: Integer;
+    R: Trect;
+Begin
+  R := rect;
+  inflateRect(r,-1,-1);
+  R.Bottom := R.Bottom + 1;
+  r.Right := r.Right + 1;
+  C.Brush.Color := BackColor;
+  C.FillRect(R);
+
+  c.Font.Color := FontColor;
+  wt := c.Textwidth(Text);
+  ht := c.Textheight(Text);
+  xt := rect.Right - wt -1;
+  yt := rect.top + ((rect.bottom - rect.top - ht) div 2);
+  c.TextOut(xt,yt,text);
+end;
+
+{****************************************************************}
+Procedure ALDrawCalendarHeader(Month1,Month2,Month3,Year : String;
+                               R: TRect;
+                               C: TCanvas;
+                               W1Calendar, HHeader1 : Integer;
+                               HeaderColor, BorderColorLo, BorderColorHi : Tcolor);
+Var xt, yt, wt, ht: Integer;
+Begin
+  c.Brush.Color := HeaderColor;
+  c.FillRect(r);
+
+  {--Ligne du bas-------------}
+  c.Pen.Color := BorderColorLo;
+  C.MoveTo(r.Left, r.Bottom);
+  C.LineTo(r.Right,r.Bottom);
+
+  {--Separateur1--------------------------}
+  C.MoveTo(r.left + W1Calendar, r.Top + 1);
+  C.LineTo(r.left + W1Calendar, r.Top + HHeader1 - 1);
+  c.Pen.Color := BorderColorHi;
+  C.MoveTo(r.left + W1Calendar+1,r.Top + 1);
+  C.LineTo(r.Left + W1Calendar+1,r.Top + HHeader1 - 1);
+
+  {--Separateur2--------------}
+  c.Pen.Color := BorderColorLo;
+  C.MoveTo(r.left + 2*W1Calendar + 2, r.Top + 1);
+  C.LineTo(r.left + 2*W1Calendar + 2, r.Top + HHeader1 - 1);
+  c.Pen.Color := BorderColorHi;
+  C.MoveTo(r.left + 2*W1Calendar + 3, r.Top + 1);
+  C.LineTo(r.left + 2*W1Calendar + 3, r.Top + HHeader1 - 1);
+
+  {--Month1---------------}
+  ht := c.TextHeight('^_');
+  wt := c.Textwidth(Month1 + ' ' + year);
+  xt := R.left + ((W1Calendar - wt) div 2);
+  yt := R.Top + ((HHeader1 - ht) div 2);
+  C.TextOut(xt,yt,Month1 + ' ' + year);
+
+  {--Month2-----------------------------}
+  wt := c.Textwidth(Month2 + ' ' + year);
+  xt := r.left + W1Calendar + 2 + ((W1Calendar - wt) div 2);
+  C.TextOut(xt,yt,Month2 + ' ' + year);
+
+  {--Month3-----------------------------}
+  wt := c.Textwidth(Month3 + ' ' + year);
+  xt := r.left + 2*(W1Calendar + 2) + ((W1Calendar - wt) div 2);
+  C.TextOut(xt,yt,Month3 + ' ' + year);
+end;
+
+{****************************************************************************}
+Procedure ALDrawCalendarHeaderDay(Day1,Day2,Day3,Day4,Day5,Day6,Day7 : String;
+                                  Wblank, Yheader, wbox, hbox:Integer;
+                                  C: TCanvas;
+                                  BackColor, FontColor, BorderColorLo : Tcolor);
+Var r : Trect;
+Begin
+    r := rect(Wblank,Yheader,Wblank + wbox,Yheader + hbox);
+    ALDrawCalendarBox(Day1, BackColor, FontColor, R, C);
+    r := rect(r.Right,Yheader,r.Right+wbox,Yheader + hbox);
+    ALDrawCalendarBox(Day2, BackColor, FontColor, R, C);
+    r := rect(r.Right,Yheader,r.Right+wbox,Yheader + hbox);
+    ALDrawCalendarBox(Day3, BackColor, FontColor, R, C);
+    r := rect(r.Right,Yheader,r.Right+wbox,Yheader + hbox);
+    ALDrawCalendarBox(Day4, BackColor, FontColor, R, C);
+    r := rect(r.Right,Yheader,r.Right+wbox,Yheader + hbox);
+    ALDrawCalendarBox(Day5, BackColor, FontColor, R, C);
+    r := rect(r.Right,Yheader,r.Right+wbox,Yheader + hbox);
+    ALDrawCalendarBox(Day6, BackColor, FontColor, R, C);
+    r := rect(r.Right,Yheader,r.Right+wbox,Yheader + hbox);
+    ALDrawCalendarBox(Day7, BackColor, FontColor, R, C);
+
+    c.Pen.Color := BorderColorLo;
+    C.MoveTo(wblank, Yheader + hbox-1);
+    C.LineTo(Wblank + 7*wbox,Yheader + hbox-1);
+end;
+
+
+{***************************************************************************************************}
+Procedure ALCalculateDayBoxRect(Year, Wblank, HeaderHeight, Wbox, Hbox, wborder, W1calendar: Integer;
+                                Var LstdayBox: TALLstDayBox;
+                                Var YHeader2, YHeader3, YHeader4, bottom : Integer);
+Var Dt: Tdatetime;
+    xSamedi, xDimanche, xLundi, xMardi, xMercredi, xJeudi, xVendredi : Integer;
+    Month : Integer;
+    i : integer;
+    YDay : Integer;
+
+    Procedure UpdateXday(_Wblank : Integer);
+    Begin
+      xSamedi := _wblank;
+      xDimanche := _wblank + wbox;
+      xLundi := _wblank  + wbox*2;
+      xMardi := _wblank + wbox*3;
+      xMercredi := _wblank + wbox*4;
+      xJeudi := _wblank + wbox*5;
+      xVendredi := _wblank + wbox*6;
+    end;
+
+Begin
+      setlength(LstDayBox,daysInAyear(year));
+      Dt := encodeDate(year,1,1);
+      Yday := HeaderHeight;
+      UpdateXday(Wblank);
+      YHeader2 := 0;
+      YHeader3 := 0;
+      YHeader4 := 0;
+      Month := 1;
+
+      For i := 0 to high(lstdaybox) do begin
+        case DayOfTheWeek(dt) of
+          DayMonday : LstDayBox[i].R := Rect(xLundi,Yday,xLundi + wbox, Yday + HBox);
+          DayTuesday : LstDayBox[i].R := Rect(xMardi,Yday,xMardi + wbox, Yday + HBox);
+          DayWednesday : LstDayBox[i].R := Rect(xMercredi,Yday,xMercredi + wbox, Yday + HBox);
+          DayThursday : LstDayBox[i].r := Rect(xJeudi,Yday,xJeudi + wbox, Yday + HBox);
+          DayFriday : begin
+                        LstDayBox[i].R := Rect(xVendredi,Yday,xVendredi + wbox, Yday + HBox);
+                        inc(yday,HBox);
+                      end;
+          DaySaturday : LstDayBox[i].r := Rect(xSamedi,Yday,xSamedi + wbox, Yday + HBox);
+          DaySunday : LstDayBox[i].r := Rect(xDimanche,Yday,xDimanche + wbox, Yday + HBox);
+        end;
+        Dt := Dt+1;
+
+        If month <> MonthOF(Dt) then begin
+          Month := MonthOF(Dt);
+          Case Month of
+            2 : begin
+                  UpdateXday(Wblank + wborder + W1calendar);
+                  YHeader2 := LstdayBox[i].R.Bottom;
+                  Yday := HeaderHeight;
+                end;
+            3 : begin
+                  UpdateXday(Wblank + 2*(Wborder + W1calendar));
+                  if LstdayBox[i].r.Bottom > YHeader2 then YHeader2 := LstdayBox[i].R.Bottom;
+                  Yday := HeaderHeight;
+                end;
+            4 : begin
+                  UpdateXday(Wblank);
+                  if LstdayBox[i].R.Bottom > YHeader2 then YHeader2 := LstdayBox[i].R.Bottom;
+                  YHeader2 := YHeader2 + 5;
+                  Yday := YHeader2 + HeaderHeight;
+                end;
+            5 : begin
+                  UpdateXday(Wblank + wborder + W1calendar);
+                  YHeader3 := LstdayBox[i].R.Bottom;
+                  Yday := YHeader2 + HeaderHeight;
+                end;
+            6 : begin
+                  UpdateXday(Wblank + 2*(Wborder + W1calendar));
+                  if LstdayBox[i].R.Bottom > YHeader3 then YHeader3 := LstdayBox[i].R.Bottom;
+                  Yday := YHeader2 + HeaderHeight;
+                end;
+            7 : begin
+                  UpdateXday(Wblank);
+                  If LstdayBox[i].R.Bottom > YHeader3 then YHeader3 := LstdayBox[i].R.Bottom;
+                  YHeader3 := YHeader3 + 5;
+                  Yday := YHeader3 + HeaderHeight;
+                end;
+            8 : begin
+                  UpdateXday(Wblank + wborder + W1calendar);
+                  YHeader4 := LstdayBox[i].R.Bottom;
+                  Yday := YHeader3 + HeaderHeight;
+                end;
+            9 : begin
+                  UpdateXday(Wblank + 2*(Wborder + W1calendar));
+                  if LstdayBox[i].R.Bottom > YHeader4 then YHeader4 := LstdayBox[i].R.Bottom;
+                  Yday := YHeader3 + HeaderHeight;
+                end;
+            10 : begin
+                  UpdateXday(Wblank);
+                  If LstdayBox[i].R.Bottom > YHeader4 then YHeader4 := LstdayBox[i].R.Bottom;
+                  YHeader4 := YHeader4 + 5;
+                  Yday := YHeader4 + HeaderHeight;
+                end;
+            11 : begin
+                  UpdateXday(Wblank + wborder + W1calendar);
+                  Yday := YHeader4 + HeaderHeight;
+                  Bottom := LstdayBox[i].R.Bottom;
+                end;
+            12 : begin
+                  UpdateXday(Wblank + 2*(Wborder + W1calendar));
+                  Yday := YHeader4 + HeaderHeight;
+                  if LstdayBox[i].R.Bottom > Bottom then Bottom := LstdayBox[i].R.Bottom;
+                end;
+
+
+          end;
+        end;
+      end;
+      if LstdayBox[high(LstdayBox)].R.Bottom > Bottom then Bottom := LstdayBox[high(LstdayBox)].R.Bottom;
+end;
+
+{********************************}
+Function ALDrawCalendar(C:Tcanvas;
+                        Font, HeaderFont, disableFont:Tfont;
+                        Color, HeaderColor, BorderColorLo, BorderColorHi : Tcolor;
+                        Year : Integer;
+                        FormatSettings: TformatSettings;
+                        Var WCalendar : Integer;
+                        Var HCalendar : Integer;
+                        Var LstDayBox: TALLstdayBox): Boolean;
+Var R : Trect;
+    HBox,WBox: Integer;
+    i: Integer;
+    Jour, GrayJour : Tdatetime;
+    Wblank : Integer;
+    YHeader2,YHeader3,YHeader4 : Integer;
+    HHeader1, Hheader2 : Integer;
+    w1calendar : Integer;
+    CalchCalendar : Integer;
+    DisableFontColor : Tcolor;
+begin
+    {---init des valeurs utilisé----}
+    Result := True;
+    with FormatSettings do begin
+      For i := 1 to 12 do begin
+        LongMonthNames[i] := ALLowercase(LongMonthNames[i]);
+        LongMonthNames[i][1] := Upcase(LongMonthNames[i][1]);
+      end;
+      For i := 1 to 7 do LongDayNames[i][1] := Upcase(LongDayNames[i][1]);
+    end;
+
+
+    If assigned(Font) then c.Font.Assign(Font)
+    else begin
+      c.Font.Color := ClBlack;
+      C.Font.Name := 'Ms Sans Sherif';
+      C.Font.Size := 8;
+    end;
+    Hbox := c.TextHeight('^_') + 2;
+    wbox := c.Textwidth('__') + 4;
+    If assigned(HeaderFont) then c.Font.Assign(HeaderFont);
+    Hheader1 := c.TextHeight('^_') + 2;
+    Hheader2 := Hbox;
+    W1Calendar := (wcalendar - 4) div 3;
+    Wblank := ((W1Calendar - (7*wbox)) div 2);
+    if wblank <> 7 then begin
+      Result := False;
+      Wcalendar := 3*7*wbox + 3*14 + 4;
+      exit;
+    end;
+    ALCalculateDayBoxRect(Year, Wblank, Hheader1+hheader2 + 1, Wbox, Hbox, 2, w1calendar, LstdayBox, YHeader2, YHeader3, YHeader4, CalcHCalendar);
+    if CalcHCalendar + 2 <> HCalendar then begin
+      Result := False;
+      Hcalendar := CalcHCalendar + 2;
+      exit;
+    end;
+    If assigned(DisableFont) then DisableFontColor := DisableFont.Color
+    Else DisableFontColor := ClSilver;
+
+
+    {--- On dessine les header1------}
+    R := Rect(0,0,Wcalendar,Hheader1);
+    with FormatSettings do begin
+      ALDrawCalendarHeader(LongMonthNames[1],LongMonthNames[2],LongMonthNames[3],inttostr(year), R, C, W1Calendar, Hheader1, HeaderColor, BorderColorLo, BorderColorHi);
+      R := Rect(0,YHeader2,wcalendar,YHeader2+Hheader1);
+      ALDrawCalendarHeader(LongMonthNames[4],LongMonthNames[5],LongMonthNames[6],inttostr(year), R, C, W1Calendar, Hheader1, HeaderColor, BorderColorLo, BorderColorHi);
+      R := Rect(0,YHeader3,wcalendar,YHeader3 + Hheader1);
+      ALDrawCalendarHeader(LongMonthNames[7],LongMonthNames[8],LongMonthNames[9],inttostr(year), R, C, W1Calendar, Hheader1, HeaderColor, BorderColorLo, BorderColorHi);
+      R := Rect(0,YHeader4,wcalendar,YHeader4 + Hheader1);
+      ALDrawCalendarHeader(LongMonthNames[10],LongMonthNames[11],LongMonthNames[12],inttostr(year), R, C, W1Calendar, Hheader1, HeaderColor, BorderColorLo, BorderColorHi);
+    end;
+
+
+    {--- On dessine les header2--------------}
+    If assigned(Font) then c.Font.Assign(Font)
+    else begin
+      c.Font.Color := ClBlack;
+      C.Font.Name := 'Ms Sans Sherif';
+      C.Font.Size := 8;
+    end;
+    with FormatSettings Do begin
+      ALDrawCalendarHeaderDay(LongDayNames[7][1],LongDayNames[1][1],LongDayNames[2][1],LongDayNames[3][1],LongDayNames[4][1],LongDayNames[5][1],LongDayNames[6][1], Wblank, hheader1, wbox, hbox, C, Color, c.Font.Color, BorderColorLo);
+      ALDrawCalendarHeaderDay(LongDayNames[7][1],LongDayNames[1][1],LongDayNames[2][1],LongDayNames[3][1],LongDayNames[4][1],LongDayNames[5][1],LongDayNames[6][1], Wblank + W1Calendar + 2, hheader1, wbox, hbox, C, Color, c.Font.Color, BorderColorLo);
+      ALDrawCalendarHeaderDay(LongDayNames[7][1],LongDayNames[1][1],LongDayNames[2][1],LongDayNames[3][1],LongDayNames[4][1],LongDayNames[5][1],LongDayNames[6][1], Wblank + 2*(W1Calendar + 2), hheader1, wbox, hbox, C, Color, c.Font.Color, BorderColorLo);
+      ALDrawCalendarHeaderDay(LongDayNames[7][1],LongDayNames[1][1],LongDayNames[2][1],LongDayNames[3][1],LongDayNames[4][1],LongDayNames[5][1],LongDayNames[6][1], Wblank, YHeader2 + hheader1, wbox, hbox, C, Color, c.Font.Color, BorderColorLo);
+      ALDrawCalendarHeaderDay(LongDayNames[7][1],LongDayNames[1][1],LongDayNames[2][1],LongDayNames[3][1],LongDayNames[4][1],LongDayNames[5][1],LongDayNames[6][1], Wblank + W1Calendar + 2, YHeader2 + hheader1, wbox, hbox, C, Color, c.Font.Color, BorderColorLo);
+      ALDrawCalendarHeaderDay(LongDayNames[7][1],LongDayNames[1][1],LongDayNames[2][1],LongDayNames[3][1],LongDayNames[4][1],LongDayNames[5][1],LongDayNames[6][1], Wblank + 2*(W1Calendar + 2), YHeader2 + hheader1, wbox, hbox, C, Color, c.Font.Color, BorderColorLo);
+      ALDrawCalendarHeaderDay(LongDayNames[7][1],LongDayNames[1][1],LongDayNames[2][1],LongDayNames[3][1],LongDayNames[4][1],LongDayNames[5][1],LongDayNames[6][1], Wblank, YHeader3 + hheader1, wbox, hbox, C, Color, c.Font.Color, BorderColorLo);
+      ALDrawCalendarHeaderDay(LongDayNames[7][1],LongDayNames[1][1],LongDayNames[2][1],LongDayNames[3][1],LongDayNames[4][1],LongDayNames[5][1],LongDayNames[6][1], Wblank + W1Calendar + 2, YHeader3 + hheader1, wbox, hbox, C, Color, c.Font.Color, BorderColorLo);
+      ALDrawCalendarHeaderDay(LongDayNames[7][1],LongDayNames[1][1],LongDayNames[2][1],LongDayNames[3][1],LongDayNames[4][1],LongDayNames[5][1],LongDayNames[6][1], Wblank + 2*(W1Calendar + 2), YHeader3 + hheader1, wbox, hbox, C, Color, c.Font.Color, BorderColorLo);
+      ALDrawCalendarHeaderDay(LongDayNames[7][1],LongDayNames[1][1],LongDayNames[2][1],LongDayNames[3][1],LongDayNames[4][1],LongDayNames[5][1],LongDayNames[6][1], Wblank, YHeader4 + hheader1, wbox, hbox, C, Color, c.Font.Color, BorderColorLo);
+      ALDrawCalendarHeaderDay(LongDayNames[7][1],LongDayNames[1][1],LongDayNames[2][1],LongDayNames[3][1],LongDayNames[4][1],LongDayNames[5][1],LongDayNames[6][1], Wblank + W1Calendar + 2, YHeader4 + hheader1, wbox, hbox, C, Color, c.Font.Color, BorderColorLo);
+      ALDrawCalendarHeaderDay(LongDayNames[7][1],LongDayNames[1][1],LongDayNames[2][1],LongDayNames[3][1],LongDayNames[4][1],LongDayNames[5][1],LongDayNames[6][1], Wblank + 2*(W1Calendar + 2), YHeader4 + hheader1, wbox, hbox, C, Color, c.Font.Color, BorderColorLo);
+    end;
+
+
+    {--- On dessine les Jours-----}
+    Jour := encodeDate(year,01,01);
+    For i := 0 to high(lstdaybox) do begin
+      if DayOfTheMonth(Jour) = 1 then begin
+        GrayJour := Jour - 1;
+        R := LstDayBox[i].R;
+        r.Left := r.Left - Wbox;
+        R.Right := r.Right - wbox;
+        while DayOfTheWeek(GrayJour) <> DayFriday do begin
+          ALDrawCalendarBox(inttostr(DayOfTheMonth(GrayJour)), Color, DisableFontColor, R, C);
+          r.Left := r.Left - Wbox;
+          R.Right := r.Right - wbox;
+          GrayJour := GrayJour - 1;
+        end;
+      end;
+      ALDrawCalendarBox(inttostr(DayOfTheMonth(Jour)), LstDayBox[i].BackgroundColor, LstDayBox[i].FontColor, LstDayBox[i].R, C);
+      jour := jour + 1;
+      if DayOfTheMonth(Jour) = 1 then begin
+        GrayJour := Jour;
+        R := LstDayBox[i].R;
+        r.Left := r.Left + Wbox;
+        R.Right := r.Right + wbox;
+        while DayOfTheWeek(GrayJour) <> DaySaturday do begin
+          ALDrawCalendarBox(inttostr(DayOfTheMonth(GrayJour)), Color, DisableFontColor, R, C);
+          r.Left := r.Left + Wbox;
+          R.Right := r.Right + wbox;
+          GrayJour := GrayJour + 1;
+        end;
+      end;
+    end;
+end;
+
+end.

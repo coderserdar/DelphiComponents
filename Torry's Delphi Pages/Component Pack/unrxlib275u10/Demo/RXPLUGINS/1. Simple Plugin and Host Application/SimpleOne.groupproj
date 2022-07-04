@@ -1,0 +1,44 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{391130f2-cc9d-428d-a5ed-83e7a08ed47b}</ProjectGuid>
+  </PropertyGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Projects Include="PlugInDemo.dproj" />
+    <Projects Include="SamplePluginOne.dproj" />
+  </ItemGroup>
+  <ProjectExtensions>
+    <Borland.Personality>Default.Personality</Borland.Personality>
+    <Borland.ProjectType />
+    <BorlandProject>
+  <BorlandProject xmlns=""> <Default.Personality> </Default.Personality> </BorlandProject></BorlandProject>
+  </ProjectExtensions>
+  <Target Name="SamplePluginOne">
+    <MSBuild Projects="SamplePluginOne.dproj" Targets="" />
+  </Target>
+  <Target Name="SamplePluginOne:Clean">
+    <MSBuild Projects="SamplePluginOne.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="SamplePluginOne:Make">
+    <MSBuild Projects="SamplePluginOne.dproj" Targets="Make" />
+  </Target>
+  <Target Name="PlugInDemo">
+    <MSBuild Projects="PlugInDemo.dproj" Targets="" />
+  </Target>
+  <Target Name="PlugInDemo:Clean">
+    <MSBuild Projects="PlugInDemo.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="PlugInDemo:Make">
+    <MSBuild Projects="PlugInDemo.dproj" Targets="Make" />
+  </Target>
+  <Target Name="Build">
+    <CallTarget Targets="SamplePluginOne;PlugInDemo" />
+  </Target>
+  <Target Name="Clean">
+    <CallTarget Targets="SamplePluginOne:Clean;PlugInDemo:Clean" />
+  </Target>
+  <Target Name="Make">
+    <CallTarget Targets="SamplePluginOne:Make;PlugInDemo:Make" />
+  </Target>
+  <Import Condition="Exists('$(MSBuildBinPath)\Borland.Group.Targets')" Project="$(MSBuildBinPath)\Borland.Group.Targets" />
+</Project>

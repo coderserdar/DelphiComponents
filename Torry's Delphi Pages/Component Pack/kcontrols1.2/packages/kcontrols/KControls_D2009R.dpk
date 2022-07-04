@@ -1,0 +1,57 @@
+package KControls_D2009R;
+
+{$include ..\..\source\kcontrols.inc}
+
+{$R *.res}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS ON}
+{$RANGECHECKS ON}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS ON}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'KControls Development Suite - runtime package'}
+{$RUNONLY}
+{$IMPLICITBUILD ON}
+
+requires
+  vcl,
+  vclx,
+  vclimg
+{$IFDEF TKDBGRID_USE}
+  , dbrtl
+  , vcldb
+{$ENDIF}
+  ;
+
+contains
+  kcontrols in '..\..\source\kcontrols.pas',
+  kdialogs in '..\..\source\kdialogs.pas',
+  keditcommon in '..\..\source\keditcommon.pas',
+  kfunctions in '..\..\source\kfunctions.pas',
+  kgraphics in '..\..\source\kgraphics.pas',
+  kgrids in '..\..\source\kgrids.pas',
+  kicon in '..\..\source\kicon.pas',
+  khexeditor in '..\..\source\khexeditor.pas',
+  kprintpreview in '..\..\source\kprintpreview.pas',
+  kprintsetup in '..\..\source\kprintsetup.pas',
+  kwidewinprocs in '..\..\source\kwidewinprocs.pas'
+{$IFDEF TKDBGRID_USE}
+  , kdbgrids in '..\..\source\kdbgrids.pas'
+{$ENDIF}
+  ;
+end.

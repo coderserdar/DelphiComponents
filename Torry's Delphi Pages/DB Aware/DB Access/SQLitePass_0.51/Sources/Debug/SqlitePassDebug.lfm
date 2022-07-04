@@ -1,0 +1,42 @@
+object FormDebugOutput: TFormDebugOutput
+  Left = 238
+  Height = 521
+  Top = 181
+  Width = 790
+  HorzScrollBar.Page = 789
+  VertScrollBar.Page = 520
+  ActiveControl = BtnClearMemo
+  Caption = 'Debug Output'
+  ClientHeight = 521
+  ClientWidth = 790
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  object PanelTop: TPanel
+    Height = 41
+    Width = 790
+    Align = alTop
+    ClientHeight = 41
+    ClientWidth = 790
+    TabOrder = 0
+    object BtnClearMemo: TButton
+      Left = 24
+      Height = 25
+      Top = 8
+      Width = 75
+      Caption = 'Clear'
+      OnClick = BtnClearMemoClick
+      TabOrder = 0
+    end
+  end
+  object MemoDebug: TMemo
+    Height = 480
+    Top = 41
+    Width = 790
+    Align = alClient
+    Lines.Strings = (
+      ''
+    )
+    ScrollBars = ssAutoBoth
+    TabOrder = 1
+  end
+end

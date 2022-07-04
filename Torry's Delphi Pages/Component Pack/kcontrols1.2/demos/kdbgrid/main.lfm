@@ -1,0 +1,168 @@
+object MainForm: TMainForm
+  Left = 466
+  Height = 516
+  Top = 356
+  Width = 643
+  ActiveControl = EDConnectionString
+  Caption = 'KDBGrid demo'
+  ClientHeight = 516
+  ClientWidth = 643
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  OnCreate = FormCreate
+  OnDeactivate = FormDeactivate
+  Position = poScreenCenter
+  LCLVersion = '0.9.29'
+  object Label1: TLabel
+    Left = 8
+    Height = 14
+    Top = 8
+    Width = 118
+    Caption = 'ODBC System DSN alias:'
+    ParentColor = False
+  end
+  object Label2: TLabel
+    Left = 8
+    Height = 14
+    Top = 48
+    Width = 31
+    Caption = 'Table:'
+    ParentColor = False
+  end
+  object Label3: TLabel
+    Left = 192
+    Height = 14
+    Top = 48
+    Width = 91
+    Caption = 'First column value:'
+    ParentColor = False
+  end
+  object BUModify: TButton
+    Left = 503
+    Height = 25
+    Top = 104
+    Width = 132
+    Action = ACModify
+    TabOrder = 0
+  end
+  object DBGrid: TKDBGrid
+    Left = 0
+    Height = 372
+    Top = 144
+    Width = 643
+    Align = alBottom
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    ColCount = 2
+    DataSource = DSMain
+    Options = [goAlwaysShowEditor, goColMoving, goColSizing, goColSorting, goDrawFocusSelected, goEditing, goEnterMoves, goFixedHorzLine, goFixedVertLine, goHeader, goHeaderAlignment, goHorzLine, goIndicateHiddenCells, goMouseCanHideCells, goMouseOverCells, goRowSizing, goRowSorting, goThemes, goThemedCells, goVertLine]
+    RowCount = 2
+    TabOrder = 1
+    OnCustomSortRows = DBGridCustomSortRows
+    OnDrawCell = DBGridDrawCell
+    OnEditorCreate = DBGridEditorCreate
+    OnMouseCellHint = DBGridMouseCellHint
+    OnMouseClickCell = DBGridMouseClickCell
+    ColWidths = (
+      64
+      64
+    )
+    RowHeights = (
+      21
+      21
+    )
+  end
+  object EDConnectionString: TEdit
+    Left = 8
+    Height = 21
+    Top = 24
+    Width = 627
+    Anchors = [akTop, akLeft, akRight]
+    TabOrder = 2
+    Text = 'mssql_tk_pc_data'
+  end
+  object EDTable: TEdit
+    Left = 8
+    Height = 21
+    Top = 64
+    Width = 168
+    TabOrder = 3
+    Text = '[Table]'
+  end
+  object EDFirstCol: TDBEdit
+    Left = 192
+    Height = 21
+    Top = 64
+    Width = 121
+    DataSource = DSMain
+    TabOrder = 4
+  end
+  object BUOpen: TButton
+    Left = 8
+    Height = 25
+    Top = 104
+    Width = 83
+    Action = ACOpen
+    TabOrder = 5
+  end
+  object BUClose: TButton
+    Left = 93
+    Height = 25
+    Top = 104
+    Width = 83
+    Action = ACClose
+    TabOrder = 6
+  end
+  object DBNav: TDBNavigator
+    Left = 192
+    Height = 25
+    Top = 104
+    Width = 240
+    BevelOuter = bvNone
+    ClientHeight = 25
+    ClientWidth = 240
+    DataSource = DSMain
+    TabOrder = 7
+  end
+  object BUPrint: TButton
+    Left = 536
+    Height = 25
+    Top = 72
+    Width = 99
+    Action = ACPrint
+    TabOrder = 8
+  end
+  object ALMain: TActionList
+    left = 405
+    top = 56
+    object ACOpen: TAction
+      Caption = 'Open table'
+      OnExecute = ACOpenExecute
+      OnUpdate = ACOpenUpdate
+    end
+    object ACClose: TAction
+      Caption = 'Close table'
+      OnExecute = ACCloseExecute
+      OnUpdate = ACCloseUpdate
+    end
+    object ACModify: TAction
+      Caption = 'Modify random cell'
+      OnExecute = ACModifyExecute
+      OnUpdate = ACCloseUpdate
+    end
+    object ACPrint: TAction
+      Caption = 'Print...'
+      OnExecute = ACPrintExecute
+      OnUpdate = ACPrintUpdate
+    end
+  end
+  object DSMain: TDatasource
+    left = 367
+    top = 56
+  end
+  object PSDMain: TKPrintSetupDialog
+    Control = DBGrid
+    SelAvail = False
+    left = 328
+    top = 56
+  end
+end

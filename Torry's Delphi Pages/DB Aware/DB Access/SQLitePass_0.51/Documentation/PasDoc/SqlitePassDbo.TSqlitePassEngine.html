@@ -1,0 +1,325 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+<meta name="GENERATOR" content="PasDoc 0.11.0">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<title>SqlitePass Database Objects: SqlitePassDbo: Class TSqlitePassEngine</title>
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body bgcolor="#ffffff" text="#000000" link="#0000ff" vlink="#800080" alink="#FF0000">
+<a name="TSqlitePassEngine"></a><h1 class="cio">Class TSqlitePassEngine</h1>
+<table class="sections wide_list">
+<tr>
+<td><a class="section"  href="#%40Description">Description</a></td><td><a class="section"  href="#%40Hierarchy">Hierarchy</a></td><td>Fields</td><td><a class="section"  href="#%40Methods">Methods</a></td><td><a class="section"  href="#%40Properties">Properties</a></td></tr></table>
+<a name="%40Description"></a><h2 class="unit">Unit</h2>
+<p class="unitlink">
+<a   href="SqlitePassDbo.html">SqlitePassDbo</a></p>
+<h2 class="declaration">Declaration</h2>
+<p class="declaration">
+<code>type TSqlitePassEngine = class(TObject)</code></p>
+<h2 class="description">Description</h2>
+<a name="%40Hierarchy"></a><h2 class="hierarchy">Hierarchy</h2>
+<ul class="hierarchy"><li class="ancestor">TObject</li>
+<li class="thisitem">TSqlitePassEngine</li></ul><h2 class="overview">Overview</h2>
+<a name="%40Methods"></a><h3 class="summary">Methods</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>Constructor <b><a   href="SqlitePassDbo.TSqlitePassEngine.html#Create">Create</a></b>(Database: <a   href="SqlitePassDbo.TSqlitePassDatabase.html">TSqlitePassDatabase</a>);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>Destructor <b><a   href="SqlitePassDbo.TSqlitePassEngine.html#Destroy">Destroy</a></b>; override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.TSqlitePassEngine.html#CheckResult">CheckResult</a></b>(Const i: Integer; VerboseLevel: <a   href="SqlitePassDbo.html#TSqlitePassVerboseLevel">TSqlitePassVerboseLevel</a> = <a   href="SqlitePassConst.html#vlLogAndShow">vlLogAndShow</a>): Integer;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.TSqlitePassEngine.html#CreateFunction">CreateFunction</a></b>(FuncName: String; ArgCount: ShortInt; DefaultEncoding: Byte; UserData: Pointer; xFunc, xStep: <a   href="SqlitePassApi_v3.html#TFuncHandler">TFuncHandler</a>; xFinal: <a   href="SqlitePassApi_v3.html#TFuncFinalizer">TFuncFinalizer</a>): Boolean;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.TSqlitePassEngine.html#ExecSQL">ExecSQL</a></b>(Const Sql: String; CallBackFunc: <a   href="SqlitePassDbo.html#TSqlitePassExecCallBack">TSqlitePassExecCallBack</a> = nil): Integer;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.TSqlitePassEngine.html#GetChangesCount">GetChangesCount</a></b>: Integer;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.TSqlitePassEngine.html#GetLastInsertRowId">GetLastInsertRowId</a></b>: Int64;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.TSqlitePassEngine.html#GetTotalChangesCount">GetTotalChangesCount</a></b>: Integer;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>Function <b><a   href="SqlitePassDbo.TSqlitePassEngine.html#LoadSqliteLibrary">LoadSqliteLibrary</a></b>(LibraryFile: String): Boolean;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.TSqlitePassEngine.html#PrepareStmt">PrepareStmt</a></b>(var Stmt: pointer; const sql: String; VerboseLevel: <a   href="SqlitePassDbo.html#TSqlitePassVerboseLevel">TSqlitePassVerboseLevel</a> = <a   href="SqlitePassConst.html#vlLogAndShow">vlLogAndShow</a>): Boolean;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.TSqlitePassEngine.html#UnprepareStmt">UnprepareStmt</a></b>(var Stmt: pointer): Boolean;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.TSqlitePassEngine.html#CloseDatabase">CloseDatabase</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.TSqlitePassEngine.html#ExecQuery">ExecQuery</a></b>(Const Sql: String; VerboseLevel: <a   href="SqlitePassDbo.html#TSqlitePassVerboseLevel">TSqlitePassVerboseLevel</a> = <a   href="SqlitePassConst.html#vlLogAndShow">vlLogAndShow</a>);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.TSqlitePassEngine.html#ExecQueryUTF16">ExecQueryUTF16</a></b>(Const Sql: <a   href="SqlitePassUtils.html#UTF16WideString">UTF16WideString</a>; VerboseLevel: <a   href="SqlitePassDbo.html#TSqlitePassVerboseLevel">TSqlitePassVerboseLevel</a> = <a   href="SqlitePassConst.html#vlLogAndShow">vlLogAndShow</a>);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.TSqlitePassEngine.html#ExecQueryUTF8">ExecQueryUTF8</a></b>(Const Sql: UTF8String; VerboseLevel: <a   href="SqlitePassDbo.html#TSqlitePassVerboseLevel">TSqlitePassVerboseLevel</a> = <a   href="SqlitePassConst.html#vlLogAndShow">vlLogAndShow</a>);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>Procedure <b><a   href="SqlitePassDbo.TSqlitePassEngine.html#FinalizePendingStmts">FinalizePendingStmts</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.TSqlitePassEngine.html#OpenDatabase">OpenDatabase</a></b>(Const FullName: String; Const LibraryFile: String = <a   href="SqlitePassConst.html#DefaultSQLiteLibrary">DefaultSQLiteLibrary</a>);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>Procedure <b><a   href="SqlitePassDbo.TSqlitePassEngine.html#StartChrono">StartChrono</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>Procedure <b><a   href="SqlitePassDbo.TSqlitePassEngine.html#StopChrono">StopChrono</a></b>;</code></td>
+</tr>
+</table>
+<a name="%40Properties"></a><h3 class="summary">Properties</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassEngine.html#Connection">Connection</a></b>: Pointer read FConnectionHandle;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassEngine.html#ElapsedTime">ElapsedTime</a></b>: Double read FElapsedTime;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassEngine.html#QueryTimeout">QueryTimeout</a></b>: Integer Read FQueryTimeout Write FQueryTimeout;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassEngine.html#Transaction">Transaction</a></b>: <a   href="SqlitePassDbo.TSqlitePassTransaction.html">TSqlitePassTransaction</a> Read FTransaction Write FTransaction;</code></td>
+</tr>
+</table>
+<h2 class="description">Description</h2>
+<h3 class="detail">Methods</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Create"></a><code>Constructor <b>Create</b>(Database: <a   href="SqlitePassDbo.TSqlitePassDatabase.html">TSqlitePassDatabase</a>);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Destroy"></a><code>Destructor <b>Destroy</b>; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="CheckResult"></a><code>function <b>CheckResult</b>(Const i: Integer; VerboseLevel: <a   href="SqlitePassDbo.html#TSqlitePassVerboseLevel">TSqlitePassVerboseLevel</a> = <a   href="SqlitePassConst.html#vlLogAndShow">vlLogAndShow</a>): Integer;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="CreateFunction"></a><code>function <b>CreateFunction</b>(FuncName: String; ArgCount: ShortInt; DefaultEncoding: Byte; UserData: Pointer; xFunc, xStep: <a   href="SqlitePassApi_v3.html#TFuncHandler">TFuncHandler</a>; xFinal: <a   href="SqlitePassApi_v3.html#TFuncFinalizer">TFuncFinalizer</a>): Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+&mdash;&mdash; User Defined Functions &mdash;&ndash;</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="ExecSQL"></a><code>function <b>ExecSQL</b>(Const Sql: String; CallBackFunc: <a   href="SqlitePassDbo.html#TSqlitePassExecCallBack">TSqlitePassExecCallBack</a> = nil): Integer;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+&mdash;&mdash; SQL Exec &mdash;&mdash;</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="GetChangesCount"></a><code>function <b>GetChangesCount</b>: Integer;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="GetLastInsertRowId"></a><code>function <b>GetLastInsertRowId</b>: Int64;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="GetTotalChangesCount"></a><code>function <b>GetTotalChangesCount</b>: Integer;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="LoadSqliteLibrary"></a><code>Function <b>LoadSqliteLibrary</b>(LibraryFile: String): Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+&mdash;&mdash;&mdash;&mdash; Library &mdash;&mdash;&mdash;&mdash;&mdash;&ndash;</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="PrepareStmt"></a><code>function <b>PrepareStmt</b>(var Stmt: pointer; const sql: String; VerboseLevel: <a   href="SqlitePassDbo.html#TSqlitePassVerboseLevel">TSqlitePassVerboseLevel</a> = <a   href="SqlitePassConst.html#vlLogAndShow">vlLogAndShow</a>): Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+&mdash;&mdash; SQL Statements &mdash;&mdash;</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="UnprepareStmt"></a><code>function <b>UnprepareStmt</b>(var Stmt: pointer): Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="CloseDatabase"></a><code>procedure <b>CloseDatabase</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="ExecQuery"></a><code>procedure <b>ExecQuery</b>(Const Sql: String; VerboseLevel: <a   href="SqlitePassDbo.html#TSqlitePassVerboseLevel">TSqlitePassVerboseLevel</a> = <a   href="SqlitePassConst.html#vlLogAndShow">vlLogAndShow</a>);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="ExecQueryUTF16"></a><code>procedure <b>ExecQueryUTF16</b>(Const Sql: <a   href="SqlitePassUtils.html#UTF16WideString">UTF16WideString</a>; VerboseLevel: <a   href="SqlitePassDbo.html#TSqlitePassVerboseLevel">TSqlitePassVerboseLevel</a> = <a   href="SqlitePassConst.html#vlLogAndShow">vlLogAndShow</a>);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="ExecQueryUTF8"></a><code>procedure <b>ExecQueryUTF8</b>(Const Sql: UTF8String; VerboseLevel: <a   href="SqlitePassDbo.html#TSqlitePassVerboseLevel">TSqlitePassVerboseLevel</a> = <a   href="SqlitePassConst.html#vlLogAndShow">vlLogAndShow</a>);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="FinalizePendingStmts"></a><code>Procedure <b>FinalizePendingStmts</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="OpenDatabase"></a><code>procedure <b>OpenDatabase</b>(Const FullName: String; Const LibraryFile: String = <a   href="SqlitePassConst.html#DefaultSQLiteLibrary">DefaultSQLiteLibrary</a>);</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+&mdash;&mdash;&mdash;&mdash;- Database &mdash;&mdash;&mdash;&mdash;&mdash;-</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="StartChrono"></a><code>Procedure <b>StartChrono</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Chrono utility</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="StopChrono"></a><code>Procedure <b>StopChrono</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<h3 class="detail">Properties</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Connection"></a><code>property <b>Connection</b>: Pointer read FConnectionHandle;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="ElapsedTime"></a><code>property <b>ElapsedTime</b>: Double read FElapsedTime;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="QueryTimeout"></a><code>property <b>QueryTimeout</b>: Integer Read FQueryTimeout Write FQueryTimeout;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Transaction"></a><code>property <b>Transaction</b>: <a   href="SqlitePassDbo.TSqlitePassTransaction.html">TSqlitePassTransaction</a> Read FTransaction Write FTransaction;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Transactions. TODO : Rework on nested named transactions. Sqlite engine supports only one active <code>transaction</code> at the same time. In other words, you can't use nested transactions. The <a class="normal"  href="SqlitePassDbo.TSqlitePassTransaction.html">TSqlitePassTransaction</a> object will automatically handle this, so any attempt to start a <code>transaction</code> while one is running will have no effect. Transactions are really helpfull to speed up and secure data operations. You should use them as often as you can. If no <code>transaction</code> is active, the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabase.html">TSqlitePassDatabase</a> will always try to start a new <code>transaction</code> before writing to the database and commit it. This could be time consuming if you need to update or add many records at the same time and you should proceed like this : <code> Database.Transaction.Start; ... Your code here to update or <a class="normal"  href="SqlitePassDbo.TSqlitePassEngine.html#Create">create</a> records; ... Database.Transaction.Commit;</code></p>
+</td></tr>
+</table>
+<hr noshade size="1"><span class="appinfo"><em>Generated by <a  target="_parent" href="http://pasdoc.sourceforge.net/">PasDoc 0.11.0</a> on 2010-05-16 23:39:44</em>
+</span>
+</body></html>

@@ -1,0 +1,85 @@
+
+(********************************************************)
+(*                                                      *)
+(*      Codebot Class Library                           *)
+(*                                                      *)
+(*      Open Source Released 2000                       *)
+(*                                                      *)
+(********************************************************)
+
+package d5cbot;
+
+{$R *.RES}
+{$ALIGN ON}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'Codebot Class Library'}
+{$IMPLICITBUILD OFF}
+
+requires
+  vcl50,
+  Vcldb50,
+  Vclx50,
+  dsnide50;
+
+contains
+  AutoComplete in 'AutoComplete.pas',
+  Balloon in 'Balloon.pas',
+  BalloonHintFrm in 'BalloonHintFrm.pas',
+  BtnCtrls in 'BtnCtrls.pas',
+  SuplCtrls in 'SuplCtrls.pas',
+  DateTools in 'DateTools.pas',
+  DropMgr in 'DropMgr.pas',
+  FormTools in 'FormTools.pas',
+  FileTools in 'FileTools.pas',
+  FolderCtrls in 'FolderCtrls.pas',
+  FolderBarsFrm in 'FolderBarsFrm.pas',
+  GraphTools in 'GraphTools.pas',
+  ImageListFrm in 'ImageListFrm.pas',
+  InetTools in 'INetTools.pas',
+  InspectCtrls in 'InspectCtrls.pas',
+  InspectEditors in 'InspectEditors.pas',
+  InspectorEditorsFrm in 'InspectorEditorsFrm.pas',
+  KeybrdCtrls in 'KeybrdCtrls.pas',
+  MathTools in 'MathTools.pas',
+  OpenTools in 'OpenTools.pas',
+  OleEnum in 'OleEnum.pas',
+  PaneCtrls in 'PaneCtrls.pas',
+  PasParser in 'PasParser.pas',
+  PopCtrls in 'PopCtrls.pas',
+  PropEditors in 'PropEditors.pas',
+  ScrollCtrls in 'ScrollCtrls.pas',
+  ShlCtrls in 'ShlCtrls.pas',
+  ShlIntf in 'ShlIntf.pas',
+  SpeedCtrls in 'SpeedCtrls.pas',
+  StrConst in 'StrConst.pas',
+  StretchCtrls in 'StretchCtrls.pas',
+  StrTools in 'StrTools.pas',
+  BtnEdit in 'BtnEdit.pas',
+  WinTools in 'WinTools.pas',
+  MemoCtrls in 'MemoCtrls.pas',
+  OleTools in 'OleTools.pas',
+  GraphThemes in 'GraphThemes.pas',
+  CodeReg in 'CodeReg.pas';
+
+end.
+
+

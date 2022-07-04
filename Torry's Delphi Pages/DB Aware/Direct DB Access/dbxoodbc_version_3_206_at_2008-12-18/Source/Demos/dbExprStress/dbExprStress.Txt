@@ -1,0 +1,117 @@
+DbExpress Stress test tools:
+  Testing dbExpress driver in multithreaded working ...
+
+  Part of Kylix / Delphi open source DbExpress driver for ODBC
+  Version 1.10, 2003-05-21
+
+  Copyright (c) 2003 by Vadim V.Lopushansky
+
+----------------------------------------------------------
+This project is intended for testing dbExpress of drivers.
+Also you can see those problems which one for you can arise by
+operation with your database server and with yours ODBC by the driver.
+----------------------------------------------------------
+
+Some outcomes of testing:
+***********
+ACCESS:
+***********
+  ODBC connection string:
+    DRIVER={Driver do Microsoft Access (*.mdb)};DBQ=.\dbstress.mdb;DriverId=25;FIL=MS Access;MaxBufferSize=4096;PageTimeout=17;UID=admin;
+
+  -  Microsoft Access version "4.00.6019.00"
+      Options:
+      Usage Packet Records = [x]:
+      ****************************************
+        ###CDS.ApplyUpdates:Error returned from ODBC function SQLSetConnectAttr(SQL_ATTR_AUTOCOMMIT, SQL_AUTOCOMMIT_OFF)
+        ODBC Return Code: -1: SQL_ERROR
+        ODBC SqlState:        HY011
+        Native Error Code:    72
+        [Microsoft][ODBC Microsoft Access Driver]Attribute cannot be set now
+        Connection string: DSN=dsn_dbxODBC
+      ****************************************
+        ###Task Error:Error returned from ODBC function SQLCloseCursor
+        ODBC Return Code: -1: SQL_ERROR
+        ODBC SqlState:        24000
+        Native Error Code:    43
+        [Microsoft][ODBC Microsoft Access Driver]Invalid cursor state
+      ****************************************
+      For want of the "Usage Packet Records" parameter of an error does not arise.
+
+    NB: PacketRecords should be equal to zero.
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+      There are only problems with the lockings at quantity of connections more than one:
+      ****************************************
+        ###Reconcile:Error returned from ODBC function SQLExecute
+        ODBC Return Code: -1: SQL_ERROR
+        ODBC SqlState:        HY000
+        Native Error Code:    -1102
+        [Microsoft][ODBC Microsoft Access Driver] Could not update; currently locked by user 'admin' on machine 'VADIMHOST'.
+      ****************************************
+
+***********
+INTERBASE:
+***********
+  - Borland dbExpress for Interbase version "7.0.2.113":
+      ****************************************
+        ###Provider:deadlockupdate conflicts with concurrent update
+      ****************************************
+      It not the error is a normal situation at competitive access !
+
+***********
+INFORMIX:
+***********
+
+  - Informix ODBC version "3.34.00.10841"/"3.80.00.10841":
+    Errors by operation with blobs if is one then one paralel connection:
+        database: stores7:
+        table: catalog
+        field: cat_picture  - it is Blob Field
+      ****************************************
+        ###CDS.Open:Error returned from ODBC function SQLGetData
+        ODBC Return Code: -1: SQL_ERROR
+        ODBC SqlState:        HY000
+        Native Error Code:    -604
+        [Informix][Informix ODBC Driver][Informix]Cannot read blob
+      ****************************************
+      Informix find error : -604:
+       Cannot read TEXT or BYTE value.
+       This statement refers to a BYTE or TEXT value, but some unexpected error prevented
+       access to the value. Roll back the current transaction. Check the accompanying ISAM error
+       code for more information; possibly a hardware error or data corruption of the storage
+       space or tblspace occurred. If the error recurs, please note all circumstances and
+       contact Informix Technical Support.
+   ps:
+      At single-user access of errors in operation with Blob does not arise. Probably in ODBC
+      the driver there are errors. It is necessary to clear up...
+
+***********
+PARADOX:
+***********
+
+MSJet4_Xbase_Paradox_over_ISAM.reg
+======================================================================
+REGEDIT4
+
+;Non-BDE Paradox and dBase ISAM Drivers:
+;http://support.microsoft.com/default.aspx?scid=KB;en-us;263561
+
+;How to Control Whether Access Loads the Borland Data Engine (BDE):
+;http://support.microsoft.com/default.aspx?scid=kb;EN-US;248841
+;0 - Use the BDE if it is installed. If not, use the ISAM.
+;1 - Always use the BDE. If it's not installed then fail.
+;2 - Always use the ISAM.
+
+;Updated Version of Microsoft Jet 4.0:
+;http://support.microsoft.com/default.aspx?scid=kb;EN-US;239114
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Jet\4.0\Engines\Xbase]
+"BDE"=dword:00000000
+======================================================================
+
+***********
+XBASE:
+***********
+
+DataDirect

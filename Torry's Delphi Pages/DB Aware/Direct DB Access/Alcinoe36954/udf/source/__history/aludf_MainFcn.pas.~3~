@@ -1,0 +1,153 @@
+unit aludf_MainFcn;
+
+interface
+
+function aludf_random(range: integer): Integer; cdecl; export;
+function aludf_pos(SubStr, Str: PChar): Integer; cdecl; export;
+function aludf_copy(Str: Pchar; var Index, Count: Integer):Pchar; cdecl; export;
+function aludf_length(Str: PChar): Integer; cdecl; export;
+function aludf_lower(Str: PChar): Pchar; cdecl; export;
+function aludf_ansilowercase(Str: PChar): Pchar; cdecl; export;
+function aludf_ansiuppercase(Str: PChar): Pchar; cdecl; export;
+function aludf_utf8lowercase(Str: PChar): Pchar; cdecl; export;
+function aludf_utf8uppercase(Str: PChar): Pchar; cdecl; export;
+function aludf_utf8normalizedname(Str: Pchar):Pchar; cdecl; export;
+function aludf_zlibcompress(Str: PChar): Pchar; cdecl; export;
+function aludf_mimeencodenocrlf(Str: PChar): Pchar; cdecl; export;
+function aludf_zlibcompressmimeencode(Str: PChar): Pchar; cdecl; export;
+function aludf_crlf: Pchar; cdecl; export;
+function aludf_ansitoutf8(Str: PChar): Pchar; cdecl; export;
+function aludf_utf8lowercase1charupper(Str: PChar): Pchar; cdecl; export;
+function aludf_httpencode(Str: PChar): Pchar; cdecl; export;
+
+implementation
+
+uses sysutils,
+     HttpApp,
+     alDeflate,
+     alfcnmime,
+     alfcnUnicode,
+     alfcnstring;
+
+function ib_util_malloc(l: integer): pointer; cdecl; external 'ib_util.dll';
+
+{************************************************}
+function ALMakeResultString(Source: PChar): PChar;
+var Len: cardinal;
+begin
+  Len := StrLen(Source) + 1;
+  result := ib_util_malloc(Len);
+
+  if Len = 1 then result[0] := #0
+  else Move(Source^, result^, Len);
+end;
+
+{*********************************************}
+function aludf_random(range: integer): Integer;
+begin
+  result := Random(range);
+end;
+
+{**********************************************}
+function aludf_pos(SubStr, Str: PChar): Integer;
+begin
+  result := alPos(String(SubStr), String(Str));
+end;
+
+{*****************************************}
+function aludf_length(Str: PChar): Integer;
+begin
+  result := strlen(Str);
+end;
+
+{***************************************************************}
+function aludf_copy(Str: Pchar; var Index, Count: Integer):Pchar;
+begin
+  result := ALMakeResultString(Pchar(alcopystr(String(Str), Index, Count)));
+end;
+
+{*************************************}
+function aludf_lower(Str: Pchar):Pchar;
+begin
+  result := ALMakeResultString(StrLower(str));
+end;
+
+{**********************************************}
+function aludf_ansilowercase(Str: PChar): Pchar;
+begin
+  result := ALMakeResultString(AnsiStrLower(str));
+end;
+
+{**********************************************}
+function aludf_ansiuppercase(Str: PChar): Pchar;
+begin
+  result := ALMakeResultString(AnsiStrUpper(str));
+end;
+
+{**********************************************}
+function aludf_utf8lowercase(Str: PChar): Pchar;
+begin
+  result := ALMakeResultString(pchar(alUTF8Lowercase(string(str))));
+end;
+
+{**********************************************}
+function aludf_utf8uppercase(Str: PChar): Pchar;
+begin
+  result := ALMakeResultString(pchar(alUTF8uppercase(string(str))));
+end;
+
+{**************************************************}
+function aludf_utf8normalizedname(Str: Pchar):Pchar;
+begin
+  result := ALMakeResultString(pchar(ALUTF8Normalize(string(str))));
+end;
+
+{*************************************************}
+function aludf_mimeencodenocrlf(Str: PChar): Pchar;
+Begin
+  result := ALMakeResultString(Pchar(ALMimeBase64EncodeStringNoCRLF(String(Str))));
+end;
+
+{*********************************************}
+function aludf_zlibcompress(Str: PChar): Pchar;
+begin
+  result := ALMakeResultString(Pchar(ALZcompressStr(String(Str))));
+end;
+
+{*******************************************************}
+function aludf_zlibcompressmimeencode(Str: PChar): Pchar;
+begin
+  result := ALMakeResultString(Pchar(ALMimeBase64EncodeStringNoCRLF(ALZcompressStr(String(Str)))));
+end;
+
+{*************************}
+function aludf_crlf: Pchar;
+begin
+  result := ALMakeResultString(Pchar(#13#10));
+end;
+
+{*******************************************}
+function aludf_ansitoutf8(Str: PChar): Pchar;
+begin
+  result := ALMakeResultString(Pchar(AnsiToUTF8(String(Str))));
+end;
+
+{********************************************************}
+function aludf_utf8lowercase1charupper(Str: PChar): Pchar;
+var tmpWideStr: WideString;
+begin
+  TmpWideStr := UTF8Decode(string(Str));
+  result := ALMakeResultString(Pchar(utf8encode(WideUpperCase(copy(TmpWideStr,1,1)) + WideLowerCase(copy(TmpWideStr,2,MaxInt)))));
+end;
+
+{*******************************************}
+function aludf_httpencode(Str: PChar): Pchar;
+begin
+  result := ALMakeResultString(pchar(httpencode(string(Str))));
+end;
+
+initialization
+randomize;
+
+end.
+

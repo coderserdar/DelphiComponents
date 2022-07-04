@@ -1,0 +1,472 @@
+<HTML>
+<HEAD>
+ <link rel="stylesheet" type="text/css" href="style.css">
+ <TITLE>DOCI components for direct Oracle access</TITLE>
+</HEAD>
+
+<BODY >
+<DIV align=left>
+
+
+<table width="100%" border="0" cellpadding="5" cellspacing="0">
+  <tr>
+   <td align=center bgColor=#009999>
+    <font class=fontmainbig color="#FFFFFF">
+     <b>Компоненты DOCI для прямого доступа к Oracle <br></b>
+	</font>
+	<br>
+    <font class=fontmain color="#FFFFFF"> 
+     <b>Version 1.15</b><br>
+    </font>
+   </td>
+  </tr>
+</table>
+
+<font class=fontmain>
+
+<p>Copyright &copy; 1998-2001 by Andrey Romanchenko<br>
+All rights reserved.
+
+<p><table cellspacing=2 cellpadding=0>
+<tr>
+   <td><font class=fontmain>
+    <i>e-mail:&nbsp;&nbsp;</i></font>
+	</td>
+	<td><font class=fontmain size=2>
+	 <a href="mailto:lasersquard@yahoo.com?subject=DOCI">lasersquad@tut.by</a></font>
+	</td>
+</tr>
+<tr>
+   <td>
+    <font class=fontmain>
+     <i>web site:&nbsp;&nbsp;</i>
+	</font>
+   </td>
+   <td><font class=fontmain>
+    <a href="http://doci.narod.ru" target=_new>http://doci.narod.ru/</a></font>
+	</td>
+</tr>
+<tr>
+   <td></td>
+   <td><font class=fontmain>
+    <!-- (другой адрес: <a href="http://www.doci.cjb.net/" target=_new>http://www.doci.cjb.net/</a>)-->
+   </font>
+	</td>
+</tr>
+
+</table>
+	  
+<hr>
+<br>
+	  
+Компоненты <b>DOCI</b> протестированы и нормально работают под <b>Delphi 4, 5, 6</b>. Вполне вероятно 
+что без каких-нибудь переделок компоненты будут работать и под <b>Delphi 3</b> (если это кому то актуально).
+Когда то они работали и под <b>Delphi 3</b>, но с тех пор внесено много изменений которые на <b>Delphi 3</b>
+не тестировались. 
+<br>
+Если работаете с <b>Delphi 6</b> то стоит почитать <a href="../!README_Delphi6.rus" >решение</a>
+проблемы отсуствия файла <b>Proxies.dcu</b> при компиляции приложения использующего
+<b>Property Editors (Component Editors)</b>.
+
+<br><br>
+<br>
+
+<hr>		  
+          
+<font class=fontmain>
+
+<h3>СОДЕРЖАНИЕ</h3>
+<ul>
+	<li><a href="#introduction">Введение</a></li>
+	<li><a href="#license">Распространение</a></li>
+	<li><a href="#description">Общее описание</a></li>
+	<li><a href="#instalation">Инсталяция</a></li>
+	<li><a href="#howtowork">Как работать с компонентами</a></li>
+	<ul>
+ 		<li> <a href="#workdescription">Описание</a></li>
+		<li> <a href="#examples">Примеры</a></li>
+	</ul> 
+	<li><a href="#tests">Тесты на производительность</a></li>
+	<li><a href="#changelog">ChangeLog</a></li>
+</ul>
+
+<hr>
+
+<a name="introduction"></a>
+<h3>ВВЕДЕНИЕ</h3>
+
+
+<p>Компоненты предназначены для доступа к серверам <strong>Oracle 8</strong> из <strong>Delphi 4, 5, 6</strong>.<br>
+Они используют стандартную библиотеку <strong>OCI</strong> (Oracle Call Interface), которая
+устанавливается при установе <strong>Oracle Client for Windows 9x/NT/2000</strong>. Поэтому
+перед началом работы необходимо установить <strong>Oracle Client</strong>, ну конечно иметь где нибудь
+работающий <strong>Oracle Server любой Еdition</strong>.</p>
+
+<p>
+Работают только с клиентом <strong>Oracle8</strong> и выше (<strong>8i</strong>), но можно ходить и к
+<strong>Oracle 7</strong>, используя клиентов восьмых. 
+<br>
+Что касается <strong>Delphi 4, 5, 6</strong> - почти 
+ничего специфического
+нет, кроме того, что используется стандартный редактор <strong>TParam</strong>, который ранее 
+надо было писать самому. Кто хочет - может заточить под <strong>Delphi3</strong> - скажу большое
+спасибо и различия включу в свой исходник. Так же очень приветствуются любые рекомендации как заточить их под 
+<strong>Kylix</strong>. Так же если кому надо - портируйте
+под <strong>Oracle7</strong> или <b>Oracle 9</b> - там ничего сложного нет, но мне пока не на чем отлаживать.
+Если будете вносить изменения в исходный код то не забывайте присылать их мне.
+</p>
+
+<p>Поддерживаются оракловские типы <strong>BLOB</strong> и <strong>CLOB</strong>.<br>
+С версии <strong>1.0 BLOBы</strong> работают нормально и у компонент наследников <strong>TDataSet</strong>.
+(у наследников <strong>TDataSet</strong> пока только на чтение)
+</p>
+
+<p>
+Кто интересуется изменениями смотрите <a href="..\changelog.rus">ChangeLog</a>.
+</p>
+
+<p>Я постараюсь преложить все усилия по отлову багов, но большую роль играют
+ваши отзывы и описание замеченных недостатков - не все я могу самостоятельно
+отловить.</p>
+
+ Мой e-mail - <a href="mailto:lasersquard@yahoo.com">lasersquard@yahoo.com</a>, 
+ или <a href="mailto:lasersquad@tut.by">lasersquad@tut.by</a>.
+ <br><br>
+ Кто хочет получать свежие версии и патчи - не стесняйтесь, пишите мне письмо.<br><br>
+
+Пока нету <b>сached updates</b> и полей <b>Int64</b>.<br>
+Если срочно нужно <b>cached updates</b> или <b>Int64</b> то пишите мне и они быстрее будут готовы. 
+<br><br>
+<hr>
+
+<a name="license"></a>
+<h3>РАСПРОСТРАНЕНИЕ</h3>
+
+
+Принцип распространения - Freeware с исходниками.<br>
+Вы можете использовать их в каких угодно проектах (в том числе и коммерческих).<br>
+Вы так же можете делать любые изменения в исходных кодах, но об всяческих изменениях
+желательно оповещать автора (то есть меня). Я внесу Ваши изменения в код и выложу 
+обновленные версии на общее обозрение.
+
+<br><br>
+<hr>
+
+<a name="description"></a>
+<h3>ОБЩЕЕ ОПИСАНИЕ</h3>
+В этом разделе вы найдете общее описание возможностей компонентов.
+
+<br><br>
+В настоящее время поддерживаются данные следующих типов (в скобках указан соответствующий тип <b>Oracle</b>):
+<ul>
+	<li>  <b>String</b> (CHAR, NCHAR, VARCHAR2, NVARCHAR2, ROWID(пока не поддерживается))
+	           - в памяти как строка символов фиксированого размера как поле </li>
+	<li>  <b>Boolean</b> - как <b>NUMBER(1)</b> - 1 байт. Нулевые значения - <b>False</b>, не нулевые - <b>True</b></li>
+	<li>  <b>Double</b> (NUMBER(n,m)) </li>
+	<li>  <b>Currency</b></li>
+	<li>  <b>Date</b> (DATE) - хранится как количество (<b>integer</b>) дней с 1.01.0001</li>
+	<li>  <b>Time</b> (DATE) - хранится как количество (<b>integer</b>) миллисекунд с полуночи</li>
+	<li>  <b>DateTime</b> (DATE) - хранится как число <b>int64</b> которое вычисляется как <b>Date*MSecsPerDay+Time</b></li>
+	<li>  <b>Integer</b> (NUMBER(n) при <b>n</b> меньше <b>10</b> если не изменено с помощью <b>TOraDB.Preferences.IntegerPrecision</b>)</li>
+	<li>  <b>SmallInt</b>(NUMBER(n) при <b>n</b> меньше <b>5</b> если не изменено с помощью <b>TOraDB.Preferences.SmallIntPrecision</b>)</li>
+	<li>  <b>Word</b></li>
+	<li>  <b>BLOB</b> (BLOB,BFILE)</li>
+	<li>  <b>CLOB</b> (CLOB)</li>
+</ul>
+
+
+Все вышеуказанные типы поддерживаются в полях.<br>
+В параметрах поддерживаются все кроме BLOB и CLOB. 
+
+<b>NUMBER(n,m)</b> в зависимоcти от значения <b>TOraDB.Preferences.FloatPrecision</b> может  
+быть распознан как <b>String</b>.
+Это может быть полезно когда в базе хранятся числа с точностью превышающей точность типа <b>Double</b> в <b>Delphi</b>. 
+В этом случае что бы не потерять точность такие числа преобразовываются в <b>String</b>.
+Для более подробной информации см. описание свойства <b>TOraDB.Preferences.FloatPrecision</b>.
+<br><br><br>
+
+<h4>Описание классов:</h4>
+
+<p>   <strong>TOraDB</strong> - коннект к базе и управление транзакциями. Для хождения к базе все 
+     компоненты используют этот компонент. Все вызовы <strong>OCI</strong> сосредоточены именно
+     в этом компоненте.
+</p>
+<p>   <strong>TAOraSQL</strong> - непосредственно выполняет вызовы <strong>OCI</strong> обращаясь к методам 
+   <strong>TOraDB</strong> (выполнение запросов и кусков <strong>PL/SQL</strong> кода).
+	 Является полнофункциональным компонентом, применяется 
+     для случаев когда НЕ нужна совместимость с <strong>TDataSet</strong>, а именно если нужно 
+     выполнить хранимую процедуру или кусок PL/SQL кода или запрос результаты 
+     которого не нужно показывать в <strong>TDBGridе</strong>.
+     Работает быстрее <strong>TOraSQL</strong> т.к не выполняет лишних действий связаных с 
+     совместимостью с <strong>TDataSet</strong>. <br>
+     Позволяет обращаться к результатам запроса по номеру строки. <br>
+     За одно обращение к базе вытягивает столько записей сколько указано
+     в свойстве <strong>FetchCount</strong>. При работе с большими таблицами рекомендуется увеличивать
+     значение <strong>FetchCount</strong>. По умолчанию <strong>FetchCount=100</strong> что соответствует средним 
+     размерам данных. 
+     Если сделать ему просто <strong>Open</strong> то запрос откроется, но никакие данные не 
+     вытянутся для этого надо использовать либо <strong>ReadAll</strong> после <strong>Open</strong>
+	 либо <strong>OpenAll</strong> вместо <b>Open</b>.
+     В этих случаях на клиента вытянутся все строки запроса. Если все строки не 
+     нужны то можно использовать ф-цию <strong>ReadRecord</strong>(RecordNum), которая будет тянуть 
+     по <strong>FetchCount</strong> записей за раз пока не будет вытянуто больше или столько же 
+     строк сколько затребовали.
+</p>    
+<p>   <strong>TOraSQL</strong> - wrapper вокруг <strong>TAOraSQL</strong> для совместимости с <strong>TDataSet</strong>.
+     Аналог <strong>TQuery</strong>, <strong>TStoredProc</strong>.
+	 Позволяет задать запрос к базе, поля (програмно и в дизайнере),
+     в общем работа с <strong>TOraSQL</strong> идет как со стандартными компонентами <strong>Delphi</strong> для
+     доступа к данным. По умолчанию при открытии запроса вычитывается столько записей
+     сколько надо для показа в гриде. Что бы прочитать больше записей можно 
+     использовать методы <strong>OpenAll</strong>, <strong>ReadAll</strong>, <strong>VGoto</strong>.
+</p>    
+<p>   <strong>TAOraUpdateSQL</strong> - компонента для подсоединения к <strong>TOraSQL</strong> и задания запросов на
+     изменение (<strong>INSERT, DELETE, UPDATE</strong>) данных. Является аналогом <strong>TUpdateSQL</strong>
+     в <strong>Delphi</strong>. Запросы на изменения данных можно писать и вручную в свойства 
+	 <strong>DeleteSQL, InsertSQL, ModifySQL</strong>.
+</p>
+
+<p>
+		<b>TMemoryDataSet</b> - таблица в памяти наследница <b>TDataSet</b>. Позволяет хранить в памяти и
+		 показывать данные в TDBGride данные любого размера. Не связана ни с какими базами данных.
+</p>
+
+<p>
+		<b>TAMemoryDataSet</b> - таблица в памяти не совместимая с TDataSet. Применяется когда надо хранить 
+		в памяти данные организованные подобно таблице, но не нужно их показывать в TDBGridе.
+		Работает быстрее TMemoryDataSet.
+</p>
+
+<br>
+<h4>Основные файлы:</h4>
+
+<a name="DynamicArrays"></a>
+<p>    <strong>DynamicArrays.pas</strong>  - мои компоненты для работы с динамическими массивами.
+                используются многими другими компонентами. Этот модуль может 
+                использоваться отдельно от <strong>dOCI</strong> компонент т.к. содержит много
+                очень полезных и мощных классов для работы с массивами в памяти.
+</p>                         
+
+<a name="VirtualDataSet"></a>
+<p> <strong>VirtualDataSet.pas </strong> - некоторое 
+			  усовершенствование <strong>TDataSet</strong> для удобства. 
+                от него наследуются все компоненты требующие совместимости с <strong>TDataSet</strong>. 
+</p>
+
+<a name="DataSetQuery"></a>
+<p>    <strong>DataSetQuery.pas</strong>   - содержит класс-наследник <strong>TVirtualDataSet</strong>, который содержит
+                90% функциональности конечных компонент. Для разработчика 
+                компонент класс <strong>TDataSetQuery</strong> представляет наибольший интерес т.к.
+                с перекрытием нескольких методов из него можно сделать нормальный 
+                компонент для доступа к любым данным (например легко сделать 
+                <a href="#MemoryTable">MemoryTable</a>). Содержит так же класс <strong>TABlobStream</strong>, который 
+                используется внутри <strong>TDataSetQuery</strong> для доступа к полям типа <strong>BLOB</strong>.
+</p>
+<p>    <strong>OraDB.pas</strong> - содержит компонент <strong>TOraDB</strong> для коннекта к Ораклу, аналог 
+                <strong>TDatabase</strong> в <strong>Delphi</strong>.
+</p>
+<p>    <strong>AOraSQL.pas</strong> - содержит непосредственно класс <strong>TAOraSQL</strong> и используемые им же 2 
+                класса <strong>TAOraField</strong> и <strong>TAOraParam</strong> для представления полей и параметров
+                запроса.
+</p>
+   <p> <strong>OraSQL.pas</strong>  - содержит класс <strong>TOraSQL</strong>.
+</p>
+<p>    <strong>OraDefines.pas</strong> - содержит константы и определения функций для <strong>OCI</strong> вызовов.
+</p>
+<p>    <strong>OraError.pas</strong> - содержит классы и функции для работы с 
+       исключениями (<strong>EOraError, ADatabaseError</strong>).
+	   
+<p>
+		<b>MemoryDataSet.pas</b> - содержит класс <b>TMemoryDataSet</b> наследник <b>TDataSet</b> для хранения 
+		таблиц в памяти. Практически то же что и <b>TOraSQL</b> не связан с базами.
+		Может показывать данные в <b>TDBGride</b>.
+</p>	   
+
+<p>
+		<b>AMemoryDataSet.pas</b> - содержит класс <b>TAMemoryDataSet</b> для хранения данных в памяти когда не 
+		нужна совместимость с <b>TDataSet</b>. Работает быстрее <b>TMemoryDataSet</b> и рекомендуется к использованию когда 
+		не нужна совместимость с <b>TDataSet</b>.
+</p>
+
+<p>
+		<b>AOraUpdateSQL.pas</b> - содержит класс <b>TAOraUpdateSQL</b> для аналог стандартного <b>TUpdateSQL</b> 
+</p>
+
+<p>
+		<b>dOCIMessages_LANGUAGE.lang</b> - ресурсный файл со строками сообщений об ошибках. 
+		Таких файлов может быть несколько по одному для каждого языка. Пока есть только два языка - 
+		русский и английский (файлы <b>dOCIMessages_Russian.lang</b> и <b>dOCIMessages_English.lang</b> соответственно).
+		Те кому нужны другие языки переводите один из существующих и присылайте его мне я включу его в дистрибутив.
+		Какой ресурсный файл будет использоваться задается в <b>dOCI.inc</b> и <b>dOCIMessages.pas</b> с помощью условной компиляции.
+</p>
+
+<p>
+		<b>GoodDate.pas</b> - содержит множество полезных функций для работы с датами в различных форматах.
+</p>
+
+<p>
+		<b>OraUtils.pas</b> - содержит различные полезные функции используемые в компонентах.
+</p>
+
+<hr>
+
+<a name="instalation"></a>
+<h3>ИНСТАЛЯЦИЯ</h3>
+
+
+ Откройте package <strong>dOCI5.dpk</strong> (<strong>dOCI6.dpk</strong> для <strong>Delphi 6</strong>).
+ Нажмите кнопки "Compile", а потом "Install" и компоненты установятся.
+ Искать их следует на странице "Data Access" палитры компонентов <strong>Delphi</strong>.
+
+<hr>
+
+<a name="howtowork"></a>
+<h3>КАК РАБОТАТЬ С КОМПОНЕНТАМИ</h3>
+
+Здесь приводится краткое описание основных свойств и методов компонентов.
+Полезно для общего знакомства с применением и со структурой компонентов.
+
+<a name="TOraDB"></a>
+  <br><b>TOraDB</b> - для коннекта к <strong>Oracle</strong> (аналог <strong>TDatabase</strong> в <strong>Delphi</strong>)
+  <br><br>
+   Свойства :
+<ul> 
+   <li> <strong>Active</strong> - и так ясно <br>
+   <li> <strong>DBLogin, DBPassword</strong> - имя и пароль в базу  <br>
+   <li> <strong>DBServer</strong> - синоним сервера к которому конектимся (создается с помощью "Oracle
+          Net8 Easy Config" либо ручками прописывается в файле 
+          %oraclehome%/net80(network)/admin/tnsnames.ora) <br>
+   <li> <b>OraSessionIsolationLevel</b> - уровень изоляции транзакций для сессии. 
+          Все начинающиеся в этой секции транзакции будут иметь этот уровень 
+          изоляции (если он не переопределен с помощью <b>OraTransIsolationLevel</b>). <br>
+   <li> <b>OraTransIsolationLevel</b> - уровень изоляции новой транзакции. Если tiDefault 
+          то уровень берется из <b>OraSessionIsolationLevel</b>. <br>
+</ul>  
+
+ Методы: 
+ <ul>  
+   <li> <b>Open, Close</b> - сконектиться/отконектиться <br>
+   <li> <b>StartTransaction,
+    CommitTransaction,
+    RollbackTransaction</b> - управление транзакциями. <br>
+</ul>  
+<br>
+
+<a name="TOraSQL"></a>
+  <b>TOraSQL</b> - запросы к <b>Oracle</b> (совместима с <b>TDataSet</b>)<br><br>
+ 
+   Свойства : <br>
+<ul>   
+   <li> <b>Database</b> - к какой базе ходить(компонента <a href="#TOraDB">TOraDB</a>)<br>
+   <li> <b>SQL</b> - текст запроса (как всегда - параметры начинаются с ':')<br>
+   <li> <b>Params</b> - список параметров. 
+   <li> <b>FetchCount</b> - для SELECT - сколько записей вытягивать за одно обращение к серверу.
+                 Как показывает практика, значение на уровне 1 - это примерно
+                 скорость BDE.<br>
+	Методы:<br>
+   <li> <b>Open, Close</b> - 	открыть/закрыть запрос (только для SQL запросов вида SELECT ...)
+   <li> <b>ExecSQL</b> - для выполнения всех других видов запросов кроме SELECT.
+   <li> <b>Prepare</b> - подготовить запрос к выполнению. Вызывать необязательно.<br>
+   <li> <b>UnPrepare</b> - освободить привязку, сделаную <b>Prepare</b>. Вызывать необязательно.<br>
+</ul>   
+	<br>
+
+    Доступ к данным рекомендуется делать через следующие методы :<br>
+<ul>	
+   <li> <b>GetFieldValue</b> - получить значение поля. Намного быстрее <b>FieldByName('').As...</b>
+        но неправильно отдает значения записей находящихся в режиме редактирования.<br>
+   <li> <b>GetFieldHArray</b> - получить указатель на массив значений поля<br>
+   <li> <b>GetFieldNullHArray</b> - получить указатель на массив признаков <b>Null</b> или <b>NOT Null</b>
+      (по последним 2-м методам полезно внимательно просмотреть файл <b>DynamicArrays.pas</b>)<br>
+   <li> <b>ReadAll</b> - прочитать все данные с сервера на локальную машину<br>
+   <li> <b>VGoto</b> - прочитать все записи до указаной, если они еще не прочитаны<br>
+</ul>   
+<br>
+
+<a name="TAOraUpdateSQL"></a>
+  <b>TAOraUpdateSQL</b> - запросы изменения данных<br>
+    <b>DeleteSQL, InsertSQL, ModifySQL</b> - и так понятно для чего предназначены<br>
+
+<br>
+
+
+Работа с <b>BLOB</b> :<br>
+
+ При работе с <a href="#TOraSQL">TOraSQL</a> <b>BLOB </b>поля можно читать используя стандартные методы от 
+ <b>TDataSet</b>.<br>
+
+ Для записи пока надо использовать <b>TAOraSQL</b>. Что бы можно было записывать поля
+ <b>BLOB</b> запрос должен содержать фразу "FOR UPDATE".<br><br>
+
+ <b>TAOraSQL</b> имеет следующие функции для работы с <b>BLOB</b>:<br>
+<ul>
+   <li> <b>GetLobLength</b> - получить размер данных в байтах содержащихся в поле.<br>
+   <li> <b>ReadBlob</b>  - читает данные из заданного <b>BLOB</b> поля в буфер.<br>
+   <li> <b>WriteBlob</b> - записывает данные из заданного буфера в <b>BLOB</b> поле.<br>
+   <li> <b>ReadBlobToStream</b> - читает весь <b>BLOB</b> в поток<br>
+   <li> <b>WriteBlobFromStream</b> - перезаписывает <b>BLOB</b> поле из потока<br>
+   <li> <b>WriteBlobParam</b> not implemented<br>
+   <li> <b>ReadBlobParam</b>not implemented<br>
+</ul>   
+   
+
+<hr>
+
+<a name="examples"></a>
+<h3>ПРИМЕРЫ</h3>
+
+Получение курсора из запроса:
+
+   Для этого надо написать запрос, параметром которого является курсор и
+   присвоить этому параметру тип данных <b>ftCursor</b> и тип параметра <b>ptResult</b>.
+    Например, вызов StoredProc, возвращающей курсор :<br><br>
+
+   BEGIN  :Result := GetData(12); END;
+
+<br><br>
+!!!! В тексте SQL можно писать PL/SQL-блок.
+<br><br>
+
+Если запрос достает одну запись:
+  Если надо вытянуть запросом всего  несколько чисел (запрос такой что 
+   возвращает несколько полей из одной строки таблицы), то лучше использовать 
+   для этого параметры, а не поля, например :
+   <br><br>
+    
+  BEGIN SELECT Name,Index INTO :Name,:Index FROM Table1 WHERE ...... ; END; 
+  
+  <br><br>
+
+   и результат получать через параметры 
+<br>
+   Name:=OraSQL.ParamByName('Name').AsString;
+   Ind:=OraSQL.ParamByName('Index').AsInteger;
+<br>
+   типы параметров Name и Index надо будет задать в дизайнере или в коде программы.
+<br><br>
+
+<hr>
+
+<h3>ТЕСТЫ НА ПРОИЗВОДИТЕЛЬНОСТЬ</h3>
+
+   Приблизительные замеры скорости показали(секунды) :<br>
+<pre>
+            BDE        OCI(FetchCount=1)   OCI(FetchCount=1000)<br>
+ INSERT     24                19<br>
+ SELECT     27                26                  4<br>
+</pre>
+
+  Тесты выполнялись :<br>
+          сервер - oracle 8.0.5(linux) - p-200/64ram<br>
+          клиент - NT4                 - pII-233/64ram<br>
+          сетка - 10мбит незагруженная<br>
+          работа шла с небольшой таблицей в 10000 записей<br>
+  
+</font>		  
+
+
+</font>
+
+</DIV>
+</BODY>
+</HTML>

@@ -1,0 +1,41 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Component TSmLogEvent</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+</head>
+
+<body>
+<table width="75%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="6%"><img src="3.jpg" width="42" height="45"></td>
+    <td width="40%"><strong>Component TSmLogEvent</strong></td>
+    <td width="54%"><div align="right"><a href="ReadMe_Eng.htm">Main page</a></div></td>
+  </tr>
+  <tr>
+    <td colspan="3"><p>&nbsp;</p>
+      <p>Component TSmLogEvent intend for logging of the different events.
+        In file of log entering date,time and description of the event.</p>      
+      <p><font size="+1"><strong>Property</strong></font></p>
+      <ul>
+        <li><strong>property</strong> FileName:
+                string - define the file name, in which the events log.</li>
+      </ul>      <p><font size="+1"><strong>Method</strong></font></p>
+      <ul>
+        <li><strong>method</strong> Log(Event: string)
+              - write  Event in the file with date and time. If log file is absent,
+          it will be created before writing.</li>
+        <li><strong>method</strong> procedure DeleteLog
+              - delete log file..</li>
+      </ul>      
+      <p><font size="+1"><strong>Event</strong></font></p>
+      <ul>
+        <li><strong>property</strong> OnLogEvent: TNotifyEvent - the event occurs
+          after executed writing in log file.</li>
+      </ul>      </p>
+    </td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

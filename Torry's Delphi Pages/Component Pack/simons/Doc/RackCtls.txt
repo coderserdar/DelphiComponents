@@ -1,0 +1,241 @@
+RackControls:
+-------------
+(C)opyright 2004 Version 1.20
+Autor : Simon Reinhardt
+eMail : reinhardt@picsoft.de
+Internet : http://www.picsoft.de
+
+  RackControls ist eine Komponentensammlung zur Erstellung von
+  Audiorack-ähnlichen Oberflächen. Die Unit RackCtls enthält fünf verschiedene 
+  Komponenten:
+
+    TLEDButton ist eine Button-Komponente, deren Funktionaltität in etwa der der
+    TSpeedButton-Komponente entspricht. Vor allem das Design ist aber komplett neu.
+
+    TButtonPanel ist eine Panel-Komponente im Design von TLEDButton, enspricht aber 
+    sonst dem Standard-Panel.
+
+    TScrewPanel enspricht der Standard-TPanel-Komponente, in den vier Ecken des
+    Panels werden aber Schraubenköpfe angedeutet.
+
+    TLEDDisplay ist eine 7-Segment-Anzeige zur Darstellung von Zahlenwerten.
+
+    TLEDMeter ist eine Balkenanzeige in Form einer dreifarbigen LED-Kette.
+
+  Diese Komponenten sind Public Domain, das Urheberrecht liegt aber beim Autor.
+
+  Die Komponente TLEDDisplay ist eine Weiterentwicklung der Komponente TLCDDisplay 
+  von Luis Iglesias <luis.iglesias@vigo.org>
+
+  Änderungen, die bei LEDDisplay nachfolgende Nullen bei LeadingZeros=False doch zeichnet
+  Ergänzt von Wolfgang Kleinrath
+
+  Die Eigenschaft FSingleLED von TLEDMeter wurde ergänzt von U. Conrad 
+
+  Vielen Dank an Robert Rossmair für die rrColors-Unit! 
+
+
+
+Dateiumfang:
+------------
+
+Readme.txt	- Diese Datei
+RackCtls.pas	- Quelltext der Komponente
+RackCtls.d16	- Resourcendatei der 16Bit-Komponenten für Delphi 1
+RackCtls.d32	- Resourcendatei der 16Bit-Komponenten für Delphi 2 bis 5
+SRDefine.inc
+rr.inc		- Inculdedateien für die Komponente
+rrColors.pas	- Funktionen zur RGB-HSL-Umrechnung
+
+Ordner	RackDemo	- Demo-Projekt für Delphi 2 oder 3
+	RackMain.dfm	- Formulardatei der MainForm
+	RackMain.pas	- Quelltext der MainForm-Unit
+	RackDemo.dof	- Compileroptionen des Demo-Projekts
+	RackDemo.dpr	- Quelltext des Demo-Projekts
+	RackDemo.res	- Resourcendatei des Demo-Projekts
+
+
+Installation:
+-------------
+
+In Delphi 1:
+------------
+1. Alle Dateien in das Delphi-Komponenten-Verzeichnis entpacken.
+2. Menü Optionen : Komponente installieren
+3. Schaltfläche Hinzufügen / Durchsuchen
+4. Datei RackCtls.pas im Delphi-Komponenten-Verzeichnis suchen und mit
+   OK bestätigen.
+5. Die Komponenten erscheinen in der Komponenten-Gruppe "Simon"
+
+In Delphi 2:
+------------
+1. Alle Dateien in das Delphi-Komponenten-Verzeichnis entpacken.
+2. Menü Komponente :  installieren
+3. Schaltfläche Hinzufügen / Durchsuchen
+4. Datei RackCtls.pas im Delphi-Komponenten-Verzeichnis suchen und mit
+   OK bestätigen.
+5. Die Komponenten erscheinen in der Komponenten-Gruppe "Simon"
+
+Ab Delphi 3:
+------------
+1. Alle Dateien in das Delphi-Komponenten-Verzeichnis entpacken.
+2. Menü Komponente :  Komponente installieren
+3. Schaltfläche Durchsuchen (hinter dem Eingabefeld für den Unit-Namen)
+4. Datei RackCtls.pas im Delphi-Komponenten-Verzeichnis suchen und mit
+   OK bestätigen.
+5. Die Rückfrage nach dem Neukompilieren des Packages bestätigen.
+6. Die Komponenten erscheinen in der Komponenten-Gruppe "Simon"
+   (Evtl. muß eine bereits installierte, ältere Version der RackControls
+    zuvor entfernt werden)
+
+
+
+I. Funktion der Komponente TLEDButton:
+--------------------------------------
+
+A) Eigenschaften:
+-----------------
+1. Beveled - bestimmt, ob die Seiten des Buttons abgeschrägt sind.
+2. BorderStyle - wenn BorderStyle=bsSingle, wird ein Rahmen um den Button 
+   gezeichnet.
+3. ButtonDirection - bestimmt die erhöhte Seite des Buttons und die Position 
+   der LED.
+4. Color - die Farbe des Buttons.
+5. ColorLED - die Farbe der LED, wenn StateOn=true
+6. Depth - die Tiefe der erhöhten Buttonseite
+7. LEDContrast - Kontrast zwischen leuchtender und abgeschalteter LED
+                 0: Kein Helligkeitsunterschied ..
+		 9: Maximaler Helligkeitsunterschied
+8. ShowLED - falls ShowLED=true, wird eine LED auf dem Button gezeichnet.
+9. StateOn - der Zustand des Buttons: an oder aus.
+10.Switching - gibt an, ob der Button wie ein Taster (false) oder wie ein
+   Schalter (true) funtkionieren soll. Die Eigenschaft StateOn wechselt nur, 
+   wenn Switching=true.
+11.TextPosition - die Position der Beschriftung: Über, unter oder auf dem Button
+
+B) Ereignisse:
+--------------
+Die Ereignisse entsprechen denen der TSpeedButton-Komponente.
+
+
+II. Funktion der Komponente TButtonPanel:
+-----------------------------------------
+
+A) Eigenschaften:
+-------------------------------------------
+1. Beveled - bestimmt, ob die Seiten des Panels abgeschrägt sind.
+2. BorderStyle - wenn BorderStyle=bsSingle, wird ein Rahmen um das Panel 
+   gezeichnet.
+3. Depth - die Tiefe der erhöhten Panelseite
+4. PanelDirection - bestimmt die erhöhte Seite des Panels und die Position 
+   des LED-Rahmens.
+5. ShowLED - falls ShowLED=true, wird ein LED-Rahmen auf dem Panel gezeichnet.
+
+B) Ereignisse:
+--------------
+Die Ereignisse entsprechen denen der TPanel-Komponente.
+
+
+III. Funktion der Komponente TScrewPanel:
+-----------------------------------------
+
+A) Eigenschaften:
+-------------------------------------------
+1. Margin - bestimmt den Abstand der Schrauben vom Rand (BevelInner) des 
+   Panels.
+2. ScrewSize - bestimmt den Durchmesser der Schrauben. 
+   Mögliche Werte : 1..8. Der Durchmesser ergibt sich aus ScrewSize*4.
+3. ShowScrews - falls ShowScrews=true, werden Schrauben auf dem Panel 
+   gezeichnet.
+
+B) Ereignisse:
+--------------
+Die Ereignisse entsprechen denen der TPanel-Komponente.
+
+
+IV. Funktion der Komponente TLEDDisplay:
+----------------------------------------
+
+A) Eigenschaften:
+-----------------
+1. BevelStyle - Entspricht der Eigenschaft "BevelOuter" von TPanel.
+2. BorderStyle - Falls BorderStyle=bsSingle, wird ein Rahmen um die Anzeige 
+   gezeichnet.
+3. ColorBackGround - Hintergrundfarbe der Anzeige
+4. ColorLED - Farbe eines "leuchtenden" Anzeige-Segments
+5. DecSeparator - Gibt bei Float-Werten die Form des Dezimaltrennzeichens an:
+     - dsApostrophe: Ein Hochkomma
+     - dsComma: Ein Komma
+     - dsDoublePoint: Ein Doppelpunkt
+     - dsHyphen: Ein Trennstrich (Minus)
+     - dsNone: Kein Trennzeichen
+     - dsPoint: Ein Punkt
+     - dsSemicolon: Ein Semikolon
+6. DigitHeight - Höhe der dargestellten Zahlen
+7. DigitLineWidth - Liniendicke der dargestellten Zahlen
+8. DigitWidth - Breite der dargestellten Zahlen
+9. DrawDigitShapes - Wenn DrawDigitShapes=true, dann wird eine Linie um 
+   die Anzeigesegmente gezeichnet.
+10.FractionDigits - Anzahl Nachkommastellen bei Float-Werten
+11.LeadingZeros - Anzahl Nullen vor dem Zahlenwert
+12.LEDContrast - Kontrast zwischen leuchtender und abgeschalteter LED
+                 0: Kein Helligkeitsunterschied ..
+	         9: Maximaler Helligkeitsunterschied
+13.NumDigits - Stellenzahl der Anzeige
+14.SegmentStyle - Form der Anzeige-Segmente:
+   ssBeveled : Segmente mit abgeschrägten Ecken
+   ssRectabgular : rechteckige Segmente
+15.Value - dargestellter Zahlenwert der Anzeige (extended)
+ 
+B) Ereignisse:
+--------------
+1. OnChange tritt auf, wenn sich der Wert der Eigenschaft "Value" ändert.
+
+
+V. Funktion der Komponente TLEDMeter:
+-------------------------------------
+
+A) Eigenschaften:
+-----------------
+1. BevelStyle - Entspricht der Eigenschaft "BevelOuter" von TPanel.
+2. Colors - Diese Eigenschaft legt die Farben des LEDMeters fest:
+    - Border - Farbe des Randes und der Trennstriche zwischen den Segmenten 
+    - Section1 - Farbe der Anzeige-Segmente bis zur Position "Section2Value"
+    - Section2 - Farbe der Anzeige-Segmente bis zur Position "Section3Value"
+    - Section3 - Farbe der Anzeige-Segmente ab der Position "Section3Value"
+3. Direction - Gibt die Richtung der Anzeige an:
+   dsDown : Die Anzeige verläuft von oben (kleine Werte) nach unten (große Werte) 
+   dsLeft : Die Anzeige verläuft von rechts (kleine Werte) nach links (große Werte) 
+   dsRight : Die Anzeige verläuft von links (kleine Werte) nach rechts (große Werte) 
+   dsUp : Die Anzeige verläuft von unten (kleine Werte) nach oben (große Werte) 
+4. FallbackDelay - Wenn dieser Eigenschaft ein Wert größer Null zugewiesen wird,
+   wird nach einem höheren Wert nicht sofort ein niedrigerer Wert angezeigt, sondern
+   auch alle Zwischenwerte. FallbackDelay bestimmt bestimmt die Leuchtdauer der
+   Zwischenwerte in 1/1000 Sekunden.
+5. LEDContrast - Kontrast zwischen leuchtender und abgeschalteter LED
+                 0: Kein Helligkeitsunterschied ..
+	         9: Maximaler Helligkeitsunterschied
+6. Max - Maximalwert der Eigenschaft "Position"
+7. Min - Minimalwert der Eigenschaft "Position"
+8. NumDigits - Anzahl Segmente in der Anzeige
+9. PeakHoldTime - Wenn dieser Eigenschaft ein Wert größer Null zugewiesen wird, 
+   geht die LED für den höchsten angezeigten Wert nicht sofort aus, sondern leuchtet
+   für die in PeakHoldTime festgelegte Zeit (in 1/10 Sekunden) weiter.
+11.Position - Position der Anzeige (integer)
+12.SingleLED - Es wird jeweils nur die LED, die die Eigenschaft "Position" repräsentiert, 
+   erleuchtet angezeigt. (Hinzugefügt von U. Conrad)
+13.Section2Value - Der Wert der Eigenschaft "Position", ab der die Segmente die Farbe
+   "Colors.Section2" haben
+14.Section3Value - Der Wert der Eigenschaft "Position", ab der die Segmente die Farbe
+   "Colors.Section3" haben
+ 
+B) Ereignisse:
+--------------
+1. OnChange tritt auf, wenn sich der Wert der Eigenschaft "Position" ändert.
+
+
+Einige Eigenschaften und Ereignisse sind in Delphiversionen<5 evtl.
+nicht verfügbar.
+
+Die Funktion der Komponenten läßt sich außerdem im beigefügten 
+Demo-Programm im Ordner "Demo" sehen.

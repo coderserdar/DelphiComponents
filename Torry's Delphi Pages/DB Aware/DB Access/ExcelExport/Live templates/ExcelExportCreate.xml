@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<codetemplate xmlns="http://schemas.borland.com/Delphi/2005/codetemplates" version="1.0.0">
+  <template name="ExcelExportCreate" invoke="manual">
+    <description>Create TscExcelExport component</description>
+    <author>Stefan Cruysberghs, http://www.scip.be</author>
+    <point name="ExcelExport">
+      <text>scExcelExport1</text>
+      <hint>TscExcelExport component</hint>
+    </point>
+    <point name="Dataset">
+      <text>ClientDataset1</text>
+      <hint>Dataset to export to Excel</hint>
+    </point>        
+    <script language="Delphi" onenter="false" onleave="true">
+			DeclareVariable(|ExcelExport|);
+		</script>
+    <code language="Delphi" delimiter="|"><![CDATA[
+
+|ExcelExport| := TscExcelExport.Create(Self);
+try
+  |ExcelExport|.Dataset:=|Dataset|;
+  |ExcelExport|.Connect;
+  |ExcelExport|.ExportDataset;
+finally
+  |ExcelExport|.Disconnect;
+  |ExcelExport|.Free;
+end;
+    
+     |end|]]></code>
+   </template>
+</codetemplate>
+    

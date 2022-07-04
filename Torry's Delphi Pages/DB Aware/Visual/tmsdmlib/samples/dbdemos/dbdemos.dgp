@@ -1,0 +1,2531 @@
+object AppMetaData: TAppMetaData
+  VersionControlPath = '%projectdir%\versions'
+  VersionControl = <
+    item
+      VersionID = 1
+      DateTime = 39928.762663113430000000
+    end>
+  DataDictionary.DatabaseTypeID = 'firebird2'
+  DataDictionary.NextTableID = 17
+  DataDictionary.NextFieldID = 124
+  DataDictionary.NextConstraintID = 1
+  DataDictionary.NextIndexID = 24
+  DataDictionary.NextRelationshipID = 5
+  DataDictionary.Domains = <>
+  DataDictionary.Tables = <
+    item
+      TableName = 'ANIMALS'
+      TID = 1
+      OidIndex = 0
+      Fields = <
+        item
+          FieldName = 'NAME'
+          DataTypeName = 'Varchar'
+          Size = 10
+          Size2 = 0
+          Required = False
+          FID = 1
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'SIZ_'
+          DataTypeName = 'Smallint'
+          Size = 0
+          Size2 = 0
+          Required = False
+          FID = 2
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'WEIGHT'
+          DataTypeName = 'Smallint'
+          Size = 0
+          Size2 = 0
+          Required = False
+          FID = 3
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'AREA'
+          DataTypeName = 'Varchar'
+          Size = 20
+          Size2 = 0
+          Required = False
+          FID = 4
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'BMP'
+          DataTypeName = 'Blob'
+          Size = 80
+          Size2 = 0
+          Required = False
+          FID = 5
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end>
+      Indexes = <
+        item
+          IndexName = 'NAME'
+          IndexType = itNone
+          IndexOrder = ioAscending
+          IID = 1
+          IFields = <
+            item
+              FieldIndex = 0
+              FieldOrder = ioAsc
+              KeyByRelationship = False
+            end>
+        end>
+      Constraints = <>
+      Triggers = <>
+      PrimaryKeyIndex.IndexName = 'PrimaryKey1'
+      PrimaryKeyIndex.IndexType = itNone
+      PrimaryKeyIndex.IndexOrder = ioAscending
+      PrimaryKeyIndex.IID = 0
+      PrimaryKeyIndex.IFields = <>
+    end
+    item
+      TableName = 'BIOLIFE'
+      TID = 2
+      OidIndex = 0
+      Fields = <
+        item
+          FieldName = 'SPECIES_NO'
+          DataTypeName = 'Double precision'
+          Size = 0
+          Size2 = 0
+          Required = False
+          FID = 6
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'CATEGORY'
+          DataTypeName = 'Varchar'
+          Size = 15
+          Size2 = 0
+          Required = False
+          FID = 7
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'COMMON_NAME'
+          DataTypeName = 'Varchar'
+          Size = 30
+          Size2 = 0
+          Required = False
+          FID = 8
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'SPECIES_NAME'
+          DataTypeName = 'Varchar'
+          Size = 40
+          Size2 = 0
+          Required = False
+          FID = 9
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'LENGTH__CM_'
+          DataTypeName = 'Double precision'
+          Size = 0
+          Size2 = 0
+          Required = False
+          FID = 10
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'LENGTH_IN'
+          DataTypeName = 'Double precision'
+          Size = 0
+          Size2 = 0
+          Required = False
+          FID = 11
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'NOTES'
+          DataTypeName = 'Blob text'
+          Size = 80
+          Size2 = 0
+          Required = False
+          FID = 12
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'GRAPHIC'
+          DataTypeName = 'Blob'
+          Size = 80
+          Size2 = 0
+          Required = False
+          FID = 13
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end>
+      Indexes = <
+        item
+          IndexName = 'BIOLIFE0'
+          IndexType = itUnique
+          IndexOrder = ioAscending
+          IID = 2
+          IFields = <
+            item
+              FieldIndex = 0
+              FieldOrder = ioAsc
+              KeyByRelationship = False
+            end>
+        end>
+      Constraints = <>
+      Triggers = <>
+      PrimaryKeyIndex.IndexName = 'PrimaryKey2'
+      PrimaryKeyIndex.IndexType = itNone
+      PrimaryKeyIndex.IndexOrder = ioAscending
+      PrimaryKeyIndex.IID = 0
+      PrimaryKeyIndex.IFields = <>
+    end
+    item
+      TableName = 'COUNTRY'
+      TID = 3
+      OidIndex = 0
+      Fields = <
+        item
+          FieldName = 'NAME'
+          DataTypeName = 'Varchar'
+          Size = 24
+          Size2 = 0
+          Required = False
+          FID = 14
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'CAPITAL'
+          DataTypeName = 'Varchar'
+          Size = 24
+          Size2 = 0
+          Required = False
+          FID = 15
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'CONTINENT'
+          DataTypeName = 'Varchar'
+          Size = 24
+          Size2 = 0
+          Required = False
+          FID = 16
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'AREA'
+          DataTypeName = 'Double precision'
+          Size = 0
+          Size2 = 0
+          Required = False
+          FID = 17
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'POPULATION'
+          DataTypeName = 'Double precision'
+          Size = 0
+          Size2 = 0
+          Required = False
+          FID = 18
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end>
+      Indexes = <
+        item
+          IndexName = 'COUNTRY0'
+          IndexType = itUnique
+          IndexOrder = ioAscending
+          IID = 3
+          IFields = <
+            item
+              FieldIndex = 0
+              FieldOrder = ioAsc
+              KeyByRelationship = False
+            end>
+        end>
+      Constraints = <>
+      Triggers = <>
+      PrimaryKeyIndex.IndexName = 'PrimaryKey3'
+      PrimaryKeyIndex.IndexType = itNone
+      PrimaryKeyIndex.IndexOrder = ioAscending
+      PrimaryKeyIndex.IID = 0
+      PrimaryKeyIndex.IFields = <>
+    end
+    item
+      TableName = 'CUSTOLY'
+      TID = 4
+      OidIndex = 0
+      Fields = <
+        item
+          FieldName = 'CUSTNO'
+          DataTypeName = 'Integer'
+          Size = 0
+          Size2 = 0
+          Required = False
+          FID = 19
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'LAST_NAME'
+          DataTypeName = 'Varchar'
+          Size = 30
+          Size2 = 0
+          Required = False
+          FID = 20
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'FIRST_NAME'
+          DataTypeName = 'Varchar'
+          Size = 30
+          Size2 = 0
+          Required = False
+          FID = 21
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'VIP_STATUS'
+          DataTypeName = 'Varchar'
+          Size = 10
+          Size2 = 0
+          Required = False
+          FID = 22
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'ADDRESS1'
+          DataTypeName = 'Varchar'
+          Size = 40
+          Size2 = 0
+          Required = False
+          FID = 23
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'ADDRESS2'
+          DataTypeName = 'Varchar'
+          Size = 40
+          Size2 = 0
+          Required = False
+          FID = 24
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'CITY'
+          DataTypeName = 'Varchar'
+          Size = 20
+          Size2 = 0
+          Required = False
+          FID = 25
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'STATE_PROV'
+          DataTypeName = 'Varchar'
+          Size = 10
+          Size2 = 0
+          Required = False
+          FID = 26
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'POST_CODE'
+          DataTypeName = 'Varchar'
+          Size = 10
+          Size2 = 0
+          Required = False
+          FID = 27
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'COUNTRY'
+          DataTypeName = 'Varchar'
+          Size = 10
+          Size2 = 0
+          Required = False
+          FID = 28
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'PHONE'
+          DataTypeName = 'Varchar'
+          Size = 18
+          Size2 = 0
+          Required = False
+          FID = 29
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'FAX'
+          DataTypeName = 'Varchar'
+          Size = 18
+          Size2 = 0
+          Required = False
+          FID = 30
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'EMAIL'
+          DataTypeName = 'Varchar'
+          Size = 40
+          Size2 = 0
+          Required = False
+          FID = 31
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'REMARKS'
+          DataTypeName = 'Blob text'
+          Size = 80
+          Size2 = 0
+          Required = False
+          FID = 32
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end>
+      Indexes = <
+        item
+          IndexName = 'CITY'
+          IndexType = itNone
+          IndexOrder = ioAscending
+          IID = 4
+          IFields = <
+            item
+              FieldIndex = 6
+              FieldOrder = ioAsc
+              KeyByRelationship = False
+            end>
+        end
+        item
+          IndexName = 'CUSTOLY0'
+          IndexType = itUnique
+          IndexOrder = ioAscending
+          IID = 5
+          IFields = <
+            item
+              FieldIndex = 0
+              FieldOrder = ioAsc
+              KeyByRelationship = False
+            end>
+        end>
+      Constraints = <>
+      Triggers = <>
+      PrimaryKeyIndex.IndexName = 'PrimaryKey4'
+      PrimaryKeyIndex.IndexType = itNone
+      PrimaryKeyIndex.IndexOrder = ioAscending
+      PrimaryKeyIndex.IID = 0
+      PrimaryKeyIndex.IFields = <>
+    end
+    item
+      TableName = 'CUSTOMER'
+      TID = 5
+      OidIndex = 0
+      Fields = <
+        item
+          FieldName = 'CUSTNO'
+          DataTypeName = 'Double precision'
+          Size = 0
+          Size2 = 0
+          Required = True
+          FID = 33
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'COMPANY'
+          DataTypeName = 'Varchar'
+          Size = 30
+          Size2 = 0
+          Required = False
+          FID = 34
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'ADDR1'
+          DataTypeName = 'Varchar'
+          Size = 30
+          Size2 = 0
+          Required = False
+          FID = 35
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'ADDR2'
+          DataTypeName = 'Varchar'
+          Size = 30
+          Size2 = 0
+          Required = False
+          FID = 36
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'CITY'
+          DataTypeName = 'Varchar'
+          Size = 15
+          Size2 = 0
+          Required = False
+          FID = 37
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'STATE'
+          DataTypeName = 'Varchar'
+          Size = 20
+          Size2 = 0
+          Required = False
+          FID = 38
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'ZIP'
+          DataTypeName = 'Varchar'
+          Size = 10
+          Size2 = 0
+          Required = False
+          FID = 39
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'COUNTRY'
+          DataTypeName = 'Varchar'
+          Size = 20
+          Size2 = 0
+          Required = False
+          FID = 40
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'PHONE'
+          DataTypeName = 'Varchar'
+          Size = 15
+          Size2 = 0
+          Required = False
+          FID = 41
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'FAX'
+          DataTypeName = 'Varchar'
+          Size = 15
+          Size2 = 0
+          Required = False
+          FID = 42
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'TAXRATE'
+          DataTypeName = 'Double precision'
+          Size = 0
+          Size2 = 0
+          Required = False
+          FID = 43
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'CONTACT'
+          DataTypeName = 'Varchar'
+          Size = 20
+          Size2 = 0
+          Required = False
+          FID = 44
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'LASTINVOICEDATE'
+          DataTypeName = 'Timestamp'
+          Size = 0
+          Size2 = 0
+          Required = False
+          FID = 45
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end>
+      Indexes = <
+        item
+          IndexName = 'BYCOMPANY'
+          IndexType = itNone
+          IndexOrder = ioAscending
+          IID = 6
+          IFields = <
+            item
+              FieldIndex = 1
+              FieldOrder = ioAsc
+              KeyByRelationship = False
+            end>
+        end
+        item
+          IndexName = 'CUSTOMER0'
+          IndexType = itUnique
+          IndexOrder = ioAscending
+          IID = 7
+          IFields = <
+            item
+              FieldIndex = 0
+              FieldOrder = ioAsc
+              KeyByRelationship = False
+            end>
+        end>
+      Constraints = <>
+      Triggers = <>
+      PrimaryKeyIndex.IndexName = 'INTEG_2'
+      PrimaryKeyIndex.IndexType = itNone
+      PrimaryKeyIndex.IndexOrder = ioAscending
+      PrimaryKeyIndex.IID = 0
+      PrimaryKeyIndex.IFields = <
+        item
+          FieldIndex = 0
+          FieldOrder = ioAsc
+          KeyByRelationship = False
+        end>
+    end
+    item
+      TableName = 'EMPLOYEE'
+      TID = 6
+      OidIndex = 0
+      Fields = <
+        item
+          FieldName = 'EMPNO'
+          DataTypeName = 'Integer'
+          Size = 0
+          Size2 = 0
+          Required = False
+          FID = 46
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'LASTNAME'
+          DataTypeName = 'Varchar'
+          Size = 20
+          Size2 = 0
+          Required = False
+          FID = 47
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'FIRSTNAME'
+          DataTypeName = 'Varchar'
+          Size = 15
+          Size2 = 0
+          Required = False
+          FID = 48
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'PHONEEXT'
+          DataTypeName = 'Varchar'
+          Size = 4
+          Size2 = 0
+          Required = False
+          FID = 49
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'HIREDATE'
+          DataTypeName = 'Timestamp'
+          Size = 0
+          Size2 = 0
+          Required = False
+          FID = 50
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'SALARY'
+          DataTypeName = 'Double precision'
+          Size = 0
+          Size2 = 0
+          Required = False
+          FID = 51
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end>
+      Indexes = <
+        item
+          IndexName = 'BYNAME'
+          IndexType = itNone
+          IndexOrder = ioAscending
+          IID = 8
+          IFields = <
+            item
+              FieldIndex = 1
+              FieldOrder = ioAsc
+              KeyByRelationship = False
+            end
+            item
+              FieldIndex = 2
+              FieldOrder = ioAsc
+              KeyByRelationship = False
+            end>
+        end
+        item
+          IndexName = 'EMPLOYEE0'
+          IndexType = itUnique
+          IndexOrder = ioAscending
+          IID = 9
+          IFields = <
+            item
+              FieldIndex = 0
+              FieldOrder = ioAsc
+              KeyByRelationship = False
+            end>
+        end>
+      Constraints = <>
+      Triggers = <>
+      PrimaryKeyIndex.IndexName = 'PrimaryKey6'
+      PrimaryKeyIndex.IndexType = itNone
+      PrimaryKeyIndex.IndexOrder = ioAscending
+      PrimaryKeyIndex.IID = 0
+      PrimaryKeyIndex.IFields = <>
+    end
+    item
+      TableName = 'INDUSTRY'
+      TID = 7
+      OidIndex = 0
+      Fields = <
+        item
+          FieldName = 'IND_CODE'
+          DataTypeName = 'Smallint'
+          Size = 0
+          Size2 = 0
+          Required = False
+          FID = 52
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'IND_NAME'
+          DataTypeName = 'Varchar'
+          Size = 5
+          Size2 = 0
+          Required = False
+          FID = 53
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'LONG_NAME'
+          DataTypeName = 'Varchar'
+          Size = 20
+          Size2 = 0
+          Required = False
+          FID = 54
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end>
+      Indexes = <
+        item
+          IndexName = 'IND_CODE'
+          IndexType = itNone
+          IndexOrder = ioAscending
+          IID = 10
+          IFields = <
+            item
+              FieldIndex = 0
+              FieldOrder = ioAsc
+              KeyByRelationship = False
+            end>
+        end>
+      Constraints = <>
+      Triggers = <>
+      PrimaryKeyIndex.IndexName = 'PrimaryKey7'
+      PrimaryKeyIndex.IndexType = itNone
+      PrimaryKeyIndex.IndexOrder = ioAscending
+      PrimaryKeyIndex.IID = 0
+      PrimaryKeyIndex.IFields = <>
+    end
+    item
+      TableName = 'ITEMS'
+      TID = 8
+      OidIndex = 0
+      Fields = <
+        item
+          FieldName = 'ORDERNO'
+          DataTypeName = 'Double precision'
+          Size = 0
+          Size2 = 0
+          Required = False
+          FID = 55
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'ITEMNO'
+          DataTypeName = 'Double precision'
+          Size = 0
+          Size2 = 0
+          Required = False
+          FID = 56
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'PARTNO'
+          DataTypeName = 'Double precision'
+          Size = 0
+          Size2 = 0
+          Required = False
+          FID = 57
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'QTY'
+          DataTypeName = 'Integer'
+          Size = 0
+          Size2 = 0
+          Required = False
+          FID = 58
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'DISCOUNT'
+          DataTypeName = 'Double precision'
+          Size = 0
+          Size2 = 0
+          Required = False
+          FID = 59
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end>
+      Indexes = <
+        item
+          IndexName = 'BYORDERNO'
+          IndexType = itNone
+          IndexOrder = ioAscending
+          IID = 11
+          IFields = <
+            item
+              FieldIndex = 0
+              FieldOrder = ioAsc
+              KeyByRelationship = False
+            end>
+        end
+        item
+          IndexName = 'ITEMS0'
+          IndexType = itUnique
+          IndexOrder = ioAscending
+          IID = 12
+          IFields = <
+            item
+              FieldIndex = 0
+              FieldOrder = ioAsc
+              KeyByRelationship = False
+            end
+            item
+              FieldIndex = 1
+              FieldOrder = ioAsc
+              KeyByRelationship = False
+            end>
+        end
+        item
+          IndexName = 'PARTNO'
+          IndexType = itNone
+          IndexOrder = ioAscending
+          IID = 13
+          IFields = <
+            item
+              FieldIndex = 2
+              FieldOrder = ioAsc
+              KeyByRelationship = False
+            end>
+        end>
+      Constraints = <>
+      Triggers = <>
+      PrimaryKeyIndex.IndexName = 'PrimaryKey8'
+      PrimaryKeyIndex.IndexType = itNone
+      PrimaryKeyIndex.IndexOrder = ioAscending
+      PrimaryKeyIndex.IID = 0
+      PrimaryKeyIndex.IFields = <>
+    end
+    item
+      TableName = 'MASTER'
+      TID = 9
+      OidIndex = 0
+      Fields = <
+        item
+          FieldName = 'SYMBOL'
+          DataTypeName = 'Varchar'
+          Size = 7
+          Size2 = 0
+          Required = False
+          FID = 60
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'CO_NAME'
+          DataTypeName = 'Varchar'
+          Size = 20
+          Size2 = 0
+          Required = False
+          FID = 61
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'EXCHANGE'
+          DataTypeName = 'Varchar'
+          Size = 8
+          Size2 = 0
+          Required = False
+          FID = 62
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'CUR_PRICE'
+          DataTypeName = 'Double precision'
+          Size = 0
+          Size2 = 0
+          Required = False
+          FID = 63
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'YRL_HIGH'
+          DataTypeName = 'Double precision'
+          Size = 0
+          Size2 = 0
+          Required = False
+          FID = 64
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'YRL_LOW'
+          DataTypeName = 'Double precision'
+          Size = 0
+          Size2 = 0
+          Required = False
+          FID = 65
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'P_E_RATIO'
+          DataTypeName = 'Double precision'
+          Size = 0
+          Size2 = 0
+          Required = False
+          FID = 66
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'BETA'
+          DataTypeName = 'Double precision'
+          Size = 0
+          Size2 = 0
+          Required = False
+          FID = 67
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'PROJ_GRTH'
+          DataTypeName = 'Double precision'
+          Size = 0
+          Size2 = 0
+          Required = False
+          FID = 68
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'INDUSTRY'
+          DataTypeName = 'Smallint'
+          Size = 0
+          Size2 = 0
+          Required = False
+          FID = 69
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'PRICE_CHG'
+          DataTypeName = 'Smallint'
+          Size = 0
+          Size2 = 0
+          Required = False
+          FID = 70
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'SAFETY'
+          DataTypeName = 'Smallint'
+          Size = 0
+          Size2 = 0
+          Required = False
+          FID = 71
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'RATING'
+          DataTypeName = 'Varchar'
+          Size = 4
+          Size2 = 0
+          Required = False
+          FID = 72
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'RANK'
+          DataTypeName = 'Double precision'
+          Size = 0
+          Size2 = 0
+          Required = False
+          FID = 73
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'OUTLOOK'
+          DataTypeName = 'Smallint'
+          Size = 0
+          Size2 = 0
+          Required = False
+          FID = 74
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'RCMNDATION'
+          DataTypeName = 'Varchar'
+          Size = 5
+          Size2 = 0
+          Required = False
+          FID = 75
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'RISK'
+          DataTypeName = 'Varchar'
+          Size = 4
+          Size2 = 0
+          Required = False
+          FID = 76
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end>
+      Indexes = <
+        item
+          IndexName = 'GROWTHASC'
+          IndexType = itNone
+          IndexOrder = ioAscending
+          IID = 14
+          IFields = <
+            item
+              FieldIndex = 8
+              FieldOrder = ioAsc
+              KeyByRelationship = False
+            end>
+        end
+        item
+          IndexName = 'GROWTHDESC'
+          IndexType = itNone
+          IndexOrder = ioDescending
+          IID = 15
+          IFields = <
+            item
+              FieldIndex = 8
+              FieldOrder = ioAsc
+              KeyByRelationship = False
+            end>
+        end
+        item
+          IndexName = 'SYMBOL'
+          IndexType = itUnique
+          IndexOrder = ioAscending
+          IID = 16
+          IFields = <
+            item
+              FieldIndex = 0
+              FieldOrder = ioAsc
+              KeyByRelationship = False
+            end>
+        end>
+      Constraints = <>
+      Triggers = <>
+      PrimaryKeyIndex.IndexName = 'PrimaryKey9'
+      PrimaryKeyIndex.IndexType = itNone
+      PrimaryKeyIndex.IndexOrder = ioAscending
+      PrimaryKeyIndex.IID = 0
+      PrimaryKeyIndex.IFields = <>
+    end
+    item
+      TableName = 'NEXTCUST'
+      TID = 10
+      OidIndex = 0
+      Fields = <
+        item
+          FieldName = 'NEWCUST'
+          DataTypeName = 'Double precision'
+          Size = 0
+          Size2 = 0
+          Required = False
+          FID = 77
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end>
+      Indexes = <>
+      Constraints = <>
+      Triggers = <>
+      PrimaryKeyIndex.IndexName = 'PrimaryKey10'
+      PrimaryKeyIndex.IndexType = itNone
+      PrimaryKeyIndex.IndexOrder = ioAscending
+      PrimaryKeyIndex.IID = 0
+      PrimaryKeyIndex.IFields = <>
+    end
+    item
+      TableName = 'NEXTITEM'
+      TID = 11
+      OidIndex = 0
+      Fields = <
+        item
+          FieldName = 'NEWKEY'
+          DataTypeName = 'Double precision'
+          Size = 0
+          Size2 = 0
+          Required = False
+          FID = 78
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end>
+      Indexes = <>
+      Constraints = <>
+      Triggers = <>
+      PrimaryKeyIndex.IndexName = 'PrimaryKey11'
+      PrimaryKeyIndex.IndexType = itNone
+      PrimaryKeyIndex.IndexOrder = ioAscending
+      PrimaryKeyIndex.IID = 0
+      PrimaryKeyIndex.IFields = <>
+    end
+    item
+      TableName = 'NEXTORD'
+      TID = 12
+      OidIndex = 0
+      Fields = <
+        item
+          FieldName = 'NEWKEY'
+          DataTypeName = 'Double precision'
+          Size = 0
+          Size2 = 0
+          Required = False
+          FID = 79
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end>
+      Indexes = <>
+      Constraints = <>
+      Triggers = <>
+      PrimaryKeyIndex.IndexName = 'PrimaryKey12'
+      PrimaryKeyIndex.IndexType = itNone
+      PrimaryKeyIndex.IndexOrder = ioAscending
+      PrimaryKeyIndex.IID = 0
+      PrimaryKeyIndex.IFields = <>
+    end
+    item
+      TableName = 'ORDERS'
+      TID = 13
+      OidIndex = 0
+      Fields = <
+        item
+          FieldName = 'ORDERNO'
+          DataTypeName = 'Double precision'
+          Size = 0
+          Size2 = 0
+          Required = True
+          FID = 80
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'CUSTNO'
+          DataTypeName = 'Double precision'
+          Size = 0
+          Size2 = 0
+          Required = True
+          FID = 81
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'SALEDATE'
+          DataTypeName = 'Timestamp'
+          Size = 0
+          Size2 = 0
+          Required = False
+          FID = 82
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'SHIPDATE'
+          DataTypeName = 'Timestamp'
+          Size = 0
+          Size2 = 0
+          Required = False
+          FID = 83
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'EMPNO'
+          DataTypeName = 'Integer'
+          Size = 0
+          Size2 = 0
+          Required = True
+          FID = 84
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'SHIPTOCONTACT'
+          DataTypeName = 'Varchar'
+          Size = 20
+          Size2 = 0
+          Required = False
+          FID = 85
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'SHIPTOADDR1'
+          DataTypeName = 'Varchar'
+          Size = 30
+          Size2 = 0
+          Required = False
+          FID = 86
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'SHIPTOADDR2'
+          DataTypeName = 'Varchar'
+          Size = 30
+          Size2 = 0
+          Required = False
+          FID = 87
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'SHIPTOCITY'
+          DataTypeName = 'Varchar'
+          Size = 15
+          Size2 = 0
+          Required = False
+          FID = 88
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'SHIPTOSTATE'
+          DataTypeName = 'Varchar'
+          Size = 20
+          Size2 = 0
+          Required = False
+          FID = 89
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'SHIPTOZIP'
+          DataTypeName = 'Varchar'
+          Size = 10
+          Size2 = 0
+          Required = False
+          FID = 90
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'SHIPTOCOUNTRY'
+          DataTypeName = 'Varchar'
+          Size = 20
+          Size2 = 0
+          Required = False
+          FID = 91
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'SHIPTOPHONE'
+          DataTypeName = 'Varchar'
+          Size = 15
+          Size2 = 0
+          Required = False
+          FID = 92
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'SHIPVIA'
+          DataTypeName = 'Varchar'
+          Size = 7
+          Size2 = 0
+          Required = False
+          FID = 93
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'PO'
+          DataTypeName = 'Varchar'
+          Size = 15
+          Size2 = 0
+          Required = False
+          FID = 94
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'TERMS'
+          DataTypeName = 'Varchar'
+          Size = 6
+          Size2 = 0
+          Required = False
+          FID = 95
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'PAYMENTMETHOD'
+          DataTypeName = 'Varchar'
+          Size = 7
+          Size2 = 0
+          Required = False
+          FID = 96
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'ITEMSTOTAL'
+          DataTypeName = 'Double precision'
+          Size = 0
+          Size2 = 0
+          Required = False
+          FID = 97
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'TAXRATE'
+          DataTypeName = 'Double precision'
+          Size = 0
+          Size2 = 0
+          Required = False
+          FID = 98
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'FREIGHT'
+          DataTypeName = 'Double precision'
+          Size = 0
+          Size2 = 0
+          Required = False
+          FID = 99
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'AMOUNTPAID'
+          DataTypeName = 'Double precision'
+          Size = 0
+          Size2 = 0
+          Required = False
+          FID = 100
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end>
+      Indexes = <
+        item
+          IndexName = 'CUSTNO'
+          IndexType = itNone
+          IndexOrder = ioAscending
+          IID = 17
+          IFields = <
+            item
+              FieldIndex = 1
+              FieldOrder = ioAsc
+              KeyByRelationship = False
+            end>
+        end
+        item
+          IndexName = 'ORDERS0'
+          IndexType = itUnique
+          IndexOrder = ioAscending
+          IID = 18
+          IFields = <
+            item
+              FieldIndex = 0
+              FieldOrder = ioAsc
+              KeyByRelationship = False
+            end>
+        end>
+      Constraints = <>
+      Triggers = <>
+      PrimaryKeyIndex.IndexName = 'INTEG_6'
+      PrimaryKeyIndex.IndexType = itNone
+      PrimaryKeyIndex.IndexOrder = ioAscending
+      PrimaryKeyIndex.IID = 0
+      PrimaryKeyIndex.IFields = <
+        item
+          FieldIndex = 0
+          FieldOrder = ioAsc
+          KeyByRelationship = False
+        end>
+    end
+    item
+      TableName = 'PARTS'
+      TID = 14
+      OidIndex = 0
+      Fields = <
+        item
+          FieldName = 'PARTNO'
+          DataTypeName = 'Double precision'
+          Size = 0
+          Size2 = 0
+          Required = True
+          FID = 101
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'VENDORNO'
+          DataTypeName = 'Double precision'
+          Size = 0
+          Size2 = 0
+          Required = False
+          FID = 102
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'DESCRIPTION'
+          DataTypeName = 'Varchar'
+          Size = 30
+          Size2 = 0
+          Required = False
+          FID = 103
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'ONHAND'
+          DataTypeName = 'Double precision'
+          Size = 0
+          Size2 = 0
+          Required = False
+          FID = 104
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'ONORDER'
+          DataTypeName = 'Double precision'
+          Size = 0
+          Size2 = 0
+          Required = False
+          FID = 105
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'COST'
+          DataTypeName = 'Double precision'
+          Size = 0
+          Size2 = 0
+          Required = False
+          FID = 106
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'LISTPRICE'
+          DataTypeName = 'Double precision'
+          Size = 0
+          Size2 = 0
+          Required = False
+          FID = 107
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end>
+      Indexes = <
+        item
+          IndexName = 'BYDESCRIPTION'
+          IndexType = itNone
+          IndexOrder = ioAscending
+          IID = 19
+          IFields = <
+            item
+              FieldIndex = 2
+              FieldOrder = ioAsc
+              KeyByRelationship = False
+            end>
+        end
+        item
+          IndexName = 'PARTS0'
+          IndexType = itUnique
+          IndexOrder = ioAscending
+          IID = 20
+          IFields = <
+            item
+              FieldIndex = 0
+              FieldOrder = ioAsc
+              KeyByRelationship = False
+            end>
+        end
+        item
+          IndexName = 'VENDORNO'
+          IndexType = itNone
+          IndexOrder = ioAscending
+          IID = 21
+          IFields = <
+            item
+              FieldIndex = 1
+              FieldOrder = ioAsc
+              KeyByRelationship = False
+            end>
+        end>
+      Constraints = <>
+      Triggers = <>
+      PrimaryKeyIndex.IndexName = 'INTEG_8'
+      PrimaryKeyIndex.IndexType = itNone
+      PrimaryKeyIndex.IndexOrder = ioAscending
+      PrimaryKeyIndex.IID = 0
+      PrimaryKeyIndex.IFields = <
+        item
+          FieldIndex = 0
+          FieldOrder = ioAsc
+          KeyByRelationship = False
+        end>
+    end
+    item
+      TableName = 'VENDORS'
+      TID = 15
+      OidIndex = 0
+      Fields = <
+        item
+          FieldName = 'VENDORNO'
+          DataTypeName = 'Double precision'
+          Size = 0
+          Size2 = 0
+          Required = True
+          FID = 108
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'VENDORNAME'
+          DataTypeName = 'Varchar'
+          Size = 30
+          Size2 = 0
+          Required = False
+          FID = 109
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'ADDRESS1'
+          DataTypeName = 'Varchar'
+          Size = 30
+          Size2 = 0
+          Required = False
+          FID = 110
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'ADDRESS2'
+          DataTypeName = 'Varchar'
+          Size = 30
+          Size2 = 0
+          Required = False
+          FID = 111
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'CITY'
+          DataTypeName = 'Varchar'
+          Size = 20
+          Size2 = 0
+          Required = False
+          FID = 112
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'STATE'
+          DataTypeName = 'Varchar'
+          Size = 20
+          Size2 = 0
+          Required = False
+          FID = 113
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'ZIP'
+          DataTypeName = 'Varchar'
+          Size = 10
+          Size2 = 0
+          Required = False
+          FID = 114
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'COUNTRY'
+          DataTypeName = 'Varchar'
+          Size = 15
+          Size2 = 0
+          Required = False
+          FID = 115
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'PHONE'
+          DataTypeName = 'Varchar'
+          Size = 15
+          Size2 = 0
+          Required = False
+          FID = 116
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'FAX'
+          DataTypeName = 'Varchar'
+          Size = 15
+          Size2 = 0
+          Required = False
+          FID = 117
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'PREFERRED'
+          DataTypeName = 'Varchar'
+          Size = 1
+          Size2 = 0
+          Required = False
+          FID = 118
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end>
+      Indexes = <
+        item
+          IndexName = 'VENDORS0'
+          IndexType = itUnique
+          IndexOrder = ioAscending
+          IID = 22
+          IFields = <
+            item
+              FieldIndex = 0
+              FieldOrder = ioAsc
+              KeyByRelationship = False
+            end>
+        end>
+      Constraints = <>
+      Triggers = <>
+      PrimaryKeyIndex.IndexName = 'INTEG_10'
+      PrimaryKeyIndex.IndexType = itNone
+      PrimaryKeyIndex.IndexOrder = ioAscending
+      PrimaryKeyIndex.IID = 0
+      PrimaryKeyIndex.IFields = <
+        item
+          FieldIndex = 0
+          FieldOrder = ioAsc
+          KeyByRelationship = False
+        end>
+    end
+    item
+      TableName = 'VENUES'
+      TID = 16
+      OidIndex = 0
+      Fields = <
+        item
+          FieldName = 'VENUENO'
+          DataTypeName = 'Integer'
+          Size = 0
+          Size2 = 0
+          Required = False
+          FID = 119
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'VENUE'
+          DataTypeName = 'Varchar'
+          Size = 30
+          Size2 = 0
+          Required = False
+          FID = 120
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'CAPACITY'
+          DataTypeName = 'Integer'
+          Size = 0
+          Size2 = 0
+          Required = False
+          FID = 121
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'VENUE_MAP'
+          DataTypeName = 'Blob'
+          Size = 80
+          Size2 = 0
+          Required = False
+          FID = 122
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end
+        item
+          FieldName = 'REMARKS'
+          DataTypeName = 'Blob text'
+          Size = 80
+          Size2 = 0
+          Required = False
+          FID = 123
+          DefaultValueSpecific = False
+          ConstraintExprSpecific = False
+          SeedValue = 0
+          IncrementValue = 1
+          GeneratedByRelationship = False
+        end>
+      Indexes = <
+        item
+          IndexName = 'VENUES0'
+          IndexType = itUnique
+          IndexOrder = ioAscending
+          IID = 23
+          IFields = <
+            item
+              FieldIndex = 0
+              FieldOrder = ioAsc
+              KeyByRelationship = False
+            end>
+        end>
+      Constraints = <>
+      Triggers = <>
+      PrimaryKeyIndex.IndexName = 'PrimaryKey16'
+      PrimaryKeyIndex.IndexType = itNone
+      PrimaryKeyIndex.IndexOrder = ioAscending
+      PrimaryKeyIndex.IID = 0
+      PrimaryKeyIndex.IFields = <>
+    end>
+  DataDictionary.Relationships = <
+    item
+      RelationshipName = 'INTEG_11'
+      ParentTableIndex = 12
+      ChildTableIndex = 7
+      UpdateMethod = umRestrict
+      DeleteMethod = dmRestrict
+      RelID = 1
+      FieldLinks = <
+        item
+          ParentFieldName = 'ORDERNO'
+          ChildFieldName = 'ORDERNO'
+        end>
+      ParentIndexID = 0
+      RelationshipType = ryUndefined
+    end
+    item
+      RelationshipName = 'INTEG_12'
+      ParentTableIndex = 13
+      ChildTableIndex = 7
+      UpdateMethod = umRestrict
+      DeleteMethod = dmRestrict
+      RelID = 2
+      FieldLinks = <
+        item
+          ParentFieldName = 'PARTNO'
+          ChildFieldName = 'PARTNO'
+        end>
+      ParentIndexID = 0
+      RelationshipType = ryUndefined
+    end
+    item
+      RelationshipName = 'INTEG_13'
+      ParentTableIndex = 4
+      ChildTableIndex = 12
+      UpdateMethod = umRestrict
+      DeleteMethod = dmRestrict
+      RelID = 3
+      FieldLinks = <
+        item
+          ParentFieldName = 'CUSTNO'
+          ChildFieldName = 'CUSTNO'
+        end>
+      ParentIndexID = 0
+      RelationshipType = ryUndefined
+    end
+    item
+      RelationshipName = 'INTEG_14'
+      ParentTableIndex = 14
+      ChildTableIndex = 13
+      UpdateMethod = umRestrict
+      DeleteMethod = dmRestrict
+      RelID = 4
+      FieldLinks = <
+        item
+          ParentFieldName = 'VENDORNO'
+          ChildFieldName = 'VENDORNO'
+        end>
+      ParentIndexID = 0
+      RelationshipType = ryUndefined
+    end>
+  DataDictionary.Categories = <
+    item
+      CategoryType = ctProcedure
+      Objects = <>
+    end
+    item
+      CategoryType = ctView
+      Objects = <>
+    end
+    item
+      CategoryType = ctSequence
+      Objects = <>
+    end>
+  DiagramObj.Diagrams = <
+    item
+      DiagramName = 'Main Diagram'
+      DiagramString = 
+        'object TDiagramClass'#13#10'  NettoExportOffset = 3'#13#10'  AutomaticNodes ' +
+        '= False'#13#10'  AutoScroll = True'#13#10'  AutoPage = False'#13#10'  Background.S' +
+        'croll = True'#13#10'  Background.Style = biTile'#13#10'  Background.Visible ' +
+        '= False'#13#10'  Background.Gradient.Direction = grTopBottom'#13#10'  Backgr' +
+        'ound.Gradient.StartColor = clWhite'#13#10'  Background.Gradient.EndCol' +
+        'or = clYellow'#13#10'  Background.Gradient.Visible = False'#13#10'  Backgrou' +
+        'nd.PrintGradient = False'#13#10'  SnapGrid.Active = False'#13#10'  SnapGrid.' +
+        'Force = False'#13#10'  SnapGrid.Visible = False'#13#10'  SnapGrid.SizeX = 8.' +
+        '000000000000000000'#13#10'  SnapGrid.SizeY = 8.000000000000000000'#13#10'  S' +
+        'napGrid.Style = gsDots'#13#10'  SnapGrid.SnapToRuler = False'#13#10'  LeftRu' +
+        'ler.Visible = False'#13#10'  LeftRuler.Divisions = 5'#13#10'  LeftRuler.Font' +
+        '.Charset = DEFAULT_CHARSET'#13#10'  LeftRuler.Font.Color = clWindowTex' +
+        't'#13#10'  LeftRuler.Font.Height = -9'#13#10'  LeftRuler.Font.Name = '#39'Arial'#39 +
+        #13#10'  LeftRuler.Font.Style = []'#13#10'  LeftRuler.Units = unCenti'#13#10'  Le' +
+        'ftRuler.MinorTickLength = 4'#13#10'  LeftRuler.MajorTickLength = 6'#13#10'  ' +
+        'LeftRuler.Color = clWhite'#13#10'  LeftRuler.TickColor = clBlack'#13#10'  Le' +
+        'ftRuler.Size = 16'#13#10'  LeftRuler.AutoFactor = True'#13#10'  LeftRuler.Gr' +
+        'idColor = clBlack'#13#10'  TopRuler.Visible = False'#13#10'  TopRuler.Divisi' +
+        'ons = 5'#13#10'  TopRuler.Font.Charset = DEFAULT_CHARSET'#13#10'  TopRuler.F' +
+        'ont.Color = clWindowText'#13#10'  TopRuler.Font.Height = -9'#13#10'  TopRule' +
+        'r.Font.Name = '#39'Arial'#39#13#10'  TopRuler.Font.Style = []'#13#10'  TopRuler.Un' +
+        'its = unCenti'#13#10'  TopRuler.MinorTickLength = 4'#13#10'  TopRuler.MajorT' +
+        'ickLength = 6'#13#10'  TopRuler.Color = clWhite'#13#10'  TopRuler.TickColor ' +
+        '= clBlack'#13#10'  TopRuler.Size = 16'#13#10'  TopRuler.AutoFactor = True'#13#10' ' +
+        ' TopRuler.GridColor = clBlack'#13#10'  Zoom = 100'#13#10'  BorderColor = clG' +
+        'ray'#13#10'  MouseWheelMode = mwVertical'#13#10'  ActiveLayers = 0'#13#10'  LinkCu' +
+        'rsor = crHandPoint'#13#10'  PanCursor = crHandPoint'#13#10'  ZoomCursor = cr' +
+        'Default'#13#10'  IgnoreScreenDPI = False'#13#10'  ShowCrossIndicators = Fals' +
+        'e'#13#10'  PageLines.Visible = False'#13#10'  PageLines.Pen.Style = psDot'#13#10' ' +
+        ' KeyActions = [kaEscape, kaMove, kaPage, kaResize, kaSelect]'#13#10'  ' +
+        'SmoothMode = smAntiAlias'#13#10'  TextRenderingMode = tmAntiAlias'#13#10'  S' +
+        'electionMode = slmMultiple'#13#10'  CanMoveOutOfBounds = True'#13#10'  Borde' +
+        'rStyle = bsNone'#13#10'  Color = clWhite'#13#10'  ParentColor = False'#13#10'  Dis' +
+        'playRelationshipNames = False'#13#10'  LinkRelationshipsToFields = Tru' +
+        'e'#13#10'  StraightRelationshipLines = False'#13#10'  object TTableDiagramBl' +
+        'ock'#13#10'    Left = 121'#13#10'    Top = 463'#13#10'    Width = 64'#13#10'    Height =' +
+        ' 114'#13#10'    Collapsed = False'#13#10'    TID = 1'#13#10'  end'#13#10'  object TTable' +
+        'DiagramBlock'#13#10'    Left = 209'#13#10'    Top = 460'#13#10'    Width = 104'#13#10'  ' +
+        '  Height = 168'#13#10'    Collapsed = False'#13#10'    TID = 2'#13#10'  end'#13#10'  obj' +
+        'ect TTableDiagramBlock'#13#10'    Left = 339'#13#10'    Top = 594'#13#10'    Width' +
+        ' = 88'#13#10'    Height = 114'#13#10'    Collapsed = False'#13#10'    TID = 3'#13#10'  e' +
+        'nd'#13#10'  object TTableDiagramBlock'#13#10'    Left = 15'#13#10'    Top = 461'#13#10' ' +
+        '   Width = 88'#13#10'    Height = 276'#13#10'    Collapsed = False'#13#10'    TID ' +
+        '= 4'#13#10'  end'#13#10'  object TTableDiagramBlock'#13#10'    Left = 273'#13#10'    Top' +
+        ' = 186'#13#10'    Width = 116'#13#10'    Height = 258'#13#10'    Collapsed = False' +
+        #13#10'    TID = 5'#13#10'  end'#13#10'  object TTableDiagramBlock'#13#10'    Left = 45' +
+        '0'#13#10'    Top = 466'#13#10'    Width = 81'#13#10'    Height = 132'#13#10'    Collapse' +
+        'd = False'#13#10'    TID = 6'#13#10'  end'#13#10'  object TTableDiagramBlock'#13#10'    ' +
+        'Left = 212'#13#10'    Top = 649'#13#10'    Width = 85'#13#10'    Height = 78'#13#10'    ' +
+        'Collapsed = False'#13#10'    TID = 7'#13#10'  end'#13#10'  object TTableDiagramBlo' +
+        'ck'#13#10'    Left = 406'#13#10'    Top = 10'#13#10'    Width = 76'#13#10'    Height = 1' +
+        '14'#13#10'    Collapsed = False'#13#10'    TID = 8'#13#10'  end'#13#10'  object TTableDi' +
+        'agramBlock'#13#10'    Left = 550'#13#10'    Top = 436'#13#10'    Width = 92'#13#10'    H' +
+        'eight = 330'#13#10'    Collapsed = False'#13#10'    TID = 9'#13#10'  end'#13#10'  object' +
+        ' TTableDiagramBlock'#13#10'    Left = 121'#13#10'    Top = 687'#13#10'    Width = ' +
+        '73'#13#10'    Height = 42'#13#10'    Collapsed = False'#13#10'    TID = 10'#13#10'  end'#13 +
+        #10'  object TTableDiagramBlock'#13#10'    Left = 122'#13#10'    Top = 587'#13#10'   ' +
+        ' Width = 65'#13#10'    Height = 42'#13#10'    Collapsed = False'#13#10'    TID = 1' +
+        '1'#13#10'  end'#13#10'  object TTableDiagramBlock'#13#10'    Left = 121'#13#10'    Top =' +
+        ' 638'#13#10'    Width = 65'#13#10'    Height = 42'#13#10'    Collapsed = False'#13#10'  ' +
+        '  TID = 12'#13#10'  end'#13#10'  object TTableDiagramBlock'#13#10'    Left = 18'#13#10' ' +
+        '   Top = 10'#13#10'    Width = 112'#13#10'    Height = 402'#13#10'    Collapsed = ' +
+        'False'#13#10'    TID = 13'#13#10'  end'#13#10'  object TRelationshipDiagramLine'#13#10' ' +
+        '   SourceArrow.Shape = asNone'#13#10'    SourceArrow.Width = 10'#13#10'    S' +
+        'ourceArrow.Height = 10'#13#10'    SourceArrow.Brush.Color = clBlack'#13#10' ' +
+        '   TargetArrow.Shape = asNone'#13#10'    TargetArrow.Width = 10'#13#10'    T' +
+        'argetArrow.Height = 10'#13#10'    TargetArrow.Brush.Color = clBlack'#13#10' ' +
+        '   Cursor = crDefault'#13#10'    TextCells = <'#13#10'      item'#13#10'        DC' +
+        'ontrolAngle = True'#13#10'        Left = 118'#13#10'        Top = 37'#13#10'      ' +
+        '  Width = 300'#13#10'        Height = 100'#13#10'        Clip = False'#13#10'     ' +
+        '   WordWrap = True'#13#10'        DControlFont = True'#13#10'        Alignme' +
+        'nt = taCenter'#13#10'        VertAlign = vaTop'#13#10'        RotateFont = T' +
+        'rue'#13#10'        CellFrame.Color = clWhite'#13#10'        CellFrame.Pen.St' +
+        'yle = psClear'#13#10'        CellFrame.Transparent = False'#13#10'        Ce' +
+        'llFrame.AutoFrame = True'#13#10'        CellFrame.AutoFrameMargin = 0'#13 +
+        #10'        CellFrame.Visible = True'#13#10'        Visible = True'#13#10'     ' +
+        ' end'#13#10'      item'#13#10'        DControlAngle = True'#13#10'        Left = -' +
+        '32'#13#10'        Top = 47'#13#10'        Width = 400'#13#10'        Height = 100'#13 +
+        #10'        Clip = False'#13#10'        WordWrap = True'#13#10'        DControl' +
+        'Font = True'#13#10'        Alignment = taRightJustify'#13#10'        VertAli' +
+        'gn = vaTop'#13#10'        RotateFont = True'#13#10'        CellFrame.Color =' +
+        ' clWhite'#13#10'        CellFrame.Transparent = True'#13#10'        CellFram' +
+        'e.AutoFrame = False'#13#10'        CellFrame.AutoFrameMargin = 0'#13#10'    ' +
+        '    CellFrame.Visible = False'#13#10'        Visible = True'#13#10'      end' +
+        #13#10'      item'#13#10'        DControlAngle = True'#13#10'        Left = 148'#13#10 +
+        '        Top = 37'#13#10'        Width = 400'#13#10'        Height = 100'#13#10'   ' +
+        '     Clip = False'#13#10'        WordWrap = True'#13#10'        DControlFont' +
+        ' = True'#13#10'        Alignment = taLeftJustify'#13#10'        VertAlign = ' +
+        'vaTop'#13#10'        RotateFont = True'#13#10'        CellFrame.Color = clWh' +
+        'ite'#13#10'        CellFrame.Transparent = True'#13#10'        CellFrame.Aut' +
+        'oFrame = False'#13#10'        CellFrame.AutoFrameMargin = 0'#13#10'        C' +
+        'ellFrame.Visible = False'#13#10'        Visible = True'#13#10'      end'#13#10'   ' +
+        '   item'#13#10'        DControlAngle = True'#13#10'        Left = -32'#13#10'     ' +
+        '   Top = -73'#13#10'        Width = 400'#13#10'        Height = 100'#13#10'       ' +
+        ' Clip = False'#13#10'        WordWrap = True'#13#10'        DControlFont = T' +
+        'rue'#13#10'        Alignment = taRightJustify'#13#10'        VertAlign = vaB' +
+        'ottom'#13#10'        RotateFont = True'#13#10'        CellFrame.Color = clWh' +
+        'ite'#13#10'        CellFrame.Transparent = True'#13#10'        CellFrame.Aut' +
+        'oFrame = False'#13#10'        CellFrame.AutoFrameMargin = 0'#13#10'        C' +
+        'ellFrame.Visible = False'#13#10'        Visible = True'#13#10'      end'#13#10'   ' +
+        '   item'#13#10'        DControlAngle = True'#13#10'        Left = 148'#13#10'     ' +
+        '   Top = 37'#13#10'        Width = 400'#13#10'        Height = 100'#13#10'        ' +
+        'Clip = False'#13#10'        WordWrap = True'#13#10'        DControlFont = Tr' +
+        'ue'#13#10'        Alignment = taLeftJustify'#13#10'        VertAlign = vaTop' +
+        #13#10'        RotateFont = True'#13#10'        CellFrame.Color = clWhite'#13#10 +
+        '        CellFrame.Transparent = True'#13#10'        CellFrame.AutoFram' +
+        'e = False'#13#10'        CellFrame.AutoFrameMargin = 0'#13#10'        CellFr' +
+        'ame.Visible = False'#13#10'        Visible = True'#13#10'      end>'#13#10'    Vis' +
+        'ible = True'#13#10'    Layer = 0'#13#10'    Transparency = 0'#13#10'    LineStyle ' +
+        '= lsSideLine'#13#10'    Color = clBlack'#13#10'    Collapsed = False'#13#10'    Ha' +
+        'ndles = <'#13#10'      item'#13#10'        OrX = 388.000000000000000000'#13#10'   ' +
+        '     OrY = 37.000000000000000000'#13#10'        Style = hsSize'#13#10'      ' +
+        'end'#13#10'      item'#13#10'        OrX = 148.000000000000000000'#13#10'        O' +
+        'rY = 37.000000000000000000'#13#10'        Style = hsSize'#13#10'      end>'#13#10 +
+        '    LinkPoints = <'#13#10'      item'#13#10'        AnchorIndex = 0'#13#10'       ' +
+        ' Collapsable = False'#13#10'        Collapsed = False'#13#10'        LinkCon' +
+        'straint = lcAll'#13#10'        Visible = True'#13#10'      end'#13#10'      item'#13#10 +
+        '        AnchorIndex = 1'#13#10'        Collapsable = False'#13#10'        Co' +
+        'llapsed = False'#13#10'        LinkConstraint = lcAll'#13#10'        Visible' +
+        ' = True'#13#10'      end>'#13#10'    RelID = 1'#13#10'  end'#13#10'  object TRelationshi' +
+        'pDiagramLine'#13#10'    Pen.Style = psDot'#13#10'    SelPen.Style = psDot'#13#10' ' +
+        '   SourceArrow.Shape = asNone'#13#10'    SourceArrow.Width = 10'#13#10'    S' +
+        'ourceArrow.Height = 10'#13#10'    SourceArrow.Brush.Color = clBlack'#13#10' ' +
+        '   TargetArrow.Shape = asNone'#13#10'    TargetArrow.Width = 10'#13#10'    T' +
+        'argetArrow.Height = 10'#13#10'    TargetArrow.Brush.Color = clBlack'#13#10' ' +
+        '   Cursor = crDefault'#13#10'    TextCells = <'#13#10'      item'#13#10'        DC' +
+        'ontrolAngle = True'#13#10'        Left = 104'#13#10'        Top = 82'#13#10'      ' +
+        '  Width = 300'#13#10'        Height = 100'#13#10'        Clip = False'#13#10'     ' +
+        '   WordWrap = True'#13#10'        DControlFont = True'#13#10'        Alignme' +
+        'nt = taCenter'#13#10'        VertAlign = vaTop'#13#10'        RotateFont = T' +
+        'rue'#13#10'        CellFrame.Color = clWhite'#13#10'        CellFrame.Pen.St' +
+        'yle = psClear'#13#10'        CellFrame.Transparent = False'#13#10'        Ce' +
+        'llFrame.AutoFrame = True'#13#10'        CellFrame.AutoFrameMargin = 0'#13 +
+        #10'        CellFrame.Visible = True'#13#10'        Visible = True'#13#10'     ' +
+        ' end'#13#10'      item'#13#10'        DControlAngle = True'#13#10'        Left = 1' +
+        '68'#13#10'        Top = -55'#13#10'        Width = 400'#13#10'        Height = 100' +
+        #13#10'        Clip = False'#13#10'        WordWrap = True'#13#10'        DContro' +
+        'lFont = True'#13#10'        Alignment = taLeftJustify'#13#10'        VertAli' +
+        'gn = vaBottom'#13#10'        RotateFont = True'#13#10'        CellFrame.Colo' +
+        'r = clWhite'#13#10'        CellFrame.Transparent = True'#13#10'        CellF' +
+        'rame.AutoFrame = False'#13#10'        CellFrame.AutoFrameMargin = 0'#13#10' ' +
+        '       CellFrame.Visible = False'#13#10'        Visible = True'#13#10'      ' +
+        'end'#13#10'      item'#13#10'        DControlAngle = True'#13#10'        Left = -1' +
+        '65'#13#10'        Top = 103'#13#10'        Width = 400'#13#10'        Height = 100' +
+        #13#10'        Clip = False'#13#10'        WordWrap = True'#13#10'        DContro' +
+        'lFont = True'#13#10'        Alignment = taRightJustify'#13#10'        VertAl' +
+        'ign = vaBottom'#13#10'        RotateFont = True'#13#10'        CellFrame.Col' +
+        'or = clWhite'#13#10'        CellFrame.Transparent = True'#13#10'        Cell' +
+        'Frame.AutoFrame = False'#13#10'        CellFrame.AutoFrameMargin = 0'#13#10 +
+        '        CellFrame.Visible = False'#13#10'        Visible = True'#13#10'     ' +
+        ' end'#13#10'      item'#13#10'        DControlAngle = True'#13#10'        Left = 1' +
+        '68'#13#10'        Top = 65'#13#10'        Width = 400'#13#10'        Height = 100'#13 +
+        #10'        Clip = False'#13#10'        WordWrap = True'#13#10'        DControl' +
+        'Font = True'#13#10'        Alignment = taLeftJustify'#13#10'        VertAlig' +
+        'n = vaTop'#13#10'        RotateFont = True'#13#10'        CellFrame.Color = ' +
+        'clWhite'#13#10'        CellFrame.Transparent = True'#13#10'        CellFrame' +
+        '.AutoFrame = False'#13#10'        CellFrame.AutoFrameMargin = 0'#13#10'     ' +
+        '   CellFrame.Visible = False'#13#10'        Visible = True'#13#10'      end'#13 +
+        #10'      item'#13#10'        DControlAngle = True'#13#10'        Left = -165'#13#10 +
+        '        Top = 223'#13#10'        Width = 400'#13#10'        Height = 100'#13#10'  ' +
+        '      Clip = False'#13#10'        WordWrap = True'#13#10'        DControlFon' +
+        't = True'#13#10'        Alignment = taRightJustify'#13#10'        VertAlign ' +
+        '= vaTop'#13#10'        RotateFont = True'#13#10'        CellFrame.Color = cl' +
+        'White'#13#10'        CellFrame.Transparent = True'#13#10'        CellFrame.A' +
+        'utoFrame = False'#13#10'        CellFrame.AutoFrameMargin = 0'#13#10'       ' +
+        ' CellFrame.Visible = False'#13#10'        Visible = True'#13#10'      end>'#13#10 +
+        '    Visible = True'#13#10'    Layer = 0'#13#10'    Transparency = 0'#13#10'    Lin' +
+        'eStyle = lsSideLine'#13#10'    Color = clBlack'#13#10'    Collapsed = False'#13 +
+        #10'    Handles = <'#13#10'      item'#13#10'        OrX = 148.0000000000000000' +
+        '00'#13#10'        OrY = 55.000000000000000000'#13#10'        Style = hsSize'#13 +
+        #10'      end'#13#10'      item'#13#10'        OrX = 244.000000000000000000'#13#10'  ' +
+        '      OrY = 134.000000000000000000'#13#10'        Style = hsSize'#13#10'    ' +
+        '  end'#13#10'      item'#13#10'        OrX = 255.000000000000000000'#13#10'       ' +
+        ' OrY = 213.000000000000000000'#13#10'        Style = hsSize'#13#10'      end' +
+        '>'#13#10'    LinkPoints = <'#13#10'      item'#13#10'        AnchorIndex = 3'#13#10'    ' +
+        '    Collapsable = False'#13#10'        Collapsed = False'#13#10'        Link' +
+        'Constraint = lcAll'#13#10'        Visible = True'#13#10'      end'#13#10'      ite' +
+        'm'#13#10'        AnchorIndex = 0'#13#10'        Collapsable = False'#13#10'       ' +
+        ' Collapsed = False'#13#10'        LinkConstraint = lcAll'#13#10'        Visi' +
+        'ble = True'#13#10'      end>'#13#10'    RelID = 3'#13#10'  end'#13#10'  object TTableDia' +
+        'gramBlock'#13#10'    Left = 722'#13#10'    Top = 82'#13#10'    Width = 92'#13#10'    Hei' +
+        'ght = 150'#13#10'    Collapsed = False'#13#10'    TID = 14'#13#10'  end'#13#10'  object ' +
+        'TRelationshipDiagramLine'#13#10'    Pen.Style = psDot'#13#10'    SelPen.Styl' +
+        'e = psDot'#13#10'    SourceArrow.Shape = asNone'#13#10'    SourceArrow.Width' +
+        ' = 10'#13#10'    SourceArrow.Height = 10'#13#10'    SourceArrow.Brush.Color ' +
+        '= clBlack'#13#10'    TargetArrow.Shape = asNone'#13#10'    TargetArrow.Width' +
+        ' = 10'#13#10'    TargetArrow.Height = 10'#13#10'    TargetArrow.Brush.Color ' +
+        '= clBlack'#13#10'    Cursor = crDefault'#13#10'    TextCells = <'#13#10'      item' +
+        #13#10'        DControlAngle = True'#13#10'        Left = 470'#13#10'        Top ' +
+        '= 53'#13#10'        Width = 300'#13#10'        Height = 100'#13#10'        Clip = ' +
+        'False'#13#10'        WordWrap = True'#13#10'        DControlFont = True'#13#10'   ' +
+        '     Alignment = taCenter'#13#10'        VertAlign = vaTop'#13#10'        Ro' +
+        'tateFont = True'#13#10'        CellFrame.Color = clWhite'#13#10'        Cell' +
+        'Frame.Pen.Style = psClear'#13#10'        CellFrame.Transparent = False' +
+        #13#10'        CellFrame.AutoFrame = True'#13#10'        CellFrame.AutoFram' +
+        'eMargin = 0'#13#10'        CellFrame.Visible = True'#13#10'        Visible =' +
+        ' True'#13#10'      end'#13#10'      item'#13#10'        DControlAngle = True'#13#10'    ' +
+        '    Left = 520'#13#10'        Top = -37'#13#10'        Width = 400'#13#10'        ' +
+        'Height = 100'#13#10'        Clip = False'#13#10'        WordWrap = True'#13#10'   ' +
+        '     DControlFont = True'#13#10'        Alignment = taLeftJustify'#13#10'   ' +
+        '     VertAlign = vaBottom'#13#10'        RotateFont = True'#13#10'        Ce' +
+        'llFrame.Color = clWhite'#13#10'        CellFrame.Transparent = True'#13#10' ' +
+        '       CellFrame.AutoFrame = False'#13#10'        CellFrame.AutoFrameM' +
+        'argin = 0'#13#10'        CellFrame.Visible = False'#13#10'        Visible = ' +
+        'True'#13#10'      end'#13#10'      item'#13#10'        DControlAngle = True'#13#10'     ' +
+        '   Left = 284'#13#10'        Top = -1'#13#10'        Width = 400'#13#10'        He' +
+        'ight = 100'#13#10'        Clip = False'#13#10'        WordWrap = True'#13#10'     ' +
+        '   DControlFont = True'#13#10'        Alignment = taRightJustify'#13#10'    ' +
+        '    VertAlign = vaBottom'#13#10'        RotateFont = True'#13#10'        Cel' +
+        'lFrame.Color = clWhite'#13#10'        CellFrame.Transparent = True'#13#10'  ' +
+        '      CellFrame.AutoFrame = False'#13#10'        CellFrame.AutoFrameMa' +
+        'rgin = 0'#13#10'        CellFrame.Visible = False'#13#10'        Visible = T' +
+        'rue'#13#10'      end'#13#10'      item'#13#10'        DControlAngle = True'#13#10'      ' +
+        '  Left = 520'#13#10'        Top = 83'#13#10'        Width = 400'#13#10'        Hei' +
+        'ght = 100'#13#10'        Clip = False'#13#10'        WordWrap = True'#13#10'      ' +
+        '  DControlFont = True'#13#10'        Alignment = taLeftJustify'#13#10'      ' +
+        '  VertAlign = vaTop'#13#10'        RotateFont = True'#13#10'        CellFram' +
+        'e.Color = clWhite'#13#10'        CellFrame.Transparent = True'#13#10'       ' +
+        ' CellFrame.AutoFrame = False'#13#10'        CellFrame.AutoFrameMargin ' +
+        '= 0'#13#10'        CellFrame.Visible = False'#13#10'        Visible = True'#13#10 +
+        '      end'#13#10'      item'#13#10'        DControlAngle = True'#13#10'        Lef' +
+        't = 284'#13#10'        Top = 119'#13#10'        Width = 400'#13#10'        Height ' +
+        '= 100'#13#10'        Clip = False'#13#10'        WordWrap = True'#13#10'        DC' +
+        'ontrolFont = True'#13#10'        Alignment = taRightJustify'#13#10'        V' +
+        'ertAlign = vaTop'#13#10'        RotateFont = True'#13#10'        CellFrame.C' +
+        'olor = clWhite'#13#10'        CellFrame.Transparent = True'#13#10'        Ce' +
+        'llFrame.AutoFrame = False'#13#10'        CellFrame.AutoFrameMargin = 0' +
+        #13#10'        CellFrame.Visible = False'#13#10'        Visible = True'#13#10'   ' +
+        '   end>'#13#10'    Visible = True'#13#10'    Layer = 0'#13#10'    Transparency = 0' +
+        #13#10'    LineStyle = lsSideLine'#13#10'    Color = clBlack'#13#10'    Collapsed' +
+        ' = False'#13#10'    Handles = <'#13#10'      item'#13#10'        OrX = 500.0000000' +
+        '00000000000'#13#10'        OrY = 73.000000000000000000'#13#10'        Style ' +
+        '= hsSize'#13#10'      end'#13#10'      item'#13#10'        OrX = 681.0000000000000' +
+        '00000'#13#10'        OrY = 91.000000000000000000'#13#10'        Style = hsSi' +
+        'ze'#13#10'      end'#13#10'      item'#13#10'        OrX = 704.000000000000000000'#13 +
+        #10'        OrY = 109.000000000000000000'#13#10'        Style = hsSize'#13#10' ' +
+        '     end>'#13#10'    LinkPoints = <'#13#10'      item'#13#10'        AnchorIndex =' +
+        ' 5'#13#10'        Collapsable = False'#13#10'        Collapsed = False'#13#10'    ' +
+        '    LinkConstraint = lcAll'#13#10'        Visible = True'#13#10'      end'#13#10' ' +
+        '     item'#13#10'        AnchorIndex = 0'#13#10'        Collapsable = False'#13 +
+        #10'        Collapsed = False'#13#10'        LinkConstraint = lcAll'#13#10'    ' +
+        '    Visible = True'#13#10'      end>'#13#10'    RelID = 2'#13#10'  end'#13#10'  object T' +
+        'TableDiagramBlock'#13#10'    Left = 479'#13#10'    Top = 185'#13#10'    Width = 93' +
+        #13#10'    Height = 222'#13#10'    Collapsed = False'#13#10'    TID = 15'#13#10'  end'#13#10 +
+        '  object TRelationshipDiagramLine'#13#10'    Pen.Style = psDot'#13#10'    Se' +
+        'lPen.Style = psDot'#13#10'    SourceArrow.Shape = asNone'#13#10'    SourceAr' +
+        'row.Width = 10'#13#10'    SourceArrow.Height = 10'#13#10'    SourceArrow.Bru' +
+        'sh.Color = clBlack'#13#10'    TargetArrow.Shape = asNone'#13#10'    TargetAr' +
+        'row.Width = 10'#13#10'    TargetArrow.Height = 10'#13#10'    TargetArrow.Bru' +
+        'sh.Color = clBlack'#13#10'    Cursor = crDefault'#13#10'    TextCells = <'#13#10' ' +
+        '     item'#13#10'        DControlAngle = True'#13#10'        Left = 540'#13#10'   ' +
+        '     Top = 212'#13#10'        Width = 300'#13#10'        Height = 100'#13#10'     ' +
+        '   Clip = False'#13#10'        WordWrap = True'#13#10'        DControlFont =' +
+        ' True'#13#10'        Alignment = taCenter'#13#10'        VertAlign = vaTop'#13#10 +
+        '        RotateFont = True'#13#10'        CellFrame.Color = clWhite'#13#10'  ' +
+        '      CellFrame.Pen.Style = psClear'#13#10'        CellFrame.Transpare' +
+        'nt = False'#13#10'        CellFrame.AutoFrame = True'#13#10'        CellFram' +
+        'e.AutoFrameMargin = 0'#13#10'        CellFrame.Visible = True'#13#10'       ' +
+        ' Visible = True'#13#10'      end'#13#10'      item'#13#10'        DControlAngle = ' +
+        'True'#13#10'        Left = 284'#13#10'        Top = 137'#13#10'        Width = 400' +
+        #13#10'        Height = 100'#13#10'        Clip = False'#13#10'        WordWrap =' +
+        ' True'#13#10'        DControlFont = True'#13#10'        Alignment = taRightJ' +
+        'ustify'#13#10'        VertAlign = vaTop'#13#10'        RotateFont = True'#13#10'  ' +
+        '      CellFrame.Color = clWhite'#13#10'        CellFrame.Transparent =' +
+        ' True'#13#10'        CellFrame.AutoFrame = False'#13#10'        CellFrame.Au' +
+        'toFrameMargin = 0'#13#10'        CellFrame.Visible = False'#13#10'        Vi' +
+        'sible = True'#13#10'      end'#13#10'      item'#13#10'        DControlAngle = Tru' +
+        'e'#13#10'        Left = 610'#13#10'        Top = 222'#13#10'        Width = 400'#13#10' ' +
+        '       Height = 100'#13#10'        Clip = False'#13#10'        WordWrap = Tr' +
+        'ue'#13#10'        DControlFont = True'#13#10'        Alignment = taLeftJusti' +
+        'fy'#13#10'        VertAlign = vaTop'#13#10'        RotateFont = True'#13#10'      ' +
+        '  CellFrame.Color = clWhite'#13#10'        CellFrame.Transparent = Tru' +
+        'e'#13#10'        CellFrame.AutoFrame = False'#13#10'        CellFrame.AutoFr' +
+        'ameMargin = 0'#13#10'        CellFrame.Visible = False'#13#10'        Visibl' +
+        'e = True'#13#10'      end'#13#10'      item'#13#10'        DControlAngle = True'#13#10' ' +
+        '       Left = 284'#13#10'        Top = 17'#13#10'        Width = 400'#13#10'      ' +
+        '  Height = 100'#13#10'        Clip = False'#13#10'        WordWrap = True'#13#10' ' +
+        '       DControlFont = True'#13#10'        Alignment = taRightJustify'#13#10 +
+        '        VertAlign = vaBottom'#13#10'        RotateFont = True'#13#10'       ' +
+        ' CellFrame.Color = clWhite'#13#10'        CellFrame.Transparent = True' +
+        #13#10'        CellFrame.AutoFrame = False'#13#10'        CellFrame.AutoFra' +
+        'meMargin = 0'#13#10'        CellFrame.Visible = False'#13#10'        Visible' +
+        ' = True'#13#10'      end'#13#10'      item'#13#10'        DControlAngle = True'#13#10'  ' +
+        '      Left = 610'#13#10'        Top = 102'#13#10'        Width = 400'#13#10'      ' +
+        '  Height = 100'#13#10'        Clip = False'#13#10'        WordWrap = True'#13#10' ' +
+        '       DControlFont = True'#13#10'        Alignment = taLeftJustify'#13#10' ' +
+        '       VertAlign = vaBottom'#13#10'        RotateFont = True'#13#10'        ' +
+        'CellFrame.Color = clWhite'#13#10'        CellFrame.Transparent = True'#13 +
+        #10'        CellFrame.AutoFrame = False'#13#10'        CellFrame.AutoFram' +
+        'eMargin = 0'#13#10'        CellFrame.Visible = False'#13#10'        Visible ' +
+        '= True'#13#10'      end>'#13#10'    Visible = True'#13#10'    Layer = 0'#13#10'    Trans' +
+        'parency = 0'#13#10'    LineStyle = lsSideLine'#13#10'    Color = clBlack'#13#10'  ' +
+        '  Collapsed = False'#13#10'    Handles = <'#13#10'      item'#13#10'        OrX = ' +
+        '704.000000000000000000'#13#10'        OrY = 127.000000000000000000'#13#10'  ' +
+        '      Style = hsSize'#13#10'      end'#13#10'      item'#13#10'        OrX = 694.0' +
+        '00000000000000000'#13#10'        OrY = 169.000000000000000000'#13#10'       ' +
+        ' Style = hsSize'#13#10'      end'#13#10'      item'#13#10'        OrX = 590.000000' +
+        '000000000000'#13#10'        OrY = 212.000000000000000000'#13#10'        Styl' +
+        'e = hsSize'#13#10'      end>'#13#10'    LinkPoints = <'#13#10'      item'#13#10'        ' +
+        'AnchorIndex = 2'#13#10'        Collapsable = False'#13#10'        Collapsed ' +
+        '= False'#13#10'        LinkConstraint = lcAll'#13#10'        Visible = True'#13 +
+        #10'      end'#13#10'      item'#13#10'        AnchorIndex = 1'#13#10'        Collaps' +
+        'able = False'#13#10'        Collapsed = False'#13#10'        LinkConstraint ' +
+        '= lcAll'#13#10'        Visible = True'#13#10'      end>'#13#10'    RelID = 4'#13#10'  en' +
+        'd'#13#10'  object TTableDiagramBlock'#13#10'    Left = 336'#13#10'    Top = 464'#13#10' ' +
+        '   Width = 83'#13#10'    Height = 114'#13#10'    Collapsed = False'#13#10'    TID ' +
+        '= 16'#13#10'  end'#13#10'end'#13#10
+    end>
+end

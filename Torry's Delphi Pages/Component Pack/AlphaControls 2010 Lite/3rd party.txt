@@ -1,0 +1,56 @@
+3rd-party components
+
+For support in the project, a required 3rd-party controls must be declared in the SkinManager.ThirdParty property. Use a special design-time editor for handy adding of required controls.
+
+--------------------------------------------------------------------------------
+List of supported components :
+
+ - Standard VCL (TPanel, TEdit, TMemo, TListBox, TComboBox, TMaskEdit, TStringGrid, TDrawGrid, TCheckListBox, TRichEdit, THotKey, TTreeView, TListView, TDBGrid, TDBEdit, TDBMemo, TDBListBox, TDBLookupListBox, TDBRichEdit, TGroupBox, TButton, TCheckBox, TRadioButton and others)
+ - Windows system dialogs (File open/save, Font dialog, Color dialog and others)
+ - DevExpress grids and other controls which supports LookAndFeel technology
+ - RXLib (TCurrencyEdit, TTextListBox, TRxRichEdit, TRxDrawGrid, TRxDBGrid, TRxDBLookupList, TRxDBRichEdit and others)
+ - JvEdits (JvValidateEdit, JvEdit, JvMemo, JvRichEdit and some others)
+ - EhLib controls
+ - TPNGImageList
+ - TntControls Unicode
+ - Most TMS edits and grids
+ - Billenium effects
+ - TSynEdit, TSynMemo, TDBSynEdit
+ - Virtual Controls (TVirtualStringTree and TVirtualDrawTree)
+ - most Woll2Woll InfoPower 4000 controls
+ - TmxFlatEdit, TmxFlatFloatEdit, TmxFlatMaskEdit, TmxFlatMemo, TmxFlatRichEdit, TmxFlatListBox, TmxFlatDirectoryListBox, TmxFlatFileListBox, mxFlatCheckListBox and others
+ - ImageEn library
+ - TRichView, TRichViewEdit, TDBRichViewEdit and TDBRichView 
+ - TVirtualExplorerListView, TVirtualExplorerTreeview
+ - Raize controls (TRzPanel, TRzGroupBox, TRzEdit, TRzMaskEdit, TRzNumericEdit, TRzExpandEdit, TRzHotKeyEdit, TRzTreeView, TRzCheckTree, TRzMemo, TRzRichEdit, TRzShellTree, TRzShellList, TRzRankListBox, TRzListBox, TRzTabbedListBox, TRzCheckList, TRzEditListBox, TRzComboBox, TRzImageComboBox, TRzMRUComboBox, TRzShellCombo, TRzLabel, TRzURLLabel, TRzDateTimeEdit, 
+
+--------------------------------------------------------------------------------
+Some instructions for 3rd-party features using in the AlphaControls full release :
+
+1. Most standard and 3rd-party controls
+
+Skinned automatically if required controls are declared in the SkinManager.ThirdParty property
+
+2. TntControls Unicode
+
+Most controls from AlphaControls package may have support of Unicode (in Delphi6-2009). In this case used the TntControls package (thanks TNT authors, TntControls must be installed already). For using this feature should be uncommented the TNTUNICODE key in the sDefs.inc file (should be {$DEFINE TNTUNICODE}) and AlphaControls package must be reinstalled (sources needed). 
+Note : don't forget backup all projects before opening after package installation, some Unicode data may be lost if compiled without TNTUNICODE key.
+
+3. TPngImageList
+
+Since version 6 AlphaControls have native support of PNG format (TsAlphaImageList was added also).
+Buttons and menus from AlphaControls have support of TPngImageList component also. For work with this component the USEPNG key should be defined in the sDefs.inc file (must be {$DEFINE USEPNG}).
+TPNGImageList is a freeware component with sources that may be used for work with PNG glyphs in any application.
+May be downloaded from http://www.thany.org/article/32/PngComponents
+
+4. DevExpress grids and other controls
+
+ - Install DevExpress and AlphaControls
+ - Enable the 'DEVEX' key in the sDefs.inc file (AlphaControls), must be {$DEFINE DEVEX}
+ - Be sure that latest version of DevExpress is installed, or check a list of supported DevExpress versions in the beginning of the acLFPainter.pas file (AlphaControls)
+ - Configure the sSkinManager component and compile the project.
+In the run-time will be skinned all DevExpress controls which have LookAndFeel property properly supported. LookAndFeel.NativeStyle property must be False.'DEVEX' key must enabled (in the sDefs.inc file) before AlphaControls installing (must be {$DEFINE DEVEX}).
+
+5. Billenium Effects
+
+This package is supported authomatically

@@ -1,0 +1,31 @@
+v1.25
+- Official support for the following Delphi versions: 5, 6, 7, 2005, 2006, 2007
+- Fixed ImgFadeBase bug which caused a crash on destruction of ImgBtn/ImgCheckBox       controls on older compiler versions
+- Massive amount of bugs/issues fixed on most controls & many refinements
+- Fixed ImgForm width calculation bug
+- Fixed ImgCheckBox design-time visibility issue
+- Code cleanup
+- Added more skins
+
+v1.24
+- New control: EkImgLED
+
+v1.23:
+- New bmp skins req. for ImgBtn/ImgCheckbox
+- Rewrote/cleaned up/upgraded ImgBtn & ImgCheckbox
+- When program went from unfocuced to focused state it caused some 
+  controls to no longer be visible - fixed
+- ImgBtn has a few new properties & events
+- EkImgForm now gets darkened upon disactivation
+- EkImgForm has a few new events & 2 new public functions for loading images:
+  LoadImgFrom(), LoadImgTo()
+- Added OnFadeStartStop & OnFadeComplete events to EkImgFade
+- Changed EkFadeImg, EkFadeImgBase names to EkImgFade, EkImgFadeBase
+- Various undocumented fixes/changes
+
+
+Old Changes:
+- Much improved animation/tween effects performance
+- Much faster region code (used in ImgForm)
+- New control: EkImgForm - Skin your form via bitmap
+- Many undocumented fixed/code cleanups

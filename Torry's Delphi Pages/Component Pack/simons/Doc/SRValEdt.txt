@@ -1,0 +1,199 @@
+TSRValueEdit (C)opyright 2004 Version 1.01
+
+  Autor : Simon Reinhardt
+  eMail : reinhardt@picsoft.de
+  Internet : http://www.picsoft.de
+
+  Die Komponente TSRValueEdit ist eine Kombination aus
+  einem Drehknopf für die optische Anzeige des eingestellten
+  Wertes und zwei weiteren Komponenten zur Einstellung des Wertes:
+
+  - Einer TNumericEdit-Komponente für die alphanumerische
+    Eingabe eines Zahlenwerts. Zahlenwerte können direkt eingetippt
+    werden oder man kann über SpinButtons einzelne Stellen ändern.
+
+  - Einer TSliderEdit-Komponente für die Einstellung eines
+    Zahlenwerts mit der Maus. Dazu wird einfach ein Schiebesteller
+    an die gewünschte Position gezogen. 
+
+  Zusätzlich werden die letzten vier eingestellten Werte gespeichert 
+  und können über ein Popup-Menü wieder abgerufen werden. Auf diese 
+  Weise stellt sie den optimalen Kompromiss zwischen minimalem 
+  Platzbedarf und optimaler Bedienbarkeit mit Maus und Tastatur zur 
+  Auswahl eines Zahlenwertes dar. 
+
+  Die Komponente ist Public Domain, das Urheberrecht liegt aber 
+  beim Autor.
+
+
+
+Dateiumfang:
+------------
+
+Readme.txt 	- Diese Datei
+
+SRValEdt.pas	- Quelltext der Komponente
+SRValEdt.d16	- Resourcendatei der 16-Bit-Komponente für Delphi 1
+SRValEdt.d32	- Resourcendatei der 32-Bit-Komponente für Delphi 2 bis 5
+SRDefine.inc
+rr.inc		- Inculdedateien für die Komponente
+rrColors.pas	- Funktionen zur RGB-HSL-Umrechnung
+SRUtils.pas	- verschiedende Prozeduren und Funktionen für die Komponente
+                  (Eine Beschreibung findet man im Interface der Unit)  
+	
+Ordner	Demo		- TSRValueEdit-Demo-Projekt für 32-Bit-Delphi
+	ValMain.dfm	- Formulardatei der MainForm
+	ValMain.pas	- Quelltext der MainForm-Unit
+	VEDemo.dof	- Compileroptionen des Demo-Projekts
+	VEDemo.dpr	- Quelltext des Demo-Projekts
+	VEDemo.res	- Resourcendatei des Demo-Projekts
+
+
+Installation:
+-------------
+
+In Delphi 1:
+------------
+1. Alle Dateien in das Delphi-Komponenten-Verzeichnis entpacken.
+2. Menü Optionen: Komponente installieren
+3. Schaltfläche Hinzufügen / Durchsuchen
+4. Datei SRValEdt.pas im Delphi-Komponenten-Verzeichnis suchen und mit
+   OK bestätigen.
+5. Die Komponenten erscheinen in der Komponenten-Gruppe "Simon"
+
+In Delphi 2:
+------------
+1. Alle Dateien in das Delphi-Komponenten-Verzeichnis entpacken.
+2. Menü Komponente:  installieren
+3. Schaltfläche Hinzufügen / Durchsuchen
+4. Datei SRValEdt.pas im Delphi-Komponenten-Verzeichnis suchen und mit
+   OK bestätigen.
+5. Die Komponenten erscheinen in der Komponenten-Gruppe "Simon"
+
+Ab Delphi 3:
+------------
+1. Alle Dateien in das Delphi-Komponenten-Verzeichnis entpacken.
+2. Menü Komponente:  Komponente installieren
+3. Schaltfläche Durchsuchen (hinter dem Eingabefeld für den Unit-Namen)
+4. Datei SRValEdt.pas im Delphi-Komponenten-Verzeichnis suchen und mit
+   OK bestätigen.
+5. Die Rückfrage nach dem Neukompilieren des Packages bestätigen.
+6. Die Komponenten erscheinen in der Komponenten-Gruppe "Simon"
+   (Evtl. muß eine bereits installierte, ältere Version der Komponente
+    zuvor entfernt werden)
+
+
+
+Funktion:
+---------
+
+Wenn man mit der linken Maustaste auf den Drehknopf klickt, erscheint das
+TSliderEdit-Control. Es verschwindet automatisch wieder, solbald man die 
+Maustaste wieder loslässt. Hält man beim Mausklick die Umschalttaste gedrückt, 
+wird das TSliderEdit-Control mit [Enter], [Esc] oder mit einem Klick auf den Close-
+Button des SliderEdits wieder ausgeblendet, oder wenn es den Eingabefokus verliert.
+
+Es folgt eine kurze Aufstellung aller von TPanel abweichenden Eigenschaften 
+und Ereignisse:
+
+A) Eigenschaften:
+-----------------
+
+CaptureMouse: boolean;
+  Bestimmt, ob der Mauszeiger den Bereich der TSliderEdit-Kpomponente verlassen kann.
+
+Colors: TColors;
+  Background		- Hintergrundfarbe
+  NumBackground		- Hintergrundfarbe der TNumericEdit-Komponente
+  NumFrame		- Rahmenfarbe der TNumericEdit-Komponente
+  SpinBorder		- Randfarbe des SpinControls (Drehknopfes)
+  SpinTop		- Oberflächenfarbe des SpinControls (Drehknopfes) und
+			  des TSliderEdit-Rulers
+  SpinMark		- Farbe der Markierung des SpinControls (Drehknopfes)
+			  und der TSliderEdit-Markierung.
+  SliderBackground	- Hintergrundfarbe der TSliderEdit-Komponente
+  Ticks           	- Farbe der Positionsmarkierungen
+
+DecSeparator: char;
+  Das Dezimaltrennzeichen, wenn DescSeparatorPos>0
+
+DecSeparatorPos: byte;
+  Die Position des Dezimal-Trennzeichens (von rechts)
+
+FocusRect: boolean;
+  Bestimmt, ob ein Fokusrahmen auf dem Control gezeichnet werden soll.
+
+MaxValue: extended;
+  Höchster einzustellender Wert
+
+MinValue: extended;
+  Niedrigster einzustellender Wert
+
+NumDigits: TNumDigits;
+  Anzahl der Dezimalstellen der TNumericEdit-Komponente
+
+RulerDirection: TRulerDirection;
+  rdHorizontal - die TSliderEdit-Komponente wird horizontal angezeigt.
+  rdVertical   - die TSliderEdit-Komponente wird vertikal angezeigt.
+
+ScrewSize: TScrewSize;
+  Durchmesser der Schrauben
+
+ShowScrews: boolean;
+  Bestimmt, ob in den Ecken des Controls angedeutete Schrauben gezeichnet werden.
+
+SliderEditLength: integer;
+  Länge der TSliderEdit-Komponente
+
+SliderEditWidth: integer;
+  Breite der TSliderEdit-Komponente
+
+SliderWidth: integer;
+  Breite des TSliderEdit-Sliders
+
+SpinBtnHeight: integer;
+  Höhe der Spinbuttons der TNumericEdit-Komponente
+
+SpinControlWidth: integer;
+  Durchmesser des SpinControls (Drehknopfes)
+
+TickStyle : TTickStyle;
+  tsAll		- Es werden zehn Positionsmarkierungen gezeichnet
+  tsHalf	- Es werden nur drei Positionsmarkierungen gezeichnet
+  tsNone	- Es werden keine Positionsmarkierungen gezeichnet.
+
+Value: extended;
+  Der eingestellte Wert
+
+ValueHistory: boolean;
+  Wenn diese Eigenschaft den Wert "true" hat und der Eigenschaft "PopupMenu"
+  kein Popop-Menü zugewiesen ist, werden die letzten vier eingestellten Werte
+  der "Value"-Eigenschaft gespeichert und können aus einem Popup-Menü abgerufen
+  werden, wenn mit der rechten Maustaste auf die Komponente geklickt wurde.
+
+
+B) Ereignisse:
+--------------
+
+OnChange: TNotifyEvent;
+  wird bei jeder Änderung der Value-Eigenschaft ausgelöst.
+
+OnHideSlider: TNotifyEvent;
+  wird bei ausgelöst, wenn die TSliderEdit-Komponente ausgeblendet wird.
+
+OnHistoryClick: TNotifyEvent;
+  wird bei ausgelöst, wenn aus dem History-PopupMenü ein gespeicherter Wert 
+  abgerufen wird.
+
+OnShowSlider: TNotifyEvent;
+  wird bei ausgelöst, wenn die TSliderEdit-Komponente angezeigt wird.
+
+OnSpinBtnClick: TNESpinBtnClick;
+  wird ausgelöst wenn einer der SpinButtons der TNumericEdit-Komponente
+  angeklickt wurde.
+
+
+Eine Beschreibung der Komponente TNumericEdit findet man in der Datei "NumEdit.txt", 
+ein Beschreibung der Komponente TSliderEdit findet man in der Datei "SlidEdit.txt".
+Die Funktion der Komponenten läßt sich außerdem im beigefügten Demo-Programm im 
+Ordner "Demo" sehen.

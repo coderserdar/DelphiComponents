@@ -1,0 +1,656 @@
+07.02.2009 21:31:34  RRR    
+
+Bugfix in build #343 (QA0303022009)
+
+
+<(root)>
+ DMPlot.pas             Test axis visibility in
+                        PaintTitleFrame and PaintLabelsFrame
+
+--------------- [end of checkin] ---------------
+
+29.01.2009 16:42:15  RRR    
+
+New in build #342: several improvements 
+and bugfixes and totally rewrited TPlotLabel
+objects - now it has really universal 
+coordinate system that can be attached to 
+any combination of any plot elements.
+This feature allows to create specialized
+plot types (charts, polar etc).
+
+========================================
+In this build all work on improvements 
+of presentation features of DM2003
+graphic engine was finished.
+
+
+<(root)>
+ DMWorksheet.pas        Now worksheet copies cell text "as is", using
+                        text returned by OnGetCellText (see QA0218102008)
+
+ DMPlot.pas             A lot of changes in this unit:
+                        1. TAxis class - TickLength property added 
+                        (QA0118092008)
+                        2. TPlot.PaintCanvas now public (may be used to 
+                        make preview)
+                        3. Bugfix: some datasets may crash plot due to 
+                        underflows
+                        4. TPlotLabel coordinate system redesigned 
+                        (QA0117062008,
+                        see also QA0318012009); now PinModeXXX should be 
+                        used instead
+                        of TX,YAxis properties
+                        5. Vertical text in labels (QA0218012009)
+                        6. TPlotLabel.Alignment property added (see 
+                        QA0221012009)
+
+ HTextDlg.dfm           Renamed HTMLDlg unit (conflict with
+                        same-named unit in DMEditor!!)
+
+ SerieDlg.pas           HTMLDlg.pas renamed to HTextDlg.pas
+ HTextDlg.pas           Renamed HTMLDlg unit (conflict with
+                        same-named unit in DMEditor!!)
+
+ DMHTMLText.pas         Correctly process custom legend with empty
+                        text (see QA0117102008)
+
+ AxisDlg.pas            1. Controls for TickLength property 
+                        (QA0118092008)
+                        2. HTMLDlg.pas renamed to HTextDlg.pas
+
+ AxisDlg.dfm            1. Controls for TickLength property added
+                        2. other controls rearranged to free space
+
+ DM2003.dof             Build #342
+ DM2003.res             Build #342
+ DM2003.dpk             HTMLDlg.pas renamed to HTextDlg.pas
+--------------- [end of checkin] ---------------
+
+17.10.2008 0:54:59  RRR    
+
+In the build #335:
+1. Customized plot legends (QA0113092008)
+2. Zeros in error bars (QA0110092008)
+
+
+<(root)>
+ DMPlot.pas             1. Customized plot legends (QA0113092008)
+                        2. Zeros in error bars (QA0110092008)
+
+ DMHTMLText.pas         function ProcessLegendAction added
+ AxisDlg.dfm            Tab order fixed
+--------------- [end of checkin] ---------------
+
+05.09.2008 0:55:22  RRR    
+
+In the build #333, DM2003 graphics was seriously
+improved. The main changes in the design related 
+to the new plot labels scaling mode. 
+
+Following main items should be mentioned:
+
+1) axis titles Margins (QA0106062008)
+In pmMargins MouseMode now it is possible to move
+tick labels and title (TitleMargin, LabelMargin)
+
+2) label positions and scaling (QA0117062008)
+3 modes - Frame, Axis and Scale for all coordinates
++ 3 additional label types (line, rectangle and 
+ellipse)
+
+3) series point marker/leader (QA0102082008)
+Now it is controlled by special property
+
+4) Error Bars for data series (QA0105082008).
+Now 2 additional columns may be defined as X/Y
+error bars.
+
+5) TSerie.AreaBorder property (QA0109082008).
+Any series or axis may be used to fill contours 
+limited by series curves or axis.
+
+6) linked axis feature (QA0111082008).
+
+
+
+<(root)>
+ HTMLDlg.pas            Unit header added
+ DMPlotEdit.pas         1. New TAreaBorder property editor
+                        2. TSerieProperty dialog setup changed
+
+ SerieDlg.pas           A lot of new controls added for AreaBorder, 
+                        Error bars and Leader (marker) properties
+                        
+
+ SerieDlg.dfm           A lot of new controls added for AreaBorder, 
+                        Error bars and Leader (marker) properties
+                        
+
+ DMPlot.pas             A lot of enhancements in almost all objects:
+                        1. TAxis: TitleMargin, IsLinked, InnerTicks, 
+                        LabelMargin
+                        2. TSerie: LeaderPosition, X/YErrorColumn, 
+                        AreaBorder
+                        3. TPlotLabel: PinModeX,Y1,2, Transparent
+                        4. TPlot: AreaSeries, AutoScaleLabels, 
+                        OnGetAxisLabel
+
+ AxisDlg.pas            New checkboxes for InnerTicks 
+                        and IsLinked properties
+
+ AxisDlg.dfm            New checkboxes for InnerTicks 
+                        and IsLinked properties
+
+ DM2003.res             New build #333
+ DM2003.dof             New build #333
+--------------- [end of checkin] ---------------
+
+30.07.2008 12:26:27  RRR    
+
+Build #316
+
+
+<(root)>
+ DMWorksheet.pas        Build #316 - selected cell frame color fix
+--------------- [end of checkin] ---------------
+
+15.06.2008 16:37:12  RRR    
+
+New in build #315:
+Rich text support in labels and
+axis titles (html formatting).
+Property editor UI also changed.
+
+
+<(root)>
+ HTMLDlg.dfm            First file check-in
+ DMWorksheet.pas        Support for rich text in column headers added
+ DMPlot.pas             1. TAxis.ShowExpression property added
+                        2. A lot of changes for rich text support
+                        (hude TAxis.Paint and TPlotLabel.Paint
+                        procedures about completely rewrited)
+
+ SerieDlg.pas           Support for HTML Text Editor added
+ SerieDlg.dfm           1. SpinEdits for First/Last line enlarged
+                        2. HTMLTextBitBtn added
+
+ HTMLDlg.pas            First file check-in
+ DM2003.dof             New build #315
+ AxisDlg.pas            Support for HTML Text Editor and new 
+                        ShowExpression property added
+
+ AxisDlg.dfm            ShowExpressionCheckbox and HTMLTextBitBtn added
+ DMHTMLText.pas         First file check-in
+ DM2003.res             New build #315
+ DM2003.dpk             2 new units added
+--------------- [end of checkin] ---------------
+
+11.05.2008 1:18:21  RRR    
+
+New in version 11.8.0.305 - support of 
+double precision floating point numbers
+(when doublefloat defined, TReal=double)
+
+
+<(root)>
+ DMData.inc             doublefloat condition added
+ DMPlot.pas             public TPlot.GetPoint now has TReal X,Y 
+                        parameters. This change is for doubles support.
+
+ DMWorksheet.pas        Inherited DrawCell called for ExpressionCell 
+                        color support
+
+ DM2003.dof             New version 11.8.0.305
+ DM2003.res             New version 11.8.0.305
+ DMContainer.pas        1. long data file line (>256 chars) bug fixed
+                        2. now container correctly supports doubles 
+
+--------------- [end of checkin] ---------------
+
+23.04.2007 2:36:23  RRR    
+
+Build #295 - 3 plot bugfixes
+
+
+<(root)>
+ DMWebIniFile.pas       First file check-in
+ DMPlot.pas             1. axis label font size and margins (bugfix)
+                        2. addpoint - incorrect point drawing (bugfix)
+                        3. label pen width not copied/pasted (bugfix)
+
+--------------- [end of checkin] ---------------
+
+10.05.2006 2:26:33  RRR    
+
+Build #242
+
+
+<(root)>
+ DMPlot.pas             1. rounding bugfix (points invisible 
+                        if coordinates are the same)
+                        2. hidden series are not clickable
+
+--------------- [end of checkin] ---------------
+
+02.03.2006 17:48:16  RRR    
+
+Bugfix
+
+
+<(root)>
+ AxisDlg.pas            Beep removed (ALWAYS when scale too large)
+--------------- [end of checkin] ---------------
+
+26.02.2006 21:07:38  RRR    
+
+Build #240
+
+
+<(root)>
+ DMWorksheet.pas        1. OnGetCellText event support added
+                        2. Paste performance greatly improved
+
+ SerieDlg.dfm           # of functional series intervals may be 1
+ DMPlot.pas             TAxis object significantly modified 
+                        to support date/time labels format
+
+ AxisDlg.dfm            A lot of changes - date/time format supported,
+                        + several minor improvements
+
+ AxisDlg.pas            A lot of changes - date/time format supported
+--------------- [end of checkin] ---------------
+
+18.12.2005 0:48:13  RRR    
+
+Build #226
+
+
+<(root)>
+ DMWorksheet.pas        Bugfix in PasteFromClipboard (row,col 
+                        initialization)
+
+ DMPlot.pas             1. Now points in functional series may be clicked
+                        2. OnSelectionChange event called at the very end
+
+--------------- [end of checkin] ---------------
+
+12.12.2005 19:29:22  RRR    
+
+Build #223
+
+
+<(root)>
+ DMWebBrowser.pas       Functional keys handling commented
+                        (moved to MainWnd, as in TEmbeddedWB)
+
+--------------- [end of checkin] ---------------
+
+29.08.2005 16:36:26  RRR    
+
+Build #222
+
+
+<(root)>
+ DMPlot.pas             Error in MakeMajorTicks corrected
+                        (assertion violation at large scales)
+
+--------------- [end of checkin] ---------------
+
+10.08.2005 19:36:12  RRR    
+
+Build #220
+
+
+<(root)>
+ DMPlot.pas             Zillion of enhancements in following areas:
+                        ===========================================
+                        a) width of vertical axis labels calculated
+                        more correctly (by real label values!)
+                        b) ZERO label value processed correctly
+                        c) Delete and Point Eraser correct ALL
+                        series blocks in ALL forms
+                        d) enhanced painting of plot selection
+                        (especially actual on W98)
+                        e) numerous log scale axis enhancements: 
+                        ticks with reverse scale bug, label selection,
+                        ruler and translation tools
+                        f) autohide ticks and labels on resize
+                        g) copy points from functional series
+
+--------------- [end of checkin] ---------------
+
+10.06.2005 18:41:39  RRR    
+
+Build #203
+
+
+<(root)>
+ DMContainer.pas        Decimal separator in files forced to "."
+--------------- [end of checkin] ---------------
+
+01.04.2005 2:22:48  RRR    
+
+Decimal separator bugfix
+
+
+<(root)>
+ DMWorksheet.pas        Decimal separator bugfix
+ DMContainer.pas        Decimal separator bugfix
+--------------- [end of checkin] ---------------
+
+01.04.2005 1:51:01  RRR    
+
+Build #202 - Decimal separator bugfix
+
+
+<(root)>
+ DMWorksheet.pas        Decimal separator bugfix
+ DMContainer.pas        Decimal separator bugfix in Str2Real
+--------------- [end of checkin] ---------------
+
+23.01.2005 20:06:01  RRR    
+
+Build #200
+
+
+<(root)>
+ DMUserAction.pas       Now providers may be not loaded into IDE
+ DMUserActionEditor.pas   Now providers may be not loaded into IDE
+ DM2003.dof             Build #200
+ DM2003.res             Build #200
+--------------- [end of checkin] ---------------
+
+28.11.2004 19:28:44  RRR    
+
+Build #195 (Release)
+
+
+<(root)>
+ DMPlot.pas             Label properties assignment order (bugfix)
+                        Incorrect Legend printing fixed (scaling)
+
+--------------- [end of checkin] ---------------
+
+15.08.2004 15:04:49  RRR    
+
+Build #185 (release candidate)
+
+
+<(root)>
+ DMPlot.pas             1. labels support
+                        2. TSerie clipboard (2 props)
+                        3. TSeries update bugfix
+
+--------------- [end of checkin] ---------------
+
+30.07.2004 16:58:09  RRR    
+
+Plot bugfixes before adding objects
+
+
+<(root)>
+ SerieDlg.pas           Points and dotted lines bugfix
+ DMWebBrowser.pas       SetScrollBars/3D implemented
+ DMPlot.pas             Many bugfixes:
+                        Range check (scaling points and selection)
+                        Points and dotted lines colors
+                        Selection now not disappear when change serie
+                        Zoom both axes mode added
+                        Margins bugfix (new algorithm)
+
+--------------- [end of checkin] ---------------
+
+16.06.2004 23:15:54  RRR    
+
+Build # 158
+
+
+<(root)>
+ DMPlot.pas             Plot property added for TAxis
+ DM2003.res             Build # 158
+ DMWorksheet.pas        Default shortcuts placed into ifdef
+ DMWebBrowser.pas       Accelerator keys problem solved
+ DM2003.cfg             Compiler option changed
+ AxisDlg.dfm            Help context bugfix
+ DM2003.dpk             Compiler option changed
+ DM2003.dof             Build # 158
+--------------- [end of checkin] ---------------
+
+02.03.2004 21:27:56  RRR    
+
+TPlot.ClipPoints property added
+
+
+<(root)>
+ DMPlot.pas             Clip points property added
+--------------- [end of checkin] ---------------
+
+24.02.2004 3:09:51  RRR    
+
+Minor changes. Check-in before 23.2
+
+
+<(root)>
+ DMWorksheet.pas        MM bugs - local var lists
+ DMPlot.pas             points clipping ifdef, minor printing bugfixes,
+                        now Scale in invisible series works
+
+ DMContainer.pas        copydataformat ifdef added
+--------------- [end of checkin] ---------------
+
+16.02.2004 20:06:01  RRR    
+
+Two bugfixes
+
+
+<(root)>
+ DMPlot.pas             PointClickEvent (result), edit point bug
+ DMContainer.pas        TRealData format bugfix
+--------------- [end of checkin] ---------------
+
+13.02.2004 2:25:13  RRR    
+
+A lot of changes in build #22:
+now Library is under MM!!!!
+
+
+<(root)>
+ DMPlot.pas             A lot of changes in build #22:
+                        now Library is under MM!!!!
+
+ DMWorksheet.pas        A lot of changes in build #22:
+                        now Library is under MM!!!!
+
+ SerieDlg.dfm           ParameterLabel caption changed
+ DMContainer.pas        A lot of changes in build #22:
+                        now Library is under MM!!!!
+
+ DM2003.dof             Build #22
+ DM2003.dpk             DCR included
+ DM2003.res             Build #22
+--------------- [end of checkin] ---------------
+
+09.02.2004 19:59:46  RRR    
+
+New build #20 - removed DM_TLB
+(DMApplication component)
+
+
+<(root)>
+ DM2003.dpk             Removed DM_TLB (DMApplication component)
+ DM2003.res             New build
+ DM2003.dof             New build
+ DM_TLB.pas             <deleted>
+ DM2003.cfg             New build
+--------------- [end of checkin] ---------------
+
+06.01.2004 16:10:55  RRR    
+
+Check-in for Build #18
+
+
+<(root)>
+ DMWorksheet.pas        UseTabs parameter added to Copy member
+ DMPlot.pas             UseTabs copy mode added, new plottranserror, 
+                        AddPoint
+                        implemented, bugfixes
+
+ DMContainer.pas        UseTabs global flag removed (as in DM2K!)
+--------------- [end of checkin] ---------------
+
+22.12.2003 22:04:38  RRR    
+
+DMWebBrowser bugfixes
+
+
+<(root)>
+ DMWebBrowser.pas       IDocHostShowUI pointer bug fixed, fireevent 
+                        returns result
+
+--------------- [end of checkin] ---------------
+
+12.12.2003 18:51:16  RRR    
+
+Changes in DM2003 build #28
+
+
+<(root)>
+ TextDlg.pas            Changes for TDMComboBox ActiveX
+ DMWebBrowser.pas       Security manager, event support
+ DMComboBox.pas         Budfixes in ButtonClick and WMSIZE
+--------------- [end of checkin] ---------------
+
+05.12.2003 16:03:57  RRR    
+
+Textspeedbutton replaced by expressioncombo
+new component added to the package
+
+
+<(root)>
+ DMComboBox.pas         first file check-in
+ DM2003.res             new build 17
+ SerieDlg.dfm           Textspeedbutton replaced by expressioncombo
+ TextDlg.pas            width calculation fixed
+ SerieDlg.pas           Textspeedbutton replaced by expressioncombo
+ AxisDlg.pas            Textspeedbutton replaced by expressioncombo
+ AxisDlg.dfm            Textspeedbutton replaced by expressioncombo
+ DM_TLB.pas             New members
+ DM2003.dpk             DMCombo added
+ DM2003.dof             new build 17
+--------------- [end of checkin] ---------------
+
+29.11.2003 18:04:35  RRR    
+
+TDMApp ole server (DM_TLB) + some bugfixes
+
+
+<(root)>
+ DMContainer.pas        noname removed from constructor
+ DMPlot.pas             axiskind prefixes changed to axXXX to avoid 
+                        conflicts
+
+ DM_TLB.pas             First file check-in
+ DM2003.dpk             dm_tlb added
+--------------- [end of checkin] ---------------
+
+11.11.2003 16:58:15  RRR    
+
+DMPlot.pas bugs fixed
+
+
+<(root)>
+ DMPlot.pas             Fixed bugs with fmin=fmax & smartticks,
+                        no title if fmin=fmax and right axis tick
+
+ DM2003.res             New build
+ DM2003.dof             New build
+--------------- [end of checkin] ---------------
+
+03.11.2003 17:46:16  RRR    
+
+Minor improvements in container
+
+
+<(root)>
+ DMContainer.pas        Added hourglass cursor for long operations
+--------------- [end of checkin] ---------------
+
+30.10.2003 17:37:59  RRR    
+
+Undefined user action state 
+minor improvements
+
+
+<(root)>
+ DMUserAction.pas       New props added + undefined state
+ DMWorksheet.pas        AlignTextout made public
+ SerieDlg.pas           Plot color used for preview
+ ActPrv.inc             undefined state added
+ DM2003.dof             build 16
+ DM2003.res             build 16
+--------------- [end of checkin] ---------------
+
+19.10.2003 17:24:32  RRR    
+
+This check-in after finishing library beta
+and before starting DM2003.EXE core
+
+
+<(root)>
+ DMWorksheet.pas        Screen.cursor set, Usetabs now global flag
+ DMPlotEdit.pas         Serie editor added
+ SerieDlg.pas           ColorGroups removed, AxisGroups added
+                        Visible checkbox added
+
+ SerieDlg.dfm           Too many changes...
+ DMPlot.pas             Added TPlotCopyXXX types
+                        TAxis.Scale(Abs=true) + changes in TAxis.Paint
+                        Some methods made public, TSerie.PaintPoint 
+                        removed
+                        DrawSelection,Margins have Canvas parameter
+                        Tplot.Savetofile, print, delete, copy added
+                        Serie scaling and setserieindex bugfixes
+                        Container.showprogress added
+                         
+
+ DM2003.dpk             Added todo and SerieDlg.pas
+ DM2003.dof             New build 14
+ DMContainer.pas        Added UseTabs global flag
+                        Corrected implementation of TRealData.GetData
+
+ DM2003.res             New build 14
+                        New icon
+
+--------------- [end of checkin] ---------------
+
+18.10.2003 17:51:26  RRR    
+
+First project check-in
+
+
+<(root)>
+ DMUserAction.pas       First file check-in
+ DMUserActionEditor.pas   First file check-in
+ DMSpeedButton.pas      First file check-in
+ DMPlot.pas             First file check-in
+ DMPlotEdit.pas         First file check-in
+ DMWebBrowser.pas       First file check-in
+ TextDlg.dfm            First file check-in
+ TextDlg.pas            First file check-in
+ SerieDlg.pas           First file check-in
+ DMWorksheet.pas        First file check-in
+ SerieDlg.dfm           First file check-in
+ DM2003.cfg             First file check-in
+ DM2003.dof             First file check-in
+ AxisDlg.pas            First file check-in
+ ActPrv.inc             First file check-in
+ AxisDlg.dfm            First file check-in
+ DM2003.dpk             First file check-in
+ DMFloatEdit.pas        First file check-in
+ DMMemo.pas             First file check-in
+ DMData.inc             First file check-in
+ DM2003.res             First file check-in
+ DMContainer.pas        First file check-in
+--------------- [end of checkin] ---------------
+

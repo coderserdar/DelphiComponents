@@ -1,0 +1,444 @@
+object UIBTransactionEditForm: TUIBTransactionEditForm
+  Left = 403
+  Height = 349
+  Top = 285
+  Width = 448
+  HorzScrollBar.Page = 447
+  VertScrollBar.Page = 348
+  ActiveControl = CommonBox
+  Caption = 'UIB Transaction Editor'
+  ClientHeight = 349
+  ClientWidth = 448
+  Font.Height = 11
+  Font.Name = 'MS Sans Serif'
+  Font.Pitch = fpVariable
+  OnCreate = FormCreate
+  Position = poDesktopCenter
+  object Label1: TLabel
+    Left = 8
+    Height = 14
+    Top = 6
+    Width = 47
+    Caption = 'Commons'
+    ParentColor = False
+  end
+  object CommonBox: TComboBox
+    AnchorSideLeft.Control = Label1
+    AnchorSideTop.Control = Label1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 14
+    Height = 21
+    Top = 26
+    Width = 428
+    Anchors = [akTop, akLeft, akRight]
+    AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
+    BorderSpacing.Around = 6
+    ItemHeight = 13
+    Items.Strings = (
+      'Default'
+      'SnapShot'
+      'Read Committed'
+      'Read Only Table Stability'
+      'Read Write Table Stability'
+      '<custom>'
+    )
+    MaxLength = 0
+    OnChange = CommonBoxChange
+    Style = csDropDownList
+    TabOrder = 0
+  end
+  object OK: TButton
+    Left = 285
+    Height = 30
+    Top = 314
+    Width = 75
+    Anchors = [akRight, akBottom]
+    BorderSpacing.InnerBorder = 4
+    Caption = '&OK'
+    ModalResult = 1
+    OnClick = OKClick
+    TabOrder = 2
+  end
+  object Cancel: TButton
+    Left = 365
+    Height = 30
+    Top = 314
+    Width = 75
+    Anchors = [akRight, akBottom]
+    BorderSpacing.InnerBorder = 4
+    Caption = '&Cancel'
+    ModalResult = 2
+    TabOrder = 3
+  end
+  object OptionPanel: TPanel
+    AnchorSideLeft.Control = Label1
+    AnchorSideTop.Control = CommonBox
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = CommonBox
+    AnchorSideRight.Side = asrBottom
+    Left = 8
+    Height = 253
+    Top = 53
+    Width = 434
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    ClientHeight = 253
+    ClientWidth = 434
+    TabOrder = 1
+    object ChkConsistency: TCheckBox
+      Left = 8
+      Height = 13
+      Top = 8
+      Width = 77
+      BorderSpacing.Top = 6
+      Caption = 'Consistency'
+      OnClick = ChkOptionClick
+      TabOrder = 0
+    end
+    object ChkConcurrency: TCheckBox
+      Tag = 1
+      AnchorSideLeft.Control = ChkConsistency
+      AnchorSideTop.Control = ChkConsistency
+      AnchorSideTop.Side = asrBottom
+      Left = 8
+      Height = 13
+      Top = 27
+      Width = 80
+      BorderSpacing.Top = 6
+      Caption = 'Concurrency'
+      OnClick = ChkOptionClick
+      TabOrder = 1
+    end
+    object ChkShared: TCheckBox
+      Tag = 2
+      AnchorSideLeft.Control = ChkRestartRequests
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = ChkConsistency
+      Left = 232
+      Height = 13
+      Top = 8
+      Width = 54
+      BorderSpacing.Left = 24
+      Caption = 'Shared'
+      OnClick = ChkOptionClick
+      TabOrder = 12
+    end
+    object ChkProtected: TCheckBox
+      Tag = 3
+      AnchorSideLeft.Control = ChkRestartRequests
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = ChkShared
+      AnchorSideTop.Side = asrBottom
+      Left = 232
+      Height = 13
+      Top = 27
+      Width = 66
+      BorderSpacing.Left = 24
+      BorderSpacing.Top = 6
+      Caption = 'Protected'
+      OnClick = ChkOptionClick
+      TabOrder = 13
+    end
+    object ChkExclusive: TCheckBox
+      Tag = 4
+      AnchorSideLeft.Control = ChkRestartRequests
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = ChkProtected
+      AnchorSideTop.Side = asrBottom
+      Left = 232
+      Height = 13
+      Top = 46
+      Width = 65
+      BorderSpacing.Left = 24
+      BorderSpacing.Top = 6
+      Caption = 'Exclusive'
+      OnClick = ChkOptionClick
+      TabOrder = 14
+    end
+    object ChkWait: TCheckBox
+      Tag = 5
+      AnchorSideLeft.Control = ChkConsistency
+      AnchorSideTop.Control = ChkConcurrency
+      AnchorSideTop.Side = asrBottom
+      Left = 8
+      Height = 13
+      Top = 46
+      Width = 42
+      BorderSpacing.Top = 6
+      Caption = 'Wait'
+      OnClick = ChkOptionClick
+      TabOrder = 2
+    end
+    object ChkNowait: TCheckBox
+      Tag = 6
+      AnchorSideLeft.Control = ChkConsistency
+      AnchorSideTop.Control = ChkWait
+      AnchorSideTop.Side = asrBottom
+      Left = 8
+      Height = 13
+      Top = 65
+      Width = 53
+      BorderSpacing.Top = 6
+      Caption = 'Nowait'
+      OnClick = ChkOptionClick
+      TabOrder = 3
+    end
+    object ChkRead: TCheckBox
+      Tag = 7
+      AnchorSideLeft.Control = ChkConsistency
+      AnchorSideTop.Control = ChkNowait
+      AnchorSideTop.Side = asrBottom
+      Left = 8
+      Height = 13
+      Top = 84
+      Width = 46
+      BorderSpacing.Top = 6
+      Caption = 'Read'
+      OnClick = ChkOptionClick
+      TabOrder = 4
+    end
+    object ChkWrite: TCheckBox
+      Tag = 8
+      AnchorSideLeft.Control = ChkConsistency
+      AnchorSideTop.Control = ChkRead
+      AnchorSideTop.Side = asrBottom
+      Left = 8
+      Height = 13
+      Top = 103
+      Width = 45
+      BorderSpacing.Top = 6
+      Caption = 'Write'
+      OnClick = ChkOptionClick
+      TabOrder = 5
+    end
+    object ChkLockRead: TCheckBox
+      Tag = 9
+      AnchorSideLeft.Control = ChkConsistency
+      AnchorSideBottom.Control = LockReadTables
+      AnchorSideBottom.Side = asrBottom
+      Left = 8
+      Height = 13
+      Top = 130
+      Width = 70
+      Anchors = [akLeft, akBottom]
+      Caption = 'LockRead'
+      OnClick = ChkOptionClick
+      TabOrder = 18
+    end
+    object ChkLockWrite: TCheckBox
+      Tag = 10
+      AnchorSideLeft.Control = ChkConsistency
+      AnchorSideBottom.Control = LockWriteTable
+      AnchorSideBottom.Side = asrBottom
+      Left = 8
+      Height = 13
+      Top = 157
+      Width = 69
+      Anchors = [akLeft, akBottom]
+      Caption = 'LockWrite'
+      OnClick = ChkOptionClick
+      TabOrder = 20
+    end
+    object ChkVerbTime: TCheckBox
+      Tag = 11
+      AnchorSideLeft.Control = ChkRestartRequests
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = ChkExclusive
+      AnchorSideTop.Side = asrBottom
+      Left = 232
+      Height = 13
+      Top = 65
+      Width = 65
+      BorderSpacing.Left = 24
+      BorderSpacing.Top = 6
+      Caption = 'VerbTime'
+      OnClick = ChkOptionClick
+      TabOrder = 15
+    end
+    object ChkCommitTime: TCheckBox
+      Tag = 12
+      AnchorSideLeft.Control = ChkRestartRequests
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = ChkVerbTime
+      AnchorSideTop.Side = asrBottom
+      Left = 232
+      Height = 13
+      Top = 84
+      Width = 77
+      BorderSpacing.Left = 24
+      BorderSpacing.Top = 6
+      Caption = 'CommitTime'
+      OnClick = ChkOptionClick
+      TabOrder = 16
+    end
+    object ChkIgnoreLimbo: TCheckBox
+      Tag = 13
+      AnchorSideLeft.Control = ChkRestartRequests
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = ChkCommitTime
+      AnchorSideTop.Side = asrBottom
+      Left = 232
+      Height = 13
+      Top = 103
+      Width = 78
+      BorderSpacing.Left = 24
+      BorderSpacing.Top = 6
+      Caption = 'IgnoreLimbo'
+      OnClick = ChkOptionClick
+      TabOrder = 17
+    end
+    object ChkReadCommitted: TCheckBox
+      Tag = 14
+      AnchorSideLeft.Control = LockReadTables
+      AnchorSideTop.Control = ChkConsistency
+      Left = 109
+      Height = 13
+      Top = 8
+      Width = 95
+      BorderSpacing.Left = 7
+      Caption = 'ReadCommitted'
+      OnClick = ChkOptionClick
+      TabOrder = 6
+    end
+    object ChkAutoCommit: TCheckBox
+      Tag = 15
+      AnchorSideLeft.Control = LockReadTables
+      AnchorSideTop.Control = ChkNoRecVersion
+      AnchorSideTop.Side = asrBottom
+      Left = 109
+      Height = 13
+      Top = 65
+      Width = 76
+      BorderSpacing.Left = 7
+      BorderSpacing.Top = 6
+      Caption = 'AutoCommit'
+      OnClick = ChkOptionClick
+      TabOrder = 9
+    end
+    object ChkRecVersion: TCheckBox
+      Tag = 16
+      AnchorSideLeft.Control = LockReadTables
+      AnchorSideTop.Control = ChkReadCommitted
+      AnchorSideTop.Side = asrBottom
+      Left = 109
+      Height = 13
+      Top = 27
+      Width = 75
+      BorderSpacing.Left = 7
+      BorderSpacing.Top = 6
+      Caption = 'RecVersion'
+      OnClick = ChkOptionClick
+      TabOrder = 7
+    end
+    object ChkNoRecVersion: TCheckBox
+      Tag = 17
+      AnchorSideLeft.Control = LockReadTables
+      AnchorSideTop.Control = ChkRecVersion
+      AnchorSideTop.Side = asrBottom
+      Left = 109
+      Height = 13
+      Top = 46
+      Width = 89
+      BorderSpacing.Left = 7
+      BorderSpacing.Top = 6
+      Caption = 'NoRecVersion'
+      OnClick = ChkOptionClick
+      TabOrder = 8
+    end
+    object ChkRestartRequests: TCheckBox
+      Tag = 18
+      AnchorSideLeft.Control = LockReadTables
+      AnchorSideTop.Control = ChkAutoCommit
+      AnchorSideTop.Side = asrBottom
+      Left = 109
+      Height = 13
+      Top = 84
+      Width = 99
+      BorderSpacing.Left = 7
+      BorderSpacing.Top = 6
+      Caption = 'RestartRequests'
+      OnClick = ChkOptionClick
+      TabOrder = 10
+    end
+    object ChkNoAutoUndo: TCheckBox
+      Tag = 19
+      AnchorSideLeft.Control = LockReadTables
+      AnchorSideTop.Control = ChkRestartRequests
+      AnchorSideTop.Side = asrBottom
+      Left = 109
+      Height = 13
+      Top = 103
+      Width = 82
+      BorderSpacing.Left = 7
+      BorderSpacing.Top = 6
+      Caption = 'NoAutoUndo'
+      OnClick = ChkOptionClick
+      TabOrder = 11
+    end
+    object LockReadTables: TEdit
+      AnchorSideLeft.Control = LockTimeoutValue
+      AnchorSideTop.Control = ChkWrite
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = OptionPanel
+      AnchorSideRight.Side = asrBottom
+      Left = 102
+      Height = 21
+      Top = 122
+      Width = 326
+      Anchors = [akTop, akLeft, akRight]
+      AutoSize = True
+      BorderSpacing.Top = 6
+      BorderSpacing.Right = 6
+      BorderSpacing.Bottom = 6
+      TabOrder = 19
+    end
+    object LockWriteTable: TEdit
+      AnchorSideLeft.Control = LockTimeoutValue
+      AnchorSideTop.Control = LockReadTables
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = OptionPanel
+      AnchorSideRight.Side = asrBottom
+      Left = 102
+      Height = 21
+      Top = 149
+      Width = 326
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Top = 6
+      BorderSpacing.Right = 6
+      BorderSpacing.Bottom = 6
+      TabOrder = 21
+    end
+    object ChkLockTimeOut: TCheckBox
+      Tag = 20
+      AnchorSideLeft.Control = ChkConsistency
+      AnchorSideBottom.Control = LockTimeoutValue
+      AnchorSideBottom.Side = asrBottom
+      Left = 8
+      Height = 13
+      Top = 184
+      Width = 82
+      Anchors = [akLeft, akBottom]
+      Caption = 'LockTimeout'
+      OnClick = ChkOptionClick
+      TabOrder = 22
+      Visible = False
+    end
+    object LockTimeoutValue: TEdit
+      AnchorSideLeft.Control = ChkLockTimeOut
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = LockWriteTable
+      AnchorSideTop.Side = asrBottom
+      Left = 102
+      Height = 21
+      Top = 176
+      Width = 57
+      AutoSize = True
+      BorderSpacing.Left = 6
+      BorderSpacing.Around = 6
+      TabOrder = 23
+      Text = '0'
+      Visible = False
+    end
+  end
+end

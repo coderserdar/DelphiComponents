@@ -1,0 +1,475 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+
+	<title>
+		DelphiDabbler.com Info Sheet: Macro Toolbar Display Wizard for Delphi 7
+	</title>
+
+	<style type="text/css">
+		<!--
+		body {
+			margin: 1em;
+			padding: 0;
+			font-family: Verdana, Arial, sans-serif;
+			font-size: 9pt;
+			line-height: 150%;
+		}
+		h1 {
+			margin: 0 0 1em 0;
+			padding: 0.5em;
+			border: 1px silver solid;
+			background-color: #eee;
+			font-size: 13pt;
+			font-weight: bold;
+			text-align: center;
+		}
+		h1 .subtitle {
+			font-style: italic;
+			color: #336;
+		}
+		h2 {
+			margin: 1em 0 0 0;
+			padding: 0;
+			padding-bottom: 6px;
+			border-bottom: 1px silver solid;
+			font-size: 11pt;
+			font-weight: bold;
+		}
+		h3 {
+			margin: 0.5em 0 0 0;
+			padding: 0;
+			font-size: 9pt;
+			font-weight: bold;
+		}
+		p {
+			margin: 0.5em 0 0 0;
+			padding: 0;
+		}
+		ul, ol {
+			margin: 0.5em 0 0 3em;
+			padding: 0;
+		}
+		ul {
+			list-style-type: square;
+		}
+		ul.spaced li,
+		ol.spaced li {
+			margin-top: 0.5em;
+		}
+		ul.spaced li,
+		ol.spaced li {
+			margin-top: 0.5em;
+		}
+		ul.unspaced li,
+		ol.unspaced li {
+			margin-top: 0;
+		}
+		ul.unspaced li.first,
+		ol.unspaced li.first {
+			margin-top: 0.5em;
+		}
+		code {
+			font-family: "Courier New", Courier, monospace;
+		}
+		a:link {
+			color: #336;
+			text-decoration: underline;
+		}
+		a:visited {
+			color: #669;
+			text-decoration: underline;
+		}
+		a:active {
+			color: #336;
+			text-decoration: underline;
+		}
+		a:hover {
+			text-decoration: underline;
+		}
+		.gototop {
+			margin: 1em 0 0 0;
+			padding: 0.3em 0 0 0;
+			text-align: center;
+			position: relative;
+			float: right;
+			font-weight: bold;
+		}
+		.pullout {
+			border-left: 8px silver solid;
+			xborder-bottom: 2px silver solid;
+			xborder-top: 2px silver solid;
+			background-color: #eee;
+			margin: 0.5em 0 0 0;
+			padding: 0.25em 0.5em;
+			font-style: italic;
+		}
+		.indent {
+			margin-left: 3em;
+		}
+		.highlight {
+			color: #336;
+			font-style: italic;
+			font-weight: bold;
+		}
+		.endnotes {
+			margin: 1.5em 0 0 0;
+			padding: 1em 0 0 0;
+			border-top: 1px silver solid;
+		}
+		.comments {
+			font-style: italic;
+		}
+		.copyright,
+		.copyright a:link,
+		.copyright a:visited,
+		.copyright a:active {
+			margin: 1em 0 0 0;
+			color: gray;
+			font-size: 8pt;
+			text-align: right;
+		}
+		-->
+	</style>
+
+</head>
+
+<body>
+
+
+<h1>
+	Macro Toolbar Display Wizard for Delphi 7<br />
+	<span class="subtitle">Information Sheet</span>
+</h1>
+
+
+<h2 id="contents">Contents</h2>
+
+<ul>
+	<li><a href="#description">Description</a></li>
+	<li><a href="#compatibility">Compatibility</a></li>
+	<li><a href="#installation">Installation</a></li>
+	<li><a href="#update">Update History</a></li>
+	<li><a href="#license">License and Disclaimer</a></li>
+	<li><a href="#author">About the Author</a></li>
+</ul>
+
+
+
+<p class="gototop">
+	&raquo; <a href="#contents">Contents</a>
+</p>
+
+<h2 id="description">
+	Description
+</h2>
+
+<p>
+	Delphi 7 introduced a macro recording toolbar that can be used to record and
+	play back macros. The toolbar was to be displayed in the bottom left of the
+	editor's status bar. However, the toolbar was hidden in the release version,
+	leaving an empty space in the first panel of the status bar.
+</p>
+
+<p>
+	This wizard causes the hidden toolbar to be displayed in each open edit
+	window. It also adds a new menu item to Delphi's <em>View</em> menu that
+	toggles the toolbar on and off.
+</p>
+
+
+<p class="gototop">
+	&raquo; <a href="#contents">Contents</a>
+</p>
+
+<h2 id="compatibility">
+	Compatibility
+</h2>
+
+<p>
+	The wizard works only with Delphi 7. The macro toolbar was not available on
+	earlier versions of Delphi and later versions have a totally revised IDE.
+</p>
+
+
+<p class="gototop">
+	&raquo; <a href="#contents">Contents</a>
+</p>
+
+<h2 id="installation">
+	Installation
+</h2>
+
+<p class="pullout">
+	<strong>NOTE:</strong> This wizard will only work with Delphi 7. It will
+	fail to compile / install on any other version of Delphi.
+</p>
+
+<p>
+	The wizard source files along with supporting documentation are supplied in
+	a zip file. Before installing you need to extract all the files from the zip
+	file. The following files will be extracted:
+</p>
+
+<ul>
+	<li>
+		<code>ChangeLog.txt</code> &ndash; change log.
+	</li>
+	<li>
+		<strong><code>DDabMacroTBarDisplay.dpk</code></strong> &ndash; package
+		file that can be used to install the wizard.
+	</li>
+	<li>
+		<strong><code>DDabMacroTBarDisplayWiz.pas</code></strong> &ndash; wizard
+		source code.
+	</li>
+	<li>
+		<code>MPL.txt</code> &ndash; the Mozilla public license.
+	</li>
+	<li>
+		<code>ReadMe.htm</code> &ndash; this file.
+	</li>
+	<li>
+		<strong><code>VDDabMacroTBarDisplay.res</code></strong> &ndash; binary
+		resource file containing version information for the package.
+	</li>
+	<li>
+		<code>VDDabMacroTBarDisplay.vi</code> &ndash; version information source
+		for compilation using the DelphiDabbler
+		<a href="http://www.delphidabbler.com/vied/">Version Information
+		Editor</a>.
+	</li>
+</ul>
+
+<p>
+	<strong>Emphasised</strong> files may be used in the installation, others
+	are source or documentation files.
+</p>
+
+<p>
+	You can now proceed to install the wizard. There are two possible ways to do
+	this:
+</p>
+
+<ol>
+	<li>
+		<a href="#pkg">By compiling and installing the provided package</a>.
+	</li>
+	<li>
+		<a href="#pas">By adding the wizard source code to a pre-existing
+		design package</a>.
+	</li>
+</ol>
+
+
+<h3 id="pkg">
+	Installation using the provided package
+</h3>
+
+<ol class="spaced">
+	<li>
+		If necessary copy <code>DDabMacroTBarDisplay.dpk</code>,
+		<code>DDabMacroTBarDisplayWiz.pas</code> and
+		<code>VDDabMacroTBarDisplay.res</code> to the folder where you wish to
+		keep them.
+	</li>
+	<li>
+		Start Delphi and open <code>DDabMacroTBarDisplay.dpk</code>.
+	</li>
+	<li>
+		Compile <code>DDabMacroTBarDisplay.dpk</code>. In the package window the
+		<em>Install</em> button should now be enabled. Click this button to
+		install the package. Dismiss the message that informs you that the
+		package has been installed.
+	</li>
+	<li>
+		Close the package window. Do not permit Delphi to save any changes.
+	</li>
+	<li>
+		If the package has installed successfully you should see the macro
+		recording toolbar in the editor window's status bar. If there is no
+		editor window open, open a file in Delphi to display the window. In
+		addition, a <em>Display Macro Toolbar</em> menu item should have
+		appeared at the foot of the <em>View</em> menu.
+	</li>
+</ol>
+
+<p>
+	To uninstall the wizard choose the <em>Components | Install Packages</em>
+	menu option. In the resulting dialog box, scroll down the list of design
+	packages until you find &quot;DelphiDabbler Macro Toolbar Display
+	Wizard&quot;. Select the package, click the <em>Remove</em> button and give
+	permission to remove when prompted. Click <em>OK</em>. The macro toolbar
+	will disappear from editor windows and the menu option will be removed. If
+	you have configured any custom tool buttons to work with the wizard, they
+	too will be removed.
+</p>
+
+
+<h3 id="pas">
+	Installation into a pre-existing package
+</h3>
+
+<p>
+	If you don't want to install the provided package, you can add the wizard to
+	an existing design package, possibly the &quot;user&quot; package named
+	<code>dclusr.dpk</code>. This package can be found in
+	<code>$(DELPHI)\Lib</code>, where <code>$(DELPHI)</code> represents the path
+	where Delphi 7 is installed. Ensure that the package &quot;requires&quot;
+	<code>designide.pas</code>, which is also found in
+	<code>$(DELPHI)\Lib</code>. 
+</p>
+
+<ol class="spaced">
+
+	<li>
+		Decide upon a suitable location into which to install the wizard. This
+		may be a subdirectory of your <code>$(DELPHI)\lib</code> folder.
+	</li>
+	
+	<li>
+		Copy <code>DDabMacroTBarDisplayWiz.pas</code> to the chosen installation
+		folder. Note that this is the only file you need when installing into an
+		existing package.
+	</li>
+
+	<li>	
+		Start Delphi then:
+		
+		<ul>
+			
+			<li>
+				Choose the <em>Component | Install Component</em> menu option to
+				display the <em>Install Component</em> dialog box. Ensure the
+				<em>Into existing package</em> tab is selected. Enter the full
+				path to <code>DDabMacroTBarDisplayWiz.pas</code> in the <em>Unit
+				file name</em> edit box (use the adjacent <em>Browse</em> button
+				to navigate to the file). Choose the required package from the
+				<em>Package description</em> combo box, or by navigating to the
+				package using <em>Browse</em>. Click <em>OK</em> to confirm your
+				selections. 
+			</li>
+
+			<li>
+				A confirmation dialog box may displayed, querying whether it is
+				OK to rebuild and reinstall the package. Click <em>Yes</em> to
+				proceed.
+			</li>
+			
+			<li>
+				The package will now be built. If this succeeds the wizard will
+				now be ready for use and editor windows will display the macro
+				toolbar in the status bar. A <em>Display Macro Toolbar</em> menu
+				item should have appeared at the foot of the <em>View</em> menu.
+			</li>
+
+		</ul>
+
+	</li>
+
+	<li>
+		If you wish you can now delete <code>DDabMacroTBarDisplayWiz.pas</code>
+		from the chosen installation folder.
+	</li>
+	
+</ol>
+
+<p>
+	To remove the wizard, simply open the package into which you installed the
+	wizard, remove <code>DDabMacroTBarDisplayWiz.pas</code> and recompile the
+	package. The macro toolbar will disappear from editor windows and the
+	wizard's menu item and any custom tool buttons you added will be removed.
+	Close the package, accepting that changes should be saved.
+</p>
+
+
+<p class="gototop">
+	&raquo; <a href="#contents">Contents</a>
+</p>
+
+<h2 id="update">
+	Update History
+</h2>
+
+<p>
+	 A complete change log is provided in <code>ChangeLog.txt</code>.
+</p>
+
+
+<p class="gototop">
+	&raquo; <a href="#contents">Contents</a>
+</p>
+
+<h2 id="license">
+	License and Disclaimer
+</h2>
+
+<p>
+	This product, <em>Macro Toolbar Display Wizard for Delphi 7</em>, is subject
+	to the Mozilla Public License Version 1.1 (the &quot;License&quot;). You may
+	not use this Product except in compliance with the License. You may obtain a
+	copy of the License at
+	<a href="http://www.mozilla.org/MPL/">http://www.mozilla.org/MPL/</a> or see
+	<code>MPL.txt</code> included in the download.
+</p>
+
+<p>
+	Software distributed under the License is distributed on an &quot;AS
+	IS&quot; basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
+	the License for the specific language governing rights and limitations under
+	the License.
+</p>
+
+<p>
+	The Initial Developer of <em>Macro Toolbar Display Wizard for Delphi 7</em>
+	is Peter D Johnson
+	(<a href="http://www.delphidabbler.com/">www.delphidabbler.com</a>).
+	Portions created by the Initial Developer are Copyright &copy; 2007 Peter 
+	Johnson. All Rights Reserved.
+</p>
+
+
+<p>
+	All relevant trademarks are acknowledged.
+</p>
+
+
+<p class="gototop">
+	&raquo; <a href="#contents">Contents</a>
+</p>
+
+<h2 id="author">
+	About the Author
+</h2>
+
+<p>
+	I'm Peter Johnson &ndash; a hobbyist programmer living in Ceredigion in West
+	Wales,  UK, writing write mainly in Delphi. My programs are available for
+	download from:
+	<a href="http://www.delphidabbler.com/">http://www.delphidabbler.com/</a>.
+</p>
+
+
+<div class="endnotes">
+
+	<div class="comments">
+		Please
+		<a href="http://www.delphidabbler.com/contact">
+		let me know</a> if you have any comments about this wizard, if you have
+		found a bug, or you want to suggest any updates.
+	</div>
+
+	<div class="copyright">
+		This info sheet is copyright &copy; 2007, P D Johnson,
+		<a href="http://www.delphidabbler.com/">www.delphidabbler.com</a>
+	</div>
+
+</div>
+
+</body>
+
+</html>

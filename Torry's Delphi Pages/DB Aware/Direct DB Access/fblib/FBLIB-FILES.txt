@@ -1,0 +1,43 @@
+FBlib files
+
+Units
+
+ Include file
+   fbl.inc
+ 
+ Core units                    
+   TFBLDatabase.pas         class: TFBLDatabase     interface: IFBLDbEvent 
+   TFBLTransaction.pas      class: TFBLTransaction
+   TFBLDsql.pas             class: TFBLDsql
+
+ Support units              
+   ibase_h.pas             // Firebird Api types,constants and functions  
+   iberror_h.pas           // Firebird error constants 
+   FBLExcept.pas           
+   FBLMixf.pas
+   FBLConst.pas       
+
+ Extras units
+   FBLMetadata.pas                   
+   FBLScript.pas
+   FBLService.pas
+   FBLEvents.pas
+   FBLHtmlExport.pas 
+   FBLTableToSqlScriptExport.pas
+   FBLTextGridExport.pas
+   FBLParamDsql.pas (by Uwe Willmann)
+
+ Register units
+   FBLReg.pas
+
+Resurce
+   fblpalette.res     //palette bitmaps delphi / kylix 
+   fblpalette.lrs     //palette bitmaps lazarus
+
+packages
+   fblD4.dpk          // delphi 4        
+   fblD6.dpk          // delphi 6
+   fblD7.dpk          // delphi 7
+   fblK2.dpk          // kylix 2 
+   fblK3.dpk          // kylix 3
+   fblib.lpk          // lazarus ide 

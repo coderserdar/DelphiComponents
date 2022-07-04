@@ -1,0 +1,115 @@
+2005.12.07 ver 0.83
+ correct bugs in class TFBLScript (90% code are new)
+ correct bug in class TFBLDatabase (access violation when value of "username" or "password" is an empty string)
+ updated Lazarus package (fblib.lpk) 
+  
+2005.10.20 ver 0.82
+ New component TFBLParamDsql (thanks to Uwe Willmann) it's a direct TFBLDSQL descendant 
+   supporting named parameters instead of "?" placeholders, like IBX and IBObjects.
+ Lazarus package (fblib.lpk) now works with version 0.9.10 of lazarus ide.
+
+2005.09.02 ver 0.81
+ FBLDSql.pas : correct bug in method ParamAsString when insert an empty string
+ Add unit 'FBLSimple.pas'. 
+
+2005.06.21 ver 0.80
+  class TFBLDatabase,TFBLTransction,TFBLDsql are now Thread-safe
+  (for default this class are not thread-safe for enable this feature activate 
+   compiler directive FBL_THREADSAFE  in fbl.inc)
+  Documentation can be created with pasdoc.
+
+2005.04.05 ver 0.77
+  various internal modification and bugs fix  
+
+2005.03.19 ver 0.76
+  FBLService.pas : add event OnConnect
+  FBLService.pas : add event OnDisconnect
+  FBLService: add GFix functions for set properties and repair database
+  Various internal modifications
+
+2005.02.20 ver 0.75
+  FreeBsd 5.3 Compatibility with Freepascal 1.9.6 
+
+2004.11.01 ver 0.74
+  Add package for Lazarus Ide (fblib.lpk)
+ 
+2004.10.21 ver 0.73
+  Fixed Bugs with freepascal compiler >= 1.9.4 
+  FBLDsql.pas : add function 'TFBLDsql.FieldByNameIsNull(const AFieldNAme: string): Boolean;
+
+2004.06.26 ver 0.72
+  FBLService.pas : add property 'TFBLService.Version: Integer'
+  FBLService.pas : add property 'TFBLService.ServerVersion: string'
+  FBLService.pas : add property 'TFBLService.ServerImplementation: string'
+  FBLService.pas : add property 'TFBLService.ServerPath: string'
+  FBLService.pas : add property 'TFBLService.ServerLockPath: string'
+  FBLService.pas : add property 'TFBLService.ServerMsgPath: string'
+  FBLService.pas : add property 'TFBLService.UserDbPath: string'
+  FBLService.pas : add property 'TFBLService.NumOfAttachments: Integer'
+  FBLService.pas : add property 'TFBLService.NumOfDatabases: Integer'
+  FBLService.pas : add property 'TFBLService.DatabaseNames: TStringList'
+  FBLService.pas : Corrected bugs with Firebird 1.5 Classic server 
+
+2004.06.19 ver 0.71
+  FBLTransaction.pas : add property 'TFBLTransaction.ReservationReadTables: TStrings'
+  FBLTransaction.pas : add property 'TFBLTransaction.ReservationWriteTables: TStrings'
+  FBLTransaction.pas : add property 'TFBLTransaction.TableReservationMode'
+  FBLDatabase.pas  : add property 'TFBLDatabase.UserNames' 
+  
+2004.06.03 ver 0.70
+  Add Feature: Events Alerter class 'TFBLEvent' unit FBLEvents.pas
+  Various internal modifications
+  Nb. event manager IS NOT stable, tested only with delphi/kylix and Firebird 1.5
+
+2004.05.28 ver 0.53a
+ Fixed bug in FBLMetadata.pas property 'TFBLmetadata.Tables','TFBLMetadata.Views'  
+ Fixed bug in FBLTransaction.pas method 'TFBLTransaction.StartTransaction'  
+
+2004.05.08 ver 0.53
+  FBLDatabase.pas : add property CharacterSet in 'TFBLDatabase'
+
+2004.04.08 ver 0.52
+  FBLDsql.pas : change blobs procedure 'TFBLDsql.BlobFieldSaveToStream'
+  FBLDsql.pas : change blobs procedure 'TFBLDsql.BlobParamLoadFromStream'   
+  FBLDsql.pas : change blobs functions 'TFBLDsql.BlobFieldAsString'
+  FBLDsql.pas : change blobs Procedure 'TFBLDsql.BlobParamAsString'
+  FBLDsql.pas : Add blobs procedure 'TFBLDsql.BlobFieldSaveToFile'
+  FBLDsql.pas : Add blobs procedure 'TFBLDsql.BlobFieldByNameSaveToFile'
+  FBLDsql.pas : Add blobs procedure 'TFBLDsql.BlobParamLoadFromFile'
+  FBLService.pas : change procedure 'TFBLService.GetUsers'
+
+2004.03.24 ver 0.51
+  Add feature: Service manager Class(TFBLService)
+   * Backup Restore Database
+   * Security manager AddUser ModifyUser DeleteUser DisplayUser
+   * Database report statistics
+   * View LogFile 
+   * gfix functions is not implemented yet  
+   Note: Service Manager works only with Firebird 1.0.x Superserver
+         and Firebird 1.5 Classic and Superserver
+
+  Change license agreement from GPL to LGPL read lgpl.txt for more information
+
+  Various internal modifications 
+  
+2004.03.02 Ver 0.38
+  Some Bugs fixes
+
+2003.12.14 Ver 0.37
+  TFBLDsql Fixed Bugs in Params
+
+2003.11.29 Ver 0.36
+  TFBLDatabase add properties
+   ClientVersion: string            // return client version only Firebird 1.5 with fbclient.dll 
+   GetClientMajorVersion: Integer;  // return 1 in Fb 1.5 
+   GetClientMinorVersion: Integer;  // retunn 5 in fb 1.5 
+  
+2003.11.16 Ver 0.35
+  Support freepascal compiler 1.9.0 aka 2.0.0 Beta 1 
+
+2003.11.08 Ver 0.34
+  Fixed Bug in FBLExportToHtml.pas 
+
+2003.11.03 Ver. 0.33 
+  First public release
+

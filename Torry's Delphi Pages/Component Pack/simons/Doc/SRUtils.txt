@@ -1,0 +1,494 @@
+unit SRUtils;
+
+{----------------------------------------------------------------------}
+{  Version  : 1.51                                                     }
+{  Autor    : Simon Reinhardt                                          }
+{  eMail    : reinhardt@picsoft.de                                     }
+{  Internet : http://www.picsoft.de                                    }
+{                                                                      }
+{  Hilfreiche Prozeduren und Funktionen, die die Borland-Programmierer }
+{  offensichtlich vergessen haben.                                     }
+{----------------------------------------------------------------------}
+
+{----------------------------------------------------------------------}
+{ Version 1.51:                                                        }
+{ Neu: IsNumber                                                        }
+{                                                                      }
+{ Version 1.50:                                                        }
+{ Geändert: ExtractItemsFromString, ConvertStrToDateTime,              }
+{           CreateUniqueFileName,GetFirstDayOfWeekNr                   }
+{                                                                      }
+{ Version 1.49:                                                        }
+{ Geändert: GetFirstDayOfWeekNr                                        }
+{                                                                      }
+{ Version 1.48:                                                        }
+{ Neu: StringReplace                                                   }
+{ Geändert: GetParentDir                                               }
+{                                                                      }
+{ Version 1.47:                                                        }
+{ Neu: GetFolder, CreateUniqueFileName                                 }
+{                                                                      }
+{ Version 1.46:                                                        }
+{ Neu: ExtractNumberFromText, CompareNumbers                           }
+{      Konstante CSIDL_COMMON_APPDATA                                  }
+{                                                                      }
+{ Version 1.45:                                                        }
+{ Neu: GetDiskSpace, GetTreeSize                                       }
+{ Geändert: GetExeForProtocol, GetNumberFromText                       }
+{                                                                      }
+{ Version 1.44:                                                        }
+{ Geändert: GetParentDir, RewrapText                                   }
+{                                                                      }
+{ Version 1.43:                                                        }
+{ Neu: GetAppDataPeth,                                                 }
+{      GetLocalComputerName, ReplaceEntities, ReplaceHighChars         }
+{                                                                      }
+{ Version 1.42:                                                        }
+{ Neu: FindChildWindow, FindExecutableStr,                             }
+{      GetWindowCaption, GetWindowClass, GetTextInWindow               }
+{      Konstante CSIDL_LOCAL_APPDATA                                   }
+{                                                                      }
+{ Version 1.41:                                                        }
+{ Neu: GetFileDateTime, SetFileDateTime, GetProgramFilesDir,           }
+{      GetSystemFolderLocation, GetParentDir, GetTempDir               }
+{ Geändert: GetExeForProtocol, FindAssociatedProgram                   }
+{                                                                      }
+{ Version 1.40:                                                        }
+{ Neu: GetFullNodePath, GetNumberFromText, IsValidMailAdress           }
+{                                                                      }
+{ Version 1.39:                                                        }
+{ Neu: GetFirstDayOfWeekNr                                             }
+{ Geändert: IsSummertime , GetFirstDayOfWeek                           }
+{                                                                      }
+{ Version 1.38:                                                        }
+{ Neu: ANSIUpCase, ANSILowCase                                         }
+{ Geändert: CapitalizeString                                           }
+{                                                                      }
+{ Version 1.37:                                                        }
+{ Neu: CapitalizeString, LowCase                                       }
+{                                                                      }
+{ Version 1.36:                                                        }
+{ Neu: ExtractItemsFromString, FirstDelimiter, Like, RewrapText        }
+{ Geändert: LastDelimiter                                              }
+{                                                                      }
+{ Version 1.35:                                                        }
+{ Geändert: GetFirstPartOfString                                       }
+{                                                                      }
+{ Version 1.34:                                                        }
+{ Neu: TrimChars                                                       }
+{                                                                      }
+{ Version 1.33:                                                        }
+{ Neu: StrToTimeDef, TimeToStrDef                                      }
+{                                                                      }
+{ Version 1.32:                                                        }
+{ Neu: GetDaysPerYear                                                  }
+{ Geändert: StripForbiddenChars                                        }
+{                                                                      }
+{ Version 1.31:                                                        }
+{ Neu: PosN                                                            }
+{                                                                      }
+{ Version 1.30:                                                        }
+{ Neu: GetShiftState                                                   }
+{                                                                      }
+{ Version 1.29:                                                        }
+{ Neu: ExtractFileDir, LastDelimiter                                   }
+{ Geändert: GetExeForProtocol, FindAssociatedProgram                   }
+{                                                                      }
+{ Version 1.28:                                                        }
+{ Geändert: DateTimeToStrDef, DateToStrDef                             }
+{ Neu: Konstante PeriodNames                                           }
+{                                                                      }
+{ Version 1.27:                                                        }
+{ Neu: GetWindowState, GetSystemWorkArea                               }
+{                                                                      }
+{ Version 1.26:                                                        }
+{ Neu: GetFirstDayOfWeek                                               }
+{ Geändert: IsSummerTime,                                              }
+{ Initialisierung von FirstWeekDay und FirstWeekDate in Delphi 1       }
+{                                                                      }
+{ Version 1.25:                                                        }
+{ Neu: GetHourFromTime, GetMinuteFromTime, GetSecondFromTime           }
+{ Geändert: GetDayFromDate, GetMonthFromDate, GetYearFromDate          }
+{                                                                      }
+{ Version 1.24:                                                        }
+{ Geändert: Konstanten ShortForbiddenChars und LongForbiddenChars      }
+{                                                                      }
+{ Version 1.23:                                                        }
+{ Geändert: GetWeekOfYear, GetWeeksPerYear                             }
+{                                                                      }
+{ Version 1.22:                                                        }
+{ Neu: DateToStrDef, StrToDateDef, GetWeeksPerYear                     }
+{ Geändert: GetFirstPartOfString, AddBackSlash                         }
+{                                                                      }
+{----------------------------------------------------------------------}
+
+interface
+
+{$I SRDefine.inc}
+
+{$IFDEF SR_Delphi1}
+uses WinTypes, WinProcs, Graphics, Classes;
+{$ELSE}
+uses Windows, Graphics, Classes, ComCtrls;
+{$ENDIF}
+
+
+const
+  { Standard Encarta & FlatStyle Color Constants     }
+  { Diese konstanten hat maik Porkert am 31.10.2000  }
+  { in de.comp.lang.delphi.non-tech gepostet.        }
+  { Ich stelle Sie hier zur Verfügung:               }
+
+  ecDarkBlue = TColor($00996633);
+  ecBlue = TColor($00CF9030);
+  ecLightBlue = TColor($00CFB78F);
+
+  ecDarkRed = TColor($00302794);
+  ecRed = TColor($005F58B0);
+  ecLightRed = TColor($006963B6);
+
+  ecDarkGreen = TColor($00385937);
+  ecGreen = TColor($00518150);
+  ecLightGreen = TColor($0093CAB1);
+
+  ecDarkYellow = TColor($004EB6CF);
+  ecYellow = TColor($0057D1FF);
+  ecLightYellow = TColor($00B3F8FF);
+
+  ecDarkBrown = TColor($00394D4D);
+  ecBrown = TColor($00555E66);
+  ecLightBrown = TColor($00829AA2);
+
+  ecDarkKaki = TColor($00D3D3D3);
+  ecKaki = TColor($00C8D7D7);
+  ecLightKaki = TColor($00E0E9EF);
+
+  { Konstanten für GetFileDateTime / SetFileDateTime: }
+  ftCreation   = 0;
+  ftLastAccess = 1;
+  ftLastWrite  = 2;
+
+  { Konstanten für GetSystemFolderLocation() }
+  CSIDL_LOCAL_APPDATA  = $001C;
+  CSIDL_COMMON_APPDATA = $0023;
+
+  {$IFDEF SR_Delphi1}
+  Max_Path = 255;
+  {$ENDIF}
+  { Ungültige Zeichen fuer 8.3-Dateinamen im DOS-Format: }
+  ShortForbiddenChars :
+    set of char = [':','?','*',';','=','+','<','>','|','"','[',']',' ','\',#39];
+  { Ungültige Zeichen fuer lange Dateinamen im Win9x-Format: }
+  LongForbiddenChars :
+    set of char = ['\','/',':','*','?','"','<','>','|'];
+  { Gültige Zeichen fuer E-Mail-Adressen: }
+  AllowedMailChars :
+    set of char = ['A'..'Z', 'a'..'z', '0'..'9', 'q', '.', '_', '-', '@'];
+
+  { Bezeichner für relative Datumsangaben in DateTimeToStrDef und DateToStrDef: }
+  PeriodNames :
+    array [0..4] of string = ('Übermorgen', 'Morgen', 'Heute', 'Gestern', 'Vorgestern');
+
+type
+  TFileSizeFormat = (fsByte, fsKilobyte, fsMegabyte);
+  { Rückgabe-Formate für die Funktion GetFileSize }
+  {$IFDEF SR_Delphi4_Up}
+  TDiskSpaceType = (dsTotal, dsFree, dsUsed);
+  { Für die Funktion GetDiskSpace }
+  {$ENDIF}
+  {$IFNDEF SR_Delphi4_Up}
+  TReplaceFlags = set of (rfReplaceAll, rfIgnoreCase);
+  { Für die Funktion StringReplace }
+  {$ENDIF}
+
+{---------------------------------------}
+{ Funktionen für alle Delphi-Versionen: }
+{---------------------------------------}
+
+function AddBackslash(FileName:string):string;
+ { erweitert den Dateinamen mit einem abschließenden Backslash }
+function ANSILowCase(const AChar:char):char;
+ { Erweiterung der Lowcase-Funktion um Umlaute }
+function ANSIUpCase(const AChar:char):char;
+ { Erweiterung der Upcase-Funktion um Umlaute }
+function CapitalizeString(const AText:string):string;
+ { Wandelt den Text "AText" in einen Kleinbuchstaben um,
+   alle Anfangsbuchstaben der Wörter werden aber groß geschrieben }
+function CompareNumbers(const Number1,Number2:double):ShortInt;
+ { Vergleicht die Zahlen "Number1" und "Number2" - wie CompareText }
+function CutBackSlash(FileName:string):string;
+ { entfernt den abschließenden Backslash aus dem Dateinamen }
+function CutRootDirectory(FName:string):string;
+ { entfernt das Stammverzeichnis aus einem Dateinamen }
+function DateTimeToStrDef(ADate:TDateTime;Default:string;CompareToday:boolean):string;
+ { Umwandlung DateTime->String mit Rückgabe eines Default-Wertes bei Fehlern }
+function DateToStrDef(ADate:TDateTime;Default:string;CompareToday:boolean):string;
+ { Umwandlung Date->String mit Rückgabe eines Default-Wertes bei Fehlern }
+function ExecAndWait(const Filename,Params:string;WindowState:word):boolean;
+ { Startet ein Programm und wartet auf dessen Ende }
+function ExpandString(S:string;AChar:char;ALength:word):string;
+ { Erweitert einen String mit dem Zeichen "AChar" auf die Länge ALength }
+procedure ExtractItemsFromString(AFrom:string;ATo:TStrings;const Delimiter:string);
+ { Extrahiert aus dem String "AFrom" die durch den String "Delimiter" getrennten Teile
+   und gibt diese in der Stringliste "ATo" zurück }
+function ExtractNumberFromText(const AText:string;const Digits:byte):extended;
+ { Extrahiert eine Zahl aus dem String "AText". Dabei werden alle im String
+   vorhandenen Ziffern, sowie ein Vorzeichen und Komma extrahiert }
+function ExtractRawFileName(DName:string):string;
+ { Gibt von einem vollen Dateinamen mit Pfad nur den Dateinamen ohne Erweiterung zurück }
+function FindChildWindow(const OwnerWnd:HWnd;const AClass,AText:string;const ExactMatch:boolean):HWnd;
+ { Ermittelt das Handle Fensters, dessen Parent oder Owner "OwnerWnd" ist.
+   Wenn ExactMatch=false, dürfen AClass oder AText einen leeren String enthalten,
+   um alle Fenster einer Klasse oder mit einem best. Titel zu finden }
+function FindExecutableStr(const Filename:string):string;
+ { Wrapper für die API-Funktion FindExecutable() }
+function FirstDelimiter(AChars,AText:string):integer;
+ { Ermittelt die erste Position eines Zeichens aus "AChars" im string "AText" }
+function GetBuildInfo(const AFilename:String; var V1,V2,V3,V4:Word):Boolean;
+ { Ermittelt die vier Versionsnummern einer Exe- oder Dll-Datei }
+function GetDayFromDate(ADate:TDateTime):word;
+ { Gibt den Tag im Monat aus einem Datums-Wert zurück }
+function GetDayOfYear(ADate:TDateTime):word;
+ { Gibt den Tag im Jahr aus einem Datums-Wert zurück }
+function GetDaysPerMonth(AYear,AMonth:integer):integer;
+ { Gibt die Anzahl Tage in einem Monat zurück }
+function GetDaysPerYear(AYear:integer):integer;
+ { Gibt die Anzahl Tage in einem Jahr zurück }
+function GetFileSize(FileName:string;AFormat:TFileSizeFormat):integer;
+ { Ermittelt die Größe der Datei "FileName" im Format "AFormat" }
+function GetFirstDayOfWeek(ADate:TDateTime;DayIndex:integer):TDateTime;
+ { Gibt den ersten Tag "DayOfWeek" der Woche zurück, in der das Datum "ADate" liegt.
+   Ist DayOfWeek <= 0, wird der in FirstWeekday angegebene Tag als erster Wochentag gesetzt. }
+function GetFirstDayOfWeekNr(AWeek,AYear:word;DayIndex:integer):TDateTime;
+ { Gibt den ersten Tag "DayOfWeek" der Woche mit der Nummer "AWeek" im Jahr "AYear" zurück.
+   Ist DayOfWeek <= 0, wird der in FirstWeekday angegebene Tag als erster Wochentag gesetzt. }
+function GetFirstPartOfString(var AText:string;Delimiter:char;IncludeDelimiter:boolean):string;
+ { Extrahiert aus einem String den ersten Teil bis zum Zeichen "Delimiter" und entfernt
+   diesen Teil aus dem String "AText" }
+function GetHourFromTime(ATime:TDateTime):byte;
+ { Gibt die Stunde aus einem Zeit-Wert zurück }
+function GetMinuteFromTime(ATime:TDateTime):byte;
+ { Gibt die Minute aus einem Zeit-Wert zurück }
+function GetMonthFromDate(ADate:TDateTime):word;
+ { Gibt den Monat aus einem Datums-Wert zurück }
+function GetNumberFromText(const AText:string):integer;
+ { Gibt den Wert der ersten Ganzzahl einem String zurück }
+function GetParentDir(const Directory:string):string;
+ { Ermittelt das übergeordnete Verzeichnis von "Directory" }
+function GetSecondFromTime(ATime:TDateTime):byte;
+ { Gibt die Sekunde aus einem Zeit-Wert zurück }
+function GetShiftState:TShiftState;
+ { Ermittelt den Zustand der Shift-, Alt- und Ctrl-Tasten }
+function GetSystemDir:string;
+ { Ermittelt das Windows-System-Verzeichnis }
+function GetTextInWindow(const AWnd:HWnd):string;
+ { Gibt den Text des Fensters mit dem Handle AWnd zurück }
+function GetVersionNr(ExeName:string;BuildNr:boolean):string;
+ { Generiert einen Versionsnummern-string zu einer Exe- oder Dll-Datei }
+function GetWeekOfYear(ADate:TDateTime):byte;
+ { Gibt die Woche im Jahr aus einem Datums-Wert zurück }
+function GetWeeksPerYear(AYear:word):byte;
+ { Gibt die Wochenzahl der letzten Woche im Jahr "AYear" zurück }
+function GetWindowCaption(const AWnd:HWnd):string;
+ { Gibt den Titeltext des Fensters mit dem Handle AWnd zurück
+   (kapselt die API-Funktion "GetWindowText") }
+function GetWindowClass(const AWnd:HWnd):string;
+ { Gibt den Klassennamen des Fensters mit dem Handle AWnd zurück
+   (kapselt die API-Funktion "GetClassname") }
+function GetWindowsDir:string;
+ { Ermittelt das Windows-Verzeichnis }
+function GetYearFromDate(ADate:TDateTime):word;
+ { Gibt das Jahr aus einem Datums-Wert zurück }
+function IntToStrFixed(IntValue:integer;OutDigits:byte):string;
+ { Umwandlung Int->String mit fester Stellenzahl und führenden Nullen }
+function IsNumber(const AText:string):boolean;
+ { Überprüft, ob es sich bei "AText" um eine gültige Zahlenangabe handelt }
+function IsSummertime(ADate:TDateTime):boolean;
+ { Ermmittelt, ob ein Datum in der Sommerzeit liegt }
+function IsValidMailAdress(const AText:string):boolean;
+ { Prüft, ob "AText" eine gültige E-Mail-Adresse darstellt }
+function LowCase(const AChar:char):char;
+ { Wandelt den Buchstaben "AChar" in einen Kleinbuchstaben um }
+function PosN(const AText,S:string;N:integer):integer;
+ { Entspricht der Pos()-Funktion, sucht aber erst ab der Textposition "N" }
+function ReplaceEntities(const AText:string):string;
+ { Wandelt alle HTML-Entities in AText in Sonderzeichen um}
+function ReplaceHighChars(const AText:string):string;
+ { Wandelt alle Sonderzeichen in AText in HTML-Entities um}
+function ReverseString(AText:string):string;
+ { Spiegelt einen String, die Buchstabenfolge wird umgedreht }
+procedure RewrapText(AFrom,ATo:TStrings;const MaxLineLength:integer;WrapInWord:boolean);
+ { Der Text "AFrom" wird nach "MaxLineLength" Zeichen neu umbrochen und in "ATo"
+   zurückgegeben. Wenn WrapInWord=true, wird auch mitten im Wort umbrochen }
+function RGBToStr(RGBColor:integer):string;
+ { Umwandlung Windows-RGB-Wert -> HTML-RGB-Wert }
+function StripForbiddenChars(const AText:string):string;
+ { Entfernt für Dateinamen nicht erlaubte Zeichen aus einem String }
+function StrToDateDef(S:string;Def:TDateTime):TDateTime;
+ { Umwandlung String->Date mit Rückgabe eines Default-Wertes bei Fehlern }
+function StrToDateTimeDef(S:string;Def:TDateTime):TDateTime;
+ { Umwandlung String->DateTime mit Rückgabe eines Default-Wertes bei Fehlern }
+function StrToFloatDef(S:string;Def:extended):extended;
+ { Umwandlung String->Extended mit Rückgabe eines Default-Wertes bei Fehlern }
+function StrToTimeDef(S:string;Def:TDateTime):TDateTime;
+ { Umwandlung String->Time mit Rückgabe eines Default-Wertes bei Fehlern }
+function TimeToStrDef(ADate:TDateTime;Default:string):string;
+ { Umwandlung Time->String mit Rückgabe eines Default-Wertes bei Fehlern }
+function TrimChars(const AChar:char;const AText:string):string;
+ { Entfernt alle Zeichen "AChar" von Anfang und Ende des Strings "AText" }
+function ValidFileName(DName:string):boolean;
+ { Ermittelt, ob es sich um einen gültigen Dateinamen handelt }
+
+
+{---------------------------------------}
+{ Funktionen nur für Delphi 1:          }
+{---------------------------------------}
+
+{$IFDEF SR_Delphi1}
+procedure DrawEdge(ACanvas:TCanvas;ARect:TRect;Raised:boolean);
+ { Zeichnet einen 3D-Rahmen auf der Zeichenfläche ACanvas }
+procedure SetFileDate(FName:string;FDate:LongInt);
+ { Setzt das Erstellungs-Datum einer Datei }
+function Trim(const AText:string):string;
+ { Entfernt führende und abschließende Leerzeichen aus einem String }
+{$ENDIF}
+
+
+{---------------------------------------}
+{ Funktionen nur für alle 32Bit-        }
+{ Delphi-Versionen                      }
+{---------------------------------------}
+
+{$IFDEF SR_Delphi2_Up}
+function ConvertStrToDateTime(s:String):TDateTime;
+ { Versucht, einen String in einen Datumswert zu wandeln
+   (zuvor muß InitLocale aufgerufen werden) }
+function CreateUniqueFileName(const FileName:string;const StartIndex:word):string;
+ { Erstellt aus "FileName" per Inidzierung einen eindeutigen Dateinamen }
+function GetAppDataPath(const Common,Local:boolean):string;
+ { Ermittelt den Systemordner für Anwendungsdaten }
+function FindAssociatedProgram(DateiName:String):String;
+ { Ermittelt das mit einer Dateierweiterung verknüpfte Programm }
+function GetExeForProtocol(URL:string):string;
+ { Ermittelt das mit einem Übertragungs-Protokoll verknüpfte Programm }
+function GetFileDateTime(const FName:string;const WhatTime:byte):TDateTime;
+ { Ermittelt das Erstellungs-, Zugriffs- oder Änderungsdatum einer Datei (siehe ft*-Konstanten) }
+function GetFolder(const Root:integer;const Caption,InitialDir:string):string;
+ { Kapselt die API-Funktion SHBrowseForFolder }
+function GetFocussedControl:HWnd;
+ { Ermittelt das Fensterelement mit dem Eingabefokus }
+function GetFullNodePath(Node:TTreeNode;const Divider:char;const IncludeRoot:boolean):string;
+ { Gibt den vollen Pfad eines TreeNodes zurück }
+function GetLocalComputerName:string;
+ { Ermittelt den Netzwerknamen des Computers (Wrapper für die API-Funktion GetComputerName) }
+function GetLongPathName(APath:String):String;
+ { Wandelt einen verkürzten DOS-Dateinamen in einen langen Windows9x-Dateinamen }
+function GetProgramFilesDir:string;
+ { Gibt das Verzeichnis für Programme (Standard: "C:\Programme") zurück }
+function GetSystemFileDescription(FileName:string):string;
+ { Liefert die in Windows registrierte Dateibeschreibung zu einem Dateinamen zurück }
+function GetSystemFolderLocation(const FolderID:integer):string;
+ { Gibt den Pfad zum mit der ID "ID" Systemordner zurück }
+function GetSystemWorkArea:TRect;
+ { Gibt das Windows-Desktop-Rechteck ohne die Taskbar zurück }
+function GetTempDir:string;
+ { Gibt das Verzeichnis für temporäre Dateien zurück (Wrapper für die API-Funktion GetTempPath) }
+function GetWindowState(WHandle:HWnd):integer;
+ { Gibt den Anzeige-Zustand des Fenster mit dem Handle "WHandle" zurück }
+function GetWinUsername:string;
+ { Ermittelt den aktuell angemeldeten Windows-Benutzer (Wrapper für die API-Funktion GetUserName) }
+procedure InitLocale;
+ { Ermittelt die aktuellen Lokalisierungseinstellungen
+   (muß vor  ConvertStrToDateTime aufgerufen werden) }
+function IsWindowsNT:boolean;
+ { Ermittelt ob es sich bei dem Betriebssystem um eine Windows-NT-Version handelt }
+function Like(const AString, APattern: String): Boolean;
+ { Prüft, ob der Dateiname "AString" der Maske "APattern" entspricht }
+procedure SendKeys(AText:string);
+ { Sendet einen String als Folge von Tastendrücken an ein Fensterelement }
+function SetFileDate(FName:string;FDate:Integer):boolean;
+ { Setzt das Erstellungs-Datum einer Datei, wird seit Version 1.41 ersetzt durch SetFileDateTime }
+function SetFileDateTime(const FName:string;const ATime:TDateTime;const WhatTime:byte):boolean;
+ { Setzt das Erstellungs-, Zugriffs- oder Änderungsdatum einer Datei (siehe ft*-Konstanten) }
+procedure SimulateKeyDown(Key : byte);
+ { Sendet eine KeyDown-Nachricht an ein Fensterelement }
+procedure SimulateKeystroke(Key:byte; extra:DWORD);
+ { Sendet einen vollständigen Tatendruck (KeyDown+KeyUp) an ein Fensterelement }
+procedure SimulateKeyUp(Key : byte);
+ { Sendet eine KeyUp-Nachricht an ein Fensterelement }
+{$ENDIF}
+
+
+{---------------------------------------}
+{ Funktionen nur für bestimmte          }
+{ Delphi-Versionen                      }
+{---------------------------------------}
+
+{$IFNDEF SR_Delphi4_Up}
+procedure FreeAndNil(var Obj);
+ { Gibt ein Objekt frei und setzt den Objektzeiger auf NIL (Delphi 1..3) }
+function StringReplace(const S,OldPattern,NewPattern:string;const Flags:TReplaceFlags):string;
+ { Ersetzt den Text "OldPattern" duch den Text "NewPattern" im String "S" }
+{$ENDIF}
+{$IFNDEF SR_Delphi3_Up}
+function ExtractFileDir(APath:string):string;
+ { Gibt wie ExtractFilePath den Pfad eines Dateinamens zurück,
+  aber ohne abschließenden Backslash }
+function IsLeapYear(AYear: Integer):boolean;
+ { Ermittelt, ob ein Jahr ein Schaltjahr ist (Delphi 1..2) }
+function LastDelimiter(AChars,AText:string):integer;
+ { Ermittelt die letzte Position des Zeichens AChar im string AText (Delphi 1..2) }
+{$ENDIF}
+{$IFDEF SR_Delphi4_Up}
+function GetDiskSpace(const RootDir:string;const AType:TDiskSpaceType;const Format:TFileSizeFormat):Int64;
+ { Gibt den belegten, freien oder Gesamtplatz einer Partition zurück }
+function GetTreeSize(const RootFolder:string;const Format:TFileSizeFormat):Int64;
+ { Gibt die Gesamtgröße eines Verzeichnisbaums zurück }
+{$ENDIF}
+
+implementation
+
+uses SysUtils, Messages, ShellAPI
+     {$IFDEF SR_Delphi2_Up}, Registry, ShlObj
+     {$ELSE}, Forms, Ver {$ENDIF};
+
+const
+  MaxChars = 89;
+  Entities : array [0..MaxChars] of string[10] =
+   ('&lt;', '&gt;', '&amp;', '&quot;', '&nbsp;', '&Ccdil;', '&ccdil;', '&Ntilde;',
+   '&ntilde;', '&THORN;', '&thorn;', '&Yacute;', '&yacute;', '&yuml;', '&szlig;',
+   '&AElig;', '&Aacute;', '&Acirc;', '&Agrave;', '&Aring;', '&Atilde;', '&Auml;',
+   '&aelig;', '&aacute;', '&acirc;', '&agrave;', '&aring;', '&atilde;', '&auml;',
+   '&ETH;', '&Eacute;', '&Ecirc;', '&Egrave;', '&Euml;', '&eth;', '&eacute;',
+   '&ecirc;', '&egrave;', '&euml;', '&Iacute;', '&Icirc;', '&Igrave;', '&Iuml;',
+   '&iacute;', '&icirc;', '&igrave;', '&iuml;', '&Oacute;', '&Ocirc;', '&Ograve;',
+   '&Oslash;', '&Otilde;', '&Ouml;', '&oacute;', '&ocirc;', '&ograve;', '&oslash;',
+   '&otilde;', '&ouml;', '&Uacute;', '&Ucirc;', '&Ugrave;', '&Uuml;', '&uacute;',
+   '&ucirc;', '&ugrave;', '&uuml;', '&reg;', '&copy;', '&plusmn;', '&micro;',
+   '&para;', '&middot;', '&cent;', '&pound;', '&yen;', '&frac14;', '&frac12;',
+   '&frac34;', '&sup1;', '&sup2;', '&sup3;', '&iquest;', '&deg;', '&brvbar;',
+   '&sect;', '&laquo;', '&raquo;', '&#132;', '&#147;');
+  HighChars : array [0..MaxChars] of char =
+   ('<', '>', '&', '"', '=', 'Ç', 'ç', 'Ñ', 'ñ', 'Þ', 'þ', 'Ý', 'ý', 'ÿ', 'ß', 'Æ', 'Á', 'Â',
+   'À', 'Å', 'Ã', 'Ä', 'æ', 'á', 'â', 'à', 'å', 'ã', 'ä', 'Ð', 'É', 'Ê', 'È', 'Ë', 'ð', 'é',
+   'ê', 'è', 'ë', 'Í', 'Î', 'Ì', 'Ï', 'í', 'î', 'ì', 'ï', 'Ó', 'Ô', 'Ò', 'Ø', 'Õ', 'Ö', 'ó',
+   'ô', 'ò', 'ø', 'õ', 'ö', 'Ú', 'Û', 'Ù', 'Ü', 'ú', 'û', 'ù', 'ü', '®', '©', '±', 'µ', '¶',
+   '·', '¢', '£', '¥', '¼', '½', '¾', '¹', '²', '³', '¿', '°', '¦', '§', '«', '»', '“', '”');
+
+var
+  {$IFDEF SR_Delphi2_Up}
+  FirstWeekDay      : Integer = 2;  { Wochentag, mit dem die Woche beginnt
+                                     (siehe Delphi-Wochentage)
+                                      2 : Montag (nach DIN 1355) }
+  FirstWeekDate     : Integer = 4;  { 1 : Beginnt am ersten Januar
+                                      4 : Erste-4 Tage-Woche (nach DIN 1355)
+                                      7 : Erste volle Woche }
+  bffInitialFolder  : string;
+  {$ELSE}
+  FirstWeekDay      : Integer;
+  FirstWeekDate     : Integer;
+  {$ENDIF}
+  LocaleIDate,
+  LocaleILDate,
+  CurrentYear2Digit,
+  CurrentCentury    : Integer;

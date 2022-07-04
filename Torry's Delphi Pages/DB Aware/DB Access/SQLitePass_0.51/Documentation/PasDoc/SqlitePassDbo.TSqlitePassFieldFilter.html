@@ -1,0 +1,183 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+<meta name="GENERATOR" content="PasDoc 0.11.0">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<title>SqlitePass Database Objects: SqlitePassDbo: Class TSqlitePassFieldFilter</title>
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body bgcolor="#ffffff" text="#000000" link="#0000ff" vlink="#800080" alink="#FF0000">
+<a name="TSqlitePassFieldFilter"></a><h1 class="cio">Class TSqlitePassFieldFilter</h1>
+<table class="sections wide_list">
+<tr>
+<td><a class="section"  href="#%40Description">Description</a></td><td><a class="section"  href="#%40Hierarchy">Hierarchy</a></td><td>Fields</td><td><a class="section"  href="#%40Methods">Methods</a></td><td><a class="section"  href="#%40Properties">Properties</a></td></tr></table>
+<a name="%40Description"></a><h2 class="unit">Unit</h2>
+<p class="unitlink">
+<a   href="SqlitePassDbo.html">SqlitePassDbo</a></p>
+<h2 class="declaration">Declaration</h2>
+<p class="declaration">
+<code>type TSqlitePassFieldFilter = class(<a class="normal"  href="SqlitePassUtils.TSqlitePassObjectList.html">TSqlitePassObjectList</a>)</code></p>
+<h2 class="description">Description</h2>
+<div class="nodescription">no description available, TSqlitePassObjectList description follows</div><div class="nodescription">no description available, TSqlitePassList description follows</div><a name="%40Hierarchy"></a><h2 class="hierarchy">Hierarchy</h2>
+<ul class="hierarchy"><li class="ancestor">TObject</li>
+<li class="ancestor"><a class="normal"  href="SqlitePassUtils.TSqlitePassList.html">TSqlitePassList</a></li>
+<li class="ancestor"><a class="normal"  href="SqlitePassUtils.TSqlitePassObjectList.html">TSqlitePassObjectList</a></li>
+<li class="thisitem">TSqlitePassFieldFilter</li></ul><h2 class="overview">Overview</h2>
+<a name="%40Methods"></a><h3 class="summary">Methods</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>constructor <b><a   href="SqlitePassDbo.TSqlitePassFieldFilter.html#Create">Create</a></b>(FieldFilters: <a   href="SqlitePassDbo.TSqlitePassFieldFilters.html">TSqlitePassFieldFilters</a>; Field: TField);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>destructor <b><a   href="SqlitePassDbo.TSqlitePassFieldFilter.html#Destroy">Destroy</a></b>; override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.TSqlitePassFieldFilter.html#GetItem">GetItem</a></b>(Index: Integer): <a   href="SqlitePassDbo.TSqlitePassFieldFilterExp.html">TSqlitePassFieldFilterExp</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.TSqlitePassFieldFilter.html#AddFilterExpression">AddFilterExpression</a></b>(LogicalOperator:<a   href="SqlitePassDbo.html#TSqlitePassFilterLogicalOperators">TSqlitePassFilterLogicalOperators</a>; ComparisonOperator: <a   href="SqlitePassDbo.html#TSqlitePassFilterComparisonOperators">TSqlitePassFilterComparisonOperators</a>; FilterValue: String);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.TSqlitePassFieldFilter.html#ClearFilter">ClearFilter</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.TSqlitePassFieldFilter.html#SetItem">SetItem</a></b>(Index: Integer; const Value: <a   href="SqlitePassDbo.TSqlitePassFieldFilterExp.html">TSqlitePassFieldFilterExp</a>);</code></td>
+</tr>
+</table>
+<a name="%40Properties"></a><h3 class="summary">Properties</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassFieldFilter.html#Count">Count</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassFieldFilter.html#Field">Field</a></b>: TField Read FField;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassFieldFilter.html#Filtered">Filtered</a></b>: Boolean Read FFiltered Write SetFFiltered;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassFieldFilter.html#FilterText">FilterText</a></b>: String Read GetFilterText;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassFieldFilter.html#HasFilterExpression">HasFilterExpression</a></b>: Boolean Read GetHasFilterExpression;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassFieldFilter.html#Items">Items</a></b>[Index: Integer]: <a   href="SqlitePassDbo.TSqlitePassFieldFilterExp.html">TSqlitePassFieldFilterExp</a> read <a   href="SqlitePassDbo.TSqlitePassFieldFilter.html#GetItem">GetItem</a> write <a   href="SqlitePassDbo.TSqlitePassFieldFilter.html#SetItem">SetItem</a>;</code></td>
+</tr>
+</table>
+<h2 class="description">Description</h2>
+<h3 class="detail">Methods</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Create"></a><code>constructor <b>Create</b>(FieldFilters: <a   href="SqlitePassDbo.TSqlitePassFieldFilters.html">TSqlitePassFieldFilters</a>; Field: TField);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Destroy"></a><code>destructor <b>Destroy</b>; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="GetItem"></a><code>function <b>GetItem</b>(Index: Integer): <a   href="SqlitePassDbo.TSqlitePassFieldFilterExp.html">TSqlitePassFieldFilterExp</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="AddFilterExpression"></a><code>procedure <b>AddFilterExpression</b>(LogicalOperator:<a   href="SqlitePassDbo.html#TSqlitePassFilterLogicalOperators">TSqlitePassFilterLogicalOperators</a>; ComparisonOperator: <a   href="SqlitePassDbo.html#TSqlitePassFilterComparisonOperators">TSqlitePassFilterComparisonOperators</a>; FilterValue: String);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="ClearFilter"></a><code>procedure <b>ClearFilter</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="SetItem"></a><code>procedure <b>SetItem</b>(Index: Integer; const Value: <a   href="SqlitePassDbo.TSqlitePassFieldFilterExp.html">TSqlitePassFieldFilterExp</a>);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<h3 class="detail">Properties</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Count"></a><code>property <b>Count</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Field"></a><code>property <b>Field</b>: TField Read FField;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Filtered"></a><code>property <b>Filtered</b>: Boolean Read FFiltered Write SetFFiltered;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="FilterText"></a><code>property <b>FilterText</b>: String Read GetFilterText;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="HasFilterExpression"></a><code>property <b>HasFilterExpression</b>: Boolean Read GetHasFilterExpression;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Indicates whether or not a filter is defined on the <a class="normal"  href="SqlitePassDbo.TSqlitePassFieldFilter.html#Field">field</a> value</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Items"></a><code>property <b>Items</b>[Index: Integer]: <a   href="SqlitePassDbo.TSqlitePassFieldFilterExp.html">TSqlitePassFieldFilterExp</a> read <a   href="SqlitePassDbo.TSqlitePassFieldFilter.html#GetItem">GetItem</a> write <a   href="SqlitePassDbo.TSqlitePassFieldFilter.html#SetItem">SetItem</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<hr noshade size="1"><span class="appinfo"><em>Generated by <a  target="_parent" href="http://pasdoc.sourceforge.net/">PasDoc 0.11.0</a> on 2010-05-16 23:39:44</em>
+</span>
+</body></html>

@@ -1,0 +1,506 @@
+object MainForm: TMainForm
+  ActiveControl = tabDirectories
+  Caption = 'Employee demo'
+  ClientHeight = 583
+  ClientWidth = 724
+  Menu = MainMenu1
+  OnCreate = MainFormCreate
+  PixelsPerInch = 96
+  Position = poScreenCenter
+  ShowHint = True
+  WindowState = wsMaximized
+  HorzScrollBar.Page = 723
+  VertScrollBar.Page = 582
+  Left = 246
+  Height = 583
+  Top = 171
+  Width = 724
+  object StatusBar1: TStatusBar
+    Panels = <>
+    Height = 20
+    Top = 563
+    Width = 724
+  end
+  object PageControl1: TPageControl
+    ActivePage = tabDirectories
+    Align = alClient
+    BorderSpacing.OnChange = nil
+    TabIndex = 1
+    TabOrder = 0
+    OnChange = PageControl1Change
+    Height = 563
+    Width = 724
+    object tabMain: TTabSheet
+      Caption = 'Main'
+      ClientHeight = 537
+      ClientWidth = 716
+      Height = 537
+      Width = 716
+      object PageControl3: TPageControl
+        ActivePage = tabAbout
+        Align = alClient
+        BorderSpacing.OnChange = nil
+        TabIndex = 0
+        TabOrder = 0
+        TabPosition = tpBottom
+        Height = 537
+        Width = 716
+        object tabAbout: TTabSheet
+          Caption = 'About'
+          ClientHeight = 511
+          ClientWidth = 708
+          Height = 511
+          Width = 708
+          object Label1: TLabel
+            Alignment = taCenter
+            Anchors = [akTop, akLeft, akRight]
+            BorderSpacing.OnChange = nil
+            Caption = 'FBDataSet Lazarus demo'
+            Color = clNone
+            Left = 8
+            Height = 17
+            Top = 22
+            Width = 690
+          end
+          object Label2: TLabel
+            Alignment = taCenter
+            Anchors = [akTop, akLeft, akRight]
+            Caption = '(c) 2005 by Lagunov Aleksey (Alexs)'
+            Color = clNone
+            Left = 8
+            Height = 17
+            Top = 49
+            Width = 690
+          end
+          object Label3: TLabel
+            Alignment = taCenter
+            Anchors = [akTop, akLeft, akRight]
+            Caption = 'mail to: alexs75@hotbox.ru, alexs75@yandex.ru'
+            Color = clNone
+            Left = 16
+            Height = 17
+            Top = 86
+            Width = 689
+          end
+          object Label4: TLabel
+            Alignment = taCenter
+            Anchors = [akTop, akLeft, akRight]
+            Caption = 'http://alexs75.narod.ru/Files'
+            Color = clNone
+            Left = 9
+            Height = 17
+            Top = 110
+            Width = 689
+          end
+        end
+      end
+    end
+    object tabDirectories: TTabSheet
+      Caption = 'Directories'
+      ClientHeight = 537
+      ClientWidth = 716
+      Height = 537
+      Width = 716
+      object PageControl2: TPageControl
+        ActivePage = tabCustomer
+        Align = alClient
+        BorderSpacing.OnChange = nil
+        TabIndex = 1
+        TabOrder = 0
+        TabPosition = tpBottom
+        OnChange = PageControl2Change
+        Height = 537
+        Width = 716
+        object tabSprCountry: TTabSheet
+          Caption = 'Country'
+          ClientHeight = 511
+          ClientWidth = 708
+          Height = 511
+          Width = 708
+          object dbGrid1: TdbGrid
+            Align = alClient
+            BorderSpacing.OnChange = nil
+            Color = clWhite
+            Columns = <            
+              item
+                FieldName = 'COUNTRY'
+                Title.Caption = 'COUNTRY'
+                Width = 200
+              end            
+              item
+                FieldName = 'CURRENCY'
+                Title.Caption = 'CURRENCY'
+                Width = 80
+              end>
+            DataSource = dsSprCountry
+            FixedColor = clBtnFace
+            Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+            Scrollbars = ssBoth
+            OnTitleClick = dbGrid1TitleClick
+            Height = 387
+            Width = 597
+          end
+        end
+        object tabCustomer: TTabSheet
+          Caption = 'Customer'
+          ClientHeight = 511
+          ClientWidth = 708
+          Height = 511
+          Width = 708
+          object dbGrid2: TdbGrid
+            Align = alClient
+            BorderSpacing.OnChange = nil
+            Color = clWhite
+            Columns = <            
+              item
+                FieldName = 'ON_HOLD'
+                Alignment = taCenter
+                Width = 15
+              end            
+              item
+                FieldName = 'CUST_NO'
+                Alignment = taRightJustify
+                Title.Caption = 'CUST_NO'
+              end            
+              item
+                FieldName = 'CUSTOMER'
+                Title.Caption = 'CUSTOMER'
+                Width = 170
+              end            
+              item
+                FieldName = 'CITY'
+                Title.Caption = 'CITY'
+                Width = 160
+              end            
+              item
+                FieldName = 'PHONE_NO'
+                Alignment = taRightJustify
+                Title.Caption = 'PHONE_NO'
+                Width = 100
+              end            
+              item
+                FieldName = 'COUNTRY'
+                Title.Caption = 'COUNTRY'
+                Width = 120
+              end>
+            DataSource = dsSprCustomer
+            FixedColor = clBtnFace
+            Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+            Scrollbars = ssBoth
+            OnDblClick = actCustEditExecute
+            OnTitleClick = dbGrid2TitleClick
+            Height = 431
+            Top = 30
+            Width = 708
+          end
+          object ToolBar1: TToolBar
+            BorderSpacing.OnChange = nil
+            ButtonWidth = 96
+            Caption = 'ToolBar1'
+            EdgeBorders = [ebLeft, ebTop, ebRight, ebBottom]
+            EdgeInner = esLowered
+            EdgeOuter = esRaised
+            Height = 30
+            List = True
+            ParentColor = True
+            ShowCaptions = True
+            TabOrder = 0
+            Height = 30
+            Width = 708
+            object ToolButton1: TToolButton
+              Action = actCustDelete
+              AutoSize = True
+              Left = 195
+              Height = 22
+              Hint = 'Delete customer from database'
+              Top = 2
+              Width = 96
+            end
+            object ToolButton2: TToolButton
+              Action = actCustEdit
+              Left = 99
+              Height = 22
+              Hint = 'Edit customer data'
+              Top = 2
+              Width = 96
+            end
+            object ToolButton3: TToolButton
+              Action = actCustNew
+              Left = 3
+              Height = 22
+              Hint = 'Add new customer to database'
+              Top = 2
+              Width = 96
+            end
+            object ToolButton4: TToolButton
+              Caption = 'ToolButton4'
+              Style = tbsSeparator
+              Width = 23
+              Left = 291
+              Height = 22
+              Top = 2
+              Width = 23
+            end
+            object ToolButton5: TToolButton
+              Action = actCustFilter
+              Left = 314
+              Height = 22
+              Hint = 'Filter demo'
+              Top = 2
+              Width = 96
+            end
+          end
+          object Panel1: TPanel
+            Align = alBottom
+            BorderSpacing.OnChange = nil
+            ClientHeight = 50
+            ClientWidth = 708
+            FullRepaint = False
+            TabOrder = 1
+            Height = 50
+            Top = 461
+            Width = 708
+            object DBEdit1: TDBEdit
+              DataField = 'ADDRESS_LINE1'
+              DataSource = dsSprCustomer
+              TabOrder = 0
+              Height = 23
+              Top = 9
+              Width = 264
+            end
+            object DBEdit2: TDBEdit
+              DataField = 'ADDRESS_LINE2'
+              DataSource = dsSprCustomer
+              Anchors = [akTop, akLeft, akRight]
+              TabOrder = 1
+              Left = 283
+              Height = 23
+              Top = 9
+              Width = 415
+            end
+          end
+        end
+      end
+    end
+  end
+  object MainMenu1: TMainMenu
+    left = 74
+    top = 250
+  end
+  object ActionList1: TActionList
+    left = 74
+    top = 280
+    object actCustNew: TAction
+      Caption = 'New customer'
+      Hint = 'Add new customer to database'
+      OnExecute = actCustEditExecute
+      Category = 'Customers'
+      Tag = 1
+    end
+    object actCustEdit: TAction
+      Caption = 'Edit customer'
+      Hint = 'Edit customer data'
+      OnExecute = actCustEditExecute
+      Category = 'Customers'
+    end
+    object actCustDelete: TAction
+      Caption = 'Delete customer'
+      Hint = 'Delete customer from database'
+      OnExecute = actCustDeleteExecute
+      Category = 'Customers'
+    end
+    object actCustFilter: TAction
+      Caption = 'Filter'
+      Hint = 'Filter demo'
+      OnExecute = actCustFilterExecute
+      Category = 'Customers'
+    end
+  end
+  object JvUIBDataBase1: TJvUIBDataBase
+    Params.Strings = (
+      'sql_dialect=3'
+      'lc_ctype=NONE'
+      'user_name=sysdba'
+      'password=masterkey'
+    )
+    DatabaseName = 'C:\Program Files\Firebird\Firebird_1_5\examples\employee.fdb'
+    UserName = 'sysdba'
+    PassWord = 'masterkey'
+    LibraryName = 'gds32.dll'
+    Connected = True
+    left = 72
+    top = 13
+  end
+  object trRead: TJvUIBTransaction
+    DataBase = JvUIBDataBase1
+    Options = [tpConcurrency, tpWait, tpRead, tpReadCommitted, tpAutoCommit, tpRecVersion]
+    left = 74
+    top = 46
+  end
+  object trWrite: TJvUIBTransaction
+    DataBase = JvUIBDataBase1
+    left = 74
+    top = 80
+  end
+  object quSprCountry: TFBDataSet
+    AutoCommit = True
+    AutoUpdateOptions.IncrementBy = 1
+    DataBase = JvUIBDataBase1
+    Macros = <>
+    Option = [poTrimCharFields, poRefreshAfterPost]
+    Transaction = trRead
+    UpdateTransaction = trWrite
+    SQLSelect.Strings = (
+      'select'
+      '  *'
+      'from'
+      '  COUNTRY '
+      'order by'
+      '  COUNTRY.COUNTRY'
+    )
+    SQLRefresh.Strings = (
+      'select'
+      '  *'
+      'from'
+      '  COUNTRY'
+      'where'
+      '  COUNTRY.COUNTRY = :COUNTRY'
+    )
+    SQLEdit.Strings = (
+      'update'
+      '  COUNTRY'
+      'set'
+      ' COUNTRY = :COUNTRY,'
+      ' CURRENCY = :CURRENCY'
+    )
+    SQLDelete.Strings = (
+      'delete'
+      'from'
+      '  COUNTRY'
+      'where'
+      '  COUNTRY.COUNTRY = :COUNTRY'
+    )
+    SQLInsert.Strings = (
+      'insert into COUNTRY'
+      '  (COUNTRY, CURRENCY)'
+      'values'
+      '  (:COUNTRY, :CURRENCY)'
+    )
+    AfterClose = quSprCountryAfterClose
+    left = 168
+    top = 168
+  end
+  object dsSprCountry: TDatasource
+    DataSet = quSprCountry
+    left = 168
+    top = 136
+  end
+  object dsSprCustomer: TDatasource
+    DataSet = quSprCustomer
+    left = 211
+    top = 136
+  end
+  object quSprCustomer: TFBDataSet
+    AutoCommit = True
+    AutoUpdateOptions.KeyField = 'CUST_NO'
+    AutoUpdateOptions.WhenGetGenID = wgBeforePost
+    AutoUpdateOptions.GeneratorName = 'CUST_NO_GEN'
+    AutoUpdateOptions.IncrementBy = 1
+    DataBase = JvUIBDataBase1
+    Macros = <    
+      item
+        Name = 'MacroFilter'
+      end>
+    Option = [poTrimCharFields, poRefreshAfterPost]
+    Transaction = trRead
+    UpdateTransaction = trWrite
+    SQLSelect.Strings = (
+      'select'
+      '  CUSTOMER.ADDRESS_LINE1,'
+      '  CUSTOMER.ADDRESS_LINE2,'
+      '  CUSTOMER.CITY,'
+      '  CUSTOMER.CONTACT_FIRST,'
+      '  CUSTOMER.CONTACT_LAST,'
+      '  CUSTOMER.COUNTRY,'
+      '  CUSTOMER.CUSTOMER,'
+      '  CUSTOMER.CUST_NO,'
+      '  CUSTOMER.ON_HOLD,'
+      '  CUSTOMER.PHONE_NO,'
+      '  CUSTOMER.POSTAL_CODE,'
+      '  CUSTOMER.STATE_PROVINCE'
+      'from'
+      '  CUSTOMER '
+      '@MacroFilter'
+      'order by'
+      '  CUSTOMER.CUSTOMER'
+    )
+    SQLRefresh.Strings = (
+      'select'
+      '  CUSTOMER.ADDRESS_LINE1,'
+      '  CUSTOMER.ADDRESS_LINE2,'
+      '  CUSTOMER.CITY,'
+      '  CUSTOMER.CONTACT_FIRST,'
+      '  CUSTOMER.CONTACT_LAST,'
+      '  CUSTOMER.COUNTRY,'
+      '  CUSTOMER.CUSTOMER,'
+      '  CUSTOMER.CUST_NO,'
+      '  CUSTOMER.ON_HOLD,'
+      '  CUSTOMER.PHONE_NO,'
+      '  CUSTOMER.POSTAL_CODE,'
+      '  CUSTOMER.STATE_PROVINCE'
+      'from'
+      '  CUSTOMER'
+      'where'
+      '  CUSTOMER.CUST_NO = :CUST_NO'
+    )
+    SQLEdit.Strings = (
+      'update'
+      '  CUSTOMER'
+      'set'
+      '  ADDRESS_LINE1 = :ADDRESS_LINE1,'
+      '  ADDRESS_LINE2 = :ADDRESS_LINE2,'
+      '  CITY = :CITY,'
+      '  CONTACT_FIRST = :CONTACT_FIRST,'
+      '  CONTACT_LAST = :CONTACT_LAST,'
+      '  COUNTRY = :COUNTRY,'
+      '  CUSTOMER = :CUSTOMER,'
+      '  ON_HOLD = :ON_HOLD,'
+      '  PHONE_NO = :PHONE_NO,'
+      '  POSTAL_CODE = :POSTAL_CODE,'
+      '  STATE_PROVINCE = :STATE_PROVINCE'
+      'where'
+      '  CUSTOMER.CUST_NO = :CUST_NO'
+    )
+    SQLDelete.Strings = (
+      'delete'
+      'from'
+      '  CUSTOMER'
+      'where'
+      '  CUSTOMER.CUST_NO = :CUST_NO'
+    )
+    SQLInsert.Strings = (
+      'insert into CUSTOMER'
+      '  (ADDRESS_LINE1, ADDRESS_LINE2, CITY, CONTACT_FIRST,'
+      '   CONTACT_LAST, COUNTRY, CUSTOMER, CUST_NO, ON_HOLD,'
+      '   PHONE_NO, POSTAL_CODE, STATE_PROVINCE)'
+      'values'
+      '  (:ADDRESS_LINE1, :ADDRESS_LINE2, :CITY, :CONTACT_FIRST,'
+      '   :CONTACT_LAST, :COUNTRY, :CUSTOMER, :CUST_NO, :ON_HOLD,'
+      '   :PHONE_NO, :POSTAL_CODE, :STATE_PROVINCE)'
+    )
+    AfterClose = quSprCustomerAfterClose
+    left = 211
+    top = 168
+  end
+  object ApplicationProperties1: TApplicationProperties
+    CaptureExceptions = True
+    HintColor = clInfoBk
+    HintHidePause = 2500
+    HintPause = 500
+    HintShortCuts = True
+    ShowHint = True
+    OnHint = ApplicationProperties1Hint
+    left = 168
+    top = 208
+  end
+end

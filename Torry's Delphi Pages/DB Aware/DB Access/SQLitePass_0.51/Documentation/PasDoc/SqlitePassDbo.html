@@ -1,0 +1,2747 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+<meta name="GENERATOR" content="PasDoc 0.11.0">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<title>SqlitePass Database Objects: SqlitePassDbo</title>
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body bgcolor="#ffffff" text="#000000" link="#0000ff" vlink="#800080" alink="#FF0000">
+<h1 class="unit">Unit SqlitePassDbo</h1>
+<table class="sections wide_list">
+<tr>
+<td><a class="section"  href="#%40Description">Description</a></td><td><a class="section"  href="#%40Uses">uses</a></td><td><a class="section"  href="#%40Classes">Classes, Interfaces, Objects and Records</a></td><td><a class="section"  href="#%40FuncsProcs">Functions and Procedures</a></td><td><a class="section"  href="#%40Types">Types</a></td><td>Constants</td><td>Variables</td></tr></table>
+<a name="%40Description"></a><h2 class="description">Description</h2>
+<p>
+The unit <code>SqlitePassDbo</code> defines all the interface definitions for the SqlitePass Database Objects Project. The implementations are located in SqlitePassEngine.inc, SqlitePassDatabase.inc, SqlitePassDatabaseParts.inc, SqlitePassDataset.inc, SqlitePassSqlStmts.inc and SqlitePassRecordset.inc files.
+
+<p>&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;
+
+<p>This library is free software; you can redistribute it and/or modify it under the terms of the GNU Library General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Library General Public License for more details.
+
+<p>You should have received a copy of the GNU Library General Public License along with this library; if not, write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+
+<p>&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;
+
+<p> 
+
+<p>Major changes are indicated in the \Documentation\Changes.pdf file  
+
+<p>&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;</p>
+<a name="%40Uses"></a><h2 class="uses">uses</h2>
+<ul class="useslist"><li>Classes</li><li>Controls</li><li>Db</li><li>DbConst</li><li>Dialogs</li><li>Extctrls</li><li>FileUtil</li><li>FmtBcd</li><li>Forms</li><li>LCLIntf</li><li>LCLProc</li><li>Math</li><li><a   href="SqlitePassApi_v3.html">SqlitePassApi_v3</a></li><li><a   href="SqlitePassConst.html">SqlitePassConst</a></li><li><a   href="SqlitePassErrorLang.html">SqlitePassErrorLang</a></li><li><a   href="SqlitePassUtils.html">SqlitePassUtils</a></li><li>SysUtils</li><li>Variants</li><li>Windows</li></ul><h2 class="overview">Overview</h2>
+<a name="%40Classes"></a><h3 class="cio">Classes, Interfaces, Objects and Records</h3>
+<table class="classestable wide_list">
+<tr class="listheader">
+<th class="itemname">Name</th>
+<th class="itemdesc">Description</th>
+</tr>
+<tr class="list">
+<td class="itemname">record&nbsp;<a class="bold"  href="SqlitePassDbo.TMidRecordBuffer.html"><code>TMidRecordBuffer</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+<tr class="list2">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassDbo.TSqlitePassBlobStream.html"><code>TSqlitePassBlobStream</code></a></td>
+<td class="itemdesc">&mdash;&ndash; Blob fields stream &mdash;&ndash;</td>
+</tr>
+<tr class="list">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassDbo.TSqlitePassCustomFieldDef.html"><code>TSqlitePassCustomFieldDef</code></a></td>
+<td class="itemdesc"><code>TSqlitePassCustomFieldDef</code> is used by <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html">TSqlitePassDatabaseDataTypeOptions</a> when you need to define your own <a class="normal"  href="SqlitePassDbo.TSqlitePassCustomFieldDef.html#FieldType">fieldtype</a> translations</td>
+</tr>
+<tr class="list2">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassDbo.TSqlitePassCustomFieldDefs.html"><code>TSqlitePassCustomFieldDefs</code></a></td>
+<td class="itemdesc"><code>TSqlitePassCustomFieldDefs</code></td>
+</tr>
+<tr class="list">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassDbo.TSqlitePassDatabase.html"><code>TSqlitePassDatabase</code></a></td>
+<td class="itemdesc">The <code>TSqlitePassDatabase</code> component is the main link between your application and the sqlite library.</td>
+</tr>
+<tr class="list2">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassDbo.TSqlitePassDatabaseAttached.html"><code>TSqlitePassDatabaseAttached</code></a></td>
+<td class="itemdesc">TSqliteAttachedDatabases : Maintain a list of all attached databases</td>
+</tr>
+<tr class="list">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html"><code>TSqlitePassDatabaseDataTypeOptions</code></a></td>
+<td class="itemdesc">The <code>TSqlitePassDatabaseDataTypeOptions</code> is used by the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabase.html#DatatypeOptions">TSqlitePassDatabase.DatatypeOptions</a> property and gives you the opportunity to set custom or default behaviors for a given <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseDataTypeOptions.html#Database">database</a>.</td>
+</tr>
+<tr class="list2">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassDbo.TSqlitePassDatabaseError.html"><code>TSqlitePassDatabaseError</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+<tr class="list">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassDbo.TSqlitePassDatabaseIndex.html"><code>TSqlitePassDatabaseIndex</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+<tr class="list2">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassDbo.TSqlitePassDatabaseIndexDefs.html"><code>TSqlitePassDatabaseIndexDefs</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+<tr class="list">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassDbo.TSqlitePassDatabaseOptions.html"><code>TSqlitePassDatabaseOptions</code></a></td>
+<td class="itemdesc"><code>TSqlitePassDatabaseOptions</code></td>
+</tr>
+<tr class="list2">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassDbo.TSqlitePassDatabasesAttached.html"><code>TSqlitePassDatabasesAttached</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+<tr class="list">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassDbo.TSqlitePassDatabaseVersionInfo.html"><code>TSqlitePassDatabaseVersionInfo</code></a></td>
+<td class="itemdesc">TVersionInfo</td>
+</tr>
+<tr class="list2">
+<td class="itemname">record&nbsp;<a class="bold"  href="SqlitePassDbo.TSqlitePassDataReader.html"><code>TSqlitePassDataReader</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+<tr class="list">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassDbo.TSqlitePassDataset.html"><code>TSqlitePassDataset</code></a></td>
+<td class="itemdesc">The <code>TSqlitePassDataset</code> is a link between your application and the <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#Database">database</a> content.</td>
+</tr>
+<tr class="list2">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassDbo.TSqlitePassDatasetIndex.html"><code>TSqlitePassDatasetIndex</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+<tr class="list">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassDbo.TSqlitePassDatasetIndexDefs.html"><code>TSqlitePassDatasetIndexDefs</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+<tr class="list2">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassDbo.TSqlitePassDatasets.html"><code>TSqlitePassDatasets</code></a></td>
+<td class="itemdesc"><code>TSqlitePassDatasets</code> : Maintain a <a class="normal"  href="SqlitePassUtils.TSqlitePassList.html#List">list</a> of all datasets connected to the database</td>
+</tr>
+<tr class="list">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassDbo.TSqlitePassDatasetVersionInfo.html"><code>TSqlitePassDatasetVersionInfo</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+<tr class="list2">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassDbo.TSqlitePassEngine.html"><code>TSqlitePassEngine</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+<tr class="list">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassDbo.TSqlitePassFieldFilter.html"><code>TSqlitePassFieldFilter</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+<tr class="list2">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassDbo.TSqlitePassFieldFilterExp.html"><code>TSqlitePassFieldFilterExp</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+<tr class="list">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassDbo.TSqlitePassFieldFilters.html"><code>TSqlitePassFieldFilters</code></a></td>
+<td class="itemdesc">A <a class="normal"  href="SqlitePassUtils.TSqlitePassList.html#List">list</a> of defined Filters matching Fields <a class="normal"  href="SqlitePassUtils.TSqlitePassList.html#List">List</a></td>
+</tr>
+<tr class="list2">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassDbo.TSqlitePassFieldTypesDefaultTranslationRules.html"><code>TSqlitePassFieldTypesDefaultTranslationRules</code></a></td>
+<td class="itemdesc"><code>TSqlitePassFieldTypesDefaultTranslationRules</code></td>
+</tr>
+<tr class="list">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassDbo.TSqlitePassFieldTypesGenericTranslationRules.html"><code>TSqlitePassFieldTypesGenericTranslationRules</code></a></td>
+<td class="itemdesc"><code>TSqlitePassFieldTypesGenericTranslationRules</code></td>
+</tr>
+<tr class="list2">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassDbo.TSqlitePassFieldTypesTranslationRules.html"><code>TSqlitePassFieldTypesTranslationRules</code></a></td>
+<td class="itemdesc"><code>TSqlitePassFieldTypesTranslationRules</code></td>
+</tr>
+<tr class="list">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassDbo.TSqlitePassFieldTypeTranslationRule.html"><code>TSqlitePassFieldTypeTranslationRule</code></a></td>
+<td class="itemdesc"><code>TSqlitePassFieldTypeTranslationRule</code>.</td>
+</tr>
+<tr class="list2">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassDbo.TSqlitePassGenericFieldDef.html"><code>TSqlitePassGenericFieldDef</code></a></td>
+<td class="itemdesc"><code>TSqlitePassGenericFieldDef</code> is a generic class used to store information on fields presents in the database tables.</td>
+</tr>
+<tr class="list">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassDbo.TSqlitePassGenericTableDef.html"><code>TSqlitePassGenericTableDef</code></a></td>
+<td class="itemdesc">TableDefs</td>
+</tr>
+<tr class="list2">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassDbo.TSqlitePassIndex.html"><code>TSqlitePassIndex</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+<tr class="list">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassDbo.TSqlitePassIndexColumn.html"><code>TSqlitePassIndexColumn</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+<tr class="list2">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassDbo.TSqlitePassIndexColumns.html"><code>TSqlitePassIndexColumns</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+<tr class="list">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassDbo.TSqlitePassInMemoryIndex.html"><code>TSqlitePassInMemoryIndex</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+<tr class="list2">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassDbo.TSqlitePassInMemoryIndexes.html"><code>TSqlitePassInMemoryIndexes</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+<tr class="list">
+<td class="itemname">record&nbsp;<a class="bold"  href="SqlitePassDbo.TSqlitePassInMemoryIndexInfo.html"><code>TSqlitePassInMemoryIndexInfo</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+<tr class="list2">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassDbo.TSqlitePassQueryDef.html"><code>TSqlitePassQueryDef</code></a></td>
+<td class="itemdesc">QueryDefs</td>
+</tr>
+<tr class="list">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassDbo.TSqlitePassQueryDefs.html"><code>TSqlitePassQueryDefs</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+<tr class="list2">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassDbo.TSqlitePassRecordset.html"><code>TSqlitePassRecordset</code></a></td>
+<td class="itemdesc">Internal cache holding the records returned by a table/query It is designed to provide data to <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html">TSqlitePassDataset</a></td>
+</tr>
+<tr class="list">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassDbo.TSqlitePassSelectStmt.html"><code>TSqlitePassSelectStmt</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+<tr class="list2">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassDbo.TSqlitePassSelectStmtFieldDef.html"><code>TSqlitePassSelectStmtFieldDef</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+<tr class="list">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassDbo.TSqlitePassSelectStmtFieldDefs.html"><code>TSqlitePassSelectStmtFieldDefs</code></a></td>
+<td class="itemdesc"><code>TSqlitePassSelectStmtFieldDefs</code> is a collection of <a class="normal"  href="SqlitePassDbo.TSqlitePassSelectStmtFieldDef.html">TSqlitePassSelectStmtFieldDef</a></td>
+</tr>
+<tr class="list2">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassDbo.TSqlitePassSelectStmtTableDef.html"><code>TSqlitePassSelectStmtTableDef</code></a></td>
+<td class="itemdesc"><code>TSqlitePassSelectStmtTableDef</code> : When a <a class="normal"  href="SqlitePassDbo.TSqlitePassGenericTableDef.html#Sql">SQL</a> select statement is executed, a <code>TSqlitePassSelectStmtTableDef</code> is generated for each table used in the <a class="normal"  href="SqlitePassDbo.TSqlitePassGenericTableDef.html#Sql">SQL</a> statement.</td>
+</tr>
+<tr class="list">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassDbo.TSqlitePassSelectStmtTableDefs.html"><code>TSqlitePassSelectStmtTableDefs</code></a></td>
+<td class="itemdesc"><code>TSqlitePassSelectStmtTableDefs</code> : represents a collection of <a class="normal"  href="SqlitePassDbo.TSqlitePassSelectStmtTableDef.html">TSqlitePassSelectStmtTableDef</a>.</td>
+</tr>
+<tr class="list2">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassDbo.TSqlitePassSQLSections.html"><code>TSqlitePassSQLSections</code></a></td>
+<td class="itemdesc">The <code>TSqlitePassSQLSections</code> is an utility object used to : Split a SQL statement into a list of String for each SQL Keyword</td>
+</tr>
+<tr class="list">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassDbo.TSqlitePassSQLStmt.html"><code>TSqlitePassSQLStmt</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+<tr class="list2">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassDbo.TSqlitePassSQLStmtDef.html"><code>TSqlitePassSQLStmtDef</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+<tr class="list">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassDbo.TSqlitePassSQLStmtDefs.html"><code>TSqlitePassSQLStmtDefs</code></a></td>
+<td class="itemdesc">SQL statements collection</td>
+</tr>
+<tr class="list2">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassDbo.TSqlitePassSQLToken.html"><code>TSqlitePassSQLToken</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+<tr class="list">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassDbo.TSqlitePassSQLTokenizer.html"><code>TSqlitePassSQLTokenizer</code></a></td>
+<td class="itemdesc">The TSqlitePassTokenizer is an utility object used to : Split a SQL statement or a piece of SQL statement into a list of tokens (<a class="normal"  href="SqlitePassDbo.TSqlitePassSQLToken.html">TSqlitePassSQLToken</a>)
+
+<p>Move to the <a class="normal"  href="SqlitePassDbo.TSqlitePassSQLTokenizer.html#First">First</a>, <a class="normal"  href="SqlitePassDbo.TSqlitePassSQLTokenizer.html#Prior">Prior</a>, <a class="normal"  href="SqlitePassDbo.TSqlitePassSQLTokenizer.html#Next">Next</a>, <a class="normal"  href="SqlitePassDbo.TSqlitePassSQLTokenizer.html#Last">Last</a> <a class="normal"  href="SqlitePassDbo.TSqlitePassSQLTokenizer.html#Token">Token</a> Lookup a specific <a class="normal"  href="SqlitePassDbo.TSqlitePassSQLTokenizer.html#Token">token</a> by <a class="normal"  href="SqlitePassDbo.TSqlitePassSQLTokenizer.html#Text">text</a> or type <a class="normal"  href="SqlitePassDbo.TSqlitePassSQLTokenizer.html#Replace">Replace</a> a specific <a class="normal"  href="SqlitePassDbo.TSqlitePassSQLTokenizer.html#Token">token</a> Located before an existing <a class="normal"  href="SqlitePassDbo.TSqlitePassSQLTokenizer.html#Token">token</a> <a class="normal"  href="SqlitePassDbo.TSqlitePassSQLTokenizer.html#Remove">Remove</a> a specific <a class="normal"  href="SqlitePassDbo.TSqlitePassSQLTokenizer.html#Token">token</a> Located after an existing <a class="normal"  href="SqlitePassDbo.TSqlitePassSQLTokenizer.html#Token">token</a> Insert a new <a class="normal"  href="SqlitePassDbo.TSqlitePassSQLTokenizer.html#Token">token</a> before an existing <a class="normal"  href="SqlitePassDbo.TSqlitePassSQLTokenizer.html#Token">token</a> Insert a new <a class="normal"  href="SqlitePassDbo.TSqlitePassSQLTokenizer.html#Token">token</a> after an existing <a class="normal"  href="SqlitePassDbo.TSqlitePassSQLTokenizer.html#Token">token</a> Set the String to be tokenized and rebuild a String representation from the tokens (<a class="normal"  href="SqlitePassDbo.TSqlitePassSQLTokenizer.html#Text">Text</a> property)...</td>
+</tr>
+<tr class="list2">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassDbo.TSqlitePassSQLTokens.html"><code>TSqlitePassSQLTokens</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+<tr class="list">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassDbo.TSqlitePassTableDef.html"><code>TSqlitePassTableDef</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+<tr class="list2">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassDbo.TSqlitePassTableDefs.html"><code>TSqlitePassTableDefs</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+<tr class="list">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassDbo.TSqlitePassTableFieldDef.html"><code>TSqlitePassTableFieldDef</code></a></td>
+<td class="itemdesc"><code>TSqlitePassTableFieldDef</code> is mainly used to get information on fields presents in the database tables and to build a static schema of the database</td>
+</tr>
+<tr class="list2">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassDbo.TSqlitePassTableFieldDefs.html"><code>TSqlitePassTableFieldDefs</code></a></td>
+<td class="itemdesc"><code>TSqlitePassTableFieldDefs</code> is a collection of <a class="normal"  href="SqlitePassDbo.TSqlitePassTableFieldDef.html">TSqlitePassTableFieldDef</a></td>
+</tr>
+<tr class="list">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassDbo.TSqlitePassTransaction.html"><code>TSqlitePassTransaction</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+<tr class="list2">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassDbo.TSqlitePassTranslator.html"><code>TSqlitePassTranslator</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+<tr class="list">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassDbo.TSqlitePassTranslator_Kexi.html"><code>TSqlitePassTranslator_Kexi</code></a></td>
+<td class="itemdesc">Specific translator for Kexi databases</td>
+</tr>
+<tr class="list2">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassDbo.TSqlitePassTranslator_SqliteAdmin.html"><code>TSqlitePassTranslator_SqliteAdmin</code></a></td>
+<td class="itemdesc">Empty declaration : nothing to override</td>
+</tr>
+<tr class="list">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassDbo.TSqlitePassTranslator_SqliteExpert.html"><code>TSqlitePassTranslator_SqliteExpert</code></a></td>
+<td class="itemdesc">Empty declaration : nothing to override</td>
+</tr>
+<tr class="list2">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassDbo.TSqlitePassTrigger.html"><code>TSqlitePassTrigger</code></a></td>
+<td class="itemdesc">Triggers</td>
+</tr>
+<tr class="list">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassDbo.TSqlitePassTriggers.html"><code>TSqlitePassTriggers</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+<tr class="list2">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassDbo.TSqlitePassView.html"><code>TSqlitePassView</code></a></td>
+<td class="itemdesc">Views</td>
+</tr>
+<tr class="list">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassDbo.TSqlitePassViews.html"><code>TSqlitePassViews</code></a></td>
+<td class="itemdesc"><code>TSqlitePassViews</code></td>
+</tr>
+</table>
+<a name="%40FuncsProcs"></a><h3 class="summary">Functions and Procedures</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptAnsiStringCsValueCmpAnywhere">AcceptAnsiStringCsValueCmpAnywhere</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptAnsiStringCsValueCmpEndWith">AcceptAnsiStringCsValueCmpEndWith</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptAnsiStringCsValueCmpEqual">AcceptAnsiStringCsValueCmpEqual</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptAnsiStringCsValueCmpGreater">AcceptAnsiStringCsValueCmpGreater</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptAnsiStringCsValueCmpGreaterOrEqual">AcceptAnsiStringCsValueCmpGreaterOrEqual</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptAnsiStringCsValueCmpLesser">AcceptAnsiStringCsValueCmpLesser</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptAnsiStringCsValueCmpLesserOrEqual">AcceptAnsiStringCsValueCmpLesserOrEqual</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptAnsiStringCsValueCmpNotEqual">AcceptAnsiStringCsValueCmpNotEqual</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptAnsiStringCsValueCmpStartWith">AcceptAnsiStringCsValueCmpStartWith</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptAnsiStringValueCmpAnywhere">AcceptAnsiStringValueCmpAnywhere</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptAnsiStringValueCmpEndWith">AcceptAnsiStringValueCmpEndWith</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptAnsiStringValueCmpEqual">AcceptAnsiStringValueCmpEqual</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptAnsiStringValueCmpGreater">AcceptAnsiStringValueCmpGreater</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptAnsiStringValueCmpGreaterOrEqual">AcceptAnsiStringValueCmpGreaterOrEqual</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptAnsiStringValueCmpLesser">AcceptAnsiStringValueCmpLesser</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptAnsiStringValueCmpLesserOrEqual">AcceptAnsiStringValueCmpLesserOrEqual</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptAnsiStringValueCmpNotEqual">AcceptAnsiStringValueCmpNotEqual</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptAnsiStringValueCmpStartWith">AcceptAnsiStringValueCmpStartWith</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptCurrencyValueCmpEqual">AcceptCurrencyValueCmpEqual</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptCurrencyValueCmpGreater">AcceptCurrencyValueCmpGreater</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptCurrencyValueCmpGreaterOrEqual">AcceptCurrencyValueCmpGreaterOrEqual</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptCurrencyValueCmpLesser">AcceptCurrencyValueCmpLesser</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptCurrencyValueCmpLesserOrEqual">AcceptCurrencyValueCmpLesserOrEqual</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptCurrencyValueCmpNotEqual">AcceptCurrencyValueCmpNotEqual</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptDoubleValueCmpEqual">AcceptDoubleValueCmpEqual</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptDoubleValueCmpGreater">AcceptDoubleValueCmpGreater</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptDoubleValueCmpGreaterOrEqual">AcceptDoubleValueCmpGreaterOrEqual</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptDoubleValueCmpLesser">AcceptDoubleValueCmpLesser</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptDoubleValueCmpLesserOrEqual">AcceptDoubleValueCmpLesserOrEqual</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptDoubleValueCmpNotEqual">AcceptDoubleValueCmpNotEqual</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptDummyValue">AcceptDummyValue</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptInt64ValueCmpEqual">AcceptInt64ValueCmpEqual</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptInt64ValueCmpGreater">AcceptInt64ValueCmpGreater</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptInt64ValueCmpGreaterOrEqual">AcceptInt64ValueCmpGreaterOrEqual</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptInt64ValueCmpLesser">AcceptInt64ValueCmpLesser</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptInt64ValueCmpLesserOrEqual">AcceptInt64ValueCmpLesserOrEqual</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptInt64ValueCmpNotEqual">AcceptInt64ValueCmpNotEqual</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptIntegerValueCmpEqual">AcceptIntegerValueCmpEqual</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptIntegerValueCmpGreater">AcceptIntegerValueCmpGreater</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptIntegerValueCmpGreaterOrEqual">AcceptIntegerValueCmpGreaterOrEqual</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptIntegerValueCmpLesser">AcceptIntegerValueCmpLesser</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptIntegerValueCmpLesserOrEqual">AcceptIntegerValueCmpLesserOrEqual</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptIntegerValueCmpNotEqual">AcceptIntegerValueCmpNotEqual</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptMemoCsValueCmpAnywhere">AcceptMemoCsValueCmpAnywhere</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptMemoCsValueCmpEndWith">AcceptMemoCsValueCmpEndWith</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptMemoCsValueCmpEqual">AcceptMemoCsValueCmpEqual</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptMemoCsValueCmpGreater">AcceptMemoCsValueCmpGreater</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptMemoCsValueCmpGreaterOrEqual">AcceptMemoCsValueCmpGreaterOrEqual</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptMemoCsValueCmpLesser">AcceptMemoCsValueCmpLesser</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptMemoCsValueCmpLesserOrEqual">AcceptMemoCsValueCmpLesserOrEqual</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptMemoCsValueCmpNotEqual">AcceptMemoCsValueCmpNotEqual</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptMemoCsValueCmpStartWith">AcceptMemoCsValueCmpStartWith</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptMemoValueCmpAnywhere">AcceptMemoValueCmpAnywhere</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptMemoValueCmpEndWith">AcceptMemoValueCmpEndWith</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptMemoValueCmpEqual">AcceptMemoValueCmpEqual</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptMemoValueCmpGreater">AcceptMemoValueCmpGreater</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptMemoValueCmpGreaterOrEqual">AcceptMemoValueCmpGreaterOrEqual</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptMemoValueCmpLesser">AcceptMemoValueCmpLesser</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptMemoValueCmpLesserOrEqual">AcceptMemoValueCmpLesserOrEqual</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptMemoValueCmpNotEqual">AcceptMemoValueCmpNotEqual</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptMemoValueCmpStartWith">AcceptMemoValueCmpStartWith</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptValueCmpNotNull">AcceptValueCmpNotNull</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptValueCmpNull">AcceptValueCmpNull</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptWideStringCsValueCmpAnywhere">AcceptWideStringCsValueCmpAnywhere</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptWideStringCsValueCmpEndWith">AcceptWideStringCsValueCmpEndWith</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptWideStringCsValueCmpEqual">AcceptWideStringCsValueCmpEqual</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptWideStringCsValueCmpGreater">AcceptWideStringCsValueCmpGreater</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptWideStringCsValueCmpGreaterOrEqual">AcceptWideStringCsValueCmpGreaterOrEqual</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptWideStringCsValueCmpLesser">AcceptWideStringCsValueCmpLesser</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptWideStringCsValueCmpLesserOrEqual">AcceptWideStringCsValueCmpLesserOrEqual</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptWideStringCsValueCmpNotEqual">AcceptWideStringCsValueCmpNotEqual</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptWideStringCsValueCmpStartWith">AcceptWideStringCsValueCmpStartWith</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptWideStringValueCmpAnywhere">AcceptWideStringValueCmpAnywhere</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptWideStringValueCmpEndWith">AcceptWideStringValueCmpEndWith</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptWideStringValueCmpEqual">AcceptWideStringValueCmpEqual</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptWideStringValueCmpGreater">AcceptWideStringValueCmpGreater</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptWideStringValueCmpGreaterOrEqual">AcceptWideStringValueCmpGreaterOrEqual</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptWideStringValueCmpLesser">AcceptWideStringValueCmpLesser</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptWideStringValueCmpLesserOrEqual">AcceptWideStringValueCmpLesserOrEqual</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptWideStringValueCmpNotEqual">AcceptWideStringValueCmpNotEqual</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptWideStringValueCmpStartWith">AcceptWideStringValueCmpStartWith</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptWordBoolValueCmpEqual">AcceptWordBoolValueCmpEqual</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#AcceptWordBoolValueCmpNotEqual">AcceptWordBoolValueCmpNotEqual</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.html#BindAnsiStringToSqliteValueAsUTF8">BindAnsiStringToSqliteValueAsUTF8</a></b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const RecordBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const RecordFieldIndex: Integer; Const PreparedStmt: Pointer; Const PreparedStmtFieldNo: Integer); inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.html#BindBlobToSqliteValue">BindBlobToSqliteValue</a></b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const RecordBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const RecordFieldIndex: Integer; Const PreparedStmt: Pointer; Const PreparedStmtFieldNo: Integer); inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.html#BindCurrencyToSqliteValue">BindCurrencyToSqliteValue</a></b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const RecordBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const RecordFieldIndex: Integer; Const PreparedStmt: Pointer; Const PreparedStmtFieldNo: Integer); inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.html#BindDateTimeToSqliteValueAsJulianDateTime">BindDateTimeToSqliteValueAsJulianDateTime</a></b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const RecordBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const RecordFieldIndex: Integer; Const PreparedStmt: Pointer; Const PreparedStmtFieldNo: Integer); inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.html#BindDateTimeToSqliteValueAsMacDateTime">BindDateTimeToSqliteValueAsMacDateTime</a></b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const RecordBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const RecordFieldIndex: Integer; Const PreparedStmt: Pointer; Const PreparedStmtFieldNo: Integer); inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.html#BindDateTimeToSqliteValueAsText">BindDateTimeToSqliteValueAsText</a></b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const RecordBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const RecordFieldIndex: Integer; Const PreparedStmt: Pointer; Const PreparedStmtFieldNo: Integer); inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.html#BindDateTimeToSqliteValueAsUnixDateTime">BindDateTimeToSqliteValueAsUnixDateTime</a></b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const RecordBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const RecordFieldIndex: Integer; Const PreparedStmt: Pointer; Const PreparedStmtFieldNo: Integer); inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.html#BindDateToSqliteValueAsText">BindDateToSqliteValueAsText</a></b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const RecordBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const RecordFieldIndex: Integer; Const PreparedStmt: Pointer; Const PreparedStmtFieldNo: Integer); inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.html#BindDoubleToSqliteValue">BindDoubleToSqliteValue</a></b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const RecordBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const RecordFieldIndex: Integer; Const PreparedStmt: Pointer; Const PreparedStmtFieldNo: Integer); inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.html#BindDummyToSqliteValue">BindDummyToSqliteValue</a></b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const RecordBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const RecordFieldIndex: Integer; Const PreparedStmt: Pointer; Const PreparedStmtFieldNo: Integer); inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.html#BindInt64ToSqliteValue">BindInt64ToSqliteValue</a></b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const RecordBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const RecordFieldIndex: Integer; Const PreparedStmt: Pointer; Const PreparedStmtFieldNo: Integer); inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.html#BindIntegerToSqliteValue">BindIntegerToSqliteValue</a></b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const RecordBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const RecordFieldIndex: Integer; Const PreparedStmt: Pointer; Const PreparedStmtFieldNo: Integer); inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.html#BindTimeToSqliteValueAsText">BindTimeToSqliteValueAsText</a></b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const RecordBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const RecordFieldIndex: Integer; Const PreparedStmt: Pointer; Const PreparedStmtFieldNo: Integer); inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.html#BindUTF8StringToSqliteValueAsUTF16">BindUTF8StringToSqliteValueAsUTF16</a></b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const RecordBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const RecordFieldIndex: Integer; Const PreparedStmt: Pointer; Const PreparedStmtFieldNo: Integer); inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.html#BindUTF8StringToSqliteValueAsUTF8">BindUTF8StringToSqliteValueAsUTF8</a></b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const RecordBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const RecordFieldIndex: Integer; Const PreparedStmt: Pointer; Const PreparedStmtFieldNo: Integer); inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.html#BindWideStringToSqliteValueAsUTF16">BindWideStringToSqliteValueAsUTF16</a></b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const RecordBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const RecordFieldIndex: Integer; Const PreparedStmt: Pointer; Const PreparedStmtFieldNo: Integer); inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.html#BindWordBoolToSqliteValue">BindWordBoolToSqliteValue</a></b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const RecordBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const RecordFieldIndex: Integer; Const PreparedStmt: Pointer; Const PreparedStmtFieldNo: Integer); inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.html#BindWordBoolToSqliteValueAsText">BindWordBoolToSqliteValueAsText</a></b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const RecordBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const RecordFieldIndex: Integer; Const PreparedStmt: Pointer; Const PreparedStmtFieldNo: Integer); inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#CompareAnsiStringValueAsc">CompareAnsiStringValueAsc</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer1, FieldValueBuffer2: Pointer): Integer; inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#CompareAnsiStringValueDesc">CompareAnsiStringValueDesc</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer1, FieldValueBuffer2: Pointer): Integer; inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#CompareCurrencyValueAsc">CompareCurrencyValueAsc</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer1, FieldValueBuffer2: Pointer): Integer; inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#CompareCurrencyValueDesc">CompareCurrencyValueDesc</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer1, FieldValueBuffer2: Pointer): Integer; inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#CompareDoubleValueAsc">CompareDoubleValueAsc</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer1, FieldValueBuffer2: Pointer): Integer; inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#CompareDoubleValueDesc">CompareDoubleValueDesc</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer1, FieldValueBuffer2: Pointer): Integer; inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#CompareDummyValue">CompareDummyValue</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer1, FieldValueBuffer2: Pointer): Integer; inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#CompareInt64ValueAsc">CompareInt64ValueAsc</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer1, FieldValueBuffer2: Pointer): Integer; inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#CompareInt64ValueDesc">CompareInt64ValueDesc</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer1, FieldValueBuffer2: Pointer): Integer; inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#CompareIntegerValueAsc">CompareIntegerValueAsc</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer1, FieldValueBuffer2: Pointer): Integer; inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#CompareIntegerValueDesc">CompareIntegerValueDesc</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer1, FieldValueBuffer2: Pointer): Integer; inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#CompareMemoValueAsc">CompareMemoValueAsc</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer1, FieldValueBuffer2: Pointer): Integer; inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#CompareMemoValueDesc">CompareMemoValueDesc</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer1, FieldValueBuffer2: Pointer): Integer; inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#CompareRecord">CompareRecord</a></b>(Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; var MidRecordBuffers: <a   href="SqlitePassDbo.html#TMidRecordBuffers">TMidRecordBuffers</a>; var SortedFields: <a   href="SqlitePassDbo.html#TSqlitePassInMemoryIndexInfos">TSqlitePassInMemoryIndexInfos</a>; RecordBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>): Integer; inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#CompareWideStringValueAsc">CompareWideStringValueAsc</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer1, FieldValueBuffer2: Pointer): Integer; inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#CompareWideStringValueDesc">CompareWideStringValueDesc</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer1, FieldValueBuffer2: Pointer): Integer; inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#CompareWordBoolValueAsc">CompareWordBoolValueAsc</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer1, FieldValueBuffer2: Pointer): Integer; inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#CompareWordBoolValueDesc">CompareWordBoolValueDesc</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer1, FieldValueBuffer2: Pointer): Integer; inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.html#GetMemoValue">GetMemoValue</a></b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue: Pointer): AnsiString; inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.html#InsertionSort">InsertionSort</a></b>(Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; RecordBufferList: <a   href="SqlitePassUtils.html#PRecBufferList">PRecBufferList</a>; var MidRecordBuffers: <a   href="SqlitePassDbo.html#TMidRecordBuffers">TMidRecordBuffers</a>; var SortedFields: <a   href="SqlitePassDbo.html#TSqlitePassInMemoryIndexInfos">TSqlitePassInMemoryIndexInfos</a>;Const Lo, Hi: Integer); inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.html#SqliteValueDateTimeTextToDouble">SqliteValueDateTimeTextToDouble</a></b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const PreparedStmt: Pointer; Const ColumnIndex: Integer); inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.html#SqliteValueJulianDateTimeToDouble">SqliteValueJulianDateTimeToDouble</a></b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const PreparedStmt: Pointer; Const ColumnIndex: Integer); inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.html#SqliteValueMacDateTimeToDouble">SqliteValueMacDateTimeToDouble</a></b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const PreparedStmt: Pointer; Const ColumnIndex: Integer); inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.html#SqliteValueTextToDate">SqliteValueTextToDate</a></b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const PreparedStmt: Pointer; Const ColumnIndex: Integer); inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.html#SqliteValueTextToTime">SqliteValueTextToTime</a></b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const PreparedStmt: Pointer; Const ColumnIndex: Integer); inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.html#SqliteValueTextToWordBool">SqliteValueTextToWordBool</a></b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const PreparedStmt: Pointer; Const ColumnIndex: Integer); inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.html#SqliteValueToAnsiString">SqliteValueToAnsiString</a></b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const PreparedStmt: Pointer; Const ColumnIndex: Integer); inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.html#SqliteValueToBlob">SqliteValueToBlob</a></b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const PreparedStmt: Pointer; Const ColumnIndex: Integer); inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.html#SqliteValueToCurrency">SqliteValueToCurrency</a></b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const PreparedStmt: Pointer; Const ColumnIndex: Integer); inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.html#SqliteValueToDouble">SqliteValueToDouble</a></b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const PreparedStmt: Pointer; Const ColumnIndex: Integer); inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.html#SqliteValueToDummy">SqliteValueToDummy</a></b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const PreparedStmt: Pointer; Const ColumnIndex: Integer); inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.html#SqliteValueToInt64">SqliteValueToInt64</a></b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const PreparedStmt: Pointer; Const ColumnIndex: Integer); inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.html#SqliteValueToInteger">SqliteValueToInteger</a></b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const PreparedStmt: Pointer; Const ColumnIndex: Integer); inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.html#SqliteValueToRawString">SqliteValueToRawString</a></b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const PreparedStmt: Pointer; Const ColumnIndex: Integer); inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.html#SqliteValueToRawWideString">SqliteValueToRawWideString</a></b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const PreparedStmt: Pointer; Const ColumnIndex: Integer); inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.html#SqliteValueToUTF16WideString">SqliteValueToUTF16WideString</a></b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const PreparedStmt: Pointer; Const ColumnIndex: Integer); inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.html#SqliteValueToUTF8String">SqliteValueToUTF8String</a></b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const PreparedStmt: Pointer; Const ColumnIndex: Integer); inline;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.html#SqliteValueToWordBool">SqliteValueToWordBool</a></b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const PreparedStmt: Pointer; Const ColumnIndex: Integer); inline;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.html#SqliteValueUnixDateTimeToDouble">SqliteValueUnixDateTimeToDouble</a></b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const PreparedStmt: Pointer; Const ColumnIndex: Integer); inline;</code></td>
+</tr>
+</table>
+<a name="%40Types"></a><h3 class="summary">Types</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassDbo.html#PSqlitePassExecCallBack">PSqlitePassExecCallBack</a></b> = &circ;<a   href="SqlitePassDbo.html#TSqlitePassExecCallBack">TSqlitePassExecCallBack</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassDbo.html#PSqlitePassRecordState">PSqlitePassRecordState</a></b> = &circ;<a   href="SqlitePassDbo.html#TSqlitePassRecordState">TSqlitePassRecordState</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassDbo.html#StmtType">StmtType</a></b> = (...);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassDbo.html#TConnectEvent">TConnectEvent</a></b> = procedure(Database: <a   href="SqlitePassDbo.TSqlitePassDatabase.html">TSqlitePassDatabase</a>) of object;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassDbo.html#TDataTypeConversion">TDataTypeConversion</a></b> = procedure (Database: <a   href="SqlitePassDbo.TSqlitePassDatabase.html">TSqlitePassDatabase</a>; TableDef: <a   href="SqlitePassDbo.TSqlitePassTableDef.html">TSqlitePassTableDef</a>; FiedDef: <a   href="SqlitePassDbo.TSqlitePassTableFieldDef.html">TSqlitePassTableFieldDef</a>) of object;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassDbo.html#TFieldFilterExpAcceptValueFunc">TFieldFilterExpAcceptValueFunc</a></b> = function(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassDbo.html#TMidRecordBuffers">TMidRecordBuffers</a></b> = Array of <a   href="SqlitePassDbo.TMidRecordBuffer.html">TMidRecordBuffer</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassDbo.html#TSqlitePassApplyMode">TSqlitePassApplyMode</a></b> = (...);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassDbo.html#TSqlitePassApplyModes">TSqlitePassApplyModes</a></b>           = set of <a   href="SqlitePassDbo.html#TSqlitePassApplyMode">TSqlitePassApplyMode</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassDbo.html#TSqlitePassAutoVacuumType">TSqlitePassAutoVacuumType</a></b> = (...);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassDbo.html#TSqlitePassAvailableOperations">TSqlitePassAvailableOperations</a></b> = set of (aoRead, aoInsert, aoUpdate, aoDelete);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassDbo.html#TSqlitePassBooleanStorage">TSqlitePassBooleanStorage</a></b> = (...);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassDbo.html#TSqlitePassBufferToSqliteValue">TSqlitePassBufferToSqliteValue</a></b> = procedure (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const RecordBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const RecordFieldIndex: Integer; Const PreparedStmt: Pointer; Const PreparedStmtFieldNo: Integer);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassDbo.html#TSqlitePassCompareColumnValue">TSqlitePassCompareColumnValue</a></b> = function(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldBufferValue1, FieldBufferValue2: Pointer): Integer;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassDbo.html#TSqlitePassDatabaseObjectTypes">TSqlitePassDatabaseObjectTypes</a></b> = (...);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassDbo.html#TSqlitePassDatabaseState">TSqlitePassDatabaseState</a></b> = set of (dbsInternalOpen, dbsRefreshingDefinitions);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassDbo.html#TSqlitePassDatabaseType">TSqlitePassDatabaseType</a></b> = (...);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassDbo.html#TSqlitePassDatasetExportProgressEvent">TSqlitePassDatasetExportProgressEvent</a></b> = procedure(Current, Total:Integer) of object;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassDbo.html#TSqlitePassDatasetFilterRecordEvent">TSqlitePassDatasetFilterRecordEvent</a></b> = procedure(DataSet: TDataSet; var Accept: Boolean) of object;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassDbo.html#TSqlitePassDatasetImportProgressEvent">TSqlitePassDatasetImportProgressEvent</a></b> = procedure(Current:Integer) of object;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassDbo.html#TSqlitePassDatasetType">TSqlitePassDatasetType</a></b> = (...);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassDbo.html#TSqlitePassDataTypeDetectionMode">TSqlitePassDataTypeDetectionMode</a></b> = (...);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassDbo.html#TSqlitePassDataTypeMappingMode">TSqlitePassDataTypeMappingMode</a></b> = (...);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassDbo.html#TSqlitePassDataTypeStorageLoadOptions">TSqlitePassDataTypeStorageLoadOptions</a></b> = set of (loDefaultProperties, loCustomProperties, loTranslationRules, loCustomFieldDefs);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassDbo.html#TSqlitePassDataTypeStorageSaveOptions">TSqlitePassDataTypeStorageSaveOptions</a></b> = set of (soCustomProperties, soTranslationRules, soCustomFieldDefs);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassDbo.html#TSqlitePassDateStorage">TSqlitePassDateStorage</a></b> = <a   href="SqlitePassDbo.html#TSqlitePassBooleanStorage">TSqlitePassBooleanStorage</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassDbo.html#TSqlitePassDateTimeStorage">TSqlitePassDateTimeStorage</a></b> = (...);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassDbo.html#TSqlitePassEncoding">TSqlitePassEncoding</a></b> = (...);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassDbo.html#TSqlitePassExecCallBack">TSqlitePassExecCallBack</a></b> = function(acolumns: Integer; aColumnValues, aColumnNames:ppAnsiChar):integer of object;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassDbo.html#TSqlitePassFilterChanges">TSqlitePassFilterChanges</a></b> = set of (fcSQLFilter, fcDirectFilters, fcLowerLimit, fcUpperLimit);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassDbo.html#TSqlitePassFilterComparisonOperators">TSqlitePassFilterComparisonOperators</a></b> = (...);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassDbo.html#TSqlitePassFilterLogicalOperators">TSqlitePassFilterLogicalOperators</a></b> = (...);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassDbo.html#TSqlitePassFilterMode">TSqlitePassFilterMode</a></b> = (...);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassDbo.html#TSqlitePassGetPragmaCallback">TSqlitePassGetPragmaCallback</a></b> = function(UserData: Pointer; ColumnCount: Integer; ColumnValues, ColumnNames: PPointer): Integer; cdecl;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassDbo.html#TSqlitePassIndexDirection">TSqlitePassIndexDirection</a></b> = (...);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassDbo.html#TSqlitePassInMemoryIndexInfos">TSqlitePassInMemoryIndexInfos</a></b> = Array of <a   href="SqlitePassDbo.TSqlitePassInMemoryIndexInfo.html">TSqlitePassInMemoryIndexInfo</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassDbo.html#TSqlitePassJournalMode">TSqlitePassJournalMode</a></b> = (...);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassDbo.html#TSqlitePassLockingMode">TSqlitePassLockingMode</a></b> = (...);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassDbo.html#TSqlitePassPageSize">TSqlitePassPageSize</a></b>             = 512..32768;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassDbo.html#TSqlitePassPostType">TSqlitePassPostType</a></b> = (...);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassDbo.html#TSqlitePassQuoteStyle">TSqlitePassQuoteStyle</a></b> = (...);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassDbo.html#TSqlitePassRecordsCacheCapacity">TSqlitePassRecordsCacheCapacity</a></b> = 1..MaxInt;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassDbo.html#TSqlitePassRecordState">TSqlitePassRecordState</a></b> =  Byte;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassDbo.html#TSqlitePassRecordStateType">TSqlitePassRecordStateType</a></b> = 0..7;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassDbo.html#TSqlitePassRecordStateValue">TSqlitePassRecordStateValue</a></b> = 0..1;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassDbo.html#TSqlitePassSortMode">TSqlitePassSortMode</a></b> = (...);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassDbo.html#TSqlitePassSQLChanges">TSqlitePassSQLChanges</a></b> = set of (scSelect, scWhere, scGroupBy, scHaving, scOrderBy, scLimit, scRefresh);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassDbo.html#TSqlitePassSqliteValueToBuffer">TSqlitePassSqliteValueToBuffer</a></b> = procedure(Const FRecordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const Buffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const PreparedStmt: Pointer; Const ColumnIndex: Integer);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassDbo.html#TSqlitePassSQLTokenizerCleanOptions">TSqlitePassSQLTokenizerCleanOptions</a></b> =  set of <a   href="SqlitePassDbo.html#TSqlitePassSQLTokenType">TSqlitePassSQLTokenType</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassDbo.html#TSqlitePassSQLTokenizerOptions">TSqlitePassSQLTokenizerOptions</a></b> =  set of (toClean, toUpperCase);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassDbo.html#TSqlitePassSQLTokenType">TSqlitePassSQLTokenType</a></b> = (...);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassDbo.html#TSqlitePassSynchronous">TSqlitePassSynchronous</a></b> = (...);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassDbo.html#TSqlitePassSystemEncoding">TSqlitePassSystemEncoding</a></b> = (...);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassDbo.html#TSqlitePassTempStore">TSqlitePassTempStore</a></b> = (...);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassDbo.html#TSqlitePassTimeStorage">TSqlitePassTimeStorage</a></b> = <a   href="SqlitePassDbo.html#TSqlitePassDateStorage">TSqlitePassDateStorage</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassDbo.html#TSqlitePassUnicodeEncoding">TSqlitePassUnicodeEncoding</a></b> = (...);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassDbo.html#TSqlitePassVerboseLevel">TSqlitePassVerboseLevel</a></b> = vlSilent..vlLogAndShow;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassDbo.html#TSqlitePassWriteMode">TSqlitePassWriteMode</a></b> = (...);</code></td>
+</tr>
+</table>
+<h2 class="description">Description</h2>
+<h3 class="detail">Functions and Procedures</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptAnsiStringCsValueCmpAnywhere"></a><code>function <b>AcceptAnsiStringCsValueCmpAnywhere</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptAnsiStringCsValueCmpEndWith"></a><code>function <b>AcceptAnsiStringCsValueCmpEndWith</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptAnsiStringCsValueCmpEqual"></a><code>function <b>AcceptAnsiStringCsValueCmpEqual</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Case Sensitive</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptAnsiStringCsValueCmpGreater"></a><code>function <b>AcceptAnsiStringCsValueCmpGreater</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptAnsiStringCsValueCmpGreaterOrEqual"></a><code>function <b>AcceptAnsiStringCsValueCmpGreaterOrEqual</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptAnsiStringCsValueCmpLesser"></a><code>function <b>AcceptAnsiStringCsValueCmpLesser</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptAnsiStringCsValueCmpLesserOrEqual"></a><code>function <b>AcceptAnsiStringCsValueCmpLesserOrEqual</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptAnsiStringCsValueCmpNotEqual"></a><code>function <b>AcceptAnsiStringCsValueCmpNotEqual</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptAnsiStringCsValueCmpStartWith"></a><code>function <b>AcceptAnsiStringCsValueCmpStartWith</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptAnsiStringValueCmpAnywhere"></a><code>function <b>AcceptAnsiStringValueCmpAnywhere</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptAnsiStringValueCmpEndWith"></a><code>function <b>AcceptAnsiStringValueCmpEndWith</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptAnsiStringValueCmpEqual"></a><code>function <b>AcceptAnsiStringValueCmpEqual</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Not Case Sensitive</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptAnsiStringValueCmpGreater"></a><code>function <b>AcceptAnsiStringValueCmpGreater</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptAnsiStringValueCmpGreaterOrEqual"></a><code>function <b>AcceptAnsiStringValueCmpGreaterOrEqual</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptAnsiStringValueCmpLesser"></a><code>function <b>AcceptAnsiStringValueCmpLesser</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptAnsiStringValueCmpLesserOrEqual"></a><code>function <b>AcceptAnsiStringValueCmpLesserOrEqual</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptAnsiStringValueCmpNotEqual"></a><code>function <b>AcceptAnsiStringValueCmpNotEqual</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptAnsiStringValueCmpStartWith"></a><code>function <b>AcceptAnsiStringValueCmpStartWith</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptCurrencyValueCmpEqual"></a><code>function <b>AcceptCurrencyValueCmpEqual</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptCurrencyValueCmpGreater"></a><code>function <b>AcceptCurrencyValueCmpGreater</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptCurrencyValueCmpGreaterOrEqual"></a><code>function <b>AcceptCurrencyValueCmpGreaterOrEqual</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptCurrencyValueCmpLesser"></a><code>function <b>AcceptCurrencyValueCmpLesser</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptCurrencyValueCmpLesserOrEqual"></a><code>function <b>AcceptCurrencyValueCmpLesserOrEqual</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptCurrencyValueCmpNotEqual"></a><code>function <b>AcceptCurrencyValueCmpNotEqual</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptDoubleValueCmpEqual"></a><code>function <b>AcceptDoubleValueCmpEqual</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptDoubleValueCmpGreater"></a><code>function <b>AcceptDoubleValueCmpGreater</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptDoubleValueCmpGreaterOrEqual"></a><code>function <b>AcceptDoubleValueCmpGreaterOrEqual</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptDoubleValueCmpLesser"></a><code>function <b>AcceptDoubleValueCmpLesser</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptDoubleValueCmpLesserOrEqual"></a><code>function <b>AcceptDoubleValueCmpLesserOrEqual</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptDoubleValueCmpNotEqual"></a><code>function <b>AcceptDoubleValueCmpNotEqual</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptDummyValue"></a><code>function <b>AcceptDummyValue</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Filter functions</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptInt64ValueCmpEqual"></a><code>function <b>AcceptInt64ValueCmpEqual</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptInt64ValueCmpGreater"></a><code>function <b>AcceptInt64ValueCmpGreater</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptInt64ValueCmpGreaterOrEqual"></a><code>function <b>AcceptInt64ValueCmpGreaterOrEqual</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptInt64ValueCmpLesser"></a><code>function <b>AcceptInt64ValueCmpLesser</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptInt64ValueCmpLesserOrEqual"></a><code>function <b>AcceptInt64ValueCmpLesserOrEqual</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptInt64ValueCmpNotEqual"></a><code>function <b>AcceptInt64ValueCmpNotEqual</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptIntegerValueCmpEqual"></a><code>function <b>AcceptIntegerValueCmpEqual</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptIntegerValueCmpGreater"></a><code>function <b>AcceptIntegerValueCmpGreater</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptIntegerValueCmpGreaterOrEqual"></a><code>function <b>AcceptIntegerValueCmpGreaterOrEqual</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptIntegerValueCmpLesser"></a><code>function <b>AcceptIntegerValueCmpLesser</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptIntegerValueCmpLesserOrEqual"></a><code>function <b>AcceptIntegerValueCmpLesserOrEqual</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptIntegerValueCmpNotEqual"></a><code>function <b>AcceptIntegerValueCmpNotEqual</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptMemoCsValueCmpAnywhere"></a><code>function <b>AcceptMemoCsValueCmpAnywhere</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptMemoCsValueCmpEndWith"></a><code>function <b>AcceptMemoCsValueCmpEndWith</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptMemoCsValueCmpEqual"></a><code>function <b>AcceptMemoCsValueCmpEqual</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Case Sensitive</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptMemoCsValueCmpGreater"></a><code>function <b>AcceptMemoCsValueCmpGreater</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptMemoCsValueCmpGreaterOrEqual"></a><code>function <b>AcceptMemoCsValueCmpGreaterOrEqual</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptMemoCsValueCmpLesser"></a><code>function <b>AcceptMemoCsValueCmpLesser</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptMemoCsValueCmpLesserOrEqual"></a><code>function <b>AcceptMemoCsValueCmpLesserOrEqual</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptMemoCsValueCmpNotEqual"></a><code>function <b>AcceptMemoCsValueCmpNotEqual</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptMemoCsValueCmpStartWith"></a><code>function <b>AcceptMemoCsValueCmpStartWith</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptMemoValueCmpAnywhere"></a><code>function <b>AcceptMemoValueCmpAnywhere</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptMemoValueCmpEndWith"></a><code>function <b>AcceptMemoValueCmpEndWith</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptMemoValueCmpEqual"></a><code>function <b>AcceptMemoValueCmpEqual</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Not Case Sensitive</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptMemoValueCmpGreater"></a><code>function <b>AcceptMemoValueCmpGreater</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptMemoValueCmpGreaterOrEqual"></a><code>function <b>AcceptMemoValueCmpGreaterOrEqual</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptMemoValueCmpLesser"></a><code>function <b>AcceptMemoValueCmpLesser</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptMemoValueCmpLesserOrEqual"></a><code>function <b>AcceptMemoValueCmpLesserOrEqual</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptMemoValueCmpNotEqual"></a><code>function <b>AcceptMemoValueCmpNotEqual</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptMemoValueCmpStartWith"></a><code>function <b>AcceptMemoValueCmpStartWith</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptValueCmpNotNull"></a><code>function <b>AcceptValueCmpNotNull</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptValueCmpNull"></a><code>function <b>AcceptValueCmpNull</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptWideStringCsValueCmpAnywhere"></a><code>function <b>AcceptWideStringCsValueCmpAnywhere</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptWideStringCsValueCmpEndWith"></a><code>function <b>AcceptWideStringCsValueCmpEndWith</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptWideStringCsValueCmpEqual"></a><code>function <b>AcceptWideStringCsValueCmpEqual</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Case Sensitive</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptWideStringCsValueCmpGreater"></a><code>function <b>AcceptWideStringCsValueCmpGreater</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptWideStringCsValueCmpGreaterOrEqual"></a><code>function <b>AcceptWideStringCsValueCmpGreaterOrEqual</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptWideStringCsValueCmpLesser"></a><code>function <b>AcceptWideStringCsValueCmpLesser</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptWideStringCsValueCmpLesserOrEqual"></a><code>function <b>AcceptWideStringCsValueCmpLesserOrEqual</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptWideStringCsValueCmpNotEqual"></a><code>function <b>AcceptWideStringCsValueCmpNotEqual</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptWideStringCsValueCmpStartWith"></a><code>function <b>AcceptWideStringCsValueCmpStartWith</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptWideStringValueCmpAnywhere"></a><code>function <b>AcceptWideStringValueCmpAnywhere</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptWideStringValueCmpEndWith"></a><code>function <b>AcceptWideStringValueCmpEndWith</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptWideStringValueCmpEqual"></a><code>function <b>AcceptWideStringValueCmpEqual</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Not Case Sensitive</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptWideStringValueCmpGreater"></a><code>function <b>AcceptWideStringValueCmpGreater</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptWideStringValueCmpGreaterOrEqual"></a><code>function <b>AcceptWideStringValueCmpGreaterOrEqual</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptWideStringValueCmpLesser"></a><code>function <b>AcceptWideStringValueCmpLesser</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptWideStringValueCmpLesserOrEqual"></a><code>function <b>AcceptWideStringValueCmpLesserOrEqual</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptWideStringValueCmpNotEqual"></a><code>function <b>AcceptWideStringValueCmpNotEqual</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptWideStringValueCmpStartWith"></a><code>function <b>AcceptWideStringValueCmpStartWith</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptWordBoolValueCmpEqual"></a><code>function <b>AcceptWordBoolValueCmpEqual</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AcceptWordBoolValueCmpNotEqual"></a><code>function <b>AcceptWordBoolValueCmpNotEqual</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="BindAnsiStringToSqliteValueAsUTF8"></a><code>procedure <b>BindAnsiStringToSqliteValueAsUTF8</b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const RecordBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const RecordFieldIndex: Integer; Const PreparedStmt: Pointer; Const PreparedStmtFieldNo: Integer); inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="BindBlobToSqliteValue"></a><code>procedure <b>BindBlobToSqliteValue</b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const RecordBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const RecordFieldIndex: Integer; Const PreparedStmt: Pointer; Const PreparedStmtFieldNo: Integer); inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="BindCurrencyToSqliteValue"></a><code>procedure <b>BindCurrencyToSqliteValue</b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const RecordBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const RecordFieldIndex: Integer; Const PreparedStmt: Pointer; Const PreparedStmtFieldNo: Integer); inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="BindDateTimeToSqliteValueAsJulianDateTime"></a><code>procedure <b>BindDateTimeToSqliteValueAsJulianDateTime</b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const RecordBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const RecordFieldIndex: Integer; Const PreparedStmt: Pointer; Const PreparedStmtFieldNo: Integer); inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="BindDateTimeToSqliteValueAsMacDateTime"></a><code>procedure <b>BindDateTimeToSqliteValueAsMacDateTime</b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const RecordBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const RecordFieldIndex: Integer; Const PreparedStmt: Pointer; Const PreparedStmtFieldNo: Integer); inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="BindDateTimeToSqliteValueAsText"></a><code>procedure <b>BindDateTimeToSqliteValueAsText</b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const RecordBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const RecordFieldIndex: Integer; Const PreparedStmt: Pointer; Const PreparedStmtFieldNo: Integer); inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="BindDateTimeToSqliteValueAsUnixDateTime"></a><code>procedure <b>BindDateTimeToSqliteValueAsUnixDateTime</b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const RecordBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const RecordFieldIndex: Integer; Const PreparedStmt: Pointer; Const PreparedStmtFieldNo: Integer); inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="BindDateToSqliteValueAsText"></a><code>procedure <b>BindDateToSqliteValueAsText</b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const RecordBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const RecordFieldIndex: Integer; Const PreparedStmt: Pointer; Const PreparedStmtFieldNo: Integer); inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="BindDoubleToSqliteValue"></a><code>procedure <b>BindDoubleToSqliteValue</b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const RecordBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const RecordFieldIndex: Integer; Const PreparedStmt: Pointer; Const PreparedStmtFieldNo: Integer); inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="BindDummyToSqliteValue"></a><code>procedure <b>BindDummyToSqliteValue</b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const RecordBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const RecordFieldIndex: Integer; Const PreparedStmt: Pointer; Const PreparedStmtFieldNo: Integer); inline;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Translates a value from internal buffer to a sqlite value. Then binds this value to parameter in INSERT - UPDATE - DELETE SQL statement StmtFieldNo is 1 based, FieldIndex is Zero based</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="BindInt64ToSqliteValue"></a><code>procedure <b>BindInt64ToSqliteValue</b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const RecordBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const RecordFieldIndex: Integer; Const PreparedStmt: Pointer; Const PreparedStmtFieldNo: Integer); inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="BindIntegerToSqliteValue"></a><code>procedure <b>BindIntegerToSqliteValue</b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const RecordBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const RecordFieldIndex: Integer; Const PreparedStmt: Pointer; Const PreparedStmtFieldNo: Integer); inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="BindTimeToSqliteValueAsText"></a><code>procedure <b>BindTimeToSqliteValueAsText</b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const RecordBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const RecordFieldIndex: Integer; Const PreparedStmt: Pointer; Const PreparedStmtFieldNo: Integer); inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="BindUTF8StringToSqliteValueAsUTF16"></a><code>procedure <b>BindUTF8StringToSqliteValueAsUTF16</b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const RecordBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const RecordFieldIndex: Integer; Const PreparedStmt: Pointer; Const PreparedStmtFieldNo: Integer); inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="BindUTF8StringToSqliteValueAsUTF8"></a><code>procedure <b>BindUTF8StringToSqliteValueAsUTF8</b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const RecordBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const RecordFieldIndex: Integer; Const PreparedStmt: Pointer; Const PreparedStmtFieldNo: Integer); inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="BindWideStringToSqliteValueAsUTF16"></a><code>procedure <b>BindWideStringToSqliteValueAsUTF16</b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const RecordBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const RecordFieldIndex: Integer; Const PreparedStmt: Pointer; Const PreparedStmtFieldNo: Integer); inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="BindWordBoolToSqliteValue"></a><code>procedure <b>BindWordBoolToSqliteValue</b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const RecordBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const RecordFieldIndex: Integer; Const PreparedStmt: Pointer; Const PreparedStmtFieldNo: Integer); inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="BindWordBoolToSqliteValueAsText"></a><code>procedure <b>BindWordBoolToSqliteValueAsText</b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const RecordBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const RecordFieldIndex: Integer; Const PreparedStmt: Pointer; Const PreparedStmtFieldNo: Integer); inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="CompareAnsiStringValueAsc"></a><code>function <b>CompareAnsiStringValueAsc</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer1, FieldValueBuffer2: Pointer): Integer; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="CompareAnsiStringValueDesc"></a><code>function <b>CompareAnsiStringValueDesc</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer1, FieldValueBuffer2: Pointer): Integer; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="CompareCurrencyValueAsc"></a><code>function <b>CompareCurrencyValueAsc</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer1, FieldValueBuffer2: Pointer): Integer; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="CompareCurrencyValueDesc"></a><code>function <b>CompareCurrencyValueDesc</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer1, FieldValueBuffer2: Pointer): Integer; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="CompareDoubleValueAsc"></a><code>function <b>CompareDoubleValueAsc</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer1, FieldValueBuffer2: Pointer): Integer; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="CompareDoubleValueDesc"></a><code>function <b>CompareDoubleValueDesc</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer1, FieldValueBuffer2: Pointer): Integer; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="CompareDummyValue"></a><code>function <b>CompareDummyValue</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer1, FieldValueBuffer2: Pointer): Integer; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Sort Comparison functions</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="CompareInt64ValueAsc"></a><code>function <b>CompareInt64ValueAsc</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer1, FieldValueBuffer2: Pointer): Integer; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="CompareInt64ValueDesc"></a><code>function <b>CompareInt64ValueDesc</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer1, FieldValueBuffer2: Pointer): Integer; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="CompareIntegerValueAsc"></a><code>function <b>CompareIntegerValueAsc</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer1, FieldValueBuffer2: Pointer): Integer; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="CompareIntegerValueDesc"></a><code>function <b>CompareIntegerValueDesc</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer1, FieldValueBuffer2: Pointer): Integer; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="CompareMemoValueAsc"></a><code>function <b>CompareMemoValueAsc</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer1, FieldValueBuffer2: Pointer): Integer; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="CompareMemoValueDesc"></a><code>function <b>CompareMemoValueDesc</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer1, FieldValueBuffer2: Pointer): Integer; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="CompareRecord"></a><code>function <b>CompareRecord</b>(Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; var MidRecordBuffers: <a   href="SqlitePassDbo.html#TMidRecordBuffers">TMidRecordBuffers</a>; var SortedFields: <a   href="SqlitePassDbo.html#TSqlitePassInMemoryIndexInfos">TSqlitePassInMemoryIndexInfos</a>; RecordBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>): Integer; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+procedure <a class="normal"  href="SqlitePassDbo.html#InsertionSort">InsertionSort</a>(RecordBufferList: <a class="normal"  href="SqlitePassUtils.html#PRecBufferList">PRecBufferList</a>; var MidRecordBuffers: <a class="normal"  href="SqlitePassDbo.html#TMidRecordBuffers">TMidRecordBuffers</a>; Const Lo, Hi: Integer);</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="CompareWideStringValueAsc"></a><code>function <b>CompareWideStringValueAsc</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer1, FieldValueBuffer2: Pointer): Integer; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="CompareWideStringValueDesc"></a><code>function <b>CompareWideStringValueDesc</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer1, FieldValueBuffer2: Pointer): Integer; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="CompareWordBoolValueAsc"></a><code>function <b>CompareWordBoolValueAsc</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer1, FieldValueBuffer2: Pointer): Integer; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Sort Comparison functions - Asc We could call the above *Desc functions and multiplicate the result by -1, but the code is faster this way</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="CompareWordBoolValueDesc"></a><code>function <b>CompareWordBoolValueDesc</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer1, FieldValueBuffer2: Pointer): Integer; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Sort Comparison functions - Desc</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="GetMemoValue"></a><code>function <b>GetMemoValue</b>(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue: Pointer): AnsiString; inline;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Memo</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="InsertionSort"></a><code>procedure <b>InsertionSort</b>(Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; RecordBufferList: <a   href="SqlitePassUtils.html#PRecBufferList">PRecBufferList</a>; var MidRecordBuffers: <a   href="SqlitePassDbo.html#TMidRecordBuffers">TMidRecordBuffers</a>; var SortedFields: <a   href="SqlitePassDbo.html#TSqlitePassInMemoryIndexInfos">TSqlitePassInMemoryIndexInfos</a>;Const Lo, Hi: Integer); inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteValueDateTimeTextToDouble"></a><code>procedure <b>SqliteValueDateTimeTextToDouble</b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const PreparedStmt: Pointer; Const ColumnIndex: Integer); inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteValueJulianDateTimeToDouble"></a><code>procedure <b>SqliteValueJulianDateTimeToDouble</b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const PreparedStmt: Pointer; Const ColumnIndex: Integer); inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteValueMacDateTimeToDouble"></a><code>procedure <b>SqliteValueMacDateTimeToDouble</b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const PreparedStmt: Pointer; Const ColumnIndex: Integer); inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteValueTextToDate"></a><code>procedure <b>SqliteValueTextToDate</b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const PreparedStmt: Pointer; Const ColumnIndex: Integer); inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteValueTextToTime"></a><code>procedure <b>SqliteValueTextToTime</b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const PreparedStmt: Pointer; Const ColumnIndex: Integer); inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteValueTextToWordBool"></a><code>procedure <b>SqliteValueTextToWordBool</b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const PreparedStmt: Pointer; Const ColumnIndex: Integer); inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteValueToAnsiString"></a><code>procedure <b>SqliteValueToAnsiString</b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const PreparedStmt: Pointer; Const ColumnIndex: Integer); inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteValueToBlob"></a><code>procedure <b>SqliteValueToBlob</b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const PreparedStmt: Pointer; Const ColumnIndex: Integer); inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteValueToCurrency"></a><code>procedure <b>SqliteValueToCurrency</b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const PreparedStmt: Pointer; Const ColumnIndex: Integer); inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteValueToDouble"></a><code>procedure <b>SqliteValueToDouble</b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const PreparedStmt: Pointer; Const ColumnIndex: Integer); inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteValueToDummy"></a><code>procedure <b>SqliteValueToDummy</b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const PreparedStmt: Pointer; Const ColumnIndex: Integer); inline;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Data Reader - Translate functions</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteValueToInt64"></a><code>procedure <b>SqliteValueToInt64</b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const PreparedStmt: Pointer; Const ColumnIndex: Integer); inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteValueToInteger"></a><code>procedure <b>SqliteValueToInteger</b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const PreparedStmt: Pointer; Const ColumnIndex: Integer); inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteValueToRawString"></a><code>procedure <b>SqliteValueToRawString</b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const PreparedStmt: Pointer; Const ColumnIndex: Integer); inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteValueToRawWideString"></a><code>procedure <b>SqliteValueToRawWideString</b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const PreparedStmt: Pointer; Const ColumnIndex: Integer); inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteValueToUTF16WideString"></a><code>procedure <b>SqliteValueToUTF16WideString</b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const PreparedStmt: Pointer; Const ColumnIndex: Integer); inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteValueToUTF8String"></a><code>procedure <b>SqliteValueToUTF8String</b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const PreparedStmt: Pointer; Const ColumnIndex: Integer); inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteValueToWordBool"></a><code>procedure <b>SqliteValueToWordBool</b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const PreparedStmt: Pointer; Const ColumnIndex: Integer); inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteValueUnixDateTimeToDouble"></a><code>procedure <b>SqliteValueUnixDateTimeToDouble</b> (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValueBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const PreparedStmt: Pointer; Const ColumnIndex: Integer); inline;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<h3 class="detail">Types</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="PSqlitePassExecCallBack"></a><code><b>PSqlitePassExecCallBack</b> = &circ;<a   href="SqlitePassDbo.html#TSqlitePassExecCallBack">TSqlitePassExecCallBack</a>;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="PSqlitePassRecordState"></a><code><b>PSqlitePassRecordState</b> = &circ;<a   href="SqlitePassDbo.html#TSqlitePassRecordState">TSqlitePassRecordState</a>;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="StmtType"></a><code><b>StmtType</b> = (...);</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;<h6 class="description_section">Values</h6>
+<ul>
+<li>
+stCreate: &nbsp;</li>
+<li>
+stCreateTable: &nbsp;</li>
+<li>
+stSelect: &nbsp;</li>
+<li>
+stInsert: &nbsp;</li>
+<li>
+stUpdate: &nbsp;</li>
+<li>
+stDelete: &nbsp;</li>
+<li>
+stUnknown: &nbsp;</li>
+</ul>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TConnectEvent"></a><code><b>TConnectEvent</b> = procedure(Database: <a   href="SqlitePassDbo.TSqlitePassDatabase.html">TSqlitePassDatabase</a>) of object;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+<a class="normal"  href="SqlitePassDbo.TSqlitePassDatabase.html">TSqlitePassDatabase</a> Events</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TDataTypeConversion"></a><code><b>TDataTypeConversion</b> = procedure (Database: <a   href="SqlitePassDbo.TSqlitePassDatabase.html">TSqlitePassDatabase</a>; TableDef: <a   href="SqlitePassDbo.TSqlitePassTableDef.html">TSqlitePassTableDef</a>; FiedDef: <a   href="SqlitePassDbo.TSqlitePassTableFieldDef.html">TSqlitePassTableFieldDef</a>) of object;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TFieldFilterExpAcceptValueFunc"></a><code><b>TFieldFilterExpAcceptValueFunc</b> = function(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldValue, FilterValue: Pointer):Boolean;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TMidRecordBuffers"></a><code><b>TMidRecordBuffers</b> = Array of <a   href="SqlitePassDbo.TMidRecordBuffer.html">TMidRecordBuffer</a>;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TSqlitePassApplyMode"></a><code><b>TSqlitePassApplyMode</b> = (...);</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;<h6 class="description_section">Values</h6>
+<ul>
+<li>
+amOverwriteDatabaseFileSettings: &nbsp;</li>
+<li>
+amAutoVacuum: &nbsp;</li>
+<li>
+amCacheSize: &nbsp;</li>
+<li>
+amCaseSensitiveLike: &nbsp;</li>
+<li>
+amCountChanges: &nbsp;</li>
+<li>
+amDefaultCacheSize: &nbsp;</li>
+<li>
+amFullColumnNames: &nbsp;</li>
+<li>
+amForeignKeys: &nbsp;</li>
+<li>
+amJournalMode: &nbsp;</li>
+<li>
+amJournalSizeLimit: &nbsp;</li>
+<li>
+amLockingMode: &nbsp;</li>
+<li>
+amMaxPageCount: &nbsp;</li>
+<li>
+amPageSize: &nbsp;</li>
+<li>
+amRecursiveTriggers: &nbsp;</li>
+<li>
+amSecureDelete: &nbsp;</li>
+<li>
+amSynchronous: &nbsp;</li>
+<li>
+amTemporaryStorage: &nbsp;</li>
+<li>
+amTemporaryStorageDir: &nbsp;</li>
+</ul>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TSqlitePassApplyModes"></a><code><b>TSqlitePassApplyModes</b>           = set of <a   href="SqlitePassDbo.html#TSqlitePassApplyMode">TSqlitePassApplyMode</a>;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TSqlitePassAutoVacuumType"></a><code><b>TSqlitePassAutoVacuumType</b> = (...);</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;<h6 class="description_section">Values</h6>
+<ul>
+<li>
+avNone: &nbsp;</li>
+<li>
+avFull: &nbsp;</li>
+<li>
+avIncremental: &nbsp;</li>
+</ul>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TSqlitePassAvailableOperations"></a><code><b>TSqlitePassAvailableOperations</b> = set of (aoRead, aoInsert, aoUpdate, aoDelete);</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TSqlitePassBooleanStorage"></a><code><b>TSqlitePassBooleanStorage</b> = (...);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Datatypes detection and conversion</p>
+<h6 class="description_section">Values</h6>
+<ul>
+<li>
+asInteger: &nbsp;</li>
+<li>
+asText: &nbsp;</li>
+</ul>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TSqlitePassBufferToSqliteValue"></a><code><b>TSqlitePassBufferToSqliteValue</b> = procedure (Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const RecordBuffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const RecordFieldIndex: Integer; Const PreparedStmt: Pointer; Const PreparedStmtFieldNo: Integer);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+<a class="normal"  href="SqlitePassDbo.TSqlitePassSelectStmtFieldDef.html">TSqlitePassSelectStmtFieldDef</a> is used to store information on fields returned by a SELECT Statement database. The fields definitions are mainly retrieved from the database schema. <br>  <br> Setting the field Datatype property will also define how the field will interact with the database for reading, writing, sorting and filtering.</p>
+<h6 class="description_section">See also</h6>
+<dl class="see_also">
+  <dt><a class="normal"  href="SqlitePassDbo.TSqlitePassTableFieldDef.html">TSqlitePassTableFieldDef</a></dt>
+  <dd><code>TSqlitePassTableFieldDef</code> is mainly used to get information on fields presents in the database tables and to build a static schema of the database</dd>
+</dl>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TSqlitePassCompareColumnValue"></a><code><b>TSqlitePassCompareColumnValue</b> = function(Const Recordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const FieldBufferValue1, FieldBufferValue2: Pointer): Integer;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Internal function to compare buffers value when sorting or indexing fields</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TSqlitePassDatabaseObjectTypes"></a><code><b>TSqlitePassDatabaseObjectTypes</b> = (...);</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;<h6 class="description_section">Values</h6>
+<ul>
+<li>
+dboAll: &nbsp;</li>
+<li>
+dboTableDefs: &nbsp;</li>
+<li>
+dboQueryDefs: &nbsp;</li>
+<li>
+dboIndexDefs: &nbsp;</li>
+<li>
+dboViews: &nbsp;</li>
+<li>
+dboTriggers: &nbsp;</li>
+</ul>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TSqlitePassDatabaseState"></a><code><b>TSqlitePassDatabaseState</b> = set of (dbsInternalOpen, dbsRefreshingDefinitions);</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TSqlitePassDatabaseType"></a><code><b>TSqlitePassDatabaseType</b> = (...);</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;<h6 class="description_section">Values</h6>
+<ul>
+<li>
+dbtSqlitePass: &nbsp;</li>
+<li>
+dbtKexi: &nbsp;</li>
+<li>
+dbtSqliteAdmin: &nbsp;</li>
+<li>
+dbtSqlite4Fpc: &nbsp;</li>
+<li>
+dbtSqliteExpert: &nbsp;</li>
+<li>
+dbtUnknown: &nbsp;</li>
+</ul>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TSqlitePassDatasetExportProgressEvent"></a><code><b>TSqlitePassDatasetExportProgressEvent</b> = procedure(Current, Total:Integer) of object;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Events</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TSqlitePassDatasetFilterRecordEvent"></a><code><b>TSqlitePassDatasetFilterRecordEvent</b> = procedure(DataSet: TDataSet; var Accept: Boolean) of object;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TSqlitePassDatasetImportProgressEvent"></a><code><b>TSqlitePassDatasetImportProgressEvent</b> = procedure(Current:Integer) of object;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TSqlitePassDatasetType"></a><code><b>TSqlitePassDatasetType</b> = (...);</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;<h6 class="description_section">Values</h6>
+<ul>
+<li>
+dtTable: &nbsp;</li>
+<li>
+dtQuery: &nbsp;</li>
+<li>
+dtView: &nbsp;</li>
+<li>
+dtSQLSelect: &nbsp;</li>
+<li>
+dtSQLDirect: &nbsp;</li>
+<li>
+dtUnknown: &nbsp;</li>
+</ul>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TSqlitePassDataTypeDetectionMode"></a><code><b>TSqlitePassDataTypeDetectionMode</b> = (...);</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;<h6 class="description_section">Values</h6>
+<ul>
+<li>
+dmTypeName: &nbsp;</li>
+<li>
+dmDbSpecific: &nbsp;</li>
+<li>
+dmCustom: &nbsp;</li>
+<li>
+dmForceStr: &nbsp;</li>
+</ul>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TSqlitePassDataTypeMappingMode"></a><code><b>TSqlitePassDataTypeMappingMode</b> = (...);</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;<h6 class="description_section">Values</h6>
+<ul>
+<li>
+mmExact: &nbsp;</li>
+<li>
+mmExactNoCase: &nbsp;</li>
+<li>
+mmPartial: &nbsp;</li>
+<li>
+mmPartialNoCase: &nbsp;</li>
+<li>
+mmAll: &nbsp;</li>
+</ul>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TSqlitePassDataTypeStorageLoadOptions"></a><code><b>TSqlitePassDataTypeStorageLoadOptions</b> = set of (loDefaultProperties, loCustomProperties, loTranslationRules, loCustomFieldDefs);</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TSqlitePassDataTypeStorageSaveOptions"></a><code><b>TSqlitePassDataTypeStorageSaveOptions</b> = set of (soCustomProperties, soTranslationRules, soCustomFieldDefs);</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TSqlitePassDateStorage"></a><code><b>TSqlitePassDateStorage</b> = <a   href="SqlitePassDbo.html#TSqlitePassBooleanStorage">TSqlitePassBooleanStorage</a>;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TSqlitePassDateTimeStorage"></a><code><b>TSqlitePassDateTimeStorage</b> = (...);</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;<h6 class="description_section">Values</h6>
+<ul>
+<li>
+dtsDateTime: &nbsp;</li>
+<li>
+dtsJulian: &nbsp;</li>
+<li>
+dtsText: &nbsp;</li>
+<li>
+dtsUnix: &nbsp;</li>
+<li>
+dtsMac: &nbsp;</li>
+</ul>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TSqlitePassEncoding"></a><code><b>TSqlitePassEncoding</b> = (...);</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;<h6 class="description_section">Values</h6>
+<ul>
+<li>
+UTF8: &nbsp;</li>
+<li>
+UTF16: &nbsp;</li>
+<li>
+UTF16le: &nbsp;</li>
+<li>
+UTF16be: &nbsp;</li>
+</ul>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TSqlitePassExecCallBack"></a><code><b>TSqlitePassExecCallBack</b> = function(acolumns: Integer; aColumnValues, aColumnNames:ppAnsiChar):integer of object;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TSqlitePassFilterChanges"></a><code><b>TSqlitePassFilterChanges</b> = set of (fcSQLFilter, fcDirectFilters, fcLowerLimit, fcUpperLimit);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Filtering</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TSqlitePassFilterComparisonOperators"></a><code><b>TSqlitePassFilterComparisonOperators</b> = (...);</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;<h6 class="description_section">Values</h6>
+<ul>
+<li>
+CmpUnknown: &nbsp;</li>
+<li>
+CmpEqual: &nbsp;</li>
+<li>
+CmpNotEqual: &nbsp;</li>
+<li>
+CmpGreater: &nbsp;</li>
+<li>
+CmpGreateOrEqual: &nbsp;</li>
+<li>
+CmpLesserOrEqual: &nbsp;</li>
+<li>
+CmpLesser: &nbsp;</li>
+<li>
+CmpNull: &nbsp;</li>
+<li>
+CmpNotNull: &nbsp;</li>
+</ul>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TSqlitePassFilterLogicalOperators"></a><code><b>TSqlitePassFilterLogicalOperators</b> = (...);</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;<h6 class="description_section">Values</h6>
+<ul>
+<li>
+opNone: &nbsp;</li>
+<li>
+opAnd: &nbsp;</li>
+<li>
+opOr: &nbsp;</li>
+</ul>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TSqlitePassFilterMode"></a><code><b>TSqlitePassFilterMode</b> = (...);</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;<h6 class="description_section">Values</h6>
+<ul>
+<li>
+fmDirect: &nbsp;</li>
+<li>
+fmSQL: &nbsp;</li>
+<li>
+fmSQLDirect: &nbsp;</li>
+</ul>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TSqlitePassGetPragmaCallback"></a><code><b>TSqlitePassGetPragmaCallback</b> = function(UserData: Pointer; ColumnCount: Integer; ColumnValues, ColumnNames: PPointer): Integer; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TSqlitePassIndexDirection"></a><code><b>TSqlitePassIndexDirection</b> = (...);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Database indexes management (managed by sqlite engine)</p>
+<h6 class="description_section">Values</h6>
+<ul>
+<li>
+cidAscending: &nbsp;</li>
+<li>
+cidDescending: &nbsp;</li>
+<li>
+cidUnknown: &nbsp;</li>
+</ul>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TSqlitePassInMemoryIndexInfos"></a><code><b>TSqlitePassInMemoryIndexInfos</b> = Array of <a   href="SqlitePassDbo.TSqlitePassInMemoryIndexInfo.html">TSqlitePassInMemoryIndexInfo</a>;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TSqlitePassJournalMode"></a><code><b>TSqlitePassJournalMode</b> = (...);</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;<h6 class="description_section">Values</h6>
+<ul>
+<li>
+jmDelete: &nbsp;</li>
+<li>
+jmTruncate: &nbsp;</li>
+<li>
+jmPersist: &nbsp;</li>
+<li>
+jmMemory: &nbsp;</li>
+<li>
+jmOff: &nbsp;</li>
+</ul>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TSqlitePassLockingMode"></a><code><b>TSqlitePassLockingMode</b> = (...);</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;<h6 class="description_section">Values</h6>
+<ul>
+<li>
+lmNormal: &nbsp;</li>
+<li>
+lmExclusive: &nbsp;</li>
+</ul>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TSqlitePassPageSize"></a><code><b>TSqlitePassPageSize</b>             = 512..32768;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TSqlitePassPostType"></a><code><b>TSqlitePassPostType</b> = (...);</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;<h6 class="description_section">Values</h6>
+<ul>
+<li>
+ptInsert: &nbsp;</li>
+<li>
+ptUpdate: &nbsp;</li>
+<li>
+ptDelete: &nbsp;</li>
+</ul>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TSqlitePassQuoteStyle"></a><code><b>TSqlitePassQuoteStyle</b> = (...);</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;<h6 class="description_section">Values</h6>
+<ul>
+<li>
+qsDoubleQuote: &nbsp;</li>
+<li>
+qsBracket: &nbsp;</li>
+<li>
+qsGraveQuote: &nbsp;</li>
+<li>
+qsNone: &nbsp;</li>
+</ul>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TSqlitePassRecordsCacheCapacity"></a><code><b>TSqlitePassRecordsCacheCapacity</b> = 1..MaxInt;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TSqlitePassRecordState"></a><code><b>TSqlitePassRecordState</b> =  Byte;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TSqlitePassRecordStateType"></a><code><b>TSqlitePassRecordStateType</b> = 0..7;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Record State</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TSqlitePassRecordStateValue"></a><code><b>TSqlitePassRecordStateValue</b> = 0..1;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TSqlitePassSortMode"></a><code><b>TSqlitePassSortMode</b> = (...);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Sorting</p>
+<h6 class="description_section">Values</h6>
+<ul>
+<li>
+smDirect: &nbsp;</li>
+<li>
+smSQL: &nbsp;</li>
+</ul>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TSqlitePassSQLChanges"></a><code><b>TSqlitePassSQLChanges</b> = set of (scSelect, scWhere, scGroupBy, scHaving, scOrderBy, scLimit, scRefresh);</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TSqlitePassSqliteValueToBuffer"></a><code><b>TSqlitePassSqliteValueToBuffer</b> = procedure(Const FRecordset: <a   href="SqlitePassDbo.TSqlitePassRecordset.html">TSqlitePassRecordset</a>; Const Buffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Const PreparedStmt: Pointer; Const ColumnIndex: Integer);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+TSqlitePassFieldAccessor</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TSqlitePassSQLTokenizerCleanOptions"></a><code><b>TSqlitePassSQLTokenizerCleanOptions</b> =  set of <a   href="SqlitePassDbo.html#TSqlitePassSQLTokenType">TSqlitePassSQLTokenType</a>;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TSqlitePassSQLTokenizerOptions"></a><code><b>TSqlitePassSQLTokenizerOptions</b> =  set of (toClean, toUpperCase);</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TSqlitePassSQLTokenType"></a><code><b>TSqlitePassSQLTokenType</b> = (...);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Note : Check <a class="normal"  href="SqlitePassConst.html#SqlitePassSQLTokenTypeAsString">SqlitePassConst.SqlitePassSQLTokenTypeAsString</a> if <code>TSqlitePassSQLTokenType</code> is modified</p>
+<h6 class="description_section">Values</h6>
+<ul>
+<li>
+ttKeyword: &nbsp;</li>
+<li>
+ttIdentifier: &nbsp;</li>
+<li>
+ttDatabaseIdentifier: &nbsp;</li>
+<li>
+ttTableIdentifier: &nbsp;</li>
+<li>
+ttFieldIdentifier: &nbsp;</li>
+<li>
+ttFunctionIdentifier: &nbsp;</li>
+<li>
+ttStar: &nbsp;</li>
+<li>
+ttNumber: &nbsp;</li>
+<li>
+ttDateTime: &nbsp;</li>
+<li>
+ttSingleQuote: &nbsp;</li>
+<li>
+ttDoubleQuote: &nbsp;</li>
+<li>
+ttGraveQuote: &nbsp;</li>
+<li>
+ttHash: &nbsp;</li>
+<li>
+ttPercent: &nbsp;</li>
+<li>
+ttBraceOpen: &nbsp;</li>
+<li>
+ttBraceClose: &nbsp;</li>
+<li>
+ttSquareOpen: &nbsp;</li>
+<li>
+ttSquareClose: &nbsp;</li>
+<li>
+ttRoundOpen: &nbsp;</li>
+<li>
+ttRoundClose: &nbsp;</li>
+<li>
+ttWhitespace: &nbsp;</li>
+<li>
+ttComment: &nbsp;</li>
+<li>
+ttComma: &nbsp;</li>
+<li>
+ttColon: &nbsp;</li>
+<li>
+ttSemiColon: &nbsp;</li>
+<li>
+ttEqual: &nbsp;</li>
+<li>
+ttNotEqual: &nbsp;</li>
+<li>
+ttGreater: &nbsp;</li>
+<li>
+ttGreaterOrEqual: &nbsp;</li>
+<li>
+ttLesser: &nbsp;</li>
+<li>
+ttLesserOrEqual: &nbsp;</li>
+<li>
+ttNull: &nbsp;</li>
+<li>
+ttNotNull: &nbsp;</li>
+<li>
+ttPlus: &nbsp;</li>
+<li>
+ttMinus: &nbsp;</li>
+<li>
+ttAnd: &nbsp;</li>
+<li>
+ttOr: &nbsp;</li>
+<li>
+ttDot: &nbsp;</li>
+<li>
+ttSlash: &nbsp;</li>
+<li>
+ttSeparator: &nbsp;</li>
+<li>
+ttEOF: &nbsp;</li>
+<li>
+ttUnknown: &nbsp;</li>
+</ul>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TSqlitePassSynchronous"></a><code><b>TSqlitePassSynchronous</b> = (...);</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;<h6 class="description_section">Values</h6>
+<ul>
+<li>
+syncOff: &nbsp;</li>
+<li>
+syncNormal: &nbsp;</li>
+<li>
+syncFull: &nbsp;</li>
+</ul>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TSqlitePassSystemEncoding"></a><code><b>TSqlitePassSystemEncoding</b> = (...);</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;<h6 class="description_section">Values</h6>
+<ul>
+<li>
+sysANSI: &nbsp;</li>
+<li>
+sysUTF8: &nbsp;</li>
+<li>
+sysUTF16: &nbsp;</li>
+</ul>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TSqlitePassTempStore"></a><code><b>TSqlitePassTempStore</b> = (...);</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;<h6 class="description_section">Values</h6>
+<ul>
+<li>
+tsDefault: &nbsp;</li>
+<li>
+tsFile: &nbsp;</li>
+<li>
+tsMemory: &nbsp;</li>
+</ul>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TSqlitePassTimeStorage"></a><code><b>TSqlitePassTimeStorage</b> = <a   href="SqlitePassDbo.html#TSqlitePassDateStorage">TSqlitePassDateStorage</a>;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TSqlitePassUnicodeEncoding"></a><code><b>TSqlitePassUnicodeEncoding</b> = (...);</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;<h6 class="description_section">Values</h6>
+<ul>
+<li>
+ueAuto: &nbsp;</li>
+<li>
+ueUTF8: &nbsp;</li>
+<li>
+ueUTF16: &nbsp;</li>
+<li>
+ueRawText: &nbsp;</li>
+</ul>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TSqlitePassVerboseLevel"></a><code><b>TSqlitePassVerboseLevel</b> = vlSilent..vlLogAndShow;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TSqlitePassWriteMode"></a><code><b>TSqlitePassWriteMode</b> = (...);</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;<h6 class="description_section">Values</h6>
+<ul>
+<li>
+wmDirect: &nbsp;</li>
+<li>
+wmPostponed: &nbsp;</li>
+</ul>
+</td></tr>
+</table>
+<h2 class="authors">Authors</h2>
+<ul class="authors">
+<li>Luc DAVID 2006-2010 <a   href="mailto:luckylazarus@free.fr">luckylazarus@free.fr</a></li>
+<li><a   href="http://source.online.free.fr">source.online.free.fr</a> </li>
+</ul>
+<h2 class="created">Created</h2>
+<p>
+2006
+</p>
+<h2 class="modified">Last Modified</h2>
+<p>
+09.03.2010
+</p>
+<hr noshade size="1"><span class="appinfo"><em>Generated by <a  target="_parent" href="http://pasdoc.sourceforge.net/">PasDoc 0.11.0</a> on 2010-05-16 23:39:43</em>
+</span>
+</body></html>

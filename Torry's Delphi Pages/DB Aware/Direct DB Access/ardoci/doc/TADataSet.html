@@ -1,0 +1,1177 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="style.css">
+<title>TADataSet</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+<table width="100%" border="0" cellpadding="5" cellspacing="0">
+   <tr>
+   <td align=center bgColor=#009999>
+    <font class=fontmainbig color="#FFFFFF">
+     <b>Компоненты DOCI для прямого доступа к Oracle <br></b>
+	</font>
+	<br>
+    <font class=fontmain color="#FFFFFF"> 
+     <b>Version 1.15</b><br>
+    </font>
+	
+   </td>
+   </tr>
+</table>
+
+<font class=fontmain>
+
+<p>Copyright &copy; 1998-2001 by Andrey Romanchenko<br>
+All rights reserved.
+
+<p>
+
+<table cellspacing=2 cellpadding=0>
+<tr>
+   <td><font class=fontmain>
+    <i>e-mail:&nbsp;&nbsp;</i></font>
+	</td>
+	<td><font class=fontmain>
+	 <a href="mailto:lasersquard@yahoo.com?subject=Dynamic Arrays version 2.0">lasersquad@tut.by</a></font>
+	</td>
+</tr>
+<tr>
+   <td><font class=fontmain>
+    <i>web site:&nbsp;&nbsp;</i></font>
+   </td>
+   <td><font class=fontmain>
+    <a href="http://DynamicArrays.narod.ru" target=_new>http://DynamicArrays.narod.ru/</a></font>
+	</td>
+</tr>
+<tr>
+   <td></td>
+   <td><font class=fontmain>
+     <!-- (другой адрес: <a href="http://www.dynamicarrays.cjb.net/" target=_new>http://www.dynamicarrays.cjb.net/</a>)-->
+     </font>
+	</td>
+</tr>
+
+</table>
+
+<br><br>
+<h1 align=center>TADataSet</h1>
+
+<table cellspacing="0" cellpadding="5" border="1">
+<tr bgcolor="#009999">
+	<td colspan="2" align="center" valign="middle">
+	 <font class=fontcaption>
+      Свойства
+	 </font> 
+	</td>
+
+</tr>
+
+<tr>
+	<td> <font class=fontcode>
+      property <b>Active</b>:boolean;
+	  	</font>
+	</td>
+	<td><font class=fontmain >
+
+		</font> 
+	</td>
+</tr>
+<tr>
+	<td> <font class=fontcode>
+      property <b>Fetched</b>:boolean;
+	  	</font>
+	</td>
+	<td><font class=fontmain >
+
+		</font> 
+	</td>
+</tr>
+<tr>
+	<td> <font class=fontcode>
+      property <b>UniDirectional</b>:boolean;
+	  	</font>
+	</td>
+	<td><font class=fontmain >
+
+		</font> 
+	</td>
+</tr>
+<tr>
+	<td> <font class=fontcode>
+       property <b>ParamCount</b>:integer;
+	  	</font>
+	</td>
+	<td><font class=fontmain >
+
+		</font> 
+	</td>
+</tr>
+<tr>
+	<td> <font class=fontcode>
+       property <b>ParamByName</b>[Name:string]:TAParam;
+	  	</font>
+	</td>
+	<td><font class=fontmain >
+
+		</font> 
+	</td>
+</tr>
+<tr>
+	<td> <font class=fontcode>
+      property <b>ParamByIndex</b>[Index:integer]:TAParam;
+	  	</font>
+	</td>
+	<td><font class=fontmain >
+
+		</font> 
+	</td>
+</tr>
+<tr>
+	<td> <font class=fontcode>
+      pproperty <b>FieldCount</b>:integer;
+	  	</font>
+	</td>
+	<td><font class=fontmain >
+
+		</font> 
+	</td>
+</tr>
+<tr>
+	<td> <font class=fontcode>
+      property <b>FieldByName</b>[Index:string]:TAField;
+	  	</font>
+	</td>
+	<td><font class=fontmain >
+
+		</font> 
+	</td>
+</tr>
+<tr>
+	<td> <font class=fontcode>
+      property <b>FieldByIndex</b>[Index:integer]:TAField;
+	  	</font>
+	</td>
+	<td><font class=fontmain >
+
+		</font> 
+	</td>
+</tr>
+<tr>
+	<td> <font class=fontcode>
+      property <b>RecordCount</b>:integer;
+	  	</font>
+	</td>
+	<td><font class=fontmain >
+
+		</font> 
+	</td>
+</tr>
+<tr>
+	<td> <font class=fontcode>
+       property <b>FieldID</b>[FieldName:string]:integer;
+	  	</font>
+	</td>
+	<td><font class=fontmain >
+
+		</font> 
+	</td>
+</tr>
+<tr>
+	<td> <font class=fontcode>
+      property <b>CurrentRecord</b>:integer;
+	  	</font>
+	</td>
+	<td><font class=fontmain >
+
+		</font> 
+	</td>
+</tr>
+
+<tr bgcolor="#009999">
+	<td colspan="2" align="center" valign="middle">
+	 <font class=fontcaption>
+	  Методы
+	 </font> 
+	</td>
+
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	  constructor <b>Create</b>(AOwner:TComponent); override;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font> 
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	  destructor <b>Destroy</b>; override;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font> 
+	</td>
+</tr>
+<tr>
+<a name=""></a>
+	<td>
+	 <font class=fontcode>
+	  procedure <b>Open</b>;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+
+	 </font>
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	  procedure <b>Close</b>;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font> 
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	  procedure <b>Open</b>(Fields:THArrayPointer);
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font> 
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	   procedure <b>ReOpen</b>;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font> 
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	  procedure <b>ReadAll</b>;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font> 
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	  procedure <b>Fetch</b>;abstract;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font> 
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	  procedure <b>UnPrepare</b>;abstract;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font> 
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	    procedure <b>Prepare</b>; abstract;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font> 
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	  function <b>ReadRecord</b>(RecordNum:integer):boolean;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font> 
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	  procedure <b>DeleteRecord</b>(RecordNum:integer);
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font> 
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	    procedure <b>InsertRecord</b>(RecordNum:integer);
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font> 
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	   procedure <b>AppendRecord</b>;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font> 
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	   procedure <b>ClearFields</b>;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font> 
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	  procedure <b>ClearParams</b>;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font> 
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	   procedure <b>AddParam</b>(ParamName:string;FieldType:TAFieldType;ParamType:TAParamType);
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font> 
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	  procedure <b>AddField</b>(FieldName:string;FieldType:TAFieldType;FieldSize:word;Required:boolean);
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font> 
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	  procedure <b>CopyStructure</b>(DataSet:TDataSet);
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font> 
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	  procedure <b>CopyStructure</b>(ADataSet:TADataSet);
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font> 
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	   procedure <b>First</b>;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font> 
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	  procedure <b>Next</b>;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font> 
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	  function <b>EOF</b>:boolean;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font> 
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	  procedure <b>SaveToDBF</b>(FileName:string);
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font> 
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	   function <b>ParamExists</b>(ParamName: string): boolean;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font> 
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	   function <b>FieldExists</b>(FieldName: string): boolean;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font> 
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	 function <b>WriteBlob</b>(FieldNum,RecordNum:integer;Offset:integer;Buffer:pointer;Size:integer):cardinal;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font> 
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	  function <b>ReadBlob</b>(FieldNum,RecordNum:integer;Offset:integer;Buffer:pointer;Size:integer):cardinal;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font> 
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	  function <b>ReadBlobToStream</b>(FieldNum,RecordNum:integer;Stream:TStream):cardinal;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font> 
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	  function <b>WriteBlobFromStream</b>(FieldNum,RecordNum:integer;Stream:TStream):cardinal;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font> 
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	 function <b>WriteBlob</b>(FieldName:string;RecordNum:integer;Offset:integer;Buffer:pointer;Size:integer):cardinal;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font> 
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	  function <b>ReadBlob</b>(FieldName:string;RecordNum:integer;Offset:integer;Buffer:pointer;Size:integer):cardinal;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font> 
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	  function <b>ReadBlobToStream</b>(FieldName:string;RecordNum:integer;Stream:TStream):cardinal;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font> 
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	  function <b>WriteBlobFromStream</b>(FieldName:string;RecordNum:integer;Stream:TStream):cardinal;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font> 
+	</td>
+</tr>
+
+
+<tr bgcolor="#009999">
+	<td colspan="2" align="center" valign="middle">
+	 <font class=fontcaption>
+	  События
+	 </font> 
+	</td>
+
+</tr>
+
+</table>
+<br>
+
+<h1 align=center>TAParam</h1>
+
+<table cellspacing="0" cellpadding="5" border="1">
+<tr bgcolor="#009999">
+	<td colspan="2" align="center" valign="middle">
+	 <font class=fontcaption>
+      Свойства
+	 </font> 
+	</td>
+
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	  property <b>Name</b>:string;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font>
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	  property <b>IsNull</b>:boolean;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font>
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	  property <b>AsInteger</b>:integer;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font>
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	   property <b>AsWord</b>:Word;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font>
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	   property <b>AsSmallInt</b>:SmallInt;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font>
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	   property <b>AsDate</b>:integer ;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font>
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	   property <b>AsTime</b>:integer;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font>
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	  property <b>AsDateTime</b>:int64;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font>
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	   property <b>AsString</b>:string;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font>
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	   property <b>AsDouble</b>:double;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font>
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	  property <b>AsCurrency</b>:currency;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font>
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	   property <b>AsBoolean</b>:Boolean;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font>
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	   property <b>FieldType</b>:TAFieldType;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font>
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	  property <b>ParamType</b>:TAParamType;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font>
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	  property <b>Value</b>:variant;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font>
+	</td>
+</tr>
+</table>
+
+
+<h1 align=center>TAField</h1>
+
+<table cellspacing="0" cellpadding="5" border="1">
+<tr bgcolor="#009999">
+	<td colspan="2" align="center" valign="middle">
+	 <font class=fontcaption>
+      Свойства
+	 </font> 
+	</td>
+
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	  property <b>Name</b>:string;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font>
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	  property <b>IsNull</b>:boolean;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font>
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	  property <b>AsInteger</b>:integer;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font>
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	   property <b>AsWord</b>:Word;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font>
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	   property <b>AsSmallInt</b>:SmallInt;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font>
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	   property <b>AsDate</b>:integer ;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font>
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	   property <b>AsTime</b>:integer;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font>
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	  property <b>AsDateTime</b>:int64;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font>
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	   property <b>AsString</b>:string;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font>
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	   property <b>AsDouble</b>:double;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font>
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	  property <b>AsCurrency</b>:currency;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font>
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	   property <b>AsBoolean</b>:Boolean;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font>
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	   property <b>FieldType</b>:TAFieldType;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font>
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	  property <b>FieldSize</b>:word;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font>
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	  property <b>Required</b>:boolean;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font>
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	  property <b>HArrayValues</b>:THArray;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font>
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	  property <b>HArrayValuesNull</b>:THArrayBoolean;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font>
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	  property <b>HArrayValuesSize</b>:THArrayInteger;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font>
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	  property <b>Value</b>[RecordNum:integer]:variant;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font>
+	</td>
+</tr>
+
+<tr bgcolor="#009999">
+	<td colspan="2" align="center" valign="middle">
+	 <font class=fontcaption>
+	  Методы
+	 </font> 
+	</td>
+
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	  constructor <b>Create</b>(Parent:TADataSet;FieldName:string;RFieldType:TAFieldType;FieldSize:word;Required:boolean);
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font> 
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	  destructor <b>Destroy</b>; 
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+	 </font> 
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	  procedure <b>ClearBlob</b>(RecordNum:integer);
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+
+	 </font>
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	  function <b>WriteBlob</b>(RecordNum:integer;Offset:integer;Buffer:pointer;Size:integer):cardinal;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+
+	 </font>
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	  function <b>ReadBlob</b>(RecordNum:integer;Offset:integer;Buffer:pointer;Size:integer):cardinal;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+
+	 </font>
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	  function <b>ReadBlobToStream</b>(RecordNum:integer;Stream:TStream):cardinal;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+
+	 </font>
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	 function <b>WriteBlobFromStream</b>(RecordNum:integer;Stream:TStream):cardinal;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+
+	 </font>
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	  function <b>GetLobLength</b>(RecordNum:integer):integer;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+
+
+	 </font>
+	</td>
+</tr>
+<tr>
+
+</table>
+
+
+</font>
+</body>
+</html>

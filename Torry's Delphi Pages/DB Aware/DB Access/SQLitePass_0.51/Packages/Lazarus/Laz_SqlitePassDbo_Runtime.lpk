@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<CONFIG>
+  <Package Version="3">
+    <PathDelim Value="\"/>
+    <Name Value="Laz_SqlitePassDbo_Runtime"/>
+    <Author Value="Luc DAVID"/>
+    <CompilerOptions>
+      <Version Value="8"/>
+      <PathDelim Value="\"/>
+      <SearchPaths>
+        <OtherUnitFiles Value="..\..\Sources\;..\..\Sources\DesignTimeEditors\;..\..\Sources\Debug\;$(LazarusDir)\lcl\units\$(TargetCPU)-$(TargetOS)\"/>
+        <UnitOutputDirectory Value="..\Build"/>
+      </SearchPaths>
+      <Parsing>
+        <SyntaxOptions>
+          <UseAnsiStrings Value="True"/>
+        </SyntaxOptions>
+      </Parsing>
+      <Other>
+        <Verbosity>
+          <ShowHintsForUnusedUnitsInMainSrc Value="True"/>
+        </Verbosity>
+        <CompilerPath Value="$(CompPath)"/>
+      </Other>
+    </CompilerOptions>
+    <Description Value="SQLitePass Database Components Package - Runtime
+"/>
+    <License Value="LGPL
+"/>
+    <Version Minor="5" Release="1"/>
+    <Files Count="10">
+      <Item1>
+        <Filename Value="..\..\Sources\SqlitePassApi_v3.pas"/>
+        <UnitName Value="SqlitePassApi_v3"/>
+      </Item1>
+      <Item2>
+        <Filename Value="..\..\Sources\SqlitePassDbo.inc"/>
+        <Type Value="Include"/>
+      </Item2>
+      <Item3>
+        <Filename Value="..\..\Sources\SqlitePassDatabase.inc"/>
+        <Type Value="Include"/>
+      </Item3>
+      <Item4>
+        <Filename Value="..\..\Sources\SqlitePassDatabaseParts.inc"/>
+        <Type Value="Include"/>
+      </Item4>
+      <Item5>
+        <Filename Value="..\..\Sources\SqlitePassDataset.inc"/>
+        <Type Value="Include"/>
+      </Item5>
+      <Item6>
+        <Filename Value="..\..\Sources\SqlitePassRecordset.inc"/>
+        <Type Value="Include"/>
+      </Item6>
+      <Item7>
+        <Filename Value="..\..\Sources\SqlitePassConst.pas"/>
+        <UnitName Value="SqlitePassConst"/>
+      </Item7>
+      <Item8>
+        <Filename Value="..\..\Sources\SqlitePassSqlStmts.inc"/>
+        <Type Value="Include"/>
+      </Item8>
+      <Item9>
+        <Filename Value="..\..\Sources\SqlitePassEngine.inc"/>
+        <Type Value="Include"/>
+      </Item9>
+      <Item10>
+        <Filename Value="..\..\Sources\SqlitePassDbo.pas"/>
+        <UnitName Value="SqlitePassDbo"/>
+      </Item10>
+    </Files>
+    <RequiredPkgs Count="3">
+      <Item1>
+        <PackageName Value="LCL"/>
+        <MinVersion Major="1" Valid="True"/>
+      </Item1>
+      <Item2>
+        <PackageName Value="IDEIntf"/>
+        <MinVersion Major="1" Valid="True"/>
+      </Item2>
+      <Item3>
+        <PackageName Value="FCL"/>
+        <MinVersion Major="1" Valid="True"/>
+      </Item3>
+    </RequiredPkgs>
+    <UsageOptions>
+      <UnitPath Value="$(PkgOutDir)\"/>
+    </UsageOptions>
+    <PublishOptions>
+      <Version Value="2"/>
+      <DestinationDirectory Value="$(TestDir)\publishedpackage\"/>
+      <IgnoreBinaries Value="False"/>
+    </PublishOptions>
+  </Package>
+</CONFIG>

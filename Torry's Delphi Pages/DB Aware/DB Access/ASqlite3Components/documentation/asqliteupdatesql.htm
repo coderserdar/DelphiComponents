@@ -1,0 +1,48 @@
+<html>
+
+<head>
+<title>No title</title>
+<meta name="author" content="Albert Drent">
+<meta name="generator" content="Namo WebEditor">
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="purple" alink="red">
+<table border="1" cellspacing="0" bordercolordark="white" bordercolorlight="black" width="746">
+    <tr>
+        <td width="195" rowspan="5" align="left" valign="top" height="426"><font face="Arial"><span style="font-size:9pt;"><img src="img7.gif" border="0"></span></font></td>
+        <td width="126" align="left" valign="top"><font face="Arial"><span style="font-size:9pt;">DeleteSQL</span></font></td>
+        <td width="411" align="left" valign="top">
+            <p><font face="Arial"><span style="font-size:9pt;">SQL for deleting a record</span></font></p>
+            <p><b><font face="Arial"><span style="font-size:9pt;">DELETESQL</span></font></b><span style="font-size:9pt;"><i><b><font face="Arial"><br></font></b></i><font face="Arial">This just need a correct statement like</font></span><i><font face="Arial"><span style="font-size:9pt;"> delete from table where id=:id</span></font></i></p>
+        </td>
+    </tr>
+    <tr>
+        <td width="126" align="left" valign="top"><font face="Arial"><span style="font-size:9pt;">InsertSQL</span></font></td>
+        <td width="411" align="left" valign="top">
+            <p><font face="Arial"><span style="font-size:9pt;">SQL for inserting a record</span></font></p>
+            <p><b><font face="Arial"><span style="font-size:9pt;">INSERT SQL:</span></font></b><span style="font-size:9pt;"><i><font face="Arial"><br>insert into table *<br></font></i></span><font face="Arial"><span style="font-size:9pt;"> this will generate an insert statement for each field and values,&nbsp; i<i>.e. insert into table (a,b,c) values (:a, :b, :c);</i></span></font></p>
+            <p><i><font face="Arial"><span style="font-size:9pt;">insert into table (a, b, c) values *<br></span></font></i><font face="Arial"><span style="font-size:9pt;"> this will generate an insert statement like&nbsp; <i>insert into table (a, b, c) values (:a, :b, :c);</i></span></font></p>
+            <p><i><font face="Arial"><span style="font-size:9pt;">insert into table (a, b, c) values (:a, :b, :c);</span></font></i><font face="Arial"><span style="font-size:9pt;"></span></font></p>
+            <p><i><font face="Arial"><span style="font-size:9pt;">insert into table (a, b, c) values (:a, &quot;bvalue&quot;, :c)</span></font></i><font face="Arial"><span style="font-size:9pt;"> etc.</span></font></p>
+        </td>
+    </tr>
+    <tr>
+        <td width="126" align="left" valign="top"><font face="Arial"><span style="font-size:9pt;">Name</span></font></td>
+        <td width="411" align="left" valign="top"><font face="Arial"><span style="font-size:9pt;">Name of the component</span></font></td>
+    </tr>
+    <tr>
+        <td width="126" align="left" valign="top"><font face="Arial"><span style="font-size:9pt;">Tag</span></font></td>
+        <td width="411" align="left" valign="top"><font face="Arial"><span style="font-size:9pt;">Tag (see Borland documentation)</span></font></td>
+    </tr>
+    <tr>
+        <td width="126" align="left" valign="top"><font face="Arial"><span style="font-size:9pt;">UpdateSQL</span></font></td>
+        <td width="411" align="left" valign="top">
+            <p><font face="Arial"><span style="font-size:9pt;">SQL for updating a record.</span></font></p>
+            <p><b><font face="Arial"><span style="font-size:9pt;">UPDATE SQL:</span></font></b><span style="font-size:9pt;"><i><font face="Arial"><br>update table set * where &lt;criteria&gt;</font></i><font face="Arial"><br>this will generate a update for all fields like&nbsp;</font></span><i><font face="Arial"><span style="font-size:9pt;">update a=:a, b=:b, c=:c where &lt;criteria&gt;</span></font></i></p>
+        </td>
+    </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+
+</html>

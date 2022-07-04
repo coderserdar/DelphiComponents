@@ -1,0 +1,61 @@
+package KADaoControls;
+
+{$R *.res}
+{$R 'KADaoDBGrid.dcr'}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'KADAO Controls'}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl,
+  vcl,
+  vcldb,
+  KADao;
+
+contains
+  KADaoDBGrid in 'KADaoDBGrid.pas',
+  KADaoSelectIndexButton in 'KADaoSelectIndexButton.pas',
+  KADaoSortByButton in 'KADaoSortByButton.pas',
+  KADaoFilterByButton in 'KADaoFilterByButton.pas',
+  KADaoFindButton in 'KADaoFindButton.pas',
+  KADaoCVFButton in 'KADaoCVFButton.pas',
+  KADaoExportButton in 'KADaoExportButton.pas',
+  KADaoDateTime in 'KADaoDateTime.pas',
+  KADaoIncrementalSearch in 'KADaoIncrementalSearch.pas',
+  KADaoSeekButton in 'KADaoSeekButton.pas',
+  KADaoDBStringList in 'KADaoDBStringList.pas',
+  KADaoDBColumnCombo in 'KADaoDBColumnCombo.pas',
+  KADaoDBColumnListBox in 'KADaoDBColumnListBox.pas',
+  KADaoDBColumnCheckListBox in 'KADaoDBColumnCheckListBox.pas',
+  KADaoDbGUIDEdit in 'KADaoDbGUIDEdit.pas',
+  KADaoTablesCombo in 'KADaoTablesCombo.pas',
+  KADaoTablesCheckListBox in 'KADaoTablesCheckListBox.pas',
+  KADaoTablesListBox in 'KADaoTablesListBox.pas',
+  KADaoIndexesCombo in 'KADaoIndexesCombo.pas',
+  KADaoIndexesListBox in 'KADaoIndexesListBox.pas',
+  KADaoIndexesCheckListBox in 'KADaoIndexesCheckListBox.pas',
+  KADaoSearch in 'KADaoSearch.pas',
+  KAHRollForm in 'KAHRollForm.pas',
+  KADbSingleLineMemo in 'KADbSingleLineMemo.pas';
+
+end.

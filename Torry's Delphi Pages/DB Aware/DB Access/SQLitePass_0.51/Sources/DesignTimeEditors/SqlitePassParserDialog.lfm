@@ -1,0 +1,62 @@
+object SqlitePassParserDlg: TSqlitePassParserDlg
+  Left = 180
+  Height = 376
+  Top = 201
+  Width = 343
+  BorderIcons = []
+  BorderStyle = bsDialog
+  Caption = 'Parser infos on current SQL Statement'
+  ClientHeight = 376
+  ClientWidth = 343
+  Font.CharSet = ANSI_CHARSET
+  Font.Height = -11
+  Font.Name = 'Arial'
+  LCLVersion = '0.9.29'
+  object PanelIndexApplyChanges: TPanel
+    Left = 0
+    Height = 42
+    Top = 334
+    Width = 343
+    Align = alBottom
+    BevelInner = bvRaised
+    BevelOuter = bvLowered
+    ClientHeight = 42
+    ClientWidth = 343
+    TabOrder = 0
+    object SbOk: TSpeedButton
+      Left = 249
+      Height = 22
+      Top = 10
+      Width = 75
+      Caption = 'Ok'
+      Color = clBtnFace
+      Flat = True
+      NumGlyphs = 0
+      OnClick = SbOkClick
+    end
+    object CheckBoxShowWhiteSpaces: TCheckBox
+      Left = 19
+      Height = 18
+      Top = 13
+      Width = 116
+      Caption = '&Show white spaces'
+      OnClick = CheckBoxShowWhiteSpacesClick
+      TabOrder = 0
+    end
+  end
+  object Tv: TTreeView
+    Left = 0
+    Height = 334
+    Top = 0
+    Width = 343
+    Align = alClient
+    BorderStyle = bsNone
+    Color = cl3DLight
+    DefaultItemHeight = 16
+    Indent = 19
+    ReadOnly = True
+    RowSelect = True
+    TabOrder = 1
+    Options = [tvoAutoItemHeight, tvoHideSelection, tvoKeepCollapsedNodes, tvoReadOnly, tvoRowSelect, tvoShowButtons, tvoShowLines, tvoShowRoot, tvoToolTips]
+  end
+end

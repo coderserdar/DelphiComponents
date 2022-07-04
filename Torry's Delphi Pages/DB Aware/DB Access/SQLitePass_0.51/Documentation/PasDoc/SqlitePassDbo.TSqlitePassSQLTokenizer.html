@@ -1,0 +1,331 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+<meta name="GENERATOR" content="PasDoc 0.11.0">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<title>SqlitePass Database Objects: SqlitePassDbo: Class TSqlitePassSQLTokenizer</title>
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body bgcolor="#ffffff" text="#000000" link="#0000ff" vlink="#800080" alink="#FF0000">
+<a name="TSqlitePassSQLTokenizer"></a><h1 class="cio">Class TSqlitePassSQLTokenizer</h1>
+<table class="sections wide_list">
+<tr>
+<td><a class="section"  href="#%40Description">Description</a></td><td><a class="section"  href="#%40Hierarchy">Hierarchy</a></td><td>Fields</td><td><a class="section"  href="#%40Methods">Methods</a></td><td><a class="section"  href="#%40Properties">Properties</a></td></tr></table>
+<a name="%40Description"></a><h2 class="unit">Unit</h2>
+<p class="unitlink">
+<a   href="SqlitePassDbo.html">SqlitePassDbo</a></p>
+<h2 class="declaration">Declaration</h2>
+<p class="declaration">
+<code>type TSqlitePassSQLTokenizer = class(TObject)</code></p>
+<h2 class="description">Description</h2>
+<p>
+The TSqlitePassTokenizer is an utility object used to : Split a SQL statement or a piece of SQL statement into a list of tokens (<a class="normal"  href="SqlitePassDbo.TSqlitePassSQLToken.html">TSqlitePassSQLToken</a>)
+
+<p>Move to the <a class="normal"  href="SqlitePassDbo.TSqlitePassSQLTokenizer.html#First">First</a>, <a class="normal"  href="SqlitePassDbo.TSqlitePassSQLTokenizer.html#Prior">Prior</a>, <a class="normal"  href="SqlitePassDbo.TSqlitePassSQLTokenizer.html#Next">Next</a>, <a class="normal"  href="SqlitePassDbo.TSqlitePassSQLTokenizer.html#Last">Last</a> <a class="normal"  href="SqlitePassDbo.TSqlitePassSQLTokenizer.html#Token">Token</a> Lookup a specific <a class="normal"  href="SqlitePassDbo.TSqlitePassSQLTokenizer.html#Token">token</a> by <a class="normal"  href="SqlitePassDbo.TSqlitePassSQLTokenizer.html#Text">text</a> or type <a class="normal"  href="SqlitePassDbo.TSqlitePassSQLTokenizer.html#Replace">Replace</a> a specific <a class="normal"  href="SqlitePassDbo.TSqlitePassSQLTokenizer.html#Token">token</a> Located before an existing <a class="normal"  href="SqlitePassDbo.TSqlitePassSQLTokenizer.html#Token">token</a> <a class="normal"  href="SqlitePassDbo.TSqlitePassSQLTokenizer.html#Remove">Remove</a> a specific <a class="normal"  href="SqlitePassDbo.TSqlitePassSQLTokenizer.html#Token">token</a> Located after an existing <a class="normal"  href="SqlitePassDbo.TSqlitePassSQLTokenizer.html#Token">token</a> Insert a new <a class="normal"  href="SqlitePassDbo.TSqlitePassSQLTokenizer.html#Token">token</a> before an existing <a class="normal"  href="SqlitePassDbo.TSqlitePassSQLTokenizer.html#Token">token</a> Insert a new <a class="normal"  href="SqlitePassDbo.TSqlitePassSQLTokenizer.html#Token">token</a> after an existing <a class="normal"  href="SqlitePassDbo.TSqlitePassSQLTokenizer.html#Token">token</a> Set the String to be tokenized and rebuild a String representation from the tokens (<a class="normal"  href="SqlitePassDbo.TSqlitePassSQLTokenizer.html#Text">Text</a> property)...</p>
+<a name="%40Hierarchy"></a><h2 class="hierarchy">Hierarchy</h2>
+<ul class="hierarchy"><li class="ancestor">TObject</li>
+<li class="thisitem">TSqlitePassSQLTokenizer</li></ul><h2 class="overview">Overview</h2>
+<a name="%40Methods"></a><h3 class="summary">Methods</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>constructor <b><a   href="SqlitePassDbo.TSqlitePassSQLTokenizer.html#Create">Create</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>destructor <b><a   href="SqlitePassDbo.TSqlitePassSQLTokenizer.html#Destroy">Destroy</a></b>; override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.TSqlitePassSQLTokenizer.html#First">First</a></b>: Boolean;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.TSqlitePassSQLTokenizer.html#GetTextAfter">GetTextAfter</a></b>(TokenType: <a   href="SqlitePassDbo.html#TSqlitePassSQLTokenType">TSqlitePassSQLTokenType</a>): String;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.TSqlitePassSQLTokenizer.html#GetTextBefore">GetTextBefore</a></b>(TokenType: <a   href="SqlitePassDbo.html#TSqlitePassSQLTokenType">TSqlitePassSQLTokenType</a>): String;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.TSqlitePassSQLTokenizer.html#Last">Last</a></b>: Boolean;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.TSqlitePassSQLTokenizer.html#Locate">Locate</a></b>(TokenText: String): Boolean; overload;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.TSqlitePassSQLTokenizer.html#Locate">Locate</a></b>(TokenType: <a   href="SqlitePassDbo.html#TSqlitePassSQLTokenType">TSqlitePassSQLTokenType</a>): Boolean; overload;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.TSqlitePassSQLTokenizer.html#Next">Next</a></b>: Boolean; overload;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.TSqlitePassSQLTokenizer.html#Next">Next</a></b>(TokenType: <a   href="SqlitePassDbo.html#TSqlitePassSQLTokenType">TSqlitePassSQLTokenType</a>): Boolean; overload;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.TSqlitePassSQLTokenizer.html#Prior">Prior</a></b>(TokenType: <a   href="SqlitePassDbo.html#TSqlitePassSQLTokenType">TSqlitePassSQLTokenType</a>): Boolean; overload;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.TSqlitePassSQLTokenizer.html#Prior">Prior</a></b>: Boolean; overload;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.TSqlitePassSQLTokenizer.html#InsertAfter">InsertAfter</a></b>(TokenText, InsertedStmt: String);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.TSqlitePassSQLTokenizer.html#InsertBefore">InsertBefore</a></b>(TokenText, InsertedStmt: String);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.TSqlitePassSQLTokenizer.html#Remove">Remove</a></b>(TokenText: String);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>Procedure <b><a   href="SqlitePassDbo.TSqlitePassSQLTokenizer.html#RemoveAfter">RemoveAfter</a></b>(TokenText: String);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.TSqlitePassSQLTokenizer.html#RemoveBefore">RemoveBefore</a></b>(TokenText: String);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.TSqlitePassSQLTokenizer.html#Replace">Replace</a></b>(OldText, NewText: String);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.TSqlitePassSQLTokenizer.html#Tokenize">Tokenize</a></b>(Options: <a   href="SqlitePassDbo.html#TSqlitePassSQLTokenizerOptions">TSqlitePassSQLTokenizerOptions</a> = []);</code></td>
+</tr>
+</table>
+<a name="%40Properties"></a><h3 class="summary">Properties</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassSQLTokenizer.html#Count">Count</a></b>: Integer Read GetFCount;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassSQLTokenizer.html#EOF">EOF</a></b>: Boolean Read GetFEOF;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassSQLTokenizer.html#Text">Text</a></b>: String Read GetFText Write SetFText;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassSQLTokenizer.html#Token">Token</a></b>: <a   href="SqlitePassDbo.TSqlitePassSQLToken.html">TSqlitePassSQLToken</a> Read GetFCurrentToken;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassSQLTokenizer.html#TokenIndex">TokenIndex</a></b>: Integer Read FCurrentTokenIndex;</code></td>
+</tr>
+</table>
+<h2 class="description">Description</h2>
+<h3 class="detail">Methods</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Create"></a><code>constructor <b>Create</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Destroy"></a><code>destructor <b>Destroy</b>; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="First"></a><code>function <b>First</b>: Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="GetTextAfter"></a><code>function <b>GetTextAfter</b>(TokenType: <a   href="SqlitePassDbo.html#TSqlitePassSQLTokenType">TSqlitePassSQLTokenType</a>): String;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="GetTextBefore"></a><code>function <b>GetTextBefore</b>(TokenType: <a   href="SqlitePassDbo.html#TSqlitePassSQLTokenType">TSqlitePassSQLTokenType</a>): String;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Last"></a><code>function <b>Last</b>: Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Locate"></a><code>function <b>Locate</b>(TokenText: String): Boolean; overload;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Locate"></a><code>function <b>Locate</b>(TokenType: <a   href="SqlitePassDbo.html#TSqlitePassSQLTokenType">TSqlitePassSQLTokenType</a>): Boolean; overload;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Next"></a><code>function <b>Next</b>: Boolean; overload;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Next"></a><code>function <b>Next</b>(TokenType: <a   href="SqlitePassDbo.html#TSqlitePassSQLTokenType">TSqlitePassSQLTokenType</a>): Boolean; overload;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Prior"></a><code>function <b>Prior</b>(TokenType: <a   href="SqlitePassDbo.html#TSqlitePassSQLTokenType">TSqlitePassSQLTokenType</a>): Boolean; overload;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Prior"></a><code>function <b>Prior</b>: Boolean; overload;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="InsertAfter"></a><code>procedure <b>InsertAfter</b>(TokenText, InsertedStmt: String);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="InsertBefore"></a><code>procedure <b>InsertBefore</b>(TokenText, InsertedStmt: String);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Remove"></a><code>procedure <b>Remove</b>(TokenText: String);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="RemoveAfter"></a><code>Procedure <b>RemoveAfter</b>(TokenText: String);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="RemoveBefore"></a><code>procedure <b>RemoveBefore</b>(TokenText: String);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Replace"></a><code>procedure <b>Replace</b>(OldText, NewText: String);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Tokenize"></a><code>procedure <b>Tokenize</b>(Options: <a   href="SqlitePassDbo.html#TSqlitePassSQLTokenizerOptions">TSqlitePassSQLTokenizerOptions</a> = []);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<h3 class="detail">Properties</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Count"></a><code>property <b>Count</b>: Integer Read GetFCount;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="EOF"></a><code>property <b>EOF</b>: Boolean Read GetFEOF;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Text"></a><code>property <b>Text</b>: String Read GetFText Write SetFText;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Sets the original String to be tokenized or builds and returns a String from the tokens</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Token"></a><code>property <b>Token</b>: <a   href="SqlitePassDbo.TSqlitePassSQLToken.html">TSqlitePassSQLToken</a> Read GetFCurrentToken;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Gives access to the currently selected <code>token</code></p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="TokenIndex"></a><code>property <b>TokenIndex</b>: Integer Read FCurrentTokenIndex;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<hr noshade size="1"><span class="appinfo"><em>Generated by <a  target="_parent" href="http://pasdoc.sourceforge.net/">PasDoc 0.11.0</a> on 2010-05-16 23:39:44</em>
+</span>
+</body></html>

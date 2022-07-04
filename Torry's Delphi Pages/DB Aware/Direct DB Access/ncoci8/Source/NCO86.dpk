@@ -1,0 +1,55 @@
+package NCO86;
+
+{$R *.res}
+{$ALIGN 8}
+{$ASSERTIONS OFF}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS OFF}
+{$LOCALSYMBOLS OFF}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'NC OCI8 V 1.0.6 for D6'}
+{$IMPLICITBUILD ON}
+
+requires
+  vcl,
+  vcldb,
+  designide,
+  dcldb;
+
+contains
+  NCOciDB in 'NCOciDB.pas',
+  NCOciWrapper in 'NCOciWrapper.pas',
+  NCOciErrorDlg in 'NCOciErrorDlg.pas' {NCOciErrorFrm},
+  NCOciMsg in 'NCOciMsg.pas',
+  NCOci in 'NCOCI.pas',
+  NCOciBuff in 'NCOciBuff.pas',
+  NCOciLoginDlg in 'NCOciLoginDlg.pas' {NCOciLoginFrm},
+  NCOciParams in 'NCOciParams.pas',
+  NCOciDM in 'NCOciDM.pas' {OCIDM: TDataModule},
+  NCOciReg in 'NCOciReg.pas',
+  NCOciFilter in 'NCOciFilter.pas',
+  NCOciBreakDlg in 'NCOciBreakDlg.pas' {NCOciBreakFrm},
+  NCOciUtil in 'NCOciUtil.pas',
+  NCSQLMon in 'NCSQLMon.pas',
+  NCOciUpdateSQL in 'NCOciUpdateSQL.pas',
+  NCOciPLSQLGenSetupDlg in 'NCOciPLSQLGenSetupDlg.pas' {NCOciPLSQLGenSetupFrm},
+  NCOciPLSQLGen in 'NCOciPLSQLGen.pas',
+  NCOciCompNamer in 'NCOciCompNamer.pas',
+  NCOciCompNamerSetupDlg in 'NCOciCompNamerSetupDlg.pas' {OciCompNamerSetupFrm};
+
+end.

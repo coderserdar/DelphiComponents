@@ -1,0 +1,543 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="style.css">
+<title>TOraDB</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+<table width="100%" border="0" cellpadding="5" cellspacing="0">
+   <tr>
+   <td align=center bgColor=#009999>
+    <font class=fontmainbig color="#FFFFFF">
+     <b>Компоненты DOCI для прямого доступа к Oracle <br></b>
+	</font>
+	<br>
+    <font class=fontmain color="#FFFFFF"> 
+     <b>Version 1.15</b><br>
+    </font>
+	
+   </td>
+   </tr>
+</table>
+
+<font class=fontmain>
+
+<p>Copyright &copy; 1998-2002 by Andrey Romanchenko<br>
+All rights reserved.
+
+<p>
+
+<table cellspacing=2 cellpadding=0>
+<tr>
+   <td><font class=fontmain>
+    <i>e-mail:&nbsp;&nbsp;</i></font>
+	</td>
+	<td><font class=fontmain>
+	 <a href="mailto:lasersquard@yahoo.com?subject=Dynamic Arrays version 2.0">lasersquad@tut.by</a></font>
+	</td>
+</tr>
+<tr>
+   <td><font class=fontmain>
+    <i>web site:&nbsp;&nbsp;</i></font>
+   </td>
+   <td><font class=fontmain>
+    <a href="http://DynamicArrays.narod.ru" target=_new>http://DynamicArrays.narod.ru/</a></font>
+	</td>
+</tr>
+<tr>
+   <td></td>
+   <td><font class=fontmain>
+     <!-- (другой адрес: <a href="http://www.dynamicarrays.cjb.net/" target=_new>http://www.dynamicarrays.cjb.net/</a>)-->
+     </font>
+	</td>
+</tr>
+
+</table>
+
+<br><br>
+<h1 align=center>TOraDB</h1>
+
+<table cellspacing="0" cellpadding="5" border="1">
+<tr bgcolor="#009999">
+	<td colspan="2" align="center" valign="middle">
+	 <font class=fontcaption>
+      Свойства
+	 </font> 
+	</td>
+
+</tr>
+<tr>
+<a name=DBLogin></a>
+	<td> <font class=fontcode>
+      property <b>DBLogin</b>:string;
+	  	</font>
+	</td>
+	<td><font class=fontmain >
+             Имя пользователя для логина в базу.
+		</font> 
+	</td>
+</tr>
+<tr>
+<a name=DBPassword></a>
+	<td> <font class=fontcode>
+      property <b>DBPassword</b>:string;
+	  	</font>
+	</td>
+	<td><font class=fontmain >
+              Пароль для логина в базу. Используйте это свойство в редких случаях когда пароль не запрашивается при старте приложения потому 
+			  как пароль хранится и показывается в <b>Object Inspectore</b> открытым текстом.
+			  </font> 
+	</td>
+</tr>
+<tr>
+<a name=DBServer></a>
+	<td> <font class=fontcode>
+      property <b>DBServer</b>:string;
+	  	</font>
+	</td>
+	<td><font class=fontmain >
+             Синоним сервера к которому конектимся.<br>
+			 Синоним можно создать с помощью "<b>Oracle Net8 Easy Config</b>" либо редактируя файл 
+             %oraclehome%/network/admin/tnsnames.ora (%oraclehome%/net80/admin/tnsnames.ora - для некоторых версий <b>Oracle Client</b>).
+		</font> 
+	</td>
+</tr>
+<tr>
+	<td> <font class=fontcode>
+      property <b>ConnectAs</b>:TOraConnectAs;
+	  	</font>
+	</td>
+	<td><font class=fontmain >
+              <b>TOraConnectAs   = (caNormal, caSYSDBA, caSYSOPER);</b><br>
+			  Задает уровень привилегий устанавливаемого соединения. caSYSDBA и caSYSOPER следует задавать если  у вас есть соответствующие
+			  системные привилегии и известен соответствующий пароль.<br>
+			  <b>SYSOPER</b> - позволяет делать alter database open/mount, alter database backup, archive log, and recover.<br>
+			  <b>SYSBDA</b> - содержит все системные привилегии  с admin option и системную привилегию sysoper.
+			  
+		</font> 
+	</td>
+</tr>
+<tr>
+<a name=LoginPrompt></a>
+	<td> <font class=fontcode>
+      property <b>LoginPrompt</b>:boolean;
+	  	</font>
+	</td>
+	<td><font class=fontmain >
+            Выводить ли окошко с запросом имени и пароля перед установлением соединения с базой.<br>
+			<b>True</b> - выводить.
+			<b>False</b>- не выводить.
+ 		</font> 
+	</td>
+</tr>
+<tr>
+<a name=OraTransIsolationLevel></a>
+	<td> <font class=fontcode>
+      property <b>OraTransIsolationLevel</b>:TOraTransIsolationLevel;
+	  	</font>
+	</td>
+	<td><font class=fontmain >
+           Уровень изоляции транзакций для сессии. 
+          Все начинающиеся в этой сессии транзакции будут иметь этот уровень  изоляции 
+		  (если он не переопределен с помощью <b>OraTransIsolationLevel</b>).
+		</font> 
+	</td>
+</tr>
+<tr>
+	<td> <font class=fontcode>
+      property <b>OraSessionIsolationLevel</b>:TOraSessionIsolationLevel;
+	  	</font>
+	</td>
+	<td><font class=fontmain >
+           Уровень изоляции новой транзакции.  Каждая начинающаяся транзакция будет иметь этот уровень изоляции.
+		   Если <b>tiDefault</b>  то уровень берется из <b>OraSessionIsolationLevel</b>.
+		</font> 
+	</td>
+</tr>
+<tr>
+	<td> <font class=fontcode>
+      property <b>Preferences</b>:TOraPreferences;
+	  	</font>
+	</td>
+	<td><font class=fontmain >
+             Собирательное свойство которое задает некоторые дополнительные параметры работы компонента.<br>
+			 Содержит следующие поля: (их описание см. <a href='#TOraPreferences'> ниже</a>)
+			 <ul>
+			   <li> <b>ConvertCRLF:boolean;</b>
+			   <li> <b>FloatPrecision:integer;</b>
+              <li>  <b>IntegerPrecision:integer;</b>
+              <li> <b>SmallIntPrecision:integer;</b>
+            </ul>
+		</font> 
+	</td>
+</tr>
+<tr>
+	<td> <font class=fontcode>
+      property <b>RollbackOnDisconnect</b>:boolean;
+	  	</font>
+	</td>
+	<td><font class=fontmain >
+             Надо ли делать <b>Rollback</b> текущей транзакции при закрытии соединения с базой.
+			 По умолчанию<b> RollbackOnDisconnect</b>=<b>False</b>, т.е. не делать <b>Rollback</b> .<br>
+			 Если приложение падает и не успевает правильно отсоединиться от базы то <b>Oracle</b> 
+			 автоматически делает <b>Rollback</b> текущей транзакции.
+		</font> 
+	</td>
+</tr>
+<tr>
+	<td> <font class=fontcode>
+      property <b>SQLTrace</b>:TOraSQLTrace;
+	  	</font>
+	</td>
+	<td><font class=fontmain >
+             Включает или выключает <b>SQL trace</b> опцию для сессии.<br>
+			 Если <b>SQLTrace</b> = <b>stTrue</b> то вы можете анализировать все выполненые в этой сесси <b>SQL</b> выражения (запросы) 
+			 с помощью утилиты <b>tkprof</b>.<br>
+			  Она дает много полезной информации такой как:  CPU time, elapsed time, disk I/O, etc для каждого <b>SQL</b> выражения (запроса), 
+			  а также общую информацию по всем  выполненым запросам.<br>
+			  См.  раздел "<b>Oracle Server Tuning</b>" документации для более подробной информации о <b>tkprof</b>.<br>
+			  Когда <b>SQLTrace</b> = <b>stDefault</b> то значение <b>SQL trace</b> опции (не свойства <b>TOraDB.SQLTrace!</b>) 
+			  определяется параметром инициализации <b>SQL_TRACE</b>.
+		</font> 
+	</td>
+</tr>
+<tr>
+<a name=InTransaction></a>
+	<td> <font class=fontcode>
+      property  <b>InTransaction</b>:boolean;readonly!
+	  	</font>
+	</td>
+	<td><font class=fontmain >
+            Показывает находимся ли мы в режиме выполнения транзакции.
+		</font> 
+	</td>
+</tr>
+
+<tr bgcolor="#009999">
+	<td colspan="2" align="center" valign="middle">
+	 <font class=fontcaption>
+	  Методы
+	 </font> 
+	</td>
+
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	  constructor <b>Create</b>(AOwner:TComponent); override;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+           Создаем компонент и инициализируем его поля.
+	 </font> 
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	  destructor <b>Destroy</b>; override;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+         Если необходимо закрываем коннект к базе и потом разрушаем компонент.
+	 </font> 
+	</td>
+</tr>
+<tr>
+<a name="Open"></a>
+	<td>
+	 <font class=fontcode>
+	  procedure <b>Open</b>;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+          Устанавливаем соединение с базой.<br>
+		   Если свойство <a href=#LoginPrompt>LoginPrompt</a>= <b>True</b> то имя и пароль запрашивается
+		   у пользователя. Иначе используются значения из <a href=#DBLogin>DBLogin</a>, <a href=#DBPassword>DBPassword</a>,
+		     <a href=#DBServer> DBServer</a>
+	 </font>
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	  procedure <b>Close</b>;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+         Закрываем соединение с базой.
+	 </font> 
+	</td>
+</tr>
+<tr>
+<a name=StartTransaction></a>
+	<td>
+	 <font class=fontcode>
+	  procedure <b>StartTransaction</b>;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+         Выставляет уровень изоляции транзакции (<a href=#OraTransIsolationLevel>OraTransIsolationLevel</a>) и если все прошло успешно то выставляет <a href=#InTransaction>InTransaction</a> в <b>True</b>.
+	 </font> 
+	</td>
+</tr>
+<tr>
+<a name=CommitTransaction></a>
+	<td>
+	 <font class=fontcode>
+	   procedure <b>CommitTransaction</b>;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+          Делает <b>Commit</b> текущей транзакции и если все прошло удачно то сбрасывает флаг  <a href=#InTransaction>InTransaction</a> в <b>False</b>.
+	 </font> 
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	  procedure <b>RollbackTransaction</b>;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+         Делает <b>Rollback</b> текущей транзакции и если все прошло удачно то сбрасывает флаг  <a href=#InTransaction>InTransaction</a> в <b>False</b>.
+	 </font> 
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	  function <b>TestError</b>(where:string;ex:sword):sword;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+         Принимает на вход код (<b>ex:sword</b>)  результата выполнения <b>OCI</b> вызова и генерирует исключение если произошла ошибка. 
+		 Иначе просто возвращает переданый ей код.<br>
+		 <b>sword</b> - это специальный тип который эквивалентен <b>integer </b>в <b>Delphi</b>.
+		 		 
+	 </font> 
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	  procedure <b>GetServicesList</b>(AList: TStrings);
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+        Парсит <b>tnsnames.ora</b> и возвращает список алиасов (<b>AList: TStrings)</b> зарегистрированных на этой машине.
+	 </font> 
+	</td>
+</tr>
+
+
+<tr bgcolor="#009999">
+	<td colspan="2" align="center" valign="middle">
+	 <font class=fontcaption>
+	  События
+	 </font> 
+	</td>
+
+</tr>
+
+<tr>
+	<td>
+	 <font class=fontcode>
+	  property <b><b>BeforeInitOCI</b></b>:TBeforeInitOCI;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+         Вызывается непосредственно перед  загрузкой <b>OCI dll</b>.<br>
+		 Позволяет запретить загрузку <b>OCI dll</b> (и инициализацию библиотеки), а так же позволяет сменить имя <b>dll</b> файла 
+		 в случае если оно отличается от стандартного (<b>oci.dll</b>).
+	 </font>
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	  property <b>AfterInitOCI</b> :TAfterInitOCI;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+         Вызывается когда загрузка и инициализация <b>OCI</b> библиотеки прошла успешно.
+	 </font>
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	   property <b>BeforeLogin</b>:TBeforeLoginEvent;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+        Вызывается после инициализации библиотеки <b>OCI</b>, но перед тем как будет вызвана первая  ф-ция <b>OCI</b>.<br>
+		А если свойство <a href=#LoginPrompt>LoginPrompt</a>=<b>True</b>, то событие будет вызвано перед выводом окна запроса имени и пароля.
+		Таким образом в обработчике события можно запретить  соединение с базой еще до вывода окошка диалога.
+		
+	 </font>
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	  property <b>AfterLogin</b>:TAfterLoginEvent ;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+         Поисходит сразу после того как вы успешно установили соединение с базой. 
+		 Позволяет выполнить  какие либо действия после логина в базу.
+	 </font>
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	  property <b>OnStartTransaction</b>:TNotifyEvent;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+                Вызывается  после старта  транзакции перед завершением метода  <a href=#StartTransaction>StartTransaction</a>.
+	 </font>
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	  property <b>BeforeCommit</b>:TNotifyEvent;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+                Вызывается непосредствнно перед тем как будет вызван <b>OCI</b> метод <b>OCITransCommit.</b>
+	 </font>
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	  property <b>AfterCommit</b>:TNotifyEvent;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+               Вызывается  после того как произошел <b>Commit</b>. (в конце метода  <a href=#CommitTransaction>CommitTransaction</a>.               
+	 </font>
+	</td>
+</tr>
+
+</table>
+<br>
+
+<a name=TOraPreferences></a>
+<h1 align=center>TOraPreferences</h1>
+
+<table cellspacing="0" cellpadding="5" border="1">
+<tr bgcolor="#009999">
+	<td colspan="2" align="center" valign="middle">
+	 <font class=fontcaption>
+      Свойства
+	 </font> 
+	</td>
+
+</tr>
+<tr>
+	<td width=33%>
+	 <font class=fontcode>
+	  property <b>ConvertCRLF</b>:boolean;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+   		   Конвертирование между CRLF (#13#10) и  LF (#10).<br>
+			   В <b>Oracle</b> строчки текста разделяются только символом переводом строки LF (#10).
+			   В Windows они разделяются  возвратом каретки (carriage return -  CR ) и переводом строки (linefeed - LF).<br>
+			   Если <b>ConvertCRLF</b> = <b>True</b>,  то конвертирование будет осуществляться автоматически.<br>
+			   Установка <b>ConvertCRLF</b> в <b>False</b> запрещает конвертирование.
+			
+	 </font>
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	  property <b>FloatPrecision</b>:integer;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+			     Максимальная точность представления чисел  в полях с плавающей точкой (<b>Double</b>).
+				 Установка этого свойства в <b>0</b> указывает что все не целые (с дробной частью) числа интерпретировать как числа с плавающей точкой даже
+				 если эти числа представлены с большей точностью чем <b>Double</b> в <b>Delphi </b>(<b>15</b> цифр) что приведет к потере точности. 			
+				 Установка этого свойства в значение <b>>0</b>  сделает что числа с точностью больше указаной будут интерпретироваться как строки.
+				 Число с плавающей точкой будет преобразовано в строку на сервере используя  настройки <b>NLS_LANG сервера</b>.
+
+	 </font>
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	  property <b>IntegerPrecision</b>:integer;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+		       	   Максимальная точность представления  целых чисел.
+				   Установка этого свойства в <b>0</b> указывает что все целые числа  (без дробной части) с точностью <b>9</b> и меньше цифр будут 
+				   представлены полями типа <b>integer.</b>
+				   Все остальные целые числа будут представлены как <b>Double</b> или <b>String</b> в зависимости от значения свойства <b>FloatPrecision</b>.
+
+	 </font>
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	  property <b>SmallIntPrecision</b>:integer;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+			  Максимальная точность представления коротких целых чисел (<b>SmallInt</b>).
+			  Установка этого свойства в <b>0</b> указывает что все целые числа с точностью <b>4</b> и меньше цифр будут 
+			  представлены полями типа <b>Smallint</b>.
+			  Все остальные числа будут представлены в соответствии с  настройками <b>IntegerPrecision</b> и <b>FloatPrecision</b>.
+
+	 </font>
+	</td>
+</tr>
+
+
+</table>
+
+<br>
+<br>
+
+</font>
+
+<div align=right>
+<font class=fontsmall>
+Copyright (c) by Andrey Romanchenko
+</font>
+</div>
+
+</body>
+</html>

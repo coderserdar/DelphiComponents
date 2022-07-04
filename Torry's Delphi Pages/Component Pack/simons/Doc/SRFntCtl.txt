@@ -1,0 +1,98 @@
+TSRFontComboBox und TSRFontListBox (C)opyright 2004 Version 1.03
+
+  Autor : Simon Reinhardt
+  eMail : reinhardt@picsoft.de
+  Internet : http://www.picsoft.de
+
+  Diese Komponenten zur Schriftart-Auswahl basieren auf den Komponenten
+  TFontComboBox und TFontListBox von Jimmy Theo <Theo@elang.stts.ac.id>
+  Die Sourcecodes sind Public Domain, das Urheberrecht liegt aber beim
+  Autor. 
+
+
+Dateiumfang:
+------------
+
+SRFntCtl.txt 	- Diese Datei
+
+SRFntCtl.pas	- Quelltext der Komponente
+SRFntCtl.d16	- Resourcendatei der 16-Bit-Komponente für Delphi 1
+SRFntCtl.d32,	
+SRFntCtl.r32	- Resourcendateien der 32-Bit-Komponente für Delphi 2 bis 5
+SRDefine.inc
+SRUtils.pas	- verschiedende Prozeduren und Funktionen für die Komponente
+                  (Eine Beschreibung findet man im Interface der Unit)  
+	
+
+Installation:
+-------------
+
+In Delphi 1:
+------------
+1. Alle Dateien in das Delphi-Komponenten-Verzeichnis entpacken.
+2. Menü Optionen : Komponente installieren
+3. Schaltfläche Hinzufügen / Durchsuchen
+4. Datei SRFntCtl.pas im Delphi-Komponenten-Verzeichnis suchen und mit
+   OK bestätigen.
+5. Die Komponente erscheint in der Komponenten-Gruppe "Simon"
+
+In Delphi 2:
+------------
+1. Alle Dateien in das Delphi-Komponenten-Verzeichnis entpacken.
+2. Menü Komponente :  installieren
+3. Schaltfläche Hinzufügen / Durchsuchen
+4. Datei SRFntCtl.pas im Delphi-Komponenten-Verzeichnis suchen und mit
+   OK bestätigen.
+5. Die Komponente erscheint in der Komponenten-Gruppe "Simon"
+
+Ab Delphi 3:
+------------
+1. Alle Dateien in das Delphi-Komponenten-Verzeichnis entpacken.
+2. Menü Komponente :  Komponente installieren
+3. Schaltfläche Durchsuchen (hinter dem Eingabefeld für den Unit-Namen)
+4. Datei SRFntCtl.pas im Delphi-Komponenten-Verzeichnis suchen und mit
+   OK bestätigen.
+5. Die Rückfrage nach dem Neukompilieren des Packages bestätigen.
+6. Die Komponente erscheint in der Komponenten-Gruppe "Simon"
+   (Evtl. muß eine bereits installierte, ältere Version der Komponente
+    zuvor entfernt werden)
+
+
+
+Funktion:
+---------
+
+Die Komponenten sind eine TComboBox bzw. TListBox im Stil OwnerDrawFixed und
+listen alle im System installierten Schriftarten auf. Ab Delphi 2 werden 
+TrueType-Schriften mit einem Symbol gekennzeichnet. Über die FontName-Eigenschaft
+kann die ausgewählte Schriftart zugewiesen oder ausgelesen werden.
+
+
+Zusätzliche Eigenschaften:
+--------------------------
+DisplayFontName: TFontName
+  Gibt die Schriftart an, in der die Einträge der Liste dargestellt werden sollen, 
+  wenn die Eigenschaft "UseItemFont" den Wert "false" hat.
+
+DisplayFontSize: TFontSize 
+  Gibt die Größe an, in der die Schriftarten in der Liste dargestellt werden sollen.
+
+FontMask: TFontMask
+  In dieser Eigenschaft kann festgelegt werden, welche Schrifttypen in der Liste 
+  angezeigt werden sollen:
+    [fmTrueType]      - TrueType-Schriften werden angezeigt.
+    [fmNoTrueType]    - Nicht-TrueType-Schriften werden angezeigt.
+    [fmFixedPitch]    - Schriften mit fester Zeichenbreite werden angezeigt.
+    [fmVariablePitch] - Schriften mit vriabler Zeichenbreite werden angezeigt.
+
+FontName: TFontName
+  Diese Eigenschaft bezeichnet die ausgewählte Schriftart.
+
+ShowTTSymbol: boolean
+  Wenn "ShowTTSymbol" den Wert "true" hat, werden TrueType-Fonts durch ein "TT"-Symbol
+  gekennzeichnet.
+
+UseItemFont: boolean
+  Wenn "UseItemFont" den Wert "true" hat, werden die Listeneinträge jeweils in der 
+  Schriftart gemalt, die sie repräsentieren. Ansonsten wird die in der Eigenschaft
+  "DisplayFontName" angegebene Schriftart zur Darstellung verwendet.

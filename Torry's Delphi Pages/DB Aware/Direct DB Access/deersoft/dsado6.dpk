@@ -1,0 +1,51 @@
+package dsado6;
+
+{$R *.res}
+{$ALIGN 8}
+{$ASSERTIONS OFF}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS OFF}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'DeerSoft ADO components'}
+{$IMPLICITBUILD OFF}
+
+requires
+  vcl,
+  vclx,
+  vcldb,
+  vclsmp;
+
+contains
+  RegDSADO in 'RegDSADO.pas',
+  ADOBase in 'ADOBase.pas',
+  DDB in 'DDB.pas',
+  DEditors in 'DEditors.pas',
+  DFilters in 'DFilters.pas',
+  DlgColor in 'DlgColor.pas' {ColorFltDialog},
+  DlgExport in 'DlgExport.pas' {ExportDialog},
+  DlgFillUp in 'DlgFillUp.pas' {FillUpDialog},
+  DlgFilter in 'DlgFilter.pas' {FilterDialog},
+  DlgSelFld in 'DlgSelFld.pas' {SelFldDialog},
+  DMaster in 'DMaster.pas',
+  DTables in 'DTables.pas',
+  DUtils in 'DUtils.pas',
+  ADOApi in 'ADOApi.pas',
+  ADOEditorApi in 'ADOEditorApi.pas';
+
+end.

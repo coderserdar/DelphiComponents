@@ -1,0 +1,40 @@
+package IDEAutoHide;
+
+{$R *.RES}
+{$ALIGN ON}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$IMPLICITBUILD OFF}
+
+requires
+  vcl50;
+
+contains
+  main in 'main.pas',
+  Unit_AutoHide in 'Unit_AutoHide.pas',
+  Unit_WndProp in 'Unit_WndProp.pas',
+  Unit_FormMainClass in 'Unit_FormMainClass.pas' {FormAutoHide},
+  Unit_FormAbout in 'Unit_FormAbout.pas' {FormAbout},
+  Unit_FormAddClass in 'Unit_FormAddClass.pas' {FormAddClass},
+  Unit_Misc in 'Unit_Misc.pas',
+  Unit_Constants in 'Unit_Constants.pas';
+
+end.

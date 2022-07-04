@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<codetemplate xmlns="http://schemas.borland.com/Delphi/2005/codetemplates" version="1.0.0">
+  <template name="ExcelExportUse" invoke="manual">
+    <description>Use TscExcelExport component</description>
+    <author>Stefan Cruysberghs, http://www.scip.be</author>
+    <point name="ExcelExport">
+      <text>scExcelExport1</text>
+      <hint>TscExcelExport component</hint>
+    </point>
+    <point name="ConnectTo">
+      <text>ctNewExcel</text>
+      <hint>Connection : ctNewExcel, ctNewWorkbook, ctNewWorksheet</hint>
+    </point>
+    <point name="Dataset">
+      <text>ClientDataset1</text>
+      <hint>Dataset to export to Excel</hint>
+    </point>        
+    <code language="Delphi" delimiter="|"><![CDATA[
+
+try
+  |ExcelExport|.LoadDefaultProperties;
+  |ExcelExport|.ExcelVisible:=True;
+  |ExcelExport|.ConnectTo:=|ConnectTo|;  
+  |ExcelExport|.Dataset:=|Dataset|;
+  |ExcelExport|.Connect;
+  |ExcelExport|.ExportDataset;
+finally
+  |ExcelExport|.Disconnect;
+end;
+    
+     |end|]]></code>
+   </template>
+</codetemplate>
+    

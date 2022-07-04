@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{8bb4a8f4-92ec-4af7-b88f-a64d3a5b05cb}</ProjectGuid>
+    <MainSource>TomD.dpk</MainSource>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
+    <DCC_DependencyCheckOutputName>C:\Users\Tomasz Bojara\Documents\RAD Studio\5.0\Bpl\TomD.bpl</DCC_DependencyCheckOutputName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Version>7.0</Version>
+    <DCC_DebugInformation>False</DCC_DebugInformation>
+    <DCC_LocalDebugSymbols>False</DCC_LocalDebugSymbols>
+    <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+    <DCC_Define>RELEASE</DCC_Define>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <Version>7.0</Version>
+  </PropertyGroup>
+  <ProjectExtensions>
+    <Borland.Personality>Delphi.Personality</Borland.Personality>
+    <Borland.ProjectType>Package</Borland.ProjectType>
+    <BorlandProject>
+<BorlandProject><Delphi.Personality><Parameters><Parameters Name="UseLauncher">False</Parameters><Parameters Name="LoadAllSymbols">True</Parameters><Parameters Name="LoadUnspecifiedSymbols">False</Parameters></Parameters><Package_Options><Package_Options Name="ImplicitBuild">True</Package_Options><Package_Options Name="DesigntimeOnly">True</Package_Options><Package_Options Name="RuntimeOnly">False</Package_Options><Package_Options Name="PackageDescription">TOM Components (TB)</Package_Options></Package_Options><VersionInfo><VersionInfo Name="IncludeVerInfo">True</VersionInfo><VersionInfo Name="AutoIncBuild">False</VersionInfo><VersionInfo Name="MajorVer">1</VersionInfo><VersionInfo Name="MinorVer">0</VersionInfo><VersionInfo Name="Release">0</VersionInfo><VersionInfo Name="Build">0</VersionInfo><VersionInfo Name="Debug">False</VersionInfo><VersionInfo Name="PreRelease">False</VersionInfo><VersionInfo Name="Special">False</VersionInfo><VersionInfo Name="Private">False</VersionInfo><VersionInfo Name="DLL">False</VersionInfo><VersionInfo Name="Locale">1045</VersionInfo><VersionInfo Name="CodePage">1250</VersionInfo></VersionInfo><VersionInfoKeys><VersionInfoKeys Name="CompanyName"></VersionInfoKeys><VersionInfoKeys Name="FileDescription"></VersionInfoKeys><VersionInfoKeys Name="FileVersion">1.0.0.0</VersionInfoKeys><VersionInfoKeys Name="InternalName"></VersionInfoKeys><VersionInfoKeys Name="LegalCopyright"></VersionInfoKeys><VersionInfoKeys Name="LegalTrademarks"></VersionInfoKeys><VersionInfoKeys Name="OriginalFilename"></VersionInfoKeys><VersionInfoKeys Name="ProductName"></VersionInfoKeys><VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys><VersionInfoKeys Name="Comments"></VersionInfoKeys></VersionInfoKeys><Excluded_Packages>
+      
+      
+      
+      
+      
+      
+      <Excluded_Packages Name="$(BDS)\bin\dcloffice2k100.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+      <Excluded_Packages Name="$(BDS)\bin\dclofficexp100.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+    </Excluded_Packages><Source><Source Name="MainSource">TomD.dpk</Source></Source></Delphi.Personality></BorlandProject></BorlandProject>
+  </ProjectExtensions>
+  <Import Project="$(MSBuildBinPath)\Borland.Delphi.Targets" />
+  <ItemGroup>
+    <DelphiCompile Include="TomD.dpk">
+      <MainSource>MainSource</MainSource>
+    </DelphiCompile>
+    <DCCReference Include="$(SystemRoot)\system32\rtl.dcp" />
+    <DCCReference Include="$(SystemRoot)\system32\vcl.dcp" />
+    <DCCReference Include="D:\BUSZ\Zobrazowanie\Hex.pas" />
+    <DCCReference Include="FileNameDialog.pas" />
+    <DCCReference Include="FileNameDialog_.dcr" />
+    <DCCReference Include="FileNameDialog_.dcr" />
+    <DCCReference Include="F_FileName.pas" />
+    <DCCReference Include="F_Klaw.pas" />
+    <DCCReference Include="HeadListBox.pas" />
+    <DCCReference Include="HeadListBox_.dcr" />
+    <DCCReference Include="HeadListBox_.dcr" />
+    <DCCReference Include="InPanel.pas" />
+    <DCCReference Include="Klawiatura.pas" />
+    <DCCReference Include="Pipes.pas" />
+    <DCCReference Include="PipesStatus.pas" />
+    <DCCReference Include="PipeStatus.pas" />
+    <DCCReference Include="Pipes_.dcr" />
+    <DCCReference Include="Pipes_.dcr" />
+    <DCCReference Include="PJVersionInfo.pas" />
+    <DCCReference Include="PJVersionInfo_.dcr" />
+    <DCCReference Include="PJVersionInfo_.dcr" />
+    <DCCReference Include="SSStringGrid.pas" />
+    <DCCReference Include="TerminalBox.pas" />
+    <DCCReference Include="TerminalBox_.dcr" />
+    <DCCReference Include="TerminalBox_.dcr" />
+    <DCCReference Include="ThreadTimer.pas" />
+    <DCCReference Include="ThreadTimer_.dcr" />
+    <DCCReference Include="ThreadTimer_.dcr" />
+    <DCCReference Include="TrayIcon.pas" />
+    <DCCReference Include="uCiaComPort_.dcr" />
+    <DCCReference Include="U_TomReg.pas" />
+    <DCCReference Include="WaveFile_.dcr" />
+    <DCCReference Include="WaveFile_.dcr" />
+    <DCCReference Include="WaveList.pas" />
+    <DCCReference Include="WaveList_.dcr" />
+    <DCCReference Include="WaveList_.dcr" />
+    <DCCReference Include="Wavez.pas" />
+    <DCCReference Include="Wavez_.dcr" />
+    <DCCReference Include="Wavez_.dcr" />
+  </ItemGroup>
+</Project>

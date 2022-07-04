@@ -1,0 +1,232 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Component DBTreeView</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+</head>
+
+<body>
+<table width="75%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="6%" valign="top"><strong><img src="2.jpg" width="45" height="44"></strong></td>
+    <td width="40%" valign="middle"><strong>Component DBTreeView </strong></td>
+    <td width="54%"><div align="right"><a href="ReadMe_Eng.htm">Main page</a></div></td>
+  </tr>
+  <tr>
+    <td colspan="3"><p>&nbsp;</p>
+      <p>Component DBTreeView intends for
+            representing and managing a hierarchical structure in database.
+        It display information in the form of some virtual file system:
+        in the form of folders and objects. Managment of tree is meaning moving
+        of the object or folder  (including nested objects or folders)
+        into another folder.</p>
+      <table width="82%" border="0" cellspacing="5" cellpadding="0">
+        <tr>
+          <td><p><strong><img src="1.jpg" width="400" height="352"></strong></p>
+          <p align="center">pic.1.</p></td>
+          <td>Connection of component
+              DBTreeView to data base realize by help of
+            ADO. This component was tested by connection to MS SQL, ACCESS.
+              However, with rigth connection via ODBC, you can connect to the
+            other data base. For right work of the component, there are needed
+            two tables in data base. First table hold information about folders
+            and structure,
+              and second holds information about objects.</td>
+        </tr>
+      </table>
+      <p>&nbsp;</p>
+      <p>Table's structure, using for holding structure of folders
+        (tree):</p>
+      <table width="622" border="1" cellpadding="0" cellspacing="0">
+        <tr>
+          <td width="27%"><p><strong>Field name - <em>id</em></strong></p>
+              <p><strong>Field type -
+                    <em>autoincrement</em></strong></p>
+          </td>
+          <td width="21%"><p><strong>Field name - <em>Owner</em></strong></p>
+              <p><strong>Field type -
+                    <em>integer</em></strong></p>
+          </td>
+          <td width="52%"><p><strong>Filed name - <em>Name</em></strong></p>
+              <p><strong>Field type -
+                    <em>varchar</em></strong></p>
+          </td>
+        </tr>
+        <tr>
+          <td align="center">1</td>
+          <td align="center">0</td>
+          <td>Suppliers</td>
+        </tr>
+        <tr>
+          <td align="center">2</td>
+          <td align="center">0</td>
+          <td>Customers</td>
+        </tr>
+        <tr>
+          <td align="center">3</td>
+          <td align="center">0</td>
+          <td>Banks</td>
+        </tr>
+        <tr>
+          <td align="center">4</td>
+          <td align="center">1</td>
+          <td>Foreign suppliers</td>
+        </tr>
+        <tr>
+          <td align="center">5</td>
+          <td align="center">1</td>
+          <td>Native suppliers</td>
+        </tr>
+        <tr>
+          <td align="center">6</td>
+          <td align="center">2</td>
+          <td>Customers from south</td>
+        </tr>
+        <tr>
+          <td align="center">7</td>
+          <td align="center">2</td>
+          <td>Customers from north</td>
+        </tr>
+        <tr>
+          <td height="22" align="center">8</td>
+          <td align="center">6</td>
+          <td>Customers Mumba city</td>
+        </tr>
+        <tr>
+          <td align="center">9</td>
+          <td align="center">6</td>
+          <td>Customers Zanzibar city</td>
+        </tr>
+      </table>
+      <p>Table's structure, using for holding objects</p>
+      <table width="623" border="1" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="26%"><p><strong>Field name - <em>id</em></strong></p>
+              <p><strong>Field type -
+                    <em>autoincrement</em></strong></p>
+          </td>
+          <td width="22%"><p><strong>Field name - <em>Folder_id</em></strong></p>
+              <p><strong>Field type -
+                    <em>integer</em></strong></p>
+          </td>
+          <td width="52%"><p><strong>Filed name - <em>Name</em></strong></p>
+              <p><strong>Field type -
+                    <em>varchar</em></strong></p>
+          </td>
+        </tr>
+        <tr>
+          <td align="center">1</td>
+          <td align="center">0</td>
+          <td>Agent with out category</td>
+        </tr>
+        <tr>
+          <td align="center">2</td>
+          <td align="center">3</td>
+          <td>Bank &quot;Capital-credit&quot;</td>
+        </tr>
+        <tr>
+          <td height="28" align="center">3</td>
+          <td align="center">5</td>
+          <td>Supplier of meat &quot;Horns and hoofs&quot;</td>
+        </tr>
+        <tr>
+          <td align="center">4</td>
+          <td align="center">6</td>
+          <td>Supermarket &quot;Mumbar&quot;</td>
+        </tr>
+        <tr>
+          <td align="center">5</td>
+          <td align="center">6</td>
+          <td>Hotel &quot;Continental&quot;</td>
+        </tr>
+        <tr>
+          <td align="center">6</td>
+          <td align="center">9</td>
+          <td>Bar &quot;Black cat&quot;</td>
+        </tr>
+        <tr>
+          <td align="center">7</td>
+          <td align="center">9</td>
+          <td>Hotel &quot;Lost Alpinist&quot;</td>
+        </tr>
+        <tr>
+          <td align="center">8</td>
+          <td align="center">3</td>
+          <td>Bank &quot;Alfa-group&quot;</td>
+        </tr>
+        <tr>
+          <td align="center">9</td>
+          <td align="center">5</td>
+          <td>Supplier of lobster</td>
+        </tr>
+      </table>
+      <br>
+      <strong><em>Notes:</em></strong> 
+      <ol>
+        <li> In table for folders holding, value of field <em><strong>Owner</strong></em>          reference
+          to value of field <em><strong>id</strong></em>.</li>
+        <li> In the table for objects holding, value of field <strong><em>Folder_id</em></strong>          reference
+        to value of field <em><strong>id</strong></em> of table holding folder's
+        structure.</li>
+      </ol>
+      <p>Component DBTreeView is a child of component TreeView, it inherites
+        all their property, method and events.
+        In component DBTreeView adds the following new property and method:</p>
+      <ul>
+        <li><strong>property</strong> NameFolderTable:
+            string - name of table, using for holding folder's structure
+          (tree)</li>
+        <li><strong>property</strong> NameObjectTable:
+            string - name of table, using for holding objects</li>
+        <li><strong>property</strong> Connection:
+            TADOConnection - Specifies the ADO connection component to use.</li>
+        <li><strong>method</strong> Open - opens datasets and loads structure
+          of folders and objects</li>
+        <li><strong>method</strong> CheckOnFolder(Node:
+            TTreeNode): Boolean - Checks, is selected node folder or object.
+          If node is folder returns
+          True otherwise False.</li>
+      </ul>
+      <p>For coorect work of component,
+    the property <strong>Images</strong> must have specified component
+    <strong>ImageList. </strong>Which must hold three images:
+    first correspond to closed folder,
+    second to selected(opend) folder, and third correspond to objects.</p>
+      <p>On loading of structure and objects, to the  property StateIndex of
+        every node's, assigne correspondent
+        <strong>id</strong> of the correspontending table.
+      For example, to folder assign <strong>id</strong> from table for holding structure,
+        and for objects - from table for objects holding.</p>
+      <p>Example of creations component in run-time
+      and loading information.</p>
+	<PRE>
+    <strong>var</strong>
+       DBTreeView1: TDBTreeView;
+    <strong>begin</strong>
+       DBTreeView1 := TDBTreeView.Create(<strong>nil</strong>);
+       DBTreeView1.NameFolderTable := 'Folder_Objects';
+       DBTreeView1.NameObjectTanle := 'Objects';
+       DBTreeView1.Open;
+    <strong>end</strong>;
+	</PRE>
+    <p>Example of getting type and id of selected folder or object</p>
+    <PRE>
+   <strong>procedure</strong> TForm1.DBTreeView1DblClick(Sender: TObject);
+   <strong>var</strong>
+       Sel: integer;
+       Folder: Boolean;
+   <strong>begin</strong>
+      Sel := DBTreeView1.Selected.StateIndex;
+      Folder := DBTreeView1.CheckOnFolder(DBTreeView1.Selected);
+      <strong>if</strong> Folder = True <strong>then</strong>
+        ShowMessage('Folder № '+IntToStr(Sel))
+      <strong>else</strong>
+        ShowMessage('Object № '+IntToStr(Sel));
+   <strong>end</strong>;
+ </PRE>    
+    </td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Component TSmExpotToExcel</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+</head>
+
+<body>
+<table width="75%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="6%"><img src="5.jpg" width="44" height="42"></td>
+    <td width="40%"><strong>Component TSmExpotToExcel</strong></td>
+    <td width="54%"><div align="right"><a href="ReadMe_Eng.htm">Main page</a></div></td>
+  </tr>
+  <tr>
+    <td colspan="3"><p>&nbsp;</p>
+      <p>Component TSmExpotToExcel converts the data from specified
+        TDataSet in Excel file. There is a possibility to view a progress of
+        proccess.</p>      
+      <p><font size="+1"><strong>Property</strong></font></p>
+      <ul>
+        <li><strong>property</strong> FileName:
+                string - specifies the name of Excel file,
+          in which converting data</li>
+        <li><strong>property</strong> DataSet: TDatSet - specifies the dataset
+        to use with the current TSmExpotToExcel component.</li>
+        <li><strong>property</strong> Header: TStrings - list, specifies user's
+          headers</li>
+        <li><strong>property</strong> Footer: TStrings - list, specifies user's
+          footer</li>
+        <li><strong>property</strong> Captions: TFiledCaptions - type of captions</li>
+        <li><strong>Type</strong> TFiledCaptions = (smNone, smLabels, smFieldNames);
+          - smNone - with out header, smLabels - specified by user in property
+          Header,
+          smFieldNames - captions are the same as name of field in DataSet</li>
+        <li><strong>property</strong> CaptionBgColor: TColor - color of background
+          of caption</li>
+      </ul>      
+      <p><font size="+1"><strong>Method</strong></font></p>
+      <ul>
+        <li><strong>method</strong> Execute
+              - run conversion.</li>
+      </ul>      
+      <p><font size="+1"><strong>Event</strong></font></p>
+      <ul>
+        <li><strong>Type</strong> TNotifyEvent = procedure(Sender: TObject;
+          Progress: integer) of object;</li>
+        <li><strong>property</strong> OnExportProgress: TNotifyEvent - event
+          occurs after conversion each row of data. Value
+          <em><strong>Progress</strong></em> reflect percent execution of conversion.</li>
+      </ul>      
+      </p>
+    </td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

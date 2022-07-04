@@ -1,0 +1,48 @@
+colorADO Database Components
+
+Installation.
+
+1) Uninstall all previously installed files and remove paths from the IDE.
+
+
+2) Compile the Run-Time library using corresponding package:
+
+Delphi: Source\Packages\colorXX.dpk
+C++ Builder: Source\Packages\colorXX.bpk
+
+where XX means the version of IDE (40, 50, 60 or 70)
+
+Do not save any changes made by IDE.
+
+
+3) Compile the Design-Time library using corresponding package:
+
+Delphi: Source\Packages\dclcolorXX.dpk
+C++ Builder: Source\Packages\dclcolorXX.bpk
+
+where XX means the version of IDE (40, 50, 60 or 70)
+
+Do not save any changes made by IDE.
+
+
+4) Install the Design-Time library
+
+
+5) All .dcu, .lib, .obj, .dcp files after compilation will be saved in the LIB sub-directory.
+Check if you have correctly set Library Path to this folder. If not, add it.
+
+6) Copy oledbadm.dll and oledbcpl.cpl files from the oledbadm subfolder to Windows system directory. 
+Register the oledbadm.dll file, using regsvr32 utility.
+
+7) If you'd like to check examples, register the DSN that points to demo.mdb and demosys.mdb files.
+Modify the oledbdsn.reg file to point to above files.
+Example: If you have saved .mdb files in the C:\components\colorado\Demos\Data\ folder, modify oledbdsn.reg 
+as shown below:
+
+REGEDIT4
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\OLEDB\DSNS\COLORDEMO]
+"ConnectionString"="Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\\components\\colorado\\Demos\\Data\\demo.mdb;Persist Security Info=False;Jet OLEDB:System database=C:\\components\\colorado\\Demos\\Data\\demosys.mdb"
+
+Save and register the oledbdsn.reg file.
+

@@ -1,0 +1,371 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+<meta name="GENERATOR" content="PasDoc 0.11.0">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<title>SqlitePass Database Objects: SqlitePassUtils</title>
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body bgcolor="#ffffff" text="#000000" link="#0000ff" vlink="#800080" alink="#FF0000">
+<h1 class="unit">Unit SqlitePassUtils</h1>
+<table class="sections wide_list">
+<tr>
+<td><a class="section"  href="#%40Description">Description</a></td><td><a class="section"  href="#%40Uses">uses</a></td><td><a class="section"  href="#%40Classes">Classes, Interfaces, Objects and Records</a></td><td><a class="section"  href="#%40FuncsProcs">Functions and Procedures</a></td><td><a class="section"  href="#%40Types">Types</a></td><td>Constants</td><td>Variables</td></tr></table>
+<a name="%40Description"></a><h2 class="description">Description</h2>
+<p>
+The unit <code>SqlitePassUtils</code> implement missing classes and functions for the Delphi4 or Delphi 6 VCL. It uses mostly original code from FCL. implements : - TObjectList for Delphi 4 - <a class="normal"  href="SqlitePassUtils.TSqlitePassBitArray.html">TSqlitePassBitArray</a> (Bit Array &lt;-&gt; Integer converter) - <a class="normal"  href="SqlitePassUtils.TSqlitePassList.html">TSqlitePassList</a> (A TList with less properties but faster) - <a class="normal"  href="SqlitePassUtils.TSqlitePassAnsiStringList.html">TSqlitePassAnsiStringList</a> (A TStringList with less properties but faster) - <a class="normal"  href="SqlitePassUtils.TSqlitePassWideStringList.html">TSqlitePassWideStringList</a> (A TStringList with less properties but faster) - Strings functions (String &lt;-&gt; UTF8 converter) - <a class="normal"  href="SqlitePassUtils.TSqlitePassIntegerList.html">TSqlitePassIntegerList</a> (a mini TList implementation to manage Integers)
+
+<p>&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;
+
+<p>This program is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License as published by the Free Software Foundation; either version 2.1 of the License, or (at your option) any later version.
+
+<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more details.
+
+<p>You should have received a copy of the GNU Lesser General Public License along with this program; if not, write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+
+<p>&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;
+
+<p>Author : Luc DAVID Email: luckylazarus@free.fr Last update : 10.03.2010
+
+<p>&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;</p>
+<a name="%40Uses"></a><h2 class="uses">uses</h2>
+<ul class="useslist"><li>Classes</li><li>Db</li><li><a   href="SqlitePassConst.html">SqlitePassConst</a></li><li><a   href="SqlitePassErrorLang.html">SqlitePassErrorLang</a></li><li>SysUtils</li><li>Windows</li></ul><h2 class="overview">Overview</h2>
+<a name="%40Classes"></a><h3 class="cio">Classes, Interfaces, Objects and Records</h3>
+<table class="classestable wide_list">
+<tr class="listheader">
+<th class="itemname">Name</th>
+<th class="itemdesc">Description</th>
+</tr>
+<tr class="list">
+<td class="itemname">record&nbsp;<a class="bold"  href="SqlitePassUtils.TSqlitePassAnsiStringItem.html"><code>TSqlitePassAnsiStringItem</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+<tr class="list2">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassUtils.TSqlitePassAnsiStringList.html"><code>TSqlitePassAnsiStringList</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+<tr class="list">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassUtils.TSqlitePassBitArray.html"><code>TSqlitePassBitArray</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+<tr class="list2">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassUtils.TSqlitePassIntegerList.html"><code>TSqlitePassIntegerList</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+<tr class="list">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassUtils.TSqlitePassList.html"><code>TSqlitePassList</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+<tr class="list2">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassUtils.TSqlitePassObjectList.html"><code>TSqlitePassObjectList</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+<tr class="list">
+<td class="itemname">record&nbsp;<a class="bold"  href="SqlitePassUtils.TSqlitePassWideStringItem.html"><code>TSqlitePassWideStringItem</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+<tr class="list2">
+<td class="itemname">Class&nbsp;<a class="bold"  href="SqlitePassUtils.TSqlitePassWideStringList.html"><code>TSqlitePassWideStringList</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+</table>
+<a name="%40FuncsProcs"></a><h3 class="summary">Functions and Procedures</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code>function <b><a   href="SqlitePassUtils.html#AnsiToUTF8">AnsiToUTF8</a></b>(const S: AnsiString): UTF8String;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a   href="SqlitePassUtils.html#BoolAsString">BoolAsString</a></b>(Value: Boolean): String;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a   href="SqlitePassUtils.html#FieldTypeToString">FieldTypeToString</a></b>(FieldType: TFieldType): String;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>Procedure <b><a   href="SqlitePassUtils.html#OutputDebugString">OutputDebugString</a></b>(S: String);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a   href="SqlitePassUtils.html#RPos">RPos</a></b>(const aSubStr, aString : String; const aStartPos: Integer): Integer;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a   href="SqlitePassUtils.html#StringToFieldType">StringToFieldType</a></b>(FieldTypeName: String): TFieldType;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a   href="SqlitePassUtils.html#UTF8Decode">UTF8Decode</a></b>(const s : UTF8String): WideString;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a   href="SqlitePassUtils.html#UTF8Encode">UTF8Encode</a></b>(const s : WideString) : UTF8String;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a   href="SqlitePassUtils.html#UTF8ToAnsi">UTF8ToAnsi</a></b>(const S: PAnsiChar): AnsiString;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a   href="SqlitePassUtils.html#WStrCopy">WStrCopy</a></b>(Dest: PWideChar; const Source: PWideChar): PWideChar;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a   href="SqlitePassUtils.html#_WStrCopy">_WStrCopy</a></b>(Dest: PWideChar; const Source: PWideChar): PWideChar;</code></td>
+</tr>
+</table>
+<a name="%40Types"></a><h3 class="summary">Types</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassUtils.html#PByteBool">PByteBool</a></b>     = &circ;ByteBool;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassUtils.html#PIntegerList">PIntegerList</a></b> = &circ;<a   href="SqlitePassUtils.html#TIntegerList">TIntegerList</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassUtils.html#PPRecBuffer">PPRecBuffer</a></b>   = &circ;<a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassUtils.html#PPSqliteValue">PPSqliteValue</a></b> = &circ;<a   href="SqlitePassUtils.html#PSqliteValue">PSqliteValue</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a></b>   = PAnsiChar;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassUtils.html#PRecBufferList">PRecBufferList</a></b> = &circ;<a   href="SqlitePassUtils.html#TRecBufferList">TRecBufferList</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassUtils.html#PSqlitePassAnsiStringItem">PSqlitePassAnsiStringItem</a></b> = &circ;<a   href="SqlitePassUtils.TSqlitePassAnsiStringItem.html">TSqlitePassAnsiStringItem</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassUtils.html#PSqlitePassAnsiStringItemList">PSqlitePassAnsiStringItemList</a></b> = &circ;<a   href="SqlitePassUtils.html#TSqlitePassAnsiStringItemList">TSqlitePassAnsiStringItemList</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassUtils.html#PSqlitePassWideStringItem">PSqlitePassWideStringItem</a></b> = &circ;<a   href="SqlitePassUtils.TSqlitePassWideStringItem.html">TSqlitePassWideStringItem</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassUtils.html#PSqlitePassWideStringItemList">PSqlitePassWideStringItemList</a></b> = &circ;<a   href="SqlitePassUtils.html#TSqlitePassWideStringItemList">TSqlitePassWideStringItemList</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassUtils.html#PSqliteValue">PSqliteValue</a></b>  = Pointer;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassUtils.html#PUTF16WideString">PUTF16WideString</a></b> = &circ;<a   href="SqlitePassUtils.html#UTF16WideString">UTF16WideString</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassUtils.html#TIntegerList">TIntegerList</a></b> = array[0..MaxListSize - 1] of Integer;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassUtils.html#TRecBufferList">TRecBufferList</a></b> = array[0..MaxListSize - 1] of <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassUtils.html#TSqlitePassAnsiStringItemList">TSqlitePassAnsiStringItemList</a></b> = array[0..MaxListSize] of <a   href="SqlitePassUtils.TSqlitePassAnsiStringItem.html">TSqlitePassAnsiStringItem</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassUtils.html#TSqlitePassWideStringItemList">TSqlitePassWideStringItemList</a></b> = array[0..MaxListSize] of <a   href="SqlitePassUtils.TSqlitePassWideStringItem.html">TSqlitePassWideStringItem</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassUtils.html#UTF16WideString">UTF16WideString</a></b> = WideString;</code></td>
+</tr>
+</table>
+<h2 class="description">Description</h2>
+<h3 class="detail">Functions and Procedures</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AnsiToUTF8"></a><code>function <b>AnsiToUTF8</b>(const S: AnsiString): UTF8String;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="BoolAsString"></a><code>function <b>BoolAsString</b>(Value: Boolean): String;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="FieldTypeToString"></a><code>function <b>FieldTypeToString</b>(FieldType: TFieldType): String;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="OutputDebugString"></a><code>Procedure <b>OutputDebugString</b>(S: String);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+function GetExeDir: String; function GetWorkDir: String;</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="RPos"></a><code>function <b>RPos</b>(const aSubStr, aString : String; const aStartPos: Integer): Integer;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Same as Pos but from Right to Left</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="StringToFieldType"></a><code>function <b>StringToFieldType</b>(FieldTypeName: String): TFieldType;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="UTF8Decode"></a><code>function <b>UTF8Decode</b>(const s : UTF8String): WideString;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="UTF8Encode"></a><code>function <b>UTF8Encode</b>(const s : WideString) : UTF8String;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="UTF8ToAnsi"></a><code>function <b>UTF8ToAnsi</b>(const S: PAnsiChar): AnsiString;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="WStrCopy"></a><code>function <b>WStrCopy</b>(Dest: PWideChar; const Source: PWideChar): PWideChar;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="_WStrCopy"></a><code>function <b>_WStrCopy</b>(Dest: PWideChar; const Source: PWideChar): PWideChar;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Procedure SetWideString (Out S : WideString; Buf : PWideChar; Len : SizeInt);</p>
+</td></tr>
+</table>
+<h3 class="detail">Types</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="PByteBool"></a><code><b>PByteBool</b>     = &circ;ByteBool;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="PIntegerList"></a><code><b>PIntegerList</b> = &circ;<a   href="SqlitePassUtils.html#TIntegerList">TIntegerList</a>;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="PPRecBuffer"></a><code><b>PPRecBuffer</b>   = &circ;<a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="PPSqliteValue"></a><code><b>PPSqliteValue</b> = &circ;<a   href="SqlitePassUtils.html#PSqliteValue">PSqliteValue</a>;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="PRecBuffer"></a><code><b>PRecBuffer</b>   = PAnsiChar;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="PRecBufferList"></a><code><b>PRecBufferList</b> = &circ;<a   href="SqlitePassUtils.html#TRecBufferList">TRecBufferList</a>;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="PSqlitePassAnsiStringItem"></a><code><b>PSqlitePassAnsiStringItem</b> = &circ;<a   href="SqlitePassUtils.TSqlitePassAnsiStringItem.html">TSqlitePassAnsiStringItem</a>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Moved to Public section...same</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="PSqlitePassAnsiStringItemList"></a><code><b>PSqlitePassAnsiStringItemList</b> = &circ;<a   href="SqlitePassUtils.html#TSqlitePassAnsiStringItemList">TSqlitePassAnsiStringItemList</a>;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="PSqlitePassWideStringItem"></a><code><b>PSqlitePassWideStringItem</b> = &circ;<a   href="SqlitePassUtils.TSqlitePassWideStringItem.html">TSqlitePassWideStringItem</a>;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="PSqlitePassWideStringItemList"></a><code><b>PSqlitePassWideStringItemList</b> = &circ;<a   href="SqlitePassUtils.html#TSqlitePassWideStringItemList">TSqlitePassWideStringItemList</a>;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="PSqliteValue"></a><code><b>PSqliteValue</b>  = Pointer;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="PUTF16WideString"></a><code><b>PUTF16WideString</b> = &circ;<a   href="SqlitePassUtils.html#UTF16WideString">UTF16WideString</a>;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TIntegerList"></a><code><b>TIntegerList</b> = array[0..MaxListSize - 1] of Integer;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TRecBufferList"></a><code><b>TRecBufferList</b> = array[0..MaxListSize - 1] of <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TSqlitePassAnsiStringItemList"></a><code><b>TSqlitePassAnsiStringItemList</b> = array[0..MaxListSize] of <a   href="SqlitePassUtils.TSqlitePassAnsiStringItem.html">TSqlitePassAnsiStringItem</a>;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TSqlitePassWideStringItemList"></a><code><b>TSqlitePassWideStringItemList</b> = array[0..MaxListSize] of <a   href="SqlitePassUtils.TSqlitePassWideStringItem.html">TSqlitePassWideStringItem</a>;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="UTF16WideString"></a><code><b>UTF16WideString</b> = WideString;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<hr noshade size="1"><span class="appinfo"><em>Generated by <a  target="_parent" href="http://pasdoc.sourceforge.net/">PasDoc 0.11.0</a> on 2010-05-16 23:39:44</em>
+</span>
+</body></html>

@@ -1,0 +1,167 @@
+object SearchForm: TSearchForm
+  Left = 1005
+  Height = 204
+  Top = 825
+  Width = 330
+  BorderStyle = bsDialog
+  Caption = 'Find Text'
+  ClientHeight = 204
+  ClientWidth = 330
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  OnShow = FormShow
+  Position = poScreenCenter
+  LCLVersion = '0.9.29'
+  object LBFindText: TLabel
+    Left = 8
+    Height = 14
+    Top = 12
+    Width = 61
+    Caption = '&Text to find:'
+    FocusControl = CBTextToFind
+    ParentColor = False
+  end
+  object CBTextToFind: TComboBox
+    Left = 72
+    Height = 21
+    Top = 8
+    Width = 249
+    ItemHeight = 13
+    OnChange = CBTextToFindChange
+    TabOrder = 0
+  end
+  object GBOptions: TGroupBox
+    Left = 8
+    Height = 61
+    Top = 36
+    Width = 173
+    Caption = 'Options'
+    ClientHeight = 43
+    ClientWidth = 169
+    TabOrder = 1
+    object CBMatchCase: TCheckBox
+      Left = 8
+      Height = 17
+      Top = 4
+      Width = 87
+      Caption = '&Case sensitive'
+      TabOrder = 0
+    end
+    object CBHexaSearch: TCheckBox
+      Left = 8
+      Height = 17
+      Top = 24
+      Width = 120
+      Caption = 'As he&xadecimal digits'
+      TabOrder = 1
+    end
+  end
+  object BUFind: TButton
+    Left = 164
+    Height = 25
+    Top = 172
+    Width = 75
+    Caption = '&Find'
+    Default = True
+    ModalResult = 6
+    OnClick = BUFindClick
+    TabOrder = 2
+  end
+  object BUCancel: TButton
+    Left = 248
+    Height = 25
+    Top = 172
+    Width = 75
+    Cancel = True
+    Caption = 'Cancel'
+    ModalResult = 2
+    TabOrder = 3
+  end
+  object GBDirection: TGroupBox
+    Left = 192
+    Height = 61
+    Top = 36
+    Width = 129
+    Caption = 'Direction'
+    ClientHeight = 43
+    ClientWidth = 125
+    TabOrder = 4
+    object RBForward: TRadioButton
+      Left = 8
+      Height = 17
+      Top = 4
+      Width = 58
+      Caption = 'Forwar&d'
+      Checked = True
+      State = cbChecked
+      TabOrder = 0
+    end
+    object RBBackward: TRadioButton
+      Left = 8
+      Height = 17
+      Top = 24
+      Width = 64
+      Caption = '&Backward'
+      TabOrder = 1
+      TabStop = False
+    end
+  end
+  object GBScope: TGroupBox
+    Left = 8
+    Height = 61
+    Top = 104
+    Width = 173
+    Caption = 'Scope'
+    ClientHeight = 43
+    ClientWidth = 169
+    TabOrder = 5
+    object RBGlobal: TRadioButton
+      Left = 8
+      Height = 17
+      Top = 4
+      Width = 47
+      Caption = '&Global'
+      Checked = True
+      State = cbChecked
+      TabOrder = 0
+    end
+    object RBSelectedOnly: TRadioButton
+      Left = 8
+      Height = 17
+      Top = 24
+      Width = 82
+      Caption = '&Selected only'
+      TabOrder = 1
+      TabStop = False
+    end
+  end
+  object GBOrigin: TGroupBox
+    Left = 192
+    Height = 61
+    Top = 104
+    Width = 129
+    Caption = 'Origin'
+    ClientHeight = 43
+    ClientWidth = 125
+    TabOrder = 6
+    object RBFromCursor: TRadioButton
+      Left = 8
+      Height = 17
+      Top = 4
+      Width = 75
+      Caption = 'Fro&m cursor'
+      Checked = True
+      State = cbChecked
+      TabOrder = 0
+    end
+    object RBEntireScope: TRadioButton
+      Left = 8
+      Height = 17
+      Top = 24
+      Width = 77
+      Caption = '&Entire scope'
+      TabOrder = 1
+      TabStop = False
+    end
+  end
+end

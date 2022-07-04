@@ -1,0 +1,62 @@
+# ---------------------------------------------------------------------------
+!if !$d(BCB)
+BCB = $(MAKEDIR)\..
+!endif
+
+# ---------------------------------------------------------------------------
+# IDE SECTION
+# ---------------------------------------------------------------------------
+# The following section of the project makefile is managed by the BCB IDE.
+# It is recommended to use the IDE to change any of the values in this
+# section.
+# ---------------------------------------------------------------------------
+
+VERSION = BCB.04.04
+# ---------------------------------------------------------------------------
+PROJECT = "dclcolor40.bpl"
+OBJFILES = dclcolor40.obj colorpe.obj colorxpe.obj
+
+RESFILES = color.res
+RESDEPEN = $(RESFILES)
+LIBFILES =
+LIBRARIES =
+SPARELIBS = vcl40.lib vcldb40.lib color40.lib
+PACKAGES = vcl40.bpi vcldb40.bpi color40.bpi
+DEFFILE =
+# ---------------------------------------------------------------------------
+PATHCPP = .;
+PATHASM = .;
+PATHPAS = .;..\colorado;..\colorx
+PATHRC = .;
+DEBUGLIBPATH = $(BCB)\lib\debug
+RELEASELIBPATH = $(BCB)\lib\release
+USERDEFINES =
+SYSDEFINES = _RTLDLL;NO_STRICT;USEPACKAGES
+# ---------------------------------------------------------------------------
+CFLAG1 = -I..\;$(BCB)\include;$(BCB)\include\vcl -Od -w -Ve -r- -a8 -k -vi -c -b- -w-par \
+  -w-inl -Vx -tWM -D$(SYSDEFINES);$(USERDEFINES)
+PFLAGS = -U..\;$(BCB)\lib\obj;$(BCB)\lib;$(RELEASELIBPATH) \
+  -I..\;$(BCB)\include;$(BCB)\include\vcl -N2..\..\LIB\ -N0..\..\LIB\ -$Y- -$W -$L- \
+  -E"..\..\LIB\" \
+  -N1"..\..\LIB\" \
+  -N3"..\..\LIB\" \
+  -LE"..\..\LIB\" \
+  -LN"..\..\LIB\" \
+  -LUvcl40 \
+  -LUvcldb40 \
+  -LUcolor40 \
+  -$D- -$O+ -$C- -JPHNE -M -v
+RFLAGS = -i..\;$(BCB)\include;$(BCB)\include\vcl
+AFLAGS = /i$(BCB)\include /i$(BCB)\include\vcl /mx /w2 /zd
+LFLAGS = -I..\..\LIB -L..\;$(BCB)\lib\obj;$(BCB)\lib;$(RELEASELIBPATH) -l"..\..\LIB\" \
+  -D"colorADO Database Components" -aa -Tpp -Gpd -x -Gn -Gl -Gi -v
+# ---------------------------------------------------------------------------
+ALLOBJ = c0pkg32.obj Memmgr.Lib $(PACKAGES) sysinit.obj $(OBJFILES)
+ALLRES = $(RESFILES)
+ALLLIB = $(LIBFILES) $(LIBRARIES) import32.lib cp32mti.lib
+# ---------------------------------------------------------------------------
+!ifdef IDEOPTIONS
+
+[Version Info]
+IncludeVerInfo=0
+!endif

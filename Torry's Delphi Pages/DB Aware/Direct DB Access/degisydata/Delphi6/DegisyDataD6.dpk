@@ -1,0 +1,56 @@
+package DegisyDataD6;
+
+{$R *.res}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'Degisy Data Components 2.02'}
+{$RUNONLY}
+{$IMPLICITBUILD OFF}
+
+requires
+  rtl,
+  dbrtl,
+  vcl;
+
+contains
+  DsDbUtils in 'DsDbUtils.pas',
+  DsClrTable in 'DsClrTable.pas',
+  DsDatabase in 'DsDatabase.pas',
+  DsDbApi in 'DsDbApi.pas',
+  DsDbFilter in 'DsDbFilter.pas',
+  DsClrApi in 'DsClrApi.pas',
+  DsPdxTable in 'DsPdxTable.pas',
+  DsPdxApi in 'DsPdxApi.pas',
+  DsDbfApi in 'DsDbfApi.pas',
+  DsDbfTable in 'DsDbfTable.pas',
+  DsDdaTable in 'DsDdaTable.pas',
+  DsDdaApi in 'DsDdaApi.pas',
+  DsCrypt in 'DsCrypt.pas',
+  DsCP in 'DsCP.pas',
+  DsSqlApi in 'DsSqlApi.pas',
+  DsClrQuery in 'DsClrQuery.pas',
+  DsMemTable in 'DsMemTable.pas',
+  DsSqlParser in 'DsSqlParser.pas',
+  DsDbParser in 'DsDbParser.pas',
+  DsConsts in 'DsConsts.pas';
+
+end.

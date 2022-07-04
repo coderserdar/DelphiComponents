@@ -1,0 +1,2052 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+<meta name="GENERATOR" content="PasDoc 0.11.0">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<title>SqlitePass Database Objects: SqlitePassDbo: Class TSqlitePassDataset</title>
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body bgcolor="#ffffff" text="#000000" link="#0000ff" vlink="#800080" alink="#FF0000">
+<a name="TSqlitePassDataset"></a><h1 class="cio">Class TSqlitePassDataset</h1>
+<table class="sections wide_list">
+<tr>
+<td><a class="section"  href="#%40Description">Description</a></td><td><a class="section"  href="#%40Hierarchy">Hierarchy</a></td><td>Fields</td><td><a class="section"  href="#%40Methods">Methods</a></td><td><a class="section"  href="#%40Properties">Properties</a></td></tr></table>
+<a name="%40Description"></a><h2 class="unit">Unit</h2>
+<p class="unitlink">
+<a   href="SqlitePassDbo.html">SqlitePassDbo</a></p>
+<h2 class="declaration">Declaration</h2>
+<p class="declaration">
+<code>type TSqlitePassDataset = class(TDataSet)</code></p>
+<h2 class="description">Description</h2>
+<p>
+The <code>TSqlitePassDataset</code> is a link between your application and the <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#Database">database</a> content. <code>TSqlitePassDataset</code> enables you to access tables, queries, views or even to <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#Create">create</a> direct <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#SQL">SQL</a> queries to read and write data from/to your <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#Database">database</a>. It supports almost any kind of fields, including blobs, memo, datetime...etc, and has extended capabilities to quickly <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#SortedBy">sort</a>, <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#Filter">filter</a> records (even on calculated or <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#Lookup">lookup</a> fields). <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#Locate">Locate</a> and <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#Lookup">Lookup</a> is also implemented with some additional methods.</p>
+<a name="%40Hierarchy"></a><h2 class="hierarchy">Hierarchy</h2>
+<ul class="hierarchy"><li class="ancestor">TDataSet</li>
+<li class="thisitem">TSqlitePassDataset</li></ul><h2 class="overview">Overview</h2>
+<a name="%40Methods"></a><h3 class="summary">Methods</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>Constructor <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#Create">Create</a></b>(AOwner: TComponent); override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>Destructor <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#Destroy">Destroy</a></b>; override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>Function <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#BookmarkValid">BookmarkValid</a></b>(Bookmark: TBookmark): Boolean; override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>Function <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#CompareBookmarks">CompareBookmarks</a></b>(Bookmark1, Bookmark2: TBookmark): Integer; override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>Function <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#CreateBlobStream">CreateBlobStream</a></b>(Field: TField; Mode: TBlobStreamMode): TStream; override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>Function <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#GetFieldData">GetFieldData</a></b>(Field: TField; Buffer: Pointer): Boolean; override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#Locate">Locate</a></b>(const KeyFields: String; const KeyValues: Variant; Options: TLocateOptions): Boolean; overload; override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#Locate">Locate</a></b>(const LocateStmt: String; Options: TLocateOptions): Boolean; reintroduce; overload;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#LocateFirst">LocateFirst</a></b>: Boolean;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#LocateLast">LocateLast</a></b>: Boolean;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#LocateNext">LocateNext</a></b>: Boolean;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#LocatePrior">LocatePrior</a></b>: Boolean;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#Lookup">Lookup</a></b>(const KeyFields: String; const KeyValues: Variant; const ResultFields: String): Variant; override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#LookupEx">LookupEx</a></b>(const LookupStmt: String; const ResultFields: String; const LookUpResultMaxRecordCount: integer = 0): Variant; overload;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#LookupEx">LookupEx</a></b>(const KeyFields: String; const KeyValues: Variant; const ResultFields: String; const LookUpResultMaxRecordCount: Integer = 0): Variant; overload;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#LookupFirst">LookupFirst</a></b>(var LookupResult: Variant): Boolean;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#LookUpLast">LookUpLast</a></b>(var LookupResult: Variant): Boolean;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#LookupNext">LookupNext</a></b>(var LookupResult: Variant): Boolean;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#LookupPrior">LookupPrior</a></b>(var LookupResult: Variant): Boolean;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>Function <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#AllocRecordBuffer">AllocRecordBuffer</a></b>: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#FindRecord">FindRecord</a></b>(Restart, GoForward: Boolean): Boolean; override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>Function <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#GetBookmarkFlag">GetBookmarkFlag</a></b>(Buffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>): TBookmarkFlag; override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>Function <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#GetCanModify">GetCanModify</a></b>: Boolean; override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>function <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#GetFieldClass">GetFieldClass</a></b>(FieldType: TFieldType): TFieldClass; override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>Function <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#GetParamsCount">GetParamsCount</a></b>: Integer;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>Function <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#GetRecNo">GetRecNo</a></b>: Integer; override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>Function <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#GetRecord">GetRecord</a></b>(Buffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; GetMode: TGetMode; DoCheck: Boolean): TGetResult; override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>Function <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#GetRecordCount">GetRecordCount</a></b>: Integer; override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>Function <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#GetRecordSize">GetRecordSize</a></b>: Word; override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>Function <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#IsCursorOpen">IsCursorOpen</a></b>: Boolean; override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>Procedure <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#ApplyChanges">ApplyChanges</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#CloseBlob">CloseBlob</a></b>(Field: TField); override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>Procedure <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#EmptyTable">EmptyTable</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#GetFieldList">GetFieldList</a></b>(List: TList; const FieldNames: string);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>Procedure <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#Index">Index</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>Procedure <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#Refresh">Refresh</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#RefreshLocate">RefreshLocate</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>Procedure <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#SetFieldData">SetFieldData</a></b>(Field: TField; Buffer: Pointer); override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>Procedure <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#Sort">Sort</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#AllocateBLOBPointers">AllocateBLOBPointers</a></b>(Buffer: pAnsiChar);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>Procedure <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#ClearCalcFields">ClearCalcFields</a></b>(Buffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>); override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>Procedure <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#DefineProperties">DefineProperties</a></b>(Filer: TFiler); override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#DoOnNewRecord">DoOnNewRecord</a></b>; override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#FreeBlobPointers">FreeBlobPointers</a></b>(Buffer: pAnsiChar);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>Procedure <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#FreeRecordBuffer">FreeRecordBuffer</a></b>(var Buffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>); override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#FreeRecordPointers">FreeRecordPointers</a></b>(Buffer: pAnsiChar);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>Procedure <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#GetBookmarkData">GetBookmarkData</a></b>(Buffer: pAnsiChar; Data: Pointer); override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>Procedure <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#InternalAddRecord">InternalAddRecord</a></b>(Buffer: Pointer; Append: Boolean); override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>Procedure <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#InternalCancel">InternalCancel</a></b>; override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>Procedure <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#InternalClearFieldDefs">InternalClearFieldDefs</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>Procedure <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#InternalClose">InternalClose</a></b>; override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>Procedure <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#InternalDelete">InternalDelete</a></b>; override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>Procedure <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#InternalEdit">InternalEdit</a></b>; override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>Procedure <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#InternalFirst">InternalFirst</a></b>; override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>Procedure <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#InternalGotoBookmark">InternalGotoBookmark</a></b>(ABookmark: Pointer); override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>Procedure <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#InternalHandleException">InternalHandleException</a></b>; override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>Procedure <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#InternalInitFieldDefs">InternalInitFieldDefs</a></b>; override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>Procedure <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#InternalInitIndexDefs">InternalInitIndexDefs</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>Procedure <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#InternalInitRecord">InternalInitRecord</a></b>(Buffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>); override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#InternalInsert">InternalInsert</a></b>; override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>Procedure <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#InternalLast">InternalLast</a></b>; override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>Procedure <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#InternalOpen">InternalOpen</a></b>; override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>Procedure <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#InternalPost">InternalPost</a></b>; override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>Procedure <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#InternalRefresh">InternalRefresh</a></b>; override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>Procedure <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#InternalSetToRecord">InternalSetToRecord</a></b>(Buffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>); override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>Procedure <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#Loaded">Loaded</a></b>; override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>Procedure <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#Notification">Notification</a></b>(AComponent: TComponent; Operation: TOperation); Override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#ProcessFilterText">ProcessFilterText</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>Procedure <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#ReadParamData">ReadParamData</a></b>(Reader: TReader);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>Procedure <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#RefreshActive">RefreshActive</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>Procedure <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#RefreshFilteredRecords">RefreshFilteredRecords</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>Procedure <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#SetBookmarkData">SetBookmarkData</a></b>(Buffer: pAnsiChar; Data: Pointer); override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>Procedure <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#SetBookmarkFlag">SetBookmarkFlag</a></b>(Buffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Value: TBookmarkFlag); override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#SetFiltered">SetFiltered</a></b>(Value: Boolean); override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#SetFilterOptions">SetFilterOptions</a></b>(Value: TFilterOptions); override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#SetFilterText">SetFilterText</a></b>(Const Value: String); override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>Procedure <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#SetParamsList">SetParamsList</a></b>(Value: TParams);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>Procedure <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#SetRecNo">SetRecNo</a></b>(Value: Integer); override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>Procedure <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#UpdateIndexDefs">UpdateIndexDefs</a></b>; override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>Procedure <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#UpdateInternalFieldsInfos">UpdateInternalFieldsInfos</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>Procedure <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#UpdateParamsList">UpdateParamsList</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>Procedure <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#WriteParamData">WriteParamData</a></b>(Writer: TWriter);</code></td>
+</tr>
+</table>
+<a name="%40Properties"></a><h3 class="summary">Properties</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#Active">Active</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#AfterCancel">AfterCancel</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#AfterClose">AfterClose</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#AfterDelete">AfterDelete</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#AfterEdit">AfterEdit</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#AfterInsert">AfterInsert</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#AfterOpen">AfterOpen</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#AfterPost">AfterPost</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#AfterScroll">AfterScroll</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#AutoCalcFields">AutoCalcFields</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#BeforeCancel">BeforeCancel</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#BeforeClose">BeforeClose</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#BeforeDelete">BeforeDelete</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#BeforeEdit">BeforeEdit</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#BeforeInsert">BeforeInsert</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#BeforeOpen">BeforeOpen</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#BeforePost">BeforePost</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#BeforeScroll">BeforeScroll</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#CalcDisplayedRecordsOnly">CalcDisplayedRecordsOnly</a></b>: Boolean Read FCalcDisplayedRecordsOnly Write SetFCalcDisplayedRecordsOnly;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#Database">Database</a></b>: <a   href="SqlitePassDbo.TSqlitePassDatabase.html">TSqlitePassDatabase</a> Read GetFDatabase Write SetFDatabase;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#DatabaseAutoActivate">DatabaseAutoActivate</a></b>: Boolean Read FDatabaseAutoActivate  Write FDatabaseAutoActivate;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#DatasetName">DatasetName</a></b>: String Read FDatasetName Write SetFDatasetName;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#DatasetType">DatasetType</a></b>: <a   href="SqlitePassDbo.html#TSqlitePassDatasetType">TSqlitePassDatasetType</a> Read FDatasetType;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#Filter">Filter</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#Filtered">Filtered</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#FilterMode">FilterMode</a></b>: <a   href="SqlitePassDbo.html#TSqlitePassFilterMode">TSqlitePassFilterMode</a> Read FFilterMode Write FFilterMode;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#FilterOptions">FilterOptions</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#FilterRecordLowerLimit">FilterRecordLowerLimit</a></b>: Integer Read FFilterRecordLowerLimit Write SetFFilterRecordLowerLimit;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#FilterRecordUpperLimit">FilterRecordUpperLimit</a></b>: Integer Read FFilterRecordUpperLimit Write setFFilterRecordUpperLimit;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#Filters">Filters</a></b>: <a   href="SqlitePassDbo.TSqlitePassFieldFilters.html">TSqlitePassFieldFilters</a> Read FFieldFilters Write FFieldFilters;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#IndexDefs">IndexDefs</a></b>: <a   href="SqlitePassDbo.TSqlitePassDatasetIndexDefs.html">TSqlitePassDatasetIndexDefs</a>  Read FIndexDefs Write FIndexDefs;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#Indexed">Indexed</a></b>: Boolean Read FInMemoryIndexed Write SetFInMemoryIndexed;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#IndexedBy">IndexedBy</a></b>: String Read FInMemoryIndexedBy Write SetFInMemoryIndexedBy;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#Indexes">Indexes</a></b>: <a   href="SqlitePassDbo.TSqlitePassInMemoryIndexes.html">TSqlitePassInMemoryIndexes</a> Read FInMemoryIndexes Write FInMemoryIndexes;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#LocateFilters">LocateFilters</a></b>: <a   href="SqlitePassDbo.TSqlitePassFieldFilters.html">TSqlitePassFieldFilters</a> read FLocateFieldFilters write FLocateFieldFilters;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#LocateMoveState">LocateMoveState</a></b>: TGetResult read GetLocateMoveState;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#LocateSmartRefresh">LocateSmartRefresh</a></b>: Boolean Read FLocateSmartRefresh Write FLocateSmartRefresh;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#LookUpCache">LookUpCache</a></b>: Boolean Read FLookUpCache Write SetFLookUpCache;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#LookUpDisplayedRecordsOnly">LookUpDisplayedRecordsOnly</a></b>: Boolean Read FLookUpFieldsDisplayedRecordsOnly Write SetFLookUpFieldsDisplayedRecordsOnly;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#LookupFilters">LookupFilters</a></b>: <a   href="SqlitePassDbo.TSqlitePassFieldFilters.html">TSqlitePassFieldFilters</a> read FLookupKeyFieldFilters write FLookupKeyFieldFilters;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#LookupMoveState">LookupMoveState</a></b>: TGetResult read GetLookupMoveState;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#LookUpSmartRefresh">LookUpSmartRefresh</a></b>: Boolean Read FLookUpSmartRefresh Write FLookUpSmartRefresh;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#MasterFields">MasterFields</a></b>: String read GetMasterFields write SetMasterFields;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#MasterSource">MasterSource</a></b>: TDataSource read GetMasterDataSource write SetMasterDataSource;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#MasterSourceAutoActivate">MasterSourceAutoActivate</a></b>: Boolean read FMasterAutoActivate write FMasterAutoActivate;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#OnCalcFields">OnCalcFields</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#OnDeleteError">OnDeleteError</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#OnEditError">OnEditError</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#OnFilterRecord">OnFilterRecord</a></b>  : <a   href="SqlitePassDbo.html#TSqlitePassDatasetFilterRecordEvent">TSqlitePassDatasetFilterRecordEvent</a> read FOnFilterRecord write FOnFilterRecord;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#OnNewRecord">OnNewRecord</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#OnPostError">OnPostError</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#ParamCheck">ParamCheck</a></b>: Boolean Read FParamCheck Write FParamCheck;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#ParamCount">ParamCount</a></b>: Integer read <a   href="SqlitePassDbo.TSqlitePassDataset.html#GetParamsCount">GetParamsCount</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#Params">Params</a></b>: TParams read FParams Write <a   href="SqlitePassDbo.TSqlitePassDataset.html#SetParamsList">SetParamsList</a> Stored False;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#ReadOnly">ReadOnly</a></b>: Boolean Read GetFReadOnly Write SetFReadOnly default False;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#RecordsCacheCapacity">RecordsCacheCapacity</a></b>: <a   href="SqlitePassDbo.html#TSqlitePassRecordsCacheCapacity">TSqlitePassRecordsCacheCapacity</a> Read FRecordsCacheCapacity Write FRecordsCacheCapacity;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#Sorted">Sorted</a></b>: Boolean Read FSorted Write SetFSorted;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#SortedBy">SortedBy</a></b>: String Read FSortedBy Write SetFSortedBy;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#SortMode">SortMode</a></b>: <a   href="SqlitePassDbo.html#TSqlitePassSortMode">TSqlitePassSortMode</a> Read FSortMode Write SetFSortMode;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#SQL">SQL</a></b>: TStringList Read FSQL Write SetFSQL;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#SQLSelectStmt">SQLSelectStmt</a></b>: <a   href="SqlitePassDbo.TSqlitePassSelectStmt.html">TSqlitePassSelectStmt</a> Read FSQLSelectStmt;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#VersionInfo">VersionInfo</a></b>: <a   href="SqlitePassDbo.TSqlitePassDatasetVersionInfo.html">TSqlitePassDatasetVersionInfo</a> Read FVersionInfo Write FVersionInfo;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDataset.html#WriteMode">WriteMode</a></b>: <a   href="SqlitePassDbo.html#TSqlitePassWriteMode">TSqlitePassWriteMode</a> Read FWriteMode Write SetFWriteMode;</code></td>
+</tr>
+</table>
+<h2 class="description">Description</h2>
+<h3 class="detail">Methods</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Create"></a><code>Constructor <b>Create</b>(AOwner: TComponent); override;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+&mdash;&ndash; Constructor - Destructor &mdash;&ndash;</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Destroy"></a><code>Destructor <b>Destroy</b>; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="BookmarkValid"></a><code>Function <b>BookmarkValid</b>(Bookmark: TBookmark): Boolean; override;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Call the BookmarkValide method to check if a given bookmark is still valid This function tests bookmarks for validity and indicate when a bookmark is valid by returning True.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="CompareBookmarks"></a><code>Function <b>CompareBookmarks</b>(Bookmark1, Bookmark2: TBookmark): Integer; override;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Compares two bookmark and returns <br> </p>
+
+<ul class="paragraph_spacing">
+  <li><p>-1 if Bookmark1 &lt; Bookmark2</p></li>
+  <li><p>0 if Bookmark1 = Bookmark2</p></li>
+  <li><p>1 if Bookmark1 &gt; Bookmark2</p></li>
+</ul>
+
+<p></p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="CreateBlobStream"></a><code>Function <b>CreateBlobStream</b>(Field: TField; Mode: TBlobStreamMode): TStream; override;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Classic TDataset behavior</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="GetFieldData"></a><code>Function <b>GetFieldData</b>(Field: TField; Buffer: Pointer): Boolean; override;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+<code>GetFieldData</code> Puts the data for field 'Field' from the <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#Active">active</a> buffer into Buffer. This is called whenever a field value is demanded by a TField, so it must be efficient. the TDataset class doesn’t know anything about how our record buffer is organized. The next question then becomes that if the TDataset class doesn’t know about our record structure, how it does it pull out field values from this structure? How it does it put them back in when the user is editing a record? The answer is that it uses the <code>GetFieldData</code> and <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#SetFieldData">SetFieldData</a> methods which a custom dataset class must override. These methods are called by the Tdataset.fields when it needs to retrieve or set a specific field value from the current record buffer. <code>GetFieldData</code> is prototyped as follows:
+
+<p>function TDataset.GetFieldData(Field: TField; Buffer: Pointer): Boolean;
+
+<p>The Field parameter is the field for which the value needs to be retrieved We send back the needed value in the buffer. Returns False if a null value was retrieved</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Locate"></a><code>function <b>Locate</b>(const KeyFields: String; const KeyValues: Variant; Options: TLocateOptions): Boolean; overload; override;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+The <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#Locate">Locate</a> function works as the classic one, with the same parameters, but has extended features to provide navigation in Located records with <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#LocateFirst">LocateFirst</a>, <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#LocateNext">LocateNext</a>, <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#LocatePrior">LocatePrior</a>, <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#LocateLast">LocateLast</a>, LocateRecordCount</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Locate"></a><code>function <b>Locate</b>(const LocateStmt: String; Options: TLocateOptions): Boolean; reintroduce; overload;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="LocateFirst"></a><code>function <b>LocateFirst</b>: Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Moves to the first record matching <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#Locate">Locate</a> parameters</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="LocateLast"></a><code>function <b>LocateLast</b>: Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Moves to the last record matching <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#Locate">Locate</a> parameters</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="LocateNext"></a><code>function <b>LocateNext</b>: Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Moves to the next record matching <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#Locate">Locate</a> parameters.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="LocatePrior"></a><code>function <b>LocatePrior</b>: Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Moves to the prior record matching <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#Locate">Locate</a> parameters</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Lookup"></a><code>function <b>Lookup</b>(const KeyFields: String; const KeyValues: Variant; const ResultFields: String): Variant; override;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Implementation of the classic TDataset.Lookup function</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="LookupEx"></a><code>function <b>LookupEx</b>(const LookupStmt: String; const ResultFields: String; const LookUpResultMaxRecordCount: integer = 0): Variant; overload;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+The second <code>LookupEx</code> function takes a complete <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#Lookup">Lookup</a> Statement as first parameter. The others parameters remains the same</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="LookupEx"></a><code>function <b>LookupEx</b>(const KeyFields: String; const KeyValues: Variant; const ResultFields: String; const LookUpResultMaxRecordCount: Integer = 0): Variant; overload;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+<a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#LookupEx">LookupEx</a> function is a extension of classic <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#Lookup">lookup</a> function in order to provide 'multiple rows' <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#Lookup">lookup</a> results. It has got two syntaxes : The first syntaxe works as quite the sames parameters as the TDataset.Lookup classic one, but has extended features to provide navigation in LookedUp records with <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#LookupFirst">LookupFirst</a>, <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#LookupNext">LookupNext</a>, <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#LookupPrior">LookupPrior</a>, <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#LookUpLast">LookupLast</a>. Additional Parameters : LookUpResultMaxRecordCount is used to limit the number of records returned by the <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#Lookup">Lookup</a> function in order to improve speed with large tables. Note : Strings case sensitive <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#Lookup">lookup</a> is set by the lookupFilters.Options property</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="LookupFirst"></a><code>function <b>LookupFirst</b>(var LookupResult: Variant): Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Moves to the first record matching <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#Lookup">lookup</a> parameters</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="LookUpLast"></a><code>function <b>LookUpLast</b>(var LookupResult: Variant): Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Moves to the last record matching <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#Lookup">lookup</a> parameters</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="LookupNext"></a><code>function <b>LookupNext</b>(var LookupResult: Variant): Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Moves to the next record matching <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#Lookup">lookup</a> parameters</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="LookupPrior"></a><code>function <b>LookupPrior</b>(var LookupResult: Variant): Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Moves to the prior record matching <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#Lookup">lookup</a> parameters</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="AllocRecordBuffer"></a><code>Function <b>AllocRecordBuffer</b>: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="FindRecord"></a><code>function <b>FindRecord</b>(Restart, GoForward: Boolean): Boolean; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="GetBookmarkFlag"></a><code>Function <b>GetBookmarkFlag</b>(Buffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>): TBookmarkFlag; override;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Procedure InternalMoveToBookmark(Bookmark: Pointer);</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="GetCanModify"></a><code>Function <b>GetCanModify</b>: Boolean; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="GetFieldClass"></a><code>function <b>GetFieldClass</b>(FieldType: TFieldType): TFieldClass; override;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+&mdash;&mdash; &mdash;&mdash;-</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="GetParamsCount"></a><code>Function <b>GetParamsCount</b>: Integer;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="GetRecNo"></a><code>Function <b>GetRecNo</b>: Integer; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="GetRecord"></a><code>Function <b>GetRecord</b>(Buffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; GetMode: TGetMode; DoCheck: Boolean): TGetResult; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="GetRecordCount"></a><code>Function <b>GetRecordCount</b>: Integer; override;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+&mdash;&ndash; Records infos &mdash;&ndash;</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="GetRecordSize"></a><code>Function <b>GetRecordSize</b>: Word; override;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Ok v1.00</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="IsCursorOpen"></a><code>Function <b>IsCursorOpen</b>: Boolean; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="ApplyChanges"></a><code>Procedure <b>ApplyChanges</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+&mdash;&ndash; Apply or Cancel records modification if <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#WriteMode">WriteMode</a> is wmPostpone &mdash;&ndash;</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="CloseBlob"></a><code>procedure <b>CloseBlob</b>(Field: TField); override;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Classic TDataset behavior</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="EmptyTable"></a><code>Procedure <b>EmptyTable</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="GetFieldList"></a><code>procedure <b>GetFieldList</b>(List: TList; const FieldNames: string);</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Override the TDataset.GetFieldList method to accept quoted field names</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Index"></a><code>Procedure <b>Index</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+<a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#Indexes">Indexes</a> the dataset in memory, using the fields and <code>index</code> order defined in the <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#IndexedBy">IndexedBy</a> property</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Refresh"></a><code>Procedure <b>Refresh</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+&mdash;&ndash; &mdash;&ndash;</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="RefreshLocate"></a><code>procedure <b>RefreshLocate</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="SetFieldData"></a><code>Procedure <b>SetFieldData</b>(Field: TField; Buffer: Pointer); override;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+seealso(<a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#GetFieldData">GetFieldData</a>)</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Sort"></a><code>Procedure <b>Sort</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Sorts the dataset using the fields and <code>sort</code> order defined in the <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#SortedBy">SortedBy</a> property</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="AllocateBLOBPointers"></a><code>procedure <b>AllocateBLOBPointers</b>(Buffer: pAnsiChar);</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+&mdash;&ndash; Blobs &mdash;&ndash;</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="ClearCalcFields"></a><code>Procedure <b>ClearCalcFields</b>(Buffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>); override;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+&mdash;&ndash; &mdash;&ndash;</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="DefineProperties"></a><code>Procedure <b>DefineProperties</b>(Filer: TFiler); override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="DoOnNewRecord"></a><code>procedure <b>DoOnNewRecord</b>; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="FreeBlobPointers"></a><code>procedure <b>FreeBlobPointers</b>(Buffer: pAnsiChar);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="FreeRecordBuffer"></a><code>Procedure <b>FreeRecordBuffer</b>(var Buffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>); override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="FreeRecordPointers"></a><code>procedure <b>FreeRecordPointers</b>(Buffer: pAnsiChar);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="GetBookmarkData"></a><code>Procedure <b>GetBookmarkData</b>(Buffer: pAnsiChar; Data: Pointer); override;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Procedure SetBookmarkStr(const Value: TBookmarkStr); override; -&gt; Keep the inherited</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="InternalAddRecord"></a><code>Procedure <b>InternalAddRecord</b>(Buffer: Pointer; Append: Boolean); override;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+&mdash;&ndash; Navigation and Editing &mdash;&ndash;</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="InternalCancel"></a><code>Procedure <b>InternalCancel</b>; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="InternalClearFieldDefs"></a><code>Procedure <b>InternalClearFieldDefs</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="InternalClose"></a><code>Procedure <b>InternalClose</b>; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="InternalDelete"></a><code>Procedure <b>InternalDelete</b>; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="InternalEdit"></a><code>Procedure <b>InternalEdit</b>; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="InternalFirst"></a><code>Procedure <b>InternalFirst</b>; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="InternalGotoBookmark"></a><code>Procedure <b>InternalGotoBookmark</b>(ABookmark: Pointer); override;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+&mdash;&ndash; Bookmarks &mdash;&ndash;</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="InternalHandleException"></a><code>Procedure <b>InternalHandleException</b>; override;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+&mdash;&ndash; Miscalleous &mdash;&ndash;</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="InternalInitFieldDefs"></a><code>Procedure <b>InternalInitFieldDefs</b>; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="InternalInitIndexDefs"></a><code>Procedure <b>InternalInitIndexDefs</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="InternalInitRecord"></a><code>Procedure <b>InternalInitRecord</b>(Buffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>); override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="InternalInsert"></a><code>procedure <b>InternalInsert</b>; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="InternalLast"></a><code>Procedure <b>InternalLast</b>; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="InternalOpen"></a><code>Procedure <b>InternalOpen</b>; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="InternalPost"></a><code>Procedure <b>InternalPost</b>; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="InternalRefresh"></a><code>Procedure <b>InternalRefresh</b>; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="InternalSetToRecord"></a><code>Procedure <b>InternalSetToRecord</b>(Buffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>); override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="Loaded"></a><code>Procedure <b>Loaded</b>; override;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+&mdash;&ndash; Override methods from TDataset &mdash;&ndash;</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="Notification"></a><code>Procedure <b>Notification</b>(AComponent: TComponent; Operation: TOperation); Override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="ProcessFilterText"></a><code>procedure <b>ProcessFilterText</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="ReadParamData"></a><code>Procedure <b>ReadParamData</b>(Reader: TReader);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="RefreshActive"></a><code>Procedure <b>RefreshActive</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Fetch data from physical <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#Database">Database</a></p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="RefreshFilteredRecords"></a><code>Procedure <b>RefreshFilteredRecords</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+&mdash;&ndash; Filtering &mdash;&ndash;</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="SetBookmarkData"></a><code>Procedure <b>SetBookmarkData</b>(Buffer: pAnsiChar; Data: Pointer); override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="SetBookmarkFlag"></a><code>Procedure <b>SetBookmarkFlag</b>(Buffer: <a   href="SqlitePassUtils.html#PRecBuffer">PRecBuffer</a>; Value: TBookmarkFlag); override;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+From TDataset</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="SetFiltered"></a><code>procedure <b>SetFiltered</b>(Value: Boolean); override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="SetFilterOptions"></a><code>procedure <b>SetFilterOptions</b>(Value: TFilterOptions); override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="SetFilterText"></a><code>procedure <b>SetFilterText</b>(Const Value: String); override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="SetParamsList"></a><code>Procedure <b>SetParamsList</b>(Value: TParams);</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+&mdash;&ndash; <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#Params">Params</a> &mdash;&ndash;</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="SetRecNo"></a><code>Procedure <b>SetRecNo</b>(Value: Integer); override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="UpdateIndexDefs"></a><code>Procedure <b>UpdateIndexDefs</b>; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="UpdateInternalFieldsInfos"></a><code>Procedure <b>UpdateInternalFieldsInfos</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="UpdateParamsList"></a><code>Procedure <b>UpdateParamsList</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="WriteParamData"></a><code>Procedure <b>WriteParamData</b>(Writer: TWriter);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<h3 class="detail">Properties</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="Active"></a><code>property <b>Active</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Classic dataset behavior. When set to True, opens the dataset and displays data if dataware components are linked to the datasource. When set to False, closes the dataset and frees the memory used to store dataset records.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="AfterCancel"></a><code>property <b>AfterCancel</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="AfterClose"></a><code>property <b>AfterClose</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="AfterDelete"></a><code>property <b>AfterDelete</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="AfterEdit"></a><code>property <b>AfterEdit</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="AfterInsert"></a><code>property <b>AfterInsert</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="AfterOpen"></a><code>property <b>AfterOpen</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="AfterPost"></a><code>property <b>AfterPost</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="AfterScroll"></a><code>property <b>AfterScroll</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="AutoCalcFields"></a><code>property <b>AutoCalcFields</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Classic dataset behavior</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="BeforeCancel"></a><code>property <b>BeforeCancel</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="BeforeClose"></a><code>property <b>BeforeClose</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="BeforeDelete"></a><code>property <b>BeforeDelete</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="BeforeEdit"></a><code>property <b>BeforeEdit</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="BeforeInsert"></a><code>property <b>BeforeInsert</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="BeforeOpen"></a><code>property <b>BeforeOpen</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+&mdash;</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="BeforePost"></a><code>property <b>BeforePost</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="BeforeScroll"></a><code>property <b>BeforeScroll</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="CalcDisplayedRecordsOnly"></a><code>property <b>CalcDisplayedRecordsOnly</b>: Boolean Read FCalcDisplayedRecordsOnly Write SetFCalcDisplayedRecordsOnly;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Enable or Disable the persistent lookupfields</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="Database"></a><code>property <b>Database</b>: <a   href="SqlitePassDbo.TSqlitePassDatabase.html">TSqlitePassDatabase</a> Read GetFDatabase Write SetFDatabase;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Selects the <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabase.html">TsqlitePassDatabase</a> component you want to depend on.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="DatabaseAutoActivate"></a><code>property <b>DatabaseAutoActivate</b>: Boolean Read FDatabaseAutoActivate  Write FDatabaseAutoActivate;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+When set to True, opens automatically the <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#Database">database</a> if needed.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="DatasetName"></a><code>property <b>DatasetName</b>: String Read FDatasetName Write SetFDatasetName;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Once you are connected to a <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#Database">database</a>, enters a table name or a query name. At design time, a dialog will let you choose your dataset among all the available <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#Database">database</a> datasets.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="DatasetType"></a><code>property <b>DatasetType</b>: <a   href="SqlitePassDbo.html#TSqlitePassDatasetType">TSqlitePassDatasetType</a> Read FDatasetType;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+This property is read only. It gives you information about the currently selected dataset and can be one of the following values :
+
+<p><b>dtUnkown</b> : The dataset type could not be recognized or the <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#DatasetName">DatasetName</a> property is empty.
+
+<p><b>dtTable</b> : The dataset is a table.
+
+<p><b>dtQuery</b> : The dataset is a query.
+
+<p><b>dtView</b> : The dataset is a view.
+
+<p><b>dtSqlDirect</b> : The <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#SQL">SQL</a> property has been modified or you entered a new <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#SQL">SQL</a> query. When the <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#SQL">SQL</a> text is changed, the <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#DatasetName">DatasetName</a> will automatically be set to '' assuming that the <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#DatasetName">DatasetName</a> and <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#SQL">SQL</a> text don't match anymore.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="Filter"></a><code>property <b>Filter</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+This dataset allows many kinds of filtering features that will be applied in this priority to the retrieved data : </p>
+
+<ol class="paragraph_spacing">
+  <li value="1"><p>Original <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#SQL">SQL</a> statement using a WHERE or a LIMIT clause to <code>filter</code> records.</p></li>
+  <li value="2"><p>Additional WHERE clause defined in the 1st part of the <code>Filter</code> property - when <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#FilterMode">FilterMode</a> in [fmSQL, fmSQLDirect].</p></li>
+  <li value="3"><p><a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#FilterRecordLowerLimit">FilterRecordLowerLimit</a> applies after the <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#SQL">SQL</a> statement is executed.</p></li>
+  <li value="4"><p><a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#FilterRecordUpperLimit">FilterRecordUpperLimit</a> applies after the <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#SQL">SQL</a> statement is executed.</p></li>
+  <li value="5"><p>Additional <code>filter</code> defined in the 2nd part of the <code>Filter</code> property - when <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#FilterMode">FilterMode</a> is in [fmDirect, fmSQLDirect].</p></li>
+  <li value="6"><p>Master - Detail relationship.</p></li>
+</ol>
+
+<p>
+
+<p>As described, the <code>filter</code> statement itsef can be divided in two parts that are activated depending on the <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#FilterMode">FilterMode</a> property. [1st part = <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#SQL">SQL</a> syntax][;][2nd part = Direct syntax]
+
+<p>The goal of the 2nd part is to provide filtering on <b>calculated fields</b>
+
+<p><b>The 1st part :</b> follows the classic dataset <code>filter</code> behavior and takes a <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#SQL">SQL</a> WHERE clause but without the WHERE word at the begining. You can also use wildcard characters as discribed in the Sqlite help. <i>Example #1 : country = 'France'</i> <i>Example #2 : customer like '%cur%'</i> <br> <br> The ';' semi-colon is used to separate the 1st and the 2nd part <br> <br> <b>The 2nd part :</b> it uses a custom syntax close to <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#SQL">SQL</a> but limited For numeric fields : ComparisonOp : '=, &lt;&gt;, &gt;, &gt;=, &lt;=, &lt;, Null, NotNull' Value = numeric or empty (with Null and NotNull) Example 1 : MyDataset.Filter := MyField1 &gt; 1 and &lt; 10 or = 20; MyField7 &lt;&gt; 5; MyField3 Null;
+
+<p>Example 2 : '=' operator has a special syntax supporting multiple values separated with comma MyDataset.Filter := MyField1 = 1, 10, 20, 30; MyField2 &lt;&gt; 5; MyField7 NotNull;
+
+<p>For Boolean fields ComparisonOp : '=' Value : True or False
+
+<p>Example 1 : MyDataset.Filter := MyField1 = True; MyField2 = False;
+
+<p>For Text fields (including Memo) ComparisonOp : '=, &lt;&gt;, &gt;, &gt;=, &lt;=, &lt;, Null, NotNull' '=' and '&lt;&gt;' accepts '%' or '*' wildcard char. You can use *YourText or %YourText* or YourText% as TextPattern
+
+<p>Example 1 : MyDataset.Filter := MyField1 = %Pasc%; MyField3 NotNull;
+
+<p>For Date, Time, DateTime fields ComparisonOp : '=, &lt;&gt;, &gt;, &gt;=, &lt;=, &lt;, Null, NotNull' Value = numeric or empty (with Null and NotNull) DateFormat : #DD-MM-YYYY# TimeFormat : #hh:mm:ss[.zzz]# DateTimeFormat : #DD-MM-YYYY hh:mm:ss[.zzz]#
+
+<p>Note : '#' can be replaced by single or double quote
+
+<p>Example 1 : MyDataset.Filter := MyField1 = #22-02-2008#; MyField3 NotNull;</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="Filtered"></a><code>property <b>Filtered</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Determines whether or not the different <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#Filters">filters</a> are activated. The <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html">TsqlitePassDataset</a> component can handle three <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#Filter">filter</a> levels that will be applied in this priority order :
+
+<p>1 : <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#MasterFields">MasterFields</a>/DetailFields property 2 : <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#Filter">Filter</a> property 3 : RecordLowerLimit/RecordUpperLimit properties</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="FilterMode"></a><code>property <b>FilterMode</b>: <a   href="SqlitePassDbo.html#TSqlitePassFilterMode">TSqlitePassFilterMode</a> Read FFilterMode Write FFilterMode;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Can take one of the following values : <br> </p>
+
+<ul class="paragraph_spacing">
+  <li><p>fmDirect</p></li>
+  <li><p>fmSQL</p></li>
+  <li><p>fmSQLDirect - Default</p></li>
+</ul>
+
+<p> </p>
+<h6 class="description_section">See also</h6>
+<dl class="see_also">
+  <dt><a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#Filter">Filter</a></dt>
+  <dd>This dataset allows many kinds of filtering features that will be applied in this priority to the retrieved data : </p>
+
+<ol class="paragraph_spacing">
+  <li value="1"><p>Original <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#SQL">SQL</a> statement using a WHERE or a LIMIT clause to <code>filter</code> records.</p></li>
+  <li value="2"><p>Additional WHERE clause defined in the 1st part of the <code>Filter</code> property - when <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#FilterMode">FilterMode</a> in [fmSQL, fmSQLDirect].</p></li>
+  <li value="3"><p><a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#FilterRecordLowerLimit">FilterRecordLowerLimit</a> applies after the <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#SQL">SQL</a> statement is executed.</p></li>
+  <li value="4"><p><a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#FilterRecordUpperLimit">FilterRecordUpperLimit</a> applies after the <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#SQL">SQL</a> statement is executed.</p></li>
+  <li value="5"><p>Additional <code>filter</code> defined in the 2nd part of the <code>Filter</code> property - when <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#FilterMode">FilterMode</a> is in [fmDirect, fmSQLDirect].</p></li>
+  <li value="6"><p>Master - Detail relationship.</p></li>
+</ol>
+
+<p>
+
+<p>As described, the <code>filter</code> statement itsef can be divided in two parts that are activated depending on the <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#FilterMode">FilterMode</a> property.</dd>
+</dl>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="FilterOptions"></a><code>property <b>FilterOptions</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+foCaseInsensitive and foNoPartialCompare applies both to <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#SQL">SQL</a> and Internal <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#Filters">Filters</a>. You can also override the general setting, if you change the LocateFilters.Options, LookupFilters.Options, LookupFieldFilters.Options or Filters.Options properties</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="FilterRecordLowerLimit"></a><code>property <b>FilterRecordLowerLimit</b>: Integer Read FFilterRecordLowerLimit Write SetFFilterRecordLowerLimit;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+<code>FilterRecordLowerLimit</code> is the lower limit of the range <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#Filter">filter</a>. If greater than 1, the -nth first records will not be retrieved. In other words, if FilterLowerLimit = 4, the fifth record will be the first one retrieved from the query.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="FilterRecordUpperLimit"></a><code>property <b>FilterRecordUpperLimit</b>: Integer Read FFilterRecordUpperLimit Write setFFilterRecordUpperLimit;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+<code>FilterRecordUpperLimit</code> is the upper limit of the range <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#Filter">filter</a>.
+
+<p>If greater than 1, the -nth first records will be retrieved. In other words, if FilterUpperLimit = 4 and FilterLowerLimit = 0 then only the four first records will be retrieved from the query.
+
+<p>If lesser than 0, the -nth last records will be retrieved. In other words, if FilterUpperLimit = -9 and FilterLowerLimit = 0 then only the nine last records will be retrieved from the query.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Filters"></a><code>property <b>Filters</b>: <a   href="SqlitePassDbo.TSqlitePassFieldFilters.html">TSqlitePassFieldFilters</a> Read FFieldFilters Write FFieldFilters;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+A list of internal <code>filters</code> applying to a record</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="IndexDefs"></a><code>property <b>IndexDefs</b>: <a   href="SqlitePassDbo.TSqlitePassDatasetIndexDefs.html">TSqlitePassDatasetIndexDefs</a>  Read FIndexDefs Write FIndexDefs;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+The <code>IndexDefs</code> property gives you access to the <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#Indexes">indexes</a> definitions for the selected table. <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#Indexes">Indexes</a> are only available if the <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#DatasetType">DatasetType</a> is a 'dtTable' type.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="Indexed"></a><code>property <b>Indexed</b>: Boolean Read FInMemoryIndexed Write SetFInMemoryIndexed;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Determines whether or not the <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#IndexedBy">IndexedBy</a> property is activated.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="IndexedBy"></a><code>property <b>IndexedBy</b>: String Read FInMemoryIndexedBy Write SetFInMemoryIndexedBy;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+The <code>IndexedBy</code> property lets you define an internal <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#Index">index</a> used to speed up <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#Locate">locate</a>, <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#Lookup">lookup</a> operations. When a proper <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#Index">index</a> is set, the dataset is directly <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#Indexed">Indexed</a> in memory, using quicksort. and a fast binary search routine is used to find the requested records. The <code>IndexedBy</code> property always takes a <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#SQL">SQL</a> 'ORDER BY' clause but without the 'ORDER BY' expression at the begining <br> <i>Example : 'car_names ASC, car_types DESC'.</i> Field names with space must be quoted (see <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseOptions.html#QuoteStyle">TSqlitePassDatabaseOptions.QuoteStyle</a>). <br>
+
+<p><br> At design time, a dialog will let you <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#Create">create</a> or modify the <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#Index">index</a>.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Indexes"></a><code>property <b>Indexes</b>: <a   href="SqlitePassDbo.TSqlitePassInMemoryIndexes.html">TSqlitePassInMemoryIndexes</a> Read FInMemoryIndexes Write FInMemoryIndexes;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+A list of In-Memory <code>Indexes</code></p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="LocateFilters"></a><code>property <b>LocateFilters</b>: <a   href="SqlitePassDbo.TSqlitePassFieldFilters.html">TSqlitePassFieldFilters</a> read FLocateFieldFilters write FLocateFieldFilters;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="LocateMoveState"></a><code>property <b>LocateMoveState</b>: TGetResult read GetLocateMoveState;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Returns the state of the last move when locating a record</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="LocateSmartRefresh"></a><code>property <b>LocateSmartRefresh</b>: Boolean Read FLocateSmartRefresh Write FLocateSmartRefresh;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+When set to TRUE, Located records list is updated every time data is refetched from <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#Database">database</a>. If FALSE, the located records list is not synchronized : Located records are lost when data is refetched</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="LookUpCache"></a><code>property <b>LookUpCache</b>: Boolean Read FLookUpCache Write SetFLookUpCache;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Activate or disactivate the <code>LookUpCache</code></p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="LookUpDisplayedRecordsOnly"></a><code>property <b>LookUpDisplayedRecordsOnly</b>: Boolean Read FLookUpFieldsDisplayedRecordsOnly Write SetFLookUpFieldsDisplayedRecordsOnly;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Enable or Disable the persistent lookupfields. You should turn on thos option if you need to <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#Sort">sort</a> lookupfields</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="LookupFilters"></a><code>property <b>LookupFilters</b>: <a   href="SqlitePassDbo.TSqlitePassFieldFilters.html">TSqlitePassFieldFilters</a> read FLookupKeyFieldFilters write FLookupKeyFieldFilters;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Collection of <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#Lookup">lookup</a> <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#Filters">Filters</a></p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="LookupMoveState"></a><code>property <b>LookupMoveState</b>: TGetResult read GetLookupMoveState;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Returns the state of the last <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#Lookup">lookup</a> move</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="LookUpSmartRefresh"></a><code>property <b>LookUpSmartRefresh</b>: Boolean Read FLookUpSmartRefresh Write FLookUpSmartRefresh;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Automatically Resfreshes the <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#Lookup">Lookup</a> Results when dataset is changed or refetch from <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#Database">database</a></p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="MasterFields"></a><code>property <b>MasterFields</b>: String read GetMasterFields write SetMasterFields;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Classic table <code>MasterFields</code> behavior.
+
+<p>At design time, a dialog will let you <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#Create">create</a> or modify the relation between <code>MasterFields</code> and DetailFields.
+
+<p>A relation is defined like this : MasterFieldName=DetailFieldName If you want set several relations, they must be separated by a ';' MasterFieldName1=DetailFieldName1;MasterFieldName2=DetailFieldName2</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="MasterSource"></a><code>property <b>MasterSource</b>: TDataSource read GetMasterDataSource write SetMasterDataSource;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Classic table <code>MasterSource</code> behavior.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="MasterSourceAutoActivate"></a><code>property <b>MasterSourceAutoActivate</b>: Boolean read FMasterAutoActivate write FMasterAutoActivate;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+When set to TRUE, the dataset will try to automatically open the master dataource if necessary</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="OnCalcFields"></a><code>property <b>OnCalcFields</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="OnDeleteError"></a><code>property <b>OnDeleteError</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="OnEditError"></a><code>property <b>OnEditError</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="OnFilterRecord"></a><code>property <b>OnFilterRecord</b>  : <a   href="SqlitePassDbo.html#TSqlitePassDatasetFilterRecordEvent">TSqlitePassDatasetFilterRecordEvent</a> read FOnFilterRecord write FOnFilterRecord;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Property OnExportProgress: <a class="normal"  href="SqlitePassDbo.html#TSqlitePassDatasetExportProgressEvent">TSqlitePassDatasetExportProgressEvent</a> Read FOnExportProgress Write FOnExportProgress; Property OnImportProgress: <a class="normal"  href="SqlitePassDbo.html#TSqlitePassDatasetImportProgressEvent">TSqlitePassDatasetImportProgressEvent</a> Read FOnImportProgress Write FOnImportProgress;</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="OnNewRecord"></a><code>property <b>OnNewRecord</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="OnPostError"></a><code>property <b>OnPostError</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="ParamCheck"></a><code>property <b>ParamCheck</b>: Boolean Read FParamCheck Write FParamCheck;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Not used - TODO</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="ParamCount"></a><code>property <b>ParamCount</b>: Integer read <a   href="SqlitePassDbo.TSqlitePassDataset.html#GetParamsCount">GetParamsCount</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+To be properly implemented</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="Params"></a><code>property <b>Params</b>: TParams read FParams Write <a   href="SqlitePassDbo.TSqlitePassDataset.html#SetParamsList">SetParamsList</a> Stored False;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Not used - TODO</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="ReadOnly"></a><code>property <b>ReadOnly</b>: Boolean Read GetFReadOnly Write SetFReadOnly default False;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Classic Dataset behavior</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="RecordsCacheCapacity"></a><code>property <b>RecordsCacheCapacity</b>: <a   href="SqlitePassDbo.html#TSqlitePassRecordsCacheCapacity">TSqlitePassRecordsCacheCapacity</a> Read FRecordsCacheCapacity Write FRecordsCacheCapacity;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Set the number of records that can fit within one memory bloc before the need to alLookup a new records memory bloc. Using a larger <code>RecordsCacheCapacity</code> with large tables or queries should improve loading speed</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="Sorted"></a><code>property <b>Sorted</b>: Boolean Read FSorted Write SetFSorted;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Determines whether or not the <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#IndexedBy">IndexedBy</a> property is activated.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="SortedBy"></a><code>property <b>SortedBy</b>: String Read FSortedBy Write SetFSortedBy;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+The <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#IndexedBy">IndexedBy</a> property always takes a <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#SQL">SQL</a> 'ORDER BY' clause but without the 'ORDER BY' expression at the begining <br> <i>Example : 'car_names ASC, car_types DESC'.</i> Field names with space must be quoted (see <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseOptions.html#QuoteStyle">TSqlitePassDatabaseOptions.QuoteStyle</a>). <br> It has two different <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#Sort">sort</a> modes : <br> When the <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#SortMode">SortMode</a> property is set to smDirect, (this is the default value) the dataset is directly <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#Indexed">Indexed</a> in memory, using quicksort. This is fast and handy to <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#Sort">sort</a> dates, times, and calculated fields since you don't have to think about date or time format. <br> When the <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#SortMode">SortMode</a> property is set to smSQL, the dataset is <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#Indexed">Indexed</a> using a <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#SQL">SQL</a> ORDER BY statement. Calculated fields cannot be <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#Indexed">Indexed</a> this way. <br> At design time, a dialog will let you <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#Create">create</a> or modify the <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#Sort">sort</a> order.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="SortMode"></a><code>property <b>SortMode</b>: <a   href="SqlitePassDbo.html#TSqlitePassSortMode">TSqlitePassSortMode</a> Read FSortMode Write SetFSortMode;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Can take one of the following values : <br> </p>
+
+<ul class="paragraph_spacing">
+  <li><p>smDirect - Default</p></li>
+  <li><p>smSQL</p></li>
+</ul>
+
+<p> </p>
+<h6 class="description_section">See also</h6>
+<dl class="see_also">
+  <dt><a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#SortedBy">SortedBy</a></dt>
+  <dd>The <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#IndexedBy">IndexedBy</a> property always takes a <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#SQL">SQL</a> 'ORDER BY' clause but without the 'ORDER BY' expression at the begining <br> <i>Example : 'car_names ASC, car_types DESC'.</i> Field names with space must be quoted (see <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseOptions.html#QuoteStyle">TSqlitePassDatabaseOptions.QuoteStyle</a>).</dd>
+</dl>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="SQL"></a><code>property <b>SQL</b>: TStringList Read FSQL Write SetFSQL;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+<code>SQL</code> represents the <code>SQL</code> statement used to retrieve data from the <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#Database">database</a>.
+
+<p>For tables, it will automatically be set to :
+
+<p><code>SELECT * FROM TableName;</code> if all fields need to be retrieved from the table, or to :
+
+<p><code>SELECT field1, field2... FROM TableName;</code> if only some fields need to be retrieved from the table.
+
+<p>For queries, it will reflect the query <code>SQL</code> statement. You can also directly write your own <code>SQL</code> statement to fit your needs or to interact directly with the <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#Database">database</a>. In this case, the <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#DatasetName">datasetname</a> propery will be set to '' (empty) and the <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#DatasetType">datasetType</a> will be set to dtDirectSql.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="SQLSelectStmt"></a><code>property <b>SQLSelectStmt</b>: <a   href="SqlitePassDbo.TSqlitePassSelectStmt.html">TSqlitePassSelectStmt</a> Read FSQLSelectStmt;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+The internal schema of the current <a class="normal"  href="SqlitePassDbo.TSqlitePassDataset.html#SQL">SQL</a> statement. It gives you access to advanced information - read only</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="VersionInfo"></a><code>property <b>VersionInfo</b>: <a   href="SqlitePassDbo.TSqlitePassDatasetVersionInfo.html">TSqlitePassDatasetVersionInfo</a> Read FVersionInfo Write FVersionInfo;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Returns the dataset component version number</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="WriteMode"></a><code>property <b>WriteMode</b>: <a   href="SqlitePassDbo.html#TSqlitePassWriteMode">TSqlitePassWriteMode</a> Read FWriteMode Write SetFWriteMode;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+need to write doc...</p>
+</td></tr>
+</table>
+<hr noshade size="1"><span class="appinfo"><em>Generated by <a  target="_parent" href="http://pasdoc.sourceforge.net/">PasDoc 0.11.0</a> on 2010-05-16 23:39:43</em>
+</span>
+</body></html>

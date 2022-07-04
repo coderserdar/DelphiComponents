@@ -1,0 +1,389 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+<meta name="GENERATOR" content="PasDoc 0.11.0">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<title>SqlitePass Database Objects: SqlitePassDbo: Class TSqlitePassDatabaseOptions</title>
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body bgcolor="#ffffff" text="#000000" link="#0000ff" vlink="#800080" alink="#FF0000">
+<a name="TSqlitePassDatabaseOptions"></a><h1 class="cio">Class TSqlitePassDatabaseOptions</h1>
+<table class="sections wide_list">
+<tr>
+<td><a class="section"  href="#%40Description">Description</a></td><td><a class="section"  href="#%40Hierarchy">Hierarchy</a></td><td>Fields</td><td><a class="section"  href="#%40Methods">Methods</a></td><td><a class="section"  href="#%40Properties">Properties</a></td></tr></table>
+<a name="%40Description"></a><h2 class="unit">Unit</h2>
+<p class="unitlink">
+<a   href="SqlitePassDbo.html">SqlitePassDbo</a></p>
+<h2 class="declaration">Declaration</h2>
+<p class="declaration">
+<code>type TSqlitePassDatabaseOptions = class(TPersistent)</code></p>
+<h2 class="description">Description</h2>
+<p>
+<code>TSqlitePassDatabaseOptions</code></p>
+<a name="%40Hierarchy"></a><h2 class="hierarchy">Hierarchy</h2>
+<ul class="hierarchy"><li class="ancestor">TPersistent</li>
+<li class="thisitem">TSqlitePassDatabaseOptions</li></ul><h2 class="overview">Overview</h2>
+<a name="%40Methods"></a><h3 class="summary">Methods</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>constructor <b><a   href="SqlitePassDbo.TSqlitePassDatabaseOptions.html#Create">Create</a></b>(Database: <a   href="SqlitePassDbo.TSqlitePassDatabase.html">TSqlitePassDatabase</a>);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>destructor <b><a   href="SqlitePassDbo.TSqlitePassDatabaseOptions.html#Destroy">Destroy</a></b>; override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>Function <b><a   href="SqlitePassDbo.TSqlitePassDatabaseOptions.html#GetEncodingAsString">GetEncodingAsString</a></b>(Encoding: <a   href="SqlitePassDbo.html#TSqlitePassEncoding">TSqlitePassEncoding</a>): String;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>Procedure <b><a   href="SqlitePassDbo.TSqlitePassDatabaseOptions.html#Apply">Apply</a></b>;</code></td>
+</tr>
+</table>
+<a name="%40Properties"></a><h3 class="summary">Properties</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDatabaseOptions.html#ApplyMode">ApplyMode</a></b>: <a   href="SqlitePassDbo.html#TSqlitePassApplyModes">TSqlitePassApplyModes</a> Read FApplyMode Write FApplyMode;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDatabaseOptions.html#AutoVacuum">AutoVacuum</a></b>: <a   href="SqlitePassDbo.html#TSqlitePassAutoVacuumType">TSqlitePassAutoVacuumType</a> Read GetFAutoVacuum Write SetFAutoVacuum;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDatabaseOptions.html#CacheSize">CacheSize</a></b>: Integer Read GetFCacheSize Write SetFCacheSize;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDatabaseOptions.html#CaseSensitiveLike">CaseSensitiveLike</a></b>: Boolean Read FCaseSensitiveLike Write SetFCaseSensitiveLike;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDatabaseOptions.html#CountChanges">CountChanges</a></b>: Boolean Read GetFCountChanges Write SetFCountChanges;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDatabaseOptions.html#DefaultCacheSize">DefaultCacheSize</a></b>: Integer Read GetFDefaultCacheSize Write SetFDefaultCacheSize;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDatabaseOptions.html#Encoding">Encoding</a></b>: <a   href="SqlitePassDbo.html#TSqlitePassEncoding">TSqlitePassEncoding</a> Read GetFEncoding Write SetFEncoding;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDatabaseOptions.html#ForeignKeys">ForeignKeys</a></b>: Boolean Read GetFForeignKeys Write SetFForeignKeys;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDatabaseOptions.html#FullColumnNames">FullColumnNames</a></b>: Boolean Read GetFFullColumnNames Write SetFFullColumnNames;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDatabaseOptions.html#JournalMode">JournalMode</a></b>: <a   href="SqlitePassDbo.html#TSqlitePassJournalMode">TSqlitePassJournalMode</a> Read GetFJournalMode Write SetFJournalMode;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDatabaseOptions.html#JournalSizeLimit">JournalSizeLimit</a></b>: Integer Read GetFJournalSizeLimit Write SetFJournalSizeLimit;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDatabaseOptions.html#LockingMode">LockingMode</a></b>: <a   href="SqlitePassDbo.html#TSqlitePassLockingMode">TSqlitePassLockingMode</a> Read GetFLockingMode Write SetFLockingMode;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDatabaseOptions.html#LogErrors">LogErrors</a></b>: Boolean Read FLogErrors Write FLogErrors;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDatabaseOptions.html#MaxPageCount">MaxPageCount</a></b>: Integer Read GetFMaxPageCount Write SetFMaxPageCount;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDatabaseOptions.html#PageSize">PageSize</a></b>: <a   href="SqlitePassDbo.html#TSqlitePassPageSize">TSqlitePassPageSize</a> Read GetFPageSize Write SetFPageSize;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDatabaseOptions.html#QuoteStyle">QuoteStyle</a></b>: <a   href="SqlitePassDbo.html#TSqlitePassQuoteStyle">TSqlitePassQuoteStyle</a> Read FQuoteStyle Write SetFQuoteStyle;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDatabaseOptions.html#RecursiveTriggers">RecursiveTriggers</a></b>: Boolean Read GetFRecursiveTriggers Write SetFRecursiveTriggers;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDatabaseOptions.html#SecureDelete">SecureDelete</a></b>: Boolean Read GetFSecureDelete Write SetFSecureDelete;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDatabaseOptions.html#Synchronous">Synchronous</a></b>: <a   href="SqlitePassDbo.html#TSqlitePassSynchronous">TSqlitePassSynchronous</a> Read GetFSynchronous Write SetFSynchronous;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDatabaseOptions.html#TemporaryStorage">TemporaryStorage</a></b>: <a   href="SqlitePassDbo.html#TSqlitePassTempStore">TSqlitePassTempStore</a> Read GetFTemporaryStorage Write SetFTemporaryStorage;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a   href="SqlitePassDbo.TSqlitePassDatabaseOptions.html#TemporaryStorageDir">TemporaryStorageDir</a></b>: String Read GetFTemporaryStorageDir Write SetFTemporaryStorageDir;</code></td>
+</tr>
+</table>
+<h2 class="description">Description</h2>
+<h3 class="detail">Methods</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Create"></a><code>constructor <b>Create</b>(Database: <a   href="SqlitePassDbo.TSqlitePassDatabase.html">TSqlitePassDatabase</a>);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Destroy"></a><code>destructor <b>Destroy</b>; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="GetEncodingAsString"></a><code>Function <b>GetEncodingAsString</b>(Encoding: <a   href="SqlitePassDbo.html#TSqlitePassEncoding">TSqlitePassEncoding</a>): String;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Apply"></a><code>Procedure <b>Apply</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Writes the options settings to the database file</p>
+</td></tr>
+</table>
+<h3 class="detail">Properties</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="ApplyMode"></a><code>property <b>ApplyMode</b>: <a   href="SqlitePassDbo.html#TSqlitePassApplyModes">TSqlitePassApplyModes</a> Read FApplyMode Write FApplyMode;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+This property sets how the options are applied to the database file. <br> <b>When database is already connected</b>, any options change is directly applied to the database file. <br> <b>When database is not connected</b>, the changes are only applied when you open the database (Connected = True), depending on the <code>ApplyMode</code> setting : if amOverwriteDatabaseFileSettings is True, then the the <code>ApplyMode</code> selected options are applied to the database file with the values defined in object inspector (designtime) or in your *.dfm or *.lfm file (runtime). <br> if amOverwriteDatabaseFileSettings is False, your customized settings will discarded and overwritten with the current database file settings.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="AutoVacuum"></a><code>property <b>AutoVacuum</b>: <a   href="SqlitePassDbo.html#TSqlitePassAutoVacuumType">TSqlitePassAutoVacuumType</a> Read GetFAutoVacuum Write SetFAutoVacuum;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+This property gets or sets the database autovacum pragma as described in the Sqlite help</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="CacheSize"></a><code>property <b>CacheSize</b>: Integer Read GetFCacheSize Write SetFCacheSize;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+This property gets or sets the database <code>CacheSize</code> pragma as described in the Sqlite help</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="CaseSensitiveLike"></a><code>property <b>CaseSensitiveLike</b>: Boolean Read FCaseSensitiveLike Write SetFCaseSensitiveLike;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+This property gets or sets the database <code>CaseSensitiveLike</code> pragma as described in the Sqlite help</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="CountChanges"></a><code>property <b>CountChanges</b>: Boolean Read GetFCountChanges Write SetFCountChanges;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+This property gets or sets the database <code>CountChanges</code> pragma as described in the Sqlite help</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="DefaultCacheSize"></a><code>property <b>DefaultCacheSize</b>: Integer Read GetFDefaultCacheSize Write SetFDefaultCacheSize;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+This property gets or sets the database <code>DefaultCacheSize</code> pragma as described in the Sqlite help</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="Encoding"></a><code>property <b>Encoding</b>: <a   href="SqlitePassDbo.html#TSqlitePassEncoding">TSqlitePassEncoding</a> Read GetFEncoding Write SetFEncoding;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+This property is readonly =. It gets the database <code>Encoding</code> as described in the Sqlite help - the database <code>encoding</code> can only be set if the database has not already been created</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="ForeignKeys"></a><code>property <b>ForeignKeys</b>: Boolean Read GetFForeignKeys Write SetFForeignKeys;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+This property gets or sets the database <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseOptions.html#FullColumnNames">FullColumnNames</a> pragma as described in the Sqlite help</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="FullColumnNames"></a><code>property <b>FullColumnNames</b>: Boolean Read GetFFullColumnNames Write SetFFullColumnNames;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+This property gets or sets the database <code>FullColumnNames</code> pragma as described in the Sqlite help</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="JournalMode"></a><code>property <b>JournalMode</b>: <a   href="SqlitePassDbo.html#TSqlitePassJournalMode">TSqlitePassJournalMode</a> Read GetFJournalMode Write SetFJournalMode;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+This property gets or sets the database Journal mode pragma as described in the Sqlite help</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="JournalSizeLimit"></a><code>property <b>JournalSizeLimit</b>: Integer Read GetFJournalSizeLimit Write SetFJournalSizeLimit;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+This property gets or sets the database Journal mode property as described in the Sqlite help</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="LockingMode"></a><code>property <b>LockingMode</b>: <a   href="SqlitePassDbo.html#TSqlitePassLockingMode">TSqlitePassLockingMode</a> Read GetFLockingMode Write SetFLockingMode;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+This property gets or sets the database Journal mode pragma as described in the Sqlite help</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="LogErrors"></a><code>property <b>LogErrors</b>: Boolean Read FLogErrors Write FLogErrors;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+When set to True, Errors are logged to the TSqlitePassDatabase.DatabaseError.ErrorList</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="MaxPageCount"></a><code>property <b>MaxPageCount</b>: Integer Read GetFMaxPageCount Write SetFMaxPageCount;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+This property gets or sets the Maximum database Pages Count pragma as described in the Sqlite help</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="PageSize"></a><code>property <b>PageSize</b>: <a   href="SqlitePassDbo.html#TSqlitePassPageSize">TSqlitePassPageSize</a> Read GetFPageSize Write SetFPageSize;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+This property gets or sets the database <code>PageSize</code> pragma as described in the Sqlite help</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="QuoteStyle"></a><code>property <b>QuoteStyle</b>: <a   href="SqlitePassDbo.html#TSqlitePassQuoteStyle">TSqlitePassQuoteStyle</a> Read FQuoteStyle Write SetFQuoteStyle;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+This property gets or sets the database default quote style used to surround identifiers in sql statements. It can take one of the following values : <br> </p>
+
+<ul class="paragraph_spacing">
+  <li><p>qsDoubleQuote for &quot;</p></li>
+  <li><p>qsBracket for [ and ]</p></li>
+  <li><p>sqGraveQuote for `</p></li>
+</ul>
+
+<p></p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="RecursiveTriggers"></a><code>property <b>RecursiveTriggers</b>: Boolean Read GetFRecursiveTriggers Write SetFRecursiveTriggers;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+This property gets or sets the database Recursive Triggers pragma as described in the Sqlite help</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="SecureDelete"></a><code>property <b>SecureDelete</b>: Boolean Read GetFSecureDelete Write SetFSecureDelete;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+This property gets or sets the database Secure Delete pragma as described in the Sqlite help</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="Synchronous"></a><code>property <b>Synchronous</b>: <a   href="SqlitePassDbo.html#TSqlitePassSynchronous">TSqlitePassSynchronous</a> Read GetFSynchronous Write SetFSynchronous;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+This property gets or sets the database <code>Synchronous</code> pragma as described in the Sqlite help</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="TemporaryStorage"></a><code>property <b>TemporaryStorage</b>: <a   href="SqlitePassDbo.html#TSqlitePassTempStore">TSqlitePassTempStore</a> Read GetFTemporaryStorage Write SetFTemporaryStorage;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+This property gets or sets the database <code>TemporaryStorage</code> pragma as described in the Sqlite help</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a   href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><a name="TemporaryStorageDir"></a><code>property <b>TemporaryStorageDir</b>: String Read GetFTemporaryStorageDir Write SetFTemporaryStorageDir;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+This property gets or sets the database <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabaseOptions.html#TemporaryStorage">TemporaryStorage</a> pragma as described in the Sqlite help</p>
+</td></tr>
+</table>
+<hr noshade size="1"><span class="appinfo"><em>Generated by <a  target="_parent" href="http://pasdoc.sourceforge.net/">PasDoc 0.11.0</a> on 2010-05-16 23:39:43</em>
+</span>
+</body></html>

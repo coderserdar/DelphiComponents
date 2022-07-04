@@ -1,0 +1,108 @@
+
+               Firesoft - ExportSuite
+               ======================
+
+Indice
+------
+
+  Copyrigth
+  Licencia
+  Registro de los Componentes
+  Historial
+  Instalación
+  Lista de Archivos
+
+
+
+Copyrigth
+---------
+
+  Copyright (C) 1997-2006 
+  Federico Firenze,
+  Buenos Aires, Argentina
+  webmaster@delphi.com.ar
+
+
+Licencia
+--------
+
+  Esta librería es software libre; usted puede redistribuirlo y/o modificarlo
+bajo los términos de la licencia pública GNU tal como la publica la Free 
+Software Foundation; ya se la versión 2.1 de la Licencia, o (a su elección)
+cualquier versión posterior.
+
+  Esta librería se distribuye con la esperanza de que sea útil,
+pero SIN NINGÚN TIPO DE GARANTÍA; ni siquiera la garantía implícita de
+COMERCIABILIDAD o de ADECUACIÓN A UNA FINALIDAD PARTICULAR. Vea la licencia
+pública GNU para más detalles.
+
+  Usted debería haber recibido una copia de la GNU Lesser General Public
+License junto con esta librería; si no es así, escriba a Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+
+
+Registro de los Componentes
+---------------------------
+
+  El registro de este software no es obligatorio, pero al registrarlo tendrá
+la ventaja de estar informado sobre cambios o nuevas versiones de esta
+librería. Para registrar la librería enviar un correo electrónico a la cuenta
+webmaster@delphi.com.ar con asunto "Registro: ExpSuite".
+
+
+Historial
+---------
+
+      1999 - Primera versión de la librería.
+
+23/05/2003 - Se agregó el componente TDataToWK1 para poder generar archivos de Lotus 123.
+           - Se optimizó el código de generación de archivos XLS.
+
+17/06/2003 - Se agregó el componente TDataToHTML.
+           - Se agregó en el Menú contextual del editor de propiedades el item "Test to File..."
+
+25/02/2006 - Se abrió el código de la librería bajo la licencia pública GNU.
+
+
+Instalación
+-----------
+
+  Utilice el menú "File\Open..." del IDE de Delphi para abrir el paquete
+de runtime RunExpSuitD?.dpk. En la ventana "Package..." haga click en el
+botón "Compile" para compilar el paquete. Ponga los archivos BBP compilados
+en un directorio que sea accesible por el Search PATH de su IDE o de los
+proyectos a utilizar.
+
+  Después de compilar el paquete de runtime, usted debe instalar el paquete
+de designtime en el IDE.
+
+
+  Utilice el menú "File\Open..." del IDE de Delphi para abrir el paquete
+de designtime DesExpSuitD?.dpk. En la ventana "Package..." haga click en el
+botón "Compile" para compilar el paquete, y luego haga click en el botón 
+"Install" para registrar los componentes en la paleta de componentes.
+
+
+Lista de Archivos
+-----------------
+
+  RunTime Units
+  -------------
+    DataExport.pas     Abstract classess to export DataSets 
+    DataToAscii.pas    Classes and functions to export DataSets in ASCII mode.
+    DataToDBF.pas      Classes and functions to export DataSets into DBase files.
+    DataToHTML.pas     Classes and functions to export DataSets into HTML files. 
+    BiffFile.pas       Generic class to write BIFF5 files (Old Excel version)  
+    DataToXLS.pas      Classes and functions to export DataSets into Excel files. 
+    WKFile.pas         Generic class to write WK1 files.
+    DataToWK1.pas      Classes and functions to export DataSets into Lotus123 files. 
+    ExpDlg.pas         INCLOMPLETE, standard Dialog to export all posible type´s.
+
+  Desing Time Units
+  -----------------
+    RegExpSuite.pas    Property Editor´s and register procedures
+    unClassLister.pas  Dialog to find a component by class, for example TDBGrid when
+                       in design time the user right click over the any TDataExport 
+                       and choose the menu "Retrive TDBColumns..."
+
+_

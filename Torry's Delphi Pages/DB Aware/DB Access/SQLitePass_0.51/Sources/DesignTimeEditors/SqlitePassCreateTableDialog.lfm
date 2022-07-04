@@ -1,0 +1,913 @@
+object SqlitePassCreateTableDlg: TSqlitePassCreateTableDlg
+  Left = 103
+  Height = 552
+  Top = 71
+  Width = 828
+  BorderIcons = []
+  BorderStyle = bsDialog
+  Caption = 'Create Table Dialog'
+  ClientHeight = 552
+  ClientWidth = 828
+  Font.CharSet = ANSI_CHARSET
+  Font.Height = -11
+  Font.Name = 'Arial'
+  KeyPreview = True
+  OnShow = FormShow
+  Position = poScreenCenter
+  LCLVersion = '0.9.29'
+  object PanelBottom: TPanel
+    Left = 0
+    Height = 42
+    Top = 510
+    Width = 828
+    Align = alBottom
+    BevelInner = bvLowered
+    BevelOuter = bvNone
+    ClientHeight = 42
+    ClientWidth = 828
+    TabOrder = 0
+    object LabelManualSQL: TLabel
+      Left = 18
+      Height = 15
+      Top = 13
+      Width = 155
+      Caption = '(SQL has been manually edited)'
+      Font.CharSet = ANSI_CHARSET
+      Font.Color = clRed
+      Font.Height = -11
+      Font.Name = 'Arial'
+      ParentColor = False
+      ParentFont = False
+    end
+    object BtOk: TButton
+      Left = 607
+      Height = 25
+      Top = 9
+      Width = 100
+      Caption = '&Create Table'
+      Font.CharSet = ANSI_CHARSET
+      Font.Height = -11
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ModalResult = 1
+      OnClick = BtOkClick
+      ParentFont = False
+      TabOrder = 0
+    end
+    object BtCancel: TButton
+      Left = 714
+      Height = 25
+      Top = 9
+      Width = 100
+      Cancel = True
+      Caption = '&Cancel'
+      Font.CharSet = ANSI_CHARSET
+      Font.Height = -11
+      Font.Name = 'Arial'
+      ModalResult = 2
+      ParentFont = False
+      TabOrder = 1
+    end
+  end
+  object PageControl: TPageControl
+    Left = 8
+    Height = 497
+    Top = 8
+    Width = 809
+    ActivePage = TsTableDefinition
+    TabIndex = 0
+    TabOrder = 1
+    object TsTableDefinition: TTabSheet
+      Caption = '&Table Definition'
+      ClientHeight = 470
+      ClientWidth = 801
+      object PanelTableFieldDefs: TPanel
+        Left = 0
+        Height = 470
+        Top = 0
+        Width = 801
+        Align = alClient
+        BevelOuter = bvNone
+        ClientHeight = 470
+        ClientWidth = 801
+        TabOrder = 0
+        object Shape4: TShape
+          Left = 287
+          Height = 108
+          Top = 349
+          Width = 202
+          Brush.Style = bsClear
+          Pen.Color = clSilver
+          Shape = stRoundRect
+        end
+        object Shape6: TShape
+          Left = 16
+          Height = 108
+          Top = 349
+          Width = 262
+          Brush.Style = bsClear
+          Pen.Color = clSilver
+          Shape = stRoundRect
+        end
+        object Bevel2: TBevel
+          Left = 566
+          Height = 9
+          Top = 326
+          Width = 227
+          Shape = bsTopLine
+        end
+        object Bevel4: TBevel
+          Left = 97
+          Height = 9
+          Top = 326
+          Width = 400
+          Shape = bsTopLine
+        end
+        object Shape1: TShape
+          Left = 8
+          Height = 22
+          Top = 316
+          Width = 97
+          Brush.Color = 16774380
+          Pen.Color = clSilver
+          Pen.Width = 2
+        end
+        object Label2: TLabel
+          Left = 24
+          Height = 15
+          Top = 320
+          Width = 73
+          Caption = 'Field Options'
+          Font.CharSet = ANSI_CHARSET
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          ParentColor = False
+          ParentFont = False
+        end
+        object Shape2: TShape
+          Left = 509
+          Height = 22
+          Top = 316
+          Width = 108
+          Brush.Color = 16774380
+          Pen.Color = clSilver
+          Pen.Width = 2
+        end
+        object Label1: TLabel
+          Left = 517
+          Height = 15
+          Top = 320
+          Width = 93
+          Caption = 'Field Description'
+          Font.CharSet = ANSI_CHARSET
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          ParentColor = False
+          ParentFont = False
+        end
+        object LabelPrimaryKeyConflict: TLabel
+          Left = 44
+          Height = 15
+          Top = 386
+          Width = 53
+          Caption = 'On conflict'
+          ParentColor = False
+        end
+        object LabelPrimaryKeySort: TLabel
+          Left = 44
+          Height = 15
+          Top = 411
+          Width = 52
+          Caption = 'Sort Order'
+          ParentColor = False
+        end
+        object LabelNotNullConflict: TLabel
+          Left = 316
+          Height = 15
+          Top = 378
+          Width = 53
+          Caption = 'On conflict'
+          ParentColor = False
+        end
+        object Bevel3: TBevel
+          Left = 293
+          Height = 9
+          Top = 403
+          Width = 187
+          Shape = bsTopLine
+        end
+        object LabelUniqueConflict: TLabel
+          Left = 316
+          Height = 15
+          Top = 428
+          Width = 53
+          Caption = 'On conflict'
+          ParentColor = False
+        end
+        object CbPrimaryKey: TCheckBox
+          Left = 29
+          Height = 19
+          Top = 342
+          Width = 78
+          Caption = 'Primary Key'
+          OnClick = CbPrimaryKeyClick
+          TabOrder = 0
+        end
+        object CbAutoInc: TCheckBox
+          Left = 44
+          Height = 19
+          Top = 362
+          Width = 93
+          Caption = 'Auto Increment'
+          OnClick = CbAutoIncClick
+          TabOrder = 1
+        end
+        object CbNotNull: TCheckBox
+          Left = 299
+          Height = 19
+          Top = 360
+          Width = 56
+          Caption = 'Not Null'
+          OnClick = CbNotNullClick
+          TabOrder = 2
+        end
+        object CbUnique: TCheckBox
+          Left = 299
+          Height = 19
+          Top = 410
+          Width = 53
+          Caption = 'Unique'
+          OnClick = CbUniqueClick
+          TabOrder = 3
+        end
+        object MemoFieldDescription: TMemo
+          Left = 516
+          Height = 108
+          Top = 349
+          Width = 269
+          TabOrder = 4
+        end
+        object PanelCtrlGrid: TPanel
+          Left = 0
+          Height = 305
+          Top = 0
+          Width = 801
+          Align = alTop
+          BevelOuter = bvNone
+          Caption = 'PanelCtrlGrid'
+          ClientHeight = 305
+          ClientWidth = 801
+          TabOrder = 5
+          object PanelCtrlGridNav: TPanel
+            Left = 0
+            Height = 24
+            Top = 281
+            Width = 801
+            Align = alBottom
+            BevelOuter = bvLowered
+            ClientHeight = 24
+            ClientWidth = 801
+            Color = cl3DLight
+            ParentColor = False
+            TabOrder = 0
+            object ImagePrimaryKey: TImage
+              Left = 773
+              Height = 16
+              Top = 3
+              Width = 16
+              AutoSize = True
+              Center = True
+              Picture.Data = {
+                07544269746D617036030000424D360300000000000036000000280000001000
+                0000100000000100180000000000000300000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                000000000000000000000000000000000000000000FFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00
+                0000000000FFFFFF0000000000000000000000000000005C4B46000000000000
+                000000000000000000000000FFFFFF000000000000FFFFFF0000000000000000
+                000000008D7E7A00F3FA5C4B46000000000000000000000000000000FFFFFF00
+                0000000000FFFFFF0000000000000000000000008D7E7A00F3FA00F3FA5C4B46
+                000000000000000000000000FFFFFF000000000000FFFFFF0000000000000000
+                000000008D7E7A00F3FA5C4B46000000000000000000000000000000FFFFFF00
+                0000000000FFFFFF0000000000000000000000008D7E7A00F3FA00F3FA5C4B46
+                000000000000000000000000FFFFFF000000000000FFFFFF0000000000000000
+                000000008D7E7A00F3FA5C4B46000000000000000000000000000000FFFFFF00
+                0000000000FFFFFF0000000000000000005C4B4600F3FA00F3FA00F3FA5C4B46
+                000000000000000000000000FFFFFF000000000000FFFFFF0000000000008D7E
+                7A00F3FA00F3FA00F3FA00F3FA00F3FA5C4B46000000000000000000FFFFFF00
+                0000000000FFFFFF0000000000008D7E7A00F3FA00F3FA5C4B4600F3FA00F3FA
+                5C4B46000000000000000000FFFFFF000000000000FFFFFF0000000000008D7E
+                7A49E2FB00F3FA00F3FA00F3FA49E2FB5C4B46000000000000000000FFFFFF00
+                0000000000FFFFFF0000000000000000008D7E7A8D7E7A8D7E7A8D7E7A8D7E7A
+                000000000000000000000000FFFFFF000000000000FFFFFF0000000000000000
+                00000000000000000000000000000000000000000000000000000000FFFFFF00
+                0000000000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000
+              }
+              Visible = False
+            end
+            object ImageAutoinc: TImage
+              Left = 755
+              Height = 16
+              Top = 3
+              Width = 16
+              AutoSize = True
+              Center = True
+              Picture.Data = {
+                07544269746D617036040000424D360400000000000036000000280000001000
+                0000100000000100200000000000000400000000000000000000000000000000
+                0000000000FF000000FF000000FF000000FF000000FF000000FF000000FF0000
+                00FF000000FF000000FF000000FF000000FF000000FF000000FF000000FF0000
+                00FF000000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000
+                00FF000000FFFFFFFFFF000000FF000000FF000000FF000000FF000000FF0000
+                00FF000000FF000000FF000000FF000000FF000000FF000000FFFFFFFFFF0000
+                00FF000000FFFFFFFFFF000000FF000000FF000000FF000000FF000000FF0000
+                00FF000000FF000000FF000000FF000000FF000000FF000000FFFFFFFFFF0000
+                00FF000000FFFFFFFFFF000000FF000000FFFFFFFFFFFFFFFFFF000000FFFFFF
+                FFFFFFFFFFFF000000FFFFFFFFFFFFFFFFFF000000FF000000FFFFFFFFFF0000
+                00FF000000FFFFFFFFFF000000FF000000FFFFFFFFFFFFFFFFFF000000FFFFFF
+                FFFFFFFFFFFF000000FFFFFFFFFFFFFFFFFF000000FF000000FFFFFFFFFF0000
+                00FF000000FFFFFFFFFF000000FF000000FF000000FF000000FF000000FF0000
+                00FF000000FF000000FF000000FF000000FF000000FF000000FFFFFFFFFF0000
+                00FF000000FFFFFFFFFF000000FF000000FF000000FF000000FF000000FF0000
+                00FF000000FF000000FF000000FF000000FF000000FF000000FFFFFFFFFF0000
+                00FF000000FFFFFFFFFF000000FF000000FF000000FF000000FF000000FF0000
+                00FF000000FFFFFFFFFF000000FF000000FF000000FF000000FFFFFFFFFF0000
+                00FF000000FFFFFFFFFF000000FF000000FF000000FF000000FF000000FF0000
+                00FF000000FFFFFFFFFF000000FF000000FF000000FF000000FFFFFFFFFF0000
+                00FF000000FFFFFFFFFF000000FF000000FF000000FF000000FF000000FFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF000000FF000000FFFFFFFFFF0000
+                00FF000000FFFFFFFFFF000000FF000000FF000000FF000000FF000000FF0000
+                00FF000000FFFFFFFFFF000000FF000000FF000000FF000000FFFFFFFFFF0000
+                00FF000000FFFFFFFFFF000000FF000000FF000000FF000000FF000000FF0000
+                00FF000000FFFFFFFFFF000000FF000000FF000000FF000000FFFFFFFFFF0000
+                00FF000000FFFFFFFFFF000000FF000000FF000000FF000000FF000000FF0000
+                00FF000000FF000000FF000000FF000000FF000000FF000000FFFFFFFFFF0000
+                00FF000000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000
+                00FF000000FF000000FF000000FF000000FF000000FF000000FF000000FF0000
+                00FF000000FF000000FF000000FF000000FF000000FF000000FF000000FF0000
+                00FF
+              }
+              Visible = False
+            end
+          end
+          object PanelCtrlGridHeader: TPanel
+            Left = 0
+            Height = 161
+            Top = 0
+            Width = 801
+            Align = alTop
+            BevelOuter = bvNone
+            ClientHeight = 161
+            ClientWidth = 801
+            TabOrder = 1
+            object Shape8: TShape
+              Left = 7
+              Height = 81
+              Top = 21
+              Width = 770
+              Brush.Color = 16774380
+              Pen.Color = clSilver
+              Shape = stRoundRect
+            end
+            object Bevel5: TBevel
+              Left = 97
+              Height = 9
+              Top = 124
+              Width = 680
+              Shape = bsTopLine
+            end
+            object Shape5: TShape
+              Left = 8
+              Height = 22
+              Top = 114
+              Width = 102
+              Brush.Color = 16774380
+              Pen.Color = clSilver
+              Pen.Width = 2
+            end
+            object Label6: TLabel
+              Left = 16
+              Height = 15
+              Top = 118
+              Width = 89
+              Caption = 'Fields Definition'
+              Font.CharSet = ANSI_CHARSET
+              Font.Height = -11
+              Font.Name = 'Arial'
+              Font.Style = [fsBold]
+              ParentColor = False
+              ParentFont = False
+            end
+            object LabelTableName: TLabel
+              Left = 26
+              Height = 15
+              Top = 52
+              Width = 56
+              Caption = 'Table Name'
+              Color = 16774380
+              ParentColor = False
+              Transparent = False
+            end
+            object Shape3: TShape
+              Left = 16
+              Height = 22
+              Top = 13
+              Width = 70
+              Brush.Color = 16774380
+              Pen.Color = clSilver
+              Pen.Width = 2
+            end
+            object Label3: TLabel
+              Left = 34
+              Height = 15
+              Top = 17
+              Width = 30
+              Caption = 'Table'
+              Font.CharSet = ANSI_CHARSET
+              Font.Height = -11
+              Font.Name = 'Arial'
+              Font.Style = [fsBold]
+              ParentColor = False
+              ParentFont = False
+            end
+            object Shape7: TShape
+              Left = 287
+              Height = 53
+              Top = 38
+              Width = 202
+              Brush.Style = bsClear
+              Pen.Color = clSilver
+              Shape = stRoundRect
+            end
+            object StaticText1: TStaticText
+              Left = 57
+              Height = 18
+              Top = 143
+              Width = 137
+              Alignment = taCenter
+              BorderStyle = sbsSunken
+              Caption = 'Field Name'
+              TabOrder = 0
+            end
+            object StaticText2: TStaticText
+              Left = 196
+              Height = 18
+              Top = 143
+              Width = 130
+              Alignment = taCenter
+              BorderStyle = sbsSunken
+              Caption = 'Data Type'
+              TabOrder = 1
+            end
+            object StaticText3: TStaticText
+              Left = 329
+              Height = 18
+              Top = 143
+              Width = 40
+              Alignment = taCenter
+              BorderStyle = sbsSunken
+              Caption = 'Size'
+              TabOrder = 2
+            end
+            object StaticText4: TStaticText
+              Left = 425
+              Height = 18
+              Top = 143
+              Width = 107
+              Alignment = taCenter
+              BorderStyle = sbsSunken
+              Caption = 'Default Value'
+              TabOrder = 3
+            end
+            object StaticText6: TStaticText
+              Left = 673
+              Height = 18
+              Top = 143
+              Width = 99
+              Alignment = taCenter
+              BorderStyle = sbsSunken
+              Caption = 'Collating Order'
+              TabOrder = 4
+            end
+            object StaticText7: TStaticText
+              Left = 534
+              Height = 18
+              Top = 143
+              Width = 137
+              Alignment = taCenter
+              BorderStyle = sbsSunken
+              Caption = 'Check Constraint'
+              TabOrder = 5
+            end
+            object CbTemporaryTable: TCheckBox
+              Left = 308
+              Height = 19
+              Top = 47
+              Width = 98
+              Caption = '&Temporary table'
+              Color = 16774380
+              ParentColor = False
+              TabOrder = 6
+            end
+            object EditTableName: TEdit
+              Left = 94
+              Height = 22
+              Top = 46
+              Width = 165
+              OnEnter = EditFieldNameEnter
+              OnKeyDown = EditFieldNameKeyDown
+              TabOrder = 7
+            end
+            object CbOverwriteExistingTable: TCheckBox
+              Left = 307
+              Height = 19
+              Top = 65
+              Width = 135
+              Caption = '&Overwrite existing table'
+              Checked = True
+              Color = 16774380
+              ParentColor = False
+              State = cbChecked
+              TabOrder = 8
+            end
+            object StaticText5: TStaticText
+              Left = 371
+              Height = 18
+              Top = 143
+              Width = 51
+              Alignment = taCenter
+              BorderStyle = sbsSunken
+              Caption = 'Precision'
+              TabOrder = 9
+            end
+          end
+          object PanelCtrlGrid1: TPanel
+            Left = 0
+            Height = 120
+            Top = 161
+            Width = 801
+            Align = alClient
+            BevelOuter = bvNone
+            ClientHeight = 120
+            ClientWidth = 801
+            TabOrder = 2
+            object PanelFieldDef: TPanel
+              Left = 0
+              Height = 26
+              Top = 0
+              Width = 801
+              Align = alTop
+              BevelOuter = bvNone
+              ClientHeight = 26
+              ClientWidth = 801
+              Color = 14869218
+              ParentColor = False
+              TabOrder = 0
+              object PanelOnNotNullConflict: TLabel
+                Left = 296
+                Height = 15
+                Top = 30
+                Width = 110
+                Caption = 'PanelOnNotNullConflict'
+                ParentColor = False
+                Visible = False
+              end
+              object PanelOnPrimaryKeyConflict: TLabel
+                Left = 184
+                Height = 15
+                Top = 30
+                Width = 132
+                Caption = 'PanelOnPrimaryKeyConflict'
+                ParentColor = False
+                Visible = False
+              end
+              object PanelOnUniqueConflict: TLabel
+                Left = 408
+                Height = 15
+                Top = 30
+                Width = 110
+                Caption = 'PanelOnUniqueConflict'
+                ParentColor = False
+                Visible = False
+              end
+              object PanelFieldDescription: TLabel
+                Left = 520
+                Height = 15
+                Top = 30
+                Width = 103
+                Caption = 'PanelFieldDescription'
+                ParentColor = False
+                Visible = False
+              end
+              object EditFieldName: TEdit
+                Left = 56
+                Height = 22
+                Top = 2
+                Width = 138
+                OnEnter = EditFieldNameEnter
+                OnKeyDown = EditFieldNameKeyDown
+                TabOrder = 0
+              end
+              object CbDataType: TComboBox
+                Left = 195
+                Height = 22
+                Top = 2
+                Width = 132
+                ItemHeight = 14
+                OnEnter = EditFieldNameEnter
+                OnExit = CbDataTypeExit
+                OnKeyDown = EditFieldNameKeyDown
+                Sorted = True
+                Style = csDropDownList
+                TabOrder = 1
+              end
+              object EditSize: TEdit
+                Left = 328
+                Height = 22
+                Top = 2
+                Width = 40
+                OnEnter = EditFieldNameEnter
+                OnKeyDown = EditFieldNameKeyDown
+                OnKeyPress = EditSizeKeyPress
+                TabOrder = 2
+              end
+              object EditPrecision: TEdit
+                Left = 370
+                Height = 22
+                Top = 2
+                Width = 52
+                OnEnter = EditFieldNameEnter
+                OnKeyDown = EditFieldNameKeyDown
+                OnKeyPress = EditSizeKeyPress
+                TabOrder = 3
+              end
+              object CbDefaultValue: TComboBox
+                Left = 424
+                Height = 22
+                Top = 2
+                Width = 108
+                ItemHeight = 14
+                Items.Strings = (
+                  'CURRENT_TIME'
+                  'CURRENT_DATE'
+                  'CURRENT_TIMESTAMP'
+                )
+                OnEnter = EditFieldNameEnter
+                OnKeyDown = EditFieldNameKeyDown
+                TabOrder = 4
+              end
+              object EditFieldCheckConstraint: TEdit
+                Left = 534
+                Height = 22
+                Top = 2
+                Width = 137
+                OnEnter = EditFieldNameEnter
+                OnKeyDown = EditFieldNameKeyDown
+                TabOrder = 12
+              end
+              object CbCollatingOrder: TComboBox
+                Left = 674
+                Height = 22
+                Top = 2
+                Width = 100
+                ItemHeight = 14
+                Items.Strings = (
+                  '(DEFAULT)'
+                  'BINARY'
+                  'NOCASE'
+                  'RTRIM'
+                )
+                OnEnter = EditFieldNameEnter
+                OnKeyDown = EditFieldNameKeyDown
+                Style = csDropDownList
+                TabOrder = 13
+              end
+              object PanelCbPrimaryKey: TCheckBox
+                Left = 32
+                Height = 19
+                Top = 28
+                Width = 114
+                Caption = 'PanelCbPrimaryKey'
+                TabOrder = 5
+                TabStop = False
+                Visible = False
+              end
+              object PanelCbAutoInc: TCheckBox
+                Left = 48
+                Height = 19
+                Top = 28
+                Width = 96
+                Caption = 'PanelCbAutoInc'
+                TabOrder = 6
+                TabStop = False
+                Visible = False
+              end
+              object PanelCbNotNull: TCheckBox
+                Left = 64
+                Height = 19
+                Top = 28
+                Width = 92
+                Caption = 'PanelCbNotNull'
+                TabOrder = 7
+                TabStop = False
+                Visible = False
+              end
+              object PanelCbUnique: TCheckBox
+                Left = 80
+                Height = 19
+                Top = 28
+                Width = 92
+                Caption = 'PanelCbUnique'
+                TabOrder = 8
+                TabStop = False
+                Visible = False
+              end
+              object PanelRbSortNone: TRadioButton
+                Left = 98
+                Height = 19
+                Top = 28
+                Width = 104
+                Caption = 'PanelRbSortNone'
+                Checked = True
+                State = cbChecked
+                TabOrder = 9
+                Visible = False
+              end
+              object PanelRbSortUp: TRadioButton
+                Left = 122
+                Height = 19
+                Top = 28
+                Width = 92
+                Caption = 'PanelRbSortUp'
+                TabOrder = 10
+                TabStop = False
+                Visible = False
+              end
+              object PanelRbSortDown: TRadioButton
+                Left = 146
+                Height = 19
+                Top = 28
+                Width = 108
+                Caption = 'PanelRbSortDown'
+                TabOrder = 11
+                TabStop = False
+                Visible = False
+              end
+            end
+          end
+        end
+        object CbOnPrimaryKeyConflict: TComboBox
+          Left = 129
+          Height = 22
+          Top = 382
+          Width = 134
+          ItemHeight = 14
+          Items.Strings = (
+            '(DEFAULT)'
+            'ROLLBACK'
+            'ABORT'
+            'FAIL'
+            'IGNORE'
+            'REPLACE'
+          )
+          Style = csDropDownList
+          TabOrder = 6
+        end
+        object RbSortNone: TRadioButton
+          Left = 127
+          Height = 19
+          Top = 410
+          Width = 45
+          Caption = '&None'
+          TabOrder = 7
+        end
+        object RbSortUp: TRadioButton
+          Left = 175
+          Height = 19
+          Top = 410
+          Width = 33
+          Caption = '&Up'
+          TabOrder = 8
+        end
+        object RbSortDown: TRadioButton
+          Left = 215
+          Height = 19
+          Top = 410
+          Width = 49
+          Caption = '&Down'
+          TabOrder = 9
+        end
+        object CbOnNotNullConflict: TComboBox
+          Left = 373
+          Height = 22
+          Top = 374
+          Width = 100
+          ItemHeight = 14
+          Items.Strings = (
+            '(DEFAULT)'
+            'ROLLBACK'
+            'ABORT'
+            'FAIL'
+            'IGNORE'
+            'REPLACE'
+          )
+          Style = csDropDownList
+          TabOrder = 10
+        end
+        object CBOnUniqueConflict: TComboBox
+          Left = 373
+          Height = 22
+          Top = 424
+          Width = 100
+          ItemHeight = 14
+          Items.Strings = (
+            '(DEFAULT)'
+            'ROLLBACK'
+            'ABORT'
+            'FAIL'
+            'IGNORE'
+            'REPLACE'
+          )
+          Style = csDropDownList
+          TabOrder = 11
+        end
+      end
+    end
+    object TsSQL: TTabSheet
+      Caption = '&SQL Create Statement'
+      ClientHeight = 470
+      ClientWidth = 801
+      ImageIndex = 1
+      OnShow = TsSQLShow
+      object MemoSQL: TMemo
+        Left = 0
+        Height = 417
+        Top = 0
+        Width = 801
+        Align = alTop
+        Font.CharSet = ANSI_CHARSET
+        Font.Height = -11
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        OnKeyDown = MemoSQLKeyDown
+        OnKeyPress = MemoSQLKeyPress
+        ParentFont = False
+        TabOrder = 0
+      end
+      object BtSaveToFile: TButton
+        Left = 7
+        Height = 25
+        Top = 433
+        Width = 100
+        Caption = '&Save to file'
+        Font.CharSet = ANSI_CHARSET
+        Font.Height = -11
+        Font.Name = 'Arial'
+        OnClick = BtSaveToFileClick
+        ParentFont = False
+        TabOrder = 1
+      end
+      object BtLoadFromFile: TButton
+        Left = 114
+        Height = 25
+        Top = 433
+        Width = 100
+        Caption = '&Load from file'
+        Font.CharSet = ANSI_CHARSET
+        Font.Height = -11
+        Font.Name = 'Arial'
+        OnClick = BtLoadFromFileClick
+        ParentFont = False
+        TabOrder = 2
+      end
+      object BtRefreshSQL: TButton
+        Left = 224
+        Height = 25
+        Top = 433
+        Width = 100
+        Caption = '&Resfresh'
+        Font.CharSet = ANSI_CHARSET
+        Font.Height = -11
+        Font.Name = 'Arial'
+        OnClick = BtRefreshSQLClick
+        ParentFont = False
+        TabOrder = 3
+      end
+    end
+  end
+  object OpenDialog: TOpenDialog
+    left = 732
+    top = 465
+  end
+  object SaveDialog: TSaveDialog
+    left = 764
+    top = 465
+  end
+end

@@ -1,0 +1,63 @@
+QUESTION:
+
+ I dropped a TOraDB and a TAOraSQL components onto a form. I set the properties,
+ and TAOraSQL.SQL property to 'select * from real_actl'.
+ This table has many fields and it has a field, name TBLA.
+ So I tried to open the dataset. Than I got a message: 'Field 'TBLA' not found!'. 
+ I missed something?
+
+ANSWER:
+
+ If you use TAOraSQL for SQL queries your can define all fields manually. 
+ If your table has two fields: TBLA(integer) and TBBB(string) your can do next:
+
+  AOraSQL.SetSQL('select * from real_actl');
+  AOraSQL.AddField('TBLA',ftoInteger,0,True);
+  AOraSQL.AddField('TBBB',ftoString,50,True);
+  AOraSQL.Open;
+
+ The other way to call LoadFields method before Open.
+
+  AOraSQL.SetSQL('select * from real_actl');
+  AOraSQL.LoadFields;
+  AOraSQL.Open;
+
+ If you use TOraSQL no any additional actions needed:
+
+  OraSQL.SQL.Text:='select * from real_actl';
+  OraSQL.Open;
+
+
+---------------------------------------------------------------------------------
+
+QUESTION:
+ How can I make Editable DataSet like TTable component?
+
+ANSWER:
+ See an example EditableDataSet.dpr and comments in source code in 
+Examples folder.
+
+---------------------------------------------------------------------------------
+
+QUESTION:
+ I need to open login window to allow users to type login and password before login 
+ to database. How can I do it using dOCI components?
+
+
+ANSWER:
+ From version 1.14 TOraDB has property LoginPrompt which works as the  
+ same property from TDatabase.
+ 
+---------------------------------------------------------------------------------
+
+QUESTION:
+ I am trying to install DOCI components on Delphi5, but I receive error message that file
+ DsgnIntf.dcu not found.
+
+ANSWER:
+ Borland forgot to add DsgnIntf.dcu installation packet, but you can find DsgnIntf.pas
+ in $(DELPHI)/Sources/ToolsApi folder. You should add this path to the Library Path section 
+ of your IDE (menu Tools/Environment Options/Library tab/Library Path editbox).
+ After adding path DOCI components should be compiled withoput errors.
+
+------------------------------------------------------------------------------------

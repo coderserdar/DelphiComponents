@@ -1,0 +1,182 @@
+TSRLabel (C)opyright 2005   Version 2.00
+Autor : Simon Reinhardt
+eMail : reinhardt@picsoft.de
+Internet : http://www.picsoft.de
+
+  Diese Komponente ist eine Label-Komponente mit Schatteneffekt und
+  Link-Funktion. Sie ist abgeleitet von TGraphiControl und sie ist 
+  Public Domain, das Urheberrecht liegt aber beim Autor.
+
+  Vielen Dank an Robert Rossmair für die rrColors-Unit!
+
+Dateiumfang:
+------------
+
+SRLabel.txt 	- Diese Datei
+SRLabel.pas	- Quelltext der Komponente
+SRLabel.d16
+SRLabel.r16	- Resourcendateien der 16Bit-Komponente für Delphi 1
+SRLabel.d32
+SRLabel.r32	- Resourcendateien der 32Bit-Komponente für Delphi 2 bis 5
+SRDefine.inc
+rr.inc          - Includedateien für die Komponente
+rrColors.pas	- Funktionen zur RGB-HSL-Umrechnung
+
+
+Installation:
+-------------
+
+In Delphi 1:
+------------
+1. Alle Dateien in das Delphi-Komponenten-Verzeichnis entpacken.
+2. Menü Optionen : Komponente installieren
+3. Schaltfläche Hinzufügen / Durchsuchen
+4. Datei SRLabel.pas im Delphi-Komponenten-Verzeichnis suchen und mit
+   OK bestätigen.
+5. Die Komponente erscheint in der Komponenten-Gruppe "Simon"
+
+In Delphi 2:
+------------
+1. Alle Dateien in das Delphi-Komponenten-Verzeichnis entpacken.
+2. Menü Komponente :  installieren
+3. Schaltfläche Hinzufügen / Durchsuchen
+4. Datei SRLabel.pas im Delphi-Komponenten-Verzeichnis suchen und mit
+   OK bestätigen.
+5. Die Komponente erscheint in der Komponenten-Gruppe "Simon"
+
+Ab Delphi 3:
+------------
+1. Alle Dateien in das Delphi-Komponenten-Verzeichnis entpacken.
+2. Menü Komponente :  Komponente installieren
+3. Schaltfläche Durchsuchen (hinter dem Eingabefeld für den Unit-Namen)
+4. Datei SRLabel.pas im Delphi-Komponenten-Verzeichnis suchen und mit
+   OK bestätigen.
+5. Die Rückfrage nach dem Neukompilieren des Packages bestätigen.
+6. Die Komponente erscheint in der Komponenten-Gruppe "Simon"
+
+
+
+Beschreibung:
+-------------
+
+Die Komponente funktioniert genauso, wie die Delphi-Komponente 
+TLabel. Zusätzlich kann SRLabel mit Schatten versehen werden. Außerdem
+kann SRLabel mit einer Linkfunktion zum Aufruf von Internetseiten, eMails
+oder Newsgroups versehen werden. Ab Delphi 2 kann der Text auch in 
+verschiedenen Richtungen angezeigt werden.
+
+
+A) neue Eigenschaften:
+----------------------
+
+BevelStyle [TLabelBevel]
+  - bvFrame: 	Um das Label wird ein einfarbiger Rahmen gezeichnet.
+  - bvLowered:	Um das Label wird ein abgesenkter 3D-Rahmen gezeichnet.
+  - bvNone:	Um das Label wird kein Rahmen gezeichnet.
+  - bvRaised:	Um das Label wird ein erhabener 3D-Rahmen gezeichnet.
+  - bvSingle:	Um das Label wird ein Rahmen im 3D-Fensterstil gezeichnet.
+
+BevelWidth [word]
+  Die Breite des Rahmens um das Label.
+
+BorderWidth [word]
+  Der Abstand vom Text zum Rand des Labels.
+
+Direction [TTextDirection]
+  - tdRight:	Der Text wird von links nach rechts gezeichnet.
+  - tdLeft:	Der Text wird von rechts nach links gezeichnet.
+  - tdUp:	Der Text wird von unten nach oben gezeichnet.
+  - tdDown:	Der Text wird von oben nach unten gezeichnet.
+  Alle Werte<>tdRight funktionieren nur mit TrueType-Fonts!
+
+HighlightColor [TColor]
+  Die Farbe der "beleuchteten" Textseite, wenn ShowHighlight=true.
+
+HighlightOffset [word]
+  Der Abstand des "beleuchteten" Textes zum normalen Text, wenn 
+  ShowHighlight=true.
+
+HighlightPos [THighlightPos]
+  - hpTopLeft  : Die beleuchtete Seite (Highlight) des Textes wird oben links 
+                 gezeichnet, die unbeleuchtete unten rechts.
+  - hpTopRight : Die beleuchtete Seite (Highlight) des Textes wird oben rechts 
+                 gezeichnet, die unbeleuchtete unten links.
+
+HoverColor [TColor]
+  Diese Eigenschaft speichert die Hintergrundfarbe für den Fall, daß die Maus 
+  über das Label bewegt wird und die Link-Funktion aktiv ist.
+
+HoverFontColor [TColor]
+  Diese Eigenschaft speichert die Schriftfarbe für den Fall, daß die Maus über 
+  das Label bewegt wird und die Link-Funktion aktiv ist.
+
+Layout [TTextLayout]
+ - tlTop: Der Text wird am oberen Rand des Labels ausgerichtet.
+ - tlCenter: Der Text wird horizontal in der Mitte des Labels ausgerichtet.
+ - tlBottom: Der Text wird am unteren Rand des Labels ausgerichtet.
+
+LinkActive [boolean]
+  Gibt an, ob die Link-Funktion aktiv ist. Nur wenn diese Eigenschaft 
+  "true" ist, wird bei einem Click auf das Label der in "LinkedAdress" 
+  gespeicherte Link ausgeführt.
+
+LinkedAdress [string]
+  Die Zieladresse für die Linkfunktion. Das kann eine Internet-URL (WWW), 
+  eine eMail-Adresse oder eine Newsgroup sein.
+
+LinkType [TLinkType]
+ - ltEMail: Die Adresse in "LinkedAdress" ist eine eMail-Adresse.
+ - ltNews:  Die Die Adresse in "LinkedAdress" ist eine Newsgroup.
+ - ltNone:  Bei einem Klick auf die Komponente erfolgt kein Aufruf eines externen Programms.
+ - ltWWW:   Die Adresse in "LinkedAdress" ist eine URL im World Wide Web.
+
+ShadowColor [TColor]
+  Die Farbe der "unbeleuchteten" Textseite, wenn ShowShadow=true.
+
+ShadowOffset [word]
+  Der Abstand des "schattierten" Textes zum normalen Text, wenn 
+  ShowShadow=true.
+
+ShortenFilenames [boolean]
+  Falls diese Eigenschaft den Wert "true" hat und in der Eigenschaft 
+  "Caption" ein Dateiname gespeichert ist, wird der Dateiname so abgekürzt, 
+  daß er in die Anzeige passt. 
+  (z.B. C:\Programme\Borland\Delphi.exe zu C:\..\Delphi.exe)
+
+ShowHighlight [boolean]
+  Bestimmt, ob eine "beleuchtete" Textseite gezeichnet werden soll.
+
+ShowShadow [boolean]
+  Bestimmt, ob eine "schattierte" Textseite gezeichnet werden soll.
+
+Style [TLabelStyle]
+ - ls3DText:	Erhabener, schattierter Text mit der Hintergrundfarbe 
+                clBtnFace.
+ - lsLink:	Blauer Text mit aktivierter WWW-Link-Funktion.
+ - lsPath:	Texte zur Anzeige (und ggf. Abkürzung) von Dateinamen.
+ - lsWindow:	Label im Stil eines normalen Fensters (z.B. TEdit).
+
+UnderlineOnEnter [boolean]
+  Wenn diese Eigenschaft den Wert "true" hat, wird der dargestellte 
+  Text unterstrichen, wenn die Maus über das Label bewegt wird und die 
+  Link-Funktion aktiv ist.
+
+
+
+B) neue Ereignisse:
+-------------------
+
+OnExecuteLink [TNotifyEvent]
+  Wird ausgelöst, bevor Linkfunktion einen Internet-Browser, ein 
+  Mailprogramm oder einen Newsreader aufruft.
+
+OnMouseEnter [TNotifyEvent]
+  Wird ausgelöst, wenn die Maus über das Label bewegt wird.
+
+OnMouseExit [TNotifyEvent]
+  Wird ausgelöst, wenn die Maus das Label verlässt.
+
+
+
+Die Funktion der Komponente läßt sich außerdem im beigefügten 
+Demo-Programm im Ordner "Demo" sehen.

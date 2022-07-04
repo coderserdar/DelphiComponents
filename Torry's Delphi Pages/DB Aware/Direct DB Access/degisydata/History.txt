@@ -1,0 +1,192 @@
+{~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~}
+{                                                                  }
+{   Degisy Data Component Suite                                    }
+{   History List                                                   }
+{   (c)2001-2004 Degisy Software                                   }
+{   http://www.degisy.com                                          }
+{                                                                  }
+{~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~}
+
+
+-------------------------------------------------------------------
+
+11/25/2004  == TDsDbfTable ==
+(2.02)      [*] Fixed reading FoxPro memo-fields bug.
+                (Reported by Emil Groeneveld).
+
+-------------------------------------------------------------------
+
+10/14/2004  == TDsDbfTable ==
+(2.00)      [+] Reading memo-fields in Read-only mode.
+
+            == TDsClrTable ==
+            [+] Full support array fields.
+            [+] Reading memo-fields in Read-only mode.
+            [*] Fixed else one bug with a crypted Clarion tables.
+
+-------------------------------------------------------------------
+
+08/19/2004  == TDsClrTable ==
+(1.38)      [*] Fixed bug with a crypted Clarion tables.
+
+-------------------------------------------------------------------
+
+08/17/2004  == TDsDbfTable ==
+(1.37)      [*] Fixed bug with opening FoxPro tables.
+                (Reported by Abramchuk A.).
+
+-------------------------------------------------------------------
+
+07/05/2004  == TDsPdxTable ==
+(1.36)      [*] Fixed bug with Boolean field values.
+            [*] Fixed bug with codepage of Memo fields.
+                (Reported by Rozov E.A.).
+
+-------------------------------------------------------------------
+
+07/02/2004  == TDsXXXTable ==
+(1.34)      [*] Fixed bug AV with destroying components.
+
+            == TDsPdxTable ==
+            [*] Fixed bug with reading of some tables.
+            [+] New design-time and run-time packages.
+
+-------------------------------------------------------------------
+
+06/16/2004  == TDsPdxTable ==
+(1.32)      [*] Fixed bug with reading of blob and memo-fields.
+            [*] Changed error class DsResult.
+
+-------------------------------------------------------------------
+
+06/07/2004  == TDsPdxTable ==
+(1.30)      [*] Fixed bug with Time Fields.
+
+-------------------------------------------------------------------
+
+04/24/2004  == TDsPdxTable ==
+(1.26)      [*] Fixed bug on CreateTable method.
+            [+] Added a FieldDefs property to all TDsXXXTable classes.
+
+-------------------------------------------------------------------
+
+04/02/2004  == TDsPdxTable ==
+(1.25)      [*] Fixed bug on Delete last record from table (fixed
+                reallocation blocks function).
+                (Reported by Rozov E.A.).
+
+-------------------------------------------------------------------
+
+03/16/2004  == TDsDbfTable ==
+(1.24)      [*] Fixed bug in CreateTable method.
+
+            == TDsPdxTable ==
+            [+] CreateTable method was added.
+
+-------------------------------------------------------------------
+
+01/23/2004  == TDsDatabase ==
+(1.22)      [*] Fixed bug in CloseDataSets method.
+                (reported by Pedja).
+
+-------------------------------------------------------------------
+
+12/26/2003  == TDsPdxTable ==
+(1.20)      [*] Fixed a few bugs.
+
+-------------------------------------------------------------------
+
+12/04/2003  == TDsClrTable ==
+(1.18)      [*] DECIMAL fields opens as TBcdField and supports
+                precission property. Now you can create table with
+                decimal fields.
+            [*] Fixed bug on re-open crypted table.
+
+-------------------------------------------------------------------
+
+11/19/2003  == TDsPdxTable ==
+            [*] Fixed error for field names in non ANSI charset
+                (reported by Andrew Holubovski).
+
+-------------------------------------------------------------------
+
+11/18/2003  == TDsPdxTable ==
+(1.16)      [*] Incorrect value of last block record on last field.
+                Fixed :-) (reported by Igor Nemo).
+
+-------------------------------------------------------------------
+
+10/31/2003  == TDsClrTable ==
+(1.14)      [*] Fixed 'Field name missing' bug
+                (reported by Sergey L.Brylow).
+
+-------------------------------------------------------------------
+
+10/16/2003  == TDsPdxTable ==
+(1.12)      [*] Fixed GetData and SetData functions bug for
+                TimeStamp fields (reported by Alexander Vasiliev).
+
+-------------------------------------------------------------------
+
+09/07/2003  == TDsClrTable - TDsPdxTable ==
+(1.10)      [+] Added DateTime fields support.
+            [+] Now filter support Date and DateTime fields.
+            [+] Added support negative numbers to filter expression
+                ( Field=-6.12 )
+            [+] Added exception message on apply invalid filter
+                expression.   
+
+-------------------------------------------------------------------
+
+08/23/2003  == TDsClrTable - TDsPdxTable ==
+            [+] Added NULL constant support to the filter.
+            [*] Fixed filter error with dBase VII autoinc field.
+
+-------------------------------------------------------------------
+
+08/12/2003  == TDsClrTable - TDsPdxTable ==
+            [*] Fixed FilterOptions property.
+            [*] Fixed Locate function with loPartialKey parameter.
+            [*] Fixed DeleteTable method.
+
+-------------------------------------------------------------------
+
+08/07/2003  == TDsPdxTable ==
+            [*] Fixed bug for TFloatField and TCurrencyField.
+
+-------------------------------------------------------------------
+
+07/28/2003  == TDsClrTable - TDsPdxTable ==
+            [+] Added CodePage property.
+            [*] Fixed Access Violation on destroy component.
+
+-------------------------------------------------------------------
+
+07/10/2003  == TDsDatabase ==
+            [+] Added RegisterDataSet method.
+            [+] Added UnRegisterDataSet method.
+            [+] Added CloseDataSets method.
+            [+] Now inherited from TCustomConnection class.
+            [*] DegisyData.res file changed to DegisyData.dcr.
+
+-------------------------------------------------------------------
+
+07/03/2003  == TDsDbfTable ==
+            [*] Fixed bug in CreateTable function.
+            [*] Fixed bug in GetVersion function.
+            [+] Added TableLevel property for creation table with
+            CreateTable function. Available values: 3,4,5,7.
+
+-------------------------------------------------------------------
+
+06/20/2003  == TDsDbfTable ==
+            [*] Fixed bug in OpenTable function for VisualFoxPro
+            tables.
+
+            == TDsPdxTable ==
+            [*] Fixed bug in AppendRecord function not allowing to
+            add record to the empty table.
+            [*] Fixed bug in DeleteRecord function.
+
+-------------------------------------------------------------------
+

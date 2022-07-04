@@ -1,0 +1,39 @@
+package XPlorer_D5;
+
+{$R *.RES}
+{$R 'XPIB.res'}
+{$ALIGN ON}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS ON}
+{$RANGECHECKS ON}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE ON}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS ON}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$IMPLICITBUILD OFF}
+
+requires
+  vcl50;
+
+contains
+  XPInformationBar in 'XPInformationBar.pas',
+  XPInformationPanel in 'XPInformationPanel.pas',
+  XPStyler in 'XPStyler.pas',
+  info in 'XPIB_Resources\info.pas' {XPInfoDialog},
+  XPInformationDialog in 'XPInformationDialog.pas',
+  Bubblehint in 'XPIB_Resources\Bubblehint.pas' {BubbleHintForm};
+
+end.

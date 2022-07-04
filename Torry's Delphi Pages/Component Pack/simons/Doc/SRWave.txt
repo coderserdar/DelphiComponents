@@ -1,0 +1,102 @@
+TSRWavePlayer - Komponente (C)opyright 2000   Version 1.02
+
+Autor : Simon Reinhardt
+eMail : reinhardt@picsoft.de
+Internet : http://www.picsoft.de
+
+  Die Komponente TSRWavePlayer kapselt die Methoden PlaySound (32Bit) bzw. sndPlaySound (16Bit)
+  der Windows-API zur Wiedergabe von Wave-Sounds.
+
+  Diese Komponente ist Public Domain, das Urheberrecht liegt aber beim Autor. 
+
+  Fragen und Verbesserungsvorschläge sind immer willkommen.
+
+
+
+Dateiumfang:
+------------
+
+SRWave.txt 	- Diese Datei
+SRWave.pas	- Quelltext der Komponente
+SRWave.d16	- Resourcendatei der 16Bit-Komponente für Delphi 1
+SRWave.d32	- Resourcendatei der 32Bit-Komponente für Delphi 2 bis 5
+SRDefine.inc	- Inculdedatei für die Komponente	
+	
+Ordner	WaveDemo	- TEnhancedEdit-Demo-Projekt für Delphi 2 oder 3
+	WaveMain.dfm	- Formulardatei der MainForm
+	WaveMain.pas	- Quelltext der MainForm-Unit
+	WaveDemo.dof	- Compileroptionen des Demo-Projekts
+	WaveDemo.dpr	- Quelltext des Demo-Projekts
+	WaveDemo.res	- Resourcendatei des Demo-Projekts
+
+
+Installation:
+-------------
+
+In Delphi 1:
+------------
+1. Alle Dateien in das Delphi-Komponenten-Verzeichnis entpacken.
+2. Menü Optionen : Komponente installieren
+3. Schaltfläche Hinzufügen / Durchsuchen
+4. Datei SRWave.pas im Delphi-Komponenten-Verzeichnis suchen und mit
+   OK bestätigen.
+5. Die Komponente erscheint in der Komponenten-Gruppe "Simon"
+
+In Delphi 2:
+------------
+1. Alle Dateien in das Delphi-Komponenten-Verzeichnis entpacken.
+2. Menü Komponente :  installieren
+3. Schaltfläche Hinzufügen / Durchsuchen
+4. Datei SRWave.pas im Delphi-Komponenten-Verzeichnis suchen und mit
+   OK bestätigen.
+5. Die Komponente erscheint in der Komponenten-Gruppe "Simon"
+
+Ab Delphi 3:
+------------
+1. Alle Dateien in das Delphi-Komponenten-Verzeichnis entpacken.
+2. Menü Komponente :  Komponente installieren
+3. Schaltfläche Durchsuchen (hinter dem Eingabefeld für den Unit-Namen)
+4. Datei SRWave.pas im Delphi-Komponenten-Verzeichnis suchen und mit
+   OK bestätigen.
+5. Die Rückfrage nach dem Neukompilieren des Packages bestätigen.
+6. Die Komponente erscheint in der Komponenten-Gruppe "Simon"
+   (Evtl. muß eine bereits installierte, ältere Version der Komponente
+    zuvor entfernt werden)
+
+
+Funktion:
+---------
+
+Eigenschaften:
+--------------
+1. Async - 
+   Async=true :  Die Programmausführung wird unmittelbar nach dem Start der Wiedergabe nach dem
+                 fortgesetzt. 
+   Async=false:  Die Programmausführung nach dem Starten der Wiedergabe erst fortgesetzt, wenn 
+                 die Wiedergabe beendet ist.
+2. Loop - Wenn Loop=ztrue, erfolgt die Wiedergabe als Schleife, d.h. sie wird immer wieder von 
+   vorne begonnen. (Nur möglich bei Async=true)
+3. Name - wie bei TPanel
+4. Tag - wie bei TPanel
+5. WaveLocation - Speicherort des in der Eigenschaft Wavename angegebenen Sounds:
+   wlRAM : Sound wird aus dem RAM-Speicher abgespielt.
+   wlResource : Sound ist in einer Resourcendatei gespeichert.
+   wlFile : Sound ist in eine .wav-Datei gespeichert
+   {Diese Eigenschaft besitzt nur die 32Bit-Komponente!}
+6. WaveName - Name des abzuspielenden Sounds
+
+Ereignisse:
+-----------
+1. OnAfterPlay - Wird ausgelöst, sobald die Kontrolle an das aufrufende Programm zurückgegeben
+   wird. 
+   Async=true :  OnAfterPlay wird unmittelbar nach dem Start der Wiedergabe ausgelöst. 
+   Async=false:  OnAfterPlay wird erst nach dem Beenden der Wiedergabe ausgelöst.
+2. OnBeforePlay - Wird unmittelbar vor dem Start der Wiedergabe ausgelöst
+
+Methoden:
+---------
+1. Play - Die Wiedergabe des in der Eigenschaft WaveName angegebenen Sounds starten
+2. Stop - Die Wiedergabe anhalten (Nur wenn Async=true)
+
+Die Funktion der Komponenten läßt sich außerdem im beigefügten 
+Demo-Programm im Ordner "Demo" sehen.

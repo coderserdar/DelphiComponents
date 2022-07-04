@@ -1,0 +1,1027 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+<meta name="GENERATOR" content="PasDoc 0.11.0">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<title>SqlitePass Database Objects: SqlitePassConst</title>
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body bgcolor="#ffffff" text="#000000" link="#0000ff" vlink="#800080" alink="#FF0000">
+<h1 class="unit">Unit SqlitePassConst</h1>
+<table class="sections wide_list">
+<tr>
+<td><a class="section"  href="#%40Description">Description</a></td><td>uses</td><td>Classes, Interfaces, Objects and Records</td><td>Functions and Procedures</td><td>Types</td><td><a class="section"  href="#%40Constants">Constants</a></td><td>Variables</td></tr></table>
+<a name="%40Description"></a><h2 class="description">Description</h2>
+<p>
+The unit <code>SqlitePassConst</code> defines all the constants used by the SqlitePass Database Objects Project.
+
+<p>&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;
+
+<p>This program is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License as published by the Free Software Foundation; either version 2.1 of the License, or (at your option) any later version.
+
+<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more details.
+
+<p>You should have received a copy of the GNU Lesser General Public License along with this program; if not, write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+
+<p>&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;
+
+<p>Messages localisation unit Author : Luc DAVID Email: luckylazarus@free.fr 2006-2010
+
+<p>Major changes are indicated in the \Documentation\changes.pdf file Last update : 09.05.2010
+
+<p>&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;</p>
+<a name="%40Uses"></a><h2 class="overview">Overview</h2>
+<a name="%40Constants"></a><h3 class="summary">Constants</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#AfterIdentifierSeparator">AfterIdentifierSeparator</a></b> = [<a   href="SqlitePassConst.html#KwSpace">KwSpace</a>, <a   href="SqlitePassConst.html#kwComma">KwComma</a>, <a   href="SqlitePassConst.html#KwLineReturn">kwLineReturn</a>, <a   href="SqlitePassConst.html#kwBraceClose">kwBraceClose</a>, <a   href="SqlitePassConst.html#kwSQLEnd">KwSqlEnd</a>];</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#BeforeIdentifierSeparator">BeforeIdentifierSeparator</a></b> = [<a   href="SqlitePassConst.html#KwSpace">KwSpace</a>, <a   href="SqlitePassConst.html#kwComma">KwComma</a>, <a   href="SqlitePassConst.html#kwLineBreak">kwLineBreak</a>, <a   href="SqlitePassConst.html#kwBraceOpen">kwBraceOpen</a>];</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#DefaultSQLiteLibrary">DefaultSQLiteLibrary</a></b> = 'sqlite3.dll';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#DefaultStringFieldSize">DefaultStringFieldSize</a></b> = 50;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#fsModified">fsModified</a></b>     = 1;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#fsModifiedFlag">fsModifiedFlag</a></b> = 1;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#fsNotModified">fsNotModified</a></b>  = 0;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#fsNotNull">fsNotNull</a></b>      = 0;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#fsNull">fsNull</a></b>         = 1;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#fsNullFlag">fsNullFlag</a></b>    = 0;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#IdentifierChar">IdentifierChar</a></b>: Set of Char = ['0'..'9', 'a'..'z', 'A'..'Z', '_', '.', 'é', 'è', 'ê'];</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#JulianEpoch">JulianEpoch</a></b> = -2415018.5;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#KexiBlobs_CreateSQLStmt">KexiBlobs_CreateSQLStmt</a></b> = 'CREATE TABLE kexi__blobs (o_id INTEGER PRIMARY KEY, o_data BLOB, o_name Text(200), o_caption Text(200), o_mime Text(200) NOT NULL, o_folder_id Integer UNSIGNED);';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#KexiDb_CreateSQLStmt">KexiDb_CreateSQLStmt</a></b> = 'CREATE TABLE kexi__db (db_property Text(32), db_value CLOB);';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#KexiFieldConstraints">KexiFieldConstraints</a></b> = 'NoConstraints,AutoInc,Unique,PrimaryKey,ForeignKey,NotNull,NotEmpty,Indexed';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#KexiFields_CreateSQLStmt">KexiFields_CreateSQLStmt</a></b> = 'CREATE TABLE kexi__fields (t_id Integer UNSIGNED, f_type Byte UNSIGNED, f_name Text(200), f_length Integer, f_precision Integer, f_constraints Integer, f_options Integer, f_default Text(200), f_order Integer, f_caption Text(200), f_help CLOB);';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#KexiObjectData_CreateSQLStmt">KexiObjectData_CreateSQLStmt</a></b> = 'CREATE TABLE kexi__objectdata (o_id Integer UNSIGNED NOT NULL, o_data CLOB, o_sub_id Text(200));';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#KexiObjects_CreateSQLStmt">KexiObjects_CreateSQLStmt</a></b> = 'CREATE TABLE kexi__objects (o_id INTEGER PRIMARY KEY, o_type Byte UNSIGNED, o_name Text(200), o_caption Text(200), o_desc CLOB);';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#KexiParts_CreateSQLStmt">KexiParts_CreateSQLStmt</a></b> = 'CREATE TABLE kexi__parts (p_id INTEGER PRIMARY KEY, p_name Text(200), p_mime Text(200), p_url Text(200));';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#KexiSystemTables">KexiSystemTables</a></b>:array[0..7] of string =
+           ('kexi__db',
+            'kexi__fields',
+            'kexi__final',
+            'kexi__objects',
+            'kexi__objectdata',
+            'kexi__parts',
+            'kexi__useractions',
+            'kexi__blobs');</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#kwAll">kwAll</a></b> = 'ALL';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#KwAllFields">KwAllFields</a></b> = '*';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#KwAnd">KwAnd</a></b> = 'AND';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#KwASAlias">KwASAlias</a></b> = 'AS';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#kwBraceClose">kwBraceClose</a></b> = ')';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#kwBraceOpen">kwBraceOpen</a></b> = '(';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#kwBracketClose">kwBracketClose</a></b> = ']';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#kwBracketOpen">kwBracketOpen</a></b> = '[';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#kwComma">kwComma</a></b> = ',';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#kwCreate">kwCreate</a></b> = 'CREATE';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#kwCreateTable">kwCreateTable</a></b> = 'CREATE TABLE';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#kwCreateTemporaryTable">kwCreateTemporaryTable</a></b> = 'CREATE TEMPORARY TABLE';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#kwCreateTempTable">kwCreateTempTable</a></b> = 'CREATE TEMP TABLE';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#kwDelete">kwDelete</a></b> = 'DELETE';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#kwDistinct">kwDistinct</a></b> = 'DISTINCT';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#kwDot">kwDot</a></b> = '.';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#kwDoubleQuote">kwDoubleQuote</a></b> = '&quot;';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#kwEqual">kwEqual</a></b> = '=';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#kwFrom">kwFrom</a></b>    = 'FROM';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#kwGraveQuote">kwGraveQuote</a></b> = '`';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#kwGroupBy">kwGroupBy</a></b> = 'GROUP BY';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#kwHaving">kwHaving</a></b>  = 'HAVING';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#kwInsert">kwInsert</a></b> = 'INSERT';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#kwLike">kwLike</a></b>    = 'LIKE';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#kwLimit">kwLimit</a></b>   = 'LIMIT';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#kwLineBreak">kwLineBreak</a></b> = Char($A);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#kwLineEnd">kwLineEnd</a></b> = <a   href="SqlitePassConst.html#KwLineReturn">KwLineReturn</a> + <a   href="SqlitePassConst.html#kwLineBreak">KwLineBreak</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#KwLineReturn">KwLineReturn</a></b> = Char($D);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#kwOrderBy">kwOrderBy</a></b> = 'ORDER BY';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#kwPragmaTableInfo">kwPragmaTableInfo</a></b> = 'PRAGMA TABLE_INFO';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#kwSelect">kwSelect</a></b>  = 'SELECT';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#kwSingleQuote">kwSingleQuote</a></b> = '''';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#KwSpace">KwSpace</a></b> = ' ';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#kwSQLEnd">kwSQLEnd</a></b>  = ';' ;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#kwUpdate">kwUpdate</a></b> = 'UPDATE';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#kwWhere">kwWhere</a></b>   = 'WHERE';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#QuoteChars">QuoteChars</a></b> = [<a   href="SqlitePassConst.html#kwSingleQuote">KwSingleQuote</a>, <a   href="SqlitePassConst.html#kwDoubleQuote">KwDoubleQuote</a>, <a   href="SqlitePassConst.html#kwBracketOpen">kwBracketOpen</a>, <a   href="SqlitePassConst.html#kwBracketClose">kwBracketClose</a>];</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#QuoteCharsArray">QuoteCharsArray</a></b>: Array[0..4] of String = (<a   href="SqlitePassConst.html#kwSingleQuote">KwSingleQuote</a>, <a   href="SqlitePassConst.html#kwDoubleQuote">KwDoubleQuote</a>, <a   href="SqlitePassConst.html#kwGraveQuote">kwGraveQuote</a>, <a   href="SqlitePassConst.html#kwBracketOpen">kwBracketOpen</a>, <a   href="SqlitePassConst.html#kwBracketClose">kwBracketClose</a>);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#rsDeleted">rsDeleted</a></b>     = 1;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#rsDeletedFlag">rsDeletedFlag</a></b>  = 4;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#rsEnabled">rsEnabled</a></b>     = 0;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#rsEnabledFlag">rsEnabledFlag</a></b>  = 0;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#rsInserted">rsInserted</a></b>    = 1;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#rsInsertedFlag">rsInsertedFlag</a></b> = 3;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#rsModified">rsModified</a></b>    = 1;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#rsModifiedFlag">rsModifiedFlag</a></b> = 2;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#rsNotDeleted">rsNotDeleted</a></b>  = 0;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#rsNotEnabled">rsNotEnabled</a></b>  = 1;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#rsNotInserted">rsNotInserted</a></b> = 0;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#rsNotModified">rsNotModified</a></b> = 0;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#rsNotVisible">rsNotVisible</a></b>  = 1;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#rsVisible">rsVisible</a></b>     = 0;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#rsVisibleFlag">rsVisibleFlag</a></b>  = 1;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#SelectStmtFieldDefs">SelectStmtFieldDefs</a></b>: array[0..4] of String = (<a   href="SqlitePassConst.html#kwSelect">kwSelect</a>, <a   href="SqlitePassConst.html#kwAll">kwAll</a>, <a   href="SqlitePassConst.html#kwDistinct">KwDistinct</a>, <a   href="SqlitePassConst.html#kwComma">kwComma</a>, <a   href="SqlitePassConst.html#kwSQLEnd">KwSQLEnd</a>);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#SelectStmtKeywords">SelectStmtKeywords</a></b>: array[0..7] of String = (<a   href="SqlitePassConst.html#kwSelect">kwSelect</a>, <a   href="SqlitePassConst.html#kwFrom">kwFrom</a>, <a   href="SqlitePassConst.html#kwWhere">kwWhere</a>, <a   href="SqlitePassConst.html#kwGroupBy">kwGroupBy</a>, <a   href="SqlitePassConst.html#kwHaving">kwHaving</a>, <a   href="SqlitePassConst.html#kwOrderBy">kwOrderBy</a>, <a   href="SqlitePassConst.html#kwLimit">kwLimit</a>, <a   href="SqlitePassConst.html#kwSQLEnd">kwSQLEnd</a>);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#SelectStmtTableDefs">SelectStmtTableDefs</a></b>: array[0..3] of String = (<a   href="SqlitePassConst.html#kwFrom">kwFrom</a>, <a   href="SqlitePassConst.html#KwASAlias">kwAsAlias</a>, <a   href="SqlitePassConst.html#kwComma">kwComma</a>, <a   href="SqlitePassConst.html#kwSQLEnd">KwSQLEnd</a>);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#SqlitePassDatabaseVersion">SqlitePassDatabaseVersion</a></b> = '0.51';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#SqlitePassDatasetVersion">SqlitePassDatasetVersion</a></b> = '0.51';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#SqlitePassDbSettingsTable">SqlitePassDbSettingsTable</a></b> = 'SQLitePass__DbSettings';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#SqlitePassPackageVersion">SqlitePassPackageVersion</a></b> = '0.51';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#SqlitePassPathSeparator">SqlitePassPathSeparator</a></b> = '\';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#SqlitePassSQLStmtDefsTable">SqlitePassSQLStmtDefsTable</a></b> = 'SQLitePass__SQLStmts';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#SqlitePassSQLTokenTypeAsString">SqlitePassSQLTokenTypeAsString</a></b>: Array[0..41] of String =
+  ('ttKeyword', 'ttIdentifier', 'ttDatabaseIdentifier', 'ttTableIdentifier', 'ttFieldIdentifier', 'ttFunctionIdentifier',
+   'ttStar', 'ttNumber', 'ttDateTime', 'ttSingleQuote', 'ttDoubleQuote', 'ttGraveQuote', 'ttHash', 'ttPercent', 'ttBraceOpen', 'ttBraceClose', 'ttSquareOpen', 'ttSquareClose',
+   'ttRoundOpen', 'ttRoundClose', 'ttWhitespace', 'ttComment', 'ttComma', 'ttColon', 'ttSemiColon', 'ttEqual', 'ttNotEqual',
+   'ttGreater', 'ttGreaterOrEqual', 'ttLesser', 'ttLesserOrEqual', 'ttNul', 'ttNotNull', 'ttPlus', 'ttMinus', 'ttAnd', 'ttOr', 'ttDot', 'ttSlash', 'ttSeparator',
+   'ttEOF', 'ttUnknown');</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#SqlitePassStorageVersion">SqlitePassStorageVersion</a></b> = '0.40';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#StmtTypeKeywords">StmtTypeKeywords</a></b>: array[0..7] of String = (<a   href="SqlitePassConst.html#kwCreateTemporaryTable">kwCreateTemporaryTable</a>, <a   href="SqlitePassConst.html#kwCreateTempTable">kwCreateTempTable</a>, <a   href="SqlitePassConst.html#kwCreateTable">kwCreateTable</a>, <a   href="SqlitePassConst.html#kwCreate">kwCreate</a>,
+                                           <a   href="SqlitePassConst.html#kwSelect">kwSelect</a>,  <a   href="SqlitePassConst.html#kwInsert">KwInsert</a>, <a   href="SqlitePassConst.html#kwUpdate">kwUpdate</a>, <a   href="SqlitePassConst.html#kwDelete">kwDelete</a>);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#UnixEpoch">UnixEpoch</a></b> = <a   href="SqlitePassConst.html#JulianEpoch">JulianEpoch</a> + 2440587.5;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#vlLog">vlLog</a></b>        = 1;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#vlLogAndShow">vlLogAndShow</a></b> = 3;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#vlShow">vlShow</a></b>       = 2;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassConst.html#vlSilent">vlSilent</a></b>     = 0;</code></td>
+</tr>
+</table>
+<h2 class="description">Description</h2>
+<h3 class="detail">Constants</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="AfterIdentifierSeparator"></a><code><b>AfterIdentifierSeparator</b> = [<a   href="SqlitePassConst.html#KwSpace">KwSpace</a>, <a   href="SqlitePassConst.html#kwComma">KwComma</a>, <a   href="SqlitePassConst.html#KwLineReturn">kwLineReturn</a>, <a   href="SqlitePassConst.html#kwBraceClose">kwBraceClose</a>, <a   href="SqlitePassConst.html#kwSQLEnd">KwSqlEnd</a>];</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="BeforeIdentifierSeparator"></a><code><b>BeforeIdentifierSeparator</b> = [<a   href="SqlitePassConst.html#KwSpace">KwSpace</a>, <a   href="SqlitePassConst.html#kwComma">KwComma</a>, <a   href="SqlitePassConst.html#kwLineBreak">kwLineBreak</a>, <a   href="SqlitePassConst.html#kwBraceOpen">kwBraceOpen</a>];</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="DefaultSQLiteLibrary"></a><code><b>DefaultSQLiteLibrary</b> = 'sqlite3.dll';</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Default sqlite library file</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="DefaultStringFieldSize"></a><code><b>DefaultStringFieldSize</b> = 50;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+TFields</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="fsModified"></a><code><b>fsModified</b>     = 1;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Default : At loading time, AllocMem initialize memory to 0 = value is not null</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="fsModifiedFlag"></a><code><b>fsModifiedFlag</b> = 1;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="fsNotModified"></a><code><b>fsNotModified</b>  = 0;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="fsNotNull"></a><code><b>fsNotNull</b>      = 0;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="fsNull"></a><code><b>fsNull</b>         = 1;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Default value when testing field status</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="fsNullFlag"></a><code><b>fsNullFlag</b>    = 0;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Internal Field status flag position in byte (<code>fsNullFlag</code>,<a class="normal"  href="SqlitePassConst.html#fsModifiedFlag">fsModifiedFlag</a>,0,0,0,0,0,0)</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="IdentifierChar"></a><code><b>IdentifierChar</b>: Set of Char = ['0'..'9', 'a'..'z', 'A'..'Z', '_', '.', 'é', 'è', 'ê'];</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+<a class="normal"  href="SqlitePassConst.html#kwPragmaTableInfo">kwPragmaTableInfo</a>,</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="JulianEpoch"></a><code><b>JulianEpoch</b> = -2415018.5;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Date</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="KexiBlobs_CreateSQLStmt"></a><code><b>KexiBlobs_CreateSQLStmt</b> = 'CREATE TABLE kexi__blobs (o_id INTEGER PRIMARY KEY, o_data BLOB, o_name Text(200), o_caption Text(200), o_mime Text(200) NOT NULL, o_folder_id Integer UNSIGNED);';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="KexiDb_CreateSQLStmt"></a><code><b>KexiDb_CreateSQLStmt</b> = 'CREATE TABLE kexi__db (db_property Text(32), db_value CLOB);';</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+SQL Stqtements used to create system tables needed by Kexi (used by <a class="normal"  href="SqlitePassDbo.TSqlitePassDatabase.html#CreateDatabase">TSqlitePassDatabase.CreateDatabase</a>)</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="KexiFieldConstraints"></a><code><b>KexiFieldConstraints</b> = 'NoConstraints,AutoInc,Unique,PrimaryKey,ForeignKey,NotNull,NotEmpty,Indexed';</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+NoConstraints = 0, AutoInc = 1, ? Unique = 2, ? PrimaryKey = 4, ? ForeignKey = 8, -&gt; FieldType NotNull = 16, ? NotEmpty = 32, ? //!&lt; only legal for string-like and blob fields Indexed = 64 -&gt; IsIndexField</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="KexiFields_CreateSQLStmt"></a><code><b>KexiFields_CreateSQLStmt</b> = 'CREATE TABLE kexi__fields (t_id Integer UNSIGNED, f_type Byte UNSIGNED, f_name Text(200), f_length Integer, f_precision Integer, f_constraints Integer, f_options Integer, f_default Text(200), f_order Integer, f_caption Text(200), f_help CLOB);';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="KexiObjectData_CreateSQLStmt"></a><code><b>KexiObjectData_CreateSQLStmt</b> = 'CREATE TABLE kexi__objectdata (o_id Integer UNSIGNED NOT NULL, o_data CLOB, o_sub_id Text(200));';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="KexiObjects_CreateSQLStmt"></a><code><b>KexiObjects_CreateSQLStmt</b> = 'CREATE TABLE kexi__objects (o_id INTEGER PRIMARY KEY, o_type Byte UNSIGNED, o_name Text(200), o_caption Text(200), o_desc CLOB);';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="KexiParts_CreateSQLStmt"></a><code><b>KexiParts_CreateSQLStmt</b> = 'CREATE TABLE kexi__parts (p_id INTEGER PRIMARY KEY, p_name Text(200), p_mime Text(200), p_url Text(200));';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="KexiSystemTables"></a><code><b>KexiSystemTables</b>:array[0..7] of string =
+           ('kexi__db',
+            'kexi__fields',
+            'kexi__final',
+            'kexi__objects',
+            'kexi__objectdata',
+            'kexi__parts',
+            'kexi__useractions',
+            'kexi__blobs');</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Kexi system tables</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="kwAll"></a><code><b>kwAll</b> = 'ALL';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="KwAllFields"></a><code><b>KwAllFields</b> = '*';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="KwAnd"></a><code><b>KwAnd</b> = 'AND';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="KwASAlias"></a><code><b>KwASAlias</b> = 'AS';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="kwBraceClose"></a><code><b>kwBraceClose</b> = ')';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="kwBraceOpen"></a><code><b>kwBraceOpen</b> = '(';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="kwBracketClose"></a><code><b>kwBracketClose</b> = ']';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="kwBracketOpen"></a><code><b>kwBracketOpen</b> = '[';</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Keywords for Quotes</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="kwComma"></a><code><b>kwComma</b> = ',';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="kwCreate"></a><code><b>kwCreate</b> = 'CREATE';</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Keywords definition for [create] statement</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="kwCreateTable"></a><code><b>kwCreateTable</b> = 'CREATE TABLE';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="kwCreateTemporaryTable"></a><code><b>kwCreateTemporaryTable</b> = 'CREATE TEMPORARY TABLE';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="kwCreateTempTable"></a><code><b>kwCreateTempTable</b> = 'CREATE TEMP TABLE';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="kwDelete"></a><code><b>kwDelete</b> = 'DELETE';</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Keywords definition for [delete] statement</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="kwDistinct"></a><code><b>kwDistinct</b> = 'DISTINCT';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="kwDot"></a><code><b>kwDot</b> = '.';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="kwDoubleQuote"></a><code><b>kwDoubleQuote</b> = '&quot;';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="kwEqual"></a><code><b>kwEqual</b> = '=';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="kwFrom"></a><code><b>kwFrom</b>    = 'FROM';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="kwGraveQuote"></a><code><b>kwGraveQuote</b> = '`';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="kwGroupBy"></a><code><b>kwGroupBy</b> = 'GROUP BY';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="kwHaving"></a><code><b>kwHaving</b>  = 'HAVING';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="kwInsert"></a><code><b>kwInsert</b> = 'INSERT';</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Keywords definition for [Insert] statement</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="kwLike"></a><code><b>kwLike</b>    = 'LIKE';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="kwLimit"></a><code><b>kwLimit</b>   = 'LIMIT';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="kwLineBreak"></a><code><b>kwLineBreak</b> = Char($A);</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="kwLineEnd"></a><code><b>kwLineEnd</b> = <a   href="SqlitePassConst.html#KwLineReturn">KwLineReturn</a> + <a   href="SqlitePassConst.html#kwLineBreak">KwLineBreak</a>;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="KwLineReturn"></a><code><b>KwLineReturn</b> = Char($D);</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="kwOrderBy"></a><code><b>kwOrderBy</b> = 'ORDER BY';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="kwPragmaTableInfo"></a><code><b>kwPragmaTableInfo</b> = 'PRAGMA TABLE_INFO';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="kwSelect"></a><code><b>kwSelect</b>  = 'SELECT';</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Keywords definition for [select] statement</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="kwSingleQuote"></a><code><b>kwSingleQuote</b> = '''';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="KwSpace"></a><code><b>KwSpace</b> = ' ';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="kwSQLEnd"></a><code><b>kwSQLEnd</b>  = ';' ;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Global Keywords definition</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="kwUpdate"></a><code><b>kwUpdate</b> = 'UPDATE';</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Keywords definition for [update] statement</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="kwWhere"></a><code><b>kwWhere</b>   = 'WHERE';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="QuoteChars"></a><code><b>QuoteChars</b> = [<a   href="SqlitePassConst.html#kwSingleQuote">KwSingleQuote</a>, <a   href="SqlitePassConst.html#kwDoubleQuote">KwDoubleQuote</a>, <a   href="SqlitePassConst.html#kwBracketOpen">kwBracketOpen</a>, <a   href="SqlitePassConst.html#kwBracketClose">kwBracketClose</a>];</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="QuoteCharsArray"></a><code><b>QuoteCharsArray</b>: Array[0..4] of String = (<a   href="SqlitePassConst.html#kwSingleQuote">KwSingleQuote</a>, <a   href="SqlitePassConst.html#kwDoubleQuote">KwDoubleQuote</a>, <a   href="SqlitePassConst.html#kwGraveQuote">kwGraveQuote</a>, <a   href="SqlitePassConst.html#kwBracketOpen">kwBracketOpen</a>, <a   href="SqlitePassConst.html#kwBracketClose">kwBracketClose</a>);</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="rsDeleted"></a><code><b>rsDeleted</b>     = 1;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Default : At loading time, AllocMem initialize memory to 0 = value is not Modified</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="rsDeletedFlag"></a><code><b>rsDeletedFlag</b>  = 4;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="rsEnabled"></a><code><b>rsEnabled</b>     = 0;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Default value when testing record status</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="rsEnabledFlag"></a><code><b>rsEnabledFlag</b>  = 0;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Internal record status flag position in byte (<a class="normal"  href="SqlitePassConst.html#rsEnabled">rsEnabled</a>, <a class="normal"  href="SqlitePassConst.html#rsModified">rsModified</a>, <a class="normal"  href="SqlitePassConst.html#rsInserted">rsInserted</a>, <a class="normal"  href="SqlitePassConst.html#rsDeleted">rsDeleted</a>, <a class="normal"  href="SqlitePassConst.html#rsVisible">rsVisible</a>, 0,0,0)</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="rsInserted"></a><code><b>rsInserted</b>    = 1;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="rsInsertedFlag"></a><code><b>rsInsertedFlag</b> = 3;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="rsModified"></a><code><b>rsModified</b>    = 1;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Default : At loading time, AllocMem initialize memory to 0 = value is not Inserted</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="rsModifiedFlag"></a><code><b>rsModifiedFlag</b> = 2;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="rsNotDeleted"></a><code><b>rsNotDeleted</b>  = 0;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="rsNotEnabled"></a><code><b>rsNotEnabled</b>  = 1;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Default : At loading time, AllocMem initialize memory to 0 = value is Enabled</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="rsNotInserted"></a><code><b>rsNotInserted</b> = 0;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="rsNotModified"></a><code><b>rsNotModified</b> = 0;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="rsNotVisible"></a><code><b>rsNotVisible</b>  = 1;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Default : At loading time, AllocMem initialize memory to 0 = value is Visible</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="rsVisible"></a><code><b>rsVisible</b>     = 0;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Default : At loading time, AllocMem initialize memory to 0 = value is not Deleted</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="rsVisibleFlag"></a><code><b>rsVisibleFlag</b>  = 1;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SelectStmtFieldDefs"></a><code><b>SelectStmtFieldDefs</b>: array[0..4] of String = (<a   href="SqlitePassConst.html#kwSelect">kwSelect</a>, <a   href="SqlitePassConst.html#kwAll">kwAll</a>, <a   href="SqlitePassConst.html#kwDistinct">KwDistinct</a>, <a   href="SqlitePassConst.html#kwComma">kwComma</a>, <a   href="SqlitePassConst.html#kwSQLEnd">KwSQLEnd</a>);</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SelectStmtKeywords"></a><code><b>SelectStmtKeywords</b>: array[0..7] of String = (<a   href="SqlitePassConst.html#kwSelect">kwSelect</a>, <a   href="SqlitePassConst.html#kwFrom">kwFrom</a>, <a   href="SqlitePassConst.html#kwWhere">kwWhere</a>, <a   href="SqlitePassConst.html#kwGroupBy">kwGroupBy</a>, <a   href="SqlitePassConst.html#kwHaving">kwHaving</a>, <a   href="SqlitePassConst.html#kwOrderBy">kwOrderBy</a>, <a   href="SqlitePassConst.html#kwLimit">kwLimit</a>, <a   href="SqlitePassConst.html#kwSQLEnd">kwSQLEnd</a>);</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SelectStmtTableDefs"></a><code><b>SelectStmtTableDefs</b>: array[0..3] of String = (<a   href="SqlitePassConst.html#kwFrom">kwFrom</a>, <a   href="SqlitePassConst.html#KwASAlias">kwAsAlias</a>, <a   href="SqlitePassConst.html#kwComma">kwComma</a>, <a   href="SqlitePassConst.html#kwSQLEnd">KwSQLEnd</a>);</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqlitePassDatabaseVersion"></a><code><b>SqlitePassDatabaseVersion</b> = '0.51';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqlitePassDatasetVersion"></a><code><b>SqlitePassDatasetVersion</b> = '0.51';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqlitePassDbSettingsTable"></a><code><b>SqlitePassDbSettingsTable</b> = 'SQLitePass__DbSettings';</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+System tables</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqlitePassPackageVersion"></a><code><b>SqlitePassPackageVersion</b> = '0.51';</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Components version</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqlitePassPathSeparator"></a><code><b>SqlitePassPathSeparator</b> = '\';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqlitePassSQLStmtDefsTable"></a><code><b>SqlitePassSQLStmtDefsTable</b> = 'SQLitePass__SQLStmts';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqlitePassSQLTokenTypeAsString"></a><code><b>SqlitePassSQLTokenTypeAsString</b>: Array[0..41] of String =
+  ('ttKeyword', 'ttIdentifier', 'ttDatabaseIdentifier', 'ttTableIdentifier', 'ttFieldIdentifier', 'ttFunctionIdentifier',
+   'ttStar', 'ttNumber', 'ttDateTime', 'ttSingleQuote', 'ttDoubleQuote', 'ttGraveQuote', 'ttHash', 'ttPercent', 'ttBraceOpen', 'ttBraceClose', 'ttSquareOpen', 'ttSquareClose',
+   'ttRoundOpen', 'ttRoundClose', 'ttWhitespace', 'ttComment', 'ttComma', 'ttColon', 'ttSemiColon', 'ttEqual', 'ttNotEqual',
+   'ttGreater', 'ttGreaterOrEqual', 'ttLesser', 'ttLesserOrEqual', 'ttNul', 'ttNotNull', 'ttPlus', 'ttMinus', 'ttAnd', 'ttOr', 'ttDot', 'ttSlash', 'ttSeparator',
+   'ttEOF', 'ttUnknown');</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqlitePassStorageVersion"></a><code><b>SqlitePassStorageVersion</b> = '0.40';</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Storage version</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="StmtTypeKeywords"></a><code><b>StmtTypeKeywords</b>: array[0..7] of String = (<a   href="SqlitePassConst.html#kwCreateTemporaryTable">kwCreateTemporaryTable</a>, <a   href="SqlitePassConst.html#kwCreateTempTable">kwCreateTempTable</a>, <a   href="SqlitePassConst.html#kwCreateTable">kwCreateTable</a>, <a   href="SqlitePassConst.html#kwCreate">kwCreate</a>,
+                                           <a   href="SqlitePassConst.html#kwSelect">kwSelect</a>,  <a   href="SqlitePassConst.html#kwInsert">KwInsert</a>, <a   href="SqlitePassConst.html#kwUpdate">kwUpdate</a>, <a   href="SqlitePassConst.html#kwDelete">kwDelete</a>);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Keywords definitions for statement type checking</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="UnixEpoch"></a><code><b>UnixEpoch</b> = <a   href="SqlitePassConst.html#JulianEpoch">JulianEpoch</a> + 2440587.5;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="vlLog"></a><code><b>vlLog</b>        = 1;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="vlLogAndShow"></a><code><b>vlLogAndShow</b> = 3;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="vlShow"></a><code><b>vlShow</b>       = 2;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="vlSilent"></a><code><b>vlSilent</b>     = 0;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Verbose Level (For error handling)</p>
+</td></tr>
+</table>
+<hr noshade size="1"><span class="appinfo"><em>Generated by <a  target="_parent" href="http://pasdoc.sourceforge.net/">PasDoc 0.11.0</a> on 2010-05-16 23:39:43</em>
+</span>
+</body></html>

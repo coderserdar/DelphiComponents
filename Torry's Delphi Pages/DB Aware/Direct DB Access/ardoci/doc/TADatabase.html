@@ -1,0 +1,181 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="style.css">
+<title>TDatabase</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+<table width="100%" border="0" cellpadding="5" cellspacing="0">
+   <tr>
+   <td align=center bgColor=#009999>
+    <font class=fontmainbig color="#FFFFFF">
+     <b>Компоненты DOCI для прямого доступа к Oracle <br></b>
+	</font>
+	<br>
+    <font class=fontmain color="#FFFFFF"> 
+     <b>Version 1.15</b><br>
+    </font>
+	
+   </td>
+   </tr>
+</table>
+
+<font class=fontmain>
+
+<p>Copyright &copy; 1998-2001 by Andrey Romanchenko<br>
+All rights reserved.
+
+<p>
+
+<table cellspacing=2 cellpadding=0>
+<tr>
+   <td><font class=fontmain>
+    <i>e-mail:&nbsp;&nbsp;</i></font>
+	</td>
+	<td><font class=fontmain>
+	 <a href="mailto:lasersquad@tut.by?subject=Dynamic Arrays version 2.0">lasersquad@tut.by</a></font>
+	</td>
+</tr>
+<tr>
+   <td><font class=fontmain>
+    <i>web site:&nbsp;&nbsp;</i></font>
+   </td>
+   <td><font class=fontmain>
+    <a href="http://DynamicArrays.narod.ru" target=_new>http://DynamicArrays.narod.ru/</a></font>
+	</td>
+</tr>
+<tr>
+   <td></td>
+   <td><font class=fontmain>
+     <!-- (другой адрес: <a href="http://www.dynamicarrays.cjb.net/" target=_new>http://www.dynamicarrays.cjb.net/</a>)-->
+     </font>
+	</td>
+</tr>
+
+</table>
+
+<br><br>
+<h1 align=center>TDatabase</h1>
+
+<table cellspacing="0" cellpadding="5" border="1">
+<tr bgcolor="#009999">
+	<td colspan="2" align="center" valign="middle">
+	 <font class=fontcaption>
+      Свойства
+	 </font> 
+	</td>
+
+</tr>
+
+<tr>
+	<td> <font class=fontcode>
+      property <b>Active</b>:boolean;
+	  	</font>
+	</td>
+	<td><font class=fontmain >
+	   Открывает/закрывает database.
+		</font> 
+	</td>
+</tr>
+
+<tr bgcolor="#009999">
+	<td colspan="2" align="center" valign="middle">
+	 <font class=fontcaption>
+	  Методы
+	 </font> 
+	</td>
+
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	  constructor <b>Create</b>(AOwner:TComponent); override;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+       Создает обьект TADatabase. Инициализирует внутренние переменные.
+	   
+	 </font> 
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	  destructor <b>Destroy</b>; override;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+         Разрушает database и закрывает (Close) все DataSetы привязаные к  нему.
+		 
+	 </font> 
+	</td>
+</tr>
+<tr>
+<a name=""></a>
+	<td>
+	 <font class=fontcode>
+	  procedure <b>Open</b>;abstract;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+           Метод для установления соединения с базой. 
+	 </font>
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	  procedure <b>Close</b>;abstract;
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+          Разрыв соединения с базой. Все DataSets привязаные к этому database  будут закрыты.
+	 </font> 
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	  procedure <b>AddDataSet</b>(DataSet:TDataSet);
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+           Добавляет DataSet в список  прилинкованых  DataSetов. (для внутреннего использования)
+	 </font> 
+	</td>
+</tr>
+<tr>
+	<td>
+	 <font class=fontcode>
+	   procedure <b>RemoveDataSet</b>(DataSet:TDataSet);
+	 </font> 
+	</td>
+	<td>
+	 <font class=fontmain>
+           Удаляет DataSet из списка прилинкованых DataSetов. (для внутреннего использования)
+	 </font> 
+	</td>
+</tr>
+
+</table>
+<br>
+
+
+</font>
+
+<div align=right>
+<font class=fontsmall>
+Copyright (c) by Andrey Romanchenko
+</font>
+</div>
+
+</body>
+</html>

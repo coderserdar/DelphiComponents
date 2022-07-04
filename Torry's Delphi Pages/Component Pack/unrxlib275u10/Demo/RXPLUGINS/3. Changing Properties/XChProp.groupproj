@@ -1,0 +1,44 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{334fb08e-f8ec-4e0d-8d6e-2b25dc65a940}</ProjectGuid>
+  </PropertyGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Projects Include="ChangePropertiesPlugin.dproj" />
+    <Projects Include="PlugInDemo.dproj" />
+  </ItemGroup>
+  <ProjectExtensions>
+    <Borland.Personality>Default.Personality</Borland.Personality>
+    <Borland.ProjectType />
+    <BorlandProject>
+  <BorlandProject xmlns=""> <Default.Personality> </Default.Personality> </BorlandProject></BorlandProject>
+  </ProjectExtensions>
+  <Target Name="ChangePropertiesPlugin">
+    <MSBuild Projects="ChangePropertiesPlugin.dproj" Targets="" />
+  </Target>
+  <Target Name="ChangePropertiesPlugin:Clean">
+    <MSBuild Projects="ChangePropertiesPlugin.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="ChangePropertiesPlugin:Make">
+    <MSBuild Projects="ChangePropertiesPlugin.dproj" Targets="Make" />
+  </Target>
+  <Target Name="PlugInDemo">
+    <MSBuild Projects="PlugInDemo.dproj" Targets="" />
+  </Target>
+  <Target Name="PlugInDemo:Clean">
+    <MSBuild Projects="PlugInDemo.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="PlugInDemo:Make">
+    <MSBuild Projects="PlugInDemo.dproj" Targets="Make" />
+  </Target>
+  <Target Name="Build">
+    <CallTarget Targets="ChangePropertiesPlugin;PlugInDemo" />
+  </Target>
+  <Target Name="Clean">
+    <CallTarget Targets="ChangePropertiesPlugin:Clean;PlugInDemo:Clean" />
+  </Target>
+  <Target Name="Make">
+    <CallTarget Targets="ChangePropertiesPlugin:Make;PlugInDemo:Make" />
+  </Target>
+  <Import Condition="Exists('$(MSBuildBinPath)\Borland.Group.Targets')" Project="$(MSBuildBinPath)\Borland.Group.Targets" />
+</Project>

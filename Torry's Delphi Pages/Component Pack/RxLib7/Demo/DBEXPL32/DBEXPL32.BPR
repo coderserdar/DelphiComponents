@@ -1,0 +1,116 @@
+# ---------------------------------------------------------------------------
+VERSION = BCB.03
+# ---------------------------------------------------------------------------
+!ifndef BCB
+BCB = $(MAKEDIR)\..
+!endif
+# ---------------------------------------------------------------------------
+PROJECT = Dbexpl32.exe
+OBJFILES = Main.obj About.obj BdeProp.obj Childwin.obj Dbcbrest.obj Desttab.obj \
+  Editpict.obj Editstr.obj Filtdlg.obj Opendlg.obj Optdlg.obj RenDlg.obj \
+  Sqlmon.obj Srctab.obj Userhelp.obj Viewblob.obj Options.obj Dbexpl32.obj
+RESFILES = Dbexpl32.res
+RESDEPEN = $(RESFILES) Main.dfm About.dfm BdeProp.dfm Childwin.dfm \
+   Dbcbrest.dfm Desttab.dfm Editpict.dfm Editstr.dfm Filtdlg.dfm Opendlg.dfm \
+   Optdlg.dfm RenDlg.dfm Sqlmon.dfm Srctab.dfm Userhelp.dfm Viewblob.dfm
+LIBFILES =
+LIBRARIES = QRPT35.lib RXDB.lib RXCTL.lib \
+  vcldb35.lib vclx35.lib vcl35.lib
+SPARELIBS = vcl35.lib vclx35.lib vcldb35.lib RXCTL.lib RXDB.lib \
+  QRPT35.lib
+PACKAGES = VCLX35.bpi VCL35.bpi VCLDB35.bpi bcbsmp35.bpi \
+  QRPT35.bpi TEEUI35.bpi TEEDB35.bpi TEE35.bpi ibsmp35.bpi DSS35.bpi NMFAST35.bpi \
+  INETDB35.bpi INET35.bpi VCLMID35.bpi RXCTL.bpi RXDB.bpi
+PATHASM = .;
+PATHCPP = .;
+PATHPAS = .;
+PATHRC = .;
+DEBUGLIBPATH = $(BCB)\lib\debug
+RELEASELIBPATH = $(BCB)\lib\release
+DEFFILE =
+# ---------------------------------------------------------------------------
+CFLAG1 = -O2 -w -Ve -k- -vi -c -b- -w-par -w-inl -Vx
+CFLAG2 = -I$(BCB)\rx\units;$(BCB)\include;$(BCB)\include\vcl;e:\work\rxcb3 \
+  -H=$(BCB)\lib\vcl.csm
+CFLAG3 =
+PFLAGS = -AWinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE \
+  -U$(BCB)\rx\units;$(BCB)\lib\obj;$(BCB)\lib;e:\work\rxcb3;$(DEBUGLIBPATH) \
+  -I$(BCB)\rx\units;$(BCB)\include;$(BCB)\include\vcl;e:\work\rxcb3 -v -JPHNV -M
+RFLAGS = -i$(BCB)\rx\units;$(BCB)\include;$(BCB)\include\vcl;e:\work\rxcb3
+AFLAGS = /i$(BCB)\rx\units /i$(BCB)\include /i$(BCB)\include\vcl /ie:\work\rxcb3 /mx /w2 \
+  /zd
+LFLAGS = -L$(BCB)\rx\units;$(BCB)\lib\obj;$(BCB)\lib;e:\work\rxcb3;$(DEBUGLIBPATH) -aa \
+  -Tpe -x
+IFLAGS =
+LINKER = ilink32
+# ---------------------------------------------------------------------------
+ALLOBJ = c0w32.obj sysinit.obj $(OBJFILES)
+ALLRES = $(RESFILES)
+ALLLIB = $(LIBFILES) $(LIBRARIES) import32.lib cp32mt.lib
+# ---------------------------------------------------------------------------
+.autodepend
+
+!ifdef IDEOPTIONS
+
+[Version Info]
+IncludeVerInfo=1
+AutoIncBuild=0
+MajorVer=2
+MinorVer=56
+Release=0
+Build=14
+Debug=0
+PreRelease=0
+Special=0
+Private=0
+DLL=0
+Locale=1033
+CodePage=1252
+
+[Version Info Keys]
+CompanyName=RX
+FileDescription=RX Database Explorer
+FileVersion=2.56.0.14
+InternalName=DBEXPL32
+LegalCopyright=Copyright © 1996, 1998 Master-Bank
+LegalTrademarks=
+OriginalFilename=DBEXPL32.EXE
+ProductName=RX Library
+ProductVersion=2.40
+Comments=RX Library Demo Program
+Developers=Fedor Koshevnikov; Igor Pavluk
+
+[Debugging]
+DebugSourceDirs=
+
+[Parameters]
+RunParams=
+HostApplication=
+
+!endif
+
+$(PROJECT): $(OBJFILES) $(RESDEPEN) $(DEFFILE)
+    $(BCB)\BIN\$(LINKER) @&&!
+    $(LFLAGS) +
+    $(ALLOBJ), +
+    $(PROJECT),, +
+    $(ALLLIB), +
+    $(DEFFILE), +
+    $(ALLRES) 
+!
+
+.pas.hpp:
+    $(BCB)\BIN\dcc32 $(PFLAGS) { $** }
+
+.pas.obj:
+    $(BCB)\BIN\dcc32 $(PFLAGS) { $** }
+
+.cpp.obj:
+    $(BCB)\BIN\bcc32 $(CFLAG1) $(CFLAG2) -o$* $* 
+
+.c.obj:
+    $(BCB)\BIN\bcc32 $(CFLAG1) $(CFLAG2) -o$* $**
+
+.rc.res:
+    $(BCB)\BIN\brcc32 $(RFLAGS) $<
+#-----------------------------------------------------------------------------

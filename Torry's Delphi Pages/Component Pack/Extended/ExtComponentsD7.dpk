@@ -1,0 +1,96 @@
+package ExtComponentsD7;
+
+{$R *.res}
+{$R 'composants\U_ExtColorCombos.dcr'}
+{$R 'composants\U_ExtNumEdits.dcr'}
+{$R 'composants\U_OnFormInfoIni.dcr'}
+{$R 'composants\U_ExtDBNavigator.dcr'}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'Composants améliorés GIROUX & MICROCELT'}
+{$IMPLICITBUILD ON}
+{$DEFINE ADO}
+
+requires
+  rtl,
+  vcl,
+  dbrtl,
+  vcldb,
+  adortl,
+  dclado,
+  VirtualTreesD7,
+  Jcl,
+  JvCoreD7R,
+  vcljpg,
+  vclx,
+  JclVcl,
+  JvStdCtrlsD7R,
+  JvSystemD7R,
+  JvDBD7R,
+  JvCtrlsD7R,
+  JvDlgsD7R,
+  FonctionsD7,
+  designide,
+  vclactnband,
+  dbexpress,
+  bdertl,
+  VclSmp,
+  dclstd,
+  designdgm,
+  vcldesigner,
+  dcldb,
+  JvXPCtrlsD7R,
+  JvGlobusD7R,
+  rxctl,
+  JvCustomD7R,
+  xmlrtl,
+  JvCoreD7D,
+  JvXPCtrlsD7D,
+  GJLSoftwareD7,
+  JvCmpD7R,
+  rxbde,
+  rxdb,
+  JvHMID7R,
+  JvPageCompsD7R;
+
+contains
+  U_ExtComboInsert in 'composants\U_ExtComboInsert.pas',
+  U_OnFormInfoIni in 'composants\U_OnFormInfoIni.pas',
+  U_ExtScrollBox in 'composants\U_ExtScrollBox.pas',
+  U_ExtColorCombos in 'composants\U_ExtColorCombos.pas',
+  U_ExtNumEdits in 'composants\U_ExtNumEdits.pas',
+  fonctions_numedit in 'fonctions\fonctions_numedit.pas',
+  U_RegisterListView in 'composants\U_RegisterListView.pas',
+  U_DBListView in 'composants\U_DBListView.pas',
+  U_ExtPageControl in 'composants\U_ExtPageControl.pas',
+  u_regonforminfoini in 'composants\u_regonforminfoini.pas',
+  u_regfwbuttons in 'composants\u_regfwbuttons.pas',
+  u_regextcolorcombos in 'composants\u_regextcolorcombos.pas',
+  u_buttons_appli in 'composants\u_buttons_appli.pas',
+  u_regframeworkcomponents in 'composants\u_regframeworkcomponents.pas',
+  U_ExtDBNavigator in 'composants\U_ExtDBNavigator.pas',
+  U_RegisterExtDBNav in 'composants\U_RegisterExtDBNav.pas',
+  u_framework_components in 'composants\u_framework_components.pas',
+  fonctions_dbcomponents in 'fonctions\fonctions_dbcomponents.pas',
+  u_regextnumedits in 'composants\u_regextnumedits.pas';
+
+end.

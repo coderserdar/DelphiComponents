@@ -1,0 +1,80 @@
+			==============================================
+				DelphiX - Direct3D Texture Tool
+			==============================================
+
+　DelphiX で Direct3D のテクスチャを簡単に扱えるようにするツールです。
+　将来、DelphiX 本体に統合します。
+
+・gendxt.exe の説明
+
+　TDXTextureImage で読み込めるテクスチャファイルを bmp ファイルから作成するツールです。
+  出来るファイルは必ず２のｎ乗の正方形のサイズとなります。
+
+  例：tex.bmp から tex.dxt を作成する
+    gendxt.exe tex.dxt RGB=tex.bmp
+
+  例：tex.bmp から透明色に RGB($80,$70,$60) を指定した tex.dxt を作成する
+    gendxt.exe tex.dxt RGB=tex.bmp tc=$807060
+
+  例：tex.bmp とから RGB:555 形式の tex.dxt を作成する
+    gendxt.exe tex.dxt RGB:555=tex.bmp
+
+  例：tex.bmp と tex-alpha.bmp からアルファチャンネルを含んだ tex.dxt を作成する
+    gendxt.exe tex.dxt RGB=tex.bmp A=tex-alpha.bmp Mipmap=max
+
+  例：tex.bmp と tex-alpha.bmp から RGBA:4444 形式の tex.dxt を作成する
+    gendxt.exe tex.dxt RGB:444=tex.bmp A:4=tex-alpha.bmp
+
+  例：tex.bmp からミップマップ形式の tex.dxt を作成する
+    gendxt.exe tex.dxt RGB=tex.bmp Mipmap=max
+
+  例：tex.bmp と tex-alpha.bmp から RGBA:4444 形式のミップマップの tex.dxt を作成する
+    gendxt.exe tex.dxt RGB:444=tex.bmp A:4=tex-alpha.bmp Mipmap=max
+
+
+
+・TDirect3DTexture2 クラスの説明
+
+　DelphiX に付属している TDirect3DTexture クラスの不具合を解消した物です。
+　またプログラミングモデルも DirectX6 以降のものになっています。
+
+  [主なプロパティ・メソッドの概要]
+
+　CreateFromFile メソッド
+	テクスチャを画像ファイルから作成する。読み込める画像ファイルの形式は
+	dxt ファイル、bmp ファイル、後は TPicture で読み込める形式。
+
+　Mipmap プロパティ
+	現在、このテクスチャはミップマップを使用しているか？
+
+　Surface プロパティ
+	現在のテクスチャのサーフェース
+
+　Texture プロパティ
+	現在のテクスチャの IDirect3DTexture2 インターフェース
+
+　TextureFormat プロパティ
+	現在のテクスチャのサイズ、ピクセルフォーマットなどの形式
+
+　Transparent プロパティ
+	現在、このテクスチャは透明色を使用しているか？
+	レンダリング時はこのプロパティを参照してカラーキーを使用するか設定する。
+
+        例：DXDraw1.D3DDevice3.SetRenderState(D3DRENDERSTATE_COLORKEYENABLE, Ord(Texture.Transparent));
+
+　TransparentColor プロパティ
+　	透明色(TColorRef 型なので PaletteIndex 関数や RGB 関数の結果を指定する)
+
+
+
+・TDXTextureImage クラスの説明
+
+　これは TDirect3DTexture2 クラス専用のグラフィックを保持するクラスです。
+　アルファチャンネルやミップマップ画像を保持することが可能になっています。
+　
+　このクラスの LoadFrom… で読み込めるファイルは、.dxt と .bmp の二つです。
+　dxt ファイルは TDXTextureImage が保持できる情報がすべて含まれており、付属の
+　gendxt.exe で作成することが出来ます。
+
+堀　浩行	E-Mail: hori@ingjapan.ne.jp 
+		Homepage: http://www.ingjapan.ne.jp/hori/

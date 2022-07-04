@@ -1,0 +1,1612 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+<meta name="GENERATOR" content="PasDoc 0.11.0">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<title>SqlitePass Database Objects: SqlitePassApi_v3</title>
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body bgcolor="#ffffff" text="#000000" link="#0000ff" vlink="#800080" alink="#FF0000">
+<h1 class="unit">Unit SqlitePassApi_v3</h1>
+<table class="sections wide_list">
+<tr>
+<td><a class="section"  href="#%40Description">Description</a></td><td><a class="section"  href="#%40Uses">uses</a></td><td>Classes, Interfaces, Objects and Records</td><td><a class="section"  href="#%40FuncsProcs">Functions and Procedures</a></td><td><a class="section"  href="#%40Types">Types</a></td><td><a class="section"  href="#%40Constants">Constants</a></td><td><a class="section"  href="#%40Variables">Variables</a></td></tr></table>
+<a name="%40Description"></a><h2 class="description">Description</h2>
+<p>
+The unit <code>SqlitePassApi_v3</code> defines all the external functions calls to the sqlite database engine library.
+
+<p>&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;
+
+<p>This library is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License as published by the Free Software Foundation; either version 2.1 of the License, or (at your option) any later version.
+
+<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more details.
+
+<p>You should have received a copy of the GNU Lesser General Public License along with this program; if not, write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+
+<p>&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;
+
+<p>Sqlite3 library translation for use with fpc compiler Original code from Mike Cariotoglou Email: mike@deltasingular.gr Modified by Luc DAVID Email: luckylazarus@free.fr 2006 - 2010
+
+<p>Major changes are indicated in the \Documentation\changes.pdf file Last update 27.10.2009
+
+<p>&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;</p>
+<a name="%40Uses"></a><h2 class="uses">uses</h2>
+<ul class="useslist"><li>Classes</li><li><a   href="SqlitePassErrorLang.html">SqlitePassErrorLang</a></li><li><a   href="SqlitePassUtils.html">SqlitePassUtils</a></li><li>SysUtils</li><li>Windows</li></ul><h2 class="overview">Overview</h2>
+<a name="%40FuncsProcs"></a><h3 class="summary">Functions and Procedures</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a   href="SqlitePassApi_v3.html#LoadFunctions">LoadFunctions</a></b>(LibraryHandle: Integer);</code></td>
+</tr>
+</table>
+<a name="%40Types"></a><h3 class="summary">Types</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#TBusyHandler">TBusyHandler</a></b> = function(user:pointer; count:integer):integer; cdecl;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#TDestructor">TDestructor</a></b> = procedure(data:pointer); cdecl;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#TExecCallback">TExecCallback</a></b> = function(Sender: pointer; ColumnsCount: Integer; ColumnValues: ppAnsiChar; ColumnNames: ppAnsiChar): integer; cdecl;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#TFuncFinalizer">TFuncFinalizer</a></b> = procedure(context:pointer); cdecl;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#TFuncHandler">TFuncHandler</a></b> = procedure(context:pointer; nArgs:integer; args:<a   href="SqlitePassUtils.html#PPSqliteValue">ppSqliteValue</a>); cdecl;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#TUserCollation">TUserCollation</a></b> = function(user:pointer; lenA:integer; a:pChar; lenB:integer; b:pChar):integer; cdecl;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#TUserCollationNeeded">TUserCollationNeeded</a></b> = procedure(user:pointer; db:pointer; eTextRep:integer; zName:pChar); cdecl;</code></td>
+</tr>
+</table>
+<a name="%40Constants"></a><h3 class="summary">Constants</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SQLITE_ABORT">SQLITE_ABORT</a></b>      =  4;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SQLITE_ANY">SQLITE_ANY</a></b>        = 5;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SQLITE_AUTH">SQLITE_AUTH</a></b>       = 23;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SQLITE_BLOB">SQLITE_BLOB</a></b>       = 4;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SQLITE_BUSY">SQLITE_BUSY</a></b>       =  5;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SQLITE_CANTOPEN">SQLITE_CANTOPEN</a></b>   = 14;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SQLITE_CONSTRAINT">SQLITE_CONSTRAINT</a></b> = 19;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SQLITE_CORRUPT">SQLITE_CORRUPT</a></b>    = 11;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SQLITE_DONE">SQLITE_DONE</a></b>       = 101;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SQLITE_EMPTY">SQLITE_EMPTY</a></b>      = 16;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SQLITE_ERROR">SQLITE_ERROR</a></b>      =  1;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SQLITE_FLOAT">SQLITE_FLOAT</a></b>      = 2;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SQLITE_FORMAT">SQLITE_FORMAT</a></b>     = 24;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SQLITE_FULL">SQLITE_FULL</a></b>       = 13;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SQLITE_INTEGER">SQLITE_INTEGER</a></b>    = 1;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SQLITE_INTERNAL">SQLITE_INTERNAL</a></b>   =  2;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SQLITE_INTERRUPT">SQLITE_INTERRUPT</a></b>  =  9;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SQLITE_IOERR">SQLITE_IOERR</a></b>      = 10;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SQLITE_LOCKED">SQLITE_LOCKED</a></b>     =  6;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SQLITE_MISMATCH">SQLITE_MISMATCH</a></b>   = 20;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SQLITE_MISUSE">SQLITE_MISUSE</a></b>     = 21;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SQLITE_NOLFS">SQLITE_NOLFS</a></b>      = 22;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SQLITE_NOMEM">SQLITE_NOMEM</a></b>      =  7;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SQLITE_NOTADB">SQLITE_NOTADB</a></b>     = 26;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SQLITE_NOTFOUND">SQLITE_NOTFOUND</a></b>   = 12;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SQLITE_NULL">SQLITE_NULL</a></b>       = 5;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SQLITE_OK">SQLITE_OK</a></b>         =  0;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SQLITE_OPEN_CREATE">SQLITE_OPEN_CREATE</a></b>         = 4;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SQLITE_OPEN_DELETEONCLOSE">SQLITE_OPEN_DELETEONCLOSE</a></b>  = 8;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SQLITE_OPEN_EXCLUSIVE">SQLITE_OPEN_EXCLUSIVE</a></b>      = 10;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SQLITE_OPEN_FULLMUTEX">SQLITE_OPEN_FULLMUTEX</a></b>      = 10000;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SQLITE_OPEN_MAIN_DB">SQLITE_OPEN_MAIN_DB</a></b>        = 100;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SQLITE_OPEN_MAIN_JOURNAL">SQLITE_OPEN_MAIN_JOURNAL</a></b>   = 800;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SQLITE_OPEN_MASTER_JOURNAL">SQLITE_OPEN_MASTER_JOURNAL</a></b> = 4000;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SQLITE_OPEN_NOMUTEX">SQLITE_OPEN_NOMUTEX</a></b>        = 8000;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SQLITE_OPEN_READONLY">SQLITE_OPEN_READONLY</a></b>       = 1;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SQLITE_OPEN_READWRITE">SQLITE_OPEN_READWRITE</a></b>      = 2;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SQLITE_OPEN_SUBJOURNAL">SQLITE_OPEN_SUBJOURNAL</a></b>     = 2000;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SQLITE_OPEN_TEMP_DB">SQLITE_OPEN_TEMP_DB</a></b>        = 200;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SQLITE_OPEN_TEMP_JOURNAL">SQLITE_OPEN_TEMP_JOURNAL</a></b>   = 1000;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SQLITE_OPEN_TRANSIENT_DB">SQLITE_OPEN_TRANSIENT_DB</a></b>   = 400;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SQLITE_PERM">SQLITE_PERM</a></b>       =  3;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SQLITE_PROTOCOL">SQLITE_PROTOCOL</a></b>   = 15;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SQLITE_RANGE">SQLITE_RANGE</a></b>      = 25;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SQLITE_READONLY">SQLITE_READONLY</a></b>   =  8;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SQLITE_ROW">SQLITE_ROW</a></b>        = 100;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SQLITE_SCHEMA">SQLITE_SCHEMA</a></b>     = 17;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SQLITE_STATIC">SQLITE_STATIC</a></b>     = 0;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SQLITE_TEXT">SQLITE_TEXT</a></b>       = 3;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SQLITE_TOOBIG">SQLITE_TOOBIG</a></b>     = 18;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SQLITE_TRANSIENT">SQLITE_TRANSIENT</a></b>  = -1;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SQLITE_UTF16">SQLITE_UTF16</a></b>      = 4;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SQLITE_UTF16BE">SQLITE_UTF16BE</a></b>    = 3;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SQLITE_UTF16LE">SQLITE_UTF16LE</a></b>    = 2;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SQLITE_UTF8">SQLITE_UTF8</a></b>       = 1;</code></td>
+</tr>
+</table>
+<a name="%40Variables"></a><h3 class="summary">Variables</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#EnginesCount">EnginesCount</a></b>: Integer;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_aggregate_context">SqliteDbv3_aggregate_context</a></b>:function(context:pointer; nBytes:integer):pointer; cdecl;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_aggregate_count">SqliteDbv3_aggregate_count</a></b>:function(SqliteDbv3_context:pointer):integer; cdecl;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_bind_blob">SqliteDbv3_bind_blob</a></b>:function(stmt:pointer; idx:integer; value:pointer; size:integer; xDel:integer):integer; cdecl;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_bind_double">SqliteDbv3_bind_double</a></b>:function(stmt:pointer; idx:integer; value:double):integer; cdecl;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_bind_int">SqliteDbv3_bind_int</a></b>:function(stmt:pointer; idx:integer; value:integer):integer; cdecl;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_bind_int64">SqliteDbv3_bind_int64</a></b>:function(stmt:pointer; idx:integer; value:int64):integer; cdecl;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_bind_null">SqliteDbv3_bind_null</a></b>:function(stmt:pointer; idx:integer):integer; cdecl;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_bind_parameter_count">SqliteDbv3_bind_parameter_count</a></b>:function(stmt:pointer):integer; cdecl;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_bind_parameter_index">SqliteDbv3_bind_parameter_index</a></b>:function(stmt:pointer; zName:pChar):integer; cdecl;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_bind_parameter_name">SqliteDbv3_bind_parameter_name</a></b>:function(stmt:pointer; idx:integer):pChar; cdecl;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_bind_text">SqliteDbv3_bind_text</a></b>:function(stmt:pointer; idx:integer; value:pAnsiChar; size:integer; xDel:Integer):integer; cdecl;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_bind_text16">SqliteDbv3_bind_text16</a></b>:function(stmt:pointer; idx:integer; value:pWideChar; size:integer; xDel:Integer):integer; cdecl;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_busy_handler">SqliteDbv3_busy_handler</a></b>: function(db: Pointer; CallbackPtr:<a   href="SqlitePassApi_v3.html#TBusyHandler">TBusyHandler</a>; user:pointer):integer; cdecl;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_busy_timeout">SqliteDbv3_busy_timeout</a></b>: function(db: Pointer; TimeOut: integer):integer; cdecl;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_changes">SqliteDbv3_changes</a></b>: function(db: Pointer): integer; cdecl;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_clear_binding">SqliteDbv3_clear_binding</a></b>:function(stmt:pointer):integer; cdecl;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_close">SqliteDbv3_close</a></b>: function(db: Pointer):integer; cdecl;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_collation_needed">SqliteDbv3_collation_needed</a></b>:function(db:pointer; userData:pointer; func:<a   href="SqlitePassApi_v3.html#TUserCollationNeeded">TUserCollationNeeded</a>):integer; cdecl;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_column_blob">SqliteDbv3_column_blob</a></b>:function(pStmt:pointer; col:integer):pointer; cdecl;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_column_bytes">SqliteDbv3_column_bytes</a></b>:function(pStmt:pointer; col:integer):integer; cdecl;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_column_count">SqliteDbv3_column_count</a></b>:function(pStmt:pointer):integer; cdecl;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_column_decltype">SqliteDbv3_column_decltype</a></b>:function(pStmt:pointer; idx:integer):pAnsiChar; cdecl;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_column_decltype16">SqliteDbv3_column_decltype16</a></b>:function(pStmt:pointer; idx:integer):pWideChar; cdecl;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_column_double">SqliteDbv3_column_double</a></b>:function(pStmt:pointer; col:integer):double; cdecl;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_column_int">SqliteDbv3_column_int</a></b>:function(pStmt:pointer; col:integer):integer; cdecl;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_column_int64">SqliteDbv3_column_int64</a></b>:function(pStmt:pointer; col:integer):int64; cdecl;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_column_name">SqliteDbv3_column_name</a></b>:function(pStmt:pointer; idx:integer):pAnsiChar; cdecl;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_column_name16">SqliteDbv3_column_name16</a></b>:function(pStmt:pointer; idx:integer):pWideChar; cdecl;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_column_origin_name">SqliteDbv3_column_origin_name</a></b>:function(pStmt:pointer; idx:integer):pAnsiChar; cdecl;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_column_origin_name16">SqliteDbv3_column_origin_name16</a></b>:function(pStmt:pointer; idx:integer):pWideChar; cdecl;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_column_table_name">SqliteDbv3_column_table_name</a></b>:function(pStmt:pointer; idx:integer):pAnsiChar; cdecl;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_column_table_name16">SqliteDbv3_column_table_name16</a></b>:function(pStmt:pointer; idx:integer):pWideChar; cdecl;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_column_text">SqliteDbv3_column_text</a></b>:function(pStmt:pointer; col:integer):pAnsiChar; cdecl;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_column_text16">SqliteDbv3_column_text16</a></b>:function(pStmt:pointer; col:integer):pWideChar; cdecl;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_column_type">SqliteDbv3_column_type</a></b>:function(pStmt:pointer; col:integer):integer; cdecl;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_compileoption_used">SqliteDbv3_compileoption_used</a></b>: function(P: pChar): Integer; cdecl;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_complete">SqliteDbv3_complete</a></b>: function(P: pChar): integer; cdecl;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_create_collation">SqliteDbv3_create_collation</a></b>:function(db:pointer; zName:pChar; eTextRep:integer; userData:pointer; func:<a   href="SqlitePassApi_v3.html#TUserCollation">TUserCollation</a>):integer; cdecl;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_create_function">SqliteDbv3_create_function</a></b>:function( db:pointer; zFunctionName:pAnsiChar; nArg:integer; eTextRep:integer; userData:pointer; xFunc, xStep:<a   href="SqlitePassApi_v3.html#TFuncHandler">TFuncHandler</a>; xFinal:<a   href="SqlitePassApi_v3.html#TFuncFinalizer">TFuncFinalizer</a>):integer; cdecl;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_create_function16">SqliteDbv3_create_function16</a></b>:function( db:pointer; zFunctionName:pWideChar; nArg:integer; eTextRep:integer; userData:pointer; xFunc, xStep:<a   href="SqlitePassApi_v3.html#TFuncHandler">TFuncHandler</a>; xFinal:<a   href="SqlitePassApi_v3.html#TFuncFinalizer">TFuncFinalizer</a>):integer; cdecl;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_data_count">SqliteDbv3_data_count</a></b>:function(pStmt:pointer):integer; cdecl;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_errcode">SqliteDbv3_errcode</a></b>:function(db:pointer):integer; cdecl;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_errmsg">SqliteDbv3_errmsg</a></b>:function(db:pointer):pAnsiChar; cdecl;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_errmsg16">SqliteDbv3_errmsg16</a></b>:function(db:pointer):pWideChar; cdecl;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_exec">SqliteDbv3_exec</a></b>: function(db: Pointer; SQLStatement: pUTF8String; CallbackPtr: <a   href="SqlitePassApi_v3.html#TExecCallback">TExecCallBack</a>; CbParam: pointer; ErrMsg: PPAnsiChar): integer; cdecl;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_finalize">SqliteDbv3_finalize</a></b>:function(pStmt:pointer):integer; cdecl;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_free">SqliteDbv3_free</a></b>: procedure(P: pChar); cdecl;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_free_table">SqliteDbv3_free_table</a></b>: procedure(Table: pChar); cdecl;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_get_auxdata">SqliteDbv3_get_auxdata</a></b>:function(context:pointer; idx:integer):pointer; cdecl;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_get_table">SqliteDbv3_get_table</a></b>: function(db: Pointer; SQLStatement: pChar; var ResultPtr: Pointer; var RowCount: cardinal; var ColCount: cardinal; var ErrMsg: pChar): integer; cdecl;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_interrupt">SqliteDbv3_interrupt</a></b>: procedure(db: Pointer); cdecl;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_last_insert_rowid">SqliteDbv3_last_insert_rowid</a></b>: function(db: Pointer): int64; cdecl;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_open">SqliteDbv3_open</a></b>: function(dbname: pAnsiChar; var db:pointer; flags: integer; vfs: pAnsiChar):integer; cdecl;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_open16">SqliteDbv3_open16</a></b>: function(dbname: pWideChar; var db:pointer):integer; cdecl;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_prepare16_v2">SqliteDbv3_prepare16_v2</a></b>:function(db:pointer; Sql:pWideChar; nBytes:integer; var stmt:pointer; var pzTail:pWideChar):integer; cdecl;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_prepare_v2">SqliteDbv3_prepare_v2</a></b>:function(db:pointer; Sql:pAnsiChar; nBytes:integer; var stmt:pointer; var pzTail:pAnsiChar):integer; cdecl;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_reset">SqliteDbv3_reset</a></b>:function(pStmt:pointer):integer; cdecl;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_result_blob">SqliteDbv3_result_blob</a></b>:procedure(context:pointer; value:pointer; size:integer; xDel:integer); cdecl;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_result_double">SqliteDbv3_result_double</a></b>:procedure(context:pointer; value:double); cdecl;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_result_error">SqliteDbv3_result_error</a></b>:procedure(context:pointer; msg:pChar; len:integer); cdecl;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_result_int">SqliteDbv3_result_int</a></b>:procedure(context:pointer; value:integer); cdecl;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_result_int64">SqliteDbv3_result_int64</a></b>:procedure(context:pointer; value:int64); cdecl;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_result_null">SqliteDbv3_result_null</a></b>:procedure(context:pointer); cdecl;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_result_text">SqliteDbv3_result_text</a></b>:procedure(context:pointer; value:pAnsiChar; len:integer; xDel:integer); cdecl;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_result_text16">SqliteDbv3_result_text16</a></b>:procedure(context:pointer; value:pWideChar; len:integer; xDel:integer); cdecl;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_result_value">SqliteDbv3_result_value</a></b>:procedure(context:pointer; value:<a   href="SqlitePassUtils.html#PSqliteValue">PSqliteValue</a>); cdecl;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_set_auxdata">SqliteDbv3_set_auxdata</a></b>:procedure(context:pointer; idx:integer; data:pointer; xDel:integer); cdecl;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_sql">SqliteDbv3_sql</a></b>: function(stmt: pointer):pChar; cdecl;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_SqliteLibSourceId">SqliteDbv3_SqliteLibSourceId</a></b>: function(): pAnsiChar; cdecl;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_SqliteLibVersion">SqliteDbv3_SqliteLibVersion</a></b>: function(): pAnsiChar; cdecl;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_SqliteLibVersionNumber">SqliteDbv3_SqliteLibVersionNumber</a></b>: function(): Integer; cdecl;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_step">SqliteDbv3_step</a></b>:function(pStmt:pointer):integer; cdecl;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_total_changes">SqliteDbv3_total_changes</a></b>: function(db: Pointer): integer; cdecl;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_user_data">SqliteDbv3_user_data</a></b>:function(context:pointer):pointer; cdecl;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_value_blob">SqliteDbv3_value_blob</a></b>:function(v:<a   href="SqlitePassUtils.html#PSqliteValue">PSqliteValue</a>):pointer; cdecl;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_value_bytes">SqliteDbv3_value_bytes</a></b>:function(v:<a   href="SqlitePassUtils.html#PSqliteValue">PSqliteValue</a>):integer; cdecl;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_value_double">SqliteDbv3_value_double</a></b>:function(v:<a   href="SqlitePassUtils.html#PSqliteValue">PSqliteValue</a>):double; cdecl;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_value_int">SqliteDbv3_value_int</a></b>:function(v:<a   href="SqlitePassUtils.html#PSqliteValue">PSqliteValue</a>):integer; cdecl;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_value_int64">SqliteDbv3_value_int64</a></b>:function(v:<a   href="SqlitePassUtils.html#PSqliteValue">PSqliteValue</a>):int64; cdecl;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_value_text">SqliteDbv3_value_text</a></b>:function(v:<a   href="SqlitePassUtils.html#PSqliteValue">PSqliteValue</a>):pAnsiChar; cdecl;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_value_text16">SqliteDbv3_value_text16</a></b>:function(v:<a   href="SqlitePassUtils.html#PSqliteValue">PSqliteValue</a>):pWideChar; cdecl;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a   href="SqlitePassApi_v3.html#SqliteDbv3_value_type">SqliteDbv3_value_type</a></b>:function(v:<a   href="SqlitePassUtils.html#PSqliteValue">PSqliteValue</a>):integer; cdecl;</code></td>
+</tr>
+</table>
+<h2 class="description">Description</h2>
+<h3 class="detail">Functions and Procedures</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="LoadFunctions"></a><code>procedure <b>LoadFunctions</b>(LibraryHandle: Integer);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+This function is called by <a class="normal"  href="SqlitePassDbo.TSqlitePassEngine.html">TSqlitePassEngine</a> to load library functions</p>
+</td></tr>
+</table>
+<h3 class="detail">Types</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TBusyHandler"></a><code><b>TBusyHandler</b> = function(user:pointer; count:integer):integer; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TDestructor"></a><code><b>TDestructor</b> = procedure(data:pointer); cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TExecCallback"></a><code><b>TExecCallback</b> = function(Sender: pointer; ColumnsCount: Integer; ColumnValues: ppAnsiChar; ColumnNames: ppAnsiChar): integer; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TFuncFinalizer"></a><code><b>TFuncFinalizer</b> = procedure(context:pointer); cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TFuncHandler"></a><code><b>TFuncHandler</b> = procedure(context:pointer; nArgs:integer; args:<a   href="SqlitePassUtils.html#PPSqliteValue">ppSqliteValue</a>); cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TUserCollation"></a><code><b>TUserCollation</b> = function(user:pointer; lenA:integer; a:pChar; lenB:integer; b:pChar):integer; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TUserCollationNeeded"></a><code><b>TUserCollationNeeded</b> = procedure(user:pointer; db:pointer; eTextRep:integer; zName:pChar); cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<h3 class="detail">Constants</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SQLITE_ABORT"></a><code><b>SQLITE_ABORT</b>      =  4;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Access permission denied</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SQLITE_ANY"></a><code><b>SQLITE_ANY</b>        = 5;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Use native byte order</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SQLITE_AUTH"></a><code><b>SQLITE_AUTH</b>       = 23;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Uses OS features not supported on host</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SQLITE_BLOB"></a><code><b>SQLITE_BLOB</b>       = 4;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SQLITE_BUSY"></a><code><b>SQLITE_BUSY</b>       =  5;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Callback routine requested an abort</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SQLITE_CANTOPEN"></a><code><b>SQLITE_CANTOPEN</b>   = 14;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Insertion failed because database is full</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SQLITE_CONSTRAINT"></a><code><b>SQLITE_CONSTRAINT</b> = 19;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Too much data for one row of a table</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SQLITE_CORRUPT"></a><code><b>SQLITE_CORRUPT</b>    = 11;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Some kind of disk I/O error occurred</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SQLITE_DONE"></a><code><b>SQLITE_DONE</b>       = 101;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+sqlite_step() has another row ready</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SQLITE_EMPTY"></a><code><b>SQLITE_EMPTY</b>      = 16;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Database lock protocol error</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SQLITE_ERROR"></a><code><b>SQLITE_ERROR</b>      =  1;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Successful result</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SQLITE_FLOAT"></a><code><b>SQLITE_FLOAT</b>      = 2;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SQLITE_FORMAT"></a><code><b>SQLITE_FORMAT</b>     = 24;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Authorization denied</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SQLITE_FULL"></a><code><b>SQLITE_FULL</b>       = 13;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+(Internal Only) Table or record not found</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SQLITE_INTEGER"></a><code><b>SQLITE_INTEGER</b>    = 1;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+sqlite_step() has finished executing</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SQLITE_INTERNAL"></a><code><b>SQLITE_INTERNAL</b>   =  2;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+SQL error or missing database</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SQLITE_INTERRUPT"></a><code><b>SQLITE_INTERRUPT</b>  =  9;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Attempt to write a readonly database</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SQLITE_IOERR"></a><code><b>SQLITE_IOERR</b>      = 10;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Operation terminated by <a class="normal"  href="SqlitePassApi_v3.html#SQLITE_INTERRUPT">sqlite_interrupt</a>()</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SQLITE_LOCKED"></a><code><b>SQLITE_LOCKED</b>     =  6;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+The database file is locked</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SQLITE_MISMATCH"></a><code><b>SQLITE_MISMATCH</b>   = 20;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Abort due to contraint violation</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SQLITE_MISUSE"></a><code><b>SQLITE_MISUSE</b>     = 21;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Data type mismatch</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SQLITE_NOLFS"></a><code><b>SQLITE_NOLFS</b>      = 22;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Library used incorrectly</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SQLITE_NOMEM"></a><code><b>SQLITE_NOMEM</b>      =  7;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+A table in the database is locked</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SQLITE_NOTADB"></a><code><b>SQLITE_NOTADB</b>     = 26;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+2nd parameter to sqlite_bind out of range</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SQLITE_NOTFOUND"></a><code><b>SQLITE_NOTFOUND</b>   = 12;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+The database disk image is malformed</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SQLITE_NULL"></a><code><b>SQLITE_NULL</b>       = 5;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SQLITE_OK"></a><code><b>SQLITE_OK</b>         =  0;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+&mdash;&ndash; SQLite declarations &mdash;&ndash;</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SQLITE_OPEN_CREATE"></a><code><b>SQLITE_OPEN_CREATE</b>         = 4;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SQLITE_OPEN_DELETEONCLOSE"></a><code><b>SQLITE_OPEN_DELETEONCLOSE</b>  = 8;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SQLITE_OPEN_EXCLUSIVE"></a><code><b>SQLITE_OPEN_EXCLUSIVE</b>      = 10;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SQLITE_OPEN_FULLMUTEX"></a><code><b>SQLITE_OPEN_FULLMUTEX</b>      = 10000;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SQLITE_OPEN_MAIN_DB"></a><code><b>SQLITE_OPEN_MAIN_DB</b>        = 100;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SQLITE_OPEN_MAIN_JOURNAL"></a><code><b>SQLITE_OPEN_MAIN_JOURNAL</b>   = 800;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SQLITE_OPEN_MASTER_JOURNAL"></a><code><b>SQLITE_OPEN_MASTER_JOURNAL</b> = 4000;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SQLITE_OPEN_NOMUTEX"></a><code><b>SQLITE_OPEN_NOMUTEX</b>        = 8000;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SQLITE_OPEN_READONLY"></a><code><b>SQLITE_OPEN_READONLY</b>       = 1;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+** These bit values are intended for use in the 3rd parameter to the sqlite3_open_v2() ** interface and in the 4th parameter to the xOpen method of the sqlite3_vfs object.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SQLITE_OPEN_READWRITE"></a><code><b>SQLITE_OPEN_READWRITE</b>      = 2;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SQLITE_OPEN_SUBJOURNAL"></a><code><b>SQLITE_OPEN_SUBJOURNAL</b>     = 2000;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SQLITE_OPEN_TEMP_DB"></a><code><b>SQLITE_OPEN_TEMP_DB</b>        = 200;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SQLITE_OPEN_TEMP_JOURNAL"></a><code><b>SQLITE_OPEN_TEMP_JOURNAL</b>   = 1000;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SQLITE_OPEN_TRANSIENT_DB"></a><code><b>SQLITE_OPEN_TRANSIENT_DB</b>   = 400;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SQLITE_PERM"></a><code><b>SQLITE_PERM</b>       =  3;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+An internal logic error in SQLite</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SQLITE_PROTOCOL"></a><code><b>SQLITE_PROTOCOL</b>   = 15;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Unable to open the database file</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SQLITE_RANGE"></a><code><b>SQLITE_RANGE</b>      = 25;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Auxiliary database format error</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SQLITE_READONLY"></a><code><b>SQLITE_READONLY</b>   =  8;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+A malloc() failed</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SQLITE_ROW"></a><code><b>SQLITE_ROW</b>        = 100;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+File opened that is not a database file</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SQLITE_SCHEMA"></a><code><b>SQLITE_SCHEMA</b>     = 17;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+(Internal Only) Database table is empty</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SQLITE_STATIC"></a><code><b>SQLITE_STATIC</b>     = 0;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+sqlite3_create_function only</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SQLITE_TEXT"></a><code><b>SQLITE_TEXT</b>       = 3;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SQLITE_TOOBIG"></a><code><b>SQLITE_TOOBIG</b>     = 18;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+The database schema changed</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SQLITE_TRANSIENT"></a><code><b>SQLITE_TRANSIENT</b>  = -1;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SQLITE_UTF16"></a><code><b>SQLITE_UTF16</b>      = 4;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SQLITE_UTF16BE"></a><code><b>SQLITE_UTF16BE</b>    = 3;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SQLITE_UTF16LE"></a><code><b>SQLITE_UTF16LE</b>    = 2;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SQLITE_UTF8"></a><code><b>SQLITE_UTF8</b>       = 1;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+** These are the allowed values for the eTextRep argument to ** sqlite3_create_collation and sqlite3_create_function.</p>
+</td></tr>
+</table>
+<h3 class="detail">Variables</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="EnginesCount"></a><code><b>EnginesCount</b>: Integer;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Keeps track of engines using the library</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_aggregate_context"></a><code><b>SqliteDbv3_aggregate_context</b>:function(context:pointer; nBytes:integer):pointer; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_aggregate_count"></a><code><b>SqliteDbv3_aggregate_count</b>:function(SqliteDbv3_context:pointer):integer; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_bind_blob"></a><code><b>SqliteDbv3_bind_blob</b>:function(stmt:pointer; idx:integer; value:pointer; size:integer; xDel:integer):integer; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_bind_double"></a><code><b>SqliteDbv3_bind_double</b>:function(stmt:pointer; idx:integer; value:double):integer; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_bind_int"></a><code><b>SqliteDbv3_bind_int</b>:function(stmt:pointer; idx:integer; value:integer):integer; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_bind_int64"></a><code><b>SqliteDbv3_bind_int64</b>:function(stmt:pointer; idx:integer; value:int64):integer; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_bind_null"></a><code><b>SqliteDbv3_bind_null</b>:function(stmt:pointer; idx:integer):integer; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_bind_parameter_count"></a><code><b>SqliteDbv3_bind_parameter_count</b>:function(stmt:pointer):integer; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_bind_parameter_index"></a><code><b>SqliteDbv3_bind_parameter_index</b>:function(stmt:pointer; zName:pChar):integer; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_bind_parameter_name"></a><code><b>SqliteDbv3_bind_parameter_name</b>:function(stmt:pointer; idx:integer):pChar; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_bind_text"></a><code><b>SqliteDbv3_bind_text</b>:function(stmt:pointer; idx:integer; value:pAnsiChar; size:integer; xDel:Integer):integer; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+SqliteDbv3_bind_value:function(stmt:pointer; idx:integer; value:pointer):integer; cdecl;</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_bind_text16"></a><code><b>SqliteDbv3_bind_text16</b>:function(stmt:pointer; idx:integer; value:pWideChar; size:integer; xDel:Integer):integer; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_busy_handler"></a><code><b>SqliteDbv3_busy_handler</b>: function(db: Pointer; CallbackPtr:<a   href="SqlitePassApi_v3.html#TBusyHandler">TBusyHandler</a>; user:pointer):integer; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_busy_timeout"></a><code><b>SqliteDbv3_busy_timeout</b>: function(db: Pointer; TimeOut: integer):integer; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_changes"></a><code><b>SqliteDbv3_changes</b>: function(db: Pointer): integer; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_clear_binding"></a><code><b>SqliteDbv3_clear_binding</b>:function(stmt:pointer):integer; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Binding values to parameters</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_close"></a><code><b>SqliteDbv3_close</b>: function(db: Pointer):integer; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+&mdash;&ndash; Database functions &mdash;&ndash;</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_collation_needed"></a><code><b>SqliteDbv3_collation_needed</b>:function(db:pointer; userData:pointer; func:<a   href="SqlitePassApi_v3.html#TUserCollationNeeded">TUserCollationNeeded</a>):integer; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_column_blob"></a><code><b>SqliteDbv3_column_blob</b>:function(pStmt:pointer; col:integer):pointer; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_column_bytes"></a><code><b>SqliteDbv3_column_bytes</b>:function(pStmt:pointer; col:integer):integer; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_column_count"></a><code><b>SqliteDbv3_column_count</b>:function(pStmt:pointer):integer; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Column information</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_column_decltype"></a><code><b>SqliteDbv3_column_decltype</b>:function(pStmt:pointer; idx:integer):pAnsiChar; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+returns text which is the declared type of the column in the CREATE TABLE statement</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_column_decltype16"></a><code><b>SqliteDbv3_column_decltype16</b>:function(pStmt:pointer; idx:integer):pWideChar; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_column_double"></a><code><b>SqliteDbv3_column_double</b>:function(pStmt:pointer; col:integer):double; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_column_int"></a><code><b>SqliteDbv3_column_int</b>:function(pStmt:pointer; col:integer):integer; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_column_int64"></a><code><b>SqliteDbv3_column_int64</b>:function(pStmt:pointer; col:integer):int64; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_column_name"></a><code><b>SqliteDbv3_column_name</b>:function(pStmt:pointer; idx:integer):pAnsiChar; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_column_name16"></a><code><b>SqliteDbv3_column_name16</b>:function(pStmt:pointer; idx:integer):pWideChar; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_column_origin_name"></a><code><b>SqliteDbv3_column_origin_name</b>:function(pStmt:pointer; idx:integer):pAnsiChar; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_column_origin_name16"></a><code><b>SqliteDbv3_column_origin_name16</b>:function(pStmt:pointer; idx:integer):pWideChar; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_column_table_name"></a><code><b>SqliteDbv3_column_table_name</b>:function(pStmt:pointer; idx:integer):pAnsiChar; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_column_table_name16"></a><code><b>SqliteDbv3_column_table_name16</b>:function(pStmt:pointer; idx:integer):pWideChar; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_column_text"></a><code><b>SqliteDbv3_column_text</b>:function(pStmt:pointer; col:integer):pAnsiChar; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_column_text16"></a><code><b>SqliteDbv3_column_text16</b>:function(pStmt:pointer; col:integer):pWideChar; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_column_type"></a><code><b>SqliteDbv3_column_type</b>:function(pStmt:pointer; col:integer):integer; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_compileoption_used"></a><code><b>SqliteDbv3_compileoption_used</b>: function(P: pChar): Integer; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_complete"></a><code><b>SqliteDbv3_complete</b>: function(P: pChar): integer; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_create_collation"></a><code><b>SqliteDbv3_create_collation</b>:function(db:pointer; zName:pChar; eTextRep:integer; userData:pointer; func:<a   href="SqlitePassApi_v3.html#TUserCollation">TUserCollation</a>):integer; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Sort functions</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_create_function"></a><code><b>SqliteDbv3_create_function</b>:function( db:pointer; zFunctionName:pAnsiChar; nArg:integer; eTextRep:integer; userData:pointer; xFunc, xStep:<a   href="SqlitePassApi_v3.html#TFuncHandler">TFuncHandler</a>; xFinal:<a   href="SqlitePassApi_v3.html#TFuncFinalizer">TFuncFinalizer</a>):integer; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+user defined functions</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_create_function16"></a><code><b>SqliteDbv3_create_function16</b>:function( db:pointer; zFunctionName:pWideChar; nArg:integer; eTextRep:integer; userData:pointer; xFunc, xStep:<a   href="SqlitePassApi_v3.html#TFuncHandler">TFuncHandler</a>; xFinal:<a   href="SqlitePassApi_v3.html#TFuncFinalizer">TFuncFinalizer</a>):integer; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_data_count"></a><code><b>SqliteDbv3_data_count</b>:function(pStmt:pointer):integer; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_errcode"></a><code><b>SqliteDbv3_errcode</b>:function(db:pointer):integer; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Error Messages</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_errmsg"></a><code><b>SqliteDbv3_errmsg</b>:function(db:pointer):pAnsiChar; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_errmsg16"></a><code><b>SqliteDbv3_errmsg16</b>:function(db:pointer):pWideChar; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_exec"></a><code><b>SqliteDbv3_exec</b>: function(db: Pointer; SQLStatement: pUTF8String; CallbackPtr: <a   href="SqlitePassApi_v3.html#TExecCallback">TExecCallBack</a>; CbParam: pointer; ErrMsg: PPAnsiChar): integer; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Always ansi utf8 encoded</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_finalize"></a><code><b>SqliteDbv3_finalize</b>:function(pStmt:pointer):integer; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_free"></a><code><b>SqliteDbv3_free</b>: procedure(P: pChar); cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_free_table"></a><code><b>SqliteDbv3_free_table</b>: procedure(Table: pChar); cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_get_auxdata"></a><code><b>SqliteDbv3_get_auxdata</b>:function(context:pointer; idx:integer):pointer; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_get_table"></a><code><b>SqliteDbv3_get_table</b>: function(db: Pointer; SQLStatement: pChar; var ResultPtr: Pointer; var RowCount: cardinal; var ColCount: cardinal; var ErrMsg: pChar): integer; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_interrupt"></a><code><b>SqliteDbv3_interrupt</b>: procedure(db: Pointer); cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_last_insert_rowid"></a><code><b>SqliteDbv3_last_insert_rowid</b>: function(db: Pointer): int64; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_open"></a><code><b>SqliteDbv3_open</b>: function(dbname: pAnsiChar; var db:pointer; flags: integer; vfs: pAnsiChar):integer; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Open a database and store the handle in 'db'</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_open16"></a><code><b>SqliteDbv3_open16</b>: function(dbname: pWideChar; var db:pointer):integer; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_prepare16_v2"></a><code><b>SqliteDbv3_prepare16_v2</b>:function(db:pointer; Sql:pWideChar; nBytes:integer; var stmt:pointer; var pzTail:pWideChar):integer; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_prepare_v2"></a><code><b>SqliteDbv3_prepare_v2</b>:function(db:pointer; Sql:pAnsiChar; nBytes:integer; var stmt:pointer; var pzTail:pAnsiChar):integer; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+&mdash;-</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_reset"></a><code><b>SqliteDbv3_reset</b>:function(pStmt:pointer):integer; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_result_blob"></a><code><b>SqliteDbv3_result_blob</b>:procedure(context:pointer; value:pointer; size:integer; xDel:integer); cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_result_double"></a><code><b>SqliteDbv3_result_double</b>:procedure(context:pointer; value:double); cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_result_error"></a><code><b>SqliteDbv3_result_error</b>:procedure(context:pointer; msg:pChar; len:integer); cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_result_int"></a><code><b>SqliteDbv3_result_int</b>:procedure(context:pointer; value:integer); cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_result_int64"></a><code><b>SqliteDbv3_result_int64</b>:procedure(context:pointer; value:int64); cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_result_null"></a><code><b>SqliteDbv3_result_null</b>:procedure(context:pointer); cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_result_text"></a><code><b>SqliteDbv3_result_text</b>:procedure(context:pointer; value:pAnsiChar; len:integer; xDel:integer); cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_result_text16"></a><code><b>SqliteDbv3_result_text16</b>:procedure(context:pointer; value:pWideChar; len:integer; xDel:integer); cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_result_value"></a><code><b>SqliteDbv3_result_value</b>:procedure(context:pointer; value:<a   href="SqlitePassUtils.html#PSqliteValue">PSqliteValue</a>); cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_set_auxdata"></a><code><b>SqliteDbv3_set_auxdata</b>:procedure(context:pointer; idx:integer; data:pointer; xDel:integer); cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_sql"></a><code><b>SqliteDbv3_sql</b>: function(stmt: pointer):pChar; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_SqliteLibSourceId"></a><code><b>SqliteDbv3_SqliteLibSourceId</b>: function(): pAnsiChar; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_SqliteLibVersion"></a><code><b>SqliteDbv3_SqliteLibVersion</b>: function(): pAnsiChar; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+.$IFDEF WIN32</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_SqliteLibVersionNumber"></a><code><b>SqliteDbv3_SqliteLibVersionNumber</b>: function(): Integer; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+.$ENDIF</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_step"></a><code><b>SqliteDbv3_step</b>:function(pStmt:pointer):integer; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_total_changes"></a><code><b>SqliteDbv3_total_changes</b>: function(db: Pointer): integer; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_user_data"></a><code><b>SqliteDbv3_user_data</b>:function(context:pointer):pointer; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_value_blob"></a><code><b>SqliteDbv3_value_blob</b>:function(v:<a   href="SqlitePassUtils.html#PSqliteValue">PSqliteValue</a>):pointer; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_value_bytes"></a><code><b>SqliteDbv3_value_bytes</b>:function(v:<a   href="SqlitePassUtils.html#PSqliteValue">PSqliteValue</a>):integer; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_value_double"></a><code><b>SqliteDbv3_value_double</b>:function(v:<a   href="SqlitePassUtils.html#PSqliteValue">PSqliteValue</a>):double; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_value_int"></a><code><b>SqliteDbv3_value_int</b>:function(v:<a   href="SqlitePassUtils.html#PSqliteValue">PSqliteValue</a>):integer; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_value_int64"></a><code><b>SqliteDbv3_value_int64</b>:function(v:<a   href="SqlitePassUtils.html#PSqliteValue">PSqliteValue</a>):int64; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_value_text"></a><code><b>SqliteDbv3_value_text</b>:function(v:<a   href="SqlitePassUtils.html#PSqliteValue">PSqliteValue</a>):pAnsiChar; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_value_text16"></a><code><b>SqliteDbv3_value_text16</b>:function(v:<a   href="SqlitePassUtils.html#PSqliteValue">PSqliteValue</a>):pWideChar; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SqliteDbv3_value_type"></a><code><b>SqliteDbv3_value_type</b>:function(v:<a   href="SqlitePassUtils.html#PSqliteValue">PSqliteValue</a>):integer; cdecl;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<hr noshade size="1"><span class="appinfo"><em>Generated by <a  target="_parent" href="http://pasdoc.sourceforge.net/">PasDoc 0.11.0</a> on 2010-05-16 23:39:43</em>
+</span>
+</body></html>

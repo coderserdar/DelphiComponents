@@ -1,0 +1,67 @@
+//
+// unicode (delphi 2009, ...):
+//
+  object SQLConnection1: TSQLConnection
+    DriverName = 'DbxWOracle'
+    GetDriverFunc = 'getSQLDriverODBCW'
+    LibraryName = 'dbxoodbc.dll'
+    LoginPrompt = False
+    Params.Strings = (
+      'DbxWOracle TransIsolation=ReadCommited'
+        'Database=DBQ=TNS_NANE1;DBA=W;APA=T;FEN=T;QTO=T;FRC=10;FDL=10;L' +
+        'OB=T;RST=T;FRL=F;MTS=F;CSR=F;PFC=10;TLO=0'
+      'RowsetSize=20'
+      'BlobSize=-1'
+      'Trim Char=True'
+        'Custom String=coNetPacketSize=8192;coLockMode=-1;coBlobChunkSize' +
+        '=40960;coSchemFlt=0;coCatPrefix=UID'
+      'User_Name=user1'
+      'Password=pwd1')
+    VendorLib = 'SQORA32.DLL'
+    Left = 40
+    Top = 40
+  end
+
+//
+// unicode (delphi 2006, 2007):
+//
+  object SQLConnection1: TSQLConnection
+    DriverName = 'DbxWOracle'
+    GetDriverFunc = 'getSQLDriverODBCW'
+    LibraryName = 'dbxoodbc.dll'
+    LoginPrompt = False
+    Params.Strings = (
+      'DbxWOracle TransIsolation=ReadCommited'
+        'Database=DBQ=TNS_NAME1;DBA=W;APA=T;FEN=T;QTO=T;FRC=10;FDL=10;L' +
+        'OB=T;RST=T;FRL=F;MTS=F;CSR=F;PFC=10;TLO=0;UID=user1;PWD=pwd1'
+      'RowsetSize=20'
+      'BlobSize=-1'
+      'Trim Char=True'
+        'Custom String=coNetPacketSize=8192;coLockMode=-1;coBlobChunkSize' +
+        '=40960;coSchemFlt=0;coCatPrefix=UID')
+    VendorLib = 'SQORA32.DLL'
+    Left = 80
+    Top = 52
+  end
+
+//
+// ansi (delphi 6, 7, 2005):
+//
+  object SQLConnection1: TSQLConnection
+    DriverName = 'DbxOracle'
+    GetDriverFunc = 'getSQLDriverODBC'
+    LibraryName = 'dbxoodbc.dll'
+    LoginPrompt = False
+    Params.Strings = (
+      'DbxOracle TransIsolation=ReadCommited'
+        'Database=DBQ=TNS_NAME1;DBA=W;APA=T;FEN=T;QTO=T;FRC=10;FDL=10;L' +
+        'OB=T;RST=T;FRL=F;MTS=F;CSR=F;PFC=10;TLO=0;UID=user1;PWD=pwd1'
+      'RowsetSize=20'
+      'BlobSize=-1'
+      'Trim Char=True'
+        'Custom String=coNetPacketSize=8192;coLockMode=-1;coBlobChunkSize' +
+        '=40960;coSchemFlt=0;coCatPrefix=UID')
+    VendorLib = 'SQORA32.DLL'
+    Left = 200
+    Top = 48
+  end

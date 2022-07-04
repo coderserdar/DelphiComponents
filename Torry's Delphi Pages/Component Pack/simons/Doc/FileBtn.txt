@@ -1,0 +1,141 @@
+TFileButton (C)opyright 2002 Version 1.00
+
+  Autor : Simon Reinhardt
+  eMail : reinhardt@picsoft.de
+  Internet : http://www.picsoft.de
+
+  Die Komponente TFileButton ist eine SpeedButton-ähnliche Komponente. Sie ist
+  abgeleteitet von TGraphicControl und dient dem einfachen Öffnen von Dateien.
+
+  Die Komponente ist Public Domain, das Urheberrecht liegt aber 
+  beim Autor.
+
+
+
+Dateiumfang:
+------------
+
+FileBtn.txt 	- Diese Datei
+
+FileBtn.pas	- Quelltext der Komponente
+FileBtn.d16	- Resourcendatei der 16-Bit-Komponente für Delphi 1
+FileBtn.d32	- Resourcendatei der 32-Bit-Komponente für Delphi 2 bis 5
+SRDefine.inc
+rr.inc          - Includedateien für die Komponente
+rrColors.pas	- Funktionen zur RGB-HSL-Umrechnung
+SRUtils.pas	- verschiedende Prozeduren und Funktionen für die Komponente
+                  (Eine Beschreibung findet man im Interface der Unit)  
+	
+
+Installation:
+-------------
+
+In Delphi 1:
+------------
+1. Alle Dateien in das Delphi-Komponenten-Verzeichnis entpacken.
+2. Menü Optionen : Komponente installieren
+3. Schaltfläche Hinzufügen / Durchsuchen
+4. Datei FileBtn.pas im Delphi-Komponenten-Verzeichnis suchen und mit
+   OK bestätigen.
+5. Die Komponente erscheint in der Komponenten-Gruppe "Simon"
+
+In Delphi 2:
+------------
+1. Alle Dateien in das Delphi-Komponenten-Verzeichnis entpacken.
+2. Menü Komponente :  installieren
+3. Schaltfläche Hinzufügen / Durchsuchen
+4. Datei FileBtn.pas im Delphi-Komponenten-Verzeichnis suchen und mit
+   OK bestätigen.
+5. Die Komponente erscheint in der Komponenten-Gruppe "Simon"
+
+Ab Delphi 3:
+------------
+1. Alle Dateien in das Delphi-Komponenten-Verzeichnis entpacken.
+2. Menü Komponente :  Komponente installieren
+3. Schaltfläche Durchsuchen (hinter dem Eingabefeld für den Unit-Namen)
+4. Datei FileBtn.pas im Delphi-Komponenten-Verzeichnis suchen und mit
+   OK bestätigen.
+5. Die Rückfrage nach dem Neukompilieren des Packages bestätigen.
+6. Die Komponente erscheint in der Komponenten-Gruppe "Simon"
+   (Evtl. muß eine bereits installierte, ältere Version der Komponente
+    zuvor entfernt werden)
+
+
+
+Funktion:
+---------
+
+Die Komponente ist eine einfache TSpeedButton-ähnliche Komponente und öffnet
+auf einen Klick die in der Eigenschaft "Filename" gespeicherte Datei.
+
+A) Eigenschaften:
+-----------------
+AppShowState: TAppShowStates 
+  Gibt den Zustand der Applikation an, die nach einem Klick auf den Button geöffnet
+  wird. Eine Beschreibung der möglichen Werte findet man in der Onlinehilfe zur
+  ShellExecute-Funktion.
+  (SW_Hide, SW_ShowNormal, SW_ShowMinimized, SW_ShowMaximized,
+   SW_ShowNoActivate, SW_Show, SW_Minimize, SW_ShowMinNoActive,
+   SW_ShowNA, SW_Restore, SW_ShowDefault)
+
+Asynchronous: boolean;
+  Wenn diese Eigenschaft den Wert "true" hat, wird die Ausführung der Anwendung nach
+  dem Öffnen der in "FileName" gespeicherten Datei fortgeführt. Ansonsten wird die
+  Ausführung angehalten, bis die gestartete Applikation wieder beendet wurde.
+
+BackgroundColor: TColor;
+  Wenn "Transparent" den Wert "true" hat, wird das Symbol transparent gezeichnet 
+  und die in dieser Eigenschaft gespeicherte Farbe scheint unter dem Symbol durch.
+
+BevelContrast: TContrast
+  Die Farben der abgeschrägten Seiten des Buttons werden aus der Button-Farbe "Color"
+  berechnet Diese Eigsenschaft gibt den Kontrast zwischen den abgeschrägten Seiten 
+  und der in "Color" gespeicherten Farbe an:
+	0: Kein Helligkeitsunterschied ..
+        9: Maximaler Helligkeitsunterschied
+
+Color: TColor
+  Die Oberflächenfarbe des Buttons.
+
+FileName: string
+  Der Name der Datei, die nach einem Klick auf den Button geöffnet wird. Das kann ein
+  ausführbares Programm sein, aber auch ein beliebiges Dokument. Nach Setzen dieser 
+  Eigenschaft wird das verknüpfte Symbol für diese Datei auf dem Button dargestellt.
+
+Flat: boolean
+  Wenn diese Eigenschaft den Wert "true" hat, hat der Button keine abgeschrägten 
+  Ränder. Erst wenn man die Maus über den Button bewegt, wird um den Button ein 
+  abgeschrägter Rand gezeichnet. 
+
+Margin: shortint
+  Diese Eigenschaft gibt den Abstand des Symbols zum oberen Rand des Buttons an. Wenn
+  Margin den Wert "-1" hat, wird das Symbol vertikal auf dem Button zentriert.
+
+ShowFilename: boolean;
+  Wenn diese Eigenschaft den Wert "true" hat, wird der Button mit dem Namen der in 
+  "FileName" angegebenen Datei beschriftet. Ansonsten wird die in "Caption" 
+  gespeicherte Beschriftung auf dem Button angezeigt. Der Dateiname wird automatisch
+  an die Breite des Buttons angepasst.
+
+ShowIconFrame: boolean;
+  Wenn diese Eigenschaft den Wert "true" hat, wird um das Symbol ein schwarzer Rand
+  gezeichnet.
+
+Spacing: shortint;
+  Diese Eigenschaft gibt den Abstand der Beschriftung des Buttons zum Symbol an.
+  Wenn Spacing den Wert "-1" hat, wird die Beschriftung vertikal unter dem Symbol
+  zentriert.
+
+Transparent: boolean;
+  Wenn diese Eigenschaft den Wert "true" hat, wird um das Symbol transparent gezeichnet
+  und die in "BackgroundColor" gespeicherte Farbe scheint unter dem Symbol durch.
+  
+
+
+B) Ereignisse:
+--------------
+OnMouseEnter: TNotifyEvent
+  Wird ausgelöst, wenn die Maus über die Komponente bewegt wird.
+
+OnMouseExit: TNotifyEvent
+  Wird ausgelöst, wenn die Maus die Komponente verlässt.

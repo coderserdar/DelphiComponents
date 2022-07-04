@@ -1,0 +1,358 @@
+object UIBDatabaseEditForm: TUIBDatabaseEditForm
+  Left = 423
+  Height = 390
+  Top = 105
+  Width = 429
+  HorzScrollBar.Page = 428
+  VertScrollBar.Page = 389
+  ActiveControl = Mode
+  BorderIcons = [biSystemMenu, biHelp]
+  Caption = 'UIB Database Editor'
+  ClientHeight = 390
+  ClientWidth = 429
+  Constraints.MinHeight = 346
+  Constraints.MinWidth = 352
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  OnCreate = FormCreate
+  Position = poDesktopCenter
+  object UserNameLbl: TLabel
+    AnchorSideLeft.Control = Connection
+    AnchorSideTop.Control = Connection
+    AnchorSideTop.Side = asrBottom
+    Left = 8
+    Height = 14
+    Top = 159
+    Width = 53
+    Caption = '&User Name'
+    ParentColor = False
+  end
+  object PasswordLbl: TLabel
+    AnchorSideLeft.Control = Connection
+    AnchorSideTop.Control = UserName
+    AnchorSideTop.Side = asrBottom
+    Left = 8
+    Height = 14
+    Top = 206
+    Width = 47
+    Caption = 'Pass&word'
+    ParentColor = False
+  end
+  object SQLRoleLbl: TLabel
+    AnchorSideLeft.Control = Connection
+    AnchorSideTop.Control = Password
+    AnchorSideTop.Side = asrBottom
+    Left = 8
+    Height = 14
+    Top = 253
+    Width = 44
+    Caption = 'SQL &Role'
+    ParentColor = False
+  end
+  object CharacterSetLbl: TLabel
+    AnchorSideLeft.Control = Connection
+    AnchorSideTop.Control = SQLRole
+    AnchorSideTop.Side = asrBottom
+    Left = 8
+    Height = 14
+    Top = 300
+    Width = 68
+    Caption = '&Character Set'
+    ParentColor = False
+  end
+  object Connection: TGroupBox
+    AnchorSideRight.Side = asrBottom
+    Left = 8
+    Height = 159
+    Width = 420
+    Anchors = [akTop, akLeft, akRight]
+    AutoSize = True
+    Caption = 'Connection'
+    ClientHeight = 141
+    ClientWidth = 416
+    TabOrder = 0
+    object ModeLbl: TLabel
+      Left = 8
+      Height = 14
+      Top = 4
+      Width = 27
+      Caption = '&Mode'
+      FocusControl = Mode
+      ParentColor = False
+    end
+    object ServerLbl: TLabel
+      AnchorSideLeft.Control = Mode
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = ModeLbl
+      Left = 133
+      Height = 14
+      Top = 4
+      Width = 33
+      Caption = '&Server'
+      ParentColor = False
+    end
+    object PortLbl: TLabel
+      AnchorSideTop.Control = ModeLbl
+      AnchorSideRight.Side = asrBottom
+      Left = 335
+      Height = 14
+      Top = 4
+      Width = 21
+      Anchors = [akTop, akRight]
+      Caption = '&Port'
+      ParentColor = False
+    end
+    object DatabaseLbl: TLabel
+      AnchorSideLeft.Control = ModeLbl
+      AnchorSideTop.Control = Mode
+      AnchorSideTop.Side = asrBottom
+      Left = 8
+      Height = 14
+      Top = 51
+      Width = 76
+      Caption = '&Database name'
+      ParentColor = False
+    end
+    object LibraryNameLbl: TLabel
+      AnchorSideLeft.Control = ModeLbl
+      AnchorSideTop.Control = DatabaseName
+      AnchorSideTop.Side = asrBottom
+      Left = 8
+      Height = 14
+      Top = 98
+      Width = 63
+      Caption = '&Library name'
+      ParentColor = False
+    end
+    object Mode: TComboBox
+      AnchorSideLeft.Control = ModeLbl
+      AnchorSideTop.Control = ModeLbl
+      AnchorSideTop.Side = asrBottom
+      Left = 14
+      Height = 21
+      Top = 24
+      Width = 113
+      AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
+      BorderSpacing.Around = 6
+      ItemHeight = 13
+      Items.Strings = (
+        '[Local]'
+        'TCP/IP'
+        'NamedPipe'
+        'IPX/SPX'
+      )
+      MaxLength = 0
+      OnChange = ModeChange
+      Style = csDropDownList
+      TabOrder = 0
+    end
+    object ServerName: TEdit
+      AnchorSideLeft.Control = ServerLbl
+      AnchorSideTop.Control = ServerLbl
+      AnchorSideTop.Side = asrBottom
+      Left = 139
+      Height = 21
+      Top = 24
+      Width = 188
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Around = 6
+      TabOrder = 1
+    end
+    object DatabaseName: TEdit
+      AnchorSideLeft.Control = ModeLbl
+      AnchorSideTop.Control = DatabaseLbl
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Browse
+      Left = 14
+      Height = 21
+      Top = 71
+      Width = 365
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Around = 6
+      TabOrder = 3
+    end
+    object PortName: TEdit
+      AnchorSideLeft.Control = PortLbl
+      AnchorSideTop.Control = PortLbl
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Connection
+      AnchorSideRight.Side = asrBottom
+      Left = 341
+      Height = 21
+      Top = 24
+      Width = 69
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Around = 6
+      TabOrder = 2
+    end
+    object Browse: TButton
+      AnchorSideTop.Control = DatabaseName
+      AnchorSideRight.Control = Connection
+      AnchorSideRight.Side = asrBottom
+      AnchorSideBottom.Control = DatabaseName
+      AnchorSideBottom.Side = asrBottom
+      Left = 385
+      Height = 21
+      Top = 71
+      Width = 25
+      Anchors = [akTop, akRight, akBottom]
+      BorderSpacing.Right = 6
+      BorderSpacing.InnerBorder = 4
+      Caption = '...'
+      OnClick = BrowseClick
+      TabOrder = 4
+    end
+    object LibraryName: TEdit
+      AnchorSideLeft.Control = ModeLbl
+      AnchorSideTop.Control = LibraryNameLbl
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = BrowseLib
+      Left = 14
+      Height = 21
+      Top = 118
+      Width = 365
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Around = 6
+      TabOrder = 5
+    end
+    object BrowseLib: TButton
+      AnchorSideTop.Control = LibraryName
+      AnchorSideRight.Control = Connection
+      AnchorSideRight.Side = asrBottom
+      AnchorSideBottom.Control = LibraryName
+      AnchorSideBottom.Side = asrBottom
+      Left = 385
+      Height = 21
+      Top = 118
+      Width = 25
+      Anchors = [akTop, akRight, akBottom]
+      BorderSpacing.Right = 6
+      BorderSpacing.InnerBorder = 4
+      Caption = '...'
+      OnClick = BrowseLibClick
+      TabOrder = 6
+    end
+  end
+  object OkBtn: TButton
+    Left = 268
+    Height = 26
+    Top = 352
+    Width = 75
+    Anchors = [akRight, akBottom]
+    BorderSpacing.InnerBorder = 4
+    Caption = '&Ok'
+    ModalResult = 1
+    OnClick = OkBtnClick
+    TabOrder = 6
+  end
+  object CancelBtn: TButton
+    Left = 348
+    Height = 26
+    Top = 352
+    Width = 75
+    Anchors = [akRight, akBottom]
+    BorderSpacing.InnerBorder = 4
+    Caption = '&Cancel'
+    ModalResult = 2
+    TabOrder = 8
+  end
+  object Parametters: TMemo
+    AnchorSideTop.Control = Connection
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Connection
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = CharacterSet
+    AnchorSideBottom.Side = asrBottom
+    Left = 144
+    Height = 176
+    Top = 165
+    Width = 284
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    BorderSpacing.Top = 6
+    OnExit = ParamettersExit
+    TabOrder = 5
+  end
+  object UserName: TEdit
+    AnchorSideLeft.Control = UserNameLbl
+    AnchorSideTop.Control = UserNameLbl
+    AnchorSideTop.Side = asrBottom
+    Left = 14
+    Height = 21
+    Top = 179
+    Width = 121
+    BorderSpacing.Around = 6
+    OnChange = UserNameChange
+    OnExit = UserNameChange
+    TabOrder = 1
+  end
+  object Password: TEdit
+    AnchorSideLeft.Control = PasswordLbl
+    AnchorSideTop.Control = PasswordLbl
+    AnchorSideTop.Side = asrBottom
+    Left = 14
+    Height = 21
+    Top = 226
+    Width = 121
+    BorderSpacing.Around = 6
+    OnChange = PasswordChange
+    OnExit = PasswordChange
+    TabOrder = 2
+  end
+  object SQLRole: TEdit
+    AnchorSideLeft.Control = SQLRoleLbl
+    AnchorSideTop.Control = SQLRoleLbl
+    AnchorSideTop.Side = asrBottom
+    Left = 14
+    Height = 21
+    Top = 273
+    Width = 121
+    BorderSpacing.Around = 6
+    OnChange = SQLRoleChange
+    OnExit = SQLRoleChange
+    TabOrder = 3
+  end
+  object CharacterSet: TComboBox
+    AnchorSideLeft.Control = CharacterSetLbl
+    AnchorSideTop.Control = CharacterSetLbl
+    AnchorSideTop.Side = asrBottom
+    Left = 14
+    Height = 21
+    Top = 320
+    Width = 121
+    AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
+    BorderSpacing.Around = 6
+    ItemHeight = 13
+    MaxLength = 0
+    OnChange = CharacterSetChange
+    OnExit = CharacterSetChange
+    Style = csDropDownList
+    TabOrder = 4
+  end
+  object Test: TButton
+    Left = 8
+    Height = 26
+    Top = 352
+    Width = 75
+    Anchors = [akLeft, akBottom]
+    BorderSpacing.InnerBorder = 4
+    Caption = '&Test'
+    OnClick = TestClick
+    TabOrder = 7
+  end
+  object DBOpenDialog: TOpenDialog
+    Title = 'Открыть существующий файл'
+    DefaultExt = '.fdb'
+    Filter = 'Firebird database (*.fdb)|*.fdb|Interbase database (*.ib)|*.ib|Old interbase database (*.gdb)|*.gdb|All files (*.*)|*.*'
+    FilterIndex = 0
+    left = 200
+    top = 80
+  end
+  object LibOpenDialog: TOpenDialog
+    Title = 'Открыть существующий файл'
+    DefaultExt = '.dll'
+    Filter = 'Windows library (*.dll)|*.dll|Linux library (*.so)|*.so|All files|*.*'
+    FilterIndex = 0
+    left = 200
+    top = 136
+  end
+end

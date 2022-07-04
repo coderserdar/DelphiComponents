@@ -1,0 +1,81 @@
+package acnt2005_R;
+{$R *.res}
+{$ALIGN 8}
+{$ASSERTIONS OFF}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS OFF}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE ON}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'AlphaControls run-time library'}
+{$RUNONLY}
+{$IMPLICITBUILD OFF}
+{$WARNINGS OFF}
+
+requires
+  vcl,
+  vclx,
+  vcljpg;
+
+{$I sDefs.inc}
+
+contains
+  sEdit in 'sEdit.pas',
+  sPanel in 'sPanel.pas',
+  sConst in 'sConst.pas',
+  sCheckbox in 'sCheckbox.pas',
+  sCheckListBox in 'sCheckListBox.pas',
+  sGraphUtils in 'sGraphUtils.pas',
+  sVclUtils in 'sVclUtils.pas',
+  sMessages in 'sMessages.pas',
+  sDateUtils in 'sDateUtils.pas',
+  sGauge in 'sGauge.pas',
+  sListView in 'sListView.pas', 
+  sMemo in 'sMemo.pas',
+  sScrollBar in 'sScrollBar.pas',
+  sStoreUtils in 'sStoreUtils.pas',
+  sStyleSimply in 'sStyleSimply.pas',
+  sGradient in 'sGradient.pas',
+  sDefaults in 'sDefaults.pas',
+  sBorders in 'sBorders.pas',
+  sSkinManager in 'sSkinManager.pas',
+  sMaskData in 'sMaskData.pas',
+  sSkinProps in 'sSkinProps.pas',
+  sSkinProvider in 'sSkinProvider.pas',
+  sStrings in 'sStrings.pas',
+  sSkinMenus in 'sSkinMenus.pas',
+  sMDIForm in 'sMDIForm.pas',
+  sCommonData in 'sCommonData.pas',
+  sAlphaGraph in 'sAlphaGraph.pas',
+  sComboBox in 'sComboBox.pas',
+  sButton in 'sButton.pas',
+  sSpeedButton in 'sSpeedButton.pas',
+  sBitBtn in 'sBitBtn.pas',
+  sFade in 'sFade.pas',
+  sLabel in 'sLabel.pas',
+  sThirdParty in 'sThirdParty.pas',
+  acSBUtils in 'acSBUtils.pas',
+  acntUtils in 'acntUtils.pas',
+  sListBox in 'sListBox.pas',
+  acDials in 'acDials.pas',
+  acSkinPack in 'acSkinPack.pas',
+  acAlphaImageList in 'acAlphaImageList.pas',
+  acPNG in 'acPNG.pas',
+  acZLibEx in 'acZLibEx.pas',
+  acGlow in 'acGlow.pas';
+
+end.

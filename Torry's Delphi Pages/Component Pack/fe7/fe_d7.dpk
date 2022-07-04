@@ -1,0 +1,53 @@
+package fe_d7;
+
+{$R *.res}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'Form editor library for Delphi 6'}
+{$IMPLICITBUILD OFF}
+
+requires
+  vcl,
+  vclx,
+  vclsmp;
+
+contains
+  iFormEditRegister in 'iFormEditRegister.pas',
+  iFormEditor in 'iFormEditor.pas',
+  iGrCombo in 'iGrCombo.pas',
+  iPaperModel in 'iPaperModel.pas',
+  iPaperModelProp in 'iPaperModelProp.pas' {PaperModelSetupFmt},
+  ipsConst in 'ipsConst.pas',
+  iPropEditorFmt in 'iPropEditorFmt.pas' {psPropertyEditorFmt},
+  ipsImage in 'ipsImage.pas',
+  iFormEditorAction in 'iFormEditorAction.pas',
+  ipsLabel in 'ipsLabel.pas',
+  ipsBrush in 'ipsBrush.pas',
+  iFormEditorFmt in 'iFormEditorFmt.pas' {FormEditorFmt},
+  iAngleSelector in 'iAngleSelector.pas',
+  ipsFormPrinter in 'ipsFormPrinter.pas',
+  ipsShadow in 'ipsShadow.pas',
+  ipsSlider in 'ipsSlider.pas',
+  ipsBrushPanel in 'ipsBrushPanel.pas',
+  iPropEditor in 'iPropEditor.pas';
+
+end.

@@ -1,0 +1,233 @@
+TIniList (C)opyright 2004 Version 1.06
+
+  Autor : Simon Reinhardt
+  eMail : reinhardt@picsoft.de
+  Internet : http://www.picsoft.de
+
+  Die Klasse TIniList ist eine Stringliste, die um die Methoden
+  von TIniFile erweitert wurde. Man hat somit eine Möglichkeit,
+  Werte verschiedener Formate im Speicher zu halten und diese
+  erst bei Bedarf in ein Inifile zu speichern oder aus einem
+  Inifile zu laden. 
+
+  Die Klasse ist Public Domain, das Urheberrecht liegt aber 
+  beim Autor.
+
+
+
+Dateiumfang:
+------------
+
+Readme.txt 	- Diese Datei
+IniList.pas	- Quelltext der Klasse
+SRDefine.inc	- Inculdedatei für die Komponente
+SRUtils.pas	- verschiedende Prozeduren und Funktionen für die Komponente
+                  (Eine Beschreibung findet man im Interface der Unit)  
+	
+Ordner	Demo		- TIniList-Demo-Projekt für 32-Bit-Delphi
+	Ini_Main.dfm	- Formulardatei der MainForm
+	Ini_Main.pas	- Quelltext der MainForm-Unit
+	IniDemo.dof	- Compileroptionen des Demo-Projekts
+	IniDemo.dpr	- Quelltext des Demo-Projekts
+	IniDemo.res	- Resourcendatei des Demo-Projekts
+
+
+Installation:
+-------------
+
+In Delphi 1:
+------------
+1. Alle Dateien in das Delphi-Komponenten-Verzeichnis entpacken.
+2. Menü Optionen : Komponente installieren
+3. Schaltfläche Hinzufügen / Durchsuchen
+4. Datei IniList.pas im Delphi-Komponenten-Verzeichnis suchen und mit
+   OK bestätigen.
+5. Die Komponente erscheint in der Komponenten-Gruppe "Simon"
+
+In Delphi 2:
+------------
+1. Alle Dateien in das Delphi-Komponenten-Verzeichnis entpacken.
+2. Menü Komponente :  installieren
+3. Schaltfläche Hinzufügen / Durchsuchen
+4. Datei IniList.pas im Delphi-Komponenten-Verzeichnis suchen und mit
+   OK bestätigen.
+5. Die Komponente erscheint in der Komponenten-Gruppe "Simon"
+
+Ab Delphi 3:
+------------
+1. Alle Dateien in das Delphi-Komponenten-Verzeichnis entpacken.
+2. Menü Komponente :  Komponente installieren
+3. Schaltfläche Durchsuchen (hinter dem Eingabefeld für den Unit-Namen)
+4. Datei IniList.pas im Delphi-Komponenten-Verzeichnis suchen und mit
+   OK bestätigen.
+5. Die Rückfrage nach dem Neukompilieren des Packages bestätigen.
+6. Die Komponente erscheint in der Komponenten-Gruppe "Simon"
+   (Evtl. muß eine bereits installierte, ältere Version der Komponente
+    zuvor entfernt werden)
+
+
+
+Funktion:
+---------
+
+Die Klasse funktioniert ähnlich wie die Delphi-Klasse TIniFile
+mit folgenden Abweichungen:
+
+A) Eigenschaften:
+-----------------
+CaseSensitive: boolean;
+  Nur wenn CaseSensitive=true, werden Abschnitte und Schlüssel mit unterschiedlicher
+  Groß-/Kleinschreibung voneinander unterschieden.
+
+DateTimeAsFloat: boolean;
+  Wenn DateTimeAsFloat=true, werden Date- DateTime- und Time-Werte immer als
+  Fließkommazahl geladen und gespeichert. Wenn die Eigenschaft den Wert "false"
+  hat, werden diese Werte im eingestellten, landesspezifischen Format erwartet.
+
+IniFilename: string;
+  Der Dateiname für die Methoden "LoadFromFile" und "SaveToFile".
+
+Separator: char;
+  Das Trennzeichen zwischen Schlüsseln und Werten (Standard "=" wie bei TIniFile).
+
+Title: string;
+  Überschrift für die Werteliste. Die Überschrift erscheint als Kommentar (mit 
+  vorangestelltem Semikolon) in der ersten Zeile der Werteliste.
+
+
+C) Methoden:
+------------
+procedure Assign(Source:TIniList);
+  Weist die IniList-Instanz einer anderen IniList-Klasse zu
+
+procedure Clear;
+  Löscht die Werteliste.
+
+procedure CopyFrom(Source:TIniList; const Section: string);
+  Kopiert den Abschnitt "Section" aus "Source" in die aktuelle IniList-Instanz.
+  
+procedure DeleteKey(const Section, Key: String);
+  Löscht den Schlüssel "Key" aus dem Abschnitt "Section". Wenn es der einzige
+  Schlüssel in diesem Abschnitt war, wird der komplette Abschnitt "Section" 
+  gelöscht.
+
+procedure EraseSection(const Section: string);
+  Löscht den Abschnitt "Section" mit allen Schlüsseln.
+
+function KeyCount(const Section: string):integer;
+  Gibt die Anzahl Schlüssel im Abschnitt "Section" zurück.
+
+function KeyExists(const Section,Key: string):integer;
+  Prüft, ob der Schlüssel "Key" im Abschnitt "Section" existiert.
+
+function LoadFromFile:boolean;
+  Lädt alle Abschnitte, Schlüssel und Werte aus einer Text-(Ini-)datei. Der
+  Name der Datei wird in der Eigenschaft "Filename" angegeben.
+
+function LoadFromFile(const FileName:string):boolean;
+  Lädt alle Abschnitte, Schlüssel und Werte aus einer Text-(Ini-)datei. Der
+  Name der Datei wird im Parameter "Filename" angegeben. (nur ab Delphi 4)
+
+function LoadFromStream(AStream: TStream):boolean;
+  Lädt alle Abschnitte, Schlüssel und Werte aus dem Stream "AStream".
+  
+procedure LoadFromStrings(AStrings:TStrings);
+  Lädt alle Abschnitte, Schlüssel und Werte aus der Stringliste "AStrings".
+
+function ReadBool(const Section, Key: string; Default: Boolean): Boolean;
+  Gibt den Wert des Schlüssels "Key" im Abschnitt "Section" als boolschen
+  Wert zurück. 
+
+function ReadDate(const Section, Key: string; Default: TDateTime): TDateTime;
+  Gibt den Wert des Schlüssels "Key" im Abschnitt "Section" als TDate-Wert 
+  zurück. 
+
+function ReadDateTime(const Section, Key: string; Default: TDateTime): TDateTime;
+  Gibt den Wert des Schlüssels "Key" im Abschnitt "Section" als TDateTime-Wert 
+  zurück. 
+
+function ReadFloat(const Section, Key: string; Default: Double): Double;
+  Gibt den Wert des Schlüssels "Key" im Abschnitt "Section" als Fließkommawert 
+  zurück. 
+
+function ReadInteger(const Section, Key: string; Default: Longint): Longint;
+  Gibt den Wert des Schlüssels "Key" im Abschnitt "Section" als ganzzahligen Wert 
+  zurück. 
+
+function ReadString(const Section, Key, Default: string): string;
+  Gibt den Wert des Schlüssels "Key" im Abschnitt "Section" als Zeichenkette zurück. 
+
+function ReadTime(const Section, Key: string; Default: TDateTime): TDateTime;
+  Gibt den Wert des Schlüssels "Key" im Abschnitt "Section" als TTime-Wert 
+  zurück. 
+
+function ReadSection(const Section: string; AStrings: TStrings);
+  Liest alle Einträge (also Schlüssel mit Werten) aus dem Abschnitt "Section"
+  in die Liste "AStrings".
+
+function ReadSections(AStrings: TStrings);
+  Liest die Namen aller Abschnitte aus der Werteliste in die Liste "AStrings".
+
+function ReadSectionKeys(const Section: string; AStrings: TStrings);
+  Liest alle Schlüssel aus dem Abschnitt "Section" in die Liste "AStrings".
+
+function ReadSectionValues(const Section: string; AStrings: TStrings);
+  Liest alle Werte aus dem Abschnitt "Section" in die Liste "AStrings".
+
+function SaveToFile:boolean;
+  Speichert alle Abschnitte, Schlüssel und Werte in eine Text-(Ini-)datei. Der
+  Name der Datei wird in der Eigenschaft "Filename" angegeben.
+
+function SaveToFile(const FileName:string):boolean;
+  Speichert alle Abschnitte, Schlüssel und Werte in eine Text-(Ini-)datei. Der
+  Name der Datei wird im Parameter "Filename" angegeben. (nur ab Delphi 4)
+
+function SaveToStream(AStream: TStream):boolean;
+  Speichert alle Abschnitte, Schlüssel und Werte im Stream "AStream".
+
+procedure SaveToStrings(AStrings:TStrings);
+  Speichert alle Abschnitte, Schlüssel und Werte in der Stringliste "AStrings".
+
+function SectionCount:integer;
+  Gibt die Anzahl der Abschnitte in der Werteliste zurück.
+
+function SectionExists(const Section: string):boolean;
+  Prüft, ob der Abschnitt "Section" existiert.
+
+function ValueExists(const Section,Value: string):boolean;
+  Prüft, ob der Wert "Value" in der Sektion "Section" existiert.
+
+procedure WriteBool(const Section, Key: string; Value: Boolean);
+  Schreibt den boolschen Wert "Value" unter dem Schlüssel "Key" in den
+  Abschnitt "Section". 
+
+procedure WriteDate(const Section, Key: string; Value: TDateTime);
+  Schreibt den TDate-Wert "Value" unter dem Schlüssel "Key" in den
+  Abschnitt "Section". 
+
+procedure WriteDateTime(const Section, Key: string; Value: TDateTime);
+  Schreibt den TDateTime-Wert "Value" unter dem Schlüssel "Key" in den
+  Abschnitt "Section". 
+
+procedure WriteFloat(const Section, Key: string; Value: Double);
+  Schreibt den Fließkomma-Wert "Value" unter dem Schlüssel "Key" in den
+  Abschnitt "Section". 
+
+procedure WriteInteger(const Section, Key: string; Value: Longint);
+  Schreibt den ganzzahligen Wert "Value" unter dem Schlüssel "Key" in den
+  Abschnitt "Section". 
+
+procedure WriteString(const Section, Key, Value: String);
+  Schreibt die Zeichenkette "Value" unter dem Schlüssel "Key" in den
+  Abschnitt "Section". 
+
+procedure WriteTime(const Section, Key: string; Value: TDateTime);
+  Schreibt den TTime-Wert "Value" unter dem Schlüssel "Key" in den
+  Abschnitt "Section". 
+
+procedure WriteSection(const Section: string; AStrings: TStrings);
+  Schreibt alle Schlüssel-/Wertepaare aus AStrings in den Abschnitt "Section"
+
+
+Die Funktion der Komponente läßt sich außerdem im beigefügten Demo-Programm im 
+Ordner "Demo" sehen.

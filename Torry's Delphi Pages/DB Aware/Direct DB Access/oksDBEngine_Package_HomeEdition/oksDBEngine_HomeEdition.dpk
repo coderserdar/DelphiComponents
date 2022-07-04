@@ -1,0 +1,69 @@
+
+package oksDBEngine_HomeEdition;
+
+{$R *.res}
+{$R 'oksDBEngine.dcr'}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'oksDBEngine V1.2 Package'}
+{$IMPLICITBUILD OFF}
+
+requires
+  rtl,
+  vcl,
+  dbrtl,
+  designide,
+  vclactnband,
+  vclx;
+
+contains
+  oksDBEngine_13 in '..\Quellcode\oksDBEngine_13.pas',
+  oksDBEngine_10 in '..\Quellcode\oksDBEngine_10.pas',
+  oksDBEngine_5 in '..\Quellcode\oksDBEngine_5.pas',
+  oksDBEngine_1 in '..\Quellcode\oksDBEngine_1.pas',
+  oksDBEngine_11 in '..\Quellcode\oksDBEngine_11.pas',
+  oksDBEngine_14 in '..\Quellcode\oksDBEngine_14.pas',
+  oksDBEngine_2 in '..\Quellcode\oksDBEngine_2.pas',
+  oksDBEngine_30 in '..\Quellcode\oksDBEngine_30.pas',
+  oksDBEngine_18 in '..\Quellcode\oksDBEngine_18.pas',
+  oksDBEngine_12 in '..\Quellcode\oksDBEngine_12.pas',
+  oksDBEngine_21 in '..\Quellcode\oksDBEngine_21.pas',
+  oksDBEngine_4 in '..\Quellcode\oksDBEngine_4.pas',
+  oksDBEngine_28 in '..\Quellcode\oksDBEngine_28.pas',
+  oksDBEngine_15 in '..\Quellcode\oksDBEngine_15.pas',
+  oksDBEngine_19 in '..\Quellcode\oksDBEngine_19.pas',
+  oksDBEngine_24 in '..\Quellcode\oksDBEngine_24.pas',
+  oksDBEngine_3 in '..\Quellcode\oksDBEngine_3.pas',
+  oksDBEngine_22 in '..\Quellcode\oksDBEngine_22.pas',
+  oksDBEngine_17 in '..\Quellcode\oksDBEngine_17.pas',
+  oksDBEngine_register in '..\Quellcode\oksDBEngine_register.pas',
+  oksDBEngine_8 in '..\Quellcode\oksDBEngine_8.pas',
+  oksDBEngine_16 in '..\Quellcode\oksDBEngine_16.pas',
+  oksDBEngine_6 in '..\Quellcode\oksDBEngine_6.pas',
+  oksDBEngine_20 in '..\Quellcode\oksDBEngine_20.pas',
+  oksDBEngine_7 in '..\Quellcode\oksDBEngine_7.pas',
+  oksDBEngine_9 in '..\Quellcode\oksDBEngine_9.pas',
+  oksDBEngine_27 in '..\Quellcode\oksDBEngine_27.pas' {Form_ProcessingState},
+  oksDBEngine_25 in '..\Quellcode\oksDBEngine_25.pas' {OKSDBELinkFields},
+  oksDBEngine_26 in '..\Quellcode\oksDBEngine_26.pas' {OKSDBEPassDialog};
+
+end.

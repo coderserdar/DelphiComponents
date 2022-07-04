@@ -1,0 +1,14 @@
+
+{$IFDEF VER200} //Delphi 2009 unicode
+  {$DEFINE D9_UP}
+{$ENDIF}
+{$IFDEF VER210} //Delphi 2010 unicode
+  {$DEFINE D9_UP}
+{$ENDIF}
+{$IFDEF VER220} //Delphi 2010 unicode
+  {$DEFINE D9_UP}
+  {$DEFINE XE_UP}
+{$ENDIF}
+
+{$WARN SYMBOL_PLATFORM OFF}
+{$WARN UNIT_PLATFORM OFF}

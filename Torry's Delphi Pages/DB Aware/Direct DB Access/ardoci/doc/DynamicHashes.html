@@ -1,0 +1,546 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+	<title>Динамические хеши></title>
+</head>
+
+<body>
+
+<table width="100%" border="0" cellpadding="5" cellspacing="0">
+   <tr>
+   <td align=center bgColor=#009999 bgcolor="#264b99">
+    <font face="verdana,arial" size="5" color="#FFFFFF">
+     <b>Динамические Хеши<br> (Hashes)</b></font><br>
+<font face="verdana,arial" size="2" color="#FFFFFF"><b> Version 2.0</b><br></font>
+ </td>
+   </tr>
+</table>
+
+<font face="verdana,arial" size=2>
+
+<p>Copyright &copy; 1998-2001 by Andrey Romanchenko<br>
+All rights reserved.
+
+<p><table cellspacing=2 cellpadding=0>
+<tr>
+   <td><font face="verdana,arial" size=2>
+    <i>e-mail:&nbsp;&nbsp;</i></font>
+	</td>
+	<td><font face="verdana,arial" size=2>
+	 <a href="mailto:lasersquard@yahoo.com?subject=Dynamic Arrays version 2.0">lasersquad@tut.by</a></font>
+	</td>
+</tr>
+<tr>
+   <td><font face="verdana,arial" size=2>
+    <i>web site:&nbsp;&nbsp;</i></font>
+   </td>
+   <td><font face="verdana,arial" size=2>
+    <a href="http://DynamicArrays.narod.ru" target=_new>http://DynamicArrays.narod.ru/</a></font>
+	</td>
+</tr>
+<tr>
+   <td></td>
+   <td><font face="verdana,arial" size=2>
+   <!-- (другой адрес: <a href="http://www.dynamicarrays.cjb.net/" target=_new>http://www.dynamicarrays.cjb.net/</a>)</font>-->
+	</td>
+</tr>
+
+</table>
+
+<h3>Содержание</h3>
+<ul>
+ <li> <a href="#commondescr">Общее описание</a>
+ <li> <a href="#instalation">Инсталяция</a>
+ <li> <a href="#globals">Глобальные определения</a>
+ <li> Классы
+  <ul>
+ <li> <a href="#THash">THash</a>
+ <li> <a href="#THashExists">THashExists</a>
+ <li> <a href="#THashInteger">THashInteger</a>
+ <li> <a href="#THashBoolean">THashBoolean</a>
+ <li> <a href="#THashPointer">THashPointer</a>
+ <li> <a href="#THashCurrency">THashCurrency</a>
+ <li> <a href="#THashDouble">THashDouble</a>
+ <li> <a href="#THashString">THashString</a>
+ </ul>
+</ul>
+
+<hr>
+
+<a name="commondescr"></a>
+<h3>Общее описание</h3>
+
+ Хэши - динамические структуры, где хранятся эначения по индексу. <br>
+ От динамических массивов отличаются тем, что<br>
+<ol>
+	<li>Хранятся только те значения, которые установлены,т.е. можно занести
+	    значение с индексов <strong>1</strong> и с индексом <strong>1 000 000</strong>, при этом будет занята память
+	    только для двух значений. Удобно для запоминания значений, индексы которых
+	    не упорядочены и не линейны.</li>
+	<li>Индексом может служить не только <strong>integer</strong> (хотя в настоящей реализации
+	    используется только <strong>integer</strong> индексы).
+</ol>
+
+ Визуально хеш можно представить как массив пар чисел где одно число это ключ (индекс), а второе это значение.<br>
+ Все хэши при чтении несуществующего элемента выдают исключение. <br>
+ Проверить существование можно с помощью метода <a href="#IfExist">THash.IfExist</a>.<br>
+ <a href="#THashExists">THashExists</a> является исключением. В нем хранятся только значения <strong>True</strong>.
+ Соответственно, <a href="#IfExist">IfExist</a> будет выдавать только на них <strong>True</strong>, и никогда
+ не будет возникать исключения. На запрос несуществующего элемента
+ будет возвращаться значение <strong>False</strong>, а при установке значения в <strong>False</strong> 
+ оно просто удалится из хеша.
+<br><br>
+<hr>
+
+<a name="instalation"></a>
+<h3>Инсталяция</h3>
+Динамические Хеши как и динамические массивы не требуют никакой инсталяции.
+Достаточно включить модуль <strong>DynamicArrays.pas</strong> в секцию 
+<strong>uses</strong> нужного модуля вашего проекта и все. 
+Только не забудьте указать <strong>Delphi</strong> путь где вы разместили файл <strong>DynamicArrays.pas</strong>.
+Это можно сделать либо в 
+ <ul>
+  <li>/Tools/Environment Options/Library/Library Path/
+ </ul>
+ либо в
+ <ul>
+  <li>/Project/Project Options/Directories Conditionals/Search Path/
+ </ul>
+ 
+<hr>
+
+<a name="globals"></a>
+<h3>Глобальные определения</h3> 
+
+См. <a href="DynamicArrays.html">Динамические массивы</a> для описания глобальных определений.
+
+<br><br>
+<hr>
+
+<a name="THash"></a>
+<h3>THash</h3>
+Обобщенный абстрактный класс. Предок всех классов-хешей.
+В отличие от <a href="DynamicArrays.html#THArray">THArray</a> можно устанавливать/читать и не существующие до этого момента значения.
+Никаких исключений при этом не возникает.
+<br><br>
+
+
+<table cellspacing="0" cellpadding="5" border="1">
+<tr bgcolor="#009999">
+	<td colspan="2" align="center" valign="middle"><font face="verdana,arial" size=4>
+      Свойства
+	</td>
+
+</tr>
+<tr>
+<a name="AIndexes"></a>
+	<td width="40%"> <font face="Courier New" size=2>
+	  property <strong>AIndexes</strong>:THArrayInteger;
+	 </td>
+	<td><font face="verdana,arial" size=2>
+	 ReadOnly свойство возвращающее массив <a href="DynamicArrays.html#THArrayInteger">THArrayInteger</a>
+	 содержащий все ключи (<strong>Keys</strong>) всех значений в хеше.
+	 </td>
+</tr>
+
+<tr>
+	<td> <font face="Courier New" size=2>
+	  property <strong>Count</strong>:integer;
+	 </td>
+	<td><font face="verdana,arial" size=2>
+	 Количество значений в хэше.
+	 </td>
+</tr>
+<tr>
+	<td> <font face="Courier New" size=2>
+	  property <strong>Keys</strong>[Index:integer]:integer;
+	 </td>
+	<td><font face="verdana,arial" size=2>
+	 Возвращает ключ (индекс) элемента, хранящегося в <strong>Index</strong> позиции
+	  (<strong>Index</strong>: <strong>0</strong>..<strong>Count-1</strong>).
+	 </td>
+</tr>
+
+<tr bgcolor="#009999">
+	<td colspan="2" align="center" valign="middle"><font face="verdana,arial" size=4>
+	Методы
+	</td>
+
+</tr>
+<tr>
+	<td><font face="Courier New" size=2>
+	 procedure <strong>Clear</strong>;virtual;
+	 </td>
+	<td><font face="verdana,arial" size=2>
+     Чистит хеш, но память не освобождает (остатется для хранения новых данных).
+    Если хеш часто чистится перезаписывается, но размер примерно одинаков,
+    память чистить не обязательно - следующий раз не будет захватываться память,
+    которая уже использовалась. См. также метод <a href="#ClearMem">ClearMem</a>.
+	</td>
+</tr>
+<tr>
+<a name="ClearMem"></a>
+  <td><font face="Courier New" size=2>
+    procedure<strong> ClearMem</strong>;virtual;</td>
+  <td><font face="verdana,arial" size=2>
+      Чистит хеш, при этом освобождая всю память.</td>
+</tr>
+
+<tr>
+  <td><font face="Courier New" size=2>
+    procedure <strong>Delete</strong>(Key:integer); virtual;abstract;
+  <td><font face="verdana,arial" size=2>
+      Удаляет значение для ключа <strong>Key</strong>. Ключ и значение удаляются из хеша. В дальнешем <a href="#IfExist">IfExist</a> 
+	  будет возвращать <strong>False</strong> на этот ключ.
+	  </td>
+</tr>
+
+<tr>
+<a name="IfExist"></a>
+  <td><font face="Courier New" size=2>
+    function <strong>IfExist</strong>(Key:integer):boolean;
+  <td><font face="verdana,arial" size=2>
+      Проверка - существует ли элемент с ключем <strong>Key</strong>.
+	  Если существует то возвращает <strong>True</strong>, иначе <strong>False</strong>.
+	  </td>
+</tr>
+</table>  
+<br>
+<br>
+
+<a name="THashBoolean"></a>
+<h3>THashBoolean</h3>
+Хеш для хранения <strong>boolean</strong> чисел. Хранит как <strong>True</strong> так и <strong>False</strong> 
+значения поэтому существует возможность отдельно проверить есть ли значение в хеше и если есть то какое 
+<strong>True</strong> или <strong>False</strong>.
+См. также <a href="#THashExists">THashExists</a>.
+<br><br>
+
+<table cellspacing="0" cellpadding="5" border="1">
+<tr bgcolor="#009999">
+	<td colspan="2" align="center" valign="middle"><font face="verdana,arial" size=4>
+      Свойства
+	</td>
+
+</tr>
+<tr>
+	<td width="40%"> <font face="Courier New" size=2>
+	  property <strong>Value</strong>[Index:integer]:boolean;default;
+	 </td>
+	<td><font face="verdana,arial" size=2>
+	 Установка/удаление значения из хеша по индексу.
+	 Если значение не существует то по умолчанию возвращает <strong>False</strong>.
+	 </td>
+</tr>
+<tr bgcolor="#009999">
+	<td colspan="2" align="center" valign="middle"><font face="verdana,arial" size=4>
+	Методы
+	</td>
+
+</tr>
+<tr>
+	<td><font face="Courier New" size=2>
+	    constructor <strong>CreateFromHArrays</strong>(IndexHArray:THArrayInteger; ValueHArray:THArrayBoolean);
+	 </td>
+	<td><font face="verdana,arial" size=2>
+	Позволяет создать хеш из двух массивов. Один массив рассматривается как массив индексов (ключей), а второй как массив значений.
+	При этом значения из массивов не копируются а копируются только ссылки на эти массивы и весь хеш становится read only 
+	т.е. позволяет только читать значения.
+	
+	</td>
+</tr>
+</table>  
+<br>
+<br>
+
+<a name="THashExists"></a>
+<h3>THashExists</h3>
+Хеш для хранения <strong>Boolean</strong> значений. Главное отличие от <a href="#THashBoolean">THashBoolean</a> в том что 
+<strong>THashExists</strong> не хранит <strong>False</strong> значений т.е. при установке значения в <strong>False</strong> 
+оно автоматически удаляется из хеша.
+<br><br>
+
+<table cellspacing="0" cellpadding="5" border="1">
+<tr bgcolor="#009999">
+	<td colspan="2" align="center" valign="middle"><font face="verdana,arial" size=4>
+      Свойства
+	</td>
+
+</tr>
+<tr>
+	<td width="40%"> <font face="Courier New" size=2>
+	  property <strong>Value</strong>[Index:integer]:boolean;default;
+	 </td>
+	<td><font face="verdana,arial" size=2>
+	 Установка/удаление значения из хеша по индексу.<br>
+	 При установке значения в <strong>False</strong> оно автоматически удаляется из хеша.
+	 </td>
+</tr>
+</table>  
+
+<br>
+<br>
+
+
+<a name="THashInteger"></a>
+<h3>THashInteger</h3>
+Хеш для хранения целых чисел (<strong>integer</strong>).
+<br><br>
+ 
+<table cellspacing="0" cellpadding="5" border="1">
+<tr bgcolor="#009999">
+	<td colspan="2" align="center" valign="middle"><font face="verdana,arial" size=4>
+      Свойства
+	</td>
+
+</tr>
+<tr>
+	<td width="40%"> <font face="Courier New" size=2>
+	   property <strong>AValues</strong>:THArrayInteger read FAValues;
+	 </td>
+	<td><font face="verdana,arial" size=2>
+	ReadOnly свойство. Возвращает хранимые значения как массив <a href="DynamicArrays.html#THArrayInteger">THArrayInteger</a>.
+	См. так же <a href="#AIndexes">THash.AIndexes</a>.
+	 </td>
+</tr>
+
+<tr>
+	<td> <font face="Courier New" size=2>
+	  property <strong>Value</strong>[Index:integer]:integer;default;
+	 </td>
+	<td><font face="verdana,arial" size=2>
+	 Установка/удаление значения из хеша по индексу.
+	 Если значение не существует то по умолчанию возвращает <strong>0</strong>.
+	 </td>
+</tr>
+<tr bgcolor="#009999">
+	<td colspan="2" align="center" valign="middle"><font face="verdana,arial" size=4>
+	Методы
+	</td>
+
+</tr>
+<tr>
+	<td><font face="Courier New" size=2>
+	    constructor <strong>CreateFromHArrays</strong>(IndexHArray:THArrayInteger; ValueHArray:THArrayInteger);
+	 </td>
+	<td><font face="verdana,arial" size=2>
+	Позволяет создать хеш из двух массивов. Один массив рассматривается как массив индексов (ключей), а второй как массив значений.
+	При этом значения из массивов не копируются, а копируются только ссылки на эти массивы и весь хеш становится read only 
+	т.е. позволяет только читать значения.
+	
+	</td>
+</tr>
+
+</table>  
+<br>
+<br>
+
+<a name="THashPointer"></a>
+<h3>THashPointer</h3>
+Хеш для хранения указателей (<strong>pointer</strong>).
+Никаких специальных действий над указателями не производит просто хранит их и все. 
+Поэтому позволяет хранить указатели на что угодно.
+<br><br>
+
+<table cellspacing="0" cellpadding="5" border="1">
+<tr bgcolor="#009999">
+	<td colspan="2" align="center" valign="middle"><font face="verdana,arial" size=4>
+      Свойства
+	</td>
+
+</tr>
+<tr>
+	<td width="40%"> <font face="Courier New" size=2>
+	   property <strong>AValues</strong>:THArrayPointer read FAValues;
+	 </td>
+	<td><font face="verdana,arial" size=2>
+	ReadOnly свойство. Возвращает хранимые значения как массив <a href="DynamicArrays.html#THArrayInteger">THArrayInteger</a>.
+	См. так же <a href="#AIndexes">THash.AIndexes</a>.
+	 </td>
+</tr>
+
+<tr>
+	<td> <font face="Courier New" size=2>
+	  property <strong>Value</strong>[Index:integer]:pointer;
+	 </td>
+	<td><font face="verdana,arial" size=2>
+	 Установка/удаление значения из хеша по индексу.
+	 Если значение не существует то по умолчанию возвращает <strong>nil</strong>.
+	 </td>
+</tr>
+<tr bgcolor="#009999">
+	<td colspan="2" align="center" valign="middle"><font face="verdana,arial" size=4>
+	Методы
+	</td>
+
+</tr>
+<tr>
+	<td><font face="Courier New" size=2>
+	    constructor <strong>CreateFromHArrays</strong>(IndexHArray:THArrayInteger; ValueHArray:THArrayPointer);
+	 </td>
+	<td><font face="verdana,arial" size=2>
+	Позволяет создать хеш из двух массивов. Один массив рассматривается как массив индексов (ключей), а второй как массив значений.
+	При этом значения из массивов не копируются, а копируются только ссылки на эти массивы и весь хеш становится read only 
+	т.е. позволяет только читать значения.
+	
+	</td>
+</tr>
+
+</table>  
+<br>
+<br>
+
+<a name="THashCurrency"></a>
+<h3>THashCurrency</h3>
+Хеш для хранения чисел <strong>Currency</strong>.
+<br><br>
+
+
+<table cellspacing="0" cellpadding="5" border="1">
+<tr bgcolor="#009999">
+	<td colspan="2" align="center" valign="middle"><font face="verdana,arial" size=4>
+      Свойства
+	</td>
+
+</tr>
+<tr>
+	<td width="40%"> <font face="Courier New" size=2>
+	  property <strong>Value</strong>[Index:integer]:Currency;
+	 </td>
+	<td><font face="verdana,arial" size=2>
+	 Установка/удаление значения из хеша по индексу.
+	 Если значение не существует то по умолчанию возвращает <strong>0</strong>.
+	 </td>
+</tr>
+<tr bgcolor="#009999">
+	<td colspan="2" align="center" valign="middle"><font face="verdana,arial" size=4>
+	Методы
+	</td>
+
+</tr>
+<tr>
+	<td><font face="Courier New" size=2>
+	    constructor <strong>CreateFromHArrays</strong>(IndexHArray:THArrayInteger; ValueHArray:THArrayCurrency);
+	 </td>
+	<td><font face="verdana,arial" size=2>
+	Позволяет создать хеш из двух массивов. Один массив рассматривается как массив индексов (ключей), а второй как массив значений.
+	При этом значения из массивов не копируются, а копируются только ссылки на эти массивы и весь хеш становится read only 
+	т.е. позволяет только читать значения.
+	
+	</td>
+</tr>
+
+<tr>
+	<td><font face="Courier New" size=2>
+	  procedure <strong>Inc</strong>(Key:integer;Value:currency);
+	 </td>
+	<td><font face="verdana,arial" size=2>
+	Увеличивает хранящееся значение с ключом <strong>Key</strong> на <strong>Value</strong>. Если значение не существует то
+	создает значение в ключом <strong>Key</strong> и значением <strong>Value</strong>.
+	</td>
+</tr>
+
+</table>  
+<br>
+<br>
+
+<a name="THashDouble"></a>
+<h3>THashDouble</h3>
+Хеш для хранения чисел <strong>Double</strong>.
+<br><br>
+
+<table cellspacing="0" cellpadding="5" border="1">
+<tr bgcolor="#009999">
+	<td colspan="2" align="center" valign="middle"><font face="verdana,arial" size=4>
+      Свойства
+	</td>
+
+</tr>
+<tr>
+	<td width="40%"> <font face="Courier New" size=2>
+	  property <strong>Value</strong>[Index:integer]:Double;
+	 </td>
+	<td><font face="verdana,arial" size=2>
+	 Установка/удаление значения из хеша по индексу.
+	 Если значение не существует то по умолчанию возвращает <strong>0</strong>.
+	 </td>
+</tr>
+<tr bgcolor="#009999">
+	<td colspan="2" align="center" valign="middle"><font face="verdana,arial" size=4>
+	Методы
+	</td>
+
+</tr>
+<tr>
+	<td><font face="Courier New" size=2>
+	    constructor <strong>CreateFromHArrays</strong>(IndexHArray:THArrayInteger; ValueHArray:THArrayDouble);
+	 </td>
+	<td><font face="verdana,arial" size=2>
+	Позволяет создать хеш из двух массивов. Один массив рассматривается как массив индексов (ключей), а второй как массив значений.
+	При этом значения из массивов не копируются, а копируются только ссылки на эти массивы и весь хеш становится read only 
+	т.е. позволяет только читать значения.
+	
+	</td>
+</tr>
+
+<tr>
+	<td><font face="Courier New" size=2>
+	  procedure <strong>Inc</strong>(Key:integer;Value:Double);
+	 </td>
+	<td><font face="verdana,arial" size=2>
+	Увеличивает хранящееся значение с ключом <strong>Key</strong> на <strong>Value</strong>. Если значение не существует то
+	создает значение в ключом <strong>Key</strong> и значением <strong>Value</strong>.
+	</td>
+</tr>
+
+</table>  
+<br>
+<br>
+
+<a name="THashString"></a>
+<h3>THashString</h3>
+Хеш для хранения строк.<br>
+Имеет специальное свойство <a href="#AllowEmptyStr">AllowEmptyStr</a> регулирующее логику работы хеша. <br>
+Если <strong>AllowEmptyStr</strong>=<strong>True</strong> то хеш будет хранить пустые строки. <br>
+Если <strong>AllowEmptyStr</strong>=<strong>False</strong> то хеш не будет хранить пустые строки и при 
+установке значения в пустую строку значение будет автоматически удалено из хеша.
+<br><br>
+
+<table cellspacing="0" cellpadding="5" border="1">
+<tr bgcolor="#009999">
+	<td colspan="2" align="center" valign="middle"><font face="verdana,arial" size=4>
+      Свойства
+	</td>
+
+</tr>
+<tr>
+<a name="AllowEmptyStr"></a>
+	<td width="40%"> <font face="Courier New" size=2>
+	  property <br><strong>AllowEmptyStr</strong>:boolean;
+	 </td>
+	<td><font face="verdana,arial" size=2>
+	 Установка/удаление значения из хеша по индексу.
+	 Если значение не существует то по умолчанию возвращает <strong>0</strong>.
+	 </td>
+</tr>
+
+<tr>
+	<td> <font face="Courier New" size=2>
+	  property <strong>Value</strong>[Index:integer]:string;
+	 </td>
+	<td><font face="verdana,arial" size=2>
+	 Установка/удаление значения из хеша по индексу.
+	 Если значение не существует то по умолчанию возвращает пустую строку.
+	 </td>
+</tr>
+	
+</table>  
+<br>
+
+   
+     
+   
+ 
+
+</body>
+</html>

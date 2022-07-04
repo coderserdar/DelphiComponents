@@ -1,0 +1,51 @@
+package P4D70;
+
+{$R *.res}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'Perforce IDE Plug-in'}
+{$DESIGNONLY}
+{$IMPLICITBUILD OFF}
+
+requires
+  designide,
+  vclx,
+  vcl,
+  rtl,
+  vclactnband;
+
+contains
+  UnitP4Expert in 'UnitP4Expert.pas',
+  UnitP4Misc in 'UnitP4Misc.pas',
+  FormSubmitDialog in 'FormSubmitDialog.pas' {frmSubmitDialog},
+  FormAbout in 'FormAbout.pas' {frmAbout},
+  FormFileProps in 'FormFileProps.pas' {frmFileProperties},
+  FormSyncDialog in 'FormSyncDialog.pas' {frmSyncDialog},
+  FormOptions in 'FormOptions.pas' {frmOptions},
+  FormBaseAddEditDlg in 'FormBaseAddEditDlg.pas' {frmBaseAddEditDlg},
+  FormAddEditDialog in 'FormAddEditDialog.pas' {frmAddEditDialog},
+  FormAddAllDialog in 'FormAddAllDialog.pas' {frmAddAllDialog},
+  FormLogin in 'FormLogin.pas' {FrmLogin},
+  UnitP4Notify in 'UnitP4Notify.pas',
+  UnitP4Engine in 'UnitP4Engine.pas';
+
+end.

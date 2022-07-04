@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!-- C++Builder XML Project -->
+<PROJECT>
+  <MACROS>
+    <VERSION value="BCB.06.00"/>
+    <PROJECT value="color60.bpl"/>
+    <OBJFILES value="color60.obj ..\colorado\cadodb.obj ..\colorado\cconsts.obj 
+      ..\colorado\cfields.obj ..\colorado\cdlink.obj ..\colorado\cmsdasc.obj 
+      ..\colorado\colorado.obj ..\colorado\cschema.obj ..\colorado\cmdacver.obj 
+      ..\colorado\cerrdlg.obj ..\colorado\oledbadm.obj ..\colorado\cblobdat.obj 
+      ..\colorx\cadoxdb.obj ..\colorx\colorx.obj"/>
+    <RESFILES value="color.res"/>
+    <DEFFILE value=""/>
+    <RESDEPEN value="$(RESFILES)"/>
+    <LIBFILES value=""/>
+    <LIBRARIES value=""/>
+    <SPARELIBS value="vcl.lib vcldb.lib rtl.lib dbrtl.lib"/>
+    <PACKAGES value="vcl.bpi rtl.bpi vcldb.bpi dbrtl.dbi"/>
+    <PATHCPP value=".;"/>
+    <PATHPAS value=".;..\colorado;..\colorx"/>
+    <PATHRC value=".;"/>
+    <PATHASM value=".;"/>
+    <DEBUGLIBPATH value="$(BCB)\lib\debug"/>
+    <RELEASELIBPATH value="$(BCB)\lib\release"/>
+    <LINKER value="ilink32"/>
+    <USERDEFINES value=""/>
+    <SYSDEFINES value="NO_STRICT;_RTLDLL;USEPACKAGES"/>
+    <MAINSOURCE value="color60.cpp"/>
+    <INCLUDEPATH value="..\colorx;..\colorado;$(BCB)\include;$(BCB)\include\vcl"/>
+    <LIBPATH value="..\colorx;..\colorado;$(BCB)\lib\obj;$(BCB)\lib;..\..\lib"/>
+    <WARNINGS value="-w-par"/>
+    <OTHERFILES value=""/>
+  </MACROS>
+  <OPTIONS>
+    <CFLAG1 value="-O2 -H=$(BCB)\lib\vcl60.csm -Hc -Vx -Ve -X- -pr -a4 
+      -b- -k- -vi -c -tWM"/>
+    <PFLAGS value="-$YD -$W -$O- -$A8 -v -JPHNE -M -E..\..\LIB -N..\..\LIB -N1..\..\LIB -N2..\..\LIB -N3..\..\LIB -LN..\..\LIB -LE..\..\LIB"/>
+    <RFLAGS value=""/>
+    <AFLAGS value="/mx /w2 /zn"/>
+    <LFLAGS value="-l..\..\LIB -I..\..\LIB -D&quot;colorADO Database Components&quot; -aa -Tpp -Gpr -x -Gn -Gl -Gi"/>
+    <OTHERFILES value=""/>
+  </OPTIONS>
+  <LINKER>
+    <ALLOBJ value="c0pkg32.obj $(PACKAGES) Memmgr.Lib sysinit.obj $(OBJFILES)"/>
+    <ALLRES value="$(RESFILES)"/>
+    <ALLLIB value="$(LIBFILES) $(LIBRARIES) import32.lib cp32mti.lib"/>
+    <OTHERFILES value=""/>
+  </LINKER>
+  <FILELIST>
+      <FILE FILENAME="color60.cpp" FORMNAME="" UNITNAME="color60" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="color.res" FORMNAME="" UNITNAME="color" CONTAINERID="ResTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\colorado\cadodb.pas" FORMNAME="" UNITNAME="cadodb" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\colorado\cconsts.pas" FORMNAME="" UNITNAME="cconsts" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\colorado\cfields.pas" FORMNAME="" UNITNAME="cfields" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\colorado\cdlink.pas" FORMNAME="" UNITNAME="cdlink" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\colorado\cmsdasc.pas" FORMNAME="" UNITNAME="cmsdasc" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\colorado\colorado.pas" FORMNAME="" UNITNAME="colorado" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\colorado\cschema.pas" FORMNAME="" UNITNAME="cschema" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\colorado\cmdacver.pas" FORMNAME="" UNITNAME="cmdacver" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\colorado\cerrdlg.pas" FORMNAME="" UNITNAME="cerrdlg" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\colorado\oledbadm.pas" FORMNAME="" UNITNAME="oledbadm" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\colorado\cblobdat.pas" FORMNAME="" UNITNAME="cblobdat" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\colorx\cadoxdb.pas" FORMNAME="" UNITNAME="cadoxdb" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\colorx\colorx.pas" FORMNAME="" UNITNAME="colorx" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="vcl.bpi" FORMNAME="" UNITNAME="vcl" CONTAINERID="BPITool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="rtl.bpi" FORMNAME="" UNITNAME="rtl" CONTAINERID="BPITool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="vcldb.bpi" FORMNAME="" UNITNAME="vcldb" CONTAINERID="BPITool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="dbrtl.bpi" FORMNAME="" UNITNAME="dbrtl" CONTAINERID="BPITool" DESIGNCLASS="" LOCALCOMMAND=""/>
+  </FILELIST>
+  <BUILDTOOLS>
+  </BUILDTOOLS>
+
+  <IDEOPTIONS>
+[Version Info]
+IncludeVerInfo=0
+  </IDEOPTIONS>
+</PROJECT>

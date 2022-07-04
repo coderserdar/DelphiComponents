@@ -1,0 +1,75 @@
+/****************************************************************************
+
+vgDBRes.res
+
+  Vladimir Gaitanoff Delphi VCL Library
+  Copyright (c) 1997, 1998
+
+*****************************************************************************/
+
+#include "vgDBRes.pas"
+
+STRINGTABLE
+{
+	 SConfirmDelete       , "¿Borrar registro?"
+	 SOpenTableFailed     , "No se pudo abrir la tabla o consulta\n"\
+												  "'%s'\n"\
+												  "¿Reintentear?"
+	 SEqualStr            , " (Igual)"
+	 SNotNullReqired      , "El campo '%s' debe tener un valor."
+	 SNullReqired         , "El campo '%s' debe estar vacío."
+	 SLengthTooSmall      , "El campo '%s' debe tener tener al menos %d letras."
+	 SIntFieldOutOfRange  , "El campo '%s' debe tener un valor entre %d y %d."
+	 SFieldRequired       , "El campo '%s' debe tener un valor."
+	 SNonZeroValueReq     , "El campo '%s' debe tener valor positivo."
+	 SMoreThanReq         , "El campo '%s' debe tener un valor mayor que %d."
+	 SLessThanReq         , "El campo '%s' debe tener un valor menor que %d."
+	 SEqualReq            , "El campo '%s' debe ser igual a %d."
+	 SNotEqualReq         , "El campo '%s' debe tener ser igual al valor del campo '%s'."
+	 SValueRange          , "El campo '%s' debe tener un valor entre %.2f y %.2f."
+	 SNumericSequenceReq  , "El campo '%s' debe tener un valor mayor %s el del campo '%s'."
+	 SDateSequenceReq     , "El campo '%s' debe tener una fecha %s mayor que el campo '%s'."
+	 SRecordNotFound      , "Registro no encontrado."
+	 SRecordNotFoundTbl   , "Registro no encontrado en la tabla '%s'."
+	 SInsertNotAvail      , "No se puede insertar un nuevo registro."
+	 SEditNotAvail        , "No se puede editar el registro."
+	 SDeleteNotAvail      , "No se puede borrar el registro."
+
+	 SInvalidUserName     , "Nombre de usuario o clave desconocida."
+	 SDeadlock            , "Bloqueo detectado.\n"\
+												  "Intentelo de nuevo."
+	 SKeyViol             , "Hay un registro con la misma clave."
+	 SKeyDeleted          , "No se puede editar o borrar el registro.\n"\
+												  "Elimine el filtro o refresque los datos."
+	 SFKViolation         , "Se encontró un valor nulo o una referencia errónea.\n"
+	 SErrorCodeFmt        , "Error: %d\n"
+
+	 SDBMenuInsert        , "&Insertar"
+	 SDBMenuEdit          , "&Editar"
+	 SDBMenuDelete        , "&Borrar"
+	 SDBMenuFirst         , "&Primero"
+	 SDBMenuLast          , "Ú&ltimo"
+	 SDBMenuRefresh       , "&Refrescar"
+
+	 SGetProviderError    , "No se pudo crear un IProvider: DataSet y Provider no definidos"
+	 SDuplicateProvNames  , "%s: ProviderItem con ProviderName '%s' ya existe";
+	 SProvNotFound        , "IProvider '%s' no encontrado"
+
+	 SServicesNotFound    , "%s: No se puden encontrar servicios en el Dataset"
+	 SServicesEmpty       , "La propiedad Services no está asignada"
+	 SCreateDataSetErr    , "%s: No se puede crear el DataSet"
+	 SCreateDataSetEditErr, "%s: No se puede crear un DataSet editable"
+
+	 SRemoteServerNeeded  , "La propiedad RemoteServer no está asignada"
+
+    	 SProviderListNeeded  , "ProviderList property not assigned"
+
+         SInvalidDatabase     , "Invalid database provider"
+         SMissingDatabase     , "Database property not assigned"
+         SUnknownDatabase     , "Unknown database '%s'"
+  	 SDupProviderName     , "Provider '%s' already exists"
+         SDBFactoryMissing    , "DatabaseFactory property not assigned"
+         SNoDataModule        , "DataModule is not available"
+         SInvalidDatabaseName , "Invalid DatabaseName property"
+
+}

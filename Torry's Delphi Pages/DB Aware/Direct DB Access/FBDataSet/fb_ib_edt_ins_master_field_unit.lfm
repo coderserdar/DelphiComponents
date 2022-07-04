@@ -1,0 +1,30 @@
+object editorInsertMasterFieldForm: TeditorInsertMasterFieldForm
+  Left = 290
+  Height = 300
+  Top = 155
+  Width = 400
+  HorzScrollBar.Page = 399
+  VertScrollBar.Page = 299
+  ActiveControl = ListBox1
+  Caption = 'Select master field...'
+  ClientHeight = 300
+  ClientWidth = 400
+  Position = poDesktopCenter
+  object ListBox1: TListBox
+    Height = 250
+    Width = 400
+    Align = alClient
+    OnDblClick = ListBox1DblClick
+    TabOrder = 0
+  end
+  object ButtonPanel1: TButtonPanel
+    Left = 6
+    Height = 50
+    Top = 250
+    Width = 388
+    Align = alBottom
+    TabOrder = 1
+    ShowButtons = [pbOK, pbCancel, pbHelp]
+    ShowGlyphs = [pbOK, pbCancel, pbClose, pbHelp]
+  end
+end

@@ -1,0 +1,45 @@
+package SivakSQLite3;
+
+{$R *.res}
+{$R 'sql3_reg.dcr'}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'SQLite3 components by Ivan Sivak'}
+{$IMPLICITBUILD OFF}
+
+requires
+  rtl,
+  dbrtl,
+  vcl,
+  designide;
+
+contains
+  sql3_defs in 'sql3_defs.pas',
+  sql3_reg in 'sql3_reg.pas',
+  sql3_utils in 'sql3_utils.pas',
+  pe_simpletable_collist in 'pe_simpletable_collist.pas' {fpe_st_collist},
+  ce_simple_data in 'ce_simple_data.pas' {fce_simple_data},
+  ce_db_params in 'ce_db_params.pas' {fce_db_params},
+  ce_db_create in 'ce_db_create.pas' {fce_db_create},
+  pe_masterlinks in 'pe_masterlinks.pas' {fpe_masterlinks};
+
+end.

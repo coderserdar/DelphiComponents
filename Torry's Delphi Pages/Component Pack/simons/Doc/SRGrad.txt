@@ -1,0 +1,118 @@
+TSRGradient (C)opyright 2003 Version 1.32
+Autor : Simon Reinhardt
+eMail : reinhardt@picsoft.de
+Internet : http://www.picsoft.de
+
+  Diese Komponente erzeugt einen Farbverlauf. Sie ist abgeleitet
+  von TGraphicControl und ist Public Domain, das Urheberrecht liegt
+  aber beim Autor.
+
+  Jürgen Probst hat einige Änderungen an der Komponente vorgenommen, mehr dazu im
+  Quelltext der Komponente.
+
+  Fragen und weitere Verbesserungsvorschläge sind immer willkommen.
+
+
+
+Dateiumfang:
+------------
+
+SRGRad.txt 	- Diese Datei
+SRGrad.pas	- Quelltext der Komponente
+SRGrad.d16	- Resourcendatei der 16Bit-Komponente für Delphi 1
+SRGrad.d32	- Resourcendatei der 32Bit-Komponente für Delphi 2 bis 5
+SRDefine.inc	- Inculdedatei für die Komponente	
+
+Ordner	GradDemo	- TSRGradient-Demo-Projekt für Delphi 2 oder 3
+	GradMain.dfm	- Formulardatei der MainForm
+	GradMain.pas	- Quelltext der MainForm-Unit
+	GradDemo.dof	- Compileroptionen des Demo-Projekts
+	GradDemo.dpr	- Quelltext des Demo-Projekts
+	GradDemo.res	- Resourcendatei des Demo-Projekts
+
+
+Installation:
+-------------
+
+In Delphi 1:
+------------
+1. Alle Dateien in das Delphi-Komponenten-Verzeichnis entpacken.
+2. Menü Optionen : Komponente installieren
+3. Schaltfläche Hinzufügen / Durchsuchen
+4. Datei SRGrad.pas im Delphi-Komponenten-Verzeichnis suchen und mit
+   OK bestätigen.
+5. Die Komponente erscheint in der Komponenten-Gruppe "Simon"
+
+In Delphi 2:
+------------
+1. Alle Dateien in das Delphi-Komponenten-Verzeichnis entpacken.
+2. Menü Komponente :  installieren
+3. Schaltfläche Hinzufügen / Durchsuchen
+4. Datei SRGrad.pas im Delphi-Komponenten-Verzeichnis suchen und mit
+   OK bestätigen.
+5. Die Komponente erscheint in der Komponenten-Gruppe "Simon"
+
+In Delphi 3:
+------------
+1. Alle Dateien in das Delphi-Komponenten-Verzeichnis entpacken.
+2. Menü Komponente :  Komponente installieren
+3. Schaltfläche Durchsuchen (hinter dem Eingabefeld für den Unit-Namen)
+4. Datei SRGrad.pas im Delphi-Komponenten-Verzeichnis suchen und mit
+   OK bestätigen.
+5. Die Rückfrage nach dem Neukompilieren des Packages bestätigen.
+6. Die Komponente erscheint in der Komponenten-Gruppe "Simon"
+   (Evtl. muß eine bereits installierte, ältere Version der Komponente
+    zuvor entfernt werden)
+
+
+
+Funktion:
+---------
+
+Eigenschaften:
+--------------
+
+1. Align - wie TPanel
+2. Anchors - wie TPanel
+2. BevelWidth - wie TPanel
+2. BevelStyle - wie TPanel
+3. Buffered - wenn Buffered=true wird der Farbverlauf im Hintergrund gezeichnet und dann
+   an einem Stück auf die Oberfläche kopiert.
+4. Cursor - wie TPanel
+5. Direction - gibt die Richtung des Farbverlaufs von der Startfarbe zur Endfarbe an:
+   (gdDownRight, gdUpLeft)
+6. EndColor - die Endfarbe des Veraufs
+7. Height - wie TPanel
+8. Hint - wie TPanel
+9. Left - wie TPanel
+10.Name - wie TPanel
+11.StartColor - die Startfarbe des Veraufs
+12.StepWidth - hat nur bei elliptischen und pyramidenförmigen Verläufen eine Funktion.
+   Diese Eigenschaft gibt die breite der einzelnen Verlaufsstufen an. (1..10)
+13.Style - bestimmt die Form des Farbverlaufs:
+   (gsCornerTopLeft, gsCornerTopRight,
+    gsCornerBottomRight, gsCornerBottomLeft,
+    gsDiagonalRising, gsDiagonalFalling,
+    gsEllipse, gsHorizontal, gsPyramid, gsVertical)
+14.Tag - wie TPanel
+15.Top - wie TPanel
+16.Width - wie TPanel
+
+Ereignisse:
+-----------
+
+1. OnClick - wie TPanel
+2. OnDblClick - wie TPanel
+3. OnDragOver - wie TPanel
+4. OnDragDrop - wie TPanel
+5. OnEndDrag - wie TPanel
+6. OnMouseDown - wie TPanel
+7. OnMouseMouse - wie TPanel
+8. OnMouseUp - wie TPanel
+
+
+Einige Eigenschaften und Ereignisse sind in Delphiversionen<5 evtl.
+nicht verfügbar.
+
+Die verschiedenen Verlaufsformen der Komponente lassen sich
+im beigefügten Demo-Programm im Ordner "Demo" sehen.

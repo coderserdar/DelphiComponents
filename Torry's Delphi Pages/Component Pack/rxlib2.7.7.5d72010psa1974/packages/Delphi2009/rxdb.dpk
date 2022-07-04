@@ -1,0 +1,57 @@
+{*******************************************************}
+{                                                       }
+{         Delphi VCL Extensions (RX)                    }
+{                                                       }
+{         Copyright (c) 1998 Master-Bank                }
+{                                                       }
+{*******************************************************}
+
+package rxdb;
+
+{$R *.res}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'RX Library DB Component Package'}
+{$LIBSUFFIX '120'}
+{$RUNONLY}
+{$IMPLICITBUILD OFF}
+
+requires
+  rtl,
+  vclx,
+  vcl,
+  dbrtl,
+  vcldb,
+  VclSmp,
+  rxctl;
+
+contains
+  Rxdbctrl in '..\..\units\Rxdbctrl.pas',
+  RxLookup in '..\..\units\RxLookup.pas',
+  rxlogin in '..\..\units\rxlogin.pas',
+  Rxdconst in '..\..\units\Rxdconst.pas',
+  rxDbutils in '..\..\units\rxDbutils.pas',
+  Rxdbcomb in '..\..\units\Rxdbcomb.pas',
+  rxDbriched in '..\..\units\rxDbriched.pas',
+  RxMemDS in '..\..\units\RxMemDS.pas';
+
+end.

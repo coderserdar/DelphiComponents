@@ -1,0 +1,267 @@
+object sprCustomerEditForm: TsprCustomerEditForm
+  BorderStyle = bsDialog
+  Caption = 'Customer data'
+  ClientHeight = 316
+  ClientWidth = 400
+  OnCreate = sprCustomerEditFormCreate
+  PixelsPerInch = 96
+  HorzScrollBar.Page = 399
+  VertScrollBar.Page = 315
+  Left = 473
+  Height = 316
+  Top = 118
+  Width = 400
+  object Label1: TLabel
+    AutoSize = True
+    Caption = 'Customer'
+    Color = clNone
+    FocusControl = DBEdit1
+    Left = 8
+    Height = 13
+    Top = 16
+    Width = 46
+  end
+  object Label2: TLabel
+    AutoSize = True
+    BorderSpacing.OnChange = nil
+    Caption = 'Contact first'
+    Color = clNone
+    FocusControl = DBEdit1
+    Left = 8
+    Height = 13
+    Top = 43
+    Width = 60
+  end
+  object Label3: TLabel
+    AutoSize = True
+    BorderSpacing.OnChange = nil
+    Caption = 'Contact last'
+    Color = clNone
+    FocusControl = DBEdit1
+    Left = 8
+    Height = 13
+    Top = 72
+    Width = 58
+  end
+  object Label4: TLabel
+    AutoSize = True
+    BorderSpacing.OnChange = nil
+    Caption = 'Phone No'
+    Color = clNone
+    FocusControl = DBEdit1
+    Left = 8
+    Height = 13
+    Top = 96
+    Width = 46
+  end
+  object Label5: TLabel
+    AutoSize = True
+    BorderSpacing.OnChange = nil
+    Caption = 'Adress, line 1'
+    Color = clNone
+    FocusControl = DBEdit1
+    Left = 8
+    Height = 13
+    Top = 120
+    Width = 65
+  end
+  object Label6: TLabel
+    AutoSize = True
+    Caption = 'Country'
+    Color = clNone
+    Left = 8
+    Height = 13
+    Top = 259
+    Width = 39
+  end
+  object Label7: TLabel
+    AutoSize = True
+    Caption = 'Postal code'
+    Color = clNone
+    FocusControl = DBEdit1
+    Left = 8
+    Height = 13
+    Top = 230
+    Width = 55
+  end
+  object Label8: TLabel
+    AutoSize = True
+    Caption = 'Adress, line 2'
+    Color = clNone
+    FocusControl = DBEdit1
+    Left = 8
+    Height = 13
+    Top = 144
+    Width = 65
+  end
+  object Label9: TLabel
+    AutoSize = True
+    BorderSpacing.OnChange = nil
+    Caption = 'City'
+    Color = clNone
+    FocusControl = DBEdit1
+    Left = 8
+    Height = 13
+    Top = 171
+    Width = 19
+  end
+  object Label10: TLabel
+    AutoSize = True
+    BorderSpacing.OnChange = nil
+    Caption = 'State, province'
+    Color = clNone
+    FocusControl = DBEdit1
+    Left = 8
+    Height = 13
+    Top = 200
+    Width = 74
+  end
+  object BitBtn1: TBitBtn
+    Caption = '&ОК'
+    Default = True
+    Kind = bkOK
+    ModalResult = 1
+    TabOrder = 0
+    Left = 160
+    Height = 25
+    Top = 286
+    Width = 75
+  end
+  object BitBtn2: TBitBtn
+    Caption = 'Отмена'
+    Kind = bkCancel
+    ModalResult = 2
+    TabOrder = 1
+    Left = 240
+    Height = 25
+    Top = 286
+    Width = 75
+  end
+  object BitBtn3: TBitBtn
+    Caption = '&Справка'
+    Kind = bkHelp
+    TabOrder = 2
+    Left = 322
+    Height = 25
+    Top = 286
+    Width = 75
+  end
+  object DBEdit1: TDBEdit
+    DataField = 'CUSTOMER'
+    DataSource = Datasource1
+    TabOrder = 3
+    Left = 88
+    Height = 23
+    Top = 8
+    Width = 304
+  end
+  object DBEdit2: TDBEdit
+    DataField = 'CONTACT_FIRST'
+    DataSource = Datasource1
+    TabOrder = 4
+    Left = 88
+    Height = 23
+    Top = 35
+    Width = 184
+  end
+  object DBEdit3: TDBEdit
+    DataField = 'CONTACT_LAST'
+    DataSource = Datasource1
+    TabOrder = 5
+    Left = 88
+    Height = 23
+    Top = 62
+    Width = 184
+  end
+  object DBEdit4: TDBEdit
+    DataField = 'PHONE_NO'
+    DataSource = Datasource1
+    TabOrder = 6
+    Left = 88
+    Height = 23
+    Top = 88
+    Width = 184
+  end
+  object DBEdit5: TDBEdit
+    DataField = 'ADDRESS_LINE1'
+    DataSource = Datasource1
+    TabOrder = 7
+    Left = 88
+    Height = 23
+    Top = 112
+    Width = 304
+  end
+  object DBEdit6: TDBEdit
+    DataField = 'POSTAL_CODE'
+    DataSource = Datasource1
+    TabOrder = 8
+    Left = 88
+    Height = 23
+    Top = 222
+    Width = 184
+  end
+  object DBEdit7: TDBEdit
+    DataField = 'ADDRESS_LINE2'
+    DataSource = Datasource1
+    TabOrder = 9
+    Left = 88
+    Height = 23
+    Top = 136
+    Width = 304
+  end
+  object DBEdit8: TDBEdit
+    DataField = 'CITY'
+    DataSource = Datasource1
+    TabOrder = 10
+    Left = 88
+    Height = 23
+    Top = 163
+    Width = 304
+  end
+  object DBEdit9: TDBEdit
+    DataField = 'STATE_PROVINCE'
+    DataSource = Datasource1
+    TabOrder = 11
+    Left = 88
+    Height = 23
+    Top = 192
+    Width = 184
+  end
+  object CheckBox1: TCheckBox
+    Caption = 'On hold'
+    TabOrder = 12
+    Left = 288
+    Height = 23
+    Top = 35
+    Width = 90
+  end
+  object DBComboBox1: TComboBox
+    BorderSpacing.OnChange = nil
+    MaxLength = 0
+    Style = csDropDownList
+    TabOrder = 13
+    Left = 88
+    Height = 21
+    Top = 251
+    Width = 304
+  end
+  object Datasource1: TDatasource
+    left = 8
+    top = 8
+  end
+  object quSprCountry: TFBDataSet
+    AutoUpdateOptions.IncrementBy = 1
+    Macros = <>
+    Option = [poTrimCharFields, poRefreshAfterPost]
+    SQLSelect.Strings = (
+      'select'
+      '  *'
+      'from'
+      '  COUNTRY'
+      'order by'
+      '  COUNTRY.COUNTRY'
+    )
+    left = 8
+    top = 272
+  end
+end

@@ -1,0 +1,225 @@
+<html>
+
+<head>
+<title>TscExcelExport</title>
+</head>
+
+<body bgcolor="#FFFFCC">
+
+<hr>
+<p align="center"><font color="#000080" size="6" face="Verdana, Arial, Helvetica, sans-serif"><i><b><font color="#CC0000">TscExcelExport 3.6</font></b></i></font></p>
+<p align="center"><font color="#CC0000" size="4" face="Verdana, Arial, Helvetica, sans-serif"><b>VCL component for Delphi 5,
+6, 7, 2005, 2006, Turbo Delphi and 2007</b></font><font face="Verdana, Arial, Helvetica, sans-serif"><br>
+<font color="#CC0000" size="4"><b>Support for Excel 97, 2000, XP, 2003 and 2007<br>
+<br>
+June 2007</b></font></font></p>
+<hr>
+<p align="center"><font face="Verdana, Arial, Helvetica, sans-serif"><b><font color="#FF6600" size="4">Stefan Cruysberghs</font></b><br>
+Lommel, Flanders, Belgium<br>
+<a href="http://www.scip.be"><font size="4">http://www.scip.be</font></a></font></p>
+<hr>
+<p align="left"><font face="Verdana, Arial, Helvetica, sans-serif"><b><font color="#FF6600" size="5"></font></b></font><font face="Verdana, Arial, Helvetica, sans-serif"><b><font color="#FF6600" size="5">Description</font></b></font></p>
+<p align="left"><font face="Verdana, Arial, Helvetica, sans-serif">This TscExcelExport component is an advanced, powerful but easy component to export all records of a dataset from Delphi to MS Excel (97, 2000, XP, 2003 or 2007). Many features are provided to change the layout, to add totals, to create groups, ...</font></p>
+      <p align="left"><font face="Verdana, Arial, Helvetica, sans-serif"><b>Properties</b></font></p>
+<ul>
+  <li>
+          <p align="left"><font face="Verdana, Arial, Helvetica, sans-serif">Name of worksheet and file</font></li>
+  <li>
+    <p align="left"><font face="Verdana, Arial, Helvetica, sans-serif">Header and footer texts</font></li>
+  <li><p align="left"><font face="Verdana, Arial, Helvetica, sans-serif">Begin row and column of header, footer, titles (=fieldnames) and data (fieldvalues)</font></li>
+  <li>
+          <p align="left"><font face="Verdana, Arial, Helvetica, sans-serif">Width of columns or autofit</font></li>
+  <li><p align="left"><font face="Verdana, Arial, Helvetica, sans-serif">Font of header, footer, titles, summary and data (Alignment, WrapText, Orientation, MergeCells)</font></li>
+  <li>
+          <p align="left"><font face="Verdana, Arial, Helvetica, sans-serif">Backgroundcolor and borders of header, titles, summary and data</font></li>
+  <li>
+          <p align="left"><font face="Verdana, Arial, Helvetica, sans-serif">Summaries for numeric or given fields (SUM, MIN, MAX, 
+          AVG)</font></li>
+  <li><p align="left"><font face="Verdana, Arial, Helvetica, sans-serif">Create groups with given fields</font></li>
+  <li><p align="left"><font face="Verdana, Arial, Helvetica, sans-serif">AutoFilter for titles </font></li>
+  <li><p align="left"><font face="Verdana, Arial, Helvetica, sans-serif">A lot of other options to customize the result</font></li>
+</ul>
+          <p align="left"><font face="Verdana, Arial, Helvetica, sans-serif"><b>Events</b>
+          </font>
+<ul>
+  <li><font face="Verdana, Arial, Helvetica, sans-serif">To define the background color and font color, size, name and bold style of each cell<br>
+    <br>
+  </font></li>
+  <li><font face="Verdana, Arial, Helvetica, sans-serif">For exporting data without using a TDataset<br>
+  </font></li>
+</ul>
+      <p align="left"><font face="Verdana, Arial, Helvetica, sans-serif"><b>Methods</b></font></p>
+      <ul>
+  <li>
+          <p align="left"><font face="Verdana, Arial, Helvetica, sans-serif">Export to Excel</font></li>
+  <li>
+          <p align="left"><font face="Verdana, Arial, Helvetica, sans-serif">Save worksheet as XLSX (Open XML), XLS, HTML, XML or CSV</font></li>
+  <li>
+          <p align="left"><font face="Verdana, Arial, Helvetica, sans-serif">Show print preview</font></li>
+</ul>
+      <p align="left"><font face="Verdana, Arial, Helvetica, sans-serif"><b>Component editor
+      </b>
+      </font>
+<ul>
+        <li><font face="Verdana, Arial, Helvetica, sans-serif">The component editor can be used to change some settings on an easy way.</font></li>
+</ul>
+      <font face="Verdana, Arial, Helvetica, sans-serif"><strong>Live templates      </strong> </font>
+      <ul>
+        <li><font face="Verdana, Arial, Helvetica, sans-serif">Live templates for Delphi 2006 (ExcelExportUse and ExcelExportCreate)</font></li>
+      </ul>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif"><b>Type library / COM </b></font></p>
+      <ul>
+        <li><font face="Verdana, Arial, Helvetica, sans-serif">This component uses the Office server components from the Borland COM type library.<br>
+        <br>
+        </font></li>
+        <li><font face="Verdana, Arial, Helvetica, sans-serif">By using compiler directives (in unit scExcelExportConfig.inc) you can override the default type library. The available libraries are Excel97, Excel2000 and ExcelXP (folder Delphi\OCX\Servers).<br>
+        <br>
+        </font></li>
+        <li><font face="Verdana, Arial, Helvetica, sans-serif"> MS Excel should be installed on the PC when using this component.</font></li>
+      </ul>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif"><b>Delphi / Office </b></font></p>
+      <ul><li><font face="Verdana, Arial, Helvetica, sans-serif">This VCL component was tested in Delphi 5 (SP1), Delphi 6, Delphi 7, Delphi (BDS) 2005, Delphi (BDS) 2006 and Turbo Delphi. <br>
+        <br>
+      </font></li>
+        <li><font face="Verdana, Arial, Helvetica, sans-serif">The TscExcelExport component works with Excel 97, Excel 2000, Excel XP, Excel 2003 and Excel 2007 (b&egrave;ta) and it has been tested with Dutch and some English Office versions. <br>
+        <br>
+        </font></li>
+        <li><font face="Verdana, Arial, Helvetica, sans-serif">This component will also give you access to the Excel Application, Workbook and Worksheet objects so you can access all VBA properties and methods. </font></li>
+      </ul>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif"><b>Demo application</b></font></p>
+      <ul>
+        <li><font face="Verdana, Arial, Helvetica, sans-serif">A full demo application with 18 examples is supplied to view and test all features of the component (and Excel automation).</font></li>
+</ul>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif">See source code for history and more information about properties, methods and events.</font></p>
+      <hr>
+      <p align="left"><strong><font color="#FF6600" size="5" face="Verdana, Arial, Helvetica, sans-serif">New in version 3.42 </font></strong></p>
+      <p align="left"><font face="Verdana, Arial, Helvetica, sans-serif"><strong>Bugfixes </strong></font></p>
+      <ul>
+        <li><font face="Verdana, Arial, Helvetica, sans-serif" align="left">Bugfix Memo fields, maximum length 910 </font></li>
+        <li><font face="Verdana, Arial, Helvetica, sans-serif" align="left">Bugfix set font and style when there are more then 26 columns </font></li>
+        <li><font face="Verdana, Arial, Helvetica, sans-serif">Bugfix BeginRowHeader</font></li>
+      </ul>
+      <p align="left"><font face="Verdana, Arial, Helvetica, sans-serif"><strong>New features </strong></font></p>
+      <ul>
+        <li><font face="Verdana, Arial, Helvetica, sans-serif" align="left">Made properties ExcelApplication and ExcelWorkbook public </font></li>
+        <li><font face="Verdana, Arial, Helvetica, sans-serif" align="left">Added IsExcelAppActive function </font></li>
+        <li><font face="Verdana, Arial, Helvetica, sans-serif" align="left">Added ENotSupported exception </font></li>
+        <li><font face="Verdana, Arial, Helvetica, sans-serif" align="left">Added Quit option for Disconnect method </font></li>
+        <li><font face="Verdana, Arial, Helvetica, sans-serif" align="left">Added support for ExcelXP type library </font></li>
+        <li><font face="Verdana, Arial, Helvetica, sans-serif" align="left">Added FileFormat XML (XML spreadsheet, only with ExcelXP type library) </font></li>
+        <li><font face="Verdana, Arial, Helvetica, sans-serif" align="left">Added scExcelExportConfig.inc unit with compiler directives for choosing Excel type library (97, 2000, XP) </font></li>
+        <li><font face="Verdana, Arial, Helvetica, sans-serif" align="left">Added package and package group for Delphi (BDS) 2006</font></li>
+        <li><font face="Verdana, Arial, Helvetica, sans-serif">Added SummaryDisplayFormat property</font></li>
+        <li><font face="Verdana, Arial, Helvetica, sans-serif">Added PropertyGroups parameter to LoadDefaultProperties.
+Now a set of property groups can be given : pgFont, pgPositions, pgSummary, pgGroup, pgText, pgOther</font></li>
+        <li><font face="Verdana, Arial, Helvetica, sans-serif">Improvement WorkSheetName. By setting the WorkSheetName property an existing or new
+worksheet can be focused after the export.</font><br>
+        </li>
+      </ul>
+      <p align="left"><font face="Verdana, Arial, Helvetica, sans-serif"><b><font color="#FF6600" size="5">New in version 3.5</font></b></font></p>
+      <p align="left"><font face="Verdana, Arial, Helvetica, sans-serif"><strong>Bugfixes </strong></font></p>
+      <ul>
+        <li><font face="Verdana, Arial, Helvetica, sans-serif" align="left">Bugfix setting column width </font></li>
+      </ul>
+      <p align="left"><font face="Verdana, Arial, Helvetica, sans-serif"><strong>New features </strong></font></p>
+      <ul>
+        <li><font face="Verdana, Arial, Helvetica, sans-serif" align="left">Added properties for merging of header and footer cells (MergeHeaderCells, MergeFooterCells) </font></li>
+        <li><font face="Verdana, Arial, Helvetica, sans-serif" align="left">Added AutoFilter property for titles of dataset </font></li>
+        <li><font face="Verdana, Arial, Helvetica, sans-serif" align="left">Added support for Excel 2007 (b&egrave;ta) </font></li>
+        <li><font face="Verdana, Arial, Helvetica, sans-serif" align="left">Added ffXLSX for saving files in Excel 2007 Open XML format </font></li>
+        <li><font face="Verdana, Arial, Helvetica, sans-serif" align="left">Added support for OnGetText event for numeric fields </font></li>
+        <li><font face="Verdana, Arial, Helvetica, sans-serif" align="left">Added public property for LCID so it can be used after exporting </font></li>
+        <li><font face="Verdana, Arial, Helvetica, sans-serif" align="left">Using default font and size of Excel by setting Size = -1 and Font.Name = 'MS Sans Serif'  -&gt; Excel97/2003 : Arial size 10, Excel 2007 : Calibri size 11 </font></li>
+        <li><font face="Verdana, Arial, Helvetica, sans-serif" align="left">Tested with Turbo Delphi Explorer (Win32) </font></li>
+        <li><strong><font face="Verdana, Arial, Helvetica, sans-serif">Renewed demo application ! </font></strong></li>
+      </ul>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif"><b><font color="#FF6600" size="5">New in version 3.6</font></b></font></p>
+      <p><strong><font face="Verdana, Arial, Helvetica, sans-serif">New features</font></strong></p>
+      <ul>
+        <li><font face="Verdana, Arial, Helvetica, sans-serif">        Added support for Delphi 2007</font></li>
+        <li><font face="Verdana, Arial, Helvetica, sans-serif">        Retested support for Excel 2007</font></li>
+        <li><font face="Verdana, Arial, Helvetica, sans-serif"> Tested with Windows Vista</font></li>
+        <li><font face="Verdana, Arial, Helvetica, sans-serif"> Started with converting comments to XML documentation</font></li>
+        <li><font face="Verdana, Arial, Helvetica, sans-serif"> Added public method FindFirstEmptyRow </font></li>
+      </ul>
+      <hr>
+<p align="left"><font color="#FF6600" size="5" face="Verdana, Arial, Helvetica, sans-serif"><b>Copyrights / Registration </b></font></p>
+      <ul>
+        <li>
+        <p align="left"><font face="Verdana, Arial, Helvetica, sans-serif">All copyrights to this component are owned by the author Stefan Cruysberghs.        </font></li>
+        <li>
+          <p><font face="Verdana, Arial, Helvetica, sans-serif">This component is freeware for non-commercial use and may be freely distributed.</font></p>
+        </li>
+        <li>
+          <p><font face="Verdana, Arial, Helvetica, sans-serif">The author doesn't give a warranty for error free running of this component. </font></p>
+        </li>
+        <li>
+          <p><font face="Verdana, Arial, Helvetica, sans-serif">If you like this component or you are using it in a commercial environment then you have to register it.        </font></p>
+        </li>
+        <li><font face="Verdana, Arial, Helvetica, sans-serif">    You will encourage the author to further develop and improve this TscExcelExport component.</font></li>
+      </ul>
+      <blockquote>
+        <p align="left"><font face="Verdana, Arial, Helvetica, sans-serif"><b>Benefits of registering</b></font></p>
+      </blockquote>
+      <ul>
+        <li><font face="Verdana, Arial, Helvetica, sans-serif">Full source code for Delphi version 5 to 2006 and Turbo Delphi.</font></li>
+        <li><font face="Verdana, Arial, Helvetica, sans-serif"> Unlimited deployment license.</font></li>
+        <li><font face="Verdana, Arial, Helvetica, sans-serif">You will receive an email when new versions or upgrades are available.</font></li>
+        <li><font face="Verdana, Arial, Helvetica, sans-serif">Support will be provided by e-mail.</font></li>
+      </ul>
+			<blockquote>
+        <p align="left"><font face="Verdana, Arial, Helvetica, sans-serif"><b>Prices</b></font></p>
+      </blockquote>
+      <ul>
+        <li><font face="Verdana, Arial, Helvetica, sans-serif">I am using RegNet service for payment processing. You may pay safely by credit card online, by fax or by phone.</font></li>
+        <li><font face="Verdana, Arial, Helvetica, sans-serif"><strong>Single developer license : $35 (29 euro)</strong>: <a href="https://secure.reg.net/product.asp?ID=11696" target="_blank">https://secure.reg.net/product.asp?ID=11696</a> </font></li>
+        <li><font face="Verdana, Arial, Helvetica, sans-serif"><strong>Site license (unlimited developers) : $100</strong> (83 euro): <a href="https://secure.reg.net/product.asp?ID=15336 " target="_blank">https://secure.reg.net/product.asp?ID=15336 </a></font></li>
+        <li><font face="Verdana, Arial, Helvetica, sans-serif">After registering you do not need a registration key. The version which can be downloaded at <a href="www.scip.be">www.scip.be</a> </font><font face="Verdana, Arial, Helvetica, sans-serif"> is fully functional. </font></li>
+      </ul>
+      <hr>
+<p align="left"><font face="Verdana, Arial, Helvetica, sans-serif"><b><font color="#FF6600" size="5">Installation</font></b></font></p>
+<ul>
+  <li><font face="Verdana, Arial, Helvetica, sans-serif">Open the run-time package ExcelExport5.dpk (for Delphi5), ExcelExport6.dpk (for Delphi6) ExcelExport7.dpk (for Delphi7), ExcelExport9.dpk (for Delphi 2005), ExcelExport10.dpk (for Delphi 2006 and Turbo Delphi) or ExcelExport11.dpk (for Delphi 2007). &quot;Compile&quot; the package.<br>
+    <br>
+  </font></li>
+  <li><font face="Verdana, Arial, Helvetica, sans-serif">Open the design-time package dclExcelExportx.dpk and &quot;Compile&quot; and &quot;Install&quot; it. The TscExcelExport component can be found in the tabsheet &quot;SC&quot; of the component palette.<br>
+    <br>
+  </font></li>
+  <li><font face="Verdana, Arial, Helvetica, sans-serif">When you like to add the component to an existing package, make sure the DCP file dclOffice which can be found in the Delphi/Lib folder is added as &quot;required&quot;. When creating a new design-time package, the DCP file designide.dcp (dsnide50.dcp in Delphi5) should be added. <br> 
+    <br>
+  </font>
+  <li><font face="Verdana, Arial, Helvetica, sans-serif">The Turbo Delphi (Win32) Explorer edition does not support installing custom components in design time. So the ExcelExportPack10 package can not be installed. The TscExcelExport component should be created in runtime to use it.</font></li>
+</ul>
+<hr>
+<p align="left"><font face="Verdana, Arial, Helvetica, sans-serif"><b><font size="5" color="#FF6600">Files included</font></b></font></p>
+<ul>
+  <li>
+    <p align="left"><font face="Verdana, Arial, Helvetica, sans-serif"><strong>scExcelExport.pas</strong> : component</font></li>
+  <li>
+    <p align="left"><font face="Verdana, Arial, Helvetica, sans-serif"><strong>scExcelExportReg.pas</strong> : componenteditor and registration of
+    component</font></li>
+  <li>
+    <p align="left"><strong><font face="Verdana, Arial, Helvetica, sans-serif">scExcelExportConfig.inc </font></strong><font face="Verdana, Arial, Helvetica, sans-serif"> : configuration of type library (97, 2000, XP) </font>  </li>    <p align="left"><strong><font face="Verdana, Arial, Helvetica, sans-serif">scExcelExport.dcr</font></strong><font face="Verdana, Arial, Helvetica, sans-serif"> : component icon</font></li>
+  <li>
+  <p align="left"><font face="Verdana, Arial, Helvetica, sans-serif"><strong>ExcelExportPackx.dpk</strong> : run-time package (for Delphi 5, 6, 7, 9 (2005), 10 (2006 &amp; Turbo) and 11 (2007))  </font>    </li>
+  <li>
+    <p align="left"><strong><font face="Verdana, Arial, Helvetica, sans-serif">dclExcelExportPackx.dpk</font></strong><font face="Verdana, Arial, Helvetica, sans-serif"> : design-time package (for Delphi 5, 6, 7, 9 (2005), 10 (2006 &amp; Turbo) and 11 (2007))    </font>    </li>
+  <li>
+  <p align="left"><font face="Verdana, Arial, Helvetica, sans-serif"><strong>TscExcelExport_readme.htm</strong> : this file  </font></li>
+  <li>
+    <p align="left"><font face="Verdana, Arial, Helvetica, sans-serif"><strong>DemoExcelExport.exe</strong> : demonstration of features</font></li>
+  <li><font face="Verdana, Arial, Helvetica, sans-serif"><strong>/Live templates</strong> : the 2 live templates (ExcelExportCreate.xml and ExcelExportUse.xml) 
+for Delphi (BDS) 2006 and 2007 should be copied to<br>
+C:\Program Files\Borland\BDS\4.0\Objrepos\Code_Templates\Delphi</font><br>
+<font face="Verdana, Arial, Helvetica, sans-serif">C:\Program Files\CodeGear\RAD Studio\5.0\ObjRepos\Code_Templates\Delphi<br>
+  <br>
+</font></li>
+</ul>
+<ul>
+  <li><font face="Verdana, Arial, Helvetica, sans-serif"><strong>/Source demo</strong> : demo project to demonstrate features of
+    TscExcelExport component</font></li>
+</ul>
+<hr>
+</body>
+
+</html>

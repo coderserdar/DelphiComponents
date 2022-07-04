@@ -1,0 +1,121 @@
+-- English -------------------------------------------------------------------
+
+DirectX header for Delphi 3, 4, 5.
+
+Present unit:
+  DirectX unit   DirectX 7       (DirectX 7 SDK)
+  DShow unit     DirectShow      (DirectX Media SDK 5.1)
+  DAnim unit     DirectAnimation (DirectX Media SDK 5.1)
+
+Hiroyuki Hori
+　hori@ingjapan.ne.jp
+　http://www.yks.ne.jp/~hori/
+
+-- Japanese -------------------------------------------------------------------
+
+Delphi 3, 4, 5 用の完全な DirectX ヘッダーです。
+
+現在のユニット：
+  DirectX ユニット    DirectX 7       (DirectX 7 SDK)
+  DShow ユニット      DirectShow      (DirectX Media SDK 5.1)
+  DAnim ユニット      DirectAnimation (DirectX Media SDK 5.1)
+
+堀　浩行(Hiroyuki Hori)
+　hori@ingjapan.ne.jp
+　http://www.yks.ne.jp/~hori/
+
+
+更新記録：
+
+2000/07/17  ・IDirectDrawSurface4.Lock メソッドの引数が間違っていたのを修正した。
+            ・IDirect3DDevice7.DrawIndexedPrimitiveVB メソッドの引数が間違っていたのを修正した。
+
+1999/11/20  ・DirectX7 に対応した。
+            ・IDirectDrawSurface インターフェースの EnumAttachedSurfaces, EnumOverlayZOrders メソッドの
+              引数の型が間違っていたのを修正した。
+            ・IDirect3DRMFrame3 インターフェースの GetTransForm メソッドの引数が間違っていたのを修正した。
+            ・DDSPD_VOLATILE 定数の値が間違っていたのを修正した。
+            ・DShow.pas で Delphi 3 の場合、Int64 型を宣言していたのをやめて LONGLONG 型を使うようにした。
+            ・TDPMsg_SendComplete 型で dwPriority が抜けていたのを修正した。
+
+1999/09/27  ・Delphi 5 でレコードの可変部分にインターフェースをおけなくなったため、
+              TDDBltFX, TDDOverlayFx 構造体のなかのインターフェースをポインタに変更した。
+
+1999/08/21  ・DirectXFileCreate 関数の DLL ファイル名が間違っていたのを修正した。
+            ・IID_IDirectXFile 定数などが文字列定数として宣言されていたのを修正した。
+            ・D3DRM_XTEMPLATE_BYTES 定数を宣言し忘れていたのを修正した。
+            ・IDirect3DRMMeshBuilder3 インターフェースの宣言が間違っていたのを修正した。
+
+1999/02/21  ・IDirect3DRM3 インターフェースの宣言が間違っていたのを修正した。
+            ・IDirect3DDevice3 インターフェースの宣言が間違っていたのを修正した。
+
+1998/10/05　・IDirect3D3.CreateDevice メソッドの引数が間違っていたのを修正した。
+
+1998/08/28　・IDirect3D3.CreateVertexBuffer メソッドを宣言し忘れていたのを修正した。
+            ・IDirect3D3.CreateMaterial メソッドの引数が間違っていたのを修正した。
+
+1998/08/25  ・IDirect3DRM インターフェースを定義し忘れていたのを修正した。
+            ・IDirect3DRM2, IDirect3DRM3 の LoadTextureFromResource メソッドの引数が間違っていたのを修正した。
+
+1998/08/24  ・DirectX 5 ヘッダーと互換性がなかったのを修正した。
+              具体的には PDInputState を定義していなかった。
+
+1998/08/08  ・IBasicVideo.get_BitRate メソッドの宣言が間違っていたのを修正した。
+
+1998/08/07  ・DirectX 6 にも対応した。
+            ・型の命名規則を Delphi 標準に変えた。
+            ・Integer 型で宣言してあったのを DWORD か Longint 型で宣言するようにした。
+            ・ビデオポート関連の宣言が間違っていたのを修正した。
+            ・TD3DRMLoadTextureCallback 型の引数が間違っていたのを修正した。
+            ・IDirect3DRMPicked2Array.GetPick メソッドの宣言が間違っていたのを修正した。
+            ・TDSEnumCallbackX 型に stdcall が無かったのを修正した。
+            ・DShow ユニットで 64ビット整数型は Comp ではなく、TInt64 型にした。
+              Delphi3 では type TInt64=Comp として定義される。
+
+1998/06/03  ・VectorCrossProduct 関数の計算式が間違っていたのを修正した。
+
+1998/05/29  ・D3DRMQuaternionFromRotation 関数の引数の宣言が間違っていたのを修正した。
+
+1998/04/29  ・DIK_? で宣言し忘れていたのを追加した。
+
+1998/04/02  ・IDirect3DRMFrame2 のメソッドを修正した。
+
+1998/04/02  ・DirectPlay 関連をちょっと修正した。
+
+1998/03/02  ・IFilterMapper2.EnumMatchingFilters の宣言が間違っていたのを修正した。
+            ・IEnumXX.Next メソッドの第二引数 で out XXX: Ixxx となっていたのを out XXX とした。 
+
+1998/03/01  ・以下のユニットを追加した。
+                DShow ユニット      DirectShow(ActiveMovie)
+                DAnim ユニット      DirectAnimation
+
+1998/02/06  ・DirectX ユニットにすべてのユニットをまとめた。
+
+1998/01/31  ・すべてのユニットに $WEAKPACKAGEUNIT 指令を加えた。
+            ・D3DTypes ユニットの D3DRGBA 関数を修正した。
+
+1998/01/22  ・ほとんどのユニットに $WEAKPACKAGEUNIT 指令を加えた。
+
+1998/01/04  ・DInput.pas の DIK_xxx で宣言し忘れていたのがあったのを修正した。
+
+1997/12/27  ・IDirect3DRMDevice2 を IDirect3DRMDevice を継承するようにした。
+            ・IDirect3DViewport2 を Direct3DViewport を継承するようにした。
+            ・IDirectPlay3 で IDirectPlay2 の部分が宣言されていたのを削除した。
+            ・IDirectPlayLobby2 で IDirectPlayLobby の部分が宣言されていたのを削除した。
+            ・IDirectInputDevice2 で IDirectInputDevice の部分が宣言されていたのを削除した。
+            ・コールバック関数の戻り値を BOOL から HRESULT にした。
+            ・c_dfDIMouse, c_dfDIKeyboard の定義が正しくなかったのをなおした。
+
+1997/12/16  ・IDirect3DRM2.CreateDeviceFromD3D メソッドの引数を変更した。
+            ・IDirect3DRMMeshBuilder2 を IDirect3DRMMeshBuilder を継承するようにした。
+            ・D3DRMObj ユニットで Boolean となっていたのを Bool とした。
+
+1997/12/09  ・IDirect3DRMFrame2 を IDirect3DRMFrame を継承するようにした。
+            ・IDirect3DRMTexture2 を IDirect3DRMTexture を継承するようにした。
+
+            ・IDirect3DDevice2 の DrawPrimitve, DrawIndexedPrimitve メソッドの引数を変更した。
+            ・IDirect3DRMFace の SetColor メソッドの宣言が抜け落ちていたのを修正した。
+
+1997/11/25  ・D3DTypes ユニットの D3DRGB, D3DRGBA 関数を修正した。
+
+1997/11/21  ・IDirect3DRMObject.Clone メソッドの宣言が間違っていたのを修正した。

@@ -1,0 +1,81 @@
+      -----------------------------------------------------------------------
+         SXSkinComponents for C++Builder 6: Installation HOWTO for Newbies
+      -----------------------------------------------------------------------
+
+    Follow these to install (reinstall) SXSkinComponents package:
+
+ 1. Expect you have downloaded sxskincomponents_X.X.X_full.zip and are ready to
+    install SXSkinComponents. (However, you can use sxskincomponents_X.X.X_src.zip
+    or sxskincomponents_X.X.X_srcskin.zip instead. Just replace word "full" in
+    the following text with "src" or "srcskin"). X.X.X means the version of the
+    downloaded package (e.g. 1.2.0).
+
+ 2. Extract file sxskincomponents_X.X.X_full.zip to the folder
+    C:\sxskincomponents_X.X.X_full. (If you want to use another folder, just replace
+    appropriate paths in the following text).
+
+ 3. Start C++Builder 6.
+
+ 4. If another version of SXSkinComponents package is already installed:
+    Remove previous version of SXSkinComponents. To do this open Component->
+    Install Packages, select "SXSkinComponents Design Time Package" in the list and
+    click Remove, then click Yes in the confirmation dialog and Yes in the Remove
+    Runtime Packages dialog. Next remove "SXSkinComponents" package the same way.
+
+ 5. If another version of Graphics32 package is already installed:
+    Remove previous version of Graphics32. To do this open Component->Install Packages,
+    select "Graphics32" in the list and click Remove button. Then click Yes in the
+    confirmation dialog and one more Yes in the Remove Runtime Packages dialog. Next
+    remove GR32_DSGN_CB6 package.
+
+ 6. Install Graphics32 package:
+    Open C:\sxskincomponents_X.X.X_full\Graphics32_1_8_1_SX2\Packages\GR32_CB6.bpk.
+    Window with caption "Package - GR32_CB6.bpk" should appear. Click Install button
+    in that window. Information dialog appears when installation is successfull.
+    Click OK in the dialog and close the opened package. Click Yes in the save
+    confirmation dialog. After that you should open the package
+    C:\sxskincomponents_X.X.X_full\Graphics32_1_8_1_SX2\Packages\GR32_DSGN_CB6.bpk.
+    Click Install button, OK in the confirmation dialog, close the package and click
+    Yes to save changes.
+
+ 7. Install SXSkinComponents package:
+    Open C:\sxskincomponents_X.X.X_full\SXSkinComponents\Packages\SXSkin_CB6_R.bpk.
+    Click Install, then OK, close the package and click Yes to save changes.
+    Open C:\sxskincomponents_X.X.X_full\SXSkinComponents\Packages\SXSkin_CB6_D.bpk.
+    Install this package the same way.
+
+    TEST INSTALLED PACKAGES:
+
+ 8. Click File->New->Application in the C++Builder main menu. Find SXSkinComponents
+    tab in the C++Builder components list on the toolbar (it is the rightmost).
+    Click on the first icon from the left (SXSkinLibrary), then click on the Form1
+    to add TSXSkinLibrary component to the application. Then add SXSkinButton
+    control on the form the same way.
+
+ 9. Add Graphics32 and SXSkinComponents sources paths to the project Library path:
+    Click Project->Options. Open Directories/Conditionals page. Click ellipsis button
+    near Library path text dropdown control. Click ellipsis button and select path
+    C:\sxskincomponents_X.X.X_full\Graphics32_1_8_1_SX2. Then click OK in the path
+    selection dialog. Click Add button. Repear thiese operations for another path:
+    C:\sxskincomponents_X.X.X_full\SXSkinComponents.
+    Then add Graphics32 and SXSkinComponents sources paths to the project Include
+    path the same way: click ellipsis button near Include path text edit control
+    and add these paths to the list:
+       C:\sxskincomponents_X.X.X_full\Graphics32_1_8_1_SX2
+       C:\sxskincomponents_X.X.X_full\SXSkinComponents
+    After that click OK in the Directories window.
+
+10. Click on Form1. In the Object Inspector open Events page and double-click on the
+    empty field near OnCreate text to add Form1.OnCreate event to the application.
+    Add these lines to be executed on this event:
+
+        SXSkinLibrary1->StoredSkin = GetStoredSkinByIndex(0);
+        SXSkinLibrary1->Active = true;
+
+11. Press F9 to compile and run the application.
+    If the application doesn't start, you should better restart from step 8.
+
+Web Site: http://www.saarixx.info/sxskincomponents/en/
+E-Mail: sxskincomponents@saarixx.info
+
+Copyright (C) 2006-2007, Alexey Sadovnikov. All Rights Reserved.

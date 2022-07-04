@@ -1,0 +1,48 @@
+package color60;
+
+{$R color.res}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'colorADO Database Components'}
+{$RUNONLY}
+{$IMPLICITBUILD OFF}
+
+requires
+  vcl,
+  vcldb;
+
+contains
+  cadodb in '..\colorado\cadodb.pas',
+  cconsts in '..\colorado\cconsts.pas',
+  cfields in '..\colorado\cfields.pas',
+  cdlink in '..\colorado\cdlink.pas' {CDataLink},
+  cmsdasc in '..\colorado\cmsdasc.pas',
+  colorado in '..\colorado\colorado.pas',
+  cschema in '..\colorado\cschema.pas',
+  cmdacver in '..\colorado\cmdacver.pas',
+  cerrdlg in '..\colorado\cerrdlg.pas' {OLEDBProviderErrorsForm},
+  oledbadm in '..\colorado\oledbadm.pas',
+  cblobdat in '..\colorado\cblobdat.pas',
+  cadoxdb in '..\colorx\cadoxdb.pas',
+  colorx in '..\colorx\colorx.pas';
+
+end.

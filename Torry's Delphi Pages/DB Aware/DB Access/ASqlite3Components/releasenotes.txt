@@ -1,0 +1,380 @@
+History:
+              Nov 8, 2003 First alpha release 1.0.A Albert Drent (c) 2003 Aducom Software
+              Nov 11, Release alpha 1.0.B Albert Drent (c) 2003 Aducom Software
+                        - added 'param' support
+                        - fixed null pointer assignment
+                        - added support for partial select (limit / offset)
+              Nov 12, Release alpha 1.0.C Albert Drent (c) 2003 Aducom Software
+                        - fixed bug in update
+                        - support for events
+                        - added 'RowsAffected'
+              Nov 16, Release beta 1.0.D Albert Drent (c) 2003 Aducom Software
+                        - fixed 0 resultlist after any ExecSQL usage
+                        - added Transaction support
+              Nov 24, Release beta 1.0.E Albert Drent (c) 2003 Aducom Software
+                        - StartTransaction will open database if it is'nt already open
+                        - Changed resultset method
+                        - Added property editor for table names
+                        - Added GetTableNames function to TASQLite3Database
+                        - Added GetIndexNames function to TASQLite3Database
+                        - Added Open and Close function to TASQLite3Database
+                        - Added AutoCommit property to TDataSet descendants
+                        - Split of source in designtime and runtime package
+              Dec 15, Release beta 1.0.F Albert Drent (c) 2003 Aducom Software
+                        - Optimized code for speed
+                        - Added support for quering databases
+                        - Added property for base directory (default dir) TDatabase
+                        - Preparations for mastersets and TUpdateSQL (not functional yet)
+                        - Solved GPF on stringfields
+                        - Solved hangup of Delphi when developing
+                        - Solved invalid pointer operation bug while developing
+              Jan 11 2004, Release beta 1.0.G Albert Drent (c) 2003, 2004 Aducom Software
+                        - Fixed GetTableNames Bug as reported on forum
+                        - Solved some minor bugs, several code optimizations
+                        - Added 'getfieldnames' procedure to asqlitedb
+                        - Added component asqlitepragma for adjustments to sqlite behaviour
+                        - Added several property editors to smooth things up
+                        - Added component asqliteupdatesql
+                        - Added master-detail support for TASQLite3table (not fully tested yet)
+                        - Added master-detail support for TASQLite3query (not fully tested yet)
+                        - Added filter property to TASQLite3Query
+              Jan 18, 2004, Release beta 1.0.H Albert Drent (c) 2003, 2004 Aducom Software
+                        - Added TASQLite3Log component
+                        - Support for autoincrement (index primary key)
+              Jan 22, 2004, Release beta 1.0.I Albert Drent (c) 2003, 2004 Aducom Software
+                        - Solved bug, causing the user to open database first (where
+                          it should be opened automatically after open query or table.
+                        - datatype text is now treated as a string of max 255 chars.
+                        - added samples
+                        - added preparations for import and export component
+              Jan 26, 2004, Release beta 1.1.A Albert Drent (c) 2003, 2004 Aducom Software
+                        - Support for master-detail
+                        - Support for TUpdateSQL
+              Feb 05, 2004, Release beta 1.1.B Albert Drent (c) 2003, 2004 Aducom Software
+                        - Solved small bug: basequery is closed on querychanged event
+                        - Solved small bug: basequery is closed on filter change event
+                        - Solved bug in design package, by Marc Wetzel(forum)
+                        - Notification of BaseQuery removed and added to SQLiteTable
+              Feb 24, 2004 Release alpha 1.2.A Albert Drent (c) 2003, 2004 Aducom Software
+                        - Locate implemented, working on resultset!
+                        - Some small bugfixes
+              Feb 25, 2004 Release alpha 1.2.B Albert Drent (c) 2003, 2004 Aducom Software
+                        - Reformat of source (Marc Wetzel)
+                        - All the debug directives (Marc Wetzel)
+                          The debug stuff is added to be able to do more debugging on the
+                          components. At this stage there are still some isues which are
+                          hard to be find.
+                        - Some small bugfixes (Marc Wetzel)
+                        - Solved bug with dblookupcombobox, lookup is now shown (variant error)
+                        - Derived more classes from TDataset to solve compatibility isues with
+                          3rd party software (DevExpress)
+                        - Start of port to lower Delphi versions (designintf vs dsgnintf)
+              March 25, 2004 Release alpha 1.2.C Albert Drent (c) 2003, 2004 Aducom Software
+                        - Added property editor for database directory
+                        - Added property editor for sqlitedll directory
+                        - Bugix needed for release 13 of SQLite.dll (is compatible to lower
+                          dll versions)
+                        - More changes to solve compatibility problem with DevExpress (Plato of DevExpress)
+                        - Solved some compatibility isues with TDataSet
+                        - Solved some compatibility isues with the newest SQLite version (2.8.12)
+                        - Added/modified, GetFieldNames, GetPrimaryKeys
+                        - Added GetTableInfo
+                        - Added StartTransaction and Commit and RollBack to TTable and TQuery
+                          This will create a more readable source:
+                             db.starttranaction;
+                             q.somesql
+                             db.commit
+                          becomes now
+                             with q do begin
+                               starttransaction;
+                               somesql;
+                               try
+                                 commit;
+                               except
+                                 rollback;
+                               end;
+                             end;
+                        - Changed cleanup of components in notification (TheSneak)
+                        - Fixed potential AV (so far not reported)
+                        - Changed escape of string characters (TheSneak)
+                          (might cause incompatibility of older components if you use single
+                          quote in data)
+                        - Fixed question mark problem in data (TheSneak)
+              April 7, 2004
+                        - Fixed bug GetxxxxNames, moved pragma (reported by Martini)
+                        - Improved some performance isues (TheSneak)
+                        - Added GetTableIndexNames(by Martini)
+                        - Added support for 'small text blobs', it isn't the real stuff but
+                          limited to 20000 characters.
+                        - Fixed another compatibility isue with DevExpress
+              April 8, 2004
+                        - Fixed EnableControls (TheSneak)
+                        - Fixed memoryleak ASQLiteQuery.InternalPost (TheSneak)
+                        - Downgraded some stuff for support Delphi 4/5
+                        - Updated Locate function (by Joel  hottcha@juno.com)
+              April 14, 2004 Release beta 1.2.C Albert Drent (c) 2003, 2004 Aducom Software
+                        - RawSQL property implemented (supresses parsing of sql data)
+                        - published csv release as 1.2.C beta
+              April 15, 2004 Release alpha 2.0.A Albert Drent (c) 2003, 2004 Aducom Software
+                        - support for real clobs
+                        - added fieldtype numeric(x.y)
+                        - Implement RawSQL property in TASQLite3Query
+              May 26, 2004 Release beta 2.0.B Albert Drent (c) 2003, 2004 Aducom Software
+                        - new procedure: GetGetLastInsertRow
+                        - new component: TASQLite3InlineSQL, to be used to contain all
+                          kinds of pre-stored sql statements. I.e. for creation of tables in case
+                          of an in-memory database, or a local storage for sql statements to
+                          simplify sourcecode. In this release it is bound to the ASQLiteDB component.
+                        - new component TASQLite3Output, to be used to generate csv files,
+                          xml and html documents. It is NOT bound to ASQLite components but
+                          to a datasource (containing any database connection)
+                        - implemented bound as described by minhl on the forum
+                        - implemented IsNull as described by Kazooie64 on the forum
+                        - implemented a uniform datetime implementation by jpierce
+              May, 26, 2004 Release beta 2.0.B Albert Drent (c) 2003, 2004 Aducom Software
+                        - A few bugfixes
+              June, 15, 2004 Release beta 2.0.C Albert Drent (c) 2003, 2004 Aducom Software
+                        - A few bugfixes, thanks to Tzvetan
+              July 2004, Release 1.0 based upon source sqlite version 2 components
+              Okt 11, 2004 Release beta 1.0.B Albert Drent (c) 2003, 2004 Aducom Software
+                        - Callback routine for retieving data replaced by new
+                          by sqlite prefered way.
+                        - Some bugfixes
+                        - Support for calculated fields
+                        - Support for real blobs
+              okt 14, 2004 Release beta 1.0.C Albert Drent (c) 2003, 2004 Aducom Software
+                        - support for locate lo-partial key (thanks to Bob Mitchel)
+                        - some bugfixes (thanks to Oleg Lembievskiy marked by OL)
+                        - some other bugfixes and code cleanup
+              okt 18, 2004
+                        - re-introduced sqlite_version
+                        - added transactiontype property(SQLite3 feature)
+                        - added transaction procedures to db and basequery
+                                StartDeferredTransaction;
+                                StartImmediateTransaction;
+                                StartExclusiveTransaction;
+              nov 1, 2004
+                        - bugfix (thanx to James) for null pointer assignment on null values
+              nov 8, 2004
+                        - fixed introduced bug in result preventing new records to appear
+                          right in dbgrids.
+              nov 17, 2004
+                        - fixed small bug showing rubish on empty tables
+              Nov 17, 2004 by Mike Dijkema
+                        - filter bug  FPrepared := FPrepared + ' and ' + Filter adds ' and filterexpr' to the end of the sql statement
+                          this created errors with 'order by' 'limit' 'union' 'having' etc..
+                          filtering changed to that it works like the ADO components and union and other statements
+                          now 'select a from b union select c from d' and 'select a from b order by c' works with a filter
+                        - filter bug 'select a_where from b' removed
+              jan 11, 2005 Release 2005.01.A Albert Drent (c) 2003 .. 2005 Aducom Software
+                        - fixed bug causing fielddescription to be deleted incorrectly
+                        - fixed bug causing errormessage on null values in integer fields
+                        - added sqlcursor property
+                        - modifications to support Delphi 2005
+                        - implemented all transactiontypes
+                        - changed all showmessages to raise event types
+                        - added readonly property
+              feb 21, 2005 Release 2005.02.A Albert Drent (c) 2003 .. 2005 Aducom Software
+                        - some bugfixes, code optimization
+                        - first implementation of IProvider support (thanks to
+                          Rocco Barbaresco)
+                        - changed default SDB extension to SQB
+                        - support for multi sql statements in one string
+                        - added master-detail functionality on insert of
+                          new child record (key-data is copied)
+                        - added compatibility with SQLite3.dll version 3.1.2
+              feb 28, 2005 Release 2005.02.B Albert Drent (c) 2003 .. 2005 Aducom Software
+                        - bugfix for filter on master-detail. Setting filtered will
+                          not automatical open table any more. Causes error on closed
+                          tables in master-detail otherwise.
+              mar 7, 2005 Release 2005.03.A Albert Drent (c) 2003 .. 2005 Aducom Software
+                        - bugfix for memofields causing crlf to be handled wrongly
+                        - added TableExists function ('// DI  Ralf http://www.yunqa.de/delphi/)
+                        - some code optimizations ('// DI Ralf http://www.yunqa.de/delphi/)
+                        - solved decimalpoint bug ('// DI Ralf http://www.yunqa.de/delphi/)
+              mar 10, 2005 Release 2005.03.B Albert Drent (c) 2003 .. 2005 Aducom Software
+                        - more code optimizations
+                        - removed Forms from uses list to decrease codesize of console app's
+                        - changed cursorstyle handling
+                        - changed exception handling
+              mar 29, 2005 Release 2005.03.C Albert Drent (c) 2003 .. 2005 Aducom Software
+                        - removed default pragma's for tables
+                        - implemented another solution for tableheader duplicates (mirko)
+                        - implemented user version
+                        - solved minor bug in GetTableInfo
+              april 5, 2005 Release 2005.04.A Albert Drent (c) 2003 .. 2005 Aducom Software
+                        - fixed bug conceirning in-memory database (Bert Verhees)
+                        - fixed precompiler settings for Delhpi 7 (Dak)
+              mai 31, 2005 Release 2005.05.A Albert Drent (c) 2003 .. 2005 Aducom Software
+                        - UTF8 support (thanks to Bilgehan KUYUCU)
+                        - Statical linking (thanks to Gianpaolo Avallone (GPA)
+                        - Some bugfixes and enhancements by Albert, Gianpaolo and others.
+              august 1, 2005 Release 2005.08.A
+                        - UTF8 support to be set by property, solving a 'locale' problem.
+                        - Bugfix for null strings
+                        - Fix for static linking
+                        - Solved bug in updatesql, fieldlist is now setup correctly
+                        - solved bug in updatesql, inserting null values and constants.
+              august 2, 2005 Release 2005.08.B
+                        - first steps towards support utf16 (by Kevin Zhang)
+                        - implemented another locate routine (by jbannon)
+                        - changed treatment of datatype text. It is considered 'longtext' now.
+                          added 'shorttext' datatype which replaces the original 'text' datatype.
+                          The datatype text is now compatible with sqlite3, mysql and perhaps
+                          others.
+              sept 1, 2005 Release 2005.09.A
+                        - code optimizations by Kevin Lu, Aducom
+              sept 1, 2005 Release 2005.09.B
+                        - candidate fix for decimal point problem by Jordi March
+              sept 20, 2005 Release 2005.09.C
+                        - implementation of unidirectional dataset. This improves
+                          performance on large resultsets to the optimum. However
+                          the dataset is readonly by default, using inserts/deletes and
+                          updates will result in a 'database table is locked' error.
+              sept 21, 2005 Release 2005.09.D
+                        - bugfix for decimal point routine by Kevin Lu
+              sept 29, 2005 Release 2005.09.E
+                        - bugfix for unidirectional dataset.
+                        - bugfix for split of prepare and execute. Data was not updated
+                          correctly
+              nov 1, 2005 Release 2005.11.A
+                        - Code improvements
+                        - First (alpha) implementation of Lookup field (By John Lito)
+              dec 14, 2005 Release 2005.12.A
+                        - Check for null values
+              jan 5, 2006 Release 2006.01.A
+                        - fixed unidirectional bug (I)
+              jan 9, 2006 Release 2006.01.B
+                        - fixed unidirectional bug (II)
+                        - automatically will close table if tablename property is changed
+                          while a table is still open.
+                        - automatically close query if sql property is changed while a table
+                          is still open.
+                        - fixes for compilation under D4
+                        - changes for installation under Delphi 2005 and 2006
+                        - changes of copyright notice, the components are now under
+                          open-source bsd licence.
+              feb 22, 2006 Release 2006.02.A
+                        - Changed status to stable
+              mar 2, 2006 Release 2006.03.A
+                        - Modifications for D4/D5
+                        - Added order by property. Enter fieldnames separated by ','
+                        - Added GetIndexFieldNames (thanks to zavu10n)
+                        - Database will be reopened if necessary on filter change
+                        - Fixes by Donnie
+                        - New routine for dates and floates by Donnie
+              mar 8, 2006 Release 2006.03.B
+                        - Fixed small bug causing text treated as char 255, is now memo.
+              mar 15, 2006 Release 2006.03.C
+                        - Added switch for compilation under D4/D5 (Art Register)
+                        - DBOpen change for utf8 by John Lito
+                        - SQLCursor fix
+                        - GetFieldValue fix by Velis
+              mar 23, 2006 Release 2006.03.D
+                        - Compatibility fixes for D45 (Art Register)
+                        - changed D45 directive to $IFDEF ASQLITE_D6PLUS so
+                          compilation should work automatically now
+                        - changed cr cr/lf pairs for compatibilty with D4/D5
+                        - added CompareBookmarks to support multiple selection
+                          in DBGrid (Michael S)
+                        - added support for char *nothing* datatype (was char(1) now char is allowed)
+              mar 27,2006 Release 2006.03.E Beta
+                        - Fixed master-detail bug
+                        - Source optimizations (old source is still commented out, will
+                          be deleted on stable release
+                        - Date and Time type are now treated as is should have been
+                          from the beginning. DateTime type is stored ansi way,
+                          Date type is stored yyyy-mm-dd, Time type is stored hh:nn:ss.mmm
+                          It's possible that next release will only use hh:nn:ss due
+                          to problems with vcl components who do not support mmm.
+              mar 29,2006
+                        - Fixed small bug causing the shortdateformat to be overwritten
+              apr 03,2006
+                        - added support for getschemaversion (CoRSA)
+              Release 2006.09.A was based upon another source (ADO-based).
+              sept 14,2006 Release OldStyle 2006.09.B
+                        - OK, Within the null support release it appeared that it
+                          had a lot of obscure problems. This was costing me so much time
+                          I decided to recover and implement another null support based
+                          on the latest stable release (by Jure) and patched all the
+                          updates from the forum. I also implemented the following patches:
+                        - Kevin Lu: patch for utf8
+                        - VSmolenski: patch for sql cursor
+                        - Michael: patch for queryfilter
+                        - Jure: NULL SUPPORT (tnx!!)
+                        - Kwerling: patch for sqlite busy bug
+                        - CoRSA: patch for retrieving temp. tables
+              nov 2, 2006 Release 2006.11.A
+                        - Fix by Sean, adding 'required' field check
+                        - Fix UTF8 by Coldak
+                        - Adding BusyTimeOut by Sean
+                        - Support for collation
+              feb 22, 2007 Release 2007.02.A
+                        - Fix to solve Blob isue (generated AV)
+                        - Added InTransactionFunction
+                        - Fixes for collation (Jure)
+                        - Fixes for Null Support (Jure) to solve DUnit isues
+                          (by Sean)
+                        - Null support for Blobs is not supported. Due to the
+                          fact that a null value is kept with the field, the
+                          Blob object is always created thus causing the field
+                          to contain the blobpointer which is never null...
+                          Try to fix that in some other version. There where some
+                          code changes necessary to let the DUnit tests run through.
+                        - Other (minor) isues.
+              mar 6, 2007 Release 2007.03.A
+                        - Unicode support. Currently nBlob is implemented as
+                          WideString due to some isues with tntMemo.
+                          (thanks Sasa for testing (szutils.com))
+              april 20, 2007 Release 2007.04.A
+                        - Fixed bug in master-detail
+			- Utf 16 support (remark utf16 is NOT supported for memofields as
+                          used in tntWare, we're working on it)
+			  use nchar and nvarchar
+              mai 3, 2007 Release 2007.05.A
+                        - Some fixes for static linking
+                        - New fix for utf16
+                        - New (experimental) property OnBusy on TASQLite3DB (use with care)
+              sep 22, 2007 Release 2007.09.A
+                        - Added timeout (sean)
+                        - Added Vacuum (sean)
+                        - Several bugfixes
+                        - Fixed two serious master-detail bugs. Solved index out of range isue.
+                        - Added samples
+              sep 24, 2007 Release 2007.09.B
+                        - Bugfix to prevent resultset being created and dataset left open on
+                          ExecSQL
+                        - Added samples
+              okt 8, 2007 Release 2007.10.A
+                        - Bugfix sql generation for numeric types (Thiago)
+                        - Changed some code to solve CodeGear C++ isues
+                        - PK isue of Sasa
+              nov 1, 2007 Release 2007.11.A
+                        - Bugfix for D4/5 and BCC++ 4/5 users. Unit SQLTimSt is not
+                          used any-more. This means that the datatype
+                          ftTimeStamp is only supported from D6 to up.
+              jan 9, 2008 Release 2008.01.A
+                        - Bugfix using ',' as decimal comma causing parser error
+                        - Solved more D5 isues due to incompatibities with higher Delphi Releases
+                        - Added implementation for refresh, maintaining correct recno.
+              mar 10, 2008 Release 2008.03.A
+                        - Bugfix for master-detail with empty tables
+                        - Other (small) bugfixes
+              may 27, 2008 Release 2008.06.A
+			- Master-detail re-implemented
+			- Split source for static linking (SASA)
+			- Added sasa's build package for static linking
+			- Added sample for FTS (some additional work for result set needs
+			  to be done though)
+			- Reimplemented core sqlite routines using binding, now solves UTF16 isue:
+				Due to the reimplementation of a lot of core routines, be careful
+				when using these components. They pass our DUnit tests, but that doesn't 
+				sais it all (!)
+			- Source optimizations
+              may 27, 2008 Release 2008.06.B
+                        - Bugfix for select binding.
+	      may 28, 2008 Release 2008.06.C
+			- Bugfix for binding multiple memofields in one record.
+						
+	      may 28, 2008 Release 2008.06.D
+			- Bugfix for Delphi < version 6 (StrToDateDef is not supported in older releases)

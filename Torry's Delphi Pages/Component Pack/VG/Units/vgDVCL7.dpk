@@ -1,0 +1,67 @@
+package vgDVCL7;
+
+{$R *.res}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'VG Library VCL Components'}
+{$DESIGNONLY}
+{$IMPLICITBUILD ON}
+
+requires
+  dclstd;
+
+contains
+  vgVCLRg in 'vgVCLRg.pas',
+  vgStndrt in 'vgStndrt.pas',
+  vgItems in 'vgItems.pas' {ItemEditorForm},
+  ExplEdit in 'ExplEdit.pas' {ExplorerNodesEditorForm},
+  ExplAdd in 'ExplAdd.pas' {ExplorerNodeForm},
+  ExplNvgt in 'ExplNvgt.pas' {ExplorerNodesDesignerForm},
+  Explorer in 'Explorer.pas',
+  ExplCtrl in 'ExplCtrl.pas',
+  vgVCLUtl in 'vgVCLUtl.pas',
+  vgCtrls in 'vgCtrls.pas',
+  vgTools in 'vgTools.pas',
+  vgSystem in 'vgSystem.pas',
+  vgUtils in 'vgUtils.pas',
+  vgVCLRes in 'vgVCLRes.pas',
+  vgOleUtl in 'vgOleUtl.pas',
+  vgComObj in 'vgComObj.pas',
+  vgTlHelp in 'vgTlHelp.pas',
+  ExplFile in 'ExplFile.pas',
+  ComCtl98 in 'ComCtl98.pas',
+  fDlgStd in 'fDlgStd.pas' {DialogForm},
+  fDlgLog in 'fDlgLog.pas' {LoginDialogForm},
+  vgClpbrd in 'vgClpbrd.pas',
+  vgMSVCRT in 'vgMSVCRT.pas',
+  vgI0_TLB in 'vgI0_TLB.pas',
+  vgMSScr in 'vgMSScr.pas',
+  MSScript in 'MSScript.pas',
+  vgScript in 'vgScript.pas',
+  vgNLS in 'vgNLS.pas',
+  vgWP in 'vgWP.pas',
+  vgWPRes in 'vgWPRes.pas',
+  ExplShl in 'ExplShl.pas',
+  vgPropDs in 'vgPropDs.pas' {PropStorageForm},
+  vgShlObj in 'vgShlObj.pas';
+
+end.

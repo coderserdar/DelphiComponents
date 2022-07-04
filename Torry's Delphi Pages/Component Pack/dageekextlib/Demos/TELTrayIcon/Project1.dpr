@@ -1,0 +1,24 @@
+{*******************************************************}
+{                                                       }
+{       Extension Library example of                    }
+{       TELTrayIcon                                     }
+{                                                       }
+{       (c) 2001, Balabuyev Yevgeny                     }
+{       E-mail: stalcer@rambler.ru                      }
+{                                                       }
+{*******************************************************}
+
+program Project1;
+
+uses
+  Forms,
+  Unit1 in 'Unit1.pas' {Form1};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.Title := 'TELTrayIcon demo';
+  Application.CreateForm(TForm1, Form1);
+  Application.Run;
+end.

@@ -1,0 +1,197 @@
+How to install DbxOOdbc - Open Source DbExpress driver for ODBC
+---------------------------------------------------------------
+
+
+Source code version (compile dbxopenodbc statically into your program)
+----------------------------------------------------------------------
+This is the recommended method.
+
+It avoids possibility of incompatible versions of dbxoodbc.dll at runtime.
+It allows you to compile dbxopenodbc with your own specific options (see defines).
+It gives better tracing when your are debugging.
+
+What to do
+----------
+Copy all files in this directory to either your application source directory,
+a directory in your Delphi LibPath, or a new directory which you must then
+add to your Delphi LibPath.
+
+Add "uses dbxopenodbc" to any unit in your application.
+This causes Delphi to compile dbxopenodbc statically into your application.
+
+
+DLL version (load dbxoodbc.dll dynamically at runtime)
+------------------------------------------------------
+
+What to do
+----------
+Copy dbxoodbc.dll to your executable directory, a directory in your PATH.
+
+If you want different options (see defines in dbxopenodbc.pas source),
+open project dbxoodbc.dpr, make the required changes, and rebuild to create
+a new dbxoodbc.dll.
+
+
+Design time
+-----------
+At design time, Delphi cannot use the source code version of dbxopenodbc.
+To connect at design time, you must have dbxoodbc.dll in your path.
+
+
+Multiple DbExpress drivers
+--------------------------
+If you want to load more than one driver, or want to decide which driver to load
+at runtime, you cannot use static linking at all, since if you statically link
+the static driver will always take precedence over any dynamically loaded driver.
+In this case you have to use the DLL version and must   load dynamically at runtime.
+
+
+TSQLConnection settings for Dbxoodbc
+------------------------------------
+
+Simple method
+-------------
+
+  Set TSQLConnection properties in the object inspector before you connect
+
+  .LibaryName = dbxoodbc.dll (must be fully qualified if not on the search path)
+  .GetDriverFunc = getSQLDriverODBC (NB this is case-sensitive)
+  .VendorLib = ODBC32.DLL
+  .Params - As described dbxconnections.ini below - Database is required, others optional
+
+(.LibraryName is required, but is actually ignored if you compile DbxOpenOdbc.pas statically)
+
+
+Long method
+-----------
+This method adds driver and connection to the list of known drivers and connections;
+This makes it easier to change drivers by selecting TSQLConnection.DriverName and     TSQLConnection.ConnectionName drop-down in the Object Inspector for TSQLConnection.
+
+  1. Retrieve DbExpress INI file names from registry
+     '\Software\Borland\DBExpress' Value 'Driver Registry File'
+     (The default ini file names will be:
+      C:\Program Files\Common Files\Borland Shared\DBExpress\dbxdrivers.ini)
+      C:\Program Files\Common Files\Borland Shared\DBExpress\dbxconnections.ini)
+
+  2. In dbxdrivers.ini file
+     (see sample dbxdrivers.ini in this directory)
+
+  a. Add line to '[INSTALLEDDRIVERS]' section
+       drivername=1 (eg 'Dbx Open Odbc Driver=1') (The driver name can be any name you like)
+
+  b. Add new [drivername] section ie [Dbx Open Odbc Driver], with following 3 lines
+       LibraryName=dbxoodbc.dll        (Not case-sensitive in Windows)
+       GetDriverFunc=getSQLDriverODBC  (NB This is case-sensitive, even in Windows)
+       VendorLib=ODBC32.DLL
+
+  3. In dbxconnections.ini file
+     (see sample dbxconnections.ini in this directory)
+
+  a. Add '[ConnectionName]' section with following 4 lines
+       DriverName=Dbx Open Odbc Driver (or whatever you called it in dbxdrivers.ini)
+       Database=ODBC DSN name, or ODBC connection string, or ? for Driver Prompt
+       User_Name=user name (this can be ommitted)
+       Password=password (this can be ommitted)
+
+  b. You can have as many different [ConnectionName] sections as you like, so
+     you can pre-configure several ODBC connection settings.
+
+
+How to specify ODBC DSN (Data Source Name)
+------------------------------------------
+
+Edit TSQLConnection.Params in the Object inspector (or set in code)
+
+Database is the ODBC DSN name (must be already set up using Windows or Linux ODBC admin)
+
+Example -
+TSQLConnection.Params
+   Database:   'ODBCDSN'
+   User_Name:  'USER'
+   Password:   'SECRET'
+
+
+Alternatively, you can specify Database as the complete ODBC connect string
+
+Examples using complete ODBC connect string -
+   Database:   'DSN=Example;UID=USER;PWD=SECRET'
+   Database:   'DSN=Example;DB=MyDB;HOSTNAME=MyHost;TIMEOUT=10;UID=USER;PWD=SECRET''
+   Database:   'FILEDSN=FileDsnExample'
+   Database:   'DRIVER=Microsoft Access Driver (*.mdb);DBQ=c:\work\odbctest\odbctest.mdb'
+
+Alternatively, you can specify Database as '?'
+The driver will then prompt for the connect parameters when you connect.
+
+Example -
+   Database:   '?'
+
+
+Extra Dbxopenodbc options in Connect string
+-------------------------------------------
+As well as the standard ODbc connect parameters, you can specify
+options private to DbxOpenOdbc in the Database connect string.
+These options are stripped out before connect string is passed to Odbc.
+
+DbxOpenOdbc options (and their default settings if not specified)
+-----------------------------------------------------------------
+
+Boolean options - Specify 0, 1 or X for default
+
+ coMetaData=1;
+   Normally, we query the ODBC driver to check if it supports metadata.
+   When MetaData=0, we will never ask for metadata.
+   You may want to do this if asking for metadata hurts performance,
+   or if a particular ODBC driver has bugs in the metadata handling.
+ coSchemaFlt=0; (default=1 for Oracle)
+   When 0 catalog entries for all schemas (owners) are passed back to SqlExpress.
+   Sometimes this can hit performance, particularly if you
+   have many tables in the catalog. When this option is 1, we only pass back
+   objects where schema (owner) matches the SchemaName connection option (which
+   DbExpress automatally sets to be the User_Name of the connection).
+ coTrimChar=0;
+   Applies to FIXED LENGTH string fields only.
+   When =0, we pass fixed length strings back to DbExpress unchanged;
+   Normally the DBMS pads strings that are shorter than the defined length with spaces,
+   Sometimes this is undesirable (eg, for CHAR(5) you store "Hi", but get retrieve "Hi   ")
+   When =1, we strip off trailing spaces from fixed length strings.
+ coMapInt64ToBcd=1;
+   When 1, Int64 is mapped to BCD. (This is the way Borland DbExpress drivers behave
+   since DbExpress does not natively support the Int64 field type).
+ coMapSmallBcdToNative=0;
+   When 1, 4-digit integer BCD fields are mapped to Int16,
+   9-digit integer BCD fields are mapped to Int32, and other BCD (decimal) fields
+   with 10 or fewer signficant digits are mapped to Double.
+   (BCD fields with 11 or more digits stay as BCD).
+ coCatalog=1;  (default =0 for Informix, SQLLite, ThinkSQL)
+   ("Catalog" is the ODBC term for Database name, eg "Northwind" in MS SqlServer).
+   Normally, we check if the ODBC driver supports Catalog.
+   When 1, we pass back the name of the catalog to DbExpress when requested.
+   Sometimes the driver incorrectly indicates catalog support, or sometimes including
+   catalog info can be cumbersome, so set this option to 0 to prevent Catalog info.
+ coIgnoreUnkFldType=0;   (default=1 for Informix)
+   When 0, dbxoodbc will raise an exception if it fetches an unknown field type
+   When 1, any unkown field types will be ignored
+ coMapCharAsBDE=0;
+   When 1, String fields > 255 chars are passed back to DbExpress as string blobs.
+ coEmptyStrParam=1;
+   When 1, empty (ie string of zero length) are allowed.
+   However. some ODBC drivers do not correctly handle string with zero length.
+   For such drivers it is necessary to replace a zero-length string with null,
+   and we will do this automatically if EmptyStrParam=0
+ coMixedFetch=0;
+   When 1, enable Block Cursors even when fetching large fields
+ coEnableBCD=1
+   When=0, BCD fields are mapped as Float (this is how BDE behaves)
+ coMaxBCD=0
+   When 1, BCD fields of any length are mapped as 32 significant digits.
+   This is to handle cases where the ODBC driver returns wrong information.
+
+Integer options
+ coBlobChunkSize=40960;
+ coNetPacketSize=4096;
+
+N.B. Default settings listed above might change in the future
+
+
+Edward Benson
+2003-12-11

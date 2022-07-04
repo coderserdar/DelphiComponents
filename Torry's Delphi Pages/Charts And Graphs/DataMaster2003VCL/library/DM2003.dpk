@@ -1,0 +1,63 @@
+///////////////////////////////////////
+//        Data Master 2003           //
+//   Copyright (c) 1993-2003 RRR     //
+///////////////////////////////////////
+
+package DM2003;
+
+{$R *.res}
+{$R 'DM2003.DCR'}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS ON}
+{$RANGECHECKS ON}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'DM2003 VCL components'}
+{$IMPLICITBUILD OFF}
+
+requires
+  rtl,
+  vcl,
+  vclie,
+  designide,
+  vclx,
+  VclSmp,
+  vclactnband;
+
+{%ToDo 'DM2003.todo'}
+
+contains
+  DMWebBrowser in 'DMWebBrowser.pas',
+  DMMemo in 'DMMemo.pas',
+  DMUserAction in 'DMUserAction.pas',
+  DMUserActionEditor in 'DMUserActionEditor.pas',
+  DMSpeedButton in 'DMSpeedButton.pas',
+  DMContainer in 'DMContainer.pas',
+  DMWorksheet in 'DMWorksheet.pas',
+  DMPlot in 'DMPlot.pas',
+  DMFloatEdit in 'DMFloatEdit.pas',
+  DMPlotEdit in 'DMPlotEdit.pas',
+  DMComboBox in 'DMComboBox.pas',
+  TextDlg in 'TextDlg.pas' {TextForm},
+  AxisDlg in 'AxisDlg.pas' {AxisPropsForm},
+  SerieDlg in 'SerieDlg.pas' {SeriePropsForm},
+  HTextDlg in 'HTextDlg.pas' {HTMLTextForm},
+  DMHTMLText in 'DMHTMLText.pas';
+
+end.

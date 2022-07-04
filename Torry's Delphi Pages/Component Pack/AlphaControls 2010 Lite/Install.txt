@@ -1,0 +1,52 @@
+Installation notes
+
+--------------------------------------------------------------------------------
+The following compilers are supported by the AlphaControls:
+Delphi 5/6/7
+Delphi 2005/2006/2007/2009/2010/XE
+C++ Builder 6/2006/2007/2009/2010/XE
+
+--------------------------------------------------------------------------------
+
+If you have a previous version of the AlphaControls installed, you must remove 
+it completely before installing this version. To remove a previous installation,
+proceed as follows.
+ 
+To remove the AlphaControls:
+1. Close the IDE
+2. Browse to the folder where your bpl and dcp files are located (default is 
+$(DELPHI)\Projects\Bpl for Delphi, $(BCB)\Projects\Bpl for C++ Builder). 
+3. Delete all of the files related to AlphaControls (acnt*.*)
+--------------------------------------------------------------------------------
+
+Install for Delphi :
+
+1. Start by unpacking the acnt*.zip files into a folder of your own choice.
+2. This directory must be registered in system search path. And add, (if need) 
+AlphaControls directory in Delphi (Tools->Environment Options->Library->Library 
+Path).
+3. Use "File\Open..." menu item of Delphi IDE to open the AlphaControls 
+run-time package acntX_r.dpk (x - version of Delphi). In the "Package..." 
+window click "Compile" button to compile run-time library.
+4. Use "File\Open..." menu item of Delphi IDE to open the AlphaControls 
+design-time package acntX.dpk. In the "Package..." window click "Install" 
+button to install the library.
+5. DB-aware components users can install AlphaDB pack by copying AlphaDB files 
+to AlphaControls directory and AlphaDB.dpk file installing.
+
+Install for C++ Builder :
+
+1. Start by unpacking the acnt*.zip files into a folder of your own choice.
+
+2. This directory must be registered in system search path. And add (if need) 
+AlphaControls directory in C++ Builder paths and projects Include & Library paths.
+
+3. Open acnt*_R.bpk file or acnt*_R.cbproj (for RAD studio). 
+In RAD studio open Project/Options/Paths and check this page, 
+"Intermediate output" option must be empty!
+
+4. Compile it ("Make", not "Build"!) and save all.
+
+5. Open acnt*.bpk or acnt*.cbproj (for RAD studio) file and Install, it and save all.
+In RAD studio open Project/Options/Paths and check this page, 
+"Intermediate output" option must be empty!

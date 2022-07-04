@@ -1,0 +1,184 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!-- C++Builder XML Project -->
+<PROJECT>
+  <MACROS>
+    <VERSION value="BCB.06.00"/>
+    <PROJECT value="nco865.bpl"/>
+    <OBJFILES value="nco865.obj NCOciDB.obj NCOci.obj NCOciErrorDlg.obj NCOciMsg.obj 
+      NCOciWrapper.obj NCOciBuff.obj NCOciLoginDlg.obj NCOciParams.obj 
+      NCOciDM.obj NCOciUpdateSQL.obj NCOciFilter.obj NCOciReg.obj 
+      NCOciBreakDlg.obj NCOciUtil.obj NCSQLMon.obj NCOciPLSQLGenSetupDlg.obj 
+      NCOciPLSQLGen.obj NCOciCompNamer.obj NCOciCompNamerSetupDlg.obj"/>
+    <RESFILES value="nco865.res"/>
+    <IDLFILES value=""/>
+    <IDLGENFILES value=""/>
+    <DEFFILE value=""/>
+    <RESDEPEN value="$(RESFILES) NCOciErrorDlg.dfm NCOciLoginDlg.dfm NCOciDM.dfm 
+      NCOciBreakDlg.dfm NCOciPLSQLGenSetupDlg.dfm NCOciCompNamerSetupDlg.dfm"/>
+    <LIBFILES value=""/>
+    <LIBRARIES value="madShell_.lib madSecurity_.lib madCodeHook_.lib madKernel_.lib 
+      madRemote_.lib madDisAsm_.lib madBasic_.lib teeqr.lib soaprtl.lib 
+      dsnapcrba.lib visualclx.lib indy.lib ibxpress.lib dbxcds.lib cds.lib 
+      bdecds.lib adortl.lib websnap.lib dsnapcon.lib webdsnap.lib vclie.lib 
+      dbexpress.lib inetdbxpress.lib inetdbbde.lib xmlrtl.lib dclocx.lib 
+      inet.lib inetdb.lib nmfast.lib dss.lib tee.lib teedb.lib teeui.lib qrpt.lib 
+      vcldbx.lib ibsmp.lib bdertl.lib dsnap.lib vcljpg.lib vclx.lib"/>
+    <SPARELIBS value="rtl.lib vcl.lib vclx.lib vcljpg.lib dsnap.lib dbrtl.lib vcldb.lib 
+      bdertl.lib bcbsmp.lib ibsmp.lib vcldbx.lib qrpt.lib teeui.lib teedb.lib 
+      tee.lib dss.lib nmfast.lib inetdb.lib inet.lib dclocx.lib dcldb.lib 
+      xmlrtl.lib inetdbbde.lib inetdbxpress.lib dbexpress.lib vclie.lib 
+      webdsnap.lib dsnapcon.lib websnap.lib adortl.lib bdecds.lib cds.lib 
+      dbxcds.lib ibxpress.lib indy.lib visualclx.lib dsnapcrba.lib soaprtl.lib 
+      teeqr.lib madBasic_.lib madDisAsm_.lib madRemote_.lib madKernel_.lib 
+      madCodeHook_.lib madSecurity_.lib madShell_.lib"/>
+    <PACKAGES value="rtl.bpi vcl.bpi dbrtl.bpi vcldb.bpi bcbsmp.bpi dcldb.bpi designide.bpi"/>
+    <PATHCPP value=".;"/>
+    <PATHPAS value=".;"/>
+    <PATHRC value=".;"/>
+    <PATHASM value=".;"/>
+    <DEBUGLIBPATH value="$(BCB)\lib\debug"/>
+    <RELEASELIBPATH value="$(BCB)\lib\release"/>
+    <LINKER value="ilink32"/>
+    <USERDEFINES value=""/>
+    <SYSDEFINES value="_RTLDLL;NO_STRICT;_VIS_NOLIB;USEPACKAGES"/>
+    <MAINSOURCE value="nco865.cpp"/>
+    <INCLUDEPATH value="NCOCI\SOURCE;$(BCB)\include;$(BCB)\include\vcl;u:\vcl\madCollection\madBasic\BCB6;u:\vcl\madCollection\madDisAsm\BCB6;u:\vcl\madCollection\madExcept\BCB6;u:\vcl\madCollection\madRemote\BCB6;u:\vcl\madCollection\madKernel\BCB6;u:\vcl\madCollection\madCodeHook\BCB6;u:\vcl\madCollection\madSecurity\BCB6;u:\vcl\madCollection\madShell\BCB6"/>
+    <LIBPATH value="NCOCI\SOURCE;$(BCB)\lib\obj;$(BCB)\lib;$(BCB)\Source\ToolsAPI;u:\vcl\madCollection\madBasic\BCB6;u:\vcl\madCollection\madDisAsm\BCB6;u:\vcl\madCollection\madExcept\BCB6;u:\vcl\madCollection\madRemote\BCB6;u:\vcl\madCollection\madKernel\BCB6;u:\vcl\madCollection\madCodeHook\BCB6;u:\vcl\madCollection\madSecurity\BCB6;u:\vcl\madCollection\madShell\BCB6"/>
+    <WARNINGS value="-w-par -w-8027 -w-8026"/>
+    <WARNOPTSTR value=""/>
+    <OTHERFILES value=""/>
+  </MACROS>
+  <OPTIONS>
+    <IDLCFLAGS value="-src_suffix cpp -INCOCI\SOURCE -I$(BCB)\include -I$(BCB)\include\vcl 
+      -Iu:\vcl\madCollection\madBasic\BCB6 -Iu:\vcl\madCollection\madDisAsm\BCB6 
+      -Iu:\vcl\madCollection\madExcept\BCB6 
+      -Iu:\vcl\madCollection\madRemote\BCB6 -Iu:\vcl\madCollection\madKernel\BCB6 
+      -Iu:\vcl\madCollection\madCodeHook\BCB6 
+      -Iu:\vcl\madCollection\madSecurity\BCB6 
+      -Iu:\vcl\madCollection\madShell\BCB6 -boa"/>
+    <CFLAG1 value="-O2 -H=c:\PROGRA~1\borland\CBUILD~1\lib\vcl60.csm -Hc -Vx -Ve -X- -r- -a8 
+      -5 -b- -k -vi -c -tWM"/>
+    <PFLAGS value="-$YD -$W -$O- -$A8 -v -JPHNE -M -LUDesignIde -Ldcldb60"/>
+    <RFLAGS value=""/>
+    <AFLAGS value="/mx /w2 /zd"/>
+    <LFLAGS value="-D&quot;NC OCI8 V 1.0.3 for BCB6&quot; -aa -Tpp -x -Gn -Gl -Gi -v"/>
+    <OTHERFILES value=""/>
+  </OPTIONS>
+  <LINKER>
+    <ALLOBJ value="c0pkg32.obj $(PACKAGES) Memmgr.Lib sysinit.obj $(OBJFILES)"/>
+    <ALLRES value="$(RESFILES)"/>
+    <ALLLIB value="$(LIBFILES) $(LIBRARIES) import32.lib cp32mti.lib"/>
+    <OTHERFILES value=""/>
+  </LINKER>
+  <FILELIST>
+      <FILE FILENAME="nco865.cpp" FORMNAME="" UNITNAME="nco865" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="nco865.res" FORMNAME="" UNITNAME="nco865" CONTAINERID="ResTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="NCOciDB.pas" FORMNAME="" UNITNAME="NCOciDB" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="NCOci.pas" FORMNAME="" UNITNAME="NCOci" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="NCOciErrorDlg.pas" FORMNAME="NCOciErrorFrm" UNITNAME="Ncocierrordlg" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="NCOciMsg.pas" FORMNAME="" UNITNAME="NCOciMsg" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="NCOciWrapper.pas" FORMNAME="" UNITNAME="NCOciWrapper" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="NCOciBuff.pas" FORMNAME="" UNITNAME="NCOciBuff" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="NCOciLoginDlg.pas" FORMNAME="NCOciLoginFrm" UNITNAME="Ncocilogindlg" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="NCOciParams.pas" FORMNAME="" UNITNAME="NCOciParams" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="NCOciDM.pas" FORMNAME="OCIDM" UNITNAME="Ncocidm" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="NCOciUpdateSQL.pas" FORMNAME="" UNITNAME="NCOciUpdateSQL" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="NCOciFilter.pas" FORMNAME="" UNITNAME="NCOciFilter" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="NCOciReg.pas" FORMNAME="" UNITNAME="NCOciReg" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="NCOciBreakDlg.pas" FORMNAME="NCOciBreakFrm" UNITNAME="Ncocibreakdlg" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="NCOciUtil.pas" FORMNAME="" UNITNAME="NCOciUtil" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="NCSQLMon.pas" FORMNAME="" UNITNAME="NCSQLMon" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="NCOciPLSQLGenSetupDlg.pas" FORMNAME="NCOciPLSQLGenSetupFrm" UNITNAME="Ncociplsqlgensetupdlf" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="NCOciPLSQLGen.pas" FORMNAME="" UNITNAME="NCOciPLSQLGen" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="NCOciCompNamer.pas" FORMNAME="" UNITNAME="NCOciCompNamer" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="NCOciCompNamerSetupDlg.pas" FORMNAME="OciCompNamerSetupFrm" UNITNAME="Ncocicompnamersetupdlg" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="C:\Program Files\Borland\CBuilder6\Lib\rtl.bpi" FORMNAME="" UNITNAME="rtl" CONTAINERID="BPITool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="C:\Program Files\Borland\CBuilder6\Lib\vcl.bpi" FORMNAME="" UNITNAME="vcl" CONTAINERID="BPITool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="C:\Program Files\Borland\CBuilder6\Lib\dbrtl.bpi" FORMNAME="" UNITNAME="dbrtl" CONTAINERID="BPITool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="C:\Program Files\Borland\CBuilder6\Lib\vcldb.bpi" FORMNAME="" UNITNAME="vcldb" CONTAINERID="BPITool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="C:\Program Files\Borland\CBuilder6\Lib\bcbsmp.bpi" FORMNAME="" UNITNAME="bcbsmp" CONTAINERID="BPITool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="C:\Program Files\Borland\CBuilder6\Lib\dcldb.bpi" FORMNAME="" UNITNAME="dcldb" CONTAINERID="BPITool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="C:\Program Files\Borland\CBuilder6\Lib\designide.bpi" FORMNAME="" UNITNAME="designide" CONTAINERID="BPITool" DESIGNCLASS="" LOCALCOMMAND=""/>
+  </FILELIST>
+  <BUILDTOOLS>
+  </BUILDTOOLS>
+
+  <IDEOPTIONS>
+[Version Info]
+IncludeVerInfo=1
+AutoIncBuild=0
+MajorVer=1
+MinorVer=0
+Release=3
+Build=81
+Debug=0
+PreRelease=0
+Special=0
+Private=0
+DLL=0
+Locale=1049
+CodePage=1251
+
+[Version Info Keys]
+CompanyName=Arefiev Dmitry
+FileDescription=NC OCI8 run time &amp; design time package
+FileVersion=1.0.3.81
+InternalName==:-()))
+LegalCopyright=(c) 1999-2004, Dmitry Arefiev
+LegalTrademarks=
+OriginalFilename=NCO865.BPL
+ProductName=NC OCI8
+ProductVersion=1.0.3
+Comments=EMail: darefiev@gs-soft.ru
+
+[Excluded Packages]
+U:\GS-Soft\SAPx\gsSAPxRFCbcb6.bpl=gs-soft SAPx RFC components
+U:\DA-Soft\NCOCI8\Source\nco865.bpl=NC OCI8 V 1.0.3 for BCB6
+
+[HistoryLists\hlIncludePath]
+Count=3
+Item0=NCOCI\SOURCE;$(BCB)\include;$(BCB)\include\vcl;u:\vcl\madCollection\madBasic\BCB6;u:\vcl\madCollection\madDisAsm\BCB6;u:\vcl\madCollection\madExcept\BCB6;u:\vcl\madCollection\madRemote\BCB6;u:\vcl\madCollection\madKernel\BCB6;u:\vcl\madCollection\madCodeHook\BCB6;u:\vcl\madCollection\madSecurity\BCB6;u:\vcl\madCollection\madShell\BCB6;u:\vcl\madCollection\madBasic\BCB6;u:\vcl\madCollection\madDisAsm\BCB6;u:\vcl\madCollection\madExcept\BCB6;u:\vcl\madCollection\madRemote\BCB6;u:\vcl\madCollection\madKernel\BCB6;u:\vcl\madCollection\madCodeHook\BCB6;u:\vcl\madCollection\madSecurity\BCB6;u:\vcl\madCollection\madShell\BCB6
+Item1=NCOCI\SOURCE;$(BCB)\include;$(BCB)\include\vcl;u:\vcl\madCollection\madBasic\BCB6;u:\vcl\madCollection\madDisAsm\BCB6;u:\vcl\madCollection\madExcept\BCB6;u:\vcl\madCollection\madRemote\BCB6;u:\vcl\madCollection\madKernel\BCB6;u:\vcl\madCollection\madCodeHook\BCB6;u:\vcl\madCollection\madSecurity\BCB6;u:\vcl\madCollection\madShell\BCB6
+Item2=NCOCI\SOURCE;$(BCB)\include;$(BCB)\include\vcl
+
+[HistoryLists\hlLibraryPath]
+Count=4
+Item0=NCOCI\SOURCE;$(BCB)\lib\obj;$(BCB)\lib;$(BCB)\Source\ToolsAPI;u:\vcl\madCollection\madBasic\BCB6;u:\vcl\madCollection\madDisAsm\BCB6;u:\vcl\madCollection\madExcept\BCB6;u:\vcl\madCollection\madRemote\BCB6;u:\vcl\madCollection\madKernel\BCB6;u:\vcl\madCollection\madCodeHook\BCB6;u:\vcl\madCollection\madSecurity\BCB6;u:\vcl\madCollection\madShell\BCB6;u:\vcl\madCollection\madBasic\BCB6;u:\vcl\madCollection\madDisAsm\BCB6;u:\vcl\madCollection\madExcept\BCB6;u:\vcl\madCollection\madRemote\BCB6;u:\vcl\madCollection\madKernel\BCB6;u:\vcl\madCollection\madCodeHook\BCB6;u:\vcl\madCollection\madSecurity\BCB6;u:\vcl\madCollection\madShell\BCB6
+Item1=NCOCI\SOURCE;$(BCB)\lib\obj;$(BCB)\lib;$(BCB)\Source\ToolsAPI;u:\vcl\madCollection\madBasic\BCB6;u:\vcl\madCollection\madDisAsm\BCB6;u:\vcl\madCollection\madExcept\BCB6;u:\vcl\madCollection\madRemote\BCB6;u:\vcl\madCollection\madKernel\BCB6;u:\vcl\madCollection\madCodeHook\BCB6;u:\vcl\madCollection\madSecurity\BCB6;u:\vcl\madCollection\madShell\BCB6
+Item2=NCOCI\SOURCE;$(BCB)\lib\obj;$(BCB)\lib;$(BCB)\Source\ToolsAPI
+Item3=NCOCI\SOURCE;$(BCB)\lib\obj;$(BCB)\lib
+
+[HistoryLists\hlDebugSourcePath]
+Count=1
+Item0=$(BCB)\source\vcl
+
+[Debugging]
+DebugSourceDirs=$(BCB)\source\vcl
+
+[Parameters]
+RunParams=
+Launcher=
+UseLauncher=0
+DebugCWD=
+HostApplication=
+RemoteHost=
+RemotePath=
+RemoteLauncher=
+RemoteCWD=
+RemoteDebug=0
+
+[Compiler]
+ShowInfoMsgs=0
+LinkDebugVcl=0
+
+[Language]
+ActiveLang=
+ProjectLang=
+RootDir=
+
+[Linker]
+LibPrefix=
+LibSuffix=
+LibVersion=
+  </IDEOPTIONS>
+</PROJECT>

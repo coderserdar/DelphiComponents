@@ -1,0 +1,47 @@
+package dpkDSMenus;
+
+{$R *.res}
+{$R '..\Source\DsDockSite.dcr'}
+{$R '..\Source\DsToolBar.dcr'}
+{$R '..\Source\DsManager.dcr'}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'DS Menus'}
+{$IMPLICITBUILD OFF}
+
+requires
+  rtl,
+  vcl,
+  designide,
+  vclactnband,
+  vclx;
+
+contains
+  DsDockSite in '..\Source\DsDockSite.pas',
+  DsToolBar in '..\Source\DsToolBar.pas',
+  DsToolBarStyler in '..\Source\DsToolBarStyler.pas',
+  DsToolEditor in '..\Source\DsToolEditor.pas',
+  DsBandRow in '..\Source\DsBandRow.pas',
+  DsBand in '..\Source\DsBand.pas',
+  DsManager in '..\Source\DsManager.pas';
+
+end.

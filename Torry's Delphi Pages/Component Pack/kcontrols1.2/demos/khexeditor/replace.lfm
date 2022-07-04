@@ -1,0 +1,82 @@
+inherited ReplaceForm: TReplaceForm
+  Left = 1582
+  Height = 269
+  Top = 808
+  Caption = 'Replace Text'
+  ClientHeight = 269
+  OnShow = FormShow
+  inherited CBTextToFind: TComboBox
+    Left = 80
+    Width = 241
+    OnChange = CBTextToFindChange
+  end
+  inherited GBOptions: TGroupBox
+    Height = 85
+    Top = 72
+    ClientHeight = 67
+    TabOrder = 2
+    object CBPromptOnReplace: TCheckBox[2]
+      Left = 8
+      Height = 17
+      Top = 44
+      Width = 105
+      Caption = '&Prompt on replace'
+      Checked = True
+      State = cbChecked
+      TabOrder = 2
+    end
+  end
+  inherited BUFind: TButton
+    Left = 60
+    Top = 236
+    Caption = '&Replace'
+    OnClick = CBTextToReplaceClick
+    TabOrder = 6
+  end
+  inherited BUCancel: TButton
+    Left = 244
+    Top = 236
+    TabOrder = 8
+  end
+  inherited GBDirection: TGroupBox
+    Height = 65
+    Top = 72
+    ClientHeight = 47
+    TabOrder = 3
+  end
+  inherited GBScope: TGroupBox
+    Top = 164
+    TabOrder = 4
+  end
+  inherited GBOrigin: TGroupBox
+    Top = 164
+    TabOrder = 5
+  end
+  object LBReplaceText: TLabel[8]
+    Left = 8
+    Height = 14
+    Top = 44
+    Width = 66
+    Caption = 'Rep&lace with:'
+    FocusControl = CBTextToReplace
+    ParentColor = False
+  end
+  object CBTextToReplace: TComboBox[9]
+    Left = 80
+    Height = 21
+    Top = 40
+    Width = 241
+    ItemHeight = 13
+    OnSelect = CBTextToReplaceClick
+    TabOrder = 1
+  end
+  object BUReplaceAll: TButton[10]
+    Left = 144
+    Height = 25
+    Top = 236
+    Width = 89
+    Caption = 'Replace &All'
+    ModalResult = 10
+    TabOrder = 7
+  end
+end

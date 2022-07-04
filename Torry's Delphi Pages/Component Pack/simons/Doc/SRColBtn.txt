@@ -1,0 +1,118 @@
+TSRColorButton (C)opyright 2005   Version 1.34
+Autor : Simon Reinhardt
+eMail : reinhardt@picsoft.de
+Internet : http://www.picsoft.de
+
+  Diese Komponente ist eine TSpeedButton-ähnliche Button-Komponente,
+  die eine Color-Eigenschaft für farbige Buttons bietet. Außerdem
+  kann ein Farbverlauf auf die Button-Oberfläche gezeichnet werden
+  und es gibt eine per Timer gesteuerte automatische Click-Wiederholung.
+
+  Die Komponente ist abgeleitet von TGraphicControl und sie ist Public
+  Domain, das Urheberrecht liegt aber beim Autor.
+
+  Vielen Dank an Markus Pinl für die Fehlerkorrektur und die Beisteuerung
+  der BorderColor-Eigenschaft und an Robert Rossmair für die rrColors-Unit!
+
+
+Dateiumfang:
+------------
+
+SRColBtn.txt 	- Diese Datei
+SRColBtn.pas	- Quelltext der Komponente
+SRColBtn.d16	- Resourcendatei der 16Bit-Komponente
+SRColBtn.d32	- Resourcendatei der 32Bit-Komponente
+SRDefine.inc
+rr.inc          - Includedateien für die Komponente
+rrColors.pas	- Funktionen zur RGB-HSL-Umrechnung
+
+
+Installation:
+-------------
+
+In Delphi 1:
+------------
+1. Alle Dateien in das Delphi-Komponenten-Verzeichnis entpacken.
+2. Menü Optionen : Komponente installieren
+3. Schaltfläche Hinzufügen / Durchsuchen
+4. Datei SRColBtn.pas im Delphi-Komponenten-Verzeichnis suchen und mit
+   OK bestätigen.
+5. Die Komponente erscheint in der Komponenten-Gruppe "Simon"
+
+In Delphi 2:
+------------
+1. Alle Dateien in das Delphi-Komponenten-Verzeichnis entpacken.
+2. Menü Komponente :  installieren
+3. Schaltfläche Hinzufügen / Durchsuchen
+4. Datei SRColBtn.pas im Delphi-Komponenten-Verzeichnis suchen und mit
+   OK bestätigen.
+5. Die Komponente erscheint in der Komponenten-Gruppe "Simon"
+
+Ab Delphi 3:
+------------
+1. Alle Dateien in das Delphi-Komponenten-Verzeichnis entpacken.
+2. Menü Komponente :  Komponente installieren
+3. Schaltfläche Durchsuchen (hinter dem Eingabefeld für den Unit-Namen)
+4. Datei SRColBtn.pas im Delphi-Komponenten-Verzeichnis suchen und mit
+   OK bestätigen.
+5. Die Rückfrage nach dem Neukompilieren des Packages bestätigen.
+6. Die Komponente erscheint in der Komponenten-Gruppe "Simon"
+
+
+Beschreibung:
+-------------
+
+Die Komponente funktioniert ähnlich der Delphi-Komponente 
+TSpeedButton. Im Gegensatz zu dieser Komponente kann SRColorButton 
+eine beliebige Farbe oder ein Farbverlauf zugewiesen werden. Außerdem
+gibt es eine per Timer gesteuerte automatische Click-Wiederholung. 
+Die Komponente besitzt folgende neue Eigenschaften:
+
+1. "AllowTimer"        - Wenn diese Eigenschaft auf "true" gesetzt wird, wird
+		   	 das OnClick-Ereignis zyklisch wiederholt, solange der
+		   	 Button gedrückt bleibt.
+2. "BevelWidth"        - Die Breite des "schrägen" Buttonrandes in Pixeln
+3. "BorderColor"       - Die Farbe der Umrandung (nur bei BorderStyle=bsSingle)
+4. "BorderStyle"       - 
+    bsFlat             : Der Button besitzt keine Umrandung
+    bsNormal	       : Der Button besitzt eine schattierte Umrandung wie TSpeedButton
+    bsSingle           : Der Button besitzt eine ein Pixel breite Umrandung der Farbe
+                   	 BorderColor
+5. "ChangeDirection"   - Gibt an, ob die Richtung eines Farbverlaufs bei gedrücktem
+		   	 Button umgekehrt wird.
+6. "Color"             - Die Farbe des Buttons. Die Farben des "beleuchteten" und des
+                   	 "unbeleuchteten" Randes werden aus dieser Farbe abgeleitet.
+7. "ContrastHighlight" - Kontrast zwischen beleuchteter Seite und der Buttonfarbe
+                         0: Kein Helligkeitsunterschied ..
+                         9: Maximaler Helligkeitsunterschied
+8. "ContrastShadow"    - Kontrast zwischen unbeleuchteter Seite und der Buttonfarbe
+                         0: Kein Helligkeitsunterschied ..
+                         9: Maximaler Helligkeitsunterschied
+9. "GradientDirection" - Gibt die Richtung eines Farbverlaufs an
+10."GradientStyle      -
+    gsNone	       : Es wird keine Farbverlauf gezeichnet, der Button hat die
+			 einheitliche Farbe der Eigenschaft "Color".
+    gsHorizontal       : Der Verlauf beginnt hell am linken oder rechten Rand der 
+			 Zeichenfläche und geht dann horizontal in eine dunklere
+			 Schattierung der Farbe "Color" über.
+    gsPyramid	       : Der Verlauf beginnt hell in der linken oberen Ecke und 
+                         geht dann in einer Kreisbewegung um den Mittelpunkt der 
+                         Zeichenfläche in eine dunklere Schattierung der Farbe 
+                         "Color" über.
+   gsVertical	       : Der Verlauf beginnt hell am oberen oder unteren Rand der 
+			 Zeichenfläche und geht dann vertikal in eine dunklere
+			 Schattierung der Farbe "Color" über.
+11."Grouped"	       - Gibt an, ob der Button Bestandteil einer Gruppe ist, die
+			 sich gegenseitig auslösen. Der Index der Gruppe wird in
+                         der Eigenschaft "GroupIndex" angegeben. Die Eiegnschaft
+ 			 "AllowAllUp" bestimmt, ob immer eine Taste in einer Gruppe
+			 gedrückt sein muß oder nicht.
+12."TimerDelay"	       - Die Zeitverzögerung bis zur automatischen Wiederholung
+			 des OnClick-Ereignisses in Millisekunden 
+			 (nur bei "AllowTimer=true").
+13."TimerInterval"     - Das Zeitintervall der automatischen Wiederholung des
+			 OnClick-Ereignisses in Millisekunden 
+			 (nur bei "AllowTimer=true").
+
+Die Funktion der Komponente läßt sich außerdem im beigefügten Demo-Programm im 
+Ordner "Demo" sehen.

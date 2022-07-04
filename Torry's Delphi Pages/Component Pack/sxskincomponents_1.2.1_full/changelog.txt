@@ -1,0 +1,120 @@
+==========================================================
+        Change History of SXSkinComponents Project
+==========================================================
+
+--------- YOU WILL SEE SOON IN THE NEXT VERSIONS ---------
+-- (the most global changes are on the top of the list) --
+
+- New component: TSXSkinScrollBar
+- New component: TSXSkinMemo
+- New component: TSXSkinComboBox
+
+------------------ VERSIONS DESCRIPTION ------------------
+
+**********************************************************
+*** VERSION 1.2.1 (January 21, 2007)
+**********************************************************
+* - GDI resources leak fixed
+* - some memory leaks fixed
+* - fixed some small bugs
+**********************************************************
+
+**********************************************************
+*** VERSION 1.2.0 (January 14, 2007)
+**********************************************************
+* - TSXSkinUpDown component added
+* - TSXSkinSpinEdit component added
+* - optimized variable rectangles and regions parsing
+* - multimonitor support bug fixed
+* - fixed bug: form had been frozen on some mouse events
+* - small fixes in skin-files
+**********************************************************
+
+**********************************************************
+*** VERSION 1.1.0 (September 2, 2006)
+**********************************************************
+* - TSXSkinForm component added
+* - developed MSStyle-to-SXSkin Converter
+* - added new drawing Element - Style Element: can be used
+*   for nested General Styles drawing
+* - added new skin style type: Selective Skin Style
+* - added complete description of skin.ini-file
+* - Freeform Skin Demo added
+* - JPEG and PNG images with transparent color value can
+*   be used now for specifying regions (e.g. MouseCapture)
+* - fixed C++Builder 6 installation bug: changed all
+*   hyphens in files names to underline characters
+* - fixed Library paths in SXSkinComponents packages
+* - extended math interpreter (now can evaluate logical
+*   and comparison operations)
+* - some bugs fixed in Graphics32 library
+**********************************************************
+
+**********************************************************
+*** VERSION 1.0.5 (May 7, 2006)
+**********************************************************
+* - Delphi 7 package added
+* - added new component: TSXStoredSkin
+* - compressed skins support added (compressed skin is a
+*   *.zip-file with skin.sxs and grphic files inside)
+* - compressed skins can be stored in EXE-file of a
+*   skinnable application (component TSXStoredSkin used)
+* - skin "Internally Drawn" was added to the package, is
+*   used for the default drawing in the designer and is
+*   automatically included to all executables of projects
+* - significantly changed SXS file format, so old skin
+*   files (from 1.0.1 to 1.0.4) are not supported now
+* - improved the Template Project (zipped and stored
+*   skins support added)
+**********************************************************
+
+**********************************************************
+*** VERSION 1.0.4 (April 15, 2006)
+**********************************************************
+* - developed mouse capture engine based on CaptureMouseAt
+*   function and MouseCaptureRegion property of skin style
+* - created designer editor for SXSkinLibrary.SkinFile
+*   and SXSkinLibrary.SkinFile2 properties
+* - added new parameters of ImageElement: ResizeMode
+*   (None, Tile, Stretch), StretchFilter (Nearest, Linear,
+*   Spline, Mitchell, Lanczos), Resized Width/Height,
+*   Image Offset X/Y
+* - added new Skin Style Element: TEXT
+* - fixed bugs in Circle, CircleHFade and CircleVFade,
+*   renamed Circle* to Ellipse*, SetCircle to SetEllipse
+* - added WindowsXP themed controls manifest to fix
+*   TSXSkinEdit flickering bug
+* - fixed TSXSkinEdit caret flickering bug, but only for
+*   static background
+* - some small improvements
+* - fixed lots of small bug
+**********************************************************
+
+**********************************************************
+*** VERSION 1.0.3 (April 7, 2006)
+**********************************************************
+* - C++Builder 6 and 2006 packages added
+* - created Ini2Sxs skin file converter to convert files
+*   skin.ini to binary data format
+* - switched from Graphics32-1.8 to Graphics32-1.8.1
+**********************************************************
+
+**********************************************************
+*** VERSION 1.0.2 (April 4, 2006)
+**********************************************************
+* - added new component: TSXSkinPaintBox
+* - fixed property SXSkinEdit.Text processing bug
+* - added demo sources to the package
+**********************************************************
+
+**********************************************************
+*** VERSION 1.0.1 (March 31, 2006)
+**********************************************************
+* - First public release
+* - Now only Delphi 6, 7, 2005 and 2006 are supported
+* - Added a Template Project to the distribution package
+**********************************************************
+
+==========================================================
+ Copyright (C) 2006-2007, Alexey Sadovnikov
+==========================================================

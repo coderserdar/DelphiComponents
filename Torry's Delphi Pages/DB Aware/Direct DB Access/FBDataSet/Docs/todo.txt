@@ -1,0 +1,86 @@
+eng:
+1. options "wait for master scroll" in master-detail
+2. supprt boolean fields based on integer domain whith 'BOOLEAN' in name
+3. improove blob caches system to share caches beetween record, vs. inheritance caches
+4. improove blob stream with enhanced capability of memory allocation, or swapping (for safe work with large blobs) and capability 
+   work with stanalone blobe without full fetchig one (for huge blobs)
+
+rus:
+1. Реализовать опцию "wait for master scroll" мастер-детайл связках 2-х запросов
+2. Поддержка логических полей, основанных на целочисленных доменах с наименованием 'BOOLEAN'
+3. Доделать систему кеша блобов способностью разделять кеши между запясями вместо 
+  существующей - наседование.
+4. доделать типы Блоб-потоков с продвинутыми способностями по выделению памяти и 
+  свопингу (для безопасной работы с большими блобами) и способностью работать с кусками 
+  блоба без закачивания его целиком (для огромных блобов).
+
+6.
+property BeforeStartTransaction: TNotifyEvent; 
+property AfterStartTransaction: TNotifyEvent; 
+property BeforeEndTransaction: TEndTrEvent; 
+property AfterEndTransaction: TEndTrEvent; 
+property BeforeStartUpdateTransaction: TNotifyEvent; 
+property AfterStartUpdateTransaction: TNotifyEvent; 
+property BeforeEndUpdateTransaction: TEndTrEvent; 
+property AfterEndUpdateTransaction: TEndTrEvent; 
+
+7.
+
+
+8.
+У TpFIBDataSet добавлено новое событие OnApplyDefaultValue: TOnApplyDefaultValue, где 
+TOnApplyDefaultValue = procedure (DataSet: TDataSet; Field: TField; var Applied: boolean) of object;
+
+Обработчик события вызывается во время вставки новой записи, для каждого поля 
+имеющего непустой DefaultExpression. В обработчике вы можете самостоятельно обработать 
+DefaultExpression для ваших полей, если стандартная процедура обработки с ними не справляется. 
+Задайте значение Applied равным True, если вы самостоятельно обработали выражение. 
+В этом случае стандартная обработка производиться не будет.
+9.
+В FIBPlusTools добавлена возможность задавать умолчания для свойства TpFIBDataSet.DefaultFormats.
+
+11
+Теперь вызовы Before/AfterScroll при Locate
+
+а) при неуспешном Locate вообще не вызываются.
+б) при успешном на старой записи вызывается BeforeScroll, а на новой - AfterScroll 
+
+12
+ В свойство TpFIBDataSet.Options добавлена опция psSetEmptyStrToNull. 
+ При включении опции, у вновь создаваемых строковых полей этого датасета включается 
+ свойство EmptyStrToNull.
+13
+Добавлена новая декларация для метода OpenWP в TpFIBDataSet. 
+
+procedure OpenWP(const ParamNames:array of string;const ParamValues: array of Variant); overload;
+
+Новый вариант позволяет указывать названия параметров в переменной ParamNames. В переменной ParamValues необходимо передавать значения параметров.
+
+14
+ В TpFIBDataSet добавлены новые методы: 
+
+procedure ReOpenWP(const ParamValues: array of Variant); overload;
+procedure ReOpenWP(const ParamNames: array of string; const ParamValues: array of Variant); overload;
+procedure ReOpenWPS(const ParamSources: array of ISQLObject);
+
+Методы аналогичны OpenWP, OpenWPS, но предварительно закрывают TpFIBDataSet, если он был открыт.
+
+15
+Добавлен обработчик TpFIBDataSet.
+     
+     property AfterUpdateRecord: TFIBAfterUpdateRecordEvent read FAfterUpdateRecord
+     write FAfterUpdateRecord
+     где 
+     TFIBAfterUpdateRecordEvent = procedure(DataSet: TDataSet; UpdateKind: TUpdateKind;
+var Resume:boolean) of object;
+
+Событие происходит при работе методов ApplyUpdates и ApplyUpdToBase для каждой записи, 
+модификации которой отправляются на сервер. 
+Обработчик вызывается непосредственно ПОСЛЕ того, как успешно выполняется запрос на изменения.
+
+16
+В TpFIBDataSet добавлена опция poRefreshAfterDelete. Если опция включена, то после 
+Вызова метода Delete производится попытка Refresh только что удаленной записи. 
+Если попытка успешная (т.е. запись физически не была удалена), то запись не будет 
+помечаться в кэше как удаленная, и останется видимой.
+

@@ -1,0 +1,50 @@
+package fblD7;
+
+{$R *.res}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'Fblib - Firebird Library for Delphi 7'}
+{$IMPLICITBUILD OFF}
+
+requires
+  rtl;
+
+contains
+  iberror_h in 'iberror_h.pas',
+  FBLConst in 'FBLConst.pas',
+  FBLDatabase in 'FBLDatabase.pas',
+  FBLDsql in 'FBLDsql.pas',
+  FBLExcept in 'FBLExcept.pas',
+  FBLHtmlExport in 'FBLHtmlExport.pas',
+  FBLMetadata in 'FBLMetadata.pas',
+  FBLmixf in 'FBLmixf.pas',
+  FBLReg in 'FBLReg.pas',
+  FBLScript in 'FBLScript.pas',
+  FBLService in 'FBLService.pas',
+  FBLTableToSqlScriptExport in 'FBLTableToSqlScriptExport.pas',
+  FBLTextGridExport in 'FBLTextGridExport.pas',
+  FBLTransaction in 'FBLTransaction.pas',
+  ibase_h in 'ibase_h.pas',
+  FBLEvents in 'FBLEvents.pas',
+  FBLParamDsql in 'FBLParamDsql.pas';
+
+end.

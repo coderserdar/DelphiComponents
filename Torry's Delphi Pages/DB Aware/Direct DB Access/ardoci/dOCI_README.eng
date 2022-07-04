@@ -1,0 +1,257 @@
+
+DOCI 1.18
+==========
+
+
+Components are tested and good working with Delphi 4,5,6,7. 
+It should work under Delphi 3, however it was not checked.
+
+My contact e-mail: is lasersquard@yahoo.com 
+
+================================================================================
+
+============
+FEATURES !!!
+============
+
+- It does not require BDE! 
+  There is no problems with various BDE versions.
+- It can work with Oracle 7.3/8/8i using the client from Oracle 8/8i.
+- There is a powerful TDataSet descendant - TOraSQL. 
+  It implements all capabilities of TDataSet and adds new.
+- There is a complete implementation of ORACLE BLOB and CLOB column datatypes.
+- There is a capability for stored procedures execution.
+- There is a capability for PL/SQL code execution without stored procedures creating.
+- Number of records to be fetched from Oracle server per one network roundtrip can be customized 
+  (performance gain upon large tables).
+- There are fast and powerful memory tables (TMemoryDataSet, TAMemoryDataSet).
+- There are many nice components for working with dynamic arrays to store and handle all types 
+  of data. (search implemented using assembler, therefore is extremely fast!)
+
+ 
+
+CONTENTS
+ Introduction
+ License
+ Common description
+ Methods and Properties
+ Examples
+ Productivity tests
+
+
+
+Introduction
+------------
+
+Components were developed to get direct access to Oracle server from Delphi 4,5,6,7.
+
+They use standard OCI (Oracle Call Interface) library version 8/8i. 
+You can get access and to Oracle 7.3 server using Oracle 8/8i client.
+
+To use components you need Oracle client for Windows 9x/NT/2000 installed on your computer.
+
+The library maintains BLOB and CLOB datatypes.
+
+All recomendations and suggestions are welcome. 
+If you find a bug please drop me a letter. I will try to correct and send you a corrected version.
+
+If you want receive the newest version you can write me a letter.
+
+ My e-mail - lasersquard@yahoo.com
+ Web site  - DynamicArrays.narod.ru
+
+Cached updates and fields LargeInt are not implemented yet.
+If you need these features, send me a letter.
+
+
+COMMON DESCRIPTION
+------------------
+
+Currently the following datatypes are supported and can serve as parameters and table fields:
+   String,
+   Boolean,
+   Float,
+   Date,
+   Time,
+   DateTime,
+   Integer,
+   SmallInt,
+   Word,
+   Currency,
+   BLOB,
+   CLOB;
+ 
+  Float and Integer are used as is.
+  Boolean - as NUMBER(1) with 1 byte length. 0 = False, >0 = True.
+  String  - as array of char in memory of fixed length as field's size. 
+  Date    - as TTimeStamp.Date(integer) - amount of days  from 1.01.0001.
+  Time    - as TTimeStamp.Time(integer)
+  DateTime- as TTimeStamp.
+
+
+TOraDB -  establishes Oracle server connection, manages transactions. 
+          Other classes (such as TAOraSQL and TOraSQL) use this component to connect to the 
+          database. All OCI calls are concentrated inside this component.
+
+TAOraSQL - immediately makes OCI calls (SQL queries or parts of PL/SQL code). It is a fully 
+           functional component and can be used in case TDataSet compatibility is not necessary,
+           for example when we don't want to represent results in TDBGrid. You can retrieve an 
+           any row via record number as index. During one network roundtrip TAOraSQL fetches 
+           FetchCount number of records. 
+           When you work with large tables you should increase FetchCount property. By default 
+           FetchCount is 100 which corresponds middle sized tables. Method Open doesn't fetch 
+           any data. To retrieve data method ReadAll or OpenAll or ReadRecord should be called:
+            ReadAll - fetches all records returned by SQL statement.
+			OpenAll - combines Open and ReadAll. 
+			ReadRecord(RecordNum) - retrieves all records until the specified RecordNum.
+			                        Records are fetched by portions of FetchCount size.
+
+
+TOraSQL - is the wrapper over TAOraSQL for compatibility with TDataSet. It is quite similar 
+          to TQuery and TStoredProc standard components. You can provide SQL query statement 
+          and fields' definitions (at runtime and designtime). The usage of TOraSQL is similar 
+          to Delphi standard database components. By default, TOraSQL reads as many records as 
+          TDBGrid requires. To read more records call OpenAll, ReadAll or VGoto.
+            ReadAll - fetches all records returned by SQL statement.
+			OpenAll - combines Open and ReadAll. 
+			VGoto(RecordNum) - retrieves all records until the specified RecordNum.
+			                   Records are fetched by portions of FetchCount size.
+
+TAOraUpdateSQL - is an object providing INSERT, DELETE, UPDATE functionality. The respective 
+                 SQL statements can be generated automatically using standard SQL query editor 
+                 or set manually to the properties: DeleteSQL, InsertSQL, ModifySQL. 
+                 TAOraUpdateSQL must be linked to TOraSQL. 
+
+
+DOCI Files:
+
+DynamicArrays.pas - the set of classes to work with dynamic arrays that are used by many other 
+                    components. Also this unit can be employed solely as providing many powerful 
+                    features. 
+                         
+VirtualDataSet.pas - is descendant from TDataSet.
+
+DataSetQuery.pas - is descendant from TVirtualDataSet which implements 90% functionality of 
+                   backend components. TDataSetQuery class is very convenient for developers 
+                   as overriding some methods you can create good component for accessing any 
+                   data (for example - MemoryTable and OraSQL).
+
+OraDB.pas - includes TOraDB class as session manager. The analog in Delphi - TDatabase.
+
+AOraSQL.pas - includes TAOraSQL, TAOraField, TAOraParam which are used by TAOraSQL.
+
+OraSQL.pas  - includes the main component TOraSQL.
+
+OraDefines.pas - some constants and definitions for OCI calls.
+
+OraError.pas - includes class EOraError derived from Exception.
+
+
+
+
+INSTALLATION
+------------
+
+Open package dOCI6.dpk (dOCI5.dpk for Delphi 5 or dOCI7.dpk for Delphi 7), then press compile it
+and install. 
+These components should appear on "Data Access" page of Delphi components palette.
+That's all. 
+
+
+    
+Methods and Properties
+----------------------
+
+Below are the major methods and properties.
+
+TOraDB - session/transaction management(as TDatabase in Delphi)
+   Properties :
+     Active - open/close Oracle server connection
+     DBLogin, DBPassword - user name and password 
+     DBServer - SQL*Net8 connection string
+   Methods:
+    Open,Close - áonnect/disconnect.
+    StartTransaction,
+    CommitTransaction,
+    RollbackTransaction - transaction control
+
+  TOraSQL - queries to Oracle Server (descendant TDataSet)
+   Properies :
+     Database - TOraDB instance
+     SQL      - query text (as usual parameters begin from ':')
+     Params   - list of parameters. 
+     FetchCount - for SELECT - the number of records to be fetched per one network roundtrip.
+     Prepare  - perform preparation steps before SQL statement execution. 
+                Useful in case of multiple query execution with different parameters values. 
+                Not mandatory.
+     UnPrepare - cancels prepare call. 
+     
+    It is recommended to get access to data using the following methods:
+     GetFieldValue - get field value. Much faster than FieldByName('').As... but returns a wrong 
+                     value if a record being edited.
+     GetFieldHArray - get pointer on array of values for the specified field.
+     GetFieldNullHArray - get pointer on array of tags (boolean values that can be NULL or NOT NULL).
+     ReadAll - fetch all records to the client.
+     OpenAll - combines Open ad ReadAll calls.
+     VGoto(RecordNum) - fetch records until the specified.
+
+  TAOraUpdateSQL - queries to edit (update, delete, modify) data
+  The following three properties can contain a parts of PL/SQL code with variable and parameter
+  definitions (parameters should begin from ':') 
+    DeleteSQL - the SQL statement for delete data.
+    InsertSQL - the SQL statement for inserting data.
+    ModifySQL - the SQL statement for modify data.
+
+
+
+
+
+ Working with BLOBs:
+
+  If you work with TOraSQL you can use standard TDataSet methods to get access to BLOB fields.
+   
+  For writing BLOB data you must specify "FOR UPDATE" in SQL query. See ORACLE documentation 
+  for additional information.
+
+
+ TAOraSQL has some functions for direct access to BLOB fields:
+    GetLobLength - get the size (in bytes) of defined BLOB field.
+    ReadBlob     - read a piece of data from BLOB field to the local buffer variable.
+    WriteBlob    - write data from a buffer to BLOB field.
+    ReadBlobToStream - read all BLOB data into stream (TStream).
+    WriteBlobFromStream - write data from stream (TStream) to BLOB field.
+
+
+Examples
+--------
+
+Some very simple examples here.
+For more complex examples see Examples folder.
+
+  1.
+   Get cursor from StoredProc:
+
+    BEGIN :Result := GetData(12); END;
+   
+   Param Result has datatype ftCursor.
+
+  2.
+   For open SELECT queries you should call Open/Close, for other - ExecSQL. 
+
+   If you wish select some fields from one record of table(explicit query) you can use params:
+
+    BEGIN SELECT Name,Index INTO :Name,:Index FROM Table1 WHERE ID = 6; END; 
+
+   and get result as
+
+    OraSQL.ParamByName('Name').AsString;
+    OraSQL.ParamByName('Index').AsInteger;
+
+   This abit faster than  
+
+    SELECT Name,Index FROM Table1 WHERE ID = 6 
+
+
+
+ With best regards,
+    Andrey Romanchenko. lasersquard@yahoo.com, lasersquad@tut.by.

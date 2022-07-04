@@ -1,0 +1,69 @@
+Изменения от 03.11.2009 г.
+--------------------------------------------------------------------------------
+rxAppUtils.pas
+  - function StrToIniStr(const Str: string): string;
+    SizeOf(Buffer) заменено на Length(Buffer)
+  - function IniStrToStr(const Str: string): string;
+    SizeOf(Buffer) заменено на Length(Buffer)
+  - procedure IniDeleteKey(IniFile: TObject; const Section, Ident: string);
+    SizeOf(CSection) заменено на Length(CSection)
+    SizeOf(CIdent) заменено на Length(CIdent)
+    SizeOf(CFileName) заменено на Length(CFileName)
+rxCtrls.pas
+  - procedure TRxButtonGlyph.DrawButtonText(Canvas: TCanvas; const Caption: string;
+      TextBounds: TRect; State: TRxButtonState; Flags: Word);
+    SizeOf(CString) заменено на Length(CString)
+  - procedure TRxButtonGlyph.CalcButtonLayout(Canvas: TCanvas; const Client: TRect;
+      var Caption: string; Layout: TButtonLayout; Margin, Spacing: Integer;
+      PopupMark: Boolean; var GlyphPos: TPoint; var TextBounds: TRect; Flags: Word;
+      Images: TImageList; ImageIndex: Integer);
+    SizeOf(CString) заменено на Length(CString)
+rxCurrEdit.pas
+  - function IsValidFloat(const Value: string; var RetValue: Extended): Boolean;
+    SizeOf(Buffer) заменено на Length(Buffer)
+rxDateUtil.pas
+  - function FormatLongDate(Value: TDateTime): string;
+    SizeOf(Buffer) заменено на Length(Buffer)
+rxExcptdlg.pas
+  - procedure TRxErrorDialog.ErrorInfo(var LogicalAddress: Pointer;
+      var ModuleName: string);
+    SizeOf(Temp) заменено на Length(Temp)
+    SizeOf(ModName) заменено на Length(ModName)
+rxMenus.pas
+  - procedure RefreshMenuItem(MenuItem: TMenuItem; OwnerDraw: Boolean);
+    SizeOf(CCaption) заменено на Length(CCaption)
+RxRichEd.pas
+  - function TRichEditStrings.Get(Index: Integer): string;
+    SizeOf(Text) заменено на Length(Text)
+  - function TRxCustomRichEdit.InsertObjectDialog: Boolean;
+    SizeOf(NameBuffer) заменено на Length(NameBuffer)
+RxShell.pas
+  - function IconExtract(const FileName: string; Id: Integer): TIcon;
+    SizeOf(S) заменено на Length(S)
+RxToolEdit.pas
+  - procedure TFileDirEdit.WMDropFiles(var Msg: TWMDropFiles);
+    SizeOf(AFileName) заменено на Length(AFileName)
+rxVCLUtils.pas
+  - function GetEnvVar(const VarName: string): string;
+    SizeOf(S) заменено на Length(S)
+Rxverinf.pas
+  - function AppFileName: string;
+    SizeOf(FileName) заменено на Length(FileName)
+RxColors.pas    
+  - function RxIdentToColor(const Ident: string; var Color: Longint): Boolean;
+    SizeOf(Text) заменено на Length(Text)
+rxDBRichEd.pas
+  - procedure TRxDBRichEdit.KeyPress(var Key: Char);
+    Key заменено на AnsiChar(BytesOf(Key)[0])
+RxLookup.pas    
+  - procedure TRxLookupControl.ProcessSearchKey(Key: Char);
+    Key заменено на AnsiChar(BytesOf(Key)[0])
+  - procedure TRxDBLookupCombo.KeyPress(var Key: Char);
+    Key заменено на AnsiChar(BytesOf(Key)[0])
+rxdbfilter.pas
+  - function TFilterExpr.PutConstStr(const Value: string): Integer;
+    SizeOf(Buffer) заменено на Length(Buffer)
+  - function TFilterExpr.PutFieldNode(Field: TField): Integer;
+    SizeOf(Buffer) заменено на Length(Buffer)
+  - procedure TExprParser.NextToken;
+    SizeOf(StrBuf) заменено на Length(StrBuf)

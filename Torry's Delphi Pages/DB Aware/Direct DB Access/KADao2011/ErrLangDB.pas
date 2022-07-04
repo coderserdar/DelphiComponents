@@ -1,0 +1,42 @@
+//******************************************************* DatabaseError Messages
+RESOURCESTRING
+E1000 = 'Error';
+E1001 = 'This computer does not have a licence for using DAO!'#13#10'Licence must be installed in Registry!'#13#10'See http://support.microsoft.com/support/kb/articles/Q240/3/77.ASP for information how to install licence!';
+E1002 = 'You does not have Microsoft DAO installed ot it is an OLD Version!';
+E1003 = 'Unable to init OLE objects!';
+E1004 = 'Cannot find DAO on your system!';
+E1005 = 'TKADaoDatabase.F_Set_Active: Database property is not defined!';
+E1006 = 'TKADaoDatabase.F_Set_Active: DatabaseType property is not defined!';
+E1007 = 'TKADaoDatabase.F_Set_Active: ODBC direct workspaces'#13#10'are NOT supported for MS Access Databases!';
+E1008 = 'TKADaoDatabase.F_Set_Active: ODBC direct workspaces NOT supported when DYNADAO is disabled!';
+E1009 = 'TKADaoDatabase.F_Set_Active: ODBC direct workspaces NOT supported!';
+E1010 = 'TKADaoDatabase.F_Set_Database: Cannot set Database while Database is connected!';
+E1011 = 'TKADaoDatabase.F_Set_SystemDatabase: Cannot set SystemDatabase while Database is connected!';
+E1012 = 'TKADaoDatabase.F_Set_DaoVersion: Cannot set Dao Version while Database is connected!';
+E1013 = 'TKADaoDatabase.F_Set_Workspace: Cannot set Workspace while Database is connected!';
+E1014 = 'TKADaoDatabase.F_Set_DatabaseType: Cannot set Database Type while Database is connected!';
+E1015 = 'TKADaoDatabase.F_Set_EngineType: Cannot set EngineType Type while Database is connected!';
+E1016 = 'TKADaoDatabase.F_Set_EngineType: Cannot set PrivateEngine Type while Database is connected!';
+E1017 = 'TKADaoDatabase.F_Set_ReadOnly: Cannot change mode while Database is connected!';
+E1018 = 'TKADaoDatabase.F_Set_Exclusive: Cannot change Exclusive mode while Database is connected!';
+E1019 = 'TKADaoDatabase.F_Set_LoginPrompt: Cannot change LoginPrompt while Database is connected!';
+E1020 = 'TKADaoDatabase.F_Set_UserName: Cannot change User Name while Database is connected!';
+E1021 = 'TKADaoDatabase.F_Set_Password: Cannot change Password while Database is connected!';
+E1022 = 'TKADaoDatabase.F_Set_DatabasePassword: Cannot change Database Password while Database is connected!';
+E1023 = 'TKADaoDatabase.BeginTrans: Cannot start transactions while Database is NOT connected!';
+E1024 = 'TKADaoDatabase.CommitTrans: Cannot commit transactions while Database is NOT connected!';
+E1025 = 'Database is not connected!';
+E1026 = 'Database must be opened in exclusive mode!';
+E1027 = 'TKADaoDatabase.CreateTable: Cannot create table while Database is NOT connected!';
+E1028 = 'TKADaoDatabase.CreateTable: TableName parameter is empty!';
+E1029 = 'TKADaoDatabase.AddFieldsToTable: Cannot add fields to table while Database is NOT connected!';
+E1030 = 'TKADaoDatabase.AddFieldsToTable: TableName parameter is empty!';
+E1031 = 'Please select database type!';
+E1032 = 'Database property not set!';
+E1033 = 'Cannot set this property while DBEngine is connected!';
+E1034 = 'Cannot set this property while Workspace is connected!';
+E1035 = 'DBEngine property is not set!';
+E1036 = 'DBEngine is not connected!';
+E1037 = 'TKADaoDatabase.F_Set_DatabaseParameters: Cannot set DatabaseParameters while Database is connected!';
+E1038 = 'Cannot find Database:';
+//******************************************************************************

@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!-- C++Builder XML Project -->
+<PROJECT>
+  <MACROS>
+    <VERSION value="BCB.06.00"/>
+    <PROJECT value="tbx_cb6.bpl"/>
+    <OBJFILES value="
+      tbx_cb6.obj 
+      ..\TBXSwitcher.obj
+      ..\TBXMDI.obj
+      ..\TBXDefaultTheme.obj
+      ..\TBXStripesTheme.obj
+      ..\TBXOfficeXPTheme.obj
+      ..\TBXAluminumTheme.obj
+      ..\TBX.obj
+      ..\TBXUtils.obj
+      ..\TBXGraphics.obj
+      ..\TBXStrUtils.obj
+      ..\TBXExtItems.obj
+      ..\TBXLists.obj
+      ..\TBXUxThemes.obj
+      ..\TBXDkPanels.obj
+      ..\TBXStatusBars.obj
+      ..\TBXThemes.obj
+      ..\TBXControls.obj"
+    />
+    <RESFILES value=""/>
+    <IDLFILES value=""/>
+    <IDLGENFILES value=""/>
+    <DEFFILE value=""/>
+    <RESDEPEN value="$(RESFILES)"/>
+    <LIBFILES value=""/>
+    <LIBRARIES value=""/>
+    <SPARELIBS value="rtl.lib vcl.lib tb2k_cb6.lib"/>
+    <PACKAGES value="vcl.bpi rtl.bpi tb2k_cb6.bpi"/>
+    <PATHCPP value=".;"/>
+    <PATHPAS value=".;..;..;..;..;..;..;..;..;..;..;..;..;.."/>
+    <PATHRC value=".;"/>
+    <PATHASM value=".;"/>
+    <DEBUGLIBPATH value="$(BCB)\lib\debug"/>
+    <RELEASELIBPATH value="$(BCB)\lib\release"/>
+    <LINKER value="ilink32"/>
+    <USERDEFINES value=""/>
+    <SYSDEFINES value="_RTLDLL;NO_STRICT;USEPACKAGES"/>
+    <MAINSOURCE value="tbx_cb6.cpp"/>
+    <INCLUDEPATH value="..\;..;$(BCB)\include;$(BCB)\include\vcl"/>
+    <LIBPATH value="..\;..;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib"/>
+    <WARNINGS value="-w-par"/>
+    <OTHERFILES value=""/>
+  </MACROS>
+  <OPTIONS>
+    <IDLCFLAGS value="-I..\. -I.. -I$(BCB)\include -I$(BCB)\include\vcl 
+      -src_suffix cpp -D_DEBUG -boa"/>
+    <CFLAG1 value="-Od -H=$(BCB)\lib\vcl60.csm -Hc -Vx -Ve -X- -r- -a8 
+      -b- -k -y -v -vi- -c -tWM"/>
+    <PFLAGS value="-$YD -$W -$O- -$A8 -v -JPHNE -M"/>
+    <RFLAGS value=""/>
+    <AFLAGS value="/mx /w2 /zd"/>
+    <LFLAGS value="-D&quot;Toolbar2000 -- TBX Extensions (Alex Denisov)&quot; -aa -Tpp -x -Gn -Gl -Gi -v"/>
+    <OTHERFILES value=""/>
+  </OPTIONS>
+  <LINKER>
+    <ALLOBJ value="c0pkg32.obj $(PACKAGES) Memmgr.Lib sysinit.obj $(OBJFILES)"/>
+    <ALLRES value="$(RESFILES)"/>
+    <ALLLIB value="$(LIBFILES) $(LIBRARIES) import32.lib cp32mti.lib"/>
+    <OTHERFILES value=""/>
+  </LINKER>
+  <FILELIST>
+      <FILE FILENAME="tbx_cb6.cpp" FORMNAME="" UNITNAME="tbx_cb6" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\TBXSwitcher.pas" FORMNAME="" UNITNAME="TBXSwitcher" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\TBXMDI.pas" FORMNAME="" UNITNAME="TBXMDI" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\TBXDefaultTheme.pas" FORMNAME="" UNITNAME="TBXDefaultTheme" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\TBXStripesTheme.pas" FORMNAME="" UNITNAME="TBXStripesTheme" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\TBXOfficeXPTheme.pas" FORMNAME="" UNITNAME="TBXOfficeXPTheme" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\TBXAluminumTheme.pas" FORMNAME="" UNITNAME="TBXAluminumTheme" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\TBX.pas" FORMNAME="" UNITNAME="TBX" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\TBXUtils.pas" FORMNAME="" UNITNAME="TBXUtils" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\TBXGraphics.pas" FORMNAME="" UNITNAME="TBXGraphics" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\TBXStrUtils.pas" FORMNAME="" UNITNAME="TBXStrUtils" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\TBXExtItems.pas" FORMNAME="" UNITNAME="TBXExtItems" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\TBXLists.pas" FORMNAME="" UNITNAME="TBXLists" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\TBXUxThemes.pas" FORMNAME="" UNITNAME="TBXUxThemes" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\TBXDkPanels.pas" FORMNAME="" UNITNAME="TBXDkPanels" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\TBXStatusBars.pas" FORMNAME="" UNITNAME="TBXStatusBars" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\TBXThemes.pas" FORMNAME="" UNITNAME="TBXThemes" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\TBXControls.pas" FORMNAME="" UNITNAME="TBXControls" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="vcl.bpi" FORMNAME="" UNITNAME="vcl" CONTAINERID="BPITool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="rtl.bpi" FORMNAME="" UNITNAME="rtl" CONTAINERID="BPITool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="tb2k_cb6.bpi" FORMNAME="" UNITNAME="tb2k_cb6" CONTAINERID="BPITool" DESIGNCLASS="" LOCALCOMMAND=""/>
+  </FILELIST>
+  <BUILDTOOLS/>
+  <IDEOPTIONS/>
+</PROJECT>

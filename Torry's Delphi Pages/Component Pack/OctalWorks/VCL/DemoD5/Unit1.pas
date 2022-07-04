@@ -1,0 +1,144 @@
+unit Unit1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  owBitBtn, StdCtrls, owGradientProvider, owPanel, owProgressbar, ExtCtrls;
+
+type
+  TForm1 = class(TForm)
+    owGradientPanel1: TowGradientPanel;
+    owPanel1: TowPanel;
+    owPanel2: TowPanel;
+    owGradientProvider1: TowGradientProvider;
+    owPanel3: TowPanel;
+    owGradientPanel2: TowGradientPanel;
+    Edit1: TEdit;
+    Label1: TLabel;
+    owBitBtn1: TowBitBtn;
+    owProgressbar1: TowProgressbar;
+    owPanel4: TowPanel;
+    owBitBtn2: TowBitBtn;
+    owBitBtn3: TowBitBtn;
+    owProgressbar2: TowProgressbar;
+    owProgressbar3: TowProgressbar;
+    Timer1: TTimer;
+    owPanel5: TowPanel;
+    owBitBtn4: TowBitBtn;
+    owBitBtn5: TowBitBtn;
+    owProgressbar5: TowProgressbar;
+    owPanel6: TowPanel;
+    owGradientPanel3: TowGradientPanel;
+    owBitBtn6: TowBitBtn;
+    owBitBtn7: TowBitBtn;
+    owBitBtn8: TowBitBtn;
+    owBitBtn9: TowBitBtn;
+    owGradientProvider2: TowGradientProvider;
+    owBitBtn14: TowBitBtn;
+    owBitBtn15: TowBitBtn;
+    owBitBtn16: TowBitBtn;
+    owBitBtn17: TowBitBtn;
+    owPanel7: TowPanel;
+    owBitBtn22: TowBitBtn;
+    owBitBtn23: TowBitBtn;
+    owBitBtn24: TowBitBtn;
+    owBitBtn25: TowBitBtn;
+    owProgressbar4: TowProgressbar;
+    owBitBtn18: TowBitBtn;
+    owBitBtn19: TowBitBtn;
+    owPanel8: TowPanel;
+    owBitBtn13: TowBitBtn;
+    owBitBtn12: TowBitBtn;
+    owBitBtn11: TowBitBtn;
+    owBitBtn10: TowBitBtn;
+    procedure owBitBtn3Click(Sender: TObject);
+    procedure owBitBtn2Click(Sender: TObject);
+    procedure Timer1Timer(Sender: TObject);
+    procedure owPanel6HeaderClick(Sender: TObject);
+    procedure owPanel6LeftGlyphClick(Sender: TObject);
+    procedure owPanel6RightGlyphClick(Sender: TObject);
+    procedure owBitBtn10Click(Sender: TObject);
+    procedure owBitBtn11Click(Sender: TObject);
+    procedure owBitBtn12Click(Sender: TObject);
+    procedure owBitBtn13Click(Sender: TObject);
+    procedure owBitBtn18Click(Sender: TObject);
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.DFM}
+
+procedure TForm1.owBitBtn3Click(Sender: TObject);
+begin
+  ShowMessage('Ok Clicked');
+end;
+
+procedure TForm1.owBitBtn2Click(Sender: TObject);
+begin
+    ShowMessage('Cancel Clicked');
+end;
+
+procedure TForm1.Timer1Timer(Sender: TObject);
+begin
+  owProgressbar1.StepIt;
+  owProgressbar2.StepIt;
+  owProgressbar3.StepIt;
+  owProgressbar4.StepIt;
+  owProgressbar5.StepIt;
+
+  if owProgressbar1.Position>=100 then owProgressbar1.Position := 0;
+  if owProgressbar2.Position>=100 then owProgressbar2.Position := 0;
+  if owProgressbar3.Position>=100 then owProgressbar3.Position := 0;
+  if owProgressbar4.Position>=100 then owProgressbar4.Position := 0;
+  if owProgressbar5.Position>=100 then owProgressbar5.Position := 0;
+end;
+
+procedure TForm1.owPanel6HeaderClick(Sender: TObject);
+begin
+  ShowMessage('Header Clicked' + chr(13)+chr(10) + 'Try clicking Glyphs');
+end;
+
+procedure TForm1.owPanel6LeftGlyphClick(Sender: TObject);
+begin
+    ShowMessage('Left Glyph Clicked');
+end;
+
+procedure TForm1.owPanel6RightGlyphClick(Sender: TObject);
+begin
+  ShowMessage('Right Glyph Clicked');
+end;
+
+procedure TForm1.owBitBtn10Click(Sender: TObject);
+begin
+  owGradientProvider1.GradientTheme := BlueOffice2003;
+end;
+
+procedure TForm1.owBitBtn11Click(Sender: TObject);
+begin
+  owGradientProvider1.GradientTheme := GreenOffice2003;
+end;
+
+procedure TForm1.owBitBtn12Click(Sender: TObject);
+begin
+  owGradientProvider1.GradientTheme := GrayOffice2003;
+end;
+
+procedure TForm1.owBitBtn13Click(Sender: TObject);
+begin
+  owGradientProvider1.GradientTheme := Classic;
+end;
+
+procedure TForm1.owBitBtn18Click(Sender: TObject);
+begin
+  Timer1.Enabled := not Timer1.Enabled
+end;
+
+end.

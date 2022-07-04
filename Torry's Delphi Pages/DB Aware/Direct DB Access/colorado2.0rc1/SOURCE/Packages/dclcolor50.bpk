@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!-- C++Builder XML Project -->
+<PROJECT>
+  <MACROS>
+    <VERSION value="BCB.05.00"/>
+    <PROJECT value="dclcolor50.bpl"/>
+    <OBJFILES value="dclcolor50.obj colorpe.obj colorxpe.obj/>
+    <RESFILES value="color.res"/>
+    <DEFFILE value=""/>
+    <RESDEPEN value="$(RESFILES)"/>
+    <LIBFILES value=""/>
+    <LIBRARIES value=""/>
+    <SPARELIBS value="vcl50.lib vcldb50.lib color50.lib"/>
+    <PACKAGES value="vcl50.bpi vcldb50.bpi color50.bpi"/>
+    <PATHCPP value=".;"/>
+    <PATHPAS value=".;..\colorado;..\colorx"/>
+    <PATHRC value=".;"/>
+    <PATHASM value=".;"/>
+    <DEBUGLIBPATH value="$(BCB)\lib\debug"/>
+    <RELEASELIBPATH value="$(BCB)\lib\release"/>
+    <LINKER value="ilink32"/>
+    <USERDEFINES value=""/>
+    <SYSDEFINES value="NO_STRICT;_RTLDLL;USEPACKAGES"/>
+    <MAINSOURCE value="dclcolor50.cpp"/>
+    <INCLUDEPATH value="..\colorx;..\colorado;$(BCB)\include;$(BCB)\include\vcl"/>
+    <LIBPATH value="..\colorx;..\colorado;$(BCB)\lib\obj;$(BCB)\lib;..\..\lib"/>
+    <WARNINGS value="-w-par"/>
+    <OTHERFILES value=""/>
+  </MACROS>
+  <OPTIONS>
+    <CFLAG1 value="-O2 -H=$(BCB)\lib\vcl50.csm -Hc -Vx -Ve -X- -pr -a4 
+      -b- -k- -vi -c -tWM"/>
+    <PFLAGS value="-$Y- -$L- -$D- -$A8 -v -JPHNE -M -U..\..\LIB -E..\..\LIB -N..\..\LIB -N1..\..\LIB -N2..\..\LIB -N3..\..\LIB -LN..\..\LIB -LE..\..\LIB -LUdesignide"/>
+    <RFLAGS value=""/>
+    <AFLAGS value="/mx /w2 /zn"/>
+    <LFLAGS value="-l..\..\LIB -I..\..\LIB -D&quot;colorADO Database Components&quot; -aa -Tpp -Gpd -x -Gn -Gl -Gi"/>
+    <OTHERFILES value=""/>
+  </OPTIONS>
+  <LINKER>
+    <ALLOBJ value="c0pkg32.obj $(PACKAGES) Memmgr.Lib sysinit.obj $(OBJFILES)"/>
+    <ALLRES value="$(RESFILES)"/>
+    <ALLLIB value="$(LIBFILES) $(LIBRARIES) import32.lib cp32mti.lib"/>
+    <OTHERFILES value=""/>
+  </LINKER>
+  <IDEOPTIONS>
+[Version Info]
+IncludeVerInfo=0
+  </IDEOPTIONS>
+</PROJECT>

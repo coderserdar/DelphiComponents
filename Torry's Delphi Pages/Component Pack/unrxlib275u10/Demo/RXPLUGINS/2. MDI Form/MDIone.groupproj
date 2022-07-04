@@ -1,0 +1,44 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{883690a3-e807-44c0-aa45-0ac37a013d0c}</ProjectGuid>
+  </PropertyGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Projects Include="MDIPlugin.dproj" />
+    <Projects Include="MDISample.dproj" />
+  </ItemGroup>
+  <ProjectExtensions>
+    <Borland.Personality>Default.Personality</Borland.Personality>
+    <Borland.ProjectType />
+    <BorlandProject>
+  <BorlandProject xmlns=""> <Default.Personality> </Default.Personality> </BorlandProject></BorlandProject>
+  </ProjectExtensions>
+  <Target Name="MDIPlugin">
+    <MSBuild Projects="MDIPlugin.dproj" Targets="" />
+  </Target>
+  <Target Name="MDIPlugin:Clean">
+    <MSBuild Projects="MDIPlugin.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="MDIPlugin:Make">
+    <MSBuild Projects="MDIPlugin.dproj" Targets="Make" />
+  </Target>
+  <Target Name="MDISample">
+    <MSBuild Projects="MDISample.dproj" Targets="" />
+  </Target>
+  <Target Name="MDISample:Clean">
+    <MSBuild Projects="MDISample.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="MDISample:Make">
+    <MSBuild Projects="MDISample.dproj" Targets="Make" />
+  </Target>
+  <Target Name="Build">
+    <CallTarget Targets="MDIPlugin;MDISample" />
+  </Target>
+  <Target Name="Clean">
+    <CallTarget Targets="MDIPlugin:Clean;MDISample:Clean" />
+  </Target>
+  <Target Name="Make">
+    <CallTarget Targets="MDIPlugin:Make;MDISample:Make" />
+  </Target>
+  <Import Condition="Exists('$(MSBuildBinPath)\Borland.Group.Targets')" Project="$(MSBuildBinPath)\Borland.Group.Targets" />
+</Project>

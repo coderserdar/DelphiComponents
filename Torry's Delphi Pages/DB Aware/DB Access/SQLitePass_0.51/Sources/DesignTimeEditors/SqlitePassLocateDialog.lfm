@@ -1,0 +1,338 @@
+inherited SqlitePassLocateDlg: TSqlitePassLocateDlg
+  Left = 267
+  Height = 354
+  Top = 259
+  Width = 578
+  Caption = 'Locate Records Dialog'
+  ClientHeight = 354
+  ClientWidth = 578
+  inherited PanelIndexApplyChanges: TPanel
+    Top = 312
+    Width = 578
+    ClientWidth = 578
+    inherited SbOk: TSpeedButton
+      OnClick = SbOkClick
+    end
+    inherited SbDisplayFilterStmt: TSpeedButton
+      Caption = '&Display Locate Statement'
+    end
+  end
+  inherited PageControl: TPageControl
+    Height = 312
+    Width = 578
+    inherited tsCustomFilters: TTabSheet
+      Caption = '&Custom Locate'
+      ClientHeight = 285
+      ClientWidth = 570
+      inherited PanelIndexesToolBar: TPanel
+        Height = 285
+        Width = 570
+        Caption = ''
+        ClientHeight = 285
+        ClientWidth = 570
+        inherited LabelFiltersDefinitions: TLabel
+          Width = 111
+          Caption = 'Locate Definition : '
+        end
+        inherited PanelSetFilterText: TPanel
+          inherited PanelIndexMain: TPanel
+            inherited PanelAvailableIndexes: TPanel
+              inherited PanelCaptionAvailableIFields: TPanel
+                Color = 14540253
+                Font.Color = clBlack
+              end
+            end
+            inherited PanelSQL: TPanel
+              inherited PanelIndexCreateStmt: TPanel
+                Color = 14540253
+                inherited Label21: TLabel
+                  Width = 182
+                  Caption = 'Type in your locate statement  :'
+                  Font.Color = clBlack
+                end
+              end
+            end
+          end
+        end
+        inherited Panel1: TPanel
+          Top = 244
+          Width = 570
+          ClientWidth = 570
+        end
+      end
+    end
+    object TabSheet1: TTabSheet[1]
+      Caption = 'Class&ic Locate'
+      ClientHeight = 285
+      ClientWidth = 570
+      ImageIndex = 1
+      object Splitter1: TSplitter
+        Left = 209
+        Height = 285
+        Top = 0
+        Width = 3
+      end
+      object Panel8: TPanel
+        Left = 212
+        Height = 285
+        Top = 0
+        Width = 358
+        Align = alClient
+        BevelOuter = bvNone
+        ClientHeight = 285
+        ClientWidth = 358
+        Color = clWhite
+        ParentColor = False
+        TabOrder = 0
+        object Label1: TLabel
+          Left = 8
+          Height = 13
+          Top = 90
+          Width = 300
+          Caption = 'Type in the fields values (same as locate KeyValues)'
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = [fsBold]
+          ParentColor = False
+          ParentFont = False
+        end
+        object Label4: TLabel
+          Left = 10
+          Height = 13
+          Top = 106
+          Width = 182
+          Caption = 'for example : Smith;William;20-10-1997'
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          ParentColor = False
+          ParentFont = False
+        end
+        object Label3: TLabel
+          Left = 10
+          Height = 13
+          Top = 41
+          Width = 208
+          Caption = 'for example : LastName;FirstName;BirthDate'
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          ParentColor = False
+          ParentFont = False
+        end
+        object TEditKeyValues: TEdit
+          Left = 10
+          Height = 22
+          Top = 128
+          Width = 313
+          TabOrder = 1
+        end
+        object TEditKeyFields: TEdit
+          Left = 10
+          Height = 22
+          Top = 57
+          Width = 313
+          TabOrder = 0
+        end
+        object CbPartialKeys: TCheckBox
+          Left = 10
+          Height = 17
+          Top = 159
+          Width = 97
+          Caption = '&Partial keys'
+          Enabled = False
+          Font.CharSet = ANSI_CHARSET
+          Font.Color = clGray
+          Font.Height = -11
+          Font.Name = 'Arial'
+          ParentFont = False
+          TabOrder = 2
+        end
+        object CbCaseInsensitive: TCheckBox
+          Left = 10
+          Height = 17
+          Top = 183
+          Width = 97
+          Caption = '&Case Insensitive'
+          Enabled = False
+          Font.CharSet = ANSI_CHARSET
+          Font.Color = clGray
+          Font.Height = -11
+          Font.Name = 'Arial'
+          ParentFont = False
+          TabOrder = 3
+        end
+        object CbUseQuotes: TCheckBox
+          Left = 10
+          Height = 17
+          Top = 207
+          Width = 97
+          Caption = 'Use &Quotes'
+          TabOrder = 4
+        end
+        object Panel2: TPanel
+          Left = 0
+          Height = 32
+          Top = 0
+          Width = 358
+          Align = alTop
+          BevelOuter = bvNone
+          Caption = 'Panel2'
+          ClientHeight = 32
+          ClientWidth = 358
+          Color = 4194304
+          Font.Color = clWhite
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = [fsBold]
+          ParentColor = False
+          ParentFont = False
+          TabOrder = 5
+          object Image2: TImage
+            Left = 12
+            Height = 16
+            Top = 8
+            Width = 16
+            AutoSize = True
+            Center = True
+            Picture.Data = {
+              07544269746D617036040000424D360400000000000036000000280000001000
+              0000100000000100200000000000000400000000000000000000000000000000
+              0000FFFFFF00FFFFFF00FFFFFF00FFFFFF00113D55F7285F87FB4988BDFB428D
+              BCC12D77B322FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF002B6583FB94C7F9FF91C9F9FF4185
+              C9FF1C64AAF32E79B92FFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00A97151A9C38E68FFC08B66FFBE8864FF4389AAFFE0F2FFFF549AD8FF1A7A
+              BEFF4998C5FF4081B6FF99796BFFAB7554FFA97353FFA97151FFA97151A9FFFF
+              FF00C8926CFFFFFFFFFFFFFFFFFFFFFFFFFFA7C5D9FF7AB6D5FF90B7D1FF55C9
+              E4FF5BDFF5FF78D0EDFF519DDDFFE4F0FAFFFFFFFFFFFFFFFFFFA97251FFFFFF
+              FF00CA946EFFFFFFFFFFFFFFFFFFFFFFFEFFFFFFFDFFB3D6E6FF76BAD7FFC2F6
+              FDFF63DFF7FF5DE2F8FF79D3F0FF4A99DCFFE3EEF5FFFFFFFFFFAA7353FFFFFF
+              FF00CC976FFFFFFFFFFFFFFFFCFFFFFFFDFFFEFEFCFFFEFEFCFFB0D5E4FF77CB
+              E7FFC7F7FDFF5EDCF5FF5AE1F7FF7BD4F1FF4B9ADDFFD6E8F7FFAC7554FFFFFF
+              FF00D19C73FFFFFFFFFFFEFEFCFFFEFEFCFFFEFEFCFFFDFDFBFFFDFDFBFFBEE7
+              F1FF79D3EEFFC7F7FDFF5FDCF5FF5BE2F7FF7AD6F2FF51A2E2FF9C7E6EFFFFFF
+              FF00D49E75FFFFFFFFFFFEFEFCFFFDFDFBFFFDFDFCFFFDFDFBFFFDFDF9FFFCFC
+              F8FFBEE6F2FF7DD4EEFFC4F6FDFF6CDDF6FF6DCAEDFF63A3D7FF6399C9FF5192
+              CA26D5A076FFFFFFFFFFFDFDFCFFFDFDFBFFFDFDFAFFFCFCF9FFFCFBF7FFFBF9
+              F5FFFBF8F4FFB3E1EDFF81D6EEFFB2E3F9FF8BC0E7FFAED3F6FFC4E0FCFF669F
+              D3F7D8A279FFFFFFFFFFFDFDFAFFFCFCFAFFFCFBF9FFFBFAF6FFFBF8F5FFFBF7
+              F4FFFBF6F1FFF8F4EEFFABDDE8FF77BEE7FFB4D2F0FFE5F3FFFFACD2EFFF488C
+              C7E8D9A379FFFFFFFFFFFCFBF9FFFCFBF8FFFBF9F7FFFBF7F4FFFAF7F2FFF9F5
+              F0FFF7F3EDFFF6EFEAFFF5EBE7FFB4D7E2FF58A5D8FF85B1DBFF469DD0FF2B95
+              D15EDBA47AFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFBD8763FFFFFF
+              FF00DCA77BFFDCA77BFFDCA77BFFDCA77BFFDCA77BFFDCA77BFFDCA77BFFDCA7
+              7BFFDCA77BFFDCA77BFFDCA77BFFDCA77BFFDCA77BFFDCA77BFFC08B66FFFFFF
+              FF00DDAC85FDE8B992FFE8B992FFE8B992FFE8B992FFE8B992FFE8B992FFE8B9
+              92FFE8B992FFE8B992FFE8B992FFE8B992FFE8B992FFE8B992FFC1906FFDFFFF
+              FF00A971516BDDB18DF4DCA77BFFDCA67AFFDAA47AFFD8A279FFD5A076FFD49E
+              75FFD29D73FFCF9A72FFCE9970FFCB966FFFC9946CFFC49A7AF4A971516BFFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00
+            }
+          end
+          object Label2: TLabel
+            Left = 35
+            Height = 13
+            Top = 10
+            Width = 308
+            Caption = 'Type in the fields to locate (same as locate KeyFields)'
+            Font.Color = clWhite
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = [fsBold]
+            ParentColor = False
+            ParentFont = False
+          end
+        end
+      end
+      object Panel4: TPanel
+        Left = 0
+        Height = 285
+        Top = 0
+        Width = 209
+        Align = alLeft
+        Caption = 'PanelAvailableFields'
+        ClientHeight = 285
+        ClientWidth = 209
+        TabOrder = 1
+        object ListBoxFields: TListBox
+          Left = 1
+          Height = 251
+          Top = 33
+          Width = 207
+          Align = alClient
+          BorderStyle = bsNone
+          Color = cl3DLight
+          ItemHeight = 0
+          Sorted = True
+          TabOrder = 0
+        end
+        object Panel5: TPanel
+          Left = 1
+          Height = 32
+          Top = 1
+          Width = 207
+          Align = alTop
+          BevelOuter = bvNone
+          Caption = 'Available fields'
+          ClientHeight = 32
+          ClientWidth = 207
+          Color = 4194304
+          Font.Color = clWhite
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = [fsBold]
+          ParentColor = False
+          ParentFont = False
+          TabOrder = 1
+          object Image1: TImage
+            Left = 16
+            Height = 16
+            Top = 8
+            Width = 16
+            AutoSize = True
+            Center = True
+            Picture.Data = {
+              07544269746D617036040000424D360400000000000036000000280000001000
+              0000100000000100200000000000000400000000000000000000000000000000
+              0000000000000000000000000000000000000000000000000000000000000000
+              0000000000000000000000000000000000000000000000000000000000000000
+              0000000000000000000000000000000000000000000000000000000000000000
+              0000000000000000000000000000000000000000000000000000000000000000
+              0000000000FF000000FF000000FF000000FF000000FF000000FF000000FF0000
+              00FF000000FF000000FF000000FF000000FF000000FF000000FF000000FF0000
+              00FF000000FFB1B1B1FF868686FF404040FF9F9F9FFFA2A2A2FFA4A4A4FFA6A6
+              A6FFA9A9A9FFABABABFFADADADFF404040FFB3B3B3FFB3B3B3FFB3B3B3FF0000
+              00FF000000FFD6D6D6FFBFBFBFFF5C5C5CFFE1E1E1FFE4E4E4FFE8E8E8FFEBEB
+              EBFFEEEEEEFFF2F2F2FFF5F5F5FF5C5C5CFFFCFCFCFFFFFFFFFFB3B3B3FF0000
+              00FF000000FFD6D6D6FFBFBFBFFF5C5C5CFFDEDEDEFFE2E2E2FFE5E5E5FFE8E8
+              E8FFECECECFFEFEFEFFFF2F2F2FF5C5C5CFFF9F9F9FFFCFCFCFFB3B3B3FF0000
+              00FF000000FF979797FF5C5C5CFF5C5C5CFF5C5C5CFF5C5C5CFF5C5C5CFF5C5C
+              5CFF5C5C5CFF5C5C5CFF5C5C5CFF5C5C5CFF5C5C5CFF5C5C5CFF404040FF0000
+              00FF000000FFD6D6D6FFBFBFBFFF5C5C5CFFD9D9D9FFDCDCDCFFE0E0E0FFE3E3
+              E3FFE6E6E6FFEAEAEAFFEDEDEDFF5C5C5CFFF4F4F4FFF7F7F7FFAFAFAFFF0000
+              00FF000000FFD6D6D6FFBFBFBFFF5C5C5CFFD6D6D6FFDADADAFFDDDDDDFFE0E0
+              E0FFE4E4E4FFE7E7E7FFEAEAEAFF5C5C5CFFF1F1F1FFF4F4F4FFADADADFF0000
+              00FF000000FF979797FF5C5C5CFF5C5C5CFF5C5C5CFF5C5C5CFF5C5C5CFF5C5C
+              5CFF5C5C5CFF5C5C5CFF5C5C5CFF5C5C5CFF5C5C5CFF5C5C5CFF404040FF0000
+              00FF000000FFD6D6D6FFBFBFBFFF5C5C5CFFD1D1D1FFD4D4D4FFD8D8D8FFDBDB
+              DBFFDEDEDEFFE2E2E2FFE5E5E5FF5C5C5CFFECECECFFEFEFEFFFAAAAAAFF0000
+              00FF000000FFD6D6D6FFBFBFBFFF5C5C5CFFCECECEFFD2D2D2FFD5D5D5FFD8D8
+              D8FFDCDCDCFFDFDFDFFFE2E2E2FF5C5C5CFFE9E9E9FFECECECFFA8A8A8FF0000
+              00FF000000FFA18E7DFF6C4E31FF5C5C5CFF6C4E31FF6C4E31FF6C4E31FF6C4E
+              31FF6C4E31FF6C4E31FF6C4E31FF5C5C5CFF6C4E31FF6C4E31FF4B3621FF0000
+              00FF000000FFBCAEA2FF96816DFF8B8B8BFF96816DFF96816DFF96816DFF9681
+              6DFF96816DFF96816DFF96816DFF8B8B8BFF96816DFF96816DFF8C7F72FF0000
+              00FF000000FF000000FF000000FF000000FF000000FF000000FF000000FF0000
+              00FF000000FF000000FF000000FF000000FF000000FF000000FF000000FF0000
+              00FF000000000000000000000000000000000000000000000000000000000000
+              0000000000000000000000000000000000000000000000000000000000000000
+              0000
+            }
+          end
+        end
+      end
+    end
+  end
+end
