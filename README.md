@@ -25,6 +25,11 @@ Repo folder structure is like this
    - [**Charts & Graphs**](https://github.com/coderserdar/DelphiComponents/tree/main/Torry's%20Delphi%20Pages/Charts%20And%20Graphs)
    - [**Component Pack**](https://github.com/coderserdar/DelphiComponents/tree/main/Torry's%20Delphi%20Pages/Component%20Pack)
    - [**DB Aware Components**](https://github.com/coderserdar/DelphiComponents/tree/main/Torry's%20Delphi%20Pages/DB%20Aware)
+     - [**DB Access**](https://github.com/coderserdar/DelphiComponents/tree/main/Torry's%20Delphi%20Pages/DB%20Aware/DB%20Access)
+     - [**Direct DB Access**](https://github.com/coderserdar/DelphiComponents/tree/main/Torry's%20Delphi%20Pages/DB%20Aware/Direct%20DB%20Access)
+     - [**Other**](https://github.com/coderserdar/DelphiComponents/tree/main/Torry's%20Delphi%20Pages/DB%20Aware/Other)
+     - [**Packs**](https://github.com/coderserdar/DelphiComponents/tree/main/Torry's%20Delphi%20Pages/DB%20Aware/Packs)
+     - [**Visual**](https://github.com/coderserdar/DelphiComponents/tree/main/Torry's%20Delphi%20Pages/DB%20Aware/Visual)
    - [**Experts & IDE Plug-Ins**](https://github.com/coderserdar/DelphiComponents/tree/main/Torry's%20Delphi%20Pages/Experts%2C%20IDE)
 
 
