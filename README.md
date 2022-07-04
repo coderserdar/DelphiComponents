@@ -20,45 +20,51 @@ In this repo there are components about
 I want to add **Read Me** files to folder based components. Most of components have readme file. So when you see the folder contents, you can see the component is suitable for which *Delphi IDE*s.
 
 And I created a folder which is used to store compressed files of Delphi components which have setup files. Folder Contents are below
- - [**Setup Files**](https://github.com/coderserdar/DelphiComponents/tree/main/_Setup%20Files)
-   - *ABC For Delphi 6 Companion Edition*
-   - *ADO Component Suite*
-   - *ANN Magic CD DVD Burner*
-   - *Advanced Application Controls*
-   - *Alfa File Protector*
-   - *Barcode 4.8*
-   - *COM Port*
-   - *Chilkat Component Set*
-   - *Chilkat ZIP*
-   - *DB Alt Grid*
-   - *Drag And Drop Component Suite*
-   - *EI Pack*
-   - *Eldos Tree Lite*
-   - *Excel Component Suite*
-   - *Express Forum Library*
-   - *ExpressMemData*
-   - *EzPlan*
-   - *FSM Library*
-   - *GM Print Suite*
-   - *HTML Help Connect*
-   - *IBX For Delphi 7*
-   - *Kbmmemtable 5.60*
-   - *LMD For Delphi 5*
-   - *NR Comm Lib 6.28*
-   - *NR Comm Lib 6.36*
-   - *NT Set Component Collection*
-   - *Office Component Suite*
-   - *Optical Barcode Recognition 4.2*
-   - *Optical Character Recognition 8.1*
-   - *Orcka Component Suite*
-   - *PDFium Component Suite*
-   - *Report Builder Pro 4*
-   - *SDL Component Suite 7.0 for Delphi 7*
-   - *Super Com Suite*
-   - *Syntax Suite*
-   - *WMI Set Collection*
-   - *XLS Read Write*
-   - *ZIP Forge*
-   - *Ziegler Collection One*
+
+<details>
+  <summary>Embarcadero Code Central Setups</summary>
+
+   1. *ABC For Delphi 6 Companion Edition*
+   2. *ADO Component Suite*
+   3. *ANN Magic CD DVD Burner*
+   4. *Advanced Application Controls*
+   5. *Alfa File Protector*
+   6. *Barcode 4.8*
+   7. *COM Port*
+   8. *Chilkat Component Set*
+   9. *Chilkat ZIP*
+   10. *DB Alt Grid*
+   11. *Drag And Drop Component Suite*
+   12. *EI Pack*
+   13. *Eldos Tree Lite*
+   14. *Excel Component Suite*
+   15. *Express Forum Library*
+   16. *ExpressMemData*
+   17. *EzPlan*
+   18. *FSM Library*
+   19. *GM Print Suite*
+   20. *HTML Help Connect*
+   21. *IBX For Delphi 7*
+   22. *Kbmmemtable 5.60*
+   23. *LMD For Delphi 5*
+   24. *NR Comm Lib 6.28*
+   25. *NR Comm Lib 6.36*
+   26. *NR Comm Lib 6.36*
+   27. *NT Set Component Collection*
+   28. *Office Component Suite*
+   29. *Optical Barcode Recognition 4.2*
+   30. *Optical Character Recognition 8.1*
+   31. *Orcka Component Suite*
+   32. *PDFium Component Suite*
+   33. *Report Builder Pro 4*
+   34. *SDL Component Suite 7.0 for Delphi 7*
+   35. *Super Com Suite*
+   36. *Syntax Suite*
+   37. *WMI Set Collection*
+   38. *XLS Read Write*
+   39. *ZIP Forge*
+   40. *Ziegler Collection One*
+
+</details>
 
 If you wanna add some components to that repo or you want to share other things about **Delphi** you can communicate with me by [E-Mail](mailto:serdargul@outlook.com).
