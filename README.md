@@ -25,7 +25,7 @@ Repo folder structure is like this
    - [**Charts & Graphs**](https://github.com/coderserdar/DelphiComponents/tree/main/Torry's%20Delphi%20Pages/Charts%20And%20Graphs)
    - [**Component Pack**](https://github.com/coderserdar/DelphiComponents/tree/main/Torry's%20Delphi%20Pages/Component%20Pack)
    - [**DB Aware Components**](https://github.com/coderserdar/DelphiComponents/tree/main/Torry's%20Delphi%20Pages/DB%20Aware)
-   - [**Experts & IDE Plug Ins**](https://github.com/coderserdar/DelphiComponents/tree/main/Torry's%20Delphi%20Pages/Experts%2C%20IDE)
+   - [**Experts & IDE Plug-Ins**](https://github.com/coderserdar/DelphiComponents/tree/main/Torry's%20Delphi%20Pages/Experts%2C%20IDE)
 
 
 I want to add **Read Me** files to folder based components. Most of components have readme file. So when you see the folder contents, you can see the component is suitable for which *Delphi IDE*s.
