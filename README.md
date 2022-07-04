@@ -17,6 +17,17 @@ In this repo there are components about
  - **Security**
  - **PDF Files** etc.
 
+Repo folder structure is like this
+ - [**Embarcadero Code Central**](https://github.com/coderserdar/DelphiComponents/tree/main/Embarcadero%20Code%20Central/)
+ - [**Torry's Delphi Pages**](https://github.com/coderserdar/DelphiComponents/tree/main/Torry's%20Delphi%20Pages)
+   - [**Bars & Status Bars**](https://github.com/coderserdar/DelphiComponents/tree/main/Torry's%20Delphi%20Pages/Bars%20and%20Status%20Bars)
+   - [**Buttons & Check Boxes**](https://github.com/coderserdar/DelphiComponents/tree/main/Torry's%20Delphi%20Pages/Buttons%20and%20CheckBoxes)
+   - [**Charts & Graphs**](https://github.com/coderserdar/DelphiComponents/tree/main/Torry's%20Delphi%20Pages/Charts%20And%20Graphs)
+   - [**Component Pack**](https://github.com/coderserdar/DelphiComponents/tree/main/Torry's%20Delphi%20Pages/Component%20Pack)
+   - [**DB Aware Components**](https://github.com/coderserdar/DelphiComponents/tree/main/Torry's%20Delphi%20Pages/DB%20Aware)
+   - [**Experts & IDE Plug Ins**](https://github.com/coderserdar/DelphiComponents/tree/main/Torry's%20Delphi%20Pages/Experts%2C%20IDE)
+
+
 I want to add **Read Me** files to folder based components. Most of components have readme file. So when you see the folder contents, you can see the component is suitable for which *Delphi IDE*s.
 
 And I created a folder which is used to store compressed files of Delphi components which have setup files. Folder Contents are below
