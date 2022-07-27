@@ -136,4 +136,14 @@ And I created a folder which is used to store compressed files of Delphi compone
 
 </details>
 
+<details>
+  <summary>Delphi Turkiye Components</summary>
+
+   1. *MD5 Component*
+   2. *UGS Dialog (Splash Message Box)*
+   3. *Alternative TEdit Components*
+   4. *Some Component Sets*
+
+</details>
+
 If you wanna add some components to that repo or you want to share other things about **Delphi** you can communicate with me by [E-Mail](mailto:serdargul@outlook.com).
