@@ -1,0 +1,42 @@
+**Version 1.11b (Release date 04-04-99)
+
+This is a list of the changes that have been made since the previous release:
+
+==========================================================================================
+
+Type of change:                  Internal
+Reason for change:               Increase Usability
+Impact on existing applications: Minor
+
+Minor code tidy up
+
+==========================================================================================
+==========================================================================================
+
+**Version 1.11a (Release date 14-11-98)
+
+This is a list of the changes that have been made since the previous release:
+
+==========================================================================================
+
+Type of change:                  External
+Reason for change:               Increase Usability
+Impact on existing applications: Minor
+
+MD5 has had two new methods added:
+
+GetHashDigest: This returns the hash in the form of a TDigest. This is the same hash that is returned by the Finish call.
+
+Burn: Clears internal information.
+
+==========================================================================================
+
+Type of change:                  Internal/External
+Reason for change:               User bug report
+Impact on existing applications: Minor
+
+The Finish call produces an incorrect result. The internal digest was not being copied to the result.
+
+==========================================================================================
+
+
