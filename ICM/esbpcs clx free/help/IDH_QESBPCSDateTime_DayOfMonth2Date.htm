@@ -1,0 +1,74 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+<META NAME="GENERATOR" Content="Time2HELP 1.0; Standard Template">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html;CHARSET=iso-8859-1">
+<TITLE>DayOfMonth2Date</TITLE>
+<Style>Body, TD {font-family: "Verdana"; font-size: 10pt};
+PRE {font-size: 10pt; margin-top: 0; margin-bottom: 0}
+TR.odd {background-color: #F8F8F8};
+TR.even {background-color: #EEEEEE};
+Table.list {background-color: #FFFFFF};
+TD {vertical-align : top}
+</Style>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<BASEFONT NAME="verdana" Size="2"><Table Border="0" Width="100%" BGColor="#FFFFFF"><TR><TD><Font Color="#000000F"><B>DayOfMonth2Date Routines</B></Font></TD></TR></Table>Returns the Given Occurrence (Day of Month) of a Day of Week in a given Month/Year.<P><B>Unit</B><Br><A HREF="IDH_Unit_QESBPCSDateTime.htm">QESBPCSDateTime</A><P><Table Border="0" Width="100%" BGColor="#000000"><TR><TD><Font Color="#FFFFFF"><B>Overloaded Variants</B></Font></TD></TR></Table><Table Class="list" Width="100%" CellSpacing="1" CellPadding="2" BGColor="#EEEEEE"><TR Class="even"><TD><A HRef="#0">Function DayOfMonth2Date(const DOMType: TESBDOMType; const DOW: Byte; const Month, Year: Word): TDateTime;</A></TD></TR><TR Class="odd"><TD><A HRef="#1">Function DayOfMonth2Date(const DOMType: TESBDOMType; const DOW, Month, Year: Integer): TDateTime;</A></TD></TR></Table></P><P><B><A Name="#0">Declaration</A></B><Br><Font Face="Courier New"><B>Function</B> DayOfMonth2Date(<B>const</B> DOMType: <A HREF="IDH_Type_TESBDOMType.htm">TESBDOMType</A>; <B>const</B> DOW: Byte; <B>const</B> Month, Year: Word): TDateTime;</Font><P><B>Description</B><Br />Thus can be used to find the first Wednesday, Last Monday, etc. DOMType can be one of the following:</P><P>domFirst - First occurrence in a Month.</P><P>domSecond - Second occurrence in a Month.</P><P>domThird - Third occurrence in a Month.</P><P>domFourth - Fourth occurrence in a Month.</P><P>domLast - Last occurrence in a Month.</P><P><Table Border="0" Width="100%" BGColor="#000000"><TR><TD><Font Color="#FFFFFF"><B>Parameters</B></Font></TD></TR></Table><Table Class="list" Width="100%" CellSpacing="1" CellPadding="2" BGColor="#EEEEEE"><TR Class="even"><TD><Font Color="Blue">DOMType&nbsp;</Font></TD><TD>the desired Day of Month Type.</TD></TR><TR Class="odd"><TD><Font Color="Blue">DOW&nbsp;</Font></TD><TD>the Day of Week, 1 = Sunday, 7 = Saturady.</TD></TR><TR Class="even"><TD><Font Color="Blue">Month&nbsp;</Font></TD><TD>the month of the year, 1 = Jan, 12 = Dec.</TD></TR><TR Class="odd"><TD><Font Color="Blue">Year&nbsp;</Font></TD><TD>4-digit year such as 1999.</TD></TR></Table></P><P><B>Returns</B><Br>the Date uniquely defined by the above.<P><B>Category</B><Br><A HREF="idh_cat_dtmath.htm">Date/Time Arithmetic Routines</A><Br /><A HREF="idh_cat_monthmath.htm">Month Based Arithmetic Routines</A><Br /><Font Color=#FF0000><H3>Implementation</H3></Font> <table border="0" bgcolor="#FFFED9"  style="margin-top: 10; margin-bottom: 10;"> <tr> <td><pre><B>function</B> DayOfMonth2Date (<B>const</B> DOMType: <A HREF="IDH_Type_TESBDOMType.htm">TESBDOMType</A>; <B>const</B> DOW: Byte;
+     <B>const</B> Month, Year: Word): TDateTime;
+<B>var</B>
+     Ofs: Integer;
+     DT: TDateTime;
+<B>begin</B>
+     <B>if</B> (DOW &lt; 1) <B>or</B> (DOW &gt; 7) <B>then</B>
+          <B>raise</B> EConvertError.Create (rsInvalidDOW);
+     <B>if</B> (Month &lt; 1) <B>or</B> (Month &gt; 12) <B>then</B>
+          <B>raise</B> EConvertError.Create (rsInvalidMonth);
+
+     <B>if</B> DOMType &lt; domLast <B>then</B>
+     <B>begin</B>
+          DT := GetFirstDayOfMonth (Month, Year);
+          Ofs := DOW - DayOfWeek (DT);
+          <B>if</B> Ofs &lt; 0 <B>then</B>
+               Ofs := Ofs + 7;
+          Result := DT + Ofs + 7 * Integer (DOMType);
+     <B>end</B>
+     <B>else</B>
+     <B>begin</B>
+          DT := GetLastDayOfMonth (Month, Year);
+          Ofs := DayofWeek (DT) - DOW;
+          <B>if</B> Ofs &lt; 0 <B>then</B>
+               Ofs := Ofs + 7;
+          Result := DT - Ofs;
+     <B>end</B>;
+<B>End</B>;</pre></td></tr></Table><P><B><A Name="#1">Declaration</A></B><Br><Font Face="Courier New"><B>Function</B> DayOfMonth2Date(<B>const</B> DOMType: <A HREF="IDH_Type_TESBDOMType.htm">TESBDOMType</A>; <B>const</B> DOW, Month, Year: Integer): TDateTime;</Font><Font Color=#FF0000><H3>Implementation</H3></Font> <table border="0" bgcolor="#FFFED9"  style="margin-top: 10; margin-bottom: 10;"> <tr> <td><pre><B>function</B> DayOfMonth2Date (<B>const</B> DOMType: <A HREF="IDH_Type_TESBDOMType.htm">TESBDOMType</A>;
+     <B>const</B> DOW, Month, Year: Integer): TDateTime;
+<B>var</B>
+     Ofs: Integer;
+     DT: TDateTime;
+<B>begin</B>
+     <B>if</B> (DOW &lt; 1) <B>or</B> (DOW &gt; 7) <B>then</B>
+          <B>raise</B> EConvertError.Create (rsInvalidDOW);
+     <B>if</B> (Month &lt; 1) <B>or</B> (Month &gt; 12) <B>then</B>
+          <B>raise</B> EConvertError.Create (rsInvalidMonth);
+
+     <B>if</B> DOMType &lt; domLast <B>then</B>
+     <B>begin</B>
+          DT := GetFirstDayOfMonth (Month, Year);
+          Ofs := DOW - DayOfWeek (DT);
+          <B>if</B> Ofs &lt; 0 <B>then</B>
+               Ofs := Ofs + 7;
+          Result := DT + Ofs + 7 * Integer (DOMType);
+     <B>end</B>
+     <B>else</B>
+     <B>begin</B>
+          DT := GetLastDayOfMonth (Month, Year);
+          Ofs := DayofWeek (DT) - DOW;
+          <B>if</B> Ofs &lt; 0 <B>then</B>
+               Ofs := Ofs + 7;
+          Result := DT - Ofs;
+     <B>end</B>;
+<B>End</B>;</pre></td></tr></Table><P><HR>
+<TABLE BORDER="0" WIDTH="100%" BGCOLOR="#000000"><TR><TD>
+<Font Color=White><Large>HTML generated by <B>Time2HELP</B></Large></Font>
+</TD></TR></Table>
+<Small><A HREF="http://www.time2help.com">http://www.time2help.com</A></Small></Body></HTML>

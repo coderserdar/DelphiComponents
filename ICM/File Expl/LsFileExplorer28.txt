@@ -1,0 +1,1279 @@
+
+Unit LsFileExplorer28.pas  v2.885
+==============================================================================
+
+Archive       :- FileExpl.zip
+
+Components    :- TLsDirTree21,
+                 TLsDirTreeCombo28 and
+                 TLsFilelistView28
+
+Version       :- 2.886 For Delphi 4, 5, 6 and 7 (also for C++Builder 4 - 6)**
+
+                 ** Although not tested by the author, many users reported
+                    that these components are working fine with C++Builder
+                    4, 5 and 6.
+
+
+Author        :- Leo D. Shih <ldshih@telus.net>
+
+Latest update :- January 2006
+
+-------------------------------------------------------------------------------
+
+LICENSE AND DISCLAIMER
+======================
+
+  Copyright (C)1999/2006 Leo D. Shih, All rights reserved
+
+TLsDirTree21, TlsDirTreeCombo28 and TlsFileListView28 (components) are currently
+distributed as Freeware, thus
+
+1. You may copy and distribute verbatim copies of these components as you
+receive them, in any medium, provided that this copyright notice included
+in the source code file (LsFileExplorer28.pas) is kept intact.
+
+2. You may modify the source code of these components to improve their features,
+performance, etc. provided that
+
+  2.1 You may not change the original copyright notice.
+
+  2.2 The modified source code should contain descriptions what you have
+      changed, and your name and e-mail address.
+
+  2.3 Send the modified portion of the source code to the author so that the
+      author may incorporate the modification into future releases of these
+      components, with appropriate acknowledgement.
+
+3. You may use these components, or any part thereof, in your program,
+provided that you meet following conditions:
+
+  3.1 This notice may not be removed or altered from any source distribution,
+      and the origin of these components must not be misrepresented.
+
+  3.2 Appropriated credit to the author should be included in the "AboutForm"
+      or the "HelpFile", and the documentation of your program.
+
+  3.3 If your program is to be distributed as commercial products, in addition
+      to the above conditions, please write to the author for permission.
+
+These components are provided 'as-is', without warranty of any kind, either
+expressed or implied. In no event shall the author be liable for any problems
+or damages arising from the use of these components.
+
+------------------------------------------------------------------------------
+
+ACKNOWLEDGMENTS
+===============
+  I'm most grateful to those people in the Delphi community who have
+  reported bugs, suggested fixings or recommanded improvements.
+
+  In particular, I would like to thank Ales TRtnik for the necessary code 
+  to convert LsFileListview28 into virtual mode; and also to Andreas Roth, 
+  Brad Huggins, Claude Hunter, Detlef Scheil, Harrie Roaymans, Marcelo 
+  Rodrigues, Steve Pinneo, Tom Lisjac, Maximo Yarritu, Bogdan Giusca, 
+  Bernd Ohse, Jake Jones, Martin Berta, Matjaz Prtenjak and Budi Sukmawan
+  for their professional suggestions.
+
+  Also, I would like to thank Bernd Ohse, Andreas Roth, Bernard Bourguignon,
+  Ferruccio Accalai, David Abdaleon, Alberto Meyer, Sam Francke, Zenon
+  Mieszkuniec, Martin Berta, Scarfman Lin, Yoshihoro Sugahara, Matjaz
+  Prtenjak, Olle Johansson, Do-wan Kim and Yasar OZANLAGAN for their 
+  German, French, Italian, Spanish, Brazilian-Portuguese, Dutch, Polish, 
+  Slovak, Chinese, Japanese, Slovenian, Swedish, Korean and Turkish language 
+  translations.
+
+==============================================================================
+
+CONTENTS
+
+  1. Brief Description
+  2. Added Properties
+  3. Added Public Procedures/Functions
+  4. Installation
+  5. Notes on usage
+  6. Limitations
+  7. Supported Languages
+  8. Update History
+
+==============================================================================
+
+1. Brief Description
+====================
+
+  1.1 TLsDirTree21
+  ----------------
+  TLsDirTree21 is a simple yet a fully functional Directory TreeView
+  component, that
+  (a) displays drives/directories in the DirectoryTree and files of the
+      selected directory in a popup FileListView.  Thus, directories can be
+      selected from the DirectoryTree, and files can be selected or opened
+      in the FileListView;
+  (b) suports creating, renaming, deleting, copying, moving and dragging-
+      dropping operations on directories;
+  (c) calculates the size of a selected portion of the directory-tree.
+  (d) connects/disconnects network drives.
+
+  1.2 TLsDirTreeCombo28
+  ---------------------
+  TLsDirTreeCombo28 is a specialized ComboBox with a dropdown Directory
+  TreeView, that displays a hierarchical tree of drives and directories of
+  the File System.
+
+  1.3 TLsFilelistView28 w/TLsFilelistViewPopUp28
+  ----------------------------------------------
+  TLsFilelistView28 is a File ListView component, which is operating in the
+  "virtual mode" and is optimized for high capacity and fast speed access.  
+  In addition to its normal functions, It can also:
+  (a) performs various file management tasks, such as cut, copy, paste, 
+      rename, delete, open, view, send_to or drag-drop operations on files;
+  (b) copy files to, or paste files from, Windows Explorer or other Windows
+      applications;
+  (c) accept dropping files from Windows Explorer;
+  (d) provides statistics on Disk-FreeSpace, Selected-Numbers and -Size.
+
+  Both TlsFilelistView28 and LsDirTree21 provide Chinese, Dutch, French,
+  German, Italian, Japanese, Korean, Polish, Portuguese, Slovak, Slovenian, 
+  Spanish, Swedish and Turkish language support in addition to the default 
+  English language.
+
+
+2. Added properties:
+===================
+
+ 2.1 TLsFilelistView28
+ ---------------------
+
+  2.1.1 Published Properties
+  --------------------------
+
+   About            - Shows the version, release and build information of
+                      this component.
+
+   ColWidth_Name    - Set the width of FileName column, Default 165.
+
+   ColWidth_Size    - Set the width of FileSize column, Default 75.
+
+   ColWidth_Type    - Set the width of FileType column, Default 95.
+
+   ColWidth_Mod     - Set the width of FileLastWriteTime column, Default 115.
+
+   ColWidth_Attr    - Set the width of FileAttributes column, Default 40.
+
+                     (NB:- If the Width of a column is set to zero, that column
+                           will be invisible).
+
+   DateFormat       - Provides eight preset ShortDate Formats and a Customize
+                      option:
+
+                         Option         Format              Remarks
+                         ==========     ================    =================
+                         df_Customize   User configuable    (Default)
+                         df_ddMMyy_DE   dd.MM.yy            German
+                         df_ddMMyy_GB   dd/MM/yy            British / French
+                         df_ddMMyy_IT   dd/MM/yy            Italian
+                         df_ddMMyyyy    dd/MM/yyyy          British
+                         df_MMddyy      MM/dd/yy            American
+                         df_MMddyyyy    MM/dd/yyyy            - " -
+                         df_yyMMdd      yy-MM-dd            Ansi / Japan
+                         df_yyyyMMdd    yyyy-MM-dd            - " -
+
+                      When 'Customize' option is selected, the Regional setting
+                      in Windows Control Panel is used, thus the DateFormat can
+                      be configured by users at runtime.
+
+   TimeFormatStr    - Time Format String is used to convert a Time Value to a
+                      Time string.
+
+                         Option         Remarks
+                         ============   ====================================
+                         tfLonFormat    A LongTimeFormat which displays hours,
+                                        minutes and seconds, in 12-Hour clock
+                                        format.
+                         tfShortFormat  A ShortTimeFormat which displays only
+                                        hours and minutes.
+                         tfCustomize    The Regional setting in Windows Control
+                                        Panel will be used.
+
+   OpenByDblClick   - Option to disable the build-in DblClick procedure, thus
+                      users can code their own OnDblClick event Handler. (It
+                      was named as DblClickToOpen in previous versions)
+
+   OpenByEnter      - Enable or disable the 'Enter-key' to open executable
+                      files.
+
+   Directory        - Currently selected directory that contains files and/or
+                      sub-directories to be displayed in the TLsFilelistView28.
+                      Changing the value of this property will update the
+                      TLsFilelistView28 to display items in the new directory.
+
+   DirTree          - Provides a simple way to connect TLsFilelistView28 to
+                      TLsDirTree21 component.
+
+   DirTreeCombo     - Provides a simple way to connect TLsFilelistView28 to
+                      TLsDirTreeCombo28 component.
+
+   DriveFreeSpace   - Free space on the current drive, in kB.
+
+   
+   FileType         - Determines which file types are displayed based on the
+                      attributes of files. FileTypes included are ftReadOnly,
+                      ftHidden, ftSystem, ftVolumeID, ftDirectory, ftArchive, 
+                      ftNormal.
+
+   FileSize         - File size can be displayed in Bytes or KBs.
+
+   HideFileExt      - If it's set to True, file extensions will not be
+                      displayed.
+
+   Language         - The following language options can be selected at design-
+                      or run-time:
+
+                         lnEnglish      -  English language
+                         lnChinese_Tra  -  Chines_Tradition
+                         lnChinese_Sim  -  Chinese_Simplified
+                         lnDutch        -  Dutch language
+                         lnFrench       -  French language
+                         lnGerman       -  German language
+                         lnItalian      -  Italian language
+                         lnJapanese     -  Japanese language
+                         lnKorean	-  Korean language
+                         lnPolish       -  Polish language
+                         lnPortuguese   -  Portuguese language
+                         lnSlovak       -  Slovak language
+                         lnSlovenian    -  Slovenian language
+                         lnSpanish      -  Spanish language
+                         lnSwedish      -  Swedish language
+                         lnSysDefault   -  depends on SysLocale.PriLangID,
+                                           if it is not supported, then
+                                           default to English.
+
+   Mask             - Limits which files are displayed. Default mask is '*.*'.
+                      (To specify multiple masks, separate the file mask spec.
+                      with semicolons).
+
+   OnItemChange     - A Custom-Event, that is triggered whenever the value of
+                      SelectedItem changes
+
+   PopupMenuEnabled - Option to disable the build-in Context-Menu, thus
+                      allowing users to use the PopupMenu Property for their
+                      own popupmenu.
+
+   SelectedItem     - The FullName of the selected Item (path + ItemName).
+
+   SelectedNumber   - Number of selected items in the current directory.
+
+   SelectedSize     - Total bytes of selected items in the current directory.
+
+   ShortCuts        - Keyboard ShortCuts, including:
+                        -----------------------------------------
+                        Property        Default
+                        ---------       -------------------------
+                        scCopy          Ord('C'),  [ssCtrl]
+                        scCut           Ord('X'),  [ssCtrl]
+                        scPaste         Ord('V'),  [ssCtrl]
+                        scOpen          Ord('O'),  [ssCtrl]
+                        scView          Ord('F'),  [ssCtrl]
+                        scNewFolder     Ord('N'),  [ssCtrl]
+                        scSelectAll     Ord('A'),  [ssCtrl]
+                        scDelete        VK_DELETE, []
+                        scBack          VK_BACK,   []
+                        scRename        VK_F2,     []
+                        scFindFile      VK_F3,     []
+                        scUpdateList    VK_F5,     []
+                        -----------------------------------------
+
+                      These Shortcuts can be enabled, disabled or
+                      re-programmed at design time.
+
+                      NOTE:-  Under D6 & D7, the value of ShortCuts are
+                              expressed as decimal value in the Object
+                              Inspector.  These values generally equal
+                              to the Virtual Key Code plus scShift,
+                              scCtrl or scAlt.  Where
+                                scShift = $2000 ( 8192 decimal)
+                                scCtrl  = $4000 (16384    "   )
+                                scAlt   = $8000 (32768    "   )
+
+                              For example:
+                                scCopy = scCtrl + VK_C
+                                       = 16384 + 67
+                                       = 16451
+
+   ShowFolders      - Specifies whether or not folders are shown in the
+                      FilelistView26 together with files.
+
+   ParentDirEnabled - Option to disable the build-in ParentFolder function
+                      Note:- When enabled, double-click the Parent Folder to
+                             go up one level.
+
+   ParentDirCaption - Option to change the caption of Parent-Folder (default
+                      caption is "Parent").
+
+   LItemColorByATTR - Option to display the caption of Folders/Files in colors, 
+                      in accordance with their attributes, when ViewStyle in
+                      vsList or vsReport.
+
+   LItemColors      - Option to select display colors for ATTR_Archive, 
+                      ATTR_Hidden, ATTR_Readonly and ATTR_System.                             
+
+  2.1.2 Public
+  ------------
+
+   DirectorySize    - Total bytes of files in the current directory, excluding
+                      sub-directories, if any.
+
+ 2.2 TLsDirTreeCombo28
+ ---------------------
+
+  2.2.1 Published
+  ---------------
+
+   About            - Shows the version, release and build information of
+                      this component.
+
+   Selected         - The currently selected treenode in TLsDirTreeCombo28.
+
+   SelectedPath     - The Directory Path of the currently selected treenode in
+                      TLsDirTreeCombo28.
+
+   FileList         - Provides a way to connect TLsDirTreeCombo28 to
+                      TLsFilelistView28.
+
+   ExpandRoot       - Specifies whether the RootNode is expanded.
+
+   TreeHeight       - Set the Height of the drop-down treeview, default is 195.
+
+   Glyph            - An option to load an alternative bitmap to replace the
+                      default Glyph in the button of LsDirTreeCombo28.
+
+   OnPathChange     - A Custom-Event that is triggered whenever the value of
+                      SelectedPath changes.
+
+  2.2.2 Public
+  ------------
+
+   InitialDir       - If a directory path is specified for this property, that
+                      directory will be selected and displayed when the
+                      application runs.
+
+
+ 2.3 TLsDirTree21
+ ----------------
+
+  2.3.1 Published
+  ---------------
+
+   About            - Shows the version, release and build information of
+                      this component.
+
+   FileList         - Provides a way to connect TLsDirTree21 to
+                      TLsFilelistView28.
+
+   FolderType       - Includes ftReadOnly, ftHidden, ftSystem, ftVolumeID, 
+                      ftDirectory, ftArchive, ftNormal.         
+                      Displaying Behavior of folders can be changed by setting 
+                      this property.
+
+   Language         - The following language options can be selected at design-
+                      or run-time:
+
+                         lnEnglish      -  English language
+                         lnChinese_Tra  -  Chinese_Tradition
+                         lnChinese_Sim  -  Chinese_Simplified
+                         lnDutch        -  Dutch language
+                         lnFrench       -  French language
+                         lnGerman       -  German language
+                         lnItalian      -  Italian language
+                         lnJapanese     -  Japanese language
+                         lnKorean       -  Korean language
+                         lnPolish       -  Polish language
+                         lnPortuguese   -  Portuguese language
+                         lnSpanish      -  Spanish language
+                         lnSlovak       -  Slovak language
+                         lnSlovenian    -  Slovenian language
+                         lnSwedish      -  Swedish language
+                         lnTurkish      -  Turkish language  
+                         lnSysDefault   -  depends on SysLocale.PriLangID, if it
+                                           is not supported, then default to
+                                           English.
+
+   PopupMenuEnabled - Option to disable the buildin Context-Menu, thus allow
+                      users to use the PopupMenu Property for their own
+                      popupmenu.
+
+   DragDropEnabled  - Option to enable/disable the Drag-n-Drop function.
+
+   OnDirChange      - A Custom-Event that is triggered whenever the value of
+                      SelectedPath changes.
+
+   OnFileChange     - A Custom-Event that is triggered whenever the value of
+                      SelectedFile changes.
+
+   SelectedPath     - The Directory Path of the currently selected treenode in
+                      the TLsDirTree21.
+
+   SelectedFile     - The FileName( FilePath + FileName) of the selected item
+                      in the popup FileListDlg.
+
+  2.2.2 Public
+  ------------
+
+   InitialDir       - If a directory path is specified for this property, that
+                      directory will be selected and displayed when the
+                      application runs.
+
+
+3. Added Procedures/Functions (Public):
+======================================
+
+ 3.1 TLsFilelistView28
+ ---------------------
+
+   OneLevelUp       - A step back in the directory hierarchy (ie. move to its
+                      parent node).
+
+   CutCopy()        - |
+                      |
+   Paste            - |  Perform copy, move, delete or rename operation on
+                      |  files.
+                      |- Usage of Procedure CutCopy( ) :
+   DeleteItems      - |      - CutCopy(0) for Copy operation,
+                      |      - CutCopy(2) for Cut opration.
+   RenameFile       - |
+
+   FindFile         - To activate Windows FindDialog for locating specified 
+                      files.
+
+   ShowFileProperties - To view or edit the selected item's properties (for
+                      Delphi 4 or higher) 
+
+   OpenItem         - Open executable files or other type of files which have
+                      been associated with their respective applications in the
+                      Windows Registry.
+
+   ViewFile         - Provides programmers with a quick viewer of *.c, *.cpp,
+                      *.dpk, *.bpk, *.dpr, *.bpr, *.h, *.hpp, *.inf, *.ini,
+                      *.pas, *.prg, *.txt, *.doc, *.rtf, *.wri, *.bmp, *.Jpeg,
+                      *.Gif, *.Tiff, *.Png, *.Wmf and *.Ico files
+
+   NewFolder        - Create a new folder.
+
+
+ 3.2 TLsDirTreeCombo28
+ ---------------------
+
+   OpenPath()              - To select a treenode in accordance with the
+                             specified directory path.
+
+   ResetTreeView           - Reload the TLsDirTreeView.
+
+   ConectNetResource()     - Starts a Map Network Drive Dialog, which lets you
+                             associate drive letter(s) with shared directory
+                             (or directories) on another computer(s) in the
+                             network.
+                             The drive letter will then provide seamless access
+                             to the network shared drive as if it were another
+                             drive on the locaal system.
+
+   DisconnectNetResource() - Starts a Disconnect Network Drive Dialog for
+                             disconnecting from network drive(s).
+
+
+ 3.3 TLsDirTree21
+ ----------------
+
+   OpenPath()       - To select a treenode in accordance with the specified
+                      directory path.
+
+   ReLoad           - Reload the TLsDirTree.
+
+   AddNewNode()     - Add a new directory to the file system.
+
+   DeleteNode()     - Delete an existing directory from the file system.
+
+   CutOrCopyNode() |- Perform Copy or Move operation on directories.
+   PasteNode()     |  Using :
+                   |     - CutOrCopyNode(0) for copying directory and
+                   |                        its contents (including
+                   |                        sub-directories and their
+                   |                        contents, if any).
+                   |     - CutOrCopyNode(2) for moving directory and
+                   |                        its contents. (i.e. Cut
+                   |                        operation).
+
+   GetTreeSize()    - Calculate the TreeSize of the selected Directory and all
+                      its sub-directories.
+
+   ShowFolderContents()    - Activate the popup FileListDlg, to display files in
+                             the selected directory.
+
+   ConectNetResource()     - Starts a Map Network Drive Dialog, which lets you
+                             associate drive letter(s) with shared directory
+                             (or directories) on another computer(s) in the
+                             network.
+                             The drive letter will then provide seamless access
+                             to the network shared drive as if it were another
+                             drive on the locaal system.
+
+   DisconnectNetResource() - Starts a Disconnect Network Drive Dialog for
+                             disconnecting from network drive(s).
+
+   ShowNodeProperties()    - Activate 'property sheet' of the selected
+                             node, for Delphi 4 or higher.
+
+4. Installation
+===============
+
+ 4.1 Unzip FileExpl.zip to any directory, then copy the following files into a
+     directory you choose. 
+
+       LsComp.inc
+       LsConsts.pas
+       LsTheme.pas
+       LsFileExplorer28.dcr
+       LsFileExplorer28.pas
+       LsFileExplorer28.res
+
+     Select "Tools\Environment Option ..." menu item in Delphi IDE, then goto
+     "Library" tab to add the full path of the above directory into Delphi's 
+     Library search path.
+
+
+ 4.2 Install into LsComp package:
+
+   - Use "File\Open ..." menu item in Delphi IDE to open "LsComp.dpk".
+
+   - When "Package ..." dialog appears, click "Compile" then "Install"
+     buttons to install and register VCLs in the package.
+
+   - Right click the "Package..." dialog to save the package source.   
+
+ 4.3 Alternately, all three components can be added into an existing Package,
+     eg. Samples or Delphi User's Components Package, by following steps:
+
+   - Choose Component|Install Component; ensure that 'Into existing package'
+     tab is selected and the 'Package file name' is correct.
+
+   - From Install Component Dialog, click Browse.
+
+   - In the Unit FileName Dialog, navigate to your chosen directory and
+     select LsFileExplorer28.pas, LsFileExplorer28.dcr, LsComp.inc, 
+     LsConsts.pas and LsTheme.pas, then click Open.
+
+   - In the Install Component Dialog, click OK to compile and install the
+     package.
+
+   - Finally, right-click the "Package ..." diallog to save the package.
+
+
+5. Notes on Usage
+=================
+
+5.1 Interconnecting components
+------------------------------
+
+If you use both TLsDirTree21 (or TLsDirTreeCombo28) and TLsFilelistView28
+components in an application, they must be mutually connected through the use
+of the TLsDirTree21's (or TLsDirTreeCombo28's) 'FileList' property and the
+TLsFileListView28's 'DirTree' property (or 'DirTreeCombo' property if
+TLsDirTreeCombo28 is used). Once they are interconnected, changes in one
+component will be automatically reflected in the other component.
+
+For example, the LsDirTree21 and LsFilelistView28 components in your application
+are named as LsDirTree211 and LsFilelistView281 respectively. You can use Object
+Inspector to set LsDirTree211's 'FileList' property to LsFilelistView281;
+likewise, set LsFilelistView281's 'DirTree' property to LsDirTree211.
+
+
+5.2 ShortCut Keys (Keyboard Commands)
+-------------------------------------
+
+     5.2.1 TLsDirTreeCombo28
+     ==========================================================================
+     ShortCut Key(s)   Action
+     ----------------  --------------------------------------------------------
+     RightArrow        Expand the current selected node, if it is not expanded
+
+     LeftArrow         Collapse the current selected node, if it is expanded
+
+     F4                Display LsDirTreeView
+
+     Esc               Close LsDirTreeView
+
+     DownArrow         If current selected node is expanded, move to nextChild;
+                       otherwise move to nextvisible node
+
+     UpArrow           If current node is expanded, move to preChild; otherwise
+                       move to prevVisible node
+
+     Enter             Set the SelectedPath
+
+     ==========================================================================
+
+     5.2.2 TLsDirTree21
+     ==========================================================================
+     ShortCut Key(s)   Action
+     ----------------  --------------------------------------------------------
+     RightArrow        Expand the current selected node, if it is not expanded
+
+     LeftArrow         Collapse the current selected node, if it is expanded
+
+     DownArrow         If current selected node is expanded, move to nextChild;
+                       otherwise move to nextvisible node
+
+     UpArrow           If current node is expanded, move to preChild; otherwise
+                       move to prevVisible node
+
+     Shift+F10         Display context menu for selected node  (not for D3 & D4)
+
+     Alt + Enter       View Properties for the selected folder (not for D3)
+
+     Ctrl + C          Copy
+
+     Ctrl + X          Cut
+
+     Ctrl + V          Paste
+
+     Ctrl + N          Create a new folder
+
+     F2                Rename the selected folder
+
+     F5                Refresh
+
+     on numeric keypad
+     -----------------
+     *                 Expand everything under the selected node
+
+     +                 Expand the selected node
+
+     -                 Collapse the selected node
+
+     Drag-Drop
+     ---------
+
+     Left-MouseButton  Move the selected folder to another node.
+
+     Left-MouseButton  Copy the selected folder to another node.
+      + Ctrl-Key
+
+     ==========================================================================
+
+
+     5.2.3 TLsFilelistView28
+     ==========================================================================
+     ShortCut Key(s)   Action
+     ----------------  --------------------------------------------------------
+     Ctrl+A            Select All
+
+     Ctrl+C            Copy
+
+     Ctrl+X            Cut
+
+     Ctrl+V            Paste
+
+     Ctrl+O            Open Files
+
+     Ctrl+F            Quick view
+
+     Ctrl+N            Create New Folder
+
+     Delete            Send selected items to Recycle Bin
+
+     Enter             Open (Files or Folders)
+
+     BackSpace         Go to the parent folder
+
+     F2                Rename file
+
+     F3                Find Files
+
+     F5                Refresh TLsFilelistView28
+
+                       *******************************************************
+                       NOTE: The above ShortCut Keys can be enabled, disabled
+                             or reprogrammed at Design Time
+                       *******************************************************
+
+     F4                Display dropdown Dirtreeview of LsDirTreeCombo, if
+                       connected.
+
+     Esc               Close dropdown Dirtreeview of LsDirTreeCombo, if
+                       connected.
+
+     Shift+F10         Display context menu for selected item  (not for D3 &
+                       D4)
+
+     Shift+Del         Delete file immediately without putting it in Recycle
+                       Bin
+
+     UpArrow           Move up
+
+     DownArrow         Move down
+
+
+     Drag-Drop
+     ---------
+     Left-MouseButton  Move the selected file(s) to LsDirTree21.
+
+     Left-MouseButton  Copy the selected file(s) to LsDirTree21.
+      + Ctrl-key
+
+     ==========================================================================
+
+5.3 Popup Context Menu
+----------------------
+
+     5.3.1 LsFilelistView28Popup
+     =========================================================================
+     Menu Name            Commands / Remarks
+     ---------------      ----------------------------------------------------
+     Open                 OpenItem
+     View                 ViewFile
+     ---------------
+     Send To >            To open Send_To SubMenu, which contains:
+                           - Any Folder ... ,
+                           - Clipboard as Contents,
+                           - Clipboard as FileName,
+                           - Desktop as ShortCut,
+                           - Removable Disk(s), and
+                           - LinkFiles in \Windows\SendTo directory.
+     ---------------
+     Cut                  CutCopy(2)
+     Copy                 CutCopy(0)
+     Paste                Paste
+     ---------------
+     Rename File          RenameFile
+     Delete               DeleteItems
+     ---------------
+     Properties           ShowFileProperties / Show selected item's properties.
+     ---------------
+     New Folder           NewFolder / Create a new folder.
+     =========================================================================
+
+
+     5.3.2 LsDirTree21PopUp
+     =========================================================================
+     Menu Name           Commands / Remarks
+     -----------------   ----------------------------------------------------
+     Add Folder          AddNewNode()         / Creates a new directory
+     Rename Folder                            / Rename an existing directory
+     Delete Folder       DeleteNode()         / Delete an existing directory
+     -----------------
+     Cut                 CutOrCopyNode()      / CutOrCopyNode(2) for "Cut"
+     Copy                    - " -            / CutOrCopyNode(0) for "Copy"
+     Paste               PasteNode()          / "Paste" operation
+     -----------------
+     TreeSize            GetTreeSize()        / Calculate the TreeSize from
+                                                selected Directory
+     Folder Contents     ShowFolderContents   / Popup FileListDlg for
+                                                displaying files in the
+                                                selected directory
+     -----------------
+     Map Network Drive   ConnectNetResource() / Connect to network drive(s)
+
+     DisConnect Network  DisconnectNetResource() / disconnect network drive(s)
+       Drive
+     -----------------
+     Properties          ShowNodeProperties()   / Show selected Drive's or
+                                                  Folder's properties.
+     =========================================================================
+
+     NB:- These file- and folder-management operations can easily be
+          linked to the application's main menu by adding few lines
+          of code.
+
+5.4 If MultiSelect Property of TLsFilelistView28 is set to True, GetNextItem
+    function or a for-loop can be used to find all selected items.
+
+
+6. Limitation
+=============
+
+    Since these components are designed mainly for file management, Special
+    DesktopFolders are not retrieved from the shell's name space and
+    displayed in both components.
+
+7. Supported Lanaguages
+=======================
+
+   - English (Default)
+   - Chinese_Tradition
+   - Chinese_Simplified
+   - Dutch
+   - French
+   - German
+   - Italian
+   - Japanese
+   - Korean
+   - Polish
+   - Portuguses
+   - Slovak
+   - Slovenian
+   - Spanish
+   - Swedish
+   - Turkish
+
+   Many thanks to:
+
+     Scarfman Lin         [scarfman@fineart.com.tw] 
+     Sam Francke          [s.j.francke@hccnet.nl]
+     Bernard Bourguignon  [bernard.bourguignon@free.fr]
+     Bernd Ohse           [ELTIME@t-online.de]
+     Andreas Roth         [AndyRoth.ffm@t-online.de]
+     Ferruccio Accalai    [faccalai@tiscalinet.it]
+     Yoshihiro Sugahara   [yoshi-su@jade.plala.or.jp]
+     Zenon Mieszkuniec    [sp4dge@poczta.onet.pl]
+     Alberto Meyer        [tmedia@techmedia-software.com]
+     Martin Berta         [martin.berta@pobox.sk]
+     Matjaz Prtenjak      [Matjaz@matjazev.net]
+     David Abdaleon       [abdaleon@yahoo.es]
+     Olle Johansson       [Olle.johansson@stockholm.bostream.se]
+     Do-wan Kim		  [pupplecoffee@naver.com]
+     Yasar OZANLAGAN      [yasarozanlar@yahoo.com] 
+
+   for their Chinese, Dutch, French, German, Italean, Japanewse, Polish,
+   Portuguses, Slovak, Slovenian, Spanish, Swedish, Korean and Turkish
+   language translations of the ResourceString.
+
+8 Update History
+================
+
+ version 2.886
+ -------------
+
+ - Add Turkish language support.
+
+ - Amended Korean language translation. 
+ 
+ - Revised TFileType.
+
+ version 2.885
+ -------------
+ 
+ - Add Korean language support.
+ 
+ - fixed a minor designing time error.
+ 
+ - revised Procedure OneLevelUp in LsFileListview28.
+ 
+ version 2.884
+ -------------
+
+ - Fixed irregularities in TLsFileListview28's QuickSort function,
+                                                                                                                                                                                                                                                 
+ version 2.883
+ -------------
+
+ - Improved the visual effect of TLsFileListview28 under Windows XP.
+
+ - Added Procedure CustomDrawItem to TLsFileListview28, thus the colour
+   of ListItems can be displayed in accordance with their attributes.
+   (refers to properties LItemColorByATTR and LItemColors). 
+
+ - Fixed an AV error, when no files in the folder can match the specifed
+   File-Masks.  
+
+ version 2.882
+ -------------
+
+ - Converted LsFileListview28 into virtual mode.
+
+ - Added Swedish language support.
+
+ version 2.881
+ -------------
+
+ - Added Slovenian language support.
+
+ - Added re-programmable ShortCut keys to LsFileListview 28.
+
+ - added FolderType property to LsDirTree21.
+
+ - Changed the method of loading Shell32.dll functions from 'implicit'
+   to 'explicit' loading (i.e. DLL is loaded dynamically on demand), thus
+   enabling it to be compatible with C++Builder.
+
+ - Added some cosmetic changes.
+
+ version 2.880
+ -------------
+
+ - Added Japanese language support.
+
+ - Added 'TNetPathDlg' for Mapping Network Drives.
+
+ - Fixed problem in TLsDirTree21 when 'Property DragDropEnabled' set to False.
+
+ version 2.879
+ -------------
+
+ - Added Chinese language support.
+
+ - Added mouse wheel support to LsDirTreeCombo28.
+
+ - Recoded 'procedure ConnectNetResource( )' in LsDirTreeCombo28 and LsDirTree21
+   in order to simplify the 'Map Network Drive' task.
+
+ - Fixed a conflict between Copy/Paste and Drag/Drop operations.
+
+ version 2.878
+ -------------
+ 
+ - Fixed an obscure problem in procedure OpenPath( ).
+
+ - Added drag-n-drop capability to LsDirTree21 and LsFileListview28.
+
+ - Added copying files to, or pasting files from, Windows Explorer; and 
+   accepting dropping files from Windows Explorer capabilities to 
+   LsFilelistview28.
+
+ - Added protection on any attempt to delete Drives or Parent-folder. 
+
+ version 2.877
+ -------------
+
+ - Added compatibility with Delphi 7, thus this release will fully support
+   Delphi versions 3 upto 7. 
+
+ - Added change-notification function. It detects any changes in the file-system 
+   made by other applications, then updates appropriately.
+
+ version 2.876
+ -------------
+
+  - Added Polish and Slovak language support.
+
+  - Added 'property FileSize' to LsFileListview28, thus file size can be 
+    displayed in KBs or Bytes.
+
+  - Eliminated surplus character "\.." at the end of SelectedPath in 
+    LsDirTreeCombo28 after going up 1 level by double-click 'Up'.
+
+  - SelectedPath in LsDirTreeCombo28 will be displayed as Hint.
+
+  - Added 'Shift + Del' shortCut in LsFileListView28's KeyDown event handler,
+    in order to delete file immediately without putting it in Recycle Bin.
+
+  - Fixed minor irregularities in procedures WMLButtonDown( ), BtnClick( ),
+    KeyDown( ) and WMKillFocus( ) in LsDirTreeCombo28.
+
+ version 2.875
+ -------------
+
+  - Added Dutch language support.
+
+  - Added Property Selected to TLsDirTreeCombo28.
+
+  - Recoded 
+      Procedure TLsDirTreeView.WMLButtonDown( ) and
+      Procedure TLsDirTree21.MouseDown( ) ,
+    Thus, TLsDirTreeCombo28 and TLsDirTree21 will not update if an empty 
+    removable drive or CD-Rom is selected. 
+
+  - Also recoded Procedure OpenPath( ) in LsDirTreeCombo28 to improve its
+    usage.   
+
+ version 2.874
+ -------------
+
+  - Added Italian language support.
+
+  - Fixed Windows Desktop Short-Cut problem under Windows NT/2K/XP.
+
+  - Changed "SelectedSize" and "DriveFreeSpace" from longInt to Int64.
+
+  - Fixed irregular phenomena of the Up-Arrow and Down-Arrow keys operation
+    in LsFileListview28, after going up its Parent folder.
+
+ version 2.873
+ -------------
+
+  - Added Brazilian-Portuguese language support.
+
+  - Modified some French translations.
+
+  - Fixed displaying image problem with Windows XP.
+
+  - Add function to remember previousely selected folder in LsFileListview28
+    after going up one level.
+
+ version 2.872
+ -------------
+
+  - Added French, German and Spanish language support to both LsDirTree21
+    and LsFileListview28, through "Property Language".
+
+  - Added "Property ParentDirCaption" to LsFileListview28.
+
+  - Fixed proliferation of "ParentFolder" icon (Parent_L28.bmp) in the
+    system's image list.
+
+  - Improved GetTreeSize function in LsDirTree21.
+
+ version 2.871
+ -------------
+
+  - Fixed memory leak.
+
+  - Improved open folder performance on network drives.
+
+ version 2.870
+ -------------
+
+  - Added Delphi 6 support.
+
+  - Corrected misplacement of 'Dropdown button' in LsDirTreeCombo28.
+
+  - Fixed possible problem in LsFileListView28's HideFileExt property.
+
+  - Added new 'ParentDirEnabled' property to LsFileListView28.
+
+  - Moved 'InitialDir' property in LsDirTree21 and LsDirTreeCombo28 from
+    'Published' to 'Public' declaration.
+
+ version 2.862
+ -------------
+
+  - Eliminated the blank button on Task-bar, created by the Dropdown
+    TLsDirTreeview of TLsDirTreeCombo28.
+
+  - Add MenuItem 'Properties' to LsDirTree21's PopUp context menu.
+
+ Version 2.861
+ -------------
+
+  - Fixed 'ConvertError' in comparison of FileTime.
+
+  - MenuItem 'Attribute' in LsFileListview28's context menu has been recoded to
+    display properties of the selected item under Delphi4 or high.
+
+ Version 2.86
+ ------------
+
+  - Added  'Cut', 'Copy', and 'Paste' functions to LsDirTree21's context menu
+    for copying or moving operations of directories and their contents.
+
+ Version 2.85
+ ------------
+
+  - All LoadBitmap( ) functions were replaced by LoadImage( ) functions, thus
+    bitmaps with 256-color can be loaded from resource files.
+
+  - Added 'ExtractFileNameOnly( )' to global functions.
+
+  - Added 'property About' to all three components.
+
+  - Added 'property InitialDir to LsDirTree21 and LsDirTreeCombo28.
+
+  - Added MenuItem 'SendTo DeskTop as ShortCut' to LsFileListView28's
+    context menu.
+
+  - LsFileListView28's 'Property TimeFormatStr' completely recoded.
+
+  - LsFileListView28's 'Procedure BtnClick( )' revised, in order to make its
+    behavior similar to that of Windows Explorer.
+
+  - LsDirTreeCombo28's 'Procedure BtnClick( )' revised to allow LsDirTreeView
+    to popup above LsDirTreeCombo28, if space below is insufficient.
+
+
+ Version 2.84
+ ------------
+
+    KeyDown and KeyUp event-hanlers were recoded in order to be compliance with
+    the keyboard shortcuts used by Window Explorer.
+
+ Version 2.83
+ ------------
+
+    The inherited OnChange Events were replaced by Custom-Events (i.e.
+    OnDirChange & OnFileChange in LsDirTree21, OnPathChange in LsDirTreeCombo28,
+    and OnItemChange in LsFileListView28) to avoid errors caused by non- or
+    multi-triggering.
+
+ Version 2.82
+ ------------
+
+    (A) LsDirTree21
+
+      - FilelistDlg is now incorporated into LsDirtree21 instead of a
+        separate class.
+
+      - Added 'ConnectNetResource' and 'DisConnectNetResource' procedures, for
+        mapping and disconnecting network drives.
+
+    (B) LsFileListView28
+
+      - Surplus code fragments, that were originally for Delphi 2, have been
+        deleted.
+
+    Bitmaps for Resource file are also distributed.
+
+ Version 2.81
+ ------------
+
+    (A) LsFileListView28
+
+      - Fixed bug in the LargeImage, which would cause incorrect icon
+        for the compiled application under certain conditions.
+
+      - Enhanced NewFolder and DeleteItems procedures in LsFileListView28
+        in order to improve the user interface.
+
+ Version 2,80
+ ------------
+    (A) LsDirTree21
+
+      - Add TLsFileListDlg Class for creating a popup FileList-Dialog,
+        i.e. a simplified FileListView, that will display files in the
+        selected directory of LsDirTree21.
+
+      - Add ShowFolderContents procedure to activate LsFileListDlg.
+
+      - Fixed bug in AddNewNode( )
+
+    (B) LsDirTreeCombo28
+
+      - Fixed bug when compiled under Japanese edition of Delphi.
+
+    (C) LsFilelistView28:
+
+      - procedure SetColumnWidth() replaced by properties:
+           ColWidth_Name,
+           ColWidth_Size,
+           ColWidth_Type,
+           ColWidth_Mod, and
+           ColWidth_Attr.
+
+      - When ViewStyle = vsReport, the File Size will be displayed in KBs and
+        the Folder Size will be blank.
+
+      - The "Parent" folder will stay at top, regardless sorting directions.
+
+      - Fixed "Invalid image" error, when the icon-size is changed from default
+        size of 32x32 (in Windows' Display Property | Appearance | Icon ).
+
+
+ Version 2.70
+-------------
+    (A) LsDirTree20:
+
+      - Add Function GetTreeSize.
+
+      - Add Bipmaps to its PopupMenu.
+
+    (B) LsFilelistView27:
+
+      - Added Property HideFileExt.
+
+      - Added Property TimeFormatStr
+
+      - Revised Procedure SetDateFormat to increse preset DateFormats
+        and to provide customize option.
+
+      - Added Bitmaps to the ColumnHeaders to indicate the sorted column
+        and its direction of sorting.
+
+      - Added Bitmaps to the its PopupMenu.
+
+      - Added a 'Parent' folder at the top of filelist. Double-click on it,
+        will go up one level (similar to Procedure OneLevelUp).
+
+      - Enhancements to various functions and procedures.
+
+
+ Version 2.60
+ ------------
+    - Added a Directory-TreeView component 'TLsDirTree20'.
+
+    - Revised the KeyDown Event handler in TLsDirTreeCombo26.
+
+    - Included icons in Send-To context menu (for D4 and D5).
+
+    - Fixed bug that keep the drop-down LsDirTreeView on Top, when using
+      Alt-Tab key to switch to other running application.
+
+ Version 2.53
+ ------------
+    - Added PopupMenu and DblClickEnabled Properties to TLsFilelistView25.
+
+    - Fixed 'Integer overflow or Floating point error' generated by Functions
+      GetDiskSizze() or GetFreeDiskSize(). if the disk size or the logical
+      partition size is larger than 4GB.
+
+    - Fixed bug in Procedure TLsDirtreeCombo().
+
+    - Compiler Directives modified in order to be compatible with Delphi 5.
+
+ Version 2.52
+ ------------
+    - Added ShortCut keys to TLsDirTreeCombo25, and revised ShortCut keys
+      in TLsFilelistView25 in order to conform with standard shortcuts
+      used by Windows Explorer.
+
+    - Added procedure FindFile to TLsFilelistView25.
+
+    - In LsFilelistView25, Public Property FileName has been renamed to
+      SelectedItem to reflect its function and FileAttrhas been declared
+      as public.
+
+    - Fixed bug that keep the drop-down LsDirTreeView on Top, even the
+      application that owns TLsDirTreeCombo25, has been SentToBack.
+
+    - Incorporated patches to TLsFilelistView25 to avoid possible AV errors.
+
+ Version 2.51
+ ------------
+    - Fixed the undesired behavior of TLsDirTreeCombo25's dropdown
+      treeview, if it's located on any component other than a TForm.
+
+ Version 2.50
+ ------------
+    - TLsDirComboBox has been replaced by TLsDirTreeCombo25, in order to
+      provide a hierarchical treeview of the file system.
+
+    - Added SetColumnWidth() procedure to TLsFilelistView25.
+
+    - Added ShowFolders property to TLsFilelistView25.
+
+    - Added 'Anchors', 'BiDiMode' and 'Constraints' properties for Delphi
+      version 4.xx.
+
+    - Added Attributes to Context Menu
+
+    - Send_To SubMenu has been revised.
+
+    - Fixed bug in TLsFilelistView25's AddFiles() function.
+
+ Version 2.00
+ ------------
+    - Use Windows API functions to perform copy, move, rename,
+      delete, and other operations on files.
+
+    - Added DriveFreeSpace, SelectedNumber and SelectedSize
+      properties.
+
+    - Also added an Popup Context Menu to TLsFilelistView20 for
+      file operations.
+
+ Version 1.20
+ ------------
+    - Added compiler directives to migrate both components to
+      Delphi version 4.
+
+ Version 1.10
+ ------------
+    - Fixed bugs in TLsFilelistView's Mask property to allow
+      folders and filtered files to be displayed simultaneously.
+
+    - Fixed bugs in TLsDirTreeCombo10's Click procedure.
+
+ Version 1.00
+ ------------
+    - First development.
+
+ Note :-   Latest patches in the source code are flagged by
+           '//'+ minor version numbers.
+           eg. //51 indicates changes made in version 2.51
+-----------------------------------------------------------------------------

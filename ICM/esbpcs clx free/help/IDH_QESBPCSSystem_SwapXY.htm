@@ -1,0 +1,174 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+<META NAME="GENERATOR" Content="Time2HELP 1.0; Standard Template">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html;CHARSET=iso-8859-1">
+<TITLE>SwapXY</TITLE>
+<Style>Body, TD {font-family: "Verdana"; font-size: 10pt};
+PRE {font-size: 10pt; margin-top: 0; margin-bottom: 0}
+TR.odd {background-color: #F8F8F8};
+TR.even {background-color: #EEEEEE};
+Table.list {background-color: #FFFFFF};
+TD {vertical-align : top}
+</Style>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<BASEFONT NAME="verdana" Size="2"><Table Border="0" Width="100%" BGColor="#FFFFFF"><TR><TD><Font Color="#000000F"><B>SwapXY Routines</B></Font></TD></TR></Table>Swap 2 Values using a Temp Value.<P><B>Unit</B><Br><A HREF="IDH_Unit_QESBPCSSystem.htm">QESBPCSSystem</A><P><Table Border="0" Width="100%" BGColor="#000000"><TR><TD><Font Color="#FFFFFF"><B>Overloaded Variants</B></Font></TD></TR></Table><Table Class="list" Width="100%" CellSpacing="1" CellPadding="2" BGColor="#EEEEEE"><TR Class="even"><TD><A HRef="#0">Procedure SwapXY(var X, Y: Boolean);</A></TD></TR><TR Class="odd"><TD><A HRef="#1">Procedure SwapXY(var X, Y: Char);</A></TD></TR><TR Class="even"><TD><A HRef="#2">Procedure SwapXY(var X, Y: Byte);</A></TD></TR><TR Class="odd"><TD><A HRef="#3">Procedure SwapXY(var X, Y: ShortInt);</A></TD></TR><TR Class="even"><TD><A HRef="#4">Procedure SwapXY(var X, Y: Word);</A></TD></TR><TR Class="odd"><TD><A HRef="#5">Procedure SwapXY(var X, Y: SmallInt);</A></TD></TR><TR Class="even"><TD><A HRef="#6">Procedure SwapXY(var X, Y: LongWord);</A></TD></TR><TR Class="odd"><TD><A HRef="#7">Procedure SwapXY(var X, Y: LongInt);</A></TD></TR><TR Class="even"><TD><A HRef="#8">Procedure SwapXY(var X, Y: Int64);</A></TD></TR><TR Class="odd"><TD><A HRef="#9">Procedure SwapXY(var X, Y: Extended);</A></TD></TR><TR Class="even"><TD><A HRef="#10">Procedure SwapXY(var X, Y: Double);</A></TD></TR><TR Class="odd"><TD><A HRef="#11">Procedure SwapXY(var X, Y: Single);</A></TD></TR><TR Class="even"><TD><A HRef="#12">Procedure SwapXY(var X, Y: TESBCurrency);</A></TD></TR><TR Class="odd"><TD><A HRef="#13">Procedure SwapXY(var X, Y: TESBLongCurrency);</A></TD></TR><TR Class="even"><TD><A HRef="#14">Procedure SwapXY(var X, Y: Currency);</A></TD></TR><TR Class="odd"><TD><A HRef="#15">Procedure SwapXY(var X, Y: TESBComplex);</A></TD></TR><TR Class="even"><TD><A HRef="#16">Procedure SwapXY(var X, Y: TESBFraction);</A></TD></TR><TR Class="odd"><TD><A HRef="#17">Procedure SwapXY(var X, Y: TESBMixedFraction);</A></TD></TR><TR Class="even"><TD><A HRef="#18">Procedure SwapXY(var X, Y: TDateTime);</A></TD></TR><TR Class="odd"><TD><A HRef="#19">Procedure SwapXY(var X, Y: TPoint);</A></TD></TR><TR Class="even"><TD><A HRef="#20">Procedure SwapXY(var X, Y: TRect);</A></TD></TR><TR Class="odd"><TD><A HRef="#21">Procedure SwapXY(var X, Y: TESBImperial);</A></TD></TR></Table></P><P><B><A Name="#0">Declaration</A></B><Br><Font Face="Courier New"><B>Procedure</B> SwapXY(<B>var</B> X, Y: Boolean);</Font><P><B>Description</B><Br />This Pascal code is faster than our previous BASM code WHEN Delphi 4 (and above) has Optimization Turned On.</P><P><Table Border="0" Width="100%" BGColor="#000000"><TR><TD><Font Color="#FFFFFF"><B>Parameters</B></Font></TD></TR></Table><Table Class="list" Width="100%" CellSpacing="1" CellPadding="2" BGColor="#EEEEEE"><TR Class="even"><TD><Font Color="Blue">X&nbsp;</Font></TD><TD>First Value to Process.</TD></TR><TR Class="odd"><TD><Font Color="Blue">Y&nbsp;</Font></TD><TD>Second Value to Process.</TD></TR></Table></P><P><B>Category</B><Br><A HREF="idh_cat_extrastrings.htm">Extra String Handling Routines</A><Br /><A HREF="idh_cat_intmath.htm">Arithmetic Routines for Integers</A><Br /><A HREF="idh_cat_floatmath.htm">Arithmetic Routines for Floats</A><Br /><A HREF="idh_cat_memops.htm">Memory Operations</A><Br /><A HREF="idh_cat_complexmath.htm">Complex Number Arithmetic Routines</A><Br /><A HREF="idh_cat_fracmath.htm">Fraction Arithmetic Routines</A><Br /><A HREF="idh_cat_finmath.htm">Financial Arithmetic Routines</A><Br /><A HREF="idh_cat_dtmath.htm">Date/Time Arithmetic Routines</A><Br /><A HREF="idh_cat_impmath.htm">Arithmetic Routines for Mixed Imperials</A><Br /><Font Color=#FF0000><H3>Implementation</H3></Font> <table border="0" bgcolor="#FFFED9"  style="margin-top: 10; margin-bottom: 10;"> <tr> <td><pre><B>procedure</B> SwapXY (<B>var</B> X, Y: Boolean);
+<B>var</B>
+     Temp: Boolean;
+<B>begin</B>
+     Temp := X;
+     X := Y;
+     Y := Temp;
+<B>End</B>;</pre></td></tr></Table><P><B><A Name="#1">Declaration</A></B><Br><Font Face="Courier New"><B>Procedure</B> SwapXY(<B>var</B> X, Y: Char);</Font><Font Color=#FF0000><H3>Implementation</H3></Font> <table border="0" bgcolor="#FFFED9"  style="margin-top: 10; margin-bottom: 10;"> <tr> <td><pre><B>procedure</B> SwapXY (<B>var</B> X, Y: Char);
+<B>var</B>
+     Temp: Char;
+<B>begin</B>
+     Temp := X;
+     X := Y;
+     Y := Temp;
+<B>End</B>;</pre></td></tr></Table><P><B><A Name="#2">Declaration</A></B><Br><Font Face="Courier New"><B>Procedure</B> SwapXY(<B>var</B> X, Y: Byte);</Font><Font Color=#FF0000><H3>Implementation</H3></Font> <table border="0" bgcolor="#FFFED9"  style="margin-top: 10; margin-bottom: 10;"> <tr> <td><pre><B>procedure</B> SwapXY (<B>var</B> X, Y: Byte);
+<B>var</B>
+     Temp: Byte;
+<B>begin</B>
+     Temp := X;
+     X := Y;
+     Y := Temp;
+<B>End</B>;</pre></td></tr></Table><P><B><A Name="#3">Declaration</A></B><Br><Font Face="Courier New"><B>Procedure</B> SwapXY(<B>var</B> X, Y: ShortInt);</Font><Font Color=#FF0000><H3>Implementation</H3></Font> <table border="0" bgcolor="#FFFED9"  style="margin-top: 10; margin-bottom: 10;"> <tr> <td><pre><B>procedure</B> SwapXY (<B>var</B> X, Y: ShortInt);
+<B>var</B>
+     Temp: ShortInt;
+<B>begin</B>
+     Temp := X;
+     X := Y;
+     Y := Temp;
+<B>End</B>;</pre></td></tr></Table><P><B><A Name="#4">Declaration</A></B><Br><Font Face="Courier New"><B>Procedure</B> SwapXY(<B>var</B> X, Y: Word);</Font><Font Color=#FF0000><H3>Implementation</H3></Font> <table border="0" bgcolor="#FFFED9"  style="margin-top: 10; margin-bottom: 10;"> <tr> <td><pre><B>procedure</B> SwapXY (<B>var</B> X, Y: Word);
+<B>var</B>
+     Temp: Word;
+<B>begin</B>
+     Temp := X;
+     X := Y;
+     Y := Temp;
+<B>End</B>;</pre></td></tr></Table><P><B><A Name="#5">Declaration</A></B><Br><Font Face="Courier New"><B>Procedure</B> SwapXY(<B>var</B> X, Y: SmallInt);</Font><Font Color=#FF0000><H3>Implementation</H3></Font> <table border="0" bgcolor="#FFFED9"  style="margin-top: 10; margin-bottom: 10;"> <tr> <td><pre><B>procedure</B> SwapXY (<B>var</B> X, Y: SmallInt);
+<B>var</B>
+     Temp: SmallInt;
+<B>begin</B>
+     Temp := X;
+     X := Y;
+     Y := Temp;
+<B>End</B>;</pre></td></tr></Table><P><B><A Name="#6">Declaration</A></B><Br><Font Face="Courier New"><B>Procedure</B> SwapXY(<B>var</B> X, Y: LongWord);</Font><Font Color=#FF0000><H3>Implementation</H3></Font> <table border="0" bgcolor="#FFFED9"  style="margin-top: 10; margin-bottom: 10;"> <tr> <td><pre><B>procedure</B> SwapXY (<B>var</B> X, Y: LongWord);
+<B>var</B>
+     Temp: LongWord;
+<B>begin</B>
+     Temp := X;
+     X := Y;
+     Y := Temp;
+<B>End</B>;</pre></td></tr></Table><P><B><A Name="#7">Declaration</A></B><Br><Font Face="Courier New"><B>Procedure</B> SwapXY(<B>var</B> X, Y: LongInt);</Font><Font Color=#FF0000><H3>Implementation</H3></Font> <table border="0" bgcolor="#FFFED9"  style="margin-top: 10; margin-bottom: 10;"> <tr> <td><pre><B>procedure</B> SwapXY (<B>var</B> X, Y: LongInt);
+<B>var</B>
+     Temp: LongInt;
+<B>begin</B>
+     Temp := X;
+     X := Y;
+     Y := Temp;
+<B>End</B>;</pre></td></tr></Table><P><B><A Name="#8">Declaration</A></B><Br><Font Face="Courier New"><B>Procedure</B> SwapXY(<B>var</B> X, Y: Int64);</Font><Font Color=#FF0000><H3>Implementation</H3></Font> <table border="0" bgcolor="#FFFED9"  style="margin-top: 10; margin-bottom: 10;"> <tr> <td><pre><B>procedure</B> SwapXY (<B>var</B> X, Y: Int64);
+<B>var</B>
+     Temp: Int64;
+<B>begin</B>
+     Temp := X;
+     X := Y;
+     Y := Temp;
+<B>End</B>;</pre></td></tr></Table><P><B><A Name="#9">Declaration</A></B><Br><Font Face="Courier New"><B>Procedure</B> SwapXY(<B>var</B> X, Y: Extended);</Font><Font Color=#FF0000><H3>Implementation</H3></Font> <table border="0" bgcolor="#FFFED9"  style="margin-top: 10; margin-bottom: 10;"> <tr> <td><pre><B>procedure</B> SwapXY (<B>var</B> X, Y: Extended);
+<B>var</B>
+     Temp: Extended;
+<B>begin</B>
+     Temp := X;
+     X := Y;
+     Y := Temp;
+<B>End</B>;</pre></td></tr></Table><P><B><A Name="#10">Declaration</A></B><Br><Font Face="Courier New"><B>Procedure</B> SwapXY(<B>var</B> X, Y: Double);</Font><Font Color=#FF0000><H3>Implementation</H3></Font> <table border="0" bgcolor="#FFFED9"  style="margin-top: 10; margin-bottom: 10;"> <tr> <td><pre><B>procedure</B> SwapXY (<B>var</B> X, Y: Double);
+<B>var</B>
+     Temp: Double;
+<B>begin</B>
+     Temp := X;
+     X := Y;
+     Y := Temp;
+<B>End</B>;</pre></td></tr></Table><P><B><A Name="#11">Declaration</A></B><Br><Font Face="Courier New"><B>Procedure</B> SwapXY(<B>var</B> X, Y: Single);</Font><Font Color=#FF0000><H3>Implementation</H3></Font> <table border="0" bgcolor="#FFFED9"  style="margin-top: 10; margin-bottom: 10;"> <tr> <td><pre><B>procedure</B> SwapXY (<B>var</B> X, Y: Single);
+<B>var</B>
+     Temp: Single;
+<B>begin</B>
+     Temp := X;
+     X := Y;
+     Y := Temp;
+<B>End</B>;</pre></td></tr></Table><P><B><A Name="#12">Declaration</A></B><Br><Font Face="Courier New"><B>Procedure</B> SwapXY(<B>var</B> X, Y: <A HREF="IDH_Type_TESBCurrency.htm">TESBCurrency</A>);</Font><Font Color=#FF0000><H3>Implementation</H3></Font> <table border="0" bgcolor="#FFFED9"  style="margin-top: 10; margin-bottom: 10;"> <tr> <td><pre><B>procedure</B> SwapXY (<B>var</B> X, Y: <A HREF="IDH_Type_TESBCurrency.htm">TESBCurrency</A>);
+<B>var</B>
+     Temp: <A HREF="IDH_Type_TESBCurrency.htm">TESBCurrency</A>;
+<B>begin</B>
+     Temp := X;
+     X := Y;
+     Y := Temp;
+<B>End</B>;</pre></td></tr></Table><P><B><A Name="#13">Declaration</A></B><Br><Font Face="Courier New"><B>Procedure</B> SwapXY(<B>var</B> X, Y: <A HREF="IDH_Type_TESBLongCurrency.htm">TESBLongCurrency</A>);</Font><Font Color=#FF0000><H3>Implementation</H3></Font> <table border="0" bgcolor="#FFFED9"  style="margin-top: 10; margin-bottom: 10;"> <tr> <td><pre><B>procedure</B> SwapXY (<B>var</B> X, Y: <A HREF="IDH_Type_TESBLongCurrency.htm">TESBLongCurrency</A>);
+<B>var</B>
+     Temp: <A HREF="IDH_Type_TESBLongCurrency.htm">TESBLongCurrency</A>;
+<B>begin</B>
+     Temp := X;
+     X := Y;
+     Y := Temp;
+<B>End</B>;</pre></td></tr></Table><P><B><A Name="#14">Declaration</A></B><Br><Font Face="Courier New"><B>Procedure</B> SwapXY(<B>var</B> X, Y: Currency);</Font><Font Color=#FF0000><H3>Implementation</H3></Font> <table border="0" bgcolor="#FFFED9"  style="margin-top: 10; margin-bottom: 10;"> <tr> <td><pre><B>procedure</B> SwapXY (<B>var</B> X, Y: Currency);
+<B>var</B>
+     Temp: Currency;
+<B>begin</B>
+     Temp := X;
+     X := Y;
+     Y := Temp;
+<B>End</B>;</pre></td></tr></Table><P><B><A Name="#15">Declaration</A></B><Br><Font Face="Courier New"><B>Procedure</B> SwapXY(<B>var</B> X, Y: <A HREF="IDH_Type_TESBComplex.htm">TESBComplex</A>);</Font><Font Color=#FF0000><H3>Implementation</H3></Font> <table border="0" bgcolor="#FFFED9"  style="margin-top: 10; margin-bottom: 10;"> <tr> <td><pre><B>procedure</B> SwapXY (<B>var</B> X, Y: <A HREF="IDH_Type_TESBComplex.htm">TESBComplex</A>);
+<B>var</B>
+     Temp: <A HREF="IDH_Type_TESBComplex.htm">TESBComplex</A>;
+<B>begin</B>
+     Temp := X;
+     X := Y;
+     Y := Temp;
+<B>End</B>;</pre></td></tr></Table><P><B><A Name="#16">Declaration</A></B><Br><Font Face="Courier New"><B>Procedure</B> SwapXY(<B>var</B> X, Y: <A HREF="IDH_Type_TESBFraction.htm">TESBFraction</A>);</Font><Font Color=#FF0000><H3>Implementation</H3></Font> <table border="0" bgcolor="#FFFED9"  style="margin-top: 10; margin-bottom: 10;"> <tr> <td><pre><B>procedure</B> SwapXY (<B>var</B> X, Y: <A HREF="IDH_Type_TESBFraction.htm">TESBFraction</A>);
+<B>var</B>
+     Temp: <A HREF="IDH_Type_TESBFraction.htm">TESBFraction</A>;
+<B>begin</B>
+     Temp := X;
+     X := Y;
+     Y := Temp;
+<B>End</B>;</pre></td></tr></Table><P><B><A Name="#17">Declaration</A></B><Br><Font Face="Courier New"><B>Procedure</B> SwapXY(<B>var</B> X, Y: <A HREF="IDH_Type_TESBMixedFraction.htm">TESBMixedFraction</A>);</Font><Font Color=#FF0000><H3>Implementation</H3></Font> <table border="0" bgcolor="#FFFED9"  style="margin-top: 10; margin-bottom: 10;"> <tr> <td><pre><B>procedure</B> SwapXY (<B>var</B> X, Y: <A HREF="IDH_Type_TESBMixedFraction.htm">TESBMixedFraction</A>);
+<B>var</B>
+     Temp: <A HREF="IDH_Type_TESBMixedFraction.htm">TESBMixedFraction</A>;
+<B>begin</B>
+     Temp := X;
+     X := Y;
+     Y := Temp;
+<B>End</B>;</pre></td></tr></Table><P><B><A Name="#18">Declaration</A></B><Br><Font Face="Courier New"><B>Procedure</B> SwapXY(<B>var</B> X, Y: TDateTime);</Font><Font Color=#FF0000><H3>Implementation</H3></Font> <table border="0" bgcolor="#FFFED9"  style="margin-top: 10; margin-bottom: 10;"> <tr> <td><pre><B>procedure</B> SwapXY (<B>var</B> X, Y: TDateTime);
+<B>var</B>
+     Temp: TDateTime;
+<B>begin</B>
+     Temp := X;
+     X := Y;
+     Y := Temp;
+<B>End</B>;</pre></td></tr></Table><P><B><A Name="#19">Declaration</A></B><Br><Font Face="Courier New"><B>Procedure</B> SwapXY(<B>var</B> X, Y: TPoint);</Font><Font Color=#FF0000><H3>Implementation</H3></Font> <table border="0" bgcolor="#FFFED9"  style="margin-top: 10; margin-bottom: 10;"> <tr> <td><pre><B>procedure</B> SwapXY (<B>var</B> X, Y: TPoint);
+<B>var</B>
+     Temp: TPoint;
+<B>begin</B>
+     Temp := X;
+     X := Y;
+     Y := Temp;
+<B>End</B>;</pre></td></tr></Table><P><B><A Name="#20">Declaration</A></B><Br><Font Face="Courier New"><B>Procedure</B> SwapXY(<B>var</B> X, Y: TRect);</Font><Font Color=#FF0000><H3>Implementation</H3></Font> <table border="0" bgcolor="#FFFED9"  style="margin-top: 10; margin-bottom: 10;"> <tr> <td><pre><B>procedure</B> SwapXY (<B>var</B> X, Y: TRect);
+<B>var</B>
+     Temp: TRect;
+<B>begin</B>
+     Temp := X;
+     X := Y;
+     Y := Temp;
+<B>End</B>;</pre></td></tr></Table><P><B><A Name="#21">Declaration</A></B><Br><Font Face="Courier New"><B>Procedure</B> SwapXY(<B>var</B> X, Y: <A HREF="IDH_Type_TESBImperial.htm">TESBImperial</A>);</Font><Font Color=#FF0000><H3>Implementation</H3></Font> <table border="0" bgcolor="#FFFED9"  style="margin-top: 10; margin-bottom: 10;"> <tr> <td><pre><B>procedure</B> SwapXY (<B>var</B> X, Y: <A HREF="IDH_Type_TESBImperial.htm">TESBImperial</A>);
+<B>var</B>
+     Temp: <A HREF="IDH_Type_TESBImperial.htm">TESBImperial</A>;
+<B>begin</B>
+     Temp := X;
+     X := Y;
+     Y := Temp;
+<B>End</B>;</pre></td></tr></Table><P><HR>
+<TABLE BORDER="0" WIDTH="100%" BGCOLOR="#000000"><TR><TD>
+<Font Color=White><Large>HTML generated by <B>Time2HELP</B></Large></Font>
+</TD></TR></Table>
+<Small><A HREF="http://www.time2help.com">http://www.time2help.com</A></Small></Body></HTML>

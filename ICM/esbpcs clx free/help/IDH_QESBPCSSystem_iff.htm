@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+<META NAME="GENERATOR" Content="Time2HELP 1.0; Standard Template">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html;CHARSET=iso-8859-1">
+<TITLE>iff</TITLE>
+<Style>Body, TD {font-family: "Verdana"; font-size: 10pt};
+PRE {font-size: 10pt; margin-top: 0; margin-bottom: 0}
+TR.odd {background-color: #F8F8F8};
+TR.even {background-color: #EEEEEE};
+Table.list {background-color: #FFFFFF};
+TD {vertical-align : top}
+</Style>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<BASEFONT NAME="verdana" Size="2"><Table Border="0" Width="100%" BGColor="#FFFFFF"><TR><TD><Font Color="#000000F"><B>iff Routines</B></Font></TD></TR></Table>Performs an if that can be used in Expressions.<P><B>Unit</B><Br><A HREF="IDH_Unit_QESBPCSSystem.htm">QESBPCSSystem</A><P><Table Border="0" Width="100%" BGColor="#000000"><TR><TD><Font Color="#FFFFFF"><B>Overloaded Variants</B></Font></TD></TR></Table><Table Class="list" Width="100%" CellSpacing="1" CellPadding="2" BGColor="#EEEEEE"><TR Class="even"><TD><A HRef="#0">Function iff(const Condition: Boolean; const TrueResult, FalseResult: string): string;</A></TD></TR><TR Class="odd"><TD><A HRef="#1">Function iff(const Condition: Boolean; const TrueResult, FalseResult: Integer): Integer;</A></TD></TR><TR Class="even"><TD><A HRef="#2">Function iff(const Condition: Boolean; const TrueResult, FalseResult: Int64): Int64;</A></TD></TR><TR Class="odd"><TD><A HRef="#3">Function iff(const Condition: Boolean; const TrueResult, FalseResult: Extended): Extended;</A></TD></TR><TR Class="even"><TD><A HRef="#4">Function iff(const Condition: Boolean; const TrueResult, FalseResult: Boolean): Boolean;</A></TD></TR><TR Class="odd"><TD><A HRef="#5">Function iff(const Condition: Boolean; const TrueResult, FalseResult: Char): Char;</A></TD></TR><TR Class="even"><TD><A HRef="#6">Function iff(const Condition: Boolean; const TrueResult, FalseResult: TObject): TObject;</A></TD></TR><TR Class="odd"><TD><A HRef="#7">Function iff(const Condition: Boolean; const TrueResult, FalseResult: TPoint): TPoint;</A></TD></TR><TR Class="even"><TD><A HRef="#8">Function iff(const Condition: Boolean; const TrueResult, FalseResult: TRect): TRect;</A></TD></TR><TR Class="odd"><TD><A HRef="#9">Function iff(const Condition: Boolean; const TrueResult, FalseResult: TESBComplex): TESBComplex;</A></TD></TR><TR Class="even"><TD><A HRef="#10">Function iff(const Condition: Boolean; const TrueResult, FalseResult: TDateTime): TDateTime;</A></TD></TR><TR Class="odd"><TD><A HRef="#11">Function iff(const Condition: Boolean; const TrueResult, FalseResult: TESBCurrency): TESBCurrency;</A></TD></TR><TR Class="even"><TD><A HRef="#12">Function iff(const Condition: Boolean; const TrueResult, FalseResult: TESBLongCurrency): TESBLongCurrency;</A></TD></TR><TR Class="odd"><TD><A HRef="#13">Function iff(const Condition: Boolean; const TrueResult, FalseResult: Currency): Currency;</A></TD></TR><TR Class="even"><TD><A HRef="#14">Function iff(const Condition: Boolean; const TrueResult, FalseResult: TESBFraction): TESBFraction;</A></TD></TR><TR Class="odd"><TD><A HRef="#15">Function iff(const Condition: Boolean; const TrueResult, FalseResult: TESBMixedFraction): TESBMixedFraction;</A></TD></TR><TR Class="even"><TD><A HRef="#16">Function iff(const Condition: Boolean; const TrueResult, FalseResult: TESBImperial): TESBImperial;</A></TD></TR></Table></P><P><B><A Name="#0">Declaration</A></B><Br><Font Face="Courier New"><B>Function</B> iff(<B>const</B> Condition: Boolean; <B>const</B> TrueResult, FalseResult: <B>string</B>): <B>string</B>;</Font><P><B>Description</B><Br />If Condition is True then TrueResult is returned Else FalseResult is returned.</P><P><Table Border="0" Width="100%" BGColor="#000000"><TR><TD><Font Color="#FFFFFF"><B>Parameters</B></Font></TD></TR></Table><Table Class="list" Width="100%" CellSpacing="1" CellPadding="2" BGColor="#EEEEEE"><TR Class="even"><TD><Font Color="Blue">Condition&nbsp;</Font></TD><TD>Controls which result is returned.</TD></TR><TR Class="odd"><TD><Font Color="Blue">TrueResult&nbsp;</Font></TD><TD>Returned if Condition is True.</TD></TR><TR Class="even"><TD><Font Color="Blue">FalseResult&nbsp;</Font></TD><TD>Returned if Condition is True.</TD></TR></Table></P><P><B>Category</B><Br><A HREF="idh_cat_booleanconv.htm">Boolean Conversion Routines</A><Br /><A HREF="idh_cat_extrastrings.htm">Extra String Handling Routines</A><Br /><A HREF="idh_cat_intmath.htm">Arithmetic Routines for Integers</A><Br /><A HREF="idh_cat_floatmath.htm">Arithmetic Routines for Floats</A><Br /><A HREF="idh_cat_complexmath.htm">Complex Number Arithmetic Routines</A><Br /><A HREF="idh_cat_dtmath.htm">Date/Time Arithmetic Routines</A><Br /><A HREF="idh_cat_finmath.htm">Financial Arithmetic Routines</A><Br /><A HREF="idh_cat_fracmath.htm">Fraction Arithmetic Routines</A><Br /><A HREF="idh_cat_impmath.htm">Arithmetic Routines for Mixed Imperials</A><Br /><Font Color=#FF0000><H3>Implementation</H3></Font> <table border="0" bgcolor="#FFFED9"  style="margin-top: 10; margin-bottom: 10;"> <tr> <td><pre><B>function</B> iff (<B>const</B> Condition: Boolean; <B>const</B> TrueResult, FalseResult: <B>string</B>): <B>string</B>;
+<B>begin</B>
+     <B>if</B> Condition <B>then</B>
+          Result := TrueResult
+     <B>else</B>
+          Result := FalseResult
+<B>End</B>;</pre></td></tr></Table><P><B><A Name="#1">Declaration</A></B><Br><Font Face="Courier New"><B>Function</B> iff(<B>const</B> Condition: Boolean; <B>const</B> TrueResult, FalseResult: Integer): Integer;</Font><Font Color=#FF0000><H3>Implementation</H3></Font> <table border="0" bgcolor="#FFFED9"  style="margin-top: 10; margin-bottom: 10;"> <tr> <td><pre><B>function</B> iff (<B>const</B> Condition: Boolean; <B>const</B> TrueResult, FalseResult: Integer): Integer;
+<B>begin</B>
+     <B>if</B> Condition <B>then</B>
+          Result := TrueResult
+     <B>else</B>
+          Result := FalseResult
+<B>End</B>;</pre></td></tr></Table><P><B><A Name="#2">Declaration</A></B><Br><Font Face="Courier New"><B>Function</B> iff(<B>const</B> Condition: Boolean; <B>const</B> TrueResult, FalseResult: Int64): Int64;</Font><Font Color=#FF0000><H3>Implementation</H3></Font> <table border="0" bgcolor="#FFFED9"  style="margin-top: 10; margin-bottom: 10;"> <tr> <td><pre><B>function</B> iff (<B>const</B> Condition: Boolean; <B>const</B> TrueResult, FalseResult: Int64): Int64;
+<B>begin</B>
+     <B>if</B> Condition <B>then</B>
+          Result := TrueResult
+     <B>else</B>
+          Result := FalseResult
+<B>End</B>;</pre></td></tr></Table><P><B><A Name="#3">Declaration</A></B><Br><Font Face="Courier New"><B>Function</B> iff(<B>const</B> Condition: Boolean; <B>const</B> TrueResult, FalseResult: Extended): Extended;</Font><Font Color=#FF0000><H3>Implementation</H3></Font> <table border="0" bgcolor="#FFFED9"  style="margin-top: 10; margin-bottom: 10;"> <tr> <td><pre><B>function</B> iff (<B>const</B> Condition: Boolean; <B>const</B> TrueResult, FalseResult: Extended): Extended;
+<B>begin</B>
+     <B>if</B> Condition <B>then</B>
+          Result := TrueResult
+     <B>else</B>
+          Result := FalseResult
+<B>End</B>;</pre></td></tr></Table><P><B><A Name="#4">Declaration</A></B><Br><Font Face="Courier New"><B>Function</B> iff(<B>const</B> Condition: Boolean; <B>const</B> TrueResult, FalseResult: Boolean): Boolean;</Font><Font Color=#FF0000><H3>Implementation</H3></Font> <table border="0" bgcolor="#FFFED9"  style="margin-top: 10; margin-bottom: 10;"> <tr> <td><pre><B>function</B> iff (<B>const</B> Condition: Boolean; <B>const</B> TrueResult, FalseResult: Boolean): Boolean;
+<B>begin</B>
+     <B>if</B> Condition <B>then</B>
+          Result := TrueResult
+     <B>else</B>
+          Result := FalseResult
+<B>End</B>;</pre></td></tr></Table><P><B><A Name="#5">Declaration</A></B><Br><Font Face="Courier New"><B>Function</B> iff(<B>const</B> Condition: Boolean; <B>const</B> TrueResult, FalseResult: Char): Char;</Font><Font Color=#FF0000><H3>Implementation</H3></Font> <table border="0" bgcolor="#FFFED9"  style="margin-top: 10; margin-bottom: 10;"> <tr> <td><pre><B>function</B> iff (<B>const</B> Condition: Boolean; <B>const</B> TrueResult, FalseResult: Char): Char;
+<B>begin</B>
+     <B>if</B> Condition <B>then</B>
+          Result := TrueResult
+     <B>else</B>
+          Result := FalseResult
+<B>End</B>;</pre></td></tr></Table><P><B><A Name="#6">Declaration</A></B><Br><Font Face="Courier New"><B>Function</B> iff(<B>const</B> Condition: Boolean; <B>const</B> TrueResult, FalseResult: TObject): TObject;</Font><Font Color=#FF0000><H3>Implementation</H3></Font> <table border="0" bgcolor="#FFFED9"  style="margin-top: 10; margin-bottom: 10;"> <tr> <td><pre><B>function</B> iff (<B>const</B> Condition: Boolean;
+     <B>const</B> TrueResult, FalseResult: TObject): TObject;
+<B>begin</B>
+     <B>if</B> Condition <B>then</B>
+          Result := TrueResult
+     <B>else</B>
+          Result := FalseResult
+<B>End</B>;</pre></td></tr></Table><P><B><A Name="#7">Declaration</A></B><Br><Font Face="Courier New"><B>Function</B> iff(<B>const</B> Condition: Boolean; <B>const</B> TrueResult, FalseResult: TPoint): TPoint;</Font><Font Color=#FF0000><H3>Implementation</H3></Font> <table border="0" bgcolor="#FFFED9"  style="margin-top: 10; margin-bottom: 10;"> <tr> <td><pre><B>function</B> iff (<B>const</B> Condition: Boolean;
+     <B>const</B> TrueResult, FalseResult: TPoint): TPoint;
+<B>begin</B>
+     <B>if</B> Condition <B>then</B>
+          Result := TrueResult
+     <B>else</B>
+          Result := FalseResult
+<B>End</B>;</pre></td></tr></Table><P><B><A Name="#8">Declaration</A></B><Br><Font Face="Courier New"><B>Function</B> iff(<B>const</B> Condition: Boolean; <B>const</B> TrueResult, FalseResult: TRect): TRect;</Font><Font Color=#FF0000><H3>Implementation</H3></Font> <table border="0" bgcolor="#FFFED9"  style="margin-top: 10; margin-bottom: 10;"> <tr> <td><pre><B>function</B> iff (<B>const</B> Condition: Boolean;
+     <B>const</B> TrueResult, FalseResult: TRect): TRect;
+<B>begin</B>
+     <B>if</B> Condition <B>then</B>
+          Result := TrueResult
+     <B>else</B>
+          Result := FalseResult
+<B>End</B>;</pre></td></tr></Table><P><B><A Name="#9">Declaration</A></B><Br><Font Face="Courier New"><B>Function</B> iff(<B>const</B> Condition: Boolean; <B>const</B> TrueResult, FalseResult: <A HREF="IDH_Type_TESBComplex.htm">TESBComplex</A>): <A HREF="IDH_Type_TESBComplex.htm">TESBComplex</A>;</Font><Font Color=#FF0000><H3>Implementation</H3></Font> <table border="0" bgcolor="#FFFED9"  style="margin-top: 10; margin-bottom: 10;"> <tr> <td><pre><B>function</B> iff (<B>const</B> Condition: Boolean; <B>const</B> TrueResult, FalseResult: <A HREF="IDH_Type_TESBComplex.htm">TESBComplex</A>): <A HREF="IDH_Type_TESBComplex.htm">TESBComplex</A>;
+<B>begin</B>
+     <B>if</B> Condition <B>then</B>
+          Result := TrueResult
+     <B>else</B>
+          Result := FalseResult
+<B>End</B>;</pre></td></tr></Table><P><B><A Name="#10">Declaration</A></B><Br><Font Face="Courier New"><B>Function</B> iff(<B>const</B> Condition: Boolean; <B>const</B> TrueResult, FalseResult: TDateTime): TDateTime;</Font><Font Color=#FF0000><H3>Implementation</H3></Font> <table border="0" bgcolor="#FFFED9"  style="margin-top: 10; margin-bottom: 10;"> <tr> <td><pre><B>function</B> iff (<B>const</B> Condition: Boolean;
+     <B>const</B> TrueResult, FalseResult: TDateTime): TDateTime;
+<B>begin</B>
+     <B>if</B> Condition <B>then</B>
+          Result := TrueResult
+     <B>else</B>
+          Result := FalseResult
+<B>End</B>;</pre></td></tr></Table><P><B><A Name="#11">Declaration</A></B><Br><Font Face="Courier New"><B>Function</B> iff(<B>const</B> Condition: Boolean; <B>const</B> TrueResult, FalseResult: <A HREF="IDH_Type_TESBCurrency.htm">TESBCurrency</A>): <A HREF="IDH_Type_TESBCurrency.htm">TESBCurrency</A>;</Font><Font Color=#FF0000><H3>Implementation</H3></Font> <table border="0" bgcolor="#FFFED9"  style="margin-top: 10; margin-bottom: 10;"> <tr> <td><pre><B>function</B> iff (<B>const</B> Condition: Boolean;
+     <B>const</B> TrueResult, FalseResult: <A HREF="IDH_Type_TESBCurrency.htm">TESBCurrency</A>): <A HREF="IDH_Type_TESBCurrency.htm">TESBCurrency</A>;
+<B>begin</B>
+     <B>if</B> Condition <B>then</B>
+          Result := TrueResult
+     <B>else</B>
+          Result := FalseResult
+<B>End</B>;</pre></td></tr></Table><P><B><A Name="#12">Declaration</A></B><Br><Font Face="Courier New"><B>Function</B> iff(<B>const</B> Condition: Boolean; <B>const</B> TrueResult, FalseResult: <A HREF="IDH_Type_TESBLongCurrency.htm">TESBLongCurrency</A>): <A HREF="IDH_Type_TESBLongCurrency.htm">TESBLongCurrency</A>;</Font><Font Color=#FF0000><H3>Implementation</H3></Font> <table border="0" bgcolor="#FFFED9"  style="margin-top: 10; margin-bottom: 10;"> <tr> <td><pre><B>function</B> iff (<B>const</B> Condition: Boolean;
+     <B>const</B> TrueResult, FalseResult: <A HREF="IDH_Type_TESBLongCurrency.htm">TESBLongCurrency</A>): <A HREF="IDH_Type_TESBLongCurrency.htm">TESBLongCurrency</A>;
+<B>begin</B>
+     <B>if</B> Condition <B>then</B>
+          Result := TrueResult
+     <B>else</B>
+          Result := FalseResult
+<B>End</B>;</pre></td></tr></Table><P><B><A Name="#13">Declaration</A></B><Br><Font Face="Courier New"><B>Function</B> iff(<B>const</B> Condition: Boolean; <B>const</B> TrueResult, FalseResult: Currency): Currency;</Font><Font Color=#FF0000><H3>Implementation</H3></Font> <table border="0" bgcolor="#FFFED9"  style="margin-top: 10; margin-bottom: 10;"> <tr> <td><pre><B>function</B> iff (<B>const</B> Condition: Boolean;
+     <B>const</B> TrueResult, FalseResult: Currency): Currency;
+<B>begin</B>
+     <B>if</B> Condition <B>then</B>
+          Result := TrueResult
+     <B>else</B>
+          Result := FalseResult
+<B>End</B>;</pre></td></tr></Table><P><B><A Name="#14">Declaration</A></B><Br><Font Face="Courier New"><B>Function</B> iff(<B>const</B> Condition: Boolean; <B>const</B> TrueResult, FalseResult: <A HREF="IDH_Type_TESBFraction.htm">TESBFraction</A>): <A HREF="IDH_Type_TESBFraction.htm">TESBFraction</A>;</Font><Font Color=#FF0000><H3>Implementation</H3></Font> <table border="0" bgcolor="#FFFED9"  style="margin-top: 10; margin-bottom: 10;"> <tr> <td><pre><B>function</B> iff (<B>const</B> Condition: Boolean;
+     <B>const</B> TrueResult, FalseResult: <A HREF="IDH_Type_TESBFraction.htm">TESBFraction</A>): <A HREF="IDH_Type_TESBFraction.htm">TESBFraction</A>;
+<B>begin</B>
+     <B>if</B> Condition <B>then</B>
+          Result := TrueResult
+     <B>else</B>
+          Result := FalseResult
+<B>End</B>;</pre></td></tr></Table><P><B><A Name="#15">Declaration</A></B><Br><Font Face="Courier New"><B>Function</B> iff(<B>const</B> Condition: Boolean; <B>const</B> TrueResult, FalseResult: <A HREF="IDH_Type_TESBMixedFraction.htm">TESBMixedFraction</A>): <A HREF="IDH_Type_TESBMixedFraction.htm">TESBMixedFraction</A>;</Font><Font Color=#FF0000><H3>Implementation</H3></Font> <table border="0" bgcolor="#FFFED9"  style="margin-top: 10; margin-bottom: 10;"> <tr> <td><pre><B>function</B> iff (<B>const</B> Condition: Boolean;
+     <B>const</B> TrueResult, FalseResult: <A HREF="IDH_Type_TESBMixedFraction.htm">TESBMixedFraction</A>): <A HREF="IDH_Type_TESBMixedFraction.htm">TESBMixedFraction</A>;
+<B>begin</B>
+     <B>if</B> Condition <B>then</B>
+          Result := TrueResult
+     <B>else</B>
+          Result := FalseResult
+<B>End</B>;</pre></td></tr></Table><P><B><A Name="#16">Declaration</A></B><Br><Font Face="Courier New"><B>Function</B> iff(<B>const</B> Condition: Boolean; <B>const</B> TrueResult, FalseResult: <A HREF="IDH_Type_TESBImperial.htm">TESBImperial</A>): <A HREF="IDH_Type_TESBImperial.htm">TESBImperial</A>;</Font><Font Color=#FF0000><H3>Implementation</H3></Font> <table border="0" bgcolor="#FFFED9"  style="margin-top: 10; margin-bottom: 10;"> <tr> <td><pre><B>function</B> iff (<B>const</B> Condition: Boolean;
+     <B>const</B> TrueResult, FalseResult: <A HREF="IDH_Type_TESBImperial.htm">TESBImperial</A>): <A HREF="IDH_Type_TESBImperial.htm">TESBImperial</A>;
+<B>begin</B>
+     <B>if</B> Condition <B>then</B>
+          Result := TrueResult
+     <B>else</B>
+          Result := FalseResult
+<B>End</B>;</pre></td></tr></Table><P><HR>
+<TABLE BORDER="0" WIDTH="100%" BGCOLOR="#000000"><TR><TD>
+<Font Color=White><Large>HTML generated by <B>Time2HELP</B></Large></Font>
+</TD></TR></Table>
+<Small><A HREF="http://www.time2help.com">http://www.time2help.com</A></Small></Body></HTML>

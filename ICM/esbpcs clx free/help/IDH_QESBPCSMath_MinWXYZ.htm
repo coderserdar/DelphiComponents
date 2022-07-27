@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+<META NAME="GENERATOR" Content="Time2HELP 1.0; Standard Template">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html;CHARSET=iso-8859-1">
+<TITLE>MinWXYZ</TITLE>
+<Style>Body, TD {font-family: "Verdana"; font-size: 10pt};
+PRE {font-size: 10pt; margin-top: 0; margin-bottom: 0}
+TR.odd {background-color: #F8F8F8};
+TR.even {background-color: #EEEEEE};
+Table.list {background-color: #FFFFFF};
+TD {vertical-align : top}
+</Style>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<BASEFONT NAME="verdana" Size="2"><Table Border="0" Width="100%" BGColor="#FFFFFF"><TR><TD><Font Color="#000000F"><B>MinWXYZ Routines</B></Font></TD></TR></Table>Returns the Minimum of 4 Values.<P><B>Unit</B><Br><A HREF="IDH_Unit_QESBPCSMath.htm">QESBPCSMath</A><P><Table Border="0" Width="100%" BGColor="#000000"><TR><TD><Font Color="#FFFFFF"><B>Overloaded Variants</B></Font></TD></TR></Table><Table Class="list" Width="100%" CellSpacing="1" CellPadding="2" BGColor="#EEEEEE"><TR Class="even"><TD><A HRef="#0">Function MinWXYZ(const W, X, Y, Z: Byte): Byte;</A></TD></TR><TR Class="odd"><TD><A HRef="#1">Function MinWXYZ(const W, X, Y, Z: ShortInt): ShortInt;</A></TD></TR><TR Class="even"><TD><A HRef="#2">Function MinWXYZ(const W, X, Y, Z: Word): Word;</A></TD></TR><TR Class="odd"><TD><A HRef="#3">Function MinWXYZ(const W, X, Y, Z: SmallInt): SmallInt;</A></TD></TR><TR Class="even"><TD><A HRef="#4">Function MinWXYZ(const W, X, Y, Z: LongWord): LongWord;</A></TD></TR><TR Class="odd"><TD><A HRef="#5">Function MinWXYZ(const W, X, Y, Z: LongInt): LongInt;</A></TD></TR><TR Class="even"><TD><A HRef="#6">Function MinWXYZ(const W, X, Y, Z: Int64): Int64;</A></TD></TR><TR Class="odd"><TD><A HRef="#7">Function MinWXYZ(const W, X, Y, Z: Extended): Extended;</A></TD></TR><TR Class="even"><TD><A HRef="#8">Function MinWXYZ(const W, X, Y, Z: Double): Double;</A></TD></TR><TR Class="odd"><TD><A HRef="#9">Function MinWXYZ(const W, X, Y, Z: Single): Single;</A></TD></TR></Table></P><P><B><A Name="#0">Declaration</A></B><Br><Font Face="Courier New"><B>Function</B> MinWXYZ(<B>const</B> W, X, Y, Z: Byte): Byte;</Font><P><Table Border="0" Width="100%" BGColor="#000000"><TR><TD><Font Color="#FFFFFF"><B>Parameters</B></Font></TD></TR></Table><Table Class="list" Width="100%" CellSpacing="1" CellPadding="2" BGColor="#EEEEEE"><TR Class="even"><TD><Font Color="Blue">W&nbsp;</Font></TD><TD>First Value to Process.</TD></TR><TR Class="odd"><TD><Font Color="Blue">X&nbsp;</Font></TD><TD>Second Value to Process.</TD></TR><TR Class="even"><TD><Font Color="Blue">Y&nbsp;</Font></TD><TD>Third Value to Process.</TD></TR><TR Class="odd"><TD><Font Color="Blue">Z&nbsp;</Font></TD><TD>Fourth Value to Process.</TD></TR></Table></P><P><B>Category</B><Br><A HREF="idh_cat_intmath.htm">Arithmetic Routines for Integers</A><Br /><A HREF="idh_cat_floatmath.htm">Arithmetic Routines for Floats</A><Br /><Font Color=#FF0000><H3>Implementation</H3></Font> <table border="0" bgcolor="#FFFED9"  style="margin-top: 10; margin-bottom: 10;"> <tr> <td><pre><B>function</B> MinWXYZ (<B>const</B> W, X, Y, Z: Byte): Byte;
+<B>begin</B>
+     Result := W;
+     <B>if</B> X &lt; Result <B>then</B>
+          Result := X;
+     <B>if</B> Y &lt; Result <B>then</B>
+          Result := Y;
+     <B>if</B> Z &lt; Result <B>then</B>
+          Result := Z;
+<B>End</B>;</pre></td></tr></Table><P><B><A Name="#1">Declaration</A></B><Br><Font Face="Courier New"><B>Function</B> MinWXYZ(<B>const</B> W, X, Y, Z: ShortInt): ShortInt;</Font><Font Color=#FF0000><H3>Implementation</H3></Font> <table border="0" bgcolor="#FFFED9"  style="margin-top: 10; margin-bottom: 10;"> <tr> <td><pre><B>function</B> MinWXYZ (<B>const</B> W, X, Y, Z: ShortInt): ShortInt;
+<B>begin</B>
+     Result := W;
+     <B>if</B> X &lt; Result <B>then</B>
+          Result := X;
+     <B>if</B> Y &lt; Result <B>then</B>
+          Result := Y;
+     <B>if</B> Z &lt; Result <B>then</B>
+          Result := Z;
+<B>End</B>;</pre></td></tr></Table><P><B><A Name="#2">Declaration</A></B><Br><Font Face="Courier New"><B>Function</B> MinWXYZ(<B>const</B> W, X, Y, Z: Word): Word;</Font><Font Color=#FF0000><H3>Implementation</H3></Font> <table border="0" bgcolor="#FFFED9"  style="margin-top: 10; margin-bottom: 10;"> <tr> <td><pre><B>function</B> MinWXYZ (<B>const</B> W, X, Y, Z: Word): Word;
+<B>begin</B>
+     Result := W;
+     <B>if</B> X &lt; Result <B>then</B>
+          Result := X;
+     <B>if</B> Y &lt; Result <B>then</B>
+          Result := Y;
+     <B>if</B> Z &lt; Result <B>then</B>
+          Result := Z;
+<B>End</B>;</pre></td></tr></Table><P><B><A Name="#3">Declaration</A></B><Br><Font Face="Courier New"><B>Function</B> MinWXYZ(<B>const</B> W, X, Y, Z: SmallInt): SmallInt;</Font><Font Color=#FF0000><H3>Implementation</H3></Font> <table border="0" bgcolor="#FFFED9"  style="margin-top: 10; margin-bottom: 10;"> <tr> <td><pre><B>function</B> MinWXYZ (<B>const</B> W, X, Y, Z: SmallInt): SmallInt;
+<B>begin</B>
+     Result := W;
+     <B>if</B> X &lt; Result <B>then</B>
+          Result := X;
+     <B>if</B> Y &lt; Result <B>then</B>
+          Result := Y;
+     <B>if</B> Z &lt; Result <B>then</B>
+          Result := Z;
+<B>End</B>;</pre></td></tr></Table><P><B><A Name="#4">Declaration</A></B><Br><Font Face="Courier New"><B>Function</B> MinWXYZ(<B>const</B> W, X, Y, Z: LongWord): LongWord;</Font><Font Color=#FF0000><H3>Implementation</H3></Font> <table border="0" bgcolor="#FFFED9"  style="margin-top: 10; margin-bottom: 10;"> <tr> <td><pre><B>function</B> MinWXYZ (<B>const</B> W, X, Y, Z: LongWord): LongWord;
+<B>begin</B>
+     Result := W;
+     <B>if</B> X &lt; Result <B>then</B>
+          Result := X;
+     <B>if</B> Y &lt; Result <B>then</B>
+          Result := Y;
+     <B>if</B> Z &lt; Result <B>then</B>
+          Result := Z;
+<B>End</B>;</pre></td></tr></Table><P><B><A Name="#5">Declaration</A></B><Br><Font Face="Courier New"><B>Function</B> MinWXYZ(<B>const</B> W, X, Y, Z: LongInt): LongInt;</Font><Font Color=#FF0000><H3>Implementation</H3></Font> <table border="0" bgcolor="#FFFED9"  style="margin-top: 10; margin-bottom: 10;"> <tr> <td><pre><B>function</B> MinWXYZ (<B>const</B> W, X, Y, Z: LongInt): LongInt;
+<B>begin</B>
+     Result := W;
+     <B>if</B> X &lt; Result <B>then</B>
+          Result := X;
+     <B>if</B> Y &lt; Result <B>then</B>
+          Result := Y;
+     <B>if</B> Z &lt; Result <B>then</B>
+          Result := Z;
+<B>End</B>;</pre></td></tr></Table><P><B><A Name="#6">Declaration</A></B><Br><Font Face="Courier New"><B>Function</B> MinWXYZ(<B>const</B> W, X, Y, Z: Int64): Int64;</Font><Font Color=#FF0000><H3>Implementation</H3></Font> <table border="0" bgcolor="#FFFED9"  style="margin-top: 10; margin-bottom: 10;"> <tr> <td><pre><B>function</B> MinWXYZ (<B>const</B> W, X, Y, Z: Int64): Int64;
+<B>begin</B>
+     Result := W;
+     <B>if</B> X &lt; Result <B>then</B>
+          Result := X;
+     <B>if</B> Y &lt; Result <B>then</B>
+          Result := Y;
+     <B>if</B> Z &lt; Result <B>then</B>
+          Result := Z;
+<B>End</B>;</pre></td></tr></Table><P><B><A Name="#7">Declaration</A></B><Br><Font Face="Courier New"><B>Function</B> MinWXYZ(<B>const</B> W, X, Y, Z: Extended): Extended;</Font><Font Color=#FF0000><H3>Implementation</H3></Font> <table border="0" bgcolor="#FFFED9"  style="margin-top: 10; margin-bottom: 10;"> <tr> <td><pre><B>function</B> MinWXYZ (<B>const</B> W, X, Y, Z: Extended): Extended;
+<B>begin</B>
+     Result := W;
+     <B>if</B> X &lt; Result <B>then</B>
+          Result := X;
+     <B>if</B> Y &lt; Result <B>then</B>
+          Result := Y;
+     <B>if</B> Z &lt; Result <B>then</B>
+          Result := Z;
+<B>End</B>;</pre></td></tr></Table><P><B><A Name="#8">Declaration</A></B><Br><Font Face="Courier New"><B>Function</B> MinWXYZ(<B>const</B> W, X, Y, Z: Double): Double;</Font><Font Color=#FF0000><H3>Implementation</H3></Font> <table border="0" bgcolor="#FFFED9"  style="margin-top: 10; margin-bottom: 10;"> <tr> <td><pre><B>function</B> MinWXYZ (<B>const</B> W, X, Y, Z: Double): Double;
+<B>begin</B>
+     Result := W;
+     <B>if</B> X &lt; Result <B>then</B>
+          Result := X;
+     <B>if</B> Y &lt; Result <B>then</B>
+          Result := Y;
+     <B>if</B> Z &lt; Result <B>then</B>
+          Result := Z;
+<B>End</B>;</pre></td></tr></Table><P><B><A Name="#9">Declaration</A></B><Br><Font Face="Courier New"><B>Function</B> MinWXYZ(<B>const</B> W, X, Y, Z: Single): Single;</Font><Font Color=#FF0000><H3>Implementation</H3></Font> <table border="0" bgcolor="#FFFED9"  style="margin-top: 10; margin-bottom: 10;"> <tr> <td><pre><B>function</B> MinWXYZ (<B>const</B> W, X, Y, Z: Single): Single;
+<B>begin</B>
+     Result := W;
+     <B>if</B> X &lt; Result <B>then</B>
+          Result := X;
+     <B>if</B> Y &lt; Result <B>then</B>
+          Result := Y;
+     <B>if</B> Z &lt; Result <B>then</B>
+          Result := Z;
+<B>End</B>;</pre></td></tr></Table><P><HR>
+<TABLE BORDER="0" WIDTH="100%" BGCOLOR="#000000"><TR><TD>
+<Font Color=White><Large>HTML generated by <B>Time2HELP</B></Large></Font>
+</TD></TR></Table>
+<Small><A HREF="http://www.time2help.com">http://www.time2help.com</A></Small></Body></HTML>

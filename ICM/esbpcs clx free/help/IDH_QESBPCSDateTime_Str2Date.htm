@@ -1,0 +1,448 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+<META NAME="GENERATOR" Content="Time2HELP 1.0; Standard Template">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html;CHARSET=iso-8859-1">
+<TITLE>Str2Date</TITLE>
+<Style>Body, TD {font-family: "Verdana"; font-size: 10pt};
+PRE {font-size: 10pt; margin-top: 0; margin-bottom: 0}
+TR.odd {background-color: #F8F8F8};
+TR.even {background-color: #EEEEEE};
+Table.list {background-color: #FFFFFF};
+TD {vertical-align : top}
+</Style>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<BASEFONT NAME="verdana" Size="2"><Table Border="0" Width="100%" BGColor="#FFFFFF"><TR><TD><Font Color="#000000F"><B>Str2Date Routines</B></Font></TD></TR></Table>Converts a string containing a Date into a DateTime.<P><B>Unit</B><Br><A HREF="IDH_Unit_QESBPCSDateTime.htm">QESBPCSDateTime</A><P><Table Border="0" Width="100%" BGColor="#000000"><TR><TD><Font Color="#FFFFFF"><B>Overloaded Variants</B></Font></TD></TR></Table><Table Class="list" Width="100%" CellSpacing="1" CellPadding="2" BGColor="#EEEEEE"><TR Class="even"><TD><A HRef="#0">Function Str2Date(const DateStr: string): TDateTime;</A></TD></TR><TR Class="odd"><TD><A HRef="#1">Function Str2Date(const DateStr: string; const Year, StartMonth: Integer): TDateTime;</A></TD></TR></Table></P><P><B><A Name="#0">Declaration</A></B><Br><Font Face="Courier New"><B>Function</B> Str2Date(<B>const</B> DateStr: <B>string</B>): TDateTime;</Font><P><B>Description</B><Br />If the Item has no month and/or year then the current month and year will be assumed.</P><P>The following are all exceptable separators for entry: [' ', ',', '.', '/', '-', '\'] though the current DateSeparator will be used for display.</P><P>Dates can be entered without Separators but Leading Zeroes must then be used. Date parsing is highly dependant upon the current ShortDateFormat. <A HREF="IDH_Var_ESB2DigitYr.htm">ESB2DigitYr</A> contols the different ways in which 2 Digit Years are handled in Str2Date.</P><P>edyNone - Nothing is done, left to Delphi to handle.</P><P>edyCutOff - the ESB2DigitCutOff is used to decide which century the date lies in. If 1900 + Yr less than <A HREF="IDH_Var_ESB2DigitCutOff.htm">ESB2DigitCutOff</A> then it is assumed that 2000 + Yr is wanted, otherwise 1900 + Yr is used.</P><P>edyHistoric - asssumes that the yr is this year or earlier.</P><P><Table Border="0" Width="100%" BGColor="#000000"><TR><TD><Font Color="#FFFFFF"><B>Parameters</B></Font></TD></TR></Table><Table Class="list" Width="100%" CellSpacing="1" CellPadding="2" BGColor="#EEEEEE"><TR Class="even"><TD><Font Color="Blue">DateStr&nbsp;</Font></TD><TD>The String to convert.</TD></TR><TR Class="odd"><TD><Font Color="Blue">Year&nbsp;</Font></TD><TD>If Year and StartMonth are entered then if the Month is at least StartMonth, then this Year is implied. If it is less then the StartMonth then Year + 1 is implied. Only has meaning if the Year is omitted in the String.</TD></TR><TR Class="even"><TD><Font Color="Blue">StartMonth&nbsp;</Font></TD><TD>If Year and StartMonth are entered then if the Month is at least StartMonth, then this Year is implied. If it is less then the StartMonth then Year + 1 is implied. Only has meaning if the Year is omitted in the String.</TD></TR></Table></P><P><B>Category</B><Br><A HREF="idh_cat_dtconv.htm">Date/Time Conversion Routines</A><Br /><Font Color=#FF0000><H3>Implementation</H3></Font> <table border="0" bgcolor="#FFFED9"  style="margin-top: 10; margin-bottom: 10;"> <tr> <td><pre><B>function</B> Str2Date (<B>const</B> DateStr: <B>string</B>): TDateTime;
+<B>var</B>
+     P1, P2, I: Integer;
+     Yr: Word;
+     DateOrder: <A HREF="IDH_Type_TESBDateOrder.htm">TESBDateOrder</A>;
+     Hold: Boolean;
+     S: <B>string</B>;
+     Found: Boolean;
+<B>begin</B>
+     S := UpperCase (Trim (DateStr));
+     <B>if</B> S = <Font Color="#119911">''</Font> <B>then</B>
+     <B>begin</B>
+          Result := 0.0;
+          Exit;
+     <B>end</B>;
+
+     <B>if</B> S [1] = <Font Color="#119911">'+'</Font> <B>then</B>
+     <B>begin</B>
+          Result := ESBToday + Str2Float (RightAfterStr (S, 1));
+          Exit;
+     <B>end</B>
+     <B>else</B> <B>if</B> S [1] = <Font Color="#119911">'-'</Font> <B>then</B>
+     <B>begin</B>
+          Result := ESBToday - Str2Float (RightAfterStr (S, 1));
+          Exit;
+     <B>end</B>;
+
+     DateOrder := GetESBDateOrder (ShortDateFormat);
+
+     Hold := ESBBlankWhenZero;
+     ESBBlankWhenZero := False;
+     <B>try</B>
+          <B>if</B> IsDigitStr (S) <B>then</B>
+          <B>begin</B>
+               <B>case</B> Length (S) <B>of</B>
+                    4: S := LeftStr (S, 2) + DateSeparator + RightStr (S, 2);
+                    6: S := LeftStr (S, 2) + DateSeparator + Copy (S, 3, 2)
+                         + DateSeparator + Copy (S, 5, 2);
+                    8:
+                         <B>begin</B>
+                              <B>if</B> DateOrder = edoYMD <B>then</B>
+                                   S := LeftStr (S, 4) + DateSeparator + Copy (S, 5, 2)
+                                        + DateSeparator + Copy (S, 7, 2)
+                              <B>else</B>
+                                   S := LeftStr (S, 2) + DateSeparator + Copy (S, 3, 2)
+                                        + DateSeparator + Copy (S, 5, 4);
+                         <B>end</B>;
+               <B>end</B>;
+          <B>end</B>
+          <B>else</B>
+          <B>begin</B>
+               Found := False;
+               <B>for</B> I := 1 <B>to</B> 12 <B>do</B>
+               <B>begin</B>
+                    P1 := Pos (UpperCase (LongMonthNames [I]), S);
+                    <B>if</B> P1 &gt; 0 <B>then</B>
+                    <B>begin</B>
+                         S := LeftStr (S, P1 - 1) + Int2EStr (I) +
+                              RightAfterStr (S, P1 + Length (LongMonthNames [I]) - 1);
+                         Found := True;
+                         Break;
+                    <B>end</B>;
+               <B>end</B>;
+
+               <B>if</B> <B>not</B> Found <B>then</B>
+               <B>begin</B>
+                    <B>for</B> I := 1 <B>to</B> 12 <B>do</B>
+                    <B>begin</B>
+                         P1 := Pos (UpperCase (ShortMonthNames [I]), S);
+                         <B>if</B> P1 &gt; 0 <B>then</B>
+                         <B>begin</B>
+                              S := LeftStr (S, P1 - 1) + Int2EStr (I) +
+                                   RightAfterStr (S, P1 + Length (ShortMonthNames [I]) - 1);
+                              Break;
+                         <B>end</B>;
+                    <B>end</B>;
+               <B>end</B>;
+          <B>end</B>;
+
+          <B>try</B>
+               <Font Color="#0000DD">// Allow '-' and '/' as valid alternatives for DateSeparator</Font>
+               S := ReplaceChStr (S, <Font Color="#119911">'-'</Font>, DateSeparator);
+               S := ReplaceChStr (S, <Font Color="#119911">'/'</Font>, DateSeparator);
+               S := ReplaceChStr (S, <Font Color="#119911">'\'</Font>, DateSeparator);
+               S := ReplaceChStr (S, <Font Color="#119911">' '</Font>, DateSeparator);
+               S := ReplaceChStr (S, <Font Color="#119911">'.'</Font>, DateSeparator);
+               S := ReplaceChStr (S, <Font Color="#119911">','</Font>, DateSeparator);
+
+               <Font Color="#0000DD">// Remove trailing Separator if any</Font>
+               <B>if</B> S [Length (S)] = DateSeparator <B>then</B>
+               <B>begin</B>
+                    S := LeftStr (S, Length (S) - 1);
+                    <B>if</B> S = <Font Color="#119911">''</Font> <B>then</B>
+                    <B>begin</B>
+                         Result := 0.0;
+                         Exit;
+                    <B>end</B>;
+               <B>end</B>;
+
+               <Font Color="#0000DD">// Remove Duplicate Separators</Font>
+               <B>repeat</B>
+                    P1 := Pos (DateSeparator + DateSeparator, S);
+                    <B>if</B> P1 &lt;&gt; 0 <B>then</B>
+                         Delete (S, P1, 1);
+               <B>until</B> P1 = 0;
+
+               P1 := ESBPosCh (DateSeparator, S);
+               <B>if</B> P1 &gt; 0 <B>then</B> <Font Color="#0000DD">// If at least one Date Separator</Font>
+               <B>begin</B>
+                    P2 := ESBPosCh (DateSeparator, Copy (S, P1 + 1, Length (S) - P1));
+                    <B>if</B> P2 &gt; 0 <B>then</B> <Font Color="#0000DD">// If 2 Date Separators</Font>
+                    <B>begin</B>
+                         <Font Color="#0000DD">// Get Components</Font>
+                         <B>case</B> DateOrder <B>of</B>
+                              edoDMY, edoMDY:
+                                   <B>begin</B>
+                                        Yr := Str2Word (Copy (S, P1 + P2 + 1, Length (S) - (P1 + P2)));
+                                   <B>end</B>;
+                         <B>else</B>
+                              <B>begin</B>
+                                   Yr := Str2Word (LeftStr (S, P1 - 1));
+                              <B>end</B>;
+                         <B>end</B>;
+
+                         <B>if</B> Yr &lt; 100 <B>then</B> <Font Color="#0000DD">// If 2 Digit</Font>
+                         <B>begin</B>
+                              <B>case</B> ESB2DigitYr <B>of</B>
+                                   <Font Color="#0000DD">// edyNone - Nothing has to be done</Font>
+                                   edyCutOff: <Font Color="#0000DD">// Process using ESB2DigitCutOff</Font>
+                                        <B>begin</B>
+                                             <B>if</B> 1900 + Yr &lt; ESB2DigitCutOff <B>then</B>
+                                                  Yr := 2000 + Yr
+                                             <B>else</B>
+                                                  Yr := 1900 + Yr
+                                        <B>end</B>;
+                                   edyHistoric: <Font Color="#0000DD">// Take Yr as this year or earlier</Font>
+                                        <B>begin</B>
+                                             <B>if</B> 2000 + Yr &lt;= ThisYear <B>then</B>
+                                                  Yr := 2000 + Yr
+                                             <B>else</B>
+                                                  Yr := 1900 + Yr;
+                                        <B>end</B>;
+                              <B>end</B>;
+                         <B>end</B>;
+                         <Font Color="#0000DD">// Rebuild String</Font>
+                         <B>case</B> DateOrder <B>of</B>
+                              edoDMY, edoMDY:
+                                   <B>begin</B>
+                                        S := LeftStr (S, P1 + P2) + Int2EStr (Yr);
+                                   <B>end</B>;
+                              edoYMD:
+                                   <B>begin</B>
+                                        S := Int2EStr (Yr) + RightAfterStr (S, P1 - 1);
+                                   <B>end</B>;
+                         <B>end</B>;
+                    <B>end</B>
+                    <B>else</B>
+                    <B>begin</B>
+                         <Font Color="#0000DD">// Assume This Year is implied</Font>
+                         <B>case</B> DateOrder <B>of</B>
+                              edoDMY, edoMDY:
+                                   <B>begin</B>
+                                        S := S + DateSeparator + Int2EStr (ThisYear)
+                                   <B>end</B>;
+                              edoYMD:
+                                   <B>begin</B>
+                                        S := Int2EStr (ThisYear) + DateSeparator + S;
+                                   <B>end</B>;
+                         <B>end</B>;
+                    <B>end</B>;
+               <B>end</B>
+               <B>else</B>
+               <B>begin</B>
+                    <Font Color="#0000DD">// Assume This Month and Year are implied</Font>
+                    <B>case</B> DateOrder <B>of</B>
+                         edoDMY:
+                              <B>begin</B>
+                                   S := S + DateSeparator + Int2EStr (ThisMonth)
+                                        + DateSeparator + Int2EStr (ThisYear);
+                              <B>end</B>;
+                         edoMDY:
+                              <B>begin</B>
+                                   S := Int2EStr (ThisMonth) + DateSeparator + S
+                                        + DateSeparator + Int2EStr (ThisYear);
+                              <B>end</B>;
+                         edoYMD:
+                              <B>begin</B>
+                                   S := Int2EStr (ThisYear) + DateSeparator +
+                                        Int2EStr (ThisMonth) + DateSeparator + S;
+                              <B>end</B>;
+                    <B>end</B>;
+               <B>end</B>;
+
+               <Font Color="#0000DD">//Int ensures the fractional Component is 0</Font>
+               Result := Int (StrToDate (S));
+          <B>except</B>
+               Result := 0.0;
+               <B>if</B> ESBRaiseDateError <B>then</B>
+                    <B>raise</B> EConvertError.Create (rsInvalidDate + <Font Color="#119911">' - '</Font> + DateStr);
+          <B>end</B>;
+     <B>finally</B>
+          ESBBlankWhenZero := Hold;
+     <B>end</B>;
+<B>End</B>;</pre></td></tr></Table><P><B><A Name="#1">Declaration</A></B><Br><Font Face="Courier New"><B>Function</B> Str2Date(<B>const</B> DateStr: <B>string</B>; <B>const</B> Year, StartMonth: Integer): TDateTime;</Font><Font Color=#FF0000><H3>Implementation</H3></Font> <table border="0" bgcolor="#FFFED9"  style="margin-top: 10; margin-bottom: 10;"> <tr> <td><pre><B>function</B> Str2Date (<B>const</B> DateStr: <B>string</B>; <B>const</B> Year, StartMonth: Integer): TDateTime;
+<B>var</B>
+     P1, P2, I: Integer;
+     Yr, Mnth: Integer;
+     DateOrder: <A HREF="IDH_Type_TESBDateOrder.htm">TESBDateOrder</A>;
+     Hold: Boolean;
+     S: <B>string</B>;
+     Found: Boolean;
+<B>begin</B>
+     <B>if</B> (StartMonth &lt; 1) <B>or</B> (StartMonth &gt; 12) <B>then</B>
+          <B>raise</B> EConvertError.Create (rsInvalidMonth);
+
+     S := UpperCase (Trim (DateStr));
+     <B>if</B> S = <Font Color="#119911">''</Font> <B>then</B>
+     <B>begin</B>
+          Result := 0.0;
+          Exit;
+     <B>end</B>;
+
+     <B>if</B> S [1] = <Font Color="#119911">'+'</Font> <B>then</B>
+     <B>begin</B>
+          Result := ESBToday + Str2Float (RightAfterStr (S, 1));
+          Exit;
+     <B>end</B>
+     <B>else</B> <B>if</B> S [1] = <Font Color="#119911">'-'</Font> <B>then</B>
+     <B>begin</B>
+          Result := ESBToday - Str2Float (RightAfterStr (S, 1));
+          Exit;
+     <B>end</B>;
+
+     DateOrder := GetESBDateOrder (ShortDateFormat);
+
+     Hold := ESBBlankWhenZero;
+     ESBBlankWhenZero := False;
+     <B>try</B>
+          <B>if</B> IsDigitStr (S) <B>then</B>
+          <B>begin</B>
+               <B>case</B> Length (S) <B>of</B>
+                    4: S := LeftStr (S, 2) + DateSeparator + RightStr (S, 2);
+                    6: S := LeftStr (S, 2) + DateSeparator + Copy (S, 3, 2)
+                         + DateSeparator + Copy (S, 5, 2);
+                    8:
+                         <B>begin</B>
+                              <B>if</B> DateOrder = edoYMD <B>then</B>
+                                   S := LeftStr (S, 4) + DateSeparator + Copy (S, 5, 2)
+                                        + DateSeparator + Copy (S, 7, 2)
+                              <B>else</B>
+                                   S := LeftStr (S, 2) + DateSeparator + Copy (S, 3, 2)
+                                        + DateSeparator + Copy (S, 5, 4);
+                         <B>end</B>;
+               <B>end</B>;
+          <B>end</B>
+          <B>else</B>
+          <B>begin</B>
+               Found := False;
+               <B>for</B> I := 1 <B>to</B> 12 <B>do</B>
+               <B>begin</B>
+                    P1 := Pos (UpperCase (LongMonthNames [I]), S);
+                    <B>if</B> P1 &gt; 0 <B>then</B>
+                    <B>begin</B>
+                         S := LeftStr (S, P1 - 1) + Int2EStr (I) +
+                              RightAfterStr (S, P1 + Length (LongMonthNames [I]) - 1);
+                         Found := True;
+                         Break;
+                    <B>end</B>;
+               <B>end</B>;
+
+               <B>if</B> <B>not</B> Found <B>then</B>
+               <B>begin</B>
+                    <B>for</B> I := 1 <B>to</B> 12 <B>do</B>
+                    <B>begin</B>
+                         P1 := Pos (UpperCase (ShortMonthNames [I]), S);
+                         <B>if</B> P1 &gt; 0 <B>then</B>
+                         <B>begin</B>
+                              S := LeftStr (S, P1 - 1) + Int2EStr (I) +
+                                   RightAfterStr (S, P1 + Length (ShortMonthNames [I]) - 1);
+                              Break;
+                         <B>end</B>;
+                    <B>end</B>;
+               <B>end</B>;
+          <B>end</B>;
+
+          <B>try</B>
+               <Font Color="#0000DD">// Allow '-' and '/' as valid alternatives for DateSeparator</Font>
+               S := ReplaceChStr (S, <Font Color="#119911">'-'</Font>, DateSeparator);
+               S := ReplaceChStr (S, <Font Color="#119911">'/'</Font>, DateSeparator);
+               S := ReplaceChStr (S, <Font Color="#119911">'\'</Font>, DateSeparator);
+               S := ReplaceChStr (S, <Font Color="#119911">' '</Font>, DateSeparator);
+               S := ReplaceChStr (S, <Font Color="#119911">'.'</Font>, DateSeparator);
+               S := ReplaceChStr (S, <Font Color="#119911">','</Font>, DateSeparator);
+
+               <Font Color="#0000DD">// Remove trailing Separator if any</Font>
+               <B>if</B> S [Length (S)] = DateSeparator <B>then</B>
+               <B>begin</B>
+                    S := LeftStr (S, Length (S) - 1);
+                    <B>if</B> S = <Font Color="#119911">''</Font> <B>then</B>
+                    <B>begin</B>
+                         Result := 0.0;
+                         Exit;
+                    <B>end</B>;
+               <B>end</B>;
+
+               <Font Color="#0000DD">// Remove Duplicate Separators</Font>
+               <B>repeat</B>
+                    P1 := Pos (DateSeparator + DateSeparator, S);
+                    <B>if</B> P1 &lt;&gt; 0 <B>then</B>
+                         Delete (S, P1, 1);
+               <B>until</B> P1 = 0;
+
+               P1 := ESBPosCh (DateSeparator, S);
+               <B>if</B> P1 &gt; 0 <B>then</B> <Font Color="#0000DD">// If at least one Date Separator</Font>
+               <B>begin</B>
+                    P2 := ESBPosCh (DateSeparator, Copy (S, P1 + 1, Length (S) - P1));
+                    <B>if</B> P2 &gt; 0 <B>then</B> <Font Color="#0000DD">// If 2 Date Separators</Font>
+                    <B>begin</B>
+                         <Font Color="#0000DD">// Get Components</Font>
+                         <B>case</B> DateOrder <B>of</B>
+                              edoDMY, edoMDY:
+                                   <B>begin</B>
+                                        Yr := Str2Word (Copy (S, P1 + P2 + 1, Length (S) - (P1 + P2)));
+                                   <B>end</B>;
+                         <B>else</B>
+                              <B>begin</B>
+                                   Yr := Str2Word (LeftStr (S, P1 - 1));
+                              <B>end</B>;
+                         <B>end</B>;
+
+                         <B>if</B> Yr &lt; 100 <B>then</B> <Font Color="#0000DD">// If 2 Digit</Font>
+                         <B>begin</B>
+                              <B>case</B> ESB2DigitYr <B>of</B>
+                                   <Font Color="#0000DD">// edyNone - Nothing has to be done</Font>
+                                   edyCutOff: <Font Color="#0000DD">// Process using ESB2DigitCutOff</Font>
+                                        <B>begin</B>
+                                             <B>if</B> 1900 + Yr &lt; ESB2DigitCutOff <B>then</B>
+                                                  Yr := 2000 + Yr
+                                             <B>else</B>
+                                                  Yr := 1900 + Yr
+                                        <B>end</B>;
+                                   edyHistoric: <Font Color="#0000DD">// Take Yr as this year or earlier</Font>
+                                        <B>begin</B>
+                                             <B>if</B> 2000 + Yr &lt;= Year + 1 <B>then</B>
+                                                  Yr := 2000 + Yr
+                                             <B>else</B>
+                                                  Yr := 1900 + Yr;
+                                        <B>end</B>;
+                              <B>end</B>;
+                         <B>end</B>;
+                         <Font Color="#0000DD">// Rebuild String</Font>
+                         <B>case</B> DateOrder <B>of</B>
+                              edoDMY, edoMDY:
+                                   <B>begin</B>
+                                        S := LeftStr (S, P1 + P2) + Int2EStr (Yr);
+                                   <B>end</B>;
+                              edoYMD:
+                                   <B>begin</B>
+                                        S := Int2EStr (Yr) + RightAfterStr (S, P1 - 1);
+                                   <B>end</B>;
+                         <B>end</B>;
+                    <B>end</B>
+                    <B>else</B>
+                    <B>begin</B>
+                         <Font Color="#0000DD">// Assume This Year is implied</Font>
+                         <B>case</B> DateOrder <B>of</B>
+                              edoDMY:
+                                   <B>begin</B>
+                                        Mnth := Str2Int (RightAfterChStr (S, DateSeparator));
+                                   <B>end</B>;
+                         <B>else</B>
+                              Mnth := Str2Int (LeftTillChStr (S, DateSeparator));
+                         <B>end</B>;
+                         <B>if</B> Mnth &lt; StartMonth <B>then</B>
+                              Yr := Year + 1
+                         <B>else</B>
+                              Yr := Year;
+
+                         <B>case</B> DateOrder <B>of</B>
+                              edoDMY, edoMDY:
+                                   <B>begin</B>
+                                        S := S + DateSeparator + Int2EStr (Yr)
+                                   <B>end</B>;
+                              edoYMD:
+                                   <B>begin</B>
+                                        S := Int2EStr (Yr) + DateSeparator + S;
+                                   <B>end</B>;
+                         <B>end</B>;
+                    <B>end</B>;
+               <B>end</B>
+               <B>else</B>
+               <B>begin</B>
+                    Mnth := ThisMonth;
+                    <B>if</B> Mnth &lt; StartMonth <B>then</B>
+                         Yr := Year + 1
+                    <B>else</B>
+                         Yr := Year;
+
+                    <Font Color="#0000DD">// Assume This Month and Year are implied</Font>
+                    <B>case</B> DateOrder <B>of</B>
+                         edoDMY:
+                              <B>begin</B>
+                                   S := S + DateSeparator + Int2EStr (Mnth)
+                                        + DateSeparator + Int2EStr (Yr);
+                              <B>end</B>;
+                         edoMDY:
+                              <B>begin</B>
+                                   S := Int2EStr (Mnth) + DateSeparator + S
+                                        + DateSeparator + Int2EStr (Yr);
+                              <B>end</B>;
+                         edoYMD:
+                              <B>begin</B>
+                                   S := Int2EStr (Yr) + DateSeparator +
+                                        Int2EStr (Mnth) + DateSeparator + S;
+                              <B>end</B>;
+                    <B>end</B>;
+               <B>end</B>;
+
+               <Font Color="#0000DD">//Int ensures the fractional Component is 0</Font>
+               Result := Int (StrToDate (S));
+          <B>except</B>
+               Result := 0.0;
+               <B>if</B> ESBRaiseDateError <B>then</B>
+                    <B>raise</B> EConvertError.Create (rsInvalidDate + <Font Color="#119911">' - '</Font> + DateStr);
+          <B>end</B>;
+     <B>finally</B>
+          ESBBlankWhenZero := Hold;
+     <B>end</B>;
+<B>End</B>;</pre></td></tr></Table><P><HR>
+<TABLE BORDER="0" WIDTH="100%" BGCOLOR="#000000"><TR><TD>
+<Font Color=White><Large>HTML generated by <B>Time2HELP</B></Large></Font>
+</TD></TR></Table>
+<Small><A HREF="http://www.time2help.com">http://www.time2help.com</A></Small></Body></HTML>

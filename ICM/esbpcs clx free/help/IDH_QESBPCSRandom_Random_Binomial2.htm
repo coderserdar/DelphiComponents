@@ -1,0 +1,196 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+<META NAME="GENERATOR" Content="Time2HELP 1.0; Standard Template">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html;CHARSET=iso-8859-1">
+<TITLE>Random_Binomial2</TITLE>
+<Style>Body, TD {font-family: "Verdana"; font-size: 10pt};
+PRE {font-size: 10pt; margin-top: 0; margin-bottom: 0}
+TR.odd {background-color: #F8F8F8};
+TR.even {background-color: #EEEEEE};
+Table.list {background-color: #FFFFFF};
+TD {vertical-align : top}
+</Style>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<BASEFONT NAME="verdana" Size="2"><Table Border="0" Width="100%" BGColor="#FFFFFF"><TR><TD><Font Color="#000000F"><B>Random_Binomial2 Routines</B></Font></TD></TR></Table>Generates a single random deviate from a binomial distribution whose number of trials is N and whose probability of an event in each trial is P.<P><B>Unit</B><Br><A HREF="IDH_Unit_QESBPCSRandom.htm">QESBPCSRandom</A><P><Table Border="0" Width="100%" BGColor="#000000"><TR><TD><Font Color="#FFFFFF"><B>Overloaded Variants</B></Font></TD></TR></Table><Table Class="list" Width="100%" CellSpacing="1" CellPadding="2" BGColor="#EEEEEE"><TR Class="even"><TD><A HRef="#0">Function Random_Binomial2(const n: Int64; const pp: Extended): Int64;</A></TD></TR><TR Class="odd"><TD><A HRef="#1">Function Random_Binomial2(const n: Int64; const pp: Extended; RandomGenerator: TRandomGenFunction): Int64;</A></TD></TR></Table></P><P><B><A Name="#0">Declaration</A></B><Br><Font Face="Courier New"><B>Function</B> Random_Binomial2(<B>const</B> n: Int64; <B>const</B> pp: Extended): Int64;</Font><P><B>Description</B><Br />Translated to Fortran 90 by Alan Miller from: RANLIB, Library of Fortran Routines for Random Number Generation. Compiled and Written by:</P><P>Barry W. Brown</P><P>James Lovato</P><P>Department of Biomathematics, Box 237</P><P>The University of Texas, M.D. Anderson Cancer Center</P><P>1515 Holcombe Boulevard</P><P>Houston, TX 77030</P><P>This work was supported by grant CA-16672 from the National Cancer Institute.</P><P><Table Border="0" Width="100%" BGColor="#000000"><TR><TD><Font Color="#FFFFFF"><B>Parameters</B></Font></TD></TR></Table><Table Class="list" Width="100%" CellSpacing="1" CellPadding="2" BGColor="#EEEEEE"><TR Class="even"><TD><Font Color="Blue">n&nbsp;</Font></TD><TD>Number of Trials, must be positive.</TD></TR><TR Class="odd"><TD><Font Color="Blue">pp&nbsp;</Font></TD><TD>Probability of Success must be in [0, 1].</TD></TR><TR Class="even"><TD><Font Color="Blue">RandomGenerator&nbsp;</Font></TD><TD>Optional Function to use for Uniform Random Number Generator. If omitted, Delphi's Random function is used, and if this is done remember to call Randomize if you don't want repeated values.</TD></TR></Table></P><P><B>Category</B><Br><A HREF="idh_cat_floatmath.htm">Arithmetic Routines for Floats</A><Br /><Font Color=#FF0000><H3>Implementation</H3></Font> <table border="0" bgcolor="#FFFED9"  style="margin-top: 10; margin-bottom: 10;"> <tr> <td><pre><B>function</B> Random_Binomial2 (<B>const</B> n: Int64; <B>const</B> pp: Extended): Int64;
+<B>begin</B>
+     Result := Random_Binomial2 (n, pp);
+<B>End</B>;</pre></td></tr></Table><P><B><A Name="#1">Declaration</A></B><Br><Font Face="Courier New"><B>Function</B> Random_Binomial2(<B>const</B> n: Int64; <B>const</B> pp: Extended; RandomGenerator: <A HREF="IDH_Type_TRandomGenFunction.htm">TRandomGenFunction</A>): Int64;</Font><Font Color=#FF0000><H3>Implementation</H3></Font> <table border="0" bgcolor="#FFFED9"  style="margin-top: 10; margin-bottom: 10;"> <tr> <td><pre><B>function</B> Random_Binomial2 (<B>const</B> n: Int64; <B>const</B> pp: Extended;
+     RandomGenerator: <A HREF="IDH_Type_TRandomGenFunction.htm">TRandomGenFunction</A>): Int64;
+<B>var</B>
+     alv, aMaxXYp, f, f1, f2, u, v, w, w2, x, x1, x2, ynorm, z, z2: Extended;
+     i: Integer;
+     ix, ix1, k, mp: Int64;
+     m: Int64;
+     p, q, xnp, ffm, fm, xnpq, p1, xm, xl, xr, c, al, xll,
+          xlr, p2, p3, p4, qn, r, g: Extended;
+     Done: Boolean;
+<B>begin</B>
+     <Font Color="#0000DD">// SETUP</Font>
+     p := MinXY (pp, 1.0 - pp);
+     q := 1.0 - p;
+     xnp := n * p;
+
+     <B>if</B> (xnp &gt; 30.0) <B>then</B>
+     <B>begin</B>
+          ffm := xnp + p;
+          m := Trunc (ffm);
+          fm := m;
+          xnpq := xnp * q;
+          p1 := INT (2.195 * Sqrt (xnpq) - 4.6 * q) + 0.5;
+          xm := fm + 0.5;
+          xl := xm - p1;
+          xr := xm + p1;
+          c := 0.134 + 20.5 / (15.3 + fm);
+          al := (ffm - xl) / (ffm - xl * p);
+          xll := al * (1.0 + 0.5 * al);
+          al := (xr - ffm) / (xr * q);
+          xlr := al * (1.0 + 0.5 * al);
+          p2 := p1 * (1.0 + c + c);
+          p3 := p2 + c / xll;
+          p4 := p3 + c / xlr;
+
+          <Font Color="#0000DD">// GENERATE VARIATE, Binomial mean at least 30.</Font>
+
+          ix := 0;
+          <B>repeat</B>;
+               u := RandomGenerator; <Font Color="#0000DD">//20</Font>
+               u := u * p4;
+               v := RandomGenerator;
+
+               <Font Color="#0000DD">// TRIANGULAR REGION</Font>
+               <B>if</B> (u &lt;= p1) <B>then</B>
+               <B>begin</B>
+                    ix := Trunc (xm - p1 * v + u);
+                    Break;
+               <B>end</B>;
+
+               <Font Color="#0000DD">// PARALLELOGRAM REGION</Font>
+               <B>if</B> (u &lt;= p2) <B>then</B>
+               <B>begin</B>
+                    x := xl + (u - p1) / c;
+                    v := v * c + 1.0 - Abs (xm - x) / p1;
+                    <B>if</B> (v &gt; 1.0) <B>or</B> (v &lt;= 0) <B>then</B>
+                         Continue;
+                    ix := Trunc (x);
+               <B>end</B>
+               <B>else</B>
+               <B>begin</B>
+                    <Font Color="#0000DD">// LEFT TAIL</Font>
+                    <B>if</B> (u &lt;= p3) <B>then</B>
+                    <B>begin</B>
+                         ix := Trunc (xl + Ln (v) / xll);
+                         <B>if</B> (ix &lt; 0) <B>then</B>
+                              Continue;
+                         v := v * (u - p2) * xll
+                    <B>end</B>
+                         <Font Color="#0000DD">// RIGHT TAIL</Font>
+                    <B>else</B>
+                    <B>begin</B>
+                         ix := Trunc (xr - Ln (v) / xlr);
+                         <B>if</B> (ix &gt; n) <B>then</B>
+                              Continue;
+                         v := v * (u - p3) * xlr;
+                    <B>end</B>;
+               <B>end</B>;
+
+               <Font Color="#0000DD">// DETERMinXYE APPROPRIATE WAY TO PERFORM ACCEPT/REJECT TEST</Font>
+
+               k := Abs (ix - m);
+               <B>if</B> (k &lt;= 20) <B>or</B> (k &gt;= xnpq / 2 - 1) <B>then</B>
+               <B>begin</B>
+                    <Font Color="#0000DD">// EXPLICIT EVALUATION</Font>
+                    f := 1.0;
+                    r := p / q;
+                    g := (n + 1) * r;
+                    <B>if</B> (m &lt; ix) <B>then</B>
+                    <B>begin</B>
+                         mp := m + 1;
+                         <B>for</B> i := mp <B>to</B> ix <B>do</B>
+                              f := f * (g / i - r);
+                    <B>end</B>
+                    <B>else</B> <B>if</B> (m &gt; ix) <B>then</B>
+                    <B>begin</B>
+                         ix1 := ix + 1;
+                         <B>for</B> i := ix1 <B>to</B> m <B>do</B>
+                              f := f / (g / i - r);
+                    <B>end</B>;
+
+                    <B>if</B> (v &gt; f) <B>then</B>
+                         Continue
+                    <B>else</B>
+                         Break
+               <B>end</B>;
+
+               <Font Color="#0000DD">// SQUEEZING USING UPPER AND LOWER BOUNDS ON LOG(F(X))</Font>
+
+               aMaxXYp := (k / xnpq) * ((k * (k / 3.0 + 0.625)
+                    + 0.1666666666666) / xnpq + 0.5);
+               ynorm := -Sqr (k) / (2.0 * xnpq);
+               alv := Ln (v);
+               <B>if</B> (alv &lt; ynorm - aMaxXYp) <B>then</B>
+                    Break;
+               <B>if</B> (alv &gt; ynorm + aMaxXYp) <B>then</B>
+                    Continue;
+               <Font Color="#0000DD">// STIRLING'S (actually de Moivre's) FORMULA TO MACHINE ACCURACY FOR</Font>
+               <Font Color="#0000DD">//  THE FINAL ACCEPTANCE/REJECTION TEST</Font>
+
+               x1 := ix + 1;
+               f1 := fm + 1.0;
+               z := n + 1 - fm;
+               w := n - ix + 1.0;
+               z2 := Sqr (z);
+               x2 := Sqr (x1);
+               f2 := Sqr (f1);
+               w2 := Sqr (w);
+               <B>if</B> (alv - (xm * Ln (f1 / x1) + (n - m + 0.5) * Ln (z / w)
+                    + (ix - m) * Ln (w * p / (x1 * q))
+                    + (13860.0 - (462.0 - (132.0 - (99.0 - 140.0 / f2) / f2) / f2) / f2) / f1 / 166320.0
+                    + (13860.0 - (462.0 - (132.0 - (99.0 - 140.0 / z2) / z2) / z2) / z2) / z / 166320.0
+                    + (13860.0 - (462.0 - (132.0 - (99.0 - 140.0 / x2) / x2) / x2) / x2) / x1 / 166320.0
+                    + (13860.0 - (462.0 - (132.0 - (99.0 - 140.0 / w2) / w2) / w2) / w2) / w / 166320.0)
+                    &gt; 0.0) <B>then</B>
+               <B>begin</B>
+                    Continue;
+               <B>end</B>
+               <B>else</B>
+                    Break;
+          <B>until</B> False;
+     <B>end</B>
+     <B>else</B>
+     <B>begin</B>
+          <Font Color="#0000DD">// INVERSE CDF LOGIC FOR MEAN LESS THAN 30</Font>
+          qn := XtoY (q, n);
+          r := p / q;
+          g := r * (n + 1);
+
+          Done := False;
+          <B>repeat</B>
+               ix := 0;
+               f := qn;
+               u := RandomGenerator;
+               <B>while</B> (u &gt;= f) <B>do</B>
+               <B>begin</B>
+                    <B>if</B> (ix &gt; 110) <B>then</B>
+                         Done := False
+                    <B>else</B>
+                    <B>begin</B>
+                         Done := True;
+                         u := u - f;
+                         ix := ix + 1;
+                         f := f * (g / ix - r);
+                    <B>end</B>;
+               <B>end</B>;
+          <B>until</B> Done;
+     <B>end</B>;
+
+     <B>if</B> (pp &gt; 0.5) <B>then</B>
+          ix := n - ix;
+
+     Result := ix;
+<B>End</B>;</pre></td></tr></Table><P><HR>
+<TABLE BORDER="0" WIDTH="100%" BGCOLOR="#000000"><TR><TD>
+<Font Color=White><Large>HTML generated by <B>Time2HELP</B></Large></Font>
+</TD></TR></Table>
+<Small><A HREF="http://www.time2help.com">http://www.time2help.com</A></Small></Body></HTML>

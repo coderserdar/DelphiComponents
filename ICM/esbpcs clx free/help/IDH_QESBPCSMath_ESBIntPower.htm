@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+<META NAME="GENERATOR" Content="Time2HELP 1.0; Standard Template">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html;CHARSET=iso-8859-1">
+<TITLE>ESBIntPower</TITLE>
+<Style>Body, TD {font-family: "Verdana"; font-size: 10pt};
+PRE {font-size: 10pt; margin-top: 0; margin-bottom: 0}
+TR.odd {background-color: #F8F8F8};
+TR.even {background-color: #EEEEEE};
+Table.list {background-color: #FFFFFF};
+TD {vertical-align : top}
+</Style>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<BASEFONT NAME="verdana" Size="2"><Table Border="0" Width="100%" BGColor="#FFFFFF"><TR><TD><Font Color="#000000F"><B>ESBIntPower Routines</B></Font></TD></TR></Table>Raises Values to an Integer Power.<P><B>Unit</B><Br><A HREF="IDH_Unit_QESBPCSMath.htm">QESBPCSMath</A><P><Table Border="0" Width="100%" BGColor="#000000"><TR><TD><Font Color="#FFFFFF"><B>Overloaded Variants</B></Font></TD></TR></Table><Table Class="list" Width="100%" CellSpacing="1" CellPadding="2" BGColor="#EEEEEE"><TR Class="even"><TD><A HRef="#0">Function ESBIntPower(const X: LongInt; const N: Byte): Int64;</A></TD></TR><TR Class="odd"><TD><A HRef="#1">Function ESBIntPower(const X: Extended; const N: LongInt): Extended;</A></TD></TR><TR Class="even"><TD><A HRef="#2">Function ESBIntPower(const X: Extended; const N: LongWord): Extended;</A></TD></TR></Table></P><P><B><A Name="#0">Declaration</A></B><Br><Font Face="Courier New"><B>Function</B> ESBIntPower(<B>const</B> X: LongInt; <B>const</B> N: Byte): Int64;</Font><P><B>Description</B><Br />The different overloaded routines allow for better precision depending on the data types involved. The LongInt/Byte is for strictly Integer operations.</P><P>Zero to a Negative power raises an Exception.</P><P>The LongInt/Byte Routine cannot handle N &gt; 62, as this raises an exception, so for N &gt; 63, take the longint value and multiply it by 1.0 to ensure a different routine gets called.</P><P>Thanks to Rory Daulton for improvements.</P><P><Table Border="0" Width="100%" BGColor="#000000"><TR><TD><Font Color="#FFFFFF"><B>Parameters</B></Font></TD></TR></Table><Table Class="list" Width="100%" CellSpacing="1" CellPadding="2" BGColor="#EEEEEE"><TR Class="even"><TD><Font Color="Blue">X&nbsp;</Font></TD><TD>Value to use as the Base</TD></TR><TR Class="odd"><TD><Font Color="Blue">N&nbsp;</Font></TD><TD>Integer Value to raise the Base to</TD></TR></Table></P><P><B>Category</B><Br><A HREF="idh_cat_intmath.htm">Arithmetic Routines for Integers</A><Br /><A HREF="idh_cat_floatmath.htm">Arithmetic Routines for Floats</A><Br /><Font Color=#FF0000><H3>Implementation</H3></Font> <table border="0" bgcolor="#FFFED9"  style="margin-top: 10; margin-bottom: 10;"> <tr> <td><pre><B>function</B> ESBIntPower (<B>const</B> X: LongInt; <B>const</B> N: Byte): Int64; <B>overload</B>;
+<B>var</B>
+     I: LongWord;
+<B>begin</B>
+     <B>if</B> N &gt; 62 <B>then</B>
+          <B>raise</B> EMathError.Create (rsPowerInt64);
+
+     <B>if</B> N = 0 <B>then</B>
+          Result := 1
+     <B>else</B> <B>if</B> (X = 0) <B>or</B> (X = 1) <B>then</B>
+          Result := X
+     <B>else</B> <B>if</B> X = -1 <B>then</B>
+     <B>begin</B>
+          <B>if</B> Odd (N) <B>then</B>
+               Result := -1
+          <B>else</B>
+               Result := 1
+     <B>end</B>
+     <B>else</B>
+     <B>begin</B>
+          Result := X;
+          <B>for</B> I := 2 <B>to</B> N <B>do</B>
+               Result := Result * X;
+     <B>end</B>;
+<B>End</B>;</pre></td></tr></Table><P><B><A Name="#1">Declaration</A></B><Br><Font Face="Courier New"><B>Function</B> ESBIntPower(<B>const</B> X: Extended; <B>const</B> N: LongInt): Extended;</Font><Font Color=#FF0000><H3>Implementation</H3></Font> <table border="0" bgcolor="#FFFED9"  style="margin-top: 10; margin-bottom: 10;"> <tr> <td><pre><B>function</B> ESBIntPower (<B>const</B> X: Extended; <B>const</B> N: LongInt): Extended; <B>overload</B>;
+<B>var</B>
+     P: LongWord;
+<B>begin</B>
+     <B>if</B> N = 0 <B>then</B>
+          Result := 1
+     <B>else</B> <B>if</B> (X = 0) <B>then</B>
+     <B>begin</B>
+          <B>if</B> N &lt; 0 <B>then</B>
+               <B>raise</B> EMathError.Create (rsZeroToNegPower)
+          <B>else</B>
+               Result := 0
+     <B>end</B>
+     <B>else</B> <B>if</B> (X = 1) <B>then</B>
+          Result := 1
+     <B>else</B> <B>if</B> X = -1 <B>then</B>
+     <B>begin</B>
+          <B>if</B> Odd (N) <B>then</B>
+               Result := -1
+          <B>else</B>
+               Result := 1
+     <B>end</B>
+     <B>else</B> <B>if</B> N &gt; 0 <B>then</B>
+          Result := IntPow (X, N)
+     <B>else</B>
+     <B>begin</B>
+          <B>if</B> N &lt;&gt; Low (LongInt) <B>then</B>
+               P := abs (N)
+          <B>else</B>
+               P := LongWord (High (LongInt)) + 1;
+
+          <B>try</B>
+               Result := IntPow (X, P);
+          <B>except</B>
+               on EMathError <B>do</B>
+               <B>begin</B>
+                    Result := IntPow (1 / X, P); <Font Color="#0000DD">{ try again with another method, }</Font>
+                    Exit; <Font Color="#0000DD">{   perhaps less precise         }</Font>
+               <B>end</B> <Font Color="#0000DD">{on}</Font>;
+          <B>end</B> <Font Color="#0000DD">{try}</Font>;
+          Result := 1 / Result;
+     <B>end</B>;
+<B>End</B>;</pre></td></tr></Table><P><B><A Name="#2">Declaration</A></B><Br><Font Face="Courier New"><B>Function</B> ESBIntPower(<B>const</B> X: Extended; <B>const</B> N: LongWord): Extended;</Font><Font Color=#FF0000><H3>Implementation</H3></Font> <table border="0" bgcolor="#FFFED9"  style="margin-top: 10; margin-bottom: 10;"> <tr> <td><pre><B>function</B> ESBIntPower (<B>const</B> X: Extended; <B>const</B> N: LongWord): Extended; <B>overload</B>;
+<B>begin</B>
+     <B>if</B> N = 0 <B>then</B>
+          Result := 1
+     <B>else</B> <B>if</B> (X = 0) <B>or</B> (X = 1) <B>then</B>
+          Result := X
+     <B>else</B> <B>if</B> X = -1 <B>then</B>
+     <B>begin</B>
+          <B>if</B> Odd (N) <B>then</B>
+               Result := -1
+          <B>else</B>
+               Result := 1
+     <B>end</B>
+     <B>else</B>
+          Result := IntPow (X, N)
+<B>End</B>;</pre></td></tr></Table><P><HR>
+<TABLE BORDER="0" WIDTH="100%" BGCOLOR="#000000"><TR><TD>
+<Font Color=White><Large>HTML generated by <B>Time2HELP</B></Large></Font>
+</TD></TR></Table>
+<Small><A HREF="http://www.time2help.com">http://www.time2help.com</A></Small></Body></HTML>

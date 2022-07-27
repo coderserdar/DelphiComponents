@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+<META NAME="GENERATOR" Content="Time2HELP 1.0; Standard Template">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html;CHARSET=iso-8859-1">
+<TITLE>Date2ISOWeekNo</TITLE>
+<Style>Body, TD {font-family: "Verdana"; font-size: 10pt};
+PRE {font-size: 10pt; margin-top: 0; margin-bottom: 0}
+TR.odd {background-color: #F8F8F8};
+TR.even {background-color: #EEEEEE};
+Table.list {background-color: #FFFFFF};
+TD {vertical-align : top}
+</Style>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<BASEFONT NAME="verdana" Size="2"><Table Border="0" Width="100%" BGColor="#FFFFFF"><TR><TD><Font Color="#000000F"><B>Date2ISOWeekNo Routines</B></Font></TD></TR></Table>Converts Dates into a Week No and Year according to ISO-8601.<P><B>Unit</B><Br><A HREF="IDH_Unit_QESBPCSDateTime.htm">QESBPCSDateTime</A><P><Table Border="0" Width="100%" BGColor="#000000"><TR><TD><Font Color="#FFFFFF"><B>Overloaded Variants</B></Font></TD></TR></Table><Table Class="list" Width="100%" CellSpacing="1" CellPadding="2" BGColor="#EEEEEE"><TR Class="even"><TD><A HRef="#0">Procedure Date2ISOWeekNo(const DT: TDateTime; var WeekNo: Integer; var Year: Word);</A></TD></TR><TR Class="odd"><TD><A HRef="#1">Procedure Date2ISOWeekNo(const DT: TDateTime; var WeekNo, Year: Integer);</A></TD></TR></Table></P><P><B><A Name="#0">Declaration</A></B><Br><Font Face="Courier New"><B>Procedure</B> Date2ISOWeekNo(<B>const</B> DT: TDateTime; <B>var</B> WeekNo: Integer; <B>var</B> Year: Word);</Font><P><B>Description</B><Br />Weeks are assumed to start with Monday. The week that Jan 4 occurs in is the 1st week of the year. Note that this does mean that there can be 53 weeks in a year!</P><P><Table Border="0" Width="100%" BGColor="#000000"><TR><TD><Font Color="#FFFFFF"><B>Parameters</B></Font></TD></TR></Table><Table Class="list" Width="100%" CellSpacing="1" CellPadding="2" BGColor="#EEEEEE"><TR Class="even"><TD><Font Color="Blue">DT&nbsp;</Font></TD><TD>Date to process.</TD></TR><TR Class="odd"><TD><Font Color="Blue">WeekNo&nbsp;</Font></TD><TD>Returns the ISO-8601 Week Number in specified Year</TD></TR><TR Class="even"><TD><Font Color="Blue">Year&nbsp;</Font></TD><TD>Returns 4 digit year to which the Week Number applies, not necessarily the same year as DT.</TD></TR></Table></P><P><B>Category</B><Br><A HREF="idh_cat_dtmath.htm">Date/Time Arithmetic Routines</A><Br /><A HREF="idh_cat_weekmath.htm">Week Based Arithmetic Routines</A><Br /><Font Color=#FF0000><H3>Implementation</H3></Font> <table border="0" bgcolor="#FFFED9"  style="margin-top: 10; margin-bottom: 10;"> <tr> <td><pre><B>procedure</B> Date2ISOWeekNo (<B>const</B> DT: TDateTime; <B>var</B> WeekNo: Integer;
+     <B>var</B> Year: Word);
+<B>var</B>
+     FirstMonday, StartYear: TDateTime;
+     WeekOfs: Byte;
+<B>begin</B>
+     Year := Date2Year (DT);
+     StartYear := GetFirstDayOfYear (Year) + 3; <Font Color="#0000DD">// Jan 4th</Font>
+     <B>if</B> ISODayOfWeek (StartYear) &lt;= 4 <B>then</B>
+     <B>begin</B>
+          FirstMonday := StartOfISOWeek (StartYear);
+          WeekOfs := 1;
+          <B>if</B> DT &lt; FirstMonday <B>then</B>
+          <B>begin</B>
+               Dec (Year);
+               WeekNo := ISOWeeksInYear (Year);
+               Exit;
+          <B>end</B>;
+     <B>end</B>
+     <B>else</B>
+     <B>begin</B>
+          FirstMonday := StartOfISOWeek (StartYear) + 7;
+          WeekOfs := 2;
+          <B>if</B> DT &lt; FirstMonday <B>then</B>
+          <B>begin</B>
+               WeekNo := 1;
+               Exit;
+          <B>end</B>;
+     <B>end</B>;
+     WeekNo := DaysApart (FirstMonday, StartofISOWeek (DT)) <B>div</B> 7 + WeekOfs;
+     <B>if</B> WeekNo &gt; ISOWeeksInYear (Year) <B>then</B>
+     <B>begin</B>
+          WeekNo := 1;
+          Inc (Year);
+     <B>end</B>;
+<B>End</B>;</pre></td></tr></Table><P><B><A Name="#1">Declaration</A></B><Br><Font Face="Courier New"><B>Procedure</B> Date2ISOWeekNo(<B>const</B> DT: TDateTime; <B>var</B> WeekNo, Year: Integer);</Font><Font Color=#FF0000><H3>Implementation</H3></Font> <table border="0" bgcolor="#FFFED9"  style="margin-top: 10; margin-bottom: 10;"> <tr> <td><pre><B>procedure</B> Date2ISOWeekNo (<B>const</B> DT: TDateTime; <B>var</B> WeekNo, Year: Integer);
+<B>var</B>
+     FirstMonday, StartYear: TDateTime;
+     WeekOfs: Integer;
+<B>begin</B>
+     Year := OptDate2Year (DT);
+     StartYear := GetFirstDayOfYear (Year) + 3; <Font Color="#0000DD">// Jan 4th</Font>
+     <B>if</B> ISODayOfWeek (StartYear) &lt;= 4 <B>then</B>
+     <B>begin</B>
+          FirstMonday := StartOfISOWeek (StartYear);
+          WeekOfs := 1;
+          <B>if</B> DT &lt; FirstMonday <B>then</B>
+          <B>begin</B>
+               Dec (Year);
+               WeekNo := ISOWeeksInYear (Year);
+               Exit;
+          <B>end</B>;
+     <B>end</B>
+     <B>else</B>
+     <B>begin</B>
+          FirstMonday := StartOfISOWeek (StartYear) + 7;
+          WeekOfs := 2;
+          <B>if</B> DT &lt; FirstMonday <B>then</B>
+          <B>begin</B>
+               WeekNo := 1;
+               Exit;
+          <B>end</B>;
+     <B>end</B>;
+     WeekNo := DaysApart (FirstMonday, StartofISOWeek (DT)) <B>div</B> 7 + WeekOfs;
+     <B>if</B> WeekNo &gt; ISOWeeksInYear (Year) <B>then</B>
+     <B>begin</B>
+          WeekNo := 1;
+          Inc (Year);
+     <B>end</B>;
+<B>End</B>;</pre></td></tr></Table><P><HR>
+<TABLE BORDER="0" WIDTH="100%" BGCOLOR="#000000"><TR><TD>
+<Font Color=White><Large>HTML generated by <B>Time2HELP</B></Large></Font>
+</TD></TR></Table>
+<Small><A HREF="http://www.time2help.com">http://www.time2help.com</A></Small></Body></HTML>

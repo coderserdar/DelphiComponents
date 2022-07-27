@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+<META NAME="GENERATOR" Content="Time2HELP 1.0; Standard Template">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html;CHARSET=iso-8859-1">
+<TITLE>Int2ZStr</TITLE>
+<Style>Body, TD {font-family: "Verdana"; font-size: 10pt};
+PRE {font-size: 10pt; margin-top: 0; margin-bottom: 0}
+TR.odd {background-color: #F8F8F8};
+TR.even {background-color: #EEEEEE};
+Table.list {background-color: #FFFFFF};
+TD {vertical-align : top}
+</Style>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<BASEFONT NAME="verdana" Size="2"><Table Border="0" Width="100%" BGColor="#FFFFFF"><TR><TD><Font Color="#000000F"><B>Int2ZStr Routines</B></Font></TD></TR></Table>Converts an Integer into a string of length Len with Zero Padding to the Left.<P><B>Unit</B><Br><A HREF="IDH_Unit_QESBPCSConvert.htm">QESBPCSConvert</A><P><Table Border="0" Width="100%" BGColor="#000000"><TR><TD><Font Color="#FFFFFF"><B>Overloaded Variants</B></Font></TD></TR></Table><Table Class="list" Width="100%" CellSpacing="1" CellPadding="2" BGColor="#EEEEEE"><TR Class="even"><TD><A HRef="#0">Function Int2ZStr(const L: LongInt; const Len: Byte): string;</A></TD></TR><TR Class="odd"><TD><A HRef="#1">Function Int2ZStr(const L: Int64; const Len: Byte): string;</A></TD></TR></Table></P><P><B><A Name="#0">Declaration</A></B><Br><Font Face="Courier New"><B>Function</B> Int2ZStr(<B>const</B> L: LongInt; <B>const</B> Len: Byte): <B>string</B>;</Font><P><B>Description</B><Br /><A HREF="IDH_Var_ESBNumPosSign.htm">ESBNumPosSign</A> controls whether a '+' Sign appears at the beginning for positive Integers. <A HREF="IDH_Var_ESBBlankWhenZero.htm">ESBBlankWhenZero</A> can be set to True to have Zero returned as a string of blanks.</P><P><Table Border="0" Width="100%" BGColor="#000000"><TR><TD><Font Color="#FFFFFF"><B>Parameters</B></Font></TD></TR></Table><Table Class="list" Width="100%" CellSpacing="1" CellPadding="2" BGColor="#EEEEEE"><TR Class="even"><TD><Font Color="Blue">L&nbsp;</Font></TD><TD>Value to Convert to String.</TD></TR><TR Class="odd"><TD><Font Color="Blue">Len&nbsp;</Font></TD><TD>is the length of the resultant string. If it is too small then valid digits will be truncated from the right.</TD></TR></Table></P><P><B>Category</B><Br><A HREF="idh_cat_stringintconv.htm">String/Integer Conversion Routines</A><Br /><Font Color=#FF0000><H3>Implementation</H3></Font> <table border="0" bgcolor="#FFFED9"  style="margin-top: 10; margin-bottom: 10;"> <tr> <td><pre><B>function</B> Int2ZStr (<B>const</B> L: LongInt; <B>const</B> Len: Byte): <B>string</B>;
+<B>var</B>
+     Len2: Byte;
+<B>begin</B>
+     <B>if</B> ESBBlankWhenZero <B>and</B> (L = 0) <B>then</B>
+     <B>begin</B>
+          Result := BlankStr (Len);
+          Exit;
+     <B>end</B>;
+
+     <B>try</B>
+          FmtStr (Result, <Font Color="#119911">'%d'</Font>, [abs (L)]); <Font Color="#0000DD">// Format the string</Font>
+          <B>if</B> L = Low (LongInt) <B>then</B>
+               Result := RightAfterStr (Result, 1);
+          <B>if</B> (Len &gt; 0) <B>and</B> ((L &lt; 0) <B>or</B> ((L &gt; 0) <B>and</B> ESBNumPosSign)) <B>then</B>
+               Len2 := Len - 1 <Font Color="#0000DD">// Need to leave space for the sign</Font>
+          <B>else</B>
+               Len2 := Len;
+          Result := PadChLeftStr (LeftStr (Result, Len2), <Font Color="#119911">'0'</Font>, Len2); <Font Color="#0000DD">// Pad with Zeroes</Font>
+          <B>if</B> L &lt; 0 <B>then</B> <Font Color="#0000DD">// Add Sign if necessary</Font>
+               Result := <Font Color="#119911">'-'</Font> + Result
+          <B>else</B> <B>if</B> (L &gt; 0) <B>and</B> ESBNumPosSign <B>then</B>
+               Result := <Font Color="#119911">'+'</Font> + Result;
+     <B>except</B>
+          Result := <Font Color="#119911">''</Font>;
+     <B>end</B>;
+<B>End</B>;</pre></td></tr></Table><P><B><A Name="#1">Declaration</A></B><Br><Font Face="Courier New"><B>Function</B> Int2ZStr(<B>const</B> L: Int64; <B>const</B> Len: Byte): <B>string</B>;</Font><Font Color=#FF0000><H3>Implementation</H3></Font> <table border="0" bgcolor="#FFFED9"  style="margin-top: 10; margin-bottom: 10;"> <tr> <td><pre><B>function</B> Int2ZStr (<B>const</B> L: Int64; <B>const</B> Len: Byte): <B>string</B>;
+<B>var</B>
+     Len2: Byte;
+<B>begin</B>
+     <B>if</B> ESBBlankWhenZero <B>and</B> (L = 0) <B>then</B>
+     <B>begin</B>
+          Result := BlankStr (Len);
+          Exit;
+     <B>end</B>;
+
+     <B>try</B>
+          FmtStr (Result, <Font Color="#119911">'%d'</Font>, [abs (L)]); <Font Color="#0000DD">// Format the string</Font>
+          <B>if</B> L = Low (Int64) <B>then</B>
+               Result := RightAfterStr (Result, 1);
+          <B>if</B> (Len &gt; 0) <B>and</B> ((L &lt; 0) <B>or</B> ((L &gt; 0) <B>and</B> ESBNumPosSign)) <B>then</B>
+               Len2 := Len - 1 <Font Color="#0000DD">// Need to leave space for the sign</Font>
+          <B>else</B>
+               Len2 := Len;
+          Result := PadChLeftStr (LeftStr (Result, Len2), <Font Color="#119911">'0'</Font>, Len2); <Font Color="#0000DD">// Pad with Zeroes</Font>
+          <B>if</B> L &lt; 0 <B>then</B> <Font Color="#0000DD">// Add Sign if necessary</Font>
+               Result := <Font Color="#119911">'-'</Font> + Result
+          <B>else</B> <B>if</B> (L &gt; 0) <B>and</B> ESBNumPosSign <B>then</B>
+               Result := <Font Color="#119911">'+'</Font> + Result;
+     <B>except</B>
+          Result := <Font Color="#119911">''</Font>;
+     <B>end</B>;
+<B>End</B>;</pre></td></tr></Table><P><HR>
+<TABLE BORDER="0" WIDTH="100%" BGCOLOR="#000000"><TR><TD>
+<Font Color=White><Large>HTML generated by <B>Time2HELP</B></Large></Font>
+</TD></TR></Table>
+<Small><A HREF="http://www.time2help.com">http://www.time2help.com</A></Small></Body></HTML>

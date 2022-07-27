@@ -1,0 +1,171 @@
+//
+// The original Delphi code is : NameSpace.dpk released 12.12.2002
+// Last version: 0.98 released 23.05.2004
+// The initial developer is Cedomir Plavljanic (cedomirp@yahoo.com)
+// Copyright (C) 2002-2004 Cedomir Plavljanic
+//
+// This program is free software; you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation; either version 2 of the License, or
+// (at your option) any later version
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// version: 0.9.8.0001 released 23.05.2004
+// add new property NumberOfDecimalInSize in TNameSpaceList (propose by Dave Crutchley)
+// fix bug in PopulateIDList in NameSpaceUnit
+//				-	now correct work on system without compressed folder
+// change definition of SFGAO_ALL in NameSpaceUnit
+//		 remove SFGAO_FILESYSTEM - produce on win98 bug in TNameSpaceList
+//		 				- windows function IShellFolder.GetAttributesOf donn't work correct
+//							(not correct set sfgaof for removeable and fixed disk)
+//							with this parameter on My Computer special folder produce a error on win98
+//							I donn't know why
+// 		 but namespace work correct without this parameter
+//
+// version: 0.9.7.0001 released 26.04.2004
+// add property StandardDblClick in TNameSpaceList (propose by Philip Hadar)
+//	change DblClick event
+// fix bug in UpdateCurrentListOnNotify in TNameSpaceList
+// 	if ID is same naw free old and add new
+// fix bug in CNNOTIFY (for all file) and UpdateData (for zip file) in TNameSpaceList
+// 	now correct ghosted icon on change Hidden attribute
+// fix bug in GetAttributesAndType and GetAttributes
+// add GetAttribute in all MakeNameSpaceItem and MakeDesktop
+// add constant SFGAO_CANMONIKER
+//
+// version: 0.9.6.0001 released 18.04.2004
+// fix problem with zip file on XP(slow getattributeof - maybe check all ziped file?!)
+// for Shortcut folder on network no longer call Details folder (on XP and w2k)
+//
+// version: 0.9.5.0001 released 29.02.2004
+// fix bug memory leak
+// 	 - in TNameSpaceComboBoxEdit on Destroy not free momory of Tree Items (windows tree)
+//   - in NameSpaceTarget (revokeDragDrop falling - reference count>0 on destroy)
+//        - effects - Paradox 7.0 stay open after close
+//
+// version: 0.9.4.0001 released 15.02.2004
+// add two Event
+//		OnBeforeNotifyEvent:TNameSpaceBeforeNotifyEvent
+//		OnChangeNotifyEvent:TNameSpaceChangeNotifyEvent (propose joel joly)
+// change HandleChangeNotify
+// fix bug - donn't show size of winzip file
+//     winzip file sometimes has attribute SFGAO_FOLDER ?!?!
+//     sometimes occurr on XP but not on win98
+//
+// version  0.9.3.0001 released 04.02.2004
+// fix another bug in FolderExists from NameSpaceLibrary
+// fix another bug in FileExists from NameSpaceLibrary
+// change definition SFGAO_ALL in NameSpaceUnit
+//
+// version  0.9.2.0001 released 02.02.2004
+// fix bug in procedure PopulateIDList from NameSpaceUnit
+// fix bug in FolderExists from NameSpaceLibrary
+// fix bug in FileExists from NameSpaceLibrary
+// change in MakeChildFolderFor in TNameSpaceTree
+// change in MakeFolder in TNameSpaceList
+//
+// version  0.9.1.0001 released 04.01.2004
+// fix bug in Make New Folder methods in TNameSpaceList and TNameSpaceTree
+// fix bug in AddFolderToTree in TNameSpaceTree
+// synchronize TreeView, ComboEdit and ListView
+// fix bug in BackGroundConcatPopUpMenu in TContextPopUpMenu (correct position of menu item)
+//
+// version  0.9.0.0001 released 07.12.2003
+// add procedure SetCurrentToParent to TNameSpaceList object (OneLevelUp - propose Michal Glebowski)
+//
+// version  0.8.9.0001 released 02.11.2003
+// - add support for 'New menu item' for background of TNameSpaceList (like Explorer)
+//
+// version: 0.8.8.0001 released 28.09.2003
+// - fix bug in method MediaInsertInList in TNameSpaceList
+// - fix bug in NSWideUpperCaseW, NSWideUpperCaseA, NSWideLowerCaseW, NSWideLowerCaseA
+// - add flag ActiveDragAndDrop default True
+//   some old programs (like Paradox 7.0)
+//   donn't work properly with COM Drag and Drop and OLE
+//
+// version: 0.8.7.0001 released 26.07.2003
+// - add save haeder column data for each Folder in TNameSpaceList
+//
+// version: 0.8.6.0001
+// - fix bug in NSWideFirstUpperW and NSWideFirstUpperA
+//
+// version  0.8.5.0001 released 23.06.2003
+// - ListSortProc is now thread safe
+// - change in UpdateItemInList in TNameSpaceList	(propose and make DAVE CRUTCHLEY)
+// - change in UpdateData in TNameSpaceList			(propose and make DAVE CRUTCHLEY)
+// - add new property DateTimeFormat in TNameSpaceList
+//			- SHORT WINDOWS and empty string -> Date and Time Format is Windows Short
+//			- LONG WINDOWS -> Date and Time Format is Windows Long
+//			- for other formats see FormatDateTime function
+//
+// version: 0.8.4.0001 released 20.04.2003
+// - fix bug in TNameSpaceComboTree.Change in implementation section
+// (now set Caption property of FolderStaticText objects)
+// - add support for Shortcut to Folder
+// - correct bug with open folder on Desktop
+//
+// version: 0.8.3.0001 released 19.03.2003
+// add new unit NameSpaceWideChar for support DBCS (bug find Anders Lee)
+// fix bug in ListSortFunc (List out of bounds) in NameSpaceList
+// add compiler directive J+ for Delphi 6 (suggested by Anders Lee)
+//
+// version: 0.8.2.0001 released 02.02.2003
+// avoid problem with Drag & Drop (tem stays highlighted if press Escape)
+// avoid problem with select item (icon is not selected)
+//
+// version: 0.8.1.0001 released 27.12.2002
+// avoid problem with winzip and internet exploret 6.0 and respond on notify event
+//
+// version: 0.8.0.0001
+//
+// before install set youre folders properly
+//
+
+package NameSpace;
+
+{$R *.RES}
+{$R 'NameSpaceTree.dcr'}
+{$R 'NameSpaceComboEdit.dcr'}
+{$R 'NameSpaceList.dcr'}
+{$ALIGN ON}
+{$ASSERTIONS OFF}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS OFF}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $00400000}
+{$DESCRIPTION 'Name Space Library'}
+{$IMPLICITBUILD OFF}
+
+requires
+  vcl40;
+
+contains
+  NameSpaceLibrary in 'NameSpaceLibrary.pas',
+  NameSpaceTree in 'NameSpaceTree.pas',
+  NameSpaceComboEdit in 'NameSpaceComboEdit.pas',
+  NameSpaceUnit in 'NameSpaceUnit.pas',
+  NameSpaceList in 'NameSpaceList.pas',
+  NameSpaceDetails in 'NameSpaceDetails.pas',
+  NameSpaceWideChar in 'NameSpaceWideChar.pas',
+  NameSpaceSystemLists in 'NameSpaceSystemLists.pas';
+
+end.

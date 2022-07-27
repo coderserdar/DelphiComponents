@@ -1,0 +1,255 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+<META NAME="GENERATOR" Content="Time2HELP 1.0; Standard Template">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html;CHARSET=iso-8859-1">
+<TITLE>Random_Poisson</TITLE>
+<Style>Body, TD {font-family: "Verdana"; font-size: 10pt};
+PRE {font-size: 10pt; margin-top: 0; margin-bottom: 0}
+TR.odd {background-color: #F8F8F8};
+TR.even {background-color: #EEEEEE};
+Table.list {background-color: #FFFFFF};
+TD {vertical-align : top}
+</Style>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<BASEFONT NAME="verdana" Size="2"><Table Border="0" Width="100%" BGColor="#FFFFFF"><TR><TD><Font Color="#000000F"><B>Random_Poisson Routines</B></Font></TD></TR></Table>Generates a single random deviate from a Poisson distribution with mean mu.<P><B>Unit</B><Br><A HREF="IDH_Unit_QESBPCSRandom.htm">QESBPCSRandom</A><P><Table Border="0" Width="100%" BGColor="#000000"><TR><TD><Font Color="#FFFFFF"><B>Overloaded Variants</B></Font></TD></TR></Table><Table Class="list" Width="100%" CellSpacing="1" CellPadding="2" BGColor="#EEEEEE"><TR Class="even"><TD><A HRef="#0">Function Random_Poisson(var mu: Extended): Int64;</A></TD></TR><TR Class="odd"><TD><A HRef="#1">Function Random_Poisson(var mu: Extended; RandomGenerator: TRandomGenFunction): Int64;</A></TD></TR></Table></P><P><B><A Name="#0">Declaration</A></B><Br><Font Face="Courier New"><B>Function</B> Random_Poisson(<B>var</B> mu: Extended): Int64;</Font><P><B>Description</B><Br />Translated to Fortran 90 by Alan Miller from: RANLIB, Library of Fortran Routines for Random Number Generation. Compiled and Written by:</P><P>Barry W. Brown</P><P>James Lovato</P><P>Department of Biomathematics, Box 237</P><P>The University of Texas, M.D. Anderson Cancer Center</P><P>1515 Holcombe Boulevard</P><P>Houston, TX 77030</P><P>This work was supported by grant CA-16672 from the National Cancer Institute.</P><P>For details see: Ahrens, J.H. and Dieter, U. Computer Generation of Poisson Deviates From Modified Normal Distributions. ACM Trans. Math. Software, 8, 2 (June 1982),163-179</P><P><P><Table Border="0" Width="100%" BGColor="#000000"><TR><TD><Font Color="#FFFFFF"><B>Parameters</B></Font></TD></TR></Table><Table Class="list" Width="100%" CellSpacing="1" CellPadding="2" BGColor="#EEEEEE"><TR Class="even"><TD><Font Color="Blue">mu&nbsp;</Font></TD><TD>The mean of the Poisson distribution.</TD></TR><TR Class="odd"><TD><Font Color="Blue">RandomGenerator&nbsp;</Font></TD><TD>Optional Function to use for Uniform Random Number Generator. If omitted, Delphi's Random function is used, and if this is done remember to call Randomize if you don't want repeated values.</TD></TR></Table></P><P><B>Category</B><Br><A HREF="idh_cat_floatmath.htm">Arithmetic Routines for Floats</A><Br /><Font Color=#FF0000><H3>Implementation</H3></Font> <table border="0" bgcolor="#FFFED9"  style="margin-top: 10; margin-bottom: 10;"> <tr> <td><pre><B>function</B> Random_Poisson (<B>var</B> mu: Extended): Int64;
+<B>begin</B>
+     Result := Random_Poisson (mu, DelphiRandom);
+<B>End</B>;</pre></td></tr></Table><P><B><A Name="#1">Declaration</A></B><Br><Font Face="Courier New"><B>Function</B> Random_Poisson(<B>var</B> mu: Extended; RandomGenerator: <A HREF="IDH_Type_TRandomGenFunction.htm">TRandomGenFunction</A>): Int64;</Font><P><B>Description</B><Br />Brown James Lovato Department of Biomathematics, Box 237 The University of Texas, M.D. Anderson Cancer Center 1515 Holcombe Boulevard Houston, TX 77030 This work was supported by grant CA-16672 from the National Cancer Institute. GENerate POIsson random deviate Function Generates a single random deviate from a Poisson distribution with mean mu. Arguments mu : The mean of the Poisson distribution from which a random deviate is to be generated. REAL mu Method For details see: Ahrens, J.H. and Dieter, U. Computer Generation of Poisson Deviates From Modified Normal Distributions. ACM Trans. Math. Software, 8, 2 (June 1982),163-179 TABLES: COEFFICIENTS A0-A7 FOR STEP F. FACTORIALS FACT COEFFICIENTS A(K) - FOR PX = FK*V*V*SUM(A(K)*V**K)-DEL <Font Color=#FF0000><H3>Implementation</H3></Font> <table border="0" bgcolor="#FFFED9"  style="margin-top: 10; margin-bottom: 10;"> <tr> <td><pre><B>function</B> Random_Poisson (<B>var</B> mu: Extended;
+     RandomGenerator: <A HREF="IDH_Type_TRandomGenFunction.htm">TRandomGenFunction</A>): Int64;
+<B>const</B>
+     a0 = -0.5;
+     a1 = 0.3333333;
+     a2 = -0.2500068;
+     a3 = 0.2000118;
+     a4 = -0.1661269;
+     a5 = 0.1421878;
+     a6 = -0.1384794;
+     a7 = 0.1250060;
+
+<B>var</B>
+     b1, b2, c, c0, c1, c2, c3, del, difmuk, e, fk, fx, fy, g,
+          omega, px, py, t, u, v, x, xx: Extended;
+     s, d, p, q, p0: Extended;
+     j, k, kflag: Integer;
+     l, m: Integer;
+     pp: <B>array</B> [1..35] <B>of</B> Extended;
+     fact: <B>array</B> [1..10] <B>of</B> Extended;
+     FirstK0: Boolean;
+<B>begin</B>
+     u := 0;
+     e := 0;
+     fk := 0;
+     difmuk := 0;
+
+     fact [1] := 1; <Font Color="#0000DD">// Factorial 0</Font>
+     fact [2] := 1;
+     fact [3] := 2;
+     fact [4] := 6;
+     fact [5] := 24;
+     fact [6] := 120;
+     fact [7] := 720;
+     fact [8] := 5040;
+     fact [9] := 40320;
+     fact [10] := 362880; <Font Color="#0000DD">// Factorial 9</Font>
+
+     Result := 0;
+
+     <B>if</B> (mu &gt; 10.0) <B>then</B>
+     <B>begin</B>
+          <Font Color="#0000DD">// C A S E  A. (RECALCULATION OF S, D, L IF MU HAS CHANGED)</Font>
+
+          FirstK0 := False;
+
+          s := Sqrt (mu);
+          d := 6.0 * Sqr (mu);
+
+          <Font Color="#0000DD">// THE POISSON PROBABILITIES PK EXCEED THE DISCRETE NORMAL</Font>
+          <Font Color="#0000DD">// PROBABILITIES FK WHENEVER K &gt;= M(MU). L=IFIX(MU-1.1484)</Font>
+          <Font Color="#0000DD">//   IS AN UPPER BOUND TO M(MU) FOR ALL MU &gt;= 10 .</Font>
+
+          l := Trunc (mu - 1.1484);
+
+          <Font Color="#0000DD">// STEP N. NORMAL SAMPLE - random_normal() FOR STANDARD NORMAL DEVIATE</Font>
+
+          g := mu + s * Random_Normal (RandomGenerator);
+          <B>if</B> (g &gt; 0.0) <B>then</B>
+          <B>begin</B>
+               Result := Trunc (g);
+
+               <Font Color="#0000DD">// STEP I. IMMEDIATE ACCEPTANCE IF ival IS LARGE ENOUGH</Font>
+
+               <B>if</B> (Result &gt;= l) <B>then</B>
+                    Exit;
+
+               <Font Color="#0000DD">// STEP S. SQUEEZE ACCEPTANCE - SAMPLE U</Font>
+
+               fk := Result;
+               difmuk := mu - fk;
+               u := RandomGenerator;
+               <B>if</B> (d * u &gt;= Sqr (difmuk) * difmuk) <B>then</B>
+                    Exit;
+          <B>end</B>;
+
+          <Font Color="#0000DD">// STEP P. PREPARATIONS FOR STEPS Q AND H.</Font>
+          <Font Color="#0000DD">// (RECALCULATIONS OF PARAMETERS IF NECESSARY)</Font>
+          <Font Color="#0000DD">// .3989423=(2*PI)**(-.5)  .416667E-1=1./24.  .1428571=1./7.</Font>
+          <Font Color="#0000DD">// THE QUANTITIES B1, B2, C3, C2, C1, C0 ARE FOR THE HERMITE</Font>
+          <Font Color="#0000DD">// APPROXIMATIONS TO THE DISCRETE NORMAL PROBABILITIES FK.</Font>
+          <Font Color="#0000DD">// C=.1069/MU GUARANTEES MAJORIZATION BY THE 'HAT'-FUNCTION.</Font>
+
+          omega := 0.3989423 / s;
+          b1 := 0.4166667E-1 / mu;
+          b2 := 0.3 * Sqr (b1);
+          c3 := 0.1428571 * b1 * b2;
+          c2 := b2 - 15.0 * c3;
+          c1 := b1 - 6.0 * b2 + 45.0 * c3;
+          c0 := 1.0 - b1 + 3.0 * b2 - 15.0 * c3;
+          c := 0.1069 / mu;
+
+          kflag := -1;
+
+          <B>if</B> (g &gt;= 0.0) <B>then</B>
+          <B>begin</B>
+
+               <Font Color="#0000DD">// 'SUBROUTINE' F IS CALLED (KFLAG=0 FOR CORRECT RETURN)</Font>
+               kflag := 0;
+               FirstK0 := True;
+          <B>end</B>;
+
+          <Font Color="#0000DD">// STEP E. EXPONENTIAL SAMPLE - random_exponential() FOR STANDARD EXPONENTIAL</Font>
+          <Font Color="#0000DD">// DEVIATE E AND SAMPLE T FROM THE LAPLACE 'HAT'</Font>
+          <Font Color="#0000DD">// (IF T &lt;= -.6744 THEN PK &lt; FK FOR ALL MU &gt;= 10.)</Font>
+
+          <B>repeat</B> <Font Color="#0000DD">// 50</Font>
+               <B>if</B> <B>not</B> FirstK0 <B>then</B>
+               <B>begin</B>
+                    <B>repeat</B> <Font Color="#0000DD">// 50</Font>
+                         e := Random_Exponential (RandomGenerator);
+                         u := RandomGenerator;
+                         u := u + u - 1.0;
+                         <B>if</B> u &lt; 0 <B>then</B>
+                              t := 1.8 - abs (e)
+                         <B>else</B>
+                              t := 1.8 + abs (e);
+                    <B>until</B> t &gt; -0.6744;
+
+                    Result := Trunc (mu + s * t);
+                    fk := Result;
+                    difmuk := mu - fk;
+
+                    <Font Color="#0000DD">// 'SUBROUTINE' F IS CALLED (KFLAG=1 FOR CORRECT RETURN)</Font>
+
+                    kflag := 1
+               <B>end</B>
+               <B>else</B>
+                    FirstK0 := False;
+
+               <Font Color="#0000DD">// STEP F. 'SUBROUTINE' F. CALCULATION OF PX, PY, FX, FY.</Font>
+               <Font Color="#0000DD">// CASE ival &lt; 10 USES FACTORIALS FROM TABLE FACT</Font>
+
+               <B>if</B> (Result &lt; 10) <B>then</B> <Font Color="#0000DD">// 70</Font>
+               <B>begin</B>
+                    px := -mu;
+                    py := XtoY (mu, Result) / fact [Result + 1];
+               <B>end</B>
+               <B>else</B>
+               <B>begin</B>
+                    <Font Color="#0000DD">// CASE ival &gt;= 10 USES POLYNOMIAL APPROXIMATION</Font>
+                    <Font Color="#0000DD">//  A0-A7 FOR ACCURACY WHEN ADVISABLE</Font>
+                    <Font Color="#0000DD">//  .8333333E-1=1./12.  .3989423=(2*PI)**(-.5)</Font>
+
+                    del := 0.8333333E-1 / fk; <Font Color="#0000DD">// 80</Font>
+                    del := del - 4.8 * Sqr (del) * del;
+                    v := difmuk / fk;
+                    <B>if</B> Abs (v) &gt; 0.25 <B>then</B>
+                         px := fk * Ln (1.0 + v) - difmuk - del
+                    <B>else</B>
+                         px := fk * Sqr (v) * (((((((a7 * v + a6) * v + a5) * v + a4)
+                              * v + a3) * v + a2) * v + a1) * v + a0) - del;
+                    py := 0.3989423 / Sqrt (fk);
+               <B>end</B>;
+               x := (0.5 - difmuk) / s; <Font Color="#0000DD">// 110</Font>
+               xx := Sqr (x);
+               fx := -0.5 * xx;
+               fy := omega * (((c3 * xx + c2) * xx + c1) * xx + c0);
+               <B>if</B> (kflag &lt;= 0) <B>then</B>
+               <B>begin</B>
+                    <Font Color="#0000DD">// STEP Q. QUOTIENT ACCEPTANCE (RARE CASE)</Font>
+
+                    <B>if</B> (fy - u * fy &lt;= py * Exp (px - fx)) <B>then</B> <Font Color="#0000DD">// 40</Font>
+                         Exit;
+               <B>end</B>
+               <B>else</B>
+               <B>begin</B>
+                    <Font Color="#0000DD">// STEP H. HAT ACCEPTANCE (E IS REPEATED ON REJECTION)</Font>
+
+                    <B>if</B> (c * Abs (u) &lt;= py * Exp (px + e) - fy * Exp (fx + e)) <B>then</B> <Font Color="#0000DD">// 60</Font>
+                         Exit;
+               <B>end</B>;
+          <B>until</B> False;
+     <B>end</B>
+     <B>else</B>
+     <B>begin</B>
+
+          <Font Color="#0000DD">// C A S E  B.    mu &lt; 10</Font>
+          <Font Color="#0000DD">// START NEW TABLE AND CALCULATE P0 IF NECESSARY</Font>
+
+          m := MaxXY (1, Trunc (mu));
+          l := 0;
+          p := Exp (-mu);
+          q := p;
+          p0 := p;
+
+          <Font Color="#0000DD">//  STEP U. UNIFORM SAMPLE FOR INVERSION METHOD</Font>
+
+          <B>repeat</B>
+               u := RandomGenerator;
+               Result := 0;
+               <B>if</B> (u &lt;= p0) <B>then</B>
+                    Exit;
+
+               <Font Color="#0000DD">// STEP T. TABLE COMPARISON UNTIL THE END PP(L) OF THE</Font>
+               <Font Color="#0000DD">// PP-TABLE OF CUMULATIVE POISSON PROBABILITIES</Font>
+               <Font Color="#0000DD">// (0.458=PP(9) FOR MU=10)</Font>
+
+               <B>if</B> l &lt;&gt; 0 <B>then</B>
+               <B>begin</B>
+                    j := 1;
+                    <B>if</B> (u &gt; 0.458) <B>then</B>
+                         j := MinXY (l, m);
+                    <B>for</B> k := j <B>to</B> l <B>do</B>
+                         <B>if</B> (u &lt;= pp [k]) <B>then</B>
+                         <B>begin</B>
+                              Result := K;
+                              Exit;
+                         <B>end</B>;
+
+                    <B>if</B> l = 35 <B>then</B>
+                         Continue;
+               <B>end</B>;
+
+               <Font Color="#0000DD">// STEP C. CREATION OF NEW POISSON PROBABILITIES P</Font>
+               <Font Color="#0000DD">// AND THEIR CUMULATIVES Q=PP(K)</Font>
+
+               l := l + 1; <Font Color="#0000DD">// 150</Font>
+               <B>for</B> k := l <B>to</B> 35 <B>do</B>
+               <B>begin</B>
+                    p := p * mu / k;
+                    q := q + p;
+                    pp [k] := q;
+                    <B>if</B> (u &lt;= q) <B>then</B>
+                    <B>begin</B>
+                         Result := K;
+                         Exit;
+                    <B>end</B>;
+               <B>end</B>;
+               l := 35;
+          <B>until</B> False
+     <B>end</B>;
+<B>End</B>;</pre></td></tr></Table></P><P><HR>
+<TABLE BORDER="0" WIDTH="100%" BGCOLOR="#000000"><TR><TD>
+<Font Color=White><Large>HTML generated by <B>Time2HELP</B></Large></Font>
+</TD></TR></Table>
+<Small><A HREF="http://www.time2help.com">http://www.time2help.com</A></Small></Body></HTML>

@@ -1,0 +1,145 @@
+package rmCmpLib_d6;
+
+{$R *.res}
+{$R 'rmBtnEdit.dcr'}
+{$R 'rmCalendar.dcr'}
+{$R 'rmColorComboBox.dcr'}
+{$R 'rmColumns.dcr'}
+{$R 'rmComboBox.dcr'}
+{$R 'rmFileDrop.dcr'}
+{$R 'rmGauge.dcr'}
+{$R 'rmLabel.dcr'}
+{$R 'rmSplit.dcr'}
+{$R 'rmTabs3x.dcr'}
+{$R 'rmTaskBar.dcr'}
+{$R 'rmTrackBar.dcr'}
+{$R 'rmSpin.dcr'}
+{$R 'rmAppEvents.dcr'}
+{$R 'rmSpeedBtns.dcr'}
+{$R 'rmTVComboBox.dcr'}
+{$R 'rmPathTreeView.dcr'}
+{$R 'rmPanel.dcr'}
+{$R 'rmDataStorage.dcr'}
+{$R 'rmImageListGraphic.dcr'}
+{$R 'rmCCTabs.dcr'}
+{$R 'rmTrayIcon.dcr'}
+{$R 'rmTreeNonView.dcr'}
+{$R 'rmMDIBackground.dcr'}
+{$R 'rmSpinCombo.dcr'}
+{$R 'rmCaptionButtons.dcr'}
+{$R 'rmCollectionListbox.dcr'}
+{$R 'rmEditGrid.dcr'}
+{$R 'rmCornerGrip.dcr'}
+{$R 'rmKeyBindings.dcr'}
+{$R 'rmBrowseFor.dcr'}
+{$R 'rmDiff.dcr'}
+{$R 'rmListControl.dcr'}
+{$R 'rmOutlook.dcr'}
+{$R 'rmBtnCombo.dcr'}
+{$R 'rmOutlookExtras.dcr'}
+{$R 'rmInspector.dcr'}
+{$R 'rmDGT.dcr'}
+{$R 'rmMemoryDataSet.dcr'}
+{$R 'rmCheckbox.dcr'}
+{$R 'rmWordTree.dcr'}
+{$R 'rmNotebook2.dcr'}
+{$R 'rmDayview.dcr'}
+{$R 'rmClock.dcr'}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS ON}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'rmComponent Library'}
+{$IMPLICITBUILD ON}
+
+requires
+  vcl,
+  vclx,
+  vcldb,
+  designide;
+
+contains
+  rmBtnEdit in 'rmBtnEdit.pas',
+  rmCalendar in 'rmCalendar.pas',
+  rmColorComboBox in 'rmColorComboBox.pas',
+  rmColumns in 'rmColumns.pas',
+  rmComboBox in 'rmComboBox.pas',
+  rmFileDrop in 'rmFileDrop.pas',
+  rmGauge in 'rmGauge.pas',
+  rmLabel in 'rmLabel.pas',
+  rmRegister in 'rmregister.pas',
+  rmSplit in 'rmSplit.pas',
+  rmTabs3x in 'rmTabs3x.pas',
+  rmTaskBar in 'rmTaskBar.pas',
+  rmTrackBar in 'rmTrackBar.pas',
+  rmSpin in 'rmSpin.pas',
+  rmAppEvents in 'rmAppEvents.pas',
+  rmLibrary in 'rmLibrary.pas',
+  rmSpeedBtns in 'rmSpeedBtns.pas',
+  rmTVComboBox in 'rmTVComboBox.pas',
+  rmPathTreeView in 'rmPathTreeView.pas',
+  rmPanel in 'rmPanel.pas',
+  rmKeyBindingPropEdit in 'rmKeyBindingPropEdit.pas',
+  rmCCTabsReg in 'rmCCTabsReg.pas',
+  rmImageListGraphic in 'rmImageListGraphic.pas',
+  rmMDIBackground in 'rmMDIBackground.pas',
+  rmCCTabs in 'rmCCTabs.pas',
+  rmTrayIcon in 'rmTrayIcon.pas',
+  rmMSGList in 'rmMSGList.pas',
+  rmTreeNonView in 'rmTreeNonView.pas',
+  rmTreeNonViewEdit in 'rmTreeNonViewEdit.pas' {frmTreeNonViewEditor},
+  rmScrnCtrls in 'rmScrnCtrls.pas',
+  rmCaptionButtons in 'rmCaptionButtons.pas',
+  rmGlobalComponentHook in 'rmGlobalComponentHook.pas',
+  rmCollectionListBox in 'rmCollectionListbox.pas',
+  rmEditGrid in 'rmEditGrid.pas',
+  rmCornerGrip in 'rmCornerGrip.pas',
+  rmKeyBindings in 'rmKeyBindings.pas',
+  rmFormEditBinding in 'rmFormEditBinding.pas' {rmFrmEditBinding},
+  rmDataStoragePropEdit in 'rmdatastoragepropedit.pas',
+  rmBrowseFor in 'rmBrowseFor.pas',
+  rmKeyBindingsEditForm in 'rmKeyBindingsEditForm.pas' {FrmEditKeyBindings},
+  rmDiff in 'rmDiff.pas',
+  rmListControl in 'rmListControl.pas',
+  rmInspector in 'rmInspector.pas',
+  rmInspectorItems in 'rmInspectorItems.pas',
+  rmHint in 'rmHint.pas',
+  rmSpinCombo in 'rmSpinCombo.pas',
+  rmBaseEdit in 'rmBaseEdit.pas',
+  rmInspectorEdit in 'rmInspectorEdit.pas' {frmInspectorEditor},
+  rmInspectorEdit2 in 'rmInspectorEdit2.pas' {frmInspectorItemTypes},
+  rmOutlook in 'rmOutlook.pas',
+  rmBtnCombo in 'rmBtnCombo.pas',
+  rmOutLookExtras in 'rmOutlookExtras.pas',
+  rmOutlookReg in 'rmOutlookReg.pas',
+  rmDGT in 'rmDGT.pas',
+  rmMemoryDataSet in 'rmMemoryDataSet.pas',
+  rmToolWinFormExpt in 'rmToolWinFormExpt.pas',
+  rmToolWin in 'rmToolWin.pas',
+  rmCheckbox in 'rmCheckbox.pas',
+  rmWordTree in 'rmWordTree.pas',
+  rmScrollableControl in 'rmScrollableControl.pas',
+  rmNotebookReg in 'rmNotebookReg.pas',
+  rmDataStorage in 'rmdatastorage.pas',
+  rmNotebook2 in 'rmNotebook2.pas',
+  rmDayView in 'rmDayview.pas',
+  rmClock in 'rmClock.pas';
+
+end.

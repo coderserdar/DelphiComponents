@@ -1,0 +1,1618 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+			<style type="text/css">
+			<!--
+BODY {
+    background:teal;
+    font-family: tahoma,arial,sans-serif;
+    font-size:10pt;
+}
+
+A {
+  color:navy;
+}
+
+.blockheader0 {
+  background-color:navy;
+		color:silver;
+		font-weight:bold;
+		text-align:center;
+		font-size:16pt;
+}
+
+.blockheader1 {
+  background-color:navy;
+		color:silver;
+		font-weight:bold;
+		text-align:center;
+		font-size:14pt;
+}
+
+.blockheader2 {
+  background-color:navy;
+		color:silver;
+		font-weight:bold;
+		text-align:center;
+		font-size:12pt;
+}
+
+.blockheader3 {
+  background-color:navy;
+		color:silver;
+		font-weight:bold;
+		text-align:center;
+		font-size:10pt;
+}
+
+.descheader {
+   background-color:#C0C0C0;
+   text-align:center;
+   font-weight : bold;
+			font-size:10pt;
+		 color:black;
+}
+
+.descbody {
+	background-color:white;
+	vertical-align:top;
+	font-size:10pt;
+ color:black;
+}
+
+.lookupheader {
+   background-color:#000050;
+   text-align:center;
+   font-weight : bold;
+   color:silver;
+   font-size:10pt;
+}
+ -->
+			</style>
+</head>
+<body>
+<table align="center" border="0" cellpadding="5" cellspacing="0" width="750">
+		<tr class="blockheader0"><td colspan="3">rmControls v1.90</td></tr>
+
+		<tr><td colspan="3">&nbsp;</td></tr>
+
+		<tr class="blockheader2"><td colspan="3">Table of Contents</td></tr>
+		
+		<tr class="descbody">
+		  <td><a href="#Components">Components/Controls/Classes</a></td>
+				<td><a href="#Functions">rmLibrary - functions/procedures</a></td>
+				<td><a href="#Descriptions">Description of Components and Functions</a></td>
+		</tr>
+				
+		<tr class="descbody">
+		  <td><a href="#Disclaimer">Disclaimer</a></td>
+				<td><a href="#Contact">Contact Details</a></td>
+				<td><a href="#Status">Library Status</a></td>
+		</tr>
+		
+		<tr class="descbody">
+				<td><a href="#History">History</a></td>
+		  <td><a href="#Acknowledgments">Acknowledgments</a></td>
+				<td><a href="#Release">Release Notes</a></td>
+		</tr>
+	</table>	
+	
+		
+<table align="center" border="0" cellpadding="5" cellspacing="1" width="750">
+  <tr><td colspan="3">&nbsp;</td></tr>
+		
+		<tr class="blockheader2">
+				<td colspan="3"><a NAME="Components"></a>Components/Controls/Classes</td>
+		</tr>
+		
+		<tr class="lookupheader">
+				<td width="33%">rmStandard</td>
+				<td width="33%">rmEdits</td>
+				<td width="33%">rmCombos</td>
+		</tr>
+		
+		<tr class="descbody">
+				<td>
+						<a href="#rmCalendar">TrmCalendar</a>
+						<br><a href="#rmCheckBox">TrmCheckBox</a>
+						<br><a href="#rmClock">TrmClock</a>
+						<br><a href="#rmCollectionListBox">TrmCollectionListBox</a>
+						<br><a href="#rmGauge">TrmGauge</a>
+						<br><a href="#rmImageListGlyph">TrmImageListGlyph</a>
+				  <br><a href="#rmImageListGraphic">TrmImageListGraphic</a>
+						<br><a href="#rmLabel">TrmLabel</a>
+						<br><a href="#rmListControl">TrmListControl</a>
+						<br><a href="#rmSpinButton">TrmSpinButton</a>
+						<br><a href="#rmTrackBar">TrmTrackBar</a>
+						<br>&nbsp;
+				</td>
+				<td >
+						<a href="#rmBtnEdit">TrmBtnEdit</a>
+						<br><a href="#rmFloatSpinEdit">TrmFloatSpinEdit</a>
+						<br><a href="#rmSpinEdit">TrmSpinEdit</a>
+						<br><a href="#rmTimeSpinEdit">TrmTimeSpinEdit</a>
+						<br>&nbsp;
+				</td>
+				<td >
+						<a href="#rmBtnCombo">TrmBtnCombo</a>
+						<br><a href="#rmColorComboBox">TrmColorComboBox</a>
+						<br><a href="#rmComboBox">TrmComboBox</a>
+						<br><a href="#rmComboCalendar">TrmComboCalendar</a>
+						<br><a href="#rmComboPathTreeView">TrmComboPathTreeView</a>
+						<br><a href="#rmComboTreeView">TrmComboTreeView</a>
+						<br><a href="#rmNewComboBox">TrmNewComboBox</a>
+						<br><a href="#rmSpinCombo">TrmSpinCombo</a>
+						<br>&nbsp;
+				</td>
+		</tr>
+		
+		<tr class="lookupheader">
+				<td>rmEnhanced</td>
+				<td>rmNonVisual</td>
+				<td>rmAdvanced</td>
+		</tr>
+		
+		<tr class="descbody">
+				<td>
+						<a href="#rmCCPageControl">TrmCCPageControl</a>
+						<br><a href="#rmCCTabControl">TrmCCTabControl</a>
+						<br><a href="#rmEditDrawGrid">TrmEditDrawGrid</a>
+						<br><a href="#rmEditGrid">TrmEditGrid</a>
+						<br><a href="#rmPanel">TrmPanel</a>
+						<br><a href="#rmPathTreeView">TrmPathTreeView</a>
+						<br><a href="#rmSpeedButton">TrmSpeedButton</a>
+						<br><a href="#rmSplitter">TrmSplitter</a>
+						<br><a href="#rmTabSet">TrmTabSet</a>
+						<br>&nbsp;
+				</td>
+		  <td>
+						<a href="#rmApplicationEvents">TrmApplicationEvents</a>
+						<br><a href="#rmBrowseForFolder">TrmBrowseForFolder</a>
+						<br><a href="#rmColumns">TrmColumns</a>
+						<br><a href="#rmCornerGrip">TrmCornerGrip</a>
+						<br><a href="#rmDGTree">TrmDGTree</a>
+						<br><a href="#rmFileDrop">TrmFileDrop</a>
+						<br><a href="#rmKeyBindings">TrmKeyBindings</a>
+						<br><a href="#rmTreeNonView">TrmTreeNonView</a>
+						<br><a href="#rmMemoryDataSet">TrmMemoryDataSet</a>
+						<br><a href="#rmTrayIcon">TrmTrayIcon</a>
+						<br><a href="#rmwordtree">TrmWordTree</a>
+						<br>&nbsp;
+				</td>
+				<td>
+				  <a href="#rmBinaryDataStorage">TrmBinaryDataStorage</a>
+						<br><a href="#rmCaptionButtons">TrmCaptionButtons</a>
+						<br><a href="#rmDayView">TrmDayView</a>
+						<br><a href="#rmDiffEngine">TrmDiffEngine</a>
+						<br><a href="#rmDiffMap">TrmDiffMap</a>
+						<br><a href="#rmDiffMergeViewer">TrmDiffMergeViewer</a>
+						<br><a href="#rmDiffViewer">TrmDiffViewer</a>
+						<br><a href="#rmInspector">TrmInspector</a>
+						<br><a href="#rmMDIBackground">TrmMDIBackground</a>
+						<br><a href="#rmNotebookControl">TrmNotebookControl</a>
+						<br><a href="#rmOutlookActionLink">TrmOutlookActionLink</a>
+						<br><a href="#rmOutlookButtonList">TrmOutlookButtonList</a>
+						<br><a href="#rmOutlookControl">TrmOutlookControl</a>
+						<br><a href="#rmTaskBar">TrmTaskBar</a>
+						<br><a href="#rmTextDataStorage">TrmTextDataStorage</a>
+						<br>&nbsp;
+				</td>
+		</tr>
+
+  <tr class="lookupheader">
+		  <td colspan>Others</td>
+				<td>rmControlsEx</td>
+				<td>&nbsp;</td>
+		</tr>
+		
+  <tr class="descbody">
+		  <td>
+				  <a href="#rmToolWinForm">TrmToolWinForm</a>
+						<br>&nbsp;
+				</td>
+				<td>
+				  <a href="#rmZLIBDataStorage">TrmZLIBDataStorage</a>
+						<br>&nbsp;
+				</td>
+				<td><br>&nbsp;</td>
+		</tr>
+  <tr><td>&nbsp;</td></tr>
+		<tr class="blockheader2">
+				<td colspan="3"><a NAME="Functions"></a>rmLibrary - functions/procedures</td>
+		</tr>
+		
+		<tr class="lookupheader">
+				<td >Conversion</td>
+				<td>Math/Numeric</td>
+				<td>Hardware</td>
+		</tr>
+		
+		<tr class="descbody">
+				<td>
+						<a href="#booltostr">BoolToStr</a>
+						<br><a href="#chartostr">CharToStr</a>
+						<br><a href="#datetoint">DateToInt</a>
+						<br><a href="#inttodate">IntToDate</a>
+						<br><a href="#sizeint">SizeInt</a>
+						<br><a href="#strtobool">StrToBool</a>
+						<br><a href="#strtochar">StrToChar</a>
+						<br>&nbsp;
+				</td>
+				<td>
+						<a href="#compinrange">CompInRange</a>
+						<br><a href="#greaterthanfloat">GreaterThanFloat</a>
+						<br><a href="#greaterthanint">GreaterThanInt</a>
+						<br><a href="#intinrange">IntInRange</a>
+						<br><a href="#lessthanfloat">LessThanFloat</a>
+						<br><a href="#lessthanint">LessThanInt</a>
+						<br><a href="#setinrange">SetInRange</a>
+						<br>&nbsp;
+				</td>
+				<td>
+		  		<a href="#getmediainfo">GetMediaInfo</a>
+						<br>&nbsp;
+				</td>
+		</tr>
+		
+		<tr class="lookupheader">
+				<td>Graphic</td>
+				<td>CRC</td>
+				<td>WinSock</td>
+		</tr>
+		
+		<tr class="descbody">
+				<td>
+						<a href="#darkencolor">DarkenColor</a>
+						<br><a href="#drawgraytext">DrawGrayText</a>
+						<br><a href="#gradientfill">GradientFill</a>
+						<br><a href="#lightencolor">LightenColor</a>
+						<br><a href="#replacecolors">ReplaceColors</a>
+						<br><a href="#rotateimage">RotateImage</a>
+						<br><a href="#rotatetext">RotateText</a>
+						<br>&nbsp;
+				</td>
+				<td>
+						<a href="#getfilecrc32">GetFileCRC32</a>
+						<br><a href="#getstrcrc32">GetStrCRC32</a>
+						<br><a href="#getstrmcrc32">GetStrmCRC32</a>
+						<br>&nbsp;
+				</td>
+				<td>
+						<a href="#localip">LocalIP</a>
+						<br><a href="#localname">LocalName</a>
+						<br>&nbsp;
+				</td>
+		</tr>
+		
+		<tr class="lookupheader">
+				<td>String</td>
+				<td>Shell</td>
+				<td>OS</td>
+		</tr>
+		
+		<tr class="descbody">
+				<td>
+						<a href="#countsections">CountSections</a>
+						<br><a href="#leadingzero">LeadingZero</a>
+						<br><a href="#maskstrcmp">MaskStrCmp</a>
+						<br><a href="#padleft">PadLeft</a>
+						<br><a href="#padright">PadRight</a>
+				  <br><a href="#parsesection">ParseSection</a>
+						<br><a href="#rmdatetimetostr">rmDateTimeToStr</a>
+						<br><a href="#soundex">SoundEx</a>
+						<br><a href="#stripstring">StripString</a>
+						<br>&nbsp;
+				</td>
+				<td>
+						<a href="#getfileicon">GetFileIcon</a>
+						<br><a href="#getfileimageindex">GetFileImageIndex</a>
+						<br><a href="#getfileimages">GetFileImages</a>
+						<br><a href="#getfiletype">GetFileType</a>
+				  <br><a href="#readshortcutfile">ReadShortCutFile</a>
+						<br><a href="#writeshortcutfile">WriteShortCutFile</a>
+						<br>&nbsp;
+				</td>
+				<td>
+						<a href="#findcmdlineswitchwithparam">FindCmdLineSwitchWithParam</a>
+						<br><a href="#gettempdir">GetTempDir</a>
+						<br><a href="#gettempfile">GetTempFile</a>
+						<br><a href="#readregstring">ReadRegString</a>
+				  <br><a href="#winosversion">WinOSVersion</a>
+						<br><a href="#writeregstring">WriteRegString</a>
+						<br>&nbsp;
+				</td>
+		</tr>
+		
+		<tr class="lookupheader">
+				<td>Common ListView Sorting Procs</td>
+				<td>Rect</td>
+				<td>Forms</td>
+		</tr>
+		
+		<tr class="descbody">
+				<td>
+						<a href="#captionstringsortproc">CaptionStringSortProc</a>
+						<br><a href="#datesortproc">DateSortProc</a>
+						<br><a href="#decodesortdata">DecodeSortData</a>
+				  <br><a href="#encodesortdata">EncodeSortData</a>
+						<br><a href="#floatsortproc">FloatSortProc</a>
+						<br><a href="#integersortproc">IntegerSortProc</a>
+						<br><a href="#stringsortproc">StringSortProc</a>
+						<br>&nbsp;
+				</td>
+				<td>
+						<a href="#clientrecttoscreenrect">ClientRectToScreenRect</a>
+						<br><a href="#RectDiameter">RectDiameter</a>
+						<br><a href="#RectHeight">RectHeight</a>
+						<br><a href="#RectWidth">RectWidth</a>
+						<br><a href="#screenrecttoclientrect">ScreenRectToClientRect</a>
+						<br>&nbsp;
+				</td>
+				<td>
+						<a href="#loaddialogposition">LoadDialogPosition</a>
+						<br><a href="#loadformstate">LoadFormState</a>
+						<br><a href="#savedialogposition">SaveDialogPosition</a>
+						<br><a href="#saveformstate">SaveFormState</a>
+						<br>&nbsp;
+				</td>
+		</tr>
+</table>
+<br>&nbsp;
+<table align="center" BORDER="0" CELLSPACING="1" CELLPADDING="5" WIDTH="750" >
+  <tr class="blockheader2">
+    <td colspan="2"><a name="Descriptions"></a>Description of Components and Functions</td>
+		</tr>
+
+		<tr class="descheader">
+				<td>Name</td>
+				<td>Description</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="rmApplicationEvents"></a><strong>TrmApplicationEvents</strong></td>
+				<td>
+						This component allows for designtime	assigning of the standard application events.<br><br>
+						This was originally created to correct a VCL bug in the original release version of Delphi5.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="rmBaseEdit"></a><strong>TrmBaseEdit</strong></td>
+				<td>
+				  As apart of the general tidying up I did I created a base edit control that most of the edit based components now descend from.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="rmBinaryDataStorage"></a><strong>TrmBinaryDataStorage</strong></td>
+				<td>
+						This component allows you to load and store binary data as a part of the forms resource.<br>
+						You can't load data at runtime but you can save the data to disk or stream it out from the component.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="rmBrowseForFolder"></a><strong>TrmBrowseForFolder</strong></td>
+				<td>
+						This is actually a couple of controls in one.<br>
+						It allows you to display the standard windows dialog for: Browse for folder, Browse for Computers, Browse for Printers and Browser for Files or Folders				
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="rmBtnCombo"></a><strong>TrmBtnCombo</strong></td>
+				<td>
+						This component descends from the TrmBtnEdit.<br>
+						It implements an edit control that has an ellipsis button and has a dropdown combo list built in.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="rmBtnEdit"></a><strong>TrmBtnEdit</strong></td>
+				<td>
+						This was another of my early components.<br>
+						As such it's probably one of the most worked on components in the library.<br>
+						It is used as a base control for a number of other rmControls.<br>
+						It is an edit that has upto two ellipsis buttons.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="rmCalendar"></a><strong>TrmCalendar</strong></td>
+				<td>
+      This is a simple replacement for the M$ common control calendar.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="rmCaptionButtons"></a><strong>TrmCaptionButtons</strong></td>
+				<td>
+      This allows you to place buttons on the caption bar of the form that the component is owned by.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="rmCCPageControl"></a><strong>TrmCCPageControl</strong></td>
+				<td>
+						This and the TrmCCTabControl were originally apart of the ComCtrls95 component set.<br><br>
+						They have enhanced drawing functionality along with some of the original enhanced features of the original component set.<br>
+						The TrmCCPageControl has the ability to have it's pages ripped off to form floating forms that can then be reattached to the original control when closed.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="rmCCTabControl"></a><strong>TrmCCTabControl</strong></td>
+				<td>
+						This and the TrmCCPageControl were originally apart of the ComCtrls95 component set.<br><br>
+						They have enhanced drawing functionality along with some of the original enhanced features of the original component set.
+				</td>
+		</tr>
+		
+		<tr class="descbody">
+				<td><a NAME="rmCheckBox"></a><strong>TrmCheckBox</strong></td>
+				<td>
+      This is a non-windows implementation of a Checkbox.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="rmClock"></a><strong>TrmClock</strong></td>
+				<td>
+      This is a simple clock face that will show the appropriate hand position for the specified time.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="rmCollectionListBox"></a><strong>TrmCollectionListBox</strong></td>
+				<td>
+						This is control similar to a listbox but instead of a string list it uses a collection.<br>
+						Each item can be multi-line and also can have an image associated with it.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="rmColorComboBox"></a><strong>TrmColorComboBox</strong></td>
+				<td>
+      This is a standard combo box that has been modified to display colors and their associated names.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="rmColumns"></a><strong>TrmColumns</strong></td>
+				<td>
+						This component is tied to the details view of a TListView control.<br>
+						It can store and retrieve the columns, their sizes and which on had sorting.<br>
+						Useful for storing and retrieving stuff to registry for multiple views.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="rmCornerGrip"></a><strong>TrmCornerGrip</strong></td>
+    <td>
+				  This component is just placed on a form.<br>
+						As long as there is nothing aligned so as to cover the bottom-right corner of the form then you will see the standard SizeGrip rect on the form at runtime.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="rmComboBox"></a><strong>TrmComboBox</strong></td>
+				<td>
+      This combo box descends from the original Delphi TComboBox, but has extra features like look ahead completion and MRU history.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="rmComboCalendar"></a><strong>TrmComboCalendar</strong></td>
+				<td>
+      This is a combobox that drops down a version of the TrmCalendar.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="rmComboPathTreeView"></a><strong>TrmComboPathTreeView</strong></td>
+				<td>
+      This is a combobox that drops down a version of the TrmPathTreeView.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="rmComboTreeView"></a><strong>TrmComboTreeView</strong></td>
+				<td>
+      This is a combobox that drops down a standard TTreeView.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="rmDayView"></a><strong>TrmDayView</strong></td>
+				<td>
+				  This is a "PIM" day viewer component.  Supports multiple time divisions (5min, 10, 15, 20, 30, 1hr).
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="rmDGTree"></a><strong>TrmDGTree</strong></td>
+				<td>
+						This is a very specialized type of non-visual tree.<br>
+						I primarily use it in a spell-checker component/application that I've written.<br>
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="rmDiffEngine"></a><strong>TrmDiffEngine</strong></td>
+				<td>
+						This is the non-visual difference engine that I developed from some C source I found on the net.<br>
+						It can be hooked up to multiple rmDiffViewers/rmDiffMergeViewers at once.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="rmDiffMap"></a><strong>TrmDiffMap</strong></td>
+				<td>
+      This is a simple control that can be placed along side either an rmDiffViewer or rmDiffMergeViewer and can be linked to show where differences are located with in the two sources.				
+    </td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="rmDiffMergeViewer"></a><strong>TrmDiffMergeViewer</strong></td>
+				<td>
+      This control allows the end user to create a new, merged, version of two diff'ed files.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="rmDiffViewer"></a><strong>TrmDiffViewer</strong></td>
+				<td>
+      This control shows the differences found in two diff'ed files.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="rmEditDrawGrid"></a><strong>TrmEditDrawGrid</strong></td>
+				<td>
+						This was originally a standard DrawGrid but a friend needed the ability to have an inplace editor in a cell and	so I provided this and the TrmEditGrid as possible solutions.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="rmEditGrid"></a><strong>TrmEditGrid</strong></td>
+				<td>
+      This was originally a standard StringGrid but a friend needed the ability to have an inplace editor in a cell and so I provided this and the TrmEditDrawGrid as possible solutions.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="rmFileDrop"></a><strong>TrmFileDrop</strong></td>
+				<td>
+      Drop this component on a form and set a couple of properties and you can turn any TWinControl descendant in to a drop zone for files from the shell.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="rmFloatSpinEdit"></a><strong>TrmFloatSpinEdit</strong></td>
+				<td>
+      This is a spinedit for editing real numbers.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="rmGauge"></a><strong>TrmGauge</strong></td>
+				<td>
+						This is a simple component that can be used to as a measuring gauge.<br>
+						It has multiple drawing styles and can support gradient color filling.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="rmImageListGlyph"></a><strong>TrmImageListGlyph</strong></td>
+				<td>
+						This is a simple control that attaches to an imagelist and can change the displayed image via an imageindex property.<br><br>
+						The difference between this component and the TrmImageListGraphic is that this one also allows you to have a caption attached to the image.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="rmImageListGraphic"></a><strong>TrmImageListGraphic</strong></td>
+				<td>
+						This is a simple control that attaches to an imagelist and can change the displayed image via an imageindex property.<br><br>
+						The difference between this component and the TrmImageListGlyph is that this one has NO caption property.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="rmInspector"></a><strong>TrmInspector</strong></td>
+				<td>
+      This is a control similar to that found in Delphi's properties inspector.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="rmKeyBindings"></a><strong>TrmKeyBindings</strong></td>
+				<td>
+						Personally I don't know why Borland didn't come up with something like this.<br>
+						This control allows the end user to customize the short-cut keys assigned in actionlists.<br>
+						The changes can then be saved/loaded at any time.<br>
+						The dialog that the end user sees is very similar to the one found in M$-Word.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="rmLabel"></a><strong>TrmLabel</strong></td>
+				<td>
+						This was one of the first components I ever wrote.<br>
+						It is basically an exercise in eye candy.<br><br>
+						It provides the ability for borders, font textures and gradient shading.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="rmListControl"></a><strong>TrmListControl</strong></td>
+				<td>
+						This control was originally created for the rmDiff viewer controls.<br>
+						It is essentially a listbox control but one that has a couple of extra properties and features.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="rmMDIBackground"></a><strong>TrmMDIBackground</strong></td>
+				<td>
+						This component allows you to place an image in the MDI Client area of a form or to change it's color.<br><br>
+						The image can be centered, tiled or stretched.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="rmMemoryDataSet"></a><strong>TrmMemoryDataSet</strong></td>
+				<td>
+						This is a Dataset descendant that can be used just like a regular dataset with on major exception.<br>
+						It doesn't hook up to a Database, a datasource or anything else.<br> 
+						You can set up the columns at design time or runtime and the it operates almost exactly like a standard dataset but with out the overhead of having a DB lying around.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="rmNewComboBox"></a><strong>TrmNewComboBox</strong></td>
+				<td>
+						This was my first attempt at doing a non M$ Win32 based component.<br><br>
+						It is similar in behavior and operation to the TrmComboBox but it is NOT a subclassed M$ Comboboxl.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="rmNotebookControl"></a><strong>TrmNotebookControl</strong></td>
+				<td>
+				  The TrmNotebookControl is a TNotebook replacement.  It is similar to the TrmOutlook control in how you use it but it will probably never be "deprecated" from the control set.<br><br>
+						And it doesn't suffer from the extra border problem that you get if using the TPageControl.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="rmOutlookActionLink"></a><strong>TrmOutlookActionLink</strong></td>
+				<td>
+						This component allows you to automatically build rmOutlookButtonLists and add them to an rmOutlookControl from an ActionList.<br>
+						Each category in the ActionList becomes a page in the rmOutlookControl.<br><br>
+						This component was written by Piotr Jurago of Poland.<br>
+						He sent it back to me and I've included it here.<br>
+						Thanks Piotr!
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="rmOutlookButtonList"></a><strong>TrmOutlookButtonList</strong></td>
+				<td>
+						This is similar to the M$ list control that you see in their outlook controls.<br><br> 
+						It supports large (32x32), small(16x16) and Custom image sizes.<br>
+						This has been rewritten to reduce memory usage and to speed it up.<br>
+						This can now handle thousands of items and is very efficient in how it stores and displays them.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="rmOutlookControl"></a><strong>TrmOutlookControl</strong></td>
+				<td>
+      This is actually very similar to a PageControl is how you use it, but it looks and feels like the control found in M$ Outlook.<br>
+						Hence the name.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="rmPanel"></a><strong>TrmPanel</strong></td>
+				<td>
+      This panel has a builtin splitter/sizer grip built in as well as a sizing button.<br>
+						Either one can be used separately or in conjunction with each other.<br><br>
+						Both of these features only work when the panel has been aligned to an edge.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="rmPathTreeView"></a><strong>TrmPathTreeView</strong></td>
+				<td>
+      This is treeview was originally based on the Delphi TTreeview.<br> 
+						The addition of the pathing code allows nodes to be added via a path and indexed via paths very quickly.<br><br>
+      On average testing over 10000 nodes were added to the rmPathTreeView in less than 2000ms and all nodes were indexed/accessed via the pathing routines in less than 100ms.&nbsp;
+				</td>
+		</tr>
+		
+		<tr class="descbody">
+				<td><a NAME="rmSpeedButton"></a><strong>TrmSpeedButton</strong></td>
+				<td>
+      This enhanced speedbutton is used through out the rmControls library.<br><br>
+						It has a couple of different drawing styles to allow for dropdown menus and combo boxes.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="rmSpinButton"></a><strong>TrmSpinButton</strong></td>
+				<td>
+						This is an enhanced version of the Delphi Spin Button.<br> It provides some greater flexibility when used for automatic repeats.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="rmSpinCombo"></a><strong>TrmSpinCombo</strong></td>
+				<td>
+      This is a spinedit that has a dropdown list combo built in.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="rmSpinEdit"></a><strong>TrmSpinEdit</strong></td>
+				<td>
+      This is the base spinedit for most of the spinedit rmControls.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="rmSplitter"></a><strong>TrmSplitter</strong></td>
+				<td>
+      This was originally created to over come a bug in an early version of the Delphi 4 VCL.<br>
+						That bug has sinced been fixed as of Delphi 5 and this is probably a redundant component.<br>
+      I always ment to do more with it but I think I superceded it with the TrmPanel functionality.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="rmTabSet"></a><strong>TrmTabSet</strong></td>
+				<td>
+      This is an updated version of the old Win 3.1 Tabset component.<br>
+						It is more resource friendly and provides the ability for further drawing styles. (ah-la - Windows 2000 style tabset)
+				</td>
+		</tr>
+		
+		<tr class="descbody">
+				<td><a NAME="rmTaskBar"></a><strong>TrmTaskBar</strong></td>
+				<td>
+						This is similar to the M$ Windows Taskbar.<br>
+						It is to be used on an applications mainform and it shows all windows attached to the application.<br>
+						It is especially useful in MDI applications and has many useful functions like hiding the minimized MDI Child windows.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="rmTextDataStorage"></a><strong>TrmTextDataStorage</strong></td>
+				<td>
+						This is similar to the TrmBinaryDataStorage, but it is different in that it uses a stringlist.<br>
+						This can be edited at designtime just like any other component that has a Stringlist in it.<br><br>
+						You can't load data at runtime but you can save the data to disk or stream it out from the component.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="rmTimeSpinEdit"></a><strong>TrmTimeSpinEdit</strong></td>
+				<td>
+      This is a spinedit for editing time values (24 and 12 hr time formats)
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="rmToolWinForm"></a><strong>TrmToolWinForm</strong></td>
+				<td>
+						There is a very annoying bug in the M$ implementation the ToolWin windows style. (ie. bsSizeToolWin and bsToolWindow)<br><br>
+						It causes what's know as the ALT-Tab bug where any form with a toolwin style that has focus will not allow the application to change focus to
+						another application via the ALT-Tab key sequence.<br> 
+						(Check it out with the Delphi property inspector!!)<br><br>
+						This form allows you to use a form that looks EXACTLY like a sizeable tool window but doesn't suffer from the ALT-Tab problem.<br><br> 
+						Look under the 'File|New...' menu item and select the rmToolWinForm to get it.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="rmTrackBar"></a><strong>TrmTrackBar</strong></td>
+				<td>
+						This is a replacement for the M$ common control trackbar component.<br>
+						It offers the ability to change the thumb and other customizations.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="rmTrayIcon"></a><strong>TrmTrayIcon</strong></td>
+				<td>
+      This component allows you to place an icon in the windows tray and provide functionality to handle menus and the such.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="rmTreeNonView"></a><strong>TrmTreeNonView</strong></td>
+				<td>
+						This has to be the most useful component in the entire rmControl library.<br>
+						This is a non-visual treeview with the same pathing functionality as the TrmPathTreeView.<br>
+						The speed increases on this component are almost to amazing to believe, your just going to have to believe me.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="rmwordtree"></a><strong>TrmWordTree</strong></td>
+				<td>
+						This non-visual component attempts to provide a simple dictionary type word lookup interface.<br>
+						Given a list of words it will veryify words found in it's dictionary or provide a list of similar words found in its dictionary verified by a soundex algorithm.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="rmZLIBDataStorage"></a><strong>TrmZLIBDataStorage</strong></td>
+				<td>
+						This component allows you to load and store ZLIB compressed data as a part of the forms resource.<br>
+						You can't load data at runtime but you can save the uncompressed data to disk or stream it out from the component.<br><br>
+						
+						To use this component you must first install the <strong>rmZLIB</strong> package and then the <strong>rmCtrlsEx</strong> package.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="booltostr"></a><strong>BoolToStr</strong></td>
+				<td>
+      Returns the strings 'True' or 'False' for the boolean value given.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="captionstringsortproc"></a><strong>CaptionStringSortProc</strong></td>
+				<td>
+      A function that does a compare of two TListItems caption property and returns the result.<br><br>
+						Uses the CompareText function.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="chartostr"></a><strong>CharToStr</strong></td>
+				<td>
+      Takes a character and converts it to is string equivalent.&nbsp; (ie. 'A' to '#65')
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="clientrecttoscreenrect"></a><strong>ClientRectToScreenRect</strong></td>
+				<td>
+      Operates similar to ClientToScreen except that it works on a TRect instead of a TPoint.
+				</td>
+		</tr>
+
+		
+		<tr class="descbody">
+				<td><a NAME="compinrange"></a><strong>CompInRange</strong></td>
+				<td>
+      Determines whether a Comp value is within a given range.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="countsections"></a><strong>CountSections</strong></td>
+				<td>
+      Counts the number of sections in a string separated by a specified character.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="darkencolor"></a><strong>DarkenColor</strong></td>
+				<td>
+      Returns the given color value darkend by x percent.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="datesortproc"></a><strong>DateSortProc</strong></td>
+				<td>
+      Takes two TListItems and from a given subitem index sorts the items as TDateTime values.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="datetoint"></a><strong>DateToInt</strong></td>
+				<td>
+      Takes a date and returns it as an integer in the format of "yyyymmdd".
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="decodesortdata"></a><strong>DecodeSortData</strong></td>
+				<td>
+      Decodes the ListViews column id and sort direction from a single encoded value generated from the EncodeSortData function.<br><br>
+						Handy for a single ListView that needs to emulate multiple LiveViews.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="drawgraytext"></a><strong>DrawGrayText</strong></td>
+				<td>
+      Similar to the DrawText command but draws the text disabled.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="encodesortdata"></a><strong>EncodeSortData</strong></td>
+				<td>
+      Encodes a ListViews column id and sort direction into a single encoded value that can be decoded by the DecodeSortData function.<br><br>
+						Handy for a single ListView that needs to emulate multiple LiveViews.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="findcmdlineswitchwithparam"></a><strong>FindCmdLineSwitchWithParam</strong></td>
+				<td>
+      A function that allows for the processing of commandline options that need to contain parameters.<br><br>
+						A command line option like "/load:filename.txt" can return the "filename.txt" value from the option "/Load:".
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="floatsortproc"></a><strong>FloatSortProc</strong></td>
+				<td>
+      Takes two TListItems and from a given subitem index sorts the items as Float values.
+				</td>
+		</tr>
+		
+		<tr class="descbody">
+				<td><a NAME="getfilecrc32"></a><strong>GetFileCRC32</strong></td>
+				<td>
+      Calculates a CRC32 value on a given filename.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="getfileicon"></a><strong>GetFileIcon</strong></td>
+				<td>
+      Returns the icon for a given file extension.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="getfileimageindex"></a><strong>GetFileImageIndex</strong></td>
+				<td>
+      Returns the shell icon image index for a given file extension.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="getfileimages"></a><strong>GetFileImages</strong></td>
+				<td>
+						Returns the shells imagelist handle for displaying shell icons.<br><br>
+						(<b><font color="#FF0000">Warning</font></b>: Use this function with caution.&nbsp;
+						Read up on using shared imagelists before using.)
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="getfiletype"></a><strong>GetFileType</strong></td>
+				<td>
+      Returns the Shell file type string for a given file extension.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="getmediainfo"></a><strong>GetMediaInfo</strong></td>
+				<td>
+      Returns information about a drive based on the flags passed into the call.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="getstrcrc32"></a><strong>GetStrCRC32</strong></td>
+				<td>
+      Calculates a CRC32 value on a given string.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="getstrmcrc32"></a><strong>GetStrmCRC32</strong></td>
+				<td>
+      Calculates a CRC32 value on a given stream.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="gettempdir"></a><strong>GetTempDir</strong></td>
+				<td>
+      Handles the tedious work of the standard windows GetTempPath routine.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="gettempfile"></a><strong>GetTempFile</strong></td>
+				<td>
+      Handles the tedious work of the standard windows GetTempFilename routine.
+				</td>
+		</tr>
+		
+		<tr class="descbody">
+				<td><a NAME="gradientfill"></a><strong>GradientFill</strong></td>
+				<td>
+      Draws a gradient fill on a canvas based upon a start and end color.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="greaterthanfloat"></a><strong>GreaterThanFloat</strong></td>
+				<td>
+      Returns the larger of the two real number values.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="greaterthanint"></a><strong>GreaterThanInt</strong></td>
+				<td>
+      Returns the larger of the two integer values.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="intinrange"></a><strong>IntInRange</strong></td>
+				<td>
+      Determines whether an Integer value is within a given range.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="integersortproc"></a><strong>IntegerSortProc</strong></td>
+				<td>
+      Takes two TListItems and from a given subitem index sorts the items as Integer values.
+				</td>
+		</tr>
+		
+		<tr class="descbody">
+				<td><a NAME="inttodate"></a><strong>IntToDate</strong></td>
+				<td>
+      Takes an integer, value formated as "yyyymmdd", and returns it as a TDate.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="leadingzero"></a><strong>LeadingZero</strong></td>
+				<td>
+      Pads an integer value with leading zeros to a specified string length.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="lessthanfloat"></a><strong>LessThanFloat</strong></td>
+				<td>
+      Returns the smaller of the two real number values.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="lessthanint"></a><strong>LessThanInt</strong></td>
+				<td>
+      Returns the smaller of the two integer values.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="lightencolor"></a><strong>LightenColor</strong></td>
+				<td>
+      Returns the given color value lightend by x percent.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="loaddialogposition"></a><strong>LoadDialogPosition</strong></td>
+				<td>
+      Loads a dialog forms last position and size from the registry.<br><br>
+						The main difference between this function and the LoadFormState function is that this doesn't restore the WindowState variable.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="loadformstate"></a><strong>LoadFormState</strong></td>
+				<td>
+      Loads a forms last position, size and optionally its last WindowState from the registry.<br><br>
+						The main difference between this function and the LoadDialogPos function is that this can restore, if desired, the WindowState variable.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="localip"></a><strong>LocalIP</strong></td>
+				<td>
+      Returns the Local machines IP address if available.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="localname"></a><strong>LocalName</strong></td>
+				<td>
+      Returns the Local machines Name if available.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="maskstrcmp"></a><strong>MaskStrCmp</strong></td>
+				<td>
+      Does a string comparison with the * and ? wildcard characters
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="padleft"></a><strong>PadLeft</strong></td>
+				<td>
+      Pads a string with leading spaces to a specified string length.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="padright"></a><strong>PadRight</strong></td>
+				<td>
+      Pads a string with trailing spaces to a specified string length.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="parsesection"></a><strong>ParseSection</strong></td>
+				<td>
+						Parses a returns data from a string separated by a specified character.<br>
+						(ie 'One|Two|Three|' the index 2 would return 'Two')
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="readregstring"></a><strong>ReadRegString</strong></td>
+				<td>
+      Basic wrapper function for the tediousness of having to read basic string information from the registry.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="readshortcutfile"></a><strong>ReadShortCutFile</strong></td>
+				<td>
+      Reads a .LNK or .PIF file and returns the details of it in an TShortCutDetails record.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="RectDiameter"></a><strong>RectDiameter</strong></td>
+				<td>
+      Takes a TRect and returns what the circular diameter of the Rect is.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="RectHeight"></a><strong>RectHeight</strong></td>
+				<td>
+      Returns the height of the Rect
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="RectWidth"></a><strong>RectWidth</strong></td>
+				<td>
+      Returns the width of the Rect
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="replacecolors"></a><strong>ReplaceColors</strong></td>
+				<td>
+      Takes a simple black and white bitmap and does a two color replacement.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="rmdatetimetostr"></a><strong>rmDateTimeToStr</strong></td>
+				<td>
+      Returns the date time as a string in the format of&nbsp; 'yyyymmddhhnnsszzz'
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="rotateimage"></a><strong>RotateImage</strong></td>
+				<td>
+      Rotates an image by a specified rotational angle.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="rotatetext"></a><strong>RotateText</strong></td>
+				<td>
+      Draws text on an canvas specified by a rotational angle.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="savedialogposition"></a><strong>SaveDialogPosition</strong></td>
+				<td>
+      Saves a dialog forms last position and size to the registry.<br><br>
+						The main difference between this function and the SaveFormState function is that this doesn't save the WindowState variable.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="saveformstate"></a><strong>SaveFormState</strong></td>
+				<td>
+      Saves a forms last position, size and WindowState to the registry.<br><br>
+						The main difference between this function and the SaveDialogPos function is that this saves the WindowState variable.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="screenrecttoclientrect"></a><strong>ScreenRectToClientRect</strong></td>
+				<td>
+      Operates similar to ScreenToClient except that it works on a TRect instead of a TPoint.
+				</td>
+		</tr>
+		
+		<tr class="descbody">
+				<td><a NAME="setinrange"></a><strong>SetInRange</strong></td>
+				<td>
+      Determines whether a value is with in a given range and sets it to one of the bounds if it isn't.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="sizeint"></a><strong>SizeInt</strong></td>
+				<td>
+      Takes an integer value and returns the shorted string version.&nbsp; (ie 1024 to '1kb')
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="soundex"></a><strong>SoundEx</strong></td>
+				<td>
+      Does a simple SoundEx calculation on a given string.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="stringsortproc"></a><strong>StringSortProc</strong></td>
+				<td>
+      Takes two TListItems and from a given subitem index sorts the items as string values.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="stripstring"></a><strong>StripString</strong></td>
+				<td>
+      Strips a string of all characters from a specified character set.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="strtobool"></a><strong>StrToBool</strong></td>
+				<td>
+      Attempts to return the Boolean value of the given string.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="strtochar"></a><strong>StrToChar</strong></td>
+				<td>
+      Takes a string and attempts to convert it to is character equivalent.&nbsp; (ie. '#65' to&nbsp; 'A')
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="winosversion"></a><strong>WinOSVersion</strong></td>
+				<td>
+      This returns an enumerated type specifying the current operating system.
+				</td>
+		</tr>
+		
+		<tr class="descbody">
+				<td><a NAME="writeregstring"></a><strong>WriteRegString</strong></td>
+				<td>
+      Basic wrapper function for the tediousness of having to write basic string information to the registry.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="writeshortcutfile"></a><strong>WriteShortCutFile</strong></td>
+				<td>
+      Writes a .LNK file from the details given in a TShortCutDetails record.
+				</td>
+		</tr>
+
+		<tr class="lookupheader">
+		  <td colspan="2">
+				   Other Files, Units and Unmentionables
+				</td>
+		</tr>
+		
+		<tr class="descbody">
+				<td><a NAME="rmHint"></a><strong>TrmHint</strong></td>
+				<td>
+      A rewrite of the standard Borland Hint window with some extra properties.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="compilerdefines"></a><strong>CompilerDefines.INC<br><em>(File)</em></strong></td>
+				<td>
+				  This file provides every rmControl unit with a standard set of compiler defines and options.<br><br>
+						Do not modify this file, doing so will most likely cause your library to stop compiling.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="sergey_orlik"></a><strong>sergey_orlik_def.inc<br><em>(File)</em></strong></td>
+				<td>
+				  Since I use parts of Sergeys form expert code to install the TrmToolWinForm I still have to include a copy of his include file with his compiler defines in them.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="rmMSGList"></a><strong>rmMSGList<br><em>(Unit)</em></strong></td>
+				<td>
+      A unit that converts standard windows messages into strings for logging or debugging purposes.<br><br>
+						It fairly complete list also including VCL messages and some common ComCtrl messages when able.<br><br>
+						<strong>Function GetMessageName(Msg:integer):string;</strong>
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="rmGlobalComponentHook"></a><strong>rmGlobalComponentHook<br><em>(Unit)</em></strong></td>
+				<td>
+      Provides a standard stack type interface to the rmControls that descend from TComponent and that hook their owners WndProc.<br>
+						This enables the component to correctly backout of the hook with out hanging the form or application.<br><br>
+						***** This is not to be used lightly!! *****<br>
+						PLEASE look at all the units that use the functions located in this unit and how they use them.<br>
+						** You have been warned **
+				</td>
+		</tr>
+		
+		<tr class="descbody">
+				<td><a NAME="rmInspectorItems"></a><strong>rmInspectorItems<br><em>(Unit)</em></strong></td>
+				<td>
+				  This unit contains most of the usable rmInspectorItems.<br><br>
+						This are most of the items I've ever had need for.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="rmScrnCtrls"></a><strong>rmScrnCtrls<br><em>(Unit)</em></strong></td>
+				<td>
+				  This unit shows how I've implemented most of the rm'ified Combo controls from standard controls such as the TrmTreeViewCombo.<br><br>
+						If you want to make your own "combo" controls looking through this file is probably a very good place to start.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="rmZLIB"></a><strong>rmZLIB<br><em>(Package)</em></strong></td>
+				<td>
+				  Starting with the v1.90 release I'm shipping an rm'ified version of the ZLIB routines.<br>
+						I'm doing this to help support the <strong>rmZLIBDataStorage</strong> Component and to avoid possible name resolution conflicts.<br>
+						The version of ZLIB being shipped is 1.1.4.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+				<td><a NAME="rmCtrlsEX"></a><strong>rmCtrlsEX<br><em>(Package)</em></strong></td>
+				<td>
+				  Starting with the v1.90 release I'm shipping an extra unit that has outside dependancies.<br><br>
+						This package requires that the <strong>rmZLIB</strong> package be installed before installing this one.<br>
+						This package contains the <strong>TrmZLIBDataStorage</strong> component.
+				</td>
+		</tr>
+
+		<tr class="descbody">
+		  <td colspan="2">
+						There are other bits and pieces of this component set that I could tell you about but I'm not.<br>
+						If you are really interested	and have and somewhat advanced knowledge of both Windows and Delphi programming
+						then feel to browse the code.		  
+    </td>
+		</tr>
+</table>
+<br>&nbsp;
+
+<table align="center" BORDER="0" CELLSPACING="1" CELLPADDING="5" width="750">
+  <tr class="blockheader1"><td><a NAME="Disclaimer"></a>Disclaimer</td></tr>
+  <tr class="descbody">
+    <td>
+						THIS SOFTWARE AND THE ACCOMPANYING FILES ARE
+						DISTRIBUTED "AS IS" AND WITHOUT WARRANTIES AS
+						TO PERFORMANCE OF MERCHANTABILITY OR ANY OTHER
+						WARRANTIES WHETHER EXPRESSED OR IMPLIED.<br><br>
+						Because of the various software environments into
+						which this code may be used,
+						NO WARRANTY OF FITNESS FOR A PARTICULAR PURPOSE IS OFFERED.<br><br>
+						Good data processing procedure dictates that any
+						program based on this code be thoroughly tested
+						with non-critical data before relying on it.<br><br>
+						THE USER MUST ASSUME THE ENTIRE RISK OF
+						USING ANY OF THE ACCOMPANYING CODE.
+				</td>
+  </tr>
+
+  <tr><td><br>&nbsp;</td></tr>
+
+  <tr class="blockheader1"><td><a NAME="Status"></a>Library Status</td></tr>
+
+  <tr class="descbody">
+    <td>
+						This code is being released as freeware.<br>
+						I only ask that if you modify the code that you email a copy of the new source back to me.<br>
+						If you do use and enjoy the library, drop me a line and let me know.
+				</td>
+	 </tr>
+
+  <tr><td><br>&nbsp;</td></tr>
+
+  <tr class="blockheader1"><td><a NAME="Contact"></a>Contact Details</td></tr>
+  <tr class="descbody">
+    <td>
+						My name is Ryan Mills and the rmControl library homepage is <b>http://www.mills-enterprise.ca/delphicomp.html</b><br>
+						If you have questions or source code updates you can email them to this address <b>rmcontrols@mills-enterprise.ca</b>
+				</td>
+		</tr>
+
+  <tr><td><br>&nbsp;</td></tr>
+
+  <tr class="blockheader1"><td><a NAME="History"></a>History</td></tr>
+  <tr class="descbody">
+    <td>
+						I originally started this library in 1997 as the meControl library.<br>
+						It wasn't long after this that I found the <a href="http://www.delphiprefixregistry.net/" target="_blank">Delphi Prefix Registry</a> and discovered that the "me" prefix was already spoken for.<br>
+						Since then I have registered the "rm" prefix renamed all of the original components and produced a few new ones.
+				</td>
+		</tr>
+
+  <tr><td><br>&nbsp;</td></tr>
+
+  <tr class="blockheader1"><td><a NAME="Acknowledgments"></a>Acknowledgments</td></tr>
+  <tr class="descbody">
+    <td>
+						I wrote alot of the code found in this library and the code that I didn't write I either have been asked to take over and maintain or have found on the net and included in this library.<br><br>
+						If you look in the header comments of the units you will find the relevant comments giving credit to the original author.
+				</td>
+		</tr>
+</table>
+<br>&nbsp;
+
+<table align="center" BORDER="0" CELLSPACING="1" CELLPADDING="5" width="750">
+  <tr class="blockheader1"><td colspan="3"><a NAME="Release"></a>Release Notes</td></tr>
+		<tr class="descheader">
+		  <td width="100">Date Released</td>
+				<td width="50">Version</td>
+				<td>Comments</td>
+		</tr>
+
+  <tr class="descbody">
+		  <td>11-24-2002</td>
+		  <td>1.90</td>
+				<td>
+						EEK! Over a year since I last did an update. I'm so sorry!<br><br>
+						Anyways here is the latest and greatest. (All disclaimers in effect! &lt;g&gt;) I've been busy starting my own company and getting married. It takes a bit out of a guy.<br>
+						I've added a few new components, restructured a number of others and generally been a bad boy.<br>
+						There should be no big breaks of functionality from the last version but testing is necessary.<br><br>
+						**** This version now fully supports D7, D6 and D5, I think. ****<br><br>
+						I no longer have D5 installed and haven't tested any of the new stuff.<br>
+						If you have any problems please let me know.<br>
+
+      New components in this release:
+						<a href="#rmClock">TrmClock</a>
+						<a href="#rmDayView">TrmDayView</a>,
+						<a href="#rmNoteBook">TrmNoteBook</a>,
+						<a href="#rmZLIBDataStorage">TrmZLIBDataStorage</a><br><br>
+						New functions/procedures in this release:
+						<a href="#datetoint">DateToInt</a>,
+						<a href="#inttodate">IntToDate</a>,
+						<a href="#darkencolor">DarkenColor</a>,
+						<a href="#lightencolor">LightenColor</a>,
+						<a href="#findcmdlineswitchwithparam">FindCmdLineSwitchWithParam</a>,
+						<a href="#gettempdir">GetTempDir</a>,
+						<a href="#gettempfile">GetTempFile</a>,
+						<a href="#readregstring">ReadRegString</a>,
+						<a href="#writeregstring">WriteRegString</a>,
+						<a href="#captionstringsortproc">CaptionStringSortProc</a>,
+						<a href="#datesortproc">DateSortProc</a>,
+						<a href="#decodesortdata">DecodeSortData</a>,
+						<a href="#encodesortdata">EncodeSortData</a>,
+						<a href="#floatsortproc">FloatSortProc</a>,
+						<a href="#integersortproc">IntegerSortProc</a>,
+						<a href="#stringsortproc">StringSortProc</a>,
+						<a href="#clientrecttoscreenrect">ClientRectToScreenRect</a>,
+						<a href="#screenrecttoclientrect">ScreenRectToClientRect</a>,
+						<a href="#loaddialogposition">LoadDialogPosition</a>,
+						<a href="#loadformstate">LoadFormState</a>,
+						<a href="#savedialogposition">SaveDialogPosition</a>,
+						<a href="#saveformstate">SaveFormState</a><br><br>
+						I have located a bug in original release of D6 that affects the ActionManager.<br>
+						**This bug affects the TrmKeyBindings component specifically.<br> 
+						If you change the shortcut of a TClientActionItem at runtime (for sure) it
+						will change the shortcut but it wont change the caption on things like
+						the menu items.&nbsp; BAD!!<br><br>
+						I finally have an email address that is a little more permanent: <font color="#800000">rmcontrols@mills-enterprise.ca</font><br><br>
+						- Fixed a bug in TrmInspector that was causing a memory leak.&nbsp; Thanks to <i>Patrick O'Keeffe</i> for finding it.<br>
+						- Fixed a bug in TrmPathTreeView, thanks to the guys at the Marathon project for that one.<br>
+						- Generally fixed a number of bugs most if not all the units.  (Read: I'm sure I touched every unit!)
+				</td>
+		</tr>
+
+  <tr class="descbody">
+    <td >06-22-2001</td>
+    <td>1.80</td>
+    <td>
+						I finally got my copy of D6!&nbsp; Thus the big jump
+						in the version numbers.&nbsp; This release now supports both D5 and D6.&nbsp;
+						The most changes had to occur in the design-time code.&nbsp; There were
+						a couple of function deprication issues that I had to IFDEF out but for
+						the most part this version of the code base is same.&nbsp; You shouldn't
+						notice any difference.&nbsp;
+						<p><font color="#800000">*****Please Note*****</font>
+						<br>Just because I've gotten the entire component set compiled in D6 doesn't
+						mean that at this time I have run a full regression test on all the code.&nbsp;
+						Please notify me immediatly of any problems encountered while useing these
+						components with Delphi 6.
+						<br><font color="#800000">*****Please Note*****</font>
+						<p>I have once again had an email address change: <font color="#800000">ryan.mills@quest.com (no longer in use)</font>
+						<br><font color="#000000">I am working on getting a more stable and permanent
+						address but I haven't yet as I am moving in the next week or so.&nbsp;
+						Please be patient with me.&nbsp; I do monitor the borland news groups if
+						you can't seem to get ahold of me any other way.</font>
+						<p>- Updated TrmTreeNonView and TrmPathTreeView with some speed enhancements
+						<br>&nbsp;&nbsp; and a bug fix that caused the indexing to fail on the
+						Items.assign function.&nbsp;
+						<br>- Updated the ancestry of TrmImageListGlyph&nbsp;
+						<br>- Updated with bug fixes TrmCalendarCombo, TrmDiffViewer, TrmNewComboBox
+						<br>- Fixed a bug in TrmListControl that was causing a memory leak.&nbsp;
+						Thanks to&nbsp;
+						<br><i>&nbsp;&nbsp; Ingo Eckel</i> for finding it.
+						<br>- Rewrote the clientarea code for the TrmPanel to properly handle multi-embeded
+						<br>&nbsp;&nbsp; rmPanels
+						<br>- Modified the rmConditionalDefines.INC file to include what I consider
+						necessary&nbsp;
+						<br>&nbsp;&nbsp; compiler defines.
+						<br>- Rewrote the drawing code for the TrmTab3x component to allow for
+						alTop&nbsp;
+						<br>&nbsp;&nbsp; aligned tabs.&nbsp; All other alignments still work like
+						the original alBottom alignment did.
+						<p>Added <a href="#soundex">SoundEx</a>, <a href="#RectHeight">RectHeight</a>,
+						<a href="#RectWidth">RectWidth</a>,
+						<a href="#rmCheckBox">rmCheckBox</a>,
+						<a href="#rmInspector">rmCheckboxInspectorItem</a>
+						<br>&nbsp; <a href="#rmOutlookActionLink">rmOutlookActionLink</a> (written
+						by Piotr Jurago of Poland)
+				</td>
+		</tr>
+
+  <tr class="descbody">
+    <td>05-03-2001</td>
+    <td>1.70</td>
+    <td>
+						- Updated the TrmMemoryDataSet.&nbsp; Mea Culpa, I included
+						an 'in progress' copy of&nbsp;
+						<br>&nbsp;&nbsp; the control instead of the working copy.&nbsp; Thanks
+						to <i>Graeme D. Keast</i> for finding&nbsp;
+						<br>&nbsp;&nbsp; that one.&nbsp;
+						<br>- Updated the rmNewComboBox.&nbsp; I was again in the progress of changing
+						over the&nbsp;
+						<br>&nbsp;&nbsp; base component of the copy I sent out. Thanks to <i>Peter
+						Giroux</i> for that one.&nbsp;
+						<p>Added <a href="#rmToolWinForm">rmToolWinForm</a>
+				</td>
+		</tr>
+
+		<tr class="descbody">
+    <td>04-19-2001</td>
+    <td>1.65</td>
+    <td>
+						Updated a number of components implementing bug fixes and enhancements.<br><br>
+						Added <a href="#rmDGTree">rmDGTree</a>, <a href="#rmMemoryDataSet">rmMemoryDataSet</a>
+						and <a href="#rmInspector">rmInspector</a>.
+				</td>
+  </tr>
+
+		<tr class="descbody">
+				<td>03-19-2001</td>
+				<td>1.60</td>
+				<td>This is the original public release version.</td>
+		</tr>
+</table>
+
+</body>
+</html>

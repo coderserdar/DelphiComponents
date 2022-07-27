@@ -1,0 +1,26 @@
+DESCRIPTION RCDATA
+BEGIN
+	"\x41", "\x00", "\x62", "\x00", "\x72", "\x00", "\x61", "\x00", 	/* 0000: A.b.r.a. */
+	"\x20", "\x00", "\x4e", "\x00", "\x61", "\x00", "\x6d", "\x00", 	/* 0008:  .N.a.m. */
+	"\x65", "\x00", "\x20", "\x00", "\x53", "\x00", "\x70", "\x00", 	/* 0010: e. .S.p. */
+	"\x61", "\x00", "\x63", "\x00", "\x65", "\x00", "\x20", "\x00", 	/* 0018: a.c.e. . */
+	"\x4c", "\x00", "\x69", "\x00", "\x62", "\x00", "\x72", "\x00", 	/* 0020: L.i.b.r. */
+	"\x61", "\x00", "\x72", "\x00", "\x79", "\x00", "\x00", "\x00"	/* 0028: a.r.y... */
+END
+
+#define NameSpaceLibrary_rsSystemFolder 65520
+#define NameSpaceLibrary_rsDRIVE_REMOVABLE 65521
+#define NameSpaceLibrary_rsDRIVE_FIXED 65522
+#define NameSpaceLibrary_rsDRIVE_REMOTE 65523
+#define NameSpaceLibrary_rsDRIVE_CDROM 65524
+#define NameSpaceLibrary_rsDRIVE_RAMDISK 65525
+STRINGTABLE
+BEGIN
+	NameSpaceLibrary_rsSystemFolder,	"System Folder"
+	NameSpaceLibrary_rsDRIVE_REMOVABLE,	"Removable Drive"
+	NameSpaceLibrary_rsDRIVE_FIXED,	"Fixed Drive"
+	NameSpaceLibrary_rsDRIVE_REMOTE,	"Remote (Network) Drive"
+	NameSpaceLibrary_rsDRIVE_CDROM,	"CD ROM Drive"
+	NameSpaceLibrary_rsDRIVE_RAMDISK,	"RAM Disk Drive"
+END
+

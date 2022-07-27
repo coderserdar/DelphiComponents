@@ -1,0 +1,47 @@
+package qesbpcs_free_rt_d6;
+
+{$R *.res}
+{$ALIGN 8}
+{$ASSERTIONS OFF}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS OFF}
+{$LOCALSYMBOLS OFF}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'ESBPCS CLX Free Runtime for Delphi 6'}
+{$RUNONLY}
+{$IMPLICITBUILD OFF}
+
+requires
+  rtl,
+  visualclx;
+
+contains
+  QESBPCSGlobals in 'QESBPCSGlobals.pas',
+  QESBPCSGlobals2 in 'QESBPCSGlobals2.pas',
+  QESBPCS_RS_Globals in 'QESBPCS_RS_Globals.pas',
+  QESBPCS_RS_Math in 'QESBPCS_RS_Math.pas',
+  QESBPCSConvert in 'QESBPCSConvert.pas',
+  QESBPCSMath in 'QESBPCSMath.pas',
+  QESBPCSSystem in 'QESBPCSSystem.pas',
+  QESBPCSDateTime in 'QESBPCSDateTime.pas',
+  QESBPCSRandom in 'QESBPCSRandom.pas',
+  QESBPCSMsgs in 'QESBPCSMsgs.pas',
+  QESBPCSEdit in 'QESBPCSEdit.pas',
+  QESBPCSNumEdit in 'QESBPCSNumEdit.pas';
+
+end.
