@@ -1,0 +1,48 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{C9940E26-39AC-48E0-8ED5-2D11CD6BCC59}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="aceDX10Tokyo_R.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="aceDX10Tokyo.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="aceDX10Tokyo_R">
+        <MSBuild Projects="aceDX10Tokyo_R.dproj"/>
+    </Target>
+    <Target Name="aceDX10Tokyo_R:Clean">
+        <MSBuild Projects="aceDX10Tokyo_R.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="aceDX10Tokyo_R:Make">
+        <MSBuild Projects="aceDX10Tokyo_R.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="aceDX10Tokyo">
+        <MSBuild Projects="aceDX10Tokyo.dproj"/>
+    </Target>
+    <Target Name="aceDX10Tokyo:Clean">
+        <MSBuild Projects="aceDX10Tokyo.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="aceDX10Tokyo:Make">
+        <MSBuild Projects="aceDX10Tokyo.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="aceDX10Tokyo_R;aceDX10Tokyo"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="aceDX10Tokyo_R:Clean;aceDX10Tokyo:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="aceDX10Tokyo_R:Make;aceDX10Tokyo:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

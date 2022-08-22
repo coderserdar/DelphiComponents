@@ -1,0 +1,66 @@
+package AlphaDBDX11Alexandria_x64;
+
+{$R *.res}
+{$R 'AlphaDB.dcr'}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE DEBUG}
+{$ENDIF IMPLICITBUILDING}
+{$DESCRIPTION 'AlphaControls DB-aware pack'}
+{$RUNONLY}
+{$IMPLICITBUILD OFF}
+
+requires
+  vcl,
+  vclx,
+  vclimg,
+  vcldb,
+  acntDX11Alexandria_x64_r;
+
+contains
+  sDBEdit in 'sDBEdit.pas',
+  sDBMemo in 'sDBMemo.pas',
+  sDBLookupComboBox in 'sDBLookupComboBox.pas',
+  sDBComboBox in 'sDBComboBox.pas',
+  sDBText in 'sDBText.pas',
+  sDBLookupListBox in 'sDBLookupListBox.pas',
+  sDBListBox in 'sDBListBox.pas',
+  sDBCheckBox in 'sDBCheckBox.pas',
+  sDBNavigator in 'sDBNavigator.pas',
+  sRegDB in 'sRegDB.pas',
+  sDBDateEdit in 'sDBDateEdit.pas',
+  sDBRadioGroup in 'sDBRadioGroup.pas',
+  sDBCalcEdit in 'sDBCalcEdit.pas',
+  sDBRichEdit in 'sDBRichEdit.pas',
+  acDBTextFX in 'acDBTextFX.pas',
+  acDBCtrlGrid in 'acDBCtrlGrid.pas',
+  acDBDecimalSpinEdit in 'acDBDecimalSpinEdit.pas',
+  acDBComboBoxEx in 'acDBComboBoxEx.pas',
+  acDBListBoxEx in 'acDBListBoxEx.pas',
+  acDBComboEdit in 'acDBComboEdit.pas',
+  acDBBtns in 'acDBBtns.pas',
+  acDBSlider in 'acDBSlider.pas',
+  acDBGrid in 'acDBGrid.pas';
+
+end.
+

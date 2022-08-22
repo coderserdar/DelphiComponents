@@ -1,0 +1,47 @@
+package aceDX10Berlin_R;
+{$R *.res}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS OFF}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS OFF}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE ON}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE DEBUG}
+{$ENDIF IMPLICITBUILDING}
+{$DESCRIPTION 'AlphaControls extra library'}
+{$RUNONLY}
+{$IMPLICITBUILD OFF}
+
+requires
+  vcl,
+  vclx,
+  rtl,
+  vclimg,
+  acntDX10Berlin_R;
+
+contains
+  aceScrollPanel in 'aceScrollPanel.pas',
+  aceListView in 'aceListView.pas',
+  aceCheckComboBox in 'aceCheckComboBox.pas',
+  aceComboEditEx in 'aceComboEditEx.pas',
+  aceColorSelector in 'aceColorSelector.pas',
+  aceSkinMenu in 'aceSkinMenu.pas',
+  aceFloatPanel in 'aceFloatPanel.pas';
+
+end.

@@ -1,0 +1,44 @@
+package aceXE5_R;
+{$R *.res}
+{$ALIGN 8}
+{$ASSERTIONS OFF}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS OFF}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE ON}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'AlphaControls extra library'}
+{$RUNONLY}
+{$IMPLICITBUILD OFF}
+
+requires
+  vcl,
+  vclx,
+  rtl,
+  vclimg,
+  acntDelphiXE5_R;
+
+contains
+  aceScrollPanel in 'aceScrollPanel.pas',
+  aceListView in 'aceListView.pas',
+  aceCheckComboBox in 'aceCheckComboBox.pas',
+  aceComboEditEx in 'aceComboEditEx.pas',
+  aceColorSelector in 'aceColorSelector.pas',
+  aceSkinMenu in 'aceSkinMenu.pas',
+  aceFloatPanel in 'aceFloatPanel.pas';
+
+end.

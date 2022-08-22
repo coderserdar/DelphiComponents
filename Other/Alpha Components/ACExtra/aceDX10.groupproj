@@ -1,0 +1,48 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{C9940E26-39AC-48E0-8ED5-2D11CD6BCC59}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="aceDX10_R.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="aceDX10.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="aceDX10_R">
+        <MSBuild Projects="aceDX10_R.dproj"/>
+    </Target>
+    <Target Name="aceDX10_R:Clean">
+        <MSBuild Projects="aceDX10_R.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="aceDX10_R:Make">
+        <MSBuild Projects="aceDX10_R.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="aceDX10">
+        <MSBuild Projects="aceDX10.dproj"/>
+    </Target>
+    <Target Name="aceDX10:Clean">
+        <MSBuild Projects="aceDX10.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="aceDX10:Make">
+        <MSBuild Projects="aceDX10.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="aceDX10_R;aceDX10"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="aceDX10_R:Clean;aceDX10:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="aceDX10_R:Make;aceDX10:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
