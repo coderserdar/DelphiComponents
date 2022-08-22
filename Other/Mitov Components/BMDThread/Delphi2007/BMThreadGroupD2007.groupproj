@@ -1,0 +1,44 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{402833ba-f1e4-4313-a788-e7006a477d72}</ProjectGuid>
+  </PropertyGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Projects Include="BMThreadDsnD2007.dproj" />
+    <Projects Include="BMThreadPkgD2007.dproj" />
+  </ItemGroup>
+  <ProjectExtensions>
+    <Borland.Personality>Default.Personality</Borland.Personality>
+    <Borland.ProjectType />
+    <BorlandProject>
+<BorlandProject xmlns=""><Default.Personality></Default.Personality></BorlandProject></BorlandProject>
+  </ProjectExtensions>
+  <Target Name="BMThreadPkgD2007">
+    <MSBuild Projects="BMThreadPkgD2007.dproj" Targets="" />
+  </Target>
+  <Target Name="BMThreadPkgD2007:Clean">
+    <MSBuild Projects="BMThreadPkgD2007.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="BMThreadPkgD2007:Make">
+    <MSBuild Projects="BMThreadPkgD2007.dproj" Targets="Make" />
+  </Target>
+  <Target Name="BMThreadDsnD2007">
+    <MSBuild Projects="BMThreadDsnD2007.dproj" Targets="" />
+  </Target>
+  <Target Name="BMThreadDsnD2007:Clean">
+    <MSBuild Projects="BMThreadDsnD2007.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="BMThreadDsnD2007:Make">
+    <MSBuild Projects="BMThreadDsnD2007.dproj" Targets="Make" />
+  </Target>
+  <Target Name="Build">
+    <CallTarget Targets="BMThreadPkgD2007;BMThreadDsnD2007" />
+  </Target>
+  <Target Name="Clean">
+    <CallTarget Targets="BMThreadPkgD2007:Clean;BMThreadDsnD2007:Clean" />
+  </Target>
+  <Target Name="Make">
+    <CallTarget Targets="BMThreadPkgD2007:Make;BMThreadDsnD2007:Make" />
+  </Target>
+  <Import Condition="Exists('$(MSBuildBinPath)\Borland.Group.Targets')" Project="$(MSBuildBinPath)\Borland.Group.Targets" />
+</Project>

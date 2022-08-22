@@ -1,0 +1,155 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!-- C++Builder XML Project -->
+<PROJECT>
+  <MACROS>
+    <VERSION value="BCB.05.03"/>
+    <PROJECT value="DemoProject.exe"/>
+    <OBJFILES value="DemoProject.obj MainDemoUnit.obj"/>
+    <RESFILES value="DemoProject.res"/>
+    <IDLFILES value=""/>
+    <IDLGENFILES value=""/>
+    <DEFFILE value=""/>
+    <RESDEPEN value="$(RESFILES) MainDemoUnit.dfm"/>
+    <LIBFILES value=""/>
+    <LIBRARIES value="VCLX50.lib BM_PACK.lib Vcl50.lib"/>
+    <SPARELIBS value="Vcl50.lib BM_PACK.lib VCLX50.lib"/>
+    <PACKAGES value="Vcl50.bpi Vclx50.bpi bcbsmp50.bpi Vcldb50.bpi vclado50.bpi ibsmp50.bpi 
+      VCLBDE50.bpi vcldbx50.bpi Qrpt50.bpi TeeUI50.bpi TeeDB50.bpi Tee50.bpi 
+      Dss50.bpi TeeQR50.bpi VCLIB50.bpi Vclmid50.bpi vclie50.bpi Inetdb50.bpi 
+      Inet50.bpi NMFast50.bpi webmid50.bpi bcbie50.bpi dclocx50.bpi 
+      bcb97axserver50.bpi ProEss5.bpi AnalysisPkg5.bpi IISUPPORT5.bpi 
+      TestComponents.bpi BM_PACK.bpi Rz251N50.bpi Rz251D50.bpi IIComps5.bpi 
+      CALIENTEPKG5.bpi CaliPegPkg5.bpi"/>
+    <PATHCPP value=".;"/>
+    <PATHPAS value=".;"/>
+    <PATHRC value=".;"/>
+    <PATHASM value=".;"/>
+    <DEBUGLIBPATH value="$(BCB)\lib\debug"/>
+    <RELEASELIBPATH value="$(BCB)\lib\release"/>
+    <LINKER value="tlink32"/>
+    <USERDEFINES value="_DEBUG"/>
+    <SYSDEFINES value="NO_STRICT"/>
+    <MAINSOURCE value="DemoProject.cpp"/>
+    <INCLUDEPATH value="$(BCB)\Include;$(BCB)\Include\Vcl;C:\Raize\RC25\LibBCB5\;$(BCB)\Components\Sources;$(BCB)\Components\VTree;$(BCB)\Components\HtmlHelp;$(BCB)\Proess3\Builder;$(BCB)\Armada;$(BCB)\RX\Units;$(BCB)\3rdParty\deskclick\gfx;$(BCB)\Components\Inspector"/>
+    <LIBPATH value="$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib;C:\Raize\RC25\LibBCB5\;$(BCB)\Components\Sources;$(BCB)\Components\VTree;$(BCB)\Components\HtmlHelp;$(BCB)\Proess3\Builder;$(BCB)\Armada;$(BCB)\RX\Units;$(BCB)\3rdParty\deskclick\gfx;$(BCB)\Components\Inspector"/>
+    <WARNINGS value="-w-par"/>
+  </MACROS>
+  <OPTIONS>
+    <IDLCFLAGS value="-I$(BCB)\Include -I$(BCB)\Include\Vcl -IC:\Raize\RC25\LibBCB5\. 
+      -I$(BCB)\Components\Sources -I$(BCB)\Components\VTree 
+      -I$(BCB)\Components\HtmlHelp -I$(BCB)\Proess3\Builder -I$(BCB)\Armada 
+      -I$(BCB)\RX\Units -I$(BCB)\3rdParty\deskclick\gfx 
+      -I$(BCB)\Components\Inspector -src_suffix cpp -D_DEBUG -boa"/>
+    <CFLAG1 value="-Od -H=$(BCB)\lib\vcl50.csm -Hc -Vx -Ve -X- -r- -a8 -b- -k -y -v -vi- -c 
+      -tW -tWM"/>
+    <PFLAGS value="-$YD -$W -$O- -v -JPHNE -M"/>
+    <RFLAGS value=""/>
+    <AFLAGS value="/mx /w2 /zd"/>
+    <LFLAGS value="-D&quot;&quot; -aa -Tpe -x -Gn -v"/>
+  </OPTIONS>
+  <LINKER>
+    <ALLOBJ value="c0w32.obj sysinit.obj $(OBJFILES)"/>
+    <ALLRES value="$(RESFILES)"/>
+    <ALLLIB value="$(LIBFILES) $(LIBRARIES) import32.lib cp32mt.lib"/>
+  </LINKER>
+  <IDEOPTIONS>
+[Version Info]
+IncludeVerInfo=0
+AutoIncBuild=0
+MajorVer=1
+MinorVer=0
+Release=0
+Build=0
+Debug=0
+PreRelease=0
+Special=0
+Private=0
+DLL=0
+Locale=1033
+CodePage=1252
+
+[Version Info Keys]
+CompanyName=
+FileDescription=
+FileVersion=1.0.0.0
+InternalName=
+LegalCopyright=
+LegalTrademarks=
+OriginalFilename=
+ProductName=
+ProductVersion=1.0.0.0
+Comments=
+
+[Excluded Packages]
+$(BCB)\Bin\dclite50.bpl=Borland Integrated Translation Environment
+
+[HistoryLists\hlIncludePath]
+Count=17
+Item0=$(BCB)\Include;$(BCB)\Include\Vcl;C:\Raize\RC25\LibBCB5\;$(BCB)\Components\Sources;$(BCB)\Components\VTree;$(BCB)\Components\HtmlHelp;$(BCB)\Proess3\Builder;$(BCB)\Armada;$(BCB)\RX\Units;$(BCB)\3rdParty\deskclick\gfx;$(BCB)\Components\Inspector
+Item1=$(BCB)\Include;$(BCB)\Include\Vcl;C:\Raize\RC25\LibBCB5\;$(BCB)\Components\Sources;$(BCB)\Components\VTree;$(BCB)\Components\HtmlHelp;$(BCB)\Proess3\Builder;$(BCB)\Armada;$(BCB)\RX\Units;$(BCB)\3rdParty\deskclick\gfx
+Item2=$(BCB)\lib\obj;$(BCB)\lib;C:\Raize\RC25\LibBCB5\;$(BCB)\Components\Sources;$(BCB)\Components\VTree;$(BCB)\Components\HtmlHelp;$(BCB)\Proess3\Builder;$(BCB)\Armada;$(BCB)\RX\Units;$(BCB)\3rdParty\deskclick\gfx
+Item3=$(BCB)\include;$(BCB)\include\vcl;$(BCB)\Innovative;$(BCB)\Armada;$(BCB)\Components\IIComps
+Item4=$(BCB)\include;$(BCB)\include\vcl;C:\Raize\RC25\LibBCB5\;$(BCB)\Components\Sources;$(BCB)\Innovative;$(BCB)\Armada;$(BCB)\Components\IIComps;$(BCB)\Components\VTree;$(BCB)\Components\HtmlHelp;$(BCB)\Proess3\Builder;$(BCB)\RX\Units;$(BCB)\3rdParty\deskclick\gfx
+Item5=$(BCB)\include;$(BCB)\include\vcl;C:\Raize\RC25\LibBCB5\;$(BCB)\Components\Sources;$(BCB)\Innovative;$(BCB)\Armada;$(BCB)\Components\IIComps;$(BCB)\Components\VTree;$(BCB)\Components\HtmlHelp;$(BCB)\Proess3\Builder;$(BCB)\RX\Units
+Item6=$(BCB)\include;$(BCB)\include\vcl;C:\Raize\RC25\LibBCB5\;$(BCB)\Components\Sources;$(BCB)\Innovative;$(BCB)\Armada;$(BCB)\Components\IIComps;$(BCB)\Components\VTree;$(BCB)\Components\HtmlHelp;$(BCB)\Proess3\Builder
+Item7=$(BCB)\include;$(BCB)\include\vcl;C:\Raize\RC25\LibBCB5\;$(BCB)\Components\Sources;$(BCB)\Innovative;$(BCB)\Armada;$(BCB)\Components\IIComps;$(BCB)\Components\VTree;$(BCB)\Components\HtmlHelp
+Item8=$(BCB)\include;$(BCB)\include\vcl;C:\Raize\RC25\LibBCB5\;$(BCB)\Components\Sources;$(BCB)\Innovative;$(BCB)\Armada;$(BCB)\Components\IIComps;$(BCB)\Components\VTree
+Item9=$(BCB)\include;$(BCB)\include\vcl;C:\Raize\RC25\LibBCB5\;$(BCB)\Components\Sources;$(BCB)\Innovative;$(BCB)\Armada;$(BCB)\Components\IIComps
+Item10=$(BCB)\include;$(BCB)\include\vcl;C:\Raize\RC25\LibBCB5\;$(BCB)\Components\Sources;$(BCB)\Innovative;$(BCB)\Armada
+Item11=$(BCB)\include;$(BCB)\include\vcl;C:\Raize\RC25\LibBCB5\;$(BCB)\Components\Sources;$(BCB)\Innovative
+Item12=$(BCB)\include;$(BCB)\include\vcl;C:\Raize\RC25\LibBCB5\;$(BCB)\Components\Sources;$(BCB)\Armada
+Item13=$(BCB)\include;$(BCB)\include\vcl;C:\Raize\RC25\LibBCB5\;$(BCB)\Components\Sources
+Item14=$(BCB)\include;$(BCB)\include\vcl;C:\Raize\RC25\LibBCB5\
+Item15=$(BCB)\include;$(BCB)\include\vcl;C:\Raize\RC25\LibBCB5
+Item16=$(BCB)\include;$(BCB)\include\vcl
+
+[HistoryLists\hlLibraryPath]
+Count=11
+Item0=$(BCB)\lib\obj;$(BCB)\lib;C:\Raize\RC25\LibBCB5\;$(BCB)\Components\Sources;$(BCB)\Components\VTree;$(BCB)\Components\HtmlHelp;$(BCB)\Proess3\Builder;$(BCB)\Armada;$(BCB)\RX\Units;$(BCB)\3rdParty\deskclick\gfx;$(BCB)\Components\Inspector
+Item1=$(BCB)\lib\obj;$(BCB)\lib;C:\Raize\RC25\LibBCB5\;$(BCB)\Components\Sources;$(BCB)\Components\VTree;$(BCB)\Components\HtmlHelp;$(BCB)\Proess3\Builder;$(BCB)\Armada;$(BCB)\RX\Units;$(BCB)\3rdParty\deskclick\gfx
+Item2=$(BCB)\lib\obj;$(BCB)\lib;C:\Raize\RC25\LibBCB5\;$(BCB)\Components\Sources;$(BCB)\Components\VTree;$(BCB)\Components\HtmlHelp;$(BCB)\Proess3\Builder;$(BCB)\Armada;$(BCB)\RX\Units
+Item3=$(BCB)\lib\obj;$(BCB)\lib;C:\Raize\RC25\LibBCB5\;$(BCB)\Components\Sources;$(BCB)\Components\VTree;$(BCB)\Components\HtmlHelp;$(BCB)\Proess3\Builder;$(BCB)\Armada
+Item4=$(BCB)\lib\obj;$(BCB)\lib;C:\Raize\RC25\LibBCB5\;$(BCB)\Components\Sources;$(BCB)\Components\VTree;$(BCB)\Components\HtmlHelp;$(BCB)\Proess3\Builder
+Item5=$(BCB)\lib\obj;$(BCB)\lib;C:\Raize\RC25\LibBCB5\;$(BCB)\Components\Sources;$(BCB)\Components\VTree;$(BCB)\Components\HtmlHelp
+Item6=$(BCB)\lib\obj;$(BCB)\lib;C:\Raize\RC25\LibBCB5\;$(BCB)\Components\Sources;$(BCB)\Components\VTree
+Item7=$(BCB)\lib\obj;$(BCB)\lib;C:\Raize\RC25\LibBCB5\;$(BCB)\Components\Sources
+Item8=$(BCB)\lib\obj;$(BCB)\lib;C:\Raize\RC25\LibBCB5\
+Item9=$(BCB)\lib\obj;$(BCB)\lib;C:\Raize\RC25\LibBCB5
+Item10=$(BCB)\lib\obj;$(BCB)\lib
+
+[HistoryLists\hlDebugSourcePath]
+Count=8
+Item0=$(BCB)\source\vcl;C:\Raize\RC25\Source;$(BCB)\Components\Sources;$(BCB)\Components\IIComps;$(BCB)\Components\VTree;$(BCB)\Components\HtmlHelp;$(BCB)\Proess3\Builder;$(BCB)\Components\Inspector
+Item1=$(BCB)\source\vcl;C:\Raize\RC25\Source;$(BCB)\Components\Sources;$(BCB)\Components\IIComps;$(BCB)\Components\VTree;$(BCB)\Components\HtmlHelp;$(BCB)\Proess3\Builder
+Item2=$(BCB)\source\vcl;C:\Raize\RC25\Source;$(BCB)\Components\Sources;$(BCB)\Components\IIComps;$(BCB)\Components\VTree;$(BCB)\Components\HtmlHelp
+Item3=$(BCB)\source\vcl;C:\Raize\RC25\Source;$(BCB)\Components\Sources;$(BCB)\Components\IIComps;$(BCB)\Components\VTree
+Item4=$(BCB)\source\vcl;C:\Raize\RC25\Source;$(BCB)\Components\Sources;$(BCB)\Components\IIComps
+Item5=$(BCB)\source\vcl;C:\Raize\RC25\Source;$(BCB)\Components\Sources
+Item6=$(BCB)\source\vcl;C:\Raize\RC25\Source
+Item7=$(BCB)\source\vcl
+
+[HistoryLists\hlConditionals]
+Count=1
+Item0=_DEBUG
+
+[Debugging]
+DebugSourceDirs=$(BCB)\source\vcl;C:\Raize\RC25\Source;$(BCB)\Components\Sources;$(BCB)\Components\IIComps;$(BCB)\Components\VTree;$(BCB)\Components\HtmlHelp;$(BCB)\Proess3\Builder;$(BCB)\Components\Inspector
+
+[Parameters]
+RunParams=
+HostApplication=
+RemoteHost=
+RemotePath=
+RemoteDebug=0
+
+[Compiler]
+ShowInfoMsgs=0
+LinkDebugVcl=1
+LinkCGLIB=0
+
+[CORBA]
+AddServerUnit=1
+AddClientUnit=1
+PrecompiledHeaders=1
+  </IDEOPTIONS>
+</PROJECT>

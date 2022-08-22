@@ -1,0 +1,151 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!-- C++Builder XML Project -->
+<PROJECT>
+  <MACROS>
+    <VERSION value="BCB.05.03"/>
+    <PROJECT value="UpdateDemo.exe"/>
+    <OBJFILES value="UpdateDemo.obj Unit1.obj"/>
+    <RESFILES value="UpdateDemo.res"/>
+    <IDLFILES value=""/>
+    <IDLGENFILES value=""/>
+    <DEFFILE value=""/>
+    <RESDEPEN value="$(RESFILES) Unit1.dfm"/>
+    <LIBFILES value=""/>
+    <LIBRARIES value="VCLX50.lib BM_PACK.lib vcl50.lib"/>
+    <SPARELIBS value="vcl50.lib BM_PACK.lib VCLX50.lib"/>
+    <PACKAGES value=""/>
+    <PATHCPP value=".;"/>
+    <PATHPAS value=".;"/>
+    <PATHRC value=".;"/>
+    <PATHASM value=".;"/>
+    <DEBUGLIBPATH value="$(BCB)\lib\debug"/>
+    <RELEASELIBPATH value="$(BCB)\lib\release"/>
+    <LINKER value="ilink32"/>
+    <USERDEFINES value=""/>
+    <SYSDEFINES value="NO_STRICT"/>
+    <MAINSOURCE value="UpdateDemo.cpp"/>
+    <INCLUDEPATH value="$(BCB)\include;$(BCB)\include\vcl;$(BCB)\Components\Sources"/>
+    <LIBPATH value="$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib;$(BCB)\bin;$(BCB)\Components\Sources"/>
+    <WARNINGS value="-w-par -w-8027 -w-8026"/>
+    <WARNOPTSTR value=""/>
+  </MACROS>
+  <OPTIONS>
+    <IDLCFLAGS value="-src_suffix cpp -I$(BCB)\include -I$(BCB)\include\vcl 
+      -I$(BCB)\Components\Sources -boa"/>
+    <CFLAG1 value="-Od -H=c:\PROGRA~1\borland\CBUILD~2\lib\vcl50.csm -Hc -Vx -Ve -Tkh30000 
+      -X- -r- -a8 -b- -k -y -v -vi- -c -tW -tWM"/>
+    <PFLAGS value="-$YD -$W -$O- -v -M -JPHNE"/>
+    <RFLAGS value=""/>
+    <AFLAGS value="/mx /w2 /zd"/>
+    <LFLAGS value="-D&quot;&quot; -aa -Tpe -x -Gn -v"/>
+  </OPTIONS>
+  <LINKER>
+    <ALLOBJ value="c0w32.obj sysinit.obj $(OBJFILES)"/>
+    <ALLRES value="$(RESFILES)"/>
+    <ALLLIB value="$(LIBFILES) $(LIBRARIES) import32.lib cp32mt.lib"/>
+  </LINKER>
+  <IDEOPTIONS>
+[Version Info]
+IncludeVerInfo=0
+AutoIncBuild=0
+MajorVer=1
+MinorVer=0
+Release=0
+Build=0
+Debug=0
+PreRelease=0
+Special=0
+Private=0
+DLL=0
+Locale=1033
+CodePage=1252
+
+[Version Info Keys]
+CompanyName=
+FileDescription=
+FileVersion=1.0.0.0
+InternalName=
+LegalCopyright=
+LegalTrademarks=
+OriginalFilename=
+ProductName=
+ProductVersion=1.0.0.0
+Comments=
+
+[HistoryLists\hlIncludePath]
+Count=17
+Item0=$(BCB)\include;$(BCB)\include\vcl;$(BCB)\Components\Sources
+Item1=$(BCB)\include;$(BCB)\include\vcl;$(BCB)\Components\Sources;$(BCB)\Components\InTest;$(BCB)\Components\TB97;$(BCB)\Components\SyntaxMemo;C:\DELPHI\RX\Units;C:\RAIZE\ListPack16\LibBCB3;$(BCB)\Components\VisualStream;$(BCB)\Components\Internet
+Item2=$(BCB)\components\rexec;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\Components\VisualStream;$(BCB)\Components;$(BCB)\Components\Sources;C:\DELPHI\RX\Units;$(BCB)\Components\SyntaxMemo;$(BCB)\Components\Internet;\dream\UNITS;C:\RAIZE\ListPack16\LibBCB3;$(BCB)\Components\InTest
+Item3=$(BCB)\components\rexec;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\Components\VisualStream;$(BCB)\Components;$(BCB)\Components\Sources;..\..\..\..\..\DELPHI\RX\Units;$(BCB)\Components\SyntaxMemo;$(BCB)\Components\Internet;\dream\UNITS;C:\RAIZE\ListPack16\LibBCB3
+Item4=$(BCB)\components\rexec;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\Components\VisualStream;$(BCB)\Components;$(BCB)\Components\Sources;..\..\..\..\..\DELPHI\RX\Units;$(BCB)\Components\SyntaxMemo;$(BCB)\Components\Internet;\dream\UNITS;C:\RAIZE\LPACKBCB\LIB
+Item5=$(BCB)\components\rexec;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\Components\VisualStream;$(BCB)\Components;$(BCB)\Components\Sources;..\..\..\..\..\DELPHI\RX\Units;$(BCB)\Components\SyntaxMemo;$(BCB)\Components\Internet;\dream\UNITS
+Item6=$(BCB)\include;$(BCB)\include\vcl;$(BCB)\Components\VisualStream;$(BCB)\Components;$(BCB)\Components\Sources;..\..\..\..\..\DELPHI\RX\Units;$(BCB)\Components\SyntaxMemo;$(BCB)\Components\Internet;\dream\UNITS
+Item7=$(BCB)\include;$(BCB)\include\vcl;$(BCB)\Components\VisualStream;$(BCB)\Components;$(BCB)\Components\Sources;..\..\..\..\..\DELPHI\RX\Units;$(BCB)\Components\SyntaxMemo;$(BCB)\Components\Internet
+Item8=$(BCB)\include;$(BCB)\include\vcl;$(BCB)\Components\VisualStream;$(BCB)\Components;$(BCB)\Components\Sources;..\..\..\..\..\DELPHI\RX\Units;$(BCB)\Components\SyntaxMemo
+Item9=$(BCB)\include;$(BCB)\include\vcl;..\..\Components\VisualStream;..\..\Components;..\..\Components\Sources;..\..\..\..\..\DELPHI\RX\Units;..\..\Components\SyntaxMemo
+Item10=$(BCB)\include;$(BCB)\include\vcl;..\..\Components\VisualStream;..\..\Components;c:\program files\borland\cbuilder3\Components\Sources;C:\DELPHI\RX\Units;..\..\Components\SyntaxMemo
+Item11=$(BCB)\include;$(BCB)\include\vcl;..\..\Components\VisualStream;..\..\Components;c:\program files\borland\cbuilder3\Components\Sources;C:\DELPHI\RX\Units
+Item12=$(BCB)\include;$(BCB)\include\vcl;..\..\Components\VisualStream;..\..\Components;c:\program files\borland\cbuilder3\Components\Sources
+Item13=$(BCB)\include;$(BCB)\include\vcl;..\..\Components\VisualStream;..\..\Components;c:\program files\borland\cbuilder3\Components\Source
+Item14=$(BCB)\include;$(BCB)\include\vcl;c:\program files\borland\cbuilder3\Components\Source;C:\Program Files\Borland\CBuilder3\Components\VisualStream;c:\program files\borland\cbuilder3\Components
+Item15=$(BCB)\include;$(BCB)\include\vcl;c:\program files\borland\cbuilder3\Components\Source;C:\Program Files\Borland\CBuilder3\Components\VisualStream
+Item16=$(BCB)\include;$(BCB)\include\vcl;c:\program files\borland\cbuilder3\Components\Source
+
+[HistoryLists\hlLibraryPath]
+Count=17
+Item0=$(BCB)\lib\obj;$(BCB)\lib;$(BCB)\bin;$(BCB)\Components\Sources
+Item1=$(BCB)\lib\obj;$(BCB)\lib;$(BCB)\bin;$(BCB)\Components\Sources;$(BCB)\Components\InTest;$(BCB)\Components\TB97;$(BCB)\Components\SyntaxMemo;C:\DELPHI\RX\Units;C:\RAIZE\ListPack16\LibBCB3;$(BCB)\Components\VisualStream;$(BCB)\Components\Internet
+Item2=..\..\..\..\raize\listpa~1\libbcb3;$(BCB)\components\rexec;..\..\..\..\..\raize\listpa~1\libbcb3;$(BCB)\lib\obj;$(BCB)\lib;$(BCB)\Components;$(BCB)\Components\Sources;$(BCB)\Bin;$(BCB)\Components\VisualStream;$(BCB)\Components\SyntaxMemo;$(BCB)\Components\Internet;\dream\UNITS;C:\RAIZE\ListPack16\LibBCB3;$(BCB)\Components\InTest
+Item3=..\..\..\..\raize\listpa~1\libbcb3;$(BCB)\components\rexec;..\..\..\..\..\raize\listpa~1\libbcb3;$(BCB)\lib\obj;$(BCB)\lib;$(BCB)\Components\VisualStream;$(BCB)\Components;$(BCB)\Components\Sources;$(BCB)\Bin;$(BCB)\Components\SyntaxMemo;$(BCB)\Components\Internet;\dream\UNITS;C:\RAIZE\ListPack16\LibBCB3
+Item4=..\..\..\..\raize\listpa~1\libbcb3;$(BCB)\components\rexec;..\..\..\..\..\raize\listpa~1\libbcb3;$(BCB)\lib\obj;$(BCB)\lib;$(BCB)\Components\VisualStream;$(BCB)\Components;$(BCB)\Components\Sources;$(BCB)\Bin;$(BCB)\Components\SyntaxMemo;$(BCB)\Components\Internet;\dream\UNITS;C:\RAIZE\LPACKBCB\LIB
+Item5=..\..\..\..\raize\listpa~1\libbcb3;$(BCB)\components\rexec;..\..\..\..\..\raize\listpa~1\libbcb3;$(BCB)\lib\obj;$(BCB)\lib;$(BCB)\Components\VisualStream;$(BCB)\Components;$(BCB)\Components\Sources;$(BCB)\Bin;$(BCB)\Components\SyntaxMemo;$(BCB)\Components\Internet;\dream\UNITS
+Item6=..\..\..\..\..\raize\listpa~1\libbcb3;$(BCB)\lib\obj;$(BCB)\lib;$(BCB)\Components\VisualStream;$(BCB)\Components;$(BCB)\Components\Sources;$(BCB)\Bin;$(BCB)\Components\SyntaxMemo;$(BCB)\Components\Internet;\dream\UNITS
+Item7=..\..\..\..\..\raize\listpa~1\libbcb3;$(BCB)\lib\obj;$(BCB)\lib;$(BCB)\Components\VisualStream;$(BCB)\Components;$(BCB)\Components\Sources;$(BCB)\Bin;$(BCB)\Components\SyntaxMemo;$(BCB)\Components\Internet
+Item8=..\..\..\..\..\raize\listpa~1\libbcb3;$(BCB)\lib\obj;$(BCB)\lib;$(BCB)\Components\VisualStream;$(BCB)\Components;$(BCB)\Components\Sources;$(BCB)\Bin;$(BCB)\Components\SyntaxMemo
+Item9=..\..\..\..\..\raize\listpa~1\libbcb3;$(BCB)\lib\obj;$(BCB)\lib;..\..\Components\VisualStream;..\..\Components;..\..\Components\Sources;..\..\Bin;..\..\Components\SyntaxMemo
+Item10=..\..\..\..\raize\listpa~1\libbcb3;..\components\syntaxmemo;$(BCB)\lib\obj;$(BCB)\lib;..\..\Components\VisualStream;..\..\Components;c:\Program files\borland\cbuilder3\Components\Sources;c:\Program files\borland\cbuilder3\Bin;..\..\Components\SyntaxMemo
+Item11=$(BCB)\lib\obj;$(BCB)\lib;..\..\Components\VisualStream;..\..\Components;c:\Program files\borland\cbuilder3\Components\Sources;c:\Program files\borland\cbuilder3\Bin
+Item12=$(BCB)\lib\obj;$(BCB)\lib;..\..\Components\VisualStream;..\..\Components;c:\Program files\borland\cbuilder3\Components\Sources
+Item13=$(BCB)\lib\obj;$(BCB)\lib;..\..\Components\VisualStream;..\..\Components;c:\program files\borland\cbuilder3\Components\Source
+Item14=..\components;..\components\visualstream;$(BCB)\lib\obj;$(BCB)\lib;c:\program files\borland\cbuilder3\Components\Source;C:\Program Files\Borland\CBuilder3\Components\VisualStream;c:\program files\borland\cbuilder3\Components
+Item15=$(BCB)\lib\obj;$(BCB)\lib;c:\program files\borland\cbuilder3\Components\Source;C:\Program Files\Borland\CBuilder3\Components\VisualStream
+Item16=$(BCB)\lib\obj;$(BCB)\lib;c:\program files\borland\cbuilder3\Components\Source
+
+[HistoryLists\hlDebugSourcePath]
+Count=9
+Item0=$(BCB)\source\vcl;$(BCB)\Components\Sources
+Item1=$(BCB)\source\vcl;$(BCB)\Components\Sources;$(BCB)\Components\InTest;$(BCB)\Components\TB97;$(BCB)\Components\SyntaxMemo;C:\DELPHI\RX\Units;C:\RAIZE\ListPack16\LibBCB3;$(BCB)\Components\VisualStream;$(BCB)\Components\Internet
+Item2=$(BCB)\source\vcl;c:\program files\borland\cbuilder3\Components\Source;C:\Program Files\Borland\CBuilder3\Components\VisualStream;c:\program files\borland\cbuilder3\Components;..\..\Components\SyntaxMemo;$(BCB)\Components\Internet;\dream\UNITS
+Item3=$(BCB)\source\vcl;c:\program files\borland\cbuilder3\Components\Source;C:\Program Files\Borland\CBuilder3\Components\VisualStream;c:\program files\borland\cbuilder3\Components;..\..\Components\SyntaxMemo;$(BCB)\Components\Internet
+Item4=$(BCB)\source\vcl;c:\program files\borland\cbuilder3\Components\Source;C:\Program Files\Borland\CBuilder3\Components\VisualStream;c:\program files\borland\cbuilder3\Components;..\..\Components\SyntaxMemo
+Item5=$(BCB)\source\vcl;c:\program files\borland\cbuilder3\Components\Source;C:\Program Files\Borland\CBuilder3\Components\VisualStream;c:\program files\borland\cbuilder3\Components
+Item6=$(BCB)\source\vcl;c:\program files\borland\cbuilder3\Components\Source;C:\Program Files\Borland\CBuilder3\Components\VisualStream;c:\program files\borland\cbuilder3\Components;c:\program files\borland\cbuilder3\Components\Source
+Item7=$(BCB)\source\vcl;c:\program files\borland\cbuilder3\Components\Source;C:\Program Files\Borland\CBuilder3\Components\VisualStream
+Item8=$(BCB)\source\vcl;c:\program files\borland\cbuilder3\Components\Source
+
+[HistoryLists\hlConditionals]
+Count=1
+Item0=_RTLDLL;USEPACKAGES
+
+[Debugging]
+DebugSourceDirs=$(BCB)\source\vcl;$(BCB)\Components\Sources
+
+[Parameters]
+RunParams=
+HostApplication=
+RemoteHost=
+RemotePath=
+RemoteDebug=0
+
+[Compiler]
+ShowInfoMsgs=0
+LinkDebugVcl=1
+LinkCGLIB=0
+
+[CORBA]
+AddServerUnit=1
+AddClientUnit=1
+PrecompiledHeaders=1
+  </IDEOPTIONS>
+</PROJECT>

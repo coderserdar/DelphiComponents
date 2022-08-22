@@ -1,0 +1,217 @@
+# ---------------------------------------------------------------------------
+!if !$d(BCB)
+BCB = $(MAKEDIR)\..
+!endif
+
+# ---------------------------------------------------------------------------
+# IDE SECTION
+# ---------------------------------------------------------------------------
+# The following section of the project makefile is managed by the BCB IDE.
+# It is recommended to use the IDE to change any of the values in this
+# section.
+# ---------------------------------------------------------------------------
+
+VERSION = BCB.04.04
+# ---------------------------------------------------------------------------
+PROJECT = DemoProject.exe
+OBJFILES = DemoProject.obj DemoUnit.obj
+RESFILES = DemoProject.res
+DEFFILE =
+RESDEPEN = $(RESFILES) DemoUnit.dfm
+LIBFILES =
+LIBRARIES = VCLX40.lib BM_SHAPED.lib Vcl40.lib
+SPARELIBS = Vcl40.lib BM_SHAPED.lib VCLX40.lib
+PACKAGES = Vcl40.bpi Vclx40.bpi bcbsmp40.bpi Qrpt40.bpi Vcldb40.bpi ibsmp40.bpi \
+  vcldbx40.bpi TeeUI40.bpi teedb40.bpi tee40.bpi nmfast40.bpi dclocx40.bpi \
+  BM_SHAPED.bpi BM_PACK.bpi BM_THREAD.bpi BM_VIEW_UPDATE.bpi VisualStream.bpi \
+  syn300.bpi
+# ---------------------------------------------------------------------------
+PATHCPP = .;
+PATHASM = .;
+PATHPAS = .;
+PATHRC = .;
+DEBUGLIBPATH = $(BCB)\lib\debug
+RELEASELIBPATH = $(BCB)\lib\release
+SYSDEFINES = NO_STRICT
+USERDEFINES =
+# ---------------------------------------------------------------------------
+CFLAG1 = -I$(BCB)\include;$(BCB)\include\vcl;$(BCB)\Components\Sources -Od -Hc \
+  -H=$(BCB)\lib\vcl40.csm -w -Ve -Tkh30000 -r- -a8 -k -y -v -vi- \
+  -D$(SYSDEFINES);$(USERDEFINES) -c -b- -w-par -w-inl -Vx -tW -tWM
+CFLAG2 =
+CFLAG3 =
+PFLAGS = -U$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib;$(BCB)\bin;$(BCB)\Components\Sources;$(DEBUGLIBPATH) \
+  -I$(BCB)\include;$(BCB)\include\vcl;$(BCB)\Components\Sources -$YD -$W -$O- -v \
+  -M -JPHNE
+RFLAGS = -i$(BCB)\include;$(BCB)\include\vcl;$(BCB)\Components\Sources
+AFLAGS = /i$(BCB)\include /i$(BCB)\include\vcl /i$(BCB)\Components\Sources /mx /w2 /zd \
+  /d_RTLDLL /dUSEPACKAGES
+LFLAGS = -L$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib;$(BCB)\bin;$(BCB)\Components\Sources;$(DEBUGLIBPATH) \
+  -aa -Tpe -x -Gn -v
+IFLAGS =
+# ---------------------------------------------------------------------------
+ALLOBJ = c0w32.obj sysinit.obj $(OBJFILES)
+ALLRES = $(RESFILES)
+ALLLIB = vcl40.lib $(LIBFILES) $(LIBRARIES) import32.lib cp32mt.lib
+# ---------------------------------------------------------------------------
+!ifdef IDEOPTIONS
+
+[Version Info]
+IncludeVerInfo=0
+AutoIncBuild=0
+MajorVer=1
+MinorVer=0
+Release=0
+Build=0
+Debug=0
+PreRelease=0
+Special=0
+Private=0
+DLL=0
+Locale=1033
+CodePage=1252
+
+[Version Info Keys]
+CompanyName=
+FileDescription=
+FileVersion=1.0.0.0
+InternalName=
+LegalCopyright=
+LegalTrademarks=
+OriginalFilename=
+ProductName=
+ProductVersion=1.0.0.0
+Comments=
+
+[HistoryLists\hlIncludePath]
+Count=9
+Item0=$(BCB)\include;$(BCB)\include\vcl;$(BCB)\Components\Sources
+Item1=$(BCB)\include;$(BCB)\include\vcl;$(BCB)\Components\Sources;$(BCB)\Components\InTest;$(BCB)\Components\TB97;$(BCB)\Components\SyntaxMemo;C:\DELPHI\RX\Units;C:\RAIZE\ListPack16\LibBCB3;$(BCB)\Components\VisualStream;$(BCB)\Components\Internet;C:\ZIP\BCB\VCL;$(BCB)\Components\TreeView\Sources;$(BCB)\RALib\Lib
+Item2=$(BCB)\include;$(BCB)\include\vcl;$(BCB)\Components\Sources;$(BCB)\Components\InTest;$(BCB)\Components\TB97;$(BCB)\Components\SyntaxMemo;C:\DELPHI\RX\Units;C:\RAIZE\ListPack16\LibBCB3;$(BCB)\Components\VisualStream;$(BCB)\Components\Internet;C:\ZIP\BCB\VCL;$(BCB)\Components\TreeView\Sources
+Item3=$(BCB)\include;$(BCB)\include\vcl;$(BCB)\Components\Sources;$(BCB)\Components\InTest;$(BCB)\Components\TB97;$(BCB)\Components\SyntaxMemo;C:\DELPHI\RX\Units;C:\RAIZE\ListPack16\LibBCB3;$(BCB)\Components\VisualStream;$(BCB)\Components\Internet;C:\ZIP\BCB\VCL
+Item4=$(BCB)\include;$(BCB)\include\vcl;$(BCB)\Components\Sources;$(BCB)\Components\InTest;$(BCB)\Components\TB97;$(BCB)\Components\SyntaxMemo;C:\DELPHI\RX\Units;C:\RAIZE\ListPack16\LibBCB3;$(BCB)\Components\VisualStream;$(BCB)\Components\Internet
+Item5=$(BCB)\include;$(BCB)\include\vcl;$(BCB)\Components\Sources;$(BCB)\Components\InTest;$(BCB)\Components\TB97;$(BCB)\Components\SyntaxMemo;C:\DELPHI\RX\Units;C:\RAIZE\ListPack16\LibBCB3;$(BCB)\Components\VisualStream
+Item6=$(BCB)\include;$(BCB)\include\vcl;$(BCB)\Components\Sources;$(BCB)\Components\InTest;$(BCB)\Components\TB97;$(BCB)\Components\SyntaxMemo;C:\DELPHI\RX\Units;C:\RAIZE\ListPack16\LibBCB3
+Item7=$(BCB)\include;$(BCB)\include\vcl;$(BCB)\Components\Sources;$(BCB)\Components\InTest;$(BCB)\Components\TB97;$(BCB)\Components\SyntaxMemo;C:\DELPHI\RX\Units
+Item8=$(BCB)\include;$(BCB)\include\vcl;$(BCB)\Components\Sources;$(BCB)\Components\InTest;$(BCB)\Components\TB97;$(BCB)\Components\SyntaxMemo
+
+[HistoryLists\hlLibraryPath]
+Count=10
+Item0=$(BCB)\lib\obj;$(BCB)\lib;$(BCB)\bin;$(BCB)\Components\Sources
+Item1=$(BCB)\lib\obj;$(BCB)\lib;$(BCB)\bin;$(BCB)\Components\Sources;$(BCB)\Components\InTest;$(BCB)\Components\TB97;$(BCB)\Components\SyntaxMemo;C:\DELPHI\RX\Units;C:\RAIZE\ListPack16\LibBCB3;$(BCB)\Components\VisualStream;$(BCB)\Components\Internet;C:\ZIP\BCB\VCL;$(BCB)\Components\TreeView\Sources;$(BCB)\RALib\Lib
+Item2=$(BCB)\lib\obj;$(BCB)\lib;$(BCB)\bin;$(BCB)\Components\Sources;$(BCB)\Components\InTest;$(BCB)\Components\TB97;$(BCB)\Components\SyntaxMemo;C:\DELPHI\RX\Units;C:\RAIZE\ListPack16\LibBCB3;$(BCB)\Components\VisualStream;$(BCB)\Components\Internet;C:\ZIP\BCB\VCL;$(BCB)\Components\TreeView\Sources
+Item3=$(BCB)\lib\obj;$(BCB)\lib;$(BCB)\bin;$(BCB)\Components\Sources;$(BCB)\Components\InTest;$(BCB)\Components\TB97;$(BCB)\Components\SyntaxMemo;C:\DELPHI\RX\Units;C:\RAIZE\ListPack16\LibBCB3;$(BCB)\Components\VisualStream;$(BCB)\Components\Internet;C:\ZIP\BCB\VCL
+Item4=$(BCB)\lib\obj;$(BCB)\lib;$(BCB)\bin;$(BCB)\Components\Sources;$(BCB)\Components\InTest;$(BCB)\Components\TB97;$(BCB)\Components\SyntaxMemo;C:\DELPHI\RX\Units;C:\RAIZE\ListPack16\LibBCB3;$(BCB)\Components\VisualStream;$(BCB)\Components\Internet
+Item5=$(BCB)\lib\obj;$(BCB)\lib;$(BCB)\bin;$(BCB)\Components\Sources;$(BCB)\Components\InTest;$(BCB)\Components\TB97;$(BCB)\Components\SyntaxMemo;C:\DELPHI\RX\Units;C:\RAIZE\ListPack16\LibBCB3;$(BCB)\Components\VisualStream
+Item6=$(BCB)\lib\obj;$(BCB)\lib;$(BCB)\bin;$(BCB)\Components\Sources;$(BCB)\Components\InTest;$(BCB)\Components\TB97;$(BCB)\Components\SyntaxMemo;C:\DELPHI\RX\Units;C:\RAIZE\ListPack16\LibBCB3
+Item7=$(BCB)\lib\obj;$(BCB)\lib;$(BCB)\bin;$(BCB)\Components\Sources;$(BCB)\Components\InTest;$(BCB)\Components\TB97;$(BCB)\Components\SyntaxMemo;C:\DELPHI\RX\Units
+Item8=$(BCB)\lib\obj;$(BCB)\lib;$(BCB)\Components\Sources;$(BCB)\Components\InTest;$(BCB)\Components\TB97;$(BCB)\Components\SyntaxMemo
+Item9=$(BCB)\lib\obj;$(BCB)\lib
+
+[HistoryLists\hlDebugSourcePath]
+Count=10
+Item0=$(BCB)\source\vcl;$(BCB)\Components\Sources
+Item1=$(BCB)\source\vcl;$(BCB)\Components\Sources;$(BCB)\Components\InTest;$(BCB)\Components\TB97;$(BCB)\Components\SyntaxMemo;C:\DELPHI\RX\Units;C:\RAIZE\ListPack16\LibBCB3;$(BCB)\Components\VisualStream;$(BCB)\Components\Internet;C:\ZIP\BCB\VCL;$(BCB)\Components\TreeView\Sources;$(BCB)\RALib\Lib
+Item2=$(BCB)\source\vcl;$(BCB)\Components\Sources;$(BCB)\Components\InTest;$(BCB)\Components\TB97;$(BCB)\Components\SyntaxMemo;C:\DELPHI\RX\Units;C:\RAIZE\ListPack16\LibBCB3;$(BCB)\Components\VisualStream;$(BCB)\Components\Internet;C:\ZIP\BCB\VCL;$(BCB)\Components\TreeView\Sources
+Item3=$(BCB)\source\vcl;$(BCB)\Components\Sources;$(BCB)\Components\InTest;$(BCB)\Components\TB97;$(BCB)\Components\SyntaxMemo;C:\DELPHI\RX\Units;C:\RAIZE\ListPack16\LibBCB3;$(BCB)\Components\VisualStream;$(BCB)\Components\Internet;C:\ZIP\BCB\VCL
+Item4=$(BCB)\source\vcl;$(BCB)\Components\Sources;$(BCB)\Components\InTest;$(BCB)\Components\TB97;$(BCB)\Components\SyntaxMemo;C:\DELPHI\RX\Units;C:\RAIZE\ListPack16\LibBCB3;$(BCB)\Components\VisualStream;$(BCB)\Components\Internet
+Item5=$(BCB)\source\vcl;$(BCB)\Components\Sources;$(BCB)\Components\InTest;$(BCB)\Components\TB97;$(BCB)\Components\SyntaxMemo;C:\DELPHI\RX\Units;C:\RAIZE\ListPack16\LibBCB3;$(BCB)\Components\VisualStream
+Item6=$(BCB)\source\vcl;$(BCB)\Components\Sources;$(BCB)\Components\InTest;$(BCB)\Components\TB97;$(BCB)\Components\SyntaxMemo;C:\DELPHI\RX\Units;C:\RAIZE\ListPack16\LibBCB3
+Item7=$(BCB)\source\vcl;$(BCB)\Components\Sources;$(BCB)\Components\InTest;$(BCB)\Components\TB97;$(BCB)\Components\SyntaxMemo;C:\DELPHI\RX\Units
+Item8=$(BCB)\source\vcl;$(BCB)\Components\Sources;$(BCB)\Components\InTest;$(BCB)\Components\TB97;$(BCB)\Components\SyntaxMemo
+Item9=$(BCB)\source\vcl
+
+[HistoryLists\hlConditionals]
+Count=1
+Item0=_RTLDLL;USEPACKAGES
+
+[Debugging]
+DebugSourceDirs=$(BCB)\source\vcl;$(BCB)\Components\Sources
+
+[Parameters]
+RunParams=
+HostApplication=
+RemoteHost=
+RemotePath=
+RemoteDebug=0
+
+[Compiler]
+InMemoryExe=0
+ShowInfoMsgs=0
+
+!endif
+
+# ---------------------------------------------------------------------------
+# MAKE SECTION
+# ---------------------------------------------------------------------------
+# This section of the project file is not used by the BCB IDE.  It is for
+# the benefit of building from the command-line using the MAKE utility.
+# ---------------------------------------------------------------------------
+
+.autodepend
+# ---------------------------------------------------------------------------
+!if !$d(BCC32)
+BCC32 = bcc32
+!endif
+
+!if !$d(DCC32)
+DCC32 = dcc32
+!endif
+
+!if !$d(TASM32)
+TASM32 = tasm32
+!endif
+
+!if !$d(LINKER)
+LINKER = ilink32
+!endif
+
+!if !$d(BRCC32)
+BRCC32 = brcc32
+!endif
+# ---------------------------------------------------------------------------
+!if $d(PATHCPP)
+.PATH.CPP = $(PATHCPP)
+.PATH.C   = $(PATHCPP)
+!endif
+
+!if $d(PATHPAS)
+.PATH.PAS = $(PATHPAS)
+!endif
+
+!if $d(PATHASM)
+.PATH.ASM = $(PATHASM)
+!endif
+
+!if $d(PATHRC)
+.PATH.RC  = $(PATHRC)
+!endif
+# ---------------------------------------------------------------------------
+$(PROJECT): $(OBJFILES) $(RESDEPEN) $(DEFFILE)
+    $(BCB)\BIN\$(LINKER) @&&!
+    $(LFLAGS) +
+    $(ALLOBJ), +
+    $(PROJECT),, +
+    $(ALLLIB), +
+    $(DEFFILE), +
+    $(ALLRES)
+!
+# ---------------------------------------------------------------------------
+.pas.hpp:
+    $(BCB)\BIN\$(DCC32) $(PFLAGS) {$< }
+
+.pas.obj:
+    $(BCB)\BIN\$(DCC32) $(PFLAGS) {$< }
+
+.cpp.obj:
+    $(BCB)\BIN\$(BCC32) $(CFLAG1) $(CFLAG2) $(CFLAG3) -n$(@D) {$< }
+
+.c.obj:
+    $(BCB)\BIN\$(BCC32) $(CFLAG1) $(CFLAG2) $(CFLAG3) -n$(@D) {$< }
+
+.asm.obj:
+    $(BCB)\BIN\$(TASM32) $(AFLAGS) $<, $@
+
+.rc.res:
+    $(BCB)\BIN\$(BRCC32) $(RFLAGS) -fo$@ $<
+# ---------------------------------------------------------------------------

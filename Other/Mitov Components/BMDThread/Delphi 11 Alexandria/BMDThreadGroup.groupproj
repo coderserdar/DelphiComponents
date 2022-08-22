@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{CD120BB8-9E08-467D-B7FC-5527592F9D01}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="BMDThreadPkg.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="BMDThreadDsn.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="BMDThreadPkg">
+        <MSBuild Projects="BMDThreadPkg.dproj"/>
+    </Target>
+    <Target Name="BMDThreadPkg:Clean">
+        <MSBuild Projects="BMDThreadPkg.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="BMDThreadPkg:Make">
+        <MSBuild Projects="BMDThreadPkg.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="BMDThreadDsn">
+        <MSBuild Projects="BMDThreadDsn.dproj"/>
+    </Target>
+    <Target Name="BMDThreadDsn:Clean">
+        <MSBuild Projects="BMDThreadDsn.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="BMDThreadDsn:Make">
+        <MSBuild Projects="BMDThreadDsn.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="BMDThreadPkg;BMDThreadDsn"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="BMDThreadPkg:Clean;BMDThreadDsn:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="BMDThreadPkg:Make;BMDThreadDsn:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

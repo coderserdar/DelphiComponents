@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!-- C++Builder XML Project -->
+<PROJECT>
+  <MACROS>
+    <VERSION value="BCB.05.03"/>
+    <PROJECT value="BMSplitterProject.exe"/>
+    <OBJFILES value="BMSplitterProject.obj BMSplitterUnit.obj"/>
+    <RESFILES value="BMSplitterProject.res"/>
+    <IDLFILES value=""/>
+    <IDLGENFILES value=""/>
+    <DEFFILE value=""/>
+    <RESDEPEN value="$(RESFILES) BMSplitterUnit.dfm"/>
+    <LIBFILES value=""/>
+    <LIBRARIES value="VCLX50.lib BM_PACK.lib vcl50.lib"/>
+    <SPARELIBS value="vcl50.lib BM_PACK.lib VCLX50.lib"/>
+    <PACKAGES value="vcl50.bpi vclx50.bpi vcljpg50.bpi BM_PACK.bpi BM_SHAPED.bpi 
+      BM_VIEW_UPDATE.bpi BM_THREAD.bpi Off.bpi VisualStream.bpi ZipPack.bpi"/>
+    <PATHCPP value=".;"/>
+    <PATHPAS value=".;"/>
+    <PATHRC value=".;"/>
+    <PATHASM value=".;"/>
+    <DEBUGLIBPATH value="$(BCB)\lib\debug"/>
+    <RELEASELIBPATH value="$(BCB)\lib\release"/>
+    <LINKER value="ilink32"/>
+    <USERDEFINES value=""/>
+    <SYSDEFINES value="NO_STRICT"/>
+    <MAINSOURCE value="BMSplitterProject.cpp"/>
+    <INCLUDEPATH value="$(BCB)\include;$(BCB)\include\vcl;$(BCB)\Components\Sources;$(BCB)\Components\TB97\Source;$(BCB)\Components\SyntaxMemo;$(BCB)\Components\VisualStream"/>
+    <LIBPATH value="$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib;$(BCB)\Components\Sources;$(BCB)\Components\TB97\Source;$(BCB)\Components\SyntaxMemo;$(BCB)\Components\VisualStream"/>
+    <WARNINGS value="-w-par -w-8027 -w-8026"/>
+    <WARNOPTSTR value=""/>
+  </MACROS>
+  <OPTIONS>
+    <IDLCFLAGS value="-src_suffix cpp -I$(BCB)\include -I$(BCB)\include\vcl 
+      -I$(BCB)\Components\Sources -I$(BCB)\Components\TB97\Source 
+      -I$(BCB)\Components\SyntaxMemo -I$(BCB)\Components\VisualStream -boa"/>
+    <CFLAG1 value="-Od -H=c:\PROGRA~1\borland\CBUILD~2\lib\vcl50.csm -Hc -Vx -Ve -X- -r- -a8 
+      -b- -k -y -v -vi- -c -tW -tWM"/>
+    <PFLAGS value="-$YD -$W -$O- -v -JPHNE -M"/>
+    <RFLAGS value=""/>
+    <AFLAGS value="/mx /w2 /zd"/>
+    <LFLAGS value="-D&quot;&quot; -aa -Tpe -x -Gn -v"/>
+  </OPTIONS>
+  <LINKER>
+    <ALLOBJ value="c0w32.obj sysinit.obj $(OBJFILES)"/>
+    <ALLRES value="$(RESFILES)"/>
+    <ALLLIB value="$(LIBFILES) $(LIBRARIES) import32.lib cp32mt.lib"/>
+  </LINKER>
+  <IDEOPTIONS>
+[Version Info]
+IncludeVerInfo=0
+AutoIncBuild=0
+MajorVer=1
+MinorVer=0
+Release=0
+Build=0
+Debug=0
+PreRelease=0
+Special=0
+Private=0
+DLL=0
+Locale=1033
+CodePage=1252
+
+[Version Info Keys]
+CompanyName=
+FileDescription=
+FileVersion=1.0.0.0
+InternalName=
+LegalCopyright=
+LegalTrademarks=
+OriginalFilename=
+ProductName=
+ProductVersion=1.0.0.0
+Comments=
+
+[HistoryLists\hlIncludePath]
+Count=3
+Item0=$(BCB)\include;$(BCB)\include\vcl;$(BCB)\Components\Sources;$(BCB)\Components\TB97\Source;$(BCB)\Components\SyntaxMemo;$(BCB)\Components\VisualStream
+Item1=$(BCB)\include;$(BCB)\include\vcl;$(BCB)\Components\Sources;$(BCB)\Components\TB97\Source;$(BCB)\Components\SyntaxMemo
+Item2=$(BCB)\include;$(BCB)\include\vcl;$(BCB)\Components\Sources;$(BCB)\Components\TB97\Source
+
+[HistoryLists\hlLibraryPath]
+Count=3
+Item0=$(BCB)\lib\obj;$(BCB)\lib;$(BCB)\Components\Sources;$(BCB)\Components\TB97\Source;$(BCB)\Components\SyntaxMemo;$(BCB)\Components\VisualStream
+Item1=$(BCB)\lib\obj;$(BCB)\lib;$(BCB)\Components\Sources;$(BCB)\Components\TB97\Source;$(BCB)\Components\SyntaxMemo
+Item2=$(BCB)\lib\obj;$(BCB)\lib;$(BCB)\Components\Sources;$(BCB)\Components\TB97\Source
+
+[HistoryLists\hlDebugSourcePath]
+Count=3
+Item0=$(BCB)\source\vcl;$(BCB)\Components\Sources;$(BCB)\Components\TB97\Source;$(BCB)\Components\SyntaxMemo;$(BCB)\Components\VisualStream
+Item1=$(BCB)\source\vcl;$(BCB)\Components\Sources;$(BCB)\Components\TB97\Source;$(BCB)\Components\SyntaxMemo
+Item2=$(BCB)\source\vcl;$(BCB)\Components\Sources;$(BCB)\Components\TB97\Source
+
+[Debugging]
+DebugSourceDirs=$(BCB)\source\vcl;$(BCB)\Components\Sources;$(BCB)\Components\TB97\Source;$(BCB)\Components\SyntaxMemo;$(BCB)\Components\VisualStream
+
+[Parameters]
+RunParams=
+HostApplication=
+RemoteHost=
+RemotePath=
+RemoteDebug=0
+
+[Compiler]
+ShowInfoMsgs=0
+LinkDebugVcl=1
+LinkCGLIB=0
+
+[CORBA]
+AddServerUnit=1
+AddClientUnit=1
+PrecompiledHeaders=1
+  </IDEOPTIONS>
+</PROJECT>

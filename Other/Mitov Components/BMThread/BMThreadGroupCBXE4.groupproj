@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{B597B587-F344-4529-A7D7-AC777A770EDA}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="BMThreadPkgCBXE4.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="BMThreadDsnCBXE4.cbproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="BMThreadPkgCBXE4">
+        <MSBuild Projects="BMThreadPkgCBXE4.cbproj"/>
+    </Target>
+    <Target Name="BMThreadPkgCBXE4:Clean">
+        <MSBuild Projects="BMThreadPkgCBXE4.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="BMThreadPkgCBXE4:Make">
+        <MSBuild Projects="BMThreadPkgCBXE4.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="BMThreadDsnCBXE4">
+        <MSBuild Projects="BMThreadDsnCBXE4.cbproj"/>
+    </Target>
+    <Target Name="BMThreadDsnCBXE4:Clean">
+        <MSBuild Projects="BMThreadDsnCBXE4.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="BMThreadDsnCBXE4:Make">
+        <MSBuild Projects="BMThreadDsnCBXE4.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="BMThreadPkgCBXE4;BMThreadDsnCBXE4"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="BMThreadPkgCBXE4:Clean;BMThreadDsnCBXE4:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="BMThreadPkgCBXE4:Make;BMThreadDsnCBXE4:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
