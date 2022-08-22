@@ -1,0 +1,65 @@
+package PathPlanning;
+//=== File Prolog ============================================================
+//	This code was developed by RiverSoftAVG.
+//
+//--- Notes ------------------------------------------------------------------
+//
+//--- Development History  ---------------------------------------------------
+//
+//      10/19/2000 T. Grubb
+//		   Initial version.
+//
+//      File Contents:
+//           Package unit for Path Planning components
+//
+//
+//--- Warning ----------------------------------------------------------------
+//	This software is property of RiverSoftAVG. Unauthorized use or
+//      duplication of this software is strictly prohibited. Authorized users
+//      are subject to the following restrictions:
+//	*	RiverSoftAVG is not responsible for
+//		any consequence of the use of this software.
+//	*	The origin of this software must not be misrepresented either by
+//		explicit claim or by omission.
+//	*	Altered versions of this software must be plainly marked as such.
+//	*	This notice may not be removed or altered.
+//
+//      This software is freeware.  You are authorized to duplicate and modify
+//      this software subject to the restrictions above.
+//
+//=== End File Prolog ========================================================
+
+{$R *.RES}
+{$R 'PathPlannerReg.dcr'}
+{$ALIGN ON}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS ON}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'RiversoftAVG Path Planning'}
+{$IMPLICITBUILD ON}
+
+requires
+  vcl50;
+
+contains
+  PathPlanner in 'PathPlanner.pas',
+  PathPlannerReg in 'PathPlannerReg.pas';
+
+end.
