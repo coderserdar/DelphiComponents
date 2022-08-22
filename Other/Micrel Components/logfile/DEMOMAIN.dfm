@@ -1,0 +1,59 @@
+object frmDemoTLogFile: TfrmDemoTLogFile
+  Left = 265
+  Top = 200
+  BorderStyle = bsDialog
+  Caption = 'Demo for TLogFile'
+  ClientHeight = 52
+  ClientWidth = 300
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -13
+  Font.Name = 'System'
+  Font.Style = []
+  OldCreateOrder = True
+  Position = poScreenCenter
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 16
+  object Bevel1: TBevel
+    Left = 4
+    Top = 4
+    Width = 289
+    Height = 41
+  end
+  object spdWriteToLogFile: TSpeedButton
+    Left = 260
+    Top = 12
+    Width = 25
+    Height = 25
+    Glyph.Data = {
+      66010000424D6601000000000000760000002800000014000000140000000100
+      040000000000F000000000000000000000001000000000000000000000000000
+      80000080000000808000800000008000800080800000C0C0C000808080000000
+      FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00800000000000
+      000007770000777777777777777770770000FFFFFFFFFFFFFFF7707700007777
+      77007777777770770000FFFFFFF308FFFFF77077000077777777388000777077
+      0000FFFFFFFFF8FB73307077000077777777773BB73300770000FFFFFFFFFFF8
+      FB70007700007777777777773B0000070000FFFFFFFFFFFFFFB04C4400007777
+      777777777700CCCC0000FFFFFFFFFFFFFFF4BCCC00007777777777777770CCCC
+      0000FFFFFFFFFFFFFFF74CBC00007777777777777777700C0000FFFFFFFFFFFF
+      FFF770740000F0F0F0F0F0F0F0F8707700008F8F8F8F8F8F8F8F077700007070
+      70707070707077770000}
+    OnClick = spdWriteToLogFileClick
+  end
+  object edtLogInfo: TEdit
+    Left = 12
+    Top = 13
+    Width = 245
+    Height = 24
+    TabOrder = 0
+  end
+  object LogFile1: TLogFile
+    LogFile = 'Demo.log'
+    LogName = 'Current User'
+    Enabled = False
+    Left = 200
+    Top = 12
+  end
+end

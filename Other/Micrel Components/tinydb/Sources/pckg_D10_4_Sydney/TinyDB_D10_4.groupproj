@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{8B6D3468-8E20-48C4-9E77-7ACAC85EEB29}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="rtmTinyDB270.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="dclTinyDB270.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="rtmTinyDB270">
+        <MSBuild Projects="rtmTinyDB270.dproj"/>
+    </Target>
+    <Target Name="rtmTinyDB270:Clean">
+        <MSBuild Projects="rtmTinyDB270.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="rtmTinyDB270:Make">
+        <MSBuild Projects="rtmTinyDB270.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="dclTinyDB270">
+        <MSBuild Projects="dclTinyDB270.dproj"/>
+    </Target>
+    <Target Name="dclTinyDB270:Clean">
+        <MSBuild Projects="dclTinyDB270.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dclTinyDB270:Make">
+        <MSBuild Projects="dclTinyDB270.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="rtmTinyDB270;dclTinyDB270"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="rtmTinyDB270:Clean;dclTinyDB270:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="rtmTinyDB270:Make;dclTinyDB270:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

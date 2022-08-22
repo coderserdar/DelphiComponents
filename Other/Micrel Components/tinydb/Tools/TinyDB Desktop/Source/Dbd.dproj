@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{8484d98c-4817-4fe9-9608-f903d70d140a}</ProjectGuid>
+    <MainSource>Dbd.dpr</MainSource>
+    <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
+    <DCC_DependencyCheckOutputName>Dbd.exe</DCC_DependencyCheckOutputName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Version>7.0</Version>
+    <DCC_DebugInformation>False</DCC_DebugInformation>
+    <DCC_LocalDebugSymbols>False</DCC_LocalDebugSymbols>
+    <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+    <DCC_Define>RELEASE</DCC_Define>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <Version>7.0</Version>
+    <DCC_Define>DEBUG</DCC_Define>
+  </PropertyGroup>
+  <ProjectExtensions>
+    <Borland.Personality>Delphi.Personality</Borland.Personality>
+    <Borland.ProjectType>VCLApplication</Borland.ProjectType>
+    <BorlandProject>
+<BorlandProject><Delphi.Personality><Parameters><Parameters Name="UseLauncher">False</Parameters><Parameters Name="LoadAllSymbols">True</Parameters><Parameters Name="LoadUnspecifiedSymbols">False</Parameters></Parameters><VersionInfo><VersionInfo Name="IncludeVerInfo">True</VersionInfo><VersionInfo Name="AutoIncBuild">False</VersionInfo><VersionInfo Name="MajorVer">1</VersionInfo><VersionInfo Name="MinorVer">0</VersionInfo><VersionInfo Name="Release">0</VersionInfo><VersionInfo Name="Build">255</VersionInfo><VersionInfo Name="Debug">False</VersionInfo><VersionInfo Name="PreRelease">False</VersionInfo><VersionInfo Name="Special">False</VersionInfo><VersionInfo Name="Private">False</VersionInfo><VersionInfo Name="DLL">False</VersionInfo><VersionInfo Name="Locale">1029</VersionInfo><VersionInfo Name="CodePage">1250</VersionInfo></VersionInfo><VersionInfoKeys><VersionInfoKeys Name="CompanyName">DayDream Software</VersionInfoKeys><VersionInfoKeys Name="FileDescription">TinyDB Desktop</VersionInfoKeys><VersionInfoKeys Name="FileVersion">1.0.0.255</VersionInfoKeys><VersionInfoKeys Name="InternalName">DBD</VersionInfoKeys><VersionInfoKeys Name="LegalCopyright">(c) 2001 DayDream Software</VersionInfoKeys><VersionInfoKeys Name="LegalTrademarks">(c) 2001 DayDream Software</VersionInfoKeys><VersionInfoKeys Name="OriginalFilename">DBD</VersionInfoKeys><VersionInfoKeys Name="ProductName">TinyDBD</VersionInfoKeys><VersionInfoKeys Name="ProductVersion">1.0.0</VersionInfoKeys><VersionInfoKeys Name="Comments">(c) 2014 Micrel (recompilation)</VersionInfoKeys></VersionInfoKeys><Source><Source Name="MainSource">Dbd.dpr</Source></Source></Delphi.Personality></BorlandProject></BorlandProject>
+  </ProjectExtensions>
+  <Import Project="$(MSBuildBinPath)\Borland.Delphi.Targets" />
+  <ItemGroup>
+    <DelphiCompile Include="Dbd.dpr">
+      <MainSource>MainSource</MainSource>
+    </DelphiCompile>
+    <DCCReference Include="AboutFrm.pas">
+      <Form>AboutForm</Form>
+    </DCCReference>
+    <DCCReference Include="AddFieldFrm.pas">
+      <Form>AddFieldForm</Form>
+    </DCCReference>
+    <DCCReference Include="AddIndexFrm.pas">
+      <Form>AddIndexForm</Form>
+    </DCCReference>
+    <DCCReference Include="BaseFrm.pas">
+      <Form>BaseForm</Form>
+    </DCCReference>
+    <DCCReference Include="BlobDataFrm.pas">
+      <Form>BlobDataForm</Form>
+    </DCCReference>
+    <DCCReference Include="ChgEncFrm.pas">
+      <Form>ChgEncForm</Form>
+    </DCCReference>
+    <DCCReference Include="ChgPwdFrm.pas">
+      <Form>ChgPwdForm</Form>
+    </DCCReference>
+    <DCCReference Include="DBCardFrm.pas">
+      <Form>DBCardForm</Form>
+    </DCCReference>
+    <DCCReference Include="DBCommentsFrm.pas">
+      <Form>DBCommentsForm</Form>
+    </DCCReference>
+    <DCCReference Include="DBGridFrm.pas">
+      <Form>DBGridForm</Form>
+    </DCCReference>
+    <DCCReference Include="DBInfoFrm.pas">
+      <Form>DBInfoForm</Form>
+    </DCCReference>
+    <DCCReference Include="DBPropertyFrm.pas">
+      <Form>DBPropertyForm</Form>
+    </DCCReference>
+    <DCCReference Include="DBTableFrm.pas">
+      <Form>DBTableForm</Form>
+    </DCCReference>
+    <DCCReference Include="FieldPropFrm.pas">
+      <Form>FieldPropForm</Form>
+    </DCCReference>
+    <DCCReference Include="FilterFrm.pas">
+      <Form>FilterForm</Form>
+    </DCCReference>
+    <DCCReference Include="IndexPropFrm.pas">
+      <Form>IndexPropForm</Form>
+    </DCCReference>
+    <DCCReference Include="InputFrm.pas">
+      <Form>InputForm</Form>
+    </DCCReference>
+    <DCCReference Include="LangMgr.pas" />
+    <DCCReference Include="MainFrm.pas">
+      <Form>MainForm</Form>
+    </DCCReference>
+    <DCCReference Include="Misc.pas" />
+    <DCCReference Include="MRUMgr.pas" />
+    <DCCReference Include="NewDBFrm.pas">
+      <Form>NewDBForm</Form>
+    </DCCReference>
+    <DCCReference Include="NewTableFrm.pas">
+      <Form>NewTableForm</Form>
+    </DCCReference>
+    <DCCReference Include="OptionFrm.pas">
+      <Form>OptionForm</Form>
+    </DCCReference>
+    <DCCReference Include="SearchFrm.pas">
+      <Form>SearchForm</Form>
+    </DCCReference>
+    <DCCReference Include="TableListFrm.pas">
+      <Form>TableListForm</Form>
+    </DCCReference>
+  </ItemGroup>
+</Project>

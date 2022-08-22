@@ -1,0 +1,65 @@
+package dclTinyDB;
+
+{$R *.res}
+{.$R 'TinyDB.dcr'}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'TinyDB Database Engine'}
+
+{$IFDEF VER140} { Borland Delphi 6.x }
+{$LIBSUFFIX '60'}
+{$ENDIF}
+{$IFDEF VER145} { Borland C++Builder 6.x }
+{$LIBSUFFIX '65'}
+{$ENDIF}
+{$IFDEF VER150} { Borland Delphi 7.x }
+{$LIBSUFFIX '70'}
+{$ENDIF}
+{$IFDEF VER170} { Borland Delphi 2005 9.x }
+{$LIBSUFFIX '90'}
+{$ENDIF}
+{$IFDEF VER180} { Borland Delphi 2006, Turbo 10.x }   // JB
+{$LIBSUFFIX '100'}
+{$ENDIF}
+{$IFDEF VER185} { Borland Delphi 2007 11.x }   // JB
+{$LIBSUFFIX '110'}
+{$ENDIF}
+{$IFDEF VER200} { Borland Delphi 2009 12.x }   // JB
+{$LIBSUFFIX '120'}
+{$ENDIF}
+{$IFDEF VER210} { Borland Delphi 2010 14.x }   // JB
+{$LIBSUFFIX '140'}
+{$ENDIF}
+{$DESIGNONLY}
+{$IMPLICITBUILD OFF}
+
+requires
+  rtl,
+  designide,
+  vcl,
+  dbrtl,
+  rtmTinyDB;
+
+contains
+  TinyDBReg in '..\TinyDBReg.pas';
+
+end.

@@ -1,0 +1,3606 @@
+<html>
+  <head>
+    <title>String Manipulation Routines V1.25</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <style>
+<!--
+ 
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{
+	margin:0cm;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman";}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:purple;
+	text-decoration:underline;}
+p
+	{margin-right:0cm;
+	margin-left:0cm;
+	font-size:12.0pt;
+	font-family:"Times New Roman";}
+-->
+    </style>
+    <meta content="Delphi tools" name="subject">
+    <meta content="C:\PROGRAM FILES\MICROSOFT OFFICE\OFFICE\html.dot"
+      name="Template">
+  </head>
+  <body vlink="purple" link="blue">
+    <div class="Section1">
+      <p>
+        <b>
+          <u><span style="FONT-SIZE: 13.5pt; COLOR: fuchsia; FONT-FAMILY: Arial">String
+            manipulation routines</span>
+          </u>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: Arial">jbStr.Pas</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Version
+        1.28</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: green; FONT-FAMILY: Arial">Adapted
+        to Delphi 1.0 .. 7.0 and Delphi 2005</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Written
+        by Jaro Benes</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Copyright
+        (c) 1991-2005 by Jaro Benes. All rights reserved.</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Changes:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">21.3.2002
+          (V1.28)</span>
+        </b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Actualization
+        of source and new functions added ().</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">9.7.2000
+          (V1.27)</span>
+        </b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Fix
+        some bugs and new function added (</span><span style="FONT-SIZE: 10pt; COLOR: olive; FONT-FAMILY: 'Courier New'">Alter</span><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">, </span><span style="FONT-SIZE: 10pt; COLOR: olive; FONT-FAMILY: 'Courier New'">Reduce</span><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">, </span><span style="FONT-SIZE: 10pt; COLOR: olive; FONT-FAMILY: 'Courier New'">JoinTo</span><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">, </span><span style="FONT-SIZE: 10pt; COLOR: olive; FONT-FAMILY: 'Courier New'">ExtractNumber</span><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">, </span><span style="FONT-SIZE: 10pt; COLOR: olive; FONT-FAMILY: 'Courier New'">ExtractAlphanum</span><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">, </span><span style="FONT-SIZE: 10pt; COLOR: olive; FONT-FAMILY: 'Courier New'">StripChars</span><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">
+         and </span><span style="FONT-SIZE: 10pt; COLOR: olive; FONT-FAMILY: 'Courier New'">FindWord</span><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">)</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">5.5.2000
+          (V1.26)</span>
+        </b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Put
+        out DLL management and make more natively</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Please
+        send comments to </span><a href="mailto:micrel@micrel.cz"><span style="FONT-SIZE: 10pt; FONT-FAMILY: 'MS Sans Serif'">micrel@micrel.cz</span>
+        </a>
+        <span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">or
+        see to my WEB pages</span><a href="http://www.micrel.cz/delphi">http://www.micrel.cz/delphi</a>&nbsp; 
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Note:</span>
+        </b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">When
+        do you make modify my source code, please, send me your copy.</span>
+      </p>
+      <p>
+        <b>
+          <u><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Features:</span>
+          </u>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: green; FONT-FAMILY: Arial">82</span><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">
+         string manipulation non objected routines for generally using
+        in Delphi 1.0 .. 7.0 and Delphi 2005.</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Tested
+        in Delphi programs for versions Delphi 1,...,7 and Delphi 2005.</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Original
+        function is </span><span style="FONT-SIZE: 10pt; COLOR: olive; FONT-FAMILY: 'Courier New'">Zip</span><span style="FONT-SIZE: 10pt; FONT-FAMILY: 'Courier New'">, <span style="COLOR: olive">Smash</span>, <span style="COLOR: olive">Push</span>, <span style="COLOR: olive">Insword</span>, <span style="COLOR: olive">Hash</span>, <span style="COLOR: olive">Mask</span>, <span style="COLOR: olive">Count</span>, <span style="COLOR: olive">Flop</span>, <span style="COLOR: olive">Reduce</span>, <span style="COLOR: olive">Alter</span>, <span style="COLOR: olive">StripChars</span>, 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: olive; FONT-FAMILY: 'Courier New'">Strip</span><span style="FONT-SIZE: 10pt; FONT-FAMILY: 'Courier New'">, <span style="COLOR: olive">Change</span>, <span style="COLOR: olive">Mult</span>, <span style="COLOR: olive">Num</span>, <span style="COLOR: olive">Doc</span>, <span style="COLOR: olive">Turn</span>, <span style="COLOR: olive">TestTo</span>, <span style="COLOR: olive">Form</span>
+        </span><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">and </span><span style="FONT-SIZE: 10pt; COLOR: olive; FONT-FAMILY: 'Courier New'">Trans</span><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">.</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Other
+        function written for adapt old program modules to Delphi system or lost
+        in Delphi.</span>
+      </p>
+      <p>
+        <b>
+          <u><span style="COLOR: fuchsia; FONT-FAMILY: Arial">List
+            of functions and short description</span>
+          </u>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">Alter</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(Str,
+        AlterStr:<b>String</b>):<b>String</b>; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Alternative
+        get of unempty string – when <i>Str</i> is empty then
+        get <i>AlterStr</i>
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S:String;</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := Alter(<b>
+            <i>'', 'John'</i>
+          </b>); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          contain <b>'John'</b>} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">AlterTo</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(Str,
+        CondicStr, AlterStr:<b>String</b>):<b>String</b>; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Alternative
+        get of unempty string – when <i>CondicStr</i> is equal <i>Str</i>
+         then get <i>AlterStr</i> other <i>Str</i>
+         is returned. 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S:String;</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := <b>
+            <i>'Paolo'</i>
+          </b>; 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := Alter(S, <b>
+            <i>'Paolo', 'John'</i>
+          </b>); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          contain <b>'John'</b> now} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">Reduce</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(<b>Const</b>
+         S:<b>String</b>, AboutSize:Integer):<b>String</b>; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Truncate
+        string <i>AboutSize</i> characters to end of string. 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S:String;</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := Reduce(<b>
+            <i>'John,Pablo,Ivan,', 1</i>
+          </b>); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          contain <b>'John,Pablo,Ivan'</b>} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">JointTo</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(PreStr,
+        Delim, PostStr:<b>String</b>):<b>String</b>; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Confortable
+        join words with delimitiers.</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S:String;</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := JoinTo(<b>
+            <i>'John', ',', 'Ivan'</i>
+          </b>); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          contain <b>'John,Ivan'</b>} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">ExtractNumber</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(<b>Const</b>
+         S:<b>String</b>):<b>String</b>; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Extract
+        numbers only from string.</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S:<b>String</b>; 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := ExtractNumber(<b>'2*5f8987'</b>); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          contain <b>'258987'</b>} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">ExtractAlphanum</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(<b>Const</b>
+         S:<b>String</b>):<b>String</b>; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Extract
+        from string alphas and numbers only.</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S:<b>String</b>; 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := ExtractAlphanum(<b>'5*69df5//6f9*'</b>); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          contain <b>'569df56f9'</b>} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">StripChars</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(S:<b>String</b>;ch:CharSet):<b>String</b>; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Extract
+        from string on special character set as mask only</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S:<b>String</b>; 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := StripChars(<b>'1452a34c5c8946789abc'</b>,[<b>
+           '1'</b>,<b> '4'</b>,<b> '8'</b>,<b>
+           'c'</b>]); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          contain <b>'144cc848c'</b>} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">UpCase</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(CH:Char):Char;</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Convert
+        lower case character to upper with diacritics</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">C:Char;</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">C
+        := UpCase(<b>
+            <i>'u'</i>
+          </b>); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">C
+          contain <b>'U'</b>} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">LoCase</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(CH:Char):Char;</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Convert
+        upper character to lower with diacritics</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">C:Char;</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">C
+        := UpCase(<b>
+            <i>'U'</i>
+          </b>); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">C
+          contain <b>'u'</b>} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">StrLoCase</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(S:<b>String</b>):<b>String</b>; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Convert
+        lower case characters in all string to upper with diacritics</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S:<b>String</b>; 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := StrLoCase(<b>
+            <i>'HAHAHA'</i>
+          </b>); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          contain <b>'hahaha'</b>} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">StrUpCase</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(S:<b>String</b>):<b>String</b>; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Convert
+        upper case characters in all string to lower with diacritics</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S:<b>String</b>; 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := StrUpCase(<b>'hahaha'</b>); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          contain <b>'HAHAHA'</b>} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">StrUpCaseNoCs</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(S:<b>String</b>):<b>String</b>; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Standard
+        up case characters string without Czech diacritics (for DB-field name)</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S:<b>String</b>; 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := StrUpCase(<b>'hahaha'</b>); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          contain <b>'HAHAHA'</b>} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">CharStr</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(CH:Char;Len:Byte):<b>String</b>; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Make
+        new string with specified characters</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S:<b>String</b>; 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := CharStr(<b>'*'</b>,5); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          contain <b>'*****'</b>} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">StrStr</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(<b>Const</b>
+         S:<b>String</b>;krat:Byte):<b>String</b>; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Similar
+        as CharStr, input is string</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S:<b>String</b>; 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := StrStr(<b>'*='</b>,5); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          contain <b>'*=*=*=*=*='</b>} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">PadCh</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(S:<b>String</b>;CH:Char;Len:Byte):<b>String</b>; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Right
+        padded string with specified character</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S:<b>String</b>; 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := PadCh(<b>'CENA '</b>,<b>'*'</b>,9); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          contain <b>'CENA ****'</b>} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">Pad</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(<b>Const</b>
+         S:<b>String</b>;Len:Byte):<b>String</b>; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Similar
+        as PadCh, character is space</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S:<b>String</b>; 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := Pad(<b>'CENA:'</b>,8); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          contain <b>'CENA: '</b>} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">LeftPadCh</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(S:<b>String</b>;CH:Char;Len:Byte):<b>String</b>; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Left
+        padded string with specified character</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S:<b>String</b>; 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := LeftPadCh(<b>' CENA'</b>,'*',9); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          contain <b>'**** CENA'</b>} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">LeftPad</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(<b>Const</b>
+         S:<b>String</b>;Len:Byte):<b>String</b>; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Similar
+        as LeftPadCh, character is space</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S:<b>String</b>; 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := LeftPadCh(<b>'CENA'</b>,8); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          contain <b>' CENA'</b>} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">Hash</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(<b>Const</b>
+         S:<b>String</b>):LongInt; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Simply
+        checksum ordinal code in string</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">L:LongInt;</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">L
+        := Hash(<b>'Ahoj kamaráde'</b>); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">L
+          contain 1303 in code Latin2}</span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">Space</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(B:Byte):<b>String</b>; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Make
+        space fill string;</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S:<b>String</b>; 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := Space(4); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          contain <b>' '</b>} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">MakeStr</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(<b>Const</b>
+         S:<b>String</b>;B:Byte):<b>String</b>; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Function
+        is alias for CharStr;</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S:<b>String</b>; 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := MakeStr(<b>'*'</b>,5); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          contain <b>'*****'</b>} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">TrimLead</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(<b>Const</b>
+         S:<b>String</b>):<b>String</b>; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Trim
+        lead on string character with ordinal #0 to #32 (space)</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S:<b>String</b>; 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := TrimLead(<b>#1#2#0'AHOJ'</b>); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          contain <b>'AHOJ'</b>} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">TrimTrail</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(<b>Const</b>
+         S:<b>String</b>):<b>String</b>; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Trim
+        trail on string character with ordinal #0 to #32 (space)</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S:<b>String</b>; 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := TrimTrail(<b>'AHOJ'+#8#2#9</b>); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          contain <b>'AHOJ'</b>} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">Trim</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(<b>Const</b>
+         S:<b>String</b>):<b>String</b>; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Trim
+        lead and trail on string character with ordinal #0 to #32 (space)</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S:<b>String</b>; 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := Trim(<b>' AHOJ'+#8#2#9</b>); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          contain <b>'AHOJ'</b>} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">ZeroClip</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(<b>Const</b>
+         S:<b>String</b>):<b>String</b>; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Clip
+        lead zero character</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S:<b>String</b>; 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := ZeroClip(<b>'000023658'</b>); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          contain <b>'23658'</b>} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">CapitalizeWord</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(<b>Const</b>
+         S:<b>String</b>):<b>String</b>; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">For
+        each word in string up case first letter</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var </span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S:<b>String</b>; 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := CapitalizeWord(<b>'jaro benes'</b>); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          contain <b>'Jaro Benes'</b>} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">CenterCh</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(<b>Const</b>
+         S:<b>String</b>;CH:Char;Width:Byte):<b>String</b>; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">String
+        is centered in specified width and with character</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S:<b>String</b>; 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := CenterCh(<b>'AHOJ'</b>,<b>'-'</b>,8); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          contain <b>'--AHOJ--'</b>} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">Center</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(Const
+        S:<b>String</b>;Width:Byte):<b>String</b>; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Similar
+        as CenterCh, with space</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S:<b>String</b>; 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := Center(<b>'AHOJ'</b>,8); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          contain <b>' AHOJ '</b>} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">WordCount</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(S:<b>String</b>;WordDelims:CharSet):Byte; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Count
+        word on string and use specified delimits</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">W:Word;</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">W
+        := WordCount(<b>'AHOJ CARLO'</b>,[<b>' '</b>]); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">W
+          contain 2}</span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Note:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">If
+        delimits is <b>','</b> and string is <b>',,,,'</b>
+         then result is not correct 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">ExtractWord</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(N:Byte;S:<b>String</b>;
+        WordDelims:CharSet):<b>String</b>; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Extract
+        specified word from string</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S:<b>String</b>; 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := ExtractWord(2,<b>'AHOJ CARLO'</b>,[<b>' '</b>]); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          contain <b>'CARLO'</b>} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">ChangeWord</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(N:Byte;Wrd,S:<b>String</b>;
+        WordDelims:CharSet):<b>String</b>; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Exchange
+        specified word in string to Wrd</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S:<b>String</b>; 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := '<strong>AHOJ CARLO</strong>'; 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := ChangeWord(2,<b>'CARLUCCI'</b>,S,[<b>' '</b>]); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          contain <b>'AHOJ CARLUCCI'</b>} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">GetFirstWord</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(<b>Const</b>
+         S:<b>String</b>;WordDelims:CharSet):<b>String</b>; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Get
+        first word from string</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S:<b>String</b>; 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := GetFirstWord('<b>AHOJ CARLO MAY</b>',[' ']); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          contain <b>'AHOJ'</b>} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">GetLastWord</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(<b>Const</b>
+         S:<b>String</b>;WordDelims:CharSet):<b>String</b>; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Get
+        last word from string</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S:<b>String</b>; 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := GetLastWord(<b>'AHOJ CARLO MAY'</b>,[<b>'
+          '</b>]); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          contain <b>'MAY'</b>} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">Find</span><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">Word</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(What:<b>String</b>; <b>Const</b>
+         S:<b>String</b>;WordDelims:CharSet):<b>Boolean</b>; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Find
+        word in string, when is delimited</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">If</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">FindWord(<b>'Archimedes'</b>,<b>'Cleo,Carlo,Denise,Paula,Archimedes'</b>,[<b>','</b>]) <b>Then</b>
+         ... <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">result
+          is TRUE}</span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Procedure </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">WordWrap</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(InSt:<b>String</b>;<b>Var</b>
+         OutSt,Overlap:<b>String</b>;
+        Margin:Byte;PadToMargin:Boolean); 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Break
+        long string for multi line formatting</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">R,S:<b>String</b>; 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := <b>'xxx xxx xxx xxx uuu uuu uuu uuu iii iii iii'</b>; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Repeat</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">WordWrap(S,R,S,15,False); <i>{15
+          is width of current line}</i>
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">.. <i>{R
+          hold current wrapped line}</i>
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Until</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Length(S)=0;</span>
+      </p>
+      <p>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">{R
+          contain result:}</span>
+        </i>
+      </p>
+      <p>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">{1.
+          line <b>'xxx xxx xxx xxx'</b>} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">{2.
+          line <b>'uuu uuu uuu uuu'</b>} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">{3.
+          line <b>'iii iii iii'</b>} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">PopWord</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(B:Byte;Var
+        S:<b>String</b>;WordDelims:CharSet):<b>String</b>; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Cut
+        specified word from string</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: 'Courier New'">Example:</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">R,S:<b>String</b>; 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">R
+        := <b>'AHOJ CARLO MAY'</b>; 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := PopWord(2,R,[<b>' '</b>]); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          contain <b>'CARLO'</b> and R <b>'AHOJ
+            MAY'</b>} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">GetPos</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(B:Byte;S:<b>String</b>;WordDelims:CharSet):Byte; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Result
+        is first char position of specified word</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">W:Word;</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">W
+        := GetPos(2,<b>'AHOJ CARLO MAY'</b>,[<b>' '</b>]); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">W
+          contain 6 char position of '<b>CARLO</b>'} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">GetEnd</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(B:Byte;S:<b>String</b>;WordDelims:CharSet):Byte; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Result
+        is last char position of specified word</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">W:Word;</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">W
+        := GetEnd(2,<b>'AHOJ CARLO MAY'</b>,[<b>' '</b>]); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">W
+          contain 10}</span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">InsWord</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(iWord,cWord,cString:<b>String</b>):<b>String</b>; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Exchange
+        group characters iWord to new group cWord on string cString</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S:<b>String</b>; 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := InsWord(<b>'ee'</b>,<b>'oo'</b>,<b>'Lideep'</b>); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          contain <b>'Lidoop'</b>} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">Smash</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(C:Char;<b>Const</b>
+         S:String):<b>String</b>; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Delete
+        specified character from string</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S:<b>String</b>; 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := Smash(<b>' '</b>,<b>' 1 -B CU 182 '</b>); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          contain <b>'1-BCU182'</b>} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">Mask</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(CharOfMask:Char;<b>Const</b>
+         StrMask,Matrice:<b>String</b>; <b>Var</b>
+         NextPosic:Byte):<b>String</b>; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Search
+        multiple occurrence group characters base of mask</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Restriction:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: green; FONT-FAMILY: Arial">Length(StrMask)=Length(Matrice)</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Const</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Maska=<b>'uuuu
+          xxxx=iiiii'</b>; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Next:Byte;</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S,Matric:<b>String</b>; 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Next
+        := 1; <i>{first positon}</i>
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Matric
+        := <b>'JEDN-0038=17115'</b>; 
+        </span>
+      </p>
+      <p>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">{search <b>'x'</b>
+           in Maska, return substring from Matric and actualise 
+          </span>
+        </i>
+      </p>
+      <p>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">next
+          position of behind returned substring}</span>
+        </i>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := Mask(<b>'x'</b>, Maska, Matric, Next); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          contain <b>'0038'</b>} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">Count</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(CH:Char;<b>Const</b>
+         Dest:<b>String</b>;<b>Var</b> Posic,Len:Byte):Boolean; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Scanning
+        Dest string if contain CH character and if exist return</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">position
+        Posit and size Len this substring;</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S:<b>String</b>; 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Posic,Len:Byte;</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := <b>'xxxxxx x"zzzzzz"ccccc"zzzz"cc'</b>; 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Posic:=0;{begin
+        here}</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">While</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Count(<b>'"'</b>,S,Posic,Len) <b>Do</b>
+          <b>Begin</b>
+        </span>
+      </p>
+      <p>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">{on
+          Posit and Len size is found character <b>'"'</b>} 
+          </span>
+        </i>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">AnyActionHere(S,Posic,Len); <i>{change,
+          delimiting etc.}</i>
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Count(<b>'z'</b>,S,Posic,Len); <i>{Posic
+          is 10 and Len is 6}</i>
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Inc(Posic,Len); <i>{
+          skip this and search next}</i>
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">End</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">;</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">Push</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(Posic:Byte;<b>Const</b>
+         Source,Dest:<b>String</b>):<b>String</b>; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Paste
+        to string other string</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S:<b>String</b>; 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := Push(3,<b>'UUU'</b>,<b>'xxxxxxxx'</b>); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          contain <b>'xxUUUxxx'</b>} 
+          </span>
+        </i>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := Push(11,<b>'III'</b>,<b>'xxxxxxxx'</b>); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          contain <b>'xxxxxxxx III'</b>} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Procedure </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">Flop</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(<b>Var</b>
+         S1,S2:<b>String</b>); 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Exchange
+        two string;</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">R,S:<b>String</b>; 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := <b>'Carlo'</b>; 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">R
+        := <b>'Dominik'</b>; 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Flop(S,R); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          contain <b>'Dominik'</b> and R contain <b>'Carlo'</b>} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">Strip</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(<b>Const</b>
+         Mask,Source:<b>String</b>):<b>String</b>; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Delete
+        group character on base mask from string</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Maska,S:<b>String</b>; 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Maska
+        := <b>'XX XXXXX XX '</b>; 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := <b>'21CU..... 2156 a á'</b>; 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := Strip(Maska,S); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          contain <b>'CU 2156 á'</b>} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">Change</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(S:<b>String</b>;Source,Dest:Char):<b>String</b>; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Exchange
+        character Source to Dest on S string</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S:<b>String</b>; 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := Change(<b>'Kokorokokoko'</b>,'o','u'); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          contain <b>'Kukurukukuku'</b>} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">ChangeTo</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(S:<b>String</b>;
+        Source:CharSet; Dest:Char):<b>String</b>; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Exchange
+        some characters in Source to Dest character on S string</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S:<b>String</b>; 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := Change(<b>'Koxkoxroxkoxkoxkox'</b>,[<b>
+            <i>'o'</i>
+          </b>,<b>
+            <i>'x'</i>
+          </b>] ,<b>
+            <i>'u'</i>
+          </b>); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          contain <b>'Kuukuuruukuukuukuu'</b>} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">ChangeXChars</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(FindChar,
+        DestChar:Char, <b>Const</b> Source:<b>String</b>):<b>String</b>; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Exchange
+        all characters FindChar to DestChar on Source string. Primarily for
+        tables with delimiters.</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S:<b>String</b>; 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := <b>'KX&nbsp;&nbsp;&nbsp;&nbsp; CX&nbsp;&nbsp;&nbsp;&nbsp;
+          DX';</b>
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := Change(<b>
+            <i>' '</i>
+          </b>, <b>
+            <i>';', </i>
+          </b>S,[<b>
+            <i>'o'</i>
+          </b>,<b>
+            <i>'x'</i>
+          </b>]); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          contain <b>'FX;CX;DX'</b>, that's all} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">Zip</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(<b>Const</b>
+         Mask,Source:<b>String</b>):<b>String</b>; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Flexible
+        formatting any string on base mask</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S:<b>String</b>; 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := Zip(<b>'XX+XX=XX'</b>,<b>'333366'</b>); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          contain <b>'33+33=66'</b>} 
+          </span>
+        </i>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := Zip(<b>'XX.XX.XX'</b>,<b>'240298'</b>); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          contain <b>'24.02.98'</b>} 
+          </span>
+        </i>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := Zip(<b>'XX-XX.XX.X:XX/X'</b>,<b>'980224Apoá'</b>); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          == <b>'98-02.24.A:po/á'</b>} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">Turn</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(<b>Const</b>
+         S:<b>String</b>):<b>String</b>; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">String
+        turn for back formatting</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S:<b>String</b>; 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := Turn('ABCD'); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          contain 'DCBA'}</span>
+        </i>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := Turn(Zip(<b>'XXX,XXX'</b>,Turn(<b>'12285'</b>))); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          contain <b>' 12,285'</b>} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">EnTab</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(<b>Const</b>
+         Sx:<b>String</b>;TabSize:Byte):<b>String</b>; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Pack
+        space to tabelator character <b>(#9)</b>
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S:<b>String</b>; 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := EnTab(<b>' AHOJ'</b>,3); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          contain <b>#9#9'AHOJ'</b>} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">DeTab</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(<b>Const</b>
+         Sx:<b>String</b>;TabSize:Byte):<b>String</b>; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Expand
+        tabelator character <b>(#9)</b> to space 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S:<b>String</b>; 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := DeTab(<b>#9#9'AHOJ'</b>,3); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          contain <b>' AHOJ'</b>} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">HasExtension</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(<b>Const</b>
+         Name:<b>String</b>; <b>Var</b> DotPos:Word):Boolean; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">File
+        name orientation function, scanning extension</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Posic:Word;</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">If</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">HasExtension(<b>'MARK.TXT'</b>,Posic) <b>Then
+          …</b>
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">DefaultExtension</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(<b>Const</b>
+         Name, Ext:<b>String</b>):<b>String</b>; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">If
+        file name has not extension, then push default</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S:<b>String</b>; 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := DefaultExtension(<b>'C:\POKUS\MARK'</b>,<b>'TXT'</b>); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          contain <b>'C:\POKUS\MARK.TXT'</b>} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">ForceExtension</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(<b>Const</b>
+         Name, Ext:<b>String</b>):<b>String</b>; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Change
+        old extension</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S:<b>String</b>; 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := ForceExtension(<b>'C:\POKUS\MARK'</b>,<b>'DOC'</b>); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          contain <b>'C:\POKUS\MARK.DOC'</b>} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">JustExtension</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(<b>Const</b>
+         PathName:<b>String</b>):<b>String</b>; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Return
+        from filename the extension only</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S:<b>String</b>; 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := JustExtension(<b>'C:\POKUS\MARK.DOC'</b>); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          contain <b>'DOC'</b>} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">JustFilename</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(<b>Const</b>
+         PathName:<b>String</b>):<b>String</b>; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Return
+        from filename the name and extension only</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S:<b>String</b>; 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := JustFilename(<b>'C:\POKUS\MARK.DOC'</b>); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          contain <b>'MARK.DOC'</b>} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">JustPathname</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(<b>Const</b>
+         PathName:<b>String</b>):<b>String</b>; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Return
+        from filename the pathname only</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S:<b>String</b>; 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := JustPathname(<b>'C:\POKUS\MARK.DOC'</b>); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          contain <b>'C:\POKUS'</b>} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">JustName</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(<b>Const</b>
+         PathName:<b>String</b>):<b>String</b>; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Return
+        from filename the name only</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S:<b>String</b>; 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := JustName(<b>'C:\POKUS\MARK.DOC'</b>); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          contain <b>'MARK'</b>} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">AddLastChar</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(C:Char;<b>Const</b>
+         DirName:<b>String</b>):<b>String</b>; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">If
+        possible then add character to end string</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S:<b>String</b>; 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := AddLastChar(<b>'\'</b>,<b>'C:\POKUS'</b>); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          contain <b>'C:\POKUS\'</b>} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">RemLastChar</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(<b>Const</b>
+         DirName:<b>String</b>):<b>String</b>; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Remove
+        last character from string</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S:<b>String</b>; 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := RemLastChar(<b>'C:\POKUS\'</b>); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          contain <b>'C:\POKUS'</b>} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">CleanDOSFileName</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(FileName:<b>String</b>):<b>String</b>; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Remove
+        too many character from filename</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S:<b>String</b>; 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := CleanDOSFileName(<b>'C:\POKUS\AAA.TXTXTXT'</b>); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          contain <b>'AAA.TXT'</b>} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">TestFileName</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(FName:<b>String</b>):Boolean; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Testing
+        input string to restricted letter in DOS style; if name is empty (\.)
+        then error occur</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">If
+          Not</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">TestFileName(<b>'C:/POKUS/'</b>) <b>Then</b>
+         ErrorOccurred; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">ShortDirName </span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(Len:Byte; <b>Const</b>
+         PName:<b>String</b>):<b>String</b> ; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">For
+        shorting view directory name, path name only</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S:<b>String</b>; 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := ShortDirName(18,<b>'C:\POKUSY\PRACOV\ZADAN\NOVE\POSL\'</b>); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          contain <b>'C:\..\NOVE\POSL\'</b>} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">ShortFileName</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(Len:Byte;<b>Const</b>
+         FName:<b>String</b>):<b>String</b>; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Similar
+        as ShortDirName with file name</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S:<b>String</b>; 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := ShortFileName(25,<b>'C:\POKUSY\PRACOV\ZADAN\NOVE\POSL\MOJE.TXT'</b>); 
+        </span>
+      </p>
+      <p>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">{</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          contain <b>'C:\..\NOVE\POSL\MOJE.TXT'</b>} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">Mult</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(<b>Const</b>
+         S:<b>String</b>):Byte; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Scan
+        multiple occurrence first character of string</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">W:Word;</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">W
+        := Mult(<b>'AARON'</b>); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">W
+          contain 2}</span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">Num</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(<b>Const</b>
+         S:<b>String</b>;Base:Byte):LongInt; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Conversion
+        string number on base <b>2..36</b> into long integer 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">L:LongInt</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">L
+        := Num(<b>'FFFF'</b>,16); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">L
+          contain 65535}</span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">Doc</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(L:LongInt;<b>Const</b>
+         Base:Byte):<b>String</b>; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Conversion
+        number from long integer to string on base <b>2..36</b>
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S:<b>String</b>; 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := Doc(65535,16); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          contain <b>'FFFF'</b>} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">PackNum</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(<b>Const</b>
+         S:<b>String</b>):<b>String</b>; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Very
+        simply bcd pack, accept '0'..'9' only,</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">if
+        length is odd then padded $F</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S:<b>String</b>; 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := PackNum(<b>'12345'</b>); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          contain <b>#1'#E'</b>} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">UnpackNum</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(<b>Const</b>
+         S:<b>String</b>):<b>String</b>; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Very
+        simply bcd unpack</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S:<b>String</b>; 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := UnPackNum(<b>#1'#E'</b>); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          contain <b>'12345'</b>} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">Str3Long</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(<b>Const</b>
+         S:<b>String</b>):LongInt; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Reading
+        and conversion to first non number character without control</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">L:LongInt;</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">L
+        := Str3Long(<b>'12345aaaa'</b>); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">L
+          contain 12345}</span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">Str2Long</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(<b>Const</b>
+         S:<b>String</b>; <b>Var</b> I:LongInt):Boolean; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Convert
+        long integer string to long integer number</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">L:LongInt;</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">If
+          Not</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Str2Long(<b>'12345'</b>,L) <b>Then</b>
+         ErrorOccurred; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">Str2Word</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(<b>Const</b>
+         S:<b>String</b>; <b>Var</b> I:Word):Boolean; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Convert
+        word string to word number</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">W:Word;</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">If</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'"><b>Not</b>
+         Str2Word(<b>'12345'</b>,W) Then ErrorOccurred; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function</span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">Str2Int</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(<b>Const</b>
+         S:<b>String</b>; <b>Var</b> I:Integer):Boolean; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Convert
+        integer string to integer number</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">I:Integer;</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">If
+          Not</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Str2Int(<b>'
+          12345'</b>,I) <b>Then</b> ErrorOccurred; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">Str2Real</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(<b>Const</b>
+         S:<b>String</b>; <b>Var</b> R:Real):Boolean; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Convert
+        real string to real number</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">R:Real;</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">If</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'"><b>Not</b>
+         Str2Real('-12345.05',R) <b>Then</b> ErrorOccurred; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">Long2Str</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(L:LongInt):<b>String</b>; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Convert
+        any integer to string</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S:<b>String</b>; 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := Long2Str(12345); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          contain <b>'12345'</b>} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">Real2Str</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(R:Real;
+        Width, Places:Byte):<b>String</b>; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Convert
+        real number to string, width is size all string and places is from this
+        size</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S:<b>String</b>; 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := Real2Str(0.12589,5,2); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          contain <b>' 0.14'</b>} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">Form</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(<b>Const</b>
+         Mask:<b>String</b>; R:Real):<b>String</b>; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Simply
+        formatting of real number to string</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S:<b>String</b>; 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := Form(<b>'XXX.XX'</b>,0.13589); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          contain <b>' 0.14'</b>} 
+          </span>
+        </i>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := Form(<b>'X.X'</b>,55.256); <i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">overflow,
+          S contain <b>'*.*'</b>} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: red; FONT-FAMILY: 'Courier New'">Const</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: red; FONT-FAMILY: 'Courier New'">swKamenic
+        = 0;</span><span style="FONT-SIZE: 10pt; FONT-FAMILY: 'Courier New'"><i>{Czech
+          code as brothers Kamenicky}</i>
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: red; FONT-FAMILY: 'Courier New'">swWin31CE
+        = 1;</span><span style="FONT-SIZE: 10pt; FONT-FAMILY: 'Courier New'"><i>{Czech
+          code Windows 3.1 CE}</i>
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: red; FONT-FAMILY: 'Courier New'">swWin1250
+        = 2; </span><i><span style="FONT-SIZE: 10pt; FONT-FAMILY: 'Courier New'">{Czech
+          code Windows page 1250}</span>
+        </i>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: red; FONT-FAMILY: 'Courier New'">swECMA
+        = 3; </span><i><span style="FONT-SIZE: 10pt; FONT-FAMILY: 'Courier New'">{code
+          ECMA ansi}</span>
+        </i>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: red; FONT-FAMILY: 'Courier New'">swLatin2
+        = 4; </span><i><span style="FONT-SIZE: 10pt; FONT-FAMILY: 'Courier New'">{code
+          Latin 2}</span>
+        </i>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: red; FONT-FAMILY: 'Courier New'">swUsaAnsi
+        = 5; </span><i><span style="FONT-SIZE: 10pt; FONT-FAMILY: 'Courier New'">{code
+          as VGA generator}</span>
+        </i>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: red; FONT-FAMILY: 'Courier New'">swIbm
+        = 6; </span><i><span style="FONT-SIZE: 10pt; FONT-FAMILY: 'Courier New'">{code
+          without diacritics}</span>
+        </i>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: red; FONT-FAMILY: 'Courier New'">swSemigraph
+        = 7</span><span style="FONT-SIZE: 10pt; FONT-FAMILY: 'Courier New'">;<i>{as
+          Ibm without graphics characters}</i>
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: red; FONT-FAMILY: 'Courier New'">swMacIntosh
+        = 8;</span><i><span style="FONT-SIZE: 10pt; FONT-FAMILY: 'Courier New'">{code
+          for Mac}</span>
+        </i>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function</span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">Trans</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(St:<b>String</b>;odkud,kampak:Byte):<b>String</b>; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">String
+        will be transporting from odkud code to kampak code,</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">this
+        oriented to Czech language and not support in the table other</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">but
+        table is public</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := Trans(S, swKamenic, swWin1250);<i>{result contain text in
+          new code}</i>
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">Roman2Int</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(<b>Const</b>
+         S: <b>String</b>): LongInt; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Assume
+        function, convert romanum number to long integer</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">L:LongInt;</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">L
+        := Roman2Num(<b>
+            <i>'VII'</i>
+          </b>
+          <i>);{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">L
+          contain 7}</span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function </span>
+        </b><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">Int2Roman</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(Value:
+        LongInt): <b>String</b>; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Assume
+        function, convert long integer to romanum number</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S:String;</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">..</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := Int2Roman(9<i>);{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          contain <b>'IX'</b>} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function</span>
+        </b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">html</span><span style="FONT-SIZE: 13.5pt; COLOR: red; FONT-FAMILY: 'Courier New'">SrcEmail</span><span style="COLOR: red; FONT-FAMILY: 'Courier New'">(S:<strong>String</strong>): <b>String</b>; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Search
+        first E-mail address in input string, for more break input string post
+        result.</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S:String;</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := '<strong>&lt;A HREF="mailto:micrel@micrel.cz"&gt;&lt;IMG
+          BORDER=0 SRC="email.gif"&gt;&lt;/A&gt;</strong>' 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := htmlSrcEmail(S<i>);{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          contain <b>'micrel@micrel.cz'</b>} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function</span>
+        </b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">YesOrNo(B:Boolean): <b>String</b>; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Return
+        string representation for true or false declared as <b>ccYesString</b>
+         and <b>ccNoString</b> constant. 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S:String;</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := YesOrNo(true<i>);{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          contain <b>'1'</b>} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function</span>
+        </b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">YesOrNoEx(B:Boolean; <b>Const</b>
+         strYes, strNo:<b>String</b>): <b>String</b>; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Return
+        string representation for true or false declared in parameters strYes
+        and strNo.</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S:String;</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+        := YesOrNoEx(true, <b>
+            <i>'Its OK'</i>
+          </b>, <b>
+            <i>'Its poor'</i>
+          </b>
+          <i>);{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S
+          contain <b>'Its OK'</b>} 
+          </span>
+        </i>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function</span>
+        </b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">TestTo(S:String;
+        Sarr:Array of String): Boolean;</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Return
+        true is S string equal one from array of string. This is for simply
+        equal test.</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S:String;</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">If</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">NOT
+        TestTo(S, [<b>
+            <i>'Carlo'</i>
+          </b>, <b>
+            <i>'Irene'</i>
+          </b>]) <b>Then</b> S :=<b>
+            <i>'Peter'</i>
+          </b>;<i>{</i>
+        </span><i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: Wingdings">à</span>
+        </i>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">if
+          S isn't Carlo or Irene string put into Peter string}</span>
+        </i>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function</span>
+        </b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">TestBeginTo(S:String;
+        Sarr:Array of String): Boolean;</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Return
+        true is S string beginning one from array of string. This is for simply
+        equal test.</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">S:String;</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">If</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">TestBeginTo(S,
+        [<b>
+            <i>'001217'</i>
+          </b>, <b>
+            <i>'001319'</i>
+          </b>]) <b>Then</b> ShowMessage(<b>
+            <i>'Telephone number to U.S.A.')</i>
+          </b>; 
+        </span>
+      </p>
+      <p>
+        <b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">Function</span>
+        </b><span style="COLOR: red; FONT-FAMILY: 'Courier New'">PosN(Substring,
+        Mainstring:string; occurrence:integer):integer</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Function
+        PosN get recursive - the "occurrence" the position of "Substring" in
+        "Mainstring". Does the Mainstring not contain Substring the result is 0.
+        Works with chars and strings. (NOTE: This function is from Swiss Delphi
+        Center WEB Tips and Tricks).</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Here
+        is speed problem when main string is over <strong>4092</strong>
+         characters.
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Example:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">Var</span>
+        </b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">I:Integer;</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">I
+          := PosN('s','swissdelphicenter.ch',2 </span>
+        </b>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">{second
+          occurence}</span>
+        </i>
+        <b><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">); </span>
+        </b>
+        <i><span style="FONT-SIZE: 10pt; COLOR: navy; FONT-FAMILY: 'Courier New'">{I
+          variable contain 4 as position}</span>
+        </i>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Declaration:</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: red; FONT-FAMILY: 'Courier New'">Type</span>
+        </b>
+      </p>
+      <p><span style="COLOR: red; FONT-FAMILY: 'Courier New'">CharSet</span><span style="FONT-SIZE: 10pt; COLOR: red; FONT-FAMILY: 'Courier New'">=<b>Set
+          of</b> Char; 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: red; FONT-FAMILY: 'Courier New'">Const</span>
+        </b>
+      </p>
+      <p><span style="COLOR: red; FONT-FAMILY: 'Courier New'">MaskZipChar</span><span style="FONT-SIZE: 10pt; COLOR: red; FONT-FAMILY: 'Courier New'">:Char
+        = <b>
+            <i>'X'</i>
+          </b>; 
+        </span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: red; FONT-FAMILY: 'Courier New'">ccYesString
+        = '1';</span>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; COLOR: red; FONT-FAMILY: 'Courier New'">ccNoString
+        = '0';</span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Description:</span>
+        </b>
+      </p>
+      <p><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">MaskZipChar
+        is mask character for <span style="COLOR: olive">Strip</span>, <span style="COLOR: olive">Zip</span>
+         and <span style="COLOR: olive">Form</span>
+         function and possible to change 
+        </span>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 10pt; COLOR: fuchsia; FONT-FAMILY: Arial">End
+          of file</span>
+        </b>
+      </p>
+      <p>
+        <b><span style="FONT-SIZE: 7.5pt; FONT-FAMILY: Arial">{last
+          change 19.VIII.2005}</span>
+        </b>
+      </p>
+    </div>
+  </body>
+</html>

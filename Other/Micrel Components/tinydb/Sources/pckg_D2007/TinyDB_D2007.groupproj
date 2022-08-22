@@ -1,0 +1,54 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{6a1c9b1c-d0e5-42e0-a782-6599bdd20172}</ProjectGuid>
+  </PropertyGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Projects Include="..\..\Tools\TinyDB Desktop\Source\Dbd.dproj" />
+    <Projects Include="dclTinyDB110.dproj" />
+    <Projects Include="rtmTinyDB110.dproj" />
+  </ItemGroup>
+  <ProjectExtensions>
+    <Borland.Personality>Default.Personality</Borland.Personality>
+    <Borland.ProjectType />
+    <BorlandProject>
+<BorlandProject xmlns=""><Default.Personality></Default.Personality></BorlandProject></BorlandProject>
+  </ProjectExtensions>
+  <Target Name="rtmTinyDB110">
+    <MSBuild Projects="rtmTinyDB110.dproj" Targets="" />
+  </Target>
+  <Target Name="rtmTinyDB110:Clean">
+    <MSBuild Projects="rtmTinyDB110.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="rtmTinyDB110:Make">
+    <MSBuild Projects="rtmTinyDB110.dproj" Targets="Make" />
+  </Target>
+  <Target Name="dclTinyDB110">
+    <MSBuild Projects="dclTinyDB110.dproj" Targets="" />
+  </Target>
+  <Target Name="dclTinyDB110:Clean">
+    <MSBuild Projects="dclTinyDB110.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="dclTinyDB110:Make">
+    <MSBuild Projects="dclTinyDB110.dproj" Targets="Make" />
+  </Target>
+  <Target Name="Dbd">
+    <MSBuild Projects="..\..\Tools\TinyDB Desktop\Source\Dbd.dproj" Targets="" />
+  </Target>
+  <Target Name="Dbd:Clean">
+    <MSBuild Projects="..\..\Tools\TinyDB Desktop\Source\Dbd.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="Dbd:Make">
+    <MSBuild Projects="..\..\Tools\TinyDB Desktop\Source\Dbd.dproj" Targets="Make" />
+  </Target>
+  <Target Name="Build">
+    <CallTarget Targets="rtmTinyDB110;dclTinyDB110;Dbd" />
+  </Target>
+  <Target Name="Clean">
+    <CallTarget Targets="rtmTinyDB110:Clean;dclTinyDB110:Clean;Dbd:Clean" />
+  </Target>
+  <Target Name="Make">
+    <CallTarget Targets="rtmTinyDB110:Make;dclTinyDB110:Make;Dbd:Make" />
+  </Target>
+  <Import Condition="Exists('$(MSBuildBinPath)\Borland.Group.Targets')" Project="$(MSBuildBinPath)\Borland.Group.Targets" />
+</Project>

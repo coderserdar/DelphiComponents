@@ -1,0 +1,51 @@
+package TDB_D7R;
+
+{$R *.res}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'TinyDB Database Engine'}
+{$RUNONLY}
+{$IMPLICITBUILD OFF}
+
+requires
+  vcl,
+  vcldb,
+  designide,
+  visualclx;
+
+contains
+  TinyDB in '..\TinyDB.pas',
+  Enc_Blowfish in '..\Enc_Blowfish.pas',
+  Enc_Gost in '..\Enc_Gost.pas',
+  Enc_Twofish in '..\Enc_Twofish.pas',
+  EncryptBase in '..\EncryptBase.pas',
+  Hash_CheckSum in '..\Hash_CheckSum.pas',
+  Hash_MD in '..\Hash_MD.pas',
+  Hash_RipeMD in '..\Hash_RipeMD.pas',
+  Hash_SHA in '..\Hash_SHA.pas',
+  HashBase in '..\HashBase.pas',
+  TinyDBIni in '..\TinyDBIni.pas',
+  Compress_Zlib in '..\Compress_Zlib.pas',
+  ZlibUnit in '..\ZlibUnit.pas',
+  Compress_Zip in '..\Compress_Zip.pas';
+
+end.

@@ -1,0 +1,504 @@
+{SEE:
+
+     http://www2.imagine.com/eactive/ddedoc.html
+
+     for the complete documentation for the Program Manager.
+
+     Not all commands have been implemented here.
+}
+
+{-------------------------------------------------------}
+{                                                       }
+{Delphi VCL to add a program group and add program items}
+{ by Andrew McLean                                      }
+{                                                       }
+{ Version 1.0a - 7th Jan 1996                           }
+{ Initial release.                                      }
+{                                                       }
+{ Version 1.1a - 18th Jan 1996                          }
+{ Added two properties: programGroup                    }
+{                       programItems                    }
+{                                                       }
+{ There is now just one method to make the group:       }
+{   makeGroup                                           }
+{                                                       }
+{ Version 1.2a - 28th April 1997                        }
+{ Can now delete items                                  }
+{                                                       }
+{                                                       }
+{              THIS IS A FREE COMPONENT!!               }
+{                                                       }
+{  If you modify this please let me know.               }
+{                                                       }
+{  My web: http://www.aerosoft.com.au                   }
+{          http://www.aerosoft.com.au/delphi            }
+{          http://www.aerosoft.com.au/delphi/progman    }
+{                                                       }
+{  You can contact me via the 'contact aerosoft' link   }
+{                                                       }
+{  If anyone knows how to hide the other DDE properties }
+{  I'd be most interested in hearing from you.          }
+{                                                       }
+{-------------------------------------------------------}
+
+{-------------------------------------------------------}
+{                                                       }
+{ Reference Material:                                   }
+{ PC Magazine - Turbo Pascal for Windows                }
+{ Neil J. Rubenking                                     }
+{ Ziff-Davis Press                                      }
+{                                                       }
+{ Page: 743-753                                         }
+{                                                       }
+{-------------------------------------------------------}
+{
+Examples
+--------
+
+Drop the component onto the form...it will be called: progMan1
+
+Always:
+      openProgramManager;
+
+..and when finished always:
+
+      closeProgramManager;
+
+You can do anything you like between those two commands. More methods
+and properies exist in the source which are fairly easily understood.
+
+
+
+CREATING A GROUP & ADDING ITEMS
+-------------------------------
+
+NOTE: the path to the icon is optional
+
+  with progMan1 do
+  begin
+      openProgramManager;
+      createGroup('This is a new group');
+      addItem('c:\path\file1.exe','Caption for file 1','c:\iconpath');
+      addItem('c:\path\file2.exe','Caption for file 2','');
+      closeProgramManager;
+  end;
+
+
+
+ADDING AN ITEM TO A GROUP
+-------------------------
+
+  with progMan1 do
+  begin
+    openProgramManager;
+    deleteItemFromGroup('startup','My Clock');
+    closeProgramManager;
+  end;
+
+
+
+
+DELETING AN ITEM FROM A GROUP
+-----------------------------
+
+  with progMan1 do
+  begin
+    openProgramManager;
+    deleteItemFromGroup('startup','I always start');
+    closeProgramManager;
+  end;
+}
+
+unit Progman;
+
+interface
+
+uses
+  SysUtils, WinTypes, WinProcs, Messages, Classes,
+  DdeMan;
+
+type
+  TActivateType = (activateNormalSize,activateAndIconize,activateMaximize,
+                   iconizeNoActivate,activateNoChange,activateMinimize);
+  EItemError= class(Exception);
+
+  TProgMan = class(TDdeClientConv)
+  private
+    { Private declarations }
+    FOnGroupError,
+    FOnItemError: TNotifyEvent;
+
+    FprogramGroup: string;
+    FprogramItems: TstringList;
+
+    FshowGroup: TActivateType;
+    procedure setItems(TS: TStringList);
+
+  public
+    { Public declarations }
+    constructor Create(AOwner: TComponent); override;
+    destructor Destroy; override;
+
+    procedure createGroup(name: string);
+    procedure showGroup(name: string);
+    procedure addItem(cmdLine,itemName,iconPath: string);
+    procedure openProgramManager;
+    procedure closeProgramManager;
+
+    procedure deleteItem(itemName: string);
+    procedure deleteItemFromGroup(groupName,itemName: string);
+
+    procedure makeGroup;
+
+    //--> JB.
+    procedure EraseGroup(Const name:String);
+    Function  FileRegister(Const Ext:String;Assoc:Boolean;Const TypeName,Hint,Progr:String;IcoPos:Integer):Boolean;
+    Procedure FileUnregister(Const Ext:String);
+    //<-- JB.
+  published
+    {properties and events}
+
+    property programItems: TStringList read FprogramItems write setItems;
+    property programGroup: string read FprogramGroup write FprogramGroup;
+
+    property ShowGroupState: TActivateType read FshowGroup write FshowGroup;
+    property OnGroupError: TNotifyEvent read FOnGroupError write FOnGroupError;
+    property OnItemError: TNotifyEvent read FOnItemError write FOnItemError;
+  end;
+
+procedure Register;
+
+implementation
+
+
+procedure Register;
+begin
+  RegisterComponents('Andrew', [TprogMan]); {yes, change it to whatever}
+end;
+
+
+constructor TProgMan.Create(AOwner: TComponent);
+begin
+  inherited create(aOwner);
+  FshowGroup:=activateNormalSize;
+
+  FprogramItems:=TStringList.Create;
+end;
+
+
+destructor TProgMan.Destroy;
+begin
+  closeLink;
+  FprogramItems.free;
+  inherited Destroy;
+end;
+
+procedure TProgMan.setItems(TS: TStringList);
+begin
+  {We must assign a copy of the string because the 'write' method
+  in the property declaration only assigns points to the strings and
+  not a copy of them.}
+  FprogramItems.assign(TS);
+end;
+
+procedure TProgMan.openProgramManager;
+begin
+  connectMode:=ddeAutomatic;
+  DDEservice:='progman';   {Delphi BUG: DDEservice is never set (or is it my fault!)}
+  SetLink('progman', DDETopic);
+  openLink;
+end;
+
+
+procedure TProgMan.closeProgramManager;
+begin
+  closeLink;
+end;
+
+
+procedure TProgMan.createGroup(name: string);
+var
+  macro: string;
+  cmd: array[0..255] of Char;
+  i: integer;
+begin
+  {create a program group using DDE}
+  macro:=format('[CreateGroup(%s)]',[name])+#13#10;
+  strPCopy(cmd,macro);
+
+  if not executeMacro(cmd,false) then
+  begin
+    if assigned(FOnGroupError) then
+      FOnGroupError(Self);
+  end;
+
+  {Setup display state}
+  case FshowGroup of
+    activateNormalSize: i:=1;
+    activateAndIconize: i:=2;
+    activateMaximize:   i:=3;
+    activateMinimize:   i:=6;
+    iconizeNoActivate:  i:=7;
+    activateNoChange:   i:=8;
+  end;
+
+
+  macro:=format('[ShowGroup(%s,%d)]',[name,i])+#13#10;
+  strPCopy(cmd,macro);
+  executeMacro(cmd,false);
+end;
+
+
+
+
+procedure TProgMan.showGroup(name: string);
+var
+  macro: string;
+  cmd: array[0..255] of Char;
+  i: integer;
+begin
+  {Setup display state}
+  case FshowGroup of
+    activateNormalSize: i:=1;
+    activateAndIconize: i:=2;
+    activateMaximize:   i:=3;
+    activateMinimize:   i:=6;
+    iconizeNoActivate:  i:=7;
+    activateNoChange:   i:=8;
+  end;
+  macro:=format('[ShowGroup(%s,%d)]',[name,i])+#13#10;
+  strPCopy(cmd,macro);
+  executeMacro(cmd,false);
+end;
+
+
+
+procedure TProgMan.addItem(cmdLine,itemName,iconPath: string);
+var
+  macro: string;
+  cmd: array[0..255] of Char;
+begin
+  {add program items using DDE}
+
+  macro:='[AddItem('+cmdLine;
+
+  if itemName<>'' then
+    macro:=macro+','+itemName;
+
+  if iconPath<>'' then
+    macro:=macro+','+iconPath;
+
+  macro:=macro+')]'+#13#10;
+
+  strPCopy(cmd, macro);
+
+  if not executeMacro(cmd,false) then
+    if assigned(FOnItemError) then
+      FOnItemError(Self);
+end;
+
+
+procedure TProgMan.deleteItem(itemName: string);
+var
+  macro: string;
+  cmd: array[0..255] of Char;
+begin
+  {delete the currently active group - use showGroup to activate one}
+
+  macro:='[DeleteItem('+itemName+')]'+#13#10;
+  strPCopy(cmd, macro);
+
+  if not executeMacro(cmd,false) then
+    if assigned(FOnItemError) then
+      FOnItemError(Self);
+end;
+
+
+procedure TProgMan.deleteItemFromGroup(groupName,itemName: string);
+var
+  macro: string;
+  cmd: array[0..255] of Char;
+begin
+
+  showGroup(groupName);
+  {delete the currently active group - use showGroup to activate one}
+
+  macro:='[DeleteItem('+itemName+')]'+#13#10;
+  strPCopy(cmd, macro);
+
+  if not executeMacro(cmd,false) then
+    if assigned(FOnItemError) then
+      FOnItemError(Self);
+end;
+
+
+
+procedure TProgMan.makeGroup;
+var
+  i: integer;
+  s1,s2,s3: string;
+
+  procedure parseLine(sx: string; var s1,s2,s3: string);
+  var
+    s: array[1..3] of string;
+    i: integer;
+    done: boolean;
+
+    function comma(st: string): integer;
+    begin
+      comma:=pos(',',st);
+    end;
+
+  begin
+    for i:=1 to 3 do
+      s[i]:='';
+
+    i:=1;
+    done:=false;
+    repeat
+      if comma(sx)<>0 then
+      begin
+        s[i]:=copy(sx,1,comma(sx)-1);
+        delete(sx,1,comma(sx));
+      end
+      else
+      begin
+        s[i]:=sx;
+        done:=true;
+      end;
+      inc(i);
+    until done;
+
+    s1:=s[1];
+    s2:=s[2];
+    s3:=s[3];
+  end;
+
+begin
+  openProgramManager;
+  createGroup(FprogramGroup);
+
+
+  with FprogramItems do
+  for i:=0 to count-1 do
+  begin
+    parseLine(strings[i],s1,s2,s3);
+    addItem(s1,s2,s3);
+  end;
+
+  closeProgramManager;
+end;
+
+(* this part is addapted for me*)
+{Jaro Benes}
+{mailto:JBenes@micrel.cz}
+
+procedure TProgMan.eraseGroup;{J.B.}
+var
+  macro: string;
+  cmd: array[0..255] of Char;
+begin
+  openProgramManager;
+  {delete a program group using DDE}
+  macro:=format('[DeleteGroup(%s)]',[name])+#13#10;
+  strPCopy(cmd,macro);
+
+  if not executeMacro(cmd,false) then begin
+    if assigned(FOnGroupError) then
+      FOnGroupError(Self);
+  end;
+  closeProgramManager;
+end;
+
+{tahle sekce je pridana jako servisni}
+{FileRegister('.mt',true,'MTWorkFile','Pracovní soubor pro MTarif','C:\MTARIF\MTarif.Exe',7);}
+Function TProgMan.FileRegister(Const Ext:String;Assoc:Boolean;Const TypeName,Hint,Progr:String;IcoPos:Integer):Boolean;
+{const
+  extension: PChar = '.mt';
+  typename: PChar = 'MT_Work_File';
+  HintOfTypeName: PChar = 'Pracovní soubor pro MTarif';
+  commandKey: PChar = 'MT_Work_File\shell\open\command';
+  iconKey: PChar = 'MT_Work_File\DefaultIcon';
+  iconID: PChar = 'C:\MTARIF\MTarif.Exe,7';
+  command: PChar = 'C:\MTARIF\MTarif.Exe %1';}
+Var
+  key: HKey;
+  A:Array [0..255] of Char;
+begin
+  Result:=True;{- kdyz je vsechno OK}
+  {vytvoreni polozky extense jako tridy}
+  If RegCreateKey( HKEY_CLASSES_ROOT, StrPCopy(A,ext), key ) = ERROR_SUCCESS Then
+    {vytvoreni slozky typoveho jmena/tridy}
+    If RegSetValue( key, nil, REG_SZ, StrPCopy(A,typename), 0 ) = ERROR_SUCCESS Then Begin
+      RegCloseKey( key );
+      {popisek souboru, ktery se objevi v prirazenych ext jako nazev reg.polozky}
+      If RegCreateKey( HKEY_CLASSES_ROOT, StrPCopy(A,typename), key ) = ERROR_SUCCESS Then Begin
+        If RegSetValue( key, nil, REG_SZ, StrPCopy(A,hint), 0 ) = ERROR_SUCCESS Then RegCloseKey( key )
+        Else Begin
+          Result:=False;
+          RegCloseKey( key );
+          RegDeleteKey( HKEY_CLASSES_ROOT, StrPCopy(A,ext) );
+        End
+      End;
+      {ikona prirazena tomuto typu souboru}
+      If RegCreateKey( HKEY_CLASSES_ROOT, StrPCopy(A,typename+'\DefaultIcon'), key ) = ERROR_SUCCESS Then Begin
+        If RegSetValue( key, nil, REG_SZ, StrPCopy(A,Progr+','+IntToStr(IcoPos)), 0 ) = ERROR_SUCCESS Then RegCloseKey( key )
+        Else Begin
+          Result:=False;
+          RegCloseKey( key );
+          RegDeleteKey( HKEY_CLASSES_ROOT, StrPCopy(A,ext) );
+        End
+      End
+      Else Begin
+        Result:=False;
+        RegDeleteKey( HKEY_CLASSES_ROOT, StrPCopy(A,ext) );
+      End;
+      {prikaz pro otevreni souboru zadanym programem}
+      If Assoc Then Begin
+        If RegCreateKey( HKEY_CLASSES_ROOT, StrPCopy(A,typename+'\shell\open\command'), key ) = ERROR_SUCCESS Then Begin
+          If RegSetValue( key, nil, REG_SZ, StrPCopy(A,progr+' %1'), 0 ) = ERROR_SUCCESS Then RegCloseKey( key )
+          Else Begin
+            Result:=False;
+            RegCloseKey( key );
+            RegDeleteKey( HKEY_CLASSES_ROOT, StrPCopy(A,ext) );
+          End
+        End
+        Else Begin
+          Result:=False;
+          RegDeleteKey( HKEY_CLASSES_ROOT, StrPCopy(A,ext) );
+        End;
+      End;
+      {---}
+    End
+    Else Begin
+      Result:=False;
+      RegCloseKey( key );
+      RegDeleteKey( HKEY_CLASSES_ROOT, StrPCopy(A,ext) );
+    End
+  Else
+    Result:=False;
+end;
+{FileUnregister('.mt');}
+Procedure TProgMan.FileUnregister(Const Ext:String);
+Const eSize=256;
+Var
+  key: HKey;
+  A:Array [0..255] of Char;
+  P:PChar;
+  L:LongInt;
+Begin
+  GetMem(P,eSize);L:=eSize-1;
+  Try
+    If RegOpenKey(HKEY_CLASSES_ROOT, StrPCopy(A,ext),key) = ERROR_SUCCESS Then Begin
+      If RegQueryValue(key,Nil,P,L) = ERROR_SUCCESS Then Begin
+        RegDeleteKey( HKEY_CLASSES_ROOT, P );
+      End;
+      RegDeleteKey( HKEY_CLASSES_ROOT, StrPCopy(A,ext) );
+    End;
+  Finally
+    FreeMem(P,eSize)
+  End;
+End;
+
+end.
+
