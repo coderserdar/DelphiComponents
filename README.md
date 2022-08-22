@@ -135,6 +135,7 @@ And I created a folder which is used to store compressed files of Delphi compone
    3. *Speex Network Component*
    4. *BergSoft NextGrid 5 (for Delphi 6 & Delphi 7)*
    5. *BergSoft NextGrid 6 (for Delphi 6 & Delphi 7)*
+   6. *EC Software Help Suite*
 
 </details>
 
