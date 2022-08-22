@@ -133,6 +133,8 @@ And I created a folder which is used to store compressed files of Delphi compone
    1. *JEDI Component Library (JCL) Components (Delphi XE)*
    2. *JEDI Visual Component Library (JVCL) Components (Delphi XE)*
    3. *Speex Network Component*
+   4. *BergSoft NextGrid 5 (for Delphi 6 & Delphi 7)*
+   5. *BergSoft NextGrid 6 (for Delphi 6 & Delphi 7)*
 
 </details>
 
