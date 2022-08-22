@@ -1,0 +1,137 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type"
+content="text/html; charset=iso-8859-1">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<title>Installation and usage in C++ Builder</title>
+</head>
+
+<body bgcolor="#FFFFFF">
+
+<h1><font size="5" face="Verdana">Installation and Usage of
+TXmlScanner in Borland C++Builder</font></h1>
+
+<p><font size="2" face="Verdana"><i>By Rajeev Rajan (Qualcomm Inc,
+USA)</i> </font></p>
+
+<p><font size="2" face="Verdana">Version: Borland C++ Builder ver
+5 (BCB5) Integrated Development Environment (IDE). </font></p>
+
+<hr>
+
+<h2><font size="4" face="Verdana">Installation</font></h2>
+
+<ul>
+    <li><font size="2" face="Verdana">In the BCB5 IDE, I selected
+        the Component | Install Component menu option, and then
+        the &quot;Into new package&quot; tab. </font></li>
+    <li><font size="2" face="Verdana">I browsed the &quot;Unit
+        files&quot; and selected the &quot;LibXmlComps.pas&quot;
+        and &quot;LibXmlParser.pas&quot; files (which are the
+        Pascal component files for the TXmlScanner component) </font></li>
+    <li><font size="2" face="Verdana">I then supplied a new name
+        for the package, which will contain the component. </font></li>
+    <li><font size="2" face="Verdana">The BCB IDE, then comes up
+        with a message like &quot;Creating and Installing Package&quot;.
+        If successful, you should now see the &quot;XmlScanner&quot;
+        component in it's own XML tab, in the BCB IDE's component
+        palette. </font></li>
+</ul>
+
+<h2><font size="4" face="Verdana">Compilation problems</font></h2>
+
+<ul>
+    <li><font size="2" face="Verdana">In the LibXmlComps.hpp file,
+        the TExternalEvent property (on line 131), doesn't get
+        properly resolved, and the compiler complains about an
+        improper type name of something.<br>
+        (I just commented this line. I did not pursue it further.
+        What the comment does is that even if a call-back is
+        associated with the &quot;OnLoadExternal&quot; property
+        in the BCB's Object Inspector, for the TXmlScanner object,
+        it won't be called.)<br>
+      <i>[This was fixed with the release of 2001-02-28. Please inform me if you still have
+      problems. Stefan Heymann]</i></font></li>
+    <li><font size="2" face="Verdana">There are also some
+        overloading ambiguities between a few elements of the
+        TXmlScanner and the TXmlParser classes, like:<br>
+        typedef TAttrList TAttrList;<br>
+        and TXmlParser* usage.<br>
+        (I just changed the name of the first typedef, and
+        qualified the TXmlParser* with Libxmlparser::TXmlParser.)
+        </font></li>
+</ul>
+
+<p><font size="2" face="Verdana">Due to paucity of time, I haven't
+pursued the above problems further, but just hacked around them.
+I guess I will pursue them, when the need arises or something
+fishy happens. If someone else does before me, please let me know
+the solutions. :-) </font></p>
+
+<h2><font size="4" face="Verdana">Usage</font></h2>
+
+<h3><font size="3" face="Verdana">Usage of the TXmlScanner object</font></h3>
+
+<ul>
+    <li><font size="2" face="Verdana">Drop the XmlScanner into
+        your form. </font></li>
+    <li><font size="2" face="Verdana">Associate your application
+        code with the various event call-backs. (For example :
+        OnContent, OnEndTag etc.) </font></li>
+    <li><font size="2" face="Verdana">Use the parser as follows:<br>
+        For example: If xmlScanner is the name of your
+        TXmlScanner object. </font><pre>//-- Load the input xml file, and call execute.
+xmlScanner-&gt;LoadFromFile(&quot;c:\\myfile.xml&quot;);
+xmlScanner-&gt;Execute();</pre>
+    </li>
+    <li><font size="2" face="Verdana">That's it, as your file is
+        parsed, your various event call-back functions will be
+        automatically called. </font></li>
+</ul>
+
+<h3><font size="3" face="Verdana">Usage of the TXmlParser object
+from TXmlScanner</font></h3>
+
+<p><font size="2" face="Verdana">If you want to use the
+TXmlParser component from within TXmlScanner, a pointer to the
+same is available in the TXmlScanner object. I've given some
+sample code below on how to use it.</font></p>
+
+<p><font size="2" face="Verdana">For example: <br>
+If XmlScanner1 is the name of your TXmlScanner object:</font></p>
+
+<pre>  //-- Load the input xml file..
+  XmlScanner1-&gt;LoadFromFile(&quot;c:\\myfile.xml&quot;);
+
+  //-- Init the scanning.
+  XmlScanner1-&gt;XmlParser-&gt;StartScan();
+
+  //-- Loop thru the file for each item.
+  AnsiString s;
+  while (XmlScanner1-&gt;XmlParser-&gt;Scan())
+  {
+     switch (XmlScanner1-&gt;XmlParser-&gt;CurPartType)
+     {
+        case  ptStartTag :      //-- Got Start tag.
+          s = XmlScanner1-&gt;XmlParser-&gt;CurName;
+          break;
+
+        case  ptContent :       //-- Got content.
+          s = XmlScanner1-&gt;XmlParser-&gt;CurContent;
+          break;
+
+        //-- Add other cases here as required..
+
+        default :
+          break;
+     }
+  }
+</pre>
+
+<hr>
+
+<p><font face="Verdana" color="#808080" size="1">2000-07-27 Rajeev Rajan<br>
+2001-02-28 Stefan Heymann: Added a note on the OnLoadExternal problem</font></p>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!-- This simple demo file shows how to store a small CD collection in XML -->
+
+<!DOCTYPE CDCollection [
+
+<!ELEMENT CDCollection (CD*) >
+<!ELEMENT CD (singer, title, tracks) >
+<!ELEMENT singer (#PCDATA) >
+<!ATTLIST singer gender (none | male | female) "none">
+<!ELEMENT title (#PCDATA) >
+<!ELEMENT tracks (#PCDATA) >
+]>
+
+<CDCollection>
+
+<CD>
+  <singer gender="female">Madonna</singer>
+  <title>Ray of Light</title>
+  <tracks>13</tracks>
+</CD>
+
+<CD>
+  <singer gender="female">Gloria Estefan</singer>
+  <title>Mi Tierra</title>
+  <tracks>12</tracks>
+</CD>
+
+<CD>
+  <singer gender="female">Gloria Estefan</singer>
+  <title>Abriendo Puertas</title>
+  <tracks>10</tracks>
+</CD>
+
+<CD>
+  <singer gender="female">Vonda Shepard</singer>
+  <title>Heart and Soul. New Songs from Ally McBeal</title>
+  <tracks>14</tracks>
+</CD>
+
+<CD>
+  <singer gender="male">Joe Cocker</singer>
+  <title>Organic</title>
+  <tracks>14</tracks>
+</CD>
+
+<CD>
+  <singer gender="male">Stoppok</singer>
+  <title>Best of Stoppok</title>
+  <tracks>18</tracks>
+</CD>
+
+
+</CDCollection>
