@@ -1,0 +1,93 @@
+unit uHunspellAddictMain;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, StdCtrls,
+  ShellAPI, CheckLst, NHunspell, ad3SpellBase, ad3Spell, ad4Live, ad3MainDictionary;
+
+type
+  TFrmHunspellAddictMain = class(TForm)
+    MeText: TMemo;
+    AddictSpell1: TAddictSpell;
+    btnConfig: TButton;
+    Button1: TButton;
+    procedure FormCreate(Sender: TObject);
+    procedure btnConfigClick(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+  private
+  public
+  end;
+
+var
+  FrmHunspellAddictMain: TFrmHunspellAddictMain;
+  DictFolderName: String;
+
+implementation
+
+uses Math, uHunspellAddictConfig;
+
+{$R *.dfm}
+
+
+procedure TFrmHunspellAddictMain.btnConfigClick(Sender: TObject);
+var
+  intIndex: integer;
+begin
+  with FrmHunspellAddictConfig do
+  begin
+    lbDictsFound.Caption := lbDictsFound.Caption + #13#10 + DictFolderName;
+
+    with lbSpellDicts do
+    try
+      Items.BeginUpdate;
+      clear;
+      for intIndex := 0 to Hunspell.SpellDictionaryCount-1 do
+      begin
+        Items.AddObject(Format('%s - %s Version: %s', [Hunspell.SpellDictionaries[intIndex].LanguageName,
+                                                       Hunspell.SpellDictionaries[intIndex].DisplayName,
+                                                       Hunspell.SpellDictionaries[intIndex].Version]),
+                        Hunspell.SpellDictionaries[intIndex]);
+
+        Checked[intIndex] := AddictSpell1.Configuration.MainDictionaries.IndexOf( Hunspell.SpellDictionaries[intIndex].GetInternalFileID ) > -1;
+      end;
+    finally
+      Items.EndUpdate;
+    end;
+
+    if ShowModal = mrOK then
+    begin
+      AddictSpell1.Configuration.MainDictionaries.clear;
+
+      for intIndex := 0 to lbSpellDicts.Items.Count-1 do
+        if lbSpellDicts.Checked[intIndex] then
+          AddictSpell1.Configuration.MainDictionaries.Add( TNHSpellDictionary(lbSpellDicts.Items.Objects[intIndex]).GetInternalFileID );
+
+      Hunspell.UpdateAndLoadDictionaries;
+    end;
+  end;
+end;
+
+procedure TFrmHunspellAddictMain.Button1Click(Sender: TObject);
+begin
+  if AddictSpell1.Configuration.MainDictionaries.count = 0 then
+    Showmessage('No dictionaries defined!')
+  else
+    AddictSpell1.CheckWinControl(MeText, ctAll);
+end;
+
+procedure TFrmHunspellAddictMain.FormCreate(Sender: TObject);
+begin
+  DictFolderName := ExtractFilePath(application.Exename) + 'Dictionaries';
+  Hunspell.ReadFolder(DictFolderName);
+
+  with AddictSpell1.Configuration.MainDictionaries do
+  begin
+    Clear;
+    Add('dict-en.oxt::en_US.aff::en_US.dic');  //default value, this is the "InternalFileID" of the US English dictionary
+  end;
+  Hunspell.UpdateAndLoadDictionaries;
+end;
+
+
+end.

@@ -1,0 +1,177 @@
+unit uHunspellTestMain;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, StdCtrls,
+  Widestrings, NHunspell;
+
+type
+  TFrmHunspellTestMain = class(TForm)
+    edDict: TEdit;
+    Label1: TLabel;
+    btnDict: TButton;
+    btnLoadOXT: TButton;
+    dlgLoadDictionary: TOpenDialog;
+    Label2: TLabel;
+    EdCheckWord: TEdit;
+    btnSpell: TButton;
+    MemOutput: TMemo;
+    btnStem: TButton;
+    btnAnalyze: TButton;
+    btnHyphenate: TButton;
+    btnLoadFolder: TButton;
+    btnClear: TButton;
+    Label3: TLabel;
+    lbSpellDicts: TListBox;
+    Label4: TLabel;
+    lbHyphenDicts: TListBox;
+    procedure btnDictClick(Sender: TObject);
+    procedure btnLoadOXTClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+    procedure btnSpellClick(Sender: TObject);
+    procedure btnStemClick(Sender: TObject);
+    procedure btnAnalyzeClick(Sender: TObject);
+    procedure btnHyphenateClick(Sender: TObject);
+    procedure btnClearClick(Sender: TObject);
+    procedure btnLoadFolderClick(Sender: TObject);
+  private
+    FHunspell: TNHunspell;
+  public
+    procedure UpdateDicts;
+  end;
+
+var
+  FrmHunspellTestMain: TFrmHunspellTestMain;
+
+implementation
+
+uses Math;
+
+{$R *.dfm}
+
+procedure TFrmHunspellTestMain.btnAnalyzeClick(Sender: TObject);
+var
+  tmpStr: TWidestrings;
+begin
+  tmpStr := TWidestringlist.create;
+  try
+//qqq    FHunspell.Analyze(EdCheckWord.Text, tmpStr);
+    if tmpStr.count = 0 then
+      memOutput.Text := 'Not in dictionary'
+    else
+      memOutput.Text := tmpStr.Text;
+  finally
+    FreeAndNil(tmpStr);
+  end;
+end;
+
+procedure TFrmHunspellTestMain.btnDictClick(Sender: TObject);
+begin
+  dlgLoadDictionary.Filename := EdDict.Text;
+  if dlgLoadDictionary.Execute then
+    EdDict.Text := dlgLoadDictionary.FileName;
+
+end;
+
+procedure TFrmHunspellTestMain.UpdateDicts;
+var
+  intIndex: integer;
+begin
+  with lbSpellDicts do
+  try
+    Items.BeginUpdate;
+    clear;
+    for intIndex := 0 to fHunspell.SpellDictionariesCount-1 do
+      Items.AddObject(Format('%s - %s Version: %s', [fHunspell.SpellDictionaries[intIndex].LanguageName,
+                                                     fHunspell.SpellDictionaries[intIndex].DisplayName,
+                                                     fHunspell.SpellDictionaries[intIndex].Version]),
+                      fHunspell.SpellDictionaries[intIndex]);
+  finally
+    Items.EndUpdate;
+  end;
+
+  with lbHyphenDicts do
+  try
+    Items.BeginUpdate;
+    clear;
+    for intIndex := 0 to fHunspell.HyphenDictionariesCount-1 do
+      Items.AddObject(Format('%s - %s Version: %s', [fHunspell.HyphenDictionaries[intIndex].LanguageName,
+                                                     fHunspell.HyphenDictionaries[intIndex].DisplayName,
+                                                     fHunspell.HyphenDictionaries[intIndex].Version]),
+                      fHunspell.HyphenDictionaries[intIndex]);
+  finally
+    Items.EndUpdate;
+  end;
+end;
+
+procedure TFrmHunspellTestMain.btnLoadOXTClick(Sender: TObject);
+begin
+  FHunspell.ReadOXT(EdDict.Text);
+  UpdateDicts;
+end;
+
+procedure TFrmHunspellTestMain.btnHyphenateClick(Sender: TObject);
+begin
+//  memOutput.Text := FHunspell.Hyphenate(EdCheckWord.Text);
+end;
+
+procedure TFrmHunspellTestMain.btnStemClick(Sender: TObject);
+var
+  tmpStr: TWidestrings;
+begin
+    tmpStr := TWidestringlist.create;
+//qqq    FHunspell.Stem(EdCheckWord.Text, tmpStr);
+
+    if tmpStr.count = 0 then
+      memOutput.Text := 'Not in dictionary'
+    else
+      memOutput.Text := tmpStr.Text;
+    FreeAndNil(tmpStr);
+end;
+
+procedure TFrmHunspellTestMain.btnClearClick(Sender: TObject);
+begin
+  FHunspell.ClearDictionaries;
+  UpdateDicts;
+end;
+
+procedure TFrmHunspellTestMain.btnLoadFolderClick(Sender: TObject);
+begin
+  FHunspell.ReadFolder(ExtractFilePath(EdDict.Text));
+  UpdateDicts;
+end;
+
+procedure TFrmHunspellTestMain.FormCreate(Sender: TObject);
+begin
+  FHunspell := TNHunspell.Create;
+  EdDict.Text := ExtractFilePath(application.Exename) + 'Dictionaries\dict-en.oxt';
+end;
+
+procedure TFrmHunspellTestMain.FormDestroy(Sender: TObject);
+begin
+  FreeAndNil(FHunspell);
+end;
+
+procedure TFrmHunspellTestMain.btnSpellClick(Sender: TObject);
+var
+  tmpStr: TWidestrings;
+begin
+//qqq  if FHunspell.Spell(EdCheckWord.Text) then
+//    memOutput.Text := 'Correct'
+//  else
+  begin
+    tmpStr := TWidestringlist.create;
+//qqq    FHunspell.Suggest(EdCheckWord.Text, tmpStr);
+
+    if tmpStr.count = 0 then
+      memOutput.Text := 'No suggestions'
+    else
+      memOutput.Text := tmpStr.Text;
+    FreeAndNil(tmpStr);
+  end;
+
+end;
+
+end.

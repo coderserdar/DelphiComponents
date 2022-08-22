@@ -1,0 +1,14 @@
+program NHunspellTest;
+
+uses
+  Forms,
+  uHunspellTestMain in 'uHunspellTestMain.pas' {FrmHunspellTestMain};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TFrmHunspellTestMain, FrmHunspellTestMain);
+  Application.Run;
+end.

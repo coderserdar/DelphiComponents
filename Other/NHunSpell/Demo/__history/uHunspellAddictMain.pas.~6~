@@ -1,0 +1,37 @@
+unit uHunspellAddictMain;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, StdCtrls,
+  ShellAPI, CheckLst, NHunspell, ad3SpellBase, ad3Spell, ad4Live;
+
+type
+  TFrmHunspellTestMain = class(TForm)
+    MeText: TMemo;
+    AddictSpell1: TAddictSpell;
+    btnConfig: TButton;
+    Button1: TButton;
+    procedure FormCreate(Sender: TObject);
+  private
+    FHunspell: TNHunspell;
+  public
+  end;
+
+var
+  FrmHunspellTestMain: TFrmHunspellTestMain;
+
+implementation
+
+uses Math;
+
+{$R *.dfm}
+
+
+procedure TFrmHunspellTestMain.FormCreate(Sender: TObject);
+begin
+//  EdDict.Text := ExtractFilePath(application.Exename) + 'Dictionaries\dict-en.oxt';
+end;
+
+
+end.

@@ -1,0 +1,19 @@
+program NHunspellAddict;
+
+uses
+  Forms,
+  uHunspellAddictMain in 'uHunspellAddictMain.pas' {FrmHunspellTestMain},
+  NHunspell in '..\NHunspell.pas',
+  NHunXml in '..\NHunXml.pas',
+  PasZip in '..\PasZip.pas',
+  uHunspellAddictConfig in 'uHunspellAddictConfig.pas' {Form1};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TFrmHunspellTestMain, FrmHunspellTestMain);
+  Application.CreateForm(TForm1, Form1);
+  Application.Run;
+end.
