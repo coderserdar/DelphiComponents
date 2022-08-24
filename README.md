@@ -4,7 +4,7 @@
 
 In this repo, I want to combine some kind of *freeware* **Delphi VCL and Non-VCL Components** which are from *Embarcadero Code Central*, *Torry's Delphi Pages* etc. Generally the components are for **older** Delphi IDE versions like *Delphi 5*, *Delphi 6*, *Delphi 7* etc.
 
-But some components like [**JSON**](https://github.com/coderserdar/DelphiComponents/tree/main/Embarcadero%20Code%20Central/JSON%204.5), [**CSV**](https://github.com/coderserdar/DelphiComponents/tree/main/Embarcadero%20Code%20Central/CSV%205.6), [**Cindy Component Suite**](https://github.com/coderserdar/DelphiComponents/tree/main/Embarcadero%20Code%20Central/Cindy%20Components) can be used in most common Delphi IDEs like *Delphi 10 Rio* etc.
+But some components like [**JSON**](https://github.com/coderserdar/DelphiComponents/tree/main/Embarcadero%20Code%20Central/JSON%204.5), [**CSV**](https://github.com/coderserdar/DelphiComponents/tree/main/Embarcadero%20Code%20Central/CSV%205.6), [**Cindy Component Suite**](https://github.com/coderserdar/DelphiComponents/tree/main/Embarcadero%20Code%20Central/Cindy%20Components), [**Yunqa**](https://github.com/coderserdar/DelphiComponents/tree/main/Yunqa), [**Precision Software Components**](https://github.com/coderserdar/DelphiComponents/tree/main/Other/Precision%20Software) can be used in most common Delphi IDEs like *Delphi 10 Rio* etc.
 
 In this repo there are components about
  - **DB Aware**
@@ -131,6 +131,21 @@ And I created a folder which is used to store compressed files of Delphi compone
    32. *Pro VCL Extensions Library*
    33. *Unit Expert*
    34. *Globus Lib*
+
+</details>
+
+<details>
+  <summary>Yunqa Setups</summary>
+
+   1. *DI Converters (Library of Unicode conversion functions for Delphi)*
+   2. *DI Creole (Markup parser, converter, and document creator from Creole syntax to, among others, HTML, RTF, LaTeX, as well as custom formats, for Delphi)*
+   3. *DI Google Reader (An advanced plugin for DIHtmlParser to illustrate how Google web search result pages can be parsed.)*
+   4. *DI HTML Label (Lightweight replacement for TLabel to display HTML-formatted text with clickable text links and dynamic contents.)*
+   5. *DI MIME (Base64 (MIME) encoding and decoding library)*
+   6. *DI SQLite 3 (A self-contained, embeddable, zero-configuration SQL database engine for Delphi)*
+   7. *DI UCL (A lossless compression library with extremely fast and small (200 bytes only!) ASM decompressor)*
+   8. *Yu Brotli (The new Brotli compression algorithm to Delphi. TStream, buffer & string wrappers. No-DLL implementation)*
+   9. *Yu XML Sec (Provides major XML Security standards for Delphi: XML Signature Syntax and Processing (XMLDSIG), XML Encryption Syntax and Processing (XMLENC), and Security Assertion Markup Language (SAML).)*
 
 </details>
 
