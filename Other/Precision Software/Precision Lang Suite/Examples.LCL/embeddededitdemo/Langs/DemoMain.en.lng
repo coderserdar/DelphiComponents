@@ -1,0 +1,53 @@
+﻿;-----------------------------------------------------------------------------
+;  Precision Language Suite for VCL
+;
+;  written by Precision software & consulting
+;            copyright ©  2008 - 2009
+;            Email : info@be-precision.com
+;            Web : http://www.be-precision.com
+;
+;  Purpose: Main language file for demo application of
+;           Precision Language Suite for VCL
+;
+;  The source code is given as is. The author is not responsible
+;  for any possible damage done due to the use of this code.
+;  This unit can be freely used in any application. The complete
+;  source code remains property of the author and may not be distributed,
+;  published, given or sold in any form as such. No parts of the source
+;  code can be included in any other component or application without
+;  written authorization of the author.
+;------------------------------------------------------------------------------
+
+[precision language file]
+;languagecode=first file extension
+languagename=English
+;fileid=file name
+description=Main language file for demo application of Precision Language Suite for VCL
+fileversion=1.0.1.1
+author=Precision software & consulting
+
+[TForm1]
+lbField1.Caption=Field 1
+lbField2.Caption=Field 2
+edField2.Text=Value 2
+mTest.Lines.Text=First line\nSecond line\n\tThird line (with tab char)
+lvTest.Columns[0].Caption=Column 1
+lvTest.Columns[1].Caption=Column 2
+lvTest.Columns[2].Caption=Column 3
+sbMsgWarn.caption=Warning
+sbMsgWarn.hint=Shows message with "MSG_TEST2" text
+sbMsgInfo.caption=Information
+sbMsgInfo.hint=Shows message with "MSG_TEST1" text
+sbProperty.caption=Property
+sbProperty.hint=Shows message with value of "edField2.text"
+sbChildWindow.caption=Child window
+sbChildWindow.hint=Shows child window
+lbLabelName.Caption=Language name:
+sbMessage1.Caption=Message 1
+sbMessage1.Hint=Displays the localized system message (see the source code)
+sbMessage2.Caption=Message 2
+sbMessage2.Hint=Displays the localized system message (see the source code)
+
+[TfrmChild]
+Self.Caption=Child window
+lbTest.Caption=Testing label

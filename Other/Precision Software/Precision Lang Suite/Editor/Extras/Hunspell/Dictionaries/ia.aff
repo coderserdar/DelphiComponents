@@ -1,0 +1,92 @@
+SET ISO8859-1
+TRY abcdefghijklmnopqrstuvwxyzàáâäçèéêëìíîïñòóôöùúûüABCDEFGHIJKLMNOPQRSTUVWXYZÀÁÂÄÇÈÉÊËÌÍÎÏÑÒÓÔÖÙÚÛÜ
+
+REP 8
+REP c   ch
+REP ch  c
+REP f   ph
+REP ph  f
+REP r   rh
+REP rh  r
+REP t   th
+REP th  t
+
+PFX R Y 1
+PFX R   0    re     .
+
+SFX S Y 3
+SFX S   0    s       [aeiouàáâäèéêëìíîïòóôöùúûü]
+SFX S   0    es      [bdfghjklmnpqrstvwxzçñ]
+SFX S   0    hes     c
+
+SFX T Y 2
+SFX T   or   rice    tor
+SFX T   or   rices   tor
+
+SFX V Y 10
+SFX V   r    0       r
+SFX V   r    va      r
+SFX V   0    a       r
+SFX V   0    ea      r
+SFX V   r    nte     [ae]r
+SFX V   r    ntes    [ae]r
+SFX V   r    ente    ir
+SFX V   r    entes   ir
+SFX V   r    te      [ai]r
+SFX V   er   ite     er
+
+SFX A Y 23
+SFX A   0    s       [aeiouàáâäèéêëìíîïòóôöùúûü]
+SFX A   0    es      [bdfghjklmnpqrstvwxzçñ]
+SFX A   0    hes     c
+SFX A   0    mente   [^c]
+SFX A   0    amente  c
+SFX A   a    issime  a
+SFX A   e    issime  [^i]e
+SFX A   e    ssime   ie
+SFX A   0    ssime   i
+SFX A   0    hissime c
+SFX A   0    issime  [^aeic]
+SFX A   a    issimo  a
+SFX A   e    issimo  [^i]e
+SFX A   e    ssimo   ie
+SFX A   0    ssimo   i
+SFX A   0    hissimo c
+SFX A   0    issimo  [^aeic]
+SFX A   a    issimemente  a
+SFX A   e    issimemente  [^i]e
+SFX A   e    ssimemente   ie
+SFX A   0    ssimemente   i
+SFX A   0    hissimemente c
+SFX A   0    issimemente  [^aeic]
+
+SFX D Y 6
+SFX D   a    issimo  a
+SFX D   e    issimo  [^i]e
+SFX D   e    ssimo   ie
+SFX D   0    ssimo   i
+SFX D   0    hissimo c
+SFX D   0    issimo  [^aeic]
+
+SFX P Y 10
+SFX P   0    s       [e]
+SFX P   e    a       [e]
+SFX P   e    as      [e]
+SFX P   e    o       [e]
+SFX P   e    os      [e]
+SFX P   0    es      [^e]
+SFX P   0    a       [^e]
+SFX P   0    as      [^e]
+SFX P   0    o       [^e]
+SFX P   0    os      [^e]
+
+SFX O Y 2
+SFX O   e    o       e
+SFX O   e    os      e
+
+SFX U Y 4
+SFX U   0    s       [^sxzhy]
+SFX U   0    es      [sxzh]
+SFX U   0    s       [aeiou]y
+SFX U   y    ies     [^aeiou]y
+

@@ -1,0 +1,59 @@
+program SrcSyncOpenInfo;
+
+{$I plsConsts}
+
+function CheckChanges:boolean;
+var 
+  item:Variant;
+  cNew,cDel:integer;
+begin
+  Result:=False; 
+  cNew:=0; cDel:=0;
+  item:=PLSApp.Items.FindFirstWSyncState;
+  while not VarIsNull(item) do
+  begin
+    case item.SrcSyncState of
+      SRCSYNC_STATE_NEW:cNew:=cNew+1;
+      SRCSYNC_STATE_REMOVED:cDel:=cDel+1;      
+    end;
+    item:=PLSApp.Items.FindNextWSyncState;
+  end;  
+
+  lbNew.Caption:=inttostr(cNew);
+  lbRemoved.Caption:=inttostr(cDel);
+  if cNew+cDel>0 then
+    Result:=True;
+end;
+
+procedure ChangeFont(L:TLabel; C:TColor);
+begin
+  L.Font.Color:=C;
+  //L.Font.Style:=[fsBold];
+end;
+
+procedure sbOK_OnClick(Sender: TObject);
+begin
+  Self.Close;
+end;
+
+procedure AssignEvents;
+begin
+  sbOK.OnClick := @sbOK_OnClick;
+end;
+
+begin
+  AssignEvents;
+  ExitCode:=0;
+  Self.Font.Assign(Screen.IconFont);
+  ChangeFont(lbTotalCap,lbTotalCap.Font.Color);
+  ChangeFont(lbTotal,lbTotal.Font.Color);
+  //ChangeFont(lbNewCap,$0033CC33);
+  ChangeFont(lbNew,clGreen);
+  //ChangeFont(lbRemovedCap,$003333FF);
+  ChangeFont(lbRemoved,clMaroon);
+  Label9.Caption:=PLSApp.Project.Title;
+  Label9.Font.Style:=[fsBold];
+  lbTotal.Caption:=inttostr(PLSApp.Items.Count);
+  if not CheckChanges then
+    ShowMainForm:=False;
+end.

@@ -1,0 +1,72 @@
+object frmEmbeddedEditor: TfrmEmbeddedEditor
+  Left = 580
+  Height = 226
+  Top = 412
+  Width = 392
+  ActiveControl = sgItems
+  BorderStyle = bsSizeToolWin
+  Caption = 'Embedded localization editor'
+  ClientHeight = 226
+  ClientWidth = 392
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  OnCloseQuery = FormCloseQuery
+  OnResize = FormResize
+  LCLVersion = '1.0.8.0'
+  object pBottom: TPanel
+    Left = 0
+    Height = 41
+    Top = 185
+    Width = 392
+    Align = alBottom
+    BevelOuter = bvNone
+    ClientHeight = 41
+    ClientWidth = 392
+    TabOrder = 1
+    object sbOK: TButton
+      Left = 228
+      Height = 25
+      Top = 8
+      Width = 75
+      Anchors = [akTop, akRight]
+      Caption = 'OK'
+      Default = True
+      ModalResult = 1
+      TabOrder = 0
+    end
+    object sbCancel: TButton
+      Left = 309
+      Height = 25
+      Top = 8
+      Width = 75
+      Anchors = [akTop, akRight]
+      Cancel = True
+      Caption = 'Cancel'
+      ModalResult = 2
+      TabOrder = 1
+    end
+  end
+  object sgItems: TStringGrid
+    Left = 0
+    Height = 185
+    Top = 0
+    Width = 392
+    Align = alClient
+    ColCount = 3
+    DefaultColWidth = 128
+    DefaultDrawing = False
+    DefaultRowHeight = 19
+    FixedCols = 2
+    Options = [goVertLine, goHorzLine, goColSizing, goEditing, goAlwaysShowEditor, goThumbTracking]
+    RowCount = 2
+    ScrollBars = ssAutoVertical
+    TabOrder = 0
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    OnDblClick = sgItemsDblClick
+    OnDrawCell = sgItemsDrawCell
+    OnGetEditText = sgItemsGetEditText
+    OnKeyDown = sgItemsKeyDown
+    OnSetEditText = sgItemsSetEditText
+  end
+end

@@ -1,0 +1,7 @@
+program ReloadLibs;
+
+begin
+  ExitCode:=1;
+  PLSApp.Libraries.ReloadLibraries(False);
+  ExitCode:=0; 
+end.

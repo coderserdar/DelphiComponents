@@ -1,0 +1,46 @@
+unit DM;
+
+interface
+
+uses
+  lresources, SysUtils, Classes, Dialogs,
+  ...
+  ;
+
+...
+
+type
+  TDataModule1 = class(TDataModule)
+    ...
+  public
+    { Public declarations }
+    ...
+    procedure LanguageChanged(Sender:TObject);
+  end;
+
+var
+  DataModule1: TDataModule1;
+
+implementation
+
+uses
+  ...
+  plsLangMan, plsDialogs, %CONSTS%;
+
+{$R *.dfm}
+
+procedure TDataModule1.LanguageChanged(Sender:TObject);
+begin
+  // update properties for this data module
+  if not LanguageManager.LangForm(Self) then
+    MessageDlgLM('',LanguageManager.LanguageName+' ('+LanguageManager.LanguageCode+'): ['+Self.Name+' ('+Self.ClassName+')]'+LanguageManager.LastError,mtWarning);
+  // make other assignments if needed
+  ...
+end;
+
+...
+
+initialization
+  {$I DM.lrs}
+
+end.

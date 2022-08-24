@@ -1,0 +1,57 @@
+unit DM;
+
+interface
+
+uses
+  SysUtils, Classes, UITypes, FMX.Types,
+  ...
+  ;
+
+...
+
+type
+  TDataModule1 = class(TDataModule)
+  private
+    { Private declarations }
+    ...
+    procedure LanguageChanged(Sender:TObject);
+  public
+    { Public declarations }
+    ...
+    procedure Assign(Source: TPersistent); override;
+  end;
+
+var
+  DataModule1: TDataModule1;
+
+implementation
+
+uses
+  FMX.Dialogs,
+  ...
+  FMX.plsLangMan, %CONSTS%;
+
+{%CLASSGROUP 'FMX.Types.TFmxObject'}
+
+{$R *.dfm}
+
+procedure TDataModule1.Assign(Source: TPersistent);
+begin
+  if Source is TLanguageManager then
+    LanguageChanged(Source) // perform language changed event when language is changed by the user
+  else
+    inherited;
+end;
+
+procedure TDataModule1.LanguageChanged(Sender:TObject);
+begin
+  // update properties for this data module
+  if not LanguageManager.LangForm(Self) then
+    MessageDlg(LanguageManager.LanguageName+' ('+LanguageManager.LanguageCode+'): ['+Self.Name+' ('+Self.ClassName+')] '+LanguageManager.LastError,TMsgDlgType.mtWarning,[TMsgDlgBtn.mbOK],0);
+  // make other assignments if needed
+  ...
+end;
+
+...
+
+end.

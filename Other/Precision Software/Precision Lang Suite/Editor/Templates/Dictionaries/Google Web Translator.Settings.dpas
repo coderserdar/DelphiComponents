@@ -1,0 +1,17 @@
+// Info dialog for Google Web Translator service
+program GoogleWebTranslatorSettings;
+
+procedure sbCancel_OnClick(Sender: TObject);
+begin
+  Self.Close;
+end;
+
+procedure AssignEvents;
+begin
+  sbCancel.OnClick := @sbCancel_OnClick;
+end;
+
+begin
+  Self.Font.Assign(Screen.IconFont);
+  AssignEvents;
+end.

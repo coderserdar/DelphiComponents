@@ -1,0 +1,59 @@
+program XNamespaces;
+
+procedure LoadOptions;
+var
+  Ini:TMemIniFile;
+begin
+  Ini:=TMemIniFile.create(PLSApp.Settings.IniFile);
+  try
+    mList.Lines.CommaText:=Ini.ReadString('Global settings','Namespaces','');
+    if mList.Lines.Count=0 then
+      mList.Lines.CommaText:=
+          'Androidapi,Androidapi.JNI,Bde,Data,Data.Bind,Data.Cloud,Data.Win,Datasnap,Datasnap.Win,FireDAC,FireDAC.Comp,'+
+          'FireDAC.ConsoleUI,FireDAC.DApt,FireDAC.FMXUI,FireDAC.Import,FireDAC.Moni,FireDAC.Phys,FireDAC.Stan,FireDAC.UI,'+
+          'FireDAC.VCLUI,FMX,FMX.ASE,Fmx.Bind,FMX.Canvas,FMX.Canvas.GPU,FMX.Context,FMX.Controls,FMX.DAE,FMX.Design,'+
+          'FMX.Dialogs,FMX.Editor,FMX.Filter,FMX.FontGlyphs,FMX.Forms,FMX.Forms.Border,FMX.Gestures,FMX.Helpers,FMX.ListView,'+
+          'FMX.Materials,FMX.Media,FMX.MediaLibrary,FMX.Notification,FMX.OBJ,FMX.PhoneDialer,FMX.Pickers,FMX.Platform,'+
+          'FMX.Printer,FMX.SpellChecker,FMX.Styles,FMX.TextLayout,FMX.VirtualKeyboard,iOSApi,Macapi,MetropolisUI,Posix,'+
+          'REST,REST.Authenticator,REST.Authenticator.OAuth.WebForm,REST.Response,Soap,Soap.Win,System,System.Bindings,'+
+          'System.Generics,System.Internal,System.Mac,System.Win,Vcl,Vcl.Bind,Vcl.Imaging,Vcl.Samples,Vcl.Shell,Vcl.Touch,'+
+          'Web,Web.Win,Winapi,Xml,Xml.Internal,Xml.Win';
+  finally
+    Ini.free;
+  end;
+end;
+
+procedure SaveOptions;
+var
+  Ini:TMemIniFile;
+begin
+  Ini:=TMemIniFile.create(PLSApp.Settings.IniFile);
+  try
+    Ini.WriteString('Global settings','Namespaces',mList.Lines.CommaText);
+    Ini.UpdateFile;   
+  finally
+    Ini.free;
+  end;
+end;
+
+procedure sbOK_OnClick(Sender: TObject);
+begin
+  SaveOptions;
+  Self.Close;  
+end;
+
+procedure sbCancel_OnClick(Sender: TObject);
+begin
+  Self.Close;
+end;
+
+procedure AssignEvents;
+begin
+  sbOK.OnClick := @sbOK_OnClick;
+  sbCancel.OnClick := @sbCancel_OnClick;
+end;
+
+begin
+  AssignEvents;
+  LoadOptions;
+end.

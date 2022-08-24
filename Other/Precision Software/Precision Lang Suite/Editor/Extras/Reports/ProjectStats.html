@@ -1,0 +1,63 @@
+<html>
+  <head>
+    <meta http-equiv="  Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <link href="ProjectStats.css" rel="stylesheet" type="text/css">
+    <!--[if lte IE 8]><script type="text/javascript" language="javascript" src="excanvas.min.js"></script><![endif]-->
+    <script type="text/javascript" language="javascript" src="jquery.min.js"></script>
+    <script type="text/javascript" language="javascript" src="jquery.flot.min.js"></script>
+    <script type="text/javascript" language="javascript" src="jquery.flot.pie.min.js"></script>
+    <script type="text/javascript" language="javascript" src="data.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+          prjTitle.innerText = project_title;
+          chrt1Title.innerText = chart1_title;
+          chrt2Title.innerText = chart2_title;
+          document.title = report_title;
+
+          $.plot($("#placeholder"), data, {
+              series: {
+                  pie: {
+                      show: true
+                  }
+              },
+              legend: {
+                  show: false
+              }
+          });
+
+          $.plot($("#placeholder2"), data2, {
+              series: {
+                  pie: {
+                      show: true
+                  }
+              },
+              legend: {
+                  show: false
+              }
+          });
+
+      });
+    </script>
+  </head>
+  <body>
+    <div id="header">
+      <span id="prjTitle"></span>
+    </div>
+
+    <table id="content">
+      <tr>
+        <td id="chrt1Title">Translated texts</td>
+        <td id="chrt2Title">Translated items</td>
+      </tr>
+      <tr>
+        <td><div class="chart" id="placeholder" style="float:left;"></div></td>
+        <td><div class="chart" id="placeholder2" style="float:left;"></div></td>      
+      </tr>  
+    </table>          
+
+	  <div id="footer">
+		  Copyright &copy; 2008 - 2013 Precision software &amp; consulting
+	  </div>
+  </body>
+</html>

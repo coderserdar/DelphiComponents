@@ -1,0 +1,179 @@
+object Form1: TForm1
+  Left = 311
+  Height = 493
+  Top = 185
+  Width = 555
+  Caption = 'Precision Language Suite for VCL'
+  ClientHeight = 474
+  ClientWidth = 555
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Menu = mmMain
+  OnClose = FormClose
+  OnCreate = FormCreate
+  PopupMenu = pumLanguages
+  Position = poDesktopCenter
+  LCLVersion = '1.0.8.0'
+  object lbField1: TLabel
+    Left = 15
+    Height = 14
+    Top = 252
+    Width = 37
+    Alignment = taRightJustify
+    Caption = 'lbField1'
+    ParentColor = False
+  end
+  object lbLabelName: TLabel
+    Left = 13
+    Height = 14
+    Top = 452
+    Width = 57
+    Caption = 'LabelName:'
+    ParentColor = False
+  end
+  object lbName: TLabel
+    Left = 129
+    Height = 14
+    Top = 452
+    Width = 36
+    Caption = 'Default'
+    ParentColor = False
+  end
+  object lbField2: TLabel
+    Left = 15
+    Height = 14
+    Top = 275
+    Width = 37
+    Alignment = taRightJustify
+    Caption = 'lbField2'
+    ParentColor = False
+  end
+  object lbInfo: TLabel
+    Left = 13
+    Height = 233
+    Top = 8
+    Width = 529
+    AutoSize = False
+    Caption = 'This simple project demonstrates an embedded localization feautures of Precision Language Suite.'#13#10#13#10'By adding only three lines of code into your main form, you can start localize your application "on the fly".'#13#10'1) Run this demo application'#13#10'2) Press the Alt+F2 hot-key'#13#10'3) Click on any component on the form (later you can try click while pressing the Shift key)'#13#10'4) A simple editing grid with properties and texts in the current language are displayed'#13#10'5) Modify the texts you want and confirm the dialog'#13#10'    (use double-click or Shift+Enter key to edit multi-line texts)'#13#10'6) Now see the newly created language file in application folder (or Langs subfolder)'#13#10'7) To make your localization fully functional, now you have to add "loading" part of code to your forms,'#13#10'    as described in the help, or as you can see in another demo projects.'#13#10#13#10'Embedded localization offers a lot of options to setup, such as executing the editor directly,'#13#10'listing also the localized constants, saving in so called UserMode (to the .lngu files), etc.'#13#10#13#10'Embedded localization is available for registered users only!'
+    ParentColor = False
+    WordWrap = True
+  end
+  object sbMsgWarn: TButton
+    Left = 117
+    Height = 25
+    Top = 304
+    Width = 99
+    Caption = 'Warning'
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 2
+  end
+  object sbMsgInfo: TButton
+    Left = 13
+    Height = 25
+    Top = 304
+    Width = 99
+    Caption = 'Information'
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 1
+  end
+  object sbProperty: TButton
+    Left = 221
+    Height = 25
+    Top = 304
+    Width = 99
+    Caption = 'Property'
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 3
+  end
+  object mTest: TMemo
+    Left = 329
+    Height = 89
+    Top = 272
+    Width = 213
+    TabOrder = 4
+  end
+  object lvTest: TListView
+    Left = 13
+    Height = 65
+    Top = 372
+    Width = 529
+    Columns = <    
+      item
+        Caption = 'Column 1'
+        Width = 64
+      end    
+      item
+        Caption = 'Column 2'
+        Width = 64
+      end    
+      item
+        Caption = 'Column 3'
+        Width = 64
+      end>
+    TabOrder = 5
+    ViewStyle = vsReport
+  end
+  object sbChildWindow: TButton
+    Left = 13
+    Height = 25
+    Top = 336
+    Width = 99
+    Caption = 'Child window'
+    OnClick = sbChildWindowClick
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 6
+  end
+  object edField2: TEdit
+    Left = 57
+    Height = 21
+    Top = 272
+    Width = 121
+    TabOrder = 0
+    Text = 'edField2'
+  end
+  object sbMessage1: TButton
+    Left = 117
+    Height = 25
+    Top = 336
+    Width = 99
+    Caption = 'Message 1'
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 7
+  end
+  object sbMessage2: TButton
+    Left = 221
+    Height = 25
+    Top = 336
+    Width = 99
+    Caption = 'Message 2'
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 8
+  end
+  object pumLanguages: TPopupMenu
+    left = 269
+    top = 432
+  end
+  object mmMain: TMainMenu
+    left = 345
+    top = 432
+    object miFile: TMenuItem
+      Caption = 'File'
+      object miLanguage: TMenuItem
+        Caption = 'Language'
+      end
+      object N1: TMenuItem
+        Caption = '-'
+      end
+      object miExit: TMenuItem
+        Caption = 'Exit'
+        OnClick = miExitClick
+      end
+    end
+  end
+end

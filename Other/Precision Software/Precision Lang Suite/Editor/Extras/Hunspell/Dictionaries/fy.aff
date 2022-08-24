@@ -1,0 +1,193 @@
+SET ISO8859-1
+TRY eniatrsdolkmfyhwjgpbucDûêzâúIF'SHWBMvNEAOJKYLTôGPR-VëUCxüZïQäqéèö
+
+NOSPLITSUGS
+
+KEEPCASE b
+
+WORDCHARS -'
+
+PFX A Y 1
+PFX A 0 oan .
+
+PFX B Y 1
+PFX B 0 be .
+
+PFX C Y 1
+PFX C 0 yn .
+
+PFX D Y 1
+PFX D 0 ôf .
+
+PFX E Y 1
+PFX E 0 ge .
+
+PFX F Y 1
+PFX F 0 op .
+
+PFX G Y 1
+PFX G 0 ûn .
+
+PFX H Y 1
+PFX H 0 út .
+
+PFX I Y 1
+PFX I 0 fer .
+
+PFX J Y 1
+PFX J 0 oer .
+
+PFX K Y 1
+PFX K 0 foar .
+
+PFX L Y 1
+PFX L 0 om .
+
+PFX M Y 1
+PFX M 0 troch .
+
+PFX N Y 1
+PFX N 0 mis .
+
+PFX O Y 1
+PFX O 0 ûnder .
+
+SFX P N 10
+SFX P 0 ke [^kghlntd]
+SFX P 0 kes [^kghlntd] 
+SFX P 0 je [^ng][kgh]
+SFX P 0 jes [^ng][kgh]
+SFX P 0 tsje [ln]
+SFX P 0 tsjes [ln]
+SFX P g kje ng
+SFX P g kjes ng
+SFX P 0 sje [td]
+SFX P 0 sjes [td]
+
+SFX Q N 2
+SFX Q   0     en     [^e]
+SFX Q   0     n      e
+
+SFX R N 2
+SFX R   0     s      [^s]
+SFX R   s     zen    s
+
+SFX S N 3
+SFX S   0     e      [^esh]
+SFX S   ch    ge     ch
+SFX S   s     ze     [s]
+
+SFX T N 3
+SFX T   0     er     [^es]
+SFX T   0     r      e
+SFX T   s     zer    s
+
+SFX U N 2
+SFX U   0     st     [^es]
+SFX U   0     t      [s]
+
+SFX V N 6
+SFX V   je    rest   earje
+SFX V   je    ret    earje
+SFX V   je    re     earje
+SFX V   je    ren    earje
+SFX V   je    jend   earje
+SFX V   je    jen    earje
+
+SFX W N 9
+SFX W   je    est    je 
+SFX W   je    et     je
+SFX W   je    e      je
+SFX W   je    en     je
+SFX W   je    estû   je
+SFX W   je    este   je
+SFX W   je    esto   je
+SFX W   je    jend   je
+SFX W   je    jen    je
+
+SFX X N 11
+SFX X   e     0      e
+SFX X   e     st     e
+SFX X   e     t      e
+SFX X   e     sto    e
+SFX X   e     stû    e
+SFX X   e     ste    e
+SFX X   e     te     e
+SFX X   e     ten    e
+SFX X   e     t      e
+SFX X   e     end    e
+SFX X   e     en     e
+
+SFX Y N 1
+SFX Y 0 heid .
+
+SFX Z N 1
+SFX Z 0 ens .
+
+SFX a N 2
+SFX a gy gysk gy
+SFX a gy gyske gy
+
+SFX b N 4
+SFX b bje bbet bje
+SFX b bje bbest bje
+SFX b bje bbe bje
+SFX b bje bben bje
+
+SFX g N 4
+SFX g gje gget gje
+SFX g gje ggest gje
+SFX g gje gge gje
+SFX g gje ggen gje
+
+SFX k N 4
+SFX k kje kket kje
+SFX k kje kkest kje
+SFX k kje kke kje
+SFX k kje kken kje
+
+SFX l N 4
+SFX l lje llet lje
+SFX l lje llest lje
+SFX l lje lle lje
+SFX l lje llen lje
+
+SFX m N 4
+SFX m mje mmet mje
+SFX m mje mmest mje
+SFX m mje mme mje
+SFX m mje mmen mje
+
+SFX n N 4
+SFX n nje nnet nje
+SFX n nje nnest nje
+SFX n nje nne nje
+SFX n nje nnen nje
+
+SFX p N 4
+SFX p pje ppet pje
+SFX p pje ppest pje
+SFX p pje ppe pje
+SFX p pje ppen pje
+
+SFX r N 4
+SFX r rje rret rje
+SFX r rje rrest rje
+SFX r rje rre rje
+SFX r rje rren rje
+
+SFX s N 4
+SFX s sje sset sje
+SFX s sje ssest sje
+SFX s sje sse sje
+SFX s sje ssen sje
+
+REP 8
+REP g ch
+REP ch g
+REP ij y
+REP y ij
+REP hw w
+REP ae aa
+REP bi be
+REP for fer

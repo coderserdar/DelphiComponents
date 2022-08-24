@@ -1,0 +1,29 @@
+unit Child;
+
+interface
+
+uses
+  LCLIntf, LCLType, lresources, SysUtils, Classes, Forms,
+  ...
+  plsController;
+
+...
+
+type
+  TfrmChild = class(TForm)
+    ...
+    // Add TplsController visual component to your child form
+    plsController1: TplsController; 
+  end;
+
+var
+  frmChild: TfrmChild;
+
+implementation
+
+...
+
+initialization
+  {$I Child.lrs}
+
+end.

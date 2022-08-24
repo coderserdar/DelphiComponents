@@ -1,0 +1,21 @@
+object frmChild: TfrmChild
+  Left = 0
+  Top = 0
+  Caption = 'Child window'
+  ClientHeight = 165
+  ClientWidth = 272
+  FormFactor.Width = 1920
+  FormFactor.Height = 1080
+  FormFactor.Devices = [dkDesktop]
+  OnCreate = FormCreate
+  OnClose = FormClose
+  object lbTest: TLabel
+    AutoSize = True
+    Height = 19.000000000000000000
+    Position.X = 32.000000000000000000
+    Position.Y = 24.000000000000000000
+    Text = 'lbTest'
+    Width = 33.000000000000000000
+    WordWrap = False
+  end
+end

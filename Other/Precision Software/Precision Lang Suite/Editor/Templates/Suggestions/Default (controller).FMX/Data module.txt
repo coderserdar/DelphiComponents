@@ -1,0 +1,30 @@
+unit DM;
+
+interface
+
+uses
+  System.SysUtils, System.Classes,  FMX.Types,
+  ...
+  FMX.plsController;
+
+...
+
+type
+  TDataModule1 = class(TDataModule)
+    ...
+    // Add TplsController visual component to your data module
+    plsController1: TplsController;
+  end;
+
+var
+  DataModule1: TDataModule1;
+
+implementation
+
+{%CLASSGROUP 'FMX.Types.TFmxObject'}
+
+{$R *.dfm}
+
+...
+
+end.

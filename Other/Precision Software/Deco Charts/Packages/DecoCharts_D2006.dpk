@@ -1,0 +1,51 @@
+package DecoCharts_D2006;
+
+{$R *.res}
+{$R '..\Source\DecoBar.dcr'}
+{$R '..\Source\DecoProgressGrid.dcr'}
+{$R '..\Source\DecoCompareGrid.dcr'}
+{$R '..\Source\DecoProgressBar.dcr'}
+{$R '..\Source\DecoRatingStars.dcr'}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'DecoCharts'}
+{$DESIGNONLY}
+{$IMPLICITBUILD OFF}
+
+requires
+  vcl,
+  designide,
+  rtl,
+  vclx;
+
+contains
+  DecoChartsReg in '..\Source\DecoChartsReg.pas',
+  DecoBar in '..\Source\DecoBar.pas',
+  DecoCommon in '..\Source\DecoCommon.pas',
+  DecoGDI in '..\Source\DecoGDI.pas',
+  DecoProgressGrid in '..\Source\DecoProgressGrid.pas',
+  DecoCompareGrid in '..\Source\DecoCompareGrid.pas',
+  DecoChart in '..\Source\DecoChart.pas',
+  DecoProgressBar in '..\Source\DecoProgressBar.pas',
+  DecoRatingStars in '..\Source\DecoRatingStars.pas';
+
+end.

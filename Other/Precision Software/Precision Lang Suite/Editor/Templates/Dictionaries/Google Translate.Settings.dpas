@@ -1,0 +1,82 @@
+// Settings dialog for Google Translate service (https://developers.google.com/translate/)
+program GoogleTranslateSettings;
+
+{$I windows.inc}
+
+procedure LoadConfig;
+var
+  Ini:TMemIniFile;
+begin
+  Ini:=TMemIniFile.Create(ChangeFileExt(ChangeFileExt(GetVariable('ScriptFile'),''),'.Dictionary.ini'));
+  try
+    edUrl.Text:=Ini.ReadString('precision language translation','url',edUrl.text);
+  finally
+    Ini.free;
+  end;
+end; 
+
+procedure SaveConfig;
+var
+  Ini:TMemIniFile;
+begin
+  Ini:=TMemIniFile.Create(ChangeFileExt(ChangeFileExt(GetVariable('ScriptFile'),''),'.Dictionary.ini'));
+  try
+    Ini.WriteString('precision language translation','url',edUrl.text);
+    Ini.UpdateFile;
+  finally
+    Ini.free;
+  end;
+end; 
+
+procedure sbCancel_OnClick(Sender: TObject);
+begin
+  Self.Close;
+end;
+
+procedure sbOK_OnClick(Sender: TObject);
+begin
+  SaveConfig;
+  Self.Close;
+end;
+
+procedure sbAPIKey_OnClick(Sender: TObject);
+begin
+  SaveConfig;
+  StdOut:='apikey request';
+  Self.Close;
+end;
+
+procedure lbHomePage_OnMouseEnter(Sender: TObject);
+begin
+  lbHomePage.Font.color:=clBlue;
+  lbHomePage.Font.Style:=[fsUnderline];  
+end;
+
+procedure lbHomePage_OnMouseLeave(Sender: TObject);
+begin
+  lbHomePage.Font.color:=clNavy;
+  lbHomePage.Font.Style:=[];  
+end;
+
+procedure lbHomePage_OnClick(Sender: TObject);
+begin
+  ShellExec(lbHomePage.Caption,'','',SW_SHOW,'')
+end;
+
+procedure AssignEvents;
+begin
+  sbCancel.OnClick := @sbCancel_OnClick;
+  sbOK.OnClick := @sbOK_OnClick;
+  lbHomePage.OnMouseEnter := @lbHomePage_OnMouseEnter;
+  lbHomePage.OnMouseLeave := @lbHomePage_OnMouseLeave;
+  lbHomePage.OnClick := @lbHomePage_OnClick;
+  sbAPIKey.OnClick := @sbAPIKey_OnClick;
+end;
+
+begin
+  Self.Font.Assign(Screen.IconFont);
+  Label3.Font.Style:=[fsBold];
+  lbHomePage.Font.color:=clNavy;
+  AssignEvents;
+  LoadConfig;
+end.

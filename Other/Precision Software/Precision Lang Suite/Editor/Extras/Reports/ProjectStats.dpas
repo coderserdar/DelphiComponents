@@ -1,0 +1,213 @@
+program ProjectStats;
+
+const
+  repTemplate = 'ProjectStats.html';
+  repData = 'data.js';
+  
+  cssTemplate = 'ProjectStats.css';
+  jsExCanvas = 'excanvas.min.js';
+  jsJQuery = 'jquery.min.js';
+  jsFlot = 'jquery.flot.min.js';
+  jsFlotPie = 'jquery.flot.pie.min.js';
+
+var
+  statusText,
+  reportTitle,
+  chart1_title,
+  chart2_title,
+  strTranslated,
+  strAutoTranslated,
+  strEmpty,
+  strPartially:string;  
+
+procedure InitLanguage;
+var
+  fn, 
+  lngcode:string;  
+  SL:TStringList;
+begin
+  reportTitle := 'Project stats';
+  statusText := 'Creating report ...';
+  chart1_title := 'Translated texts';
+  chart2_title := 'Translated items';
+  strTranslated := 'Translated';
+  strAutoTranslated := 'Auto-translated';
+  strEmpty := 'Empty';
+  strPartially := 'Partially translated';
+
+  lngcode:=copy(GetVariable('ScriptLangName'),1,2);
+  if length(lngcode)=0 then
+    lngCode:='en';
+
+  fn:=ChangeFileExt(GetVariable('ScriptFile'),'.'+lngcode+'.lng');
+  if fileexists(fn) then
+  begin
+    SL:=TStringList.create;
+    try
+      SL.LoadFromFile(fn);
+      reportTitle := SL.Values['reportTitle'];
+      statusText := SL.Values['statusText'];
+      chart1_title := SL.Values['chart1_title'];
+      chart2_title := SL.Values['chart2_title'];
+      strTranslated := SL.Values['strTranslated'];
+      strAutoTranslated := SL.Values['strAutoTranslated'];
+      strEmpty := SL.Values['strEmpty'];
+      strPartially := SL.Values['strPartially'];
+    finally
+      SL.free;
+    end;
+  end;
+   
+end;
+  
+function MakeReport:string;
+var  
+  fn, sFldr, jsFldr, tmpFldr:string;
+  tmp:string;
+  
+  rCnt, r,
+  cntTrans,
+  cntAutoTrans,
+  cntEmpty:Cardinal;
+  
+  cntIFull,
+  cntIPart,
+  cntIEmpty:Cardinal;
+  
+  cCnt, c, n:Integer;
+  item:Variant;
+  text:string;
+  
+  autoTransTag:Variant;
+  atDataPTR:integer;  
+begin
+  result:='';
+
+  // get folders
+  fn:=GetVariable('ScriptFile');
+  sFldr:=ExtractFilePath(fn);
+  jsFldr:=IncludeTrailingPathDelimiter(ExtractFilePath(ExcludeTrailingPathDelimiter(sFldr))+'flot');
+  tmpFldr:=IncludeTrailingPathDelimiter(GetTempFolder)+'ProjectStats\';
+
+  // copy template (html, css, js, img files ...)
+  if ForceDirectories(tmpFldr) then
+  begin
+    Result:=tmpFldr+repTemplate;
+    CopyFileAs(sFldr+repTemplate, Result, True);
+    CopyFileAs(sFldr+cssTemplate, tmpFldr+cssTemplate, True);
+    CopyFileAs(jsFldr+jsExCanvas, tmpFldr+jsExCanvas, True);
+    CopyFileAs(jsFldr+jsJQuery, tmpFldr+jsJQuery, True);
+    CopyFileAs(jsFldr+jsFlot, tmpFldr+jsFlot, True);
+    CopyFileAs(jsFldr+jsFlotPie, tmpFldr+jsFlotPie, True); 
+    
+    // find auto-translated tag
+    autoTransTag:=PLSApp.Tags.FindTag('autotranslated');
+    if VarIsNull(autoTransTag) then
+      atDataPTR:=0
+    else
+      atDataPTR:=autoTransTag.DataPTR;    
+
+    // get data
+    cntTrans:=0;
+    cntAutoTrans:=0;
+    cntEmpty:=0;
+    cntIFull:=0;
+    cntIPart:=0;
+    cntIEmpty:=0;
+  
+    rCnt:=PLSApp.Items.Count;
+    r:=0;  
+    cCnt:=PLSApp.Items.ColumnCount;
+    item:=PLSApp.Items.First;
+    while not VarIsNull(item) do
+    begin
+      n:=0;
+      for c:=1 to cCnt-1 do
+      begin
+        text := item.GetText(c);
+        if length(text)=0 then
+        begin
+          cntEmpty:=cntEmpty+1;
+          n:=n+1;
+        end
+        else
+        if atDataPTR=0 then
+          cntTrans:=cntTrans+1
+        else
+        if item.HasTagData(atDataPTR,c) then
+          cntAutoTrans:=cntAutoTrans+1
+        else    
+          cntTrans:=cntTrans+1;        
+      end;
+      if n=0 then
+        cntIFull:=cntIFull+1
+      else
+      if n=cCnt-1 then
+        cntIEmpty:=cntIEmpty+1
+      else
+        cntIPart:=cntIPart+1;
+      r:=r+1;
+      if r mod 100=0 then
+      begin
+        PLSApp.StatusBarProgress:=trunc(100.0*r/rCnt);
+        PLSApp.Synchronize;
+      end;
+      item:=item.Next;
+    end; 
+    
+    // create data.js 
+    tmp:=
+      'var project_title = "'+PLSApp.Project.Title+'";'#13#10+
+      'var report_title = "'+reportTitle+'";'#13#10+
+      'var chart1_title = "'+chart1_title+'";'#13#10+
+      'var chart2_title = "'+chart2_title+'";'#13#10+      
+      'var data = ['#13#10+
+      '  { label: "'+strTranslated+'",  data: '+Int64ToStr(cntTrans)+', color: "#9DC565"},'#13#10+
+      '  { label: "'+strAutoTranslated+'",  data: '+Int64ToStr(cntAutoTrans)+', color: "#6592A7"},'#13#10+
+      '  { label: "'+strEmpty+'",  data: '+Int64ToStr(cntEmpty)+', color: "#CC666A"}'#13#10+
+      '];'#13#10+
+      'var data2 = ['#13#10+
+      '  { label: "'+strTranslated+'",  data: '+Int64ToStr(cntiFull)+', color: "#9DC565"},'#13#10+
+      '  { label: "'+strPartially+'",  data: '+Int64ToStr(cntIPart)+', color: "#6592A7"},'#13#10+
+      '  { label: "'+strEmpty+'",  data: '+Int64ToStr(cntIEmpty)+', color: "#CC666A"}'#13#10+
+      '];';      
+    SaveStrToFileEx(tmp,tmpFldr+repData,'utf-8');
+  end;
+  
+end;
+
+procedure ShowReport;
+var
+  rf:string;
+begin
+  PLSApp.StatusBarText:=statusText;
+  PLSApp.StatusBarProgress:=0;  
+  try
+    rf:=MakeReport;
+    PLSApp.StatusBarProgress:=-1;
+    PLSApp.StatusBarText:='';
+    PLSApp.ShowHtmlReport(rf);
+  finally
+    PLSApp.StatusBarProgress:=-1;
+    PLSApp.StatusBarText:='';
+    if length(rf)>0 then
+    begin
+      rf:=extractfilepath(rf);
+      if DirectoryExists(rf) then
+      begin
+        ClearDir(rf);
+        DeleteDir(rf);
+      end;
+    end;   
+  end;
+end;
+
+begin 
+  try
+    InitLanguage;
+    ShowReport;
+  except
+    ExitCode:=SCRIPT_WARNING;
+    Writeln(ExceptionToString(ExceptionType, ExceptionParam));       
+  end;
+end.

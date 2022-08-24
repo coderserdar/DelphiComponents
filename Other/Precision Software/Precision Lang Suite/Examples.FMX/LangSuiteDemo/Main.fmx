@@ -1,0 +1,192 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  Caption = 'Precision Language Suite for FMX'
+  ClientHeight = 365
+  ClientWidth = 547
+  FormFactor.Width = 1920
+  FormFactor.Height = 1080
+  FormFactor.Devices = [dkDesktop]
+  OnCreate = FormCreate
+  object lbLabelName: TLabel
+    AutoSize = True
+    Height = 19.000000000000000000
+    Position.X = 8.000000000000000000
+    Position.Y = 312.000000000000000000
+    Text = 'LabelName:'
+    Width = 61.000000000000000000
+    WordWrap = False
+  end
+  object lbName: TLabel
+    AutoSize = True
+    Height = 19.000000000000000000
+    Position.X = 124.000000000000000000
+    Position.Y = 312.000000000000000000
+    Text = 'Default'
+    Width = 39.000000000000000000
+    WordWrap = False
+  end
+  object lbField1: TLabel
+    AutoSize = True
+    Height = 19.000000000000000000
+    Position.X = 8.000000000000000000
+    Position.Y = 16.000000000000000000
+    Text = 'lbField1'
+    Width = 42.000000000000000000
+    WordWrap = False
+  end
+  object lbField2: TLabel
+    AutoSize = True
+    Height = 19.000000000000000000
+    Position.X = 8.000000000000000000
+    Position.Y = 39.000000000000000000
+    Text = 'lbField2'
+    Width = 42.000000000000000000
+    WordWrap = False
+  end
+  object edField2: TEdit
+    DisableFocusEffect = False
+    KeyboardType = vktDefault
+    Password = False
+    Text = 'edField2'
+    Position.X = 50.000000000000000000
+    Position.Y = 37.000000000000000000
+    Width = 100.000000000000000000
+    Height = 22.000000000000000000
+  end
+  object mTest: TMemo
+    Touch.InteractiveGestures = [igPan]
+    Height = 89.000000000000000000
+    Position.X = 324.000000000000000000
+    Position.Y = 13.000000000000000000
+    Width = 213.000000000000000000
+    DisableFocusEffect = False
+    KeyboardType = vktDefault
+  end
+  object grdTest: TGrid
+    Touch.InteractiveGestures = [igPan]
+    Height = 153.000000000000000000
+    Position.X = 8.000000000000000000
+    Position.Y = 140.000000000000000000
+    Width = 529.000000000000000000
+    RowCount = 4
+    RowHeight = 21.000000000000000000
+    object colTest0: TColumn
+      Header = 'Column 1'
+      Height = 128.000000000000000000
+      Width = 100.000000000000000000
+    end
+    object colTest1: TColumn
+      Header = 'Column 2'
+      Height = 128.000000000000000000
+      Position.X = 100.000000000000000000
+      Width = 100.000000000000000000
+    end
+    object colTest2: TColumn
+      Header = 'Column 3'
+      Height = 128.000000000000000000
+      Position.X = 200.000000000000000000
+      Width = 100.000000000000000000
+    end
+  end
+  object sbMsgInfo: TButton
+    DisableFocusEffect = False
+    Height = 23.000000000000000000
+    Position.X = 8.000000000000000000
+    Position.Y = 78.000000000000000000
+    Text = 'Information'
+    Width = 99.000000000000000000
+    OnClick = sbMsgInfoClick
+  end
+  object sbMsgWarn: TButton
+    DisableFocusEffect = False
+    Height = 23.000000000000000000
+    Position.X = 112.000000000000000000
+    Position.Y = 78.000000000000000000
+    Text = 'Warning'
+    Width = 99.000000000000000000
+    OnClick = sbMsgWarnClick
+  end
+  object sbProperty: TButton
+    DisableFocusEffect = False
+    Height = 23.000000000000000000
+    Position.X = 216.000000000000000000
+    Position.Y = 78.000000000000000000
+    Text = 'Property'
+    Width = 99.000000000000000000
+    OnClick = sbPropertyClick
+  end
+  object sbMessage1: TButton
+    DisableFocusEffect = False
+    Height = 23.000000000000000000
+    Position.X = 112.000000000000000000
+    Position.Y = 108.000000000000000000
+    Text = 'Message 1'
+    Width = 99.000000000000000000
+    OnClick = sbMessage1Click
+  end
+  object sbMessage2: TButton
+    DisableFocusEffect = False
+    Height = 23.000000000000000000
+    Position.X = 216.000000000000000000
+    Position.Y = 108.000000000000000000
+    Text = 'Message 2'
+    Width = 99.000000000000000000
+    OnClick = sbMessage2Click
+  end
+  object sbChildWindow: TButton
+    DisableFocusEffect = False
+    Height = 23.000000000000000000
+    Position.X = 8.000000000000000000
+    Position.Y = 108.000000000000000000
+    Text = 'Child window'
+    Width = 99.000000000000000000
+    OnClick = sbChildWindowClick
+  end
+  object sbResStr: TButton
+    DisableFocusEffect = False
+    Height = 23.000000000000000000
+    Position.X = 324.000000000000000000
+    Position.Y = 108.000000000000000000
+    Text = 'Resource string'
+    Width = 99.000000000000000000
+    OnClick = sbResStrClick
+  end
+  object TColorAnimation
+    Duration = 0.200000002980232200
+    StartValue = claWhite
+    StopValue = claNull
+  end
+  object mmMain: TMainMenu
+    Left = 296
+    Top = 304
+    object miFile: TMenuItem
+      Height = 50.000000000000000000
+      Text = 'miFile'
+      Width = 50.000000000000000000
+      object miLanguage: TMenuItem
+        Height = 50.000000000000000000
+        Locked = True
+        Text = 'miLanguage'
+        Width = 50.000000000000000000
+      end
+      object MenuItem1: TMenuItem
+        Height = 50.000000000000000000
+        Locked = True
+        Text = '-'
+        Width = 50.000000000000000000
+      end
+      object miExit: TMenuItem
+        Height = 50.000000000000000000
+        Locked = True
+        Text = 'miExit'
+        Width = 50.000000000000000000
+        OnClick = miExitClick
+      end
+    end
+  end
+  object pumLanguages: TPopupMenu
+    Left = 224
+    Top = 304
+  end
+end

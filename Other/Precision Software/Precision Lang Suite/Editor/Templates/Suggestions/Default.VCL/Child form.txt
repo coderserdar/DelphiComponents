@@ -1,0 +1,59 @@
+unit Child;
+
+interface
+
+uses
+  SysUtils, Classes, Messages, Forms, Dialogs,
+  ...
+  plsLangMan;
+
+...
+
+type
+  TfrmChild = class(TForm)
+    ...
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+    procedure WMLanguageChanged(var Message: TMessage); message WM_LANGUAGECHANGED;
+    procedure LanguageChanged(Sender:TObject);
+    ...
+  end;
+
+var
+  frmChild: TfrmChild;
+
+implementation
+
+uses
+  ...
+  plsDialogs, %CONSTS%;
+
+{$R *.dfm}
+
+procedure TfrmChild.WMLanguageChanged(var Message: TMessage);
+begin
+  // perform language changed event when language is changed by the user
+  LanguageChanged(Self);
+  Message.Result := 0;
+end;
+
+procedure TfrmChild.FormCreate(Sender: TObject);
+begin
+  // perform language changed event for newly created form
+  LanguageChanged(Self);
+  ...
+end;
+
+procedure TfrmChild.LanguageChanged(Sender:TObject);
+begin
+  if not LanguageManager.LangVCL(Self) then
+    MessageDlgLM(Caption,LanguageManager.LanguageName+' ('+LanguageManager.LanguageCode+'): ['+Self.Name+' ('+Self.ClassName+')] '+LanguageManager.LastError,
+      mtWarning,[mbOK]);
+  // make other assignments if needed
+  ...
+end;
+
+...
+
+end.

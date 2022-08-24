@@ -1,0 +1,28 @@
+unit DM;
+
+interface
+
+uses
+  SysUtils, Classes, 
+  ...
+  plsController;
+
+...
+
+type
+  TDataModule1 = class(TDataModule)
+    ...
+    // Add TplsController visual component to your data module
+    plsController1: TplsController;
+  end;
+
+var
+  DataModule1: TDataModule1;
+
+implementation
+
+{$R *.dfm}
+
+...
+
+end.

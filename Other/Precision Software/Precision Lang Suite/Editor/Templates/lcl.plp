@@ -1,0 +1,33 @@
+[precision language library]
+title=LCL properties
+description=Default LCL properties library (designed as an extension to the VCL library only)
+author=Precision software & consulting
+version=1.0
+
+[VCL.skip.classes]
+TDbf=
+TDbf.IndexDefs[]=
+
+[VCL.class.properties]
+TCheckGroup=Items.Text
+TSemaphorGrid=StringGreen,StringRed,StringYellow
+TStringGrid.Columns[]=Title.Caption
+TTICheckGroup=Link.AliasValuesStrings
+TTIRadioGroup=Link.AliasValues.Text,Link.AliasValuesStrings
+
+[VCL.skip.properties]
+*=LCLVersion
+TForm.DaemonDefs[]=DaemonClassName
+THTMLBrowserHelpViewer=BrowserParams
+THTMLHelpDatabase=BaseURL,KeywordPrefix
+TIpHtmlPanel=DefaultTypeFace,FixedTypeface
+TSybaseConnection=UserName
+TSynAnySyn=IdentifierChars,Objects.Text
+TSynCompletion=EndOfTokenChr
+TTIComboBox=Link.TIPropertyName
+TTIEdit=Link.TIPropertyName
+TTICheckBox=Link.TIPropertyName
+TTICheckGroup=Link.TIPropertyName
+TTIRadioGroup=Link.TIPropertyName
+TTISpinEdit=Link.TIElementName,Link.TIPropertyName
+

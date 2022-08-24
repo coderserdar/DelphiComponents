@@ -1,0 +1,383 @@
+// Settings dialog for TBX (Term Base eXchange) dictionaries
+program TBXSettings;
+
+{$I windows.inc}
+
+procedure LoadConfig;
+var
+  Ini:TMemIniFile;
+  SL:TStringList;
+  i:integer;
+  LI:TListItem;
+begin
+  Ini:=TMemIniFile.Create(ChangeFileExt(GetVariable('ScriptFile'),'.cfg'));
+  SL:=TStringList.create;
+  lvFiles.Items.BeginUpdate;
+  try
+    cbAllowCrossLangs.Checked:=Ini.ReadBool('Settings','AllowCrossLangs',True);
+    lvFiles.Items.Clear;
+    Ini.ReadSectionValues('Files',SL);
+    for i:=0 to SL.count-1 do
+    begin
+      LI:=lvFiles.Items.Add;
+      LI.Caption:=SL.Names[i];
+      LI.SubItems.Add(SL.ValueFromIndex[i]);     
+      if copy(LI.Caption,1,1)='~' then
+      begin
+        LI.Checked:=False;
+        LI.Caption:=copy(LI.Caption,2,maxint);
+      end
+      else
+        LI.Checked:=true;
+    end;
+  finally
+    SL.free;
+    Ini.free;
+    lvFiles.Items.EndUpdate;
+    if lvFiles.Items.Count>0 then
+    begin
+      lvFiles.Items[0].Focused:=true;
+      lvFiles.Items[0].Selected:=true;
+      lvFiles.Items[0].MakeVisible(False);      
+    end;
+  end;
+end; 
+
+procedure SaveConfig;
+var
+  Ini:TMemIniFile;
+  i:integer;
+begin
+  Ini:=TMemIniFile.Create(ChangeFileExt(GetVariable('ScriptFile'),'.cfg'));
+  try
+    Ini.WriteBool('Settings','AllowCrossLangs',cbAllowCrossLangs.Checked);
+    Ini.EraseSection('Files');
+    for i:=0 to lvFiles.Items.Count-1 do
+    begin
+      if lvFiles.Items[i].Checked then
+        Ini.WriteString('Files',lvFiles.Items[i].Caption,lvFiles.Items[i].SubItems[0])
+      else
+        Ini.WriteString('Files','~'+lvFiles.Items[i].Caption,lvFiles.Items[i].SubItems[0]);
+    end;
+    Ini.UpdateFile;
+  finally
+    Ini.free;
+  end;
+end; 
+
+procedure sbCancel_OnClick(Sender: TObject);
+begin
+  Self.Close;
+end;
+
+procedure sbOK_OnClick(Sender: TObject);
+begin
+  SaveConfig;
+  Self.Close;
+end;
+
+procedure lbHomePage_OnMouseEnter(Sender: TObject);
+begin
+  lbHomePage.Font.color:=clBlue;
+  lbHomePage.Font.Style:=[fsUnderline];  
+end;
+
+procedure lbHomePage_OnMouseLeave(Sender: TObject);
+begin
+  lbHomePage.Font.color:=clNavy;
+  lbHomePage.Font.Style:=[];  
+end;
+
+procedure lbHomePage_OnClick(Sender: TObject);
+begin
+  ShellExec(lbHomePage.Caption,'','',SW_SHOW,'')
+end;
+
+function ParseTMXLangs(const FileName:string):string;
+var
+  SL:TStringList;
+  i,p,q,z:integer;
+  tmp,lng, srch:string;
+begin
+  Result:='';
+  try
+    SL:=TStringList.create;
+    try
+      if LoadStrFromFile(tmp,FileName) then
+      begin   
+        for i:=1 to 2 do
+        begin
+          if i=1 then srch:=' xml:lang="' else srch:=' lang="';
+          z:=length(srch);               
+          p:=pos(srch,tmp);
+          while p>0 do
+          begin
+            q:=PosEx('"',tmp,p+z);
+            if q>p then
+            begin
+              lng:=copy(tmp,p+z,q-p-z);
+              if SL.IndexOf(lng)=-1 then
+                SL.Add(lng);
+            end
+            else
+              break;
+            p:=PosEx(srch,tmp,p+1);
+          end;
+          if SL.count>0 then
+            break;
+        end;
+      end;
+      Result:=SL.commatext;
+    finally
+      SL.free;
+    end;
+  except
+  end;
+end;
+
+function FindInList(const FileName:string):TListItem;
+var
+  i:integer;
+begin
+  Result:=nil;
+  for i:=0 to lvFiles.Items.Count-1 do
+    if AnsiSameText(FileName,lvFiles.Items[i].Caption) then
+    begin
+      Result:=lvFiles.Items[i];
+      break;
+    end;
+end;
+
+procedure acAdd_OnExecute(Sender: TObject);
+var
+  fd,opc:string;
+  FLI,LI:TListItem;
+  SL:TStringList;
+  i:integer;
+begin
+  fd:='';
+  if lvFiles.Selected<>nil then
+  begin
+    fd:=extractfilepath(ExpandFileNameEx(GetVariable('ScriptFile'),lvFiles.Selected.Caption));
+    if not DirectoryExists(fd) then
+      fd:='';
+  end;
+  
+  SL:=TStringList.create;
+  FLI:=nil;
+  try
+    if length(fd)>0 then
+      SL.add(fd);
+    if SelectFiles(SL,lbFileFilter.Caption) then
+    begin
+      opc:=Label6.Caption;      
+      Screen.Cursor:=crHourGlass;
+      lbHomePage.Visible:=False;
+      Label6.Font.Color:=clMaroon;
+      try
+        for i:=0 to SL.count-1 do
+        begin
+          fd:=ExtractRelativePathEx(GetVariable('ScriptFile'), SL[i], 3);
+          LI:=FindInList(fd);
+          if LI=nil then
+          begin
+            LI:=lvFiles.Items.Add;
+            LI.SubItems.Add('');
+          end;
+          LI.Caption:=fd;         
+          LI.Checked:=true;     
+          Label6.Caption:=lbProgress.Caption+' '+LI.Caption+' ...';
+          LI.Selected:=true;
+          LI.Focused:=true;
+          LI.MakeVisible(False);
+          Application.ProcessMessages;
+          LI.SubItems[0]:=ParseTMXLangs(SL[i]);
+          if FLI=nil then FLI:=LI;
+        end;
+      finally
+        lbHomePage.Visible:=True;
+        Label6.Caption:=opc;
+        Label6.ParentFont:=true;
+        Screen.Cursor:=crDefault;
+      end;
+    end;
+  finally
+    SL.free;
+    if FLI<>nil then
+    begin
+      if lvFiles.CanFocus then
+        lvFiles.SetFocus;          
+    end;
+  end;
+end;
+
+procedure acRemove_OnExecute(Sender: TObject);
+begin
+  if lvFiles.Selected<>nil then
+  begin
+    lvFiles.Selected.Delete;
+    if lvFiles.ItemFocused<>nil then
+      lvFiles.ItemFocused.Selected:=true;
+  end;
+end;
+
+procedure acLangs_OnExecute(Sender: TObject);
+var
+  s:string;
+begin
+  if lvFiles.Selected<>nil then
+  begin
+    s:=lvFiles.Selected.SubItems[0];   
+    if InputQueryPDS(ExtractFileName(lvFiles.Selected.Caption), sbLangs.Hint, s) then
+      lvFiles.Selected.SubItems[0]:=s;
+  end;
+end;
+
+procedure acMoveUp_OnExecute(Sender: TObject);
+var
+  sLI,tLI:TListItem;
+  i,j:integer;
+  tmp:String;
+  tmb:boolean;
+begin
+  sLI:=lvFiles.Selected;
+  if sLI<>nil then
+  begin
+    i:=sLI.index;
+    if i>0 then
+    begin
+      tLI:=lvFiles.Items[i-1];
+      tmp:=tLI.Caption;
+      tLI.Caption:=sLI.Caption;
+      sLI.Caption:=tmp;
+      tmb:=tLI.Checked;
+      tLI.Checked:=sLI.Checked;
+      sLI.Checked:=tmb;
+      for j:=0 to tLI.SubItems.Count-1 do
+      begin
+        tmp:=tLI.SubItems[j];
+        tLI.SubItems[j]:=sLI.SubItems[j];
+        sLI.SubItems[j]:=tmp;
+      end;
+      tLI.Selected:=true;
+      tLI.Focused:=true;
+      tLI.MakeVisible(false);
+    end;
+  end;
+end;
+
+procedure acMoveDn_OnExecute(Sender: TObject);
+var
+  sLI,tLI:TListItem;
+  i,j:integer;
+  tmp:String;
+  tmb:boolean;
+begin
+  sLI:=lvFiles.Selected;
+  if sLI<>nil then
+  begin
+    i:=sLI.index;
+    if i<lvFiles.Items.Count-1 then
+    begin
+      tLI:=lvFiles.Items[i+1];
+      tmp:=tLI.Caption;
+      tLI.Caption:=sLI.Caption;
+      sLI.Caption:=tmp;
+      tmb:=tLI.Checked;
+      tLI.Checked:=sLI.Checked;
+      sLI.Checked:=tmb;      
+      for j:=0 to tLI.SubItems.Count-1 do
+      begin
+        tmp:=tLI.SubItems[j];
+        tLI.SubItems[j]:=sLI.SubItems[j];
+        sLI.SubItems[j]:=tmp;
+      end;
+      tLI.Selected:=true;
+      tLI.Focused:=true;
+      tLI.MakeVisible(false);
+    end;
+  end;
+end;
+
+procedure InitLanguage;
+begin
+  LocalizeButtonCaption(mbOK, sbOK.Caption);
+  LocalizeButtonCaption(mbCancel, sbCancel.Caption);
+  miAdd.Caption:=sbAdd.Caption;
+  miRemove.Caption:=sbRemove.Caption;
+  miLangs.Caption:=sbLangs.Caption;
+  miMoveUp.Caption:=sbMoveUp.Caption;
+  miMoveDn.Caption:=sbMoveDn.Caption;
+end;
+
+procedure miCheckAll_OnClick(Sender: TObject);
+var
+  i:integer;
+begin
+  lvFiles.Items.BeginUpdate;
+  try
+    for i:=0 to lvFiles.Items.Count-1 do
+      lvFiles.Items[i].Checked:=true;
+  finally
+    lvFiles.Items.EndUpdate;
+  end;
+end;
+
+procedure miInvertChecks_OnClick(Sender: TObject);
+var
+  i:integer;
+begin
+  lvFiles.Items.BeginUpdate;
+  try
+    for i:=0 to lvFiles.Items.Count-1 do
+      lvFiles.Items[i].Checked:=not lvFiles.Items[i].Checked;
+  finally
+    lvFiles.Items.EndUpdate;
+  end;
+end;
+
+procedure acRemove_OnUpdate(Sender: TObject);
+begin
+  TAction(Sender).Enabled:=lvFiles.Selected<>nil;
+end;
+
+procedure acMoveUp_OnUpdate(Sender: TObject);
+begin
+  TAction(Sender).Enabled:=(lvFiles.Selected<>nil) and (lvFiles.Selected<>lvFiles.Items[0])
+end;
+
+procedure acMoveDn_OnUpdate(Sender: TObject);
+begin
+  TAction(Sender).Enabled:=(lvFiles.Selected<>nil) and (lvFiles.Selected<>lvFiles.Items[lvFiles.Items.Count-1])
+end;
+
+procedure AssignEvents;
+begin
+  sbCancel.OnClick := @sbCancel_OnClick;
+  sbOK.OnClick := @sbOK_OnClick;
+  lbHomePage.OnMouseEnter := @lbHomePage_OnMouseEnter;
+  lbHomePage.OnMouseLeave := @lbHomePage_OnMouseLeave;
+  lbHomePage.OnClick := @lbHomePage_OnClick;
+
+  acAdd.OnExecute := @acAdd_OnExecute;
+  acRemove.OnExecute := @acRemove_OnExecute;
+  acLangs.OnExecute := @acLangs_OnExecute;
+  acMoveUp.OnExecute := @acMoveUp_OnExecute;
+  acMoveDn.OnExecute := @acMoveDn_OnExecute;
+  miCheckAll.OnClick := @miCheckAll_OnClick;
+  miInvertChecks.OnClick := @miInvertChecks_OnClick;
+  acRemove.OnUpdate := @acRemove_OnUpdate;
+  acLangs.OnUpdate := @acRemove_OnUpdate;
+  acMoveUp.OnUpdate := @acMoveUp_OnUpdate;
+  acMoveDn.OnUpdate := @acMoveDn_OnUpdate;
+  lvFiles.OnDblClick := @acLangs_OnExecute;
+end;
+
+begin
+  Self.Font.Assign(Screen.IconFont);
+  Label3.Font.Style:=[fsBold];
+  lbHomePage.Font.color:=clNavy;
+  AssignEvents;
+  InitLanguage;
+  LoadConfig;
+end.

@@ -1,0 +1,125 @@
+unit Main;
+
+interface
+
+uses
+  System.SysUtils, System.Types, System.UITypes, System.Rtti, System.Classes,
+  FMX.Forms, FMX.Types, FMX.Menus, FMX.Controls,
+  ...
+  ;
+
+...
+
+type
+  TForm1 = class(TForm)
+    ...
+    MainMenu:TMainMenu;
+    miLanguage:TMenuItem;
+    procedure FormCreate(Sender: TObject);
+    procedure miChangeLanguageClick(Sender:TObject);
+  private
+    { Private declarations }
+    procedure ReadAvailableLanguages;
+    procedure LanguageChanged(Sender:TObject);
+    ...
+  public
+    { Public declarations }
+    procedure Assign(Source: TPersistent); override;
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.fmx}
+
+uses
+  ...
+  FMX.Dialogs, FMX.plsLangMan, %CONSTS%;
+
+procedure TForm1.FormCreate(Sender: TObject);
+begin
+  ...
+  // fill menu with available languages
+  ReadAvailableLanguages;
+  // assign language changed event
+  LanguageManager.OnLanguageChanged:=LanguageChanged;
+  // if language files are already loaded, then perform the event now
+  if LanguageManager.LanguageCode<>'' then
+    LanguageChanged(LanguageManager);
+  ...
+end;
+
+procedure TForm1.Assign(Source: TPersistent);
+begin
+  if not (Source is TLanguageManager) then
+    inherited;
+end;
+
+procedure TForm1.LanguageChanged(Sender:TObject);
+var
+  i:Integer;
+begin
+  // update user defined constants (variables)
+  %CONSTS%.LanguageChanged;
+  // clear localization strings table for constants - it saves some memory (do not use Clear, if you want to edit constants with an embedded localization editor!)
+  LanguageManager.Clear(True,False);
+
+  // update properties for this form
+  if not LanguageManager.LangForm(Self) then
+    MessageDlg(LanguageManager.LanguageName+' ('+LanguageManager.LanguageCode+'): ['+
+      Self.Name+' ('+Self.ClassName+')] '+LanguageManager.LastError, TMsgDlgType.mtWarning, [TMsgDlgBtn.mbOK], 0);
+  ...
+  // make other assignments, i.e. display the current language name and code, etc.
+  Self.Caption:='MyApp - '+LanguageManager.LanguageName+' ('+LanguageManager.LanguageCode+')';
+  ...
+  // inform other forms/frames/modules that language changed (note: see differences in overriden Assign method of the main form and the child form)
+  for i := 0 to Screen.DataModuleCount - 1 do  
+    Screen.DataModules[i].Assign(LanguageManager);
+  for i := 0 to Screen.FormCount - 1 do
+    Screen.Forms[i].Assign(LanguageManager); 
+end;
+
+procedure TForm1.ReadAvailableLanguages;
+var
+  SL:TStringList;
+  MI:TMenuItem;
+  i,j:Integer;
+begin
+  // fill menu with available languages
+  miLanguage.Clear;
+  SL:=TStringList.Create;
+  try
+    LanguageManager.GetAvailableLanguages(SL);
+    for i := 0 To SL.Count - 1 do
+    begin
+      MI:=TMenuItem.Create(self);
+      MI.TagString:=SL.Names[i];
+      MI.Text:=SL.ValueFromIndex[i]; 
+      MI.OnClick:=miChangeLanguageClick;
+      for j := 0 to miLanguage.ItemsCount - 1 do
+        if MI.Text<miLanguage.Items[j].Text then
+        begin
+          miLanguage.InsertObject(j,MI);
+          Break;
+        end;
+      if MI.Parent=nil then
+        miLanguage.AddObject(MI);
+    end;
+  finally
+    SL.Free;
+  end;
+end;
+
+procedure TForm1.miChangeLanguageClick(Sender:TObject);
+begin
+  // load another language files
+  LanguageManager.LanguageCode:=TMenuItem(Sender).TagString; 
+  if Length(LanguageManager.LastError)>0 then
+    MessageDlg(Self.Caption, LanguageManager.LastError, TMsgDlgType.mtWarning, [TMsgDlgBtn.mbOK], 0);
+end;
+
+...
+
+end.

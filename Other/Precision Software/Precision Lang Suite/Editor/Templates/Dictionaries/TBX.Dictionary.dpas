@@ -1,0 +1,337 @@
+// Interface template for TBX dictionaries
+program TBX;
+
+var
+  DictFiles:TStringList;
+  docs:array of variant;
+  AllowCrossLangs:boolean;
+
+procedure ClearAll;
+var
+  i:integer;
+begin
+  for i:=0 to DictFiles.Count-1 do
+  begin
+    if not VarIsNull(docs[i]) then
+      docs[i]:=null;
+  end;
+  SetLength(docs,0);
+  DictFiles.Clear;  
+end;
+  
+procedure LoadSettings;
+var
+  Ini:TMemIniFile;
+  i:integer;
+begin
+  ClearAll;
+  Ini:=TMemIniFile.Create(ChangeFileExt(ChangeFileExt(GetVariable('ScriptFile'),''),'.Settings.cfg'));
+  try
+    AllowCrossLangs:=Ini.ReadBool('Settings','AllowCrossLangs',True);
+    Ini.ReadSectionValues('Files',DictFiles); 
+    {
+      [Files]
+      FileName=en-GB,ru-RU,fr-FR,cs,de, ...
+      ~Filename=... unselected filename     
+    }   
+    for i:=DictFiles.Count-1 downto 0 do
+      if copy(DictFiles[i],1,1)='~' then
+        DictFiles.Delete(i);
+    SetLength(docs,DictFiles.Count);
+    for i:=0 to dictfiles.count-1 do
+      docs[i]:=null;
+  finally
+    Ini.free;
+  end;
+end; 
+
+procedure OnDestroy;
+begin
+  ClearAll;
+  DictFiles.Free;  
+end;
+
+
+function DoTranslate(const text:string; srclng:string; tgtlng:string; var res:string):integer;
+var
+  dsrclng,dtgtlng:string;  
+  fn,query:string;
+  SL,FL:TStringList;
+  i,j,p:integer;
+  cont:boolean;
+  xmlDoc:Variant;
+  N:Variant;
+begin
+  Result := 2; // not found
+  res := '';
+  try
+    srclng:=AnsiUpperCase(srclng);
+    tgtlng:=AnsiUpperCase(tgtlng);    
+
+    SL:=TStringList.create;
+    FL:=TStringList.create;
+    try
+      FL.CaseSensitive:=False;
+      SL.CaseSensitive:=False;
+      // walk through the file names for bilingual (direct) translation
+      for i:=0 to DictFiles.Count-1 do
+      begin
+        cont:=false;
+        // check a valid lang pair
+        FL.commatext:=DictFiles.ValueFromIndex[i];
+        if FL.count<2 then
+          continue;
+        p:=FL.IndexOf(srclng);
+        if p>=0 then
+        begin
+          dsrclng:=FL[p];
+          p:=FL.IndexOf(tgtlng);
+          if p>=0 then
+          begin
+            dtgtlng:=FL[p];
+            cont:=true;
+          end;
+        end;
+        if not cont then
+        begin
+          // check a valid lang pair for shortened langcodes
+          SL.Clear;
+          SL.AddStrings(FL);
+          for j:=0 to SL.count-1 do
+          begin
+            p:=pos('-',SL[j]);
+            if p>0 then
+              SL[j]:=copy(SL[j],1,p-1);
+          end;
+          p:=SL.IndexOf(srclng);
+          if p>=0 then
+          begin
+            dsrclng:=FL[p];
+            p:=SL.IndexOf(tgtlng);
+            if p>=0 then
+            begin
+              dtgtlng:=FL[p];
+              cont:=true;
+            end;
+          end;          
+        end;
+         
+        if cont then
+        begin
+          // create XPath query
+          query:='/martif/text/body/termEntry[langSet[lang('''+dsrclng+''')]/ntig/termGrp/term[translate(text(),''ABCDEFGHIJKLMNOPQRSTUVWXYZ&'',''abcdefghijklmnopqrstuvwxyz'')='+
+            'translate('''+text+''',''ABCDEFGHIJKLMNOPQRSTUVWXYZ&'',''abcdefghijklmnopqrstuvwxyz'')]]/langSet[lang('''+dtgtlng+''')]/ntig/termGrp/term';
+          // load or select the xmlDoc
+          if VarIsNull(docs[i]) then
+          begin          
+            xmldoc:=CreateOleObject('Microsoft.XMLDOM');
+            xmldoc.async := False;
+            xmldoc.validateOnParse := False;
+            xmldoc.resolveExternals := False;
+            fn:=ExpandFileNameEx(GetVariable('ScriptFile'),DictFiles.Names[i]);
+            xmldoc.Load(fn);
+            if (not VarIsNull(xmlDoc)) and (not VarIsEmpty(xmlDoc)) and (not VarIsClear(xmldoc)) and (xmldoc.parseError.errorCode=0) then
+            begin
+              xmldoc.setProperty('SelectionLanguage', 'XPath');           
+              Docs[i]:=xmldoc;             
+            end;
+          end
+          else
+            xmlDoc:=Docs[i];
+          if (not VarIsNull(xmlDoc)) and (not VarIsEmpty(xmlDoc)) and (not VarIsClear(xmldoc)) and (xmldoc.parseError.errorCode=0) then
+          begin       
+            // perform query
+            N := xmldoc.selectSingleNode(query);
+            if (not VarIsNull(N)) and (not VarIsEmpty(N)) and (not VarIsClear(N)) then
+            begin
+              res := N.text; 
+              Result:=0; // found
+              break;
+            end; 
+          end;              
+        end;
+      end;
+      
+    finally
+      N:=null;
+      SL.free;
+      FL.free;
+    end;
+  except
+    Result := 1; // error    
+    res:= ExceptionToString(ExceptionType, ExceptionParam); 
+  end;
+end;
+
+function DoCrossTranslate(const text:string; srclng:string; tgtlng:string; var res:string):integer;
+var
+  tmp,ctmp,clng:string;
+  FL,SL:TStringList;
+  srcTL,tgtSL,CL:TStringList;
+  i,j,p,q:integer; 
+begin
+  Result:=2;
+  res:='';
+  try
+    srcTL:=TStringList.create;
+    tgtSL:=TStringList.create;
+    CL:=TStringList.create;
+    FL:=TStringList.create;
+    SL:=TStringList.create;
+    try
+      FL.CaseSensitive:=False;
+      SL.CaseSensitive:=False;
+      srcTL.CaseSensitive:=False;
+      srcTL.Duplicates:=dupIgnore;
+      tgtSL.CaseSensitive:=False;
+      tgtSL.Duplicates:=dupIgnore;
+
+      // get source targets and target sources
+      for i:=0 to DictFiles.Count-1 do
+      begin
+        FL.commatext:=DictFiles.ValueFromIndex[i];       
+        if FL.count<2 then
+          continue;         
+        SL.Text:=FL.Text;
+        for j:=0 to SL.Count-1 do
+        begin
+          tmp:=SL[j];
+          p:=pos('-',tmp);
+          if p>0 then
+            SL[j]:=copy(tmp,1,p-1);
+        end;
+        
+        p:=FL.IndexOf(srclng);
+        if p<0 then
+          p:=SL.IndexOf(srclng);
+        q:=FL.IndexOf(tgtlng);
+        if q<0 then
+          q:=SL.IndexOf(tgtlng);
+        
+        if not ((p>=0) and (q>=0)) then
+        begin
+          if p>=0 then
+          begin
+            FL.Delete(p);
+            SL.Delete(p);
+            srcTL.AddStrings(FL);
+          end;       
+          if FL.count<2 then
+            continue;
+          if q>=0 then
+          begin
+            FL.Delete(q);
+            SL.Delete(q);
+            tgtSL.AddStrings(FL);
+          end;
+        end;
+      end;
+
+      // find cross langs
+      for i:=0 to srcTL.Count-1 do
+      begin
+        tmp:=srcTL[i];
+        p:=tgtSL.IndexOf(tmp);
+        if p>=0 then
+          CL.Add(tmp)
+        else
+        begin
+          j:=pos('-',tmp);
+          if j>0 then
+          begin
+            p:=tgtSL.IndexOf(copy(tmp,1,j-1));
+            if p>=0 then
+              CL.Add(tmp);
+          end;
+        end;
+      end;             
+      for i:=0 to tgtSL.Count-1 do
+      begin
+        tmp:=tgtSL[i];
+        j:=pos('-',tmp);
+        if j>0 then
+        begin
+          p:=srcTL.IndexOf(copy(tmp,1,j-1));
+          if p>=0 then
+            CL.Add(tmp);
+        end;
+      end;      
+                                               
+      for q:=0 to CL.count-1 do
+      begin
+        clng:=CL[q];
+        i:=pos('-',clng);
+        if i>0 then
+          Delete(clng,i,maxint);
+        // translate source to cross lang
+        i:=DoTranslate(text,srclng,clng,ctmp);              
+        if (i=0) and (length(ctmp)>0) then
+        begin
+          // translate cross lang to target                  
+          i:=DoTranslate(ctmp,clng,tgtlng,res);
+          if i=0 then
+          begin         
+            Result:=0;
+            break;
+          end;
+        end;
+      end;
+      
+    finally
+      srcTL.free;
+      tgtSL.free;
+      CL.free;
+      FL.free;
+      SL.free;          
+    end;
+  except
+    Result := 1; // error        
+    res := ExceptionToString(ExceptionType, ExceptionParam); 
+  end;  
+end;
+
+function OnTranslate(const Params:string):integer;
+var
+  srclng,tgtlng:string;
+  text,tmp:string;
+begin
+  Result := 2; // not found
+  try
+    text:=PLSApp.Event.Text;
+    if length(trim(text))>0 then
+    begin
+      srclng:=PLSApp.Event.SrcLng;
+      tgtlng:=PLSApp.Event.TgtLng;    
+      PLSApp.Event.Returns:=''; 
+      Result := DoTranslate(text, srclng, tgtlng, tmp);     
+      case Result of
+        0:PLSApp.Event.Returns := tmp; 
+        1:begin
+            PLSApp.Event.Fails := true;
+            PLSApp.Event.Returns := tmp;       
+          end;
+        2:if AllowCrossLangs then
+          begin
+            Result := DoCrossTranslate(text, srclng, tgtlng, tmp);
+            case Result of
+              0:PLSApp.Event.Returns := tmp; 
+              1:begin
+                  PLSApp.Event.Fails := true;
+                  PLSApp.Event.Returns := tmp;       
+                end;
+            end;  
+          end;        
+      end;  
+    end;
+  except
+    Result := 1; // error    
+    PLSApp.Event.Fails := true;
+    PLSApp.Event.Returns := ExceptionToString(ExceptionType, ExceptionParam); 
+  end;
+end;
+
+begin
+  // initialization
+  DictFiles:=TStringList.Create;
+  LoadSettings;
+end.

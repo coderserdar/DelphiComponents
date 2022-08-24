@@ -1,0 +1,141 @@
+unit Main;
+
+interface
+
+uses
+  LCLIntf, LCLType, lresources, SysUtils, Classes, Forms,
+  ...
+  plsController;
+
+...
+
+type
+  TForm1 = class(TForm)
+    mmMain: TMainMenu;
+    miFile: TMenuItem;
+    miLanguages: TMenuItem;
+    ...
+    // Add TplsController visual component to your main form and setup its properties and events
+    plsController1: TplsController;
+    procedure plsController1BeforeLangChange(Sender: TObject);
+    procedure plsController1LanguageChanged(Sender: TObject);
+    procedure plsController1Error(Sender: TObject);
+    procedure plsController1InitLangManager(Sender: TObject);
+    procedure miChangeLanguageClick(Sender:TObject);
+    ...
+    procedure FormCreate(Sender: TObject);
+    procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
+  private
+    { Private declarations }
+    procedure ReadAvailableLanguages;
+    ...
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+uses
+  ...
+  { plsEmbedded, // uncomment this line if you want to use an embedded localization features }
+  plsDialogs, %CONSTS%;
+
+////////////////////////// plsController events ////////////////////////////////////////////
+procedure TForm1.plsController1InitLangManager(Sender: TObject);
+begin
+  { LanguageManager Initialization }
+  { Here you can setup miscellaneous options for loading localization files
+    via the main TplsController (and its associated LanguageManager) }
+  // TplsController(Sender).LangManager.FileNames.CommaText:='DemoMain,Comm*';  // set this, if you want to filter language files to those names (masks supported)
+  // TplsController(Sender).LangManager.RecursiveFolder:=True;                  // set this, if you want to get language files from subfolders too
+  // TplsController(Sender).LangManager.Folder:='..\..\Langs';                  // set this, if your language files are in different folder then default (AppExe\Langs)
+  // TplsController(Sender).DefaultLangCode:='';                                // instead of default language code, you can set a language code loaded from your ini/config here
+  { End LanguageManager Initialization }
+
+  ReadAvailableLanguages;
+end;
+
+procedure TForm1.plsController1BeforeLangChange(Sender: TObject);
+begin
+  plsDialogs.LanguageChanged; // update constants (variables) in plsDialogs unit
+  %CONSTS%.LanguageChanged; // update user defined constants (variables/resources)
+  TplsController(Sender).LangManager.Clear(True, False);  // clear localization strings table for constants (speeds up searching for properties a little)
+end;
+
+procedure TForm1.plsController1LanguageChanged(Sender: TObject);
+var
+  j:Integer;
+begin
+  // If you want, perform any desired actions after the language has been changed
+  Application.Title := Self.Caption;
+  for j := 0 to miLanguages.Count - 1 do
+    if miLanguages.Items[j].Hint=plsController1.LanguageCode then
+    begin
+      miLanguages.Items[j].Checked:=True;
+      break;
+    end;
+end;
+
+procedure TForm1.plsController1Error(Sender: TObject);
+begin
+  with TplsController(Sender) do
+    MessageDlg('', LanguageName+' ('+LanguageCode+'): ['+Owner.Name+' ('+Owner.ClassName+')] '+LastError, mtWarning);
+end;
+
+
+////////////////////////// Language selection methods and events ///////////////////////////
+procedure TForm1.ReadAvailableLanguages;
+var
+  MI:TMenuItem;
+  i:Integer;
+begin
+  // fill menu with available languages
+  miLanguages.Clear;
+  for i := 0 To plsController1.LanguagesCount - 1 do
+  begin
+    MI:=TMenuItem.Create(self);
+    MI.Hint:=plsController1.LanguageCodes[i];
+    MI.Caption:=plsController1.LanguageNames[i];
+    MI.OnClick:=@miChangeLanguageClick;
+    MI.RadioItem:=True;
+    MI.GroupIndex:=1;
+    miLanguages.Add(MI);
+  end;
+end;
+
+procedure TForm1.miChangeLanguageClick(Sender:TObject);
+begin
+  // load another translation
+  plsController1.LanguageCode:=TMenuItem(Sender).Hint;
+end;
+
+...
+
+////////////////////////// Embedded localization support (if needed) ///////////////////////
+procedure TForm1.FormCreate(Sender: TObject);
+begin
+  ...
+  { LE_InstallCaptureControlShortcut(LanguageManager,  TextToShortCut('Alt+F2')); // uncomment this line if you want to use an embedded localization features }
+  ...
+end;
+
+{$IFDEF FPC}
+{$HINTS OFF}
+{$ENDIF}
+
+procedure TForm1.FormClose(Sender: TObject; var CloseAction: TCloseAction);
+begin
+  ...
+  { LE_RemoveCaptureControlShortcut; // uncomment this line if you want to use embedded localization features }
+  ...
+end;
+
+{$IFDEF FPC}
+{$HINTS ON}
+{$ENDIF}
+
+initialization
+  {$I Main.lrs}
+
+end.

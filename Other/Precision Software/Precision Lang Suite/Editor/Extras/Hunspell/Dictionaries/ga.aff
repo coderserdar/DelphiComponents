@@ -1,0 +1,611 @@
+# myspell affix file for Irish by Kevin Scannell
+# I created this file by converting my ispell affix file on 5 August 2002
+# Exactly the same set of affixes, except one can avoid the acrobatics
+# for the verb "buígh" because myspell is a bit smarter about combining affixes
+#
+#               ABCDEFGHIJKLMNOPQRSTUVWXYZ
+#               ****** ******     ***      
+#
+# Copyright 2002 Kevin P. Scannell
+#
+#    This program is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation; either version 2 of the License, or
+#    (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program; if not, write to the Free Software
+#    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+#
+#
+# Consult the web page
+#
+#   http://borel.slu.edu/~kps/ispell/index.html
+#
+# for detailed information about these packages and installation information.
+
+SET ISO8859-1
+
+TRY aihnrsetcdoglumbíéáfóúpvjzxywqk
+
+# séimhiú (only place where capitals are required)
+PFX S Y 18
+PFX S b bh b
+PFX S B Bh B
+PFX S c ch c
+PFX S C Ch C
+PFX S d dh d
+PFX S D Dh D
+PFX S f fh f
+PFX S F Fh F
+PFX S g gh g
+PFX S G Gh G
+PFX S m mh m
+PFX S M Mh M
+PFX S p ph p
+PFX S P Ph P
+PFX S s sh s[aeiouáéíóúlnr]
+PFX S S Sh S[aeiouáéíóúlnr]
+PFX S t th t
+PFX S T Th T
+
+# urú
+PFX U Y 16
+PFX U 0 m b[^h]
+PFX U bh mb bh
+PFX U 0 g c[^h]
+PFX U ch gc ch
+PFX U 0 n d[^h\']
+PFX U dh nd dh
+PFX U 0 bh f[^h]
+PFX U fh bhf fh
+PFX U 0 n g[^h]
+PFX U gh ng gh
+PFX U 0 b p[^h]
+PFX U ph bp ph
+PFX U 0 d t[^h]
+PFX U th dt th
+PFX U d' n- d'[aeiouáéíóú]
+PFX U 0 n- [aeiouáéíóú]
+
+#  b'
+PFX B N 2
+PFX B 0 b' [aeiouáéíóú]
+PFX B f b'fh f
+
+# h
+PFX H Y 1
+PFX H 0 h [aeiouáéíóú]
+ 
+#  m'
+PFX M N 2
+PFX M 0 m' [aeiouáéíóú]
+PFX M f m'fh f
+
+#  d'
+PFX D N 2
+PFX D 0 d' [aeiouáéíóú]
+PFX D f d'fh f
+
+# t-
+PFX T N 2
+PFX T 0 t- [aeiouáéíóú]
+PFX T 0 t s
+ 
+# "leideanna"
+PFX L Y 180
+PFX L 0 an- [^bcfgmp]
+PFX L b an-bh b
+PFX L c an-ch c
+PFX L f an-fh f
+PFX L g an-gh g
+PFX L m an-mh m
+PFX L p an-ph p
+PFX L 0 dea- [^bcdfgmpst]
+PFX L 0 dea- s[^aeiouáéíóúlnr]
+PFX L s dea-sh s[aeiouáéíóúlnr]
+PFX L b dea-bh b
+PFX L c dea-ch c
+PFX L d dea-dh d
+PFX L f dea-fh f
+PFX L g dea-gh g
+PFX L m dea-mh m
+PFX L p dea-ph p
+PFX L t dea-th t
+PFX L 0 ain [deéiílnrst]
+PFX L b ainbh b
+PFX L c ainch c
+PFX L f ainfh f
+PFX L g aingh g
+PFX L m ainmh m
+PFX L p ainph p
+PFX L 0 ath [^bcdfgmpst]
+PFX L b athbh b
+PFX L c athch c
+PFX L d athdh d
+PFX L f athfh f
+PFX L g athgh g
+PFX L m athmh m
+PFX L p athph p
+PFX L 0 a t
+PFX L 0 ath s[^aeiouáéíóúlnr]
+PFX L s athsh s[aeiouáéíóúlnr]
+PFX L 0 comh [^bcdfgmnpst]
+PFX L b comhbh b
+PFX L c comhch c
+PFX L d comhdh d
+PFX L f comhfh f
+PFX L g comhgh g
+PFX L p comhph p
+PFX L t comhth t
+PFX L 0 comh s[^aeiouáéíóúlnr]
+PFX L s comhsh s[aeiouáéíóúlnr]
+PFX L m cómh m[aáoóuú]
+PFX L m cóimh m[eéií]
+PFX L 0 có n[aáoóuú]
+PFX L 0 cói n[eéií]
+PFX L 0 do- [^bcdfglmnprst]
+PFX L 0 do [lnr]
+PFX L b dobh b
+PFX L c doch c
+PFX L d dodh d
+PFX L f dofh f
+PFX L g dogh g
+PFX L m domh m
+PFX L p doph p
+PFX L t doth t
+PFX L 0 do s[^aeiouáéíóúlnr]
+PFX L s dosh s[aeiouáéíóúlnr]
+PFX L 0 droch [^bcdfgmpst]
+PFX L b drochbh b
+PFX L c droch-ch c
+PFX L d drochdh d
+PFX L f drochfh f
+PFX L g drochgh g
+PFX L m drochmh m
+PFX L p drochph p
+PFX L t drochth t
+PFX L 0 droch s[^aeiouáéíóúlnr]
+PFX L s drochsh s[aeiouáéíóúlnr]
+PFX L 0 for [^bcdfgmprst]
+PFX L b forbh b
+PFX L c forch c
+PFX L d fordh d
+PFX L f forfh f
+PFX L g forgh g
+PFX L m formh m
+PFX L p forph p
+PFX L 0 for- r
+PFX L t forth t
+PFX L 0 for s[^aeiouáéíóúlnr]
+PFX L s forsh s[aeiouáéíóúlnr]
+PFX L 0 fo- [^bcdfglmnprst]
+PFX L 0 fo [lnr]
+PFX L b fobh b
+PFX L c foch c
+PFX L d fodh d
+PFX L f fofh f
+PFX L g fogh g
+PFX L m fomh m
+PFX L p foph p
+PFX L t foth t
+PFX L 0 fo s[^aeiouáéíóúlnr]
+PFX L s fosh s[aeiouáéíóúlnr]
+PFX L 0 frith [^bcdfgmpst]
+PFX L b frithbh b
+PFX L c frithch c
+PFX L d frithdh d
+PFX L f frithfh f
+PFX L g frithgh g
+PFX L m frithmh m
+PFX L p frithph p
+PFX L 0 fri t
+PFX L 0 frith s[^aeiouáéíóúlnr]
+PFX L s frithsh s[aeiouáéíóúlnr]
+PFX L 0 il [^bcfgmp]
+PFX L b ilbh b
+PFX L c ilch c
+PFX L f ilfh f
+PFX L g ilgh g
+PFX L m ilmh m
+PFX L p ilph p
+PFX L 0 im [^bcdfgmpst]
+PFX L b imbh b
+PFX L c imch c
+PFX L d imdh d
+PFX L f imfh f
+PFX L g imgh g
+PFX L p imph p
+PFX L t imth t
+PFX L 0 im s[^aeiouáéíóúlnr]
+PFX L s imsh s[aeiouáéíóúlnr]
+PFX L 0 in [^bcfgmnp]
+PFX L b inbh b
+PFX L c inch c
+PFX L f infh f
+PFX L g ingh g
+PFX L m inmh m
+PFX L p inph p
+PFX L 0 in- n
+PFX L 0 mí- [^bcdfglmnprst]
+PFX L 0 mí [lnr]
+PFX L b míbh b
+PFX L c mích c
+PFX L d mídh d
+PFX L f mífh f
+PFX L g mígh g
+PFX L m mímh m
+PFX L p míph p
+PFX L t míth t
+PFX L 0 mí s[^aeiouáéíóúlnr]
+PFX L s mísh s[aeiouáéíóúlnr]
+PFX L 0 réamh [^bcdfgmpst]
+PFX L b réamhbh b
+PFX L c réamhch c
+PFX L d réamhdh d
+PFX L f réamhfh f
+PFX L g réamhgh g
+PFX L m réamh-mh m
+PFX L p réamhph p
+PFX L t réamhth t
+PFX L 0 réamh s[^aeiouáéíóúlnr]
+PFX L s réamhsh s[aeiouáéíóúlnr]
+PFX L 0 ró- [^bcdfglmnprst]
+PFX L 0 ró [lnr]
+PFX L b róbh b
+PFX L c róch c
+PFX L d ródh d
+PFX L f rófh f
+PFX L g rógh g
+PFX L m rómh m
+PFX L p róph p
+PFX L t róth t
+PFX L 0 ró s[^aeiouáéíóúlnr]
+PFX L s rósh s[aeiouáéíóúlnr]
+PFX L 0 so- [^bcdfglmnprst]
+PFX L 0 so [lnr]
+PFX L b sobh b
+PFX L c soch c
+PFX L d sodh d
+PFX L f sofh f
+PFX L g sogh g
+PFX L m somh m
+PFX L p soph p
+PFX L t soth t
+PFX L 0 so s[^aeiouáéíóúlnr]
+PFX L s sosh s[aeiouáéíóúlnr]
+
+SFX A Y 119                      # molaim
+SFX A im nn [^ui]aim      # láithreach
+SFX A 0 id [^ui]aim             
+SFX A aim faidh [^uif]aim     # fáistineach
+SFX A aim faimid [^uif]aim   
+SFX A aim far [^uif]aim   
+SFX A m nn [^ui]aim          # foshuiteach caite
+SFX A 0 is [^ui]aim   
+SFX A im dh [^ui]aim     
+SFX A m dís [^ui]aim   
+SFX A im 0 [^ui]aim          # foshuiteach
+SFX A m gí [^ui]aim          # ordaitheach
+SFX A aim tar [^uthi]aim    # láithreach saor
+SFX A aim tá [^uthi]aim     # foshuiteach caite
+SFX A aim taí [^uthi]aim    
+SFX A m dh faim       # fáistineach                   grafaim  liteagrafaim
+SFX A im r faim
+SFX A im r taim       # láithreach saor               róstaim
+SFX A aim á taim      # foshuiteach caite
+SFX A im í taim    
+SFX A aim tar [^t]haim    # láithreach saor           traochaim
+SFX A aim tá [^t]haim     # foshuiteach caite
+SFX A aim taí [^t]haim    
+SFX A haim ar thaim    # láithreach saor              meathaim
+SFX A haim á thaim     # foshuiteach caite
+SFX A haim aí thaim    
+SFX A im nn [oáóú]im      # láithreach cb lch.98      dóim
+SFX A 0 id [oáóú]im
+SFX A m tear [oáóú]im
+SFX A im faidh [oáóú]im   # fáistineach
+SFX A im faimid [oáóú]im
+SFX A im far [oáóú]im
+SFX A m nn [oáóú]im       # foshuiteach caite
+SFX A m teá [oáóú]im
+SFX A 0 is [oáóú]im
+SFX A im dh [oáóú]im
+SFX A m dís [oáóú]im
+SFX A m tí [oáóú]im
+SFX A im 0 [oáóú]im       # foshuiteach
+SFX A m gí [oáóú]im       # ordaitheach
+SFX A im nn [iu]aim       # láithreach cb lch.98      buaim  iaim
+SFX A 0 id [iu]aim
+SFX A m tear [iu]aim
+SFX A im faidh [iu]aim    # fáistineach
+SFX A im faimid [iu]aim
+SFX A im far [iu]aim
+SFX A m nn [iu]aim        # foshuiteach caite
+SFX A m teá [iu]aim
+SFX A 0 is [iu]aim
+SFX A im dh [iu]aim
+SFX A m dís [iu]aim
+SFX A m tí [iu]aim
+SFX A im 0 [iu]aim        # foshuiteach
+SFX A m gí [iu]aim        # ordaitheach
+SFX A im eann [^aoáéóú]im    # láithreach             brisim
+SFX A 0 id [^aoáéóú]im
+SFX A im fidh [^aoáéóú]im    # fáistineach
+SFX A im fimid [^aoáéóú]im
+SFX A im fear [^aoáéóú]im
+SFX A m nn [^aoáéóú]im       # foshuiteach caite
+SFX A 0 is [^aoáéóú]im
+SFX A im eadh [^aoáéóú]im
+SFX A m dís [^aoáéóú]im
+SFX A im e [^aoáéóú]im       # foshuiteach
+SFX A m gí [^aoáéóú]im       # ordaitheach
+SFX A im tear [^aoáéóúth]im    # láithreach saor
+SFX A im teá [^aoáéóúth]im     # foshuiteach caite
+SFX A im tí [^aoáéóúth]im
+SFX A im ear tim     # láithreach saor                titim
+SFX A im eá tim      # foshuiteach caite
+SFX A im í tim
+SFX A im tear [^t]him    # láithreach saor            sroichim
+SFX A im teá [^t]him     # foshuiteach caite
+SFX A im tí [^t]him    
+SFX A him ear thim    # láithreach saor               caithim
+SFX A him eá thim     # foshuiteach caite
+SFX A him í thim    
+SFX A im ann éim             # láithreach cb lch.99   léim
+SFX A 0 id éim
+SFX A m tear éim
+SFX A m fidh éim             # fáistineach
+SFX A m fimid éim
+SFX A m fear éim
+SFX A m nn éim               # foshuiteach caite
+SFX A m teá éim
+SFX A 0 is éim
+SFX A im adh éim
+SFX A m dís éim
+SFX A m tí éim
+SFX A im 0 éim               # foshuiteach
+SFX A m gí éim               # ordaitheach
+SFX A m onn ím              # láithreach cb lch.99    guím
+SFX A m mid ím
+SFX A m fidh ím             # fáistineach
+SFX A m fimid ím
+SFX A m fear ím
+SFX A m nn ím               # foshuiteach caite
+SFX A m mis ím
+SFX A m odh ím
+SFX A m dís ím
+SFX A m 0 ím                # foshuiteach 
+SFX A m gí ím               # ordaitheach 
+SFX A ím itear [^aou]ím
+SFX A ím iteá [^aou]ím
+SFX A ím ití [^aou]ím
+SFX A m tear aím                                   #  cnaím  maím
+SFX A m teá aím
+SFX A m tí aím
+SFX A ím itear [^l]oím                             #  snoím
+SFX A ím iteá [^l]oím
+SFX A ím ití [^l]oím
+SFX A m tear loím                                  #  cloím 
+SFX A m teá loím
+SFX A m tí loím
+SFX A ím itear [^b]uím                             #  dluím  guím  luím  suím
+SFX A ím iteá [^b]uím
+SFX A ím ití [^b]uím
+SFX A m tear buím                                  #  buím 
+SFX A m teá buím
+SFX A m tí buím
+
+
+SFX E Y 102                     # mholainn  d'amharcainn
+SFX E inn mar [^iu]ainn    # caite 
+SFX E inn dh [^iu]ainn     # gnáthchaite
+SFX E nn mis [^iu]ainn
+SFX E nn dís [^iu]ainn
+SFX E ainn fainn [^iuf]ainn # coinníollach
+SFX E ainn fá [^iuf]ainn
+SFX E ainn fadh [^iuf]ainn
+SFX E ainn faimis [^iuf]ainn
+SFX E ainn faidís [^iuf]ainn
+SFX E ainn faí [^iuf]ainn
+SFX E inn dar [^iu]ainn    # an B.N.
+SFX E ainn tá [^utih]ainn    # gnáthchaite
+SFX E ainn taí [^utih]ainn    
+SFX E ainn á [ft]ainn    # coinníollach gnáthchaite    ghrafainn     róstainn
+SFX E inn í [ft]ainn
+SFX E ainn tá [^t]hainn    # gnáthchaite               traochainn
+SFX E ainn taí [^t]hainn
+SFX E hainn á thainn    # gnáthchaite                  meathainn
+SFX E hainn aí thainn    
+SFX E inn mar [oáóú]inn    # caite                     dhóinn  d'ionsáinn
+SFX E nn teá [oáóú]inn     # gnáthchaite
+SFX E inn dh [oáóú]inn
+SFX E nn mis [oáóú]inn
+SFX E nn dís [oáóú]inn
+SFX E nn tí [oáóú]inn
+SFX E inn fainn [oáóú]inn  # coinníollach
+SFX E inn fá [oáóú]inn
+SFX E inn fadh [oáóú]inn
+SFX E inn faimis [oáóú]inn
+SFX E inn faidís [oáóú]inn
+SFX E inn faí [oáóú]inn
+SFX E inn dar [oáóú]inn    # an B.N.
+SFX E inn mar [iu]ainn    # caite                      bhuainn  d'iomluainn
+SFX E nn teá [iu]ainn     # gnáthchaite
+SFX E inn dh [iu]ainn
+SFX E nn mis [iu]ainn
+SFX E nn dís [iu]ainn
+SFX E nn tí [iu]ainn
+SFX E inn fainn [iu]ainn  # coinníollach
+SFX E inn fá [iu]ainn
+SFX E inn fadh [iu]ainn
+SFX E inn faimis [iu]ainn
+SFX E inn faidís [iu]ainn
+SFX E inn faí [iu]ainn
+SFX E inn dar [iu]ainn    # an B.N.
+SFX E inn eamar [^aoáéóú]inn  # caite                  bhrisinn  d'éistinn
+SFX E inn eadh [^aoáéóú]inn   # gnáthchaite
+SFX E nn mis [^aoáéóú]inn
+SFX E nn dís [^aoáéóú]inn
+SFX E inn finn [^aoáéóú]inn    # coinníollach
+SFX E inn feá [^aoáéóú]inn
+SFX E inn feadh [^aoáéóú]inn
+SFX E inn fimis [^aoáéóú]inn
+SFX E inn fidís [^aoáéóú]inn
+SFX E inn fí [^aoáéóú]inn
+SFX E inn eadar [^aoáéóú]inn   # an B.N.
+SFX E inn teá [^aoáéóúth]inn     # gnáthchaite
+SFX E inn tí [^aoáéóúth]inn
+SFX E inn eá tinn      # gnáthchaite                         titinn
+SFX E inn í tinn
+SFX E inn teá [^t]hinn     # gnáthchaite                     sroichinn
+SFX E inn tí [^t]hinn    
+SFX E hinn eá thinn     # gnáthchaite                        caithinn
+SFX E hinn í thinn    
+SFX E inn amar éinn        # caite                           phléinn  d'atéinn
+SFX E nn teá éinn          # gnáthchaite
+SFX E inn adh éinn
+SFX E nn mis éinn
+SFX E nn dís éinn
+SFX E nn tí éinn
+SFX E nn finn éinn         # coinníollach
+SFX E nn feá éinn
+SFX E nn feadh éinn
+SFX E nn fimis éinn
+SFX E nn fidís éinn
+SFX E nn fí éinn
+SFX E inn adar éinn        # an B.N.
+SFX E nn omar ínn          # caite                           ghuínn  d'fhínn
+SFX E nn odh ínn           # gnáthchaite
+SFX E nn mis ínn
+SFX E nn dís ínn
+SFX E nn finn ínn          # coinníollach
+SFX E nn feá ínn
+SFX E nn feadh ínn
+SFX E nn fimis ínn
+SFX E nn fidís ínn
+SFX E nn fí ínn
+SFX E nn odar ínn          # an B.N.
+SFX E ínn iteá [^aou]ínn
+SFX E ínn ití [^aou]ínn
+SFX E nn teá aínn                                     # chnaínn  mhaínn
+SFX E nn tí aínn
+SFX E ínn iteá [^l]oínn                               # shnoínn
+SFX E ínn ití [^l]oínn
+SFX E nn teá loínn                                    # chloínn
+SFX E nn tí loínn
+SFX E ínn iteá [^h]uínn                               # dhluínn  luínn
+SFX E ínn ití [^h]uínn
+SFX E ínn iteá [^b]huínn                              # ghuínn  shuínn
+SFX E ínn ití [^b]huínn
+SFX E nn teá bhuínn                                   # bhuínn
+SFX E nn tí bhuínn
+
+SFX C Y 28                                     # beannaím
+SFX C m onn aím        # láithreach
+SFX C 0 id aím
+SFX C m tear aím
+SFX C aím óidh aím     # fáistineach
+SFX C aím óimid aím
+SFX C aím ófar aím
+SFX C m nn aím         # foshuiteach caite
+SFX C m teá aím
+SFX C 0 is aím
+SFX C m odh aím
+SFX C m dís aím
+SFX C m tí aím
+SFX C m 0 aím          # foshuiteach
+SFX C m gí aím         # ordaitheach
+SFX C m onn [^a]ím        # láithreach           bailím
+SFX C 0 id [^a]ím
+SFX C m tear [^a]ím
+SFX C ím eoidh [^a]ím     # fáistineach
+SFX C ím eoimid [^a]ím
+SFX C ím eofar [^a]ím
+SFX C m nn [^a]ím         # foshuiteach caite
+SFX C m teá [^a]ím
+SFX C 0 is [^a]ím
+SFX C m odh [^a]ím
+SFX C m dís [^a]ím
+SFX C m tí [^a]ím
+SFX C m 0 [^a]ím          # foshuiteach
+SFX C m gí [^a]ím         # ordaitheach
+
+SFX F Y 26                                      # bheannaínn  d'iompaínn
+SFX F nn omar aínn       # caite
+SFX F nn teá aínn        # gnáthchaite
+SFX F nn odh aínn
+SFX F nn mis aínn
+SFX F nn dís aínn
+SFX F nn tí aínn
+SFX F aínn óinn aínn     # coinníollach
+SFX F aínn ófá aínn
+SFX F aínn ódh aínn
+SFX F aínn óimis aínn
+SFX F aínn óidís aínn
+SFX F aínn ófaí aínn
+SFX F nn odar aínn       # an B.N. 
+SFX F nn omar [^a]ínn       # caite                bhailínn  d'áitínn
+SFX F nn teá [^a]ínn        # gnáthchaite
+SFX F nn odh [^a]ínn
+SFX F nn mis [^a]ínn
+SFX F nn dís [^a]ínn
+SFX F nn tí [^a]ínn
+SFX F ínn eoinn [^a]ínn     # coinníollach
+SFX F ínn eofá [^a]ínn
+SFX F ínn eodh [^a]ínn
+SFX F ínn eoimis [^a]ínn
+SFX F ínn eoidís [^a]ínn
+SFX F ínn eofaí [^a]ínn
+SFX F nn odar [^a]ínn       # an B.N. 
+
+SFX I Y 14            # campálaim
+SFX I im nn .         # láithreach
+SFX I 0 id .
+SFX I aim faidh .     # fáistineach
+SFX I aim faimid .
+SFX I aim far .
+SFX I m nn .          # foshuiteach caite
+SFX I 0 is .
+SFX I im dh .
+SFX I m dís .
+SFX I im 0 .          # foshuiteach
+SFX I m gí .          # ordaitheach
+SFX I laim iltear .   # láithreach saor
+SFX I laim ilteá .    # foshuiteach caite dara phearsa
+SFX I laim iltí .     # foshuiteach caite saor
+
+SFX J Y 13           # champálainn  d'iarnálainn
+SFX J inn mar .      # caite
+SFX J inn dh .       # gnáthchaite
+SFX J nn mis .    
+SFX J nn dís .
+SFX J ainn fainn .   # coinníollach
+SFX J ainn fá .
+SFX J ainn fadh .
+SFX J ainn faimis .
+SFX J ainn faidís .
+SFX J ainn faí .
+SFX J inn dar .      # an B.N.
+SFX J lainn ilteá .   # gnáthchaite dara phearsa
+SFX J lainn iltí .    # gnáthchaite saor
+
+# "leideanna" (míreanna le *dhá* litreacha nó leis an fleiscín) 
+SFX K Y 12
+SFX K 0 ín .
+SFX K 0 sa .
+SFX K 0 se .
+SFX K 0 na .
+SFX K 0 ne .
+SFX K 0 -sa .
+SFX K 0 -se .
+SFX K 0 -sé .     # an B.N.
+SFX K 0 -na .
+SFX K 0 -ne .
+SFX K 0 -san .
+SFX K 0 -sean .

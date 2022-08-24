@@ -1,0 +1,176 @@
+program Html_Export;
+
+var
+  filter_html:string;
+  
+procedure InitLanguage;
+var
+  lngcode,fn:string;
+  SL:TStringList;
+begin
+  filter_html := 'Html files (*.html)|*.html';
+
+  lngcode:=copy(GetVariable('ScriptLangName'),1,2);
+  if length(lngcode)>0 then
+  begin
+    fn:=ChangeFileExt(GetVariable('ScriptFile'),'.'+lngcode+'.lng');
+    if fileexists(fn) then
+    begin
+      SL:=TStringList.create;
+      try
+        SL.LoadFromFile(fn);
+        filter_html:=SL.Values['filter_html'];
+      finally
+        SL.free;
+      end;
+    end;
+  end;
+end;
+
+{ Define file suffixes and file selection dialog filters }
+procedure DefineFilters;
+begin
+  // Define file suffix, that is handled by this script file
+  Writeln('html');
+
+  // Define file selection dialog filter ("filter=")
+  Writeln('filter='+filter_html);  
+end;
+
+{ Convert input file (in CSV format) to Fast Report xml format. Write resulting file names to stdout if needed. 
+  CSV format example:
+  "ID";"English (en)";"French (fr)"
+  "MB_OK";"OK";"OK"
+  "MB_CANCEL";"Cancel";"Annuler"
+}
+procedure ConvertCSV(FileName:string);
+var
+  SL,IL:TStringList;
+  i,c,j,p:integer;
+  fname:string;
+  res:string;
+  tmp:string;
+begin
+  if not fileexists(FileName) then
+    ExitCode := SCRIPT_WARNING
+  else
+  begin
+    fname:=ChangeFileExt(FileName,'.html'); 
+    SL:=TStringList.create;
+    IL:=TStringList.create;
+    try
+      IL.Delimiter:=';';       
+      SL.LoadFromFile(FileName);              
+
+      // meta           
+      res:= 
+        '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">'#13#10+
+        '<html>'#13#10+
+        '  <head>'#13#10+
+        '    <meta http-equiv="content-type" content="text/html; charset=utf-8">'#13#10+
+        '    <meta name="generator" content="Precision Language Suite, www.be-precision.com">'#13#10+
+        '    <title>'+changefileext(extractfilename(FileName),'')+'</title>'#13#10+
+        '    <style>'#13#10+
+        '      TABLE {border-collapse:collapse;font-size:small;font-family:Tahoma,Arial,"Sans Serif";}'#13#10+
+        '      TH {border:1px solid #000;background-color:#e0e0e0;}'#13#10+                        
+        '      TD {border:1px solid #000;vertical-align:top;min-width:200px;}'#13#10+        
+        '      TD.id {background-color:#f0f0f0;font-weight:bold;}'#13#10+        
+        '    </style>'#13#10+        
+        '  </head>'#13#10+
+        '  <body>'#13#10+
+        '    <table>';
+
+      // header
+      if SL.count>0 then
+      begin
+        IL.DelimitedText:=SL[0];
+        c:=IL.Count;
+        res:=res+
+          '      <thead>'#13#10+
+          '        <tr>'#13#10;
+        for j:=0 to c-1 do
+        begin
+          tmp:=
+            ReplaceStr(
+              ReplaceStr(
+                ReplaceStr(
+                  ReplaceStr(
+                    ReplaceStr(IL[j],'&','&amp;'), 
+                  '"','&quot;'),
+                '''','&#039;'),
+              '<','&lt;'),                
+            '>','&gt;');                        
+          res:=res+'          <th>'+tmp+'</th>';
+        end;
+        res:=res+
+          '        </tr>'#13#10+          
+          '      </thead>'#13#10;
+      end
+      else
+        c:=0;
+      
+      // items
+      res:=res+
+        '      <tbody>'#13#10;
+      for i:=1 to SL.Count-1 do
+      begin
+        IL.DelimitedText:=SL[i];
+        res:=res+
+          '        <tr>'#13#10;
+        p:=SL.count;
+        for j:=0 to c-1 do
+        begin
+          if j>=p then
+            res:=res+'          <td></td>'
+          else
+          begin
+            tmp:=
+              ReplaceStr(            
+              ReplaceStr(              
+              ReplaceStr(
+                ReplaceStr(
+                  ReplaceStr(
+                    ReplaceStr(
+                      ReplaceStr(IL[j],'&','&amp;'), 
+                    '"','&quot;'),
+                  '''','&#039;'),
+                '<','&lt;'),                
+              '>','&gt;'),
+              '\t','&nbsp;&nbsp;'),              
+              '\n','<br />');                 
+            if j=0 then
+              res:=res+'          <td class="id">'+tmp+'</td>'
+            else                    
+              res:=res+'          <td>'+tmp+'</td>';
+          end;
+        end;
+        res:=res+
+          '        </tr>'#13#10;
+      end;
+      res:=res+
+        '      </tbody>'#13#10;
+        
+      // finish
+      res:=res+
+        '    </table>'#13#10+
+        '  </body>'#13#10+
+        '</html>';
+
+      SaveStrToFileEx(res,fname,'utf-8');
+      writeln(fname);
+   
+
+    finally
+      IL.free;
+      SL.free;
+    end;
+  end;
+end;
+
+begin
+  InitLanguage; 
+  if ParamCount=0 then
+    DefineFilters // no parameters, return file suffixes and file selection dialog filters only
+  else
+    ConvertCSV(ParamStr(1)); // parameter is a file name to convert (in csv format)
+end.

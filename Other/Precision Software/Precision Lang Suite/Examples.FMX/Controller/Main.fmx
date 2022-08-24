@@ -1,0 +1,74 @@
+object frmMain: TfrmMain
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 480
+  ClientWidth = 640
+  Position = poScreenCenter
+  FormFactor.Width = 1920
+  FormFactor.Height = 1080
+  FormFactor.Devices = [dkDesktop]
+  object sbChildWindow: TButton
+    DisableFocusEffect = False
+    Height = 22.000000000000000000
+    Position.X = 136.000000000000000000
+    Position.Y = 56.000000000000000000
+    Text = 'sbChildWindow'
+    Width = 169.000000000000000000
+    OnClick = sbChildWindowClick
+  end
+  object sbOpenTest: TButton
+    DisableFocusEffect = False
+    Height = 22.000000000000000000
+    Position.X = 136.000000000000000000
+    Position.Y = 88.000000000000000000
+    Text = 'sbOpenTest'
+    Width = 169.000000000000000000
+    OnClick = sbOpenTestClick
+  end
+  object sbTestMessage: TButton
+    DisableFocusEffect = False
+    Height = 22.000000000000000000
+    Position.X = 136.000000000000000000
+    Position.Y = 120.000000000000000000
+    Text = 'sbTestMessage'
+    Width = 169.000000000000000000
+    OnClick = sbTestMessageClick
+  end
+  object mmMain: TMainMenu
+    Left = 304
+    Top = 224
+    object miFile: TMenuItem
+      Height = 50.000000000000000000
+      Text = 'File'
+      Width = 50.000000000000000000
+      object miLanguages: TMenuItem
+        Height = 50.000000000000000000
+        Locked = True
+        Text = 'Languages'
+        Width = 50.000000000000000000
+      end
+      object miN1: TMenuItem
+        Height = 50.000000000000000000
+        Locked = True
+        Text = '-'
+        Width = 50.000000000000000000
+      end
+      object miExit: TMenuItem
+        Height = 50.000000000000000000
+        Locked = True
+        Text = 'Exit'
+        Width = 50.000000000000000000
+        OnClick = miExitClick
+      end
+    end
+  end
+  object plsController1: TplsController
+    OnBeforeLangChange = plsController1BeforeLangChange
+    OnError = plsController1Error
+    OnInitLangManager = plsController1InitLangManager
+    OnLanguageChanged = plsController1LanguageChanged
+    Left = 432
+    Top = 176
+  end
+end

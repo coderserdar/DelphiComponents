@@ -1,0 +1,53 @@
+﻿;-----------------------------------------------------------------------------
+;  Precision Language Suite for VCL
+;
+;  written by Precision software & consulting
+;            copyright ©  2008 - 2009
+;            Email : info@be-precision.com
+;            Web : http://www.be-precision.com
+;
+;  Purpose: Main language file for demo application of
+;           Precision Language Suite for VCL
+;
+;  The source code is given as is. The author is not responsible
+;  for any possible damage done due to the use of this code.
+;  This unit can be freely used in any application. The complete
+;  source code remains property of the author and may not be distributed,
+;  published, given or sold in any form as such. No parts of the source
+;  code can be included in any other component or application without
+;  written authorization of the author.
+;------------------------------------------------------------------------------
+
+[precision language file]
+;languagecode=první přípona souboru
+languagename=Čeština
+;fileid=jméno souboru
+description=Hlavní jazykový soubor pro demonstrační aplikaci produktu Precision Language Suite for VCL
+fileversion=1.0.1.1
+author=Precision software & consulting
+
+[TForm1]
+lbField1.Caption=Pole 1
+lbField2.Caption=Pole 2
+edField2.Text=Hodnota 2
+mTest.Lines.Text=První řádek\nDruhý řádek\n\tTřetí řádek (s tabelátorem)
+lvTest.Columns[0].Caption=Sloupec 1
+lvTest.Columns[1].Caption=Sloupec 2
+lvTest.Columns[2].Caption=Sloupec 3
+sbMsgWarn.caption=Upozornění
+sbMsgWarn.hint=Zobrazí zprávu s textem konstanty "MSG_TEST2"
+sbMsgInfo.caption=Informace
+sbMsgInfo.hint=Zobrazí zprávu s textem konstanty "MSG_TEST1"
+sbProperty.caption=Vlastnost
+sbProperty.hint=Zobrazí zprávu s textem vlastnosti "edField2.Text"
+sbChildWindow.caption=Okno 2
+sbChildWindow.hint=Zobrazí podřízené okno
+lbLabelName.Caption=Jazykový řez:
+sbMessage1.Caption=Hlášení 1
+sbMessage1.Hint=Zobrazí přeložené systémové hlášení (viz. kód)
+sbMessage2.Caption=Hlášení 2
+sbMessage2.Hint=Zobrazí přeložené systémové hlášení (viz. kód)
+
+[TfrmChild]
+Self.Caption=Podřízené okno
+lbTest.Caption=Testovací nadpis

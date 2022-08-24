@@ -1,0 +1,70 @@
+// MyMemory translation service (http://mymemory.translated.net/)
+program MyMemory;
+
+var
+  url:string;
+  
+procedure LoadSettings;
+var
+  Ini:TMemIniFile;
+begin
+  Ini:=TMemIniFile.Create(ChangeFileExt(ChangeFileExt(GetVariable('ScriptFile'),''),'.Settings.cfg'));
+  try
+    url:=Ini.ReadString('Settings','url','http://mymemory.translated.net/api/get?q=$TEXT$&langpair=$SRCLNG$|$TGTLNG$&of=tmx');
+  finally
+    Ini.free;
+  end;
+end; 
+
+function OnTranslate(const Params:string):boolean;
+var
+  curl,tmp:string;
+  SL:TStringList;
+  p:integer;
+begin
+  Result := false; // not found
+  try
+    SL:=TStringList.create;
+    try
+      curl:=ReplaceText(url,'$TEXT$',PLSApp.UrlEncode(PLSApp.Event.Text));
+      curl:=ReplaceText(curl,'$SRCLNG$',PLSApp.Event.SrcLng);
+      curl:=ReplaceText(curl,'$TGTLNG$',PLSApp.Event.TgtLng);
+      PLSApp.Event.Returns:='';  
+      if HttpGetText(curl,SL) then
+      begin
+        tmp:=UTF8Decode(SL.Text);
+        p:=pos('<seg>',tmp);
+        if p>0 then
+        begin
+          delete(tmp,1,p+4);
+          p:=pos('<seg>',tmp);
+          if p>0 then
+          begin
+            delete(tmp,1,p+4);
+            p:=pos('</seg>',tmp);
+            if p>0 then
+            begin
+              delete(tmp,p,maxint);
+              if length(tmp)>0 then
+              begin
+                PLSApp.Event.Returns := tmp;
+                Result := true;
+              end;
+            end;
+          end;
+        end;
+      end;
+    finally
+      SL.Free;
+    end;
+  except
+    Result := false; // error    
+    PLSApp.Event.Fails:=true;
+    PLSApp.Event.Returns := ExceptionToString(ExceptionType, ExceptionParam); 
+  end;
+end;
+
+begin
+  // initialization
+  LoadSettings;
+end.

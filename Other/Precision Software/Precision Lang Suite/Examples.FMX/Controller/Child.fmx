@@ -1,0 +1,32 @@
+object frmChild: TfrmChild
+  Left = 0
+  Top = 0
+  Caption = 'frmChild'
+  ClientHeight = 225
+  ClientWidth = 324
+  Position = poMainFormCenter
+  FormFactor.Width = 1920
+  FormFactor.Height = 1080
+  FormFactor.Devices = [dkDesktop]
+  OnClose = FormClose
+  object lbTest: TLabel
+    Height = 15.000000000000000000
+    Position.X = 80.000000000000000000
+    Position.Y = 64.000000000000000000
+    Text = 'lbTest'
+    Width = 120.000000000000000000
+  end
+  object sbClose: TButton
+    DisableFocusEffect = False
+    Height = 22.000000000000000000
+    Position.X = 80.000000000000000000
+    Position.Y = 120.000000000000000000
+    Text = 'sbClose'
+    Width = 80.000000000000000000
+    OnClick = sbCloseClick
+  end
+  object plsController1: TplsController
+    Left = 224
+    Top = 104
+  end
+end

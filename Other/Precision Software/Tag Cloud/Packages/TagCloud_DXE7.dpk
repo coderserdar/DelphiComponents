@@ -1,0 +1,47 @@
+package TagCloud_DXE7;
+
+{$R *.res}
+{$R '..\Source\TagCloud.dcr'}
+{$R '..\Source\TagCloudPrmStyler.dcr'}
+{$R '..\Source\TagIndex.dcr'}
+{$R '..\Source\NavPathLabel.dcr'}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE DEBUG}
+{$ENDIF IMPLICITBUILDING}
+{$DESCRIPTION 'TagCloud'}
+{$DESIGNONLY}
+{$IMPLICITBUILD OFF}
+
+requires
+  rtl,
+  designide;
+
+contains
+  NavPathLabel in '..\Source\NavPathLabel.pas',
+  TagCloud in '..\Source\TagCloud.pas',
+  TagCloudPrmStyler in '..\Source\TagCloudPrmStyler.pas',
+  TagCloudReg in '..\Source\TagCloudReg.pas',
+  TagIndex in '..\Source\TagIndex.pas';
+
+end.

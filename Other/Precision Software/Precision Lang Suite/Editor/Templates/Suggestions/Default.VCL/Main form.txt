@@ -1,0 +1,138 @@
+unit Main;
+
+interface
+
+uses
+  SysUtils, Classes, Forms,
+  ...
+  ;
+
+...
+
+type
+  TForm1 = class(TForm)
+    ...
+    MainMenu:TMainMenu;
+    miLanguage:TMenuItem;
+    procedure FormCreate(Sender: TObject);
+    procedure FormClose(Sender: TObject);
+    procedure miChangeLanguageClick(Sender:TObject);
+  private
+    { Private declarations }
+    procedure ReadAvailableLanguages;
+    procedure LanguageChanged(Sender:TObject);
+    ...
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+uses
+  ...
+  { plsEmbedded, // uncomment this line if you want to use an embedded localization features }
+  plsLangMan, plsDialogs, %CONSTS%;
+
+{$R *.dfm}
+
+procedure TForm1.FormCreate(Sender: TObject);
+begin
+  ...
+  // fill menu with available languages
+  ReadAvailableLanguages;
+  // assign language changed event
+  LanguageManager.OnLanguageChanged:=LanguageChanged;
+  // if language files are already loaded, then perform the event now
+  if LanguageManager.LanguageCode<>'' then
+    LanguageChanged(LanguageManager);
+  { LE_InstallCaptureControlShortcut(LanguageManager,  TextToShortCut('Alt+F2')); // uncomment this line if you want to use an embedded localization features }
+  ...
+end;
+
+procedure TForm1.FormClose(Sender: TObject);
+begin
+  ...
+  { LE_RemoveCaptureControlShortcut; // uncomment this line if you want to use embedded localization features }
+  ...
+end;
+
+procedure TForm1.LanguageChanged(Sender:TObject);
+var
+  i:Integer;
+begin
+  // update constants (variables) in plsDialogs unit
+  plsDialogs.LanguageChanged;
+  // update user defined constants (variables)
+  %CONSTS%.LanguageChanged;
+  // clear localization strings table for constants - it saves some memory (do not use Clear, if you want to edit constants with an embedded localization editor!)
+  LanguageManager.Clear(True,False);
+
+  // update vcl properties for this form
+  if not LanguageManager.LangVCL(Self) then
+    MessageDlgLM('',LanguageManager.LanguageName+' ('+LanguageManager.LanguageCode+'): ['+Self.Name+' ('+Self.ClassName+')]'+LanguageManager.LastError,mtWarning);
+  ...
+  // make other assignments, i.e. display the current language name and code, etc.
+  Caption:=Application.Title+' - '+LanguageManager.LanguageName+' ('+LanguageManager.LanguageCode+')';
+  ...
+  // inform other forms/frames/modules that language changed (directly or via WM_LANGUAGECHANGED message)
+  // DataModule1.LanguageChanged(Sender);
+  for i := 0 to Screen.FormCount - 1 do
+    SendMessage(Screen.Forms[i].Handle,WM_LANGUAGECHANGED,0,0);
+end;
+
+procedure TForm1.ReadAvailableLanguages;
+var
+  SL:TStringList;
+  MI:TMenuItem;
+  i,j:Integer;
+begin
+  // fill menu with available languages
+  miLanguage.Clear;
+  SL:=TStringList.Create;
+  try
+    LanguageManager.GetAvailableLanguages(SL);
+    for i := 0 To SL.Count - 1 do
+    begin
+      MI:=TMenuItem.Create(self);
+      MI.Hint:=SL.Names[i];
+      MI.Caption:=SL.ValueFromIndex[i]; // for earlier Delphi versions use SL.Values[MI.Hint]
+      MI.OnClick:=miChangeLanguageClick;
+      MI.RadioItem:=True;
+      MI.GroupIndex:=1;
+      for j := 0 to miLanguage.Count - 1 do
+        if MI.Caption<miLanguage.Items[j].Caption then
+        begin
+          miLanguage.Insert(j,MI);
+          Break;
+        end;
+      if MI.Parent=nil then
+        miLanguage.Add(MI);
+      if MI.Hint=LanguageManager.LanguageCode then
+        MI.Checked:=True;
+    end;
+  finally
+    SL.Free;
+  end;
+end;
+
+procedure TForm1.miChangeLanguageClick(Sender:TObject);
+var
+  i:integer;
+begin
+  // load another language files
+  LanguageManager.LanguageCode:=TMenuItem(Sender).Hint;
+  if Length(LanguageManager.LastError)>0 then
+    MessageDlgLM(Caption,LanguageManager.LastError,mtWarning,[mbOK]);
+  // instead of this manual method, you can use an AutoCheck property of menu items, where available
+  for i:=0 To miLanguage.Count-1 do
+    if miLanguage.Items[i].Hint=LanguageManager.LanguageCode then
+    begin
+      miLanguage.Items[i].Checked:=True;
+      break;
+    end;
+end;
+
+...
+
+end.

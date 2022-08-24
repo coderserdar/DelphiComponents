@@ -1,0 +1,72 @@
+program FastReport_Import;
+
+{ Define file suffixes and file selection dialog filters }
+procedure DefineFilters;
+begin
+  // Define file suffix, that is handled by this script file
+  Writeln('xml');     
+  // Writeln('fxml'); // you can define more suffixes if needed
+
+  // Define file selection dialog filter ("filter=")
+  Writeln('filter=Fast report language files (*.xml)|*.xml');  
+  // Writeln('filter=Fast report language files (*.fxml)|*.fxml');  // you can define more filters if needed
+end;
+
+{ Convert input file to the CSV format and write the result to the StdOut (Write/Writeln).
+  CSV format example:
+  "ID";"English (en)";"French (fr)"
+  "MB_OK";"OK";"OK"
+  "MB_CANCEL";"Cancel";"Annuler"
+}
+procedure ConvertFastReportXmlToCsv(FileName:string);
+var
+  SL:TStringList;
+  lng:string;
+  XmlDom, RL: Variant;  
+begin
+  if not fileexists(FileName) then
+    ExitCode := SCRIPT_WARNING
+  else
+  begin
+    SL:=TStringList.create;
+    try
+      lng:='English (en)';
+      SL.LoadFromFile(extractfilepath(GetVariable('ScriptFile'))+'lcnames.txt');
+      if not InputQueryPDSList('Import Fast Report language file','Select language to import:',lng, SL, False) then
+        ExitCode := SCRIPT_WARNING
+      else
+      begin
+        writeln('"#";"'+lng+'"');      
+        XmlDom := CreateOleObject('Microsoft.XMLDOM');
+        XmlDom.async := False;       
+        SL.LoadFromFile(FileName);
+        if (SL.count>0) and (pos('version="1.1"',SL[0])>0) then
+        begin        
+          SL[0]:=ReplaceStr(SL[0],'version="1.1"','version="1.0"');
+          XmlDom.LoadXML(SL.text);
+        end
+        else
+          XmlDom.load(FileName);         
+        if (not VarIsClear(XmlDom)) and (not VarIsNull(XmlDom)) and (not VarIsEmpty(XmlDom)) then
+        begin
+      		RL := XmlDom.documentElement.firstChild;          
+    			while (not VarIsClear(RL)) and (not VarIsNull(RL)) and (not VarIsEmpty(RL)) do // radky
+    			begin
+            writeln('"FastReport'+ReplaceStr(RL.getAttribute('Name'),'.','_')+'";"'+ UTF8Decode(RL.getAttribute('Text'))+'"');
+    				RL := RL.nextSibling();            
+    			end;
+      	end;
+      	XmlDom := UnAssigned;
+      end;
+    finally
+      SL.free;
+    end;
+  end;
+end;
+
+begin
+  if ParamCount=0 then
+    DefineFilters // no parameters, return file suffixes and file selection dialog filters only
+  else
+    ConvertFastReportXmlToCsv(ParamStr(1)); // parameter is a file name to import
+end.

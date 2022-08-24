@@ -1,0 +1,82 @@
+program gettext_Import;
+
+{ Define file suffixes and file selection dialog filters }
+procedure DefineFilters;
+begin
+  // Define file suffix, that is handled by this script file
+  Writeln('pas');     
+  Writeln('dpr');
+  Writeln('inc'); // you can define more suffixes if needed
+
+  // Define file selection dialog filter ("filter=")
+  Writeln('filter=gettext like strings (*.pas, *.dpr, *.inc)|*.pas;*.dpr;*.inc');  
+  // Writeln('filter=gettext like strings (*.pas)|*.pas');  // you can define more filters if needed
+end;
+
+{ Convert input file to the CSV format and write the result to the StdOut (Write/Writeln).
+  CSV format example:
+  "ID";"English (en)";"French (fr)"
+  "MB_OK";"OK";"OK"
+  "MB_CANCEL";"Cancel";"Annuler"
+}
+procedure ExtractSourceStringsToCsv(FileName:string);
+var
+  SL:TStringList;
+  lng:string; 
+  ft,fd,s,tmp:string;
+  p:integer;
+  ec:LongWord;
+  q:boolean;
+begin
+  if not fileexists(FileName) then
+    ExitCode := SCRIPT_WARNING
+  else
+  begin
+    SL:=TStringList.create;
+    try
+      fd:=extractfilepath(GetVariable('ScriptFile'));    
+      q:=true;
+      lng:='';
+      ft:=IncludeTrailingPathDelimiter(GetTempFolder)+'pls_gettext_import.txt';
+      if fileexists(ft) and (IncTimes(now,0,0,-15,0)<FileDateToDateTime(fileage(ft))) then
+      begin
+        LoadStrFromFile(lng, ft);
+        if lng<>'' then
+          q:=false;
+      end;
+      if lng='' then
+        lng:='English (en)';
+            
+      if q then
+      begin
+        SL.LoadFromFile(fd+'lcnames.txt');
+        if InputQueryPDSList('Import hard-coded strings (gettext like)','Select language to import:',lng, SL, False) then
+          SaveStrToFile(lng, ft)
+        else
+          ExitCode := SCRIPT_WARNING
+      end;           
+
+      if ExitCode = SCRIPT_OK then
+      begin      
+        s:='';
+        WinExecCapture('"'+fd+'GetStrings.exe" "'+FileName+'"', ec, s, extractfilepath(filename), 0, False);        
+        SL.Text:=s;      
+        writeln('"#";"'+lng+'"');        
+        for p:=0 to SL.count-1 do
+        begin
+          tmp:=SL[p];
+          writeln('"!'+tmp+'";"'+tmp+'"');
+        end;       
+      end;
+    finally
+      SL.free;
+    end;
+  end;
+end;
+
+begin
+  if ParamCount=0 then
+    DefineFilters // no parameters, return file suffixes and file selection dialog filters only
+  else
+    ExtractSourceStringsToCsv(ParamStr(1)); // parameter is a file name to import
+end.

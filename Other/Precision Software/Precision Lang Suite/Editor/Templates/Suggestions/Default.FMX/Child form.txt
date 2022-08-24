@@ -1,0 +1,61 @@
+unit Child;
+
+interface
+
+uses
+  System.SysUtils, System.Types, System.UITypes, System.Rtti, System.Classes,
+  System.Variants, FMX.Types, FMX.Forms, FMX.Dialogs,
+  ...
+  ;
+
+type
+  TfrmChild = class(TForm)
+    ...
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+
+    procedure LanguageChanged(Sender:TObject);
+    ...
+  public
+    { Public declarations }
+    procedure Assign(Source: TPersistent); override;
+  end;
+
+var
+  frmChild: TfrmChild;
+
+implementation
+
+{$R *.fmx}
+
+uses
+  ...
+  FMX.plsLangMan, %CONSTS%;
+
+procedure TfrmChild.Assign(Source: TPersistent);
+begin
+  if Source is TLanguageManager then
+    LanguageChanged(Source) // perform language changed event when language is changed by the user
+  else
+    inherited;
+end;
+
+procedure TfrmChild.FormCreate(Sender: TObject);
+begin
+  // perform language changed event for newly created form
+  LanguageChanged(Self);
+  ...
+end;
+
+procedure TfrmChild.LanguageChanged(Sender:TObject);
+begin
+  if not LanguageManager.LangForm(Self) then
+    MessageDlg(LanguageManager.LanguageName+' ('+LanguageManager.LanguageCode+'): ['+Self.Name+' ('+Self.ClassName+')] '+LanguageManager.LastError,TMsgDlgType.mtWarning,[TMsgDlgBtn.mbOK],0);
+  // make other assignments if needed
+  ...
+end;
+
+...
+
+end.

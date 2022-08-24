@@ -1,0 +1,81 @@
+program FastReport_Export;
+
+{ Define file suffixes and file selection dialog filters }
+procedure DefineFilters;
+begin
+  // Define file suffix, that is handled by this script file
+  Writeln('xml');
+  // Writeln('fxml'); // you can define more suffixes if needed
+
+  // Define file selection dialog filter ("filter=")
+  Writeln('filter=Fast report language files (*.xml)|*.xml');
+  // Writeln('filter=Fast report language files (*.fxml)|*.fxml');  // you can define more filters if needed
+end;
+
+{ Convert input file (in CSV format) to Fast Report xml format. Write resulting file names to stdout if needed. 
+  CSV format example:
+  "ID";"English (en)";"French (fr)"
+  "MB_OK";"OK";"OK"
+  "MB_CANCEL";"Cancel";"Annuler"
+}
+procedure ConvertCSVToFastReportFiles(FileName:string);
+var
+  SL,DL,IL:TStringList;
+  i,c,p:integer;
+  fname:string;
+  xml:string;
+begin
+  if not fileexists(FileName) then
+    ExitCode := SCRIPT_WARNING
+  else
+  begin
+    SL:=TStringList.create;
+    DL:=TStringList.create;
+    IL:=TStringList.create;
+    try
+      SL.LoadFromFile(FileName);
+      if SL.count>0 then
+      begin
+        // read header
+        DL.Delimiter:=';';
+        DL.DelimitedText:=SL[0];
+        IL.Delimiter:=';';       
+        for c:=1 to DL.count-1 do
+        begin
+          fname:=DL[c];
+          p:=LastDelimiter('(',fname);
+          if p>0 then
+          begin
+            delete(fname,1,p);
+            p:=pos(')',fname);
+            if p>0 then
+              delete(fname,p,maxint);
+          end;   
+          fname:=ChangeFileExt(FileName,'.'+fname+ExtractFileExt(FileName));         
+          xml:='<?xml version="1.1" encoding="utf-8"?>'#13#10+
+               '<Resources CodePage="0">'#13#10;        
+          for i:=1 to SL.Count-1 do
+          begin
+            IL.DelimitedText:=SL[i];
+            xml:=xml+'  <StrRes Name="'+IL[0]+'" Text="'+HTMLEscape(IL[c])+'" />'#13#10;
+          end;
+          xml:=xml+'</Resources>';
+          SaveStrToFileEx(xml,fname,'utf-8');
+          writeln(fname);
+        end;    
+      end;
+
+    finally
+      IL.free;
+      DL.free;
+      SL.free;
+    end;
+  end;
+end;
+
+begin
+  if ParamCount=0 then
+    DefineFilters // no parameters, return file suffixes and file selection dialog filters only
+  else
+    ConvertCSVToFastReportFiles(ParamStr(1)); // parameter is a file name to convert (in csv format)
+end.

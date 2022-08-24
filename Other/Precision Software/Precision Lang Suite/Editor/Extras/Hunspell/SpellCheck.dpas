@@ -1,0 +1,669 @@
+program SpellCheck;
+
+function IsCharAlpha(ch:Char): BOOL; external 'IsCharAlphaW@user32.dll stdcall';
+
+{$I plsLocale.inc}
+
+const
+  customDictName = 'custom.dict';
+  customDictExt  = '.custom';
+  customTermName = 'custom.term';
+
+  ini_file = 'SpellCheck.ini';  
+  ini_options = 'Options';
+  ini_map = 'Map';  
+  ini_autoclose = 'AutoClose';
+  ini_globalcust = 'GlobalCustomDict';
+    
+var
+  rootFld: string;
+  dictFld: string;
+  Modified:boolean; // indicates any modifications
+  
+  column: integer;  // currently focused column
+  lngCode: string;  // language code to check
+  lngName: string;
+  
+  totalCnt: integer;  // total count of checked items;
+  currIdx: integer;   // index of currently checked item
+  currItem: Variant;  // currently checked item
+  currText: string;   // text of currently checked item (including prior modifications)
+  currWord: string;   // not found word
+  startPos: integer;  // start position of currently parsed word 
+  endPos: integer;    // end position of currently parsed word
+  priorPos: integer;
+  
+  slSkipAll: TStringList; // skipped words
+  slReplaceAll, slReplaceAllTgt: TStringList;  // replaced words
+  slTerms: TStringList; // known terms (with more than one word)
+  slMap: TStringList; // mapped dictionaries
+  
+  checkAll:boolean;
+  
+  opt_globalcustomdict: boolean;
+    
+procedure sbAbort_OnClick(Sender: TObject);
+begin
+  Self.Close;
+end;
+
+procedure LoadConfig;
+var
+  Ini:TMemIniFile;
+begin
+  try
+    Ini:=TMemIniFile.create(ExtractFilePath(GetVariable('ScriptFile'))+ini_file);
+    try
+      cbAutoClose.Checked:=Ini.ReadBool(ini_Options,ini_AutoClose,False);
+      opt_globalcustomdict:=Ini.ReadBool(ini_Options,ini_globalcust,True);
+      Ini.ReadSectionValues(ini_map,slMap);     
+    finally
+      Ini.Free;
+    end;
+  except
+    ;
+  end;
+end;
+
+procedure SaveConfig;
+var
+  Ini:TMemIniFile;
+begin
+  try
+    Ini:=TMemIniFile.create(ExtractFilePath(GetVariable('ScriptFile'))+ini_file);
+    try
+      Ini.WriteBool(ini_Options,ini_AutoClose,cbAutoClose.Checked);
+      // Ini.WriteBool(ini_Options,ini_globalcust,opt_globalcustomdict);
+      Ini.UpdateFile;
+    finally
+      Ini.Free;
+    end;
+  except
+    ;
+  end;
+end;
+
+procedure SortTerms;
+var
+  i,j:integer;
+  t:string;
+begin
+  for i:=0 to slTerms.Count-2 do
+    for j:=i+1 to slTerms.Count-1 do
+      if length(slTerms[j])>length(slTerms[i]) then
+      begin
+        t:=slTerms[i];
+        slTerms[i]:=slTerms[j];
+        slTerms[j]:=t;
+      end;
+end;
+
+function DoCheckDict(ALngCode:string):boolean;
+var
+  fn:string;
+  p:integer;
+  SL:TStringList;
+begin
+  Result:=PLSApp.SpellCheck.DictHasLangCode(ALngCode);
+  if not Result then
+  begin
+    // find dictionary
+    fn:=dictFld+ALngCode+'.aff'; 
+    if not fileexists(fn) then 
+    begin 
+      fn:='';
+      p:=slMap.IndexOfName(ALngCode);
+      if (p>=0) and fileexists(dictFld+slMap.ValueFromIndex[p]+'.aff') then
+        fn:=dictFld+slMap.ValueFromIndex[p]+'.aff';
+      
+      if length(fn)=0 then
+      begin
+        p:=pos('-',ALngCode);
+        if p>0 then
+        begin
+          // find general dict
+          delete(ALngCode,p,maxint);
+          if fileexists(dictFld+ALngCode+'.aff') then
+            fn:=dictFld+ALngCode+'.aff';
+        end;
+      end;
+      
+      if length(fn)=0 then 
+      begin
+        // find similar dict
+        SL:=TStringList.create;
+        try
+          // check mappings      
+          p:=slMap.IndexOfName(ALngCode);
+          if (p>=0) and fileexists(dictFld+slMap.ValueFromIndex[p]+'.aff') then
+            fn:=dictFld+slMap.ValueFromIndex[p]+'.aff'
+          else
+          if AnsiLowercase(ALngCode)='en' then
+          begin
+            if fileexists(dictFld+ALngCode+'-US.aff') then
+              fn:=dictFld+ALngCode+'-US.aff'
+            else
+            if fileexists(dictFld+ALngCode+'-GB.aff') then
+              fn:=dictFld+ALngCode+'-GB.aff';          
+          end;
+          if length(fn)=0 then
+          begin
+            // find first similar dict
+            GetFilesByMask(dictFld,SL,ALngCode+'-*.aff');
+            SL.Sort;
+            if SL.count>0 then
+              fn:=SL[0];
+          end;
+        finally
+          SL.free;
+        end;
+      end;
+    end;
+    
+    if length(fn)>0 then
+    begin
+      if PLSApp.SpellCheck.LoadDictionary(fn) then
+      begin
+        Result:=true;
+        // load custom dictionary
+        if opt_globalcustomdict then
+        begin
+          if fileexists(dictFld+customDictName) then
+            PLSApp.SpellCheck.LoadCustomDictionary(dictFld+customDictName);
+        end
+        else
+        if fileexists(dictFld+PLSApp.SpellCheck.LangCode+customDictExt) then
+          PLSApp.SpellCheck.LoadCustomDictionary(dictFld+PLSApp.SpellCheck.LangCode+customDictExt);
+      end;
+    end;  
+  end; 
+end;
+
+procedure DoFinish;
+begin
+  if cbAutoClose.Checked then
+    Self.Close
+  else
+  begin
+    sbAbort.Caption:=mConsts.Lines[3];
+    if checkAll then
+      lbStatus.Caption := mConsts.Lines[4]
+    else
+      lbStatus.Caption := lngName + ': ' + mConsts.Lines[4];    
+    if sbAbort.CanFocus then
+      sbAbort.SetFocus;
+  end;
+end;
+
+procedure mCurrent_OnChange(Sender: TObject);
+begin
+  sbAdd.Enabled := False;
+  //sbReplaceAll.Enabled := False;
+  sbSkipAll.Enabled := False;
+  sbSkip.Default := False;
+  sbReplace.Default := True;
+end;
+
+procedure CheckNextWord;
+var
+  tmp,s,trm:string;
+  ac:boolean;
+  i:integer;
+begin
+  while startPos <= Length(currText) do
+  begin
+    // skip non-letters
+    while (startpos <= Length(currText)) and (not boolean(IsCharAlpha(currText[startpos]))) do
+      startPos:=startPos+1;
+    if startPos <= Length(currText) then
+    begin
+      // find next non-letter
+      endPos := startPos + 1;
+      ac:=false;
+      while (endpos <= Length(currText)) and (boolean(IsCharAlpha(currText[endPos])) or (currText[endpos]='&')) do
+      begin
+        if (not ac) and (currText[endpos]='&') then
+          ac:=true;
+        endPos:=endPos+1;
+      end;
+
+      // parsed word
+      tmp:=Copy(currText, startpos, endpos - startpos);
+      if ac then
+        tmp:=ReplaceStr(tmp,'&','');
+        
+      // check for ignored words
+      case length(tmp) of
+        1:tmp:='';
+        2:if (tmp[1]='F') and (tmp[2]>='1') and (tmp[2]<='9') then tmp:='';
+        3:if (tmp[1]='F') and (tmp[2]='1') and (tmp[2]>='0') and (tmp[2]<='2') then tmp:='';
+      end;
+
+      if length(tmp)>0 then
+      begin
+        s:=PLSApp.SpellCheck.SpellCheck(tmp);
+        if (length(s)>0) and (not slSkipAll.Find(tmp,i)) then
+        begin
+          i:=slReplaceAll.IndexOf(tmp);
+          if i>=0 then
+          begin
+            delete(currText,startpos,endpos - startpos);
+            tmp:=slReplaceAllTgt[i];
+            insert(tmp,currText,startpos);
+            currItem.SetText(column,currText);
+            endPos := startPos + Length(tmp);
+            // SetLangItemTag(Data,FindTagData(tag_translate),column,True);
+            // SetLangItemTag(Data,FindTagData(tag_autotranslated),column,True);
+            Modified:=true;            
+          end
+          else
+          begin
+            if slTerms.Count>0 then
+            begin
+              for i:=0 to slTerms.Count-1 do
+              begin
+                trm:=slTerms[i];
+                if (length(trm)>=endpos-startpos) and (trm=copy(currText,startpos,length(trm))) then
+                begin
+                  endpos := startpos + length(trm);
+                  tmp:='';
+                  break;
+                end;
+              end;
+            end;
+            if length(tmp)>0 then
+            begin
+              currWord := tmp;       
+              mCurrent.Lines.Text:=currText;
+              mCurrent.Modified:=False;
+              mCurrent.OnChange := @mCurrent_OnChange;
+              if s='?' then
+                s:='';
+              lbSuggest.Items.Text:=s;
+              pSuggest.Enabled:=true;                
+              pSuggest.Visible:=true;
+              if pBtns.Top<pSuggest.Top then
+                pBtns.Top:=pSuggest.Top+pSuggest.Height+1;
+              application.processmessages;
+              
+              mCurrent.SelStart:=startPos-1;
+              mCurrent.SelLength:=endpos-startpos;
+              if lbSuggest.Items.Count>0 then
+                lbSuggest.ItemIndex:=0;
+              if mCurrent.CanFocus then
+                mCurrent.SetFocus
+              else
+              if lbSuggest.CanFocus then
+                lbSuggest.SetFocus;
+      
+              priorPos := startPos;
+              startpos := endpos + 1;
+              exit;
+            end;
+          end;
+        end;
+      end;
+      startpos := endpos + 1;      
+    end;
+  end;
+  TimerNextItem.Enabled:=True;  
+end;
+
+procedure CheckNextItem;
+begin
+  if currIdx = 0 then
+    currItem:=PLSApp.Items.First
+  else
+  if not VarIsNull(currItem) then
+    currItem:=currItem.Next;
+
+  if VarIsNull(currItem) then
+    TimerNextLang.Enabled:=True
+  else
+  begin
+    // check item
+    currIdx := currIdx + 1;
+    lbStatus.Caption := lngName + ': ' + currItem.ID + ' ... ';
+    pgBar.Position:=trunc(100.0*currIdx/totalCnt);
+    application.ProcessMessages;
+    
+    currText := currItem.GetText(column);
+    startPos := 1;
+    
+    CheckNextWord;    
+  end; 
+end;
+
+procedure TimerNextWord_OnTimer(Sender: TObject);
+begin
+  TimerNextWord.Enabled:=False;
+  mCurrent.OnChange := nil;
+  sbAdd.Enabled := True;
+  //sbReplaceAll.Enabled := True;
+  sbSkipAll.Enabled := True;
+  sbReplace.Default := False;
+  sbSkip.Default := True; 
+  CheckNextWord;
+end;
+
+procedure TimerNextItem_OnTimer(Sender: TObject);
+begin
+  TimerNextItem.Enabled:=False;
+  pSuggest.Visible:=false;
+  CheckNextItem;
+end;
+
+procedure sbSkip_OnClick(Sender: TObject);
+begin
+  pSuggest.Enabled:=False; TimerNextWord.Enabled:=True;
+end;
+
+procedure sbSkipAll_OnClick(Sender: TObject);
+begin
+  if length(currWord)>0 then
+    slSkipAll.Add(currWord);
+  pSuggest.Enabled:=False; TimerNextWord.Enabled:=True;
+end;
+
+procedure sbAdd_OnClick(Sender: TObject);
+var
+  SL:TStringList;
+  tmp,w,fn:string;
+  i:integer;
+  isTerm:boolean;
+begin
+  isTerm:=False;
+  w:=ReplaceStr(mCurrent.SelText,'&','');
+  for i:=1 to length(w) do
+    if not boolean(IsCharAlpha(w[i])) then
+    begin
+      isTerm:=true;
+      break;
+    end;
+    
+  if isTerm and (length(w)>1) then
+  begin
+    try
+      // add to current terms
+      w:=mCurrent.SelText;
+      slTerms.Add(w);
+      SortTerms;
+      tmp:=slTerms.Text;
+      SaveStrToFileEx(tmp,dictFld+customTermName,'utf-8');
+      startPos := priorPos;        
+    except
+    end;   
+  end
+  else
+  if length(currWord)>0 then
+  begin
+    try
+      // add to current dict (temporarily)
+      PLSApp.SpellCheck.AddCustomWord(currWord);
+      // add to custom dict
+      SL:=TStringList.create;
+      try
+        if opt_globalcustomdict then
+          fn:=dictFld+customDictName
+        else
+          fn:=dictFld+PLSApp.SpellCheck.LangCode+customDictExt;
+
+        if fileexists(fn) then
+          SL.LoadFromFile(fn);
+        if SL.IndexOf(currWord)=-1 then
+        begin
+          SL.Add(currWord);
+          tmp:=SL.Text;
+          SaveStrToFileEx(tmp,fn,'utf-8');
+        end;
+      finally
+        SL.Free;
+      end;
+    except
+    end;
+  end;
+  pSuggest.Enabled:=False; TimerNextWord.Enabled:=True;
+end;
+
+procedure sbReplace_OnClick(Sender: TObject);
+var
+  m:boolean;
+begin
+  if mCurrent.Modified then
+    m:=currText<>mCurrent.Lines.Text
+  else
+  if lbSuggest.ItemIndex>=0 then
+  begin
+    mCurrent.SelStart:=priorPos-1;
+    mCurrent.SelLength:=endpos-priorPos; 
+    mCurrent.SelText:=lbSuggest.Items[lbSuggest.ItemIndex];
+    m:=true;
+  end
+  else
+    m:=false;  
+  
+  if m then
+  begin
+    currText:=mCurrent.Lines.Text;
+    currItem.SetText(column,currText);
+    startPos := priorPos;  
+    // SetLangItemTag(Data,FindTagData(tag_translate),column,True);
+    // SetLangItemTag(Data,FindTagData(tag_autotranslated),column,True);
+    Modified:=true;  
+  end;
+  pSuggest.Enabled:=False; TimerNextWord.Enabled:=True;
+end;
+
+procedure sbReplaceAll_OnClick(Sender: TObject);
+var
+  ct,n:string;
+  ac:boolean;
+  ep:integer;
+begin
+  n:='';
+  if mCurrent.Modified then
+  begin
+    // find new word
+    ct:=mCurrent.Lines.Text;
+    ep := priorPos + 1;
+    ac:=false;
+    while (ep <= Length(ct)) and (boolean(IsCharAlpha(ct[ep])) or (ct[ep]='&')) do
+    begin
+      if (not ac) and (ct[ep]='&') then
+        ac:=true;
+      ep:=ep+1;
+    end;       
+    n:=Copy(ct, priorpos, ep - priorpos);
+    if ac then
+      n:=ReplaceStr(n,'&','');    
+  end
+  else
+  if lbSuggest.ItemIndex>=0 then
+    n:=lbSuggest.Items[lbSuggest.ItemIndex];
+
+  if length(n)>0 then
+  begin
+    // add to list
+    slReplaceAll.Add(currWord);
+    slReplaceAllTgt.Add(n);
+    sbReplace_OnClick(Sender);
+  end;
+end;
+
+procedure mCurrent_OnEnter(Sender: TObject);
+begin
+  if not mCurrent.Modified then
+  begin  
+    sbReplace.Default := False;
+    sbSkip.Default := True;    
+  end;  
+end;
+
+procedure lbSuggest_OnEnter(Sender: TObject);
+begin
+  if lbSuggest.ItemIndex>=0 then
+  begin  
+    sbSkip.Default := False;
+    sbReplace.Default := True;
+  end;  
+end;
+
+procedure CheckNextLang;
+begin
+  if checkAll then
+  begin
+    if column=-1 then
+      column:=1
+    else
+      column:=column+1; 
+    lngCode := PLSApp.Items.GetLangCodeByColumn(column);
+    if lngCode = '' then
+    begin
+      if column=1 then
+      begin
+        MessageDlgPDS(Self.Caption, mConsts.Lines[1], mtInformation, [mbOK]);
+        Self.Close;
+      end
+      else
+        DoFinish;
+    end
+    else
+    begin
+      lngName := PLSApp.Items.Columns(column).Text;
+      if not DoCheckDict(lngCode) then  // set dictionary for current language
+      begin
+        MessageDlgPDS(Self.Caption, mConsts.Lines[0]+' '+lngName, mtWarning, [mbOK]);
+        CheckNextLang;
+      end
+      else
+      begin
+        lbStatus.Caption := lngName + ' ...';      
+        currIdx:=0;
+        currWord := '';    
+        CheckNextItem;       
+      end;
+    end;      
+  end
+  else
+  begin
+    if column=-1 then
+    begin
+      column:=PLSApp.Items.FocusedColumn;
+      lngCode := PLSApp.Items.GetLangCodeByColumn(column);
+      if lngCode = '' then
+      begin
+        MessageDlgPDS(Self.Caption, mConsts.Lines[1], mtInformation, [mbOK]);
+        Self.Close;
+      end
+      else
+      begin
+        lngName := PLSApp.Items.Columns(column).Text;
+        if not DoCheckDict(lngCode) then  // set dictionary for current language
+        begin
+          MessageDlgPDS(Self.Caption, mConsts.Lines[0]+' '+lngName, mtWarning, [mbOK]);
+          Self.Close;
+        end
+        else
+        begin
+          lbStatus.Caption := lngName + ' ...';      
+          currIdx:=0;
+          currWord := '';    
+          CheckNextItem;       
+        end; 
+      end;     
+    end
+    else
+      DoFinish;
+  end; 
+end;
+
+procedure TimerNextLang_OnTimer(Sender: TObject);
+begin
+  TimerNextLang.Enabled:=False;
+  CheckNextLang;
+end;
+
+procedure DoInit;
+begin
+  Modified:=false;
+  slSkipAll := TStringList.Create;  
+  slSkipAll.Sorted := True;
+  slReplaceAll := TStringList.Create;
+  slReplaceAllTgt := TStringList.Create;
+  slTerms := TStringList.Create;
+  slMap := TStringList.create;
+  // spell check params
+  rootFld := ExtractFilePath(GetVariable('ScriptFile'));
+  dictFld := rootFld + 'Dictionaries\';
+
+  totalCnt:=PLSApp.Items.Count;
+  if totalCnt=0 then
+  begin
+    MessageDlgPDS(Self.Caption, mConsts.Lines[1], mtInformation, [mbOK]);
+    Self.Close;
+  end
+  else
+  if not PLSApp.SpellCheck.Enabled then
+  begin
+    MessageDlgPDS(Self.Caption, mConsts.Lines[2], mtWarning, [mbOK]);
+    Self.Close;
+  end
+  else
+  begin
+    LoadConfig;
+    if fileexists(dictFld+customTermName) then
+    begin // load terms list        
+      slTerms.LoadFromFile(dictFld+customTermName);
+      SortTerms;
+    end;    
+    checkAll:=(PLSApp.PlugInID='SpellCheckAll') or (PLSApp.Items.FocusedColumn=0);  
+    Column:=-1;
+    CheckNextLang;
+  end;  
+end;
+
+procedure Self_OnClose(Sender: TObject; var Action: TCloseAction);
+begin
+  slTerms.Free;
+  slSkipAll.Free;
+  slReplaceAll.Free;
+  slReplaceAllTgt.Free;
+  slMap.Free;
+  if Modified then
+  begin
+    PLSApp.Project.Modified:=True;
+    PLSApp.UpdateTips;
+  end;
+  SaveConfig;
+end;
+
+procedure TimerStart_OnTimer(Sender: TObject);
+begin
+  TimerStart.Enabled := False;
+  DoInit;   
+end;
+
+procedure AssignEvents;
+begin
+  sbAbort.OnClick := @sbAbort_OnClick;
+  TimerStart.OnTimer := @TimerStart_OnTimer;
+  TimerNextItem.OnTimer := @TimerNextItem_OnTimer;
+  TimerNextWord.OnTimer := @TimerNextWord_OnTimer;
+  sbSkip.OnClick := @sbSkip_OnClick;
+  sbSkipAll.OnClick := @sbSkipAll_OnClick;
+  Self.OnClose := @Self_OnClose;
+  sbAdd.OnClick := @sbAdd_OnClick;
+  sbReplace.OnClick := @sbReplace_OnClick;
+  lbSuggest.OnDblClick := @sbReplace_OnClick;
+  lbSuggest.OnEnter := @lbSuggest_OnEnter;
+  mCurrent.OnEnter := @mCurrent_OnEnter;
+  sbReplaceAll.OnClick := @sbReplaceAll_OnClick;
+  TimerNextLang.OnTimer := @TimerNextLang_OnTimer;
+end;
+
+begin
+  ExitCode := 0;
+  AssignEvents;
+  LocalizeMsgDlgs;  
+  TimerStart.Enabled:=true;
+end.

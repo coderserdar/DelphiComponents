@@ -1,0 +1,38 @@
+program %PROJECT%;
+
+uses
+  Forms,
+  ...
+  plsLangMan,
+  { you can use the localized dialogs and your constants here (if needed) }
+  // plsDialogs,
+  // %CONSTS%,
+  ...
+  Main in 'Main.pas' {Form1};
+
+  ...
+
+begin
+  Application.Initialize;
+  ...
+
+  { Note: You can setup and load the language anywhere, it does not have to be here. }
+  { LanguageManager Initialization }
+  { set LanguageManager.FileNames if you want to filter language files to those names (masks supported) }
+  // LanguageManager.FileNames.CommaText:='Main,Comm*';
+  { set LanguageManager.RecursiveFolder if you want to get language files from subfolders too }
+  // LanguageManager.RecursiveFolder:=True;
+  { set LanguageManager.Folder if your language files are in different folder then default (AppExe\Langs) }
+  // LanguageManager.Folder:='..\..\Langs';
+
+  { Load language. Instead of default language code you can set here a language code loaded from your ini/config }
+  LanguageManager.LanguageCode:=GetDefaultLangCode;
+  if LanguageManager.LanguageCode='' then
+    LanguageManager.LanguageCode:='%DEFLC%';
+  { End LanguageManager Initialization }
+
+  ...
+  Application.Title := '%PROJECT%';
+  Application.CreateForm(TForm1, Form1);
+  Application.Run;
+end.

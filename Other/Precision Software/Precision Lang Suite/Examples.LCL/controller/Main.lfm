@@ -1,0 +1,68 @@
+object frmMain: TfrmMain
+  Left = 498
+  Height = 394
+  Top = 332
+  Width = 562
+  Caption = 'frmMain'
+  ClientHeight = 375
+  ClientWidth = 562
+  Color = clBtnFace
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Menu = mmMain
+  Position = poScreenCenter
+  LCLVersion = '1.0.8.0'
+  object sbChildWindow: TButton
+    Left = 100
+    Height = 25
+    Top = 32
+    Width = 172
+    Caption = 'sbChildWindow'
+    OnClick = sbChildWindowClick
+    TabOrder = 0
+  end
+  object sbOpenTest: TButton
+    Left = 100
+    Height = 25
+    Top = 63
+    Width = 172
+    Caption = 'sbOpenTest'
+    OnClick = sbOpenTestClick
+    TabOrder = 1
+  end
+  object sbTestMessage: TButton
+    Left = 100
+    Height = 25
+    Top = 94
+    Width = 172
+    Caption = 'sbTestMessage'
+    OnClick = sbTestMessageClick
+    TabOrder = 2
+  end
+  object mmMain: TMainMenu
+    left = 272
+    top = 200
+    object miFile: TMenuItem
+      Caption = 'miFile'
+      object miLanguages: TMenuItem
+        Caption = 'miLanguages'
+      end
+      object N1: TMenuItem
+        Caption = '-'
+      end
+      object miExit: TMenuItem
+        Caption = 'miExit'
+        OnClick = miExitClick
+      end
+    end
+  end
+  object plsController1: TplsController
+    OnBeforeLangChange = plsController1BeforeLangChange
+    OnError = plsController1Error
+    OnInitLangManager = plsController1InitLangManager
+    OnLanguageChanged = plsController1LanguageChanged
+    left = 376
+    top = 148
+  end
+end

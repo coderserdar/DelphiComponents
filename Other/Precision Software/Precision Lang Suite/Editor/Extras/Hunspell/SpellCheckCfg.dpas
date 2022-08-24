@@ -1,0 +1,368 @@
+program SpellCheckCfg;
+
+{$I plsLocale.inc}
+
+const
+  customDictName = 'custom.dict';
+  customDictExt  = '.custom';
+  customTermName = 'custom.term';
+
+  ini_file = 'SpellCheck.ini';  
+  ini_options = 'Options';
+  ini_map = 'Map';
+    
+var
+  rootFld: string;
+  dictFld: string;
+  slTerms: TStringList; // known terms (with more than one word)
+ 
+procedure LoadConfig;
+var
+  Ini:TMemIniFile;
+  SL:TStringList;
+  LI:TListItem;
+  i:integer;
+begin
+  try
+    lvMap.Items.BeginUpdate;
+    Ini:=TMemIniFile.create(ExtractFilePath(GetVariable('ScriptFile'))+ini_file);
+    SL:=TStringList.create;
+    try
+      AutoClose.Checked:=Ini.ReadBool(ini_Options,AutoClose.Name,AutoClose.Checked);
+      GlobalCustomDict.Checked:=Ini.ReadBool(ini_Options,GlobalCustomDict.Name,GlobalCustomDict.Checked);
+      Ini.ReadSectionValues(ini_map,SL);
+      for i:=0 to SL.count-1 do
+      begin
+        LI:=lvMap.Items.Add;
+        LI.Caption:=SL.Names[i];
+        LI.SubItems.Add(SL.ValueFromIndex[i]);
+      end;
+    finally
+      SL.free;
+      Ini.Free;
+      lvMap.AlphaSort;
+      lvMap.Items.EndUpdate;
+      if lvMap.Items.Count>0 then
+      begin
+        lvMap.Items[0].Focused:=True;
+        lvMap.Items[0].Selected:=True;
+      end;           
+    end;
+  except
+    ;
+  end;
+end;
+
+procedure SaveConfig;
+var
+  Ini:TMemIniFile;
+  LI:TListItem;
+  i:integer;  
+begin
+  try
+    Ini:=TMemIniFile.create(ExtractFilePath(GetVariable('ScriptFile'))+ini_file);
+    try
+      Ini.WriteBool(ini_Options,AutoClose.Name,AutoClose.Checked);
+      Ini.WriteBool(ini_Options,GlobalCustomDict.Name,GlobalCustomDict.Checked);
+      Ini.EraseSection(ini_map);
+      for i:=0 to lvMap.Items.count-1 do
+      begin
+        LI:=lvMap.Items[i];
+        Ini.WriteString(ini_map,LI.Caption,LI.SubItems[0]);
+      end;
+      Ini.UpdateFile;
+    finally
+      Ini.Free;
+    end;
+  except
+    ;
+  end;
+end;
+
+procedure LoadDicts;
+var
+  SL,LCNames:TStringList;
+  i,j,p:integer;
+  fn,lc,sc:string;
+  LI:TListItem;
+begin
+  SL:=TStringList.Create;
+  LCNames:=TStringList.Create;
+  lvDicts.Items.BeginUpdate;
+  lvCustDicts.Items.BeginUpdate;
+  try
+    // hunspell and custom dictionaries
+    lcnames.text:=PLSApp.Libraries.LCNames;
+    GetFilesByMask(dictFld,SL,'*.aff');
+    GetFilesByMask(dictFld,SL,'*'+customDictExt);
+    for i:=0 to SL.count-1 do
+    begin
+      fn:=SL[i];
+      lc:=ansilowercase(ChangeFileExt(ExtractFileName(fn),''));
+      if AnsiSameText(ExtractFileExt(fn),customDictExt) then
+        LI:=lvCustDicts.Items.Add
+      else
+        LI:=lvDicts.Items.Add;
+      
+      j:=LCNames.IndexOfName(lc);
+      if j>=0 then
+        LI.Caption:=lcNames.ValueFromIndex[j]
+      else
+      begin
+        p:=pos('-',lc);
+        if p>0 then
+          j:=LCNames.IndexOfName(copy(lc,1,p-1));
+        if j>=0 then
+          LI.Caption:=lcNames.ValueFromIndex[j]+' ('+copy(lc,p+1,maxint)+')'
+        else
+          LI.Caption:=lc;
+      end;
+      LI.SubItems.Add(lc);
+      cbTmp.Items.Add(lc);
+      LI.SubItems.Add(fn);
+    end;
+    // common and terms custom dicts
+    fn:=dictFld+customDictName;
+    if fileexists(fn) then
+    begin
+      LI:=lvCustDicts.Items.Add;
+      LI.Caption:=mConsts.Lines[2];
+      LI.SubItems.Add('');
+      LI.SubItems.Add(fn);
+    end;
+    fn:=dictFld+customTermName;
+    if fileexists(fn) then
+    begin
+      LI:=lvCustDicts.Items.Add;
+      LI.Caption:=mConsts.Lines[3];
+      LI.SubItems.Add('');
+      LI.SubItems.Add(fn);
+    end;  
+         
+  finally
+    SL.free;
+    LCNames.free;
+    lvDicts.AlphaSort;
+    lvDicts.Items.EndUpdate;
+    if lvDicts.Items.Count>0 then
+    begin
+      lvDicts.Items[0].Focused:=True;
+      lvDicts.Items[0].Selected:=True;
+      cbTmp.Sorted:=true;
+    end;
+    lvCustDicts.AlphaSort;
+    lvCustDicts.Items.EndUpdate;
+    if lvCustDicts.Items.Count>0 then
+    begin
+      lvCustDicts.Items[0].Focused:=True;
+      lvCustDicts.Items[0].Selected:=True;
+    end;   
+  end;
+end;
+
+procedure sbCancel_OnClick(Sender: TObject);
+begin
+  Self.Close;
+end;
+
+procedure sbOK_OnClick(Sender: TObject);
+begin
+  SaveConfig;
+  Self.Close;
+end;
+
+procedure sbAddDict_OnClick(Sender: TObject);
+begin
+  MessageDlgPDS(Self.Caption, mConsts.Lines[1]+#13#10#13#10+
+    ExtractFilePath(GetVariable('ScriptFile'))+'Dictionaries', mtInformation, [mbOK]);
+end;
+
+procedure sbDelDict_OnClick(Sender: TObject);
+var
+  LI:TListItem;
+  i:integer;
+begin
+  LI:=lvDicts.Selected;
+  if (LI<>nil) and (MessageDlgPDS(Self.Caption, mConsts.Lines[0], mtConfirmation, [mbYes,mbNo])=mrYes) then
+  begin
+    for i:=lvDicts.Items.Count-1 downto 0 do
+    begin
+      LI:=lvDicts.Items[i];
+      if LI.Selected then
+      begin
+        try
+          if fileexists(LI.SubItems[1]) then
+            DeleteFile(LI.SubItems[1]);
+          if fileexists(ChangeFileExt(LI.SubItems[1],'.dic')) then
+            DeleteFile(ChangeFileExt(LI.SubItems[1],'.dic'));
+        except
+        end;          
+        LI.Delete;
+      end;
+    end;
+  end;  
+end;
+
+procedure StopCustDictEdit;
+begin
+  sbDelCustDict.Caption:=mConsts.Lines[7];
+  mEditor.Visible:=False;
+  sbEditCustDict.Caption:=mConsts.Lines[4];
+  lvCustDicts.Enabled:=true;
+  if lvCustDicts.CanFocus then
+    lvCustDicts.SetFocus;
+end;
+
+procedure SaveCustDict;
+var
+  tmp:string;
+  LI:TListItem;
+begin
+  LI:=lvCustDicts.Selected;
+  if LI<>nil then
+  begin
+    tmp:=mEditor.Lines.Text;
+    SaveStrToFileEx(tmp,LI.SubItems[1],'utf-8');
+  end;
+  StopCustDictEdit;
+end;
+
+procedure sbDelCustDict_OnClick(Sender: TObject);
+var
+  LI:TListItem;
+  i:integer;
+begin
+  if mEditor.Visible then
+    StopCustDictEdit
+  else
+  begin
+    LI:=lvCustDicts.Selected;
+    if (LI<>nil) and (MessageDlgPDS(Self.Caption, mConsts.Lines[0], mtConfirmation, [mbYes,mbNo])=mrYes) then
+    begin
+      for i:=lvCustDicts.Items.Count-1 downto 0 do
+      begin
+        LI:=lvCustDicts.Items[i];
+        if LI.Selected then
+        begin
+          try
+            if fileexists(LI.SubItems[1]) then
+              DeleteFile(LI.SubItems[1]);
+          except
+          end;          
+          LI.Delete;
+        end;
+      end;
+    end;
+  end;  
+end;
+
+procedure sbEditCustDict_OnClick(Sender: TObject);
+var
+  LI:TListItem;
+begin
+  LI:=lvCustDicts.Selected;
+  if mEditor.Visible then
+    SaveCustDict
+  else    
+  if LI<>nil then
+  begin
+    mEditor.Lines.LoadFromFile(LI.SubItems[1]);
+    mEditor.Visible:=True;
+    if mEditor.CanFocus then
+      mEditor.SetFocus;
+    sbEditCustDict.Caption:=mConsts.Lines[5];
+    sbDelCustDict.Caption:=mConsts.Lines[6];
+    lvCustDicts.Enabled:=False;
+  end;
+end;
+
+procedure mEditor_OnKeyPress(Sender: TObject; var Key: Char);
+begin
+  if key=#27 then
+    StopCustDictEdit;
+end;
+
+procedure sbDelMap_OnClick(Sender: TObject);
+var
+  LI:TListItem;
+  i:integer;
+begin
+  LI:=lvMap.Selected;
+  if (LI<>nil) and (MessageDlgPDS(Self.Caption, mConsts.Lines[0], mtConfirmation, [mbYes,mbNo])=mrYes) then
+  begin
+    for i:=lvMap.Items.Count-1 downto 0 do
+    begin
+      LI:=lvMap.Items[i];
+      if LI.Selected then
+        LI.Delete;
+    end;
+  end;   
+end;
+
+procedure sbEditMap_OnClick(Sender: TObject);
+var
+  LI:TListItem;
+  LCNames:TStringList;
+  i:integer;
+  s,t:string;
+begin
+  LI:=lvMap.Selected;
+  if (LI<>nil) then
+  begin
+    LCNames:=TStringList.Create;
+    try
+      s:=LI.Caption;
+      t:=LI.SubItems[0];
+      lcnames.text:=PLSApp.Libraries.LCNames;
+      for i:=0 to lcnames.count-1 do
+        lcnames[i]:=lcnames.names[i];
+      if InputQueryPDSList(tsMapping.Caption, mConsts.Lines[8], s, lcnames, false) then
+      begin
+        LI.Caption:=s;
+        if InputQueryPDSList(tsMapping.Caption, mConsts.Lines[9], t, cbTmp.Items, false) then
+          LI.SubItems[0]:=t;
+      end;
+    finally
+      lcnames.free;
+    end;
+  end;
+end;
+
+procedure sbAddMap_OnClick(Sender: TObject);
+var
+  LI:TListItem;  
+begin
+  LI:=lvMap.Items.Add;
+  LI.SubItems.Add('');
+  LI.Focused:=true;
+  LI.Selected:=true;
+  sbEditMap_OnClick(nil);
+  if (LI.Caption='') or (LI.SubItems[0]='') then
+    LI.Delete;
+end;
+
+procedure AssignEvents;
+begin
+  sbCancel.OnClick := @sbCancel_OnClick;
+  sbOK.OnClick := @sbOK_OnClick;
+  sbDelDict.OnClick := @sbDelDict_OnClick;
+  sbAddDict.OnClick := @sbAddDict_OnClick;
+  sbDelCustDict.OnClick := @sbDelCustDict_OnClick;
+  sbEditCustDict.OnClick := @sbEditCustDict_OnClick;
+  lvCustDicts.OnDblClick := @sbEditCustDict_OnClick;
+  mEditor.OnKeyPress := @mEditor_OnKeyPress;
+  sbDelMap.OnClick := @sbDelMap_OnClick;
+  sbEditMap.OnClick := @sbEditMap_OnClick;
+  lvMap.OnDblClick := @sbEditMap_OnClick;
+  sbAddMap.OnClick := @sbAddMap_OnClick;
+end;
+
+begin
+  AssignEvents;
+  rootFld := ExtractFilePath(GetVariable('ScriptFile'));
+  dictFld := rootFld + 'Dictionaries\';
+  LocalizeMsgDlgs;  
+  LoadConfig;
+  LoadDicts;
+  pcMain.ActivePageIndex:=0;
+end.

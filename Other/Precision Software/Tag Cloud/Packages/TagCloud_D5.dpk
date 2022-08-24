@@ -1,0 +1,45 @@
+package TagCloud_D5;
+
+{$R *.RES}
+{$R '..\Source\TagCloud.dcr'}
+{$R '..\Source\TagCloudPrmStyler.dcr'}
+{$R '..\Source\TagIndex.dcr'}
+{$R '..\Source\NavPathLabel.dcr'}
+{$ALIGN ON}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'TagCloud'}
+{$DESIGNONLY}
+{$IMPLICITBUILD OFF}
+
+requires
+  vcl50,
+  VCLX50,
+  dsnide50;
+
+contains
+  TagCloudReg in '..\Source\TagCloudReg.pas',
+  TagCloud in '..\Source\TagCloud.pas',
+  TagCloudPrmStyler in '..\Source\TagCloudPrmStyler.pas',
+  TagIndex in '..\Source\TagIndex.pas',
+  NavPathLabel in '..\Source\NavPathLabel.pas';
+
+end.

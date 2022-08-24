@@ -1,0 +1,29 @@
+unit Child;
+
+interface
+
+uses
+  System.SysUtils, System.Types, System.UITypes, System.Rtti, System.Classes,
+  System.Variants, FMX.Types, FMX.Controls, FMX.Forms, 
+  ...
+  FMX.plsController;
+
+...
+
+type
+  TfrmChild = class(TForm)
+    ...
+    // Add TplsController visual component to your child form
+    plsController1: TplsController; 
+  end;
+
+var
+  frmChild: TfrmChild;
+
+implementation
+
+{$R *.fmx}
+
+...
+
+end.

@@ -1,0 +1,53 @@
+program VTClasses;
+
+procedure LoadOptions;
+var
+  Ini:TMemIniFile;
+begin
+  Ini:=TMemIniFile.create(PLSApp.Settings.IniFile);
+  try
+    mList.Lines.CommaText:=Ini.ReadString('Global settings','VirtualTreeLike','');
+    if mList.Lines.Count=0 then
+    begin
+      mList.Lines.Add('TVirtualStringTree');
+      mList.Lines.Add('TVirtualDrawTree');
+    end;    
+  finally
+    Ini.free;
+  end;
+end;
+
+procedure SaveOptions;
+var
+  Ini:TMemIniFile;
+begin
+  Ini:=TMemIniFile.create(PLSApp.Settings.IniFile);
+  try
+    Ini.WriteString('Global settings','VirtualTreeLike',mList.Lines.CommaText);
+    Ini.UpdateFile;   
+  finally
+    Ini.free;
+  end;
+end;
+
+procedure sbOK_OnClick(Sender: TObject);
+begin
+  SaveOptions;
+  Self.Close;  
+end;
+
+procedure sbCancel_OnClick(Sender: TObject);
+begin
+  Self.Close;
+end;
+
+procedure AssignEvents;
+begin
+  sbOK.OnClick := @sbOK_OnClick;
+  sbCancel.OnClick := @sbCancel_OnClick;
+end;
+
+begin
+  AssignEvents;
+  LoadOptions;
+end.

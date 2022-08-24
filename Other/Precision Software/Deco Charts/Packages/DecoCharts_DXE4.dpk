@@ -1,0 +1,54 @@
+package DecoCharts_DXE4;
+
+{$R *.res}
+{$R '..\Source\DecoBar.dcr'}
+{$R '..\Source\DecoProgressGrid.dcr'}
+{$R '..\Source\DecoCompareGrid.dcr'}
+{$R '..\Source\DecoProgressBar.dcr'}
+{$R '..\Source\DecoRatingStars.dcr'}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE DEBUG}
+{$ENDIF IMPLICITBUILDING}
+{$DESCRIPTION 'DecoCharts'}
+{$DESIGNONLY}
+{$IMPLICITBUILD OFF}
+
+requires
+  rtl,
+  vcl,
+  vclx,
+  designide;
+
+contains
+  DecoChartsReg in '..\Source\DecoChartsReg.pas',
+  DecoBar in '..\Source\DecoBar.pas',
+  DecoCommon in '..\Source\DecoCommon.pas',
+  DecoCompareGrid in '..\Source\DecoCompareGrid.pas',
+  DecoGDI in '..\Source\DecoGDI.pas',
+  DecoChart in '..\Source\DecoChart.pas',
+  DecoProgressBar in '..\Source\DecoProgressBar.pas',
+  DecoProgressGrid in '..\Source\DecoProgressGrid.pas',
+  DecoRatingStars in '..\Source\DecoRatingStars.pas';
+
+end.
