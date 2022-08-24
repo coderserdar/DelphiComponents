@@ -1,0 +1,48 @@
+package tb2k_d7;
+
+{$R *.res}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $3FC00000}
+{$DESCRIPTION 'Toolbar2000 Components (Jordan Russell)'}
+{$RUNONLY}
+{$IMPLICITBUILD ON}
+
+requires
+  vcl;
+
+contains
+  TB2Version in '..\Source\TB2Version.pas',
+  TB2Toolbar in '..\Source\TB2Toolbar.pas',
+  TB2Consts in '..\Source\TB2Consts.pas',
+  TB2Dock in '..\Source\TB2Dock.pas',
+  TB2ExtItems in '..\Source\TB2ExtItems.pas',
+  TB2Item in '..\Source\TB2Item.pas',
+  TB2Common in '..\Source\TB2Common.pas',
+  TB2Hook in '..\Source\TB2Hook.pas',
+  TB2ToolWindow in '..\Source\TB2ToolWindow.pas',
+  TB2MRU in '..\Source\TB2MRU.pas',
+  TB2Anim in '..\Source\TB2Anim.pas',
+  TB2MDI in '..\Source\TB2MDI.pas',
+  TB2Acc in '..\Source\TB2Acc.pas';
+
+end.
+

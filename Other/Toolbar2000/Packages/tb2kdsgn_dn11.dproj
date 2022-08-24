@@ -1,0 +1,82 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{be3d3497-f4e5-4f7b-a5f7-0ad1f00fddb2}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <DCC_DCCCompiler>DCCIL</DCC_DCCCompiler>
+    <DCC_DependencyCheckOutputName>tb2kdsgn_dn11.dll</DCC_DependencyCheckOutputName>
+    <MainSource>tb2kdsgn_dn11.dpk</MainSource>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Version>7.0</Version>
+    <DCC_DebugInformation>False</DCC_DebugInformation>
+    <DCC_LocalDebugSymbols>False</DCC_LocalDebugSymbols>
+    <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+    <DCC_Define>RELEASE</DCC_Define>
+    <DCC_ImageBase>3F000000</DCC_ImageBase>
+    <DCC_UNIT_PLATFORM>False</DCC_UNIT_PLATFORM>
+    <DCC_NameSpace>Borland.Vcl.Design</DCC_NameSpace>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <Version>7.0</Version>
+    <DCC_DebugInfoInExe>True</DCC_DebugInfoInExe>
+    <DCC_DebugVN>True</DCC_DebugVN>
+    <DCC_Define>DEBUG</DCC_Define>
+    <DCC_ImageBase>3F000000</DCC_ImageBase>
+    <DCC_UNIT_PLATFORM>False</DCC_UNIT_PLATFORM>
+    <DCC_NameSpace>Borland.Vcl.Design</DCC_NameSpace>
+  </PropertyGroup>
+  <ProjectExtensions>
+    <Borland.Personality>DelphiDotNet.Personality</Borland.Personality>
+    <Borland.ProjectType />
+    <BorlandProject>
+<BorlandProject><DelphiDotNet.Personality><Parameters><Parameters Name="UseLauncher">False</Parameters><Parameters Name="LoadAllSymbols">True</Parameters><Parameters Name="LoadUnspecifiedSymbols">False</Parameters></Parameters><Package_Options><Package_Options Name="ImplicitBuild">False</Package_Options><Package_Options Name="DesigntimeOnly">True</Package_Options><Package_Options Name="RuntimeOnly">False</Package_Options><Package_Options Name="PackageDescription">Toolbar2000 .NET Design Package (Jordan Russell)</Package_Options></Package_Options><VersionInfo><VersionInfo Name="IncludeVerInfo">True</VersionInfo><VersionInfo Name="AutoIncBuild">False</VersionInfo><VersionInfo Name="MajorVer">1</VersionInfo><VersionInfo Name="MinorVer">0</VersionInfo><VersionInfo Name="Release">0</VersionInfo><VersionInfo Name="Build">0</VersionInfo><VersionInfo Name="Debug">False</VersionInfo><VersionInfo Name="PreRelease">False</VersionInfo><VersionInfo Name="Special">False</VersionInfo><VersionInfo Name="Private">False</VersionInfo><VersionInfo Name="DLL">False</VersionInfo><VersionInfo Name="Locale">1033</VersionInfo><VersionInfo Name="CodePage">1252</VersionInfo></VersionInfo><VersionInfoKeys><VersionInfoKeys Name="CompanyName"></VersionInfoKeys><VersionInfoKeys Name="FileDescription"></VersionInfoKeys><VersionInfoKeys Name="FileVersion">1.0.0.0</VersionInfoKeys><VersionInfoKeys Name="InternalName"></VersionInfoKeys><VersionInfoKeys Name="LegalCopyright"></VersionInfoKeys><VersionInfoKeys Name="LegalTrademarks"></VersionInfoKeys><VersionInfoKeys Name="OriginalFilename"></VersionInfoKeys><VersionInfoKeys Name="ProductName"></VersionInfoKeys><VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys><VersionInfoKeys Name="Comments"></VersionInfoKeys></VersionInfoKeys><Source><Source Name="MainSource">tb2kdsgn_dn11.dpk</Source></Source></DelphiDotNet.Personality></BorlandProject></BorlandProject>
+  </ProjectExtensions>
+  <ItemGroup>
+    <Reference Include="Borland.VclRtl.dll">
+      <AssemblyName>Borland.VclRtl</AssemblyName>
+      <Version>11.0.5000.9245</Version>
+      <HintPath>Borland.VclRtl.dll</HintPath>
+      <AssemblyTag>Borland.VclRtl.dll</AssemblyTag>
+      <LinkUnits>False</LinkUnits>
+    </Reference>
+    <Reference Include="Borland.Vcl.dll">
+      <AssemblyName>Borland.Vcl</AssemblyName>
+      <Version>11.0.5000.9245</Version>
+      <HintPath>Borland.Vcl.dll</HintPath>
+      <AssemblyTag>Borland.Vcl.dll</AssemblyTag>
+      <LinkUnits>False</LinkUnits>
+    </Reference>
+    <Reference Include="tb2k_dn11.dll">
+      <AssemblyName>tb2k_dn11</AssemblyName>
+      <Version>0.0.0.0</Version>
+      <HintPath>tb2k_dn11.dll</HintPath>
+      <AssemblyTag>tb2k_dn11.dll</AssemblyTag>
+      <LinkUnits>False</LinkUnits>
+    </Reference>
+    <Reference Include="Borland.Delphi.dll">
+      <AssemblyName>Borland.Delphi</AssemblyName>
+      <Version>11.0.5000.9245</Version>
+      <HintPath>Borland.Delphi.dll</HintPath>
+      <AssemblyTag>Borland.Delphi.dll</AssemblyTag>
+      <LinkUnits>False</LinkUnits>
+    </Reference>
+    <Reference Include="Borland.Vcl.Design.Standard.dll">
+      <AssemblyName>Borland.Vcl.Design.Standard</AssemblyName>
+      <Version>11.0.5000.9245</Version>
+      <HintPath>Borland.Vcl.Design.Standard.dll</HintPath>
+      <AssemblyTag>Borland.Vcl.Design.Standard.dll</AssemblyTag>
+      <LinkUnits>False</LinkUnits>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <DelphiCompile Include="tb2kdsgn_dn11.dpk">
+      <MainSource>MainSource</MainSource>
+    </DelphiCompile>
+    <DCCReference Include="..\Source\TB2DsgnConverter.pas" />
+    <DCCReference Include="..\Source\TB2DsgnConvertOptions.pas" />
+    <DCCReference Include="..\Source\TB2DsgnItemEditor.pas" />
+    <DCCReference Include="..\Source\TB2Reg.pas" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Borland.Delphi.Targets" />
+</Project>
