@@ -1,0 +1,68 @@
+<html>
+<head>
+   <title>StripReloc Revision History</title>
+</head>
+<body text="#000000" bgcolor="#ffffff" link="#264b99" vlink="#5e85d7" alink="#7799dd">
+
+<font face="verdana,arial" size=2>
+
+<table width="100%" border="0" cellpadding="5" cellspacing="0">
+   <tr>
+   <td align=center bgcolor="#264b99"><font face="verdana,arial" size=6 color="#FFFFFF"><b>StripReloc</b></font><br>
+   <font face="verdana,arial" size=4 color="#FFFFFF"><b>Revision History</b></font></td>
+   </tr>
+</table>
+
+<p><b>1.13</b> <font size=1>(2005-02-12)</font>
+<ul>
+   <li>Now rejects 64-bit binaries, which are not supported. Previously, it attempted to process them but would fail.
+</ul>
+
+<p><b>1.12</b> <font size=1>(2004-02-24)</font>
+<ul>
+   <li>To appease PE Explorer, it no longer sets PointerToRawData on the reloc section to zero. (Thanks to Paul Heinz.)
+</ul>
+
+<p><b>1.11</b> <font size=1>(2003-02-05)</font>
+<ul>
+   <li>Added a top-level exception handler to prevent "critical error" boxes from being displayed when an exception occurs.
+   <li>Now displays the usage info if switches are specified but no files.
+</ul>
+
+<p><b>1.10</b> <font size=1>(2000-12-21)</font>
+<ul>
+   <li>It now skips DLLs since they require a relocation section. (If you <i>really</i> want to strip a DLL, use the /F parameter.)
+   <li>New parameter: /C, which causes it to calculate and write an accurate checksum into the image's optional header. This requires imagehlp.dll (ships with Windows 98, NT 4.0, and later). If /C is not used, StripReloc will write a zero as the checksum. The checksum is normally unimportant.
+</ul>
+
+<p><b>1.02</b> <font size=1>(2000-03-26)</font>
+<ul>
+   <li>The program is now distributed under the <a href="http://www.gnu.org/copyleft/gpl.html">GNU General Public License</a>.
+   <li>It no longer requires the relocation section to be named ".reloc", so it can now be run on EXE's linked with ALINK.
+</ul>
+
+<p><b>1.01</b> <font size=1>(1999-09-29)</font>
+<ul>
+   <li>Added new <i>/B-</i> switch, which suppresses the creation of <i>.bak</i> files.
+</ul>
+
+<p><b>1.0b</b> <font size=1>(1999-08-19)</font>
+<ul>
+   <li>Now works on EXE's that have the <i>PointerToLinenumbers</i> field in section headers set.
+   <li>Changed name from "StripRlc" to the more descriptive "StripReloc". :-)
+</ul>
+
+<p><b>1.0a</b> <font size=1>(1999-08-18)</font>
+<ul>
+   <li>Now checks if image base is less than 0x400000.
+</ul>
+
+<p><b>1.0</b> <font size=1>(1999-08-17)</font>
+<ul>
+   <li>First release.
+</ul>
+
+</font>
+
+</body>
+</html>
