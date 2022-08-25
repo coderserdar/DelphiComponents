@@ -1,0 +1,60 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{01CE505A-77FC-4A97-99D1-DFA54BAFCFF6}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="Magentasubs22.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="magras220r.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="magras220d.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="Magentasubs22">
+        <MSBuild Projects="Magentasubs22.dproj"/>
+    </Target>
+    <Target Name="Magentasubs22:Clean">
+        <MSBuild Projects="Magentasubs22.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Magentasubs22:Make">
+        <MSBuild Projects="Magentasubs22.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="magras220r">
+        <MSBuild Projects="magras220r.dproj"/>
+    </Target>
+    <Target Name="magras220r:Clean">
+        <MSBuild Projects="magras220r.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="magras220r:Make">
+        <MSBuild Projects="magras220r.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="magras220d">
+        <MSBuild Projects="magras220d.dproj"/>
+    </Target>
+    <Target Name="magras220d:Clean">
+        <MSBuild Projects="magras220d.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="magras220d:Make">
+        <MSBuild Projects="magras220d.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="Magentasubs22;magras220r;magras220d"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="Magentasubs22:Clean;magras220r:Clean;magras220d:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="Magentasubs22:Make;magras220r:Make;magras220d:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

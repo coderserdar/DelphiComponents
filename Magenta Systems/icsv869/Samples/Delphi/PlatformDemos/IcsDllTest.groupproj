@@ -1,0 +1,60 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{7AAD8E3E-23F0-4F29-B591-918CBD3B577B}</ProjectGuid>
+		</PropertyGroup>
+		<ItemGroup>
+			<Projects Include="IcsDll1.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="IcsDll2.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="IcsDllTst.dproj">
+				<Dependencies/>
+			</Projects>
+		</ItemGroup>
+		<ProjectExtensions>
+			<Borland.Personality>Default.Personality.12</Borland.Personality>
+			<Borland.ProjectType/>
+			<BorlandProject>
+				<Default.Personality/>
+			</BorlandProject>
+		</ProjectExtensions>
+		<Target Name="IcsDll1">
+			<MSBuild Projects="IcsDll1.dproj"/>
+		</Target>
+		<Target Name="IcsDll1:Clean">
+			<MSBuild Projects="IcsDll1.dproj" Targets="Clean"/>
+		</Target>
+		<Target Name="IcsDll1:Make">
+			<MSBuild Projects="IcsDll1.dproj" Targets="Make"/>
+		</Target>
+		<Target Name="IcsDll2">
+			<MSBuild Projects="IcsDll2.dproj"/>
+		</Target>
+		<Target Name="IcsDll2:Clean">
+			<MSBuild Projects="IcsDll2.dproj" Targets="Clean"/>
+		</Target>
+		<Target Name="IcsDll2:Make">
+			<MSBuild Projects="IcsDll2.dproj" Targets="Make"/>
+		</Target>
+		<Target Name="IcsDllTst">
+			<MSBuild Projects="IcsDllTst.dproj"/>
+		</Target>
+		<Target Name="IcsDllTst:Clean">
+			<MSBuild Projects="IcsDllTst.dproj" Targets="Clean"/>
+		</Target>
+		<Target Name="IcsDllTst:Make">
+			<MSBuild Projects="IcsDllTst.dproj" Targets="Make"/>
+		</Target>
+		<Target Name="Build">
+			<CallTarget Targets="IcsDll1;IcsDll2;IcsDllTst"/>
+		</Target>
+		<Target Name="Clean">
+			<CallTarget Targets="IcsDll1:Clean;IcsDll2:Clean;IcsDllTst:Clean"/>
+		</Target>
+		<Target Name="Make">
+			<CallTarget Targets="IcsDll1:Make;IcsDll2:Make;IcsDllTst:Make"/>
+		</Target>
+		<Import Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')" Project="$(BDS)\Bin\CodeGear.Group.Targets"/>
+	</Project>

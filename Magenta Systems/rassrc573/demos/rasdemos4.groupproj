@@ -1,0 +1,170 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{dad0fea6-52e9-4f6d-8d39-710fd81b39ed}</ProjectGuid>
+		</PropertyGroup>
+		<ItemGroup>
+			<Projects Include="exdialc.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="exdials.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="exeditc.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="exedits.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="exmon.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="exnew.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="exnewm.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="experf.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="rasdemo4.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="scuttest.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="tapidemo.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="testmulti.dproj">
+				<Dependencies/>
+			</Projects>
+		</ItemGroup>
+		<ProjectExtensions>
+			<Borland.Personality>Default.Personality.12</Borland.Personality>
+			<Borland.ProjectType/>
+			<BorlandProject>
+				<BorlandProject>
+					<Default.Personality/>
+				</BorlandProject>
+			</BorlandProject>
+		</ProjectExtensions>
+		<Target Name="exdialc">
+			<MSBuild Projects="exdialc.dproj"/>
+		</Target>
+		<Target Name="exdialc:Clean">
+			<MSBuild Projects="exdialc.dproj" Targets="Clean"/>
+		</Target>
+		<Target Name="exdialc:Make">
+			<MSBuild Projects="exdialc.dproj" Targets="Make"/>
+		</Target>
+		<Target Name="exdials">
+			<MSBuild Projects="exdials.dproj"/>
+		</Target>
+		<Target Name="exdials:Clean">
+			<MSBuild Projects="exdials.dproj" Targets="Clean"/>
+		</Target>
+		<Target Name="exdials:Make">
+			<MSBuild Projects="exdials.dproj" Targets="Make"/>
+		</Target>
+		<Target Name="exeditc">
+			<MSBuild Projects="exeditc.dproj"/>
+		</Target>
+		<Target Name="exeditc:Clean">
+			<MSBuild Projects="exeditc.dproj" Targets="Clean"/>
+		</Target>
+		<Target Name="exeditc:Make">
+			<MSBuild Projects="exeditc.dproj" Targets="Make"/>
+		</Target>
+		<Target Name="exedits">
+			<MSBuild Projects="exedits.dproj"/>
+		</Target>
+		<Target Name="exedits:Clean">
+			<MSBuild Projects="exedits.dproj" Targets="Clean"/>
+		</Target>
+		<Target Name="exedits:Make">
+			<MSBuild Projects="exedits.dproj" Targets="Make"/>
+		</Target>
+		<Target Name="exmon">
+			<MSBuild Projects="exmon.dproj"/>
+		</Target>
+		<Target Name="exmon:Clean">
+			<MSBuild Projects="exmon.dproj" Targets="Clean"/>
+		</Target>
+		<Target Name="exmon:Make">
+			<MSBuild Projects="exmon.dproj" Targets="Make"/>
+		</Target>
+		<Target Name="exnew">
+			<MSBuild Projects="exnew.dproj"/>
+		</Target>
+		<Target Name="exnew:Clean">
+			<MSBuild Projects="exnew.dproj" Targets="Clean"/>
+		</Target>
+		<Target Name="exnew:Make">
+			<MSBuild Projects="exnew.dproj" Targets="Make"/>
+		</Target>
+		<Target Name="exnewm">
+			<MSBuild Projects="exnewm.dproj"/>
+		</Target>
+		<Target Name="exnewm:Clean">
+			<MSBuild Projects="exnewm.dproj" Targets="Clean"/>
+		</Target>
+		<Target Name="exnewm:Make">
+			<MSBuild Projects="exnewm.dproj" Targets="Make"/>
+		</Target>
+		<Target Name="experf">
+			<MSBuild Projects="experf.dproj"/>
+		</Target>
+		<Target Name="experf:Clean">
+			<MSBuild Projects="experf.dproj" Targets="Clean"/>
+		</Target>
+		<Target Name="experf:Make">
+			<MSBuild Projects="experf.dproj" Targets="Make"/>
+		</Target>
+		<Target Name="rasdemo4">
+			<MSBuild Projects="rasdemo4.dproj"/>
+		</Target>
+		<Target Name="rasdemo4:Clean">
+			<MSBuild Projects="rasdemo4.dproj" Targets="Clean"/>
+		</Target>
+		<Target Name="rasdemo4:Make">
+			<MSBuild Projects="rasdemo4.dproj" Targets="Make"/>
+		</Target>
+		<Target Name="scuttest">
+			<MSBuild Projects="scuttest.dproj"/>
+		</Target>
+		<Target Name="scuttest:Clean">
+			<MSBuild Projects="scuttest.dproj" Targets="Clean"/>
+		</Target>
+		<Target Name="scuttest:Make">
+			<MSBuild Projects="scuttest.dproj" Targets="Make"/>
+		</Target>
+		<Target Name="tapidemo">
+			<MSBuild Projects="tapidemo.dproj"/>
+		</Target>
+		<Target Name="tapidemo:Clean">
+			<MSBuild Projects="tapidemo.dproj" Targets="Clean"/>
+		</Target>
+		<Target Name="tapidemo:Make">
+			<MSBuild Projects="tapidemo.dproj" Targets="Make"/>
+		</Target>
+		<Target Name="testmulti">
+			<MSBuild Projects="testmulti.dproj"/>
+		</Target>
+		<Target Name="testmulti:Clean">
+			<MSBuild Projects="testmulti.dproj" Targets="Clean"/>
+		</Target>
+		<Target Name="testmulti:Make">
+			<MSBuild Projects="testmulti.dproj" Targets="Make"/>
+		</Target>
+		<Target Name="Build">
+			<CallTarget Targets="exdialc;exdials;exeditc;exedits;exmon;exnew;exnewm;experf;rasdemo4;scuttest;tapidemo;testmulti"/>
+		</Target>
+		<Target Name="Clean">
+			<CallTarget Targets="exdialc:Clean;exdials:Clean;exeditc:Clean;exedits:Clean;exmon:Clean;exnew:Clean;exnewm:Clean;experf:Clean;rasdemo4:Clean;scuttest:Clean;tapidemo:Clean;testmulti:Clean"/>
+		</Target>
+		<Target Name="Make">
+			<CallTarget Targets="exdialc:Make;exdials:Make;exeditc:Make;exedits:Make;exmon:Make;exnew:Make;exnewm:Make;experf:Make;rasdemo4:Make;scuttest:Make;tapidemo:Make;testmulti:Make"/>
+		</Target>
+		<Import Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')" Project="$(BDS)\Bin\CodeGear.Group.Targets"/>
+	</Project>

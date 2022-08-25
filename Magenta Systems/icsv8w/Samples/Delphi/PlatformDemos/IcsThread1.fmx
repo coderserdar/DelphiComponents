@@ -1,0 +1,246 @@
+object frmMain: TfrmMain
+  Left = 0
+  Top = 0
+  Caption = 'ICS in a Thread'
+  ClientHeight = 344
+  ClientWidth = 465
+  Visible = False
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  StyleLookup = 'backgroundstyle'
+  object mmLog: TMemo
+    Align = alClient
+    Position.Point = '(0,245)'
+    Width = 465.000000000000000000
+    Height = 71.000000000000000000
+    TabOrder = 0
+    KeyboardType = vktDefault
+  end
+  object mmMailMessage: TMemo
+    Align = alTop
+    Position.Point = '(0,141)'
+    Width = 465.000000000000000000
+    Height = 89.000000000000000000
+    TabOrder = 1
+    Lines.Strings = (
+      'Hello !'
+      'This message has been sent by IcsThrdMailSnd demo.'
+      ''
+      '')
+    KeyboardType = vktDefault
+  end
+  object pnlTop: TPanel
+    Align = alTop
+    Width = 465.000000000000000000
+    Height = 141.000000000000000000
+    TabOrder = 2
+    object edtFromAddr: TEdit
+      Position.Point = '(76,32)'
+      Width = 189.000000000000000000
+      Height = 22.000000000000000000
+      TabOrder = 0
+      KeyboardType = vktDefault
+      Password = False
+      Text = 'name@domain.com'
+    end
+    object edtHost: TEdit
+      Position.Point = '(76,8)'
+      Width = 189.000000000000000000
+      Height = 22.000000000000000000
+      TabOrder = 1
+      KeyboardType = vktDefault
+      Password = False
+      Text = 'localhost'
+    end
+    object edtPwd: TEdit
+      Position.Point = '(327,32)'
+      Width = 121.000000000000000000
+      Height = 22.000000000000000000
+      TabOrder = 2
+      KeyboardType = vktDefault
+      Password = False
+      Text = 'test'
+    end
+    object edtToAddr: TEdit
+      Position.Point = '(76,56)'
+      Width = 189.000000000000000000
+      Height = 22.000000000000000000
+      TabOrder = 3
+      KeyboardType = vktDefault
+      Password = False
+      Text = 'name@domain.com'
+    end
+    object edtUser: TEdit
+      Position.Point = '(327,8)'
+      Width = 121.000000000000000000
+      Height = 22.000000000000000000
+      TabOrder = 4
+      KeyboardType = vktDefault
+      Password = False
+      Text = 'test'
+    end
+    object Label1: TLabel
+      Position.Point = '(12,11)'
+      Width = 64.500000000000000000
+      Height = 19.500000000000000000
+      TabOrder = 5
+      AutoSize = True
+      Text = 'Mail Server:'
+      WordWrap = False
+    end
+    object Label2: TLabel
+      Position.Point = '(12,35)'
+      Width = 62.500000000000000000
+      Height = 19.500000000000000000
+      TabOrder = 6
+      AutoSize = True
+      Text = 'From Addr:'
+      WordWrap = False
+    end
+    object Label3: TLabel
+      Position.Point = '(12,59)'
+      Width = 49.500000000000000000
+      Height = 19.500000000000000000
+      TabOrder = 7
+      AutoSize = True
+      Text = 'To Addr:'
+      WordWrap = False
+    end
+    object Label4: TLabel
+      Position.Point = '(272,11)'
+      Width = 31.500000000000000000
+      Height = 19.500000000000000000
+      TabOrder = 8
+      AutoSize = True
+      Text = 'User:'
+      WordWrap = False
+    end
+    object Label5: TLabel
+      Position.Point = '(272,35)'
+      Width = 56.500000000000000000
+      Height = 19.500000000000000000
+      TabOrder = 9
+      AutoSize = True
+      Text = 'Password:'
+      WordWrap = False
+    end
+    object Label6: TLabel
+      Position.Point = '(3,126)'
+      Width = 75.500000000000000000
+      Height = 19.500000000000000000
+      TabOrder = 10
+      AutoSize = True
+      Text = 'Message text:'
+      WordWrap = False
+    end
+    object edtSubject: TEdit
+      Position.Point = '(76,80)'
+      Width = 373.000000000000000000
+      Height = 22.000000000000000000
+      TabOrder = 11
+      KeyboardType = vktDefault
+      Password = False
+      Text = 'ICS thread SMTP demo is working'
+    end
+    object Label8: TLabel
+      Position.Point = '(12,83)'
+      Width = 45.500000000000000000
+      Height = 19.500000000000000000
+      TabOrder = 12
+      AutoSize = True
+      Text = 'Subject:'
+      WordWrap = False
+    end
+    object edtFileName: TEdit
+      Position.Point = '(76,104)'
+      Width = 345.000000000000000000
+      Height = 22.000000000000000000
+      TabOrder = 14
+      KeyboardType = vktDefault
+      Password = False
+    end
+    object btnFileSelect: TButton
+      Position.Point = '(424,104)'
+      Width = 24.000000000000000000
+      Height = 22.000000000000000000
+      OnClick = btnFileSelectClick
+      TabOrder = 15
+      Text = '..'
+    end
+    object Label9: TLabel
+      Position.Point = '(12,107)'
+      Width = 66.500000000000000000
+      Height = 19.500000000000000000
+      TabOrder = 16
+      AutoSize = True
+      Text = 'Attachment:'
+      WordWrap = False
+    end
+    object edtBytesPerSec: TEdit
+      Position.Point = '(328,56)'
+      Width = 65.000000000000000000
+      Height = 22.000000000000000000
+      TabOrder = 17
+      TextAlign = taTrailing
+      KeyboardType = vktDefault
+      Password = False
+      Text = '0'
+    end
+    object Label10: TLabel
+      Position.Point = '(396,59)'
+      Width = 52.000000000000000000
+      Height = 20.000000000000000000
+      TabOrder = 18
+      AutoSize = True
+      Text = 'Bytes/sec'
+      WordWrap = False
+    end
+    object Label11: TLabel
+      Position.Point = '(272,59)'
+      Width = 48.000000000000000000
+      Height = 20.000000000000000000
+      TabOrder = 19
+      AutoSize = True
+      Text = 'Throttle:'
+      WordWrap = False
+    end
+  end
+  object Splitter1: TSplitter
+    Align = alTop
+    Cursor = crVSplit
+    Position.Point = '(0,230)'
+    Width = 465.000000000000000000
+    Height = 15.000000000000000000
+    TabOrder = 3
+    MinSize = 20.000000000000000000
+    object Label7: TLabel
+      Position.Point = '(3,0)'
+      Width = 27.500000000000000000
+      Height = 19.500000000000000000
+      TabOrder = 0
+      AutoSize = True
+      Text = 'Log:'
+      WordWrap = False
+    end
+  end
+  object pnlBottom: TPanel
+    Align = alBottom
+    Position.Point = '(0,316)'
+    Width = 465.000000000000000000
+    Height = 28.000000000000000000
+    TabOrder = 4
+    object btnSendMail: TButton
+      Position.Point = '(8,3)'
+      Width = 80.000000000000000000
+      Height = 22.000000000000000000
+      OnClick = btnSendMailClick
+      TabOrder = 0
+      Text = 'Send Mail'
+    end
+  end
+  object OpenDialog1: TOpenDialog
+    Options = [ofHideReadOnly, ofFileMustExist, ofEnableSizing]
+    Left = 404
+    Top = 152
+  end
+end

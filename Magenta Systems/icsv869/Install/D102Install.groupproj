@@ -1,0 +1,62 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{30D8AA58-0A26-4C23-AD0A-2243BA3306F8}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="..\Packages\OverbyteIcsD102Run.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\Packages\OverbyteIcsD102Design.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="OverbyteIcsD102Run">
+        <MSBuild Projects="..\Packages\OverbyteIcsD102Run.dproj"/>
+    </Target>
+    <Target Name="OverbyteIcsD102Run:Clean">
+        <MSBuild Projects="..\Packages\OverbyteIcsD102Run.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="OverbyteIcsD102Run:Make">
+        <MSBuild Projects="..\Packages\OverbyteIcsD102Run.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="OverbyteIcsD102Design">
+        <MSBuild Projects="..\Packages\OverbyteIcsD102Design.dproj"/>
+    </Target>
+    <Target Name="OverbyteIcsD102Design:Clean">
+        <MSBuild Projects="..\Packages\OverbyteIcsD102Design.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="OverbyteIcsD102Design:Make">
+        <MSBuild Projects="..\Packages\OverbyteIcsD102Design.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="OverbyteIcsD102Run;OverbyteIcsD102Design"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="OverbyteIcsD102Run:Clean;OverbyteIcsD102Design:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="OverbyteIcsD102Run:Make;OverbyteIcsD102Design:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+    <ItemGroup Condition="'$(BuildGroup)'=='Both libraries'">
+        <BuildGroupProject Include="..\Packages\OverbyteIcsD102Design.dproj">
+            <ProjectGuid>{64B470D0-2204-4CF1-B8F5-E2BE8764BBA8}</ProjectGuid>
+            <Configurations>Debug</Configurations>
+            <Platforms>Win32</Platforms>
+            <Enabled>True</Enabled>
+        </BuildGroupProject>
+        <BuildGroupProject Include="..\Packages\OverbyteIcsD102Run.dproj">
+            <ProjectGuid>{BCD0545C-3A49-4959-BB73-0741D6E1D23B}</ProjectGuid>
+            <Configurations>Debug</Configurations>
+            <Platforms>Win32;Win64</Platforms>
+            <Enabled>True</Enabled>
+        </BuildGroupProject>
+    </ItemGroup>
+</Project>

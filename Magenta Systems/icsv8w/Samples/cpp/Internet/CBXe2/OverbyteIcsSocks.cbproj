@@ -1,0 +1,196 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{87511395-8FE0-43DF-B550-470319E33288}</ProjectGuid>
+			<MainSource>OverbyteIcsSocks.cpp</MainSource>
+			<Config Condition="'$(Config)'==''">Debug</Config>
+			<ProjectVersion>13.4</ProjectVersion>
+			<Base>True</Base>
+			<AppType>Application</AppType>
+			<FrameworkType>VCL</FrameworkType>
+			<Platform Condition="'$(Platform)'==''">Win32</Platform>
+			<TargetedPlatforms>1</TargetedPlatforms>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Base)'=='true') or '$(Base_Win32)'!=''">
+			<Base_Win32>true</Base_Win32>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_1)'!=''">
+			<Cfg_1>true</Cfg_1>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_2)'!=''">
+			<Cfg_2>true</Cfg_2>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Base)'!=''">
+			<AllPackageLibs>vcl.lib;rtl.lib</AllPackageLibs>
+			<ILINK_LibraryPath>..\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<FinalOutputDir>.\$(Platform)\$(Config)</FinalOutputDir>
+			<IntermediateOutputDir>.\$(Platform)\$(Config)</IntermediateOutputDir>
+			<UsingDelphiRTL>true</UsingDelphiRTL>
+			<Manifest_File>None</Manifest_File>
+			<VerInfo_Locale>1033</VerInfo_Locale>
+			<VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+			<DCC_Namespace>Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
+			<VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+			<BCC_OptimizeForSpeed>true</BCC_OptimizeForSpeed>
+			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
+			<Defines>NO_STRICT;$(Defines)</Defines>
+			<DynamicRTL>true</DynamicRTL>
+			<ILINK_ObjectSearchPath>..\..\Internet;$(ILINK_ObjectSearchPath)</ILINK_ObjectSearchPath>
+			<BCC_wpar>false</BCC_wpar>
+			<IncludePath>..\;..\CBXe2;..\..\Internet;.\InvalidRemoveMe;$(BDS)\include;$(BDS)\include\dinkumware;$(BDSINCLUDE)\windows\vcl;$(IncludePath)</IncludePath>
+			<Multithreaded>true</Multithreaded>
+			<_TCHARMapping>wchar_t</_TCHARMapping>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Base_Win32)'!=''">
+			<DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_1)'!=''">
+			<BCC_OptimizeForSpeed>false</BCC_OptimizeForSpeed>
+			<DCC_Optimize>false</DCC_Optimize>
+			<DCC_DebugInfoInExe>true</DCC_DebugInfoInExe>
+			<Defines>_DEBUG;$(Defines)</Defines>
+			<ILINK_FullDebugInfo>true</ILINK_FullDebugInfo>
+			<BCC_InlineFunctionExpansion>false</BCC_InlineFunctionExpansion>
+			<ILINK_DisableIncrementalLinking>true</ILINK_DisableIncrementalLinking>
+			<BCC_UseRegisterVariables>None</BCC_UseRegisterVariables>
+			<DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
+			<BCC_DebugLineNumbers>true</BCC_DebugLineNumbers>
+			<TASM_DisplaySourceLines>true</TASM_DisplaySourceLines>
+			<BCC_StackFrames>true</BCC_StackFrames>
+			<BCC_DisableOptimizations>true</BCC_DisableOptimizations>
+			<ILINK_LibraryPath>$(BDSLIB)\$(PLATFORM)\debug;.\InvalidRemoveMe\$(PLATFORM)\Debug;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<TASM_Debugging>Full</TASM_Debugging>
+			<BCC_SourceDebuggingOn>true</BCC_SourceDebuggingOn>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_2)'!=''">
+			<Defines>NDEBUG;$(Defines)</Defines>
+			<ILINK_LibraryPath>$(BDSLIB)\$(PLATFORM)\release;.\InvalidRemoveMe\$(PLATFORM)\Release;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<TASM_Debugging>None</TASM_Debugging>
+		</PropertyGroup>
+		<ProjectExtensions>
+			<Borland.Personality>CPlusPlusBuilder.Personality.12</Borland.Personality>
+			<Borland.ProjectType>CppVCLApplication</Borland.ProjectType>
+			<BorlandProject>
+				<CPlusPlusBuilder.Personality>
+					<Source>
+						<Source Name="MainSource">OverbyteIcsSocks.cpp</Source>
+					</Source>
+					<VersionInfo>
+						<VersionInfo Name="IncludeVerInfo">False</VersionInfo>
+						<VersionInfo Name="AutoIncBuild">False</VersionInfo>
+						<VersionInfo Name="MajorVer">1</VersionInfo>
+						<VersionInfo Name="MinorVer">0</VersionInfo>
+						<VersionInfo Name="Release">0</VersionInfo>
+						<VersionInfo Name="Build">0</VersionInfo>
+						<VersionInfo Name="Debug">False</VersionInfo>
+						<VersionInfo Name="PreRelease">False</VersionInfo>
+						<VersionInfo Name="Special">False</VersionInfo>
+						<VersionInfo Name="Private">False</VersionInfo>
+						<VersionInfo Name="DLL">False</VersionInfo>
+						<VersionInfo Name="Locale">1031</VersionInfo>
+						<VersionInfo Name="CodePage">1252</VersionInfo>
+					</VersionInfo>
+					<VersionInfoKeys>
+						<VersionInfoKeys Name="CompanyName"/>
+						<VersionInfoKeys Name="FileDescription"/>
+						<VersionInfoKeys Name="FileVersion">1.0.0.0</VersionInfoKeys>
+						<VersionInfoKeys Name="InternalName"/>
+						<VersionInfoKeys Name="LegalCopyright"/>
+						<VersionInfoKeys Name="LegalTrademarks"/>
+						<VersionInfoKeys Name="OriginalFilename"/>
+						<VersionInfoKeys Name="ProductName"/>
+						<VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys>
+						<VersionInfoKeys Name="Comments"/>
+					</VersionInfoKeys>
+					<HistoryLists_hlIncludePath>
+						<HistoryLists_hlIncludePath Name="Count">1</HistoryLists_hlIncludePath>
+						<HistoryLists_hlIncludePath Name="Item0">$(BDS)\include;$(BDS)\include\dinkumware;$(BDSINCLUDE)\windows\vcl;.\InvalidRemoveMe</HistoryLists_hlIncludePath>
+					</HistoryLists_hlIncludePath>
+					<HistoryLists_hlILINK_LibraryPath>
+						<HistoryLists_hlILINK_LibraryPath Name="Count">1</HistoryLists_hlILINK_LibraryPath>
+						<HistoryLists_hlILINK_LibraryPath Name="Item0">$(BDS)\lib;$(BDS)\lib\obj;$(BDS)\lib\psdk</HistoryLists_hlILINK_LibraryPath>
+					</HistoryLists_hlILINK_LibraryPath>
+					<HistoryLists_hlDefines>
+						<HistoryLists_hlDefines Name="Count">1</HistoryLists_hlDefines>
+						<HistoryLists_hlDefines Name="Item0">NO_STRICT</HistoryLists_hlDefines>
+					</HistoryLists_hlDefines>
+					<HistoryLists_hlILINK_MaxErrors>
+						<HistoryLists_hlILINK_MaxErrors Name="Count">1</HistoryLists_hlILINK_MaxErrors>
+						<HistoryLists_hlILINK_MaxErrors Name="Item0">0</HistoryLists_hlILINK_MaxErrors>
+					</HistoryLists_hlILINK_MaxErrors>
+					<HistoryLists_hlILINK_FileAlignment>
+						<HistoryLists_hlILINK_FileAlignment Name="Count">1</HistoryLists_hlILINK_FileAlignment>
+						<HistoryLists_hlILINK_FileAlignment Name="Item0">0x200</HistoryLists_hlILINK_FileAlignment>
+					</HistoryLists_hlILINK_FileAlignment>
+					<HistoryLists_hlILINK_ObjectAlignment>
+						<HistoryLists_hlILINK_ObjectAlignment Name="Count">1</HistoryLists_hlILINK_ObjectAlignment>
+						<HistoryLists_hlILINK_ObjectAlignment Name="Item0">4096</HistoryLists_hlILINK_ObjectAlignment>
+					</HistoryLists_hlILINK_ObjectAlignment>
+					<Debugging>
+						<Debugging Name="DebugSourceDirs"/>
+					</Debugging>
+					<Parameters>
+						<Parameters Name="RemoteHost"/>
+						<Parameters Name="RemotePath"/>
+						<Parameters Name="RemoteParams"/>
+						<Parameters Name="RemoteLauncher"/>
+						<Parameters Name="UseRemoteLauncher">False</Parameters>
+						<Parameters Name="RemoteCWD"/>
+						<Parameters Name="RemoteDebug">False</Parameters>
+					</Parameters>
+					<Linker>
+						<Linker Name="LibPrefix"/>
+						<Linker Name="LibSuffix"/>
+						<Linker Name="LibVersion"/>
+					</Linker>
+					<ProjectProperties>
+						<ProjectProperties Name="AutoShowDeps">False</ProjectProperties>
+						<ProjectProperties Name="ManagePaths">True</ProjectProperties>
+						<ProjectProperties Name="VerifyPackages">True</ProjectProperties>
+					</ProjectProperties>
+					<Excluded_Packages>
+						<Excluded_Packages Name="$(BDSBIN)\fmidesigner160.bpl">FMI Form designer and property and component editors</Excluded_Packages>
+					</Excluded_Packages>
+				</CPlusPlusBuilder.Personality>
+				<Platforms>
+					<Platform value="Win32">True</Platform>
+				</Platforms>
+			</BorlandProject>
+			<ProjectFileVersion>12</ProjectFileVersion>
+		</ProjectExtensions>
+		<ItemGroup>
+			<CppCompile Include="OverbyteIcsSocks.cpp">
+				<BuildOrder>1</BuildOrder>
+			</CppCompile>
+			<ResFiles Include="OverbyteIcsSocks.res">
+				<BuildOrder>0</BuildOrder>
+			</ResFiles>
+			<CppCompile Include="..\OverbyteIcsSocks1.cpp">
+				<Form>SocksTestForm</Form>
+				<DependentOn>..\OverbyteIcsSocks1.h</DependentOn>
+				<BuildOrder>2</BuildOrder>
+			</CppCompile>
+			<FormResources Include="..\OverbyteIcsSocks1.dfm"/>
+			<BuildConfiguration Include="Release">
+				<Key>Cfg_2</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Base">
+				<Key>Base</Key>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Debug">
+				<Key>Cfg_1</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+		</ItemGroup>
+		<Import Condition="Exists('$(BDS)\Bin\CodeGear.Cpp.Targets')" Project="$(BDS)\Bin\CodeGear.Cpp.Targets"/>
+		<Import Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')" Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj"/>
+	</Project>

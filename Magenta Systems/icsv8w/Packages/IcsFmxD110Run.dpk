@@ -1,0 +1,108 @@
+package IcsFmxD110Run;
+
+{$R *.res}
+{$R '..\Source\OverbyteIcsHttpSrv.dcr'}
+{$R '..\Source\OverbyteIcsFtpSrv.dcr'}
+{$R '..\Source\OverbyteIcsNntpCli.dcr'}
+{$R '..\Source\OverbyteIcsWSocket.dcr'}
+{$R '..\Source\OverbyteIcsFtpCli.dcr'}
+{$R '..\Source\OverbyteIcsHttpProt.dcr'}
+{$R '..\Source\OverbyteIcsWSocketS.dcr'}
+{$R '..\Source\OverbyteIcsSmtpProt.dcr'}
+{$R '..\Source\OverbyteIcsPop3Prot.dcr'}
+{$R '..\Source\OverbyteIcsDnsQuery.dcr'}
+{$R '..\Source\OverbyteIcsFingCli.dcr'}
+{$R '..\Source\OverbyteIcsPing.dcr'}
+{$R '..\Source\OverbyteIcsMultipartFtpDownloader.dcr'}
+{$R '..\Source\OverbyteIcsMultipartHttpDownloader.dcr'}
+{$R '..\Source\OverbyteIcsSslSessionCache.dcr'}
+{$R '..\Source\OverbyteIcsHttpAppServer.dcr'}
+{$R '..\Source\OverbyteIcsCharsetComboBox.dcr'}
+{$R '..\Source\OverbyteIcsProxy.dcr'}
+{$R '..\Source\OverbyteIcsSslX509Certs.dcr'}
+{$R '..\Source\OverbyteIcsSslHttpRest.dcr'}
+{$R '..\source\OverbyteIcsBlacklist.dcr'}
+{$R '..\source\OverbyteIcsIpStreamLog.dcr'}
+{$R '..\source\OverbyteIcsMailQueue.dcr'}
+{$R '..\source\OverbyteIcsSntp.dcr'}
+{$R '..\source\OverbyteIcsWhoisCli.dcr'}
+{$R '..\source\OverbyteIcsFileCopy.dcr'}
+{$R '..\source\OverbyteIcsHttpMulti.dcr'}
+{$R '..\source\OverbyteIcsFtpMulti.dcr'}
+{$R '..\Source\OverbyteIcsSslHttpOAuth.dcr'}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS OFF}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS OFF}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE RELEASE}
+{$DEFINE USE_SSL}
+{$ENDIF IMPLICITBUILDING}
+{$DESCRIPTION 'Overbyte ICS FMX Run-Time Package for Delphi 11.0'}
+{$RUNONLY}
+{$IMPLICITBUILD OFF}
+
+requires
+  rtl,
+  fmx,
+  IcsCommonD110Run,
+  dbrtl;
+
+contains
+  Ics.Fmx.OverbyteIcsWndControl in '..\Source\Ics.Fmx.OverbyteIcsWndControl.pas',
+  Ics.Fmx.OverbyteIcsWSocket in '..\Source\Ics.Fmx.OverbyteIcsWSocket.pas',
+  Ics.Fmx.OverbyteIcsFtpCli in '..\Source\Ics.Fmx.OverbyteIcsFtpCli.pas',
+  Ics.Fmx.OverbyteIcsFtpSrv in '..\Source\Ics.Fmx.OverbyteIcsFtpSrv.pas',
+  Ics.Fmx.OverbyteIcsHttpProt in '..\Source\Ics.Fmx.OverbyteIcsHttpProt.pas',
+  Ics.Fmx.OverbyteIcsWSocketS in '..\Source\Ics.Fmx.OverbyteIcsWSocketS.pas',
+  Ics.Fmx.OverbyteIcsSmtpProt in '..\Source\Ics.Fmx.OverbyteIcsSmtpProt.pas',
+  Ics.Fmx.OverbyteIcsPop3Prot in '..\Source\Ics.Fmx.OverbyteIcsPop3Prot.pas',
+  Ics.Fmx.OverbyteIcsNntpCli in '..\Source\Ics.Fmx.OverbyteIcsNntpCli.pas',
+  Ics.Fmx.OverbyteIcsPing in '..\Source\Ics.Fmx.OverbyteIcsPing.pas',
+  Ics.Fmx.OverbyteIcsDnsQuery in '..\Source\Ics.Fmx.OverbyteIcsDnsQuery.pas',
+  Ics.Fmx.OverbyteIcsFingCli in '..\Source\Ics.Fmx.OverbyteIcsFingCli.pas',
+  Ics.Fmx.OverbyteIcsSslSessionCache in '..\Source\Ics.Fmx.OverbyteIcsSslSessionCache.pas',
+  Ics.Fmx.OverbyteIcsHttpSrv in '..\Source\Ics.Fmx.OverbyteIcsHttpSrv.pas',
+  Ics.Fmx.OverbyteIcsSocketUtils in '..\Source\Ics.Fmx.OverbyteIcsSocketUtils.pas',
+  Ics.Fmx.OverbyteIcsMultipartFtpDownloader in '..\Source\Ics.Fmx.OverbyteIcsMultipartFtpDownloader.pas',
+  Ics.Fmx.OverbyteIcsMultipartHttpDownloader in '..\Source\Ics.Fmx.OverbyteIcsMultipartHttpDownloader.pas',
+  Ics.Fmx.OverbyteIcsHttpAppServer in '..\Source\Ics.Fmx.OverbyteIcsHttpAppServer.pas',
+  Ics.Fmx.OverbyteIcsThreadTimer in '..\Source\Ics.Fmx.OverbyteIcsThreadTimer.pas',
+  Ics.Fmx.OverbyteIcsCharsetComboBox in '..\Source\Ics.Fmx.OverbyteIcsCharsetComboBox.pas',
+  Ics.Posix.PXMessages in '..\Source\Ics.Posix.PXMessages.pas',
+  Ics.Fmx.OverbyteIcsIcmp in '..\Source\Ics.Fmx.OverbyteIcsIcmp.pas',
+  Ics.Fmx.OverbyteIcsProxy in '..\Source\Ics.Fmx.OverbyteIcsProxy.pas',
+  Ics.Fmx.OverbyteIcsSslX509Certs in '..\Source\Ics.Fmx.OverbyteIcsSslX509Certs.pas',
+  Ics.Fmx.OverbyteIcsSslHttpRest in '..\Source\Ics.Fmx.OverbyteIcsSslHttpRest.pas',
+  Ics.Fmx.OverbyteIcsMsSslUtils in '..\Source\Ics.Fmx.OverbyteIcsMsSslUtils.pas',
+  Ics.Fmx.OverbyteIcsSslX509Utils in '..\Source\Ics.Fmx.OverbyteIcsSslX509Utils.pas',
+  Ics.Fmx.OverbyteIcsSslJose in '..\Source\Ics.Fmx.OverbyteIcsSslJose.pas',
+  Ics.Fmx.OverbyteIcsBlacklist in '..\Source\Ics.Fmx.OverbyteIcsBlacklist.pas',
+  Ics.Fmx.OverbyteIcsIpStreamLog in '..\Source\Ics.Fmx.OverbyteIcsIpStreamLog.pas',
+  Ics.Fmx.OverbyteIcsMailQueue in '..\Source\Ics.Fmx.OverbyteIcsMailQueue.pas',
+  Ics.Fmx.OverbyteIcsSntp in '..\Source\Ics.Fmx.OverbyteIcsSntp.pas',
+  Ics.Fmx.OverbyteIcsWhoisCli in '..\Source\Ics.Fmx.OverbyteIcsWhoisCli.pas',
+  Ics.Fmx.OverbyteIcsFileCopy in '..\Source\Ics.Fmx.OverbyteIcsFileCopy.pas',
+  Ics.Fmx.OverbyteIcsHttpMulti in '..\Source\Ics.Fmx.OverbyteIcsHttpMulti.pas',
+  Ics.Fmx.OverbyteIcsFtpMulti in '..\Source\Ics.Fmx.OverbyteIcsFtpMulti.pas',
+  Ics.Fmx.OverbyteIcsSslHttpOAuth in '..\Source\Ics.Fmx.OverbyteIcsSslHttpOAuth.pas';
+
+end.
+

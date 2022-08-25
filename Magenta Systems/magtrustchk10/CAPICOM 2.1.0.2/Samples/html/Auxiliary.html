@@ -1,0 +1,405 @@
+<%@ Language=VBScript%>
+<HTML>
+	<HEAD>
+		<title>Auxiliary Objects</title>
+		<OBJECT id="oCAPICOM" codeBase="http://download.microsoft.com/download/E/1/8/E18ED994-8005-4377-A7D7-0A8E13025B94/capicom.cab#version=2,0,0,3" classid="clsid:A996E48C-D3DC-4244-89F7-AFA33EC60679" VIEWASTEXT>
+		</OBJECT>
+<%
+'******************************************************************************
+'
+' THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND,
+' EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED
+' WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
+'
+' Copyright (C) 1999- 2002.  Microsoft Corporation.  All rights reserved.
+'
+'******************************************************************************
+'
+' Auxiliary.html
+'
+' This is a VBScript sample that illustrates how to use features introduced in
+' CAPICOM v2.0 to display properties of public and private keys, extensions, 
+' policies, qualifiers and template.
+'
+' Note: For simplicity, this script does not handle all exceptions.
+'
+'******************************************************************************
+%>
+
+	</HEAD>
+	<BODY onload="ListCerts()">
+		<script language="vbscript">
+    Option Explicit
+    
+    'Store Location Constants
+    const CAPICOM_LOCAL_MACHINE_STORE                             = 1
+    const CAPICOM_CURRENT_USER_STORE                              = 2
+    const CAPICOM_ACTIVE_DIRECTORY_USER_STORE                     = 3
+    const CAPICOM_SMART_CARD_USER_STORE                           = 4
+    
+    'Store Open Mode
+    const CAPICOM_STORE_OPEN_READ_ONLY                              = 0
+    const CAPICOM_STORE_OPEN_READ_WRITE                             = 1
+    const CAPICOM_STORE_OPEN_MAXIMUM_ALLOWED                        = 2
+    const CAPICOM_STORE_OPEN_EXISTING_ONLY                        = 128
+    const CAPICOM_STORE_OPEN_INCLUDE_ARCHIVED                     = 256
+    
+    const CAPICOM_KEY_SPEC_KEYEXCHANGE                              = 1
+    const CAPICOM_KEY_SPEC_SIGNATURE                                = 2
+    
+    Public st
+    Public Certificate	'keeps track of the currently selected certificate
+    Public i, j
+   
+  
+  	function ListCerts()
+
+		Dim storeName
+		Dim certOption        
+		Dim count
+		
+		On Error Resume Next
+		
+		'clear list of certificates
+		count =  frmSelectedCerts.allCerts.options.length
+		for i = 1 to count
+				frmSelectedCerts.allCerts.options.remove(count-i)
+		next
+				
+		Set st = CreateObject("CAPICOM.Store")
+		Set Certificate = CreateObject("CAPICOM.Certificate")
+		
+		'get user selected store name 
+		storeName =  frmStore.storeName.options(frmStore.storeName.selectedIndex).value
+	   
+		'open selected store
+		st.Open CAPICOM_CURRENT_USER_STORE, storeName, CAPICOM_STORE_OPEN_READ_WRITE
+		  
+		'list all certificates in store
+		For i = 1 to st.Certificates.Count
+			
+			Set certOption = document.createElement("OPTION")
+			
+			certOption.text= st.Certificates(i).subjectName & ", Sha1 =" & _
+							 st.Certificates(i).thumbprint
+			certOption.value = i-1
+			certOption.selected = False
+		    
+			frmSelectedCerts.allCerts.add(certOption)
+			
+		Next 
+        
+        'select the first certificate in store as default
+        frmSelectedCerts.allCerts.options(0).selected = True
+        Set Certificate = st.Certificates(1)
+                
+    end function
+
+    function ShowPrivateKey()
+		
+		Dim szHTML
+    	
+    	On Error Resume Next
+    	
+    	szHTML = "<p><table id=tblPrivKey cellSpacing=10 cellPadding=0 width=""800"" border=0 ms_1d_layout=""TRUE"">"
+    	
+    	szHTML = szHTML & "<tr><td><font color=#993300 size=2 face='Arial'>Private Key Properties:</font></td><td><font color=#993300 size=2 face='Arial'>"
+    			
+		if Certificate.PrivateKey.KeySpec = CAPICOM_KEY_SPEC_KEYEXCHANGE then
+			szHTML = szHTML & " Exchange"
+		else
+    		szHTML = szHTML & " Signature"
+    	end if
+    	
+		if Certificate.PrivateKey.IsAccessible = true then
+			szHTML = szHTML & ", Accessible"
+		else
+			szHTML = szHTML & ", Not Accessible"
+		end if
+		
+		if Certificate.PrivateKey.IsExportable = true then
+			szHTML = szHTML & ", Exportable"
+		else
+			szHTML = szHTML & ", Not Exportable"
+		end if
+		
+		if Certificate.PrivateKey.IsHardwareDevice = true then
+			szHTML = szHTML & ", Stored on H/W Device"
+		end if
+		
+		if Certificate.PrivateKey.IsMachineKeyset = true then
+			szHTML = szHTML & ", Machine"
+		end if
+
+        if Certificate.PrivateKey.IsProtected = true then
+			szHTML = szHTML & ", Protected"
+		end if
+
+        if Certificate.PrivateKey.IsRemovable = true then
+			szHTML = szHTML & ", Removable"
+		end if
+		
+		szHTML = szHTML & "</font></td></tr>"    	
+    	szHTML = szHTML & "<tr><td><font color=#993300 size=2 face='Arial'>Container Name:</font></td><td><font color=#993300 size=2 face='Arial'>" & Certificate.PrivateKey.ContainerName & "</font></td>"
+
+    	if Certificate.PrivateKey.ContainerName <> Certificate.PrivateKey.UniqueContainerName then
+			szHTML = szHTML & "<tr valign=top><td><font color=#993300 size=2 face='Arial'>Unique Container Name:</font></td><td><font color=#993300 size=2 face='Arial'>" & Certificate.PrivateKey.UniqueContainerName& "</font></td></tr>"
+		end if
+		
+		szHTML = szHTML & "</table>"
+		datadiv.innerHTML=szHTML & "<p>"
+	
+     end function
+    
+    function ShowPublicKey()
+		
+		Dim szHTML
+    	Dim PublicKey
+    	
+    	On Error Resume Next
+    	    	
+    	'begin table
+		szHTML = "<p><table id=tblPubKey cellSpacing=15 cellPadding=0 width=""1010"" border=0 ms_1d_layout=""TRUE"">"
+		szHTML = szHTML & "<tr><td><font color=#993300 size=2 face='Arial'>Algorithm:</td>"
+		szHTML = szHTML & "<td><font color=#993300 size=2 face='Arial'>" & Certificate.PublicKey.Algorithm.FriendlyName & "</td></tr>"
+		szHTML = szHTML & "<tr><td><font color=#993300 size=2 face='Arial'>Key Length:</td>" 
+		szHTML = szHTML & "<td><font color=#993300 size=2 face='Arial'>" & Certificate.PublicKey.Length & "</td></tr>"
+		szHTML = szHTML & "<tr><td><font color=#993300 size=2 face='Arial'>Parameters:</td>"
+		szHTML = szHTML & "<td><font color=#993300 size=2 face='Arial'>" & Certificate.PublicKey.EncodedParameters.Format & "</td></tr>"
+		szHTML = szHTML & "<tr><td valign=top><font color=#993300 size=2 face='Arial'>Key:</td>"
+		szHTML = szHTML & "<td><font color=#993300 size=2 face='Arial'>" & Certificate.PublicKey.EncodedKey.Format & "</td></tr>"
+		szHTML = szHTML & "</table>"
+		
+		datadiv.innerHTML=szHTML
+		
+	end function
+    
+    function ShowExtensions()
+		
+		Dim szHTML
+    	Dim szTmp
+    	Dim szResult
+    	   	   	    	
+    	On Error Resume Next
+    	
+    	szHTML = "<font color=#993300 size=2 face='Arial'><p>"  
+    	
+    	if Certificate.Extensions is Nothing then
+				szHTML = szHTML & "<h5> Certificate has no extensions </h5>"
+		else
+					
+    			    	
+	    	for i = 1 to Certificate.Extensions.Count
+    			szHTML = szHTML & Certificate.Extensions(i).OID.FriendlyName
+    			
+    			if Certificate.Extensions(i).IsCritical = true then
+    				szHTML = szHTML & " (critical): <br>"
+    			else
+    				szHTML = szHTML & " (non-critical): <br>"
+    			end if
+    			
+    			szTmp = Certificate.Extensions(i).EncodedData.Format(True)
+    			
+    			'use the fact that bMultiLines value was set to true in order to format output
+    			for j = 1 to Len(szTmp)
+    				if Mid(szTmp, j, 2) = vbCrLf then
+    					szResult = szResult & "<br>"
+    				else
+    					szResult = szResult & Mid(szTmp, j, 1)
+    				end if
+    			next
+    			
+    			szHTML = szHTML & szResult
+    			szHTML = szHTML & "<p>"
+    		next
+	    	      
+			
+		end if
+		
+		datadiv.innerHTML=szHTML
+		
+	
+     end function
+   
+     function ShowPolicies()
+		
+		Dim szHTML
+    	Dim policies
+    	Dim policy
+    	    	
+    	On Error Resume Next
+    	
+    	szHTML = "<font color=#993300 size=2 face='Arial'><p>"  
+    	
+    	Set policies = CreateObject("CAPICOM.CertificatePolicies")
+    	Set policy = CreateObject("CAPICOM.PolicyInformation")
+    	
+    	'get policies
+    	Set policies = Certificate.Extensions.Item("2.5.29.32").EncodedData.Decoder
+		
+		if policies is Nothing then
+				szHTML = szHTML & "<h5> Certificate has no policies </h5>"
+		else
+			for each policy in policies 
+    			szHTML = szHTML & policy.OID.FriendlyName & ": "    				
+    			szHTML = szHTML & policy.OID.Value
+    		next
+		end if
+			
+		datadiv.innerHTML=szHTML
+	
+     end function
+     
+     function ShowQualifiers()
+		
+		Dim szHTML
+		Dim policies
+    	Dim policy
+    	Dim flag 'true if certificate has qualifiers, false otherwise
+    	    	
+    	On Error Resume Next
+    	
+    	Set policies = CreateObject("CAPICOM.CertificatePolicies")
+    	Set policy = CreateObject("CAPICOM.PolicyInformation")
+    	Set policies = Certificate.Extensions.Item("2.5.29.32").EncodedData.Decoder
+		
+		szHTML = "<font color=#993300 size=2 face='Arial'><p>"  
+		
+		if policies is nothing then
+				szHTML = szHTML & "<h5> Certificate has no policies and no qualifiers </h5>"
+		else
+	    	flag = false
+	    	for each policy in policies 
+    			if not policy.qualifiers is nothing then
+    				flag = true
+    				for i = 1 to policy.qualifiers.Count
+    					szHTML = szHTML & "Name: " & policy.qualifiers(i).oid.FriendlyName & "<br>"
+    					szHTML = szHTML & "Value: " & policy.qualifiers(i).oid.Value & "<br>"
+    					if policy.qualifiers(i).OrganizationName <> "" then
+    						szHTML = szHTML & "Organization:" & policy.qualifiers(i).OrganizationName & "<br>"
+    					end if
+    					if policy.qualifiers(i).CPSPointer <> "" then
+    						szHTML = szHTML & "CPS:" & policy.qualifiers(i).CPSPointer & "<br>"
+    					end if
+    					if policy.qualifiers(i).ExplicitText <> "" then
+    						szHTML = szHTML & "ExplicitText: " & policy.qualifiers(i).ExplicitText & "<br>"
+    					end if
+    					
+    					if not policy.qualifiers(i).NoticeNumbers is nothing then
+    						for j = 1 to policy.qualifiers(i).NoticeNumbers.Count
+    							szHTML = szHTML & "NoticeNumber " & j & ": " & policy.qualifiers(i).NoticeNumbers.Item(j) & "<br>"
+    						next
+    					end if
+    					szHTML = szHTML & "<p>"
+    				next
+    			end if
+			next
+			
+			if flag = false then
+				szHTML = szHTML & "<h5> Certificate has no qualifiers </h5>"
+			end if
+			
+		end if
+					
+		datadiv.innerHTML=szHTML
+		
+	
+     end function
+     
+     function ShowTemplate()
+		
+		Dim szHTML
+    	Dim Template
+    	    	
+    	On Error Resume Next
+ 
+     	szHTML = "<font color=#993300 size=2 face='Arial'><p>"     
+     	
+		if Certificate.Template.IsPresent = true then
+    		
+     		szHTML = szHTML & "Template Name: "
+    		szHTML = szHTML & Certificate.Template.Name
+    		
+    		if Certificate.Extensions(i).IsCritical = true then
+    			szHTML = szHTML & " (critical)<br>"
+    		else
+    			szHTML = szHTML & " (non-critical)<br>"
+    		end if
+    			
+    		szHTML = szHTML & "Major Version: "
+    		szHTML = szHTML & Certificate.Template.MajorVersion & "<br>"
+    		szHTML = szHTML & "Minor Version: "
+    		szHTML = szHTML & Certificate.Template.MinorVersion & "<br>"
+
+    		
+		else
+	
+			szHTML = szHTML & "<h5> No Template present</h5>"
+	
+		end if
+		
+		datadiv.innerHTML=szHTML
+				
+     end function
+     
+   
+    function SelectedCert
+        Dim index
+        index = frmSelectedCerts.allCerts.options.selectedIndex
+        
+        'get currently selected certificate
+        Set Certificate = st.Certificates(index+1)
+	end function
+	
+	function DisplayCert()
+		'display currently selected certificate
+		Certificate.Display
+	end function
+	
+		</script>
+		<form id="frmStore">
+			<h4>Please select the name of the CURRENT_USER_STORE to open:
+			</h4>
+			<table height="30" cellSpacing="0" cellPadding="0" width="400" border="0" ms_1d_layout="TRUE" ID="Table3">
+				<tr valign="top">
+					<td width="180">Store Name:
+					</td>
+					<td width="143"><select id="storeName" size="1" name="storeName">
+							<option value="my" selected>Personal</option>
+							<option value="root">Root</option>
+							<option value="AddressBook">Address Book</option>
+							<option value="ca">CA</option>
+						</select></td>
+					<td width="286"><input id="Button3" onclick="ListCerts()" type="button" size="50" value="Open" name="btSign"></td>
+				</tr>
+			</table>
+		</form>
+		<form id="frmSelectedCerts">
+			<h4>The store contains certificates:
+			</h4>
+			<table id="Table4" cellSpacing="0" cellPadding="0" width="600" border="0" ms_1d_layout="TRUE">
+				<tr valign="top">
+					<td><select id="allCerts" size="6" name="allCerts" onchange="SelectedCert()"></select></td>
+				</tr>
+				<tr>
+					<td align="left" width="100"><input id="Button8" onclick="DisplayCert()" type="button" value="Display Selected Certificate" name="btPrivateKey"></td>
+				</tr>
+			</table>
+		</form>
+		<form id="frmCerts">
+			<h4>select a certificate from the box above and use the buttons below to view its 
+				content.</h4>
+			<table id="Table1" height="30" cellSpacing="0" cellPadding="0" width="700" border="0" ms_1d_layout="TRUE">
+				<tr valign="top">
+					<td align="middle" width="100"><input id="Button1" onclick="ShowPrivateKey()" type="button" value="Private Key" name="btPrivateKey"></td>
+					<td align="middle" width="100"><input id="Button2" onclick="ShowPublicKey()" type="button" value="Public Key" name="btPublicKey"></td>
+					<td align="middle" width="100"><input id="Button4" onclick="ShowExtensions()" type="button" value="Extensions" name="btExtensios"></td>
+					<td align="middle" width="100"><input id="Button5" onclick="ShowPolicies()" type="button" value="Policies" name="btPolicies"></td>
+					<td align="middle" width="100"><input id="Button6" onclick="ShowQualifiers()" type="button" value="Qualifiers" name="btQualifiers"></td>
+					<td align="middle" width="100"><input id="Button7" onclick="ShowTemplate()" type="button" value="Template" name="btTemplate"></td>
+				</tr>
+			</table>
+			<div id="datadiv"></div>
+		</form>
+	</BODY>
+</HTML>

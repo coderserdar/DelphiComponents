@@ -1,0 +1,44 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{b9648cf1-ed87-425d-bcc3-cb1f446b43fb}</ProjectGuid>
+  </PropertyGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Projects Include="..\BrowserDemo\FrameBrowserIcs.dproj" />
+    <Projects Include="OverbyteIcsDDWebService.dproj" />
+  </ItemGroup>
+  <ProjectExtensions>
+    <Borland.Personality>Default.Personality</Borland.Personality>
+    <Borland.ProjectType />
+    <BorlandProject>
+  <BorlandProject xmlns=""> <Default.Personality> </Default.Personality> </BorlandProject></BorlandProject>
+  </ProjectExtensions>
+  <Target Name="FrameBrowserIcs">
+    <MSBuild Projects="..\BrowserDemo\FrameBrowserIcs.dproj" Targets="" />
+  </Target>
+  <Target Name="FrameBrowserIcs:Clean">
+    <MSBuild Projects="..\BrowserDemo\FrameBrowserIcs.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="FrameBrowserIcs:Make">
+    <MSBuild Projects="..\BrowserDemo\FrameBrowserIcs.dproj" Targets="Make" />
+  </Target>
+  <Target Name="OverbyteIcsDDWebService">
+    <MSBuild Projects="OverbyteIcsDDWebService.dproj" Targets="" />
+  </Target>
+  <Target Name="OverbyteIcsDDWebService:Clean">
+    <MSBuild Projects="OverbyteIcsDDWebService.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="OverbyteIcsDDWebService:Make">
+    <MSBuild Projects="OverbyteIcsDDWebService.dproj" Targets="Make" />
+  </Target>
+  <Target Name="Build">
+    <CallTarget Targets="FrameBrowserIcs;OverbyteIcsDDWebService" />
+  </Target>
+  <Target Name="Clean">
+    <CallTarget Targets="FrameBrowserIcs:Clean;OverbyteIcsDDWebService:Clean" />
+  </Target>
+  <Target Name="Make">
+    <CallTarget Targets="FrameBrowserIcs:Make;OverbyteIcsDDWebService:Make" />
+  </Target>
+  <Import Condition="Exists('$(MSBuildBinPath)\Borland.Group.Targets')" Project="$(MSBuildBinPath)\Borland.Group.Targets" />
+</Project>

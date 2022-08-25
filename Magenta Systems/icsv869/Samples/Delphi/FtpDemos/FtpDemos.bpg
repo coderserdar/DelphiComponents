@@ -1,0 +1,44 @@
+#----------------------------------------------------------------------------
+VERSION = BWS.01
+#----------------------------------------------------------------------------
+!ifndef ROOT
+ROOT = $(MAKEDIR)\..
+!endif
+#----------------------------------------------------------------------------
+MAKE = $(ROOT)\bin\make.exe -$(MAKEFLAGS) -f$**
+DCC = $(ROOT)\bin\dcc32.exe $**
+BRCC = $(ROOT)\bin\brcc32.exe $**
+#----------------------------------------------------------------------------
+PROJECTS = OverbyteIcsConFtp.exe OverbyteIcsFtpTst.exe OverbyteIcsFtpServ.exe \
+  OverbyteIcsFtpMultipartDownload.exe OverbyteIcsBasFtp.exe OverbyteIcsFtpAsy.exe \
+  OverbyteIcsFtpMulti.exe OverbyteIcsFtpThrd.exe
+#----------------------------------------------------------------------------
+default: $(PROJECTS)
+#----------------------------------------------------------------------------
+
+OverbyteIcsFtpTst.exe: OverbyteIcsFtpTst.dpr
+  $(DCC)
+
+OverbyteIcsConFtp.exe: OverbyteIcsConFtp.dpr
+  $(DCC)
+
+OverbyteIcsFtpServ.exe: OverbyteIcsFtpServ.dpr
+  $(DCC)
+
+OverbyteIcsFtpMultipartDownload.exe: OverbyteIcsFtpMultipartDownload.dpr
+  $(DCC)
+
+OverbyteIcsBasFtp.exe: OverbyteIcsBasFtp.dpr
+  $(DCC)
+
+OverbyteIcsFtpAsy.exe: OverbyteIcsFtpAsy.dpr
+  $(DCC)
+
+OverbyteIcsFtpMulti.exe: OverbyteIcsFtpMulti.dpr
+  $(DCC)
+
+OverbyteIcsFtpThrd.exe: OverbyteIcsFtpThrd.dpr
+  $(DCC)
+
+
+

@@ -1,0 +1,126 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{0FF9B63A-8B97-4BC9-A5A3-10202B134426}</ProjectGuid>
+			<MainSource>OverbyteIcsD2009Design.dpk</MainSource>
+			<ProjectVersion>12.0</ProjectVersion>
+			<Config Condition="'$(Config)'==''">Debug</Config>
+			<DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_1)'!=''">
+			<Cfg_1>true</Cfg_1>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_2)'!=''">
+			<Cfg_2>true</Cfg_2>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Base)'!=''">
+			<DCC_DebugInformation>false</DCC_DebugInformation>
+			<DCC_AssertionsAtRuntime>false</DCC_AssertionsAtRuntime>
+			<DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
+			<DCC_UnitSearchPath>..\Source\Include;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+			<DCC_Define>USE_SSL;$(DCC_Define)</DCC_Define>
+			<DCC_Description>Overbyte ICS Design-Time Package Delphi 2009</DCC_Description>
+			<DesignOnlyPackage>true</DesignOnlyPackage>
+			<DCC_DependencyCheckOutputName>C:\Users\Public\Documents\RAD Studio\6.0\Bpl\OverbyteIcsD2009Design.bpl</DCC_DependencyCheckOutputName>
+			<GenPackage>true</GenPackage>
+			<GenDll>true</GenDll>
+			<DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+			<DCC_ImageBase>00400000</DCC_ImageBase>
+			<DCC_Platform>x86</DCC_Platform>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_1)'!=''">
+			<DCC_DcuOutput>..\Lib\Release\Win32\D2009</DCC_DcuOutput>
+			<DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
+			<DCC_Define>RELEASE;$(DCC_Define)</DCC_Define>
+			<DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+			<DCC_DebugInformation>false</DCC_DebugInformation>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_2)'!=''">
+			<DCC_DebugInformation>true</DCC_DebugInformation>
+			<DCC_LocalDebugSymbols>true</DCC_LocalDebugSymbols>
+			<DCC_AssertionsAtRuntime>true</DCC_AssertionsAtRuntime>
+			<DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
+			<DCC_Optimize>false</DCC_Optimize>
+			<DCC_DcuOutput>..\Lib\Debug\Win32\D2009</DCC_DcuOutput>
+			<DCC_SymbolReferenceInfo>2</DCC_SymbolReferenceInfo>
+			<DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
+		</PropertyGroup>
+		<ItemGroup>
+			<DelphiCompile Include="OverbyteIcsD2009Design.dpk">
+				<MainSource>MainSource</MainSource>
+			</DelphiCompile>
+			<DCCReference Include="rtl.dcp"/>
+			<DCCReference Include="designide.dcp"/>
+			<DCCReference Include="OverbyteIcsD2009Run.dcp"/>
+			<DCCReference Include="..\Source\OverbyteIcsReg.pas"/>
+			<DCCReference Include="..\Source\OverByteIcsWSocketE.pas"/>
+			<DCCReference Include="..\Source\OverbyteIcsDprUpdFix.pas"/>
+			<BuildConfiguration Include="Base">
+				<Key>Base</Key>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Debug">
+				<Key>Cfg_2</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Release">
+				<Key>Cfg_1</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+		</ItemGroup>
+		<Import Project="$(BDS)\Bin\CodeGear.Delphi.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Delphi.Targets')"/>
+		<ProjectExtensions>
+			<Borland.Personality>Delphi.Personality.12</Borland.Personality>
+			<Borland.ProjectType>Package</Borland.ProjectType>
+			<BorlandProject>
+				<Delphi.Personality>
+					<Source>
+						<Source Name="MainSource">OverbyteIcsD2009Design.dpk</Source>
+					</Source>
+					<Parameters>
+						<Parameters Name="UseLauncher">False</Parameters>
+						<Parameters Name="LoadAllSymbols">True</Parameters>
+						<Parameters Name="LoadUnspecifiedSymbols">False</Parameters>
+					</Parameters>
+					<VersionInfo>
+						<VersionInfo Name="IncludeVerInfo">True</VersionInfo>
+						<VersionInfo Name="AutoIncBuild">False</VersionInfo>
+						<VersionInfo Name="MajorVer">1</VersionInfo>
+						<VersionInfo Name="MinorVer">0</VersionInfo>
+						<VersionInfo Name="Release">0</VersionInfo>
+						<VersionInfo Name="Build">0</VersionInfo>
+						<VersionInfo Name="Debug">False</VersionInfo>
+						<VersionInfo Name="PreRelease">False</VersionInfo>
+						<VersionInfo Name="Special">False</VersionInfo>
+						<VersionInfo Name="Private">False</VersionInfo>
+						<VersionInfo Name="DLL">False</VersionInfo>
+						<VersionInfo Name="Locale">1033</VersionInfo>
+						<VersionInfo Name="CodePage">1252</VersionInfo>
+					</VersionInfo>
+					<VersionInfoKeys>
+						<VersionInfoKeys Name="CompanyName"/>
+						<VersionInfoKeys Name="FileDescription"/>
+						<VersionInfoKeys Name="FileVersion">1.0.0.0</VersionInfoKeys>
+						<VersionInfoKeys Name="InternalName"/>
+						<VersionInfoKeys Name="LegalCopyright"/>
+						<VersionInfoKeys Name="LegalTrademarks"/>
+						<VersionInfoKeys Name="OriginalFilename"/>
+						<VersionInfoKeys Name="ProductName"/>
+						<VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys>
+						<VersionInfoKeys Name="Comments"/>
+					</VersionInfoKeys>
+					<Excluded_Packages>
+						<Excluded_Packages Name="$(BDS)\Bin\dclIndyCore120.bpl">Indy 10 Core Design Time</Excluded_Packages>
+						<Excluded_Packages Name="$(BDS)\Bin\dclIndyProtocols120.bpl">Indy 10 Protocols Design Time</Excluded_Packages>
+						<Excluded_Packages Name="$(BDS)\bin\dclwebsnap120.bpl">CodeGear WebSnap Components</Excluded_Packages>
+					</Excluded_Packages>
+				</Delphi.Personality>
+			</BorlandProject>
+			<ProjectFileVersion>12</ProjectFileVersion>
+		</ProjectExtensions>
+	</Project>

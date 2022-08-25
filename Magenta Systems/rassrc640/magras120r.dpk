@@ -1,0 +1,47 @@
+package magras120r;
+
+{$R *.res}
+{$ALIGN 8}
+{$ASSERTIONS OFF}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS OFF}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'Magenta TMagRas RAS and TAPI Components Run Time'}
+{$RUNONLY}
+{$IMPLICITBUILD OFF}
+
+requires
+  vcl,
+  rtl,
+  magentasubs12;
+
+contains
+  magtapiapiw in 'magtapiapiw.pas',
+  magrasconw in 'magrasconw.pas',
+  magrasedtw in 'magrasedtw.pas',
+  magrasperw in 'magrasperw.pas',
+  magtapiw in 'magtapiw.pas',
+  magrasapiw in 'magrasapiw.pas',
+  magtapistr in 'magtapistr.pas',
+  magrasstr in 'magrasstr.pas',
+  magrasentw in 'magrasentw.pas',
+  maglsapw in 'maglsapw.pas',
+  magsubs2 in 'magsubs2.pas';
+
+end.

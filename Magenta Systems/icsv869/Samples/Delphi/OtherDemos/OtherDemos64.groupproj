@@ -1,0 +1,108 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{CF49E2EE-6799-432C-B139-051EA82B1BCC}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="OverbyteIcsPingTst64.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="OverbyteIcsNsLookup64.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="OverByteIcsDnsResolver64.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="OverbyteIcsBatchDnsLookup64.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="OverbyteIcsWhoisCliTst64.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="OverbyteIcsTimeTst64.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="OverbyteIcsWmiTst64.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="OverbyteIcsPingTst64">
+        <MSBuild Projects="OverbyteIcsPingTst64.dproj"/>
+    </Target>
+    <Target Name="OverbyteIcsPingTst64:Clean">
+        <MSBuild Projects="OverbyteIcsPingTst64.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="OverbyteIcsPingTst64:Make">
+        <MSBuild Projects="OverbyteIcsPingTst64.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="OverbyteIcsNsLookup64">
+        <MSBuild Projects="OverbyteIcsNsLookup64.dproj"/>
+    </Target>
+    <Target Name="OverbyteIcsNsLookup64:Clean">
+        <MSBuild Projects="OverbyteIcsNsLookup64.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="OverbyteIcsNsLookup64:Make">
+        <MSBuild Projects="OverbyteIcsNsLookup64.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="OverByteIcsDnsResolver64">
+        <MSBuild Projects="OverByteIcsDnsResolver64.dproj"/>
+    </Target>
+    <Target Name="OverByteIcsDnsResolver64:Clean">
+        <MSBuild Projects="OverByteIcsDnsResolver64.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="OverByteIcsDnsResolver64:Make">
+        <MSBuild Projects="OverByteIcsDnsResolver64.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="OverbyteIcsBatchDnsLookup64">
+        <MSBuild Projects="OverbyteIcsBatchDnsLookup64.dproj"/>
+    </Target>
+    <Target Name="OverbyteIcsBatchDnsLookup64:Clean">
+        <MSBuild Projects="OverbyteIcsBatchDnsLookup64.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="OverbyteIcsBatchDnsLookup64:Make">
+        <MSBuild Projects="OverbyteIcsBatchDnsLookup64.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="OverbyteIcsWhoisCliTst64">
+        <MSBuild Projects="OverbyteIcsWhoisCliTst64.dproj"/>
+    </Target>
+    <Target Name="OverbyteIcsWhoisCliTst64:Clean">
+        <MSBuild Projects="OverbyteIcsWhoisCliTst64.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="OverbyteIcsWhoisCliTst64:Make">
+        <MSBuild Projects="OverbyteIcsWhoisCliTst64.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="OverbyteIcsTimeTst64">
+        <MSBuild Projects="OverbyteIcsTimeTst64.dproj"/>
+    </Target>
+    <Target Name="OverbyteIcsTimeTst64:Clean">
+        <MSBuild Projects="OverbyteIcsTimeTst64.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="OverbyteIcsTimeTst64:Make">
+        <MSBuild Projects="OverbyteIcsTimeTst64.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="OverbyteIcsWmiTst64">
+        <MSBuild Projects="OverbyteIcsWmiTst64.dproj"/>
+    </Target>
+    <Target Name="OverbyteIcsWmiTst64:Clean">
+        <MSBuild Projects="OverbyteIcsWmiTst64.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="OverbyteIcsWmiTst64:Make">
+        <MSBuild Projects="OverbyteIcsWmiTst64.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="OverbyteIcsPingTst64;OverbyteIcsNsLookup64;OverByteIcsDnsResolver64;OverbyteIcsBatchDnsLookup64;OverbyteIcsWhoisCliTst64;OverbyteIcsTimeTst64;OverbyteIcsWmiTst64"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="OverbyteIcsPingTst64:Clean;OverbyteIcsNsLookup64:Clean;OverByteIcsDnsResolver64:Clean;OverbyteIcsBatchDnsLookup64:Clean;OverbyteIcsWhoisCliTst64:Clean;OverbyteIcsTimeTst64:Clean;OverbyteIcsWmiTst64:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="OverbyteIcsPingTst64:Make;OverbyteIcsNsLookup64:Make;OverByteIcsDnsResolver64:Make;OverbyteIcsBatchDnsLookup64:Make;OverbyteIcsWhoisCliTst64:Make;OverbyteIcsTimeTst64:Make;OverbyteIcsWmiTst64:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

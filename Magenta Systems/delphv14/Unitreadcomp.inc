@@ -1,0 +1,9 @@
+  ArraySize.Value := ReadInteger (section, 'ArraySize_Value', 0) ;
+  CodeMasks.Lines := LoadSList (section + '.CodeMasks_Lines') ;
+  FilePrefix.Text := ReadString (section, 'FilePrefix_Text', '') ;
+  FontDialog.Font := LoadFont ('FontDialog_Font') ;
+  FormComps.Lines := LoadSList (section + '.FormComps_Lines') ;
+  OutDir.Text := ReadString (section, 'OutDir_Text', '') ;
+  OutFiles.Lines := LoadSList (section + '.OutFiles_Lines') ;
+  SavedProps.Lines := LoadSList (section + '.SavedProps_Lines') ;
+  SuppProps.Lines := LoadSList (section + '.SuppProps_Lines') ;

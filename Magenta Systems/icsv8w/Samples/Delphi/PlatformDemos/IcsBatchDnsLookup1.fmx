@@ -1,0 +1,216 @@
+object BatchDnsLookupForm: TBatchDnsLookupForm
+  Left = 202
+  Top = 118
+  Caption = 'ICS batch async DNS lookup new API (IPv6 and IPv4)'
+  ClientHeight = 401
+  ClientWidth = 324
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop, iPhone, iPad]
+  OnCreate = FormCreate
+  OnClose = FormClose
+  OnDestroy = FormDestroy
+  Left = 202
+  Top = 118
+  DesignerMasterStyle = 0
+  object Label1: TLabel
+    AutoSize = True
+    Position.X = 8.000000000000000000
+    Position.Y = 316.000000000000000000
+    Size.Width = 34.000000000000000000
+    Size.Height = 16.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.WordWrap = False
+    Text = 'Min. #'
+    TabOrder = 0
+    Left = 8
+    Top = 298
+  end
+  object Label2: TLabel
+    AutoSize = True
+    Position.X = 69.000000000000000000
+    Position.Y = 316.000000000000000000
+    Size.Width = 36.000000000000000000
+    Size.Height = 16.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.WordWrap = False
+    Text = 'Max. #'
+    TabOrder = 1
+    Left = 69
+    Top = 298
+  end
+  object Label3: TLabel
+    AutoSize = True
+    Position.X = 8.000000000000000000
+    Position.Y = 297.000000000000000000
+    Size.Width = 324.000000000000000000
+    Size.Height = 16.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.WordWrap = False
+    Text = 'Lookup threads shared by all instances in this thread context '
+    TabOrder = 2
+    Left = 8
+    Top = 279
+  end
+  object Label4: TLabel
+    AutoSize = True
+    Position.X = 8.000000000000000000
+    Position.Y = 277.000000000000000000
+    Size.Width = 166.000000000000000000
+    Size.Height = 16.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.WordWrap = False
+    Text = 'Number of TWSocket instances'
+    TabOrder = 3
+    Left = 8
+    Top = 259
+  end
+  object Label5: TLabel
+    AutoSize = True
+    Position.X = 8.000000000000000000
+    Position.Y = 336.000000000000000000
+    Size.Width = 69.000000000000000000
+    Size.Height = 16.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.WordWrap = False
+    Text = 'SocketFamily'
+    TabOrder = 4
+    Left = 8
+    Top = 318
+  end
+  object Label6: TLabel
+    AutoSize = True
+    Position.X = 132.000000000000000000
+    Position.Y = 316.000000000000000000
+    Size.Width = 174.000000000000000000
+    Size.Height = 16.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.WordWrap = False
+    Text = '(Max - Min time out after 60 sec)'
+    TabOrder = 5
+    Left = 132
+    Top = 298
+  end
+  object StartButton: TButton
+    Position.X = 223.000000000000000000
+    Position.Y = 350.000000000000000000
+    Size.Width = 75.000000000000000000
+    Size.Height = 25.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 6
+    Text = 'Start'
+    OnClick = StartButtonClick
+    Left = 223
+    Top = 332
+  end
+  object DnsNamesMemo: TMemo
+    Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+    DataDetectorTypes = []
+    Lines.Strings = (
+      'DnsNamesMemo')
+    Position.X = 8.000000000000000000
+    Position.Y = 8.000000000000000000
+    Size.Width = 150.000000000000000000
+    Size.Height = 260.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 7
+    Viewport.Width = 146.000000000000000000
+    Viewport.Height = 256.000000000000000000
+  end
+  object ResultMemo: TMemo
+    Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+    DataDetectorTypes = []
+    Lines.Strings = (
+      'ResultMemo')
+    ReadOnly = True
+    Position.X = 166.000000000000000000
+    Position.Y = 8.000000000000000000
+    Size.Width = 150.000000000000000000
+    Size.Height = 260.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 8
+    Viewport.Width = 146.000000000000000000
+    Viewport.Height = 256.000000000000000000
+  end
+  object MinEdit: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    TabOrder = 9
+    Text = '0'
+    Position.X = 40.000000000000000000
+    Position.Y = 313.000000000000000000
+    Size.Width = 23.000000000000000000
+    Size.Height = 21.000000000000000000
+    Size.PlatformDefault = False
+    Left = 40
+    Top = 295
+  end
+  object MaxEdit: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    TabOrder = 10
+    Text = '2'
+    Position.X = 105.000000000000000000
+    Position.Y = 313.000000000000000000
+    Size.Width = 23.000000000000000000
+    Size.Height = 21.000000000000000000
+    Size.PlatformDefault = False
+    Left = 105
+    Top = 295
+  end
+  object InstancesEdit: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    TabOrder = 11
+    Text = '3'
+    Position.X = 171.000000000000000000
+    Position.Y = 274.000000000000000000
+    Size.Width = 36.000000000000000000
+    Size.Height = 21.000000000000000000
+    Size.PlatformDefault = False
+    Left = 159
+    Top = 256
+  end
+  object SocketFamilyComboBox: TComboBox
+    ItemIndex = 0
+    Position.X = 8.000000000000000000
+    Position.Y = 352.000000000000000000
+    Size.Width = 157.000000000000000000
+    Size.Height = 21.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 12
+    OnChange = SocketFamilyComboBoxChange
+    Left = 8
+    Top = 334
+    object ListBoxItem1: TListBoxItem
+      Position.X = 5000.000000000000000000
+      Position.Y = 5000.000000000000000000
+      Size.Width = 19.000000000000000000
+      Size.Height = 19.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      Text = 'sfAny'
+    end
+    object ListBoxItem2: TListBoxItem
+      Position.X = 5000.000000000000000000
+      Position.Y = 5000.000000000000000000
+      TabOrder = 1
+      Text = 'sfAnyIPv4'
+    end
+    object ListBoxItem3: TListBoxItem
+      Position.X = 5000.000000000000000000
+      Position.Y = 5000.000000000000000000
+      TabOrder = 2
+      Text = 'sfAnyIPv6'
+    end
+    object ListBoxItem4: TListBoxItem
+      Position.X = 5000.000000000000000000
+      Position.Y = 5000.000000000000000000
+      TabOrder = 3
+      Text = 'sfIPv4 (old Win API)'
+    end
+    object ListBoxItem5: TListBoxItem
+      Position.X = 5000.000000000000000000
+      Position.Y = 5000.000000000000000000
+      TabOrder = 4
+      Text = 'sfIPv6'
+    end
+  end
+end

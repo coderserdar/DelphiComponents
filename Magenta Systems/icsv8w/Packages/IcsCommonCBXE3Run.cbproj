@@ -1,0 +1,344 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{CE749E31-F1AF-4B3E-B8DB-8A612EE77630}</ProjectGuid>
+        <ProjectVersion>14.4</ProjectVersion>
+        <FrameworkType>None</FrameworkType>
+        <MainSource>IcsCommonCBXE3Run.cpp</MainSource>
+        <Base>True</Base>
+        <Config Condition="'$(Config)'==''">Debug</Config>
+        <Platform Condition="'$(Platform)'==''">Win32</Platform>
+        <TargetedPlatforms>5</TargetedPlatforms>
+        <AppType>Package</AppType>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='OSX32' and '$(Base)'=='true') or '$(Base_OSX32)'!=''">
+        <Base_OSX32>true</Base_OSX32>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Base)'=='true') or '$(Base_Win32)'!=''">
+        <Base_Win32>true</Base_Win32>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_1)'!=''">
+        <Cfg_1>true</Cfg_1>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='OSX32' and '$(Cfg_1)'=='true') or '$(Cfg_1_OSX32)'!=''">
+        <Cfg_1_OSX32>true</Cfg_1_OSX32>
+        <CfgParent>Cfg_1</CfgParent>
+        <Cfg_1>true</Cfg_1>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_1)'=='true') or '$(Cfg_1_Win32)'!=''">
+        <Cfg_1_Win32>true</Cfg_1_Win32>
+        <CfgParent>Cfg_1</CfgParent>
+        <Cfg_1>true</Cfg_1>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_2)'!=''">
+        <Cfg_2>true</Cfg_2>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='OSX32' and '$(Cfg_2)'=='true') or '$(Cfg_2_OSX32)'!=''">
+        <Cfg_2_OSX32>true</Cfg_2_OSX32>
+        <CfgParent>Cfg_2</CfgParent>
+        <Cfg_2>true</Cfg_2>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_2)'=='true') or '$(Cfg_2_Win32)'!=''">
+        <Cfg_2_Win32>true</Cfg_2_Win32>
+        <CfgParent>Cfg_2</CfgParent>
+        <Cfg_2>true</Cfg_2>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base)'!=''">
+        <DCC_ObjOutput>..\Lib\$(Config)\$(Platform)\XE3</DCC_ObjOutput>
+        <ILINK_LibraryPath>..\Source\;..\Lib\$(Config)\$(Platform)\XE3;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <DCC_UnitSearchPath>..\Source;..\Source\Include;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+        <BCC_OutputDir>..\Lib\$(Config)\$(Platform)\XE2</BCC_OutputDir>
+        <DCC_HppOutput>..\Lib\$(Config)\$(Platform)\XE3</DCC_HppOutput>
+        <IncludePath>..\Source\;..\Lib\$(Config)\$(Platform)\XE3;$(IncludePath)</IncludePath>
+        <ILINK_Description>Overbyte ICS Common Run-Time Package for C++ Builder XE3</ILINK_Description>
+        <PackageImports>IPIndyImpl;bindcompfmx;fmx;rtl;dbrtl;IndySystem;DbxClientDriver;bindcomp;inetdb;DBXInterBaseDriver;DataSnapClient;DataSnapCommon;DataSnapServer;DataSnapProviderClient;xmlrtl;ibxpress;DbxCommonDriver;IndyProtocols;DBXMySQLDriver;dbxcds;soaprtl;bindengine;DBXOracleDriver;CustomIPTransport;dsnap;DBXInformixDriver;IndyCore;fmxase;CloudService;DBXFirebirdDriver;inet;fmxobj;inetdbxpress;DBXSybaseASADriver;fmxdae;dbexpress;DataSnapIndy10ServerTransport;$(PackageImports)</PackageImports>
+        <RuntimeOnlyPackage>true</RuntimeOnlyPackage>
+        <Multithreaded>true</Multithreaded>
+        <ProjectType>CppPackage</ProjectType>
+        <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
+        <ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
+        <ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <VerInfo_Locale>1031</VerInfo_Locale>
+        <_TCHARMapping>wchar_t</_TCHARMapping>
+        <DCC_OutputNeverBuildDcps>true</DCC_OutputNeverBuildDcps>
+        <DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
+        <DynamicRTL>true</DynamicRTL>
+        <UsePackages>true</UsePackages>
+        <IntermediateOutputDir>..\Lib\$(Config)\$(Platform)\XE3</IntermediateOutputDir>
+        <BCC_wpar>false</BCC_wpar>
+        <BCC_OptimizeForSpeed>true</BCC_OptimizeForSpeed>
+        <BCC_ExtendedErrorInfo>true</BCC_ExtendedErrorInfo>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base_OSX32)'!=''">
+        <Defines>USE_SSL;SECURITY_WIN32;$(Defines)</Defines>
+        <Icns_MainIcns>$(BDS)\bin\cbuilder_PROJECTICNS.icns</Icns_MainIcns>
+        <VerInfo_Keys>CFBundleName=$(MSBuildProjectName);CFBundleDisplayName=$(MSBuildProjectName);CFBundleIdentifier=$(MSBuildProjectName);CFBundleVersion=1.0.0.0;CFBundlePackageType=APPL;CFBundleSignature=????;CFBundleAllowMixedLocalizations=YES;CFBundleExecutable=$(MSBuildProjectName);NSHighResolutionCapable=true</VerInfo_Keys>
+        <Debugger_Launcher>/usr/X11/bin/xterm -e &quot;%debuggee%&quot;</Debugger_Launcher>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base_Win32)'!=''">
+        <Defines>USE_SSL;SECURITY_WIN32;$(Defines)</Defines>
+        <BCC_OutputDir>..\Lib\$(Config)\$(Platform)\XE3</BCC_OutputDir>
+        <PackageImports>vcldbx;vclib;inetdbbde;DBXOdbcDriver;DBXSybaseASEDriver;vclimg;vclactnband;vcldb;vcldsnap;bindcompvcl;vclie;vcltouch;DBXDb2Driver;bcbsmp;websnap;VclSmp;vcl;DataSnapConnectors;DBXMSSQLDriver;dsnapcon;vclx;webdsnap;bdertl;adortl;bcbie;$(PackageImports)</PackageImports>
+        <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_1)'!=''">
+        <DCC_DebugInfoInExe>true</DCC_DebugInfoInExe>
+        <DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
+        <BCC_OptimizeForSpeed>false</BCC_OptimizeForSpeed>
+        <BCC_DisableOptimizations>true</BCC_DisableOptimizations>
+        <DCC_Optimize>false</DCC_Optimize>
+        <BCC_InlineFunctionExpansion>false</BCC_InlineFunctionExpansion>
+        <BCC_UseRegisterVariables>None</BCC_UseRegisterVariables>
+        <DCC_Define>DEBUG</DCC_Define>
+        <BCC_DebugLineNumbers>true</BCC_DebugLineNumbers>
+        <TASM_DisplaySourceLines>true</TASM_DisplaySourceLines>
+        <BCC_StackFrames>true</BCC_StackFrames>
+        <ILINK_FullDebugInfo>true</ILINK_FullDebugInfo>
+        <TASM_Debugging>Full</TASM_Debugging>
+        <BCC_SourceDebuggingOn>true</BCC_SourceDebuggingOn>
+        <ILINK_LibraryPath>$(BDSLIB)\$(PLATFORM)\debug;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_1_OSX32)'!=''">
+        <Defines>_DEBUG;$(Defines)</Defines>
+        <BCC_OutputDir>..\Lib\$(Config)\$(Platform)\XE3</BCC_OutputDir>
+        <DCC_RemoteDebug>true</DCC_RemoteDebug>
+        <VerInfo_Keys>CFBundleName=$(MSBuildProjectName);CFBundleDisplayName=$(MSBuildProjectName);CFBundleIdentifier=$(MSBuildProjectName);CFBundleVersion=1.0.0.0;CFBundlePackageType=APPL;CFBundleSignature=????;CFBundleAllowMixedLocalizations=YES;CFBundleExecutable=$(MSBuildProjectName);NSHighResolutionCapable=true</VerInfo_Keys>
+        <Debugger_Launcher>/usr/X11/bin/xterm -e &quot;%debuggee%&quot;</Debugger_Launcher>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
+        <Defines>_DEBUG;$(Defines)</Defines>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2)'!=''">
+        <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
+        <DCC_DebugInformation>false</DCC_DebugInformation>
+        <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+        <DCC_AssertionsAtRuntime>false</DCC_AssertionsAtRuntime>
+        <TASM_Debugging>None</TASM_Debugging>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2_OSX32)'!=''">
+        <Defines>NDEBUG;$(Defines)</Defines>
+        <Icns_MainIcns>$(BDS)\bin\cbuilder_PROJECTICNS.icns</Icns_MainIcns>
+        <DCC_RemoteDebug>true</DCC_RemoteDebug>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
+        <Defines>NDEBUG;$(Defines)</Defines>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+    </PropertyGroup>
+    <ItemGroup>
+        <CppCompile Include="IcsCommonCBXE3Run.cpp">
+            <BuildOrder>0</BuildOrder>
+        </CppCompile>
+        <PackageImport Include="rtl.bpi">
+            <BuildOrder>1</BuildOrder>
+        </PackageImport>
+        <DelphiCompile Include="..\Source\Ics.Posix.KEventApi.pas">
+            <BuildOrder>2</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\Source\Ics.Posix.KEventTypes.pas">
+            <BuildOrder>3</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\Source\Ics.Posix.WinTypes.pas">
+            <BuildOrder>4</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\Source\OverbyteIcsAvlTrees.pas">
+            <BuildOrder>5</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\Source\OverbyteIcsCharsetUtils.pas">
+            <BuildOrder>6</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\Source\OverbyteIcsCRC.pas">
+            <BuildOrder>7</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\Source\OverbyteIcsCsc.pas">
+            <BuildOrder>8</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\Source\OverbyteIcsDES.pas">
+            <BuildOrder>9</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\Source\OverbyteIcsDigestAuth.pas">
+            <BuildOrder>10</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\Source\OverByteIcsFtpSrvT.pas">
+            <BuildOrder>44</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\Source\OverbyteIcsHttpCCodZLib.pas">
+            <BuildOrder>44</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\Source\OverbyteIcsHttpContCod.pas">
+            <BuildOrder>11</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\Source\OverbyteIcsIconv.pas">
+            <BuildOrder>13</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\Source\OverbyteIcsLIBEAY.pas">
+            <BuildOrder>14</BuildOrder>
+        </DelphiCompile>
+        <ResFiles Include="..\Source\OverbyteIcsLogger.dcr">
+            <BuildOrder>16</BuildOrder>
+        </ResFiles>
+        <DelphiCompile Include="..\Source\OverbyteIcsLogger.pas">
+            <BuildOrder>15</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\Source\OverbyteIcsMD4.pas">
+            <BuildOrder>17</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\Source\OverbyteIcsMD5.pas">
+            <BuildOrder>18</BuildOrder>
+        </DelphiCompile>
+        <ResFiles Include="..\Source\OverbyteIcsMimeDec.dcr">
+            <BuildOrder>20</BuildOrder>
+        </ResFiles>
+        <DelphiCompile Include="..\Source\OverbyteIcsMimeDec.pas">
+            <BuildOrder>19</BuildOrder>
+        </DelphiCompile>
+        <ResFiles Include="..\Source\OverbyteIcsMimeUtils.dcr">
+            <BuildOrder>22</BuildOrder>
+        </ResFiles>
+        <DelphiCompile Include="..\Source\OverbyteIcsMimeUtils.pas">
+            <BuildOrder>21</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\Source\OverbyteIcsMLang.pas">
+            <BuildOrder>23</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\Source\OverbyteIcsNtlmMsgs.pas">
+            <BuildOrder>24</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\Source\OverbyteIcsNtlmSsp.pas">
+            <BuildOrder>25</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\Source\OverbyteIcsOneTimePw.pas">
+            <BuildOrder>26</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\Source\OverbyteIcsSha1.pas">
+            <BuildOrder>28</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\Source\OverbyteIcsSSLEAY.pas">
+            <BuildOrder>29</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\Source\OverbyteIcsSspi.pas">
+            <BuildOrder>30</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\Source\OverbyteIcsStreams.pas">
+            <BuildOrder>31</BuildOrder>
+        </DelphiCompile>
+        <ResFiles Include="..\Source\OverbyteIcsTimeList.dcr">
+            <BuildOrder>33</BuildOrder>
+        </ResFiles>
+        <DelphiCompile Include="..\Source\OverbyteIcsTimeList.pas">
+            <BuildOrder>32</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\Source\OverbyteIcsTypes.pas">
+            <BuildOrder>34</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\Source\OverbyteIcsUrl.pas">
+            <BuildOrder>35</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\Source\OverbyteIcsUtils.pas">
+            <BuildOrder>36</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\Source\OverbyteIcsWebSession.pas">
+            <BuildOrder>37</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\Source\OverbyteIcsWinnls.pas">
+            <BuildOrder>38</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\Source\OverbyteIcsWinsock.pas">
+            <BuildOrder>39</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\Source\OverbyteIcsWSockBuf.pas">
+            <BuildOrder>40</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\Source\OverbyteIcsZLibDll.pas">
+            <BuildOrder>41</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\Source\OverbyteIcsZlibHigh.pas">
+            <BuildOrder>42</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\Source\OverbyteIcsZLibObj.pas">
+            <BuildOrder>43</BuildOrder>
+        </DelphiCompile>
+        <BuildConfiguration Include="Release">
+            <Key>Cfg_2</Key>
+            <CfgParent>Base</CfgParent>
+        </BuildConfiguration>
+        <BuildConfiguration Include="Base">
+            <Key>Base</Key>
+        </BuildConfiguration>
+        <BuildConfiguration Include="Debug">
+            <Key>Cfg_1</Key>
+            <CfgParent>Base</CfgParent>
+        </BuildConfiguration>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>CPlusPlusBuilder.Personality.12</Borland.Personality>
+        <Borland.ProjectType>CppPackage</Borland.ProjectType>
+        <BorlandProject>
+            <CPlusPlusBuilder.Personality>
+                <VersionInfo>
+                    <VersionInfo Name="IncludeVerInfo">False</VersionInfo>
+                    <VersionInfo Name="AutoIncBuild">False</VersionInfo>
+                    <VersionInfo Name="MajorVer">1</VersionInfo>
+                    <VersionInfo Name="MinorVer">0</VersionInfo>
+                    <VersionInfo Name="Release">0</VersionInfo>
+                    <VersionInfo Name="Build">0</VersionInfo>
+                    <VersionInfo Name="Debug">False</VersionInfo>
+                    <VersionInfo Name="PreRelease">False</VersionInfo>
+                    <VersionInfo Name="Special">False</VersionInfo>
+                    <VersionInfo Name="Private">False</VersionInfo>
+                    <VersionInfo Name="DLL">False</VersionInfo>
+                    <VersionInfo Name="Locale">1031</VersionInfo>
+                    <VersionInfo Name="CodePage">1252</VersionInfo>
+                </VersionInfo>
+                <VersionInfoKeys>
+                    <VersionInfoKeys Name="CompanyName"/>
+                    <VersionInfoKeys Name="FileDescription"/>
+                    <VersionInfoKeys Name="FileVersion">1.0.0.0</VersionInfoKeys>
+                    <VersionInfoKeys Name="InternalName"/>
+                    <VersionInfoKeys Name="LegalCopyright"/>
+                    <VersionInfoKeys Name="LegalTrademarks"/>
+                    <VersionInfoKeys Name="OriginalFilename"/>
+                    <VersionInfoKeys Name="ProductName"/>
+                    <VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys>
+                    <VersionInfoKeys Name="Comments"/>
+                </VersionInfoKeys>
+                <ProjectProperties>
+                    <ProjectProperties Name="AutoShowDeps">False</ProjectProperties>
+                    <ProjectProperties Name="ManagePaths">True</ProjectProperties>
+                    <ProjectProperties Name="VerifyPackages">True</ProjectProperties>
+                </ProjectProperties>
+                <Source>
+                    <Source Name="MainSource">IcsCommonCBXE3Run.cpp</Source>
+                </Source>
+                <Excluded_Packages/>
+            </CPlusPlusBuilder.Personality>
+            <Deployment/>
+            <Platforms>
+                <Platform value="OSX32">True</Platform>
+                <Platform value="Win32">True</Platform>
+            </Platforms>
+        </BorlandProject>
+        <ProjectFileVersion>12</ProjectFileVersion>
+    </ProjectExtensions>
+    <Import Condition="Exists('$(BDS)\Bin\CodeGear.Cpp.Targets')" Project="$(BDS)\Bin\CodeGear.Cpp.Targets"/>
+    <Import Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')" Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj"/>
+</Project>

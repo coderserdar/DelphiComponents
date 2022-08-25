@@ -1,0 +1,264 @@
+object FormMain: TFormMain
+  Left = 0
+  Top = 0
+  Caption = 'Magenta Firewall Testing - 1st February 2022 '
+  ClientHeight = 488
+  ClientWidth = 852
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Arial'
+  Font.Style = []
+  OldCreateOrder = False
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  PixelsPerInch = 96
+  TextHeight = 14
+  object Log: TMemo
+    Left = 0
+    Top = 116
+    Width = 852
+    Height = 372
+    Align = alClient
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Courier New'
+    Font.Style = []
+    Lines.Strings = (
+      '')
+    ParentFont = False
+    ScrollBars = ssBoth
+    TabOrder = 0
+  end
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 852
+    Height = 116
+    Align = alTop
+    TabOrder = 1
+    object Label1: TLabel
+      Left = 10
+      Top = 18
+      Width = 55
+      Height = 14
+      Caption = 'List Search'
+    end
+    object Label2: TLabel
+      Left = 272
+      Top = 18
+      Width = 51
+      Height = 14
+      Caption = 'Rule Name'
+    end
+    object Label3: TLabel
+      Left = 545
+      Top = 18
+      Width = 54
+      Height = 14
+      Caption = 'Rule Group'
+    end
+    object Label4: TLabel
+      Left = 272
+      Top = 46
+      Width = 69
+      Height = 14
+      Caption = 'App File Name'
+    end
+    object LabelAdmin: TLabel
+      Left = 10
+      Top = 82
+      Width = 289
+      Height = 18
+      Caption = 'Program needs Admin Rights to add rules'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clRed
+      Font.Height = -16
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+    end
+    object RuleName: TEdit
+      Left = 348
+      Top = 15
+      Width = 178
+      Height = 22
+      TabOrder = 0
+      Text = 'Test Rule'
+    end
+    object RuleGroup: TEdit
+      Left = 620
+      Top = 15
+      Width = 121
+      Height = 22
+      TabOrder = 1
+      Text = 'Magsys'
+    end
+    object ListSearch: TEdit
+      Left = 90
+      Top = 15
+      Width = 121
+      Height = 22
+      TabOrder = 2
+      Text = 'ALL'
+    end
+    object doListRules: TButton
+      Left = 10
+      Top = 45
+      Width = 75
+      Height = 25
+      Caption = 'List Rules'
+      TabOrder = 3
+      OnClick = doListRulesClick
+    end
+    object doClear: TButton
+      Left = 535
+      Top = 75
+      Width = 75
+      Height = 25
+      Caption = 'Clear'
+      TabOrder = 4
+      OnClick = doClearClick
+    end
+    object doClose: TButton
+      Left = 626
+      Top = 75
+      Width = 75
+      Height = 25
+      Caption = 'Close'
+      TabOrder = 5
+      OnClick = doCloseClick
+    end
+    object doListApps: TButton
+      Left = 91
+      Top = 45
+      Width = 75
+      Height = 25
+      Caption = 'List Apps'
+      TabOrder = 6
+      OnClick = doListAppsClick
+    end
+    object doListServ: TButton
+      Left = 172
+      Top = 45
+      Width = 75
+      Height = 25
+      Caption = 'List Services'
+      TabOrder = 7
+      OnClick = doListServClick
+    end
+    object doAddRule: TButton
+      Left = 335
+      Top = 75
+      Width = 90
+      Height = 25
+      Caption = 'Add App Rule'
+      TabOrder = 8
+      OnClick = doAddRuleClick
+    end
+    object doRemRule: TButton
+      Left = 440
+      Top = 75
+      Width = 75
+      Height = 25
+      Caption = 'Remove Rule'
+      TabOrder = 9
+      OnClick = doRemRuleClick
+    end
+    object RuleDir: TRadioGroup
+      Left = 755
+      Top = 14
+      Width = 81
+      Height = 86
+      Caption = 'Direction'
+      ItemIndex = 1
+      Items.Strings = (
+        'None'
+        'Inbound'
+        'Outbound'
+        'Both')
+      TabOrder = 10
+    end
+    object RuleFileName: TEdit
+      Left = 348
+      Top = 43
+      Width = 363
+      Height = 22
+      TabOrder = 11
+      Text = 'c:\myprog.exe'
+    end
+    object doOpenFile: TBitBtn
+      Left = 717
+      Top = 43
+      Width = 32
+      Height = 25
+      TabOrder = 12
+      OnClick = doOpenFileClick
+      Glyph.Data = {
+        F6060000424DF606000000000000360000002800000018000000180000000100
+        180000000000C0060000120B0000120B00000000000000000000FF00FFFF00FF
+        FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
+        FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
+        00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+        FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
+        FFFF00FFFF00FFFF00FFFF00FF25A8D625A8D625A8D658CAE843BCE12DAFDA20
+        A7D61AA3D4FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+        FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF17A3D3A9DFF0B8FFFF99FE
+        FF96F9FF91F2FD81E7F86BD7F055C9E93FBAE129ADD91EA6D518A2D3FF00FFFF
+        00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF12A2D3
+        63BFE1CBFEFF8FFBFF94FAFF94FAFF95FAFF98FAFF97F9FF90F4FF89EDFC75DF
+        F45FD0ED4AC2E634B4DD23A9D71CA5D51BA5D4FF00FFFF00FFFF00FFFF00FFFF
+        00FFFF00FF20A8D640B4DCC5F1F99AFDFF92F9FF93F8FF92F7FF91F6FF90F5FF
+        8FF6FF90F4FF91F5FF93F6FF90F3FF8AEEFD81E7FA64D3F12EB0DDFF00FFFF00
+        FFFF00FFFF00FFFF00FFFF00FF2AACD85AC8E793D5EBB7FFFF8FF9FF93F8FF92
+        F7FF91F6FF90F5FF8EF5FF8EF3FF8DF2FE8CF1FE8BF0FE8BF1FE8DF2FF80E7FE
+        59CCF01FA7D6FF00FFFF00FFFF00FFFF00FFFF00FF27AAD77EE2F360C4E4CAFA
+        FE90FAFF92F8FF92F7FF91F6FF90F5FF8EF5FF8EF3FF8DF2FE8CF1FE8BF0FE8A
+        F0FE8BF0FE78E2FB73DDFA3CBBE0FF00FFFF00FFFF00FFFF00FFFF00FF26A9D7
+        97F1FB52CBE6B8E6F49FFDFF91F8FF92F7FF91F6FF90F5FF8EF5FF8EF3FF8DF2
+        FE8CF1FE8BF0FE8CF1FE8BF0FE78E1FB78E1FC66D6EF18A2D3FF00FFFF00FFFF
+        00FFFF00FF26A9D79CF3FC67DFF188CFE8BEFFFF8CF8FF91F7FF91F6FF90F5FF
+        8EF5FF8EF3FF8DF2FE8CF1FE8BF0FE8AF0FE8BF0FE78E1FB74DEFA8AEEFC28AD
+        D9FF00FFFF00FFFF00FFFF00FF26A9D798F0FA8CF8FD4BBBDFCFF4FBA3FDFF93
+        F9FF8FF7FF8BF5FF89F5FF8CF3FF8DF2FE8CF1FE8BF0FE8AF0FE8BF0FE78E1FB
+        0C7B1413841F4CC6E6FF00FFFF00FFFF00FFFF00FF27A9D797F0FA9BFFFF5AD4
+        EC5FBDE0BAE7F3C1F1F9C3F5FCC0F6FDBEFBFF9FF8FF88F1FE8CF1FE8BF0FE8A
+        F0FE8BF0FE05720B3FBF624FD47911811C1CA5D4FF00FFFF00FFFF00FF29AAD7
+        9DF2FB96FEFF95FBFF64DAEF56CBE857C7E65FC6E566C5E472C6E4BCE8F4B1FA
+        FF86F1FE89F0FE8AF0FE006B0232AF505EE8915AE58B3ABE5A08750EFF00FFFF
+        00FFFF00FF29AAD79DF3FB95FDFF95FAFF99FDFF97FCFF91F7FF8AF3FE85F1FC
+        61D9F03FB8DEAFDFF0C6FBFF92F3FF05720A2FAA4B5FEB9355DE8348D36F21AE
+        3522A83806730BFF00FFFF00FF28AAD79CF3FB96FDFF94FAFF93F9FF93F8FF93
+        F8FF92F7FF91F6FF95F9FF7CEAF941BDE17ECAE505720A21AE3534AF513BBB5C
+        44CE6939C75A2DBC4921AE3521AE35047009FF00FF29ABD79EF4FC96FDFF94FA
+        FF93F9FF93F8FF92F7FF91F6FF90F5FF8EF5FF92F6FF8CF2FE5DD5EE05720A05
+        720A05720A08771030BB4D2EC24B06770C06770C05720A05710AFF00FF2BABD8
+        A5F8FD94FDFF94FAFF93F9FF93F8FF92F7FF91F6FF8FF6FF8DF6FF8DF4FF8DF3
+        FF91F5FF89F1FF7FECFC80ECFC06730C23AD3921B83806770CFF00FFFF00FFFF
+        00FFFF00FF2AAAD7B3F4FA96FDFF93FAFF93F9FF93F8FF91F7FF92F7FF9FF3FD
+        A1F2FD9FF2FD9DF1FD9BF1FD9AF1FE98F3FF9DF6FF08770F19A92B12AA220677
+        0CFF00FFFF00FFFF00FFFF00FF16A3D37ACDE8B5FFFF97FEFF95FCFF93FAFF93
+        FBFF85EEFB31B0DA30ADD838B2DB3EB4DC43B7DE48BADF4EBCE156C0E30A8313
+        11AA200C9D1906770CFF00FFFF00FFFF00FFFF00FFFF00FF21A6D582D5EC94E5
+        F397E8F69EEDF9A7F4FB5ACBE814A1D2FF00FFFF00FFFF00FFFF00FFFF00FFFF
+        00FF06750C0E9D190FA81D09871206770CFF00FFFF00FFFF00FFFF00FFFF00FF
+        FF00FF19A3D422A6D526A7D62AA9D62BAAD71FA6D5FF00FFFF00FFFF00FFFF00
+        FFFF00FFFF00FF0984120E9E190FA61C098A1305700AFF00FFFF00FFFF00FFFF
+        00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+        FF00FF05700906740C0C83160D91190C97180A9015087D0E06770CFF00FFFF00
+        FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
+        00FFFF00FFFF00FFFF00FFFF00FF06770C07760D06760C06740B05700AFF00FF
+        FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
+        FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
+        00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
+    end
+  end
+  object OpenDialog: TOpenDialog
+    Options = [ofPathMustExist, ofFileMustExist, ofNoNetworkButton, ofOldStyleDialog, ofEnableSizing, ofDontAddToRecent]
+    OptionsEx = [ofExNoPlacesBar]
+    Left = 425
+    Top = 155
+  end
+end

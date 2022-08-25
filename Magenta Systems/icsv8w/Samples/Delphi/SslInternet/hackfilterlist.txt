@@ -1,0 +1,20 @@
+* web server filter list, path= or remaddr=
+path=.php      *** remove if you want to support PHP, etc
+path=wp-login.php   *** we are not using WordPress!!
+path=.pl       *** not using Perl
+path=/cgi      *** remove if using cgi
+path=;echo     *** SQL injection
+path=/..       *** parent paths
+path=phpmy
+path=myadmin
+path=/sql/
+path=/pma
+path=mysql
+path=/php
+path=web.xml
+path=sqlmap
+path=#dev
+path=/.git/
+path=\..\..\..\
+path=c:/windows
+remaddr=192.168.222.

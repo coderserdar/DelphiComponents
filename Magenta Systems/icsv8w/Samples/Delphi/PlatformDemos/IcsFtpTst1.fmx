@@ -1,0 +1,1483 @@
+object FtpReceiveForm: TFtpReceiveForm
+  Left = 227
+  Top = 183
+  Caption = 'FTP - http://www.overbyte.be'
+  ClientHeight = 596
+  ClientWidth = 634
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop, iPhone, iPad]
+  OnCreate = FormCreate
+  OnClose = FormClose
+  Left = 227
+  Top = 183
+  DesignerMasterStyle = 0
+  object DisplayMemo: TMemo
+    Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+    DataDetectorTypes = []
+    Lines.Strings = (
+      'DisplayMemo')
+    Position.Y = 401.000000000000000000
+    Size.Width = 634.000000000000000000
+    Size.Height = 195.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    Viewport.Width = 630.000000000000000000
+    Viewport.Height = 191.000000000000000000
+  end
+  object Panel1: TPanel
+    Position.Y = 173.000000000000000000
+    Size.Width = 634.000000000000000000
+    Size.Height = 228.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    object InfoLabel: TLabel
+      AutoSize = True
+      Position.X = 512.000000000000000000
+      Position.Y = 6.000000000000000000
+      Size.Width = 49.000000000000000000
+      Size.Height = 16.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.WordWrap = False
+      Text = 'InfoLabel'
+      TabOrder = 0
+    end
+    object StateLabel: TLabel
+      Position.X = 512.000000000000000000
+      Position.Y = 25.000000000000000000
+      Size.Width = 105.000000000000000000
+      Size.Height = 13.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.WordWrap = False
+      Text = 'StateLabel'
+      TabOrder = 1
+    end
+    object Label7: TLabel
+      AutoSize = True
+      Position.X = 504.000000000000000000
+      Position.Y = 122.000000000000000000
+      Size.Width = 56.000000000000000000
+      Size.Height = 16.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.WordWrap = False
+      Text = 'Resume at'
+      TabOrder = 2
+    end
+    object Label11: TLabel
+      AutoSize = True
+      Position.X = 504.000000000000000000
+      Position.Y = 142.000000000000000000
+      Size.Width = 47.000000000000000000
+      Size.Height = 16.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.WordWrap = False
+      Text = 'Start Pos'
+      TabOrder = 3
+    end
+    object Label12: TLabel
+      AutoSize = True
+      Position.X = 504.000000000000000000
+      Position.Y = 162.000000000000000000
+      Size.Width = 42.000000000000000000
+      Size.Height = 16.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.WordWrap = False
+      Text = 'End Pos'
+      TabOrder = 4
+    end
+    object Label13: TLabel
+      AutoSize = True
+      Position.X = 504.000000000000000000
+      Position.Y = 182.000000000000000000
+      Size.Width = 61.000000000000000000
+      Size.Height = 16.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.WordWrap = False
+      Text = 'Max KBytes'
+      TabOrder = 5
+    end
+    object Label15: TLabel
+      AutoSize = True
+      Position.X = 504.000000000000000000
+      Position.Y = 202.000000000000000000
+      Size.Width = 52.000000000000000000
+      Size.Height = 16.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.WordWrap = False
+      Text = 'Language'
+      TabOrder = 6
+    end
+    object ExitButton: TButton
+      Position.X = 512.000000000000000000
+      Position.Y = 78.000000000000000000
+      Size.Width = 105.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 7
+      Text = '&Exit Program'
+      OnClick = ExitButtonClick
+    end
+    object OpenAsyncButton: TButton
+      Position.X = 8.000000000000000000
+      Position.Y = 6.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 8
+      Text = 'Open'
+      OnClick = OpenAsyncButtonClick
+    end
+    object QuitAsyncButton: TButton
+      Position.X = 8.000000000000000000
+      Position.Y = 24.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 9
+      Text = 'Quit'
+      OnClick = QuitAsyncButtonClick
+    end
+    object CwdAsyncButton: TButton
+      Position.X = 254.000000000000000000
+      Position.Y = 6.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 10
+      Text = 'Cwd'
+      OnClick = CwdAsyncButtonClick
+    end
+    object UserAsyncButton: TButton
+      Position.X = 90.000000000000000000
+      Position.Y = 6.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 11
+      Text = 'User'
+      OnClick = UserAsyncButtonClick
+    end
+    object PassAsyncButton: TButton
+      Position.X = 172.000000000000000000
+      Position.Y = 6.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 12
+      Text = 'Pass'
+      OnClick = PassAsyncButtonClick
+    end
+    object ConnectAsyncButton: TButton
+      Position.X = 90.000000000000000000
+      Position.Y = 24.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 13
+      Text = 'Connect'
+      OnClick = ConnectAsyncButtonClick
+    end
+    object GetAsyncButton: TButton
+      Position.X = 8.000000000000000000
+      Position.Y = 42.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 14
+      Text = 'Get'
+      OnClick = GetAsyncButtonClick
+    end
+    object ReceiveAsyncButton: TButton
+      Position.X = 8.000000000000000000
+      Position.Y = 60.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 15
+      Text = 'Receive'
+      OnClick = ReceiveAsyncButtonClick
+    end
+    object AbortAsyncButton: TButton
+      Position.X = 172.000000000000000000
+      Position.Y = 24.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 16
+      Text = 'Abort'
+      OnClick = AbortAsyncButtonClick
+    end
+    object DirAsyncButton: TButton
+      Position.X = 172.000000000000000000
+      Position.Y = 78.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 17
+      Text = 'Dir'
+      OnClick = DirAsyncButtonClick
+    end
+    object DirectoryAsyncButton: TButton
+      Position.X = 172.000000000000000000
+      Position.Y = 96.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 18
+      Text = 'Directory'
+      OnClick = DirectoryAsyncButtonClick
+    end
+    object LsAsyncButton: TButton
+      Position.X = 254.000000000000000000
+      Position.Y = 78.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 19
+      Text = 'Ls'
+      OnClick = LsAsyncButtonClick
+    end
+    object ListAsyncButton: TButton
+      Position.X = 254.000000000000000000
+      Position.Y = 96.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 20
+      Text = 'List'
+      OnClick = ListAsyncButtonClick
+    end
+    object SystAsyncButton: TButton
+      Position.X = 418.000000000000000000
+      Position.Y = 6.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 21
+      Text = 'Syst'
+      OnClick = SystAsyncButtonClick
+    end
+    object SystemAsyncButton: TButton
+      Position.X = 418.000000000000000000
+      Position.Y = 24.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 22
+      Text = 'System'
+      OnClick = SystemAsyncButtonClick
+    end
+    object FileSizeAsyncButton: TButton
+      Position.X = 336.000000000000000000
+      Position.Y = 60.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 23
+      Text = 'FileSize'
+      OnClick = FileSizeAsyncButtonClick
+    end
+    object SizeAsyncButton: TButton
+      Position.X = 336.000000000000000000
+      Position.Y = 42.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 24
+      Text = 'Size'
+      OnClick = SizeAsyncButtonClick
+    end
+    object MkdAsyncButton: TButton
+      Position.X = 418.000000000000000000
+      Position.Y = 42.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 25
+      Text = 'Mkd'
+      OnClick = MkdAsyncButtonClick
+    end
+    object MkdirAsyncButton: TButton
+      Position.X = 418.000000000000000000
+      Position.Y = 60.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 26
+      Text = 'Mkdir'
+      OnClick = MkdirAsyncButtonClick
+    end
+    object RmdAsyncButton: TButton
+      Position.X = 418.000000000000000000
+      Position.Y = 78.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 27
+      Text = 'Rmd'
+      OnClick = RmdAsyncButtonClick
+    end
+    object RmdirAsyncButton: TButton
+      Position.X = 418.000000000000000000
+      Position.Y = 96.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 28
+      Text = 'Rmdir'
+      OnClick = RmdirAsyncButtonClick
+    end
+    object RenAsyncButton: TButton
+      Position.X = 8.000000000000000000
+      Position.Y = 78.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 29
+      Text = 'Ren'
+      OnClick = RenAsyncButtonClick
+    end
+    object RenameAsyncButton: TButton
+      Position.X = 8.000000000000000000
+      Position.Y = 96.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 30
+      Text = 'Rename'
+      OnClick = RenameAsyncButtonClick
+    end
+    object DeleAsyncButton: TButton
+      Position.X = 90.000000000000000000
+      Position.Y = 78.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 31
+      Text = 'Dele'
+      OnClick = DeleAsyncButtonClick
+    end
+    object DeleteAsyncButton: TButton
+      Position.X = 90.000000000000000000
+      Position.Y = 96.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 32
+      Text = 'Delete'
+      OnClick = DeleteAsyncButtonClick
+    end
+    object PwdAsyncButton: TButton
+      Position.X = 254.000000000000000000
+      Position.Y = 24.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 33
+      Text = 'Pwd'
+      OnClick = PwdAsyncButtonClick
+    end
+    object QuoteAsyncButton: TButton
+      Position.X = 336.000000000000000000
+      Position.Y = 78.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 34
+      Text = 'Quote'
+      OnClick = QuoteAsyncButtonClick
+    end
+    object DoQuoteAsyncButton: TButton
+      Position.X = 336.000000000000000000
+      Position.Y = 96.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 35
+      Text = 'DoQuote'
+      OnClick = DoQuoteAsyncButtonClick
+    end
+    object PutAsyncButton: TButton
+      Position.X = 90.000000000000000000
+      Position.Y = 42.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 36
+      Text = 'Put'
+      OnClick = PutAsyncButtonClick
+    end
+    object TransmitAsyncButton: TButton
+      Position.X = 90.000000000000000000
+      Position.Y = 60.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 37
+      Text = 'Transmit'
+      OnClick = TransmitAsyncButtonClick
+    end
+    object TypeSetAsyncButton: TButton
+      Position.X = 336.000000000000000000
+      Position.Y = 6.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 38
+      Text = 'TypeSet'
+      OnClick = TypeSetAsyncButtonClick
+    end
+    object RestGetAsyncButton: TButton
+      Position.X = 172.000000000000000000
+      Position.Y = 42.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 39
+      Text = 'RestGet'
+      OnClick = RestGetAsyncButtonClick
+    end
+    object RestartGetAsyncButton: TButton
+      Position.X = 172.000000000000000000
+      Position.Y = 60.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 40
+      Text = 'RestartGet'
+      OnClick = RestartGetAsyncButtonClick
+    end
+    object CDupAsyncButton: TButton
+      Position.X = 336.000000000000000000
+      Position.Y = 24.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 41
+      Text = 'CDup'
+      OnClick = CDupAsyncButtonClick
+    end
+    object ClearButton: TButton
+      Position.X = 512.000000000000000000
+      Position.Y = 60.000000000000000000
+      Size.Width = 105.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 42
+      Text = 'Clear Display'
+      OnClick = ClearButtonClick
+    end
+    object AppendFileAsyncButton: TButton
+      Position.X = 254.000000000000000000
+      Position.Y = 60.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 43
+      Text = 'AppendFile'
+      OnClick = AppendFileAsyncButtonClick
+    end
+    object AppendAsyncButton: TButton
+      Position.X = 254.000000000000000000
+      Position.Y = 42.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 44
+      Text = 'Append'
+      OnClick = AppendAsyncButtonClick
+    end
+    object Button1: TButton
+      Position.X = 512.000000000000000000
+      Position.Y = 42.000000000000000000
+      Size.Width = 105.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 45
+      Text = 'Button1'
+      OnClick = Button1Click
+    end
+    object RestPutAsyncButton: TButton
+      Position.X = 8.000000000000000000
+      Position.Y = 114.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 46
+      Text = 'RestPut'
+      OnClick = RestPutAsyncButtonClick
+    end
+    object RestartPutAsyncButton: TButton
+      Position.X = 8.000000000000000000
+      Position.Y = 132.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 47
+      Text = 'RestartPut'
+      OnClick = RestartPutAsyncButtonClick
+    end
+    object ResumeAtEdit: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      TabOrder = 48
+      Text = 'ResumeAtEdit'
+      Position.X = 560.000000000000000000
+      Position.Y = 118.000000000000000000
+      Size.Width = 57.000000000000000000
+      Size.Height = 21.000000000000000000
+      Size.PlatformDefault = False
+    end
+    object TransmitUsingStreamButton: TButton
+      Position.X = 336.000000000000000000
+      Position.Y = 114.000000000000000000
+      Size.Width = 163.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 49
+      Text = 'Transmit using a stream'
+      OnClick = TransmitUsingStreamButtonClick
+    end
+    object ReceiveUsingStreamButton: TButton
+      Position.X = 336.000000000000000000
+      Position.Y = 132.000000000000000000
+      Size.Width = 163.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 50
+      Text = 'Receive using a stream'
+      OnClick = ReceiveUsingStreamButtonClick
+    end
+    object StressPutButton: TButton
+      Position.X = 512.000000000000000000
+      Position.Y = 96.000000000000000000
+      Size.Width = 105.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 51
+      Text = 'Stress Put'
+      OnClick = StressPutButtonClick
+    end
+    object AbortXferAsyncButton: TButton
+      Position.X = 254.000000000000000000
+      Position.Y = 114.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 52
+      Text = 'AbortXfer'
+      OnClick = AbortXferAsyncButtonClick
+    end
+    object AuthSslButton: TButton
+      Position.X = 254.000000000000000000
+      Position.Y = 132.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 53
+      Text = 'AuthSsl'
+    end
+    object AcctAsyncButton: TButton
+      Position.X = 90.000000000000000000
+      Position.Y = 114.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 54
+      Text = 'Account'
+      OnClick = AcctAsyncButtonClick
+    end
+    object SiteExecAsyncButton: TButton
+      Position.X = 8.000000000000000000
+      Position.Y = 186.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 55
+      Text = 'SiteExec'
+      OnClick = SiteExecAsyncButtonClick
+    end
+    object ClntAsyncButton: TButton
+      Position.X = 172.000000000000000000
+      Position.Y = 114.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 56
+      Text = 'Client'
+      OnClick = ClntAsyncButtonClick
+    end
+    object MlsdAsyncButton: TButton
+      Position.X = 90.000000000000000000
+      Position.Y = 132.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 57
+      Text = 'MLSD'
+      OnClick = MlsdAsyncButtonClick
+    end
+    object MlstAsyncButton: TButton
+      Position.X = 172.000000000000000000
+      Position.Y = 132.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 58
+      Text = 'MLST'
+      OnClick = MlstAsyncButtonClick
+    end
+    object XCmlsdAsyncButton: TButton
+      Position.X = 90.000000000000000000
+      Position.Y = 168.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 59
+      Text = 'XCMLSD'
+      OnClick = XCmlsdAsyncButtonClick
+    end
+    object FeatAsyncButton: TButton
+      Position.X = 8.000000000000000000
+      Position.Y = 150.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 60
+      Text = 'Feat'
+      OnClick = FeatAsyncButtonClick
+    end
+    object XDmlsdAsyncButton: TButton
+      Position.X = 172.000000000000000000
+      Position.Y = 168.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 61
+      Text = 'XDMLSD'
+      OnClick = XDmlsdAsyncButtonClick
+    end
+    object Md5AsyncButton: TButton
+      Position.X = 254.000000000000000000
+      Position.Y = 150.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 62
+      Text = 'MD5'
+      OnClick = Md5AsyncButtonClick
+    end
+    object MdtmAsyncButton: TButton
+      Position.X = 90.000000000000000000
+      Position.Y = 150.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 63
+      Text = 'MDTM'
+      OnClick = MdtmAsyncButtonClick
+    end
+    object XcrcAsyncButton: TButton
+      Position.X = 418.000000000000000000
+      Position.Y = 150.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 64
+      Text = 'XCRC'
+      OnClick = XcrcAsyncButtonClick
+    end
+    object MfmtAsyncButton: TButton
+      Position.X = 172.000000000000000000
+      Position.Y = 150.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 65
+      Text = 'MFMT'
+      OnClick = MfmtAsyncButtonClick
+    end
+    object SiteZoneAsyncButton: TButton
+      Position.X = 8.000000000000000000
+      Position.Y = 168.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 66
+      Text = 'SiteZone'
+      OnClick = SiteZoneAsyncButtonClick
+    end
+    object SiteIndexAsyncButton: TButton
+      Position.X = 254.000000000000000000
+      Position.Y = 168.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 67
+      Text = 'SiteIndex'
+      OnClick = SiteIndexAsyncButtonClick
+    end
+    object SitePaswdAsyncButton: TButton
+      Position.X = 336.000000000000000000
+      Position.Y = 168.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 68
+      Text = 'SitePaswd'
+      OnClick = SitePaswdAsyncButtonClick
+    end
+    object SiteMsgAsyncButton: TButton
+      Position.X = 418.000000000000000000
+      Position.Y = 168.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 69
+      Text = 'SiteMsg'
+      OnClick = SiteMsgAsyncButtonClick
+    end
+    object XMd5AsyncButton: TButton
+      Position.X = 336.000000000000000000
+      Position.Y = 150.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 70
+      Text = 'XMD5'
+      OnClick = XMd5AsyncButtonClick
+    end
+    object AlloAsyncButton: TButton
+      Position.X = 90.000000000000000000
+      Position.Y = 186.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 71
+      Text = 'Allo'
+      OnClick = AlloAsyncButtonClick
+    end
+    object PosStartEdit: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      TabOrder = 72
+      Text = 'PosStartEdit'
+      Position.X = 560.000000000000000000
+      Position.Y = 138.000000000000000000
+      Size.Width = 57.000000000000000000
+      Size.Height = 21.000000000000000000
+      Size.PlatformDefault = False
+    end
+    object PosEndEdit: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      TabOrder = 73
+      Text = 'PosEndEdit'
+      Position.X = 560.000000000000000000
+      Position.Y = 158.000000000000000000
+      Size.Width = 57.000000000000000000
+      Size.Height = 21.000000000000000000
+      Size.PlatformDefault = False
+    end
+    object CombAsyncButton: TButton
+      Position.X = 172.000000000000000000
+      Position.Y = 186.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 74
+      Text = 'Comb'
+      OnClick = CombAsyncButtonClick
+    end
+    object OptsAsyncButton: TButton
+      Position.X = 254.000000000000000000
+      Position.Y = 186.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 75
+      Text = 'Opts'
+      OnClick = OptsAsyncButtonClick
+    end
+    object ModeZAsyncButton: TButton
+      Position.X = 336.000000000000000000
+      Position.Y = 186.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 76
+      Text = 'Mode Z'
+      OnClick = ModeZAsyncButtonClick
+    end
+    object ModeSAsyncButton: TButton
+      Position.X = 418.000000000000000000
+      Position.Y = 186.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 77
+      Text = 'Mode S'
+      OnClick = ModeSAsyncButtonClick
+    end
+    object MaxKB: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      TabOrder = 78
+      Text = 'MaxKB'
+      Position.X = 560.000000000000000000
+      Position.Y = 178.000000000000000000
+      Size.Width = 57.000000000000000000
+      Size.Height = 21.000000000000000000
+      Size.PlatformDefault = False
+    end
+    object ConnectHostAsyncButton: TButton
+      Position.X = 8.000000000000000000
+      Position.Y = 204.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 79
+      Text = 'Connect Host'
+      OnClick = ConnectHostAsyncButtonClick
+    end
+    object HostAsyncButton: TButton
+      Position.X = 90.000000000000000000
+      Position.Y = 204.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 80
+      Text = 'Host'
+      OnClick = HostAsyncButtonClick
+    end
+    object ReinAsyncButton: TButton
+      Position.X = 172.000000000000000000
+      Position.Y = 204.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 81
+      Text = 'Reinitialize'
+      OnClick = ReinAsyncButtonClick
+    end
+    object LangAsyncButton: TButton
+      Position.X = 254.000000000000000000
+      Position.Y = 204.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 82
+      Text = 'LANG'
+      OnClick = LangAsyncButtonClick
+    end
+    object Lanugage: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      TabOrder = 83
+      Text = 'EN'
+      Position.X = 560.000000000000000000
+      Position.Y = 200.000000000000000000
+      Size.Width = 57.000000000000000000
+      Size.Height = 21.000000000000000000
+      Size.PlatformDefault = False
+    end
+    object SleepButton: TButton
+      Position.X = 418.000000000000000000
+      Position.Y = 204.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 84
+      Text = 'Sleep(10 sec)'
+      OnClick = SleepButtonClick
+    end
+    object ConnectFeatButton: TButton
+      Position.X = 336.000000000000000000
+      Position.Y = 204.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 85
+      Text = 'Connect Feat'
+      OnClick = ConnectFeatAsyncButtonClick
+    end
+  end
+  object SettingsPageControl: TTabControl
+    Size.Width = 634.000000000000000000
+    Size.Height = 173.000000000000000000
+    Size.PlatformDefault = False
+    TabHeight = 20.000000000000000000
+    TabIndex = 0
+    TabOrder = 2
+    TabPosition = Top
+    Sizes = (
+      634s
+      153s
+      634s
+      153s)
+    object MainSettingsTabSheet: TTabItem
+      CustomIcon = <
+        item
+        end>
+      IsSelected = True
+      Size.Width = 47.000000000000000000
+      Size.Height = 20.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'Main'
+      ExplicitSize.cx = 50.000000000000000000
+      ExplicitSize.cy = 50.000000000000000000
+      object Panel2: TPanel
+        Padding.Left = 2.000000000000000000
+        Padding.Top = 2.000000000000000000
+        Padding.Right = 2.000000000000000000
+        Padding.Bottom = 2.000000000000000000
+        Position.X = 2.000000000000000000
+        Position.Y = 2.000000000000000000
+        Size.Width = 630.000000000000000000
+        Size.Height = 149.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'PanelWinStyle'
+        TabOrder = 0
+        object Label1: TLabel
+          AutoSize = True
+          Position.X = 11.000000000000000000
+          Position.Y = 12.000000000000000000
+          Size.Width = 57.000000000000000000
+          Size.Height = 16.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.WordWrap = False
+          Text = 'HostName'
+          TabOrder = 0
+        end
+        object Label3: TLabel
+          AutoSize = True
+          Position.X = 20.000000000000000000
+          Position.Y = 95.000000000000000000
+          Size.Width = 46.000000000000000000
+          Size.Height = 16.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.WordWrap = False
+          Text = 'Host File'
+          TabOrder = 1
+        end
+        object Label4: TLabel
+          AutoSize = True
+          Position.X = 11.000000000000000000
+          Position.Y = 39.000000000000000000
+          Size.Width = 56.000000000000000000
+          Size.Height = 16.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.WordWrap = False
+          Text = 'UserName'
+          TabOrder = 2
+        end
+        object Label5: TLabel
+          AutoSize = True
+          Position.X = 216.000000000000000000
+          Position.Y = 40.000000000000000000
+          Size.Width = 52.000000000000000000
+          Size.Height = 16.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.WordWrap = False
+          Text = 'PassWord'
+          TabOrder = 3
+        end
+        object Label2: TLabel
+          AutoSize = True
+          Position.X = 16.000000000000000000
+          Position.Y = 123.000000000000000000
+          Size.Width = 49.000000000000000000
+          Size.Height = 16.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.WordWrap = False
+          Text = 'Local File'
+          TabOrder = 4
+        end
+        object Label6: TLabel
+          AutoSize = True
+          Position.X = 240.000000000000000000
+          Position.Y = 12.000000000000000000
+          Size.Width = 22.000000000000000000
+          Size.Height = 16.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.WordWrap = False
+          Text = 'Port'
+          TabOrder = 5
+        end
+        object Label8: TLabel
+          AutoSize = True
+          Position.X = 7.000000000000000000
+          Position.Y = 63.000000000000000000
+          Size.Width = 59.000000000000000000
+          Size.Height = 16.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.WordWrap = False
+          Text = 'Port Range'
+          TabOrder = 6
+        end
+        object Label9: TLabel
+          Position.X = 137.000000000000000000
+          Position.Y = 63.000000000000000000
+          Size.Width = 12.500000000000000000
+          Size.Height = 15.500000000000000000
+          Size.PlatformDefault = False
+          TextSettings.WordWrap = False
+          Text = 'to'
+          TabOrder = 7
+        end
+        object Label10: TLabel
+          AutoSize = True
+          Position.X = 224.000000000000000000
+          Position.Y = 64.000000000000000000
+          Size.Width = 44.000000000000000000
+          Size.Height = 16.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.WordWrap = False
+          Text = 'Account'
+          TabOrder = 8
+        end
+        object Label14: TLabel
+          Position.X = 501.000000000000000000
+          Position.Y = 96.000000000000000000
+          Size.Width = 53.000000000000000000
+          Size.Height = 13.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.WordWrap = False
+          Text = 'CodePage:'
+          TabOrder = 9
+        end
+        object Label16: TLabel
+          Position.X = 460.000000000000000000
+          Position.Y = 72.000000000000000000
+          Size.Width = 25.000000000000000000
+          Size.Height = 13.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.WordWrap = False
+          Text = 'Opts:'
+          TabOrder = 10
+        end
+        object HostNameEdit: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          TabOrder = 11
+          Text = 'HostNameEdit'
+          Position.X = 72.000000000000000000
+          Position.Y = 8.000000000000000000
+          Size.Width = 137.000000000000000000
+          Size.Height = 21.000000000000000000
+          Size.PlatformDefault = False
+        end
+        object HostFileEdit: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          TabOrder = 12
+          Text = 'HostFileEdit'
+          Position.X = 212.000000000000000000
+          Position.Y = 92.000000000000000000
+          Size.Width = 261.000000000000000000
+          Size.Height = 21.000000000000000000
+          Size.PlatformDefault = False
+        end
+        object UserNameEdit: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          TabOrder = 13
+          Text = 'UserNameEdit'
+          Position.X = 72.000000000000000000
+          Position.Y = 36.000000000000000000
+          Size.Width = 137.000000000000000000
+          Size.Height = 21.000000000000000000
+          Size.PlatformDefault = False
+        end
+        object PassWordEdit: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          TabOrder = 14
+          Text = 'PassWordEdit'
+          Position.X = 276.000000000000000000
+          Position.Y = 36.000000000000000000
+          Size.Width = 137.000000000000000000
+          Size.Height = 21.000000000000000000
+          Size.PlatformDefault = False
+        end
+        object DisplayCheckBox: TCheckBox
+          Position.X = 491.000000000000000000
+          Position.Y = 4.000000000000000000
+          Size.Width = 117.000000000000000000
+          Size.Height = 17.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 15
+          Text = 'Display Data'
+        end
+        object LocalFileEdit: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          TabOrder = 16
+          Text = 'LocalFileEdit'
+          Position.X = 72.000000000000000000
+          Position.Y = 119.000000000000000000
+          Size.Width = 545.000000000000000000
+          Size.Height = 21.000000000000000000
+          Size.PlatformDefault = False
+        end
+        object BinaryCheckBox: TCheckBox
+          IsChecked = True
+          Position.X = 376.000000000000000000
+          Position.Y = 12.000000000000000000
+          Size.Width = 93.000000000000000000
+          Size.Height = 17.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 17
+          Text = 'Binary Mode'
+        end
+        object HostDirEdit: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          TabOrder = 18
+          Text = 'HostDirEdit'
+          Position.X = 72.000000000000000000
+          Position.Y = 92.000000000000000000
+          Size.Width = 137.000000000000000000
+          Size.Height = 21.000000000000000000
+          Size.PlatformDefault = False
+        end
+        object PortEdit: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          TabOrder = 19
+          Text = 'PortEdit'
+          Position.X = 276.000000000000000000
+          Position.Y = 8.000000000000000000
+          Size.Width = 85.000000000000000000
+          Size.Height = 21.000000000000000000
+          Size.PlatformDefault = False
+        end
+        object SyncCheckBox: TCheckBox
+          Position.X = 491.000000000000000000
+          Position.Y = 34.000000000000000000
+          Size.Width = 117.000000000000000000
+          Size.Height = 17.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 20
+          Text = 'Synchronous'
+        end
+        object PassiveCheckBox: TCheckBox
+          Position.X = 491.000000000000000000
+          Position.Y = 19.000000000000000000
+          Size.Width = 117.000000000000000000
+          Size.Height = 17.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 21
+          Text = 'Passive Mode'
+        end
+        object NoAutoResumeAtCheckBox: TCheckBox
+          Position.X = 491.000000000000000000
+          Position.Y = 49.000000000000000000
+          Size.Width = 117.000000000000000000
+          Size.Height = 17.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 22
+          Text = 'NoAutoResumeAt'
+        end
+        object DataPortRangeStartEdit: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          TabOrder = 23
+          Text = 'DataPortRangeStartEdit'
+          Position.X = 72.000000000000000000
+          Position.Y = 60.000000000000000000
+          Size.Width = 57.000000000000000000
+          Size.Height = 21.000000000000000000
+          Size.PlatformDefault = False
+        end
+        object DataPortRangeEndEdit: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          TabOrder = 24
+          Text = 'DataPortRangeEndEdit'
+          Position.X = 156.000000000000000000
+          Position.Y = 60.000000000000000000
+          Size.Width = 53.000000000000000000
+          Size.Height = 21.000000000000000000
+          Size.PlatformDefault = False
+        end
+        object AccountEdit: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          TabOrder = 25
+          Text = 'AccountEdit'
+          Position.X = 276.000000000000000000
+          Position.Y = 60.000000000000000000
+          Size.Width = 137.000000000000000000
+          Size.Height = 21.000000000000000000
+          Size.PlatformDefault = False
+        end
+        object CodePageEdit: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          TabOrder = 26
+          Text = 'CodePageEdit'
+          Position.X = 560.000000000000000000
+          Position.Y = 92.000000000000000000
+          Size.Width = 57.000000000000000000
+          Size.Height = 21.000000000000000000
+          Size.PlatformDefault = False
+          OnChange = CodePageEditChange
+        end
+        object OptsEdit: TComboBox
+          ItemIndex = 0
+          ItemHeight = 13.000000000000000000
+          Position.X = 491.000000000000000000
+          Position.Y = 69.000000000000000000
+          Size.Width = 126.000000000000000000
+          Size.Height = 21.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 27
+          object ListBoxItem1: TListBoxItem
+            IsSelected = True
+            Position.X = 5000.000000000000000000
+            Position.Y = 5000.000000000000000000
+            Size.Width = 101.000000000000000000
+            Size.Height = 17.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            Text = 'UTF8 ON'
+          end
+          object ListBoxItem2: TListBoxItem
+            Position.Y = 13.000000000000000000
+            Size.Width = 106.000000000000000000
+            Size.Height = 13.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 1
+            Text = 'UTF8 OFF'
+          end
+          object ListBoxItem3: TListBoxItem
+            Position.Y = 26.000000000000000000
+            Size.Width = 106.000000000000000000
+            Size.Height = 13.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 2
+            Text = 'MODE Z LEVEL 8'
+          end
+          object ListBoxItem4: TListBoxItem
+            Position.Y = 39.000000000000000000
+            Size.Width = 106.000000000000000000
+            Size.Height = 13.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 3
+            Text = 'MODE Z LEVEL 4'
+          end
+          object ListBoxItem5: TListBoxItem
+            Position.Y = 52.000000000000000000
+            Size.Width = 106.000000000000000000
+            Size.Height = 13.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 4
+            Text = 'MODE Z LEVEL 2'
+          end
+        end
+      end
+    end
+    object ConnectionTypeTabSheet: TTabItem
+      CustomIcon = <
+        item
+        end>
+      IsSelected = False
+      Size.Width = 109.000000000000000000
+      Size.Height = 20.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'Connection Type'
+      ExplicitSize.cx = 50.000000000000000000
+      ExplicitSize.cy = 50.000000000000000000
+      object Label22: TLabel
+        AutoSize = True
+        Position.X = 39.000000000000000000
+        Position.Y = 10.000000000000000000
+        Size.Width = 25.000000000000000000
+        Size.Height = 16.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.WordWrap = False
+        Text = 'Type'
+        TabOrder = 0
+      end
+      object Label23: TLabel
+        AutoSize = True
+        Position.X = 225.000000000000000000
+        Position.Y = 11.000000000000000000
+        Size.Width = 91.000000000000000000
+        Size.Height = 16.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.WordWrap = False
+        Text = 'HTTP proxy auth.'
+        TabOrder = 1
+      end
+      object Label18: TLabel
+        AutoSize = True
+        Position.X = 14.000000000000000000
+        Position.Y = 37.000000000000000000
+        Size.Width = 56.000000000000000000
+        Size.Height = 16.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.WordWrap = False
+        Text = 'Proxy host'
+        TabOrder = 2
+      end
+      object Label19: TLabel
+        AutoSize = True
+        Position.X = 16.000000000000000000
+        Position.Y = 63.000000000000000000
+        Size.Width = 55.000000000000000000
+        Size.Height = 16.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.WordWrap = False
+        Text = 'Proxy port'
+        TabOrder = 3
+      end
+      object Label20: TLabel
+        AutoSize = True
+        Position.X = 260.000000000000000000
+        Position.Y = 37.000000000000000000
+        Size.Width = 55.000000000000000000
+        Size.Height = 16.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.WordWrap = False
+        Text = 'Proxy user'
+        TabOrder = 4
+      end
+      object Label21: TLabel
+        AutoSize = True
+        Position.X = 235.000000000000000000
+        Position.Y = 64.000000000000000000
+        Size.Width = 83.000000000000000000
+        Size.Height = 16.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.WordWrap = False
+        Text = 'Proxy password'
+        TabOrder = 5
+      end
+      object Label17: TLabel
+        AutoSize = True
+        Position.X = 16.000000000000000000
+        Position.Y = 92.000000000000000000
+        Size.Width = 474.000000000000000000
+        Size.Height = 16.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.WordWrap = False
+        Text = 
+          'Note: Property Passive is set (overwritten) when HTTP or SOCKS p' +
+          'roxy connection is used.'
+        TabOrder = 6
+      end
+      object Label24: TLabel
+        AutoSize = True
+        Position.X = 16.000000000000000000
+        Position.Y = 106.000000000000000000
+        Size.Width = 504.000000000000000000
+        Size.Height = 16.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.WordWrap = False
+        Text = 
+          'The ftpProxy connection-type supports type USER@HOST FTP-proxies' +
+          ', active or passive mode. '
+        TabOrder = 7
+      end
+      object ProxyTypeComboBox: TComboBox
+        Position.X = 71.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 145.000000000000000000
+        Size.Height = 21.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 8
+        OnChange = ProxyTypeComboBoxCloseUp
+      end
+      object ProxyHttpAuthTypeComboBox: TComboBox
+        Position.X = 317.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 145.000000000000000000
+        Size.Height = 21.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 9
+        OnChange = ProxyHttpAuthTypeComboBoxCloseUp
+      end
+      object ProxyHostEdit: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        TabOrder = 10
+        Text = 'ProxyHostEdit'
+        Position.X = 71.000000000000000000
+        Position.Y = 34.000000000000000000
+        Size.Width = 145.000000000000000000
+        Size.Height = 21.000000000000000000
+        Size.PlatformDefault = False
+      end
+      object ProxyPortEdit: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        TabOrder = 11
+        Text = 'ProxyPortEdit'
+        Position.X = 71.000000000000000000
+        Position.Y = 61.000000000000000000
+        Size.Width = 56.000000000000000000
+        Size.Height = 21.000000000000000000
+        Size.PlatformDefault = False
+      end
+      object ProxyUserEdit: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        TabOrder = 12
+        Text = 'ProxyUserEdit'
+        Position.X = 317.000000000000000000
+        Position.Y = 34.000000000000000000
+        Size.Width = 145.000000000000000000
+        Size.Height = 21.000000000000000000
+        Size.PlatformDefault = False
+      end
+      object ProxyPasswordEdit: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        TabOrder = 13
+        Text = 'ProxyPasswordEdit'
+        Position.X = 317.000000000000000000
+        Position.Y = 60.000000000000000000
+        Size.Width = 145.000000000000000000
+        Size.Height = 21.000000000000000000
+        Size.PlatformDefault = False
+      end
+    end
+  end
+  object StyleBook1: TStyleBook
+    Styles = <
+      item
+        ResourcesBin = {
+          464D585F5354594C4520322E3501060D50616E656C57696E5374796C6503D800
+          060D50616E656C4D61635374796C6503C30000545046300A5452656374616E67
+          6C6500095374796C654E616D65060D50616E656C57696E5374796C650A46696C
+          6C2E436F6C6F720708636C6157686974650748697454657374080A506F736974
+          696F6E2E580500000000000080C507400A506F736974696F6E2E590500000000
+          000080A407400553696465730B000A53697A652E576964746805000000000000
+          00C804400B53697A652E4865696768740500000000000000C804401453697A65
+          2E506C6174666F726D44656661756C74080C5374726F6B652E436F6C6F720709
+          7846463845384538450000545046300A5452656374616E676C6500095374796C
+          654E616D65060D50616E656C4D61635374796C650748697454657374080A506F
+          736974696F6E2E580500000000000080C507400A506F736974696F6E2E590500
+          000000000080A407400553696465730B000A53697A652E576964746805000000
+          00000000C804400B53697A652E4865696768740500000000000000C804401453
+          697A652E506C6174666F726D44656661756C74080C5374726F6B652E436F6C6F
+          7207097846463845384538450000}
+      end>
+    Left = 112
+    Top = 445
+  end
+  object FtpClient1: TFtpClient
+    Timeout = 15
+    Port = 'ftp'
+    CodePage = 0
+    DataPortRangeStart = 0
+    DataPortRangeEnd = 0
+    LocalAddr = '0.0.0.0'
+    LocalAddr6 = '::'
+    DisplayFileFlag = False
+    Binary = True
+    ShareMode = ftpShareDenyWrite
+    Options = [ftpAcceptLF]
+    ConnectionType = ftpDirect
+    ProxyPort = 'ftp'
+    Language = 'EN'
+    OnDisplayFile = FtpClient1DisplayFile
+    OnProgress64 = FtpClient1Progress64
+    OnSessionConnected = FtpClient1SessionConnected
+    OnSessionClosed = FtpClient1SessionClosed
+    OnRequestDone = FtpClient1RequestDone
+    OnStateChange = FtpClient1StateChange
+    BandwidthLimit = 10000
+    BandwidthSampling = 1000
+    SocketFamily = sfAny
+    SocketErrs = wsErrTech
+    Left = 38
+    Top = 446
+  end
+end

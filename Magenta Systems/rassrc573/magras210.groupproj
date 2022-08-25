@@ -1,0 +1,84 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{4377D2DC-9C31-4571-8A5E-4C3901B59F16}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="rasdemo4.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Magentasubs21.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="magras210r.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="magras210d.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="tapidemo.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="rasdemo4">
+        <MSBuild Projects="rasdemo4.dproj"/>
+    </Target>
+    <Target Name="rasdemo4:Clean">
+        <MSBuild Projects="rasdemo4.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="rasdemo4:Make">
+        <MSBuild Projects="rasdemo4.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Magentasubs21">
+        <MSBuild Projects="Magentasubs21.dproj"/>
+    </Target>
+    <Target Name="Magentasubs21:Clean">
+        <MSBuild Projects="Magentasubs21.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Magentasubs21:Make">
+        <MSBuild Projects="Magentasubs21.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="magras210r">
+        <MSBuild Projects="magras210r.dproj"/>
+    </Target>
+    <Target Name="magras210r:Clean">
+        <MSBuild Projects="magras210r.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="magras210r:Make">
+        <MSBuild Projects="magras210r.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="magras210d">
+        <MSBuild Projects="magras210d.dproj"/>
+    </Target>
+    <Target Name="magras210d:Clean">
+        <MSBuild Projects="magras210d.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="magras210d:Make">
+        <MSBuild Projects="magras210d.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="tapidemo">
+        <MSBuild Projects="tapidemo.dproj"/>
+    </Target>
+    <Target Name="tapidemo:Clean">
+        <MSBuild Projects="tapidemo.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="tapidemo:Make">
+        <MSBuild Projects="tapidemo.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="rasdemo4;Magentasubs21;magras210r;magras210d;tapidemo"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="rasdemo4:Clean;Magentasubs21:Clean;magras210r:Clean;magras210d:Clean;tapidemo:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="rasdemo4:Make;Magentasubs21:Make;magras210r:Make;magras210d:Make;tapidemo:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

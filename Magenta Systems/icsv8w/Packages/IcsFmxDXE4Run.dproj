@@ -1,0 +1,267 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{BCD0545C-3A49-4959-BB73-0741D6E1D23B}</ProjectGuid>
+        <MainSource>IcsFmxDXE4Run.dpk</MainSource>
+        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+        <DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
+        <DCC_DependencyCheckOutputName/>
+        <ProjectVersion>14.6</ProjectVersion>
+        <Config Condition="'$(Config)'==''">Debug</Config>
+        <Base>True</Base>
+        <AppType>Package</AppType>
+        <FrameworkType>FMX</FrameworkType>
+        <Platform Condition="'$(Platform)'==''">Win64</Platform>
+        <TargetedPlatforms>7</TargetedPlatforms>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='OSX32' and '$(Base)'=='true') or '$(Base_OSX32)'!=''">
+        <Base_OSX32>true</Base_OSX32>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Base)'=='true') or '$(Base_Win32)'!=''">
+        <Base_Win32>true</Base_Win32>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win64' and '$(Base)'=='true') or '$(Base_Win64)'!=''">
+        <Base_Win64>true</Base_Win64>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_Release)'!=''">
+        <Cfg_Release>true</Cfg_Release>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_Release)'=='true') or '$(Cfg_Release_Win32)'!=''">
+        <Cfg_Release_Win32>true</Cfg_Release_Win32>
+        <CfgParent>Cfg_Release</CfgParent>
+        <Cfg_Release>true</Cfg_Release>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_Debug)'!=''">
+        <Cfg_Debug>true</Cfg_Debug>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_Debug)'=='true') or '$(Cfg_Debug_Win32)'!=''">
+        <Cfg_Debug_Win32>true</Cfg_Debug_Win32>
+        <CfgParent>Cfg_Debug</CfgParent>
+        <Cfg_Debug>true</Cfg_Debug>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win64' and '$(Cfg_Debug)'=='true') or '$(Cfg_Debug_Win64)'!=''">
+        <Cfg_Debug_Win64>true</Cfg_Debug_Win64>
+        <CfgParent>Cfg_Debug</CfgParent>
+        <Cfg_Debug>true</Cfg_Debug>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base)'!=''">
+        <DCC_UnitSearchPath>..\Source;..\Source\Include;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+        <DCC_OutputNeverBuildDcps>true</DCC_OutputNeverBuildDcps>
+        <DCC_Namespace>System;$(DCC_Namespace)</DCC_Namespace>
+        <DCC_DcuOutput>..\Lib\$(Config)\$(Platform)\XE4</DCC_DcuOutput>
+        <DCC_ExeOutput>.\$(Platform)\$(Config)</DCC_ExeOutput>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+        <DCC_Define>USE_SSL;$(DCC_Define)</DCC_Define>
+        <RuntimeOnlyPackage>true</RuntimeOnlyPackage>
+        <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+        <DCC_Description>Overbyte ICS FMX Run-Time Package for Delphi XE4</DCC_Description>
+        <DCC_RangeChecking>true</DCC_RangeChecking>
+        <DCC_IntegerOverflowCheck>true</DCC_IntegerOverflowCheck>
+        <GenDll>true</GenDll>
+        <GenPackage>true</GenPackage>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base_OSX32)'!=''">
+        <Icns_MainIcns>$(BDS)\bin\delphi_PROJECTICNS.icns</Icns_MainIcns>
+        <Debugger_Launcher>/usr/X11/bin/xterm -e &quot;%debuggee%&quot;</Debugger_Launcher>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base_Win32)'!=''">
+        <DCC_Namespace>Winapi;$(DCC_Namespace)</DCC_Namespace>
+        <DCC_OutputNeverBuildDcps>true</DCC_OutputNeverBuildDcps>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base_Win64)'!=''">
+        <DCC_Namespace>Winapi;$(DCC_Namespace)</DCC_Namespace>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_Release)'!=''">
+        <DCC_AssertionsAtRuntime>false</DCC_AssertionsAtRuntime>
+        <Version>7.0</Version>
+        <DCC_DebugInformation>False</DCC_DebugInformation>
+        <DCC_LocalDebugSymbols>False</DCC_LocalDebugSymbols>
+        <DCC_Optimize>true</DCC_Optimize>
+        <DCC_IntegerOverflowCheck>false</DCC_IntegerOverflowCheck>
+        <DCC_RangeChecking>false</DCC_RangeChecking>
+        <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+        <DCC_Define>RELEASE;USE_SSL</DCC_Define>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_Release_Win32)'!=''">
+        <DCC_OutputNeverBuildDcps>true</DCC_OutputNeverBuildDcps>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_Debug)'!=''">
+        <DCC_DebugInfoInExe>true</DCC_DebugInfoInExe>
+        <DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
+        <DCC_SymbolReferenceInfo>2</DCC_SymbolReferenceInfo>
+        <Version>7.0</Version>
+        <DCC_Optimize>False</DCC_Optimize>
+        <DCC_IntegerOverflowCheck>false</DCC_IntegerOverflowCheck>
+        <DCC_RangeChecking>false</DCC_RangeChecking>
+        <DCC_Define>DEBUG;USE_SSL</DCC_Define>
+        <DCC_ResourcePath>..\Vc32</DCC_ResourcePath>
+        <DCC_ObjPath>..\Vc32</DCC_ObjPath>
+        <DCC_IncludePath>..\Vc32</DCC_IncludePath>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_Debug_Win32)'!=''">
+        <DCC_Description>Overbyte ICS FMX Run-Time Package for Delphi XE4</DCC_Description>
+        <DCC_OutputNeverBuildDcps>true</DCC_OutputNeverBuildDcps>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_Debug_Win64)'!=''">
+        <DCC_DcuOutput>..\Lib\$(Config)\$(Platform)\XE4</DCC_DcuOutput>
+    </PropertyGroup>
+    <ItemGroup>
+        <DelphiCompile Include="$(MainSource)">
+            <MainSource>MainSource</MainSource>
+        </DelphiCompile>
+        <DCCReference Include="..\Source\OverbyteIcsHttpSrv.dcr"/>
+        <DCCReference Include="..\Source\OverbyteIcsFtpSrv.dcr"/>
+        <DCCReference Include="..\Source\OverbyteIcsNntpCli.dcr"/>
+        <DCCReference Include="..\Source\OverbyteIcsWSocket.dcr"/>
+        <DCCReference Include="..\Source\OverbyteIcsFtpCli.dcr"/>
+        <DCCReference Include="..\Source\OverbyteIcsHttpProt.dcr"/>
+        <DCCReference Include="..\Source\OverbyteIcsWSocketS.dcr"/>
+        <DCCReference Include="..\Source\OverbyteIcsSmtpProt.dcr"/>
+        <DCCReference Include="..\Source\OverbyteIcsPop3Prot.dcr"/>
+        <DCCReference Include="..\Source\OverbyteIcsDnsQuery.dcr"/>
+        <DCCReference Include="..\Source\OverbyteIcsFingCli.dcr"/>
+        <DCCReference Include="..\Source\OverbyteIcsPing.dcr"/>
+        <DCCReference Include="..\Source\OverbyteIcsMultipartFtpDownloader.dcr"/>
+        <DCCReference Include="..\Source\OverbyteIcsMultipartHttpDownloader.dcr"/>
+        <DCCReference Include="..\Source\OverbyteIcsSslSessionCache.dcr"/>
+        <DCCReference Include="..\Source\OverbyteIcsHttpAppServer.dcr"/>
+        <DCCReference Include="..\Source\OverbyteIcsCharsetComboBox.dcr"/>
+        <DCCReference Include="..\Source\OverbyteIcsProxy.dcr"/>
+        <DCCReference Include="..\Source\OverbyteIcsSslX509Certs.dcr"/>
+        <DCCReference Include="..\Source\OverbyteIcsSslHttpRest.dcr"/>
+        <DCCReference Include="..\source\OverbyteIcsBlacklist.dcr"/>
+        <DCCReference Include="..\source\OverbyteIcsIpStreamLog.dcr"/>
+        <DCCReference Include="..\source\OverbyteIcsMailQueue.dcr"/>
+        <DCCReference Include="..\source\OverbyteIcsSntp.dcr"/>
+        <DCCReference Include="..\source\OverbyteIcsWhoisCli.dcr"/>
+        <DCCReference Include="..\source\OverbyteIcsFileCopy.dcr"/>
+        <DCCReference Include="..\source\OverbyteIcsHttpMulti.dcr"/>
+        <DCCReference Include="..\source\OverbyteIcsFtpMulti.dcr"/>
+        <DCCReference Include="rtl.dcp"/>
+        <DCCReference Include="fmx.dcp"/>
+        <DCCReference Include="IcsCommonDXE4Run.dcp"/>
+        <DCCReference Include="..\Source\Ics.Fmx.OverbyteIcsWndControl.pas"/>
+        <DCCReference Include="..\Source\Ics.Fmx.OverbyteIcsWSocket.pas"/>
+        <DCCReference Include="..\Source\Ics.Fmx.OverbyteIcsFtpCli.pas"/>
+        <DCCReference Include="..\Source\Ics.Fmx.OverbyteIcsFtpSrv.pas"/>
+        <DCCReference Include="..\Source\Ics.Fmx.OverbyteIcsHttpProt.pas"/>
+        <DCCReference Include="..\Source\Ics.Fmx.OverbyteIcsWSocketS.pas"/>
+        <DCCReference Include="..\Source\Ics.Fmx.OverbyteIcsSmtpProt.pas"/>
+        <DCCReference Include="..\Source\Ics.Fmx.OverbyteIcsPop3Prot.pas"/>
+        <DCCReference Include="..\Source\Ics.Fmx.OverbyteIcsNntpCli.pas"/>
+        <DCCReference Include="..\Source\Ics.Fmx.OverbyteIcsPing.pas"/>
+        <DCCReference Include="..\Source\Ics.Fmx.OverbyteIcsDnsQuery.pas"/>
+        <DCCReference Include="..\Source\Ics.Fmx.OverbyteIcsFingCli.pas"/>
+        <DCCReference Include="..\Source\Ics.Fmx.OverbyteIcsSslSessionCache.pas"/>
+        <DCCReference Include="..\Source\Ics.Fmx.OverbyteIcsHttpSrv.pas"/>
+        <DCCReference Include="..\Source\Ics.Fmx.OverbyteIcsSocketUtils.pas"/>
+        <DCCReference Include="..\Source\Ics.Fmx.OverbyteIcsMultipartFtpDownloader.pas"/>
+        <DCCReference Include="..\Source\Ics.Fmx.OverbyteIcsMultipartHttpDownloader.pas"/>
+        <DCCReference Include="..\Source\Ics.Fmx.OverbyteIcsHttpAppServer.pas"/>
+        <DCCReference Include="..\Source\Ics.Fmx.OverbyteIcsThreadTimer.pas"/>
+        <DCCReference Include="..\Source\Ics.Fmx.OverbyteIcsCharsetComboBox.pas"/>
+        <DCCReference Include="..\Source\Ics.Posix.PXMessages.pas"/>
+        <DCCReference Include="..\Source\Ics.Fmx.OverbyteIcsIcmp.pas"/>
+        <DCCReference Include="..\Source\Ics.Fmx.OverbyteIcsSslX509Certs.pas"/>
+        <DCCReference Include="..\Source\Ics.Fmx.OverbyteIcsSslHttpRest.pas"/>
+        <DCCReference Include="..\Source\Ics.Fmx.OverbyteIcsMsSslUtils.pas"/>
+        <DCCReference Include="..\Source\Ics.Fmx.OverbyteIcsSslX509Utils.pas"/>
+        <DCCReference Include="..\Source\Ics.Fmx.OverbyteIcsSslJose.pas"/>
+        <DCCReference Include="..\Source\Ics.Fmx.OverbyteIcsProxy.pas"/>
+        <DCCReference Include="..\Source\Ics.Fmx.OverbyteIcsBlacklist.pas"/>
+        <DCCReference Include="..\Source\Ics.Fmx.OverbyteIcsIpStreamLog.pas"/>
+        <DCCReference Include="..\Source\Ics.Fmx.OverbyteIcsMailQueue.pas"/>
+        <DCCReference Include="..\Source\Ics.Fmx.OverbyteIcsSntp.pas"/>
+        <DCCReference Include="..\Source\Ics.Fmx.OverbyteIcsWhoisCli.pas"/>
+        <DCCReference Include="..\Source\Ics.Fmx.OverbyteIcsFileCopy.pas"/>
+        <DCCReference Include="..\Source\Ics.Fmx.OverbyteIcsHttpMulti.pas"/>
+        <DCCReference Include="..\Source\Ics.Fmx.OverbyteIcsFtpMulti.pas"/>
+        <DCCReference Include="..\Source\Ics.Fmx.OverbyteIcsSslHttpOAuth.pas"/>
+        <BuildConfiguration Include="Release">
+            <Key>Cfg_Release</Key>
+            <CfgParent>Base</CfgParent>
+        </BuildConfiguration>
+        <BuildConfiguration Include="Base">
+            <Key>Base</Key>
+        </BuildConfiguration>
+        <BuildConfiguration Include="Debug">
+            <Key>Cfg_Debug</Key>
+            <CfgParent>Base</CfgParent>
+        </BuildConfiguration>
+    </ItemGroup>
+    <Import Condition="Exists('$(BDS)\Bin\CodeGear.Delphi.Targets')" Project="$(BDS)\Bin\CodeGear.Delphi.Targets"/>
+    <ProjectExtensions>
+        <Borland.Personality>Delphi.Personality.12</Borland.Personality>
+        <Borland.ProjectType>Package</Borland.ProjectType>
+        <BorlandProject>
+            <Delphi.Personality>
+                <Parameters/>
+                <VersionInfo>
+                    <VersionInfo Name="IncludeVerInfo">True</VersionInfo>
+                    <VersionInfo Name="AutoIncBuild">False</VersionInfo>
+                    <VersionInfo Name="MajorVer">1</VersionInfo>
+                    <VersionInfo Name="MinorVer">0</VersionInfo>
+                    <VersionInfo Name="Release">0</VersionInfo>
+                    <VersionInfo Name="Build">0</VersionInfo>
+                    <VersionInfo Name="Debug">False</VersionInfo>
+                    <VersionInfo Name="PreRelease">False</VersionInfo>
+                    <VersionInfo Name="Special">False</VersionInfo>
+                    <VersionInfo Name="Private">False</VersionInfo>
+                    <VersionInfo Name="DLL">False</VersionInfo>
+                    <VersionInfo Name="Locale">1033</VersionInfo>
+                    <VersionInfo Name="CodePage">1252</VersionInfo>
+                </VersionInfo>
+                <VersionInfoKeys>
+                    <VersionInfoKeys Name="CompanyName"/>
+                    <VersionInfoKeys Name="FileDescription"/>
+                    <VersionInfoKeys Name="FileVersion">1.0.0.0</VersionInfoKeys>
+                    <VersionInfoKeys Name="InternalName"/>
+                    <VersionInfoKeys Name="LegalCopyright"/>
+                    <VersionInfoKeys Name="LegalTrademarks"/>
+                    <VersionInfoKeys Name="OriginalFilename"/>
+                    <VersionInfoKeys Name="ProductName"/>
+                    <VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys>
+                    <VersionInfoKeys Name="Comments"/>
+                </VersionInfoKeys>
+                <Source>
+                    <Source Name="MainSource">IcsFmxDXE4Run.dpk</Source>
+                </Source>
+                <VersionControl>
+                    <VersionControl Name="VersionControlID"/>
+                </VersionControl>
+                <Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\bcboffice2k180.bpl">Embarcadero C++Builder Office 2000 Servers Package</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\bcbofficexp180.bpl">Embarcadero C++Builder Office XP Servers Package</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k180.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclofficexp180.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+                </Excluded_Packages>
+            </Delphi.Personality>
+            <Platforms>
+                <Platform value="iOSDevice">False</Platform>
+                <Platform value="iOSSimulator">False</Platform>
+                <Platform value="OSX32">True</Platform>
+                <Platform value="Win32">True</Platform>
+                <Platform value="Win64">True</Platform>
+            </Platforms>
+        </BorlandProject>
+        <ProjectFileVersion>12</ProjectFileVersion>
+    </ProjectExtensions>
+    <Import Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')" Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj"/>
+</Project>

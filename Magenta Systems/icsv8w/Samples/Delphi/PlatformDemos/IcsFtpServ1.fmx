@@ -1,0 +1,364 @@
+object FtpServerForm: TFtpServerForm
+  Left = 205
+  Top = 121
+  Caption = 'FtpServerSForm'
+  ClientHeight = 256
+  ClientWidth = 376
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop, iPhone, iPad]
+  OnCreate = FormCreate
+  OnClose = FormClose
+  OnDestroy = FormDestroy
+  Left = 205
+  Top = 121
+  DesignerMasterStyle = 0
+  object MainMenu1: TMainMenu
+    Left = 120
+    Top = 112
+    object File1: TMenuItem
+      Text = 'File'
+      object MnuStartServer: TMenuItem
+        Locked = True
+        Text = 'Start server'
+        OnClick = MnuStartServerClick
+      end
+      object MnuStopServer: TMenuItem
+        Locked = True
+        Text = 'Stop server'
+        OnClick = MnuStopServerClick
+      end
+      object N2: TMenuItem
+        Locked = True
+        Text = '-'
+      end
+      object MnuListClients: TMenuItem
+        Locked = True
+        Text = 'List clients'
+        OnClick = MnuListClientsClick
+      end
+      object DisconnectAllMnu: TMenuItem
+        Locked = True
+        Text = 'Disconnect all'
+        OnClick = DisconnectAllMnuClick
+      end
+      object N1: TMenuItem
+        Locked = True
+        Text = '-'
+      end
+      object MnuQuit: TMenuItem
+        Locked = True
+        Text = 'Quit'
+        OnClick = MnuQuitClick
+      end
+    end
+    object Tools1: TMenuItem
+      Text = 'Tools'
+      object Cleardisplay1: TMenuItem
+        Locked = True
+        Text = 'Clear display'
+        OnClick = Cleardisplay1Click
+      end
+      object DisplayDirectories1: TMenuItem
+        Locked = True
+        Text = 'Display Directories'
+        OnClick = DisplayDirectories1Click
+      end
+    end
+    object About1: TMenuItem
+      Text = 'About'
+    end
+    object Options1: TMenuItem
+      Text = 'Options'
+      object BindFtpData: TMenuItem
+        Locked = True
+        AutoCheck = True
+        Text = 'Bind FTP data channel (usually port 20)'
+      end
+      object ForceHomeDir: TMenuItem
+        Locked = True
+        AutoCheck = True
+        Text = 'ForceHomeDir'
+        OnClick = ForceHomeDirClick
+      end
+      object HidePhysicalPath: TMenuItem
+        Locked = True
+        AutoCheck = True
+        Text = 'HidePhysicalPath'
+        OnClick = HidePhysicalPathClick
+      end
+      object Authenticateotpmd5: TMenuItem
+        Locked = True
+        Text = 'Authenticate otp-md5'
+        OnClick = Authenticateotpmd5Click
+      end
+      object Authenticateotpmd4: TMenuItem
+        Locked = True
+        Text = 'Authenticate otp-md4'
+        OnClick = Authenticateotpmd4Click
+      end
+      object Authenticateotpsha1: TMenuItem
+        Locked = True
+        Text = 'Authenticate otp-sha1'
+        OnClick = Authenticateotpsha1Click
+      end
+    end
+  end
+  object InfoMemo: TMemo
+    Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+    DataDetectorTypes = []
+    Lines.Strings = (
+      'InfoMemo')
+    Align = Client
+    Size.Width = 376.000000000000000000
+    Size.Height = 167.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    Viewport.Width = 372.000000000000000000
+    Viewport.Height = 163.000000000000000000
+  end
+  object Panel1: TPanel
+    Align = Top
+    Size.Width = 376.000000000000000000
+    Size.Height = 89.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    object ClientCountLabel: TLabel
+      AutoSize = True
+      Position.X = 48.000000000000000000
+      Position.Y = 8.000000000000000000
+      Size.Width = 91.000000000000000000
+      Size.Height = 16.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.WordWrap = False
+      Text = 'ClientCountLabel'
+      TabOrder = 0
+      Left = 44
+      Top = 12
+    end
+    object Label1: TLabel
+      AutoSize = True
+      Position.X = 4.000000000000000000
+      Position.Y = 62.000000000000000000
+      Size.Width = 76.000000000000000000
+      Size.Height = 16.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.WordWrap = False
+      Text = 'Root directory'
+      TabOrder = 1
+      Left = 10
+      Top = 40
+    end
+    object Label13: TLabel
+      AutoSize = True
+      Position.X = 244.000000000000000000
+      Position.Y = 10.000000000000000000
+      Size.Width = 61.000000000000000000
+      Size.Height = 16.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.WordWrap = False
+      Text = 'Max KBytes'
+      TabOrder = 2
+      Left = 242
+      Top = 12
+    end
+    object StartMinimizedCheckBox: TCheckBox
+      Position.X = 136.000000000000000000
+      Position.Y = 8.000000000000000000
+      Size.Width = 105.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 3
+      Text = 'Start Minimized'
+      Left = 136
+      Top = 12
+    end
+    object RootDirectory: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      TabOrder = 4
+      Text = 'c:\temp'
+      Position.X = 85.000000000000000000
+      Position.Y = 59.000000000000000000
+      Size.Width = 276.000000000000000000
+      Size.Height = 21.000000000000000000
+      Size.PlatformDefault = False
+      Left = 85
+      Top = 35
+    end
+    object MaxKB: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      TabOrder = 5
+      Text = 'MaxKB'
+      Position.X = 304.000000000000000000
+      Position.Y = 8.000000000000000000
+      Size.Width = 57.000000000000000000
+      Size.Height = 21.000000000000000000
+      Size.PlatformDefault = False
+      Left = 304
+      Top = 8
+    end
+    object RedImage: TImage
+      MultiResBitmap = <
+        item
+          Width = 9
+          Height = 15
+          PNG = {
+            89504E470D0A1A0A0000000D49484452000000090000000F080600000036C8E5
+            0D000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+            01904944415428533551CB2E0441143D555DBE81582212ECC463C63032CC964F
+            90D87B2733B676962CFD83849D788C1E2299784B24AC4682C1643EC0A37B745D
+            A72A5149F7EDAAF3B8754FABADD919A956AB383FABC02D51BEA0253018181A44
+            57773790D690F79D6D29644664542B190BB4644DE0F7F5DD1D19A2CE4029281D
+            E0F2EE1AA94C1A22E2DDAE6E6E9168E097AE412BB056FBA8A1DE68A0B5ADCD13
+            12026FF50F3CBFD6F0F4F20A1DF360A950449458FC6AE59F84C498AFC562114D
+            E226F28041FF700A958B0B4059DF72389D414C5B6762220BAC6F6C223C39C5C1
+            DE1E0916964E5353D3888DC137493AA6CB7CB1801F610BADD1DED18924D0F862
+            FB85555EC3913E254193D33945C46CAA6FEF0448A2A8499123996F6B1169C1FE
+            7188ECE4844BC4AFD271094D378023B949840ED9F11CCAE51249CADF2B97CFE3
+            F0E8C8E7440FE64237CBE012A571FFF84091F6318015ACDA85A748B5643B414F
+            5F2F1246401D1D1DC876BC1B3F145B85C8E5267CE2EE5EE530244082E1666979
+            4E4C0BB18046FCD9FF9503FBF395E579F9032903B80BA734212E000000004945
+            4E44AE426082}
+        end>
+      Position.X = 24.000000000000000000
+      Position.Y = 8.000000000000000000
+      Size.Width = 17.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      OnDblClick = ImagesDblClick
+      Left = 32
+      Top = 12
+    end
+    object GreenImage: TImage
+      MultiResBitmap = <
+        item
+          Width = 9
+          Height = 15
+          PNG = {
+            89504E470D0A1A0A0000000D49484452000000090000000F080600000036C8E5
+            0D000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+            019A4944415428532D91CF6E133110C67FF66E3669515F001171A8AA94C04BD0
+            7F8817E85B14155205C4015522A054691F2127C4918AEBAA4DB2017AA38742DA
+            4A552F7D8DECDAC3D8C5DEB1BDE36FBE99F9CCABDD1DB1A91103620D52534BF5
+            1C2D31F2E6F58E90D4AC4CA7139916E3084A1324B3C8CFC9587EA8BF96190DF0
+            82738EF5B50D8A620C784484E71B6B8C46A754A5609DD3C55A08F91432383A04
+            A5F47A8E35A8D3EAD455EE1D6A9DBDAE826D4810F7F0A5D4A0C4312A4E638AC0
+            18C649718233CAA7F7A94E2AE378F9628B7C922B5B48049B5B9BE4790E492053
+            A44B1D2C2838A968AE3C666E2BA8DFFF930550032E6F6718DDE769C9CDDD0D73
+            33275BAA73713D8346286A3991E3F36FF2F16B4FB2D5BA349E2ECAC2B307D2FB
+            D293E3DFDF8547AA9D6446693D074707BCFFF04E5B108C310C0E070C87C358B8
+            156DFFCFF585BE898A6AB568EB54A3529B29995DFDFD5FB85EB6DA2D2A5F4687
+            570982B8E115DAED76EC34F51A179C9D6E877EBF1F53691CDDEE5B555BBBD691
+            6CEF6EEF8BF77CEA7DC6971EE71DAE729CFD3AE3496B9566F321FF002477BBB1
+            2B56EA350000000049454E44AE426082}
+        end>
+      Position.X = 8.000000000000000000
+      Position.Y = 8.000000000000000000
+      Size.Width = 17.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      OnDblClick = ImagesDblClick
+      Left = 16
+      Top = 12
+    end
+    object PortEdit: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      TabOrder = 8
+      Text = 'ftp'
+      Position.X = 85.000000000000000000
+      Position.Y = 32.000000000000000000
+      Size.Width = 36.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+    end
+    object Label2: TLabel
+      AutoSize = True
+      Position.X = 24.000000000000000000
+      Position.Y = 35.000000000000000000
+      Size.Width = 57.000000000000000000
+      Size.Height = 16.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.WordWrap = False
+      Text = 'Listen port'
+      TabOrder = 9
+    end
+    object Label3: TLabel
+      Position.X = 136.000000000000000000
+      Position.Y = 28.000000000000000000
+      Size.Width = 217.000000000000000000
+      Size.Height = 33.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'OS X port numbers < 1024 require the app being started as root  '
+      TabOrder = 10
+    end
+  end
+  object FtpServer1: TFtpServer
+    Addr = '0.0.0.0'
+    SocketFamily = sfIPv4
+    Port = 'ftp'
+    ListenBackLog = 5
+    MultiListenSockets = <>
+    Banner = '220 ICS FTP Server ready'
+    UserData = 0
+    MaxClients = 0
+    PasvPortRangeStart = 20100
+    PasvPortRangeSize = 99
+    Options = [ftpsCwdCheck, ftpsCalcMD5OnTheFly, ftpsModeZCompress, ftpsSiteXmlsd, ftpsThreadRecurDirs, ftpsEnableUtf8, ftpsAutoDetectCodePage]
+    MD5UseThreadFileSize = 1000000
+    TimeoutSecsLogin = 60
+    TimeoutSecsIdle = 300
+    TimeoutSecsXfer = 900
+    ZlibMinLevel = 1
+    ZlibMaxLevel = 9
+    ZlibNoCompExt = '.zip;.rar;.7z;.cab;.lzh;.gz;.avi;.wmv;.mpg;.mp3;.jpg;.png;'
+    AlloExtraSpace = 1000000
+    ZlibMinSpace = 50000000
+    ZlibMaxSize = 500000000
+    CodePage = 0
+    Language = 'EN*'
+    MaxAttempts = 12
+    BandwidthLimit = 0
+    BandwidthSampling = 1000
+    OnStart = FtpServer1Start
+    OnStop = FtpServer1Stop
+    OnAuthenticate = FtpServer1Authenticate
+    OnOtpMethod = FtpServer1OtpMethodEvent
+    OnOtpGetPassword = FtpServer1OtpGetPasswordEvent
+    OnClientDisconnect = FtpServer1ClientDisconnect
+    OnClientConnect = FtpServer1ClientConnect
+    OnClientCommand = FtpServer1ClientCommand
+    OnAnswerToClient = FtpServer1AnswerToClient
+    OnChangeDirectory = FtpServer1ChangeDirectory
+    OnMakeDirectory = FtpServer1MakeDirectory
+    OnBuildDirectory = FtpServer1BuildDirectory
+    OnAlterDirectory = FtpServer1AlterDirectory
+    OnStorSessionConnected = FtpServer1StorSessionConnected
+    OnRetrSessionConnected = FtpServer1RetrSessionConnected
+    OnStorSessionClosed = FtpServer1StorSessionClosed
+    OnRetrSessionClosed = FtpServer1RetrSessionClosed
+    OnRetrDataSent = FtpServer1RetrDataSent
+    OnValidatePut = FtpServer1ValidatePut
+    OnValidateDele = FtpServer1ValidateDele
+    OnValidateRnFr = FtpServer1ValidateRnFr
+    OnGetProcessing = FtpServer1GetProcessing
+    OnValidateMfmt = FtpServer1ValidateMfmt
+    OnCalculateMd5 = FtpServer1CalculateMd5
+    OnMd5Calculated = FtpServer1Md5Calculated
+    OnCalculateCrc = FtpServer1CalculateCrc
+    OnValidateAllo = FtpServer1ValidateAllo
+    OnSiteMsg = FtpServer1SiteMsg
+    OnSiteExec = FtpServer1SiteExec
+    OnSitePaswd = FtpServer1SitePaswd
+    OnCombine = FtpServer1Combine
+    OnTimeout = FtpServer1Timeout
+    OnUpCompressFile = FtpServer1UpCompressFile
+    OnUpCompressedFile = FtpServer1UpCompressedFile
+    OnDisplay = FtpServer1Display
+    OnHost = FtpServer1Host
+    OnRein = FtpServer1Rein
+    SocketErrs = wsErrTech
+    ExclusiveAddr = True
+    Left = 40
+    Top = 112
+  end
+end

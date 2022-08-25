@@ -1,0 +1,96 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{E807D889-9D68-47D7-8759-580E67E9F049}</ProjectGuid>
+		</PropertyGroup>
+		<ItemGroup>
+			<Projects Include="..\Packages\IcsCommonCBXE3Run.cbproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="..\Packages\IcsVclCBXE3Run.cbproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="..\Packages\IcsFmxCBXE3Run.cbproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="..\Packages\IcsVclCBXE3Design.cbproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="..\Packages\IcsFmxCBXE3Design.cbproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="..\Packages\IcsCommonCBXE3Design.cbproj">
+				<Dependencies/>
+			</Projects>
+		</ItemGroup>
+		<ProjectExtensions>
+			<Borland.Personality>Default.Personality.12</Borland.Personality>
+			<Borland.ProjectType/>
+			<BorlandProject>
+				<Default.Personality/>
+			</BorlandProject>
+		</ProjectExtensions>
+		<Target Name="IcsCommonCBXE3Run">
+			<MSBuild Projects="..\Packages\IcsCommonCBXE3Run.cbproj"/>
+		</Target>
+		<Target Name="IcsCommonCBXE3Run:Clean">
+			<MSBuild Projects="..\Packages\IcsCommonCBXE3Run.cbproj" Targets="Clean"/>
+		</Target>
+		<Target Name="IcsCommonCBXE3Run:Make">
+			<MSBuild Projects="..\Packages\IcsCommonCBXE3Run.cbproj" Targets="Make"/>
+		</Target>
+		<Target Name="IcsVclCBXE3Run">
+			<MSBuild Projects="..\Packages\IcsVclCBXE3Run.cbproj"/>
+		</Target>
+		<Target Name="IcsVclCBXE3Run:Clean">
+			<MSBuild Projects="..\Packages\IcsVclCBXE3Run.cbproj" Targets="Clean"/>
+		</Target>
+		<Target Name="IcsVclCBXE3Run:Make">
+			<MSBuild Projects="..\Packages\IcsVclCBXE3Run.cbproj" Targets="Make"/>
+		</Target>
+		<Target Name="IcsFmxCBXE3Run">
+			<MSBuild Projects="..\Packages\IcsFmxCBXE3Run.cbproj"/>
+		</Target>
+		<Target Name="IcsFmxCBXE3Run:Clean">
+			<MSBuild Projects="..\Packages\IcsFmxCBXE3Run.cbproj" Targets="Clean"/>
+		</Target>
+		<Target Name="IcsFmxCBXE3Run:Make">
+			<MSBuild Projects="..\Packages\IcsFmxCBXE3Run.cbproj" Targets="Make"/>
+		</Target>
+		<Target Name="IcsVclCBXE3Design">
+			<MSBuild Projects="..\Packages\IcsVclCBXE3Design.cbproj"/>
+		</Target>
+		<Target Name="IcsVclCBXE3Design:Clean">
+			<MSBuild Projects="..\Packages\IcsVclCBXE3Design.cbproj" Targets="Clean"/>
+		</Target>
+		<Target Name="IcsVclCBXE3Design:Make">
+			<MSBuild Projects="..\Packages\IcsVclCBXE3Design.cbproj" Targets="Make"/>
+		</Target>
+		<Target Name="IcsFmxCBXE3Design">
+			<MSBuild Projects="..\Packages\IcsFmxCBXE3Design.cbproj"/>
+		</Target>
+		<Target Name="IcsFmxCBXE3Design:Clean">
+			<MSBuild Projects="..\Packages\IcsFmxCBXE3Design.cbproj" Targets="Clean"/>
+		</Target>
+		<Target Name="IcsFmxCBXE3Design:Make">
+			<MSBuild Projects="..\Packages\IcsFmxCBXE3Design.cbproj" Targets="Make"/>
+		</Target>
+		<Target Name="IcsCommonCBXE3Design">
+			<MSBuild Projects="..\Packages\IcsCommonCBXE3Design.cbproj"/>
+		</Target>
+		<Target Name="IcsCommonCBXE3Design:Clean">
+			<MSBuild Projects="..\Packages\IcsCommonCBXE3Design.cbproj" Targets="Clean"/>
+		</Target>
+		<Target Name="IcsCommonCBXE3Design:Make">
+			<MSBuild Projects="..\Packages\IcsCommonCBXE3Design.cbproj" Targets="Make"/>
+		</Target>
+		<Target Name="Build">
+			<CallTarget Targets="IcsCommonCBXE3Run;IcsVclCBXE3Run;IcsFmxCBXE3Run;IcsVclCBXE3Design;IcsFmxCBXE3Design;IcsCommonCBXE3Design"/>
+		</Target>
+		<Target Name="Clean">
+			<CallTarget Targets="IcsCommonCBXE3Run:Clean;IcsVclCBXE3Run:Clean;IcsFmxCBXE3Run:Clean;IcsVclCBXE3Design:Clean;IcsFmxCBXE3Design:Clean;IcsCommonCBXE3Design:Clean"/>
+		</Target>
+		<Target Name="Make">
+			<CallTarget Targets="IcsCommonCBXE3Run:Make;IcsVclCBXE3Run:Make;IcsFmxCBXE3Run:Make;IcsVclCBXE3Design:Make;IcsFmxCBXE3Design:Make;IcsCommonCBXE3Design:Make"/>
+		</Target>
+		<Import Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')" Project="$(BDS)\Bin\CodeGear.Group.Targets"/>
+	</Project>

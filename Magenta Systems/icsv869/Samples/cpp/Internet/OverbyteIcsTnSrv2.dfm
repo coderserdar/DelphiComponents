@@ -1,0 +1,90 @@
+object ClientForm: TClientForm
+  Left = 200
+  Top = 122
+  Caption = 'ClientForm'
+  ClientHeight = 266
+  ClientWidth = 427
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  OldCreateOrder = True
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  OnResize = FormResize
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Memo: TMemo
+    Left = 0
+    Top = 0
+    Width = 427
+    Height = 193
+    Align = alTop
+    Lines.Strings = (
+      'Memo')
+    ReadOnly = True
+    TabOrder = 0
+  end
+  object DataEdit: TEdit
+    Left = 0
+    Top = 200
+    Width = 425
+    Height = 21
+    TabOrder = 1
+    Text = 'DataEdit'
+  end
+  object SendButton: TButton
+    Left = 224
+    Top = 232
+    Width = 89
+    Height = 25
+    Caption = '&Send'
+    Default = True
+    TabOrder = 2
+    OnClick = SendButtonClick
+  end
+  object DisconnectButton: TButton
+    Left = 328
+    Top = 232
+    Width = 89
+    Height = 25
+    Caption = '&Disconnect'
+    TabOrder = 3
+    OnClick = DisconnectButtonClick
+  end
+  object Socket: TWSocket
+    LineMode = False
+    LineLimit = 65536
+    LineEnd = #13#10
+    LineEcho = False
+    LineEdit = False
+    Proto = 'tcp'
+    LocalAddr = '0.0.0.0'
+    LocalPort = '0'
+    MultiThreaded = False
+    MultiCast = False
+    MultiCastIpTTL = 1
+    FlushTimeout = 60
+    SendFlags = wsSendNormal
+    LingerOnOff = wsLingerOn
+    LingerTimeout = 0
+    KeepAliveOnOff = wsKeepAliveOff
+    KeepAliveTime = 0
+    KeepAliveInterval = 0
+    SocksLevel = '5'
+    SocksAuthentication = socksNoAuthentication
+    LastError = 0
+    ReuseAddr = False
+    ComponentOptions = []
+    ListenBacklog = 5
+    ReqVerLow = 2
+    ReqVerHigh = 2
+    OnDataAvailable = SocketDataAvailable
+    OnSessionClosed = SocketSessionClosed
+    Left = 8
+    Top = 40
+  end
+end

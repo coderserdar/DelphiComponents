@@ -1,0 +1,65 @@
+#----------------------------------------------------------------------------
+VERSION = BWS.01
+#----------------------------------------------------------------------------
+!ifndef ROOT
+ROOT = $(MAKEDIR)\..
+!endif
+#----------------------------------------------------------------------------
+MAKE = $(ROOT)\bin\make.exe -$(MAKEFLAGS) -f$**
+DCC = $(ROOT)\bin\dcc32.exe $**
+BRCC = $(ROOT)\bin\brcc32.exe $**
+#----------------------------------------------------------------------------
+PROJECTS = OverbyteIcsHttpTst.exe OverbyteIcsWebServ.exe \
+  OverbyteIcsHttpPost.exe OverbyteIcsHttpMultipartDownload.exe \
+  OverbyteIcsConHttp.exe OverbyteIcsHttpAsy.exe OverbyteIcsHttpAsp.exe \
+  OverbyteIcsWebAppServer.exe OverbyteIcsHttpChk.exe OverbyteIcsHttpDmo.exe \
+  OverbyteIcsHttpGet.exe OverbyteIcsHttpPg.exe OverbyteIcsHttpThrd.exe \
+  OverbyteIcsIsapi.dll
+#----------------------------------------------------------------------------
+default: $(PROJECTS)
+#----------------------------------------------------------------------------
+
+OverbyteIcsHttpTst.exe: OverbyteIcsHttpTst.dpr
+  $(DCC)
+
+OverbyteIcsWebServ.exe: OverbyteIcsWebServ.dpr
+  $(DCC)
+
+OverbyteIcsHttpPost.exe: OverbyteIcsHttpPost.dpr
+  $(DCC)
+
+OverbyteIcsHttpMultipartDownload.exe: OverbyteIcsHttpMultipartDownload.dpr
+  $(DCC)
+
+OverbyteIcsConHttp.exe: OverbyteIcsConHttp.dpr
+  $(DCC)
+
+OverbyteIcsHttpAsy.exe: OverbyteIcsHttpAsy.dpr
+  $(DCC)
+
+OverbyteIcsHttpAsp.exe: OverbyteIcsHttpAsp.dpr
+  $(DCC)
+
+OverbyteIcsWebAppServer.exe: OverbyteIcsWebAppServer.dpr
+  $(DCC)
+
+OverbyteIcsHttpChk.exe: OverbyteIcsHttpChk.dpr
+  $(DCC)
+
+OverbyteIcsHttpDmo.exe: OverbyteIcsHttpDmo.dpr
+  $(DCC)
+
+OverbyteIcsHttpGet.exe: OverbyteIcsHttpGet.dpr
+  $(DCC)
+
+OverbyteIcsHttpPg.exe: OverbyteIcsHttpPg.dpr
+  $(DCC)
+
+OverbyteIcsHttpThrd.exe: OverbyteIcsHttpThrd.dpr
+  $(DCC)
+
+OverbyteIcsIsapi.dll: OverbyteIcsIsapi.dpr
+  $(DCC)
+
+
+

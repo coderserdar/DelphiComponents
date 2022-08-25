@@ -1,0 +1,136 @@
+object DllTestForm: TDllTestForm
+  Left = 138
+  Top = 119
+  Caption = 'DllTest - http://www.overbyte.be'
+  ClientHeight = 213
+  ClientWidth = 371
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop, iPhone, iPad]
+  OnCreate = FormCreate
+  OnClose = FormClose
+  OnDestroy = FormDestroy
+  Left = 138
+  Top = 119
+  DesignerMasterStyle = 0
+  object ToolsPanel: TPanel
+    Align = Top
+    Size.Width = 371.000000000000000000
+    Size.Height = 57.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    object Label1: TLabel
+      AutoSize = True
+      Position.X = 12.000000000000000000
+      Position.Y = 12.000000000000000000
+      Size.Width = 55.000000000000000000
+      Size.Height = 16.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.WordWrap = False
+      Text = 'Hostname'
+      TabOrder = 0
+      Left = 12
+      Top = 12
+    end
+    object Label2: TLabel
+      AutoSize = True
+      Position.X = 152.000000000000000000
+      Position.Y = 12.000000000000000000
+      Size.Width = 22.000000000000000000
+      Size.Height = 16.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.WordWrap = False
+      Text = 'Port'
+      TabOrder = 1
+      Left = 152
+      Top = 12
+    end
+    object Label3: TLabel
+      AutoSize = True
+      Position.X = 44.000000000000000000
+      Position.Y = 36.000000000000000000
+      Size.Width = 16.000000000000000000
+      Size.Height = 16.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.WordWrap = False
+      Text = 'Url'
+      TabOrder = 2
+      Left = 44
+      Top = 36
+    end
+    object HostnameEdit: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      TabOrder = 3
+      Text = 'localhost'
+      Position.X = 64.000000000000000000
+      Position.Y = 8.000000000000000000
+      Size.Width = 73.000000000000000000
+      Size.Height = 21.000000000000000000
+      Size.PlatformDefault = False
+      Left = 64
+      Top = 8
+    end
+    object PortEdit: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      TabOrder = 4
+      Text = 'telnet'
+      Position.X = 184.000000000000000000
+      Position.Y = 8.000000000000000000
+      Size.Width = 45.000000000000000000
+      Size.Height = 21.000000000000000000
+      Size.PlatformDefault = False
+      Left = 184
+      Top = 8
+    end
+    object CallDll1Button: TButton
+      Default = True
+      Position.X = 236.000000000000000000
+      Position.Y = 8.000000000000000000
+      Size.Width = 75.000000000000000000
+      Size.Height = 21.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 5
+      Text = 'Call DLL1'
+      OnClick = CallDll1ButtonClick
+      Left = 236
+      Top = 8
+    end
+    object CallDll2Button: TButton
+      Position.X = 236.000000000000000000
+      Position.Y = 32.000000000000000000
+      Size.Width = 75.000000000000000000
+      Size.Height = 21.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 6
+      Text = 'Call DLL2'
+      OnClick = CallDll2ButtonClick
+      Left = 236
+      Top = 32
+    end
+    object UrlEdit: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      TabOrder = 7
+      Text = 'http://ipv6.google.com'
+      Position.X = 64.000000000000000000
+      Position.Y = 32.000000000000000000
+      Size.Width = 165.000000000000000000
+      Size.Height = 21.000000000000000000
+      Size.PlatformDefault = False
+      Left = 64
+      Top = 32
+    end
+  end
+  object DisplayMemo: TMemo
+    Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+    DataDetectorTypes = []
+    Lines.Strings = (
+      'DisplayMemo')
+    Align = Client
+    Size.Width = 371.000000000000000000
+    Size.Height = 156.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    Viewport.Width = 371.000000000000000000
+    Viewport.Height = 156.000000000000000000
+  end
+end

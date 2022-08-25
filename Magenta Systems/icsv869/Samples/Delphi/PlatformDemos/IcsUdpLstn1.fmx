@@ -1,0 +1,137 @@
+object MainForm: TMainForm
+  Left = 158
+  Top = 169
+  Caption = 'UdpListener'
+  ClientHeight = 115
+  ClientWidth = 318
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop, iPhone, iPad]
+  OnCreate = FormCreate
+  OnClose = FormClose
+  Left = 158
+  Top = 169
+  DesignerMasterStyle = 0
+  object DataAvailableLabel: TLabel
+    AutoSize = True
+    Position.X = 16.000000000000000000
+    Position.Y = 72.000000000000000000
+    Size.Width = 101.000000000000000000
+    Size.Height = 16.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.WordWrap = False
+    Text = 'DataAvailableLabel'
+    TabOrder = 0
+    Left = 16
+    Top = 72
+  end
+  object InfoLabel: TLabel
+    AutoSize = True
+    Position.X = 16.000000000000000000
+    Position.Y = 48.000000000000000000
+    Size.Width = 49.000000000000000000
+    Size.Height = 16.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.WordWrap = False
+    Text = 'InfoLabel'
+    TabOrder = 1
+    Left = 16
+    Top = 48
+  end
+  object Label1: TLabel
+    AutoSize = True
+    Position.X = 176.000000000000000000
+    Position.Y = 11.000000000000000000
+    Size.Width = 49.000000000000000000
+    Size.Height = 16.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.WordWrap = False
+    Text = 'UDP port'
+    TabOrder = 2
+    Left = 176
+    Top = 11
+  end
+  object Label2: TLabel
+    AutoSize = True
+    Position.X = 173.000000000000000000
+    Position.Y = 35.000000000000000000
+    Size.Width = 51.000000000000000000
+    Size.Height = 16.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.WordWrap = False
+    Text = 'Sender IP'
+    TabOrder = 3
+    Left = 173
+    Top = 35
+  end
+  object StartButton: TButton
+    Default = True
+    Position.X = 8.000000000000000000
+    Position.Y = 8.000000000000000000
+    Size.Width = 75.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 4
+    Text = 'Start'
+    OnClick = StartButtonClick
+    Left = 8
+    Top = 8
+  end
+  object StopButton: TButton
+    Position.X = 88.000000000000000000
+    Position.Y = 8.000000000000000000
+    Size.Width = 75.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 5
+    Text = 'Stop'
+    OnClick = StopButtonClick
+    Left = 88
+    Top = 8
+  end
+  object PortEdit: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    TabOrder = 6
+    Text = 'PortEdit'
+    Position.X = 228.000000000000000000
+    Position.Y = 8.000000000000000000
+    Size.Width = 57.000000000000000000
+    Size.Height = 21.000000000000000000
+    Size.PlatformDefault = False
+    Left = 228
+    Top = 8
+  end
+  object SenderEdit: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    TabOrder = 7
+    Text = 'SenderEdit'
+    Position.X = 228.000000000000000000
+    Position.Y = 32.000000000000000000
+    Size.Width = 57.000000000000000000
+    Size.Height = 21.000000000000000000
+    Size.PlatformDefault = False
+    Left = 228
+    Top = 32
+  end
+  object WSocket: TWSocket
+    LineEnd = #13#10
+    Addr = '0.0.0.0'
+    Port = '600'
+    Proto = 'udp'
+    LocalAddr = '0.0.0.0'
+    LocalAddr6 = '::'
+    LocalPort = '0'
+    KeepAliveOnOff = wsKeepAliveOnSystem
+    KeepAliveTime = 30000
+    KeepAliveInterval = 1000
+    SocksLevel = '5'
+    ExclusiveAddr = False
+    ComponentOptions = []
+    OnDataAvailable = WSocketDataAvailable
+    OnSessionClosed = WSocketSessionClosed
+    OnSessionConnected = WSocketSessionConnected
+    SocketErrs = wsErrTech
+    Left = 227
+    Top = 60
+  end
+end

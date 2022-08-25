@@ -1,0 +1,138 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{083ba7a7-db9f-48da-8583-4b069bc84e67}</ProjectGuid>
+  </PropertyGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Projects Include="demopw.dproj" />
+    <Projects Include="exdialc6.dproj" />
+    <Projects Include="exdials6.dproj" />
+    <Projects Include="exeditc6.dproj" />
+    <Projects Include="exedits6.dproj" />
+    <Projects Include="exmon6.dproj" />
+    <Projects Include="exnew6.dproj" />
+    <Projects Include="exnewm6.dproj" />
+    <Projects Include="experf6.dproj" />
+    <Projects Include="pstest.dproj" />
+    <Projects Include="rasdemo6.dproj" />
+    <Projects Include="tapidemo6.dproj" />
+  </ItemGroup>
+  <Target Name="rasdemo6">
+    <MSBuild Projects="rasdemo6.dproj" Targets="" />
+  </Target>
+  <Target Name="rasdemo6:Clean">
+    <MSBuild Projects="rasdemo6.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="rasdemo6:Make">
+    <MSBuild Projects="rasdemo6.dproj" Targets="Make" />
+  </Target>
+  <Target Name="tapidemo6">
+    <MSBuild Projects="tapidemo6.dproj" Targets="" />
+  </Target>
+  <Target Name="tapidemo6:Clean">
+    <MSBuild Projects="tapidemo6.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="tapidemo6:Make">
+    <MSBuild Projects="tapidemo6.dproj" Targets="Make" />
+  </Target>
+  <Target Name="demopw">
+    <MSBuild Projects="demopw.dproj" Targets="" />
+  </Target>
+  <Target Name="demopw:Clean">
+    <MSBuild Projects="demopw.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="demopw:Make">
+    <MSBuild Projects="demopw.dproj" Targets="Make" />
+  </Target>
+  <Target Name="pstest">
+    <MSBuild Projects="pstest.dproj" Targets="" />
+  </Target>
+  <Target Name="pstest:Clean">
+    <MSBuild Projects="pstest.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="pstest:Make">
+    <MSBuild Projects="pstest.dproj" Targets="Make" />
+  </Target>
+  <Target Name="exdialc6">
+    <MSBuild Projects="exdialc6.dproj" Targets="" />
+  </Target>
+  <Target Name="exdialc6:Clean">
+    <MSBuild Projects="exdialc6.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="exdialc6:Make">
+    <MSBuild Projects="exdialc6.dproj" Targets="Make" />
+  </Target>
+  <Target Name="exdials6">
+    <MSBuild Projects="exdials6.dproj" Targets="" />
+  </Target>
+  <Target Name="exdials6:Clean">
+    <MSBuild Projects="exdials6.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="exdials6:Make">
+    <MSBuild Projects="exdials6.dproj" Targets="Make" />
+  </Target>
+  <Target Name="exeditc6">
+    <MSBuild Projects="exeditc6.dproj" Targets="" />
+  </Target>
+  <Target Name="exeditc6:Clean">
+    <MSBuild Projects="exeditc6.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="exeditc6:Make">
+    <MSBuild Projects="exeditc6.dproj" Targets="Make" />
+  </Target>
+  <Target Name="exedits6">
+    <MSBuild Projects="exedits6.dproj" Targets="" />
+  </Target>
+  <Target Name="exedits6:Clean">
+    <MSBuild Projects="exedits6.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="exedits6:Make">
+    <MSBuild Projects="exedits6.dproj" Targets="Make" />
+  </Target>
+  <Target Name="exmon6">
+    <MSBuild Projects="exmon6.dproj" Targets="" />
+  </Target>
+  <Target Name="exmon6:Clean">
+    <MSBuild Projects="exmon6.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="exmon6:Make">
+    <MSBuild Projects="exmon6.dproj" Targets="Make" />
+  </Target>
+  <Target Name="exnew6">
+    <MSBuild Projects="exnew6.dproj" Targets="" />
+  </Target>
+  <Target Name="exnew6:Clean">
+    <MSBuild Projects="exnew6.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="exnew6:Make">
+    <MSBuild Projects="exnew6.dproj" Targets="Make" />
+  </Target>
+  <Target Name="exnewm6">
+    <MSBuild Projects="exnewm6.dproj" Targets="" />
+  </Target>
+  <Target Name="exnewm6:Clean">
+    <MSBuild Projects="exnewm6.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="exnewm6:Make">
+    <MSBuild Projects="exnewm6.dproj" Targets="Make" />
+  </Target>
+  <Target Name="experf6">
+    <MSBuild Projects="experf6.dproj" Targets="" />
+  </Target>
+  <Target Name="experf6:Clean">
+    <MSBuild Projects="experf6.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="experf6:Make">
+    <MSBuild Projects="experf6.dproj" Targets="Make" />
+  </Target>
+  <Target Name="Build">
+    <CallTarget Targets="rasdemo6;tapidemo6;demopw;pstest;exdialc6;exdials6;exeditc6;exedits6;exmon6;exnew6;exnewm6;experf6" />
+  </Target>
+  <Target Name="Clean">
+    <CallTarget Targets="rasdemo6:Clean;tapidemo6:Clean;demopw:Clean;pstest:Clean;exdialc6:Clean;exdials6:Clean;exeditc6:Clean;exedits6:Clean;exmon6:Clean;exnew6:Clean;exnewm6:Clean;experf6:Clean" />
+  </Target>
+  <Target Name="Make">
+    <CallTarget Targets="rasdemo6:Make;tapidemo6:Make;demopw:Make;pstest:Make;exdialc6:Make;exdials6:Make;exeditc6:Make;exedits6:Make;exmon6:Make;exnew6:Make;exnewm6:Make;experf6:Make" />
+  </Target>
+  <Import Condition="Exists('$(MSBuildBinPath)\Borland.Group.Targets')" Project="$(MSBuildBinPath)\Borland.Group.Targets" />
+</Project>

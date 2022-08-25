@@ -1,0 +1,72 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{7B6A6BFF-4BC9-4360-8A27-F58EF388775C}</ProjectGuid>
+  </PropertyGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Projects Include="demopw.dproj" />
+    <Projects Include="magras110d.dproj" />
+    <Projects Include="magras110r.dproj" />
+    <Projects Include="rasdemo6.dproj" />
+    <Projects Include="tapidemo6.dproj" />
+  </ItemGroup>
+  <ProjectExtensions>
+    <BorlandProject>
+<BorlandProject xmlns="" /></BorlandProject>
+  </ProjectExtensions>
+  <Target Name="rasdemo6">
+    <MSBuild Projects="rasdemo6.dproj" Targets="" />
+  </Target>
+  <Target Name="rasdemo6:Clean">
+    <MSBuild Projects="rasdemo6.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="rasdemo6:Make">
+    <MSBuild Projects="rasdemo6.dproj" Targets="Make" />
+  </Target>
+  <Target Name="demopw">
+    <MSBuild Projects="demopw.dproj" Targets="" />
+  </Target>
+  <Target Name="demopw:Clean">
+    <MSBuild Projects="demopw.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="demopw:Make">
+    <MSBuild Projects="demopw.dproj" Targets="Make" />
+  </Target>
+  <Target Name="tapidemo6">
+    <MSBuild Projects="tapidemo6.dproj" Targets="" />
+  </Target>
+  <Target Name="tapidemo6:Clean">
+    <MSBuild Projects="tapidemo6.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="tapidemo6:Make">
+    <MSBuild Projects="tapidemo6.dproj" Targets="Make" />
+  </Target>
+  <Target Name="magras110d">
+    <MSBuild Projects="magras110d.dproj" Targets="" />
+  </Target>
+  <Target Name="magras110d:Clean">
+    <MSBuild Projects="magras110d.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="magras110d:Make">
+    <MSBuild Projects="magras110d.dproj" Targets="Make" />
+  </Target>
+  <Target Name="magras110r">
+    <MSBuild Projects="magras110r.dproj" Targets="" />
+  </Target>
+  <Target Name="magras110r:Clean">
+    <MSBuild Projects="magras110r.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="magras110r:Make">
+    <MSBuild Projects="magras110r.dproj" Targets="Make" />
+  </Target>
+  <Target Name="Build">
+    <CallTarget Targets="rasdemo6;demopw;tapidemo6;magras110d;magras110r" />
+  </Target>
+  <Target Name="Clean">
+    <CallTarget Targets="rasdemo6:Clean;demopw:Clean;tapidemo6:Clean;magras110d:Clean;magras110r:Clean" />
+  </Target>
+  <Target Name="Make">
+    <CallTarget Targets="rasdemo6:Make;demopw:Make;tapidemo6:Make;magras110d:Make;magras110r:Make" />
+  </Target>
+  <Import Condition="Exists('$(MSBuildBinPath)\Borland.Group.Targets')" Project="$(MSBuildBinPath)\Borland.Group.Targets" />
+</Project>

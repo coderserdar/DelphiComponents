@@ -1,0 +1,171 @@
+[Properties]
+ArraySize_Value=0
+FilePrefix_Text=Unit
+OutDir_Text=D:\MAGDELP\delphvar
+DetailsList_Text=D:\MAGDELP\delphvar\Unit-props.sdt
+FontDialog_FontColor=-2147483640
+FontDialog_FontHeight=-13
+FontDialog_FontName=Courier New
+FontDialog_FontPitch=0
+FontDialog_FontSize=10
+FontDialog_FontStyles=xxxx
+
+[Properties.CodeMasks_Lines]
+Item0=CCBoolean - $comp := false ;
+Item1=CCDouble - $comp := 0 ;
+Item2=CCInteger - $comp := 0 ;
+Item3=CCString - $comp := '' ;
+Item4=CCTCheckBoxState - $comp := cbUnchecked ;
+Item5=CCTFont - $comp := LoadFont ('x') ;
+Item6=CCTStringList - $comp.Clear ;
+Item7=CVBoolean - $var := false ;
+Item8=CVDouble - $var := 0 ;
+Item9=CVInteger - $var := 0 ;
+Item10=CVString - $var := '' ;
+Item11=CVTCheckBoxState - $var := cbUnchecked ;
+Item12=CVTFont - $var := LoadFont ('x') ;
+Item13=CVTStringList - $var.Clear ;
+Item14=DVBoolean - $var: $type ;
+Item15=DVDouble - $var: $type ;
+Item16=DVInteger - $var: $type ;
+Item17=DVString - $var: $type ;
+Item18=DVTFont - $var: $type ;
+Item19=DVTStringList - $var: $type ;
+Item20=RCBoolean - if ReadString (section, '$lit', 'False') = 'True' then $comp := true else $comp := false ;
+Item21=RCDouble - $comp := ReadFloat (section, '$lit', 0) ;
+Item22=RCInteger - $comp := ReadInteger (section, '$lit', 0) ;
+Item23=RCString - $comp := ReadString (section, '$lit', '') ;
+Item24=RCTCheckBoxState - $comp := TCheckBoxState (ReadInteger (section, '$lit', Ord (cbUnchecked))) ;
+Item25=RCTFont - $comp := LoadFont ('$lit') ;
+Item26=RCTStringList - $comp := LoadSList (section + '.$lit') ;
+Item27=RVBoolean- if ReadString (section, '$lit', 'False') = 'True' then $var := true else $var := false ;
+Item28=RVDouble  - $var := ReadFloat (section, '$lit', 0) ;
+Item29=RVInteger  - $var := ReadInteger (section, '$lit', 0) ;
+Item30=RVString - $var := ReadString (section, '$lit', '') ;
+Item31=RVTCheckBoxState - $var := TCheckBoxState (ReadInteger (section, '$lit', Ord (cbUnchecked))) ;
+Item32=RVTFont - $var := LoadFont ('$lit') ;
+Item33=RVTStringList - $var := LoadSList (section + '.$lit');
+Item34=WCBoolean - if $comp then temp := 'True' else temp := 'False' ; WriteString (section, '$lit', temp) ;
+Item35=WCDouble  - WriteFloat (section, '$lit', $comp) ;
+Item36=WCInteger  - WriteInteger (section, '$lit', $comp) ;
+Item37=WCString - WriteString (section, '$lit', $comp) ;
+Item38=WCTCheckBoxState - WriteInteger (section, '$lit', Ord ($comp)) ;
+Item39=WCTFont - SaveFont ('$lit', $comp) ;
+Item40=WCTStringList - SaveSList (section + '.$lit', $comp) ;
+Item41=WVBoolean - if $var then temp := 'True' else temp := 'False' ; WriteString (section, '$lit', temp) ;
+Item42=WVDouble  - WriteFloat (section, '$lit', $var) ;
+Item43=WVInteger  - WriteInteger (section, '$lit', $var) ;
+Item44=WVString - WriteString (section, '$lit', $var) ;
+Item45=WVTCheckBoxState - WriteInteger (section, '$lit', Ord ($var)) ;
+Item46=WVTFont - SaveFont ('$lit', $var) ;
+Item47=WVTStringList - SaveSList (section + '.$lit', $var) ;
+Item48=XRCBoolean - $comp := ReadBool (section, '$lit', false) ;
+Item49=XRCTStringList - $comp.Clear ;$line  J := ReadInteger (section + '.$lit', 'Count', 0) ;$line  if J <> 0 then for I := 0 to J - 1 do $tab $comp.Add (ReadString (section + '.$lit',$tab 'Item' + IntToStr (I), '' )) ;
+Item50=XRVBoolean- $var := ReadBool (section, '$lit', false) ;
+Item51=XRVTStringList - $var.Clear ; $line  J := ReadInteger (section + '.$lit', 'Count', 0) ;$line  if J <> 0 then for I := 0 to J - 1 do $tab $var.Add (ReadString (section + '.$lit',$tab 'Item' + IntToStr (I), '' )) ;
+Item52=XWCBoolean - WriteBool (section, '$lit', $comp) ;
+Item53=XWCTStringList -  EraseSection (section + '.$lit') ;$line  if $comp.Count <> 0 then $tab for I := 0 to $comp.Count - 1 do $tab WriteString (section + '.$lit', 'Item' + $tab IntToStr (I), $comp[I]) ; $line  WriteInteger (section + '.$lit', 'Count', $comp.Count) ;
+Item54=XWVBoolean - WriteBool (section, '$lit', $var) ;
+Item55=XWVTStringList - EraseSection (section + '.$lit') ;$line  if $var.Count <> 0 then $tab for I := 0 to $var.Count - 1 do $tab WriteString (section + '.$lit', 'Item' + $tab IntToStr (I), $var [I]) ; $line  WriteInteger (section + '.$lit', 'Count', $var.Count) ;
+Count=56
+
+[Properties.FormComps_Lines]
+Item0=TMainForm = class(TForm)
+Item1=FormStorage: TFormStorage;
+Item2=DualListDialog: TDualListDialog;
+Item3=DefSuppProps: TStrHolder;
+Item4=OpenDialog: TOpenDialog;
+Item5=Status: TStatusBar;
+Item6=DefFiles: TStrHolder;
+Item7=PageControl1: TPageControl;
+Item8=TabSheet1: TTabSheet;
+Item9=TabSheet2: TTabSheet;
+Item10=FormComps: TMemo;
+Item11=SavedProps: TMemo;
+Item12=TabSheet3: TTabSheet;
+Item13=TabSheet4: TTabSheet;
+Item14=SuppProps: TMemo;
+Item15=CodeMasks: TMemo;
+Item16=TabSheet5: TTabSheet;
+Item17=OldSpecs: TComboBox;
+Item18=Label8: TLabel;
+Item19=Label4: TLabel;
+Item20=OutDir: TDirectoryEdit;
+Item21=Label7: TLabel;
+Item22=ArraySize: TSpinEdit;
+Item23=Label5: TLabel;
+Item24=FilePrefix: TEdit;
+Item25=doClear: TButton;
+Item26=doOpenOld: TButton;
+Item27=doOpenAny: TButton;
+Item28=doVarCreate: TButton;
+Item29=doSelectSave: TButton;
+Item30=doSave: TButton;
+Item31=doExit: TButton;
+Item32=OutFiles: TMemo;
+Item33=Defmasks: TStrHolder;
+Item34=LabelCopyright: TLabel;
+Item35=Label2: TLabel;
+Item36=FontDialog: TFontDialog;
+Item37=doFont: TButton;
+Item38=TabSheet6: TTabSheet;
+Item39=Label1: TLabel;
+Count=40
+
+[Properties.OutFiles_Lines]
+Item0=DV - defvars
+Item1=RV - readvars
+Item2=WV - writevars
+Item3=CV - clearvars
+Item4=RC - readcomp
+Item5=WC - writecomp
+Item6=CC - clearcomp
+Count=7
+
+[Properties.SavedProps_Lines]
+Item0=ArraySize.Value - Integer
+Item1=CodeMasks.Lines - TStringList
+Item2=FilePrefix.Text - String
+Item3=FontDialog.Font - TFont
+Item4=FormComps.Lines - TStringList
+Item5=OutDir.Text - String
+Item6=OutFiles.Lines - TStringList
+Item7=SavedProps.Lines - TStringList
+Item8=SuppProps.Lines - TStringList
+Count=9
+
+[Properties.SuppProps_Lines]
+Item0=TBCGFilterDialog.Brightness - Integer
+Item1=TBCGFilterDialog.Contrast - Double
+Item2=TBCGFilterDialog.Gamma - Double
+Item3=TCheckBox.Checked - Boolean
+Item4=TCheckBox.State - TCheckBoxState
+Item5=TColorComboBox.ColorValue - Integer
+Item6=TColorComboBox.ItemIndex - Integer
+Item7=TColorDialog.Color - Integer
+Item8=TColorDialog.CustomColors - TStringList
+Item9=TComboBox.ItemIndex - Integer
+Item10=TComboBox.Text - String
+Item11=TDirectoryEdit.Text - String
+Item12=TDirectoryListBox.Directory - String
+Item13=TDriveComboBox.Drive - String
+Item14=TEdit.Text - String
+Item15=TFilenameEdit.Text - String
+Item16=TFontComboBox.Font - TFont
+Item17=TFontDialog.Font - TFont
+Item18=TLabel.Caption - String
+Item19=TLabel.Font - TFont
+Item20=TListBox.ItemIndex - Integer
+Item21=TListBox.Items - TStringList
+Item22=TMaskedEdit.Text - String
+Item23=TMemo.Lines - TStringList
+Item24=TMenuItem.Checked - Boolean
+Item25=TOpenDialog.Filename - String
+Item26=TOpenDialog.InitialDir - String
+Item27=TRadioButton.Checked - Boolean
+Item28=TRadioGroup.ItemIndex - Integer
+Item29=TSaveDialog.Filename - String
+Item30=TSaveDialog.InitialDir - String
+Item31=TSpinEdit.Value - Integer
+Count=32
+

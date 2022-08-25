@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{30D8AA58-0A26-4C23-AD0A-2243BA3306F8}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="..\Packages\OverbyteIcsDXe6Run.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\Packages\OverbyteIcsDXe6Design.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="OverbyteIcsDXe6Run">
+        <MSBuild Projects="..\Packages\OverbyteIcsDXe6Run.dproj"/>
+    </Target>
+    <Target Name="OverbyteIcsDXe6Run:Clean">
+        <MSBuild Projects="..\Packages\OverbyteIcsDXe6Run.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="OverbyteIcsDXe6Run:Make">
+        <MSBuild Projects="..\Packages\OverbyteIcsDXe6Run.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="OverbyteIcsDXe6Design">
+        <MSBuild Projects="..\Packages\OverbyteIcsDXe6Design.dproj"/>
+    </Target>
+    <Target Name="OverbyteIcsDXe6Design:Clean">
+        <MSBuild Projects="..\Packages\OverbyteIcsDXe6Design.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="OverbyteIcsDXe6Design:Make">
+        <MSBuild Projects="..\Packages\OverbyteIcsDXe6Design.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="OverbyteIcsDXe6Run;OverbyteIcsDXe6Design"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="OverbyteIcsDXe6Run:Clean;OverbyteIcsDXe6Design:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="OverbyteIcsDXe6Run:Make;OverbyteIcsDXe6Design:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

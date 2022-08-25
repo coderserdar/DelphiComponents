@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+  <head>
+    <title>Overbyte ICS Web Application Server Demo - AJAX demo</title>
+  </head>
+
+  <body>
+    <script type="text/javascript">
+      var req = null;
+      var dst = null;
+      function ReadyStateChange()
+      {
+//        alert(req.readyState);
+        if (req.readyState == 4) {
+          //alert(req.readyState);
+          if (req.status == 200)
+            document.getElementById(dst).innerHTML = req.responseText;
+          else
+            document.getElementById(dst).innerHTML = "Error code " + req.status;
+        }
+      };
+      function DoShow(Param, Dest)
+      {
+        dst = Dest;
+        document.getElementById(Dest).innerHTML = "";
+        url = document.URL;
+        i   = url.indexOf("/", 7);
+        url = url.substring(0, i) + "/Ajax/FetchCounter?Counter=" + Param;
+
+        if (window.XMLHttpRequest)
+          req = new XMLHttpRequest();     // Firefox, Safari, ...
+        else if (window.ActiveXObject)    // Internet Explorer
+          req = new ActiveXObject('MSXML2.XMLHTTP.3.0');
+        else {
+          alert("Your browser doesn't support XLMHTTP");
+          return false;
+        }
+
+        req.onreadystatechange = ReadyStateChange;
+        req.open("GET", url, true);
+        req.send(null);
+        return false;
+      }
+    </script>
+
+    <form method="get">
+      <table>
+        <tr><td>Counter</td><td>Value</td></tr>
+        <tr>
+          <td><select name="CounterName1"
+                      onchange="DoShow(this.value, 'CounterValue1')">
+                <#table_rows 1>
+                  <option value="<#CounterItem>" <#CounterSelected>><#CounterItem>
+                <#/table_rows>
+              </select>
+          </td><td><span id="CounterValue1"><#CounterValue1></span></td>
+        </tr>
+
+        <tr>
+          <td><select name="CounterName2"
+					  onchange="DoShow(this.value, 'CounterValue2')">
+                <#table_rows 2>
+                  <option value="<#CounterItem>" <#CounterSelected>><#CounterItem>
+                <#/table_rows>
+              </select>
+          </td><td><span id="CounterValue2"><#CounterValue2></span></td>
+        </tr>
+
+        <tr>
+          <td>&nbsp;  </td>
+          <td>
+            <input type="submit" value="Refresh">
+          </td>
+        </tr>
+      </table>
+
+    </form>
+    <a href="/">Back to main page</a>
+    <hr>
+    <div align="center">
+      <img src="<#COUNTER>?ref=CounterView">
+    </div>
+  </body>
+</html>
+

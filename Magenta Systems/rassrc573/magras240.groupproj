@@ -1,0 +1,80 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{4377D2DC-9C31-4571-8A5E-4C3901B59F16}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="MagentaSubs24.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="magras240r.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="magras240d.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="MagentaSubs24">
+        <MSBuild Projects="MagentaSubs24.dproj"/>
+    </Target>
+    <Target Name="MagentaSubs24:Clean">
+        <MSBuild Projects="MagentaSubs24.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="MagentaSubs24:Make">
+        <MSBuild Projects="MagentaSubs24.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="magras240r">
+        <MSBuild Projects="magras240r.dproj"/>
+    </Target>
+    <Target Name="magras240r:Clean">
+        <MSBuild Projects="magras240r.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="magras240r:Make">
+        <MSBuild Projects="magras240r.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="magras240d">
+        <MSBuild Projects="magras240d.dproj"/>
+    </Target>
+    <Target Name="magras240d:Clean">
+        <MSBuild Projects="magras240d.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="magras240d:Make">
+        <MSBuild Projects="magras240d.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="MagentaSubs24;magras240r;magras240d"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="MagentaSubs24:Clean;magras240r:Clean;magras240d:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="MagentaSubs24:Make;magras240r:Make;magras240d:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+    <ItemGroup Condition="'$(BuildGroup)'=='TMagRas'">
+        <BuildGroupProject Include="magras240d.dproj">
+            <ProjectGuid>{4C8A46C4-130C-4EB6-B9CA-1A837E6783AA}</ProjectGuid>
+            <Configurations>Debug</Configurations>
+            <Platforms>Win32</Platforms>
+            <Enabled>True</Enabled>
+        </BuildGroupProject>
+        <BuildGroupProject Include="MagentaSubs24.dproj">
+            <ProjectGuid>{3202868E-C958-42ED-AC1F-CB1D77C68F07}</ProjectGuid>
+            <Configurations>Debug</Configurations>
+            <Platforms>Win32;Win64</Platforms>
+            <Enabled>True</Enabled>
+        </BuildGroupProject>
+        <BuildGroupProject Include="magras240r.dproj">
+            <ProjectGuid>{95B59580-E807-490F-AE42-3443888C21DF}</ProjectGuid>
+            <Configurations>Debug</Configurations>
+            <Platforms>Win32;Win64</Platforms>
+            <Enabled>True</Enabled>
+        </BuildGroupProject>
+    </ItemGroup>
+</Project>

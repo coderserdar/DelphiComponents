@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Language" content="en-gb">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Send Email Form</title>
+<script type="text/javascript">
+ var RequestSubmitted = false;
+
+ function CheckAndSubmit() {
+   document.All("Information").Innertext = "Sending Email - Please Wait"
+   if (RequestSubmitted == true) {
+        Alert ("You have already submitted the request. \nPlease wait for the email to be sent");
+        return false;
+        }
+   RequestSubmitted = true;
+   document.MailerForm.SendEmail.value = "Sending Email"
+   document.MailerForm.submit ();
+   }
+</SCRIPT>
+<style type="text/css">
+.style1 {
+    color: #FF0000;
+    font-weight: bolder;
+}
+</style>
+</head>
+
+<body bgcolor="#4FFFFF" >
+
+<table cellpadding="6" width="77%">
+  <tr>
+    <td valign="top" width="155">
+    &nbsp;<p>Page Last Updated:<br><#PageLastMod></p>
+    </td>
+    <td valign="top" width="703" align="center" class="Title1">
+    <h1>Send Email Form </h1>
+    <h3 align="center">This page may be used to send an test email.&nbsp; <br>
+    You will receive a copy of the email when it is sent.</h3>
+    </td>
+  </tr>
+</table>
+<table width="700" align="center" cellpadding="5" bgcolor="#FFFF00" border="3" class="BlueBorder">
+  <tr>
+    <td style="width: 723px">
+      <form action="<#sPageUrl>" method="POST" name="MailerForm" onSubmit="return CheckAndSubmit ();">
+      <table border="0" cellpadding="2" cellspacing="2" style="width: 676px" >
+        <tr>
+          <td colspan="2" height="43" width="600">
+          <input type="hidden" name="MailZTo" value="<#sMailTo>">
+          <input type="hidden" name="MailZIp" value="<#sUserIPHost>">
+          <div id="Information" class="style1"><#errorMsg>&nbsp;</div></td>
+        </tr>
+        <tr>
+          <td valign="top" height="36" bgcolor="#00FF00" style="width: 251px">Your Full Name:</td>
+          <td valign="top" align="left" width="534" height="36"><input type="text" size="64" name="MailZName" value="<#sMailName>"></td>
+        </tr>
+        <tr>
+          <td valign="top" height="36" bgcolor="#00FF00" style="width: 251px">Your Email Address:</td>
+          <td valign="top" align="left" width="534" height="36"><input type="text" size="64" name="MailZFrom" value="<#sMailFrom>"></td>
+        </tr>
+        <tr>
+          <td valign="top" height="220" bgcolor="#00FF00" style="width: 251px">Your Message:</td>
+          <td valign="top" align="left" width="534" height="220">
+          <textarea name="MailZBody" rows="13" cols="64"><#sMailBody></textarea></td>
+        </tr>
+        <tr>
+          <td valign="top" height="37" bgcolor="#00FF00" style="width: 251px">User Address:</td>
+          <td valign="top" align="left" width="534" height="37"> <#sUserIPHost></td>
+        </tr>
+        <tr>
+          <td height="50" bgcolor="#00FF00" style="width: 251px">&nbsp;</td>
+          <td height="50">
+            <p><input type="Submit" name="SendEmail"
+            value="Click to Send Mail">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="HomePage.html">Return to Home Page</a></p>
+          </td>
+        </tr>
+       </table>
+      </form>
+   </td>
+   </tr>
+</table>
+</body>

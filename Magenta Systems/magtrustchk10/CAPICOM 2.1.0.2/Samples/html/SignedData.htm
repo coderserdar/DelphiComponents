@@ -1,0 +1,304 @@
+<html>
+ <head>
+  <title>CAPICOM - SignedData Sample</title>
+<%
+'******************************************************************************
+'
+' THIS CODE AND INformATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND,
+' EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED
+' WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
+'
+' Copyright (C) 1999- 2002.  Microsoft Corporation.  All rights reserved.
+'
+'******************************************************************************
+'
+' SignedData.htm
+'
+' This is a JScript sample that illustrates how to use features in
+' CAPICOM to sign arbitrary data from the web.
+'
+' Note: For simplicity, this script does not handle all exceptions.
+'
+'******************************************************************************
+%>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <OBJECT id="oCAPICOM" codeBase="http://download.microsoft.com/download/E/1/8/E18ED994-8005-4377-A7D7-0A8E13025B94/capicom.cab#version=2,0,0,3" classid="clsid:A996E48C-D3DC-4244-89F7-AFA33EC60679" VIEWASTEXT>
+  <script language="jscript">
+
+    // CAPICOM constants 
+    var CAPICOM_STORE_OPEN_READ_ONLY = 0;
+    var CAPICOM_CURRENT_USER_STORE = 2;
+    var CAPICOM_CERTIFICATE_FIND_SHA1_HASH = 0;
+    var CAPICOM_CERTIFICATE_FIND_EXTENDED_PROPERTY = 6;
+    var CAPICOM_CERTIFICATE_FIND_TIME_VALID = 9;
+    var CAPICOM_CERTIFICATE_FIND_KEY_USAGE = 12;
+    var CAPICOM_DIGITAL_SIGNATURE_KEY_USAGE = 0x00000080;
+    var CAPICOM_AUTHENTICATED_ATTRIBUTE_SIGNING_TIME = 0;
+    var CAPICOM_INFO_SUBJECT_SIMPLE_NAME = 0;
+    var CAPICOM_ENCODE_BASE64 = 0;
+    var CAPICOM_E_CANCELLED = -2138568446;
+    var CERT_KEY_SPEC_PROP_ID = 6;
+ 
+   function IsCAPICOMInstalled()
+   {
+	if(typeof(oCAPICOM) == "object")
+	{
+		if( (oCAPICOM.object != null) )
+     		{
+      			// We found CAPICOM!
+     			return true;
+     		}
+    	}
+   }
+  
+   function init()
+   {
+	   // Filter the certificates to only those that are good for my purpose
+	   var FilteredCertificates = FilterCertificates();
+
+	   // if only one certificate was found then lets show that as the selected certificate
+	   if (FilteredCertificates.Count == 1)
+	   {
+		txtCertificate.value = FilteredCertificates.Item(1).GetInfo(CAPICOM_INFO_SUBJECT_SIMPLE_NAME);
+		txtCertificate.hash = FilteredCertificates.Item(1).Thumbprint;
+	   }
+	   else
+	   {
+		txtCertificate.value = "";
+		txtCertificate.hash = "";
+	   }
+
+	   // clean up	
+	   FilteredCertificates = null;
+   }
+
+
+   function FilterCertificates()
+   {
+	   // instantiate the CAPICOM objects
+	   var MyStore = new ActiveXObject("CAPICOM.Store");
+	   var FilteredCertificates = new ActiveXObject("CAPICOM.Certificates");
+
+	   // open the current users personal certificate store
+	   try
+	   {
+	   	MyStore.Open(CAPICOM_CURRENT_USER_STORE, "My", CAPICOM_STORE_OPEN_READ_ONLY);
+	   }
+	   catch (e)
+	   {
+		if (e.number != CAPICOM_E_CANCELLED)
+		{
+	   		alert("An error occurred while opening your personal certificate store, aborting");
+			return false;
+		}
+	   }
+
+	   // find all of the certificates that:
+	   //   * Are good for signing data
+	   //	* Have PrivateKeys associated with then - Note how this is being done :)
+	   //   * Are they time valid
+	   var FilteredCertificates = MyStore.Certificates.Find(CAPICOM_CERTIFICATE_FIND_KEY_USAGE,CAPICOM_DIGITAL_SIGNATURE_KEY_USAGE).Find(CAPICOM_CERTIFICATE_FIND_TIME_VALID).Find(CAPICOM_CERTIFICATE_FIND_EXTENDED_PROPERTY,CERT_KEY_SPEC_PROP_ID);
+	   return FilteredCertificates;
+
+	   // Clean Up
+	   MyStore = null;
+	   FilteredCertificates = null;
+  }
+
+  function FindCertificateByHash(szThumbprint)
+   {
+	   // instantiate the CAPICOM objects
+	   var MyStore = new ActiveXObject("CAPICOM.Store");
+
+	   // open the current users personal certificate store
+	   try
+	   {
+	   	MyStore.Open(CAPICOM_CURRENT_USER_STORE, "My", CAPICOM_STORE_OPEN_READ_ONLY);
+	   }
+	   catch (e)
+	   {
+		if (e.number != CAPICOM_E_CANCELLED)
+		{
+	   		alert("An error occurred while opening your personal certificate store, aborting");
+			return false;
+		}
+	   }
+
+	   // find all of the certificates that have the specified hash
+	   var FilteredCertificates = MyStore.Certificates.Find(CAPICOM_CERTIFICATE_FIND_SHA1_HASH, szThumbprint);
+	   return FilteredCertificates.Item(1);
+
+	   // Clean Up
+	   MyStore = null;
+	   FilteredCertificates = null;
+  }
+
+  function btnSelectCertificate_OnClick()
+  {
+	   // retrieve the filtered list of certificates
+	   var FilteredCertificates = FilterCertificates();
+
+	   // if only one certificate was found then lets show that as the selected certificate
+	   if (FilteredCertificates.Count > 1)
+	   {
+
+		try
+		{
+			// Pop up the selection UI
+		    var SelectedCertificate = FilteredCertificates.Select();
+			txtCertificate.value = SelectedCertificate.Item(1).GetInfo(CAPICOM_INFO_SUBJECT_SIMPLE_NAME);
+			txtCertificate.hash = SelectedCertificate.Item(1).Thumbprint;
+
+		}
+		catch (e)
+		{
+			txtCertificate.value = "";
+			txtCertificate.hash = "";
+		}
+	   }
+	   else
+	   {
+		alert("You have no valid certificates to select from");
+	   }
+
+	   // Clean-Up
+	   SelectedCertificate = null;
+	   FilteredCertificates = null;
+   }
+
+  
+  function btnSignedData_OnClick()
+  {
+	   // instantiate the CAPICOM objects
+	   var SignedData = new ActiveXObject("CAPICOM.SignedData");
+	   var Signer = new ActiveXObject("CAPICOM.Signer");
+	   var TimeAttribute = new ActiveXObject("CAPICOM.Attribute");
+
+
+		// only do this if the user selected a certificate
+	   if (txtCertificate.hash != "")
+	   {
+
+		// Set the data that we want to sign
+		SignedData.Content = txtPlainText.value;
+		try
+		{
+			// Set the Certificate we would like to sign with
+		   	Signer.Certificate = FindCertificateByHash(txtCertificate.hash);
+		   	
+		   	// Set the time in which we are applying the signature
+			var Today = new Date();
+			TimeAttribute.Name = CAPICOM_AUTHENTICATED_ATTRIBUTE_SIGNING_TIME;
+			TimeAttribute.Value = Today.getVarDate();
+			Today = null;
+		   	Signer.AuthenticatedAttributes.Add(TimeAttribute);
+			
+		   	// Do the Sign operation
+			var szSignature = SignedData.Sign(Signer, true, CAPICOM_ENCODE_BASE64);
+
+		}
+		catch (e)
+		{
+			if (e.number != CAPICOM_E_CANCELLED)
+			{
+				alert("An error occurred when attempting to sign the content, the errot was: " + e.description);
+				return false;
+			}
+		}
+
+		// create a new window and update it with the signature
+		var winSigVerify = window.open('','winSigVerify','width=580,height=475,toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,copyhistory=no,resizable=yes')
+		winSigVerify.document.writeln("<html\><head\>");
+		winSigVerify.document.writeln("<title\>CAPICOM - SignedData Verify</title\>");
+		winSigVerify.document.writeln("<object id='oCAPICOM' classid='clsid:A996E48C-D3DC-4244-89F7-AFA33EC60679' codebase='capicom.cab#version=2,0,0,0'\></object\>");
+		winSigVerify.document.writeln("<script language='jscript'\>");
+		winSigVerify.document.writeln("function btnVerifySig_OnClick()");
+		winSigVerify.document.writeln("{");
+		winSigVerify.document.writeln("	// CAPICOM Constants");
+		winSigVerify.document.writeln("	CAPICOM_VERIFY_SIGNATURE_ONLY = 0;");
+		winSigVerify.document.writeln("	CAPICOM_VERIFY_SIGNATURE_AND_CERTIFICATE = 1;");
+		winSigVerify.document.writeln("	// instantiate the CAPICOM objects");
+		winSigVerify.document.writeln("	var SignedData = new ActiveXObject('CAPICOM.SignedData');");
+		winSigVerify.document.writeln("	try");
+		winSigVerify.document.writeln("	{");
+		winSigVerify.document.writeln("		SignedData.Content='I owe you $1';");
+		winSigVerify.document.writeln("		SignedData.Verify(txtSignature.value, true, CAPICOM_VERIFY_SIGNATURE_AND_CERTIFICATE);");
+		winSigVerify.document.writeln("	}");
+		winSigVerify.document.writeln("	catch (e)");
+		winSigVerify.document.writeln("	{");
+		winSigVerify.document.writeln("		alert(e.description);");
+		winSigVerify.document.writeln("		return false;");
+		winSigVerify.document.writeln("	}");
+		winSigVerify.document.writeln("		alert('Signature Verified');");
+		winSigVerify.document.writeln("}");
+		winSigVerify.document.writeln("</script\>");
+		winSigVerify.document.writeln("</head\><body\>");
+		winSigVerify.document.writeln("<b\>PKCS7 Signature</b\><br /\><textarea cols='65' rows='25' id='txtSignature'\>");
+	 	//winSigVerify.document.writeln("----- BEGIN PKCS7-----");
+	 	winSigVerify.document.write(szSignature);
+	 	//winSigVerify.document.writeln("----- END PKCS7 -----");
+	 	winSigVerify.document.writeln("</textarea\>");
+	 	winSigVerify.document.writeln("<input type='button' name='btnVerifySig' OnClick='btnVerifySig_OnClick()' value='Verify'\>");
+		winSigVerify.document.writeln("</body></html>");
+	   }
+	   else
+	   {
+		alert("No Certificate has been selected.");
+	   }
+}
+  </script>
+ <head>
+  <body OnLoad="init()">
+
+<table align="center" width="500" height="500" border="1" CELLPADDING="15%">
+<tr>
+	<td name="WizardText" valign="top">
+	<p align="center"><b><font size="3">Welcome to the CAPICOM SignedData Sample</font></b></p>
+	<p>This sample shows you how to utilize several <a href="http://msdn.microsoft.com/library/en-us/security/portalcom_357p.asp?frame=true" target="_blank">CAPICOM</a> features, including:
+	<br />
+		<ul>
+			<li>CAPICOM.Store</li>
+			<li>CAPICOM.Certificates</li>
+			<li>CAPICOM.Certificate</li>
+			<li>CAPICOM.SignedData</li>
+		</ul>
+	</p>
+	<p>One of the most exciting things CAPICOM can do for you is sign arbitrary data. In this application we let the user choose which certificate/key pair to sign with, then when they select "Sign" we generate a attached PKCS7 digital signature.</p>
+
+	<p>This sample was written in JavaScript and its source can be found <a href="#" onClick= 'window.location = "view-source:" + window.location.href'>here</a>.		
+
+	<p>
+	<table>
+		<tr>
+			<td valign="top">
+			Digital ID:
+			</td>
+			<td>
+			<input type="text" disabled id="txtCertificate" size="45" value="" hash=""/><input type="button" name="btnSelectCertificate" OnClick="btnSelectCertificate_OnClick()" value="Select" />
+			</td>
+		</tr>
+		<tr>
+			<td valign="top">
+			Message:
+			</td>
+			<td>
+			<textarea cols="41" rows="10" id="txtPlainText">I owe you $1</textarea>
+			</td>
+		</tr>
+		<tr>
+			<td valign="top">
+			&nbsp;
+			</td>
+			<td align="right">
+			<input type="button" name="btnSignedData" OnClick="btnSignedData_OnClick()" value="Sign" />
+			</td>
+		</tr>
+	</table>
+	</p>
+
+	</td>
+</tr>
+</table>
+
+ </body>
+</html>

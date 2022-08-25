@@ -1,0 +1,172 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{30D8AA58-0A26-4C23-AD0A-2243BA3306F8}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="..\Packages\IcsCommonD104Run.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\Packages\IcsVclD104Run.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\Packages\IcsFmxD104Run.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\Packages\IcsVclD104Design.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\Packages\IcsFmxD104Design.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\Packages\IcsCommonD104Design.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="IcsCommonD104Run">
+        <MSBuild Projects="..\Packages\IcsCommonD104Run.dproj"/>
+    </Target>
+    <Target Name="IcsCommonD104Run:Clean">
+        <MSBuild Projects="..\Packages\IcsCommonD104Run.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="IcsCommonD104Run:Make">
+        <MSBuild Projects="..\Packages\IcsCommonD104Run.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="IcsVclD104Run">
+        <MSBuild Projects="..\Packages\IcsVclD104Run.dproj"/>
+    </Target>
+    <Target Name="IcsVclD104Run:Clean">
+        <MSBuild Projects="..\Packages\IcsVclD104Run.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="IcsVclD104Run:Make">
+        <MSBuild Projects="..\Packages\IcsVclD104Run.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="IcsFmxD104Run">
+        <MSBuild Projects="..\Packages\IcsFmxD104Run.dproj"/>
+    </Target>
+    <Target Name="IcsFmxD104Run:Clean">
+        <MSBuild Projects="..\Packages\IcsFmxD104Run.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="IcsFmxD104Run:Make">
+        <MSBuild Projects="..\Packages\IcsFmxD104Run.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="IcsVclD104Design">
+        <MSBuild Projects="..\Packages\IcsVclD104Design.dproj"/>
+    </Target>
+    <Target Name="IcsVclD104Design:Clean">
+        <MSBuild Projects="..\Packages\IcsVclD104Design.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="IcsVclD104Design:Make">
+        <MSBuild Projects="..\Packages\IcsVclD104Design.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="IcsFmxD104Design">
+        <MSBuild Projects="..\Packages\IcsFmxD104Design.dproj"/>
+    </Target>
+    <Target Name="IcsFmxD104Design:Clean">
+        <MSBuild Projects="..\Packages\IcsFmxD104Design.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="IcsFmxD104Design:Make">
+        <MSBuild Projects="..\Packages\IcsFmxD104Design.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="IcsCommonD104Design">
+        <MSBuild Projects="..\Packages\IcsCommonD104Design.dproj"/>
+    </Target>
+    <Target Name="IcsCommonD104Design:Clean">
+        <MSBuild Projects="..\Packages\IcsCommonD104Design.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="IcsCommonD104Design:Make">
+        <MSBuild Projects="..\Packages\IcsCommonD104Design.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="IcsCommonD104Run;IcsVclD104Run;IcsFmxD104Run;IcsVclD104Design;IcsFmxD104Design;IcsCommonD104Design"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="IcsCommonD104Run:Clean;IcsVclD104Run:Clean;IcsFmxD104Run:Clean;IcsVclD104Design:Clean;IcsFmxD104Design:Clean;IcsCommonD104Design:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="IcsCommonD104Run:Make;IcsVclD104Run:Make;IcsFmxD104Run:Make;IcsVclD104Design:Make;IcsFmxD104Design:Make;IcsCommonD104Design:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+    <ItemGroup Condition="'$(BuildGroup)'=='VCL Projects'">
+        <BuildGroupProject Include="..\Packages\IcsFmxD104Design.dproj">
+            <ProjectGuid>{09A2AD35-9818-44CB-B149-A9100F779D5F}</ProjectGuid>
+            <Configurations>Debug;Release</Configurations>
+            <Platforms>Win32</Platforms>
+            <Enabled>False</Enabled>
+        </BuildGroupProject>
+        <BuildGroupProject Include="..\Packages\IcsVclD104Run.dproj">
+            <ProjectGuid>{4FBE10B7-7597-47D6-8CEA-9E9600499EA2}</ProjectGuid>
+            <Configurations>Debug;Release</Configurations>
+            <Platforms>Win32;Win64</Platforms>
+            <Enabled>True</Enabled>
+        </BuildGroupProject>
+        <BuildGroupProject Include="..\Packages\IcsCommonD104Run.dproj">
+            <ProjectGuid>{326FE026-97FA-47A1-BAB9-9F56437E7CC3}</ProjectGuid>
+            <Configurations>Debug;Release</Configurations>
+            <Platforms>Win32;Win64</Platforms>
+            <Enabled>True</Enabled>
+        </BuildGroupProject>
+        <BuildGroupProject Include="..\Packages\IcsCommonD104Design.dproj">
+            <ProjectGuid>{C1F49B17-09DF-4A2B-B78E-0A5FF0F54171}</ProjectGuid>
+            <Configurations>Debug;Release</Configurations>
+            <Platforms>Win32</Platforms>
+            <Enabled>True</Enabled>
+        </BuildGroupProject>
+        <BuildGroupProject Include="..\Packages\IcsVclD104Design.dproj">
+            <ProjectGuid>{64B470D0-2204-4CF1-B8F5-E2BE8764BBA8}</ProjectGuid>
+            <Configurations>Debug;Release</Configurations>
+            <Platforms>Win32</Platforms>
+            <Enabled>True</Enabled>
+        </BuildGroupProject>
+        <BuildGroupProject Include="..\Packages\IcsFmxD104Run.dproj">
+            <ProjectGuid>{BCD0545C-3A49-4959-BB73-0741D6E1D23B}</ProjectGuid>
+            <Configurations>Debug;Release</Configurations>
+            <Platforms>Win32;Win64</Platforms>
+            <Enabled>False</Enabled>
+        </BuildGroupProject>
+    </ItemGroup>
+    <ItemGroup Condition="'$(BuildGroup)'=='VCL and FMX'">
+        <BuildGroupProject Include="..\Packages\IcsFmxD104Run.dproj">
+            <ProjectGuid>{BCD0545C-3A49-4959-BB73-0741D6E1D23B}</ProjectGuid>
+            <Configurations>Debug</Configurations>
+            <Platforms>Win32;Win64</Platforms>
+            <Enabled>True</Enabled>
+        </BuildGroupProject>
+        <BuildGroupProject Include="..\Packages\IcsVclD104Run.dproj">
+            <ProjectGuid>{4FBE10B7-7597-47D6-8CEA-9E9600499EA2}</ProjectGuid>
+            <Configurations>Debug</Configurations>
+            <Platforms>Win32;Win64</Platforms>
+            <Enabled>True</Enabled>
+        </BuildGroupProject>
+        <BuildGroupProject Include="..\Packages\IcsCommonD104Run.dproj">
+            <ProjectGuid>{326FE026-97FA-47A1-BAB9-9F56437E7CC3}</ProjectGuid>
+            <Configurations>Debug</Configurations>
+            <Platforms>Win32;Win64</Platforms>
+            <Enabled>True</Enabled>
+        </BuildGroupProject>
+        <BuildGroupProject Include="..\Packages\IcsCommonD104Design.dproj">
+            <ProjectGuid>{C1F49B17-09DF-4A2B-B78E-0A5FF0F54171}</ProjectGuid>
+            <Configurations>Debug</Configurations>
+            <Platforms>Win32</Platforms>
+            <Enabled>True</Enabled>
+        </BuildGroupProject>
+        <BuildGroupProject Include="..\Packages\IcsVclD104Design.dproj">
+            <ProjectGuid>{64B470D0-2204-4CF1-B8F5-E2BE8764BBA8}</ProjectGuid>
+            <Configurations>Debug</Configurations>
+            <Platforms>Win32</Platforms>
+            <Enabled>True</Enabled>
+        </BuildGroupProject>
+        <BuildGroupProject Include="..\Packages\IcsFmxD104Design.dproj">
+            <ProjectGuid>{09A2AD35-9818-44CB-B149-A9100F779D5F}</ProjectGuid>
+            <Configurations>Debug</Configurations>
+            <Platforms>Win32</Platforms>
+            <Enabled>True</Enabled>
+        </BuildGroupProject>
+    </ItemGroup>
+</Project>

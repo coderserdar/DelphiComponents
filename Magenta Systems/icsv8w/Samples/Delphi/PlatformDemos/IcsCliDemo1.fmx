@@ -1,0 +1,178 @@
+object ClientForm: TClientForm
+  Left = 139
+  Top = 650
+  Caption = 'Client'
+  ClientHeight = 247
+  ClientWidth = 452
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop, iPhone, iPad]
+  OnCreate = FormCreate
+  OnClose = FormClose
+  Left = 139
+  Top = 650
+  DesignerMasterStyle = 0
+  object DisplayMemo: TMemo
+    Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+    DataDetectorTypes = []
+    Lines.Strings = (
+      'DisplayMemo')
+    Position.Y = 73.000000000000000000
+    Size.Width = 452.000000000000000000
+    Size.Height = 174.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    Viewport.Width = 448.000000000000000000
+    Viewport.Height = 170.000000000000000000
+  end
+  object Panel1: TPanel
+    Size.Width = 452.000000000000000000
+    Size.Height = 73.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    object Label1: TLabel
+      AutoSize = True
+      Position.X = 8.000000000000000000
+      Position.Y = 12.000000000000000000
+      Size.Width = 22.000000000000000000
+      Size.Height = 16.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.WordWrap = False
+      Text = 'Port'
+      TabOrder = 0
+      Left = 8
+      Top = 12
+    end
+    object Label2: TLabel
+      AutoSize = True
+      Position.X = 104.000000000000000000
+      Position.Y = 12.000000000000000000
+      Size.Width = 34.000000000000000000
+      Size.Height = 16.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.WordWrap = False
+      Text = 'Server'
+      TabOrder = 1
+      Left = 104
+      Top = 12
+    end
+    object Label3: TLabel
+      AutoSize = True
+      Position.X = 6.000000000000000000
+      Position.Y = 43.000000000000000000
+      Size.Width = 25.000000000000000000
+      Size.Height = 16.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.WordWrap = False
+      Text = 'Data'
+      TabOrder = 2
+      Left = 6
+      Top = 43
+    end
+    object SendEdit: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      TabOrder = 3
+      Text = 'SendEdit'
+      Position.X = 32.000000000000000000
+      Position.Y = 40.000000000000000000
+      Size.Width = 185.000000000000000000
+      Size.Height = 21.000000000000000000
+      Size.PlatformDefault = False
+      Left = 32
+      Top = 40
+    end
+    object SendButton: TButton
+      Default = True
+      Position.X = 230.000000000000000000
+      Position.Y = 40.000000000000000000
+      Size.Width = 75.000000000000000000
+      Size.Height = 21.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 4
+      Text = 'Send'
+      OnClick = SendButtonClick
+      Left = 230
+      Top = 40
+    end
+    object DisconnectButton: TButton
+      Enabled = False
+      Position.X = 214.000000000000000000
+      Position.Y = 8.000000000000000000
+      Size.Width = 75.000000000000000000
+      Size.Height = 21.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 5
+      Text = 'Disconnect'
+      OnClick = DisconnectButtonClick
+      Left = 214
+      Top = 8
+    end
+    object PortEdit: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      TabOrder = 6
+      Text = 'telnet'
+      Position.X = 32.000000000000000000
+      Position.Y = 8.000000000000000000
+      Size.Width = 65.000000000000000000
+      Size.Height = 21.000000000000000000
+      Size.PlatformDefault = False
+      Left = 32
+      Top = 8
+    end
+    object ServerEdit: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      TabOrder = 7
+      Text = 'localhost'
+      Position.X = 144.000000000000000000
+      Position.Y = 8.000000000000000000
+      Size.Width = 65.000000000000000000
+      Size.Height = 21.000000000000000000
+      Size.PlatformDefault = False
+      Left = 144
+      Top = 8
+    end
+    object AllowBinaryCheckBox: TCheckBox
+      Position.X = 320.000000000000000000
+      Position.Y = 44.000000000000000000
+      Size.Width = 85.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 8
+      Text = 'Allow Binary'
+      Left = 320
+      Top = 44
+    end
+    object AddCRLFCheckBox: TCheckBox
+      IsChecked = True
+      Position.X = 320.000000000000000000
+      Position.Y = 24.000000000000000000
+      Size.Width = 97.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 9
+      Text = 'Add CR/LF'
+      Left = 320
+      Top = 24
+    end
+  end
+  object CliSocket: TWSocket
+    LineEnd = #13#10
+    SocketFamily = sfAnyIPv4
+    Proto = 'tcp'
+    LocalAddr = '0.0.0.0'
+    LocalAddr6 = '::'
+    LocalPort = '0'
+    KeepAliveOnOff = wsKeepAliveOnSystem
+    KeepAliveTime = 30000
+    KeepAliveInterval = 1000
+    SocksLevel = '5'
+    ExclusiveAddr = False
+    ComponentOptions = []
+    OnDataAvailable = CliSocketDataAvailable
+    OnSessionClosed = CliSocketSessionClosed
+    OnSessionConnected = CliSocketSessionConnected
+    SocketErrs = wsErrTech
+    Left = 240
+    Top = 128
+  end
+end

@@ -1,0 +1,48 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{30D8AA58-0A26-4C23-AD0A-2243BA3306F8}</ProjectGuid>
+		</PropertyGroup>
+		<ItemGroup>
+			<Projects Include="..\Packages\OverbyteIcsDXeRun.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="..\Packages\OverbyteIcsDXeDesign.dproj">
+				<Dependencies/>
+			</Projects>
+		</ItemGroup>
+		<ProjectExtensions>
+			<Borland.Personality>Default.Personality.12</Borland.Personality>
+			<Borland.ProjectType/>
+			<BorlandProject>
+				<Default.Personality/>
+			</BorlandProject>
+		</ProjectExtensions>
+		<Target Name="OverbyteIcsDXeRun">
+			<MSBuild Projects="..\Packages\OverbyteIcsDXeRun.dproj"/>
+		</Target>
+		<Target Name="OverbyteIcsDXeRun:Clean">
+			<MSBuild Targets="Clean" Projects="..\Packages\OverbyteIcsDXeRun.dproj"/>
+		</Target>
+		<Target Name="OverbyteIcsDXeRun:Make">
+			<MSBuild Targets="Make" Projects="..\Packages\OverbyteIcsDXeRun.dproj"/>
+		</Target>
+		<Target Name="OverbyteIcsDXeDesign">
+			<MSBuild Projects="..\Packages\OverbyteIcsDXeDesign.dproj"/>
+		</Target>
+		<Target Name="OverbyteIcsDXeDesign:Clean">
+			<MSBuild Targets="Clean" Projects="..\Packages\OverbyteIcsDXeDesign.dproj"/>
+		</Target>
+		<Target Name="OverbyteIcsDXeDesign:Make">
+			<MSBuild Targets="Make" Projects="..\Packages\OverbyteIcsDXeDesign.dproj"/>
+		</Target>
+		<Target Name="Build">
+			<CallTarget Targets="OverbyteIcsDXeRun;OverbyteIcsDXeDesign"/>
+		</Target>
+		<Target Name="Clean">
+			<CallTarget Targets="OverbyteIcsDXeRun:Clean;OverbyteIcsDXeDesign:Clean"/>
+		</Target>
+		<Target Name="Make">
+			<CallTarget Targets="OverbyteIcsDXeRun:Make;OverbyteIcsDXeDesign:Make"/>
+		</Target>
+		<Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+	</Project>

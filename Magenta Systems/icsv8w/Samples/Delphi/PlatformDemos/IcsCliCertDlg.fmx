@@ -1,0 +1,57 @@
+object ClientCertDlg: TClientCertDlg
+  Left = 437
+  Top = 331
+  Caption = 'Client Certificate Requested'
+  ClientHeight = 192
+  ClientWidth = 348
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop, iPhone, iPad]
+  Left = 437
+  Top = 331
+  DesignerMasterStyle = 0
+  object Label1: TLabel
+    Position.X = 6.000000000000000000
+    Position.Y = 6.000000000000000000
+    Size.Width = 334.000000000000000000
+    Size.Height = 13.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+  end
+  object CertListBox: TListBox
+    Position.X = 6.000000000000000000
+    Position.Y = 26.000000000000000000
+    Size.Width = 335.000000000000000000
+    Size.Height = 133.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    OnDblClick = CertListBoxDblClick
+    DisableFocusEffect = True
+    ItemHeight = 13.000000000000000000
+    DefaultItemStyles.ItemStyle = ''
+    DefaultItemStyles.GroupHeaderStyle = ''
+    DefaultItemStyles.GroupFooterStyle = ''
+    Viewport.Width = 331.000000000000000000
+    Viewport.Height = 129.000000000000000000
+  end
+  object OKButton: TButton
+    ModalResult = 1
+    Position.X = 266.000000000000000000
+    Position.Y = 166.000000000000000000
+    Size.Width = 75.000000000000000000
+    Size.Height = 21.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    Text = 'OK'
+  end
+  object CancelButton: TButton
+    ModalResult = 2
+    Position.X = 6.000000000000000000
+    Position.Y = 166.000000000000000000
+    Size.Width = 129.000000000000000000
+    Size.Height = 21.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 3
+    Text = 'Don'#39't send a certificate'
+  end
+end

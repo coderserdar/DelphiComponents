@@ -1,0 +1,26 @@
+<HTML>
+  <LINK REL="stylesheet" TYPE="text/css" HREF="/styles/Styles.css">
+  <HEAD>
+    <TITLE>ICS WebServ - Form Demo - Data File</TITLE>
+  </HEAD>
+  <BODY>
+    <A HREF="/demo.html">Demo menu</A>&nbsp;&nbsp;&nbsp;<A HREF="/form.html">Data entry</A>
+    <HR>
+    <#NOW>
+    <TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+      <TR CLASS="stTitle">
+        <TD>&nbsp;DATE&nbsp;</TD>
+        <TD>&nbsp;TIME&nbsp;</TD>
+        <TD>&nbsp;DATA&nbsp;</TD>
+      </TR>
+      <#TABLE_ROWS DATAFILE>
+        <TR CLASS="<#Style>">
+          <TD>&nbsp;<#DATE>&nbsp;</TD>
+          <TD>&nbsp;<#TIME>&nbsp;</TD>
+          <TD>&nbsp;<#DATA>&nbsp;</TD>
+        </TR>
+      <#/TABLE_ROWS DATAFILE>
+    </TABLE>
+    <HR>
+  </BODY>
+</HTML>

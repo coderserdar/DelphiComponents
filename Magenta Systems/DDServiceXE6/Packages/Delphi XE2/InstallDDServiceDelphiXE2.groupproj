@@ -1,0 +1,48 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{CA4B8C80-1838-4485-896D-C4417F7688B6}</ProjectGuid>
+		</PropertyGroup>
+		<ItemGroup>
+			<Projects Include="DDServiceRun.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="DDServiceDesign.dproj">
+				<Dependencies/>
+			</Projects>
+		</ItemGroup>
+		<ProjectExtensions>
+			<Borland.Personality>Default.Personality.12</Borland.Personality>
+			<Borland.ProjectType/>
+			<BorlandProject>
+				<Default.Personality/>
+			</BorlandProject>
+		</ProjectExtensions>
+		<Target Name="DDServiceRun">
+			<MSBuild Projects="DDServiceRun.dproj"/>
+		</Target>
+		<Target Name="DDServiceRun:Clean">
+			<MSBuild Projects="DDServiceRun.dproj" Targets="Clean"/>
+		</Target>
+		<Target Name="DDServiceRun:Make">
+			<MSBuild Projects="DDServiceRun.dproj" Targets="Make"/>
+		</Target>
+		<Target Name="DDServiceDesign">
+			<MSBuild Projects="DDServiceDesign.dproj"/>
+		</Target>
+		<Target Name="DDServiceDesign:Clean">
+			<MSBuild Projects="DDServiceDesign.dproj" Targets="Clean"/>
+		</Target>
+		<Target Name="DDServiceDesign:Make">
+			<MSBuild Projects="DDServiceDesign.dproj" Targets="Make"/>
+		</Target>
+		<Target Name="Build">
+			<CallTarget Targets="DDServiceRun;DDServiceDesign"/>
+		</Target>
+		<Target Name="Clean">
+			<CallTarget Targets="DDServiceRun:Clean;DDServiceDesign:Clean"/>
+		</Target>
+		<Target Name="Make">
+			<CallTarget Targets="DDServiceRun:Make;DDServiceDesign:Make"/>
+		</Target>
+		<Import Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')" Project="$(BDS)\Bin\CodeGear.Group.Targets"/>
+	</Project>

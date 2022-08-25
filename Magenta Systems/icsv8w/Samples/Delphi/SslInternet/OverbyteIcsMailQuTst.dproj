@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{de80a6ec-5ab7-4ba0-9b3b-3081c95a3103}</ProjectGuid>
+    <MainSource>OverbyteIcsMailQuTst.dpr</MainSource>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
+    <DCC_DependencyCheckOutputName>OverbyteIcsMailQuTst.exe</DCC_DependencyCheckOutputName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Version>7.0</Version>
+    <DCC_DebugInformation>False</DCC_DebugInformation>
+    <DCC_LocalDebugSymbols>False</DCC_LocalDebugSymbols>
+    <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+    <DCC_Define>RELEASE</DCC_Define>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <Version>7.0</Version>
+    <DCC_Define>DEBUG</DCC_Define>
+    <DCC_RemoteDebug>True</DCC_RemoteDebug>
+    <DCC_Description>Magenta Mail Queue Demo</DCC_Description>
+    <DCC_DcuOutput>.\dcu</DCC_DcuOutput>
+    <DCC_ObjOutput>.\dcu</DCC_ObjOutput>
+    <DCC_HppOutput>.\dcu</DCC_HppOutput>
+    <DCC_UnitSearchPath>..\..\..\Source;..\..\..\Source\Include</DCC_UnitSearchPath>
+    <DCC_ResourcePath>..\..\..\Source;..\..\..\Source\Include</DCC_ResourcePath>
+    <DCC_ObjPath>..\..\..\Source;..\..\..\Source\Include</DCC_ObjPath>
+    <DCC_IncludePath>..\..\..\Source;..\..\..\Source\Include</DCC_IncludePath>
+  </PropertyGroup>
+  <ProjectExtensions>
+    <Borland.Personality>Delphi.Personality</Borland.Personality>
+    <Borland.ProjectType>VCLApplication</Borland.ProjectType>
+    <BorlandProject>
+<BorlandProject><Delphi.Personality><Parameters><Parameters Name="UseLauncher">False</Parameters><Parameters Name="LoadAllSymbols">True</Parameters><Parameters Name="LoadUnspecifiedSymbols">False</Parameters></Parameters><VersionInfo><VersionInfo Name="IncludeVerInfo">False</VersionInfo><VersionInfo Name="AutoIncBuild">False</VersionInfo><VersionInfo Name="MajorVer">1</VersionInfo><VersionInfo Name="MinorVer">0</VersionInfo><VersionInfo Name="Release">0</VersionInfo><VersionInfo Name="Build">0</VersionInfo><VersionInfo Name="Debug">False</VersionInfo><VersionInfo Name="PreRelease">False</VersionInfo><VersionInfo Name="Special">False</VersionInfo><VersionInfo Name="Private">False</VersionInfo><VersionInfo Name="DLL">False</VersionInfo><VersionInfo Name="Locale">2057</VersionInfo><VersionInfo Name="CodePage">1252</VersionInfo></VersionInfo><VersionInfoKeys><VersionInfoKeys Name="CompanyName"></VersionInfoKeys><VersionInfoKeys Name="FileDescription"></VersionInfoKeys><VersionInfoKeys Name="FileVersion">1.0.0.0</VersionInfoKeys><VersionInfoKeys Name="InternalName"></VersionInfoKeys><VersionInfoKeys Name="LegalCopyright"></VersionInfoKeys><VersionInfoKeys Name="LegalTrademarks"></VersionInfoKeys><VersionInfoKeys Name="OriginalFilename"></VersionInfoKeys><VersionInfoKeys Name="ProductName"></VersionInfoKeys><VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys><VersionInfoKeys Name="Comments"></VersionInfoKeys></VersionInfoKeys><Excluded_Packages>
+      <Excluded_Packages Name="$(BDS)\libmisc\MagentaXfer2007W.bpl">Magenta Systems File Transfer Components Wide for ICS V7</Excluded_Packages>
+      <Excluded_Packages Name="$(BDS)\libmisc\MagentaSubs11.bpl">Magenta Systems General Subroutines</Excluded_Packages>
+      <Excluded_Packages Name="$(BDS)\libmisc\VCLZipPack.bpl">VCLZip Pro</Excluded_Packages>
+      <Excluded_Packages Name="$(BDS)\libmisc\MagentaXfer2007Design.bpl">Magenta Systems File Transfer Components for Delphi 2007 and ICS V7 Design</Excluded_Packages>
+      <Excluded_Packages Name="$(BDS)\libmisc\MagentaIcsDel2007.bpl">Magenta Extra ICS V7 Components</Excluded_Packages>
+      <Excluded_Packages Name="$(BDS)\Bin\dclIndyCore100.bpl">Indy 10 Core Design Time</Excluded_Packages>
+      <Excluded_Packages Name="$(BDS)\Bin\dclIndyProtocols100.bpl">Indy 10 Protocols Design Time</Excluded_Packages>
+      <Excluded_Packages Name="$(BDS)\bin\bcbofficexp100.bpl">CodeGear C++Builder Office XP Servers Package</Excluded_Packages>
+      <Excluded_Packages Name="$(BDS)\bin\dcloffice2k100.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+      <Excluded_Packages Name="$(BDS)\bin\dclofficexp100.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+    </Excluded_Packages><Source><Source Name="MainSource">OverbyteIcsMailQuTst.dpr</Source></Source></Delphi.Personality></BorlandProject></BorlandProject>
+  </ProjectExtensions>
+  <Import Project="$(MSBuildBinPath)\Borland.Delphi.Targets" />
+  <ItemGroup>
+    <DelphiCompile Include="OverbyteIcsMailQuTst.dpr">
+      <MainSource>MainSource</MainSource>
+    </DelphiCompile>
+    <DCCReference Include="OverbyteIcsMailQuTst1.pas">
+      <Form>DemoForm</Form>
+    </DCCReference>
+    <DCCReference Include="OverbyteIcsMailQuTstdiag.pas">
+      <Form>DiagForm</Form>
+    </DCCReference>
+    <DCCReference Include="OverbyteIcsMailQuTstView.pas">
+      <Form>ViewQuForm</Form>
+    </DCCReference>
+  </ItemGroup>
+</Project>

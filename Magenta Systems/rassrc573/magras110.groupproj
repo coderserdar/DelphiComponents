@@ -1,0 +1,44 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{8978247a-1a26-4f24-8e95-14921323755a}</ProjectGuid>
+  </PropertyGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Projects Include="magras110d.dproj" />
+    <Projects Include="magras110r.dproj" />
+  </ItemGroup>
+  <ProjectExtensions>
+    <Borland.Personality>Default.Personality</Borland.Personality>
+    <Borland.ProjectType />
+    <BorlandProject>
+  <BorlandProject xmlns=""> <Default.Personality> </Default.Personality> </BorlandProject></BorlandProject>
+  </ProjectExtensions>
+  <Target Name="magras110r">
+    <MSBuild Projects="magras110r.dproj" Targets="" />
+  </Target>
+  <Target Name="magras110r:Clean">
+    <MSBuild Projects="magras110r.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="magras110r:Make">
+    <MSBuild Projects="magras110r.dproj" Targets="Make" />
+  </Target>
+  <Target Name="magras110d">
+    <MSBuild Projects="magras110d.dproj" Targets="" />
+  </Target>
+  <Target Name="magras110d:Clean">
+    <MSBuild Projects="magras110d.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="magras110d:Make">
+    <MSBuild Projects="magras110d.dproj" Targets="Make" />
+  </Target>
+  <Target Name="Build">
+    <CallTarget Targets="magras110r;magras110d" />
+  </Target>
+  <Target Name="Clean">
+    <CallTarget Targets="magras110r:Clean;magras110d:Clean" />
+  </Target>
+  <Target Name="Make">
+    <CallTarget Targets="magras110r:Make;magras110d:Make" />
+  </Target>
+  <Import Condition="Exists('$(MSBuildBinPath)\Borland.Group.Targets')" Project="$(MSBuildBinPath)\Borland.Group.Targets" />
+</Project>

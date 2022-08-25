@@ -1,0 +1,64 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{98f0d8d2-5595-483d-90de-77ceedeba1d4}</ProjectGuid>
+  </PropertyGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Projects Include="diskfmt.dproj" />
+    <Projects Include="firewalltest.dproj" />
+    <Projects Include="sensortest.dproj" />
+    <Projects Include="signals.dproj" />
+  </ItemGroup>
+  <ProjectExtensions>
+    <Borland.Personality>Default.Personality</Borland.Personality>
+    <Borland.ProjectType />
+    <BorlandProject>
+  <BorlandProject xmlns=""> <Default.Personality> </Default.Personality> </BorlandProject></BorlandProject>
+  </ProjectExtensions>
+  <Target Name="diskfmt">
+    <MSBuild Projects="diskfmt.dproj" Targets="" />
+  </Target>
+  <Target Name="diskfmt:Clean">
+    <MSBuild Projects="diskfmt.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="diskfmt:Make">
+    <MSBuild Projects="diskfmt.dproj" Targets="Make" />
+  </Target>
+  <Target Name="firewalltest">
+    <MSBuild Projects="firewalltest.dproj" Targets="" />
+  </Target>
+  <Target Name="firewalltest:Clean">
+    <MSBuild Projects="firewalltest.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="firewalltest:Make">
+    <MSBuild Projects="firewalltest.dproj" Targets="Make" />
+  </Target>
+  <Target Name="sensortest">
+    <MSBuild Projects="sensortest.dproj" Targets="" />
+  </Target>
+  <Target Name="sensortest:Clean">
+    <MSBuild Projects="sensortest.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="sensortest:Make">
+    <MSBuild Projects="sensortest.dproj" Targets="Make" />
+  </Target>
+  <Target Name="signals">
+    <MSBuild Projects="signals.dproj" Targets="" />
+  </Target>
+  <Target Name="signals:Clean">
+    <MSBuild Projects="signals.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="signals:Make">
+    <MSBuild Projects="signals.dproj" Targets="Make" />
+  </Target>
+  <Target Name="Build">
+    <CallTarget Targets="diskfmt;firewalltest;sensortest;signals" />
+  </Target>
+  <Target Name="Clean">
+    <CallTarget Targets="diskfmt:Clean;firewalltest:Clean;sensortest:Clean;signals:Clean" />
+  </Target>
+  <Target Name="Make">
+    <CallTarget Targets="diskfmt:Make;firewalltest:Make;sensortest:Make;signals:Make" />
+  </Target>
+  <Import Condition="Exists('$(MSBuildBinPath)\Borland.Group.Targets')" Project="$(MSBuildBinPath)\Borland.Group.Targets" />
+</Project>

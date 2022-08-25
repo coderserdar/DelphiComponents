@@ -1,0 +1,96 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{30D8AA58-0A26-4C23-AD0A-2243BA3306F8}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="..\Packages\IcsCommonDXE8Run.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\Packages\IcsVclDXE8Run.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\Packages\IcsFmxDXE8Run.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\Packages\IcsVclDXE8Design.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\Packages\IcsFmxDXE8Design.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\Packages\IcsCommonDXE8Design.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="IcsCommonDXE8Run">
+        <MSBuild Projects="..\Packages\IcsCommonDXE8Run.dproj"/>
+    </Target>
+    <Target Name="IcsCommonDXE8Run:Clean">
+        <MSBuild Projects="..\Packages\IcsCommonDXE8Run.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="IcsCommonDXE8Run:Make">
+        <MSBuild Projects="..\Packages\IcsCommonDXE8Run.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="IcsVclDXE8Run">
+        <MSBuild Projects="..\Packages\IcsVclDXE8Run.dproj"/>
+    </Target>
+    <Target Name="IcsVclDXE8Run:Clean">
+        <MSBuild Projects="..\Packages\IcsVclDXE8Run.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="IcsVclDXE8Run:Make">
+        <MSBuild Projects="..\Packages\IcsVclDXE8Run.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="IcsFmxDXE8Run">
+        <MSBuild Projects="..\Packages\IcsFmxDXE8Run.dproj"/>
+    </Target>
+    <Target Name="IcsFmxDXE8Run:Clean">
+        <MSBuild Projects="..\Packages\IcsFmxDXE8Run.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="IcsFmxDXE8Run:Make">
+        <MSBuild Projects="..\Packages\IcsFmxDXE8Run.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="IcsVclDXE8Design">
+        <MSBuild Projects="..\Packages\IcsVclDXE8Design.dproj"/>
+    </Target>
+    <Target Name="IcsVclDXE8Design:Clean">
+        <MSBuild Projects="..\Packages\IcsVclDXE8Design.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="IcsVclDXE8Design:Make">
+        <MSBuild Projects="..\Packages\IcsVclDXE8Design.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="IcsFmxDXE8Design">
+        <MSBuild Projects="..\Packages\IcsFmxDXE8Design.dproj"/>
+    </Target>
+    <Target Name="IcsFmxDXE8Design:Clean">
+        <MSBuild Projects="..\Packages\IcsFmxDXE8Design.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="IcsFmxDXE8Design:Make">
+        <MSBuild Projects="..\Packages\IcsFmxDXE8Design.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="IcsCommonDXE8Design">
+        <MSBuild Projects="..\Packages\IcsCommonDXE8Design.dproj"/>
+    </Target>
+    <Target Name="IcsCommonDXE8Design:Clean">
+        <MSBuild Projects="..\Packages\IcsCommonDXE8Design.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="IcsCommonDXE8Design:Make">
+        <MSBuild Projects="..\Packages\IcsCommonDXE8Design.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="IcsCommonDXE8Run;IcsVclDXE8Run;IcsFmxDXE8Run;IcsVclDXE8Design;IcsFmxDXE8Design;IcsCommonDXE8Design"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="IcsCommonDXE8Run:Clean;IcsVclDXE8Run:Clean;IcsFmxDXE8Run:Clean;IcsVclDXE8Design:Clean;IcsFmxDXE8Design:Clean;IcsCommonDXE8Design:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="IcsCommonDXE8Run:Make;IcsVclDXE8Run:Make;IcsFmxDXE8Run:Make;IcsVclDXE8Design:Make;IcsFmxDXE8Design:Make;IcsCommonDXE8Design:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

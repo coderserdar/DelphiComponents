@@ -1,0 +1,42 @@
+package DDServiceRun5;
+
+{$R *.RES}
+{$ALIGN ON}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'DDService Runtime Package for Delphi 5'}
+{$RUNONLY}
+{$IMPLICITBUILD ON}
+
+requires
+  vcl50,
+  rtl50;
+  
+contains
+  DDSvcConsts in '..\..\Source\DDSvcConsts.pas',
+  DDDbt in '..\..\Source\DDDbt.pas',
+  DDSvcMgr in '..\..\Source\DDSvcMgr.pas',
+  DDWindows in '..\..\Source\DDWindows.pas',
+  DDWinSvc in '..\..\Source\DDWinSvc.pas',
+  DDWtsApi in '..\..\Source\DDWtsApi.pas',
+  DDSvcUtils in '..\..\Source\DDSvcUtils.pas';
+
+end.

@@ -1,0 +1,360 @@
+#----------------------------------------------------------------------------
+VERSION = BWS.01
+#----------------------------------------------------------------------------
+!ifndef ROOT
+ROOT = $(MAKEDIR)\..
+!endif
+#----------------------------------------------------------------------------
+MAKE = $(ROOT)\bin\make.exe -$(MAKEFLAGS) -f$**
+DCC = $(ROOT)\bin\dcc32.exe $**
+BRCC = $(ROOT)\bin\brcc32.exe $**
+#----------------------------------------------------------------------------
+PROJECTS = FtpDemos\OverbyteIcsConFtp.exe FtpDemos\OverbyteIcsFtpTst.exe FtpDemos\OverbyteIcsFtpServ.exe \
+  FtpDemos\OverbyteIcsFtpMultipartDownload.exe FtpDemos\OverbyteIcsBasFtp.exe FtpDemos\OverbyteIcsFtpAsy.exe \
+  FtpDemos\OverbyteIcsFtpMulti.exe FtpDemos\OverbyteIcsFtpThrd.exe \
+  MailNewsDemos\OverbyteIcsMailSnd.exe MailNewsDemos\OverbyteIcsMailRcv.exe \
+  MailNewsDemos\OverbyteIcsNewsReader.exe MailNewsDemos\OverbyteIcsMailHtml.exe MailNewsDemos\OverbyteIcsMimeDemo.exe \
+  MailNewsDemos\OverbyteIcsConSmtp.exe MailNewsDemos\OverbyteIcsConPop3.exe MailNewsDemos\OverbyteIcsMailSndAsync.exe \
+  MailNewsDemos\OverbyteIcsSmtpServer.exe \
+  MiscDemos\OverbyteIcsWndControlTest.exe MiscDemos\OverbyteIcsSHA1Test.exe \
+  MiscDemos\OverbyteIcsMD4Test.exe MiscDemos\OverbyteIcsMD5Test.exe MiscDemos\OverbyteIcsTimerDemo.exe \
+  MiscDemos\OverbyteIcsOneTimePassword.exe MiscDemos\OverbyteIcsCacheTest.exe MiscDemos\OverbyteIcsBufStrmTst.exe \
+  MiscDemos\OverbyteIcsThreadTimerDemo.exe MiscDemos\OverbyteIcsPrngTst.exe \
+  OtherDemos\OverbyteIcsPingTst.exe OtherDemos\OverbyteIcsNsLookup.exe \
+  OtherDemos\OverbyteIcsDnsLook.exe OtherDemos\OverbyteIcsDnsResolver.exe OtherDemos\OverbyteIcsDll1.dll \
+  OtherDemos\OverbyteIcsDll2.dll OtherDemos\OverbyteIcsDllTst.exe OtherDemos\OverbyteIcsFinger.exe \
+  OtherDemos\OverbyteIcsBatchDnsLookup.exe OtherDemos\OverbyteIcsSysLogClientDemo.exe \
+  OtherDemos\OverbyteIcsSysLogServerDemo.exe OtherDemos\OverbyteIcsSnmpCliTst.exe \
+  SocketDemos\OverbyteIcsTcpSrv.exe SocketDemos\OverbyteIcsTelnetClient.exe \
+  SocketDemos\OverbyteIcsCliDemo.exe SocketDemos\OverbyteIcsBinCliDemo.exe SocketDemos\OverbyteIcsClient5.exe \
+  SocketDemos\OverbyteIcsClient7.exe SocketDemos\OverbyteIcsConCli1.exe SocketDemos\OverbyteIcsConCli2.exe \
+  SocketDemos\OverbyteIcsConSrv1.exe SocketDemos\OverbyteIcsConUdpLstn.exe SocketDemos\OverbyteIcsDynCli.exe \
+  SocketDemos\OverbyteIcsMtSrv.exe SocketDemos\OverbyteIcsRecv.exe SocketDemos\OverbyteIcsSender.exe \
+  SocketDemos\OverbyteIcsServer5.exe SocketDemos\OverbyteIcsSocksTst.exe  \
+  SocketDemos\OverbyteIcsSrvTcp.exe SocketDemos\OverbyteIcsSvcTcp.exe SocketDemos\OverbyteIcsThrdSrv.exe \
+  SocketDemos\OverbyteIcsThrdSrvV2.exe SocketDemos\OverbyteIcsThrdSrvV3.exe SocketDemos\OverbyteIcsTnDemo.exe \
+  SocketDemos\OverbyteIcsTnSrv.exe SocketDemos\OverbyteIcsTWSChat.exe SocketDemos\OverbyteIcsUdpLstn.exe \
+  SocketDemos\OverbyteIcsUdpSend.exe SocketDemos\OverbyteIcsTcpSrvIPv6.exe \
+  SslInternet\OverbyteIcsHttpsTst.exe SslInternet\OverbyteIcsSslWebServ.exe \
+  SslInternet\OverbyteIcsSslFtpTst.exe SslInternet\OverbyteIcsSslFtpServ.exe SslInternet\OverbyteIcsSslMailSnd.exe \
+  SslInternet\OverbyteIcsSslMailRcv.exe SslInternet\OverbyteIcsSslNewsRdr.exe SslInternet\OverbyteIcsSimpleSslCli.exe \
+  SslInternet\OverbyteIcsSimpleSslServer.exe SslInternet\OverbyteIcsPemTool.exe SslInternet\OverbyteIcsMsVerify.exe \
+  SslInternet\OverbyteIcsSslSniSrv.exe SslInternet\OverbyteIcsSslWebAppServer.exe SslInternet\OverbyteIcsSslSmtpServer.exe \
+  SslInternet\OverbyteIcsProxySslServer.exe SslInternet\OverbyteIcsJoseTst.exe SslInternet\OverbyteIcsHttpRestTst.exe  \
+  SslInternet\OverbyteIcsX509CertsTst.exe SslInternet\OverbyteIcsSslMultiWebServ.exe \
+  WebDemos\OverbyteIcsHttpTst.exe WebDemos\OverbyteIcsWebServ.exe \
+  WebDemos\OverbyteIcsHttpPost.exe WebDemos\OverbyteIcsHttpMultipartDownload.exe \
+  WebDemos\OverbyteIcsConHttp.exe WebDemos\OverbyteIcsHttpAsy.exe WebDemos\OverbyteIcsHttpAsp.exe \
+  WebDemos\OverbyteIcsWebAppServer.exe WebDemos\OverbyteIcsHttpChk.exe WebDemos\OverbyteIcsHttpDmo.exe \
+  WebDemos\OverbyteIcsHttpGet.exe WebDemos\OverbyteIcsHttpPg.exe WebDemos\OverbyteIcsHttpThrd.exe \
+  WebDemos\OverbyteIcsIsapi.dll
+
+#----------------------------------------------------------------------------
+default: $(PROJECTS)
+#----------------------------------------------------------------------------
+
+FtpDemos\OverbyteIcsFtpTst.exe: FtpDemos\OverbyteIcsFtpTst.dpr
+  $(DCC)
+
+FtpDemos\OverbyteIcsConFtp.exe: FtpDemos\OverbyteIcsConFtp.dpr
+  $(DCC)
+
+FtpDemos\OverbyteIcsFtpServ.exe: FtpDemos\OverbyteIcsFtpServ.dpr
+  $(DCC)
+
+FtpDemos\OverbyteIcsFtpMultipartDownload.exe: FtpDemos\OverbyteIcsFtpMultipartDownload.dpr
+  $(DCC)
+
+FtpDemos\OverbyteIcsBasFtp.exe: FtpDemos\OverbyteIcsBasFtp.dpr
+  $(DCC)
+
+FtpDemos\OverbyteIcsFtpAsy.exe: FtpDemos\OverbyteIcsFtpAsy.dpr
+  $(DCC)
+
+FtpDemos\OverbyteIcsFtpMulti.exe: FtpDemos\OverbyteIcsFtpMulti.dpr
+  $(DCC)
+
+FtpDemos\OverbyteIcsFtpThrd.exe: FtpDemos\OverbyteIcsFtpThrd.dpr
+  $(DCC)
+
+MailNewsDemos\OverbyteIcsMailSnd.exe: MailNewsDemos\OverbyteIcsMailSnd.dpr
+  $(DCC)
+
+MailNewsDemos\OverbyteIcsMailRcv.exe: MailNewsDemos\OverbyteIcsMailRcv.dpr
+  $(DCC)
+
+MailNewsDemos\OverbyteIcsNewsReader.exe: MailNewsDemos\OverbyteIcsNewsReader.dpr
+  $(DCC)
+
+MailNewsDemos\OverbyteIcsMailHtml.exe: MailNewsDemos\OverbyteIcsMailHtml.dpr
+  $(DCC)
+
+MailNewsDemos\OverbyteIcsMimeDemo.exe: MailNewsDemos\OverbyteIcsMimeDemo.dpr
+  $(DCC)
+
+MailNewsDemos\OverbyteIcsConSmtp.exe: MailNewsDemos\OverbyteIcsConSmtp.dpr
+  $(DCC)
+
+MailNewsDemos\OverbyteIcsConPop3.exe: MailNewsDemos\OverbyteIcsConPop3.dpr
+  $(DCC)
+
+MailNewsDemos\OverbyteIcsMailSndAsync.exe: MailNewsDemos\OverbyteIcsMailSndAsync.dpr
+  $(DCC)
+
+MailNewsDemos\OverbyteIcsSmtpServer.exe: MailNewsDemos\OverbyteIcsSmtpServer.dpr
+  $(DCC)
+
+MiscDemos\OverbyteIcsWndControlTest.exe: MiscDemos\OverbyteIcsWndControlTest.dpr
+  $(DCC)
+
+MiscDemos\OverbyteIcsSHA1Test.exe: MiscDemos\OverbyteIcsSHA1Test.dpr
+  $(DCC)
+
+MiscDemos\OverbyteIcsMD4Test.exe: MiscDemos\OverbyteIcsMD4Test.dpr
+  $(DCC)
+
+MiscDemos\OverbyteIcsMD5Test.exe: MiscDemos\OverbyteIcsMD5Test.dpr
+  $(DCC)
+
+MiscDemos\OverbyteIcsTimerDemo.exe: MiscDemos\OverbyteIcsTimerDemo.dpr
+  $(DCC)
+
+MiscDemos\OverbyteIcsOneTimePassword.exe: MiscDemos\OverbyteIcsOneTimePassword.dpr
+  $(DCC)
+
+MiscDemos\OverbyteIcsCacheTest.exe: MiscDemos\OverbyteIcsCacheTest.dpr
+  $(DCC)
+
+MiscDemos\OverbyteIcsBufStrmTst.exe: MiscDemos\OverbyteIcsBufStrmTst.dpr
+  $(DCC)
+
+MiscDemos\OverbyteIcsThreadTimerDemo.exe: MiscDemos\OverbyteIcsThreadTimerDemo.dpr
+  $(DCC)
+
+MiscDemos\OverbyteIcsPrngTst.exe: MiscDemos\OverbyteIcsPrngTst.dpr
+  $(DCC)
+
+OtherDemos\OverbyteIcsPingTst.exe: OtherDemos\OverbyteIcsPingTst.dpr
+  $(DCC)
+
+OtherDemos\OverbyteIcsNsLookup.exe: OtherDemos\OverbyteIcsNsLookup.dpr
+  $(DCC)
+
+OtherDemos\OverbyteIcsDnsLook.exe: OtherDemos\OverbyteIcsDnsLook.dpr
+  $(DCC)
+
+OtherDemos\OverbyteIcsDnsResolver.exe: OtherDemos\OverbyteIcsDnsResolver.dpr
+  $(DCC)
+
+OtherDemos\OverbyteIcsDll1.dll: OtherDemos\OverbyteIcsDll1.dpr
+  $(DCC)
+
+OtherDemos\OverbyteIcsDll2.dll: OtherDemos\OverbyteIcsDll2.dpr
+  $(DCC)
+
+OtherDemos\OverbyteIcsDllTst.exe: OtherDemos\OverbyteIcsDllTst.dpr
+  $(DCC)
+
+OtherDemos\OverbyteIcsFinger.exe: OtherDemos\OverbyteIcsFinger.dpr
+  $(DCC)
+
+OtherDemos\OverbyteIcsBatchDnsLookup.exe: OtherDemos\OverbyteIcsBatchDnsLookup.dpr
+  $(DCC)
+
+OtherDemos\OverbyteIcsSysLogClientDemo.exe: OtherDemos\OverbyteIcsSysLogClientDemo.dpr
+  $(DCC)
+
+OtherDemos\OverbyteIcsSysLogServerDemo.exe: OtherDemos\OverbyteIcsSysLogServerDemo.dpr
+  $(DCC)
+
+OtherDemos\OverbyteIcsSnmpCliTst.exe: OtherDemos\OverbyteIcsSnmpCliTst.dpr
+  $(DCC)
+
+
+SocketDemos\OverbyteIcsTcpSrv.exe: SocketDemos\OverbyteIcsTcpSrv.dpr
+  $(DCC)
+
+SocketDemos\OverbyteIcsTelnetClient.exe: SocketDemos\OverbyteIcsTelnetClient.dpr
+  $(DCC)
+
+SocketDemos\OverbyteIcsCliDemo.exe: SocketDemos\OverbyteIcsCliDemo.dpr
+  $(DCC)
+
+SocketDemos\OverbyteIcsBinCliDemo.exe: SocketDemos\OverbyteIcsBinCliDemo.dpr
+  $(DCC)
+
+SocketDemos\OverbyteIcsClient5.exe: SocketDemos\OverbyteIcsClient5.dpr
+  $(DCC)
+
+SocketDemos\OverbyteIcsClient7.exe: SocketDemos\OverbyteIcsClient7.dpr
+  $(DCC)
+
+SocketDemos\OverbyteIcsConCli1.exe: SocketDemos\OverbyteIcsConCli1.dpr
+  $(DCC)
+
+SocketDemos\OverbyteIcsConCli2.exe: SocketDemos\OverbyteIcsConCli2.dpr
+  $(DCC)
+
+SocketDemos\OverbyteIcsConSrv1.exe: SocketDemos\OverbyteIcsConSrv1.dpr
+  $(DCC)
+
+SocketDemos\OverbyteIcsConUdpLstn.exe: SocketDemos\OverbyteIcsConUdpLstn.dpr
+  $(DCC)
+
+SocketDemos\OverbyteIcsDynCli.exe: SocketDemos\OverbyteIcsDynCli.dpr
+  $(DCC)
+
+SocketDemos\OverbyteIcsMtSrv.exe: SocketDemos\OverbyteIcsMtSrv.dpr
+  $(DCC)
+
+SocketDemos\OverbyteIcsRecv.exe: SocketDemos\OverbyteIcsRecv.dpr
+  $(DCC)
+
+SocketDemos\OverbyteIcsSender.exe: SocketDemos\OverbyteIcsSender.dpr
+  $(DCC)
+
+SocketDemos\OverbyteIcsServer5.exe: SocketDemos\OverbyteIcsServer5.dpr
+  $(DCC)
+
+SocketDemos\OverbyteIcsSocksTst.exe: SocketDemos\OverbyteIcsSocksTst.dpr
+  $(DCC)
+
+SocketDemos\OverbyteIcsSrvTcp.exe: SocketDemos\OverbyteIcsSrvTcp.dpr
+  $(DCC)
+
+SocketDemos\OverbyteIcsSvcTcp.exe: SocketDemos\OverbyteIcsSvcTcp.dpr
+  $(DCC)
+
+SocketDemos\OverbyteIcsThrdSrv.exe: SocketDemos\OverbyteIcsThrdSrv.dpr
+  $(DCC)
+
+SocketDemos\OverbyteIcsThrdSrvV2.exe: SocketDemos\OverbyteIcsThrdSrvV2.dpr
+  $(DCC)
+
+SocketDemos\OverbyteIcsThrdSrvV3.exe: SocketDemos\OverbyteIcsThrdSrvV3.dpr
+  $(DCC)
+
+SocketDemos\OverbyteIcsTnDemo.exe: SocketDemos\OverbyteIcsTnDemo.dpr
+  $(DCC)
+
+SocketDemos\OverbyteIcsTnSrv.exe: SocketDemos\OverbyteIcsTnSrv.dpr
+  $(DCC)
+
+SocketDemos\OverbyteIcsTWSChat.exe: SocketDemos\OverbyteIcsTWSChat.dpr
+  $(DCC)
+
+SocketDemos\OverbyteIcsUdpLstn.exe: SocketDemos\OverbyteIcsUdpLstn.dpr
+  $(DCC)
+
+SocketDemos\OverbyteIcsUdpSend.exe: SocketDemos\OverbyteIcsUdpSend.dpr
+  $(DCC)
+
+SocketDemos\OverbyteIcsTcpSrvIPv6.exe: SocketDemos\OverbyteIcsTcpSrvIPv6.dpr
+  $(DCC)
+
+SslInternet\OverbyteIcsHttpsTst.exe: SslInternet\OverbyteIcsHttpsTst.dpr
+  $(DCC)
+
+SslInternet\OverbyteIcsSslWebServ.exe: SslInternet\OverbyteIcsSslWebServ.dpr
+  $(DCC)
+
+SslInternet\OverbyteIcsSslFtpTst.exe: SslInternet\OverbyteIcsSslFtpTst.dpr
+  $(DCC)
+
+SslInternet\OverbyteIcsSslFtpServ.exe: SslInternet\OverbyteIcsSslFtpServ.dpr
+  $(DCC)
+
+SslInternet\OverbyteIcsSslMailSnd.exe: SslInternet\OverbyteIcsSslMailSnd.dpr
+  $(DCC)
+
+SslInternet\OverbyteIcsSslMailRcv.exe: SslInternet\OverbyteIcsSslMailRcv.dpr
+  $(DCC)
+
+SslInternet\OverbyteIcsSslNewsRdr.exe: SslInternet\OverbyteIcsSslNewsRdr.dpr
+  $(DCC)
+
+SslInternet\OverbyteIcsSimpleSslCli.exe: SslInternet\OverbyteIcsSimpleSslCli.dpr
+  $(DCC)
+
+SslInternet\OverbyteIcsSimpleSslServer.exe: SslInternet\OverbyteIcsSimpleSslServer.dpr
+  $(DCC)
+
+SslInternet\OverbyteIcsPemTool.exe: SslInternet\OverbyteIcsPemTool.dpr
+  $(DCC)
+
+SslInternet\OverbyteIcsMsVerify.exe: SslInternet\OverbyteIcsMsVerify.dpr
+  $(DCC)
+
+SslInternet\OverbyteIcsSslSniSrv.exe: SslInternet\OverbyteIcsSslSniSrv.dpr
+  $(DCC)
+
+SslInternet\OverbyteIcsSslWebAppServer.exe: SslInternet\OverbyteIcsSslWebAppServer.dpr
+  $(DCC)
+
+SslInternet\OverbyteIcsSslSmtpServer.exe: SslInternet\OverbyteIcsSslSmtpServer.dpr
+  $(DCC)
+
+SslInternet\OverbyteIcsProxySslServer.exe: SslInternet\OverbyteIcsProxySslServer.dpr
+  $(DCC)
+
+SslInternet\OverbyteIcsJoseTst.exe: SslInternet\OverbyteIcsJoseTst.dpr
+  $(DCC)
+
+SslInternet\OverbyteIcsHttpRestTst.exe: SslInternet\OverbyteIcsHttpRestTst.dpr
+  $(DCC)
+
+SslInternet\OverbyteIcsX509CertsTst.exe: SslInternet\OverbyteIcsX509CertsTst.dpr
+  $(DCC)
+
+SslInternet\OverbyteIcsSslMultiWebServ.exe: SslInternet\OverbyteIcsSslMultiWebServ.dpr
+  $(DCC)
+
+WebDemos\OverbyteIcsHttpTst.exe: WebDemos\OverbyteIcsHttpTst.dpr
+  $(DCC)
+
+WebDemos\OverbyteIcsWebServ.exe: WebDemos\OverbyteIcsWebServ.dpr
+  $(DCC)
+
+WebDemos\OverbyteIcsHttpPost.exe: WebDemos\OverbyteIcsHttpPost.dpr
+  $(DCC)
+
+WebDemos\OverbyteIcsHttpMultipartDownload.exe: WebDemos\OverbyteIcsHttpMultipartDownload.dpr
+  $(DCC)
+
+WebDemos\OverbyteIcsConHttp.exe: WebDemos\OverbyteIcsConHttp.dpr
+  $(DCC)
+
+WebDemos\OverbyteIcsHttpAsy.exe: WebDemos\OverbyteIcsHttpAsy.dpr
+  $(DCC)
+
+WebDemos\OverbyteIcsHttpAsp.exe: WebDemos\OverbyteIcsHttpAsp.dpr
+  $(DCC)
+
+WebDemos\OverbyteIcsWebAppServer.exe: WebDemos\OverbyteIcsWebAppServer.dpr
+  $(DCC)
+
+WebDemos\OverbyteIcsHttpChk.exe: WebDemos\OverbyteIcsHttpChk.dpr
+  $(DCC)
+
+WebDemos\OverbyteIcsHttpDmo.exe: WebDemos\OverbyteIcsHttpDmo.dpr
+  $(DCC)
+
+WebDemos\OverbyteIcsHttpGet.exe: WebDemos\OverbyteIcsHttpGet.dpr
+  $(DCC)
+
+WebDemos\OverbyteIcsHttpPg.exe: WebDemos\OverbyteIcsHttpPg.dpr
+  $(DCC)
+
+WebDemos\OverbyteIcsHttpThrd.exe: WebDemos\OverbyteIcsHttpThrd.dpr
+  $(DCC)
+
+WebDemos\OverbyteIcsIsapi.dll: WebDemos\OverbyteIcsIsapi.dpr
+  $(DCC)
+
+
+
+
+
+
+
+

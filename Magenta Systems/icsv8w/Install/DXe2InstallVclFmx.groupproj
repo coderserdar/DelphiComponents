@@ -1,0 +1,96 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{30D8AA58-0A26-4C23-AD0A-2243BA3306F8}</ProjectGuid>
+		</PropertyGroup>
+		<ItemGroup>
+			<Projects Include="..\Packages\IcsCommonDXE2Run.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="..\Packages\IcsVclDXE2Run.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="..\Packages\IcsFmxDXE2Run.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="..\Packages\IcsVclDXE2Design.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="..\Packages\IcsFmxDXE2Design.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="..\Packages\IcsCommonDXE2Design.dproj">
+				<Dependencies/>
+			</Projects>
+		</ItemGroup>
+		<ProjectExtensions>
+			<Borland.Personality>Default.Personality.12</Borland.Personality>
+			<Borland.ProjectType/>
+			<BorlandProject>
+				<Default.Personality/>
+			</BorlandProject>
+		</ProjectExtensions>
+		<Target Name="IcsCommonDXE2Run">
+			<MSBuild Projects="..\Packages\IcsCommonDXE2Run.dproj"/>
+		</Target>
+		<Target Name="IcsCommonDXE2Run:Clean">
+			<MSBuild Projects="..\Packages\IcsCommonDXE2Run.dproj" Targets="Clean"/>
+		</Target>
+		<Target Name="IcsCommonDXE2Run:Make">
+			<MSBuild Projects="..\Packages\IcsCommonDXE2Run.dproj" Targets="Make"/>
+		</Target>
+		<Target Name="IcsVclDXE2Run">
+			<MSBuild Projects="..\Packages\IcsVclDXE2Run.dproj"/>
+		</Target>
+		<Target Name="IcsVclDXE2Run:Clean">
+			<MSBuild Projects="..\Packages\IcsVclDXE2Run.dproj" Targets="Clean"/>
+		</Target>
+		<Target Name="IcsVclDXE2Run:Make">
+			<MSBuild Projects="..\Packages\IcsVclDXE2Run.dproj" Targets="Make"/>
+		</Target>
+		<Target Name="IcsFmxDXE2Run">
+			<MSBuild Projects="..\Packages\IcsFmxDXE2Run.dproj"/>
+		</Target>
+		<Target Name="IcsFmxDXE2Run:Clean">
+			<MSBuild Projects="..\Packages\IcsFmxDXE2Run.dproj" Targets="Clean"/>
+		</Target>
+		<Target Name="IcsFmxDXE2Run:Make">
+			<MSBuild Projects="..\Packages\IcsFmxDXE2Run.dproj" Targets="Make"/>
+		</Target>
+		<Target Name="IcsVclDXE2Design">
+			<MSBuild Projects="..\Packages\IcsVclDXE2Design.dproj"/>
+		</Target>
+		<Target Name="IcsVclDXE2Design:Clean">
+			<MSBuild Projects="..\Packages\IcsVclDXE2Design.dproj" Targets="Clean"/>
+		</Target>
+		<Target Name="IcsVclDXE2Design:Make">
+			<MSBuild Projects="..\Packages\IcsVclDXE2Design.dproj" Targets="Make"/>
+		</Target>
+		<Target Name="IcsFmxDXE2Design">
+			<MSBuild Projects="..\Packages\IcsFmxDXE2Design.dproj"/>
+		</Target>
+		<Target Name="IcsFmxDXE2Design:Clean">
+			<MSBuild Projects="..\Packages\IcsFmxDXE2Design.dproj" Targets="Clean"/>
+		</Target>
+		<Target Name="IcsFmxDXE2Design:Make">
+			<MSBuild Projects="..\Packages\IcsFmxDXE2Design.dproj" Targets="Make"/>
+		</Target>
+		<Target Name="IcsCommonDXE2Design">
+			<MSBuild Projects="..\Packages\IcsCommonDXE2Design.dproj"/>
+		</Target>
+		<Target Name="IcsCommonDXE2Design:Clean">
+			<MSBuild Projects="..\Packages\IcsCommonDXE2Design.dproj" Targets="Clean"/>
+		</Target>
+		<Target Name="IcsCommonDXE2Design:Make">
+			<MSBuild Projects="..\Packages\IcsCommonDXE2Design.dproj" Targets="Make"/>
+		</Target>
+		<Target Name="Build">
+			<CallTarget Targets="IcsCommonDXE2Run;IcsVclDXE2Run;IcsFmxDXE2Run;IcsVclDXE2Design;IcsFmxDXE2Design;IcsCommonDXE2Design"/>
+		</Target>
+		<Target Name="Clean">
+			<CallTarget Targets="IcsCommonDXE2Run:Clean;IcsVclDXE2Run:Clean;IcsFmxDXE2Run:Clean;IcsVclDXE2Design:Clean;IcsFmxDXE2Design:Clean;IcsCommonDXE2Design:Clean"/>
+		</Target>
+		<Target Name="Make">
+			<CallTarget Targets="IcsCommonDXE2Run:Make;IcsVclDXE2Run:Make;IcsFmxDXE2Run:Make;IcsVclDXE2Design:Make;IcsFmxDXE2Design:Make;IcsCommonDXE2Design:Make"/>
+		</Target>
+		<Import Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')" Project="$(BDS)\Bin\CodeGear.Group.Targets"/>
+	</Project>

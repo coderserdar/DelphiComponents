@@ -1,0 +1,190 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{5FC71E67-956B-4D17-94A3-EF033AE8F547}</ProjectGuid>
+			<ProjectVersion>13.4</ProjectVersion>
+			<FrameworkType>None</FrameworkType>
+			<MainSource>IcsFmxCBXE2Design.cpp</MainSource>
+			<Base>True</Base>
+			<Config Condition="'$(Config)'==''">Debug</Config>
+			<Platform Condition="'$(Platform)'==''">Win32</Platform>
+			<TargetedPlatforms>1</TargetedPlatforms>
+			<AppType>Package</AppType>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Base)'=='true') or '$(Base_Win32)'!=''">
+			<Base_Win32>true</Base_Win32>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_1)'!=''">
+			<Cfg_1>true</Cfg_1>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_1)'=='true') or '$(Cfg_1_Win32)'!=''">
+			<Cfg_1_Win32>true</Cfg_1_Win32>
+			<CfgParent>Cfg_1</CfgParent>
+			<Cfg_1>true</Cfg_1>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_2)'!=''">
+			<Cfg_2>true</Cfg_2>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Base)'!=''">
+			<BCC_OutputDir>..\Lib\$(Config)\$(Platform)\XE2</BCC_OutputDir>
+			<ILINK_LibraryPath>..\Source\;..\Lib\$(Config)\$(Platform)\XE2;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<IncludePath>..\Source\;..\Lib\$(Config)\$(Platform)\XE2;$(IncludePath)</IncludePath>
+			<DCC_ObjOutput>..\Lib\$(Config)\$(Platform)\XE2</DCC_ObjOutput>
+			<DCC_HppOutput>..\Lib\$(Config)\$(Platform)\XE2</DCC_HppOutput>
+			<DCC_UnitSearchPath>..\Source;..\Source\Include;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+			<Defines>USE_SSL;SECURITY_WIN32;$(Defines)</Defines>
+			<DCC_AdditionalSwitches>-LUDesignIde</DCC_AdditionalSwitches>
+			<VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+			<VerInfo_Locale>1031</VerInfo_Locale>
+			<ILINK_Description>Overbyte ICS FMX Design-Time Package for C++ Builder XE2</ILINK_Description>
+			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
+			<ProjectType>CppPackage</ProjectType>
+			<DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
+			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
+			<_TCHARMapping>wchar_t</_TCHARMapping>
+			<Multithreaded>true</Multithreaded>
+			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
+			<DynamicRTL>true</DynamicRTL>
+			<UsePackages>true</UsePackages>
+			<IntermediateOutputDir>..\Lib\$(Config)\$(Platform)\XE2</IntermediateOutputDir>
+			<BCC_wpar>false</BCC_wpar>
+			<BCC_OptimizeForSpeed>true</BCC_OptimizeForSpeed>
+			<BCC_ExtendedErrorInfo>true</BCC_ExtendedErrorInfo>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Base_Win32)'!=''">
+			<PackageImports>vcldbx;vclib;inetdbbde;DBXOdbcDriver;DBXSybaseASEDriver;vclimg;vclactnband;vcldb;vcldsnap;bindcompvcl;vclie;vcltouch;DBXDb2Driver;bcbsmp;websnap;VclSmp;vcl;DataSnapConnectors;DBXMSSQLDriver;dsnapcon;vclx;webdsnap;bdertl;adortl;bcbie;$(PackageImports)</PackageImports>
+			<DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
+			<VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+			<VerInfo_Locale>1033</VerInfo_Locale>
+			<VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_1)'!=''">
+			<DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
+			<BCC_OptimizeForSpeed>false</BCC_OptimizeForSpeed>
+			<BCC_DisableOptimizations>true</BCC_DisableOptimizations>
+			<DCC_Optimize>false</DCC_Optimize>
+			<DCC_DebugInfoInExe>true</DCC_DebugInfoInExe>
+			<Defines>_DEBUG;$(Defines)</Defines>
+			<BCC_InlineFunctionExpansion>false</BCC_InlineFunctionExpansion>
+			<BCC_UseRegisterVariables>None</BCC_UseRegisterVariables>
+			<DCC_Define>DEBUG</DCC_Define>
+			<BCC_DebugLineNumbers>true</BCC_DebugLineNumbers>
+			<TASM_DisplaySourceLines>true</TASM_DisplaySourceLines>
+			<BCC_StackFrames>true</BCC_StackFrames>
+			<ILINK_FullDebugInfo>true</ILINK_FullDebugInfo>
+			<TASM_Debugging>Full</TASM_Debugging>
+			<BCC_SourceDebuggingOn>true</BCC_SourceDebuggingOn>
+			<ILINK_LibraryPath>$(BDSLIB)\$(PLATFORM)\debug;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
+			<VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+			<VerInfo_Locale>1033</VerInfo_Locale>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_2)'!=''">
+			<DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
+			<DCC_DebugInformation>false</DCC_DebugInformation>
+			<DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+			<DCC_AssertionsAtRuntime>false</DCC_AssertionsAtRuntime>
+			<Defines>NDEBUG;$(Defines)</Defines>
+			<TASM_Debugging>None</TASM_Debugging>
+		</PropertyGroup>
+		<ItemGroup>
+			<PackageImport Include="designide.bpi">
+				<BuildOrder>6</BuildOrder>
+			</PackageImport>
+			<PackageImport Include="fmx.bpi">
+				<BuildOrder>7</BuildOrder>
+			</PackageImport>
+			<PackageImport Include="IcsCommonCBXE2Run.bpi">
+				<BuildOrder>5</BuildOrder>
+			</PackageImport>
+			<CppCompile Include="IcsFmxCBXE2Design.cpp">
+				<BuildOrder>0</BuildOrder>
+			</CppCompile>
+			<PackageImport Include="IcsFmxCBXE2Run.bpi">
+				<BuildOrder>4</BuildOrder>
+			</PackageImport>
+			<PackageImport Include="rtl.bpi">
+				<BuildOrder>1</BuildOrder>
+			</PackageImport>
+			<DelphiCompile Include="..\Source\Ics.Fmx.OverbyteIcsReg.pas">
+				<BuildOrder>2</BuildOrder>
+			</DelphiCompile>
+			<DelphiCompile Include="..\Source\Ics.Fmx.OverByteIcsWSocketE.pas">
+				<BuildOrder>3</BuildOrder>
+			</DelphiCompile>
+			<BuildConfiguration Include="Release">
+				<Key>Cfg_2</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Base">
+				<Key>Base</Key>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Debug">
+				<Key>Cfg_1</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+		</ItemGroup>
+		<ProjectExtensions>
+			<Borland.Personality>CPlusPlusBuilder.Personality.12</Borland.Personality>
+			<Borland.ProjectType>CppPackage</Borland.ProjectType>
+			<BorlandProject>
+				<CPlusPlusBuilder.Personality>
+					<Source>
+						<Source Name="MainSource">IcsFmxCBXE2Design.cpp</Source>
+					</Source>
+					<VersionInfo>
+						<VersionInfo Name="IncludeVerInfo">False</VersionInfo>
+						<VersionInfo Name="AutoIncBuild">False</VersionInfo>
+						<VersionInfo Name="MajorVer">1</VersionInfo>
+						<VersionInfo Name="MinorVer">0</VersionInfo>
+						<VersionInfo Name="Release">0</VersionInfo>
+						<VersionInfo Name="Build">0</VersionInfo>
+						<VersionInfo Name="Debug">False</VersionInfo>
+						<VersionInfo Name="PreRelease">False</VersionInfo>
+						<VersionInfo Name="Special">False</VersionInfo>
+						<VersionInfo Name="Private">False</VersionInfo>
+						<VersionInfo Name="DLL">False</VersionInfo>
+						<VersionInfo Name="Locale">1031</VersionInfo>
+						<VersionInfo Name="CodePage">1252</VersionInfo>
+					</VersionInfo>
+					<VersionInfoKeys>
+						<VersionInfoKeys Name="CompanyName"/>
+						<VersionInfoKeys Name="FileDescription"/>
+						<VersionInfoKeys Name="FileVersion">1.0.0.0</VersionInfoKeys>
+						<VersionInfoKeys Name="InternalName"/>
+						<VersionInfoKeys Name="LegalCopyright"/>
+						<VersionInfoKeys Name="LegalTrademarks"/>
+						<VersionInfoKeys Name="OriginalFilename"/>
+						<VersionInfoKeys Name="ProductName"/>
+						<VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys>
+						<VersionInfoKeys Name="Comments"/>
+					</VersionInfoKeys>
+					<Excluded_Packages>
+						<Excluded_Packages Name="$(BDSBIN)\fmidesigner160.bpl">FMI Form designer and property and component editors</Excluded_Packages>
+					</Excluded_Packages>
+					<ProjectProperties>
+						<ProjectProperties Name="AutoShowDeps">False</ProjectProperties>
+						<ProjectProperties Name="ManagePaths">True</ProjectProperties>
+						<ProjectProperties Name="VerifyPackages">True</ProjectProperties>
+					</ProjectProperties>
+				</CPlusPlusBuilder.Personality>
+				<Deployment/>
+				<Platforms>
+					<Platform value="Win32">True</Platform>
+				</Platforms>
+			</BorlandProject>
+			<ProjectFileVersion>12</ProjectFileVersion>
+		</ProjectExtensions>
+		<Import Condition="Exists('$(BDS)\Bin\CodeGear.Cpp.Targets')" Project="$(BDS)\Bin\CodeGear.Cpp.Targets"/>
+		<Import Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')" Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj"/>
+	</Project>

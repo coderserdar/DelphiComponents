@@ -1,0 +1,48 @@
+#----------------------------------------------------------------------------
+VERSION = BWS.01
+#----------------------------------------------------------------------------
+!ifndef ROOT
+ROOT = $(MAKEDIR)\..
+!endif
+#----------------------------------------------------------------------------
+MAKE = $(ROOT)\bin\make.exe -$(MAKEFLAGS) -f$**
+DCC = $(ROOT)\bin\dcc32.exe $**
+BRCC = $(ROOT)\bin\brcc32.exe $**
+#----------------------------------------------------------------------------
+PROJECTS = OverbyteIcsMailSnd.exe OverbyteIcsMailRcv.exe \
+  OverbyteIcsNewsReader.exe OverbyteIcsMailHtml.exe OverbyteIcsMimeDemo.exe \
+  OverbyteIcsConSmtp.exe OverbyteIcsConPop3.exe OverbyteIcsMailSndAsync.exe \
+  OverbyteIcsSmtpServer.exe
+#----------------------------------------------------------------------------
+default: $(PROJECTS)
+#----------------------------------------------------------------------------
+
+OverbyteIcsMailSnd.exe: OverbyteIcsMailSnd.dpr
+  $(DCC)
+
+OverbyteIcsMailRcv.exe: OverbyteIcsMailRcv.dpr
+  $(DCC)
+
+OverbyteIcsNewsReader.exe: OverbyteIcsNewsReader.dpr
+  $(DCC)
+
+OverbyteIcsMailHtml.exe: OverbyteIcsMailHtml.dpr
+  $(DCC)
+
+OverbyteIcsMimeDemo.exe: OverbyteIcsMimeDemo.dpr
+  $(DCC)
+
+OverbyteIcsConSmtp.exe: OverbyteIcsConSmtp.dpr
+  $(DCC)
+
+OverbyteIcsConPop3.exe: OverbyteIcsConPop3.dpr
+  $(DCC)
+
+OverbyteIcsMailSndAsync.exe: OverbyteIcsMailSndAsync.dpr
+  $(DCC)
+
+OverbyteIcsSmtpServer.exe: OverbyteIcsSmtpServer.dpr
+  $(DCC)
+
+
+

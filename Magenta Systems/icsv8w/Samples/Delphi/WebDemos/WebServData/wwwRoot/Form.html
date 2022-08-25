@@ -1,0 +1,30 @@
+<HTML>
+  <LINK REL="stylesheet" TYPE="text/css" HREF="/styles/Styles.css">
+  <HEAD>
+    <TITLE>ICS WebServ Form Demo</TITLE>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  </HEAD>
+  <BODY>
+    <H2>Enter your first and last name</H2>
+    <FORM METHOD="POST" ACTION="/cgi-bin/FormHandler">
+      <P>This demo form show how to handle posted data. The "send" button 
+         on the form below will post form data to the virtual script 
+         /cgi-bin/FormHandler which is purely implemented in Delphi code
+         within WebServ demo. Data is written to <A HREF="/FormData.html">
+         FormHandler.txt</A> text file.<BR>
+      <HR><BR>
+      <TABLE BORDER="0" ALIGN="DEFAULT">
+        <TR>
+          <TD>First name: </TD><TD><INPUT TYPE="TEXT" NAME="FirstName" MAXLENGTH="25"></TD>
+        </TR>
+        <TR>
+          <TD>Last name: </TD><TD><INPUT TYPE="TEXT" NAME="LastName" MAXLENGTH="25"></TD>
+        </TR>
+        <TR>
+          <TD>&nbsp;</TD><TD><INPUT TYPE="SUBMIT" NAME="Submit" VALUE="Send"></TD>
+        </TR>
+      </TABLE>
+      <HR><A HREF="/demo.html">Demo menu</A>
+    </FORM>
+  </BODY>
+</HTML>
