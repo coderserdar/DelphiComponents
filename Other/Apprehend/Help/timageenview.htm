@@ -1,0 +1,930 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>TImageENView</TITLE>
+<META content="text/html; charset=windows-1252" http-equiv=Content-Type>
+<META name=GENERATOR content="MSHTML 9.00.8112.16441">
+<META name=keywords content=TImageENview,></HEAD>
+<BODY bgColor=#ffffe1>
+<TABLE border=0 cellSpacing=0 cellPadding=2 width="100%" bgColor=#99ccff>
+  <TBODY>
+  <TR>
+    <TD align=left>
+      <DIV align=left><FONT size=4 face=Arial><SPAN 
+      style="FONT-SIZE: 14pt">TImageENView</SPAN></FONT><FONT 
+      color=#010101></FONT></DIV></TD>
+    <TD align=right><FONT size=2 face=Arial><A 
+      href="timage.htm">Previous</A>&nbsp;<A 
+      href="gettingstarted.htm">Top</A>&nbsp;<A href="variables.htm">Next</A> 
+      </FONT></TD></TR></TBODY></TABLE>
+<HR>
+
+<DIV align=left><BR></DIV><FONT color=#010101>
+<DIV align=left></FONT><IMG src="..\Images\timageenview.PNG"><FONT 
+color=#010101></FONT></DIV>
+<DIV align=left><BR></DIV><FONT color=#010101>
+<DIV align=left></FONT><FONT color=#010100 size=1 face=Arial><SPAN 
+style="FONT-SIZE: 9pt"><B>Description</B></SPAN></FONT><FONT 
+color=#010101></FONT></DIV>
+<DIV align=left><FONT color=#010100 face="Times New Roman"><SPAN 
+style="FONT-SIZE: 12pt">Demos of Apprehend for the <B>ImageEn Image Library</B> 
+are located in the \..\Apprehend\demos\ImageEn\ImageENVect and 
+\..\Apprehend\demos\ImageEn\ImageENView folders.</SPAN></FONT></DIV>
+<DIV align=left><FONT color=#010100 face="Times New Roman"><SPAN 
+style="FONT-SIZE: 12pt"></SPAN></FONT><FONT color=#010101></FONT>&nbsp;</DIV>
+<DIV align=left><FONT color=#010100 face="Times New Roman"><SPAN 
+style="FONT-SIZE: 12pt">ImageEn is a component suite for image processing, 
+viewing and analysis. It can load and save from various image file formats, 
+acquire from Twain scanners (single and multi pages), capture videos, applies 
+filters, merge images, and other.&nbsp; </SPAN></FONT><FONT color=#010100 
+face="Times New Roman"><SPAN style="FONT-SIZE: 12pt">ImageEn allows you to 
+include professional graphics software features in your 
+applications.</SPAN></FONT></DIV>
+<DIV align=center><FONT color=#010101></FONT></DIV>
+<DIV align=left><FONT color=#010100 face="Times New Roman"><SPAN 
+style="FONT-SIZE: 12pt">ImageEN is a shareware product available at <A 
+href="http://www.xequte.com/imageen/">http://www.xequte.com/imageen/</A></SPAN></FONT></DIV>
+<DIV align=left><FONT color=#010100 face="Times New Roman"><SPAN 
+style="FONT-SIZE: 12pt"></SPAN></FONT><FONT color=#010101></FONT>&nbsp;</DIV>
+<DIV align=left><FONT color=#010101></FONT></DIV>
+<DIV align=center><FONT color=#010100 size=1 face=Arial><SPAN 
+style="FONT-SIZE: 9pt"><B>Features</B></SPAN></FONT><FONT 
+color=#010101></FONT></DIV>
+<DIV align=left><BR></DIV><FONT color=#010101>
+<DIV align=left></FONT><FONT color=#ff0000 size=1 face=Arial><SPAN 
+style="FONT-SIZE: 9pt"><B>Input/output</B></SPAN></FONT><FONT 
+color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Support for 
+asynchronous load/save operations</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Load and save JPEG 
+(RGB, GrayScale, YCbCr, CMYK, YCbCrK) to file or stream (with also 1/2, 1/4 and 
+1/8 subsizes for fast preview). Read/write APP0-APP15,COM Jpeg 
+markers.</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">JPEG2000: JP2, J2K 
+and JPC code stream formats (JPEG-2000 Part-1 standard, ISO/IEC 
+15444-1)</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Jpeg Lossless 
+transformations and cut</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Estimation of Jpeg 
+file quality</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Optional Color 
+Management System (CMS) to process ICC profiles</SPAN></FONT><FONT 
+color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Support for 
+Microsoft Color Management System to process ICC profiles</SPAN></FONT><FONT 
+color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Read/write of Exif 
+information (in Jpeg and TIFF). Can replace EXIF information without loading or 
+changing the original image. Read/write EXIF maker note.</SPAN></FONT><FONT 
+color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Load and save TIFF 
+(rev.6.0 and Tech.Note #2, Packbits, JPEG, LZW, CCITT G.3 and G.4) with RGB, 
+CMYK, B/W, CIELab color spaces to file or stream. Also FAX (CCITT3), G3F and G3N 
+(Zetafax) formats supported for loading. Supports paletted 4, 8, 16, 32, 64, 128 
+and 256 colors images.</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Available external 
+plugins to load and/or save JBIG, RAW, DICOM, FITS, PCD and many 
+others.</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Powerful class to 
+handle TIFF files (add/edit/remove tags, add/delete pages, merge TIFFs, 
+etc…)</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Supported several 
+RAW Camera formats (CRW, NEF, ….)</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Native operations 
+on TIFF files supports add/remove/extract/enum without decompressing resulting 
+in 450 times faster processing</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Read of single TIFF 
+tags</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Save PostScript (PS 
+and EPS) format – single and multipage using RLE, G3Fax, G4Fax and Jpeg 
+compression.</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Save Adobe PDF 
+format – single and multipage images using G3Fax, G4Fax and Jpeg 
+compression.</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Load and save PNG 
+with various compression levels.</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Load and save 
+compressed and uncompressed BMP in 2,16, 256 or 16M color images to files or 
+streams.</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Load and save 
+uncompressed and black/white WBMP (Wireless Bitmap)</SPAN></FONT><FONT 
+color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Load and save 
+compressed and uncompressed PCX images in 2,16, 256 or 16M colors to file or 
+stream.</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Support for RAW 
+files, specifing width, height, color format, bit alignment, 
+etc…</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Load and save 2, 4, 
+8,16, 32, 64,128 or 256 color GIFs to files or streams.</SPAN></FONT><FONT 
+color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Load and save DCX 
+(multipage PCX) files</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Load and save DIB, 
+RLE, TGA (TARGA, VDA, ICB, VST, PIX).</SPAN></FONT><FONT 
+color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Load and save 
+Portable Bitmap PBM, PGM and PPM</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Load and save ICO 
+(provisions to compose ICO with multi resolution and color 
+depth)</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Load WMF, EMF and 
+CUR.</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Load and save AVI, 
+animated GIF and multi-TIFF.</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Read of a single 
+AVI frame.</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Read/Write IPTC 
+(IIMV4) information (like PhotoShop file info) from JPEG and TIFF. Can replace 
+IPTC information without loading or changing original image.</SPAN></FONT><FONT 
+color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Support for user 
+defined file formats.</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Support for Alpha 
+Channel (transparent images).</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Editing animated 
+GIF: extract, insert and delete single images.</SPAN></FONT><FONT 
+color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Editing&nbsp; multi 
+TIFF: extract, insert and delete single images.</SPAN></FONT><FONT 
+color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Included source 
+code of a sample plug-in to read/write LZW Gif and TIFF.</SPAN></FONT><FONT 
+color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">NON-LZW-GIF 
+compressor sample plug-in for GIF.</SPAN></FONT><FONT 
+color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Standard LZW 
+compressor/decompressor sample plug-in for GIF and TIFF 
+images.</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Get image 
+properties without loading.</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Image acquisition 
+from TWAIN scanners with full control of scanner capabilities and without 
+default scanner user interface. Supports both modal and modeless 
+acquisition.</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Image acquisition 
+from WIA scanners and cameras</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Save/load specific 
+file format parameters and save/load preview dialogs (e.g. you can set quality 
+of a Jpeg and immediately view the quality loss). Places bar on 
+Win2000/Xp/Me.</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">A property to 
+select language used in dialogs (english, italian, german, spanish, french, 
+portuguese, greek, russian, dutch, swedish, polish, japanese or customized by 
+user).</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Supports 
+connections with standard TImage component.</SPAN></FONT><FONT 
+color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">OnProgress event 
+for monitoring saving and loading.</SPAN></FONT><FONT 
+color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Provisions to abort 
+input/output processing</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Load alpha channel 
+for GIF,TIFF,PNG,ICO,CUR, TGA</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Capture from 
+screen</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Load images from 
+the network, using http protocol (LoadFromURL)</SPAN></FONT><FONT 
+color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">registration of 
+ImageEn formats in TPicture (TImage and VCL open/save 
+dialogs)</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Wang Imaging 
+annotations (load/edit/save)</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Read/write XP 
+properteis of jpeg and tiff files.</SPAN></FONT><FONT 
+color=#010101></FONT></DIV>
+<DIV align=left><BR></DIV><FONT color=#010101>
+<DIV align=left></FONT><FONT color=#ff0000 size=1 face=Arial><SPAN 
+style="FONT-SIZE: 9pt"><B>Printing</B></SPAN></FONT><FONT 
+color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Printing (and print 
+preview) functions to print single images specifying page alignment or absolute 
+position.</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV align=left><BR></DIV><FONT color=#010101>
+<DIV align=left></FONT><FONT color=#ff0000 size=1 face=Arial><SPAN 
+style="FONT-SIZE: 9pt"><B>Video Capture</B></SPAN></FONT><FONT 
+color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">VCL visual 
+component for video capture (freeze frames, save AVI files and real time frames 
+processing). Supports all codec installed and video capture 
+cards.</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">VCL non-visual 
+component for video capture (capture without display the video 
+input).</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Set audio capture 
+parameters.</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Video capture: 
+using DirectShow (WDM) capture drivers. This allows video sources to be selected 
+by code … video input, tuner, etc</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Video capture of 
+multimedia files supported by DirectShow</SPAN></FONT><FONT 
+color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Saving of 
+multimedia files with compressions supported by DirectShow</SPAN></FONT><FONT 
+color=#010101></FONT></DIV>
+<DIV align=left><BR></DIV><FONT color=#010101>
+<DIV align=left></FONT><FONT color=#ff0000 size=1 face=Arial><SPAN 
+style="FONT-SIZE: 9pt"><B>Image processing &amp; analysis</B></SPAN></FONT><FONT 
+color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Flexible image area 
+selections (rectangle, ellipse, polygon and magicwand) including “soft” 
+selection (you specify the selection intensity from 0 to 100%) and feathering 
+selections.</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Regulation of 
+contrast, HSL, HSV/HSB and RGB components.</SPAN></FONT><FONT 
+color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">11 filters for 
+quality resampling (Triangle, Hermite, Bell, BSpline, Lanczos3, Mitchell, 
+Nearest, Linear, FastLinear, Bilinear, Bicubic, ProjectBW, 
+ProjectWB).</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Application of 3x3 
+filters.</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Merge two 
+images.</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Crop selected 
+region.</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Fast Fourier 
+Transformation (FFT) with preview.</SPAN></FONT><FONT 
+color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Frequency domain 
+(FFT) filtering.</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Preview of all 
+applied effects in a single dialog, with 8 preset filters (blur, edge detection, 
+emboss, highpass1/ 2/ 3, lowpass1/ 2) and save and load filters from 
+files.</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Conversion to gray 
+scale and negative.</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Conversions of true 
+color to black/white images with ordered or threshold 
+dithering.</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Casting of a group 
+of colors to a single color.</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Rotate to any angle 
+(with enhanced quality).</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Horizontal and 
+vertical flip.</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Edge detection (to 
+convert color images to black/white using edge detection 
+algorithms)</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Skew detection (to 
+estimate the orientation angle of the lines of text)</SPAN></FONT><FONT 
+color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Simple algorithm 
+which helps to remove red eye effect</SPAN></FONT><FONT 
+color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Bump mapping 
+effect.</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Lens 
+effect.</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Wave 
+effect.</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Write/read hidden 
+text, picture and raw data inside images (pixel amplitude 
+modulation).</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Copy, cut, paste 
+and paste into a rectangle of all or part of the image.</SPAN></FONT><FONT 
+color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Multilevel 
+Undo/Redo operations</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Application effects 
+to the selected zones (also irregular)</SPAN></FONT><FONT 
+color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">OnProgress event 
+for monitoring lengthy image processing tasks.</SPAN></FONT><FONT 
+color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Histogram 
+equalization (auto and manual) and threshold.</SPAN></FONT><FONT 
+color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Median cut and 
+Neural network color quantizers, for fast and accurate color 
+reduction.</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Reduction to any 
+number of colors (with colormap output).</SPAN></FONT><FONT 
+color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">HSV channel 
+separations.</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">A property to 
+select language used by dialogs (english, italian, german, spanish, french, 
+portuguese, greek, russian, swedish, polish, japanese or customized by 
+user).</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">A dialog to view a 
+palette and select a color from it.</SPAN></FONT><FONT 
+color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">VCL component for 
+HSV/HSB color selection.</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">VCL component for 
+displaying histogram of gray levels (or RGB channels).</SPAN></FONT><FONT 
+color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Connections with 
+standard TImage component.</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Maximum (dilation), 
+Minimum (erosion), Opening and Closing filters with preview.</SPAN></FONT><FONT 
+color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Horizontal/vertical 
+pixel density histograms</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Noise removal from 
+Black/white images.</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Gamma 
+correction.</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Gaussian Blur 
+effect.</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Soft Shadow 
+effect.</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Inner Shadow 
+effect.</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Sharpening 
+effect.</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Optional Color 
+Management System (CMS) to process ICC profiles</SPAN></FONT><FONT 
+color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">manual correction 
+of Barrel Distortion and Pincushion distortion (lens distortion, underwater 
+distortion)</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">supported following 
+native pixel formats: 1bit, 8 bit paletted, 8 bit gray scale, 16 bit gray scale, 
+24 bit RGB, 32 bit float point, 24 bit CMYK, 48 bit RGB</SPAN></FONT><FONT 
+color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Crop and AutoCrop 
+functions</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV align=left><BR></DIV><FONT color=#010101>
+<DIV align=left><BR></FONT></DIV><FONT color=#010101>
+<DIV align=left></FONT><FONT color=#ff0000 size=1 face=Arial><SPAN 
+style="FONT-SIZE: 9pt"><B>Image rendering</B></SPAN></FONT><FONT 
+color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Real time Zoom-in 
+and zoom-out (by percentage, zoom-in rectangular area or by one mouse click, 
+accepts floating point values).</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Support for 
+multiple layers with separated transparency.</SPAN></FONT><FONT 
+color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Select from 37 
+layer operations (blend modes)</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Moveable and 
+resizeable layers (by code or by user interaction)</SPAN></FONT><FONT 
+color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Magnify layers 
+(rectangle or like a lens/glass)</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">133 transition 
+effects</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Quality zoom 
+effects with six filters (select between fast zoom or quality 
+zoom).</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Alpha Channel 
+(transparent images)</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">B/W filtered 
+zoom-out (for optimal display large B/W images inside small 
+rectangles).</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Scrollbar in two 
+dimensions (real time) for the fast exploration of images, and "hand navigation" 
+(click and drag the image with mouse).</SPAN></FONT><FONT 
+color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Animate bi-color 
+contour of a selected region (polygonal, irregular, circular and rectangular 
+selections).</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Magic wand 
+selection (inclusive, exclusive and global).</SPAN></FONT><FONT 
+color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Multiple 
+selections.</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Sizeable and 
+moveable selected regions.</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Multi-polygonal 
+animated regions.</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Dithering for 
+non-true color display adapters.</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">VCL component to 
+implement interactive rules with grips and numeric labels.</SPAN></FONT><FONT 
+color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">VCL component for 
+interactive gradient bar.</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Full support for 
+mouse wheel actions.</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Quality view for 
+projects (ZoomFilter = ProjectBW and ProjectWB)</SPAN></FONT><FONT 
+color=#010101></FONT></DIV>
+<DIV align=left><BR></DIV><FONT color=#010101>
+<DIV align=left></FONT><FONT color=#ff0000 size=1 face=Arial><SPAN 
+style="FONT-SIZE: 9pt"><B>Thumbnails</B></SPAN></FONT><FONT 
+color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Single VCL 
+component to display and animating thumbnails and grids of images. Handles big 
+image sequences without allocating system memory.</SPAN></FONT><FONT 
+color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">3D style and 
+customized thumbnails</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN 
+style="FONT-SIZE: 9pt">Multi-selection</SPAN></FONT><FONT 
+color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Load/Save AVI, GIF, 
+multi-page TIFF images</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Allows to set a 
+wallpaper (background image)</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Multi-threading 
+image loading</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Cache to speed-up 
+image rendering</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Show a custom or 
+preset background under thumbnails.</SPAN></FONT><FONT 
+color=#010101></FONT></DIV>
+<DIV align=left><BR></DIV><FONT color=#010101>
+<DIV align=left></FONT><FONT color=#ff0000 size=1 face=Arial><SPAN 
+style="FONT-SIZE: 9pt"><B>Database handling</B></SPAN></FONT><FONT 
+color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Data aware 
+component (TImageEnDBView) integrated with Delphi database environment (saves 
+and loads Bmp,Pcx,Jpeg,TIFF,PNG,TGA,PBM,PGM,PPM and Gif inside Blob fields or 
+path reference).</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Data aware 
+component (TImageEnDBVect) integrated with Delphi database environment (saves 
+and loads Bmp,Pcx,Jpeg,TIFF,PNG,TGA,PBM,PGM,PPM and Gif and vectorial objects 
+inside Blob fields or path reference).</SPAN></FONT><FONT 
+color=#010101></FONT></DIV>
+<DIV align=left><BR></DIV><FONT color=#010101>
+<DIV align=left></FONT><FONT color=#ff0000 size=1 face=Arial><SPAN 
+style="FONT-SIZE: 9pt"><B>Vectorial objects handling:</B></SPAN></FONT><FONT 
+color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Vectorial objects 
+(lines, box, circles, ellipses, bitmaps, text, multiline text, static ruler, 
+polylines, polygons, angles, arrows-with text, curved text, highlight box) over 
+background image. Save/Load these objects and import a sub-set of Autocad DXF 
+files. Undo capability.</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Support to 
+add/edit/delete points of a polygon.</SPAN></FONT><FONT 
+color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Anti-alias 
+capability.</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Set object 
+transparency.</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Object soft shadow 
+effects.</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Measurement of 
+lines, perimeters and areas (in pixel, inch, cm, mm or Km 
+units).</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Angle 
+measurements.</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Saves/loads IEV 
+format (compressed with Deflate, variation of LZ77 algorithm) that includes 
+images and vectorial objects.</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Anti-aliased 
+text.</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Alpha channel for 
+images (transparent images).</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Clipboard 
+Cut/Copy/Paste of vectorial objects.</SPAN></FONT><FONT 
+color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Create polygons 
+from raster image edges.</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Remove jagged edges 
+from polygons.</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV style="TEXT-INDENT: -6mm; MARGIN-LEFT: 6mm; MARGIN-RIGHT: 0mm" 
+align=left><FONT color=#010100 size=1 face=Symbol><SPAN 
+style="FONT-SIZE: 9pt">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></FONT><FONT 
+color=#010100 size=1 face=Arial><SPAN style="FONT-SIZE: 9pt">Polygon 
+simplification.</SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV align=left><BR></DIV><FONT color=#010101>
+<DIV align=left></FONT><FONT color=#0000ff face="Times New Roman"><SPAN 
+style="FONT-SIZE: 12pt"><B>Copyright © 1986-2012 by Adirondack Software &amp; 
+Graphics</B></SPAN></FONT><FONT color=#010101></FONT></DIV>
+<DIV align=left><FONT color=#010101></FONT></DIV></BODY></HTML>

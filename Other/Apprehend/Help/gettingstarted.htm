@@ -1,0 +1,269 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>Getting Started</TITLE>
+<META content="text/html; charset=windows-1252" http-equiv=Content-Type>
+<META name=GENERATOR content="MSHTML 9.00.8112.16441">
+<META name=keywords content="Getting Started,"></HEAD>
+<BODY 
+style="BORDER-BOTTOM-STYLE: none; BORDER-LEFT-STYLE: none; BORDER-TOP-STYLE: none; BORDER-RIGHT-STYLE: none" 
+bgColor=#ffffe1>
+<TABLE border=0 cellSpacing=0 cellPadding=2 width="100%" bgColor=#99ccff>
+  <TBODY>
+  <TR>
+    <TD align=left>
+      <DIV align=left><FONT size=4 face=Arial><SPAN 
+      style="FONT-SIZE: 14pt">Getting Started</SPAN></FONT><FONT 
+      color=#010101></FONT></DIV></TD>
+    <TD align=right><FONT size=2 face=Arial>&nbsp;<A 
+      href="installation.htm">Next</A> </FONT></TD></TR></TBODY></TABLE>
+<HR>
+<FONT color=#010101 face=Arial><SPAN style="FONT-SIZE: 10pt"><B>Version 
+6.0</B></SPAN></FONT> 
+<TABLE 
+style="BORDER-BOTTOM: medium none; BORDER-LEFT: medium none; BORDER-COLLAPSE: collapse; BORDER-TOP: medium none; BORDER-RIGHT: medium none" 
+cellSpacing=0 borderColor=#000000 cellPadding=4 width=576>
+  <TBODY>
+  <TR>
+    <TD vAlign=top width=70>
+      <DIV align=left><FONT color=#010101><IMG 
+      src="..\Images\gettingstarted.PNG"></FONT></DIV></TD>
+    <TD vAlign=top width=490>
+      <DIV align=left><FONT color=#010101 face="Times New Roman"><SPAN 
+      style="FONT-SIZE: 12pt">Apprehend (TASGScreenCapture) is a non-visible 
+      component for Delphi 4-Delphi&nbsp;XE2&nbsp;to capture images from the 
+      screen. Version 6 of Apprehend was tested and built with Delphi 
+      2010.&nbsp; Apprehend has not been tested with Delphi XE or XE2, by the 
+      author, but end users report sucessful installs with those 
+      compilers.&nbsp;&nbsp;FireMonkey and 64-bit versions of Apprehend are not 
+      supported.</SPAN></FONT></DIV>
+      <DIV align=left><FONT color=#010101 face="Times New Roman"><SPAN 
+      style="FONT-SIZE: 12pt"></SPAN></FONT>&nbsp;</DIV>
+      <DIV align=left><FONT color=#010101 face="Times New Roman"><SPAN 
+      style="FONT-SIZE: 12pt"></SPAN></FONT><FONT color=#010101 
+      face="Times New Roman"><SPAN style="FONT-SIZE: 12pt">Apprehend has been 
+      tested with TImage, ImageEn's TImageENView and TImageEnVect and Envision's 
+      TImageScrollBox components. Demos with source for the TImage, 
+      TImageENView, TImageEnVect and TImagePainter components are available in 
+      the Apprehend zip file. Apprehend has been designed to work with most 
+      any&nbsp;image library. Source code and plenty of demos are included. 
+      Updates are not scheduled, but may occur. Check <FONT color=#000000><A 
+      href="http://www.frontiernet.net/~w2m/index.html">http://www.frontiernet.net/~w2m/index.html</A></FONT></SPAN></FONT><FONT 
+      face="Times New Roman"><SPAN style="FONT-SIZE: 12pt"> for updates. Check 
+      the blog for further information: <A 
+      href="http://williamwmiller.wordpress.com/">http://williamwmiller.wordpress.com/</A></SPAN></FONT></DIV>
+      <DIV align=left><FONT face="Times New Roman"><SPAN 
+      style="FONT-SIZE: 12pt"></SPAN></FONT><FONT 
+      color=#010101></FONT>&nbsp;</DIV>
+      <DIV align=left><FONT color=#010101 face="Times New Roman"><SPAN 
+      style="FONT-SIZE: 12pt">To use Apprehend all you have to do is place 
+      Apprehend on the main form of a project and make one function call to 
+      return a TBitmap of the captured image. With Apprehend you may capture the 
+      desktop, capture a bitmap image of the active window, capture a bitmap of 
+      a selected object (Window, button... toolbar), capture a bitmap of a 
+      selected area, capture a bitmap of a selected polygon area, capture a 
+      Large Icon (64x64), Icon (32x32) and Small Icon (16x16)&nbsp;rectangular 
+      selection or capture a user specified size rectangular selection with 
+      these simple functions:</SPAN></FONT></DIV>
+      <DIV align=left><FONT color=#010101 face="Times New Roman"><SPAN 
+      style="FONT-SIZE: 12pt"></SPAN></FONT>&nbsp;</DIV></TD></TR></TBODY></TABLE>
+<P><FONT color=#800000 face=Arial><SPAN style="FONT-SIZE: 10pt"><B>Functions</B> 
+</SPAN></FONT></P><FONT color=#800000 face=Arial><SPAN 
+style="FONT-SIZE: 10pt"></SPAN></FONT>
+<P><FONT color=#010101 face=Arial><SPAN style="FONT-SIZE: 10pt"><B>function</B> 
+CaptureDesktop: <B>TBitmap</B>; </SPAN></FONT><FONT 
+color=#010101></FONT><BR><FONT color=#010101 face="Times New Roman"><SPAN 
+style="FONT-SIZE: 12pt"><I>Description</I> </SPAN></FONT><FONT 
+color=#010101></FONT><BR><FONT color=#010101 face="Times New Roman"><SPAN 
+style="FONT-SIZE: 12pt">Capture the entire screen or desktop and return image as 
+a bitmap.</SPAN></FONT><FONT color=#010101></FONT><BR><BR><FONT face=Arial><SPAN 
+style="FONT-SIZE: 10pt"><B>function</B> SpeedCaptureDesktop: 
+<B>TBitmap</B>;</SPAN></FONT><FONT color=#010101 face=Arial><SPAN 
+style="FONT-SIZE: 10pt"> </SPAN></FONT><FONT color=#010101></FONT><BR><FONT 
+color=#010101 face="Times New Roman"><SPAN 
+style="FONT-SIZE: 12pt"><I>Description</I> </SPAN></FONT><FONT 
+color=#010101></FONT><BR><FONT color=#010101 face="Times New Roman"><SPAN 
+style="FONT-SIZE: 12pt">Quickly capture the entire screen or desktop and return 
+image as a bitmap without any flicker.</SPAN></FONT><FONT 
+color=#010101></FONT><BR><BR><FONT color=#010101 face=Arial><SPAN 
+style="FONT-SIZE: 10pt"><B>function</B> CaptureActiveWindow: <B>TBitmap</B>; 
+</SPAN></FONT><FONT color=#010101></FONT><BR><FONT color=#010101 
+face="Times New Roman"><SPAN style="FONT-SIZE: 12pt"><I>Description</I> 
+</SPAN></FONT><FONT color=#010101></FONT><BR><FONT color=#010101 
+face="Times New Roman"><SPAN style="FONT-SIZE: 12pt">Capture the active window 
+and return an image as a bitmap</SPAN></FONT><FONT 
+color=#010101></FONT><BR><BR><FONT color=#010101 face=Arial><SPAN 
+style="FONT-SIZE: 10pt"><B>function</B> CaptureObject: <B>TBitmap</B>; 
+</SPAN></FONT><FONT color=#010101></FONT><BR><FONT color=#010101 
+face="Times New Roman"><SPAN style="FONT-SIZE: 12pt"><I>Description</I> 
+</SPAN></FONT><FONT color=#010101></FONT><BR><FONT color=#010101 
+face="Times New Roman"><SPAN style="FONT-SIZE: 12pt">Capture the user selected 
+object (icon, button, toolbar, status bar) and return a s a bitmap. 
+</SPAN></FONT><FONT color=#010101></FONT><BR><BR><FONT color=#010101 
+face=Arial><SPAN style="FONT-SIZE: 10pt"><B>function</B> CaptureSelection: 
+<B>TBitmap</B>; </SPAN></FONT><FONT color=#010101></FONT><BR><FONT color=#010101 
+face="Times New Roman"><SPAN style="FONT-SIZE: 12pt"><I>Description</I> 
+</SPAN></FONT><FONT color=#010101></FONT><BR><FONT color=#010101 
+face="Times New Roman"><SPAN style="FONT-SIZE: 12pt">Capture the user selected 
+rectangular area of the screen and return a bitmap. </SPAN></FONT><FONT 
+color=#010101></FONT><BR><BR><FONT color=#010101 face=Arial><SPAN 
+style="FONT-SIZE: 10pt"><B>function</B> CapturePolygon: <B>TBitmap</B>; 
+</SPAN></FONT><FONT color=#010101></FONT><BR><FONT color=#010101 
+face="Times New Roman"><SPAN style="FONT-SIZE: 12pt"><I>Description</I> 
+</SPAN></FONT><FONT color=#010101></FONT><BR><FONT color=#010101 
+face="Times New Roman"><SPAN style="FONT-SIZE: 12pt">Capture the user selected 
+polygon area of the screen and return as a bitmap. </SPAN></FONT><BR><BR><FONT 
+color=#010101><FONT face=Arial><SPAN style="FONT-SIZE: 10pt"><B>function</B> 
+CaptureLargeIcon: <B>TBitmap</B>;</SPAN><BR></FONT><SPAN 
+style="FONT-SIZE: 12pt"><I><FONT face="Times New Roman">Description</I> 
+</SPAN></FONT></FONT><BR><FONT color=#010101 face="Times New Roman"><SPAN 
+style="FONT-SIZE: 12pt">Capture the user selected 48x48 pixel area of the screen 
+and return as a bitmap. </SPAN></FONT></P>
+<P><FONT color=#010101 face=Arial><SPAN style="FONT-SIZE: 10pt"><B>function</B> 
+CaptureIcon: <B>TBitmap</B>;</SPAN></FONT><FONT color=#010101></FONT><BR><FONT 
+color=#010101 face="Times New Roman"><SPAN 
+style="FONT-SIZE: 12pt"><I>Description</I> </SPAN></FONT><FONT 
+color=#010101></FONT><BR><FONT color=#010101 face="Times New Roman"><SPAN 
+style="FONT-SIZE: 12pt">Capture the user selected 32x32 pixel area of the screen 
+and return as a bitmap. </SPAN></FONT></P>
+<P><FONT color=#010101 face="Times New Roman"><SPAN 
+style="FONT-SIZE: 12pt"><FONT face=Arial><SPAN 
+style="FONT-SIZE: 10pt"><B>function</B> CaptureSmallIcon: 
+<B>TBitmap</B>;</SPAN><FONT color=#010101></FONT><BR></FONT><FONT color=#010101 
+face="Times New Roman"><SPAN style="FONT-SIZE: 12pt"><I>Description</I> 
+</SPAN></FONT><FONT color=#010101></FONT><BR><FONT color=#010101 
+face="Times New Roman"><SPAN style="FONT-SIZE: 12pt">Capture the user selected 
+16x16 pixel area of the screen and return as a bitmap. 
+</SPAN></FONT></SPAN></FONT><BR><FONT color=#010100 size=1 face=Arial><SPAN 
+style="FONT-SIZE: 9pt"><FONT color=#010101><SPAN 
+style="FONT-SIZE: 10pt"><STRONG><BR>function</STRONG> 
+CaptureSpecificSizeSelection:<STRONG>TBitmap</STRONG>; </SPAN><BR></FONT><FONT 
+face="Times New Roman"><SPAN style="FONT-SIZE: 12pt"><FONT 
+color=#010101><I>Description</I> </FONT></SPAN></FONT><BR><FONT color=#010101 
+face="Times New Roman"><SPAN style="FONT-SIZE: 12pt">Capture the user specified 
+size selected area of the screen and return as a 
+bitmap.</SPAN></FONT><BR><BR><STRONG>property:</STRONG> Minimize: 
+Boolean<BR></SPAN></FONT><FONT size=1><SPAN style="FONT-SIZE: 9pt"><SPAN 
+style="FONT-SIZE: 12pt"><FONT color=#010101><I>Description</I> 
+</FONT></SPAN></SPAN></FONT></P>
+<DIV align=left><FONT color=#010101 face="Times New Roman"><SPAN 
+style="FONT-SIZE: 12pt">To automatically minimize the main form of the 
+application before a capture and to automatically restore the main form, set the 
+Minimize property to true. If you set minimize property to false, the image will 
+include the application window. Typically the minimize property will be set to 
+true. </SPAN></FONT></DIV>
+<DIV align=left><FONT color=#010101 face="Times New Roman"><SPAN 
+style="FONT-SIZE: 12pt"><BR>
+<DIV align=left><FONT color=#010100 size=1 face=Arial><SPAN 
+style="FONT-SIZE: 9pt"><B>property: </B>Auto: Boolean</SPAN></FONT><FONT 
+color=#010101></FONT></DIV>
+<DIV align=left><FONT color=#7f0000 size=1><SPAN style="FONT-SIZE: 9pt"><SPAN 
+style="FONT-SIZE: 9pt"><SPAN style="FONT-SIZE: 12pt"><FONT 
+color=#010101><I>Description<BR></I></FONT></SPAN></SPAN></SPAN></FONT></SPAN></FONT><FONT 
+color=#010101><SPAN style="FONT-SIZE: 12pt">To automatically copy the captured 
+image to the clipboard, set the auto property to true. 
+</SPAN></FONT></DIV></DIV><FONT color=#010101><SPAN style="FONT-SIZE: 12pt">
+<DIV align=left><FONT color=#010100 size=1 face=Arial><SPAN 
+style="FONT-SIZE: 9pt"><B><BR>Property:</B> Delay: Boolean</SPAN></FONT><FONT 
+color=#010101></FONT></DIV>
+<DIV align=left><FONT color=#7f0000 size=1><SPAN style="FONT-SIZE: 9pt"><SPAN 
+style="FONT-SIZE: 9pt"><SPAN style="FONT-SIZE: 9pt"><SPAN 
+style="FONT-SIZE: 12pt"><FONT 
+color=#010101><I>Description<BR></I></FONT></SPAN></SPAN></SPAN></SPAN></FONT></SPAN></FONT><FONT 
+color=#010101><SPAN style="FONT-SIZE: 12pt">To change the time between 
+minimizing the main form and the time that the snapshot takes place set the 
+delay property. Usually from 50 to 500 is a good setting. 
+</SPAN></FONT></DIV><FONT color=#010101><SPAN style="FONT-SIZE: 12pt">
+<DIV align=left><FONT color=#010100 size=1 face=Arial><SPAN 
+style="FONT-SIZE: 9pt"><B></B></SPAN></FONT>&nbsp;</DIV>
+<DIV align=left><FONT color=#010100 size=1 face=Arial><SPAN 
+style="FONT-SIZE: 9pt"><B>property:</B> ShowCursor: Boolean</SPAN></FONT><FONT 
+color=#010101></FONT></DIV>
+<DIV align=left><FONT color=#7f0000 size=1><SPAN style="FONT-SIZE: 9pt"><SPAN 
+style="FONT-SIZE: 9pt"><SPAN style="FONT-SIZE: 9pt"><SPAN 
+style="FONT-SIZE: 9pt"><SPAN style="FONT-SIZE: 12pt"><FONT 
+color=#010101><I>Description<BR></I></FONT></SPAN></SPAN></SPAN></SPAN></SPAN></FONT></SPAN></FONT><FONT 
+color=#010101><SPAN style="FONT-SIZE: 12pt">To include the screen cursor in a 
+capture of the desktop set the show cursor property to true. 
+</SPAN></FONT><BR><BR><FONT color=#010101></FONT><FONT color=#800000 size=1 
+face=Arial><SPAN style="FONT-SIZE: 9pt"><B>Example of Capturing the 
+Desktop</B></SPAN></FONT><FONT color=#800000 face="Times New Roman"><SPAN 
+style="FONT-SIZE: 12pt"> </SPAN></FONT><FONT color=#010101></FONT><BR><FONT 
+color=#010101 size=1 face="Courier New"><SPAN 
+style="FONT-SIZE: 8pt"><B>procedure</B> CaptureDesktopClick( Sender: TSender ); 
+</SPAN></FONT><FONT color=#010101></FONT><BR><FONT color=#010101 size=1 
+face="Courier New"><SPAN style="FONT-SIZE: 8pt"><B>var</B> </SPAN></FONT><FONT 
+color=#010101></FONT><BR><FONT color=#010101 size=1 face="Courier New"><SPAN 
+style="FONT-SIZE: 8pt">BMP: TBitmap; </SPAN></FONT><FONT 
+color=#010101></FONT><BR><FONT color=#010101 size=1 face="Courier New"><SPAN 
+style="FONT-SIZE: 8pt"><B>begin</B> </SPAN></FONT><FONT 
+color=#010101></FONT><BR><FONT color=#010101 size=1 face="Courier New"><SPAN 
+style="FONT-SIZE: 8pt">&nbsp;&nbsp;&nbsp; // Set the ScreenCapture Component 
+Properties or use properties set in the IDE </SPAN></FONT><FONT 
+color=#010101></FONT><BR><FONT color=#010101 size=1 face="Courier New"><SPAN 
+style="FONT-SIZE: 8pt">&nbsp;&nbsp;&nbsp; ASGScreenCapture1.Minimize := True; 
+</SPAN></FONT><FONT color=#010101></FONT><BR><FONT color=#010101 size=1 
+face="Courier New"><SPAN style="FONT-SIZE: 8pt">&nbsp;&nbsp;&nbsp; 
+ASGScreenCapture1.Auto := True; </SPAN></FONT><FONT 
+color=#010101></FONT><BR><FONT color=#010101 size=1 face="Courier New"><SPAN 
+style="FONT-SIZE: 8pt">&nbsp;&nbsp;&nbsp; ASGScreenCapture1.Delay := 500; 
+</SPAN></FONT><FONT color=#010101></FONT><BR><FONT color=#010101 size=1 
+face="Courier New"><SPAN style="FONT-SIZE: 8pt"><B>&nbsp;&nbsp;&nbsp; try</B> 
+</SPAN></FONT><FONT color=#010101></FONT><BR><FONT color=#010101 size=1 
+face="Courier New"><SPAN style="FONT-SIZE: 8pt">&nbsp;&nbsp;&nbsp; // Capture an 
+image of the desktop and assign it to a bitmap </SPAN></FONT><FONT 
+color=#010101></FONT><BR><FONT color=#010101 size=1 face="Courier New"><SPAN 
+style="FONT-SIZE: 8pt">&nbsp;&nbsp;&nbsp; BMP.Assign( 
+ASGScreenCapture1.CaptureDesktop ); </SPAN></FONT><FONT 
+color=#010101></FONT><BR><FONT color=#010101 size=1 face="Courier New"><SPAN 
+style="FONT-SIZE: 8pt">&nbsp;&nbsp;&nbsp; // Assign the bitmap to a TImage or 
+another image component </SPAN></FONT><FONT color=#010101></FONT><BR><FONT 
+color=#010101 size=1 face="Courier New"><SPAN 
+style="FONT-SIZE: 8pt">&nbsp;&nbsp;&nbsp; Image1.Picture.Bitmap.Assign( BMP ); 
+</SPAN></FONT><FONT color=#010101></FONT><BR><FONT color=#010101 size=1 
+face="Courier New"><SPAN style="FONT-SIZE: 8pt">&nbsp;&nbsp;&nbsp; // Refresh 
+the Image component to display the image </SPAN></FONT><FONT 
+color=#010101></FONT><BR><FONT color=#010101 size=1 face="Courier New"><SPAN 
+style="FONT-SIZE: 8pt">&nbsp;&nbsp;&nbsp; Image1.Resfresh; </SPAN></FONT><FONT 
+color=#010101></FONT><BR><FONT color=#010101 size=1 face="Courier New"><SPAN 
+style="FONT-SIZE: 8pt"><B>&nbsp;&nbsp;&nbsp; finally</B> </SPAN></FONT><FONT 
+color=#010101></FONT><BR><FONT color=#010101 size=1 face="Courier New"><SPAN 
+style="FONT-SIZE: 8pt">&nbsp;&nbsp;&nbsp; // Free the temporary bitmap 
+</SPAN></FONT><FONT color=#010101></FONT><BR><FONT color=#010101 size=1 
+face="Courier New"><SPAN style="FONT-SIZE: 8pt">&nbsp;&nbsp;&nbsp; BMP.Free; 
+</SPAN></FONT><FONT color=#010101></FONT><BR><FONT color=#010101 size=1 
+face="Courier New"><SPAN style="FONT-SIZE: 8pt"><B>&nbsp;&nbsp;&nbsp; end;</B> 
+</SPAN></FONT><FONT color=#010101></FONT><BR><FONT color=#010101 size=1 
+face="Courier New"><SPAN style="FONT-SIZE: 8pt"><B>end;</B> </SPAN></FONT><FONT 
+color=#010101></FONT><BR><BR><BR><FONT color=#010101></FONT><FONT color=#010101 
+face="Times New Roman"><SPAN style="FONT-SIZE: 12pt">Apprehend was written with 
+Borland's Delphi 5-Delphi 2010. Apprehend has not been tested with 
+earlier&nbsp;versions of Delphi or versions of Delphi after Delphi 2010 by the 
+author. Other programmers have successfully installed Apprehend and compiled the 
+Apprehend demos with Delphi 4. Other authors report that Apprehend will not 
+install in Delphi 3. </SPAN></FONT></DIV>
+<DIV align=left><FONT color=#010101 face="Times New Roman"><SPAN 
+style="FONT-SIZE: 12pt"></SPAN></FONT><FONT color=#010101></FONT><BR><FONT 
+color=#010101 face="Times New Roman"><SPAN style="FONT-SIZE: 12pt">To run the 
+TImage demo install the Apprehend package for the respective version of Delphi. 
+Apprehend may work in Delphi 2005 and with Delphi XE and Delphi XE2; however, no 
+packages have been provided. Apprehend has not been built for 
+</SPAN></FONT><FONT face="Times New Roman"><SPAN style="FONT-SIZE: 12pt">Net nor 
+has</SPAN></FONT><FONT color=#010101 face="Times New Roman"><SPAN 
+style="FONT-SIZE: 12pt"> it been tested on Delphi 2005, Delphi XE or Delphi 
+XE2.&nbsp; A 64-bit version is not available.</SPAN></FONT><BR><BR><BR><FONT 
+color=#010101></FONT><FONT color=#010101 face=Arial><SPAN 
+style="FONT-SIZE: 10pt"><B>Demos</B></SPAN></FONT><FONT color=#010101 
+face=Arial><SPAN style="FONT-SIZE: 12pt"><B> </B></SPAN></FONT><FONT 
+color=#010101></FONT><BR><FONT color=#010101 face="Times New Roman"><SPAN 
+style="FONT-SIZE: 12pt">TImage built with Delphi 7</SPAN></FONT><FONT 
+color=#010101></FONT><BR><FONT color=#010101 face="Times New Roman"><SPAN 
+style="FONT-SIZE: 12pt">TImageENView with Delphi 7 and ImageEN.&nbsp; You must 
+install both Apprehend and ImageEN packages before loading this demo into 
+Delphi.</SPAN></FONT><FONT color=#010101></FONT><BR><FONT color=#010101 
+face="Times New Roman"><SPAN style="FONT-SIZE: 12pt">TImageENVect with Delphi 7 
+and ImageEN.&nbsp; You must install both Apprehend and ImageEN packages before 
+loading this demo into Delphi.</SPAN></FONT><FONT 
+color=#010101></FONT><BR><BR><BR><FONT color=#010101></FONT><FONT color=#0000ff 
+face="Times New Roman"><SPAN style="FONT-SIZE: 12pt"><B>Copyright © 1986-2012 by 
+Adirondack Software &amp; Graphics</B></SPAN></FONT><FONT 
+color=#010101></FONT><BR></DIV>
+<DIV align=left><FONT color=#010101></FONT></DIV></BODY></HTML>

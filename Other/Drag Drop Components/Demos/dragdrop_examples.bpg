@@ -1,0 +1,112 @@
+#------------------------------------------------------------------------------
+VERSION = BWS.01
+#------------------------------------------------------------------------------
+!ifndef ROOT
+ROOT = $(MAKEDIR)\..
+!endif
+#------------------------------------------------------------------------------
+MAKE = $(ROOT)\bin\make.exe -$(MAKEFLAGS) -f$**
+DCC = $(ROOT)\bin\dcc32.exe $**
+BRCC = $(ROOT)\bin\brcc32.exe $**
+#------------------------------------------------------------------------------
+PROJECTS = SimpleSourceDemo.exe SimpleTargetDemo.exe MultiTarget.exe \
+  ComboTargetDemo.exe DragDropDemo.exe Adapter.exe CustomFormat1.exe \
+  CustomFormat2.exe AutoScroll.exe ExtractDemo.exe OutlookDemo.exe \
+  OutlookSource.exe RtfTarget.exe PIDLDemo.exe VirtualFile.exe \
+  VirtualFileStream.exe AsyncTransferSource.exe AsyncFTPClient.exe \
+  AsyncTransferTarget.exe SourceAnalyzer.exe TargetAnalyzer.exe \
+  DragDropUnicode.exe TreeViewTarget.exe DropFiles.exe \
+  SimpleContextMenuHandlerShellExt.dll ContextMenuHandlerShellExt.exe \
+  DragDropHandlerShellExt.dll DropHandlerShellExt.dll FoobarEdit.exe
+#------------------------------------------------------------------------------
+default: $(PROJECTS)
+#------------------------------------------------------------------------------
+
+DragDropDemo.exe: DetailedDemo\DragDropDemo.dpr
+  $(DCC)
+
+SimpleSourceDemo.exe: SourceDemo\SimpleSourceDemo.dpr
+  $(DCC)
+
+SimpleTargetDemo.exe: TargetDemo\SimpleTargetDemo.dpr
+  $(DCC)
+
+PIDLDemo.exe: PIDLDemo\PIDLDemo.dpr
+  $(DCC)
+
+MultiTarget.exe: MultipleTargets\MultiTarget.dpr
+  $(DCC)
+
+ExtractDemo.exe: ExtractDemo\ExtractDemo.dpr
+  $(DCC)
+
+CustomFormat1.exe: CustomFormat1\CustomFormat1.dpr
+  $(DCC)
+
+AutoScroll.exe: AutoScroll\AutoScroll.dpr
+  $(DCC)
+
+DropHandlerShellExt.dll: ShellDropHandler\DropHandlerShellExt.dpr
+  $(DCC)
+
+FoobarEdit.exe: ShellDropHandler\FoobarEdit.dpr
+  $(DCC)
+
+Adapter.exe: Adapters\Adapter.dpr
+  $(DCC)
+
+CustomFormat2.exe: CustomFormat2\CustomFormat2.dpr
+  $(DCC)
+
+ComboTargetDemo.exe: ComboTargetDemo\ComboTargetDemo.dpr
+  $(DCC)
+
+VirtualFile.exe: VirtualFile\VirtualFile.dpr
+  $(DCC)
+
+VirtualFileStream.exe: VirtualFileStream\VirtualFileStream.dpr
+  $(DCC)
+
+ContextMenuHandlerShellExt.exe: ShellContextMenuHandler\ContextMenuHandlerShellExt.dpr
+  $(DCC)
+
+AsyncTransferSource.exe: AsyncSource\AsyncTransferSource.dpr
+  $(DCC)
+
+DragDropHandlerShellExt.dll: ShellDragDropHandler\DragDropHandlerShellExt.dpr
+  $(DCC)
+
+SimpleContextMenuHandlerShellExt.dll: ShellContextMenuHandlerSimple\SimpleContextMenuHandlerShellExt.dpr
+  $(DCC)
+
+AsyncTransferTarget.exe: AsyncTarget\AsyncTransferTarget.dpr
+  $(DCC)
+
+OutlookDemo.exe: Outlook\OutlookDemo.dpr
+  $(DCC)
+
+SourceAnalyzer.exe: SourceAnalyzer\SourceAnalyzer.dpr
+  $(DCC)
+
+TargetAnalyzer.exe: TargetAnalyzer\TargetAnalyzer.dpr
+  $(DCC)
+
+OutlookSource.exe: OutlookSource\OutlookSource.dpr
+  $(DCC)
+
+RtfTarget.exe: RTF\RtfTarget.dpr
+  $(DCC)
+
+DropFiles.exe: WM_DROPFILES\DropFiles.dpr
+  $(DCC)
+
+TreeViewTarget.exe: TreeViewTarget\TreeViewTarget.dpr
+  $(DCC)
+
+DragDropUnicode.exe: Unicode\DragDropUnicode.dpr
+  $(DCC)
+
+AsyncFTPClient.exe: AsyncSource with Filestreams\AsyncFTPClient.dpr
+  $(DCC)
+
+

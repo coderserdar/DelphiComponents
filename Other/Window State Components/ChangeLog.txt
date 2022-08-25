@@ -1,0 +1,161 @@
+; ------------------------------------------------------------------------------
+; This Source Code Form is subject to the terms of the Mozilla Public License,
+; v. 2.0. If a copy of the MPL was not distributed with this file, You can
+; obtain one at http://mozilla.org/MPL/2.0/
+;
+; Copyright (C) 2013-2014, Peter Johnson (www.delphidabbler.com).
+;
+; $Rev: 1970 $
+; $Date: 2014-10-28 17:27:18 +0000 (Tue, 28 Oct 2014) $
+;
+; Change Log for Window State Components
+; ------------------------------------------------------------------------------
+
+Release v5.6.1 of 28 October 2014
++ Fixed bug issue #32 - "Window State Components do not compile with Delphi 5" (https://code.google.com/p/ddab-lib/issues/detail?id=32)
++ Updated read-me file to noted that components now known to compile with Delphi 5.
+
+Release v5.6.0 of 12 January 2014
++ Added new RootKeyEx property to TPJRegWdwState that acts as an alias for the existing RootKey property with the difference that it exposes friendly names for supported registry hives. This make setting the registry root key in Delphi's object inspector more intuitive.
++ Added new OnGetRegDataEx that enables the registry root key to be set using same symbols used by the RootKeyEx property. The event takes precedence over the older OnGetRegData event that operates directly on HKEY values.
++ Changed demo 1 (StandardDemo) to demonstrate how to handle the new OnGetRegDataEx event instead of OnGetRegData. Revised and corrected the instructions that appear in the demo's main window and dialogue box.
++ Updated documentation re the changes.
++ Fixed some errors in change log.
+
+Release v5.5.3 of 11 January 2014
++ Fixed problem with compiler directives in Window State Components unit that was causing compilation to fail on Delphi XE5.
++ Minor documentation tweaks and corrections.
+
+Release v5.5.2 of 30 October 2013
++ Fixed registry access code in TPJRegWdwState to use 64 bit registry view when running on 64 bit Windows. Note that this fix doesn't work when compiled with Delphi 5 and earlier.
++ Updated font in the "StandardDemo" demo program to conform to other demo forms.
++ Updated documentation.
+
+Release v5.5.1 of 07 June 2013
++ Fixed issue 27: "Window State Components release 5.5.0 does not compile on Delphi XE2 or later" (http://code.google.com/p/ddab-lib/issues/detail?id=27).
+
+Release v5.5.0 of 06 June 2013
++ Changed how TPJWdwState determines the name of the ini file it uses to store window state data.
+  - Introduced new IniRootDir property that specifies whether relative ini file names are to be relative to %appdata%, %programdata%, windows directory or program executable file directory. Fixes issue #15 (http://bit.ly/ZQ1OPc).
+  - Default behaviour changed to use %appdata% instead of windows directory for relative ini files.
+  - Added new OnGetIniDataEx event to permit IniRootDir property value to be overridden.
+  - Behaviour of OnGetIniData has been changed to add default folders to relative file names set in the event handler.
+  - Added new IniFilePath method to return the fully specified name of the ini file.
++ If ini file directories do not exist they are now created instead of causing errors.
++ Any empty section names set in TPJWdwState.OnGetIniData event handlers are now replaced with a default section name.
++ Updated demos:
+  - Modified demo #2 to demonstrate TPJWdwState's use of the IniRootDir and IniFilePath properties and to write that window state ini file to %appdata%.
+  - Fixed demo #4 to preserve its pre-v5.5 behaviour of writing the ini file to the program's executable directory.
++ Tidied up some code.
++ Revised documentation (help file not updated - it is now deprecated).
++ Renamed link to online documentation and changed the URL.
+
+Release v5.4.2 of 24 April 2013
++ Fixed bug #26 (http://code.google.com/p/ddab-lib/issues/detail?id=26) where the window position was not restored correctly for main windows that touched or overlapped the task-bar when it was located at the top or left of the screen.
+
+Release v5.4.1 of 08 January 2013
++ Component source modified to compile without warnings on Delphi XE3
++ Unit names are now qualified with namespace on Delphi XE2 and later.
++ Changes to demo projects:
+  - Font and appearance of some controls changed.
+  - All form files now in text format.
+  - Forms no longer scaled.
+  - All demos now need Delphi 7 as a minimum.
++ Component source license changed to Mozilla Public License v2.0. (Demos now placed in public domain).
++ MPL text file and documentation wiki short-cut have had names changed.
++ WinHelp help file regenerated with updated copyright date.
++ Documentation revised.
+
+Release v5.4 of 19 June 2011
++ Added new OnAfterWindowRestored and OnAfterWindowSized events to all components.
++ Added new topics to help file and updated copyright date.
++ Corrected header comments in various demo project files.
+
+Release v5.3.1 of 15 November 2009
++ Made PJWdwState unit compatible with Delphi 4.
++ Made minor changes to demos:
+  - Improved layout of controls in demo #2.
+  - Removed form properties that are not supported on earlier versions of Delphi and changed form format from text to binary where necessary.
++ Rebuilt help file.
++ Removed HKEY property editor from release.
++ Revised documentation and included short-cut file that links to component Wiki.
+
+Release v5.3 of 27 September 2007
++ Completely re-implemented code that supports fitting MDI child form in parent client workspace. Original code was broken.
++ Bug fix in multi-monitor code by Craig Symons.
++ Pause before minimization of form now uses a busy wait rather than call to Sleep.
+
+Release v5.2 of 19 September 2007
++ Added support for multiple monitors based on code suggested by Craig Symons.
++ Deleted unused defines.
+
+Release v5.1 of 28 January 2007
++ Merged in changes provided by Bruce J Miller.
+  - Added events to enable user defined data to be read from or written to registry when TPJRegWdwState writes or reads window state information.
+  - Enabled components to work with MDI child forms.
+
+Release v5.0 of 15 October 2006
++ Added new TPJUserWdwState component that gets user to provide implementation of reading and writing persistent storage by handling events.
++ Changed TPJCustomWdwState.OnReadWdwState to protected and exposed in TPJWdwState and TPJRegWdwState. This is not used in TPJUserWdwState.
++ Updated help files re new TPJUserWdwState component.
++ Added new demo illustrating use of TPJUserWdwState.
+
+Release v4.3.1 of 18 December 2005
++ Fixed compiler directive error causing program to fail to compile in Delphis below v7.
++ Added new a-link keyword file.
++ Updated HKEY property editor from v1.0.2 to v1.0.3.
++ Removed from demo applications some form properties and unit clauses not available in earlier versions of Delphi.
+
+Release v4.3 of 04 September 2005
++ Added new CreateStandAlone constructor to enable window state component instances to be constructed dynamically at run time.
++ Updated help file with details of new constructor.
++ Added two new demo programs.
+
+Release v4.2 of 30 October 2003
++ Added new option to Options property to ensure window is not displayed out of the desktop's work area.
++ Some changes made to way registry is accessed in TPJRegWdwState.
++ Rearranged some decision logic.
++ Updated HKEY property editor from v1.0.1 to v1.0.2.
++ Changed component palette to 'DelphiDabbler' from 'PJSoft'.
+
+Release v4.1 of 07 August 2002
++ Added new OnReadWdwState event in which user can override window placement, size and state read from registry or ini file.
++ Added new Options property which contains a set of values that govern the behaviour of the component. The options are to ignore the stored window state and ensure window is displayed normally or ignore the stored window size and use the form's size as designed.
+
+Release v4.0 of 17 March 2002
++ Made use ParamStr(0) for default name of ini file and registry key.
++ Changed name of default registry sub key and ini file section to enable use of multiple forms without overwriting each other's data when using default property values.
++ Rewrote method of auto saving and restoring windows to stop having to manipulate the owning form's OnCreate and OnDestroy event handlers. Now uses a hook class to hook into owning form's messages and pass them to window state components. The window now always momentarily appears in normal state before being maximized or minimized as required.
++ Added new MinimizeDelay property to control how long the normal window appears before being minimized.
++ Added OnGetIniData event to TPJWdwState and OnGetRegData events to TPJRegWdwState to allow user to override property values for reading / writing ini file and registry.
++ Made so that now only one instance of a window state component can be placed on a form.
++ Rationalised some elements of code.
++ Changed component palette from 'PJ Stuff' to 'PJSoft'.
++ Changed unit name to PJWdwState.
++ Rewrote help file to integrate into Delphi 3+ IDE, removing support for Delphi 2 IDE..
+
+Release v3.1.1 of 08 October 2000
++ Added v1.0.1 of the HKEY property editor for TPJRegWdwState's RegRootKey property.
+
+Release v3.1 of 29 April 2000
++ Fixed a bug where windows that were supposed to be restored maximised were displayed using the last saved window dimensions. This bug was also causing the form to fail to load other components under certain circumstances. (Thanks to Andre Viol for reporting these bugs).
+
+Release v3.0 of 05 April 2000
++ Added AutoSaveRestore property to enable forms to be automatically saved and restored. (Thanks to Stefan Winter for suggesting this and providing prototype code).
++ Modified window restoration code to avoid task bars in positions other than bottom of screen. (Again thanks to Stefan for pointing out the problem and providing prototype code to fix it).
++ Prevented forms being restored as minimized from flashing on screen (by cheating!)
++ Removed conditional compilation statements since this version will not compile under Delphi 1.
+
+Release v2.1 of 29 November 1999
++ Renamed ReadState and SaveState methods to ReadWdwState and SaveWdwState respectively since ReadState was masking a method inherited from TComponent.
++ Updated HTML documentation to include installation notes for Delphi 3/4 and added update history.
+
+Release v2.0 of 19 October 1999
++ Re-write which added TPJRegWdwState component that stores window state information in registry.
++ Extracted common functionality of TPJWdwState and TPJRegWdwState into new abstract base class TPJCustomWdwState.
++ TPJWdwState presented same interface and functionality as version 1.
++ TRegWdwState was not available when compiled under Delphi 1 (because it uses the registry).
++ Updated HTML documentation to deal with new classes.
+
+Release v1.0 of 15 August 1999
++ Original version - included just TPJWdwState component with HTML documentation.

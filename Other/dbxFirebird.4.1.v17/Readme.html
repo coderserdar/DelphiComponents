@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+  <head>
+    <title></title>
+  </head>
+
+  <body>
+    <h1>dbExpress Driver for Firebird
+</h1>
+    <p>dbExpress is data driver architecture developed by <a href="http://www.google.com/url?q=http%3A%2F%2Fwww.codegear.com%2Fproducts%2Fdelphi&amp;sa=D&amp;sntz=1&amp;usg=AFrqEzfBmv5H491TvvrcSSxMZgEj-XMZsg" target="_blank">Embarcadero Delphi
+</a> / C++ Builder (Formerly known as Borland or CodeGear Delphi / C++ Builder).<br>
+      <br>
+      <a href="http://www.google.com/url?q=http%3A%2F%2Fwww.firebirdsql.org%2F&amp;sa=D&amp;sntz=1&amp;usg=AFrqEzffolG3EXGtnta_3jD1hsZAi5FZWw" target="_blank">Firebird
+</a> is a relational database offering many ANSI SQL standard features that runs on Linux, Windows, and a variety of Unix platforms.<br>
+      <br>dbExpress Driver for Firebird is a high quality driver providing optimum performance for Firebird service data accessing operation.
+</p>
+    <h1>Using dbExpress Driver for Firebird
+</h1>
+    <p>
+      <table border="1" cellspacing="1" cellpadding="1" width="50%">
+          <tr>
+            <td>
+              <p align="center"><strong>Library File
+</strong>
+              </p></td>
+            <td>
+              <p align="center"><strong>IDE
+</strong>
+              </p></td>
+          </tr>
+          <tr>
+            <td>
+              <p align="center">dbxfb40.dll
+</p></td>
+            <td>
+              <p align="center">CodeGear RAD Studio 2007
+</p></td>
+          </tr>
+          <tr>
+            <td>
+              <p align="center">dbxufb40.dll
+</p></td>
+            <td>
+              <p align="center">CodeGear RAD Studio 2009
+</p></td>
+          </tr>
+      </table>
+</p>
+    <pre>var C: TSQLConnection;<br>begin<br>  C := TSQLConnection.Create(Self);
+  C.DriverName := 'FirebirdConnection';
+  C.LibraryName := 'dbxfb40.dll;
+  C.VendorLib := 'fbclient.dll';
+  C.GetDriverFunc := 'getSQLDriverFIREBIRD';
+  C.Params.Clear;
+  C.Params.Add('User_Name=SYSDBA');
+  C.Params.Add('Password=masterkey');
+  C.Params.Add('Database=localhost:C:\Program Files\Firebird\Firebird_1_5\examples\employee.fdb');
+  C.Open;<br>end;</pre>
+    <h1>Known Issues
+</h1>
+    <p>There is an issue with&nbsp;early release of Delphi 2009 build <span id="MainContentUserControl_ctl00_BuildNumberLabel">12.0.3170.1698 on </span>DBX 4 framework.&nbsp; Please refer to the following for details:
+</p>
+    <ol>
+      <li>
+    <div><span id="MainContentUserControl_ctl00_ShortDescriptionLabel" class="closedcolor"><a href="http://qc.embarcadero.com/wc/qcmain.aspx?d=67210">QC#67210</a>: TSQLConnection Driver property and DBX .ini file deployment
+          </span>
+</div>
+      </li>
+      <li>
+    <div><span class="closedcolor"></span><span class="closedcolor"><a href="https://forums.codegear.com/message.jspa?messageID=20783#20783">CodeGear Forum Thread:&nbsp;How to deploy DBX4 apps without dbxdrivers.ini and dbxconnection.ini</a>
+          </span>
+</div>
+      </li>
+      <li>
+    <div><span class="closedcolor"><a href="http://chee-yang.blogspot.com/2008/09/delphi-2009-using-dbx4-framework.html">Delphi 2009: Using DBX4 Framework</a>
+          </span>
+</div>
+      </li>
+    </ol>
+    <h1>Support
+</h1>
+    <p>URL: <a href="http://groups.google.com/group/dbxfirebird">http://groups.google.com/group/dbxfirebird
+</a>
+
+
+</p>
+    <h1>Donation
+</h1>
+    <p>We rely on your continue supports to grow this piece of software as long as both Delphi and Firebird still alive in the market.<br>
+      <br>Please consider make any amount of comfortable donation.&nbsp; Thank you very much for your support and we promise to code and keep it up to date.
+</p>
+    <p>Please click here to make your <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=7217108"><font size="4"><strong>donation
+</strong>
+        </font>
+      </a>.&nbsp;
+</p>
+	<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="7217108">
+<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+    <h1>Contact
+</h1>
+
+    <p>URL: <a href="http://sites.google.com/site/dbxfirebird/home">http://sites.google.com/site/dbxfirebird/home
+</a>
+
+</p>
+
+    <p>Support URL: <a href="http://groups.google.com/group/dbxfirebird">http://groups.google.com/group/dbxfirebird
+</a>
+
+</p>
+
+    <p>Email: <a href="mailto:ccy@sql.com.my">ccy@sql.com.my
+</a>
+</p>
+
+    <p>&nbsp;
+</p>
+
+  </body>
+</html>

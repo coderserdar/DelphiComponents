@@ -1,0 +1,566 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--
+ * This Source Code Form is subject to the terms of the Mozilla Public License,
+ * v. 2.0. If a copy of the MPL was not distributed with this file, You can
+ * obtain one at http://mozilla.org/MPL/2.0/
+ *
+ * Copyright (C) 2005-2014, Peter Johnson (www.delphidabbler.com).
+ *
+ * $Rev: 1969 $
+ * $Date: 2014-10-28 17:24:55 +0000 (Tue, 28 Oct 2014) $
+ *
+ * Read-me file for Window State Components.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+
+  <title>
+    DelphiDabbler Window State Components ReadMe
+  </title>
+
+  <style type="text/css">
+    body {
+      margin: 1em;
+      padding: 0;
+      font-family: Verdana, Arial, sans-serif;
+      font-size: 9pt;
+      line-height: 150%;
+    }
+    h1 {
+      margin: 0 0 1em 0;
+      padding: 0.5em;
+      border: 1px silver solid;
+      background-color: #eee;
+      font-size: 13pt;
+      font-weight: bold;
+      text-align: center;
+    }
+    h1 .subtitle {
+      font-style: italic;
+      color: #336;
+    }
+    h2 {
+      margin: 1em 0 0 0;
+      padding: 0;
+      padding-bottom: 6px;
+      border-bottom: 1px silver solid;
+      font-size: 11pt;
+      font-weight: bold;
+    }
+    h3 {
+      margin: 0.5em 0 0 0;
+      padding: 0;
+      font-size: 9pt;
+      font-weight: bold;
+    }
+    p {
+      margin: 0.5em 0 0 0;
+      padding: 0;
+    }
+    ul, ol {
+      margin: 0.5em 0 0 3em;
+      padding: 0;
+    }
+    ul {
+      list-style-type: square;
+    }
+    ul.spaced li,
+    ol.spaced li {
+      margin-top: 0.5em;
+    }
+    ul.spaced li,
+    ul.spaced li div,
+    ol.spaced li,
+    ol.spaced li div {
+      margin-top: 0.5em;
+    }
+    ul.unspaced li,
+    ol.unspaced li {
+      margin-top: 0;
+    }
+    ul.unspaced li.first,
+    ol.unspaced li.first {
+      margin-top: 0.5em;
+    }
+    code {
+      font-family: "Courier New", Courier, monospace;
+    }
+    a:link {
+      color: #336;
+      text-decoration: underline;
+    }
+    a:visited {
+      color: #669;
+      text-decoration: underline;
+    }
+    a:active {
+      color: #336;
+      text-decoration: underline;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .gototop {
+      margin: 1em 0 0 0;
+      padding: 0.3em 0 0 0;
+      text-align: center;
+      position: relative;
+      float: right;
+      font-weight: bold;
+    }
+    .pullout {
+      border-left: 8px silver solid;
+      background-color: #eee;
+      margin: 0.5em 0 0 0;
+      padding: 0.25em 0.5em;
+      font-style: italic;
+    }
+    .indent {
+      margin-left: 3em;
+    }
+    .highlight {
+      color: #336;
+      font-style: italic;
+      font-weight: bold;
+    }
+    .endnotes {
+      margin: 1.5em 0 0 0;
+      padding: 1em 0 0 0;
+      border-top: 1px silver solid;
+    }
+    .comments {
+      font-style: italic;
+    }
+    .copyright,
+    .copyright a:link,
+    .copyright a:visited,
+    .copyright a:active {
+      margin: 1em 0 0 0;
+      color: gray;
+      font-size: 8pt;
+      text-align: right;
+    }
+  </style>
+
+</head>
+
+<body>
+
+<h1>
+  <div>Window State Components</div>
+  <span class="subtitle">ReadMe</span>
+</h1>
+
+<h2 id="contents">
+  Contents
+</h2>
+
+<ul>
+  <li><a href="#overview">Overview</a></li>
+  <li><a href="#installation">Installation</a></li>
+  <li><a href="#demos">Demo Projects</a></li>
+  <li><a href="#changelog">Change log</a></li>
+  <li><a href="#license">License and Disclaimer</a></li>
+  <li><a href="#bugs">Bugs and Feature Requests</a></li>
+  <li><a href="#author">About the Author</a></li>
+</ul>
+
+<p class="gototop">
+  &raquo; <a href="#contents">Contents</a>
+</p>
+
+<h2 id="overview">
+  Overview
+</h2>
+
+<p>
+  The <em>Window State Components</em> can save and restore a window's size,
+  position and state (minimized, maximized or normal) between program
+  executions. Three components are provided that use different means of
+  recording the window's information. They are:
+</p>
+
+<ul class="spaced">
+
+  <li>
+    <div class="highlight">
+      TPJWdwState
+    </div>
+    <div>
+      This component records window information in an ini file. The user has
+      control over the ini file name (via the <var>IniFileName</var> property),
+      the root path used when the specified file name is relative (via the
+      <var>IniRootPath</var> and the name of the section of the file where
+      window information is recorded (using the <var>Section</var> property).
+      Alternatively the ini file name and section names can be configured by
+      handling the <var>OnGetIniData</var> and <var>OnGetIniDataEx</var> events
+      that are triggered immediately before the ini file is read or written.
+    </div>
+  </li>
+
+  <li>
+    <div class="highlight">
+      TPJRegWdwState&dagger;
+    </div>
+    <div>
+      This component uses the registry to record window information. The
+      registry root key and sub key where the information is stored are
+      controlled by the <var>RootKeyEx</var>&dagger;&dagger; and
+      <var>SubKey</var> properties, or by handling the
+      <var>OnGetRegDataEx</var>&dagger;&dagger;&dagger; event. This event is
+      triggered just before the registry is accessed. Additional application
+      defined data can be read from or written to the registry by handling the
+      <var>OnGettingRegData</var> and <var>OnPuttingRegData</var> events that
+      are triggered after the component reads or writes the registry.
+    </div>
+    <div>
+      &dagger; You are discouraged from using <var>TPJRegWdwState</var> for
+      programs compiled with Delphi 5 and earlier that may be run on 64 bit
+      Windows, because the component may not be able to access the 64 bit
+      registry view correctly and window state may be lost.
+    </div>
+    <div>
+      &dagger;&dagger; As of v5.6.0 the <var>RootKeyEx</var> property superseded
+      <var>RootKey</var>. The new property takes an enumerated value to set the
+      required root key instead of the numerical value used for
+      <var>RootKey</var>. This makes <var>RootKeyEx</var> much easier to use in
+      the Delphi Object Inspector because the use selects between user friendly
+      value names instead of having to enter an integer value. Note that the
+      <var>RootKey</var> property has been retained for backward compatibility.
+    </div>
+    <div>
+      &dagger;&dagger;&dagger; As of v5.6.0 the <var>OnGetRegDataEx</var> event
+      superseded <var>OnGetRegData</var>. Like <var>RootKeyEx</var>,
+      <var>OnGetRegDataEx</var> takes an enumerated root key value instead of
+      the numerical value passed to <var>OnGetRegData</var>. The older event is
+      still present, but any event handler is only called if
+      <var>OnGetRegDataEx</var> does not have a handler.
+    </div>
+  </li>
+
+  <li>
+    <div class="highlight">
+      TPJUserWdwState
+    </div>
+    <div>
+      This component relies on the user to handle saving and reading the window
+      state data to or from persistent storage. The component gives the most
+      flexibility of all the components at the expense of placing the storage
+      burden on the user. The component triggers <var>OnReadData</var> and
+      <var>OnSaveData</var> events when ready to read or save data.
+    </div>
+  </li>
+
+</ul>
+
+<p>
+  All components implement the same core functionality that is controlled by
+  some common properties and events:
+</p>
+
+<ul class="spaced">
+
+  <li>
+    The components can automatically restore and save windows when the program
+    starts up and closes down (using the <var>AutoSaveRestore</var> property).
+    If <var>AutoSaveRestore</var> is set to False then the <var>Restore</var>
+    and <var>Save</var> methods must be called from the host application.
+  </li>
+
+  <li>
+    The <var>Options</var> property can be used to customise the way the window
+    is restored as follows:
+
+    <ul class="unspaced">
+
+      <li>
+        The components can be instructed to ignore the saved window state
+        &ndash; the window is then displayed in the normal state.
+      </li>
+
+      <li>
+        The window's saved size can be ignored and the default size of the form
+        used instead. This is useful for dialogue boxes and fixed size windows.
+      </li>
+
+      <li>
+        The window can be kept within the current work area of the desktop. This
+        option works with multiple monitors. If the form containing the window
+        state component is a MDI child form this option keeps the window within
+        the parent form's client area, after allowing for any menu, tool-bars or
+        status bar etc.
+      </li>
+
+    </ul>
+
+  </li>
+
+  <li>
+    When the form is to be restored in a minimized state it briefly appears on
+    screen in the normal state before being minimized. The
+    <var>MinimizeDelay</var> property controls the delay between the window
+    appearing and being minimized.
+  </li>
+
+</ul>
+
+<p>
+  <var>TPJWdwState</var> and <var>TPJRegWdwState</var> also support the
+  <var>OnReadWdwState</var> event. Handling this event enables the stored
+  window's state, size and position values before the window is restored. This
+  event is called after reading the data and before sizing the window.
+  <var>TPJUserWdwState</var> does not expose this event because the user is in
+  charge of reading the data and can therefore modify it in the
+  <var>OnReadData</var> event.
+</p>
+
+<p class="gototop">
+  &raquo; <a href="#contents">Contents</a>
+</p>
+
+<h3>
+  Compatibility
+</h3>
+
+<p>
+  The components are compatible with the Delphi Windows 32 bit and 64 bit
+  compiler. They have been tested using Delphi 5, Delphi 7 and Delphi 2006
+  through to Delphi XE4. The components <em>may</em> on Delphi 4, but that has
+  not been tested.
+</p>
+
+<p>
+  The components are for use with the VCL only: they are not compatible with
+  FireMonkey.
+</p>
+
+<p>
+  .NET and non-Windows platforms are not supported.
+</p>
+
+<p class="gototop">
+  &raquo; <a href="#contents">Contents</a>
+</p>
+
+<h2 id="installation">
+  Installation
+</h2>
+
+<p>
+  The <em>Window State Components</em> are supplied in a zip file. Before
+  installing you need to extract all the files from the zip file, preserving the
+  directory structure. The following files will be extracted:
+</p>
+
+<ul>
+  <li>
+    <strong><code>PJWdwState.pas</code></strong> &ndash; component source code.
+  </li>
+  <li>
+    <strong><code>PJWdwState.dcr</code></strong> &ndash; resource file
+    containing component palette glyphs.
+  </li>
+  <li>
+    <code>PJWdwState.hlp</code> &ndash; component help file that integrates with
+    the Delphi 4 to 7 OpenHelp system.
+  </li>
+  <li>
+    <code>PJWdwState.als</code> &ndash; a-link keyword file for integration with
+    the Delphi 6 or 7 OpenHelp system.
+  </li>
+  <li>
+    <code>ReadMe.htm</code> &ndash; this file.
+  </li>
+  <li>
+    <code>MPL-2.txt</code> &ndash; the Mozilla Public License.
+  </li>
+  <li>
+    <code>ChangeLog.txt</code> &ndash; component's change log.
+  </li>
+  <li>
+    <code>Documentation.URL</code> &ndash; short-cut to the component's online
+    documentation.
+  </li>
+</ul>
+
+<p>
+  In addition to the above files you will find the the source code of four demo
+  projects along with read-me files in the <code>Demos</code> directory and its
+  <code>1</code>, <code>2</code>, <code>3</code> and <code>4</code>
+  sub-directories.
+</p>
+
+<p>
+  You can now install the components into the Delphi IDE. If you need help
+  doing this <a
+    href="http://www.delphidabbler.com/url/install-comp"
+  >see here</a>.
+</p>
+
+<p>
+  Note that the help file included in the download can only integrate with the
+  IDE in Delphi 4-7. For information on how to do this, see <a
+    href="http://www.delphidabbler.com/articles?article=15"
+  >this article</a>. Users of other versions of Delphi can either use the help
+  file as a stand-alone file (in which case some links won't work) or you can
+  use the Window State Components <a
+    href="http://www.delphidabbler.com//url/wdwstate-docs"
+  >online documentation</a> that can be accessed via the provided Internet
+  short-cut.
+</p>
+
+<p class="pullout">
+  <strong>NOTE:</strong> The help file is deprecated and is no longer being
+  updated. The last update was in the v5.4.1 release. Changes and new features
+  added since then have not been included in the help file. For up to date
+  documentation please refer to the <a
+    href="http://www.delphidabbler.com//url/wdwstate-docs"
+  >online documentation</a>.
+</p>
+
+<p class="gototop">
+  &raquo; <a href="#contents">Contents</a>
+</p>
+
+<h2 id="demos">
+  Demo Projects
+</h2>
+
+<p>
+  There are four demo projects included with these components. They are:
+</p>
+
+<ol class="spaced">
+  <li>
+    <code>StandardDemo.dpr</code><br />
+    Demonstrates how to use the components in the standard way, i.e. dropped on
+    a form from the component palette. This demo uses <var>TPJRegWdwState</var>.
+  </li>
+  <li>
+    <code>StandAloneDemo.dpr</code><br />
+    Demonstrates how to create and use the components dynamically using the
+    <var>CreateStandAlone</var> constructor. This demo uses
+    <var>TPJWdwState</var>.
+  </li>
+  <li>
+    <code>UserDemo.dpr</code><br />
+    Demonstrates how to use <var>TPJUserWdwState</var> and load and save data in
+    the <var>OnReadData</var> and <var>OnSaveData</var> events.
+  </li>
+  <li>
+    <code>MDIDemo.dpr</code><br />
+    Demonstrates the use of <var>TPJWdwState</var> with MDI applications.
+  </li>
+</ol>
+
+<p>
+  Further information about the demo programs can be found in the file
+  <code>Demos\DemoReadMe.htm</code> that is included in the download.
+</p>
+
+<p class="gototop">
+  &raquo; <a href="#contents">Contents</a>
+</p>
+
+<h2 id="changelog">
+  Change log
+</h2>
+
+<p>
+  A complete change log is provided in a text file that is included in the
+  download.
+</p>
+
+<p class="gototop">
+  &raquo; <a href="#contents">Contents</a>
+</p>
+
+<h2 id="license">
+  License and Credits
+</h2>
+
+<p>
+  These components are released under the terms of the <a
+    href="http://www.mozilla.org/MPL/2.0/"
+  >Mozilla Public License v2.0</a>.
+</p>
+
+<p>
+  Thanks to the following who have contributed to this project:
+</p>
+
+<p class="indent">
+  Stefan Winter<br />
+  Enrico Bortolazzi<br />
+  Bruce J Miller<br />
+  Craig Symons
+</p>
+
+<p>
+  All relevant trademarks are acknowledged.
+</p>
+
+<p class="gototop">
+  &raquo; <a href="#contents">Contents</a>
+</p>
+
+<h2 id="bugs">
+  Bugs and Feature Requests
+</h2>
+
+<p>
+  Bugs can be reported or new features requested via the <a
+    href="http://www.delphidabbler.com/url/ddlib-issues"
+  >Issue Tracker</a>.
+</p>
+
+<p>
+  If no similar report or request has been recorded already, use the <em>New
+  Issue</em> link to add a new issue. Please select the most appropriate
+  template from the <em>Templates</em> drop down list.
+</p>
+
+<p class="gototop">
+  &raquo; <a href="#contents">Contents</a>
+</p>
+
+<h2 id="author">
+  About the Author
+</h2>
+
+<p>
+  I'm Peter Johnson &ndash; a hobbyist programmer living in Ceredigion in West
+  Wales, UK, writing write mainly in Delphi. My programs and code are available
+  from: <a
+    href="http://www.delphidabbler.com/"
+  >http://www.delphidabbler.com/</a>.
+</p>
+
+<p>
+  I can be <a
+    href="http://www.delphidabbler.com/contact"
+  >contacted via the website</a>.
+</p>
+
+<div class="endnotes">
+
+  <div class="comments">
+    Please <a
+      href="http://www.delphidabbler.com/contact"
+    > let me know</a> if you have any comments about the component, but please
+    use the Issue Tracker noted above to report bugs and request new features.
+  </div>
+
+  <div class="copyright">
+    This document is copyright &copy; 2005-2014, P D Johnson, <a
+      href="http://www.delphidabbler.com/"
+    >www.delphidabbler.com</a>
+  </div>
+
+</div>
+
+</body>
+
+</html>

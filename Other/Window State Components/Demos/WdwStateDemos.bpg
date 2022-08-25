@@ -1,0 +1,29 @@
+#------------------------------------------------------------------------------
+VERSION = BWS.01
+#------------------------------------------------------------------------------
+!ifndef ROOT
+ROOT = $(MAKEDIR)\..
+!endif
+#------------------------------------------------------------------------------
+MAKE = $(ROOT)\bin\make.exe -$(MAKEFLAGS) -f$**
+DCC = $(ROOT)\bin\dcc32.exe $**
+BRCC = $(ROOT)\bin\brcc32.exe $**
+#------------------------------------------------------------------------------
+PROJECTS = StandAloneDemo.exe StandardDemo.exe UserDemo.exe MDIDemo.exe
+#------------------------------------------------------------------------------
+default: $(PROJECTS)
+#------------------------------------------------------------------------------
+
+StandAloneDemo.exe: 2\StandAloneDemo.dpr
+  $(DCC)
+
+StandardDemo.exe: 1\StandardDemo.dpr
+  $(DCC)
+
+UserDemo.exe: 3\UserDemo.dpr
+  $(DCC)
+
+MDIDemo.exe: 4\MDIDemo.dpr
+  $(DCC)
+
+

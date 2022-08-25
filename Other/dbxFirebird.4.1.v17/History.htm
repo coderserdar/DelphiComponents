@@ -1,0 +1,134 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+  <head>
+    <title></title>
+  </head>
+
+  <body>
+    <h1>dbExpress Driver for Firebird History</h1>
+    <p><strong>4.1.2007.17 / 4.1.2009.17 Release on 27 Jul 2009</strong>
+    </p>
+    <ol>
+      <li>Fixed: Memory Leak for Insert SQL that contain paramenters</li>
+    </ol>
+    <p><strong>4.1.2007.16 / 4.1.2009.16 Release on 24 Jul 2009</strong>
+    </p>
+    <ol>
+      <li>Fixed: The driver return LargeInt field type for some Decimal and Numeric columns.&nbsp; (e.g.: Decimal(18.0))</li>
+      <li>Fixed: SELECT SQL using operator in columsn return LargeInt field type for Decimal and Numeric columns.&nbsp; (e.g.: SELECT DecimalField + DecimalField FROM Table)</li>
+    </ol>
+    <p><strong>4.1.2007.15 / 4.1.2009.15 Release on 08 Jul 2009</strong>
+    </p>
+    <ol>
+      <li>Add: Database name will expand if contain environment variable (e.g.: %temp%)</li>
+    </ol>
+    <p><strong>4.1.2007.14 / 4.1.2009.14 Release on 07 Jul 2009</strong>
+    </p>
+    <ol>
+      <li>Add: support Firebird Stored Procedure and DBX TSQLStoredProc</li>
+      <li>Update: In Delphi 2007 DBX 4 driver, BIGINT columns map to TFmtBcdField.&nbsp; While perform data coering operation, Numeric and Decimal columns map to SQL_INT64 data type in some situation map to TDBXDataTypes.BcdType and TFmtBcdField of VCL persistent field.&nbsp; The above behavior has changed for DBX 4 unicode driver used by Delphi 2009, BIGINT column map to TDBXTypes.Int64Type.&nbsp; It convert to TDBXTypes.BcdType previously.&nbsp; As such, it map to TLargeIntField in VCL's persistent field.</li>
+      <li>Fixed: Bug fixed for Locale environment using DecimalSeparator as ","</li>
+    </ol>
+    <p><strong>4.1.0.13 / 4.1.2009.2 Release on 14 Nov 2008</strong>
+    </p>
+    <ol>
+      <li>Fixed: ServerCharSet doesn't function and cause transliteration fail</li>
+      <li>Workaound: <a href="http://tracker.firebirdsql.org/browse/CORE-2186">http://tracker.firebirdsql.org/browse/CORE-2186</a>&nbsp; fbintl.dll didn't unload after fbembed.dll was released
+      </li>
+      <li>3 environment variables "FIREBIRD", "FIREBIRD_MSG" and "FIREBIRD_TMP" wasn't unset properly if these variables never exist in current process.</li>
+    </ol>
+    <p><strong>4.1.0.12 / 4.1.2009.1 Release on 07 Nov 2008</strong>
+    </p>
+    <ol>
+      <li>Maintenance Release - minor update for Delphi 2007 and Delphi 2009</li>
+    </ol>
+    <p><strong>4.1.0.11 Release on 05 Nov 2008</strong>
+    </p>
+    <ol>
+      <li>Access violation in TStatusVector.GetError method using malform error string</li>
+    </ol>
+    <p><strong>4.1.0.10 Release on 03 Oct 2008</strong>
+    </p>
+    <ol>
+      <li>Maintenance release - minor update for Delphi 2007 and Delphi 2009</li>
+    </ol>
+    <p><strong>4.1.0.9 Release on 26 Sep 2008</strong>
+    </p>
+    <ol>
+      <li>Support Firebird 2.0 UTF-8 Character Set.</li>
+      <li>Remove IB_Headers.pas and convert C++ firebird header to object pascal.</li>
+    </ol>
+    <p><strong>4.1.0.8 Release on 26 May 2008</strong>
+    </p>
+    <ol>
+      <li>Connect to Firebird 2.1.0 will cause "Invalid parameter in Transaction parameter block" error.&nbsp; This is due to the transaction parameter wasn't define properly.&nbsp; A redundant parameter of isc_tpb_concurrency was added in previous version.</li>
+    </ol>
+    <p><strong>4.0.0.7 Release on 04 Jan 2008</strong>
+    </p>
+    <ol>
+      <li>If perform massive database operation thru' the driver, the memory quickly climb up and cause out of memory.&nbsp; This is due to function DBXBase_Close, the Handle is IDBXBase reference.&nbsp; It should set to nil in this function: IDBXBase(Handle) := nil to free the instance.</li>
+      <li>Add FmtBcd patches</li>
+    </ol>
+    <p><strong>4.0.0.6 Release on Aug 06 2007</strong>
+    </p>
+    <ol>
+      <li>If run DBX4 application compile with FastMM full debug mode, VARCHAR column may prompt corrupt memory block when TField.GetIsNull is invoked.&nbsp; The cause is due to the VARCHAR column size returned was (ActualSize + 2) instead of (ActualSize + 1).</li>
+    </ol>
+    <p><strong>4.0.0.5 Release on Jul 06 2007</strong>
+    </p>
+    <ol>
+      <li>Fix program suddenly close on embedded database. Place a sleep instruction before FreeLibrary handle.</li>
+    </ol>
+    <p><strong>4.0.0.4 Release on Jul 05 2007</strong>
+    </p>
+    <ol>
+      <li>Fix a bug where datasnap application try to retrieve nested data packet for more than 1 time, the auto commit semantic implement in DBX4 driver will prompt transaction exception.</li>
+    </ol>
+    <p><strong>4.0.0.3 Release on Jul 04 2007</strong>
+    </p>
+    <ol>
+      <li>Fix BCD conversion bug that pass value (0.1 or -0.1) to TXSQLVAR.SetBCD</li>
+    </ol>
+    <p><strong>4.0.0.2 Release on Jun 21 2007</strong>
+    </p>
+    <ol>
+      <li>Fixed Access Violation when accessing Firebird 2.0 Database metadata</li>
+    </ol>
+    <p><strong>4.0.0.1 Release on Jun 14 2007</strong>
+    </p>
+    <ol>
+      <li>Firebird Driver for DBX4 Dynalink Driver</li>
+    </ol>
+    <p><strong>3.0.0.4 Release on </strong>
+    </p>
+    <ol>
+      <li>Fixed Access Violation when using the driver with DBX4 </li>
+    </ol>
+    <p><strong>1.0.0.4 Release on Jul 04 2007</strong>
+    </p>
+    <ol>
+      <li>Fix BCD conversion bug that pass value (0.1 or -0.1) to TXSQLVAR.SetBCD</li>
+    </ol>
+    <p><strong>1.0.0.3 Release on May 25 2007</strong>
+    </p>
+    <ol>
+      <li>Support HostName parameter in TSQLConnection.Params</li>
+      <li>Auto detect if connection is loopback (localhost, 127.0.0.1). Access speed will improve much using local protocol</li>
+      <li>Improve access performance to Blob Field</li>
+      <li>Improve access performance to BCD Field</li>
+    </ol>
+    <p><strong>1.0.0.2 Release on May 16 2007</strong>
+    </p>
+    <ol>
+      <li>Fixed incorrect handling of isc_get_segment when reading Blob field. Did not call isc_close_blob if there is no more blob data to read (when reach isc_segstr_eof). This will cause massive memory leaking
+      </li>
+      <li>Did not free XSQLVAR.sqlind after used.</li>
+      <li>Fixed Param.AsDateTime := Date error. setParameter did not interpret fldTIMESTAMP</li>
+      <li>Fixed Param.AsString := '-3.41060513164848E-13' and pass to Decimal or Numeric Data type will cause StrToBcd conversion error.</li>
+    </ol>
+    <p><strong>1.0.0.1 Release on May 15 2007</strong><br>
+    </p>
+
+  </body>
+</html>

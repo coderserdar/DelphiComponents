@@ -1,0 +1,320 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--
+ * Read-me file for Window State Components Demo programs
+ *
+ * $Rev: 1594 $
+ * $Date: 2014-01-12 17:48:14 +0000 (Sun, 12 Jan 2014) $
+ *
+ * Any copyright in this file is dedicated to the Public Domain.
+ * http://creativecommons.org/publicdomain/zero/1.0/
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+
+  <title>
+    DelphiDabbler Window State Components Demo ReadMe
+  </title>
+
+  <style type="text/css">
+    body {
+      margin: 1em;
+      padding: 0;
+      font-family: Verdana, Arial, sans-serif;
+      font-size: 9pt;
+      line-height: 150%;
+    }
+    h1 {
+      margin: 0 0 1em 0;
+      padding: 0.5em;
+      border: 1px silver solid;
+      background-color: #eee;
+      font-size: 13pt;
+      font-weight: bold;
+      text-align: center;
+    }
+    h1 .subtitle {
+      font-style: italic;
+      color: #336;
+    }
+    h2 {
+      margin: 1em 0 0 0;
+      padding: 0;
+      padding-bottom: 6px;
+      border-bottom: 1px silver solid;
+      font-size: 11pt;
+      font-weight: bold;
+    }
+    h3 {
+      margin: 0.5em 0 0 0;
+      padding: 0;
+      font-size: 9pt;
+      font-weight: bold;
+    }
+    p {
+      margin: 0.5em 0 0 0;
+      padding: 0;
+    }
+    ul, ol {
+      margin: 0.5em 0 0 3em;
+      padding: 0;
+    }
+    ul {
+      list-style-type: square;
+    }
+    ul.spaced li,
+    ol.spaced li {
+      margin-top: 0.5em;
+    }
+    ul.spaced li,
+    ol.spaced li {
+      margin-top: 0.5em;
+    }
+    ul.unspaced li,
+    ol.unspaced li {
+      margin-top: 0;
+    }
+    ul.unspaced li.first,
+    ol.unspaced li.first {
+      margin-top: 0.5em;
+    }
+    code {
+      font-family: "Courier New", Courier, monospace;
+    }
+    a:link {
+      color: #336;
+      text-decoration: underline;
+    }
+    a:visited {
+      color: #669;
+      text-decoration: underline;
+    }
+    a:active {
+      color: #336;
+      text-decoration: underline;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .gototop {
+      margin: 1em 0 0 0;
+      padding: 0.3em 0 0 0;
+      text-align: center;
+      position: relative;
+      float: right;
+      font-weight: bold;
+    }
+    .pullout {
+      border-left: 8px silver solid;
+      background-color: #eee;
+      margin: 0.5em 0 0 0;
+      padding: 0.25em 0.5em;
+      font-style: italic;
+    }
+    .highlight {
+      color: #336;
+      font-style: italic;
+      font-weight: bold;
+    }
+    .endnotes {
+      margin: 1.5em 0 0 0;
+      padding: 1em 0 0 0;
+      border-top: 1px silver solid;
+    }
+    .comments {
+      font-style: italic;
+    }
+    .copyright,
+    .copyright a:link,
+    .copyright a:visited,
+    .copyright a:active {
+      margin: 1em 0 0 0;
+      color: gray;
+      font-size: 8pt;
+      text-align: right;
+    }
+  </style>
+
+</head>
+
+<body>
+
+<h1>
+  <div>Window State Components</div>
+  <div class="subtitle">Demo Projects ReadMe</div>
+</h1>
+
+<h2>
+  Introduction
+</h2>
+
+<p>
+  There are four demo projects included with these components. They are:
+</p>
+
+<ol class="spaced">
+  <li>
+    <strong><code>StandardDemo.dpr</code></strong><br />
+    Demonstrates how to use the components in the standard way, i.e. dropped on
+    a form from the component palette.
+  </li>
+  <li>
+    <strong><code>StandAloneDemo.dpr</code></strong><br />
+    Demonstrates how to create and use the components dynamically.
+  </li>
+  <li>
+    <strong><code>UserDemo.dpr</code></strong><br />
+    Demonstrates how to use <var>TPJUserWdwState</var> and load and save data
+    in the <var>OnReadData</var> and <var>OnSaveData</var> events.
+  </li>
+  <li>
+    <strong><code>MDIDemo.dpr</code></strong><br />
+    Demonstrates how to use the components with MDI applications. This demo uses
+    <var>TPJWdwState</var> components with the <var>woFitWorkArea</var> option
+    to keep MDI child forms within the main form's client area.
+  </li>
+</ol>
+
+<p>
+  These demos require Delphi 7 or later to compile.
+</p>
+
+<p>
+  On Delphi XE2 and later the demos can be compiled for 64 bit Windows. Proceed
+  as follows:
+</p>
+
+<ul>
+  <li>
+    Ensure the package where the Window State Components have been installed has
+    been compiled for a Windows 64 bit target.
+  </li>
+  <li>
+    Add a Windows 64 target to each demo project.
+  </li>
+  <li>
+    Add the directory containing the 64 bit package containing the components to
+    the each demo project's search path for the 64 bit target.
+  </li>
+</ul>
+
+<h2>
+  StandardDemo.dpr
+</h2>
+
+<p>
+  This demo can be found in the <code>Demos\1</code> sub-folder.
+</p>
+
+<p>
+  It has a main application window containing a button that, when clicked,
+  displays a modal dialogue box. Both the main window and the dialogue contain a
+  <var>TPJRegWdwState</var> component. The component in the main window is
+  configured to persist window size, state and position. The dialogue's
+  component only persists window position. Window positions are not adjusted to
+  remain within the work space.
+</p>
+
+<p>
+  Both forms demonstrate the use of the <var>OnReadWdwState</var> event. The
+  main form also shows how to use the <var>OnGetRegDataEx</var>,
+  <var>OnGettingRegData</var> and <var>OnPuttingRegData</var> events and the
+  <var>AutoSaveRestore</var> property.
+</p>
+
+<h2>
+  StandAloneDemo.dpr
+</h2>
+
+<p>
+  This demo can be found in the <code>Demos\2</code> sub-folder.
+</p>
+
+<p>
+  It displays a single application window that dynamically creates a
+  <var>TPJWdwState</var> component using the <var>CreateStandAlone</var>
+  constructor. A check box is available that is used to toggle whether windows
+  that are partially off-screen when closed are restored in exactly the same
+  position or are restored so all the window is visible.
+</p>
+
+<p>
+  The program uses the <var>TPJWdwState</var> component's <var>IniRootDir</var>,
+  <var>IniFileName</var> and <var>Section</var> properties to require that
+  window information is stored in the <code>[Window]</code> section of an ini
+  file named <code>StandAloneDemo.ini</code> in the
+  <code>%AppData%\DelphiDabbler\Lib\PJWdwState</code> directory. It also shows
+  how to use the <var>IniFilePath</var> method to get the full file spec. of
+  the ini file.
+</p>
+
+<h2>
+  UserDemo.dpr
+</h2>
+
+<p>
+  This demo can be found in the <code>Demos\3</code> sub-folder.
+</p>
+
+<p>
+  The program has a single main window that uses a <var>TPJUserWdwState</var>
+  component to persist the window's state, size and position. The component is
+  configured to automatically save and restore the window state. It is also
+  set up keep the window on screen.
+</p>
+
+<p>
+  The main form has event handler's for <var>TPJUserWdwState</var>'s
+  <var>OnReadData</var> and <var>OnSaveData</var> events. <var>OnSaveData</var>
+  is used to write the content of the <var>Data</var> record passed to the event
+  handler to a file as binary data. <var>OnReadData</var> reads any stored data
+  back into the record.
+</p>
+
+<h2>
+  MDIDemo.dpr
+</h2>
+
+<p>
+  This demo can be found in the <code>Demos\4</code> sub-folder.
+</p>
+
+<p>
+  This simple demo simply shows how to use the window state components with MDI
+  applications. There are two forms in the project &ndash; a main form and a
+  child form. Neither form has any code, but both forms have a
+  <var>TPJWdwState</var> component set up to write to different sections of the
+  same ini file. The main form has a toolbar, a menu bar and a status bar. These
+  controls have been added to show that the window state components can make
+  allowances for furniture in the main when keeping child forms within the
+  available work area.
+</p>
+
+<p>
+  Experiment by removing or adding the main form's furniture controls to check
+  how this affects the placing of the child form. Also try changing the
+  properties of each  window state component and seeing what difference this
+  makes. You may also want to try removing the component from the main form and
+  once again seeing what effect this has on the result.
+</p>
+
+<p>
+
+
+<div class="endnotes">
+
+  <div class="comments">
+    If you have any comments on the components or this demo code or if you have
+    found a bug, please let me know. Bugs should be reported via the <a
+      href="http://www.delphidabbler.com/url/ddlib-issues"
+    >Issue Tracker</a>. Other comments can be made via my website <a
+      href="http://www.delphidabbler.com/contact"
+    >contact page</a>.
+  </div>
+
+</div>
+
+</body>
+
+</html>
