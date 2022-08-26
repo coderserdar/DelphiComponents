@@ -1,0 +1,231 @@
+D.P.F iOS Native Components ( D.P.F iOSNC )
+-----------------------------------------------
+
+How to install and use:
+
+
+1) Go Tools->Options->Delphi Options->Library and :
+1-1) change Selected Pltaform to 32-bit windows and add X:\DPF.iOS.Native.Components\ in library path
+1-2) Then change Selected Platform to iOSSimulator and add X:\DPF.iOS.Native.Components\ in library path
+1-3) Then change Selected Platform to iOSDevice32 and add X:\DPF.iOS.Native.Components\ in library path
+1-4) Then change Selected Platform to iOSDevice36 and add X:\DPF.iOS.Native.Components\ in library path
+
+
+2) Important: Add this frameworks in the SDK Manager (see Frameworks.png picture after installing)
+
+/System/Library/Frameworks/EventKit
+/System/Library/Frameworks/MessageUI
+/System/Library/Frameworks/AudioToolbox
+/System/Library/Frameworks/Social
+/System/Library/Frameworks/QuickLook
+/System/Library/Frameworks/SystemConfiguration
+/System/Library/Frameworks/GameKit
+/System/Library/Frameworks/CoreBluetooth
+/System/Library/Frameworks/Accounts
+/System/Library/Frameworks/AdSupport
+/System/Library/Frameworks/ExternalAccessory
+/System/Library/Frameworks/AddressBookUI (No need in XE8 and later)
+/System/Library/Frameworks/AddressBook (No need in XE8 and later)   
+/System/Library/Frameworks/MobileCoreServices (No need in XE8 and later)
+/System/Library/Frameworks/MapKit (No need in XE8 and later)   
+/System/Library/Frameworks/LocalAuthentication.framework/LocalAuthentication (iOS 8.0 and later )
+
+Tools -> Options -> SDK Manager -> Scroll down remote paths listview ->Go Frameworks section -> Select one of framework item (e.g: select /System/Library/Frameworks/UIKit) -> click Add the new path item
+
+and Lib(s)
+
+/usr/lib/libxml2.dylib
+
+--------------------------------------
+In XE8 You must be add $(SDKROOT) the beginning of each path on remote machine value
+like this:  [ $(SDKROOT)/System/Library/Frameworks ]
+or
+like this:  [ $(SDKROOT)/usr/lib/ ]
+--------------------------------------
+
+2-1)
+path on remote machine : /System/Library/Frameworks
+Framework name: AddressBookUI
+include subdirectories: unchecked
+
+Add again:
+
+2-2)
+path on remote machine : /System/Library/Frameworks
+Framework name: AddressBook
+include subdirectories: unchecked
+
+Add again:
+
+2-3)
+path on remote machine : /System/Library/Frameworks
+Framework name: EventKit
+include subdirectories: unchecked
+
+Add again:
+
+2-4)
+path on remote machine : /System/Library/Frameworks
+Framework name: MessageUI
+include subdirectories: unchecked
+
+Add again:
+
+2-5)
+path on remote machine : /System/Library/Frameworks
+Framework name: AudioToolbox
+include subdirectories: unchecked
+
+Add again:
+
+2-6)
+path on remote machine : /System/Library/Frameworks
+Framework name: MapKit
+include subdirectories: unchecked
+
+Add again:
+
+2-7)
+path on remote machine : /System/Library/Frameworks
+Framework name: Social
+include subdirectories: unchecked
+
+Add again:
+
+2-8)
+path on remote machine : /System/Library/Frameworks
+Framework name: QuickLook
+include subdirectories: unchecked
+
+Add again:
+
+2-9)
+path on remote machine : /System/Library/Frameworks
+Framework name: SystemConfiguration
+include subdirectories: unchecked
+
+Add again: (No need in XE8 and later)
+
+Add again: 
+
+2-10)
+path on remote machine : /System/Library/Frameworks
+Framework name: MobileCoreServices
+include subdirectories: unchecked
+
+Add again: 
+
+2-11)
+path on remote machine : /System/Library/Frameworks
+Framework name: GameKit
+include subdirectories: unchecked
+
+Add again: 
+
+2-12)
+path on remote machine : /System/Library/Frameworks
+Framework name: CoreBluetooth
+include subdirectories: unchecked
+
+Add again: 
+
+2-13)
+path on remote machine : /System/Library/Frameworks
+Framework name: Accounts
+include subdirectories: unchecked
+
+Add again: 
+
+2-14)
+path on remote machine : /System/Library/Frameworks
+Framework name: AdSupport
+include subdirectories: unchecked
+
+2-15)
+path on remote machine : /System/Library/Frameworks
+Framework name: ExternalAccessory
+include subdirectories: unchecked
+
+2-16)
+path on remote machine : /usr/lib
+Framework name: libxml2.dylib
+Path type: Library path: checked
+include subdirectories: unchecked
+
+
+after Ok dialog, click Update local File Cache button.
+
+-------------------------------------------------------------------------------------------
+XE4: (Not supported after v9.0.0)
+3) DPFiOSPackagesXE4.dpk
+ 3-1) Select 32-bit windows and build then install. (No Need Simulator or Device)
+
+XE5: (Not supported after v9.0.0)
+4) DPFiOSPackagesXE5.dpk 
+ 4-1) Select 32-bit windows and build then install. (No Need Simulator or Device)
+
+XE6: (Not supported after v9.0.0)
+5) DPFiOSPackagesXE6.dpk 
+ 5-1) Select 32-bit windows and build then install. (No Need Simulator or Device)
+
+XE7:(Not supported after v9.0.0)
+5) DPFiOSPackagesXE7.dpk 
+ 6-1) Select 32-bit windows and build then install. (No Need Simulator or Device)
+
+XE8:
+7) DPFiOSPackagesXE8.dpk 
+ 7-1) Select 32-bit windows and build then install. (No Need Simulator or Device)
+
+XE10:
+8) DPFiOSPackagesXE10.dpk 
+ 8-1) Select 32-bit windows and build then install. (No Need Simulator or Device)
+
+
+Or Use DPFiOSPackagesGroup.groupproj 
+-------------------------------------------------------------------------------------------
+
+9) Before deploying Demos on Simulator or Device dont forget : Go to 
+Project Menu - > Deployment -> Deply
+-------------------------------------------------------------------------------------------
+
+
+10) This is very important to: if you want have very high performance in your project override in all you TForm declrations PaintRects
+  Sample:
+
+type
+  TFDatePicker = class( TForm )
+  private
+    { Private declarations }
+  protected
+    procedure PaintRects( const UpdateRects: array of TRectF ); override; <---- This line a important !
+  public
+    { Public declarations }
+  end;
+
+and in your implementation:
+
+procedure TFDatePicker.PaintRects( const UpdateRects: array of TRectF );
+begin
+{} <-- This is important you not have any [inherited] keyword here !
+end;
+
+----------------------------------------------------------------------------------------------------------------
+Note:
+
+If you want to use iOS 8.0 SDK, if you see compile error :
+..\Documents\Embarcadero\Studio\SDKs\iPhoneOS8.0.sdk/usr/lib/system/libdispatch.dylib.  Link against the umbrella framework 'System.framework' instead. for architecture armv7
+then you must be copy Macapi.Dispatch.pas file from delphi source folder into this framework folder and change this line :
+libdispatch           = '/usr/lib/system/libdispatch.dylib';
+to
+libdispatch = '/usr/lib/libSystem.dylib';
+
+Now, by this work, you not have a delphi Form drawing (very slow), then you must be add a TDPFUIView on the form 
+and change background color or image,
+
+Enjoy it!
+
+-------------------------------------------------------------------
+© 2011-2015 Dadeh Pardazane Faragir (D.P.F). All rights reserved.
+http://www.dpfaragir.com
+
+Developed by: Babak Yaghoobi ( b_yaghobi@yahoo.com or bayaghoobi@gmail.com)

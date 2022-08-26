@@ -1,0 +1,256 @@
+﻿// ------------------------------------------------------------------------------
+// DPF.iOS.UIComboBox Component
+//
+// Dadeh Pardazane Faragir ( DPF ) Co.
+//
+// Web: http://www.dpfaragir.com
+//
+// Developed By: Babak Yaghoobi
+//
+// Email #1: yaghoobi@dpfaragir.com
+// Email #2: b_yaghobi@yahoo.com
+// Email #3: bayaghoobi@gmail.com
+//
+// ------------------------------------------------------------------------------
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+// http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+// ------------------------------------------------------------------------------
+unit DPF.iOS.UIComboBox;
+
+interface
+
+{$I DPF.iOS.Defs.inc}
+
+uses
+  System.SysUtils,
+  System.Classes,
+  System.Types,
+  System.UITypes,
+  System.MaskUtils,
+
+  DPF.iOS.BaseControl,
+  DPF.iOS.UITextField,
+  DPF.iOS.UIPickerView,
+{$IFDEF IOS}
+  Macapi.ObjectiveC,
+  Macapi.ObjCRuntime,
+  IOSapi.CocoaTypes,
+  IOSapi.Foundation,
+  iOSapi.QuartzCore,
+  IOSapi.Uikit,
+  IOSapi.CoreGraphics,
+  IOSapi.CoreImage,
+  FMX.Platform.iOS,
+  DPF.iOS.Common,
+{$ENDIF}
+  System.TypInfo;
+
+type
+  TDPFComboBox = class;
+
+{$IFDEF IOS}
+
+  // ------------------------------------------------------------------------------
+  IDPFButtonDelegate = interface( IObjectiveC )
+    ['{1E226D2D-1BDA-4052-BBAC-9CA03DDDB5C3}']
+    procedure clickedButton( Sender: UIBarButtonItem ); cdecl;
+  end;
+
+  // ------------------------------------------------------------------------------
+  TDPFCloseButtonDelegate = class( TOCLocal, IDPFButtonDelegate )
+  private
+    FDPFComboBox: TDPFComboBox;
+  public
+    constructor Create( ADPFComboBox: TDPFComboBox );
+    procedure clickedButton( Sender: UIBarButtonItem ); cdecl;
+  end;
+{$ENDIF}
+
+  TDPFOnCloseComboBox = procedure( sender: TObject ) of object;
+
+  [ComponentPlatformsAttribute( PidWin32 or pidiOSDevice32 or pidiOSDevice64 or PidiOSSimulator )]
+  TDPFComboBox = class( TDPFTextField )
+  private
+    FPickerCloseTitle    : string;
+    FPickerToolbarVisible: boolean;
+    FOnCloseComboBox     : TDPFOnCloseComboBox;
+
+  protected
+    FDPFPickerView: TDPFPickerView;
+{$IFDEF IOS}
+    FButtonDelegate: TDPFCloseButtonDelegate;
+    toolbar        : UIToolbar;
+{$ENDIF}
+    procedure Resize; override;
+    procedure Move; override;
+    procedure OnPickerChanged( Sender: TObject; Component: Integer; Row: Integer );
+  public
+    property Picker: TDPFPickerView read FDPFPickerView;
+{$IFDEF IOS}
+    procedure Loaded; override;
+{$ELSE}
+    procedure Paint; override;
+{$ENDIF}
+    constructor Create( AOwner: TComponent ); override;
+    destructor Destroy; override;
+    procedure Clear;
+  published
+    property PickerCloseTitle    : string read FPickerCloseTitle write FPickerCloseTitle;
+    property PickerToolbarVisible: boolean read FPickerToolbarVisible write FPickerToolbarVisible default false;
+    property OnCloseComboBox     : TDPFOnCloseComboBox read FOnCloseComboBox write FOnCloseComboBox;
+
+    property UserInteraction;
+    property ContentMode;
+    property Alpha;
+    property Visible;
+    property Editable;
+    property Align;
+    property Position;
+    property Width;
+    property Height;
+  end;
+
+implementation
+
+// ------------------------------------------------------------------------------
+{ TDPFComboBox }
+procedure TDPFComboBox.Clear;
+var
+  i: integer;
+begin
+  for i                                                  := 0 to FDPFPickerView.PickerComponents.Count - 1 do
+    FDPFPickerView.PickerComponents.Items[i].SelectedRow := -1;
+  FDPFPickerView.PickerComponents.Clear;
+  Text := '';
+end;
+
+// ------------------------------------------------------------------------------
+constructor TDPFComboBox.Create( AOwner: TComponent );
+begin
+  inherited Create( AOwner );
+  ControlCaption                         := 'ComboBox';
+  FDPFPickerView                         := TDPFPickerView.Create( nil );
+  FDPFPickerView.AddThisToSubView        := false;
+  FDPFPickerView.ShowsSelectionIndicator := true;
+  FDPFPickerView.OnChanged               := OnPickerChanged;
+  FPickerCloseTitle                      := 'Done';
+  FPickerToolbarVisible                  := false;
+
+{$IFDEF IOS}
+  FButtonDelegate := TDPFCloseButtonDelegate.Create( Self );
+{$ENDIF}
+end;
+
+// ------------------------------------------------------------------------------
+destructor TDPFComboBox.Destroy;
+begin
+  FDPFPickerView.DisposeOf;
+{$IFDEF IOS}
+  toolbar.release;
+  FButtonDelegate.DisposeOf;
+{$ENDIF}
+  inherited;
+end;
+
+// ------------------------------------------------------------------------------
+{$IFDEF IOS}
+
+procedure TDPFComboBox.Loaded;
+var
+  doneButton, flexibleSpaceLeft: UIBarButtonItem;
+  ItemsArr                     : NSMutableArray;
+begin
+
+  { pickerView := TUIPickerView.Wrap( TUIPickerView.Alloc.init );
+    pickerView.setShowsSelectionIndicator( true ); }
+  FDPFPickerView.Loaded;
+
+  if FPickerToolbarVisible then
+  begin
+    ItemsArr := TNSMutableArray.Create;
+
+    toolbar := TUIToolbar.Wrap( TUIToolbar.Alloc.init );
+    toolbar.setBarStyle( UIBarStyleBlackTranslucent );
+    toolbar.sizeToFit;
+
+    // to make the done button aligned to the right
+    flexibleSpaceLeft := TUIBarButtonItem.Wrap( TUIBarButtonItem.Alloc.initWithBarButtonSystemItem( UIBarButtonSystemItemFlexibleSpace, nil, nil ) );
+    doneButton        := TUIBarButtonItem.Wrap( TUIBarButtonItem.Alloc.initWithTitle( NSStr( FPickerCloseTitle ), UIBarButtonItemStyleDone, FButtonDelegate.GetObjectID, Sel_getUid( 'clickedButton:' ) ) );
+
+    ItemsArr := TNSMutableArray.Create;
+    ItemsArr.addObject( ( flexibleSpaceLeft as ILocalObject ).GetObjectID );
+    ItemsArr.addObject( ( doneButton as ILocalObject ).GetObjectID );
+
+    toolbar.setItems( ItemsArr );
+    ItemsArr.release;
+    DPF.iOS.UITextField.UITextField( FUIControl ).setInputAccessoryView( toolbar );
+  end;
+
+  DPF.iOS.UITextField.UITextField( FUIControl ).setInputView( UIView( FDPFPickerView.UIControl ) );
+
+  AddSubView( Self, ParentControl );
+
+  // ----------------------------
+  // Important
+  inherited;
+end;
+{$ENDIF}
+
+// ------------------------------------------------------------------------------
+procedure TDPFComboBox.Resize;
+begin
+  inherited;
+end;
+
+// ------------------------------------------------------------------------------
+procedure TDPFComboBox.Move;
+begin
+  Resize;
+end;
+
+// ------------------------------------------------------------------------------
+procedure TDPFComboBox.OnPickerChanged( Sender: TObject; Component, Row: Integer );
+begin
+  Text := FDPFPickerView.PickerComponents[Component].Items[Row];
+end;
+
+// ------------------------------------------------------------------------------
+{$IFNDEF IOS}
+
+procedure TDPFComboBox.Paint;
+begin
+  inherited;
+end;
+{$ENDIF}
+// ------------------------------------------------------------------------------
+{ TDPFCloseButtonDelegate }
+{$IFDEF IOS}
+
+procedure TDPFCloseButtonDelegate.clickedButton( Sender: UIBarButtonItem );
+begin
+  DPF.iOS.UITextField.UITextField( FDPFComboBox.UIControl ).resignFirstResponder;
+  if Assigned( FDPFComboBox.FOnCloseComboBox ) then
+    FDPFComboBox.FOnCloseComboBox( FDPFComboBox );
+end;
+
+// ------------------------------------------------------------------------------
+constructor TDPFCloseButtonDelegate.Create( ADPFComboBox: TDPFComboBox );
+begin
+  inherited Create;
+  FDPFComboBox := ADPFComboBox;
+end;
+
+{$ENDIF}
+
+end.

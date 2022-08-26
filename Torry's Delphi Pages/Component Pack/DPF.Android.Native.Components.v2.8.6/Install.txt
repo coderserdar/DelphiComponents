@@ -1,0 +1,74 @@
+D.P.F Android Native Components
+-----------------------------------------------
+
+How to install and use:
+
+1) Go Tools->Options->Delphi Options->Library and :
+1-1) change Selected Pltaform to 32-bit windows and add X:\DPF.Android.Native.Components\ in library path
+1-2) Then change Selected Platform to Android and add X:\DPF.Android.Native.Components\ in library path
+
+
+-------------------------------------------------------------------------------------------
+XE5: (Not support since v2.8.6 )
+2) DPFAndroidPackagesXE5.dpk
+ 2-1) Select 32-bit windows and build then install. 
+
+-------------------------------------------------------------------------------------------
+XE6:
+3) DPFAndroidPackagesXE6.dpk
+ 3-1) Select 32-bit windows and build then install. 
+
+-------------------------------------------------------------------------------------------
+XE7:
+3) DPFAndroidPackagesXE7.dpk
+ 3-1) Select 32-bit windows and build then install. 
+
+-------------------------------------------------------------------------------------------
+
+4) Merging classes.dex
+  4-1) Open build.bat file in editor and set ANDROID and EMBO_DEX variables
+  4-2 Or use my changed Classes\classes.dex ( Only Delphi XE7 )
+
+Note:
+
+If you cant make this file successfully, all demos or you new project on device will be shown as black screen...
+
+When the small Java source files get compiled, the Android dx tool expects them to be compiled by the JDK 1.6.x compiler as opposed to the JDK 1.7.x compiler. If you have JDK 1.7.x installed, you hit a problem with dx reporting:
+bad class file magic (cafebabe) or version (0033.0000)
+However, to avoid forcing a reinstall of JDK 1.6 you might like to modify build.bat batch files and add in extra command line switches to the javac.exe command-lines. You need to insert this after the javac.exe command to force Java 1.6 byte code output, which is digestible by the Android dx command:
+
+-source 1.6 -target 1.6
+
+5) Before deploying Demos on Simulator or Device dont forget : Go to
+Project Menu - > Deployment -> Deply
+
+(very important)
+6) Make sure delphi default classes.dex file must be unchecked in Deployment window and new
+   Classes\classes.dex with classes\ remote path name, must be added in the Deployment window.
+   (see classes_dex.png image)
+
+(Thanks to "Brian Long" for merging dex files)
+
+7) in your projects->Options->Uses Permissions : make sure turn on :
+ 7-1) Access coarse location
+ 7-2) Access Wifi State
+ 7-3) Access Network State
+ 7-4) Access fine location
+ 7-5) Call phone
+ 7-6) Camera
+ 7-7) Internet
+ 7-8) Read Calendar
+ 7-9) Read External Storage
+ 7-10) Read Phone State
+ 7-11) Write Calendar
+ 7-12) Write External Storage
+ 7-13) WAKE LOCK
+
+
+Enjoy it!
+
+-------------------------------------------------------------------
+© 2011-2014 Dadeh Pardazane Faragir (D.P.F). All rights reserved.
+http://www.dpfaragir.com
+
+Developed by: Babak Yaghoobi ( b_yaghobi@yahoo.com or bayaghoobi@gmail.com)

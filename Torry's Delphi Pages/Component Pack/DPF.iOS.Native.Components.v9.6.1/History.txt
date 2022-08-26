@@ -1,0 +1,1067 @@
+
+D.P.F Delphi iOS Native Components ( D.P.F iOSNC )
+
+History
+
+--------------------------------------------------------------
+v9.6.1 - 2015/11/29
+  - Fixed Components compile error
+
+--------------------------------------------------------------
+(Special thanks to Sebastian Zierer)
+v9.6.0 - 2015/11/28
+  + Now Support Delphi XE10 Seattle
+  + Added TDPFLocalAuthentication component 
+  + Added pidiOSDevice64 in all components
+  + Added ExposureMode feature in TDPFCamera
+  + Added FocusMode feature in TDPFCamera
+  - Fixed TDPFNavigationController: access violation when deleting page at design time
+  - Fixed TDPFUITableView crash on iOS64 (UITableView.setRowHeight needs CGFloat instead of Single)
+  - Fixed TDPFUITableView: Cannot assign TSectionItem to TSectionItem
+  - Fixed TDPFSegmentedControl: "Cannot assign TDPFSegmentedControlItem to TDPFSegmentedControlItem"
+  - Fixed TDPFTableItemText.SetText
+  - Fixed TDPFUITableView.OnGetNumberOfRowsInSection should honor numberOfRowsInSection
+  - Fixed TDPFQLPreviewController crash
+  - Fixed TDPFUITableView section alignment
+  - Fixed App Manager Crash
+  - Fixed TDPFUIPageViewController page scrolling
+  - Fixed Crash in TDPFApplicationManager on iOS 9.x
+
+--------------------------------------------------------------
+v9.5.1 - 2015/04/11
+  - Fixed TDPFAVPlayer coded URL
+  - Fixed TDPFUITableView compiling
+  - Fixed DPFAVPlayer.Open Encode/Decode URL
+
+--------------------------------------------------------------
+v9.5.0 - 2015/04/10
+  + XE8 support ( is now the minimum supported Delphi version. )
+  + Added TDPFDateTimeComboBox Clear method
+  + Added TDPFTabBarProperty.BarTintColor property
+  + Added TDPFSearchBar.MaxLength property
+  - Fixed TMFMessageComposeViewController crash on send message
+  - Fixed set TDPFSearchBar.ShowsScopeBar on runtime
+
+--------------------------------------------------------------
+v9.4.5 - 2015/02/26
+  + Added TDPFAVAudioRecorder (Microphone Component)
+  + Added TDPFDatePicker.MinuteInterval property 
+  + Added TDPFImageView.ResizeImage 
+  * Improved: TDPFQRCodeScanner now uses FMX ScreenOrientation
+  - Fixed TDPFAVPlayer.StartPlayList once play
+
+--------------------------------------------------------------
+v9.4.1 - 2015/02/12
+  + Added TDPFHttp.PutData function
+  + Added TDPFUITableView.OnCellClick Event
+  + Added TDPFUITableView.OnCellLongClick Event
+  + Added EKRecurrenceRule in EventKit
+  + Added TDPFSegmentedControl change title font
+  + Added TDPFAddressBook add contact to AddressBook
+  + Added Visible Property in TTDPFSegmentedControlItem
+  - Fixed TDPFUIViewController set RootViewController
+  - Fixed GetCarrierInfo crash when Carrier not found!
+  - Fixed TDPFNavigationController crash on resize (Thanks Gordon Hamm)
+  - Fixed Removing Shadow
+  - Fixed TDPFQLPreviewController Hide Toolbar
+  * Improved FacebookSlideMenu
+
+--------------------------------------------------------------
+v9.3.0 - 2015/01/25
+  + Added SaveBitmapInAlbum & SaveImageInAlbum funcs
+  + Added SaveToAlbum Demo
+  + Added Execute for Popover in TDPFUIActionSheet for iPad (by Graham)
+  - Remove some warnings
+
+--------------------------------------------------------------
+(Special thanks to Sebastian Zierer)
+v9.2.8 - 2015/01/17
+  + New Component: TDPFQRCodeScanner
+  + New Component: TDPFViewControllerEvents
+  + New Component: TGrandID
+  + Added BarCode Demo
+  + Added TDPFiOSBaseControl: CreateUIControl, DestroyUIControl, UpdateUIControlPosition
+  + Added TDPFUIPrintPageRenderer Component
+  + Modified TDPFiOSBaseControl: preparations in order to clean up usage of "Loaded" functions
+  + Modified TDPFiOSBaseControl: call UpdateUIControlPosition if position of native control needs to be updated
+  + Added TDPFApplicationManager.OnInterfaceRotated
+  * Changed TDPFApplicationManager: adapted to XE7; allow multiple instances of TDPFApplicationManager
+  - Fixed TDPFImagePickerController save video to PhotosAlbum
+  - Fixed TUIToolBar startup position
+  - Fixed TDPFProgress startup position
+  - Fixed TDPFSegmentedControl startup position
+  - Fixed TDPFPickerView startup position
+  - Fixed TDPFMapView crash on zoom
+  - Fixed some demo minor bugs
+  - Fixed TDPFNavigationController Bar Height
+  - Fixed Fixed Crash UIViewController
+  - Fixed TDPFNavigationController Margins
+
+--------------------------------------------------------------
+(Special thanks to Sebastian Zierer)
+v9.1.0 - 2014/12/20
+NOTE: XE7 (Strongly Recommended Update 1) is now the minimum supported Delphi version.
+  + Added TDPFMapView.CoordinateToPoint
+  + Added TDPFMapView.PointToCoordinate
+  + Added TDPFUILabel.BaseLineAdjustment
+  - Fixed TDPFUIImagePickerController ReduceImageSize in Delphi XE7
+  - Fixed Access violation in TTableViewDelegate.tableView
+  - Fixed TUIToolBar mouse clicks in Windows
+  - Fixed TUIToolBar memory leak
+  - Fixed TableViewCustomViewFrame Demo Reotate & Resize
+
+--------------------------------------------------------------
+(Special thanks to Sebastian Zierer)
+v9.0.0 - 2014/10/09
+  + Added DPF.iOS.Common DisposeOfNil
+  + Added TDPFButton: basic runtime support on Windows
+  + Added TDPFImageView: basic runtime support on Windows
+  + Added TDPFSlider.Orientation property
+  + Added TDPFSlider.IsTracking function
+  + Added TDPFSlider.DoTouchDown/DoTouchUp protected function
+  + Added TDPFSlider basic runtime support on Windows
+  + Added TDPFToolbarItem ModalResult property
+  + Added TDPFToolbar basic runtime support on Windows
+  + Added TDPFUIActionSheet.Execute method. This shows the action sheet as modal dialog.
+  - Fixed TDPFToolbarItem BarItems are lost when reopening form or when running application
+  - Fixed TDPFToolbarItem leaks FBitmap and Font at design time or when running in windows
+  - Fixed TDPFToolbarItem click event: needs exception handling before returning control to the Cocoa framework
+  - Fixed assigning TDPFSlider.ThumbImage at runtime
+  - Fixed TDPFSlider.ThumbImage Highlighted state
+  - Removed TDPFSlider automatic height because the Slider Thumb looks cropped in iOS 7 or when using custom thumbs
+  - DPF.iOS.Common: NSStrToStr should check for nil (Delphi does that, so a function with the same name should do that, too)
+  - Fixed TDPFUIView Resize method in Delphi XE7
+  - Fixed TDPFUIViewController Resize method in Delphi XE7
+  - TDPFCheckBox: fixed bitmap memory leaks
+  - TDPFTabBarController: fixed unexpected changes to page indexes
+  - TDPFTabBarController: fixed ActivePageIndex
+  - TDPFTabBarController: selecting Pages now works at designtime and when running on Windows
+  - Modified DPF.iOS.Dispatch: prevented linking against the iOS 8 framework
+  * Improved component positioning (for example when rotating)
+  * TDPFFont: Added "Assign" method
+  
+--------------------------------------------------------------
+v8.9.6 - 2014/09/12
+  + Added Delphi XE7 Support
+  + Added TDPFMapView.ZoomBy method
+  + Added TDPFUserDefaults.Synchronize
+  - Fixed TDPFMapView.GetCurrentLocation Access violation
+  - Fixed TDPFMapView.GetUserLocationVisible Access violation
+  - Fixed TDPFMapView.setCenter incorrect longitude value
+  - Fixed TDPFUIViewController.SetFrame Access violation id contain none DPF control
+  - Fixed TDPFMapView first time load custom image
+  - Fixed Access violation if TDPFActionSheetButtonItem title is empty
+  - Fixed TDPFUICollectionView Selected Item
+  - Fixed TDPFToolbar.CreateBarButtonItem Access violation if image is empty
+  * improved TDPFMapView.ZoomIn
+  * improved TDPFMapView.ZoomOut
+
+--------------------------------------------------------------
+v8.9.1 - 2014/05/23
+  + Added TDPFMapView TileOverlayType (Apple, Google, OpenStreet)
+  + Added TDPFMapView Draw Custom Image
+  + Added TDPFMapView OnDrawCustomImage event
+  + Added TDPFUIScrollView BouncesZoom property 
+  + Added TDPFUIScrollView MaximumZoomScale property 
+  + Added TDPFUIScrollView MinimumZoomScale property 
+  + Added TDPFUIScrollView GetUIScrollView function
+  + Added TDPFUIScrollView viewForZoomingInScrollView Event
+
+--------------------------------------------------------------
+v8.7.4 - 2014/05/18
+  + Added DPFAddressBook GetAddressBookList method
+  + Added SelectedSegment property to TDPFSegmentedControl
+  + Added SelectedSegmentText property to TDPFSegmentedControl
+  + Added Animated parameter in Apply function in TDPFSegmentedControl
+  + Added TagNative property in TDPFiOSBaseControl
+  + Added ViewWithTag function in TDPFiOSBaseControl
+  + Added SelText property in TDPFTextView
+  + Added LoadFromMemoryStream in TDPFImageView
+  + Added GetUIViewController function in TDPFNavigationControllerPage
+  - Fixed iAd height
+  - Fixed TDPFTabBarController empty Badge
+  - Fixed DPFUITableView.OnGetRowHeight not fire in VirtualMode
+  - Fixed DPF Template for XE6
+  - Fixed GetAppVersion on XE6
+  - Fixed crash TDPFPopOver on iPad
+  - Fixed DPFADBanner half showing on XE6
+  - Fixed AlertView showing on Simulator
+
+--------------------------------------------------------------
+v8.5.2 - 2014/05/03
+  + Added Delphi XE6 Support
+  + Added TDPFUICollectionView Component
+  + Added TDPFMapView.RemoveAllAnnotation Method
+  + Added TDPFMapView.RemoveAllOverlays Method
+  + Added property TagStr to TDPFSegmentedControlItem
+  + Added TMKMapView AddAnnotation TagStr Parameter
+  + Added TMKMapView OnAnnotationClick PAnnotationInfo Parameter
+  + Added TMKMapView OnAnnotationCalloutClick PAnnotationInfo Parameter
+  * Change RateApp store path to /Library/Preferences folder
+  - Fixed TDPFUITextView setText
+  - Fixed TDPFUIView height when align eq left,right,..
+  - Fixed InAppPurchase compile error
+  - Fixed Shadow Position
+  - Fixed Touch & Drag Buttun
+  - Fixed Combobox show items
+
+--------------------------------------------------------------
+v8.3.1 - 2014/03/25
+  + Added TDPFNavigationController BarBackgroundColor (iOS 7)
+  + Added TDPFSearchBar BackgroundColor (iOS 7)
+  + Added TDPFiCloud (iCloud Sync)
+  + Added TDPFUITableView Handled parameter in OnDrawCell event
+  + Added TDPFUITableView Handled parameter in OnApplyFrameData event
+  + Added TDPFPickerViewItem Font Property
+  + Added TDPFPickerViewItem Width Property
+  + Added TDPFPickerViewItem Height Property
+  + Added TDPFPickerViewItem BackgroundColor Property
+  + Added TDPFPickerViewItem TextColor Property
+  + Added TDPFPickerViewItem TextAlignment Property
+  * Improved TDPFSegmentedControl change Image & Title
+  - Fixed TDPFPickerView Clear & ReLoaded functions
+  - Fixed TDPFPickerView SelectedRow value
+  - Fixed TDPFMapView crash ZoomLevel < 3
+  - Fixed Memory Leak in FUIImageView Assign BitMap
+
+--------------------------------------------------------------
+v8.2.7 - 2014/02/09
+  + Added TDPFMapView OnDidUpdateUserLocation (latitude,longitude,speed,...)
+  + Added TDPFMapView OnDidStopLocatingUser
+  + Added TDPFMapView OnWillStartLocatingUser
+  + Added TDPFMapView OnDidFailLoadingMap
+  + Added TDPFMapView OnDidFinishLoadingMap
+  + Added TDPFMapView OnStartLoadingMap
+  + Added TDPFMapView OnZoomChanged
+  + Added TDPFMapView OnPolygonClick
+  + Added TDPFMapView OnPolylineClick
+  + Added TDPFMapView OnCircleClick
+  + Added TDPFMapView OnAnnotationClick
+  + Added TDPFMapView OnAnnotationCalloutClick
+
+--------------------------------------------------------------
+v8.2.2 - 2014/02/07  
+  + Added TDPFNavigationController BarBackgroundImage
+  + Added TDPFViewController OnReceiveMemoryWarning event
+  + Added TDPFViewController OnPreferredStatusBarUpdateAnimation event (iOS7)
+  + Added TDPFViewController OnPrefersStatusBarHidden event (iOS7)
+  + Added TDPFViewController OnPreferredStatusBarStyle event (iOS7)
+  + Added TDPFComboBox Clear method
+  + Added TDPFInAppPurchase RestoreCompletedTransactions
+  + Added TDPFInAppPurchase productIdentifier in OnUpdatedTransactions
+  - Fixed TDPFUIView & TDPFUIViewController height in iOS 7
+  - Fixed TDPFKeyboard position
+  - Fixed StoreKit PurchaseProduct crash on OnUpdatedTransactions
+
+--------------------------------------------------------------
+v8.1.6 - 2014/01/28
+  + Added TDPFCamera AudioRecord property 
+  - Fixed StoreKit PurchaseProduct not working on iOS6.x
+  * Improved TDPFCamera
+
+--------------------------------------------------------------
+v8.1.4 - 2014/01/27
+  + Added TDPFMapView setCenter
+  + Added TDPFMapView AddCircle
+  + Added TDPFMapView AddPolyLine
+  + Added TDPFMapView AddPolygon
+  + Added TDPFMapView Custom AddAnnotation
+  - Fixed TDPFCamera cancel cause continue converting
+  - Fixed TDPFiOSBaseControl SetAlpha
+  - Fixed Some components not work on iOS 6.x
+  - Removed TDPFButton OnTouchesBegan Event
+  - Removed TDPFButton OnTouchesEnded Event
+  - Removed TDPFButton OnTouchesMoved Event
+  - Removed TDPFButton TapDelay Property
+  - Removed TDPFButton DoubleTapDelay Property
+  * Moved OnAppSettingChanged event to TDPFUserDefaults OnUserDefaultsChanged
+
+--------------------------------------------------------------
+v8.0.1 - 2014/01/25
+  + Added TDPFUITableView OnScrollBeginDragging Event
+  + Added TDPFUITableView OnScrollEndDragging Event
+  + Added TDPFUITableView StopScroll
+  + Added TDPFLabel capitalizedString	
+  + Added TDPFUserDefaults
+  - Fixed TDPFSlideDialog Direction state
+  - Fixed TDPFNavigationController HidesBackButton
+  - Fixed TDPFHttp.ConnectionCancel sometime cause crash app!
+  - Fixed TDPFUIActionSheet Memory Leak
+  - Fixed TDPFTabBarController ItemImage load crash
+  * Removed TDPFLabel NumberOfTapsRequired property
+  * Removed TDPFLabel NumberOfTouchesRequired property
+  * Removed TDPFUIView NumberOfTapsRequired property
+  * Removed TDPFUIView NumberOfTouchesRequired property
+  * Removed TDPFImageView NumberOfTapsRequired property
+  * Removed TDPFImageView NumberOfTouchesRequired property
+  * Removed TDPFImageView DelaysTouchesBegan property
+  * Removed TDPFImageView DelaysTouchesEnded property
+  * Removed TDPFGLKView DelaysTouchesBegan property
+  * Removed TDPFGLKView DelaysTouchesEnded property
+  * Removed TDPFGLKView CheckReceiveTouch property
+  * Removed TDPFGLKView NumberOfTapsRequired property
+  * Removed TDPFGLKView NumberOfTouchesRequired property
+  * Removed All Extra Enabled Property
+  * Removed TDPFUIActionSheet TitleFont (cause memory leak)
+  * Improved TDPFImageView ActivityIndicator
+
+--------------------------------------------------------------
+v7.9.6 - 2014/01/20
+  + Added Settings Bundle Demo
+  - Fixed DPF IDE Expert menu
+  * Improved TDPFRateApp
+
+--------------------------------------------------------------
+v7.9.5 - 2014/01/19
+  + Added TDPFSlideDialog TextPadding
+  + Added TDPFDateTimeComboBox OnCloseComboBox
+  + Added TDPFComboBox OnCloseComboBox
+  + Added TDPFiOSBaseControl PanSimultaneously
+  + Added TDPFiOSBaseControl PanRecognizerShouldBegin
+  + Added TDPFiOSBaseControl PanVelocitySensitivity
+  + Added TDPFMPMoviePlayerViewController OnDidEnterFullScreen event
+  + Added TDPFMPMoviePlayerViewController OnDidExitFullScreen event
+  + Added TDPFRateApp Component 
+  + Added TDPFInAppPurchase ShowProductInAppStore (for Product Info, Rate, ...) iOS6 and Later
+  + Added TDPFTextView DisableActions property (disable select, cut, copy ...)
+  + Added TDPFLabel Padding property
+  + Added TDPFLabel OnTouchesBegan event
+  + Added TDPFLabel OnTouchesEnded event
+  + Added TDPFLabel OnTouchesMoved event
+  + Added TDPFLabel OnDoubleClick event
+  + Added TDPFImageView OnTouchesBegan event
+  + Added TDPFImageView OnTouchesEnded event
+  + Added TDPFImageView OnTouchesMoved event
+  + Added TDPFAVPlayer setVolume 
+  - Fixed TDPFInAppPurchase buy product crash when in Purchasing sate
+  - Fixed TDPFHttp XE4 compile error
+  - Fixed TDPFAVPlayer OnOpenStatus return code
+  * Improved isURLExists for checking both Local and Remote URLs
+  * Changed TDPFHttp OnReceiveError to OnError
+
+--------------------------------------------------------------
+v7.8.1 - 2014/01/11
+  + Added TDPFAVPlayer PlayItems property
+  + Added TDPFMailCompose CanSendMail function 
+  + Added TDPFUIView BecomeFirstResponder
+  + Added TDPFUIView ResignFirstResponder
+  + Added TDPFUIView OnRemoteControlReceived event (Lock screen remote controls!)
+  + Added TDPFUIView CanBecomeFirstResponder property
+  + Added FDPFHttp OnCanAuthenticate // accept SSL connection for untrusted certificates!
+  + Added TDPFTextView OnBeginEditing
+  + Added TDPFTextView OnEndEditing
+  + Added TDPFTextView OnShouldClear
+  + Added TDPFTextView OnShouldReturn
+  + Added TDPFTextView OnDidBeginEditing
+  + Added TDPFTextView OnDidEndEditing  
+  + Added TDPFNavigationController Pop last ViewController
+  + Added TDPFMPMoviePlayerViewController to play file:// url
+  + Added TDPFMPMoviePlayerViewController OnPlaybackStateChanged event
+  + Added DPF.iOS.Common getPlatform function
+  + Added iOSNSOperationQueue Demo 
+  - Fixed TDPFPickerView pinned 162 warning
+  - Fixed TDPFAVPlayer crash when ReleaseDevice
+  - Fixed TDPFNavigationController raise register TDPFButtonDelegate
+  - Fixed TDPFToolbar raise register TDPFButtonDelegate
+  - Fixed TDPFNavigationController NavbarButton Color
+  - Fixed TDPFNavigationController create duplicate buttons
+  - Fixed TDPFMailCompose canSendMail native API
+  * Improved TDPFKeyboard events
+  * Changed TDPFProgress value property to Progress
+  * Removed TDPFSlideDialog Direction property and added in Show method
+  * Removed TDPFSlideDialog TextMessage property and added in Show method
+  * Removed TDPFAVPlayer Playlist property
+  * Removed TDPFAVPlayer PlayListSource property
+
+--------------------------------------------------------------
+v7.5.4 - 2014/01/04
+  + Added TDPFAVPlayer Torch/Flash 
+  + Added TDPFAVPlayer Pause and Resume functions!
+  + Added TDPFUIImagePickerController SaveToAlbum property
+  + Added TDPFUIImagePickerController UISaveVideoAtPathToSavedPhotosAlbum
+  + Added TDPFUIImagePickerController UIImageWriteToSavedPhotosAlbum
+  + Added TDPFCamera UISaveVideoAtPathToSavedPhotosAlbum
+  + Added TDPFImageView addImageOverImage 
+  + Added TDPFImagePickerController OnResizeImage (resize image after picking!)
+  + Added TDPFAVPlayer ConvertToMP4Quality property
+  + Added TDPFAVPlayer ThumbnailImageForVideo
+  + Added TDPFAVPlayer Check Microphone Permisseion in iOS7 and later
+  + Added TDPFHttp OnFinishLoading Event
+  + Added TDPFButton BackgroundColorSelected property
+  + Added TDPFHttp POST data (Form Fields, Files, ...)
+  + Added TDPFHttp OnSendProgress Event
+  * Changed TDPFHttp OnProgress to OnReceiveProgress
+  - Fixed TDPFAVPlayer crash when not permission! (iOS7)
+
+--------------------------------------------------------------
+v7.4.6 - 2013/12/28
+  + Added TDPFImageView FileOutSideApp property
+  + Added TDPFImagePickerController AnimateModal Property
+  + Added TDPFImagePickerController OndidFinishPickingUIImage Event
+  + Added TDPFImagePickerController OndidFinishPickingSavedImage Event
+  + Added TDPFImagePickerController OnDidCancel Event
+  + Added TDPFButton OnDoubleClick Event
+  + Added TDPFUITableView.DeleteRow
+  + Added TDPFKeyboard OnKeyboardWillShow Event
+  + Added TDPFKeyboard OnKeyboardWillHide Event
+  + Added TDPFSlider OnTouchDown Event
+  + Added TDPFSlider OnTouchUp Event
+  + Added TDPFAVPlayer OnStatusChanged Event
+  + Added TDPFAVPlayer OnPlaybackBufferEmptyChanged Event
+  + Added TDPFAVPlayer OnPlaybackBufferFullChanged Event
+  + Added TDPFAVPlayer OnPlaybackLikelyToKeepUpChanged Event
+  + Added TDPFAVPlayer OnError Event
+  + Added TDPFAVPlayer OnItemError Event
+  + Added TDPFAVPlayer OnOpenStatus Event
+  + Added DPF.iOS.Common.isURLExists function (check is file or ... exists!)
+  + Added TDPFPickerView RefreshNeeded
+  - Fixed TDPFHttp sendSynchronousRequest 
+  - Fixed TDPFButton System types (iOS7)
+  - Fixed TDPFImageView TapGestureRecognizer memory leak
+  - Fixed TDPFGLKView TapGestureRecognizer memory leak
+  - Fixed TDPFLabel TapGestureRecognizer memory leak
+  * Improved CABasicAnimation class
+
+--------------------------------------------------------------
+v7.1.8 - 2013/12/23
+  - Fixed TDPFNavigationController bkTitle ButtonItemKind click event
+  - Fixed Form not Show when AutoResizingmask is true
+  * Improved ActionSheet for calling system modal views!
+
+--------------------------------------------------------------
+v7.1.5 - 2013/12/17
+  - Fixed TDPFImageView crash
+  - Fixed TDPFUITableView crash
+
+--------------------------------------------------------------
+v7.1.2 - 2013/12/11
+  - Fixed MFMailComposeViewController onlick after closing!
+
+--------------------------------------------------------------
+v7.1.1 - 2013/12/11
+  + Wrapped CoreBluetooth.framework
+  + Wrapped Accounts.framework
+  + Wrapped ASIdentifierManager.framework
+  - Fixed MFMailComposeViewController crash when no mail accounts!
+  - Fixed MFMailComposeViewController memory leak
+
+--------------------------------------------------------------
+v7.0.0 - 2013/12/01
+  + Wrapped GameKit Framework
+  + Added TDPFGameCenterManager ( GameCenter )
+  + Added TDPFDateTimeComboBox PickerMode, TimeZoneType, LocaleType, CalendarType, MinimumDate, MinimumDate Properties
+  - Fixed TDPFButton Highlighted/Selected/Disabled background color
+
+--------------------------------------------------------------
+v6.9.7 - 2013/11/26
+  + Added TDPFDatePicker MinimumDate property
+  + Added TDPFDatePicker MaximumDate property
+  - Fixed TDPFKeyboard toolbar position in iOS6
+
+--------------------------------------------------------------
+v6.9.4 - 2013/11/25
+  + Added TDPFKeyboard Component
+  + Added TDPToolbar iOS7 Background Color (barTintColor)
+  + Added MakeScreenshot function
+  + Added TDPFTextField Editable property
+  + Added TDPFDateTimeComboBox PickerToolbarVisible property
+  + Added TDPFComboBox PickerToolbarVisible property
+  - Fixed TDPFMPMoviePlayerViewController crash when no file play!
+  - Fixed TDPFComboBox Enabled
+  - Fixed TDPFDateTimeComboBox Enabled
+  - Fixed TDPFCamera Crash multi thread
+  - Removed TDPFApplicationManager HideKeyboardDoneButton property
+  - Removed TDPFApplicationManager HideKeyboardToolbar property
+
+--------------------------------------------------------------
+v6.8.5 - 2013/11/22
+  + Added TDPFCamera OnConvertProgress Event
+  - Fixed CreatePDFfromUIView
+  - Fixed TDPFNavigationController iOS7 Back Button 
+  - Fixed TDPFCamera Crash in repeat recording
+  - Fixed TDPFCamera Some Memory Leak
+  - Fixed TDPFInAppPurchase Fetch Products crashing.
+
+--------------------------------------------------------------
+v6.7.1 - 2013/11/18
+  + Added TDPFCamera Component (Capture Video + Audio / Native API / Convert to MP4)
+  + Added touchesBegan Event to TDPFUIView
+  + Added touchesMoved Event to TDPFUIView
+  + Added Painter Demo
+  + Added TDPFiOSBaseControl Scale property (For some controls)
+  + Added TDPFUITableView OnSectionClick Event (Custom Header)
+  + Added TDPFUIImagePickerController Video Capture
+  + Added MobileCoreServices consts
+  * Wrapped GameKit framework
+  - Fixed TDPFADBanner Startup position
+  - Fixed TDPFMapView low memory crash
+
+--------------------------------------------------------------
+v6.4.1 - 2013/11/05
+  + Added TDPFGLKView Component
+  + Added TDPFAlertView Set Focus
+  + Added OnDoubleClick Event to TDPFUIView
+  + Added OnTouchesEnded Event to TDPFUIView
+  * Change TDPFUITableView BackgroundImage in runtime
+  * Improved TDPFUITableView to add controls into cell
+
+--------------------------------------------------------------
+v6.2.8 - 2013/10/29
+  + Added Drawing in UIView
+  + Added UILocalNotification 
+  + Added TDPFUITableView.Options.SelectedColor Property
+  + Added TDPFMPMoviePlayerViewController MovieScalingMode Property
+  + Added TDPFMPMoviePlayerViewController ShowInView Property
+  + Added TDPFUIViewController OnDidRotateFromInterfaceOrientation
+  + Added TDPFUIViewController Orientations Property
+  + Added Alpha Parameter to TColorToUIColor
+  + Added TDPFInAppPurchase Component
+  - Fixed TDPFNavigationController ButtonItemKind is bkImage
+  - Fixed TDPFEKCalendar GetAllEvents event Identifier
+  + Wrapped Store Kit Framework Reference
+
+--------------------------------------------------------------
+v6.0.0 - 2013/10/23
+  + Added DPF.iOS.NSTimer Component
+  + Added PanGestureRecognizer to TDPFiOSBaseControl
+  + Added Facebook Slide Menu Demo
+  + Added TDPFHttp OnReceiveDataStream Event
+  + Added DownloadFile Demo
+  + Added TDPFQLPreviewController.OnShouldOpenURL Event
+  + Added TDPFUITableView.IndexListBackgroundColor Property
+  + Added TDPFUITableView.IndexListTextColor Property
+  + Added TDPFMPMoviePlayerViewController Close method
+  + Added TDPFUITableView  SearchItemCount Property 
+  + Added TDPFButton TextShadowColorNormal Property
+  + Added TDPFButton TextShadowColorHighlight Property
+  - Fixed TDPFMPMoviePlayerViewController Stop method
+  - Fixed TDPFButton.TDPFContentVerticalAlignment  
+  - Fixed TDPFButton.TextColorHighlight
+  - Fixed TDPFButton.TextColorNormal
+  - Fixed TDPFUITableView Category Search
+
+--------------------------------------------------------------
+v5.9.6 - 2013/10/19
+  + Added TDPFEKCalendar RemoveEvent
+  + Adedd TDPFEKCalendar AddOrEditCalendarEvent
+  + Added TDPFImageView GetColoredImage method
+  + Added Movie Control Style to TDPFMPMoviePlayerViewController
+  + Added TagDateTime to TDPFiOSBaseControl
+  + Added ShouldStart to TDPFWeb.OnRequest event
+  + Added RequestURL to TDPFWeb.OnRequest event
+  + Added TDPFUITableView.TableItem Category ( Search Scope )
+  + Added TDPFLabel AutoSizeToFit Property
+  * Improved TDPFSlideDialog multi line text
+  * Improved TDPFLabel BackgroundImage To Fit  
+
+--------------------------------------------------------------
+v5.8.4 - 2013/10/12
+  + Added DPF.iOS.CacheManager Library
+  + Added TDPFAVPlayer Close method
+  + Added TDPFHttp URLRequestCache property
+  + Added TDPFHttp OnProgress Event
+  + Added TDPFImageView OnProgress Event
+  + Added TDPFImageView NSURLCache using
+  + Added TDPFSlideDialog Close method
+  + Added UIView & UIViewController fit background image
+  + Added SuckEffect Animation
+  + Added RippleEffect Animation
+  - Fixed TDPFHttp bad url error
+  - Fixed TDPTableView Header View Memory Leak
+  - Fixed TDPFActionSheet Memory Leak
+  - Fixed Show TDPFSLComposeViewController
+
+--------------------------------------------------------------
+v5.5.2 - 2013/09/24
+  + Adde TDPFUITableView Designtime UI (by Fenistil)
+  + Improved TDPFSlideDialog
+  + Improved TDPFImageView Image loading
+  - Fixed TDPFImageView load corrupt file
+  - Fixed XE4 $D1 compile error
+
+--------------------------------------------------------------
+v5.4.8 - 2013/09/21
+  + Added TDPFSlideDialog Component
+  + Added TDPFNavigationController setModalTransitionStyle
+  + Added TDPFAVPlayer PlayInBackground Property
+  + Added Play Audio in Background Demo
+  + Added TDPFActivityIndicatorView isAnimating property 
+  - Fixed Some bugs
+
+--------------------------------------------------------------
+v5.2.1 - 2013/09/19
+  + Support Delphi XE5
+  + Added TDPFUITableView AutoScrollLoop
+  + Added TDPFApplicationManager component
+  + Added TDPFAVPlayer isPlaying / isStopped / isPaused functions
+  - Fixed Crash TDPFImageView.free when Asynchronous Loading
+  - Fixed some bugs. 
+  - Fixed some memory leaks.
+
+--------------------------------------------------------------
+v5.0.0 - 2013/09/15
+  + Added TDPFUIScrollView OnWillBeginDragging Event
+  + Added TDPFButton SetHighlightedWithDelay
+  + Added TDPFButton TintColor
+  * Improved TDPFButton to add child control
+  - Removed TDPFTextField Editable Property
+  - Removed TextAlignment Property
+  - Fixed TDPFUITableView setEditingAccessoryType setting
+  - Fixed Some bugs
+
+--------------------------------------------------------------
+v4.8.5 - 2013/09/09
+  + Added New ComboBox Component
+  + Added New DateTime ComboBox Component
+  + Added TDPFWeb LoadFromFile
+  + Added TDPFSegmentedControl TintColor Property
+  + Added TDPFToolbar->TUIBarButtonItem TintColor Property
+  + Added TDPFUITableView ScrollsToTop property
+  + Added TDPFUITableView Horizontal Scrolling
+  + Added TDPFUITableView OnPageChanged Event
+  * Changed TDPFTableViewItemOnGetRowHeight RowHeight type to single
+  * Changed ClipsToBounds default value to True
+  - Fixed TDPFDatePicker some memory leak
+  - Fixed TDPFUITableView Header/Footer height
+
+--------------------------------------------------------------
+v4.6.2 - 2013/09/08
+  + Added TDPFADBanner Component (iAd Framework Needed)
+  + Added UISearchBar DesignTime UI (by Fenistil)
+  + Added TDPFUITableView RefreshControl Demo
+  + Added TDPFUITableView ClearSelectedRows
+  + Added TDPFUITableView GetSelectedRows
+  + Added TDPFUITableView VirtualMode
+  + Added TDPFButton ContentHorizontalAlignment
+  + Added TDPFButton ContentVerticalAlignment
+  + Added TDPFTextField TextFormat Property
+  + Added TDPFFont BoldSystemFontSize
+  + Added TDPFUIActionSheet add custom Buttons
+  + Added PlaySystemSound ( play all system sounds )
+  * Improved TDPFUITableView Custom Frame Performance
+  * Improved TDPFUITableView Custom View Performance
+  * Removed TDPFUITableView.TTableItem.Frame
+  - Fixed TDPFTextView Text Setting
+  - Fixed TableView Indexbar 
+  - Fixed TableView SearchBar
+  - Fixed TableView Custom View memory leak
+  - Fixe TableView Crash when select none visible row
+  - Fixed CheckBox OnClick on Device 
+  - Fixed UINavigationController Selected ActivePage
+
+--------------------------------------------------------------
+v4.2.0 - 2013/09/01
+  + MPVolume DesignTime UI (by Fenistil)
+  - Fixed Shadow layer
+  - Fixed TableView Some Memory Leak
+
+--------------------------------------------------------------
+v4.1.0 - 2013/08/30
+  + Added TDPFUIView OnItemDeSelect Event
+  + Adde Change Cell Accessory on Select Or DeSelect Row
+  - Fixed SlideUpDown Demo Form Loading
+  - Fixed TableView 1 Demo Form Loading
+  * Changed TableView OnItemSelect Evenet Parameters
+
+--------------------------------------------------------------
+v4.0.0 - 2013/08/30
+  + Added Project Wizard (File->New->Other->D.P.F Delphi iOS Native Components) (Thanks Tyson Stephen)
+  + Added TDPFSearchBar ( TableView searching )
+  + Added PDF Export Functions
+  + Added TDPFCheckBox Component
+  + Added Slide UP/DOWN Demo
+  + Added Basic Authentication to TDPFHttp
+  + Added TDPFHttp Set HTTPBody
+  + Added TDPFLabel OnClick Event
+  + Added TDPFUIView CheckReceiveTouch property
+  + Added TDPFUITableView OnCanMoveRow Event
+  + Added TDPFUITableView OnCanMoveFromRowToRow Event
+  + Added TDPFUITableView OnAfterMoveRow Event
+  + Added TDPFUITableView.TDPFTableViewOptions TextFont Property
+  + Added TDPFUITableView.TDPFTableViewOptions DescriptionFont Property
+  + Added TDPFTextField Maxlength Property
+  + Added TDPFTextView Maxlength Property
+  + Added TDPFTextView SearchKind (skStartsWith, skContains)
+  + Added TDPFTextView DeSelectRow Method
+  + Added TDPFNavigationController HidesBackButton property
+  + Added TDPFUIPageControl DesignTime UI (by Fenistil)
+  - Fixed TDPFUIViewController Level BackgroundImage higher than BackgroundColor
+  - Fixed TDPFNavigationController ToolbarVisible stored
+  - Fixed Click Event in Some Child Controls
+  - Fixed ActivityIndicator change color
+  - Fixed BaseControl.Shadow And BaseControl.CornerRadius 
+  - Fixed TDPFUITableView Move row from section to section
+  - Fixed TDPFUIViewController resizing in Retina Devices
+  - Fixed Controls Set Visible
+  - Fixed call TDPFHttp.GetUrlContentData with parameter
+  - Fixed TDPFTabBarController infinit loop
+  - Removed Visible Property From TableItem
+
+--------------------------------------------------------------
+v3.5.1 - 2013/08/26
+  + Added UIActivityIndicatorView AutoHide After n Sec
+  + Added TDPFTableView Move Rows  
+  + Added TDPFTableView.TSectionItem.Items default keywork
+  + Added TDPFTableView.TTableItem.Items default keywork
+  + Added TDPFTableView OnAccessoryButtonTapped Event (AccessoryType=tvcaDetailDisclosureButton)
+  + Added TDPFTableView.Row property
+  + Added TDPFActivityIndicatorView DesignTime UI (by Fenistil)
+  - Fixed BaseControl.CornerRadius 
+  - Fixed BaseControl.BorderWidth
+  - Fixed BaseControl.BorderColor
+  - Fixed TDPFButton Font Size
+  - Fixed TDPFNavigationController.ToolbarVisible not stored
+  - Removed HidesWhenStopped property of TDPFActivityIndicatorView
+  - Removed Label Property of TDPFActivityIndicatorView
+  * UIScrollView.ReCalc Moved to public
+  * Improved TDPFUIPageControl
+
+--------------------------------------------------------------
+v3.2.9 - 2013/08/20
+  - Fixed Compile Error on Device
+
+--------------------------------------------------------------
+v3.2.8 - 2013/08/20
+  + Added TQLPreviewController (Document Viewer, PDF, PNG, ...)
+  + Added TDPFPopover
+  + Added TDPFToolbarItem Font Property
+  + Added TDPFNavigationController Designtime UI (Thanks Fenistil)
+  - Fixed TDPFDatePicker display in iPad
+  - Fixed TDPFNavigationControllerPage page Prompt
+  - Fixed TDPFUITableView crash IndexList
+
+--------------------------------------------------------------
+v3.0.0 - 2013/08/16
+  + Added MKMapView Routing / Direction
+  + Added Indexed Bar To TDPFUITableView
+  + Added Frame property TDPFUITableView.TableItem (Custom cell view)
+  + Added BitMap property TDPFUITableView.TableItem
+  + Added DEFINE iOS6 for using iOS 6 features
+  + Added UIRefreshControl To TDPFUITableView (iOS 6 and later)
+  + Added Select Tableview Row Programmatically
+  - Fixed TDPFNavigationController NavBar height on orientation
+  - Fixed TDPFNavigationController toolbar button width
+  - Fixed crash TDPFAddressBook RequestAccess
+  - Fixed TDPFEKCalendar iOS 6 requestAccess
+  - Fixed TDPFAddressBook iOS 6 requestAccess
+  - Fixed TDPFTabBarController.ActivePageIndex selected value
+
+--------------------------------------------------------------
+v2.8.5 - 2013/08/10
+  - Fixed BaseControl ChangeParent
+  - Fixed Button incorrect resizing (thanks to Fenistil)
+  - Fixed Button setMasksToBounds for highlighted
+
+--------------------------------------------------------------
+v2.8.4 - 2013/08/10
+  + Added Map Location by Address with Zoom
+  - Fixed Toolbar registration
+
+--------------------------------------------------------------
+v2.8.0 - 2013/08/09
+  + Added Toolbar to TDPFNavigationController
+  + Adedd TDPFPickerView Designtime UI (thanks to Fenistil)
+  + Added TDPFTabBarController Designtime UI (thanks to Fenistil)
+  * Improved TDPFUIScrollView (thanks Tyson)
+  - Fixed TDPFNavigationController Page Title when no button
+  - Fixed Button font size (Ticket #22)
+  - Fixed TDPFUIActionSheet message in landscape mode
+  - Fixed TDPFUITableView cell  tvcsValue1 and tvcsValue2 (Ticket #21)
+
+--------------------------------------------------------------
+v2.7.0 - 2013/08/08
+  * Improved TDPFNavigationController Designtime UI
+  + Added ScrollView OnPageChanged
+  - Fixed TextAlign in designtime
+  - Fixed Visible property in BaseControl (Ticket #15)
+  - Fixed Autoscroll timer crashing.
+  - Fixed Hash FileName path
+  - Fixed TDPFTableView SetSeparatorColor
+  - Fixed Draw controls reposition in Designtime
+
+--------------------------------------------------------------
+v2.6.0 - 2013/08/05
+  + Added Embbeded Frame To TDPFUIView (no need use FM forms)
+  + Added Embbeded Frame To TDPFUIViewController (no need use FM forms)
+  - Fixed Enabled property in BaseControl
+  - Fixed DPFUIActionSheet delegate conflict with other controls
+  - Fixed crash when openning some demo projects.
+  - Fixed TDPFTabBarController wrong setting PageIndex property
+  - Fixed some Objective-C interface definitions.
+  - Fixed SLComposeViewControllerCompletion result typecast error.
+
+--------------------------------------------------------------
+v2.4.4 - 2013/07/31
+  - Fixed some components not showed in tool palette
+
+--------------------------------------------------------------
+v2.4.3 - 2013/07/31
+  + Added TDPNSOperationQueue for manage Asyc requests
+  + Added set ActivePageIndex in TDPFUIPageViewController
+  + Added SetFocus To Controls
+  + Added TDPFTableView Header Extra properties
+  + Added TDPFTableView Footer Extra properties
+  - Fixed bug in Embbeded UIView & UIViewController with More than 2 Level
+  - Fixed TDPFSLComposeViewController wrong serviceType
+  - Fixed crashed when TDPFButton set ForgroundImage to null
+  - Fixed crashed when TDPFButton set BackgroundImage to null 
+  - Fixed Bug in TDPFButton.Destroy
+  - Fixed Bug damaged cached image files in TDPFImageView (Reload again)
+  - Fixed SetBorderWidth & SetBorderColor
+
+--------------------------------------------------------------
+v2.2.1 - 2013/07/26
+  + Added many buttons on left side TDPFNavigationController
+  + Added many buttons on right side TDPFNavigationController
+  + Added Change button color in TDPFNavigationController
+  + Added Runtime change Navigation left & Right Button ButtonSystemItem property
+  + Added Runtime add Navigation button to TDPFNavigationController
+  + Added Runtime delete Navigation button from TDPFNavigationController
+
+--------------------------------------------------------------
+v2.1.6 - 2013/07/25
+  + Added EditedType property to TDPFUIImagePickerController
+  * Changed most controls Free -> DisposeOf
+  + Added FormChanged to TDPFUIView 
+  + Added FormChanging to TDPFUIView & TDPFUIViewController
+  + Added Runtime change ToolbarButton ButtonSystemItem property
+  + Added Runtime add Toolbar button
+  + Added Runtime delete Toolbar button
+  + Optimized HTTP component ASync option
+
+--------------------------------------------------------------
+v2.0.1 - 2013/07/23
+  + Added TDPFAVPlayer component (Audio Player Local & URL)
+  + Added TDPFProgress component
+  + Added TDPFSLComposeViewController for sharing (facebook, Twitter) ( required iOS 6.0 and later)
+  + Added TDPFActivityViewController for sharing (Mail, Message, copy, facebook, Twitter, ...)
+  + Added TDPFUIImagePickerController (From Camera & Library)
+  + Added PageChanged Event to TDPFUIPageViewController
+  + Added Font to TDPFTextField
+  + Added BackgroundImage to TDPFUITableView
+  + Added BackgroundImage to TDPFLabel
+  + Added BackgroundImgge to TDPFTextField
+  + Added HideKeyboardOnReturn to HideKeyboardOnReturn
+  + Added CellEdit Property to TDPFTableView
+  + Added AllEdit Property to TDPFTableView
+
+--------------------------------------------------------------
+v1.9.5 - 2013/07/21
+  + Added OnClick Event on TDPFUIView
+  - Fixed TDPFUIButton Roundrect botder style background color,
+  * Improved TDPFTextField
+  * Improved TDPFTextView
+  * Improved GUI 
+
+--------------------------------------------------------------
+v1.9.4 - 2013/07/20
+  + Added FormChanged Event To TDPFUIView & TDPFUIViewController
+  + Set DesignTime Font Default
+  - Fixed DisposeOf CustomViews in TDPFTableView
+  + Added SetBounces to TDPFUIScrollView
+  - Fixed blank bar on TDPFNavigationController  
+  * Improved TDPFNavigationController properties & events
+  - Fixed TDPFPageViewController deploying on Device
+  * Improved TDPFPageViewController
+
+--------------------------------------------------------------
+v1.9.1 - 2013/07/18
+  + Added Design time Graphic User Interface ( thanks Fenistil )
+  + Added Customizable UITableView ( with demo )
+  + Added Auto Smooth Scroll in UITableView (UP/DOWN)
+  + Added UIActionSheet Component 
+  + Added UIActionSheet Demo
+  * Change TDPFTabBarItem base class from TDPFiOSBaseControl - > TDPFUIViewController
+  - Fixed Embbeded From in TDPFUIViewController, TDPFUIView
+  * Optimized SetAnimationTransition for UIView & UIViewController
+  + Added UITableView.cell BackgroundColor Property
+  + Added UIImageView Image Caching
+  + Added Slide Transition to all controls
+  + Added Shadow to all Controls if it possible in iOS
+  + Added Border to all Controls if it possible in iOS
+  + Added LoadFromString to TDPFWeb
+  - Fixed UIFont release bug
+  - Fixed Embbeded Form Client Size
+  - Fixed Embbeded Form Bug when deploy on Device
+
+--------------------------------------------------------------
+v1.8.2 - 2013/07/14
+  + Added AdjustsImageWhenHighlighted property to UIButton
+  + Added Embbeded Form To UIViewController
+  + Added Set Shadow property on runtime
+  + Added Font Property To DPFiOSBaseControl (Apply to all controls)
+  + Added Selected, Highlited property to UIButton
+  + Added TabBar Visible property to UITabBarController
+  - Fixed UITabBarController Wrong PageIndex, ActivePageIndex setting 
+  - Fixed UITabBarController Item PageIndex Stored in dfm
+  - Fixed Fixed tvsGrouped style in DPFUITableView
+  - Fixed some memory leaks
+  - Fixed UIView Background image (mirrored)
+  - Fixed Bug Toolbar some items onClick event
+
+--------------------------------------------------------------
+v1.8.0 - 2013/07/12
+  + Added UIDatePicker with (11 Calendar And 533 Locale)  With Demo
+  + Added UIAlertView Component ( Customized ) With Demo
+  + Added UINavigationController Component With Demo
+  - Fixed TDPFUIButton Set title on none titled style
+  + Added SizeToFit property to TDPFUIButton
+  + Added Form Wrap Slide Transition ( Thanks Diego Molina )
+  + Added hasNotes to EKCalendar
+  - Fixed bug on get Calendar No Notes items
+  - Fixed some memory leaks
+  - Fixed Embbeded View Froms some bugs
+  + Optimized source code
+
+--------------------------------------------------------------
+v1.7.5 - 2013/07/10
+  + Added UIPickerView Component (Multiple Column)
+  + Added UIPickerView Multiple column Demo
+  + Added Embedded Form Property to UIView
+  + Remove painting controls in runtime
+  + Added Animation to TabBarControler all items
+
+--------------------------------------------------------------
+v1.7.2 - 2013/07/09
+  + Added UIWeb Component
+  + Added WebView Demo
+  + Added TabBar Panel in Designtime
+  + Added TabBar Background color
+  + Added TabBar Background image
+  + Added Load image Async into UIImageView 
+  + Added UIActivityIndicatorView to UIImageView Async loading
+  + Added UserInteraction for all controls
+  + Added Border to UIImageView
+  + Added Shadow to UIImageView
+  + Added Corner to UIImageView
+  + Added OnClick to UIImageView
+
+
+--------------------------------------------------------------
+v1.7.0 - 2013/07/08
+  - Fixed TDPFSegmentedControl SelectedIndex OnChange property ( Thanks Diego Molina )
+  + Added Animatiobn Demo ( Thanks Diego Molina )
+  + Added UITabBarController Component
+  + Added UITabBarController Demo
+  * Improved Toolbar Demo ( Left, Center, Right Buttons )
+  * Improved UIView capability
+
+--------------------------------------------------------------
+v1.6.8 - 2013/07/07
+  + Added UIToolbar component
+  + Added UIToolbar Demo
+  + Added ScrollType property to UIScrollView
+  * Free objects improved
+
+--------------------------------------------------------------
+v1.6.6 - 2013/07/06
+  - Fixed Compiling UIImageView in win32
+  + Add Attachment file (any MIME type) to MailCompose component
+
+--------------------------------------------------------------
+v1.6.5 - 2013/07/06
+  * Wrapped MFMessageComposeViewController class
+  + Added MessageCompose component
+  + Added MessageCompose Demo (Sending Message)
+  * Improved & Fixed leak memory HTTP component
+  + Added LoadFromFile and SaveToFile to UIImageView
+  + Added SetImage from TBitMap
+  + Added Transition Animation to controls 
+  - Fixed MapView Demo raise exception
+
+--------------------------------------------------------------
+v1.6.0 - 2013/07/05
+  * Wrapped AddressBook.framework (ABPeoplePickerNavigationController)
+  + Added TDPFAddressBook component
+  + Added AddressBook Demo (Select person from Contacts)
+  * Wrapped MFMailComposeViewController class
+  + Added MailCompose component
+  + Added MailCompose Demo (Sending eMail)
+  + Added TextField Keyboard type
+
+--------------------------------------------------------------
+v1.5.4 - 2013/07/03
+  + Added UIButton Custom Background Color
+  * Improved Design Time Controls Painting
+  
+--------------------------------------------------------------
+v1.5.3 - 2013/07/03
+  * Added Notes, Location, Identifier to EKCalendarItem // Thanks Massimo Caroccia ( carmas123 ) for helping
+  + Added Movie Player Component (Both Local File & URL)
+  + Added TabBar Component ( Under Construction )
+  + Added HTTP Component
+  + Added HTTP Component Demo 
+  + GetURLContent for getting URL Content in iOS
+
+--------------------------------------------------------------
+v1.5.1 - 2013/07/01
+  - Fixed package compile error
+
+--------------------------------------------------------------
+v1.5.0 - 2013/07/01
+  * Wrapped MapKit.framework
+  + Added MapView Component
+  + Added MapView Show User Location Demo
+  + Added UIButton text alignment
+  + Added UIView transparent background color
+  - Fixed components Design Time positions.
+
+--------------------------------------------------------------
+v1.4.7 - 2013/06/29
+  * Improved EventKit for iOS 6 ( Using requestAccessToEntityType )
+  - Fixed TableView Footer & Header Location
+  - Remove Toolbar Property from UITableView
+  + Added OnInsert to UITableView
+  + Added OnDelete to UITableView
+  + Added OnEdit to UITableView
+  + Sync VCL Position with iOS control
+  + Sync VCL Scale with iOS control
+  + Added Item Description
+  + Added Item Title Font
+  + Added Item Description Font
+  + Added TableView SelectionStyle
+  * Improved EventKit functionality
+  * Improved TableView functionality
+
+--------------------------------------------------------------
+v1.4.0 - 2013/06/27
+  + Added UILabel with Demo
+  + Added UISegmentedControl with Demo
+  + Added UISlider with Demo
+  + Added UIStepper with Demo
+  + Added UISwitch with Demo
+  + Added UIImageView with Demo
+
+--------------------------------------------------------------
+v1.3.2 - 2013/06/26
+  - Fixed AddCalendarEvent function.
+
+--------------------------------------------------------------
+v1.3.1 - 2013/06/26
+  * Removed All Extra Units
+  * Wrapped EventKit.framework
+  + Added EKEvent
+  + Added EKAlarm
+  + Added EKEventStore
+  + Added EKCalendarItem
+  + Added Calendar Alarm Demo 
+
+--------------------------------------------------------------
+v1.1.0 - 2013/06/23
+  * Added UITableView
+
+--------------------------------------------------------------
+v1.0.1 - 2013/05/16
+  * The first release of iOSNC
+  * Added UIButton
+  * Added UITextField
+  * Added UITextView
+  * Added UIView
+  * Added UIPageControl
+
+------------------------------------
+Source Code: http://sourceforge.net/projects/dpfdelphiios/
+------------------------------------
+© 2011-2015 Dadeh Pardazane Faragir (D.P.F). All rights reserved.
+http://www.dpfaragir.com
+https://telegram.me/dpfdelphiios

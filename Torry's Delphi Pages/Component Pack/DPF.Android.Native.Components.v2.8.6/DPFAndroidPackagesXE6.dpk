@@ -1,0 +1,109 @@
+// ------------------------------------------------------------------------------
+// DPFAndroidPackagesXE6 Package
+//
+// Dadeh Pardazane Faragir ( DPF ) Co.
+//
+// Web: http://www.dpfaragir.com
+//
+// Developed By: Babak Yaghoobi
+//
+// Email #1: yaghoobi@dpfaragir.com
+// Email #2: b_yaghobi@yahoo.com
+//
+// ------------------------------------------------------------------------------
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+// http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+// ------------------------------------------------------------------------------
+package DPFAndroidPackagesXE6;
+
+{$R *.res}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE DEBUG}
+{$ENDIF IMPLICITBUILDING}
+{$DESCRIPTION 'D.P.F Delphi Andriod Native Components'}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl,
+{$IFDEF WIN32}
+  designide,
+{$ENDIF}
+  fmx;
+
+contains
+{$IFDEF WIN32}
+  DPF.Android.Reg in 'DPF.Android.Reg.pas',
+  DPF.Android.DesignTime in 'DPF.Android.DesignTime.pas',
+{$ENDIF}
+  DPF.Android.ApplicationManager in 'DPF.Android.ApplicationManager.pas',
+  DPF.Android.Widget in 'DPF.Android.Widget.pas',
+  DPF.Android.BaseControl in 'DPF.Android.BaseControl.pas',
+  DPF.Android.JEditText in 'DPF.Android.JEditText.pas',
+  DPF.Android.JTextView in 'DPF.Android.JTextView.pas',
+  DPF.Android.JView in 'DPF.Android.JView.pas',
+  DPF.Android.JRelativeLayout in 'DPF.Android.JRelativeLayout.pas',
+  DPF.Android.JLinearLayout in 'DPF.Android.JLinearLayout.pas',
+  DPF.Android.JButton in 'DPF.Android.JButton.pas',
+  DPF.Android.JAlertDialog in 'DPF.Android.JAlertDialog.pas',
+  DPF.Android.JAnalogClock in 'DPF.Android.JAnalogClock.pas',
+  DPF.Android.JCheckBox in 'DPF.Android.JCheckBox.pas',
+  DPF.Android.JCheckedTextView in 'DPF.Android.JCheckedTextView.pas',
+  DPF.Android.JChronometer in 'DPF.Android.JChronometer.pas',
+  DPF.Android.JDatePicker in 'DPF.Android.JDatePicker.pas',
+  DPF.Android.JImageView in 'DPF.Android.JImageView.pas',
+  DPF.Android.IO in 'DPF.Android.IO.pas',
+  DPF.Android.Common in 'DPF.Android.Common.pas',
+  DPF.Android.JListView in 'DPF.Android.JListView.pas',
+  DPF.Android.JToast in 'DPF.Android.JToast.pas',
+  DPF.Android.JProgressBar in 'DPF.Android.JProgressBar.pas',
+  DPF.Android.JProgressDialog in 'DPF.Android.JProgressDialog.pas',
+  DPF.Android.JTimePickerDialog in 'DPF.Android.JTimePickerDialog.pas',
+  DPF.Android.JDatePickerDialog in 'DPF.Android.JDatePickerDialog.pas',
+  DPF.Android.JNumberPicker in 'DPF.Android.JNumberPicker.pas',
+  DPF.Android.JRadioButton in 'DPF.Android.JRadioButton.pas',
+  DPF.Android.JRadioGroup in 'DPF.Android.JRadioGroup.pas',
+  DPF.Android.JScrollView in 'DPF.Android.JScrollView.pas',
+  DPF.Android.JSeekBar in 'DPF.Android.JSeekBar.pas',
+  DPF.Android.JSpinner in 'DPF.Android.JSpinner.pas',
+  DPF.Android.JTabHost in 'DPF.Android.JTabHost.pas',
+  DPF.Android.JTextSwitcher in 'DPF.Android.JTextSwitcher.pas',
+  DPF.Android.JWebView in 'DPF.Android.JWebView.pas',
+  DPF.Android.JTextClock in 'DPF.Android.JTextClock.pas',
+  DPF.Android.JVideoView in 'DPF.Android.JVideoView.pas',
+  DPF.Android.JHTTP in 'DPF.Android.JHTTP.pas',
+  DPF.Android.JAnimation in 'DPF.Android.JAnimation.pas',
+  DPF.Android.JMapView in 'DPF.Android.JMapView.pas';
+
+end.

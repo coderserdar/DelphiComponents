@@ -1,0 +1,155 @@
+// ------------------------------------------------------------------------------
+// DPFiOSPackagesXE8 Package
+//
+// Dadeh Pardazane Faragir ( DPF ) Co.
+//
+// Web: http://www.dpfaragir.com
+//
+// Developed By: Babak Yaghoobi
+//
+// Email #1: yaghoobi@dpfaragir.com
+// Email #2: b_yaghobi@yahoo.com
+// Email #3: bayaghoobi@gmail.com
+//
+// ------------------------------------------------------------------------------
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+// http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+// ------------------------------------------------------------------------------
+package DPFiOSPackagesXE8;
+
+{$R *.res}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE DEBUG}
+{$ENDIF IMPLICITBUILDING}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl,
+  xmlrtl,
+  fmx,
+  designide,
+  DbxCommonDriver,
+  dbrtl,
+  inet;
+
+contains
+  DPF.iOS.DesignTime in 'DPF.iOS.DesignTime.pas',
+  DPF.iOS.UINavigationController.DesignTime in 'DPF.iOS.UINavigationController.DesignTime.pas',
+  DPF.iOS.UITabBarController.DesignTime in 'DPF.iOS.UITabBarController.DesignTime.pas',
+  DPF.iOS.Reg in 'DPF.iOS.Reg.pas',
+  DPF.App.Expt in 'DPF.App.Expt.pas',
+  DPF.iOS.Dispatch in 'DPF.iOS.Dispatch.pas',
+  DPF.iOS.BaseControl in 'DPF.iOS.BaseControl.pas',
+  DPF.iOS.MPVolume in 'DPF.iOS.MPVolume.pas',
+  DPF.iOS.UIButton in 'DPF.iOS.UIButton.pas',
+  DPF.iOS.UIPageControl in 'DPF.iOS.UIPageControl.pas',
+  DPF.iOS.UIScrollView in 'DPF.iOS.UIScrollView.pas',
+  DPF.iOS.UITableView in 'DPF.iOS.UITableView.pas',
+  DPF.iOS.UITableViewItems in 'DPF.iOS.UITableViewItems.pas',
+  DPF.iOS.UITextField in 'DPF.iOS.UITextField.pas',
+  DPF.iOS.UITextView in 'DPF.iOS.UITextView.pas',
+  DPF.iOS.UIView in 'DPF.iOS.UIView.pas',
+  DPF.iOS.EKCalendar in 'DPF.iOS.EKCalendar.pas',
+  DPF.iOS.SCNetworks in 'DPF.iOS.SCNetworks.pas',
+  DPF.iOS.UILabel in 'DPF.iOS.UILabel.pas',
+  DPF.iOS.UISegmentedControl in 'DPF.iOS.UISegmentedControl.pas',
+  DPF.iOS.UISlider in 'DPF.iOS.UISlider.pas',
+  DPF.iOS.UIStepper in 'DPF.iOS.UIStepper.pas',
+  DPF.iOS.UISwitch in 'DPF.iOS.UISwitch.pas',
+  DPF.iOS.UIImageView in 'DPF.iOS.UIImageView.pas',
+  DPF.iOS.UITabBarController in 'DPF.iOS.UITabBarController.pas',
+  DPF.iOS.HTTP in 'DPF.iOS.HTTP.pas',
+  DPF.iOS.MPMoviePlayerViewController in 'DPF.iOS.MPMoviePlayerViewController.pas',
+  DPF.iOS.UIToolbar in 'DPF.iOS.UIToolbar.pas',
+  DPF.iOS.UIWebView in 'DPF.iOS.UIWebView.pas',
+  DPF.iOS.UINavigationController in 'DPF.iOS.UINavigationController.pas',
+  DPF.iOS.UIPickerView in 'DPF.iOS.UIPickerView.pas',
+  DPF.iOS.UIAlertView in 'DPF.iOS.UIAlertView.pas',
+  DPF.iOS.UIDatePicker in 'DPF.iOS.UIDatePicker.pas',
+  DPF.iOS.UIViewController in 'DPF.iOS.UIViewController.pas',
+  DPF.iOS.UIPageViewController in 'DPF.iOS.UIPageViewController.pas',
+  DPF.iOS.UIActionSheet in 'DPF.iOS.UIActionSheet.pas',
+  DPF.iOS.UIImagePickerController in 'DPF.iOS.UIImagePickerController.pas',
+  DPF.iOS.UIActivityViewController in 'DPF.iOS.UIActivityViewController.pas',
+  DPF.iOS.SLComposeViewController in 'DPF.iOS.SLComposeViewController.pas',
+  DPF.iOS.AVPlayer in 'DPF.iOS.AVPlayer.pas',
+  DPF.iOS.UIProgressView in 'DPF.iOS.UIProgressView.pas',
+  DPF.iOS.NSOperationQueue in 'DPF.iOS.NSOperationQueue.pas',
+  DPF.iOS.UIActivityIndicatorView in 'DPF.iOS.UIActivityIndicatorView.pas',
+  DPF.iOS.UIPopoverController in 'DPF.iOS.UIPopoverController.pas',
+  DPF.iOS.QLPreviewController in 'DPF.iOS.QLPreviewController.pas',
+  DPF.iOS.UISearchBar in 'DPF.iOS.UISearchBar.pas',
+  DPF.iOS.CheckBox in 'DPF.iOS.CheckBox.pas',
+  DPF.iOS.UIFont in 'DPF.iOS.UIFont.pas',
+  DPF.iOS.Classes in 'DPF.iOS.Classes.pas',
+  DPF.iOS.Common in 'DPF.iOS.Common.pas',
+  DPF.iOS.MapKit in 'DPF.iOS.MapKit.pas',
+  DPF.iOS.MFMailCompose in 'DPF.iOS.MFMailCompose.pas',
+  DPF.iOS.MFMailComposeViewController in 'DPF.iOS.MFMailComposeViewController.pas',
+  DPF.iOS.MFMessageCompose in 'DPF.iOS.MFMessageCompose.pas',
+  DPF.iOS.MFMessageComposeViewController in 'DPF.iOS.MFMessageComposeViewController.pas',
+  DPF.iOS.MKMapView in 'DPF.iOS.MKMapView.pas',
+  DPF.iOS.EventKit in 'DPF.iOS.EventKit.pas',
+  DPF.iOS.ABPeoplePicker in 'DPF.iOS.ABPeoplePicker.pas',
+  DPF.iOS.ABPeoplePickerNavigationController in 'DPF.iOS.ABPeoplePickerNavigationController.pas',
+  DPF.iOS.ADBanner in 'DPF.iOS.ADBanner.pas',
+  DPF.iOS.UIComboBox in 'DPF.iOS.UIComboBox.pas',
+  DPF.iOS.UIDateTimeComboBox in 'DPF.iOS.UIDateTimeComboBox.pas',
+  DPF.iOS.CacheManager in 'DPF.iOS.CacheManager.pas',
+  DPF.iOS.UILocalNotification in 'DPF.iOS.UILocalNotification.pas',
+  DPF.iOS.GLKView in 'DPF.iOS.GLKView.pas',
+  DPF.iOS.GameKit in 'DPF.iOS.GameKit.pas',
+  DPF.iOS.NSTimer in 'DPF.iOS.NSTimer.pas',
+  DPF.iOS.Media in 'DPF.iOS.Media.pas',
+  DPF.iOS.MobileCoreServices in 'DPF.iOS.MobileCoreServices.pas',
+  DPF.iOS.Keyboard in 'DPF.iOS.Keyboard.pas',
+  DPF.iOS.GameCenterManager in 'DPF.iOS.GameCenterManager.pas',
+  DPF.iOS.AVFoundationConsts in 'DPF.iOS.AVFoundationConsts.pas',
+  DPF.iOS.ApplicationManager in 'DPF.iOS.ApplicationManager.pas',
+  DPF.iOS.SlideDialog in 'DPF.iOS.SlideDialog.pas',
+  DPF.iOS.StoreKit in 'DPF.iOS.StoreKit.pas',
+  DPF.iOS.CoreBluetooth in 'DPF.iOS.CoreBluetooth.pas',
+  DPF.iOS.Accounts in 'DPF.iOS.Accounts.pas',
+  DPF.iOS.ASIdentifierManager in 'DPF.iOS.ASIdentifierManager.pas',
+  DPF.iOS.MediaPlayer in 'DPF.iOS.MediaPlayer.pas',
+  DPF.iOS.RateApp in 'DPF.iOS.RateApp.pas',
+  DPF.iOS.NSUserDefaults in 'DPF.iOS.NSUserDefaults.pas',
+  DPF.iOS.iCloud in 'DPF.iOS.iCloud.pas',
+  DPF.iOS.iCloudDoc in 'DPF.iOS.iCloudDoc.pas',
+  DPF.iOS.UICollectionView in 'DPF.iOS.UICollectionView.pas',
+  DPF.iOS.BarCodeReader in 'DPF.iOS.BarCodeReader.pas',
+  DPF.iOS.UIPrintPageRenderer in 'DPF.iOS.UIPrintPageRenderer.pas';
+
+end.

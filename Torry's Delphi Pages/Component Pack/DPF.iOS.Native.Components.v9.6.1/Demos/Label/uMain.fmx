@@ -1,0 +1,116 @@
+object FLabels: TFLabels
+  Left = 0
+  Top = 0
+  Caption = 'Labels'
+  ClientHeight = 460
+  ClientWidth = 320
+  Quality = HighPerformance
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 2
+  object DPFUIView1: TDPFUIView
+    Alpha = 1.000000000000000000
+    ShadowOffsetHeight = 10.000000000000000000
+    ShadowOpacity = 1.000000000000000000
+    ShadowRadius = 10.000000000000000000
+    TagNative = 0
+    Align = Client
+    Size.Width = 320.000000000000000000
+    Size.Height = 460.000000000000000000
+    Size.PlatformDefault = False
+    object DPFLabel1: TDPFLabel
+      Alpha = 1.000000000000000000
+      ClipsToBounds = False
+      ShadowOffsetHeight = 10.000000000000000000
+      ShadowOpacity = 1.000000000000000000
+      ShadowRadius = 10.000000000000000000
+      TagNative = 0
+      Position.X = 26.000000000000000000
+      Position.Y = 368.000000000000000000
+      Size.Width = 269.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Colored Label 3'
+      BackgroundColor = claPalegreen
+      TextAlignment = taCenter
+      BaseLineAdjustment = blaAlignBaseLines
+    end
+    object DPFLabel2: TDPFLabel
+      Alpha = 1.000000000000000000
+      ClipsToBounds = False
+      ShadowOffsetHeight = 10.000000000000000000
+      ShadowOpacity = 1.000000000000000000
+      ShadowRadius = 10.000000000000000000
+      ShadowColor = claBurlywood
+      TagNative = 0
+      Position.X = 24.000000000000000000
+      Position.Y = 48.000000000000000000
+      Size.Width = 269.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Transparent Label'
+      TextAlignment = taCenter
+      BaseLineAdjustment = blaAlignBaseLines
+    end
+    object DPFLabel4: TDPFLabel
+      Alpha = 1.000000000000000000
+      ClipsToBounds = False
+      Shadow = True
+      ShadowOffsetHeight = 10.000000000000000000
+      ShadowOpacity = 1.000000000000000000
+      ShadowRadius = 20.000000000000000000
+      ShadowColor = claChartreuse
+      TagNative = 0
+      Position.X = 26.000000000000000000
+      Position.Y = 240.000000000000000000
+      Size.Width = 271.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Colored Label 2'
+      BackgroundColor = claRoyalblue
+      TextAlignment = taCenter
+      BaseLineAdjustment = blaAlignBaseLines
+      object DPFButton1: TDPFButton
+        Alpha = 1.000000000000000000
+        Font.FontSize = 12
+        ClipsToBounds = False
+        ShadowOffsetHeight = 10.000000000000000000
+        ShadowOpacity = 1.000000000000000000
+        ShadowRadius = 10.000000000000000000
+        TagNative = 0
+        Position.X = 199.000000000000000000
+        Position.Y = 4.000000000000000000
+        Size.Width = 69.000000000000000000
+        Size.Height = 41.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'Shadow'
+        TextLineBreak = lbCharacterWrap
+        TextAlpha = 1.000000000000000000
+        OnClick = DPFButton1Click
+      end
+    end
+    object DPFLabel3: TDPFLabel
+      Alpha = 1.000000000000000000
+      MasksToBounds = True
+      ClipsToBounds = False
+      Shadow = True
+      ShadowOffsetHeight = 10.000000000000000000
+      ShadowOpacity = 1.000000000000000000
+      ShadowRadius = 10.000000000000000000
+      ShadowColor = claYellow
+      CornerRadius = 10.000000000000000000
+      TagNative = 0
+      Position.X = 24.000000000000000000
+      Position.Y = 120.000000000000000000
+      Size.Width = 269.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Colored Label 1'
+      BackgroundColor = claCoral
+      TextAlignment = taCenter
+      BaseLineAdjustment = blaAlignBaseLines
+      OnClick = DPFLabel3Click
+    end
+  end
+end

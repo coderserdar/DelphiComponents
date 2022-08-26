@@ -1,0 +1,73 @@
+{$DEFINE USE_LOG}
+{$UNDEF IOSDEVICE}
+{$IFDEF IOS}
+{$IFDEF IOS}
+{$DEFINE IOS6} // For using iOS6 features
+{$DEFINE IOS7} // For using iOS7 features
+{$DEFINE IOS8} // For using iOS8 features
+{$ENDIF}
+{$IFDEF DEBUG}
+{$DEFINE IOSDEBUG}
+{$ENDIF}
+{$ENDIF}
+{$IFDEF IOS}
+{$IFDEF CPUARM}
+{$DEFINE IOSDEVICE}
+{$ENDIF}
+{$ENDIF}
+
+//--------------------------------------------------
+// Delphi XE7 or less
+{$IF compilerversion <= 28}
+{$MESSAGE ERROR 'Please upgrade to Delphi XE8'}
+{$IFEND}
+
+//--------------------------------------------------
+// Delphi XE8
+{$IF (compilerversion >= 29)}
+{$DEFINE DELPHI2}
+{$DEFINE DELPHI3}
+{$DEFINE DELPHI4}
+{$DEFINE DELPHI5}
+{$DEFINE DELPHI6}
+{$DEFINE DELPHI7}
+{$DEFINE DELPHI9}
+{$DEFINE DELPHI2006}
+{$DEFINE DELPHI2007}
+{$DEFINE DELPHI2010}
+{$DEFINE DELPHIXE}
+{$DEFINE DELPHIXE2}
+{$DEFINE DELPHIXE3}
+{$DEFINE DELPHIXE4}
+{$DEFINE DELPHIXE5}
+{$DEFINE DELPHIXE6}
+{$DEFINE DELPHIXE7}
+{$DEFINE DELPHIXE8}
+{$DEFINE DELPHI_TOUCH}
+{$DEFINE DELPHI_UNICODE}
+{$ENDIF}
+//--------------------------------------------------
+// Delphi XEX
+{$IF (compilerversion >= 29)}
+{$DEFINE DELPHI2}
+{$DEFINE DELPHI3}
+{$DEFINE DELPHI4}
+{$DEFINE DELPHI5}
+{$DEFINE DELPHI6}
+{$DEFINE DELPHI7}
+{$DEFINE DELPHI9}
+{$DEFINE DELPHI2006}
+{$DEFINE DELPHI2007}
+{$DEFINE DELPHI2010}
+{$DEFINE DELPHIXE}
+{$DEFINE DELPHIXE2}
+{$DEFINE DELPHIXE3}
+{$DEFINE DELPHIXE4}
+{$DEFINE DELPHIXE5}
+{$DEFINE DELPHIXE6}
+{$DEFINE DELPHIXE7}
+{$DEFINE DELPHIXEX}
+{$DEFINE DELPHI_TOUCH}
+{$DEFINE DELPHI_UNICODE}
+{$ENDIF}
+// ----------------------------------------------------------
