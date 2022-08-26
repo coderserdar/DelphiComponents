@@ -153,6 +153,7 @@ And I created a folder which is used to store compressed files of Delphi compone
    6. *EC Software Help Suite*
    7. *RiverSoftAVG Flocking*
    8. *RiverSoftAVG Charting Component Suite*
+   9. *Palette Bar IDE Plug-In Setup*
 
 </details>
 
