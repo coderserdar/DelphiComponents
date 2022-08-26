@@ -1,0 +1,26 @@
+#------------------------------------------------------------------------------
+VERSION = BWS.01
+#------------------------------------------------------------------------------
+!ifndef ROOT
+ROOT = $(MAKEDIR)\..
+!endif
+#------------------------------------------------------------------------------
+MAKE = $(ROOT)\bin\make.exe -$(MAKEFLAGS) -f$**
+DCC = $(ROOT)\bin\dcc32.exe $**
+BRCC = $(ROOT)\bin\brcc32.exe $**
+#------------------------------------------------------------------------------
+PROJECTS = DummyDockProj.exe PaletteBar60PE.bpl PaletteBar60.bpl
+#------------------------------------------------------------------------------
+default: $(PROJECTS)
+#------------------------------------------------------------------------------
+
+PaletteBar60.bpl: PaletteBar60.dpk
+  $(DCC)
+
+DummyDockProj.exe: ..\dockable_ide_forms\DummyDockProj.dpr
+  $(DCC)
+
+PaletteBar60PE.bpl: PaletteBar60PE.dpk
+  $(DCC)
+
+

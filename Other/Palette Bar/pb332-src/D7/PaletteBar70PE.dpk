@@ -1,0 +1,44 @@
+package PaletteBar70PE;
+
+{$R *.res}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE ON}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'PaletteBar by Hellinger Software'}
+{$DESIGNONLY}
+{$IMPLICITBUILD OFF}
+{$DEFINE Delphi7}
+
+requires
+  rtl,
+  designide,
+  vcl,
+  vclactnband,
+  vcljpg;
+
+contains
+  pb_master in '..\source\pb_master.pas' {PBar},
+  pb_Common in '..\source\pb_Common.pas',
+  pb_about in '..\source\pb_about.pas' {pbAboutFrm},
+  pb_Categories in '..\source\pb_Categories.pas' {PaletteCategories},
+  pb_config in '..\source\pb_config.pas' {PaletteConfig};
+
+end.
