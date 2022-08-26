@@ -1,0 +1,202 @@
+[hhALed], Freeware with source.
+
+Replaces:  TAutoLed V2.01 by Chang Ting SU (ctsu@ms12.hinet.net)
+Author:    Howard Harvey
+Date:      24/MAY/1999
+Version:   1.10c
+HISTORY
+-------
+V1.10c  24/05/99 Changed name to ThhALed
+V1.10b  21/12/97 Changed palette name to "Howie"
+V1.10   15/12/97 Added Border Colour property
+V1.04	13/12/97 Added Border True/False property
+V1.03a   4/10/97 Added details for using runtime arrays of ALed
+V1.03    31/7/97 Added ShowHint property
+V1.02    24/7/97 Fixed Timer identification
+V1.01   Initial Release
+
+DESCRIPTION
+-----------
+This component can show 6 different styles of LED:
+  Round Large (the original in TAutoLed)
+  Round Small
+  Square Large
+  Square Small
+  Rectangular Horizontal
+  Rectangular Vertical
+
+Dynamic resizing is possible, but the 6 predefined sizes are best.
+Resizing upwards is acceptable, but resizing downwards results in loss of clarity.
+Resizing requires a definition of the form 
+  hhALED1.width := NewWidth ;
+  hhALED1.height := NewHeight ;
+to be executed when the form is first drawn or after each change in the style
+or colours.
+
+Dynamic selection of the LED style is also possible (try doing that in hardware!)
+
+Any defined system colour can be independently defined for the ON and OFF states.
+Blinking (when ON state selected) is provided, with user selectable blink rate.
+
+Each LED may appear to be mounted on a background pedestal or directly on the
+background, and may be selected at design or execution time.
+The colour for the direct background defaults to clBtnFace (usually = clSilver)
+but may be changed to any other colour, either at design or execution time.
+
+[Events]
+    OnClick,
+    *OnMouseEnter,
+    *OnMouseLeave,
+    *OnTimer (When Blink is true)
+[Properties]
+    BorderColor (You can select any defined color),
+    Blink (True or False),
+    Bordered (True or False),
+    FalseColor (when Value is false) (You can select any defined color),
+    Hint (string),
+    Interval (Blink Interval),
+    LedStyle (LEDSmall,LEDLarge,LEDSqSmall,LEDSqLarge,LEDVertical,LEDHorizontal),
+    ShowHints (True or False),
+    TrueColor (when Value is true) (You can select any defined color),
+    Value (True or False);
+
+
+Focus Colour Control for LEDs
+
+The OnMouseEnter and OnMouseLeave events can be used to provide focus indication
+by changing the LED colour (eg changing from Lime/Green to Red/Maroon when the
+mouse enters the LED region and reverting to Lime/Green on exit)
+
+
+Suggested True (ON) and False (OFF) Colours for LEDs are:
+
+        TrueColor       FalseColor
+        ---------       ----------
+        Red             Maroon
+        Yellow          Olive
+        Lime            Green
+        Fuchsia         Purple
+        Aqua            Teal
+        Blue            Navy
+        White           Gray
+        Silver          Black
+
+
+Click Control
+
+Using the OnClick event allows clicking the LED to initiate any desired action,
+such as starting/stopping a timer or counter.
+
+
+This component has been successfully tested on Delphi2 and Delphi3.
+Test code is not included.  The component is simple and registers
+as hhALed in the Extras component panel.
+
+
+Specifying Multiple LEDs as an Array
+------------------------------------
+
+An email from Andre Nel (nelal@telkom.co.za) provided the clue for how to
+process a large array of LEDs at run time, rather than having to locate
+each individual LED at design time.  Here is a 100 LED example:
+
+unit Aled1;
+
+{ The following unit processes 100 hhALEDs.  Any LED when clicked will change
+  to Blue and place its array identifier in an Edit box.  All LEDs are
+  accessed randomly, sequencing off-lime-red-off.  The "tag" field in the
+  LEDa array is used to identify which LED was clicked.
+  The LEDs are arranged as 4 rows of 25 LEDs }
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  ALed, ExtCtrls, StdCtrls;
+
+type
+  TForm1 = class(TForm)
+    Timer1: TTimer;
+    Edit1: TEdit;
+    procedure hhALedOnCLick(Sender: TObject) ;
+    procedure FormCreate(Sender: TObject);
+    procedure Timer1Timer(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+  LEDa : array [0..99] of ThhALed ;
+
+implementation
+
+{$R *.DFM}
+
+procedure TForm1.hhALedOnCLick(Sender: TObject) ;
+
+{ OnClick Handler }
+{ Edit1 is placed at 200,72 on the form }
+
+var
+  index : integer ;
+begin
+  with sender as ThhALed do
+  begin
+    index := tag ;
+    Edit1.text := IntToStr( index ) ;
+    value := true ;
+    truecolor := clBlue ;
+  end ;
+end ;
+
+procedure TForm1.FormCreate(Sender: TObject);
+
+{ Define all the LEDs }
+
+VAR
+  index : integer ;
+
+begin
+  Form1.clientwidth := 16*25 ;
+  Form1.clientHeight := 16*4 + 40 ;
+  for index := 0 to 99 do
+  begin
+    LEDa[index] := ThhALed.create(self) ;
+    LEDa[index].parent := self ;
+    LEDa[index].top := (index DIV 25)*16 ;
+    LEDa[index].left := (index MOD 25)*16 ;
+    LEDa[index].OnClick := hhALedOnCLick ;
+    LEDa[index].blink := false ;
+    LEDa[index].tag := index ;
+    LEDa[index].show ;
+  end ;
+end;
+
+procedure TForm1.Timer1Timer(Sender: TObject);
+
+{ Timer to randomly autosequence the LEDs }
+
+var
+  index : integer ;
+begin
+  index := RANDOM(100) ;
+  if LEDa[index].value
+  then begin
+    if LEDa[index].truecolor = clLime
+    then LEDa[index].truecolor := clRed
+    else begin
+      LEDa[index].value := false ;
+      LEDa[index].truecolor := clLime ;
+    end ;
+  end
+  else LEDa[index].value := true ;
+end;
+end.
+
+
+Howard Harvey
+(hharvey@dove.net.au)
+(http://dove.net.au/~hharvey)

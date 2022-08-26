@@ -1,0 +1,105 @@
+[hhRepeatButton], Freeware* with source.
+
+Author:    Howard Harvey
+Date:      23/FEBRUARY/2000
+Version:   1.10
+
+HISTORY
+-------
+V1.10	23/02/00 Added Count read-only property
+V1.00   26/08/99 Initial Release
+
+
+DESCRIPTION
+-----------
+This component is a derivative of SpeedButton with extensions to
+provide repetition of the "OnClick" event while the left mouse
+button remains depressed and the mouse is over the button.
+
+
+INSTALLATION
+------------
+1. Place the unzipped contents of RptBtn.zip into a suitable directory.
+  (Mine is in D:\Borland\Delphi3\Lib\Extras)
+2. Start Delphi 3 and select "Component|Install Packages..."
+3. Highlight the Extras.dpl file and click "Edit..."
+4. Allow Delphi to close the dialog box and open Extras.dpk
+5. Select "Add" and find the file RepeatButton.pas
+6. Select "Compile"
+7. Close the dialog and allow Extras.dpk to be updated
+8. hhRepeatButton should now be in the "Howie" tab of the VCL palette,
+   as shown with an icon containing a lightning bolt and clock. 
+
+
+APPLICATION
+-----------
+[Events]
+    All events in SpeedButton, plus:
+    OnMouseEnter,
+    OnMouseLeave,
+
+"OnMouseEnter" can be used to indicate when the mouse first appears over
+the RepeatButton.
+"OnMouseLeave" can be used to indicate when the mouse leaves the bounds
+of the RepeatButton.
+These events may be used to change visible cues (eg colour of the caption).
+
+
+[Properties]
+    All properties in SpeedButton, plus:
+    RepeatDelay (default 400),
+    RepeatEnable (default false),
+    RepeatInterval (default 200),
+    Count
+
+"RepeatDelay" (longint) is the "holdoff" time for the first OnClick event
+while the left mouse button remains depressed.  Value is milliseconds.
+
+"RepeatEnable" (boolean) must be true to allow multiple clicks.
+If RepeatEnable := false, then RepeatButton is the same as SpeedButton
+except having the two extra "OnMouseEnter" and "OnMouseLeave" events.
+
+"RepeatInterval" (longint) is the "repeat" time for the subsequent OnClick
+events while the left mouse button remains depressed.  Value is milliseconds.
+Default value give 5 "OnClick" events per second.
+
+NOTE: Repetion only occurs if:
+   1. the button is going from Up to Down (ie a "OnMouseDown" event occurs)
+   2. the "RepeatEnable" property is true (ie an interval timer is set)
+   3. the left mouse button remains depressed (RepeatDelay or RepeatInterval
+      values expire)
+i.e. repetition does not occur if the RepeatButton was already Down when the
+left mouse button is depressed.
+
+"Count" returns the number of clicks processed while the button was depressed.
+This can be accessed at any time by any other event, such as a timer, other
+control action, etc., or by using the "OnClick" event from within RepeatButton.
+"Count" is a read-only property.  It is reset each time the button is pressed.
+
+
+OnClick Events
+--------------
+Using the "OnClick" event allows clicking the RepeatButton to initiate
+any desired action, with user defined delay from the initial press and
+repetition rate for following vents.  Note that the usual "OnClick" event
+occurs when the left mouse button is released, irrespective of any
+repetition setting.  Hence an "extra" event will occur at the time the
+left mouse button is released.  This event may also be used to read the
+"Count" value and terminate repeat action at a given value.
+
+
+This component has been successfully tested on Delphi3.
+Test code is not included.  The component is simple and registers
+as hhRepeatButton in the "Howie" component panel.
+
+
+* This component is freeware provided you do not use it in commercial
+or shareware applications.  If you wish to use it in a product for which
+you charge any fee, contact me at http://dove.net.au/~hharvey
+
+
+DISCLAIMER
+----------
+Whilst every care has been exercised in the creation of this product,
+no guarantee is given that it is free from defect or fit for purpose.
+No claims for any direct or consequential loss will be accepted.

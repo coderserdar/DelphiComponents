@@ -1,0 +1,84 @@
+hhCRC - Howie's CRC Calculator VCL component
+=====   ====================================
+
+hhCRC calculates a cyclic redundancy code (CRC) in three formats:
+     CRC-16 (X^16 + X^15 + X^2 + 1)
+     CCITT  (X^16 + X^12 + X^5 + 1)
+     CRC-32 (X^32+X^26+X^23+X^22+X^16+X^12+X^11
+            +X^11+X^10+X^8+X^7+X^5+X^4+X^2 +X+1)
+by using a byte-wise algorithm.
+
+This UNIT was derived from the CRCT FORTRAN 77 program given in
+"Byte-wise CRC Calculations" by Aram Perez in IEEE Micro, June 1983,
+pp. 40-50.  It was expanded to provide alterbative CRC tables.
+
+While the constants are specific to the CRC16, CCITT or CRC32
+polynomial, the algorithm is general and will calculate the CRC for
+whatever set of constants is present.
+
+This CRC algorithm emphasizes speed at the expense of the size of the
+lookup tables.
+
+
+Installation
+============
+1. Place hhCRC.pas and hhCRC.dcr into a suitable library folder.
+2. Install into the Borland User Components by using the menu funtion
+   "Component|Install Packages" to add hhCRC to the package.
+3. After compiling, the component will appear in the "Howie" palette.
+
+
+Properties
+==========
+Bytes: integer ;
+In/Out:	Specifies the number of bytes to be processed when calculating the CRC.
+
+CRC: Dword ;
+In:	If Zeroise = false, provides initial value for the CRC
+Out:	Provides the result of the CRC calculation after calling the CRC
+        calculation method. Only the bottom 16 bits are used for the
+	16-bit CRC input or results.
+	All 32 bits are used for the 32-bit CRC.
+
+CRCmode: TCRCmode = (CRC16,CCITT,CRC32) ;
+In/Out:	CRC16, CCITT: calculates a 16-bit CRC according to the polynomial
+	selected by the setting of CRCmode.
+	CRC32: calculates a 32-bit CRC according to the CRC-32 polynomial.
+
+Zeroise: boolean ;
+In/Out:	When "true" sets CRC to $0000 for CRC16 or CCITT modes.
+		    sets CRC to $FFFFFFFF for CRC32 modes.
+	When "false" does not initialise the CRC, allowing presetting.
+
+
+Methods
+=======
+procedure CalcCRC( p : pointer ) ;
+	Calculates the CRC for the byte stream of "Bytes" starting at the
+	address specified by the pointer, according to the "CRCmode" setting.
+
+	Note: The form of the call depends on how the buffer is created.
+
+	If the array is declared, then the code will be of the form:
+          VAR buffer: array[0..16383] of byte ;
+              ....
+              hhCRC.Bytes := 16384 ;
+              hhCRC.CalcCRC( @buffer ) ;
+
+	If the array is open, then the code will be of the form:
+          VAR buffer: array of byte ;
+              bufflen : integer ;
+              ....
+              bufflen := 16384 ;
+              SetLength( buffer , bufflen ) ;
+              ....
+              hhCRC.Bytes := bufflen ;
+              hhCRC.CalcCRC( buffer ) ;
+
+Events
+======
+	No events
+
+
+Howard Harvey
+(hharvey@picknowl.com.au)

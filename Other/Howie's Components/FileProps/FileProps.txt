@@ -1,0 +1,73 @@
+hhFileProps
+
+A Delphi3 Visual Component designed to either get the properties
+of a file, or to show the properties ina special dialog box.
+
+There are two function calls to the component:
+
+	function ShowFileProperties( myFileName : string ) : boolean ;
+	function GetFileProperties ( myFileName : string ) : boolean ;
+
+Both require a fully expanded and valid drive:\filepath\filename
+If the file can not be found, then the function returns "false".
+
+The "ShowFileProperties" call will display a dialog box similar to
+the File|Properties boxes in Explorer, excepting that user and
+current date and time are displayed.  Fields are converted to a
+best display format.  For filesize, the value is shown in bytes,
+and also in Kbytes or Mbytes when filesize has large values.
+
+
+The "GetFileProperties" call only gets the file properties so
+that the calling application can use them as required.
+
+To help achieve a consistent approach to bytes conversion, the function
+used to convert exact bytes to the nearest Kbyte/Mbyte is also available
+from within this component:
+
+	function BytesConvert( value : longint ) : string ;
+
+BytesConvert returns a string, given the file size. Rounding up to the
+next Kbyte (1024 bytes) or Mbyte (1024 Kbytes) is used even if the file
+size is only one byte more than the exact amount.  
+Thus 102400 bytes becomes 100K, but 102401 bytes would become 101K.
+
+The following properties are available:
+
+Property	format		Details
+FileName     	string    	the WIN9X long filename only
+MSDOSname    	string    	its MSDOS 8.3 format filename only
+FilePath     	string    	the path to the file
+FileSize     	longint   	the exact size (in bytes) of the file
+FileAttr     	word      	the file attributes word (see below).
+FileCreated  	tDateTime 	the date/time the file was created
+FileModified 	tDateTime 	the date/time the file was modified
+FileAccessed 	tDateTime 	the date/time the file was last accessed
+
+
+Use the Delphi standard masks for the file attributes:
+
+Constant	Value		Mask Purpose
+faReadOnly	$0001		Read-only files
+faHidden	$0002		Hidden files
+faSysFile	$0004		System files
+faVolumeID	$0008		Volume ID files
+faDirectory	$0010		Directory files
+faArchive	$0020		Archive files
+faAnyFile	$003F		Any file
+
+Example: 
+  if hhFileProps1.GetFileProperties(OpenDialog1.filename)
+  then Result := hhFileProps1.FileAttr AND (faSys OR faHidden) ;
+will be non-zero if the file is a system or hidden file.
+
+
+Not all files have all three date/time fields used.  The date/time values
+are set to "0" if an invalid or missing field is detected.  If the value
+is not zero, the standard formatting operations for tDateTime variables
+may be used, or the value may be used to compare file ages.
+
+Enjoy.
+
+Howard 
+

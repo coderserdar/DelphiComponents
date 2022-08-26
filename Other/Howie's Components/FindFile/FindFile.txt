@@ -1,0 +1,117 @@
+FindFile version 1.30
+
+Original Copyright (C) September 1997 Walter Dorawa
+
+Version 1.10:
+Modified 23/MAY/1999 by Howard Harvey (hharvey@picknowl.com.au)
+to become hhFindFile
+Version 1.20:
+Modification 17/APRIL/2000 - suggestion from Marcus Luk
+Version 1.30:
+Modification 15/FEBRUARY/2001 - suggestion from rattus
+
+Everyone is free to use this code as they wish, but
+if you use it commercially then I wouldn't mind a
+little something (mee too!).
+
+
+OVERVIEW:
+=========
+
+This is a little utility component, which allows you to search a
+directory for any file or folder.
+
+It wraps the FindFirst/FindNext/FindClose functions, and supplies the
+ability to recurse directories.
+
+
+USAGE:
+======
+
+Before activating the component, set up the properties as follows:
+Attributes: (set)     file attributes (default [ffReadOnly, ffHidden, ffSysFile])
+Directory:  (string)  starting drive:path
+Filter:     (string)  files filter (default *.*)
+Recurse:    (boolean) (default false)
+Sorted:     (boolean) (default true)
+StrictRO:   (boolean) (default false)
+
+
+Brief Description of Properties:
+================================
+
+Attributes:
+----------
+The set of inclusive attributes allowed to be present by any file.  Note that the
+set does not include "Archive" since this bit is really only meaningful for file
+backup applications.  It also does not include "AnyFile" because this function is
+of no relevance.
+
+Directory:
+---------
+The starting directory for the search.  May be at the root or any level below, and
+does not need to have a trailing "\" character included (although it is preferred).
+
+Filter:
+------
+The files filter (defaults to "*.*") which can be changed to restrict files found.
+Multiple filters may be specified, separated by semicolons.  eg *.dll;x*.bp*
+
+Recurse:
+-------
+By default, only searches the directory specified.
+Set this property to TRUE to have it recurse all directories below the one specified
+
+Sorted:
+------
+By default, sorts the directories and files in alphabetic order, and subdirectories
+and files for each directory in turn in alphabetic order.  If multiple filters are
+specified and Sorted is selected, duplicate file entries are ignored.
+Clear this property to show directories and files as encountered, showing all directories
+(and their files) in each level before descending to the next level.
+
+StrictRO:
+--------
+By default, includes ReadOnly files in the "Normal Files" list.  i.e. any file with the
+archive and/or readonly attribute set will always be found. (this is the Borland Delphi
+standard)
+Set this property to exclude ReadOnly files if the ReadOnly option in "Attributes" is
+not set.
+
+
+USE:
+====
+
+Set the published properties (Attributes, Directory, Filter, Recurse, Sorted, StrictRO)
+at design-time and/or run-time.
+
+To activate the component use:
+
+hhFindFile1.Execute;
+
+During use, three events are available:
+BeforeExecute: called prior to execution
+AfterExecute:  called on completion of execution
+OnNewPath:     called when scanned path changes
+
+Abort at any time during execution by:
+
+hhFindFile1.Abort := true;
+
+The list of matched files/folders is returned in the Files property (TStrings),
+and includes the full path and file name.  You can extract just the filename by using
+ExtractFileName(hhFindFile1.Files[index]).
+
+Other properties returned are:
+TotalSpace: (longint) returns total file space
+TotalFile:  (longint) returns total files (or files+subdirectories) found
+TotalDir:   (longint) returns total directories found (only if ffDirectory=true)
+
+If you find this component useful, have any suggestions or have found bugs,
+please email me at: hharvey@picknowl.com.au
+Unfortunately walterd@gte.net (or walterd859@aol.com) is no longer valid.
+
+INSTALLATION:
+=============
+Copy the files into a folder on your computer, select Component|Install
+in Delphi, click Add, enter the location of FileFind.pas, click OK.
