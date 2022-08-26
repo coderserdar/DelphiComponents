@@ -33,8 +33,8 @@ Repo folder structure is like this
      - [*Other*](https://github.com/coderserdar/DelphiComponents/tree/main/Torry's%20Delphi%20Pages/DB%20Aware/Other)
      - [*Packs*](https://github.com/coderserdar/DelphiComponents/tree/main/Torry's%20Delphi%20Pages/DB%20Aware/Packs)
      - [*Visual*](https://github.com/coderserdar/DelphiComponents/tree/main/Torry's%20Delphi%20Pages/DB%20Aware/Visual)
-   - [**Experts & IDE Plug-Ins**](https://github.com/coderserdar/DelphiComponents/tree/main/Torry's%20Delphi%20Pages/Experts%2C%20IDE)
-   - [**Max Components**](https://github.com/coderserdar/DelphiComponents/tree/main/Torry's%20Delphi%20Pages/Max%20Components)
+   - [*Experts & IDE Plug-Ins*](https://github.com/coderserdar/DelphiComponents/tree/main/Torry's%20Delphi%20Pages/Experts%2C%20IDE)
+   - [*Max Components*](https://github.com/coderserdar/DelphiComponents/tree/main/Torry's%20Delphi%20Pages/Max%20Components)
 
 
 I want to add **Read Me** files to folder based components. Most of components have readme file. So when you see the folder contents, you can see the component is suitable for which *Delphi IDE*s.
