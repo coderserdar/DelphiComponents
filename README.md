@@ -33,8 +33,14 @@ Repo folder structure is like this
      - [*Other*](https://github.com/coderserdar/DelphiComponents/tree/main/Torry's%20Delphi%20Pages/DB%20Aware/Other)
      - [*Packs*](https://github.com/coderserdar/DelphiComponents/tree/main/Torry's%20Delphi%20Pages/DB%20Aware/Packs)
      - [*Visual*](https://github.com/coderserdar/DelphiComponents/tree/main/Torry's%20Delphi%20Pages/DB%20Aware/Visual)
+   - [*Edits & Memos*](https://github.com/coderserdar/DelphiComponents/tree/main/Torry's%20Delphi%20Pages/Edits%20and%20Memos/Advanced%20Tree%20View)
    - [*Experts & IDE Plug-Ins*](https://github.com/coderserdar/DelphiComponents/tree/main/Torry's%20Delphi%20Pages/Experts%2C%20IDE)
+   - [*Images*](https://github.com/coderserdar/DelphiComponents/tree/main/Torry's%20Delphi%20Pages/Images/EDBImg16)
+   - [*List & Combo Boxes*](https://github.com/coderserdar/DelphiComponents/tree/main/Torry's%20Delphi%20Pages/List%20and%20Combo%20Boxes)
    - [*Max Components*](https://github.com/coderserdar/DelphiComponents/tree/main/Torry's%20Delphi%20Pages/Max%20Components)
+   - [*Other*](https://github.com/coderserdar/DelphiComponents/tree/main/Torry's%20Delphi%20Pages/Other)
+   - [*Treeviews*](https://github.com/coderserdar/DelphiComponents/tree/main/Torry's%20Delphi%20Pages/Treeviews)
+   - [*Visual Queries*](https://github.com/coderserdar/DelphiComponents/tree/main/Torry's%20Delphi%20Pages/Visual%20Queries)
 
 
 I want to add **Read Me** files to folder based components. Most of components have readme file. So when you see the folder contents, you can see the component is suitable for which *Delphi IDE*s.
