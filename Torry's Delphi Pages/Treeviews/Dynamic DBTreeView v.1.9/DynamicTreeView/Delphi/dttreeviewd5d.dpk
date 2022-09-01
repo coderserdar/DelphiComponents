@@ -1,0 +1,47 @@
+package dttreeviewd5d;
+
+{$R *.RES}
+{$R 'dtdbtreeview.dcr'}
+{$ALIGN ON}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'Dynamic DBTreeView design time package'}
+{$DESIGNONLY}
+{$IMPLICITBUILD ON}
+
+requires
+  vcl50,
+  Vclmid50,
+  Vcldb50,
+  vclado50,
+  Vclbde50,
+  ThemeManagerD5,
+  VirtualTreesD5;
+
+contains
+  DTTableTree in '..\Source\DTTableTree.pas',
+  DTADOTree in '..\Source\DTADOTree.pas',
+  DTClientTree in '..\Source\DTClientTree.pas',
+  DTCommon in '..\Source\DTCommon.pas',
+  DTDBTreeReg in '..\Source\DTDBTreeReg.pas',
+  DTDBTreeView in '..\Source\DTDBTreeView.pas';
+
+end.
