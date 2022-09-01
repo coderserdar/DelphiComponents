@@ -1,0 +1,73 @@
+package bvComp6;
+
+{$R *.res}
+{$R 'bvCOMP.dcr'}
+{$ALIGN 8}
+{$ASSERTIONS OFF}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS OFF}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS ON}
+{$RANGECHECKS ON}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE ON}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESIGNONLY}
+{$IMPLICITBUILD ON}
+
+requires
+  vcl,
+  vclx,
+  vcldb,
+  bdertl,
+  visualclx;
+
+contains
+  bvDBGrid in 'bvDBGrid.pas',
+  bvdbGridSaver in 'bvdbGridSaver.pas',
+  bvFindUnit in 'bvFindUnit.pas',
+  bvdbTableSaver in 'bvdbTableSaver.pas',
+  bvBookMark in 'bvBookMark.pas',
+  bvFormSaver in 'bvFormSaver.pas',
+  bvColorEdit in 'bvColorEdit.pas',
+  bvSaveTableUnit in 'bvSaveTableUnit.pas' {SaveTableForm},
+  bvDBGridDrawType in 'bvDBGridDrawType.pas',
+  bvFindDialogUnit in 'bvFindDialogUnit.pas' {bvFindDialogForm},
+  bvColumsEditor in 'bvColumsEditor.pas' {ColEditForm},
+  bvGetAlignmentUnit in 'bvGetAlignmentUnit.pas' {AlignmentForm},
+  bvGridPopupUnit in 'bvGridPopupUnit.pas',
+  bvSaveTableGetColumnsUnit in 'bvSaveTableGetColumnsUnit.pas' {SaveTableGetColumnsForm},
+  bvSaveTableToExcel8Unit in 'bvSaveTableToExcel8Unit.pas',
+  bvMessageUnit in 'bvMessageUnit.pas' {MessageForm},
+  bvWaitunitF2 in 'bvWaitunitF2.pas' {WaitForm3},
+  bvBDE in 'bvBDE.pas',
+  bvFiles in 'bvFiles.pas',
+  bvMath in 'bvMath.pas',
+  bvStringUtils in 'bvStringUtils.pas',
+  bvUtils in 'bvUtils.pas',
+  bvConfirmUnit in 'bvConfirmUnit.pas' {ConfirmForm1},
+  bvCursorUnit in 'bvCursorUnit.pas',
+  bvEditMemoUnit in 'bvEditMemoUnit.pas' {EditMemoForm},
+  bvSeeDocUnit in 'bvSeeDocUnit.pas',
+  bvSeeTableUnit in 'bvSeeTableUnit.pas',
+  bvWaitUnDDF in 'bvWaitUnDDF.pas' {WaitDDForm},
+  bvWaitUnit1 in 'bvWaitUnit1.pas',
+  bvWaitGlobeUnit in 'bvWaitGlobeUnit.pas',
+  bvRegisterUnit in 'bvRegisterUnit.pas',
+  bvChangePassword in 'bvChangePassword.pas' {ChangePasswordForm},
+  bvNewFieldUnit in 'bvNewFieldUnit.pas' {NewFieldForm},
+  bvConst in 'bvConst.pas',
+  bvLocalization in 'bvLocalization.pas';
+
+end.

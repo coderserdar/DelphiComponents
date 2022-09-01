@@ -1,0 +1,54 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{28cb7a88-cc92-472b-8e77-86daa9c5fd32}</ProjectGuid>
+  </PropertyGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Projects Include="dclXq.dproj" />
+    <Projects Include="Xq.dproj" />
+    <Projects Include="XqTests.dproj" />
+  </ItemGroup>
+  <ProjectExtensions>
+    <Borland.Personality>Default.Personality</Borland.Personality>
+    <Borland.ProjectType />
+    <BorlandProject>
+<BorlandProject xmlns=""><Default.Personality></Default.Personality></BorlandProject></BorlandProject>
+  </ProjectExtensions>
+  <Target Name="Xq">
+    <MSBuild Projects="Xq.dproj" Targets="" />
+  </Target>
+  <Target Name="Xq:Clean">
+    <MSBuild Projects="Xq.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="Xq:Make">
+    <MSBuild Projects="Xq.dproj" Targets="Make" />
+  </Target>
+  <Target Name="dclXq">
+    <MSBuild Projects="dclXq.dproj" Targets="" />
+  </Target>
+  <Target Name="dclXq:Clean">
+    <MSBuild Projects="dclXq.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="dclXq:Make">
+    <MSBuild Projects="dclXq.dproj" Targets="Make" />
+  </Target>
+  <Target Name="XqTests">
+    <MSBuild Projects="XqTests.dproj" Targets="" />
+  </Target>
+  <Target Name="XqTests:Clean">
+    <MSBuild Projects="XqTests.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="XqTests:Make">
+    <MSBuild Projects="XqTests.dproj" Targets="Make" />
+  </Target>
+  <Target Name="Build">
+    <CallTarget Targets="Xq;dclXq;XqTests" />
+  </Target>
+  <Target Name="Clean">
+    <CallTarget Targets="Xq:Clean;dclXq:Clean;XqTests:Clean" />
+  </Target>
+  <Target Name="Make">
+    <CallTarget Targets="Xq:Make;dclXq:Make;XqTests:Make" />
+  </Target>
+  <Import Condition="Exists('$(MSBuildBinPath)\Borland.Group.Targets')" Project="$(MSBuildBinPath)\Borland.Group.Targets" />
+</Project>

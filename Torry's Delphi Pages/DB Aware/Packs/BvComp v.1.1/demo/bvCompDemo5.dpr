@@ -1,0 +1,19 @@
+program bvCompDemo5;
+
+uses
+  Forms,
+  MainUnit in 'MainUnit.pas' {Form1},
+  bvDBGridDemoUnit in 'bvDBGridDemoUnit.pas' {bvDBGridDemoForm},
+  ColorEditUnit in 'ColorEditUnit.pas' {ColorEditForm},
+  FormSaverDemoUnit in 'FormSaverDemoUnit.pas' {FormSaverDemo},
+  StandardGrid in 'StandardGrid.pas' {StandardGridDemoForm},
+  Grid2Unit in 'Grid2Unit.pas' {bvDBGridDemoForm2},
+  Grid3Unit in 'Grid3Unit.pas' {bvDBGridDemoForm3};
+
+{$R *.RES}
+
+begin
+  Application.Initialize;
+  Application.CreateForm(TmainForm, MainForm);
+  Application.Run;
+end.

@@ -1,0 +1,64 @@
+package bvCompKylix;
+
+//{$R *.res}
+{$R 'bvcomp.dcr'}
+{$ALIGN 8}
+{$ASSERTIONS OFF}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS OFF}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS ON}
+{$RANGECHECKS ON}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE ON}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESIGNONLY}
+{$IMPLICITBUILD ON}
+requires
+  baseclx,
+  visualclx,
+  visualdbclx,
+  dataclx;
+
+contains
+  bvDBGrid in 'bvDBGrid.pas',
+  bvdbGridSaver in 'bvdbGridSaver.pas',
+  bvFindUnit in 'bvFindUnit.pas',
+  bvBookMark in 'bvBookMark.pas',
+  bvFormSaver in 'bvFormSaver.pas',
+  bvColorEdit in 'bvColorEdit.pas',
+  bvDBGridDrawType in 'bvDBGridDrawType.pas',
+  bvFindDialogUnit in 'bvFindDialogUnit.pas' {bvFindDialogForm},
+  bvColumsEditor in 'bvColumsEditor.pas' {ColEditForm},
+  bvGetAlignmentUnit in 'bvGetAlignmentUnit.pas' {AlignmentForm},
+  bvGridPopupUnit in 'bvGridPopupUnit.pas',
+  bvMessageUnit in 'bvMessageUnit.pas' {MessageForm},
+  bvWaitunitF2 in 'bvWaitunitF2.pas' {WaitForm3},
+  bvFiles in 'bvFiles.pas',
+  bvMath in 'bvMath.pas',
+  bvStringUtils in 'bvStringUtils.pas',
+  bvUtils in 'bvUtils.pas',
+  bvConfirmUnit in 'bvConfirmUnit.pas' {ConfirmForm1},
+  bvCursorUnit in 'bvCursorUnit.pas',
+  bvEditMemoUnit in 'bvEditMemoUnit.pas' {EditMemoForm},
+  bvWaitUnDDF in 'bvWaitUnDDF.pas' {WaitDDForm},
+  bvWaitUnit1 in 'bvWaitUnit1.pas',
+  bvRegisterUnit in 'bvRegisterUnit.pas',
+  bvNewFieldUnit in 'bvNewFieldUnit.pas' {NewFieldForm},
+  bvConst in 'bvConst.pas',
+  bvLocalization in 'bvLocalization.pas';
+
+
+
+end.

@@ -1,0 +1,30 @@
+#------------------------------------------------------------------------------
+VERSION = BWS.01
+#------------------------------------------------------------------------------
+!ifndef ROOT
+ROOT = $(MAKEDIR)\..
+!endif
+#------------------------------------------------------------------------------
+MAKE = $(ROOT)\bin\make.exe -$(MAKEFLAGS) -f$**
+DCC = $(ROOT)\bin\dcc32.exe $**
+BRCC = $(ROOT)\bin\brcc32.exe $**
+#------------------------------------------------------------------------------
+PROJECTS = SnapDataset.bpl DemoVDS.exe ObjectDatasetDemo.exe \
+  dclSnapDataset.bpl
+#------------------------------------------------------------------------------
+default: $(PROJECTS)
+#------------------------------------------------------------------------------
+
+SnapDataset.bpl: SnapDataset.dpk
+  $(DCC)
+
+DemoVDS.exe: Demo\VirtualDataset\DemoVDS.dpr
+  $(DCC)
+
+ObjectDatasetDemo.exe: Demo\ObjectDataset\ObjectDatasetDemo.dpr
+  $(DCC)
+
+dclSnapDataset.bpl: dclSnapDataset.dpk
+  $(DCC)
+
+
