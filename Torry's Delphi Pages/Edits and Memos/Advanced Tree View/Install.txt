@@ -1,0 +1,26 @@
+
+1. Unpack downloaded zip file into a folder.
+
+2. In Your Delphi IDE go to menu item 
+
+     Component \ Install Packages...
+
+   press 'Add' button, go to the folder
+   where You've unpacked AdvEdits files
+   and select AdvTreeViews_Dxxxx.bpl, press 'Open'
+   button on 'Add Design Package' dialog 
+   window and finally press 'OK' button
+   on the installed packages dialog window
+or
+   in Delphi Turbo Explorer open dclusr package
+   and add AdvTreeViews_Reg files (dcu + dcr)
+   then rebuild dclusr package.
+
+3. Go to  Tools \ Environment Options \ Library
+   and check if folder where You've unpacked files
+   is included in Library path. If not then add it.
+
+
+by default nonDB controls are installed on 'Win32 Additional' palette
+and DB controls on 'Data Controls' palette, 
+but You can change it in AdvTreeViews_Reg.pas
