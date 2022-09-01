@@ -1,0 +1,96 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{F90D02E1-3D27-4B70-BB07-013E057D6EB6}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="psc_delphi.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="psc_delphi_runtime.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\demo\1-joins\fltbox_demo_join.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\demo\3-calendar\cal_demo.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\demo\4-edit_color\edit_color.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\demo\5-calculator\calc_demo.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="psc_delphi">
+        <MSBuild Projects="psc_delphi.dproj"/>
+    </Target>
+    <Target Name="psc_delphi:Clean">
+        <MSBuild Projects="psc_delphi.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="psc_delphi:Make">
+        <MSBuild Projects="psc_delphi.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="psc_delphi_runtime">
+        <MSBuild Projects="psc_delphi_runtime.dproj"/>
+    </Target>
+    <Target Name="psc_delphi_runtime:Clean">
+        <MSBuild Projects="psc_delphi_runtime.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="psc_delphi_runtime:Make">
+        <MSBuild Projects="psc_delphi_runtime.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="fltbox_demo_join">
+        <MSBuild Projects="..\demo\1-joins\fltbox_demo_join.dproj"/>
+    </Target>
+    <Target Name="fltbox_demo_join:Clean">
+        <MSBuild Projects="..\demo\1-joins\fltbox_demo_join.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="fltbox_demo_join:Make">
+        <MSBuild Projects="..\demo\1-joins\fltbox_demo_join.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="cal_demo">
+        <MSBuild Projects="..\demo\3-calendar\cal_demo.dproj"/>
+    </Target>
+    <Target Name="cal_demo:Clean">
+        <MSBuild Projects="..\demo\3-calendar\cal_demo.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="cal_demo:Make">
+        <MSBuild Projects="..\demo\3-calendar\cal_demo.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="edit_color">
+        <MSBuild Projects="..\demo\4-edit_color\edit_color.dproj"/>
+    </Target>
+    <Target Name="edit_color:Clean">
+        <MSBuild Projects="..\demo\4-edit_color\edit_color.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="edit_color:Make">
+        <MSBuild Projects="..\demo\4-edit_color\edit_color.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="calc_demo">
+        <MSBuild Projects="..\demo\5-calculator\calc_demo.dproj"/>
+    </Target>
+    <Target Name="calc_demo:Clean">
+        <MSBuild Projects="..\demo\5-calculator\calc_demo.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="calc_demo:Make">
+        <MSBuild Projects="..\demo\5-calculator\calc_demo.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="psc_delphi;psc_delphi_runtime;fltbox_demo_join;cal_demo;edit_color;calc_demo"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="psc_delphi:Clean;psc_delphi_runtime:Clean;fltbox_demo_join:Clean;cal_demo:Clean;edit_color:Clean;calc_demo:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="psc_delphi:Make;psc_delphi_runtime:Make;fltbox_demo_join:Make;cal_demo:Make;edit_color:Make;calc_demo:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

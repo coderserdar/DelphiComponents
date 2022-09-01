@@ -1,0 +1,42 @@
+package doqb40;
+
+{$R *.RES}
+{$R 'QBuilder.dcr'}
+{$ALIGN ON}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $00400000}
+{$DESCRIPTION 'Open QBuilder'}
+{$DESIGNONLY}
+{$IMPLICITBUILD OFF}
+
+requires
+  vcl40,
+  dcldb40;
+
+contains
+  QBuilder in 'QBuilder.pas',
+  QBReg in 'QBReg.pas',
+  QBLnkFrm in 'Qblnkfrm.pas' {OQBLinkForm},
+  QBAbout in 'Qbabout.pas' {OQBAboutForm},
+  QBdbFrm2 in 'Qbdbfrm2.pas' {OQBDBForm2},
+  QBDirFrm in 'Qbdirfrm.pas' {OQBDirForm};
+
+end.

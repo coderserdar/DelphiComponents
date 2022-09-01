@@ -1,0 +1,49 @@
+package VQB;
+
+{$R *.res}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'Visual Query Builder'}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl,
+  vcl,
+  vclx,
+  dbrtl,
+  vcldb,
+  bdertl,
+  ibxpress,
+  designide;
+
+contains
+  VQBReg in 'VQBReg.pas',
+  VQBuilder in 'VQBuilder.pas' {SQLForm},
+  ExpressBuilder in 'ExpressBuilder.pas' {ExpBuilder},
+  VQBField in 'VQBField.pas',
+  VQBLink in 'VQBLink.pas' {LinkDlg},
+  VQBConst in 'VQBConst.pas',
+  VQBAbout in 'VQBAbout.pas' {SQLAboutBox},
+  ErrorDlg in 'ErrorDlg.pas' {SQLErrorDlg},
+  VQBLocalize in 'VQBLocalize.pas';
+
+end.

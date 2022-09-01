@@ -1,0 +1,190 @@
+# ---------------------------------------------------------------------------
+!if !$d(BCB)
+BCB = $(MAKEDIR)\..
+!endif
+
+# ---------------------------------------------------------------------------
+# IDE SECTION
+# ---------------------------------------------------------------------------
+# The following section of the project makefile is managed by the BCB IDE.
+# It is recommended to use the IDE to change any of the values in this
+# section.
+# ---------------------------------------------------------------------------
+
+VERSION = BCB.04.04
+# ---------------------------------------------------------------------------
+PROJECT = doqb40.bpl
+OBJFILES = QBuilder.obj QBReg.obj Qblnkfrm.obj Qbabout.obj Qbdbfrm2.obj Qbdirfrm.obj doqb40.obj
+RESFILES = doqb40.res QBuilder.dcr
+RESDEPEN = $(RESFILES) QBuilder.dfm Qblnkfrm.dfm Qbabout.dfm Qbdbfrm2.dfm Qbdirfrm.dfm
+LIBFILES =
+IDLFILES =
+IDLGENFILES =
+LIBRARIES = dss40.lib tee40.lib teedb40.lib teeui40.lib qrpt40.lib inet40.lib inetdb40.lib nmfast40.lib ibsmp40.lib vcldbx40.lib \
+  vclmid40.lib vcljpg40.lib
+SPARELIBS = VCL40.lib vclx40.lib vcljpg40.lib vclmid40.lib vcldb40.lib vcldbx40.lib ibsmp40.lib nmfast40.lib inetdb40.lib \
+  inet40.lib qrpt40.lib teeui40.lib teedb40.lib tee40.lib dss40.lib
+PACKAGES = vcl40.bpi VCLX40.bpi VCLDB40.bpi
+DEFFILE =
+# ---------------------------------------------------------------------------
+PATHCPP = .;
+PATHASM = .;
+PATHPAS = .;
+PATHRC = .;
+DEBUGLIBPATH = $(BCB)\lib\debug
+RELEASELIBPATH = $(BCB)\lib\release
+USERDEFINES =
+SYSDEFINES = _RTLDLL;NO_STRICT;USEPACKAGES
+# ---------------------------------------------------------------------------
+CFLAG1 = -I$(BCB)\Projects;$(BCB)\include;$(BCB)\include\vcl -Od -Hc -H=$(BCB)\lib\vcl40.csm -w -Ve -r- -a8 -k -y -v -vi- -c -b- \
+  -w-par -w-inl -Vx -tWM -D$(SYSDEFINES);$(USERDEFINES)
+IDLCFLAGS = -I$(BCB)\Projects -I$(BCB)\include -I$(BCB)\include\vcl -src_suffixcpp
+PFLAGS = -U$(BCB)\Projects;$(BCB)\lib\obj;$(BCB)\lib;$(RELEASELIBPATH) -I$(BCB)\Projects;$(BCB)\include;$(BCB)\include\vcl -$YD \
+  -$W -$O- -v -JPHNE -M
+RFLAGS = -i$(BCB)\Projects;$(BCB)\include;$(BCB)\include\vcl
+AFLAGS = /i$(BCB)\Projects /i$(BCB)\include /i$(BCB)\include\vcl /mx /w2 /zd
+LFLAGS = -L$(BCB)\Projects;$(BCB)\lib\obj;$(BCB)\lib;$(RELEASELIBPATH) -D"Open QBuilder" -aa -Tpp -Gpd -x -Gn -Gl -Gi -v
+# ---------------------------------------------------------------------------
+ALLOBJ = c0pkg32.obj Memmgr.Lib $(PACKAGES) sysinit.obj $(OBJFILES)
+ALLRES = $(RESFILES)
+ALLLIB = $(LIBFILES) $(LIBRARIES) import32.lib cp32mti.lib
+# ---------------------------------------------------------------------------
+!ifdef IDEOPTIONS
+
+[Version Info]
+IncludeVerInfo=1
+AutoIncBuild=0
+MajorVer=4
+MinorVer=0
+Release=0
+Build=0
+Debug=0
+PreRelease=0
+Special=0
+Private=0
+DLL=0
+Locale=1049
+CodePage=1251
+
+[Version Info Keys]
+CompanyName=
+FileDescription=
+FileVersion=4.0.0.0
+InternalName=
+LegalCopyright=Sergey Orlik, Mosocw, 1997-1999
+LegalTrademarks=
+OriginalFilename=
+ProductName=
+ProductVersion=4.0.0.0
+Comments=
+
+[Debugging]
+DebugSourceDirs=$(BCB)\source\vcl
+
+[Parameters]
+RunParams=
+HostApplication=
+RemoteHost=
+RemotePath=
+RemoteDebug=0
+
+[Compiler]
+InMemoryExe=0
+ShowInfoMsgs=0
+
+[CORBA]
+AddServerUnit=1
+AddClientUnit=1
+PrecompiledHeaders=1
+
+!endif
+
+# ---------------------------------------------------------------------------
+# MAKE SECTION
+# ---------------------------------------------------------------------------
+# This section of the project file is not used by the BCB IDE.  It is for
+# the benefit of building from the command-line using the MAKE utility.
+# ---------------------------------------------------------------------------
+
+.autodepend
+# ---------------------------------------------------------------------------
+!if !$d(BCC32)
+BCC32 = bcc32
+!endif
+
+!if !$d(CPP32)
+CPP32 = cpp32
+!endif
+
+!if !$d(DCC32)
+DCC32 = dcc32
+!endif
+
+!if !$d(TASM32)
+TASM32 = tasm32
+!endif
+
+!if !$d(LINKER)
+LINKER = ilink32
+!endif
+
+!if !$d(BRCC32)
+BRCC32 = brcc32
+!endif
+
+!if !$d(IDL2CPP)
+IDL2CPP = idl2cpp
+!endif
+
+# ---------------------------------------------------------------------------
+!if $d(PATHCPP)
+.PATH.CPP = $(PATHCPP)
+.PATH.C   = $(PATHCPP)
+!endif
+
+!if $d(PATHPAS)
+.PATH.PAS = $(PATHPAS)
+!endif
+
+!if $d(PATHASM)
+.PATH.ASM = $(PATHASM)
+!endif
+
+!if $d(PATHRC)
+.PATH.RC  = $(PATHRC)
+!endif
+# ---------------------------------------------------------------------------
+$(PROJECT): $(IDLGENFILES) $(OBJFILES) $(RESDEPEN) $(DEFFILE)
+    $(BCB)\BIN\$(LINKER) @&&!
+    $(LFLAGS) +
+    $(ALLOBJ), +
+    $(PROJECT),, +
+    $(ALLLIB), +
+    $(DEFFILE), +
+    $(ALLRES)
+!
+# ---------------------------------------------------------------------------
+.pas.hpp:
+    $(BCB)\BIN\$(DCC32) $(PFLAGS) {$< }
+
+.pas.obj:
+    $(BCB)\BIN\$(DCC32) $(PFLAGS) {$< }
+
+.cpp.obj:
+    $(BCB)\BIN\$(BCC32) $(CFLAG1) -n$(@D) {$< }
+
+.c.obj:
+    $(BCB)\BIN\$(BCC32) $(CFLAG1) -n$(@D) {$< }
+
+.c.i:
+    $(BCB)\BIN\$(CPP32) $(CFLAG1) -n. {$< }
+
+.cpp.i:
+    $(BCB)\BIN\$(CPP32) $(CFLAG1) -n. {$< }
+
+.asm.obj:
+    $(BCB)\BIN\$(TASM32) $(AFLAGS) $<, $@
+
+.rc.res:
+    $(BCB)\BIN\$(BRCC32) $(RFLAGS) -fo$@ $<
+# ---------------------------------------------------------------------------
