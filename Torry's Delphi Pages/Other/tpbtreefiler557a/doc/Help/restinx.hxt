@@ -1,0 +1,331 @@
+;
+;-------------------------------------------------------------------
+!TOPIC 730 Restruct/ReIndex
+
+The Restruct unit interfaces a routine called 0736RestructFileBlock that
+enables you to restructure a fileblock's data file. Restructuring can
+mean many things:
+
+  o  purging deleted records, removing the dead space from the data
+     file;
+
+  o  changing the record layout and rebuilding the data file for the new
+     layout, converting all the records from the old layout to the new
+     one;
+
+  o  verifying data in existing records, and only allowing valid records
+     to be written to the new file.
+
+The Restruct unit does not rebuild the index file, the ReIndex unit serves
+that purpose. This latter unit interfaces a routine called 0737ReIndexFileBlock
+that enables you to recreate the index file for a particular fileblock. You
+can alter the number of indexes and/or the description of each index when
+you do so.
+
+Together these two units (Restruct and ReIndex) provide all the functionality
+and more of the old ReOrg, VReOrg, Rebuild and VRebuild units, in particular
+they make use of file buffering techniques to speed up reading and writing of
+data records.
+
+  0731Declarations,Restruct  0732Declarations,ReIndex
+  0735ChangeDatSNoChange     0736RestructFileBlock
+  0737ReIndexFileBlock
+;
+;-------------------------------------------------------------------
+!TOPIC 731 Declarations,Restruct
+!NOINDEX
+
+The 0730Restruct unit declares the following constants, types and variables:
+
+  0733FuncChangeDatS
+;
+;-------------------------------------------------------------------
+!TOPIC 732 Declarations,ReIndex
+!NOINDEX
+
+The 0730ReIndex unit declares the following constants, types and variables:
+
+  0734FuncBuildKey
+;
+;-------------------------------------------------------------------
+!TOPIC 733 FuncChangeDatS
+!NOINDEX
+type
+  FuncChangeDatS = function(var DatSOld; var DatSNew;
+                            var Len : Word) : Boolean;
+
+Function prototype for a routine to convert a record from an older format
+to a newer format. You must write a routine of this type when you
+restructure a fileblock by altering the record layout. The function must
+be passed to 0736RestructFileBlock in the ChangeDatSFunc parameter.
+
+DatSOld is an untyped parameter to the buffer containing the old record.
+DatSNew is an untyped parameter to a buffer where the new record is to be
+placed. Generally you will typecast these two parameters to structures
+defining your own record layouts.
+
+On entry to the routine, Len is the number of bytes in the old record. On
+exit it must have the number of bytes in the new record. Since passing the
+length of the new record back to the caller only has meaning for variable
+length records, this value is ignored when restructuring a fixed length
+record file (the new record length is already known).
+
+The function returns a boolean: True if the record is to be copied into
+the new data file, False if the record is to be skipped (presumably
+because it is deleted). If the routine returns False, the DatSNew buffer
+does not need to be set up with a new record.
+
+If an unrecoverable error occurs in your routine, set IsamOk to False.
+This causes the RestructFileBlock procedure to exit immediately with IsamOk
+set to False and IsamError set to 10470.
+
+The ProcChangeDatS pointer that is passed to 0729ReorgFileBlock in the
+0728REORG unit must also be of this type. Similarly for the 0829ReorgVFileBlock
+in the 0830VREORG unit.
+;
+;-------------------------------------------------------------------
+!TOPIC 734 FuncBuildKey
+!NOINDEX
+type
+  FuncBuildKey = function(var DatS; KeyNr : Word) : IsamKeyStr;
+
+Function prototype for a routine to create a key from a record. You must
+write a routine of this type when you reindex a fileblock through the
+0737ReIndexFileBlock routine. The name of your key building routine must be
+passed in the BuildKeyFunc parameter of the ReIndexFileBlock procedure.
+DatS is an untyped parameter to a buffer containing the data record.
+Generally you will typecast this variable to a structure defining your
+record layout.
+
+KeyNr is the number of the index for which the key string is required.
+Your routine will be called to create all the keys for index 1, then all
+the keys for index 2 and so on.
+
+The routine returns the key string as the function result. If a null key
+is returned and the AddNullKeys constant in the FILER unit is False, the
+key is skipped, otherwise it is added to the index.
+
+If an unrecoverable error occurs in your routine, set IsamOk to False.
+This causes the ReIndexFileBlock procedure to exit immediately with IsamOk
+set to False and IsamError set to 10470.
+
+The FuncBuildKey pointer that is passed to 0729ReorgFileBlock in the
+0728REORG unit must also be of this type. Similarly for the 0829ReorgVFileBlock
+in the 0830VREORG unit.
+;
+;-------------------------------------------------------------------
+!TOPIC 735 ChangeDatSNoChange
+!NOINDEX
+function 0730Restruct.ChangeDatSNoChange(var DatSOld; var DatSNew;
+                            var Len : Word) : Boolean;
+
+Copy a record without reformatting.
+
+This routine is a default routine that can be passed as the ChangeDatSFunc
+parameter to 0736RestructFileBlock. ChangeDatSNoChange does not reformat or
+alter the record. If the first 4 bytes of DatSOld are all zero, it just
+copies Len bytes from DatSOld to DatSNew and returns True. If the first 4
+bytes of DatSOld are not all zero, it returns False.
+
+This routine is used most often when you are using RestructFileBlock to
+purge deleted records from your data file. No record reformatting is done;
+the data file is just packed.
+;
+;-------------------------------------------------------------------
+!TOPIC 736 RestructFileBlock
+!NOINDEX
+procedure 0730Restruct.RestructFileBlock(FBlName : IsamFileBlockName;
+                            DatSLen : LongInt;
+                            DatSLenOld : LongInt; VarRec : Boolean;
+                            MaxDiffBytes : LongInt;
+                            ChangeDatSFunc : FuncChangeDatS;
+                            CharConvProc : ProcBTCharConvert;
+                            CCHookPtr : Pointer);
+
+Restructure a data file.
+
+This is the main workhorse of the Restruct unit. It reads a record from
+the data file of an existing fileblock, calls a routine to convert the
+record to a new format, and then writes the record to a new data file. An
+index file is not created, for that you need to call 0737ReIndexFileBlock.
+
+FBlName is the name of the existing fileblock. It can contain up to three
+DOS filenames (with optional drive and pathname specifications) separated
+by semicolons. No extensions need to be provided, because the default ones
+are used. RestructFileBlock appends the DatExtension constant string
+(usually 'DAT') to the first file name to obtain the actual name of the
+data file. The IxExtension (usually 'IX') is appended to the second name
+(or the first file name if a second is not specified) to get the index
+file name. The SavExtension (usually 'SAV') is appended to the third name
+(or the first file name if a third one is not specified) to get the save
+file name.
+
+If VarRec is False, the restucturing of the data file is assumed to be for
+fixed length records. In this case, DatSLenOld is the record length of the
+data file in the existing fileblock, and DatSLen is the record length of
+the new data file. For a fixed length record, MaxDiffBytes is not used and
+you can pass the value 0 for it.
+
+If VarRec is True, the restructuring of the data file is assumed to be for
+variable length records. In this case, DatSLenOld is the size of the fixed
+length section for the data file in the existing fileblock, and DatSLen is
+the size of the fixed length section for the new data file.
+
+MaxDiffBytes is a measure of how the size of the largest variable-length
+record in the original data file will change when restuctured. There are
+two ways of specifying this information:
+
+  o MaxDiffBytes is greater or equal to 0. In this case the value
+    represents the maximum change in size of the records.
+
+  o MaxDiffBytes is less than 0. In this case, the negative of the
+    value represents the absolute maximum size for the new records. The
+    size of all new records will be less than or equal to -MaxDiffBytes.
+
+ChangeDatSFunc is the function that does the actual conversion of an old
+record to the new record format. It must be declared FAR and be of type
+0733FuncChangeDatS.
+
+The parameters CharConvProc and CCHookPtr are used to convert the old and
+new records to/from their external representation. They have exactly the
+same meanings as the corresponding parameters in the BTSetCharConvert
+procedure in the FILER unit. If you do not want to have a separate
+conversion routine, set CharConvProc to BTNoCharConvert and CCHookPtr to
+nil.
+
+The RestructFileBlock routine performs the following steps:
+
+1. Rename or copy the data file file to the save file, if the save
+file does not exist.
+
+2. Call BTCreateFileBlock with name FBlName, record length DatSLen,
+and NumberOfKeys indexes which are defined by IID. This new fileblock
+is opened in non-network mode with BTOpenFileBlock.
+
+3. Open the save file with IsamAssign and IsamReset.
+
+4. Read every record (except the first which is assumed to be a
+system record) from the save file and pass each one to the
+ChangeDatSFunc function. If this function returns True, the
+reformatted record is added to the new fileblock with BTAddRec or
+BTAddVariableRec.
+
+5. Close the new fileblock.
+6. Delete the save file.
+
+There are several things to notice with this process. If an error occurs,
+the routine returns immediately with IsamOk set to False and IsamError set
+to the error code describing the error. The save file is not deleted (and
+should not be deleted by you), the new fileblock is erased, and the
+original data file is recreated if possible. You must then determine what
+caused the error, rectify it, and reset the files so that another attempt
+can be made. Another point to note is that the index file is created, but
+no keys are added to it.
+
+Before calling RestructFileBlock, be sure to call BTInitIsam because
+RestructFileBlock uses B-Tree Filer services. If VarRec is True, be sure
+to create a variable length record buffer with BTCreateVariableRecBuffer.
+
+You can provide a user status routine to display status during the
+restruct, compute statistics, or check the keyboard for a user-initiated
+abort of the restruct. Your routine must be declared far, must be global,
+and must match the following prototype declaration:
+
+  procedure UserStatusRoutine(KeyNr : Integer;
+                              NumRecsRead : LongInt;
+                              NumRecsWritten : LongInt;
+                              var Data; Len : Word); far;
+  begin
+    {display status...}
+  end;
+
+KeyNr is the index number currently being added. NumRecsRead is the number
+of records read up to this point, and NumRecsWritten is the number of
+records written. Data is the data record being worked on, and Len is the
+number of bytes of data in the record.
+
+Set IsamReXUserProcPtr (declared in the Filer unit) to the address of your
+routine. The restruct routine works by first copying each valid data
+record to a new data file. During this pass, UserStatusRoutine is called
+once for each record with KeyNr set to zero.
+;
+;-------------------------------------------------------------------
+!TOPIC 737 ReIndexFileBlock
+!NOINDEX
+procedure 0730ReIndex.ReIndexFileBlock(FBlName : IsamFileBlockName;
+                            NumberOfKeys : Word;
+                            IID : IsamIndDescr;
+                            VarRec : Boolean;
+                            BuildKeyFunc : FuncBuildKey;
+                            DelRecDupKey : Boolean;
+                            var MsgFileCreated : Boolean);
+
+Create a new index file for an existing fileblock.
+
+This routine creates a new index file for a fileblock. The number of
+indexes and the definition of each index key structure can be changed from
+the ones defined in the original fileblock.
+
+FBlName is the name of the existing fileblock. It can contain up to three
+DOS filenames (with optional drive and pathname specifications) separated
+by semicolons. No extensions need to be provided, because the default ones
+are used. 0736RestructFileBlock appends the DatExtension constant string
+(usually 'DAT') to the first file name to obtain the actual name of the
+data file. The IxExtension (usually 'IX') is appended to the second name
+(or the first file name if a second is not specified) to get the index
+file name. The third file name is ignored.
+
+The parameters NumberOfKeys and IID determine the index structure in the
+same manner as they do for BTCreateFileBlock. NumberOfKeys is the number
+of indexes for the fileblock and IID is an array defining each index.
+The VarRec parameter defines whether the fileblock contains variable
+length records (True) or fixed length ones (False).
+
+BuildKeyFunc is the routine that creates a key string for each record in
+each index. It must be declared FAR and be of type 0734FuncBuildKey. It is
+called once for every record and index combination, and must generate a
+key for the required index from the given record. The function can return
+a null string, in which case the AddNullKeys identifier in the FILER unit
+determines whether the null key is added to the index or not.
+
+DelRecDupKey defines what happens if a key is generated for a primary
+index and that key already exists in the index. A primary index is one
+where all the keys are unique, and so the value of DelRecDupKey determines
+what happens when a duplicate key is added to such an index, and it fails.
+If the parameter is True, then the record and all keys that were added for
+it are deleted. If the parameter is False, then the key for this index is
+skipped. Either way a log file is created in the same directory as the
+data file with the same name, but with MsgExtension (usually 'MSG'). A log
+reference record is written to this file to describe the problem, and the
+index rebuild continues.
+
+If a message log file is created, MsgFileCreated is set to True. You can
+then examine the log message file if you want to perform further manual
+reconstruction.
+
+Before calling ReIndexFileBlock be sure to call BTInitIsam, because
+ReIndexFileBlock uses B-Tree Filer services. If VarRec is True, be sure to
+create a variable length record buffer with BTCreateVariableRecBuffer.
+
+You can provide a user status routine to display status during the
+reindex, compute statistics, or check the keyboard for a user-initiated
+abort of the reindex. Your routine must be declared far, must be global,
+and must match the following prototype declaration:
+
+  procedure UserStatusRoutine(KeyNr : Integer;
+                              NumRecsRead : LongInt;
+                              NumRecsWritten : LongInt;
+                              var Data; Len : Word); far;
+  begin
+    {display status...}
+  end;
+
+KeyNr is the index number currently being added. NumRecsRead is the number
+of records read up to this point, and NumRecsWritten is the number of
+records written. Data is the data record being worked on, and Len is the
+number of bytes of data in the record.
+
+Set IsamReXUserProcPtr (declared in the Filer unit) to the address of your
+routine. The reindex routine works by first adding all keys for index
+number one (KeyNr=1) and UserStatusRoutine is called for each key, then
+all keys for index number two, and so on.

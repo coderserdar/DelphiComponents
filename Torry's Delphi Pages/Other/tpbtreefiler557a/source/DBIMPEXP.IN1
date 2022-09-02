@@ -1,0 +1,1120 @@
+(* ***** BEGIN LICENSE BLOCK *****
+ * Version: MPL 1.1
+ *
+ * The contents of this file are subject to the Mozilla Public License Version
+ * 1.1 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ * http://www.mozilla.org/MPL/
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is TurboPower B-Tree Filer
+ *
+ * The Initial Developer of the Original Code is
+ * TurboPower Software
+ *
+ * Portions created by the Initial Developer are Copyright (C) 1996-2002
+ * the Initial Developer. All Rights Reserved.
+ *
+ * Based in part on code written by Ralf Nagel
+ *
+ * Contributor(s):
+ *
+ * ***** END LICENSE BLOCK ***** *)
+
+  Function BuildDBPartOfFieldList ( LHPtr : PListHeader ) : Integer;
+
+  Var
+    i,
+    Len,
+    FieldOfs  : Word;
+    DBFFBuf   : DBaseFileField;
+    CurFNPtr,
+    LastFNPtr,
+    MemoFNPtr : PFieldNode;
+    TStr      : String;
+    Dummy     : Integer;
+
+  Begin
+    IsamClearOK;
+    IsamLongSeek ( LHPtr^.DBHeaderPtr^.IFile,
+        SizeOf ( DBaseFileFullHeader ));
+    If Not IsamOK Then Begin
+      BuildDBPartOfFieldList := BTIsamErrorClass;
+      CallProcErrorHandler ( ERAbort, IsamError, DEZERO );
+      Exit;
+    End;
+
+    FieldOfs := 0;
+    LastFNPtr := Nil;
+    MemoFNPtr := Nil;
+    LHPtr^.ListPtr := Nil;
+    BuildDBPartOfFieldList := -1;
+    For i := 0 To LHPtr^.DBHeaderPtr^.Fields Do Begin
+      If MaxAvail < SizeOf ( FieldNode ) Then Begin
+        CallProcErrorHandler ( ERAbort, 0, DEOOM );
+        Exit;
+      End;
+      GetMem ( CurFNPtr, SizeOf ( FieldNode ) );
+
+      If MaxAvail < SizeOf ( DBaseField ) Then Begin
+        FreeMem ( CurFNPtr, SizeOf ( FieldNode ) );
+        CallProcErrorHandler ( ERAbort, 0, DEOOM );
+        Exit;
+      End;
+      GetMem ( CurFNPtr^.DBFieldPtr, SizeOf ( DBaseField ));
+
+      CurFNPtr^.BTFieldPtr := Nil;
+      CurFNPtr^.NextPtr := Nil;
+      CurFNPtr^.DBFieldPtr^.NormalContents := True;
+      If i = 0 Then Begin
+        {-1st field is delete mark}
+        CurFNPtr^.DBFieldPtr^.Normal.FType := DelMarkFType;
+        CurFNPtr^.DBFieldPtr^.Normal.Width := 1;
+        CurFNPtr^.DBFieldPtr^.Normal.Decimals := 0;
+        CurFNPtr^.FieldName := DelMarkName;
+      End Else Begin
+        IsamBlockRead ( LHPtr^.DBHeaderPtr^.IFile, DBFFBuf,
+            SizeOf ( DBaseFileField ) );
+        If Not IsamOK Then Begin
+          BuildDBPartOfFieldList := BTIsamErrorClass;
+          CallProcErrorHandler ( ERAbort, IsamError, DEZERO );
+          Exit;
+        End;
+
+        CurFNPtr^.DBFieldPtr^.Normal.FType := DBFFBuf.FType;
+        CurFNPtr^.DBFieldPtr^.Normal.Width := DBFFBuf.Width;
+        CurFNPtr^.DBFieldPtr^.Normal.Decimals := DBFFBuf.Decimals;
+        Len := GetAZSLength ( @DBFFBuf.Name );
+        If Len > DBFieldNameLen Then
+          Len := DBFieldNameLen;
+        Dummy := CArr2LBStr ( TStr, @DBFFBuf.Name, Len );
+        CurFNPtr^.FieldName := TStr;
+      End;
+      CurFNPtr^.DBFieldPtr^.Normal.Offset := FieldOfs;
+      Inc ( FieldOfs, CurFNPtr^.DBFieldPtr^.Normal.Width );
+
+      If LHPtr^.ListPtr = Nil Then Begin
+        LHPtr^.ListPtr := CurFNPtr;
+      End Else Begin
+        If CurFNPtr^.DBFieldPtr^.Normal.FType = MemoFType Then Begin
+          If MemoFNPtr = Nil Then Begin
+            LastFNPtr^.NextPtr := CurFNPtr;
+          End Else Begin
+            MemoFNPtr^.NextPtr := CurFNPtr;
+          End;
+        End Else Begin
+          If LastFNPtr = Nil Then Begin
+            {-1st field node is a memo field}
+            CurFNPtr^.NextPtr := LHPtr^.ListPtr^.NextPtr;
+            LHPtr^.ListPtr := CurFNPtr;
+          End Else Begin
+            CurFNPtr^.NextPtr := LastFNPtr^.NextPtr;
+            LastFNPtr^.NextPtr := CurFNPtr;
+          End;
+        End;
+      End;
+      If CurFNPtr^.DBFieldPtr^.Normal.FType = MemoFType Then Begin
+        MemoFNPtr := CurFNPtr;
+      End Else Begin
+        LastFNPtr := CurFNPtr;
+      End;
+    End;
+    BuildDBPartOfFieldList := 0;
+  End;
+
+
+  Function DBaseUndoUse ( Var LHPtr : PListHeader ) : Integer;
+
+  Begin
+    DBaseUndoUse := CloseDBaseFiles ( LHPtr );
+    FreeListHeader ( LHPtr );
+  End;
+
+
+  Function CreateListHeaderUseDBaseFiles ( Var LHPtr       : PListHeader;
+                                               DBFileName  : DBaseFileName;
+                                               MaxMemoSize : Word) : Integer;
+
+  Var
+    Dummy,
+    Error : Integer;
+
+  Begin
+    IsamClearOK;
+    If MaxAvail < SizeOf ( ListHeader ) Then Begin
+      CreateListHeaderUseDBaseFiles := -1;
+      CallProcErrorHandler ( ERAbort, 0, DEOOM );
+      Exit;
+    End;
+    GetMem ( LHPtr, SizeOf ( ListHeader ) );
+    FillChar ( LHPtr^, SizeOf ( ListHeader ), 0 );
+    LHPtr^.DBSource := True;
+
+    If MaxAvail < SizeOf ( DBaseHeader ) Then Begin
+      FreeMem ( LHPtr, SizeOf ( ListHeader ) );
+      LHPtr := Nil;
+      CreateListHeaderUseDBaseFiles := -1;
+      CallProcErrorHandler ( ERAbort, 0, DEOOM );
+      Exit;
+    End;
+    GetMem ( LHPtr^.DBHeaderPtr, SizeOf ( DBaseHeader ) );
+    FillChar ( LHPtr^.DBHeaderPtr^, SizeOf ( DBaseHeader ), 0 );
+
+    DBFileName := IsamForceExtension ( DBFileName, DBDataExtension );
+    IsamAssign ( LHPtr^.DBHeaderPtr^.IFile, DBFileName );
+    IsamReset ( LHPtr^.DBHeaderPtr^.IFile, False, True );
+    If Not IsamOK Then Begin
+      Error := IsamError;
+      CreateListHeaderUseDBaseFiles := BTIsamErrorClass;
+      Dummy := DBaseUndoUse ( LHPtr );
+      CallProcErrorHandler ( ERAbort, Error, DEZERO );
+      Exit;
+    End;
+    IsamBlockRead ( LHPtr^.DBHeaderPtr^.IFile,
+        LHPtr^.DBHeaderPtr^.Header, SizeOf ( DBaseFileHeader ) );
+    If Not IsamOK Then Begin
+      Error := IsamError;
+      CreateListHeaderUseDBaseFiles := BTIsamErrorClass;
+      Dummy := DBaseUndoUse ( LHPtr );
+      CallProcErrorHandler ( ERAbort, Error, DEZERO );
+      Exit;
+    End;
+
+    Case LHPtr^.DBHeaderPtr^.Header.DBaseVer And DB4DataAndMemo Of
+      DBDataOnly : Begin
+        LHPtr^.DBHeaderPtr^.DBVer := DBVersion3X;
+      End;
+
+      DB4DataAndMemo,
+      DBDataAndMemo: Begin
+        If LHPtr^.DBHeaderPtr^.Header.DBaseVer = DB4DataAndMemo Then Begin
+          LHPtr^.DBHeaderPtr^.DBVer := DBVersion4X;
+        End Else Begin
+          LHPtr^.DBHeaderPtr^.DBVer := DBVersion3X;
+        End;
+        If MaxMemoSize <> 0 Then Begin
+          If MaxAvail < SizeOf ( DBaseMemo ) Then Begin
+            Dummy := DBaseUndoUse ( LHPtr );
+            CreateListHeaderUseDBaseFiles := -1;
+            CallProcErrorHandler ( ERAbort, 0, DEOOM );
+            Exit;
+          End;
+          GetMem ( LHPtr^.DBHeaderPtr^.MemoPtr, SizeOf ( DBaseMemo ) );
+
+          DBFileName := IsamForceExtension ( DBFileName, DBMemoExtension );
+          IsamAssign ( LHPtr^.DBHeaderPtr^.MemoPtr^.IFile, DBFileName );
+          IsamReset ( LHPtr^.DBHeaderPtr^.MemoPtr^.IFile, False, True );
+          If Not IsamOK Then Begin
+            Error := IsamError;
+            CreateListHeaderUseDBaseFiles := BTIsamErrorClass;
+            Dummy := DBaseUndoUse ( LHPtr );
+            CallProcErrorHandler ( ERAbort, Error, DEZERO );
+            Exit;
+          End;
+
+          IsamBlockRead ( LHPtr^.DBHeaderPtr^.MemoPtr^.IFile,
+              LHPtr^.DBHeaderPtr^.MemoPtr^.Header,
+              SizeOf ( DBaseMemoHeader ) );
+          If Not IsamOK Then Begin
+            Error := IsamError;
+            CreateListHeaderUseDBaseFiles := BTIsamErrorClass;
+            Dummy := DBaseUndoUse ( LHPtr );
+            CallProcErrorHandler ( ERAbort, Error, DEZERO );
+            Exit;
+          End;
+
+          If ( LHPtr^.DBHeaderPtr^.Header.DBaseVer And DB4DataAndMemo )
+              = DBDataAndMemo Then Begin
+            {-dBASE III file with memo fields}
+            LHPtr^.DBHeaderPtr^.MemoPtr^.Header.BlockSize :=
+                DBMinMemoRecSize;
+          End;
+
+          LHPtr^.DBHeaderPtr^.MemoPtr^.MaxSize := MaxMemoSize;
+          LHPtr^.DBHeaderPtr^.MemoPtr^.Modified := False;
+        End Else Begin
+          LHPtr^.DBHeaderPtr^.MemoPtr := Nil;
+        End;
+      End;
+
+      Else Begin
+        CreateListHeaderUseDBaseFiles := -1;
+        Dummy := DBaseUndoUse ( LHPtr );
+        CallProcErrorHandler ( ERAbort, 0, DEBV );
+        Exit;
+      End;
+    End; {Case}
+
+    LHPtr^.DBHeaderPtr^.Fields :=
+        ( LHPtr^.DBHeaderPtr^.Header.HeaderSize -
+        SizeOf ( DBaseFileFullHeader ) - 1 ) Div SizeOf ( DBaseFileField );
+    LHPtr^.DBHeaderPtr^.RefNr := 1;
+    LHPtr^.DBHeaderPtr^.Modified := False;
+    Error := BuildDBPartOfFieldList ( LHPtr );
+    If Error <> 0 Then Begin
+      CreateListHeaderUseDBaseFiles := Error;
+      Error := DBaseUndoUse ( LHPtr );
+      Exit;
+    End;
+    If Not DBaseEOF ( LHPtr ) Then
+      Error := DBaseGo ( LHPtr, LHPtr^.DBHeaderPtr^.RefNr );
+    CreateListHeaderUseDBaseFiles := 0;
+  End;
+
+
+  Function InsertAutoRelField ( LHPtr : PListHeader ) : Boolean;
+
+  Var
+    CurFNPtr : PFieldNode;
+
+  Begin
+    InsertAutoRelField := False;
+
+    If MaxAvail < SizeOf ( FieldNode ) Then Exit;
+    GetMem ( CurFNPtr, SizeOf ( FieldNode ) );
+
+    If MaxAvail < SizeOf ( DBaseField ) Then Begin
+      FreeMem ( CurFNPtr, SizeOf ( FieldNode ) );
+      Exit;
+    End;
+    GetMem ( CurFNPtr^.DBFieldPtr, SizeOf ( DBaseField ) );
+
+    CurFNPtr^.FieldName := AutoRelName;
+    CurFNPtr^.DBFieldPtr^.NormalContents := False;
+    CurFNPtr^.DBFieldPtr^.Auto.Relation := StartAutoRel;
+    CurFNPtr^.BTFieldPtr := Nil;
+    CurFNPtr^.NextPtr := LHPtr^.ListPtr^.NextPtr;
+    LHPtr^.ListPtr^.NextPtr := CurFNPtr;
+    InsertAutoRelField := True;
+  End;
+
+
+  Function DetermineCType ( FNPtr  : PFieldNode;
+                            AZStrs : Boolean ) : Boolean;
+
+  Begin
+    DetermineCType := True;
+
+    If FNPtr^.DBFieldPtr^.NormalContents Then Begin
+      Case FNPtr^.DBFieldPtr^.Normal.FType Of
+        DelMarkFType : Begin
+          FNPtr^.BTFieldPtr^.CType := ReservedCType;
+          Exit;
+        End;
+
+        MemoFType : Begin
+          FNPtr^.BTFieldPtr^.CType := AZStringCType;
+          Exit;
+        End;
+
+        CharFType : Begin
+          If FNPtr^.DBFieldPtr^.Normal.Width = 1 Then Begin
+            FNPtr^.BTFieldPtr^.CType := CharCType;
+          End Else Begin
+            If AZStrs Then Begin
+              FNPtr^.BTFieldPtr^.CType := AZStringCType;
+            End Else Begin
+              FNPtr^.BTFieldPtr^.CType := StringCType;
+            End;
+            Exit;
+          End;
+        End;
+
+        LogicFType : Begin
+          FNPtr^.BTFieldPtr^.CType := BooleanCType;
+          Exit;
+        End;
+
+        DateFType : Begin
+          FNPtr^.BTFieldPtr^.CType := DateCType;
+          Exit;
+        End;
+
+        NumerFType,
+        FloatFType : Begin
+          If FNPtr^.DBFieldPtr^.Normal.Decimals = 0 Then Begin
+            If FNPtr^.DBFieldPtr^.Normal.Width < 3 Then Begin
+              FNPtr^.BTFieldPtr^.CType := ShortIntCType;
+            End Else If FNPtr^.DBFieldPtr^.Normal.Width < 5 Then Begin
+              FNPtr^.BTFieldPtr^.CType := IntegerCType;
+            End Else If FNPtr^.DBFieldPtr^.Normal.Width < 10 Then Begin
+              FNPtr^.BTFieldPtr^.CType := LongIntCType;
+            End Else If FNPtr^.DBFieldPtr^.Normal.Width < 12 Then Begin
+              FNPtr^.BTFieldPtr^.CType := RealCType;
+            End Else If FNPtr^.DBFieldPtr^.Normal.Width < 16 Then Begin
+              FNPtr^.BTFieldPtr^.CType := DoubleCType;
+            End Else If FNPtr^.DBFieldPtr^.Normal.Width < 21 Then Begin
+              FNPtr^.BTFieldPtr^.CType := ExtendedCType;
+            End Else Begin
+              FNPtr^.BTFieldPtr^.CType := ReservedCType;
+              DetermineCType := False;
+            End;
+          End Else Begin
+            If FNPtr^.DBFieldPtr^.Normal.Width < 8 Then Begin
+              FNPtr^.BTFieldPtr^.CType := SingleCType;
+            End Else If FNPtr^.DBFieldPtr^.Normal.Width < 12 Then Begin
+              FNPtr^.BTFieldPtr^.CType := RealCType;
+            End Else If FNPtr^.DBFieldPtr^.Normal.Width < 16 Then Begin
+              FNPtr^.BTFieldPtr^.CType := DoubleCType;
+            End Else If FNPtr^.DBFieldPtr^.Normal.Width < 21 Then Begin
+              FNPtr^.BTFieldPtr^.CType := ExtendedCType;
+            End Else Begin
+              FNPtr^.BTFieldPtr^.CType := ReservedCType;
+              DetermineCType := False;
+            End;
+          End;
+          Exit;
+        End;
+
+        Else Begin
+          FNPtr^.BTFieldPtr^.CType := ReservedCType;
+          DetermineCType := False;
+          Exit;
+        End;
+      End; {Case}
+    End Else Begin
+      FNPtr^.BTFieldPtr^.CType := LongIntCType;
+    End;
+  End;
+
+
+  Function DetermineBufSize ( LHPtr : PListHeader;
+                              FNPtr : PFieldNode ) : Word;
+
+  Begin
+    Case FNPtr^.BTFieldPtr^.CType Of
+      ReservedCType :
+        DetermineBufSize := SizeOf ( LongInt );
+      DateCType :
+        DetermineBufSize := SizeOf ( LongInt );
+      TimeCType :
+        DetermineBufSize := SizeOf ( LongInt );
+      StringCType :
+        DetermineBufSize := FNPtr^.DBFieldPtr^.Normal.Width + 1;
+      AZStringCType : Begin
+        If FNPtr^.DBFieldPtr^.Normal.FType = MemoFType Then Begin
+          If LHPtr^.DBHeaderPtr^.MemoPtr <> Nil Then Begin
+            DetermineBufSize := LHPtr^.DBHeaderPtr^.MemoPtr^.MaxSize;
+          End Else Begin
+            DetermineBufSize := 0;
+          End;
+        End Else Begin
+          DetermineBufSize := FNPtr^.DBFieldPtr^.Normal.Width + 1;
+        End;
+      End;
+      BooleanCType :
+        DetermineBufSize := SizeOf ( Boolean );
+      CharCType :
+        DetermineBufSize := SizeOf ( Char );
+      ByteCType :
+        DetermineBufSize := SizeOf ( Byte );
+      ShortIntCType :
+        DetermineBufSize := SizeOf ( ShortInt );
+      IntegerCType :
+        DetermineBufSize := SizeOf ( Integer );
+      WordCType :
+        DetermineBufSize := SizeOf ( Word );
+      LongIntCType :
+        DetermineBufSize := SizeOf ( LongInt );
+      CompCType :
+        DetermineBufSize := SizeOf ( Comp );
+      SingleCType :
+        DetermineBufSize := SizeOf ( Single );
+      RealCType :
+        DetermineBufSize := SizeOf ( Real );
+      DoubleCType :
+        DetermineBufSize := SizeOf ( Double );
+      ExtendedCType:
+        DetermineBufSize := SizeOf ( Extended );
+      Else
+        DetermineBufSize := 0;
+    End;
+  End;
+
+
+  Function CompleteDBaseList ( LHPtr : PListHeader;
+                               AZStrs,
+                               AutoRel : Boolean ) : Integer;
+
+  Var
+    CurFNPtr : PFieldNode;
+    FieldOfs : LongInt;
+
+  Begin
+    CompleteDBaseList := -1;
+
+    If Not LHPtr^.DBSource Then Begin
+      CallProcErrorHandler ( ERAbort, 0, DELHNI );
+      Exit;
+    End;
+
+    If MaxAvail < SizeOf ( IsamHeader ) Then Begin
+      CallProcErrorHandler ( ERAbort, 0, DEOOM );
+      Exit;
+    End;
+    GetMem ( LHPtr^.BTHeaderPtr, SizeOf ( IsamHeader ) );
+
+    If AutoRel Then Begin
+      If Not InsertAutoRelField ( LHPtr ) Then Begin
+        CallProcErrorHandler ( ERAbort, 0, DEOOM );
+        Exit;
+      End;
+    End;
+
+    FieldOfs := 0;
+    CurFNPtr := LHPtr^.ListPtr;
+    While ( CurFNPtr <> Nil ) And ( FieldOfs <= $FFF7 ) Do Begin
+      If MaxAvail < SizeOf ( IsamField ) Then Begin
+        CallProcErrorHandler ( ERAbort, 0, DEOOM );
+        Exit;
+      End;
+      GetMem ( CurFNPtr^.BTFieldPtr, Sizeof ( IsamField ) );
+
+      If Not DetermineCType ( CurFNPtr, AZStrs ) Then Begin
+        CallProcErrorHandler ( ERAbort, 0, DEWCT );
+        Exit;
+      End;
+
+      CurFNPtr^.BTFieldPtr^.BufSize :=
+          DetermineBufSize ( LHPtr, CurFNPtr );
+      CurFNPtr^.BTFieldPtr^.Offset := Word ( FieldOfs );
+      CurFNPtr^.BTFieldPtr^.Width := CurFNPtr^.DBFieldPtr^.Normal.Width;
+      CurFNPtr^.BTFieldPtr^.Decimals :=
+          CurFNPtr^.DBFieldPtr^.Normal.Decimals;
+      Inc ( FieldOfs, CurFNPtr^.BTFieldPtr^.BufSize );
+      CurFNPtr := CurFNPtr^.NextPtr;
+    End;
+
+    If FieldOfs > $FFF7 Then Begin
+      CallProcErrorHandler ( ERAbort, 0, DERSTL );
+      Exit;
+    End;
+
+    If FieldOfs < SizeOf ( IsamSmallInfoRec ) Then
+      FieldOfs := SizeOf ( IsamSmallInfoRec );
+
+    LHPtr^.BTHeaderPtr^.DatSLen := Word ( FieldOfs );
+    CompleteDBaseList := 0;
+  End;
+
+
+  Function WriteNoTypeDef ( LHPtr  : PListHeader;
+                            IFName : IsamFileName ) : Integer;
+
+  Begin
+  End;
+
+
+  Procedure UndoWriteFile ( Var SFile : Text;
+                                FName : IsamFileName );
+
+  Begin
+    Close ( SFile );
+    Erase ( SFile );
+  End;
+
+
+  Function WritePascalTypeDef ( LHPtr  : PListHeader;
+                                IFName : IsamFileName ) : Integer;
+
+  Var
+    FNPtr    : PFieldNode;
+    TypeFName,
+    FName    : IsamFileName;
+    TypeFile : Text;
+
+  Begin
+    WritePascalTypeDef := -1;
+
+    TypeFName := StrUpCase ( IsamForceExtension ( IFName,         {!!.42mod}
+        PasIncExtension ));
+    Assign ( TypeFile, TypeFName );
+    Rewrite ( TypeFile );
+    If IOResult <> 0 Then Exit;
+
+    Writeln ( TypeFile, '{' + #13 + #10 +
+        '  Record type description of file ' +
+        StrUpCase ( IFName ) +                                    {!!.42mod}
+        #13 + #10 + '}' + #13 + #10 );
+    If IOResult <> 0 Then Begin
+      UndoWriteFile ( TypeFile, TypeFName );
+      Exit;
+    End;
+
+    FName := GetFNameOnly ( TypeFName );
+    Writeln ( TypeFile, 'Const' + #13 + #10 + '  ' + FName +
+        'DatSLen : Word = ', LHPtr^.BTHeaderPtr^.DatSLen, ';' +
+        #13 + #10 );
+    If IOResult <> 0 Then Begin
+      UndoWriteFile ( TypeFile, TypeFName );
+      Exit;
+    End;
+    Writeln ( TypeFile, 'Type' + #13 + #10 + '  ' + FName +
+        'DatSType = Record' );
+    If IOResult <> 0 Then Begin
+      UndoWriteFile ( TypeFile, TypeFName );
+      Exit;
+    End;
+
+    FNPtr := LHPtr^.ListPtr;
+    While FNPtr <> Nil Do Begin
+      If DetermineBufSize (LHPtr, FNPtr) <> 0 Then Begin
+        {-Is zero if no memo fields are converted (parameter MaxMemoSize
+          for CreateListHeaderUseDBaseFiles is zero)}
+        Case FNPtr^.BTFieldPtr^.CType Of
+          ReservedCType :
+            Writeln ( TypeFile, ' ' : 4, FNPtr^.FieldName + #9 +
+                ' :  LongInt;' + #13 + #10 + '      { ReservedCType; offset = ',
+                FNPtr^.BTFieldPtr^.Offset, ' }' );
+          DateCType :
+            Writeln ( TypeFile, ' ' : 4, FNPtr^.FieldName + #9 +
+                ' :  LongInt;' + #13 + #10 + '      { DateCType; offset = ',
+                FNPtr^.BTFieldPtr^.Offset, ' }' );
+          TimeCType :
+            Writeln ( TypeFile, ' ' : 4, FNPtr^.FieldName + #9 +
+                ' :  LongInt;' + #13 + #10 + '      { TimeCType; offset = ',
+                FNPtr^.BTFieldPtr^.Offset, ' }' );
+          StringCType :
+            Writeln ( TypeFile, ' ' : 4, FNPtr^.FieldName + #9 +
+                ' : String [', DetermineBufSize ( LHPtr, FNPtr ) - 1, '];' +
+                #13 + #10 + '      { StringCType; offset = ',
+                FNPtr^.BTFieldPtr^.Offset, ' }' );
+          AZStringCType :
+            Writeln ( TypeFile, ' ' : 4, FNPtr^.FieldName + #9 +
+                ' : Array [0 .. ', DetermineBufSize (LHPtr, FNPtr) - 1,
+                '] Of Char;' + #13 + #10 + '      { AZStringCType; offset = ',
+                FNPtr^.BTFieldPtr^.Offset, ' }' );
+          BooleanCType :
+            Writeln ( TypeFile, ' ' : 4, FNPtr^.FieldName + #9 +
+                ' : Boolean;' + #13 + #10 + '      { BooleanCType; offset = ',
+                FNPtr^.BTFieldPtr^.Offset, ' }' );
+          CharCType :
+            Writeln ( TypeFile, ' ' : 4, FNPtr^.FieldName + #9 +
+                ' : Char;' + #13 + #10 + '      { CharCType; offset = ',
+                FNPtr^.BTFieldPtr^.Offset, ' }' );
+          ByteCType :
+            Writeln ( TypeFile, ' ' : 4, FNPtr^.FieldName + #9 +
+                ' : Byte;' + #13 + #10 + '      { ByteCType; offset = ',
+                FNPtr^.BTFieldPtr^.Offset, ' }' );
+          ShortIntCType :
+            Writeln ( TypeFile, ' ' : 4, FNPtr^.FieldName + #9 +
+                ' : ShortInt;' + #13 + #10 +
+                '      { ShortIntCType; offset = ',
+                FNPtr^.BTFieldPtr^.Offset, ' }' );
+          IntegerCType :
+            Writeln ( TypeFile, ' ' : 4, FNPtr^.FieldName + #9 +
+                ' : Integer;' + #13 + #10 + '      { IntegerCType; offset = ',
+                FNPtr^.BTFieldPtr^.Offset, ' }' );
+          WordCType :
+            Writeln ( TypeFile, ' ' : 4, FNPtr^.FieldName + #9 +
+                ' : Word;' + #13 + #10 + '      { WordCType; offset = ',
+                FNPtr^.BTFieldPtr^.Offset, ' }' );
+          LongIntCType :
+            Writeln ( TypeFile, ' ' : 4, FNPtr^.FieldName + #9 +
+                ' : LongInt;' + #13 + #10 + '      { LongIntCType; offset = ',
+                FNPtr^.BTFieldPtr^.Offset, ' }' );
+          CompCType:
+            Writeln ( TypeFile, ' ' : 4, FNPtr^.FieldName + #9 +
+                ' : Comp;' + #13 + #10 + '      { CompCType; offset = ',
+                FNPtr^.BTFieldPtr^.Offset, ' }' );
+          SingleCType :
+            Writeln ( TypeFile, ' ' : 4, FNPtr^.FieldName + #9 +
+                ' : Single;' + #13 + #10 + '      { SingleCType; offset =',
+                FNPtr^.BTFieldPtr^.Offset, ' }');
+          RealCType:
+            Writeln ( TypeFile, ' ' : 4, FNPtr^.FieldName + #9 +
+                ' : Real;' + #13 + #10 + '      { RealCType; offset = ',
+                FNPtr^.BTFieldPtr^.Offset, ' }' );
+          DoubleCType:
+            Writeln ( TypeFile, ' ' : 4, FNPtr^.FieldName + #9 +
+                ' : Double;' + #13 + #10 + '      { DoubleCType; offset = ',
+                FNPtr^.BTFieldPtr^.Offset, ' }' );
+          ExtendedCType:
+            Writeln ( TypeFile, ' ' : 4, FNPtr^.FieldName + #9 +
+                ' : Extended;' + #13 + #10 +
+                '      { ExtendedCType; offset = ',
+                FNPtr^.BTFieldPtr^.Offset, ' }' );
+          Else Begin
+            UndoWriteFile ( TypeFile, TypeFName );
+            Exit;
+          End;
+        End; {Case}
+      End;
+
+      If IOResult <> 0 Then Begin
+        UndoWriteFile ( TypeFile, TypeFName );
+        Exit;
+      End;
+
+      FNPtr := FNPtr^.NextPtr;
+    End;
+
+    Writeln ( TypeFile, '  End;' );
+    If IOResult <> 0 Then Begin
+      UndoWriteFile ( TypeFile, TypeFName );
+      Exit;
+    End;
+
+    Close ( TypeFile );
+    If IOResult <> 0 Then Begin
+      UndoWriteFile ( TypeFile, TypeFName );
+      Exit;
+    End;
+
+    WritePascalTypeDef := 0;
+  End;
+
+
+  Function DBaseReadRecord (     LHPtr : PListHeader;
+                             Var BufPtr ) : Integer;
+
+  Begin
+    DBaseReadRecord := 0;
+    IsamClearOK;
+    IsamBlockRead ( LHPtr^.DBHeaderPtr^.IFile, BufPtr,
+        LHPtr^.DBHeaderPtr^.Header.RecordSize );
+    If Not IsamOK Then Begin
+      DBaseReadRecord := BTIsamErrorClass;
+      CallProcErrorHandler ( ERAbort, IsamError, DEZERO );
+      Exit;
+    End;
+  End;
+
+
+  Function DBaseReadMemoRec (     LHPtr  : PListHeader;
+                                  RefNr  : LongInt;
+                              Var Buf ) : Integer;
+
+
+    Function DBase3ReadMemoRec (     LHPtr  : PListHeader;
+                                     RefNr  : LongInt;
+                                 Var Buf ) : Integer;
+
+    Var
+      Idx : Word;
+
+    Begin
+      IsamClearOK;
+      IsamLongSeek ( LHPtr^.DBHeaderPtr^.MemoPtr^.IFile,
+          DBMinMemoRecSize * RefNr );
+      If Not IsamOK Then Begin
+        DBase3ReadMemoRec := BTIsamErrorClass;
+        CallProcErrorHandler ( ERAbort, IsamError, DEZERO );
+        Exit;
+      End;
+      IsamBlockRead ( LHPtr^.DBHeaderPtr^.MemoPtr^.IFile, Buf,
+          LHPtr^.DBHeaderPtr^.MemoPtr^.MaxSize );
+      If Not IsamOK Then Begin
+        If IsamError <> 10070 Then Begin
+          DBase3ReadMemoRec := BTIsamErrorClass;
+          CallProcErrorHandler ( ERAbort, IsamError, DEZERO );
+          Exit;
+        End
+      End;
+
+      Idx := BytePosInMem ( Byte ( DBEndOfMemoRec ), @Buf,
+          LHPtr^.DBHeaderPtr^.MemoPtr^.MaxSize );
+
+    {--Errorcode 10070 without DBEndOfMemoRec indicates defective memo file}
+      If ( IsamError = 10070 ) And
+          ( CharArr ( Buf ) [Idx] <> DBEndOfMemoRec ) Then Begin
+        DBase3ReadMemoRec := -1;
+        CallProcErrorHandler ( ERAbort, 0, DECMF );
+        Exit;
+      End;
+
+      If Idx <> LHPtr^.DBHeaderPtr^.MemoPtr^.MaxSize Then
+        Dec ( Idx );
+      CharArr ( Buf ) [Idx] := #0;
+      DBase3ReadMemoRec := 0;
+    End;
+
+
+    Function DBase4ReadMemoRec (     LHPtr  : PListHeader;
+                                     RefNr  : LongInt;
+                                 Var Buf ) : Integer;
+
+    Var
+      MemoSize : Word;
+      FMRec    : DBase4FirstMemoRec;
+
+    Begin
+      IsamClearOK;
+      IsamLongSeek ( LHPtr^.DBHeaderPtr^.MemoPtr^.IFile,
+          LHPtr^.DBHeaderPtr^.MemoPtr^.Header.BlockSize * RefNr );
+      If Not IsamOK Then Begin
+        DBase4ReadMemoRec := BTIsamErrorClass;
+        CallProcErrorHandler ( ERAbort, IsamError, DEZERO );
+        Exit;
+      End;
+
+      IsamBlockRead ( LHPtr^.DBHeaderPtr^.MemoPtr^.IFile, FMRec,
+          SizeOf ( FMRec ) );
+      If Not IsamOK Then Begin
+        DBase4ReadMemoRec := BTIsamErrorClass;
+        CallProcErrorHandler ( ERAbort, IsamError, DEZERO );
+        Exit;
+      End;
+
+      If FMRec.Valid <> DB4ValidMemoField Then Begin
+        CallProcErrorHandler ( ERAbort, 0, DECMF );
+        DBase4ReadMemoRec := -1;
+        Exit;
+      End;
+
+      If LHPtr^.DBHeaderPtr^.MemoPtr^.MaxSize > FMRec.Width -
+          SizeOf ( FMRec ) Then Begin
+        MemoSize := Word ( FMRec.Width - SizeOf ( FMRec ) );
+      End Else Begin
+        MemoSize := LHPtr^.DBHeaderPtr^.MemoPtr^.MaxSize;
+      End;
+
+      IsamBlockRead ( LHPtr^.DBHeaderPtr^.MemoPtr^.IFile, Buf,
+          MemoSize);
+      If Not IsamOK Then Begin
+        DBase4ReadMemoRec := BTIsamErrorClass;
+        CallProcErrorHandler ( ERAbort, IsamError, DEZERO );
+        Exit;
+      End;
+
+      If LHPtr^.DBHeaderPtr^.MemoPtr^.MaxSize > FMRec.Width -
+          SizeOf ( FMRec ) Then Begin
+        CharArr ( Buf ) [MemoSize] := #0;
+      End Else Begin
+        CharArr ( Buf ) [MemoSize - 1] := #0;
+      End;
+
+      DBase4ReadMemoRec := 0;
+    End;
+
+
+  Begin
+    Case LHPtr^.DBHeaderPtr^.Header.DBaseVer And DB4DataAndMemo Of
+      DBDataAndMemo :
+        DBaseReadMemoRec := DBase3ReadMemoRec ( LHPtr, RefNr, Buf );
+      DB4DataAndMemo :
+        DBaseReadMemoRec := DBase4ReadMemoRec ( LHPtr, RefNr, Buf );
+      Else Begin
+        CallProcErrorHandler ( ERAbort, 0, DEFCNMF );
+        DBaseReadMemoRec := -1;
+      End;
+    End;
+  End;
+
+
+  Function DBase2Isam (     FNPtr        : PFieldNode;
+                        Var SrcBuf,
+                            DstBuf;
+                            ProcCArrConv : VoidFct_CharArrConvert )
+                                                              : Integer;
+
+  Begin
+    Case FNPtr^.BTFieldPtr^.CType Of
+      ReservedCType : Begin
+        If FNPtr^.DBFieldPtr^.Normal.FType = DelMarkFType Then Begin
+          If Char ( SrcBuf ) = ' ' Then Begin
+            LongInt ( DstBuf ) := 0;
+          End Else Begin
+            LongInt ( DstBuf ) := -1;
+          End;
+          DBase2Isam := 0;
+        End Else Begin
+          DBase2Isam := -1;
+        End
+      End;
+
+      DateCType : Begin
+        DBase2Isam := CArr2Date ( LongInt ( DstBuf ), @SrcBuf );
+      End;
+
+      TimeCType : Begin
+        DBase2Isam := CArr2Time ( LongInt ( DstBuf ), @SrcBuf );
+      End;
+
+      StringCType : Begin
+        DBase2Isam := CArr2LBStr ( String ( DstBuf ), @SrcBuf,
+            FNPtr^.DBFieldPtr^.Normal.Width );
+        CallProcCArrConv ( ProcCArrConv, @CharArr ( DstBuf ) [1],
+            FNPtr^.DBFieldPtr^.Normal.Width );
+      End;
+
+      AZStringCType : Begin
+        DBase2Isam := CArr2AZStr ( @DstBuf, @SrcBuf,
+            FNPtr^.DBFieldPtr^.Normal.Width );
+        CallProcCArrConv ( ProcCArrConv, @DstBuf,
+            FNPtr^.DBFieldPtr^.Normal.Width );
+      End;
+
+      BooleanCType : Begin
+        DBase2Isam := Char2Boolean ( Boolean ( DstBuf ), Char ( SrcBuf ) );
+      End;
+
+      ByteCType : Begin
+        DBase2Isam := CArr2Byte ( Byte ( DstBuf ), @SrcBuf,
+            FNPtr^.DBFieldPtr^.Normal.Width );
+      End;
+
+      CharCType : Begin
+        Char ( DstBuf ) := Char ( SrcBuf );
+        CallProcCArrConv ( ProcCArrConv, @DstBuf, 1 );
+        DBase2Isam := 0;
+      End;
+
+      ShortIntCType : Begin
+        DBase2Isam := CArr2ShortInt ( ShortInt ( DstBuf ), @SrcBuf,
+            FNPtr^.DBFieldPtr^.Normal.Width );
+      End;
+
+      IntegerCType : Begin
+        DBase2Isam := CArr2Integer ( Integer ( DstBuf ), @SrcBuf,
+            FNPtr^.DBFieldPtr^.Normal.Width );
+      End;
+
+      WordCType : Begin
+        DBase2Isam := CArr2Word ( Word ( DstBuf ), @SrcBuf,
+            FNPtr^.DBFieldPtr^.Normal.Width );
+      End;
+
+      LongIntCType : Begin
+        DBase2Isam := CArr2LongInt ( LongInt ( DstBuf ), @SrcBuf,
+            FNPtr^.DBFieldPtr^.Normal.Width );
+      End;
+
+      SingleCType : Begin
+        DBase2Isam := CArr2Single ( Single ( DstBuf ), @SrcBuf,
+            FNPtr^.DBFieldPtr^.Normal.Width );
+      End;
+
+      DoubleCType : Begin
+        DBase2Isam := CArr2Double ( Double ( DstBuf ), @SrcBuf,
+            FNPtr^.DBFieldPtr^.Normal.Width );
+      End;
+
+      RealCType : Begin
+        DBase2Isam := CArr2Real ( Real ( DstBuf ), @SrcBuf,
+            FNPtr^.DBFieldPtr^.Normal.Width );
+      End;
+
+      ExtendedCType : Begin
+        DBase2Isam := CArr2Extended ( Extended ( DstBuf ), @SrcBuf,
+            FNPtr^.DBFieldPtr^.Normal.Width);
+      End;
+
+      Else Begin
+        DBase2Isam := -1;
+      End;
+    End;
+  End;
+
+
+  Function CallFuncWriteTypeDef ( FuncWriteTypeDef : IntFct_WriteTDef;
+                                  LHPtr            : PListHeader;
+                                  IFName           : IsamFileName )
+                                                              : Integer;
+
+  Begin
+    If (@FuncWriteTypeDef <> @WriteNoTypeDef ) And
+        (@FuncWriteTypeDef <> Nil) Then Begin
+      CallFuncWriteTypeDef := FuncWriteTypeDef ( LHPtr, IFName );
+    End Else Begin
+      CallFuncWriteTypeDef := 0;
+    End;
+  End;
+
+
+  Function DBaseImport ( LHPtr             : PListHeader;
+                         IFBName           : IsamFileBlockName;
+                         FuncWriteTypeDef  : IntFct_WriteTDef;
+                         FuncReXUser       : IntFct_ReXUser;
+                         ProcCArrConv      : VoidFct_CharArrConvert;
+                         FuncDecideWrite   : EnumFct_DecideWrite )
+                                                              : Integer;
+
+  Type
+    PLongInt = ^LongInt;
+
+  Var
+    BTBufPtr,
+    DBBufPtr     : ^Char;
+    RefBuf,
+    ReadRecs,
+    WriteRecs,
+    ErrorRecs    : LongInt;
+    ErrorFields,
+    Error        : Integer;
+    UserAbort    : Boolean;
+    CurFNPtr     : PFieldNode;
+    TempFName    : IsamFileName;
+    DummyIID     : IsamIndDescr;
+    DumpFilePtr  : PText;
+
+
+  Begin
+    DBaseImport := -1;
+
+    If Not CheckListHeaderPtr ( LHPtr, True ) Then Begin
+      CallProcErrorHandler ( ERAbort, 0, DELHNI );
+      Exit;
+    End;
+
+    FillChar ( DummyIID, SizeOf ( IsamIndDescr ), 0 );
+    BTCreateFileBlock ( IFBName, LHPtr^.BTHeaderPtr^.DatSLen, 0, DummyIID );
+    If Not IsamOK Then Begin
+      DBaseImport := BTIsamErrorClass;
+      CallProcErrorHandler ( ERAbort, IsamError, DEZERO );
+      Exit;
+    End;
+    BTOpenFileBlock ( LHPtr^.BTHeaderPtr^.FBPtr, IFBName, False,
+        False, False, False );
+    If Not IsamOK Then Begin
+      Error := IsamError;
+      DBaseImport := BTIsamErrorClass;
+      BTDeleteFileBlock ( IFBName );
+      CallProcErrorHandler ( ERAbort, Error, DEZERO );
+      Exit;
+    End;
+
+    If MaxAvail < LHPtr^.BTHeaderPtr^.DatSLen Then Begin
+      CallProcErrorHandler ( ERAbort, 0, DEOOM );
+      Exit;
+    End;
+    GetMem ( BTBufPtr, LHPtr^.BTHeaderPtr^.DatSLen );
+
+    If MaxAvail < LHPtr^.DBHeaderPtr^.Header.RecordSize Then Begin
+      UndoDBaseImpExp ( LHPtr, BTBufPtr, Nil,
+          LHPtr^.BTHeaderPtr^.DatSLen, 0 );
+      CallProcErrorHandler ( ERAbort, 0, DEOOM );
+      Exit;
+    End;
+    GetMem ( DBBufPtr, LHPtr^.DBHeaderPtr^.Header.RecordSize );
+
+    If CallFuncWriteTypeDef ( FuncWriteTypeDef, LHPtr,
+        BTDataFileName ( LHPtr^.BTHeaderPtr^.FBPtr ) ) <> 0 Then Begin
+      CallProcErrorHandler ( ERIgnore, 0, DEEWTD );
+    End;
+
+    UserAbort := CallFuncReXUser ( FuncReXUser, WSInit, LHPtr,
+        LHPtr^.DBHeaderPtr^.Header.NrOfRecs,
+        LHPtr^.BTHeaderPtr^.DatSLen, 0, BTBufPtr^ ) <> 0;
+
+    DumpFilePtr := Nil;
+    ReadRecs := 0;
+    WriteRecs := 0;
+    ErrorRecs := 0;
+    While ( Not DBaseEOF ( LHPtr ) ) And ( Not UserAbort ) Do Begin
+      If DBaseReadRecord ( LHPtr, DBBufPtr^ ) <> 0 Then Begin
+        Error := IsamError;
+        DBaseImport := BTIsamErrorClass;
+        UndoDBaseImpExp ( LHPtr, BTBufPtr, DBBufPtr,
+            LHPtr^.BTHeaderPtr^.DatSLen,
+            LHPtr^.DBHeaderPtr^.Header.RecordSize );
+        CallProcErrorHandler ( ERAbort, Error, DEZERO );
+        Exit;
+      End;
+
+      FillChar ( BTBufPtr^, LHPtr^.BTHeaderPtr^.DatSLen, 0 );
+      ErrorFields := 0;
+      CurFNPtr := LHPtr^.ListPtr;
+      While CurFNPtr <> Nil Do Begin
+        With CurFNPtr^ Do Begin
+          If DBFieldPtr^.NormalContents Then Begin
+            {-dBASE fields including delete mark}
+            If DBFieldPtr^.Normal.FType <> MemoFType Then Begin
+              ConvStatus := DBase2Isam ( CurFNPtr,
+                  PCharArr ( DBBufPtr )^ [DBFieldPtr^.Normal.Offset],
+                  PCharArr ( BTBufPtr )^ [BTFieldPtr^.Offset],
+                  ProcCArrConv );
+            End Else Begin
+              If LHPtr^.DBHeaderPtr^.MemoPtr <> Nil Then Begin
+                ConvStatus := CArr2LongInt ( RefBuf,
+                    @PCharArr ( DBBufPtr )^ [DBFieldPtr^.Normal.Offset],
+                    DBFieldPtr^.Normal.Width );
+                If ( ConvStatus = 0 ) And ( RefBuf <> 0 ) Then Begin
+                  ConvStatus := DBaseReadMemoRec ( LHPtr, RefBuf,
+                      PCharArr ( BTBufPtr )^ [BTFieldPtr^.Offset] );
+                End;
+              End Else Begin
+                {-Memo fields are not converted (MaxMemoSize <> 0)}
+                ConvStatus := 0;
+              End;
+            End;
+            If ConvStatus <> 0 Then Begin
+              Inc ( ErrorFields );
+              If ConvStatus > 0 Then Begin
+                UndoDBaseImpExp ( LHPtr, BTBufPtr, DBBufPtr,
+                    LHPtr^.BTHeaderPtr^.DatSLen,
+                    LHPtr^.DBHeaderPtr^.Header.RecordSize );
+                DBaseImport := ConvStatus;
+                Exit;
+              End Else Begin
+                CallProcErrorHandler ( ERIgnore, 0, DEECF );
+              End;
+            End;
+          End Else Begin
+            {-Auto relation field}
+            PLongInt ( @PCharArr ( BTBufPtr )^ [BTFieldPtr^.Offset] )^ :=
+                DBFieldPtr^.Auto.Relation;
+            Inc ( DBFieldPtr^.Auto.Relation );
+          End;
+          CurFNPtr := CurFNPtr^.NextPtr;
+        End;
+      End;
+
+      If ErrorFields <> 0 Then Begin
+        Error := WriteDump ( DumpFilePtr, LHPtr, ErrorFields );
+        Inc ( ErrorRecs );
+      End;
+
+      Case CallFuncDecideWrite ( FuncDecideWrite, LHPtr, ErrorFields,
+          BTBufPtr^, DBBufPtr^ ) Of
+        DCWrite : Begin
+          BTAddRec ( LHPtr^.BTHeaderPtr^.FBPtr, RefBuf, BTBufPtr^ );
+          If Not IsamOK Then Begin
+            Error := IsamError;
+            DBaseImport := BTIsamErrorClass;
+            UndoDBaseImpExp ( LHPtr, BTBufPtr, DBBufPtr,
+                LHPtr^.BTHeaderPtr^.DatSLen,
+                LHPtr^.DBHeaderPtr^.Header.RecordSize );
+            CallProcErrorHandler ( ERAbort, Error, DEZERO );
+            Exit;
+          End;
+          Inc ( WriteRecs );
+        End;
+
+        DCSkip : ;
+
+        DCAbort : Exit;
+
+        Else Begin
+          CallProcErrorHandler ( ERAbort, 0, DEPE );
+          Exit;
+        End;
+      End;
+
+      Inc ( ReadRecs );
+      UserAbort := CallFuncReXUser ( FuncReXUser, WSWork, LHPtr, ReadRecs,
+          WriteRecs, ErrorRecs, BTBufPtr^ ) <> 0;
+
+      Error := DBaseSkip ( LHPtr );
+      If  Error <> 0 Then Begin
+        UndoDBaseImpExp ( LHPtr, BTBufPtr, DBBufPtr,
+            LHPtr^.BTHeaderPtr^.DatSLen,
+            LHPtr^.DBHeaderPtr^.Header.RecordSize );
+        DBaseImport := Error;
+      End;
+    End;
+
+    UserAbort := CallFuncReXUser ( FuncReXUser, WSExit, LHPtr, ReadRecs,
+        WriteRecs, ErrorRecs, BTBufPtr^ ) <> 0;
+
+    FreeMem ( DBBufPtr, LHPtr^.DBHeaderPtr^.Header.RecordSize );
+    FreeMem ( BTBufPtr, LHPtr^.BTHeaderPtr^.DatSLen );
+
+    Error := CloseDumpFile ( DumpFilePtr );
+
+    DBaseImport := CloseIsamFiles ( LHPtr );
+  End;

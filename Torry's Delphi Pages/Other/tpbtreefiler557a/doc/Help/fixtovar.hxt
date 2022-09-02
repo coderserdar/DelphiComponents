@@ -1,0 +1,30 @@
+;
+;-------------------------------------------------------------------
+!TOPIC 356 FixToVar
+FixToVar is a utility unit for converting a data file in a
+fixed length record format to a variable length record format. It
+interfaces one procedure, 0357FixToVarFileBlock.
+;
+;-------------------------------------------------------------------
+!TOPIC 357 FixToVarFileBlock
+!NOINDEX
+procedure 0356FixToVar.FixToVarFileBlock(FBlName : IsamFileBlockName;
+                                     DatSLenFix   : LongInt;
+                                     DatSLenVar   : LongInt;
+                                     NumberOfKeys : Integer;
+                                     IID          : IsamIndDescr;
+                                     FuncBuildKey : Pointer);
+
+Convert a data file in fixed length record format to one with variable
+length records. FBlName is the name of the data file. DatSLenFix is the
+record length in the existing data file. DatSLenVar is the desired
+section length for the new variable record length Fileblock. NumberOfKeys
+is the number of keys described by IID. FuncBuildKey points to a
+routine to build each key from a data record. It should be of the following
+form:
+
+  {$F+}
+  function BuildKeyFunc(var DatS; KeyNr : Integer) : IsamKeyStr;
+
+Note that the routine must be compiled under the far model and it may not
+be nested inside of another procedure.

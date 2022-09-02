@@ -1,0 +1,104 @@
+package fsql1_r2006;
+
+{$R *.res}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'FSSQL Runtime'}
+{$RUNONLY}
+{$IMPLICITBUILD ON}
+
+requires
+  vcl,
+  rtl,
+  vclx,
+  dbrtl;
+
+contains
+  fssrsort in 'fssrsort.pas',
+  fssrcur in 'fssrcur.pas',
+  fslltemp in 'fslltemp.pas',
+  fsllcoll in 'fsllcoll.pas',
+  fssrmgr in 'fssrmgr.pas',
+  fsclconv in 'fsclconv.pas',
+  fsclintf in 'fsclintf.pas',
+  fsclplug in 'fsclplug.pas',
+  fsconst in 'fsconst.pas',
+  fshash in 'fshash.pas',
+  fslldict in 'fslldict.pas',
+  fslogdlg in 'fslogdlg.pas',
+  fssrvdlg in 'fssrvdlg.pas',
+  fsdtmsgq in 'fsdtmsgq.pas',
+  fsclbase in 'fsclbase.pas',
+  fsllbase in 'fsllbase.pas',
+  fsllexcp in 'fsllexcp.pas',
+  fsllprot in 'fsllprot.pas',
+  fsllwsck in 'fsllwsck.pas',
+  fsllwsct in 'fsllwsct.pas',
+  fsnetmsg in 'fsnetmsg.pas',
+  fsclcfg in 'fsclcfg.pas',
+  fsstdate in 'fsstdate.pas',
+  fsdbbase in 'fsdbbase.pas',
+  fsdb in 'fsdb.pas',
+  fscltbrg in 'fscltbrg.pas',
+  fssrbde in 'fssrbde.pas',
+  fsserverclass in 'fsserverclass.pas',
+  fssqleng in 'fssqleng.pas',
+  fssql in 'fssql.pas',
+  fssqlbas in 'fssqlbas.pas',
+  fssrcfg in 'fssrcfg.pas',
+  fssrfmap in 'fssrfmap.pas',
+  fssrintm in 'fssrintm.pas',
+  fssrstat in 'fssrstat.pas',
+  fssrcvex in 'fssrcvex.pas',
+  fssrtran in 'fssrtran.pas',
+  fssrfold in 'fssrfold.pas',
+  fsllunc in 'fsllunc.pas',
+  fssrfltr in 'fssrfltr.pas',
+  fsconvff in 'fsconvff.pas',
+  fsserverremoteclass in 'fsserverremoteclass.pas',
+  fslllgcy in 'fslllgcy.pas',
+  fssrbase in 'fssrbase.pas',
+  fsfile in 'fsfile.pas',
+  fssrintf in 'fssrintf.pas',
+  fsllcomm in 'fsllcomm.pas',
+  fsllthrd in 'fsllthrd.pas',
+  fsllreq in 'fsllreq.pas',
+  fslllog in 'fslllog.pas',
+  fssrcmd in 'fssrcmd.pas',
+  fssrlock in 'fssrlock.pas',
+  fsllgrid in 'fsllgrid.pas',
+  fssrblob in 'fssrblob.pas',
+  fssrsec in 'fssrsec.pas',
+  fslleng in 'fslleng.pas',
+  fsindexhelper in 'fsindexhelper.pas',
+  fssqldb in 'fssqldb.pas',
+  fssqldef in 'fssqldef.pas',
+  fsllcomp in 'fsllcomp.pas',
+  fsutil in 'fsutil.pas',
+  fsclbde in 'fsclbde.pas',
+  fssrjour in 'fssrjour.pas',
+  fssrjrn in 'fssrjrn.pas' {JournalForm},
+  fscocobase in 'fscocobase.pas';
+
+{$I fsdefine.inc}
+
+end.

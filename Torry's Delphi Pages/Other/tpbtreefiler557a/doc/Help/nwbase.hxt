@@ -1,0 +1,334 @@
+;
+;-------------------------------------------------------------------
+!TOPIC 458 NWBase
+NWBase provides low-level access to the server from a workstation. It
+provides the following functions:
+
+   . determine the type of NetWare shell present and its version
+   . call a server via an NCP call
+   . issue an interrupt
+
+NWBase also has several interfaced internal routines, types, and variables
+that are not documented here. For more information, browse the source code
+for NWBase.
+
+  0465Declarations      0459nwIntr
+  0481nwIPXAddressStr   0480nwIsValidServer
+  0460nwServerCall      0461nwShellType
+  0462nwShellVersion    0463vlmCall
+  0464vlmVersion
+
+
+;
+;-------------------------------------------------------------------
+!TOPIC 459 nwIntr
+!NOINDEX
+function 0458NWBase.nwIntr(Intr : byte; var Regs : TnwRegisters) : TnwErrorCode;
+
+Issue a real mode interrupt.
+
+In a real mode program, this routine issues an interrupt in the same
+manner as the Borland Pascal Intr routine. In a protected or Windows mode
+program, this routine issues a simulated real mode interrupt via a DPMI
+call.
+
+nwIntr exists so that there is a single calling syntax between all the
+possible Pascal targets to make the rest of the NetWare units easier to
+write and maintain. It also enables the use of a single registers type
+structure.
+
+The function result is usually zero. It is non-zero only if a DPMI error
+occurs.
+
+See also:  0469TnwRegisters
+;
+;-------------------------------------------------------------------
+!TOPIC 460 nwServerCall
+!NOINDEX
+function 0458NWBase.nwServerCall(Server : TnwServer;
+                      Func : word;
+                      ReqLen : word; var Request;
+                      RpyLen : word; var Reply) : TnwErrorCode;
+
+Call a server via NCP with preset request and reply packets.
+
+This routine is documented so that you can easily call a server via
+NetWare Core Protocol (NCP) to use a NetWare routine that isn't
+interfaced. Server is the handle of the server that is the recipient of
+the call, Func is the NCP function number (in the Novell's Client API
+documentation, it is the value of AL), ReqLen is the number of bytes in
+Request, and RpyLen the number of bytes in Reply. When coding for
+protected mode or Windows, both the Request and Reply buffers can be in
+protected mode, this function internally copies them to a real mode
+buffer. See the source code for other details and hints on the use of
+nwServerCall.
+;
+;-------------------------------------------------------------------
+!TOPIC 461 nwShellType
+!NOINDEX
+function 0458NWBase.nwShellType : TnwShellType;
+
+Return the type of NetWare shell present on the workstation.
+
+The primary use of this routine is to discover whether a NetWare shell is
+present on the workstation. If nwShellType returns nsNone, then no shell
+was detected at startup.
+
+See also:  0462nwShellVersion  0470TnwShellType
+;
+;-------------------------------------------------------------------
+!TOPIC 462 nwShellVersion
+!NOINDEX
+function 0458NWBase.nwShellVersion : word;
+
+Return the version of NetWare shell present on the workstation.
+
+The high byte of the result is the major version number and the low byte
+is the minor version number. If there is no shell, the function returns
+zero.
+
+See also:  0461nwShellType
+;
+;-------------------------------------------------------------------
+!TOPIC 463 vlmCall
+!NOINDEX
+function 0458NWBase.vlmCall(DestID : word; DestFunc : word;
+                 var Regs : TnwRegisters) : TnwErrorCode;
+
+Make a direct call to a VLM module.
+
+This routine is documented so that you can make a direct call to a VLM
+Requester module. DestID is the ID of the VLM module, DestFunc is the
+function number to call, and Regs is a 0469TnwRegisters variable that defines
+the values of the registers at the time of the call. Segment fields in
+Regs must be real mode segment values, not protected mode selector values.
+See the source code for examples of how to use vlmCall.
+;
+;-------------------------------------------------------------------
+!TOPIC 464 vlmVersion
+!NOINDEX
+function 0458NWBase.vlmVersion(DestID : word) : word;
+
+Return the version number of a VLM module.
+
+This routine is documented so that you can get the version of a particular
+VLM module. DestID is the ID of the VLM module. The major version number
+is returned in the high byte of the function result and the minor version
+number in the low byte. The 0458NWBase unit source code has a complete list of
+VLM modules and their IDs. A small representative list follows:
+
+!NOWRAP
+;!TABLE
+   VLM.EXE      $01    the VLM manager
+   CONN.VLM     $10    connection services
+   TRAN.VLM     $20    transport services
+   REDIR.VLM    $40    redirection services
+   PRINT.VLM    $42    print services
+!WRAP
+
+If vlmVersion returns zero, then either the destination ID is invalid or
+the VLM module was not loaded.
+;
+;-------------------------------------------------------------------
+!TOPIC 465 Declarations,NWBase
+!NOINDEX
+The following constants, types and variables are declared in the
+0458NWBase unit:
+
+!NOWRAP
+  0466Errors        0467nwInt
+  0468nwLong        0469TnwRegisters
+  0470TnwShellType  0471TnwServer
+  0472TnwErrorCode  0473TnwObjectStr
+  0474TnwPropStr    0475nwDayOfWeek
+  0476TnwDate       0477IPXAddress
+  0478TnwUpperStr   0479nwUpperStr
+!WRAP
+;
+;-------------------------------------------------------------------
+!TOPIC 466 Errors,NWBase
+!NOINDEX
+!NOWRAP
+;!TABLE
+const
+  nwErrDPMI         = $7F01;  {DPMI access problem (no DOS memory, etc.)}
+  nwErrWrongVer     = $7F02;  {server is wrong version to support call}
+  nwErrShell        = $7F03;  {shell doesn't exist or is wrong version}
+  nwErrMemory       = $7F04;  {out of memory}
+  nwErrIntr         = $7F05;  {error on real mode interrupt}
+  nwErrBadData      = $7F06;  {bad data was passed to a routine}
+  nwErrTooManyConns = $7F07;  {too many connections for the routine}
+  nwErrNoMoreConns  = $7F08;  {no more connections to process}
+!WRAP
+
+Internal error codes, not Novell defined.
+;
+;-------------------------------------------------------------------
+!TOPIC 467 nwInt
+!NOINDEX
+type
+  nwInt = integer;            {16-bit signed integer}
+
+Definition of a 16 bit signed integer for the NetWare units.
+;
+;-------------------------------------------------------------------
+!TOPIC 468 nwLong
+!NOINDEX
+type
+  nwLong = longint;            {32-bit signed integer}
+
+Definition of a 32 bit signed integer for the NetWare units.
+;
+;-------------------------------------------------------------------
+!TOPIC 469 TnwRegisters
+!NOINDEX
+type
+  TnwRegisters = record
+    ...
+    end;
+
+A registers type that is used internally by the NetWare units, especially
+by the 0463vlmCall and 0459nwIntr routines.
+;
+;-------------------------------------------------------------------
+!TOPIC 470 TnwShellType
+!NOINDEX
+!NOWRAP
+;!TABLE
+type
+  TnwShellType = (nsNone,     {..none detected}
+                  nsNETX,     {..NETX}
+                  nsVLM);     {..VLM}
+!WRAP
+
+The types of NetWare shells that can be detected: no shell, a NETX shell,
+or the VLM Requester. 0461nwShellType returns a variable of this type.
+;
+;-------------------------------------------------------------------
+!TOPIC 471 TnwServer
+!NOINDEX
+type
+  TnwServer = word;
+
+A server handle. The routines in the NetWare units use a server handle to
+determine which of several servers on the network a call is destined for.
+;
+;-------------------------------------------------------------------
+!TOPIC 472 TnwErrorCode
+!NOINDEX
+type
+  TnwErrorCode = word;
+
+A NetWare error code type. The high byte is the source of the error, the
+low byte the individual error. If the value is zero, there was no error.
+The various values for the error source byte are $89 (server), $88 (VLM
+Requester), $87 (NETX shell) or $7F (one of the NetWare units).
+
+See also:  0466Errors
+;
+;-------------------------------------------------------------------
+!TOPIC 473 TnwObjectStr
+!NOINDEX
+type
+  TnwObjectStr = string[47];
+
+Type for a bindery object name.
+;
+;-------------------------------------------------------------------
+!TOPIC 474 TnwPropStr
+!NOINDEX
+type
+  TnwPropStr = string[15];
+
+Type for a bindery property name.
+;
+;-------------------------------------------------------------------
+!TOPIC 475 nwDayOfWeek
+!NOINDEX
+type
+  nwDayOfWeek = (nwSun, nwMon, nwTue, nwWed, nwThu, nwFri, nwSat);
+
+A day-of-the-week enumerated type for the 0476TnwDate type.
+;
+;-------------------------------------------------------------------
+!TOPIC 476 TnwDate
+!NOINDEX
+!NOWRAP
+;!TABLE
+type
+  TnwDate = record
+    Year    : word;
+    Month   : byte;
+    Day     : byte;
+    Hour    : byte;
+    Minute  : byte;
+    Second  : byte;
+    WeekDay : nwDayOfWeek;
+  end;
+!WRAP
+
+The types defining dates for the NetWare units. The year field contains
+values in the range 1980..2079; the ranges of the other fields are defined
+with their usual meanings (for example Month ranges from 1 to 12, Hour
+from 0 to 23, and so on). Note that some routines do not return the
+WeekDay field properly.
+
+See also:  0475nwDayOfWeek
+;
+;-------------------------------------------------------------------
+!TOPIC 477 IPXAddress
+!NOINDEX
+!NOWRAP
+;!TABLE
+type
+  PhysicalNodeAddress = array[1..6] of Byte;
+  IPXAddress = record
+    Network : nwLong; {high-low}
+    Node    : PhysicalNodeAddress;
+    Socket  : Word;
+  end;
+!WRAP
+
+An internetwork address on a NetWare network. Used extensively by the IPX
+and SPX communication routines.
+;
+;-------------------------------------------------------------------
+!TOPIC 478 TnwUpperStr
+!NOINDEX
+type
+  TnwUpperStr   = procedure (var S : string);
+
+A procedural type to convert a string to uppercase. The NWBASE unit
+defines a global procedural variable of this type to uppercase a string,
+see 0479nwUpperStr.
+;
+;-------------------------------------------------------------------
+!TOPIC 479 nwUpperStr
+!NOINDEX
+var
+  nwUpperStr : TnwUpperStr;
+
+A procedural variable that is used extensively by the NetWare units to
+convert a string to uppercase. The initialisation routine of the NWBASE
+unit sets the variable to a simple uppercase routine that converts
+lowercase 'a'..'z' to uppercase 'A'..'Z'. If you need a different
+uppercase routine that maps other international characters to uppercase,
+then you can write a far global routine of type 0478TnwUpperStr and set
+nwUpperStr equal to it.
+;
+;-------------------------------------------------------------------
+!TOPIC 480 nwIsValidServer
+!NOINDEX
+function 0458NWBase.nwIsValidServer(Server : TnwServer) : boolean;
+
+Return true is the server handle is valid, false otherwise.
+;
+;-------------------------------------------------------------------
+!TOPIC 481 nwIPXAddressStr
+!NOINDEX
+function 0458NWBase.nwIPXAddressStr(var Address : IPXAddress) : string;
+
+Converts an IPX address into a displayable string of the form
+wwwwwwww:nnnnnnnnnnnn:ssss with w..w being the hex network
+number (8 chars), n..n being the hex node address (12 chars),
+and s the hex socket number (4 chars), making 26 chars altogether.

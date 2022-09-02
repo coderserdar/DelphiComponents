@@ -1,0 +1,96 @@
+;*********************************************************
+;* FlashFiler: Lowlevel (common) string table resource   *
+;*********************************************************
+
+;* ***** BEGIN LICENSE BLOCK *****
+;* Version: MPL 1.1
+;*
+;* The contents of this file are subject to the Mozilla Public License Version
+;* 1.1 (the "License"); you may not use this file except in compliance with
+;* the License. You may obtain a copy of the License at
+;* http://www.mozilla.org/MPL/
+;*
+;* Software distributed under the License is distributed on an "AS IS" basis,
+;* WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+;* for the specific language governing rights and limitations under the
+;* License.
+;*
+;* The Original Code is TurboPower FlashFiler
+;*
+;* The Initial Developer of the Original Code is
+;* TurboPower Software
+;*
+;* Portions created by the Initial Developer are Copyright (C) 1996-2002
+;* the Initial Developer. All Rights Reserved.
+;*
+;* Contributor(s):
+;*
+;* ***** END LICENSE BLOCK *****
+
+#include "ffconst.inc"
+
+fferrCopyFile, "Operating system error when copying a file [%d, %s]"
+fferrDeleteFile, "Operating system error when deleting a file [%d, %s]"
+fferrRenameFile, "Operating system error when renaming a file [%d, %s]"
+
+fferrReplyTimeout, "Timed out waiting for reply"
+fferrWaitFailed, "Failure occurred while calling WaitForSingleObject: %s [%d]"
+fferrInvalidProtocol, "Protocol %s may not be specified for transport."
+fferrProtStartupFail, "Could not start %s protocol."
+fferrConnectionLost, "Connection to server is no longer valid."
+fferrTransportFail, "Transport error occurred.  See transport log for details."
+fferrPortalTimeout, "Timeout occurred in TffReadWritePortal.%s"
+
+fferrOutOfBounds, "Field, index or file number does not exist in the dictionary [%s, item %d]"
+fferrDictPresent, "Once a dictionary has been defined for a file, another cannot be defined [%s]"
+fferrNotADict, "Attempted to assign an object that wasn't a dictionary to a dictionary object [%s]"
+fferrNoFields, "Dictionary has no field definitions, it cannot be used until at least one is defined [%s]"
+fferrBadFieldRef, "Composite index refers to field number that does not exist [%s, field %d]"
+fferrBadFieldType, "Unknown field type encountered in a case statement [%d]"
+fferrRecTooLong, "The sum of the field lengths in the dictionary is greater than the maximum record length [%s]"
+fferrDiffBlockSize, "Attempted to write dictionary to a file with different block size [%s, old size %d, new %d]"
+fferrDictReadOnly, "Once a table has been built, cannot modify its dictionary [%s]"
+fferrDictMissing, "The data dictionary is not present in the file [%s]"
+fferrBLOBFileDefd, "A BLOB file has already been defined for this dictionary [%s]"
+fferrBaseFile, "Cannot remove the base file descriptor [%s, file 0]"
+fferrBadFileNumber, "File number does not exist in dictionary [%s, file %d]"
+fferrBadBaseName, "Table name is invalid: can only have a-z, A-Z, 0-9, or _ characters [passed: %s]"
+fferrBadExtension, "Extension is invalid: can only have a-z, A-Z, 0-9, or _ characters, must have 1, 2 or 3 chars [%s, ext %s]"
+fferrDupExtension, "Extension is already present in the data dictionary [%s, ext %s]"
+fferrDataFileDefd, "There can only be one data file per table, and it has already been defined for this dictionary [%s]"
+fferrNoFieldsInKey, "There must be at least one field in a composite index [%s]"
+fferrBadParameter, "Invalid parameter passed to routine [%s, parameter %d]"
+fferrBadBlockSize, "The block size must be 4KB, 8KB, 16KB or 32KB only [size used: %d]"
+fferrKeyTooLong, "The key length for an index should be between 0 and 1024 bytes [passed %d]"
+fferrDupFieldName, "There is a duplicate field name in the dictionary [%s, field %s]"
+fferrDupIndexName, "There is a duplicate index name in the dictionary [%s, index %s]"
+fferrIxHlprRegistered, "Index helper [%s] is already registered."
+fferrIxHlprNotReg, "Index helper [%s] is not registered."
+fferrIxHlprNotSupp, "Index helper [%s] does not support field type [%s]."
+fferrIncompatDict, "The cursor dictionaries are incompatible. Verify the correct field types, lengths, units, and decimal places have been specified."
+fferrFileInUse, "Cannot remove file %d because it is still referenced by an index."
+fferrFieldInUse, "Cannot remove field %s because it is still referenced by an index." 
+
+fferrCommsNoWinRes, "No window resources left: Communications notify window creation failed"
+fferrCommsCannotCall, "Servers cannot issue call requests, they only listen"
+fferrCommsCantListen, "Clients cannot issue listen requests, they only call"
+fferrWinsock, "Winsock communications: Unexpected Winsock error %d/$%x [%s]"
+fferrWSNoWinsock, "Winsock communications: Winsock not found, or DLL is invalid"
+fferrWSNoSocket, "Winsock communications: Cannot create a new socket"
+fferrWSNoLocalAddr, "Winsock communications: Cannot retrieve local address information"
+
+fferrTmpStoreCreateFail, "Could not create temporary storage, size %d. Error %d/$%x [%s]"
+fferrTmpStoreFull, "Temporary storage is full, reaching %d MB in size. More space may need to be allocated."
+fferrMapFileCreateFail, "Could not create map file %s, size %d, error %d/%x [%s]"
+fferrMapFileHandleFail, "Could not open map file %s, size %d, error %d/%x [%s]"
+fferrMapFileViewFail, "%s: Could not create view for block %d of map file %s, error %d/%x [%s]"
+
+ffscSeqAccessIndexName, "Sequential Access Index"
+ffscMainTableFileDesc, "Data/DataDict File"
+ffscRegistryMainKey, "\Software\TurboPower\FlashFiler\"
+
+fferrInvalidServerName, "Invalid server name"
+fferrInvalidNameorPath, "Invalid name or path"
+fferrDuplicateAliasName, "Duplicate alias name not allowed"
+fferrEmptyValuesNotAllowed, "One or more values not defined"
+

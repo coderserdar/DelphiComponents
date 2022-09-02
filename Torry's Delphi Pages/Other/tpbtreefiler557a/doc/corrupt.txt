@@ -1,0 +1,165 @@
+B-Tree Filer and Data Corruption on a Windows Network
+=====================================================
+
+
+Introduction
+------------
+During 1997, TurboPower started to receive some worrying reports of
+corrupted indexes when using B-Tree Filer on a Windows network,
+especially one with a mix of Windows NT 4 servers, Windows NT 4
+workstations and Windows 95 PCs. After some research, we found a
+Microsoft authored document (tech article Q165966, dated 28-Mar-97,
+which can be found at http://support.microsoft.com/support/kb/
+articles/q165/9/66.asp) stating that applications that share data on a
+network should always access the shared data in the following manner:
+
+   lock the file region to be read or updated
+   read or update the file region
+   unlock the file region
+
+TurboPower then initiated an update of B-Tree Filer to version 5.53
+which implemented this strategy. The update turned out to be a fairly
+major rewrite of the low-level file access code and necessitated the
+inclusion of a new global variable called DefeatLocalCache to turn the
+new code on and off.
+
+However, there have been some new developments in this story,
+prompting the writing of this technical paper. Indeed, if you follow
+the solution in this paper, you do not have use the DefeatLocalCache
+variable at all, making your app run faster.
+
+
+Background
+----------
+The original problem was due to 'aggressive' caching code in the new
+Windows 95, especially when related to remote files (i.e., files that
+reside on another machine on the network, and that are shared).
+Sometimes, reading data from a remote file would be satisfied from the
+local cache rather than actually retrieving the data from the remote
+machine. Similarly, writing to a remote file would cause the new data
+to 'hang around' in the local cache before being flushed to the remote
+system.
+
+Either of these two possibilities would spell major corruption to
+B-Tree Filer. For example, to add a record to a B-Tree Filer fileblock
+requires reading the system record to find the next available 'slot'
+and then writing the record there. If the read of the system record
+retrieves an 'old' version from the app's local cache, then two
+records from different workstations could be added to the same place.
+Similarly, updating the file but not having the data reach the remote
+machine immediately could also cause the same type of corruption.
+
+
+Research
+--------
+One of our customers, John Santmann of Wellsoft Corporation, ran into
+this problem and found that our new B-Tree Filer 5.53 - even with
+DefeatLocalCache set to true - did not solve it completely. He found
+that, under heavy loads on the network, he could cause the corruption
+problem to reappear, though, it must be said, not on demand: sometimes
+it took a couple of hours before the data corruption was detected.
+
+Anyway, he did some invaluable research trying to pin the problem
+down. He found out that B-Tree Filer was not the only product to
+suffer from this problem with corruption: Symantec's ACT! and Lotus
+Notes also demonstrated data corruption under certain circumstances.
+As a result of his research, he came up with the solution detailed in
+this paper. He also found that part of his problem was a flaky network
+adapter, and that B-Tree Filer 5.53 did work correctly with
+DefeatLocalCache set to true.
+
+The solution is in three parts.
+
+
+Solution - Part I
+-----------------
+The problem all along was in the VREDIR.VXD (virtual redirector)
+system file shipped with Windows 95 (even with Service Pack 1), and
+Windows 95 OSR2. It is buggy and the previous tech note quoted above
+(Q165966) is erroneous. Microsoft have released a new version of
+VREDIR.VXD (4.00.1116) and VNETSUP.VXD (4.00.1112) that eliminate the
+problems with the local cache (as well as other problems). You can
+download the new versions from
+
+http://support.microsoft.com/download/support/mslfiles/vrdrupd.exe
+
+The file is 215,728 bytes in length. When run, it starts up a standard
+setup to install the new VREDIR.VXD (156,773 bytes, dated 11-Sep-97
+11:16am) and the new VNETSUP.VXD (17,595 bytes, dated 30-May-97
+11:12am).
+
+(Note: to find out the version of your VREDIR.VXD file you can do the
+following. Start up Explorer, find the file in \WINDOWS\SYSTEM and
+right click on it. Select Properties and then click on the Version
+tab. The version of the file is the top item.)
+
+You'll have to reboot your Windows 95 system to complete the
+installation.
+
+
+Solution - Part II
+------------------
+The next step is to add a new registry entry to the Windows 95 system,
+using Windows 95's REGEDIT.EXE.
+
+Key:   HKEY_LOCAL_MACHINE\
+         System\CurrentControlSet\Services\VxD\VREDIR
+Value: DiscardCacheOnOpen (binary value)
+Data:  01
+
+Walk down the key tree until you reach the VREDIR subkey. Right click
+on the right hand pane, select New then Binary value. Enter the
+identifier DiscardCacheOnOpen and press Enter. Double click on the new
+identifier and a dialog is shown where you can enter the data 01.
+
+Once you've exited REGEDIT, you will need to reboot your machine for
+the new setting to take effect. Only the new VREDIR.VXD will
+understand this setting, previous ones will ignore it.
+
+
+Solution - Part III
+-------------------
+If you are using a Windows NT 4 server as your file manager (in other
+words, the shared data files reside on a Windows NT 4 server machine),
+there's one more step to take: You need to turn off optimistic locking
+at the server. You need to add a new registry key on the Windows NT 4
+Server (or modify the current one if it exists).
+
+Key:   HKEY_LOCAL_MACHINE\
+         System\CurrentControlSet\Services\LanmanServer\Parameters
+Value: EnableOpLocks (DWORD value)
+Data:  0
+
+
+Warnings
+--------
+These changes will have to be made to every Windows 95 and NT 4 Server
+PC on the network. If your B-Tree Filer application gets installed on
+a new network then it is up to you to ensure that all workstations and
+servers on the new network are also upgraded.
+
+Using Registry Editor incorrectly can cause serious, system-wide
+problems that may require you to reinstall your operating system to
+correct them. Although the above information is presented in good
+faith, TurboPower cannot be responsible for any problems due to their
+misapplication. TurboPower also cannot guarantee that any problems
+resulting from the use or misuse of Registry Editor can be solved. Use
+REGEDIT at your own risk. If in doubt, BACK UP YOUR REGISTRY FIRST.
+
+
+Conclusion
+----------
+This document presents a way of updating your Windows 95 and NT 4
+systems in order that you don't have to use the new B-Tree Filer
+DefeatLocalCache variable in your applications (it can be permanently
+set to false). However, it is up to you to ensure that all PCs on the
+network where the B-Tree Filer app is being run are updated according
+to this paper's three part solution.
+
+
+Julian M. Bucknall
+julianb@turbopower.com
+8-Jun-98
+
+Copyright (c) TurboPower Software Company, 1998
+All Rights Reserved

@@ -1,0 +1,53 @@
+;
+;-------------------------------------------------------------------
+!TOPIC 358 IsamTool
+IsamTool contains several varied routines for extending the
+0190Filer unit:
+
+  0362Declarations                    0359ExtendHandles
+  0361InvertString                    0360IsamErrorMessage
+;
+;-------------------------------------------------------------------
+!TOPIC 359 ExtendHandles
+!NOINDEX
+procedure 0358IsamTool.ExtendHandles(NumHandles : Word);
+
+Extends the number of file handles available to an application.
+Requires DOS 3.3 or later. Although the NumHandles parameter is of
+type Word, only 255 handles are available to DOS programs.
+;
+;-------------------------------------------------------------------
+!TOPIC 360 IsamErrorMessage
+!NOINDEX
+function 0358IsamTool.IsamErrorMessage(ErrorNr : Integer) : String;
+
+Returns a string describing an 0298IsamError number.
+;
+;-------------------------------------------------------------------
+!TOPIC 361 InvertString
+!NOINDEX
+procedure 0358IsamTool.InvertString(var Dest : String;
+                                Source : String;
+                                MaxLen : Byte);
+
+Inverts all characters in the string Source and pads it to
+length MaxLen with character #255. The result is returned in
+Dest. Calling the routine a second time returns the original
+string.
+;
+;-------------------------------------------------------------------
+!TOPIC 362 Declarations,IsamTool
+!NOINDEX
+!NOSEARCH
+IsamTool interfaces two declarations:
+
+type
+  UsedErrorMessages = (None, German, English);
+
+const
+  UseErrorMessage : UsedErrorMessages = English;
+
+UseErrorMessage determines whether 0360IsamErrorMessage
+returns messages in English or German. In order to enable German
+messages the conditional define GermanMessage must be activated
+in ISAMTOOL.PAS.

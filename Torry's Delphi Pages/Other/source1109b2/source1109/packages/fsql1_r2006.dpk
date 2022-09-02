@@ -1,0 +1,119 @@
+package fsql1_r2006;
+
+{$R *.res}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'FSSQL 1   R10'}
+{$RUNONLY}
+{$IMPLICITBUILD ON}
+
+requires
+  vcl,
+  rtl,
+  vclx,
+  dbrtl;
+
+contains
+  fsclplug in '..\fsclplug.pas',
+  fsllgrid in '..\fsllgrid.pas',
+  fszlib in '..\fszlib.pas',
+  fsblobaccess in '..\fsblobaccess.pas',
+  fschangeport in '..\fschangeport.pas',
+  fsclbase in '..\fsclbase.pas',
+  fsclbde in '..\fsclbde.pas',
+  fsclcfg in '..\fsclcfg.pas',
+  fsclconv in '..\fsclconv.pas',
+  fsclimex in '..\fsclimex.pas',
+  fsclintf in '..\fsclintf.pas',
+  fscltbrg in '..\fscltbrg.pas',
+  fscocobase in '..\fscocobase.pas',
+  fscommon in '..\fscommon.pas',
+  fsconst in '..\fsconst.pas',
+  Fsconvff in '..\Fsconvff.pas',
+  fscryptaccess in '..\fscryptaccess.pas',
+  fsdb in '..\fsdb.pas',
+  fsdbbase in '..\fsdbbase.pas',
+  fsdictserveraccess in '..\fsdictserveraccess.pas',
+  fsdtmsgq in '..\fsdtmsgq.pas',
+  fsexfield in '..\fsexfield.pas',
+  fsfile in '..\fsfile.pas',
+  fsfunInterp in '..\fsfunInterp.pas',
+  fshash in '..\fshash.pas',
+  fsindexaccess in '..\fsindexaccess.pas',
+  fsindexhelper in '..\fsindexhelper.pas',
+  fsllbase in '..\fsllbase.pas',
+  fsllcoll in '..\fsllcoll.pas',
+  fsllcomm in '..\fsllcomm.pas',
+  fsllcomp in '..\fsllcomp.pas',
+  fslldate in '..\fslldate.pas',
+  fslldict in '..\fslldict.pas',
+  fslleng in '..\fslleng.pas',
+  fsllexcp in '..\fsllexcp.pas',
+  fslllgcy in '..\fslllgcy.pas',
+  fslllog in '..\fslllog.pas',
+  fsllprot in '..\fsllprot.pas',
+  fsllreq in '..\fsllreq.pas',
+  fslltemp in '..\fslltemp.pas',
+  fsllthrd in '..\fsllthrd.pas',
+  fsllunc in '..\fsllunc.pas',
+  fsllwsck in '..\fsllwsck.pas',
+  fsllwsct in '..\fsllwsct.pas',
+  fslogdlg in '..\fslogdlg.pas',
+  fsnetmsg in '..\fsnetmsg.pas',
+  fsrecordaccess in '..\fsrecordaccess.pas',
+  fsserverclass in '..\fsserverclass.pas',
+  fsserverremoteclass in '..\fsserverremoteclass.pas',
+  fssql in '..\fssql.pas',
+  fssqlbas in '..\fssqlbas.pas',
+  fssqlclass in '..\fssqlclass.pas',
+  fssqldb in '..\fssqldb.pas',
+  fssqldef in '..\fssqldef.pas',
+  fssqleng in '..\fssqleng.pas',
+  FsSrBase in '..\FsSrBase.pas',
+  fssrbde in '..\fssrbde.pas',
+  fssrblob in '..\fssrblob.pas',
+  fssrcfg in '..\fssrcfg.pas',
+  fssrcmd in '..\fssrcmd.pas',
+  fssrcur in '..\fssrcur.pas',
+  fssrcvex in '..\fssrcvex.pas',
+  FsSrFltr in '..\FsSrFltr.pas',
+  fssrfmap in '..\fssrfmap.pas',
+  fssrfold in '..\fssrfold.pas',
+  fssrintf in '..\fssrintf.pas',
+  fssrintm in '..\fssrintm.pas',
+  fssrjour in '..\fssrjour.pas',
+  fssrjrn in '..\fssrjrn.pas',
+  fssrlock in '..\fssrlock.pas',
+  fssrmgr in '..\fssrmgr.pas',
+  fssrsec in '..\fssrsec.pas',
+  fssrsort in '..\fssrsort.pas',
+  fssrstat in '..\fssrstat.pas',
+  fssrtran in '..\fssrtran.pas',
+  fssrvdlg in '..\fssrvdlg.pas',
+  fsstdate in '..\fsstdate.pas',
+  fsstreamaccess in '..\fsstreamaccess.pas',
+  fstablehelper in '..\fstablehelper.pas',
+  fsutil in '..\fsutil.pas';
+
+{$I fsdefine.inc}
+
+end.

@@ -1,0 +1,423 @@
+
+ver. 1.109 beta 2 21-02-2006
+- small bugfixes in loadconfiguration (only D2006)
+- small bugfixes in sample demo.
+
+
+ver. 1.109 beta 1 21-02-2006
+- small bugfixes in Group BY (only bcb5 and delphi 5)
+
+Attention:
+New file configuration added for server.
+Please reconfigure server. Deleted TABxxx.FSD and Added "server.settings".
+Please recompile your client before using server ver 1.109 beta 1. 
+
+New property for server:
+1. "TempPath" for temporary files,
+2. "ConfigFile" for settings file name (Server),
+3. Encrypt temp file - for temporary files.
+
+Deleted property "configdir".
+
+Short information about my work.
+
+Item          State
+-------------------------
+DDL           in progress
+Collate       in progress
+Documentation in progress
+
+
+ver. 1.108 17-02-2006
+- Small bugfixes in Group BY
+Added:
+- New Distinct (this is options)
+Examples:
+Select Distinc(xx,yy) * from test
+Select Distinc(xx,yy) aa,dd,xx,yy from test
+Select Distinc(odd(xx),yy) aa,dd,xx,yy from test
+
+
+ver. 1.107 15-02-2006
+- Small bugfixes in LIKE and UNION,
+Added:
+1.
+Multiple UNION
+Examples:
+select ... from ..
+union [ALL] [case false/true]
+select ... from ..
+union [ALL] [case false/true]
+select ... from ..
+...
+
+2. Case true/False for DISTINCT, UNION, GROUP BY
+Examples:
+SELECT distinct case false * FROM "Client"
+
+SELECT name1, count(name1) FROM "Client"
+group by name1 case false
+
+select name1 from "Client"
+union [ALL] [case false/true]
+select name1 from "Client"
+
+Default case is True.
+
+ver. 1.105 18-12-2005
+-small improvement for fsexplorer and restructure
+
+ver. 1.103 17-12-2005
+-fix small bug for print dictionary in fsexplorer
+-small change code for D2005/6 (Thanks Bruce Christensen)
+
+ver. 1.101 12-12-2005
+Added:
+1. 
+New indices.
+Separate case, order, nulldirection, sizecompare
+It plans use these indices in "order by, group by" for big table sorting.
+SYNTAX
+SELECT ss, ns FROM "a"
+order by ss case false      null top false      count 1,  ns desc case false
+            case false/true null top false/true count [compare] (strings/wide field)
+
+Default is:
+case true,
+null top true,
+count compare field length (string, widestring).
+
+This is a option order by.
+
+
+2.
+I added new function for info blocked records in sql.
+
+Flag:
+ISRECORDLOCKED
+ISUNDELETEDRECORD
+ISPROTECTDELETERECORD
+ISPROTECTUPDATERECORD
+ISMARKASBADRECORD
+
+SYNTAX
+select ISRECORDLOCKED, * from xx
+
+select (not ISRECORDLOCKED), * from xx
+
+select ISRECORDLOCKED, * from xx
+where ISRECORDLOCKED
+
+select ISRECORDLOCKED, * from xx
+where not ISRECORDLOCKED
+
+select * from xx
+where ISRECORDLOCKED
+
+update xx set a=12
+where not ISRECORDLOCKED
+
+delete from xx 
+where not ISRECORDLOCKED
+
+3.
+New syntax for delete record
+Use top or down for specify count delete.
+
+SYNTAX
+delete top 1 FROM "TestArray"
+or
+delete top 10 FROM "TestArray" useindex YourIndex
+
+delete down 1 FROM "TestArray"
+or
+delete down 10 FROM "TestArray" useindex YourIndex
+
+
+ver. 1.077 21-11-2005
+Added:
+New function for manage lockrecord.
+Now user decides how and when record has to be blocked or 
+Set true RecLockedBeforeEdit (TfsTable) for locked before edit.
+    Procedure LockRecord;
+    Procedure UnLockRecord;
+    Procedure UnLockRecordAll;
+    Function RecordIsLocked: boolean;
+    Next version implemented select for update 
+    and select .. for xxx where LockRecord.
+
+New prop for TfsTable
+RecLockedType for decides how Lock Record.
+If Use RecLockedType = tluDatabase then lock is as database.RecLocking
+
+New prop InRange for info StartRange.
+
+RecNo is now work.Tested on D 5,6,7 and D10 but not full.
+If use supportrecno and Range and inserted record recno is show bad number.
+Next version should by ok.
+I work over ddl, triggers, constraints, events and amall 
+documentation at present and it lacks me time.
+
+ver. 1.075 5-11-2005
+Small bugfixes commpres metod
+Added:
+- Support for Delphi 5, 6, 7, 2005 (9), 2006 (10), BCB 5, BCB 6
+- Support flip order for dataset (fstable, fsquery), included filter, indexes, normal browse.
+  Speed for any table, query.
+  Use TfsTable.FlipOrder, TfsQuery.FlipOrder for change order.
+- Suppoert for recno (readonly- No insert, delete). Not yet full implemented. 
+  Slow if use big table.
+  This is first realase. RecNo is only logical position record of dataset (fstable, fsquery).
+  Use TfsTable.SupportRecno, TfsQuery.SupportRecno to ON/OFF.
+
+
+ver. 1.074 26-10-2005
+Small bugfixes
+This version required recompile client < 1.071 if use server ver >= 1.074
+
+
+ver. 1.073 25-10-2005
+Small bugfixes
+This version required recompile client if use server ver >= 1.070
+
+
+ver 1.071 21-10-2005
+This version required recompile client if use server ver >= 1.071
+Pleas reaplace 1.070 to 1.071
+Version 1.070 includes bug restructure and pack tables.
+
+ver. 1.070 19-10-2005
+Small bugfixes
+This version required recompile client if use server ver >= 1.070
+
+ver. 1.068 17-10-2005
+Added:
+- Protect individual record before delete or update.
+  See fsExplorer/Table/button "protect before delete" and "protect before update".
+  GetFlagRecord is speed and it does not send additional query to server.
+  Accessible from version >= 1.059
+
+  Detail function.
+
+  Set (TfsTable)
+  TfsTable.SetFlagRecord(frNotDeleteRecord, CheckBox2.Checked); // true set
+  TfsTable.SetFlagRecord(frNotUpdateRecord, CheckBox3.Checked);
+ 
+  Get (TfsDataset = TfsQuery, TfsTable)
+  TfsTable.GetFlagRecord: byte // info flag
+  TfQuery.GetFlagRecord
+
+  Used
+  
+  Flags record:
+  frDataRecord = 1;
+  frEmptyRecord = 2; // block empty
+  frDeleteRecord = 4;
+  frUndeletedRecord = 8;
+  frNotDeleteRecord = 16;
+  frNotUpdateRecord = 32;
+  frBadRecord = 64;
+
+  If getflags(fTable.GetFlagRecord, frUndeletedRecord) Then ...
+
+
+  This version required recompile client if use server ver >= 1.068
+  
+
+Small bugfixes
+
+
+ver. 1.064 03-10-2005
+Added:
+- Support for undelete record
+  Detail:
+  Undelete record is easy to use.
+  First restructure table and select property "Recovery Engine".
+  TRecoveryEngine = (edtNotUndelete, edtUndeleteIfPossibleNotBlob, 
+                    edtUndeleteIfPossibleAndBlob, edtUndeleteFull);
+
+  - edtNotUndelete (Old FF/FS)
+      Deleted records and recycle pages. No possible recovery.
+      Record be replaced during introduction of new record.
+
+  - edtUndeleteIfPossibleNotBlob
+      Record is possible to recovery (Not blob) if he did not was
+      replaced during introduction of new record.
+
+  - edtUndeleteIfPossibleAndBlob
+      Record is possible to recovery (And blob) if he did not was
+      replaced during introduction of new record.
+
+  - edtUndeleteFull
+      Don't deleted records and don't recycle pages (phisically).
+      Record is full recovery (And blob).He does not be replace 
+      during introduction of new record. New records always added
+      at the end of the file (next of page).
+
+
+TfsTable:
+Use procedure "Undelete". Step 1 record.
+fsTable1.Undelete.
+
+
+fsExplorer:
+Menu "Recovery deleted records" - if possible undeleted records.
+Menu "Recovery only deleted records !!" - if possible undeleted only deleted records.
+
+
+ver. 1.054 20-09-2005
+Added:
+- cached blob data for fstable and fsquery
+property:
+
+BlobMode 
+- bmdirect (readwrite direct- non recognize commpres blob),
+- bmAuto (direct or inmemory- recognize commpres blob),
+- bmInMemory (Memory blob- recognize commpres blob),
+- bmCache (cached blob data- recognize commpres blob).
+
+BlobAutoStarttransaction (options) if blob is changes 
+   then start transaction and commit (only if user non started transaction)
+BlobChunkSize - 0 is no limit, > 0 buffor size 
+BlobModifiedError - Error info if BLOB MODIFIED (delete, changes)
+
+At this time InTransaction realy check open transaction on server
+
+I repaired bug blob (yet with version ff)
+
+
+ver. 1.052 01-09-2005
+Added:
+- small bugfixes
+- support array (byte, word, integer, double).
+  SQL support. Select * from xx where ardouble = '1.25,123.02,15.05'.
+  By index: Select * from xx where Array(ardouble, 2) = 15.05
+  Select * from xx where Round(Array(ardouble, 2), 2) = 15.05
+  Supprt indexes, distinct, range, filtr.
+  Not full tested yet. See demo array how to used and manipulate width dataset.
+
+
+ver. 1.050 08-08-2005
+Added:
+- RecVersion,
+- small bugfixes
+
+
+ver. 1.049 05-08-2005
+Added:
+- Correct CAST, ROUND, TOP
+- small bugfixes
+
+
+ver. 1.048 29-07-2005
+Added:
+- ORDERUNION for sql statement
+
+small bugfixes
+
+
+ver 1.047 29-07-2005
+Added:
+- USEINDEX for sql statement
+
+small bugfixes
+
+
+ver. 1.046 25-07-2005
+Added:
+- Table password
+- Restructure password
+- update default if field is null
+- ONLINE for sql statement see SQL references
+- Optimistic record locked (Database -> RecLocking) see demo masterdetail or testsql
+
+small bugfixes
+
+
+ver. 1.037 15-05-2005
+Added:
+- ODD function
+
+
+ver 1.036 14-05-2005
+Added:
+- MOD, DIV function
+
+small bugfixes
+
+
+ver. 1.035 13-05-2005
+Added:
+- TOPCENTERDOWN, CENTER - see SQL references
+
+small bugfixes
+
+
+ver. 1.034 12-05-2005
+Added:
+- TOPDOWN
+- extension TOP, DOWN, TOPDOWN (DIVBY, ATFIRST, DISTINCT) see SQL references
+- -=-=-=-=- CAST 
+
+
+ver. 1.032 11-05-2005
+Added:
+- CAST (SQL function) see SQL references
+
+
+ver. 1.029 09-05-2005
+Added:
+- support UNION [ALL],
+- support TOP, DOWN (invert top) see SQL references
+- table flags:
+Don't change AutoInc,
+Don't change Max records,
+Don't restructure,
+Don't insert records,
+Don't edit records,
+Don't delete records
+
+
+ver. 1.028 30-04-2005
+Added:
+- TableFlags:
+	Don't change AutoInc
+	Don't change Max records
+	Don't restructure
+	Don't insert records
+	Don't edit records
+	Don't delete records
+ 	
+Small bug fixes
+
+
+ver. 1.027 - Start stable version 29-04-2005
+Ready for new extension.
+Product is ready to following changes without losses of agreement with older versions 
+
+Added:
+- MaxRecords for table - 0 is no restrict max 2147483647 
+- Step for autoincrement - –2147483648..2147483647
+- EmptyAsNull if fieldtype is:
+    -'ShortString',
+    -'AnsiShortString',
+    -'NullString',
+    -'AnsiNullString',
+    -'WideString'
+  and value = '' then value chenged as null
+- Max clients connection for server - 0 is no restrict
+- Max duplicate user connection for server - 0 is no restrict
+- Max database open for server - 0 is no restrict
+- LockType (fsltOptimistic, fsltPessimistic) for fsTable
+- DeleteTimeOut for fsTable
+- CheckTimeout for fsTable (before edit, post)
+- password (username, password) for fsClient
+
+Deleted: 
+- fieldtype:
+  fftBLOBFmtMemo,  
+  fftBLOBOLEObj,
+  fftBLOBDBSOLEObj,
+  fftBLOBTypedBin, 
+  fftBLOBFile.
+- defaultsession (automatic)

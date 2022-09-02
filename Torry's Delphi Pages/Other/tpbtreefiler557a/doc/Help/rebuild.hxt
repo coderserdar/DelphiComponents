@@ -1,0 +1,61 @@
+;
+;-------------------------------------------------------------------
+!TOPIC 726 Rebuild
+The Rebuild unit interfaces a procedure called RebuildFileBlock. This
+procedure was designed to make it easy for you to recover from corrupted
+index files. RebuildFileBlock reads the existing data file (ignoring the
+potentially damaged index file), builds a new data file using just the
+non-deleted records, and creates a complete new index file.
+
+The Rebuild unit uses the Restruct and ReIndex units to do its work.
+
+  0727RebuildFileBlock  0730RESTRUCT/REINDEX
+;
+;-------------------------------------------------------------------
+!TOPIC 727 RebuildFileBlock
+!NOINDEX
+procedure 0726Rebuild.RebuildFileBlock(FBlName :IsamFileBlockName;
+                                     DatSLen :LongInt;
+                                     NumberOfKeys :Integer;
+                                     IID :IsamIndDescr;
+                                     BuildKeyFunc :FuncBuildKey);
+
+This procedure rebuilds the Fileblock of the name FBlName. For this
+operation to succeed, every undeleted record must begin with a longint of
+value 0. A backup copy of the corrupt ".DAT" file of the corrupt Fileblock
+should be made before the use of RebuildFileBlock for maximum
+protection. The procedure works in the following fashion:
+
+!NOWRAP
+  1) Renames the ".DAT" file to ".SAV", if there is not already a
+     ".SAV" file. If there is a ".SAV" file, it assumes that it is a
+     proper file from a previous rebuild attempt.
+  2) Calls BTCreateFileBlock with the name FBlName, record length
+     DatSlen, NumberOfKeys keys and the index descriptor IID, then
+     opens the fileblock using BTOpenFileBlock.
+  3) Reads every record from the ".SAV" file and calls BTAddRec for the
+     new Fileblock.
+  4) For every single key (1 to NumberOfKeys) reads the record from the
+     new ".DAT" file and adds the key with BTAddKey.
+  5) Closes the new fileblocks.
+  6) Erases the ".SAV" file.
+!WRAP
+
+To implement step 4 the user must provide a function that will create the
+desired key from the record. The address of the function must be passed in
+FuncBuildKey. This function must be compiled under the FAR model, and it
+may not be nested within any other procedure or function. It should be of
+the following form:
+
+  {$F+}
+  function BuildKeyFunc(var DatS; KeyNr : Word) : IsamKeyStr;
+
+The rebuild procedure is terminated immediately in case of a fatal I/O
+error. The remaining ".SAV" file should not be deleted so a following
+reconstruction may attempt to use it. If during the rebuild a duplicate
+primary key is encountered, the record with all its previously entered keys
+are removed from the fileblock. The contents of the record and its
+corresponding keys are written into a file with the extension ".MSG".
+This can be examined later, with TYPE or a program like LIST. No file
+with an ".MSG" extension exists if no duplicate keys are found during the
+rebuild.

@@ -1,0 +1,44 @@
+package fsql1_d2005;
+
+{$R *.res}
+{$R 'fsclreg.dcr'}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'FSSQL'}
+{$DESIGNONLY}
+{$IMPLICITBUILD ON}
+
+requires
+  fsql1_r2005,
+  designide,
+  dbrtl;
+
+contains
+  fsclreg in 'fsclreg.pas',
+  fsclfldg in 'fsclfldg.pas',
+  fsclexps in 'fsclexps.pas' {frmSelectProtocols},
+  fsclsqle in 'fsclsqle.pas' {fsSqlEditor},
+  fsclcoln in 'fsclcoln.pas' {fsParamEditor};
+
+{$I fsdefine.inc}
+
+end.

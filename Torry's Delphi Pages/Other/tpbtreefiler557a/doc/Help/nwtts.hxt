@@ -1,0 +1,182 @@
+;
+;-------------------------------------------------------------------
+!TOPIC 643 NWTTS
+
+Novell's NetWare provides a sophisticated transaction tracking system
+to improve data integrity. With transaction tracking services (TTS), the
+network operating system can guarantee that a complete sequence of
+operations is written to disk, or that none of it is.
+
+The NWTTS module supports these TTS functions:
+
+   . determine whether TTS services are available
+   . begin, end, or abort a transaction
+   . check status of a transaction
+   . disable or enable transaction tracking system-wide
+
+NetWare supports two categories of transactions: explicit and implicit.
+Explicit transactions are initiated when the application makes an explicit
+call to the server to begin a transaction. Implicit transactions are
+started automatically when the server recognizes that certain levels of
+record locking on a transactional file have been activated by the
+application. The NWTTS module supports only the explicit method.
+
+Before using TTS on a file, remember to mark it transactional by using the
+NetWare FLAG utility or by calling nwSetFileAttr from the NWFILE unit.
+
+If you use TTS on a B-Tree Filer fileblock, you should mark the index and
+data files transactional. Do not mark the dialog file transactional.
+Because of the way the dialog file is used in Filer, marking it
+transactional causes TTS to misbehave.
+
+!NOWRAP
+  0644nwTTSAbort        0645nwTTSAvailable
+  0646nwTTSBegin        0647nwTTSDisable
+  0648nwTTSEnable       0649nwTTSEnd
+  0650nwTTSIsCommitted
+!WRAP
+
+Like other NetWare units in B-Tree Filer this unit builds upon the identifiers in the
+0458NWBase unit.
+;
+;-------------------------------------------------------------------
+!TOPIC 644 nwTTSAbort
+!NOINDEX
+function 0643NWTTS.nwTTSAbort(Server : TnwServer) : TnwErrorCode;
+
+Abort a transaction (rollback).
+
+If nwTTSAbort returns with a function result of zero, the transaction has
+been rolled back, meaning that any disk updates associated with the
+transaction are undone or removed from server memory buffers. For this
+function to work, TTS must be available and enabled.
+
+If the transaction is associated with one or more B-Tree Filer fileblocks,
+be sure to call BTInformTTSAbortSuccessful for each fileblock. This causes
+B-Tree Filer module to purge its index buffers of any information that
+might be incorrect after the transaction is backed out.
+
+An error code is returned as the function result:
+
+!NOWRAP
+;!TABLE
+  0      Transaction successfully aborted.
+  $89FD  TTS is disabled (no rollback was performed).
+  $89FE  Transaction aborted but records remain locked.
+  $89FF  No explicit transaction was active.
+!WRAP
+
+See also:  BTInformTTSAbortSuccessful  0646nwTTSBegin  0649nwTTSEnd
+;
+;-------------------------------------------------------------------
+!TOPIC 645 nwTTSAvailable
+!NOINDEX
+function 0643NWTTS.nwTTSAvailable(Server : TnwServer) : Boolean;
+
+Determine whether transaction tracking services are available.
+
+Call this function prior to any other TTS routines to determine whether
+transaction tracking services are available.
+
+See also:  0647nwTTSDisable  0648nwTTSEnable
+;
+;-------------------------------------------------------------------
+!TOPIC 646 nwTTSBegin
+!NOINDEX
+function 0643NWTTS.nwTTSBegin(Server : TnwServer) : TnwErrorCode;
+
+Begin a transaction.
+
+A "transaction" is a sequence of logically related file operations that
+must happen as a group--either all must be successful or none should be
+saved to disk. After the transaction begins, no related file operations
+are committed to disk until 0649nwTTSEnd is called.
+
+For a file to be used with transaction tracking, it must be flagged as
+transactional (see 0542nwSetFileAttr). Also, TTS services must be available
+and enabled (see 0645nwTTSAvailable and 0648nwTTSEnable).
+
+A status code is returned in function result:
+
+!NOWRAP
+;!TABLE
+  0      Transaction begun.
+  $8996  Out of dynamic workspace.
+  $89FE  Implicit transaction already active
+  $89FF  Explicit transaction already active
+!WRAP
+
+See also:  0644nwTTSAbort
+;
+;-------------------------------------------------------------------
+!TOPIC 647 nwTTSDisable
+!NOINDEX
+function 0643NWTTS.nwTTSDisable(Server : TnwServer) : Boolean;
+
+Disable transaction tracking on a server.
+
+The caller must have supervisory privileges in order to disable TTS. The
+function returns True if it succeeds; False otherwise.
+
+See also:  0648nwTTSEnable
+;
+;-------------------------------------------------------------------
+!TOPIC 648 nwTTSEnable
+!NOINDEX
+function 0643NWTTS.nwTTSEnable(Server : TnwServer) : Boolean;
+
+Enable transaction tracking on a server.
+
+The caller must have supervisory privileges in order to disable TTS. If
+TTS is available, it is active by default. The function returns True if it
+succeeds; False otherwise.
+
+See also:  0645nwTTSAvailable  0647nwTTSDisable
+;
+;-------------------------------------------------------------------
+!TOPIC 649 nwTTSEnd
+!NOINDEX
+function 0643NWTTS.nwTTSEnd(Server : TnwServer; var ID : nwLong) : TnwErrorCode;
+
+End a transaction (commit).
+
+The transaction has not necessarily been committed to disk when this
+function returns. Use the ID value returned by nwTTSEnd in a call to
+0650nwTTSIsCommitted to determine when a transaction has actually been written
+to disk. The Novell documentation states that a transaction takes between
+3 and 5 seconds to be committed, however experiments have shown commitment
+times of 6-7 seconds.
+
+If the transaction is associated with one or more B-Tree Filer fileblocks,
+be sure to call BTUnlockFileBlock for each fileblock before calling
+nwTTSEnd. This causes B-Tree Filer to flush its index buffers of any
+information that might be associated with the transaction.
+
+The function returns a status code:
+
+!NOWRAP
+;!TABLE
+  0      Transaction ended successfully.
+  $89FD  TTS disabled.
+  $89FE  Transaction ended but records remain locked.
+  $89FF  No explicit transaction was active.
+!WRAP
+
+See also:  BTUnlockFileBlock  0646nwTTSBegin
+;
+;-------------------------------------------------------------------
+!TOPIC 650 nwTTSIsCommitted
+!NOINDEX
+function 0643NWTTS.nwTTSIsCommitted(Server : TnwServer; ID : nwLong) : Boolean;
+
+Determine whether a transaction was successfully written to disk.
+
+After calling 0649nwTTSEnd, you can call nwTTSIsCommitted to verify that a
+transaction has been committed to disk. ID is the transaction reference
+number returned by nwTTSEnd. nwTTSIsCommitted returns True when the
+transaction has been committed; False if it hasn't yet been committed.
+NetWare only checks the ID against its internal queue of active
+transactions. If the ID isn't found in this queue, nwTTSIsCommitted
+returns True. Hence passing an invalid ID returns True.
+
+See also:  0647nwTTSDisable

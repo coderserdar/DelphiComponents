@@ -1,0 +1,53 @@
+package T557_R90;
+
+{$R *.RES}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $2700000}
+{$DESCRIPTION 'B-Tree Filer RunTime Package'}
+{$RUNONLY}
+{$IMPLICITBUILD OFF}
+
+requires
+  vcl;
+
+contains
+  BTBase in '..\source\BTBase.pas',
+  BTFileIO in '..\source\BTFileIO.pas',
+  BTIsBase in '..\source\BTIsBase.pas',
+  Filer in '..\source\Filer.pas',
+  VRec in '..\source\VRec.pas',
+  BufRecIO in '..\source\BufRecIO.pas',
+  Restruct in '..\source\Restruct.pas',
+  Reindex in '..\source\Reindex.pas',
+  Reorg in '..\source\Reorg.pas',
+  VReorg in '..\source\VReorg.pas',
+  Rebuild in '..\source\Rebuild.pas',
+  VRebuild in '..\source\VRebuild.pas',
+  FixToVar in '..\source\FixToVar.pas',
+  IsamTool in '..\source\IsamTool.pas',
+  NumKey32 in '..\source\NumKey32.pas',
+  Lowbrows in '..\source\Lowbrows.pas',
+  Medbrows in '..\source\Medbrows.pas',
+  Hibrows in '..\source\Hibrows.pas',
+  FvcBrows in '..\source\FvcBrows.pas';
+
+end.

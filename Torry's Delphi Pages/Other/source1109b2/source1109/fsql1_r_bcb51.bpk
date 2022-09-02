@@ -1,0 +1,124 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!-- C++Builder XML Project -->
+<PROJECT>
+  <MACROS>
+    <VERSION value="BCB.05.03"/>
+    <PROJECT value="fsql1_r_bcb51.bpl"/>
+    <OBJFILES value="fssrsort.obj fssrcur.obj fsllcoll.obj fscocobase.obj fsclbase.obj 
+      fsclbde.obj fsclcfg.obj fsclconv.obj fsclintf.obj fsserverremoteclass.obj 
+      fscltbrg.obj fsdb.obj fsfile.obj fshash.obj fsllbase.obj fsllcomm.obj 
+      fsllcomp.obj fslldict.obj fslleng.obj fsllexcp.obj fsllgrid.obj 
+      fsconst.obj fsconvff.obj fsdbbase.obj fsdtmsgq.obj fslllgcy.obj fslllog.obj 
+      fsllprot.obj fsllreq.obj fsllthrd.obj fsllunc.obj fsllwsck.obj 
+      fsllwsct.obj fsnetmsg.obj fssql.obj fssqlbas.obj fssqldb.obj fssqldef.obj 
+      fssqleng.obj fssrbase.obj fssrbde.obj fssrblob.obj fssrcfg.obj fssrcmd.obj 
+      fssrcvex.obj fsserverclass.obj fssrfltr.obj fssrfmap.obj fssrfold.obj 
+      fssrintf.obj fssrintm.obj fsindexhelper.obj fssrlock.obj fssrmgr.obj 
+      fssrsec.obj fssrstat.obj fssrtran.obj fsstdate.obj fsutil.obj fssrjour.obj 
+      fsql1_r_bcb51.obj"/>
+    <RESFILES value="fsql1_r_bcb51.res"/>
+    <IDLFILES value=""/>
+    <IDLGENFILES value=""/>
+    <DEFFILE value=""/>
+    <RESDEPEN value="$(RESFILES)"/>
+    <LIBFILES value=""/>
+    <LIBRARIES value="VCLBDE50.lib"/>
+    <SPARELIBS value="vcl50.lib vcldb50.lib VCLBDE50.lib"/>
+    <PACKAGES value="vcl50.bpi vcldb50.bpi"/>
+    <PATHCPP value=".;"/>
+    <PATHPAS value=".;"/>
+    <PATHRC value=".;"/>
+    <PATHASM value=".;"/>
+    <DEBUGLIBPATH value="$(BCB)\lib\debug"/>
+    <RELEASELIBPATH value="$(BCB)\lib\release"/>
+    <LINKER value="ilink32"/>
+    <USERDEFINES value=""/>
+    <SYSDEFINES value="NO_STRICT;_VIS_NOLIB;USEPACKAGES"/>
+    <MAINSOURCE value="fsql1_r_bcb51.cpp"/>
+    <INCLUDEPATH value="..\source;$(BCB)\include;$(BCB)\include\vcl"/>
+    <LIBPATH value="..\source;$(bcb)\lib;$(BCB)\lib\obj"/>
+    <WARNINGS value="-w-par -w-8027 -w-8026"/>
+    <WARNOPTSTR value=""/>
+  </MACROS>
+  <OPTIONS>
+    <IDLCFLAGS value="-I..\source -I$(BCB)\include -I$(BCB)\include\vcl -src_suffix cpp -boa"/>
+    <CFLAG1 value="-O2 -Vx -Ve -Tkh30000 -X- -a8 -b- -k- -vi -c -tWM"/>
+    <PFLAGS value="-$Y- -$L- -$D- -v -M -JPHNE"/>
+    <RFLAGS value=""/>
+    <AFLAGS value="/mx /w2 /zn"/>
+    <LFLAGS value="-D&quot;FSSQL Runtime Package - VCL51&quot; -aa -Tpp -Gpr -x -Gn -Gl -Gi"/>
+  </OPTIONS>
+  <LINKER>
+    <ALLOBJ value="c0pkg32.obj $(PACKAGES) sysinit.obj $(OBJFILES)"/>
+    <ALLRES value="$(RESFILES)"/>
+    <ALLLIB value="$(LIBFILES) $(LIBRARIES) import32.lib cp32mt.lib"/>
+  </LINKER>
+  <IDEOPTIONS>
+[Version Info]
+IncludeVerInfo=1
+AutoIncBuild=0
+MajorVer=1
+MinorVer=0
+Release=7
+Build=5
+Debug=0
+PreRelease=0
+Special=0
+Private=0
+DLL=0
+Locale=1033
+CodePage=1252
+
+[Version Info Keys]
+CompanyName=Krzysztof Winnicki
+FileDescription=FSSQL
+FileVersion=1.0.7.5
+InternalName=
+LegalCopyright=
+LegalTrademarks=
+OriginalFilename=
+ProductName=FSSQL
+ProductVersion=1.0.7.5
+Comments=
+
+[Excluded Packages]
+
+
+[HistoryLists\hlIncludePath]
+Count=3
+Item0=..\source;$(BCB)\include;$(BCB)\include\vcl
+Item1=..\..\CBuilder5\Zlib;..\source;$(BCB)\include;$(BCB)\include\vcl
+Item2=$(BCB)\include;$(BCB)\include\vcl
+
+[HistoryLists\hlLibraryPath]
+Count=4
+Item0=..\source;$(bcb)\lib;$(BCB)\lib\obj
+Item1=..\..\CBuilder5\Zlib;..\source;$(bcb)\lib;$(BCB)\lib\obj
+Item2=$(bcb)\lib;$(BCB)\lib\obj
+Item3=$(bcb)\lib;$(BCB)\lib\obj;$(BCB)\lib
+
+[HistoryLists\hlDebugSourcePath]
+Count=1
+Item0=$(BCB)\source\vcl
+
+[Debugging]
+DebugSourceDirs=$(BCB)\source\vcl
+
+[Parameters]
+RunParams=
+HostApplication=
+RemoteHost=
+RemotePath=
+RemoteDebug=0
+
+[Compiler]
+ShowInfoMsgs=0
+LinkDebugVcl=0
+LinkCGLIB=0
+
+[Language]
+ActiveLang=
+ProjectLang=
+RootDir=
+  </IDEOPTIONS>
+</PROJECT>

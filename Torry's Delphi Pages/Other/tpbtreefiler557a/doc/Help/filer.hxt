@@ -1,0 +1,2295 @@
+;
+;-------------------------------------------------------------------
+!TOPIC 190 Filer
+B-Tree Filer offers you a high-quality library to manage databases in an
+efficient and easy-to-use manner. It includes many features that set it
+apart from the competition:
+
+!NOWRAP
+  - integral support for multi-user, networked databases
+  - strict error checking and safety modes to maximize data integrity
+  - written in Turbo Pascal, with full source code provided
+  - fixed and variable length record support
+  - all indices stored in one file to minimize file handle usage
+  - separate data and index files to maximize data integrity
+  - support for EMS and normal heap memory for index page buffers
+  - no TSR's required at runtime
+  - powerful utility units for browsing, rebuilding and sorting data files
+  - support for Novell, MS-NET, and all NetBIOS compatible networks
+  - network utility units for NetWare, NetBIOS, and the MS-NET Redirector
+  - POPHELP on-line help reference
+!WRAP
+
+B-Tree Filer is based on an improved version of the balanced B-Tree
+algorithm, which has proven itself as one of the best methods to access
+data in large databases.
+
+The FILER unit implements the B-Tree manager. It includes a collection of
+routines for managing data and index files.
+
+***NEW FOR VERSION 5.54***
+From version 5.53 onwards the FILER unit has been split into 4 separate
+units: 0193BTBASE, 0192BTFILEIO, 0191BTISBASE and FILER. The BTBASE unit simply declares
+a set of identifiers so that all compilers supported by B-Tree Filer have
+similarly declared identifiers (an example: declaring SmallInt as Integer for
+BP7). BTFILEIO contains routines implementing the low-level operating system
+support for file access, things like opening, closing, reading from, writing
+to file handles. In prior versions of B-Tree Filer this support was coded
+in the ISAMBASE.INC include file. BTISBASE provides some basic wrappers around
+the low-level file access to make them more B-Tree Filer specific (examples
+are IsamAssign and IsamClose). In the topics in this help file the unit where
+constants, types, variables, routines are declared is explicitly specified -
+in the past, this was always assumed to be FILER unless stated otherwise.
+Applications written with B-Tree Filer 5.52 or earlier will generally have
+to have all of their units' uses lists changed to include these three extra
+units as well as the FILER unit
+
+  0194Fileblock operations         0197Fileblock information
+  0195Data file operations         0196Index file operations
+  0198Locking operations           0201Low level routines
+  0199Declarations                 0200Error codes
+;
+;-------------------------------------------------------------------
+!TOPIC 191 BTISBASE
+The BTISBASE unit provides some basic wrappers around the low-level file
+access routines to make them more B-Tree Filer specific (examples are
+IsamAssign and IsamClose). The low-level routines that are wrapped are
+declared in the 0192BTFILEIO unit.
+
+The unit also declares some of B-Tree Filer's variables and constants.
+
+See 0190Filer
+;
+;-------------------------------------------------------------------
+!TOPIC 192 BTFILEIO
+The BTFILEIO unit provides some the standard low-level routines for file
+access. The routines include opening a file to get a file handle, reading
+from, writing to, seeking on the file handle, and closing the file handle.
+B-Tree Filer does not use these routines directly, instead the 0191BTISBASE
+unit declares wrapper routines that are specific to B-Tree Filer.
+
+The identifiers and routines declared in BTFILEIO are not described in this
+help file. For full documentation, please refer to the source code in
+BTFILEIO.PAS.
+
+See 0190Filer
+;
+;-------------------------------------------------------------------
+!TOPIC 193 BTBASE
+The BTBASE unit is a simple unit that declares some primary types and
+constants. These identifiers are solely to flesh out the set of identifiers
+for older compilers, so that the remainder of the B-Tree Filer code
+can be more easily written. For example the SmallInt type is unknown to the
+BP7 compiler and so BTBASE declares it so that the rest of the B-Tree Filer
+can use the SmallInt type if needed without the need for $IFDEF statements
+and the like.
+
+See 0190Filer
+;
+;-------------------------------------------------------------------
+!TOPIC 194 Fileblock operations
+!NOINDEX
+!NOSEARCH
+The routines in this category are for overall initialization of the
+Filer unit and for operations on fileblocks as a whole.
+
+  0262BTCloseAllFileBlocks  0261BTCloseFileBlock
+  0259BTCreateFileBlock     0263BTDeleteFileBlock
+  0203BTExitIsam            0257BTFlushAllFileBlocks
+  0258BTFlushFileBlock      0225BTForceNetBufferWriteThrough
+  0220BTForceWritingMark    0337BTInformTTSAbortSuccessful
+  0202BTInitIsam            0204BTIsamErrorClass
+  0222BTNetSupported        0223BTNoNetCompiled
+  0260BTOpenFileBlock       0327BTPeekNetSupported
+  0328BTPeekNoNetCompiled   0353BTSetCharConvert
+  0221BTSetDosRetry
+;
+;-------------------------------------------------------------------
+!TOPIC 195 Data file operations
+!NOINDEX
+!NOSEARCH
+The routines in this category are for reading and writing the data file of
+a fileblock.
+
+  0229BTAddRec                0230BTDeleteRec
+  0345BTFindRecRef            0339BTGetAfterNextUsedAddRecRef
+  0346BTGetApprRecPos         0347BTGetApprRecRef
+  0338BTGetNextUsedAddRecRef  0227BTGetRec
+  0228BTGetRecReadOnly        0336BTGetStartingLong
+  0350BTNextRecRef            0352BTPrevRecRef
+  0226BTPutRec
+;
+;-------------------------------------------------------------------
+!TOPIC 196 Index file operations
+!NOINDEX
+!NOSEARCH
+The routines in this category are for searching, scanning or modifying
+the index file of a fileblock.
+
+  0251BTAddKey                        0241BTClearKey
+  0253BTDeleteAllKeys                 0252BTDeleteKey
+  0244BTFindKey                       0246BTFindKeyAndRef
+  0256BTGetApprKeyAndRef              0255BTGetApprRelPos
+  0248BTKeyExists                     0249BTNextDiffKey
+  0242BTNextKey                       0250BTPrevDiffKey
+  0243BTPrevKey                       0245BTSearchKey
+  0247BTSearchKeyAndRef               0239BTSetSearchForSequential
+;
+;-------------------------------------------------------------------
+!TOPIC 197 Fileblock information
+!NOINDEX
+!NOSEARCH
+The routines in this category are for returning information about a
+fileblock.
+
+  0264BTDataFileName               0236BTDatRecordSize
+  0218BTFileBlockIsLocked          0217BTFileBlockIsOpen
+  0219BTFileBlockIsReadLocked      0234BTFileLen
+  0233BTFreeRecs                   0354BTGetAllowDupKeys
+  0340BTGetInternalDialogID        0348BTGetKeyLen
+  0240BTGetSearchForSequential     0265BTIndexFileName
+  0349BTIsInitialized              0224BTIsNetFileBlock
+  0237BTKeyRecordSize              0238BTMinimumDatKeys
+  0235BTNrOfKeys                   0254BTOtherWSChangedKey
+  0334BTPeekDataFileName           0331BTPeekDatRecordSize
+  0325BTPeekFileBlockIsLocked      0324BTPeekFileBlockIsOpen
+  0326BTPeekFileBlockIsReadLocked  0335BTPeekIndexFileName
+  0329BTPeekIsNetFileBlock         0332BTPeekKeyRecordSize
+  0333BTPeekMinimumDatKeys         0330BTPeekNrOfKeys
+  0232BTUsedKeys                   0231BTUsedRecs
+;
+;-------------------------------------------------------------------
+!TOPIC 198 Locking operations
+!NOINDEX
+!NOSEARCH
+The routines in this category are for locking and unlocking fileblocks
+and records, and for returning information about locks.
+
+  0215BTaRecIsLocked                  0216BTGetRecordInfo
+  0209BTLockAllOpenFileBlocks         0206BTLockFileBlock
+  0211BTLockRec                       0322BTPeekaRecIsLocked
+  0323BTPeekGetRecordInfo             0321BTPeekRecIsLocked
+  0208BTReadLockAllOpenFileBlocks     0205BTReadLockFileBlock
+  0214BTRecIsLocked                   0210BTUnLockAllOpenFileBlocks
+  0207BTUnLockFileBlock               0213BTUnLockAllRecs
+  0212BTUnLockRec
+;
+;-------------------------------------------------------------------
+!TOPIC 199 Declarations,B-Tree Filer
+!NOINDEX
+!NOSEARCH
+B-Tree Filer interfaces the following types, constants and variables:
+
+  0291AddNullKeys                     0292DatExtension
+  0284DefeatLocalCache                0293DiaExtension
+  0343InheritFileHandles              0294IsamCompiledNets
+  0295IsamDelayBetwLocks              0296IsamDOSError
+  0297IsamDOSFunc                     0298IsamError
+  0341IsamFBLockTimeOutFactor         0299IsamFile
+  0300IsamFileBlockName               0301IsamFileBlockPtr
+  0302IsamFileName                    0303IsamFileNameLen
+  0304IsamFlushDOS33                  0305IsamIndDescr
+  0306IsamKeyStr                      0342IsamLockTimeOut
+  0307IsamOK                          0308IsamReXUserProcPtr
+  0309IxExtension                     0310MaxHeight
+  0311MaxKeyLen                       0312MaxNrOfKeys
+  0313MaxNrOfWorkStations             0314MinimizeUseOfNormalHeap
+  0315MsgExtension                    0316NetSupportType
+  0317PageSize                        0355ProcBTCharConvert
+  0318SavExtension                    0319SearchForSequentialDefault
+  0344TestNetExistance                0320VersionStr
+;
+;-------------------------------------------------------------------
+!TOPIC 200 Error codes
+!NOINDEX
+!NOSEARCH
+The following table lists all of the error codes that can be returned
+in the <IsamError> variable. The table is formatted as follows:
+
+!NOWRAP
+;!TABLE
+ErrorNumber (ErrorClass) Routines that may generate the error
+Brief description of the error
+
+8000   (4)    user
+The range 8000..8999 is reserved for user-defined codes, BONUS units,
+etc.
+
+9500   (4)    general
+The range 9500..9899 is reserved for IOResult error codes. Subtract
+9500 to get the true IOResult code, then refer to the Turbo Pascal
+Programmer's Guide or a DOS reference manual.
+
+9900   (2)    general
+Invalid path name, or drive not ready under Windows and protected mode.
+
+9901   (4)    general
+Too many open files.
+
+9902   (4)    general
+Current directory is full.
+
+9903   (1)    general
+File not found.
+
+9904   (4)    general
+Invalid file descriptor (usually bad DOS file handle number).
+
+9905   (4)    general
+Read request exceeds 64K bytes.
+
+9906   (4)    general
+Write request exceeds 64K bytes.
+
+9908   (4)    general
+Invalid file access mode.
+
+10000  (4)    0202BTInitIsam
+Number of page buffers is less than 0310MaxHeight.
+
+10001  (3)    0229BTAddRec
+10002  (3)    0230BTDeleteRec
+10003  (3)    0251BTAddKey
+10004  (3)    0252BTDeleteKey
+10005  (3)    0253BtDeleteAllKeys
+Serious I/O error in save mode. The fileblock is still in usable state
+but the last operation was not completed.
+
+10010  (4)    0260BTOpenFileBlock
+Index file probably corrupt (wasn't closed properly after last
+modification).
+
+10020  (4)    0259BTCreateFileBlock
+Record length out of range (<21 bytes).
+
+10030  (4)    0260BTOpenFileBlock, 0259BTCreateFileBlock
+Insufficient memory for key descriptors.
+
+10040  (4)    0818BTAddVariableRec, 0820BTPutVariableRec
+Insufficient memory for variable record buffer expansion.
+
+10050  (4)    0259BTCreateFileBlock
+Invalid number of keys specified (<0 or >0312MaxNrOfKeys).
+
+10055  (4)    0259BTCreateFileBlock
+Key length out of range (<1 or >0311MaxKeyLen).
+
+10060  (4)    0260BTOpenFileBlock
+Too many keys, or file read error (>0312MaxNrOfKeys).
+
+10065  (4)    general
+An attempt has been made to write to a fileblock opened in read only
+mode.
+
+10070  (4)    general
+File read error. Common reasons for this error include: Dialog file
+left corrupted by a previous program run (delete the dialog file at
+the DOS command line); 0227BTGetRec specified an invalid record number
+(larger than 0234BTFileLen); two different programs compiled with
+different 0313MaxNrOfWorkStations constants are trying to access the same
+fileblock; a physical hard disk error.
+
+10075  (4)    general
+File write error.
+
+10080  (4)    0261BTCloseFileBlock
+Fileblock not open.
+
+10090  (4)    0259BTCreateFileBlock
+10100  (4)    0260BTOpenFileBlock
+Insufficient memory for an IsamFileBlock variable.
+
+10110  (2)    general
+Drive not ready.
+
+10120  (4)    0260BTOpenFileBlock
+Index header corrupt; cannot calculate key length.
+
+10121  (4)    0260BTOpenFileBlock
+0311MaxKeyLen now incompatible with fileblock.
+
+10122  (4)    0260BTOpenFileBlock
+PageSize for fileblock is greater than 0317MaxPageSize
+
+10125  (4)    0251BTAddKey
+Key length too long (>max length for its index).
+
+10130  (4)    0226BTPutRec
+Attempt to write to record number 0.
+
+10135  (4)    0230BTDeleteRec
+Attempt to delete record number 0 or a number greater than
+the total in the file.
+
+10140  (4)    general
+Unexpected DOS error (check 0296IsamDOSError and 0297IsamDOSFunc).
+
+10150  (4)    general
+Out of handles on flush of network fileblock.
+
+10160  (4)    0261BTCloseFileBlock
+Fileblock not correctly closed.
+
+10164  (4)    general
+Invalid key number (<1 or >max index for this fileblock).
+
+10170  (4)    0229BTAddRec, 0230BTDeleteRec
+Free record list corrupt (attempt to use record 0).
+
+10180  (4)    general
+Attempt to repair fileblock failed.
+
+10190  (4)    0359ExtendHandles
+Requires DOS 3.3 or later.
+
+10191  (4)    0359ExtendHandles
+Insufficient memory for new file handle table.
+
+10192  (4)    0359ExtendHandles
+Unable to obtain new file handle table from DOS.
+
+10200  (1)    0244BTFindKey.
+No matching key found
+
+10205  (1)    0228BTGetRecReadOnly
+Data record is locked.
+
+10210  (1)    0245BTSearchKey
+No key found and no larger keys available.
+
+10215  (1)    0737ReIndexFileBlock
+Data file is defective
+
+10220  (1)    0252BTDeleteKey
+Key to delete was not found.
+
+10230  (1)    0251BTAddKey
+Cannot add duplicate key.
+
+10240  (1)    0249BTNextDiffKey
+10250  (1)    0242BTNextKey
+No larger key found.
+
+10245  (1)    0250BTPrevDiffKey
+10260  (1)    0243BTPrevKey
+No smaller key found.
+
+10255  (1)    0242BTNextKey
+10265  (1)    0243BTPrevKey
+Sequential access not allowed.
+
+10270  (1)    0246BTFindKeyAndRef
+No matching key and record number found.
+
+10280  (1)    0256BTGetApprKeyAndRef
+10285  (1)    0255BTGetApprRelPos
+Index empty.
+
+10306  (2)    0260BTOpenFileblock
+Too many fileblock users
+
+10310  (4)    0202BTInitIsam
+Network initialization error.
+
+10315  (4)    0203BTExitIsam
+Network exit error.
+
+10322  (4)    0261BTCloseFileBlock
+Attempt to remove readlock failed.
+
+10323  (4)    0261BTCloseFileBlock
+Attempt to remove record lock failed.
+
+10330  (2)    0206BTLockFileBlock, 0209BTLockAllOpenFileBlocks
+Attempt to lock fileblock failed.
+
+10332 (2)     0205BTReadLockFileBlock, 0208BTReadLockAllOpenFileBlocks
+Attempt to readlock fileblock failed.
+
+10335  (2)    0211BTLockRec
+Attempt to lock record failed.
+
+10337  (4)    0211BTLockRec
+Insufficient memory for lock list expansion.
+
+10340  (4)    0207BTUnlockFileBlock, 0210BTUnlockAllOpenFileBlocks
+10342  (4)    0260BTOpenFileBlock
+Attempt to unlock fileblock failed.
+
+10341  (4)    general
+Attempt to remove readlock failed.
+
+10345  (4)    0212BTUnlockRec
+Attempt to unlock record failed.
+
+10355  (2)    0260BTOpenFileBlock
+10399  (2)    general
+A lock prevents the operation.
+
+10356  (4)    0260BTOpenFileBlock
+Insufficient memory for network support record.
+
+10397  (2)    general
+Fileblock is read-only or a lock prevents operation.
+
+10398  (4)    general
+Fileblock must be locked for this operation.
+
+10410  (1)    0736RestructFileBlock
+Data file not found.
+
+10411  (4)    0736RestructFileBlock  0737ReIndexFileBlock
+Insufficient memory for work buffers.
+
+10412  (4)    0736RestructFileBlock  0737ReIndexFileBlock
+Section length exceeds 64K.
+
+10415  (4)    general (0813VRec unit)
+Too many sections in a variable rec (total length exceeds $FFF0).
+
+10420  (4)    0256BTGetApprKeyAndRef  0347BTGetApprRecRef
+10425  (4)    0255BTGetApprRelPos  0346BTGetApprRecPos
+Relative position or scale invalid.
+
+10430  (4)    general
+Fileblock repair not allowed in read-only mode.
+
+10435  (4)    0202BTInitIsam
+Index page larger than 16K bytes.
+
+10440  (4)    0260BTOpenFileBlock
+Cannot create dialog file in read-only mode.
+
+10445  (4)    general
+Fileblock pointer or descriptor corrupted (MEMORY OVERWRITE).
+
+10446  (4)    general
+Recursive call to B-Tree Filer when EMS in use.
+
+10450  (4)    0202BTInitIsam
+BTInitIsam called twice.
+
+10455  (4)    general
+BTInitIsam has not been called.
+
+10460  (4)    0736RestructFileBlock  0737ReIndexFileBlock
+Reorganization aborted.
+
+10465  (4)    0736RestructFileBlock  0737ReIndexFileBlock
+Both data (extension .DAT) and save (extension .SAV) files exist.
+Indicates that a previous rebuild or reorganisation failed.
+
+10470  (4)    0737ReIndexFileBlock
+Reindexing aborted.
+
+10475  (4)    0736RestructFileBlock
+Restructing aborted.
+
+10480  (4)    0260BTOpenFileBlock
+Operating system's locking function not working.
+!WRAP
+
+See also:  0204BTIsamErrorClass  0360IsamErrorMessage
+           0297IsamDOSFunc       0296IsamDOSError
+;
+;-------------------------------------------------------------------
+!TOPIC 201 Low level routines
+!NOINDEX
+!NOSEARCH
+The routines in this category are designed primarily for internal use by
+B-Tree Filer:
+
+  0289BTIsamLockRecord  0290BTIsamUnlockRecord
+  0351BTNoCharConvert   0268IsamAssign
+  0276IsamBlockRead     0277IsamBlockReadRetLen
+  0278IsamBlockWrite    0266IsamClearOK
+  0271IsamClose         0286IsamCopyFile
+  0288IsamDelay         0272IsamDelete
+  0267IsamExists        0285IsamExtractFileNames
+  0281IsamFlush         0287IsamForceExtension
+  0279IsamGetBlock      0282IsamGetPosition
+  0274IsamLongSeek      0275IsamLongSeekEOF
+  0280IsamPutBlock      0273IsamRename
+  0270IsamReset         0269IsamRewrite
+  0283IsamSetEOF
+;
+;-------------------------------------------------------------------
+!TOPIC 202 BTInitIsam
+!NOINDEX
+function 0190Filer.BTInitIsam(ExpectedNet : NetSupportType;
+                          Free : LongInt;
+                          NrOfEMSTreePages : Word) : LongInt;
+
+function 0190Filer.BTInitIsam(ExpectedNet : NetSupportType;
+                          Pages : Integer) : LongInt;
+
+Initializes B-Tree Filer and allocates memory from the normal
+heap and/or the EMS heap. ExpectedNet is the network type or
+NoNet. Free is the number of bytes of heap space to leave free.
+NrOfEmsTreePages is the number of index page buffers to
+allocate in expanded memory.
+
+The second version of the function is used when Filer is compiled
+to a 16-bit or 32-bit Windows target.  ExpectedNet is the same as
+before, and Pages is the number of page buffers to allocate.  A
+rule of thumb for the pages parameter is to use 8 pages for each
+open fileblock in your program.
+
+See also:  0203BTExitIsam  0170EmsHeap  0316NetSupportType
+;
+;-------------------------------------------------------------------
+!TOPIC 203 BTExitIsam
+!NOINDEX
+procedure 0190Filer.BTExitIsam;
+
+Deallocates page buffer space and shuts down the selected
+network, if any.
+
+See also:  0202BTInitIsam
+;
+;-------------------------------------------------------------------
+!TOPIC 204 BTIsamErrorClass
+!NOINDEX
+function 0190Filer.BTIsamErrorClass : Integer;
+
+Returns error class in the range 0..4 for current value of
+IsamError. Error classes are as follows:
+
+!NOWRAP
+;!TABLE
+  0  No error
+  1  User error (key not found, etc.)
+  2  Locking error (only on a network)
+  3  Operation did not succeed, but fileblocks are ok (only in save mode)
+  4  Hard error
+!WRAP
+;
+;-------------------------------------------------------------------
+!TOPIC 205 BTReadLockFileBlock
+!NOINDEX
+procedure 0190Filer.BTReadLockFileBlock(IFBPtr : IsamFileBlockPtr);
+
+Readlocks a fileblock (prevents writing to it from any other
+workstation).
+
+See also:  0206BTLockFileBlock  0208BTReadLockAllOpenFileBlocks  0207BTUnlockFileBlock
+;
+;-------------------------------------------------------------------
+!TOPIC 206 BTLockFileBlock
+!NOINDEX
+procedure 0190Filer.BTLockFileBlock(IFBPtr : IsamFileBlockPtr);
+
+Locks a fileblock for exclusive access (current station may
+modify data and index files, no other station may read or
+write).
+
+See also:  0209BTLockAllOpenFileBlocks  0205BTReadLockFileBlock  0207BTUnlockFileBlock
+;
+;-------------------------------------------------------------------
+!TOPIC 207 BTUnLockFileBlock
+!NOINDEX
+procedure 0190Filer.BTUnLockFileBlock(IFBPtr : IsamFileBlockPtr);
+
+Removes read or write locks from a fileblock.
+
+See also:  0206BTLockFileBlock  0205BTReadLockFileBlock
+;
+;-------------------------------------------------------------------
+!TOPIC 208 BTReadLockAllOpenFileBlocks
+!NOINDEX
+procedure 0190Filer.BTReadLockAllOpenFileBlocks;
+
+Readlocks all open network fileblocks.
+
+See also:
+    0209BTLockAllOpenFileBlocks           0205BTReadLockFileBlock
+    0210BTUnlockAllOpenFileBlocks
+;
+;-------------------------------------------------------------------
+!TOPIC 209 BTLockAllOpenFileBlocks
+!NOINDEX
+procedure 0190Filer.BTLockAllOpenFileBlocks;
+
+Locks all open fileblocks for exclusive access.
+
+See also:
+    0206BTLockFileBlock                   0208BTReadLockAllOpenFileBlocks
+    0210BTUnlockAllOpenFileBlocks
+;
+;-------------------------------------------------------------------
+!TOPIC 210 BTUnLockAllOpenFileBlocks
+!NOINDEX
+procedure 0190Filer.BTUnLockAllOpenFileBlocks;
+
+Unlocks all open fileblocks (removes both readlocks and
+exclusive access locks).
+
+See also:
+    0209BTLockAllOpenFileBlocks           0208BTReadLockAllOpenFileBlocks
+    0207BTUnlockFileBlock
+;
+;-------------------------------------------------------------------
+!TOPIC 211 BTLockRec
+!NOINDEX
+procedure 0190Filer.BTLockRec(IFBPtr : IsamFileBlockPtr; Ref : LongInt);
+
+Locks specified record.
+
+See also:  0206BTLockFileBlock  0205BTReadLockFileBlock  0212BTUnlockRec
+;
+;-------------------------------------------------------------------
+!TOPIC 212 BTUnLockRec
+!NOINDEX
+procedure 0190Filer.BTUnLockRec(IFBPtr : IsamFileBlockPtr; Ref : LongInt);
+
+Unlocks specified record.
+
+See also:  0211BTLockRec  0213BTUnlockAllRecs  0207BTUnlockFileBlock
+;
+;-------------------------------------------------------------------
+!TOPIC 213 BTUnLockAllRecs
+!NOINDEX
+procedure 0190Filer.BTUnLockAllRecs(IFBPtr : IsamFileBlockPtr);
+
+Unlocks all locked records of a fileblock.
+
+See also:  0215BTaRecIsLocked  0212BTUnlockRec
+;
+;-------------------------------------------------------------------
+!TOPIC 214 BTRecIsLocked
+!NOINDEX
+function 0190Filer.BTRecIsLocked(IFBPtr : IsamFileBlockPtr;
+                             Ref : LongInt) : Boolean;
+
+Returns True if specified record is locked.
+
+See also:  0215BTaRecIsLocked  0212BTUnlockRec
+;
+;-------------------------------------------------------------------
+!TOPIC 215 BTaRecIsLocked
+!NOINDEX
+function 0190Filer.BTaRecIsLocked(IFBPtr : IsamFileBlockPtr) : Boolean;
+
+Returns True if any record in specified fileblock is locked.
+
+See also:  0211BTLockRec  0214BTRecIsLocked
+;
+;-------------------------------------------------------------------
+!TOPIC 216 BTGetRecordInfo
+!NOINDEX
+procedure 0190Filer.BTGetRecordInfo(IFBPtr : IsamFileBlockPtr;
+                                Ref : LongInt;
+                                var Start, Len : LongInt;
+                                var Handle : Word);
+
+Returns information about the specified record, useful for
+implementing alternate locking schemes.
+;
+;-------------------------------------------------------------------
+!TOPIC 217 BTFileBlockIsOpen
+!NOINDEX
+function 0190Filer.BTFileBlockIsOpen(IFBPtr : IsamFileBlockPtr) : Boolean;
+
+Returns True if the specified fileblock is currently open.
+
+See also:  0261BTCloseFileBlock  0260BTOpenFileBlock
+;
+;-------------------------------------------------------------------
+!TOPIC 218 BTFileBlockIsLocked
+!NOINDEX
+function 0190Filer.BTFileBlockIsLocked(IFBPtr : IsamFileBlockPtr) : Boolean;
+
+Returns True if the specified fileblock is currently locked.
+
+See also:  0219BTFileBlockIsReadLocked
+;
+;-------------------------------------------------------------------
+!TOPIC 219 BTFileBlockIsReadLocked
+!NOINDEX
+function 0190Filer.BTFileBlockIsReadLocked(IFBPtr : IsamFileBlockPtr)
+  : Boolean;
+
+Returns True, if the fileblock is currently readlocked.
+
+See also:  0218BTFileBlockIsLocked
+;
+;-------------------------------------------------------------------
+!TOPIC 220 BTForceWritingMark
+!NOINDEX
+procedure 0190Filer.BTForceWritingMark(FFM : Boolean);
+
+Enable or disable write-through (flushing) of the
+fileblock-modified marker.
+
+See also:  0258BTFlushFileBlock  0225BTForceNetBufferWriteThrough
+;
+;-------------------------------------------------------------------
+!TOPIC 221 BTSetDosRetry
+!NOINDEX
+function 0190Filer.BTSetDosRetry(NrOfRetries, WaitTime : Integer) : Boolean;
+
+Set the number of automatic retry attempts and timeout time
+for a read attempt aborted by a lock on a MS-NET compatible
+network.
+;
+;-------------------------------------------------------------------
+!TOPIC 222 BTNetSupported
+!NOINDEX
+function 0190Filer.BTNetSupported : NetSupportType;
+
+Returns the currently initialized network.
+
+See also:  0202BTInitIsam  0224BTIsNetFileBlock  0223BTNoNetCompiled
+;
+;-------------------------------------------------------------------
+!TOPIC 223 BTNoNetCompiled
+!NOINDEX
+function 0190Filer.BTNoNetCompiled : Boolean;
+
+Returns True if B-Tree Filer was compiled without network
+support.
+
+See also:  0202BTInitIsam  0224BTIsNetFileBlock  0222BTNetSupported
+;
+;-------------------------------------------------------------------
+!TOPIC 224 BTIsNetFileBlock
+!NOINDEX
+function 0190Filer.BTIsNetFileBlock(IFBPtr : IsamFileBlockPtr) : Boolean;
+
+Returns True if the fileblock is a net fileblock (B-Tree Filer
+wasn't compiled in NoNet mode, and 0260BTOpenFileBlock was called
+with the Net parameter set to True).
+
+See also:  0222BTNetSupported  0223BTNoNetCompiled
+;
+;-------------------------------------------------------------------
+!TOPIC 225 BTForceNetBufferWriteThrough
+!NOINDEX
+procedure 0190Filer.BTForceNetBufferWriteThrough(DoIt : Boolean);
+
+Activate or deactivate automatic flushing for network
+fileblocks opened in save mode. Default is Off.
+
+See also:  0258BTFlushFileBlock  0220BTForceWritingMark
+;
+;-------------------------------------------------------------------
+!TOPIC 226 BTPutRec
+!NOINDEX
+procedure 0190Filer.BTPutRec(IFBPtr : IsamFileBlockPtr; RefNr : LongInt;
+                         var Source; ISOLock : Boolean);
+
+Modifies an existing record that has specified reference number.
+If ISOLock is True, the write will occur even if another
+workstation has the fileblock locked. Otherwise the current
+workstation must have a network fileblock locked.
+
+See also:  0229BTAddRec  0227BTGetRec
+;
+;-------------------------------------------------------------------
+!TOPIC 227 BTGetRec
+!NOINDEX
+procedure 0190Filer.BTGetRec(IFBPtr : IsamFileBlockPtr; RefNr : LongInt;
+                         var Dest; ISOLock : Boolean);
+
+Reads an existing record that has the specified reference
+number. If ISOLock is True, the read will occur even if another
+workstation has the fileblock locked. The read will fail if the
+record is locked by another workstation.
+
+See also:  0228BTGetRecReadOnly
+;
+;-------------------------------------------------------------------
+!TOPIC 228 BTGetRecReadOnly
+!NOINDEX
+procedure 0190Filer.BTGetRecReadOnly(IFBPtr : IsamFileBlockPtr;
+                                 RefNr : LongInt;
+                                 var Dest);
+
+Reads an existing record that has the specified reference
+number, even if the fileblock or record is locked by another
+workstation. If the record is locked, the first four bytes of
+Dest will remain uninitialized.
+
+See also:  0227BTGetRec
+;
+;-------------------------------------------------------------------
+!TOPIC 229 BTAddRec
+!NOINDEX
+procedure 0190Filer.BTAddRec(IFBPtr : IsamFileBlockPtr;
+                         var RefNr : LongInt;
+                         var Source);
+
+Adds a record to a fileblock and returns its reference number.
+A network fileblock must be locked for this call to succeed.
+
+See also:  0251BTAddKey  0230BTDeleteRec  0227BTGetRec
+;
+;-------------------------------------------------------------------
+!TOPIC 230 BTDeleteRec
+!NOINDEX
+procedure 0190Filer.BTDeleteRec(IFBPtr : IsamFileBlockPtr; RefNr : LongInt);
+
+Deletes an existing record with the specified reference number.
+A network fileblock must be locked for this call to succeed.
+
+See also:  0229BTAddRec  0252BTDeleteKey
+;
+;-------------------------------------------------------------------
+!TOPIC 231 BTUsedRecs
+!NOINDEX
+function 0190Filer.BTUsedRecs(IFBPtr : IsamFileBlockPtr) : LongInt;
+
+Returns the number of currently used (non-deleted) records in
+a fileblock.
+
+See also:  0234BTFileLen  0233BTFreeRecs  0232BTUsedKeys
+;
+;-------------------------------------------------------------------
+!TOPIC 232 BTUsedKeys
+!NOINDEX
+function 0190Filer.BTUsedKeys(IFBPtr : IsamFileBlockPtr;
+                          Key : Word) : LongInt;
+
+Returns the number of keys currently in a specified index.
+
+See also:  0231BTUsedRecs
+;
+;-------------------------------------------------------------------
+!TOPIC 233 BTFreeRecs
+!NOINDEX
+function 0190Filer.BTFreeRecs(IFBPtr : IsamFileBlockPtr) : LongInt;
+
+Returns the number of records that have been deleted but not
+reused in a fileblock.
+
+See also:  0234BTFileLen  0231BTUsedRecs
+;
+;-------------------------------------------------------------------
+!TOPIC 234 BTFileLen
+!NOINDEX
+function 0190Filer.BTFileLen(IFBPtr : IsamFileBlockPtr) : LongInt;
+
+Returns the total number of records in a fileblock, including
+those that are in use, those that have been deleted, and the
+system record.
+
+See also:  0233BTFreeRecs  0231BTUsedRecs
+;
+;-------------------------------------------------------------------
+!TOPIC 235 BTNrOfKeys
+!NOINDEX
+function 0190Filer.BTNrOfKeys(IFBPtr : IsamFileBlockPtr) : Word;
+
+Returns the number of indexes defined for the fileblock.
+
+See also:  0259BTCreateFileBlock
+;
+;-------------------------------------------------------------------
+!TOPIC 236 BTDatRecordSize
+!NOINDEX
+function 0190Filer.BTDatRecordSize(IFBPtr : IsamFileBlockPtr) : LongInt;
+
+Returns the number of bytes in each data record for the
+specified fileblock.
+
+See also:  0237BTKeyRecordSize  0238BTMinimumDatKeys
+;
+;-------------------------------------------------------------------
+!TOPIC 237 BTKeyRecordSize
+!NOINDEX
+function 0190Filer.BTKeyRecordSize(IFBPtr : IsamFileBlockPtr) : LongInt;
+
+Returns the number of bytes in a page of the index file. This
+is the maximum number of bytes of additional disk space that
+might be required when a key is added.
+
+See also:  0236BTDatRecordSize  0238BTMinimumDatKeys
+;
+;-------------------------------------------------------------------
+!TOPIC 238 BTMinimumDatKeys
+!NOINDEX
+function 0190Filer.BTMinimumDatKeys(IFBPtr : IsamFileBlockPtr;
+                                Space : LongInt) : LongInt;
+
+Returns the minimum number of records and keys that can still
+be added on a disk with Space bytes free.
+
+See also:  0236BTDatRecordSize  0237BTKeyRecordSize
+;
+;-------------------------------------------------------------------
+!TOPIC 239 BTSetSearchForSequential
+!NOINDEX
+procedure 0190Filer.BTSetSearchForSequential(IFBPtr : IsamFileBlockPtr;
+                                         Key : Word; On : Boolean);
+
+Enables or disables automatic search mode for sequential key
+operations.
+
+See also:
+    0251BTAddKey                          0252BTDeleteKey
+    0240BTGetSearchForSequential          0242BTNextKey
+    0319SearchForSequentialDefault
+;
+;-------------------------------------------------------------------
+!TOPIC 240 BTGetSearchForSequential
+!NOINDEX
+procedure 0190Filer.BTGetSearchForSequential(IFBPtr : IsamFileBlockPtr;
+                                         Key : Word; var SFS : Boolean);
+
+Returns whether automatic search mode is enabled for specified
+fileblock and index.
+
+See also:
+    0251BTAddKey                          0252BTDeleteKey
+    0242BTNextKey                         0239BTSetSearchForSequential
+    0319SearchForSequentialDefault
+;
+;-------------------------------------------------------------------
+!TOPIC 241 BTClearKey
+!NOINDEX
+procedure 0190Filer.BTClearKey(IFBPtr : IsamFileBlockPtr; Key : Word);
+
+Resets the internal sequential pointer, so that BTNextKey will
+return the first key and BTPrevKey will return the last key.
+
+See also:  0242BTNextKey  0243BTPrevKey
+;
+;-------------------------------------------------------------------
+!TOPIC 242 BTNextKey
+!NOINDEX
+procedure 0190Filer.BTNextKey(IFBPtr : IsamFileBlockPtr; Key : Word;
+                          var UserDatRef : LongInt;
+                          var UserKey : IsamKeyStr);
+
+Returns in UserKey and UserDatRef the key string and data
+reference number of the next key.
+
+See also:  0243BTPrevKey  0319SearchForSequentialDefault
+;
+;-------------------------------------------------------------------
+!TOPIC 243 BTPrevKey
+!NOINDEX
+procedure 0190Filer.BTPrevKey(IFBPtr : IsamFileBlockPtr; Key : Word;
+                          var UserDatRef : LongInt;
+                          var UserKey : IsamKeyStr);
+
+Returns in UserKey and UserDatRef the key string and data
+reference number of the previous key.
+
+See also:  0242BTNextKey  0319SearchForSequentialDefault
+;
+;-------------------------------------------------------------------
+!TOPIC 244 BTFindKey
+!NOINDEX
+procedure 0190Filer.BTFindKey(IFBPtr : IsamFileBlockPtr; Key : Word;
+                          var UserDatRef : LongInt;
+                          UserKey : IsamKeyStr);
+
+Returns in UserDatRef the data reference number of the
+specified key string. The match must be exact. If the index
+allows duplicate keys, the smallest reference number for a
+given key match is returned.
+
+See also:  0246BTFindKeyAndRef  0248BTKeyExists  0245BTSearchKey  0247BTSearchKeyAndRef
+;
+;-------------------------------------------------------------------
+!TOPIC 245 BTSearchKey
+!NOINDEX
+procedure 0190Filer.BTSearchKey(IFBPtr : IsamFileBlockPtr; Key : Word;
+                            var UserDatRef : LongInt;
+                            var UserKey : IsamKeyStr);
+
+Returns in UserDatRef the data reference number of the
+specified key string. If no exact match is found the key string
+and reference number of the next larger key is returned.
+
+See also:  0244BTFindKey  0242BTNextKey  0247BTSearchKeyAndRef
+;
+;-------------------------------------------------------------------
+!TOPIC 246 BTFindKeyAndRef
+!NOINDEX
+procedure 0190Filer.BTFindKeyAndRef(IFBPtr : IsamFileBlockPtr; Key : Word;
+                                var UserDatRef : LongInt;
+                                var UserKey : IsamKeyStr;
+                                NotFoundSearchDirection : Integer);
+
+Returns in UserDatRef the data reference number of the
+specified key string. If no exact match is found,
+NotFoundSearchDirection determines what happens next. 0 means
+to end the search; a positive value means to return the next
+larger key and reference; a negative value means to return the
+next smaller one.
+
+See also:  0244BTFindKey  0248BTKeyExists  0245BTSearchKey  0247BTSearchKeyAndRef
+;
+;-------------------------------------------------------------------
+!TOPIC 247 BTSearchKeyAndRef
+!NOINDEX
+procedure 0190Filer.BTSearchKeyAndRef(IFBPtr : IsamFileBlockPtr; Key : Word;
+                                  var UserDatRef : LongInt;
+                                  var UserKey : IsamKeyStr);
+
+Returns in UserDatRef the data reference number of the
+specified key string. If no exact match is found the key string
+and reference number of the next larger key is returned. If
+there is no larger key, the next smaller one is returned.
+
+See also:  0244BTFindKey  0245BTSearchKey
+;
+;-------------------------------------------------------------------
+!TOPIC 248 BTKeyExists
+!NOINDEX
+function 0190Filer.BTKeyExists(IFBPtr : IsamFileBlockPtr; Key : Word;
+                           UserDatRef : LongInt;
+                           UserKey : IsamKeyStr) : Boolean;
+
+Returns True if the specified key and data reference number
+exists in the index. UserDatRef is ignored for a primary index.
+
+See also:  0244BTFindKey  0246BTFindKeyAndRef  0245BTSearchKey  0247BTSearchKeyAndRef
+;
+;-------------------------------------------------------------------
+!TOPIC 249 BTNextDiffKey
+!NOINDEX
+procedure 0190Filer.BTNextDiffKey(IFBPtr : IsamFileBlockPtr; Key : Word;
+                              var UserDatRef : LongInt;
+                              var UserKey : IsamKeyStr);
+
+Returns the key and reference number of the next index file
+entry different than the specified one.
+
+See also:  0242BTNextKey  0250BTPrevDiffKey
+;
+;-------------------------------------------------------------------
+!TOPIC 250 BTPrevDiffKey
+!NOINDEX
+procedure 0190Filer.BTPrevDiffKey(IFBPtr : IsamFileBlockPtr;
+                              Key : Word;
+                              var UserDatRef : LongInt;
+                              var UserKey : IsamKeyStr);
+
+Returns the key and reference number of the next index file
+entry smaller than the specified one. For duplicate keys, the
+largest reference number is returned.
+
+See also:  0249BTNextDiffKey  0243BTPrevKey
+;
+;-------------------------------------------------------------------
+!TOPIC 251 BTAddKey
+!NOINDEX
+procedure 0190Filer.BTAddKey(IFBPtr : IsamFileBlockPtr; Key : Word;
+                         UserDatRef : LongInt; UserKey : IsamKeyStr);
+
+Adds a new key and data reference number to the specified index
+of the index file. Network fileblocks must be locked.
+
+See also:  0229BTAddRec  0252BTDeleteKey  0239BTSetSearchForSequential
+;
+;-------------------------------------------------------------------
+!TOPIC 252 BTDeleteKey
+!NOINDEX
+procedure 0190Filer.BTDeleteKey(IFBPtr : IsamFileBlockPtr; Key : Word;
+                            UserDatRef : LongInt; UserKey : IsamKeyStr);
+
+Deletes the specified combination of UserKey and UserDatRef
+from the index file. UserDatRef is ignored for primary indexes.
+Network fileblocks must be locked.
+
+See also:  0251BTAddKey
+;
+;-------------------------------------------------------------------
+!TOPIC 253 BTDeleteAllKeys
+!NOINDEX
+procedure 0190Filer.BTDeleteAllKeys(IFBPtr : IsamFileBlockPtr; Key : Word);
+
+Deletes all keys from the specified index. Network fileblocks
+must be locked.
+
+See also:  0252BTDeleteKey
+;
+;-------------------------------------------------------------------
+!TOPIC 254 BTOtherWSChangedKey
+!NOINDEX
+function 0190Filer.BTOtherWSChangedKey(IFBPtr : IsamFileBlockPtr;
+                                   Key : Word) : Boolean;
+
+Returns True if another workstation has modified the specified
+index since the current workstation's page buffers were
+loaded.
+;
+;-------------------------------------------------------------------
+!TOPIC 255 BTGetApprRelPos
+!NOINDEX
+procedure 0190Filer.BTGetApprRelPos(IFBPtr : IsamFileBlockPtr; Key : Word;
+                                var RelPos : Word; Scale : Word;
+                                UserKey : IsamKeyStr;
+                                UserDatRef : LongInt);
+
+Compute the relative position of UserKey and UserDatRef in the
+B-tree, and return RelPos in the range 0..Scale.
+
+See also:  0256BTGetApprKeyAndRef
+;
+;-------------------------------------------------------------------
+!TOPIC 256 BTGetApprKeyAndRef
+!NOINDEX
+procedure 0190Filer.BTGetApprKeyAndRef(IFBPtr : IsamFileBlockPtr; Key : Word;
+                                   RelPos : Word; Scale : Word;
+                                   var UserKey : IsamKeyStr;
+                                   var UserDatRef : LongInt);
+
+Return approximate UserKey and UserDatRef corresponding to
+relative position RelPos in the range 0..Scale.
+
+See also:  0255BTGetApprRelPos
+;
+;-------------------------------------------------------------------
+!TOPIC 257 BTFlushAllFileBlocks
+!NOINDEX
+procedure 0190Filer.BTFlushAllFileBlocks;
+
+Flushes all buffered, new data of all fileblocks to disk.
+
+See also:  0258BTFlushFileBlock
+;
+;-------------------------------------------------------------------
+!TOPIC 258 BTFlushFileBlock
+!NOINDEX
+procedure 0190Filer.BTFlushFileBlock(IFBPtr : IsamFileBlockPtr);
+
+Flushes all new data of a fileblock to disk.
+
+See also:
+    0257BTFlushAllFileBlocks              0225BTForceNetBufferWriteThrough
+    0220BTForceWritingMark
+;
+;-------------------------------------------------------------------
+!TOPIC 259 BTCreateFileBlock
+!NOINDEX
+procedure 0190Filer.BTCreateFileBlock(FName : IsamFileBlockName;
+                                  DatSLen : LongInt;
+                                  NumberOfKeys : Word;
+                                  IID : IsamIndDescr);
+
+Creates the disk files for a new fileblock. FName specifies
+the name for the fileblock, DatSLen is the record length,
+NumberOfKeys is the number of indexes, and IID describes the
+maximum length of each key and whether it allows duplicates.
+
+See also:  0263BTDeleteFileBlock  0260BTOpenFileBlock
+;
+;-------------------------------------------------------------------
+!TOPIC 260 BTOpenFileBlock
+!NOINDEX
+procedure 0190Filer.BTOpenFileBlock(var IFBPtr : IsamFileBlockPtr;
+                                FName : IsamFileBlockName;
+                                ReadOnly, AllReadOnly,
+                                Save, Net : Boolean);
+
+Open an existing fileblock and allocate workspace for it.
+FName is the name of the fileblock. ReadOnly is True if the
+current workstation cannot write to the fileblock. AllReadOnly
+is True if no workstation may write to it. Save is True to
+activate save mode. Net is True if the fileblock is on a
+shareable drive and more than one workstation may be accessing
+it simultaneously.
+
+See also:  0261BTCloseFileBlock  0259BTCreateFileBlock
+;
+;-------------------------------------------------------------------
+!TOPIC 261 BTCloseFileBlock
+!NOINDEX
+procedure 0190Filer.BTCloseFileBlock(var IFBPtr : IsamFileBlockPtr);
+
+Closes a fileblock and deallocates its workspace. All locks
+are removed. IFBPtr is set to nil.
+
+See also:  0262BTCloseAllFileBlocks  0259BTCreateFileBlock  0260BTOpenFileBlock
+;
+;-------------------------------------------------------------------
+!TOPIC 262 BTCloseAllFileBlocks
+!NOINDEX
+procedure 0190Filer.BTCloseAllFileBlocks;
+
+Closes all open fileblocks. Continues closing additional
+fileblocks even if an error occurs.
+
+See also:  0261BTCloseFileBlock
+;
+;-------------------------------------------------------------------
+!TOPIC 263 BTDeleteFileBlock
+!NOINDEX
+procedure 0190Filer.BTDeleteFileBlock(FName : IsamFileBlockName);
+
+Deletes a closed fileblock.
+
+See also:  0259BTCreateFileBlock
+;
+;-------------------------------------------------------------------
+!TOPIC 264 BTDataFileName
+!NOINDEX
+function 0190Filer.BTDataFileName(IFBPtr : IsamFileBlockPtr) : IsamFileName;
+
+Returns the name of the data file for a fileblock.
+
+See also:  0265BTIndexFileName
+;
+;-------------------------------------------------------------------
+!TOPIC 265 BTIndexFileName
+!NOINDEX
+function 0190Filer.BTIndexFileName(IFBPtr : IsamFileBlockPtr) : IsamFileName;
+
+Returns the name of the index file for a fileblock.
+
+See also:  0264BTDataFileName
+;
+;-------------------------------------------------------------------
+!TOPIC 266 IsamClearOK
+!NOINDEX
+procedure 0190Filer.IsamClearOK;
+
+Resets all status variables, even internal ones. IsamOK is
+True and IsamError is zero after this call.
+;
+;-------------------------------------------------------------------
+!TOPIC 267 IsamExists
+!NOINDEX
+function 0190Filer.IsamExists(Name : IsamFileName) : Boolean;
+
+Returns True if the specified file exists.
+;
+;-------------------------------------------------------------------
+!TOPIC 268 IsamAssign
+!NOINDEX
+procedure 0191BTIsBase.IsamAssign(var F : IsamFile; FName : IsamFileName);
+
+Assigns a filename to a low level file variable.
+
+See also:  0272IsamDelete  0273IsamRename  0270IsamReset  0269IsamRewrite
+;
+;-------------------------------------------------------------------
+!TOPIC 269 IsamRewrite
+!NOINDEX
+procedure 0191BTIsBase.IsamRewrite(var F : IsamFile);
+
+Creates a new file. The file is left open, but it is not
+shareable.
+
+See also:  0268IsamAssign
+;
+;-------------------------------------------------------------------
+!TOPIC 270 IsamReset
+!NOINDEX
+procedure 0191BTIsBase.IsamReset(var F : IsamFile; NetUsed, ReadOnly : Boolean);
+
+Opens a file in the specified mode. If NetUsed is True, the
+file is opened in mode $42 (read/write deny none), unless
+ReadOnly is also True in which case the file is opened in mode
+$40 (read only deny none).
+
+See also:  0268IsamAssign
+;
+;-------------------------------------------------------------------
+!TOPIC 271 IsamClose
+!NOINDEX
+procedure 0191BTIsBase.IsamClose(var F : IsamFile);
+
+Closes a file.
+
+See also:  0268IsamAssign  0270IsamReset  0269IsamRewrite
+;
+;-------------------------------------------------------------------
+!TOPIC 272 IsamDelete
+!NOINDEX
+procedure 0191BTIsBase.IsamDelete(var F : IsamFile);
+
+Deletes a closed file.
+
+See also:  0268IsamAssign
+;
+;-------------------------------------------------------------------
+!TOPIC 273 IsamRename
+!NOINDEX
+procedure 0191BTIsBase.IsamRename(var F : IsamFile; FName : IsamFileName);
+
+Renames a closed but already assigned file.
+
+See also:  0272IsamDelete
+;
+;-------------------------------------------------------------------
+!TOPIC 274 IsamLongSeek
+!NOINDEX
+procedure 0191BTIsBase.IsamLongSeek(var F : IsamFile; Ref : LongInt);
+
+Seeks to the specified position in an open file.
+
+See also:  0275IsamLongSeekEOF
+;
+;-------------------------------------------------------------------
+!TOPIC 275 IsamLongSeekEOF
+!NOINDEX
+procedure 0191BTIsBase.IsamLongSeekEOF(var F : IsamFile; var Len : LongInt);
+
+Seeks to the end of an open file and returns its length.
+
+See also:  0274IsamLongSeek
+;
+;-------------------------------------------------------------------
+!TOPIC 276 IsamBlockRead
+!NOINDEX
+procedure 0191BTIsBase.IsamBlockRead(var F : IsamFile; var Dest; Len : Word);
+
+Reads a block of length Len from the current position in a
+file to the variable Dest.
+
+See also:  0278IsamBlockWrite  0279IsamGetBlock  0277IsamBlockReadRetLen
+;
+;-------------------------------------------------------------------
+!TOPIC 277 IsamBlockReadRetLen
+!NOINDEX
+procedure 0191BTIsBase.IsamBlockReadRetLen(var F : IsamFile; var Dest;
+                                    Len : Word; var BytesRead : Word);
+
+Reads a block of length Len from the current position in a
+file to the variable Dest. Returns the number of bytes it could read.
+
+See also:  0276IsamBlockRead
+;
+;-------------------------------------------------------------------
+!TOPIC 278 IsamBlockWrite
+!NOINDEX
+procedure 0191BTIsBase.IsamBlockWrite(var F : IsamFile; var Source; Len : Word);
+
+Writes a block of length Len to the current position in a file
+from the variable Source.
+
+See also:  0276IsamBlockRead  0280IsamPutBlock
+;
+;-------------------------------------------------------------------
+!TOPIC 279 IsamGetBlock
+!NOINDEX
+procedure 0191BTIsBase.IsamGetBlock(var F : IsamFile;
+                             Ref, Len : LongInt; var Dest);
+
+Reads a block of length Len from position Ref of a file to the
+variable Ref.
+
+See also:  0276IsamBlockRead  0280IsamPutBlock
+;
+;-------------------------------------------------------------------
+!TOPIC 280 IsamPutBlock
+!NOINDEX
+procedure 0191BTIsBase.IsamPutBlock(var F : IsamFile;
+                             Ref, Len : LongInt; var Source);
+
+Writes a block of length Len to the position Ref of a file
+from the variable Source.
+
+See also:  0278IsamBlockWrite  0279IsamGetBlock
+;
+;-------------------------------------------------------------------
+!TOPIC 281 IsamFlush
+!NOINDEX
+procedure 0191BTIsBase.IsamFlush(var F : IsamFile; var WithDup : Boolean;
+                          NetUsed : Boolean);
+
+Flushes the DOS file buffers for a file to disk. Behavior is
+affected by the parameter NetUsed and by the global typed
+constant IsamFlushDOS33. If a duplicate handle was used to
+perform the flush, WithDup is set to True.
+;
+;-------------------------------------------------------------------
+!TOPIC 282 IsamGetPosition
+!NOINDEX
+function 0191BTIsBase.IsamGetPosition(var F : IsamFile) : LongInt;
+
+Returns the current position of a file.
+;
+;-------------------------------------------------------------------
+!TOPIC 283 IsamSetEOF
+!NOINDEX
+procedure 0191BTIsBase.IsamSetEOF(var F : IsamFile);
+
+Truncates the file at its current position.
+;
+;-------------------------------------------------------------------
+!TOPIC 284 DefeatLocalCache
+!NOINDEX
+var
+  DefeatLocalCache : boolean = false;
+
+The latest versions of Microsoft's Win32 platforms suffer from an overly
+aggressive local cache. Data being read from a remote file (ie, a file on
+another machine) may be obtained from the local cache rather than the
+remote file. Data written to a remote file may hang around in the local
+cache until the operating system determines that it should be sent to the
+remote machine. With B-Tree Filer this behavior leads to data and index
+corruption very quickly. Setting DefeatLocalCache to True will defeat this
+network optimization. However, the downside to doing so is that code that
+performs some kind of file access becomes much slower.
+
+The default setting of False for DefeatLocalCache emulates the behavior of
+B-Tree Filer versions 5.52 and earlier, but please note that this causes
+data integrity failures if the application is run on a newer Win32 platform.
+
+The variable is not used for single-user applications (ie, the network type
+in BTInitIsam is NoNet).
+
+Our recommendation is to set DefeatLocalCache to True in your application
+if the application is multiuser/networked and there is the slightest
+possibility that it might be run on a newer Win32 platform (Windows NT 4 or
+later; Windows 95 OSR 2 or later).
+
+This identifier is declared in the FILER.CFG file, and is interfaced by the
+FILER unit.
+;
+;-------------------------------------------------------------------
+!TOPIC 285 IsamExtractFileNames
+!NOINDEX
+procedure 0190Filer.IsamExtractFileNames(FNameComp : IsamFileBlockName;
+                                     var FNameD,
+                                         FNameI : IsamFileBlockName);
+
+Splits two file names separated by a semicolon.
+;
+;-------------------------------------------------------------------
+!TOPIC 286 IsamCopyFile
+!NOINDEX
+procedure 0190Filer.IsamCopyFile(Source, Dest : IsamFileBlockName;
+                             DeleteSourceAfterCopy : Boolean);
+
+Copies the file specified by Source to Dest, deleting the
+original file if DeleteSourceAfterCopy is True.
+;
+;-------------------------------------------------------------------
+!TOPIC 287 IsamForceExtension
+!NOINDEX
+function 0190Filer.IsamForceExtension(Name, Ext : IsamFileName)
+  : IsamFileName;
+
+Forces the extension Ext onto the filename Name.
+;
+;-------------------------------------------------------------------
+!TOPIC 288 IsamDelay
+!NOINDEX
+procedure 0191BTIsBase.IsamDelay(MilliSecs : LongInt);
+
+Delays for the specified number of milliseconds. The routine
+gives true millisecond resolution in a manner similar to the
+CRT unit.
+;
+;-------------------------------------------------------------------
+!TOPIC 289 BTIsamLockRecord
+!NOINDEX
+function 0190Filer.BTIsamLockRecord(Start, Len : LongInt;
+                                Handle : Word;
+                                TimeOut, DelayTime : Word) : Boolean;
+
+Locks the bytes Start to Start+Len-1 of the file with handle
+Handle using the network initialized by BTInitIsam. TimeOut
+is the total time spent retrying the lock, in milliseconds.
+DelayTime is the time to delay after a failed attempt to
+lock.
+
+See also:  0290BTIsamUnlockRecord
+;
+;-------------------------------------------------------------------
+!TOPIC 290 BTIsamUnlockRecord
+!NOINDEX
+function 0190Filer.BTIsamUnlockRecord(Start, Len : LongInt;
+                                Handle : Word) : Boolean;
+
+Unlocks the bytes Start to Start+Len-1 of the file with handle
+Handle using the network initialized by BTInitIsam.
+
+See also:  0289BTIsamLockRecord
+;
+;-------------------------------------------------------------------
+!TOPIC 291 AddNullKeys
+!NOINDEX
+const
+  AddNullKeys : Boolean = True;
+
+Setting to False suppresses the addition of empty key strings to
+indexes generated by 0729ReorgFileBlock, 0830ReorgVFileBlock,
+0727RebuildFileBlock, 0812RebuildVFileBlock, and
+0357FixToVarFileBlock.
+;
+;-------------------------------------------------------------------
+!TOPIC 292 DatExtension
+!NOINDEX
+const
+  DatExtension : String[3] = 'DAT';
+
+Extension applied to the data file of a fileblock.
+;
+;-------------------------------------------------------------------
+!TOPIC 293 DiaExtension
+!NOINDEX
+const
+  DiaExtension : String[3] = 'DIA';
+
+Extension applied to the dialog file of a fileblock.
+;
+;-------------------------------------------------------------------
+!TOPIC 294 IsamCompiledNets
+!NOINDEX
+var
+  IsamCompiledNets : set of 0316NetSupportType;
+
+Set containing all the network interfaces compiled into the Filer
+unit (by enabling them in BTDEFINE.INC).
+;
+;-------------------------------------------------------------------
+!TOPIC 295 IsamDelayBetwLocks
+!NOINDEX
+const
+  IsamDelayBetwLocks : Word = 64;
+
+Number of milliseconds to delay between retries while locking in
+an MsNet environment.
+;
+;-------------------------------------------------------------------
+!TOPIC 296 IsamDOSError
+!NOINDEX
+var
+  IsamDOSError : Word;
+
+DOS error code of the last DOS call made by a Filer routine.
+
+This identifier is declared in the 0191BTISBASE unit.
+;
+;-------------------------------------------------------------------
+!TOPIC 297 IsamDOSFunc
+!NOINDEX
+var
+  IsamDOSFunc : Word;
+
+DOS function code (value passed in AX to int $21) for the last
+DOS call made by a Filer routine. Equals zero if no DOS call was
+made. In 32-bit environments it will contain the DOS function code
+equivalent to the Win32 API routine actually used.
+
+This identifier is declared in the 0191BTISBASE unit.
+;
+;-------------------------------------------------------------------
+!TOPIC 298 IsamError
+!NOINDEX
+var
+  IsamError : Integer;
+
+Error code of last Filer operation, zero if no error.
+
+This identifier is declared in the 0191BTISBASE unit.
+
+See also: 0200Error codes
+;
+;-------------------------------------------------------------------
+!TOPIC 299 IsamFile
+!NOINDEX
+type
+  IsamFile = record
+      Handle : TbtfHandle;
+      Name   : array[0..0303IsamFileNameLen] of Char;
+    end;
+
+Format used to manage a file variable. Handle is the DOS file
+handle number. Name is a null-terminated (ASCIIZ) string. The TbtfHandle
+type is either an alias for Word in 16-bit environments or an alias for
+Integer in 32-bit environments.
+
+This identifier is declared in the 0191BTISBASE unit.
+;
+;-------------------------------------------------------------------
+!TOPIC 300 IsamFileBlockName
+!NOINDEX
+type
+  IsamFileBlockName = String[192];
+
+Type used to describe the files in a fileblock. May contain one,
+two, or three valid DOS filenames. The first filename specifies
+the data file, the second specifies the index file, and the third
+specifies the save file used for rebuild operations. When it
+contains more than one filename, the names are separated by
+semicolons.
+;
+;-------------------------------------------------------------------
+!TOPIC 301 IsamFileBlockPtr
+!NOINDEX
+type
+  IsamFileBlockPtr = ^IsamFileBlock;
+
+Pointer to a fileblock variable. Every fileblock is managed with
+a variable of this type. Such a variable is initialized by
+calling 0260BTOpenFileBlock and deallocated by calling
+0261BTCloseFileBlock.
+;
+;-------------------------------------------------------------------
+!TOPIC 302 IsamFileName
+!NOINDEX
+type
+  IsamFileName = String[0303IsamFileNameLen];
+
+Each file that composes a fileblock (a data file, an index file,
+a dialog file) is named with a string of this type. Note that the
+default value of IsamFileNameLen allows pathnames of at most 64
+characters, which is shorter than the DOS maximum.
+
+This identifier is declared in the 0191BTISBASE unit.
+;
+;-------------------------------------------------------------------
+!TOPIC 303 IsamFileNameLen
+!NOINDEX
+const
+  IsamFileNameLen = 64;
+
+The maximum length of a filename (including drive, directory,
+filename, extension) stored in a fileblock variable. Note that
+the default value limits names to less than the DOS maximum of
+79.
+
+This identifier is declared in the 0191BTISBASE unit.
+;
+;-------------------------------------------------------------------
+!TOPIC 304 IsamFlushDOS33
+!NOINDEX
+const
+  IsamFlushDOS33 : Boolean = True;
+
+Leaving this constant set to True allows Filer to use DOS
+function $68 to flush files to disk. This function is the most
+reliable method for DOS versions 3.3 or later, but it isn't
+supported by some operating systems, including PC/MOS-386, which
+doesn't even return an error code to indicate that the flush
+didn't occur successfully.
+;
+;-------------------------------------------------------------------
+!TOPIC 305 IsamIndDescr
+!NOINDEX
+type
+  IsamIndDescr = array[1..0312MaxNrOfKeys] of
+    record
+      KeyL : 1..0311MaxKeyLen;
+      AllowDupK : Boolean;
+    end;
+
+A variable of this type is passed to 0259BTCreateFileBlock to
+describe the indexes of the fileblock. KeyL specifies the maximum
+length of the key strings in each index. AllowDupK determines
+whether duplicate key strings are allowed in the index.
+;
+;-------------------------------------------------------------------
+!TOPIC 306 IsamKeyStr
+!NOINDEX
+type
+  IsamKeyStr = String[0311MaxKeyLen];
+
+A string of this type is passed to and from various Filer
+routines for managing the index file. No key string in any open
+fileblock may be longer than this string type allows.
+;
+;-------------------------------------------------------------------
+!TOPIC 307 IsamOK
+!NOINDEX
+var
+  IsamOK : Boolean;
+
+This variable returns the status of the last Filer operation. It
+is True if the operation was completed successfully; False
+otherwise. If the operation failed, check 0298IsamError for
+further information.
+
+This identifier is declared in the 0191BTISBASE unit.
+;
+;-------------------------------------------------------------------
+!TOPIC 308 IsamReXUserProcPtr
+!NOINDEX
+var
+  IsamReXUserProcPtr : Pointer;
+
+Points to a user-supplied routine that is called by
+0729ReorgFileBlock, 0830ReorgVFileBlock,
+0727RebuildFileBlock, 0812RebuildVFileBlock, and
+0357FixToVarFileBlock. The routine must be global, compiled
+under the far model, and must have the following header:
+
+  procedure CallUserRoutine(KeyNr : Integer;
+                            DatSNrR, DatSNrW : LongInt;
+                            var DatS; Len : Word);
+
+KeyNr is the number of the index currently being reorganized
+(zero for the data file); DatSNrR is the number of data records
+that have been read so far; DatSNrW is the number that have been
+written; DatS is the current data record; and Len is the length
+of the current record.
+;
+;-------------------------------------------------------------------
+!TOPIC 309 IxExtension
+!NOINDEX
+const
+  IxExtension : String[3] = 'IX';
+
+Extension applied to the index file of a fileblock.
+;
+;-------------------------------------------------------------------
+!TOPIC 310 MaxHeight
+!NOINDEX
+const
+  MaxHeight = 8;
+
+Specifies the deepest level of the B-tree. In combination with
+0317PageSize, determines the capacity of the index file. Do
+not modify without a careful reading of Chapter 5.
+;
+;-------------------------------------------------------------------
+!TOPIC 311 MaxKeyLen
+!NOINDEX
+const
+  MaxKeyLen = 30;
+
+Specifies the longest key string for any open fileblock. Minimum
+memory usage of the index page buffers is proportional to
+MaxKeyLen, but this constant does not affect index file size,
+which is controlled by the 0305IsamIndDescr.
+;
+;-------------------------------------------------------------------
+!TOPIC 312 MaxNrOfKeys
+!NOINDEX
+const
+  MaxNrOfKeys = 100;
+
+Specifies the maximum number of indexes per fileblock. May be
+increased to no more than 254. This constant affects only the
+size of variables of type 0305IsamIndDescr.
+;
+;-------------------------------------------------------------------
+!TOPIC 313 MaxNrOfWorkStations
+!NOINDEX
+const
+  MaxNrOfWorkStations : Word = 50;
+
+Specifies the maximum number of workstations that Filer can
+manage at one time. Valid workstation numbers must be in the
+range 1..MaxNrOfWorkStations. Affects the size of a fileblock's
+dialog file. All active workstations must use the same value of
+this constant. Its value must be set before calling 0202BTInitIsam.
+;
+;-------------------------------------------------------------------
+!TOPIC 314 MinimizeUseOfNormalHeap
+!NOINDEX
+const
+  MinimizeUseOfNormalHeap = $40000000;
+
+A bit flag that may be used to modify the meaning of the Free
+parameter passed to 0202BTInitIsam. When this bit flag is set,
+Filer allocates the minimum amount of normal heap space that it
+can, leaving the rest for the application.
+;
+;-------------------------------------------------------------------
+!TOPIC 315 MsgExtension
+!NOINDEX
+const
+  MsgExtension : String[3] = 'MSG';
+
+Extension applied to the message file of a fileblock. The message
+file is created only if a fileblock reorganization detects
+duplicate keys, in which case the associated data record is
+written to the message file.
+;
+;-------------------------------------------------------------------
+!TOPIC 316 NetSupportType
+!NOINDEX
+type
+  NetSupportType = (NoNet, Novell, MsNet);
+
+Enumerates the various network interfaces that Filer supports.
+
+This identifier is declared in the 0191BTISBASE unit.
+;
+;-------------------------------------------------------------------
+!TOPIC 317 PageSize
+!NOINDEX
+const
+  CreatePageSize = 62;
+  MaxPageSize = 62;
+
+These constants specify the maximum number of key nodes in one index page.
+In combination with 0310MaxHeight these control the overall
+capacity of the B-tree. Do not change them without carefully reading
+Chapter 5, but we recommend strongly that they are NOT changed.
+
+CreatePageSize is used when fileblocks are created, MaxPageSize is used to
+size the internal buffers for a particular application run. You should
+always have CreatePageSize <= MaxPageSize.
+;
+;-------------------------------------------------------------------
+!TOPIC 318 SavExtension
+!NOINDEX
+const
+  SavExtension : String[3] = 'SAV';
+
+Extension applied to the save file of a fileblock. The message
+file is created only when a fileblock is reorganized. The save
+file contains a backup copy of the data file and is left intact
+until a successful reorganization is completed.
+;
+;-------------------------------------------------------------------
+!TOPIC 319 SearchForSequentialDefault
+!NOINDEX
+const
+  SearchForSequentialDefault : Boolean = True;
+
+When this constant is True, 0242BTNextKey and 0243BTPrevKey will attempt
+to recover automatically after the sequential pointer has been
+disturbed. When False, the same situation leads to 0298IsamError
+10255 or 10265.
+;
+;-------------------------------------------------------------------
+!TOPIC 320 VersionStr
+!NOINDEX
+const
+  VersionStr = '05.54';
+
+Specifies the current version level of B-Tree Filer.
+;
+;-------------------------------------------------------------------
+!TOPIC 321 BTPeekRecIsLocked
+!NOINDEX
+function 0190Filer.BTPeekRecIsLocked(IFBPtr : IsamFileBlockPtr;
+                                 Ref : LongInt) : Boolean;
+
+Just like 0214BTRecIsLocked but not destroying the previous error on success.
+;
+;-------------------------------------------------------------------
+!TOPIC 322 BTPeekaRecIsLocked
+!NOINDEX
+function 0190Filer.BTPeekaRecIsLocked(IFBPtr : IsamFileBlockPtr) : Boolean;
+
+Just like 0215BTaRecIsLocked but not destroying the previous error on success.
+;
+;-------------------------------------------------------------------
+!TOPIC 323 BTPeekGetRecordInfo
+!NOINDEX
+procedure 0190Filer.BTPeekGetRecordInfo(IFBPtr : IsamFileBlockPtr;
+                                    Ref : LongInt;
+                                    var Start, Len : LongInt;
+                                    var Handle : Word);
+
+Just like 0216BTGetRecordInfo but not destroying the previous error on
+success.
+;
+;-------------------------------------------------------------------
+!TOPIC 324 BTPeekFileBlockIsOpen
+!NOINDEX
+function 0190Filer.BTPeekFileBlockIsOpen(IFBPtr : IsamFileBlockPtr)
+    : Boolean;
+
+Just like 0217BTFileBlockIsOpen but not destroying the previous error on
+success.
+;
+;-------------------------------------------------------------------
+!TOPIC 325 BTPeekFileBlockIsLocked
+!NOINDEX
+function 0190Filer.BTPeekFileBlockIsLocked(IFBPtr : IsamFileBlockPtr)
+    : Boolean;
+
+Just like 0218BTFileBlockIsLocked but not destroying the previous error on
+success.
+;
+;-------------------------------------------------------------------
+!TOPIC 326 BTPeekFileBlockIsReadLocked
+!NOINDEX
+function 0190Filer.BTPeekFileBlockIsReadLocked(IFBPtr : IsamFileBlockPtr)
+    : Boolean;
+
+Just like 0219BTFileBlockIsReadLocked but not destroying the previous error on
+success.
+;
+;-------------------------------------------------------------------
+!TOPIC 327 BTPeekNetSupported
+!NOINDEX
+function 0190Filer.BTPeekNetSupported : NetSupportType;
+
+Just like 0222BTNetSupported but not destroying the previous error on success.
+;
+;-------------------------------------------------------------------
+!TOPIC 328 BTPeekNoNetCompiled
+!NOINDEX
+function 0190Filer.BTPeekNoNetCompiled : Boolean;
+
+Just like 0223BTNoNetCompiled but not destroying the previous error on
+success.
+;
+;-------------------------------------------------------------------
+!TOPIC 329 BTPeekIsNetFileBlock
+!NOINDEX
+function 0190Filer.BTPeekIsNetFileBlock(IFBPtr : IsamFileBlockPtr) : Boolean;
+
+Just like 0224BTIsNetFileBlock but not destroying the previous error on
+success.
+;
+;-------------------------------------------------------------------
+!TOPIC 330 BTPeekNrOfKeys
+!NOINDEX
+function 0190Filer.BTPeekNrOfKeys(IFBPtr : IsamFileBlockPtr) : Word;
+
+Just like 0235BTNrOfKeys but not destroying the previous error on success.
+;
+;-------------------------------------------------------------------
+!TOPIC 331 BTPeekDatRecordSize
+!NOINDEX
+function 0190Filer.BTPeekDatRecordSize(IFBPtr : IsamFileBlockPtr) : LongInt;
+
+Just like 0236BTDatRecordSize but not destroying the previous error on
+success.
+;
+;-------------------------------------------------------------------
+!TOPIC 332 BTPeekKeyRecordSize
+!NOINDEX
+function 0190Filer.BTPeekKeyRecordSize(IFBPtr : IsamFileBlockPtr) : LongInt;
+
+Just like 0237BTKeyRecordSize but not destroying the previous error on
+success.
+;
+;-------------------------------------------------------------------
+!TOPIC 333 BTPeekMinimumDatKeys
+!NOINDEX
+function 0190Filer.BTPeekMinimumDatKeys(IFBPtr : IsamFileBlockPtr;
+                                    Space  : LongInt) : LongInt;
+
+Just like 0238BTMinimumDatKeys but not destroying the previous error on
+success.
+;
+;-------------------------------------------------------------------
+!TOPIC 334 BTPeekDataFileName
+!NOINDEX
+function 0190Filer.BTPeekDataFileName(IFBPtr : IsamFileBlockPtr)
+    : IsamFileName;
+
+Just like 0264BTDataFileName but not destroying the previous error on success.
+;
+;-------------------------------------------------------------------
+!TOPIC 335 BTPeekIndexFileName
+!NOINDEX
+function 0190Filer.BTPeekIndexFileName(IFBPtr : IsamFileBlockPtr)
+    : IsamFileName;
+
+Just like 0265BTIndexFileName but not destroying the previous error on
+success.
+;
+;-------------------------------------------------------------------
+!TOPIC 336 BTGetStartingLong
+!NOINDEX
+procedure 0190Filer.BTGetStartingLong(IFBPtr : IsamFileBlockPtr;
+                                  RefNr : LongInt;
+                                  var Dest: LongInt);
+
+Reads the first four bytes of the specified record into Dest.
+
+See also: 0227BTGetRec
+;
+;-------------------------------------------------------------------
+!TOPIC 337 BTInformTTSAbortSuccessful
+!NOINDEX
+procedure 0190Filer.BTInformTTSAbortSuccessful(IFBPtr : IsamFileBlockPtr);
+
+Clear all buffered internal data and remove all locks from a
+file after a successful NetWare TTS transaction abort.
+;
+;-------------------------------------------------------------------
+!TOPIC 338 BTGetNextUsedAddRecRef
+!NOINDEX
+function 0190Filer.BTGetNextUsedAddRecRef(IFBPtr : IsamFileBlockPtr)
+    : LongInt;
+
+Return the reference number that will be assigned to the
+next record added.
+
+See also: 0339BTGetAfterNextUsedAddRecRef
+;
+;-------------------------------------------------------------------
+!TOPIC 339 BTGetAfterNextUsedAddRecRef
+!NOINDEX
+function 0190Filer.BTGetAfterNextUsedAddRecRef(IFBPtr : IsamFileBlockPtr)
+    : LongInt;
+
+Return the reference number that will be assigned to the
+record added after the next record is added.
+
+See also: 0338BTGetNextUsedAddRecRef
+;
+;-------------------------------------------------------------------
+!TOPIC 340 BTGetInternalDialogID
+!NOINDEX
+function 0190Filer.BTGetInternalDialogID(IFBPtr : IsamFileBlockPtr) : Word;
+
+Return the internal workstation ID that is used for the
+specified fileblock.
+;
+;-------------------------------------------------------------------
+!TOPIC 341 IsamFBLockTimeOutFactor
+!NOINDEX
+const
+  IsamFBLockTimeOutFactor : Word = 4;
+
+The multiple of 0342IsamLockTimeOut for which fileblock locks
+are retried.
+;
+;-------------------------------------------------------------------
+!TOPIC 342 IsamLockTimeOut
+!NOINDEX
+const
+  IsamLockTimeOut : Word = 768;
+
+The number of milliseconds for which Filer automatically
+tries to get a lock. IsamLockTimeOut applies to all locks
+except for fileblock locks, for which it tries
+0341IsamFBLockTimeOutFactor times IsamLockTimeOut milliseconds.
+;
+;-------------------------------------------------------------------
+!TOPIC 343 InheritFileHandles
+!NOINDEX
+const
+  InheritFileHandles = False;
+
+This constant determines whether any child processes will inherit the
+B-Tree Filer fileblock handles or not. Note that, if true, the child
+process will only inherit the file handles, it will not inherit any of
+the B-Tree Filer data structures from the parent. The default is
+false to comply with the behavior of previous versions of Filer.
+;
+;-------------------------------------------------------------------
+!TOPIC 344 TestNetExistance
+!NOINDEX
+const
+  TestNetExistance : Boolean = True;
+
+If true, 0202BTInitIsam will check whether the network specified in the
+ExpectedNet parameter exists or not; if the network is not found,
+BTInitIsam will fail. If this typed constant is false, no check is
+made for the network, it is assumed to be present.
+;
+;-------------------------------------------------------------------
+!TOPIC 345 BTFindRecRef
+!NOINDEX
+procedure 0190Filer.BTFindRecRef(IFBPtr : IsamFileBlockPtr;
+                             var UserDatRef          : LongInt;
+                             NotFoundSearchDirection : Integer);
+
+This routine mimics the 0246BTFindKeyAndRef routine without using an index.
+The record with reference UserDatRef is read; if it is not deleted then
+this routine returns immediately without error. If the record is deleted,
+the parameter NotFoundSearchDirection determines whether to search further
+through the data file. A value of 0 means to end the search. A positive
+value means to search forwards sequentially through the records until the
+first active record is found, or the end of the file is reached. A negative
+value means to search backwards through the records until the first active
+record is found, or the start of the file is reached. If an active record
+is found, its reference number is returned in UserDatRef with IsamOK set
+to True and IsamError set to zero. If an active record could not be found
+(i.e., NotFoundSearchDirection was zero and the record was deleted, or the
+search could not find an active record), then IsamOk is set to False and
+IsamError is set to 10275. If a locked record was encountered during the
+initial read or the subsequent searching, this procedure returns immediately
+with IsamError set to 10390 and the offending record reference number in
+UserDatRef. You can then decide whether to jump over this record or perform
+some other type of action.
+
+See also:  0350BTNextRecRef  0352BTPrevRecRef
+;
+;-------------------------------------------------------------------
+!TOPIC 346 BTGetApprRecPos
+!NOINDEX
+procedure 0190Filer.BTGetApprRecPos(IFBPtr : IsamFileBlockPtr;
+                                var RelPos : Word;
+                                Scale      : Word;
+                                UserDatRef : LongInt);
+
+This procedure works in an analogous manner to 0255BTGetApprRelPos but does
+not refer to any index or to the B-Tree; it just uses the data file.
+
+Given a UserDatRef data reference BTGetApprRecPos calculates a relative position
+RelPos of the record in the data file, in the range 0..Scale.
+
+This routine could be used to convert a data reference into a thumb position
+within a scrollbar. In text mode, Scale should typically be the number
+of screen characters assigned to the scrollbar, minus 1.
+
+See also:  0347BTGetApprRecRef
+;
+;-------------------------------------------------------------------
+!TOPIC 347 BTGetApprRecRef
+!NOINDEX
+procedure 0190Filer.BTGetApprRecRef(IFBPtr : IsamFileBlockPtr;
+                                RelPos : Word;
+                                Scale  : Word;
+                                var UserDatRef : LongInt);
+
+This procedure works in an analogous manner to 0256BTGetApprKeyAndRef but
+does not refer to any index or to the B-Tree; it just uses the data
+file.
+
+Given the relative position RelPos in the range 0..Scale, BTGetApprRecRef
+returns the data reference UserDatRef of the record that most closely
+approximates the specified position. The reference number returned will not
+necessarily refer to an active record. It could be for a deleted record.
+
+This routine could be used to calculate a record number given a thumb
+position within a scrollbar. In text mode, Scale should typically be the
+number of screen characters assigned to the scrollbar, minus 1.
+
+See also:  0346BTGetApprRecPos
+;
+;-------------------------------------------------------------------
+!TOPIC 348 BTGetKeyLen
+!NOINDEX
+function 0190Filer.BTGetKeyLen(IFBPtr : IsamFileBlockPtr;
+                           KeyNr  : Word) : Word;
+
+This function allows you to determine at runtime how long the keys are
+in index KeyNr of fileblock IFBPtr. This information is encoded into the
+fileblock by 0259BTCreateFileBlock.
+
+See also:  0354BTGetAllowDupKeys
+;
+;-------------------------------------------------------------------
+!TOPIC 349 BTIsInitialized
+!NOINDEX
+function 0190Filer.BTIsInitialized : Boolean;
+
+B-Tree Filer is initialized with 0202BTInitIsam and closed down with 0203BTExitIsam.
+This function returns False before BTInitIsam is called, True afterwards.
+When BTExitIsam is called, it again returns False.
+;
+;-------------------------------------------------------------------
+!TOPIC 350 BTNextRecRef
+!NOINDEX
+procedure 0190Filer.BTNextRecRef(IFBPtr : IsamFileBlockPtr;
+                             var UserDatRef : LongInt);
+
+This procedure searches forward sequentially through the records in
+the data file, starting at UserDatRef+1, until an active record is
+found or the end of file is encountered. If an active record is
+found, its reference number is returned in UserDatRef. If the end
+of file is encountered without finding an active record, IsamError is
+set to 10275.
+
+If a locked record is found during the search, IsamError is set to
+10390 and the locked record reference number is returned in UserDatRef.
+Calling BTNextRecRef immediately with that value of UserDatRef causes
+the locked record to be skipped. If however you would like to try that
+record again, decrement UserDatRef by one and call BTNextRecRef again
+after a small delay.
+
+See also:  0345BTFindRecRef  0352BTPrevRecRef
+;
+;-------------------------------------------------------------------
+!TOPIC 351 BTNoCharConvert
+!NOINDEX
+procedure 0190Filer.BTNoCharConvert(DataPtr  : Pointer;
+                                DataLen  : LongInt;
+                                PostRead : Boolean;
+                                HookPtr  : Pointer);
+
+Procedures of type 0355ProcBTCharConvert (of which this is one) are designed
+to provide support for different external and internal representations
+of data records, in particular multiple code pages. BTNoCharConvert does
+nothing; the record pointed to by DataPtr is not altered.
+
+This procedure can be passed to a call to 0736RestructFileBlock (in the
+0730RESTRUCT unit) if you do not want any character conversion to take
+place.
+;
+;-------------------------------------------------------------------
+!TOPIC 352 BTPrevRecRef
+!NOINDEX
+procedure 0190Filer.BTPrevRecRef(IFBPtr : IsamFileBlockPtr;
+                             var UserDatRef : LongInt);
+
+This procedure searches backward sequentially through the records in
+the data file, starting at UserDatRef-1, until an active record is found or
+the start of the file is encountered. If an active record is found, its
+reference number is returned in UserDatRef. If the start of the file
+was encountered without finding an active record, IsamError is set to 10275.
+
+If a locked record was found during the search, IsamError is set to 10390
+and the locked record reference number is returned in UserDatRef. Calling
+BTPrevRecRef immediately with that value of UserDatRef causes the locked
+record to be skipped. However, if you need to access that record again,
+increment UserDatRef by one and call BTPrevRecRef after a small delay.
+
+See also:  0345BTFindRecRef  0350BTNextRecRef
+
+;
+;-------------------------------------------------------------------
+!TOPIC 353 BTSetCharConvert
+!NOINDEX
+procedure 0190Filer.BTSetCharConvert(IFBPtr : IsamFileBlockPtr;
+                                 CCProc     : ProcBTCharConvert;
+                                 HookPtr    : Pointer;
+                                 DestrWrite : Boolean);
+
+Record conversion routines are called after a record is read from a
+fileblock and before a record is written to a fileblock. This interface
+enables you to convert a record from an external representation to an
+internal one (or vice versa). For example, you can convert text strings
+in a record from the calling system's code page to the code page of the
+fileblock.
+
+This procedure sets the record conversion routine which will be used for
+the fileblock IFBPtr (which must be open). CCProc is a procedure of
+type 0355ProcBTCharConvert that does the conversion. HookPtr is a pointer to
+any type of data structure; this pointer is passed unmodified to
+CCProc when a record is read or written.
+
+When a record is written to the fileblock's data file, CCProc is called
+to convert the record in place (a copy of the record is not made). If,
+after the record is written, the data in the record buffer will not be
+used by the rest of the application, set DestrWrite to True. If the data
+in the record buffer will be used by the application after writing the
+record, set the DestrWrite parameter to False. In this case the
+CCProc routine is called a second time to convert the record back again to
+the internal format (as if the record had just been read).
+;
+;-------------------------------------------------------------------
+!TOPIC 354 BTGetAllowDupKeys
+!NOINDEX
+function 0190Filer.BTGetAllowDupKeys(IFBPtr : IsamFileBlockPtr;
+                                 KeyNr  : Word) : Boolean;
+
+This function allows you to determine at runtime whether the index
+specified by KeyNr of fileblock IFBPtr allows duplicate keys. This
+information is encoded into the fileblock by 0259BTCreateFileBlock.
+
+See also:  0348BTGetKeyLen
+;
+;-------------------------------------------------------------------
+!TOPIC 355 ProcBTCharConvert
+!NOINDEX
+type
+  ProcBTCharConvert = procedure (DataPtr  : Pointer;
+                                 DataLen  : LongInt;
+                                 PostRead : Boolean;
+                                 HookPtr  : Pointer);
+
+This procedural type defines a record conversion routine that is called
+when a record is read and when it is written. The idea behind this type of
+routine is to enable you to have two different formats for your records: an
+external format that resides in the fileblock, and an internal format
+that you use in your application. Examples are support for different code
+pages between the fileblock and the application, for string encryption, and
+for record compression.
+
+DataPtr is a pointer to the record that was just read or about to be written,
+DataLen is its length.
+
+PostRead is True if the record has just been read from the fileblock (in
+other words, the routine is being called to convert the record from an
+external format to your internal one), and is False if the record is about
+to be written (in other words the record needs to be converted to the
+external format).
+
+HookPtr is a pointer to any user-defined data structure; it is a way of
+passing other information to this routine.
+
+See also:  0353BTSetCharConvert

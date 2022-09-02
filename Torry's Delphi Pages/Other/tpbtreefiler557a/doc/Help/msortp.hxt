@@ -1,0 +1,394 @@
+;
+;-------------------------------------------------------------------
+!TOPIC 393 MSortP
+The virtual sort unit, MSortP, is an implementation of the merge sort
+algorithm that has been optimized for the protected mode environment (DOS
+or Windows). A merge sort allows you to sort more items than will fit in
+RAM at once, by sorting manageable portions of the input first, then merging
+these pre-sorted lists to form the final output.
+
+  0394AbortSort         0405Declarations
+  0395DefaultMergeName  0396DoneMergeSort
+  0397GetElement        0398GetSortStatus
+  0399InitMergeSort     0400MergeInfo
+  0401MergeSort         0402MinimumHeapToUse
+  0403OptimumHeapToUse  0404PutElement
+;
+;-------------------------------------------------------------------
+!TOPIC 394 AbortSort,MSortP
+!NOINDEX
+procedure AbortSort;
+
+Halt a sort prematurely.
+
+Call this routine from your Less, SendToSortEngine, or GetFromSortEngine
+routines to abort a sort. If the Less function calls AbortSort, it must
+subsequently return False until the sort completes and 0401MergeSort returns.
+If you call AbortSort, MergeSort returns a status of 1.
+;
+;-------------------------------------------------------------------
+!TOPIC 395 DefaultMergeName
+!NOINDEX
+function DefaultMergeName(Dest : PChar; MergeNum : Word) : PChar;
+
+Return a default name for each merge file.
+
+The default merge name is SORnnnnn.TMP, where nnnnn corresponds to
+MergeNum. Strings generated range from SOR1.TMP to SOR65535.TMP.
+
+See also:  0401MergeSort  0413MergeNameFunc
+;
+;-------------------------------------------------------------------
+!TOPIC 396 DoneMergeSort
+!NOINDEX
+procedure DoneMergeSort;
+
+Dispose of memory and files allocated by 0399InitMergeSort.
+
+Don't call this function unless you've called InitMergeSort to use the
+non-callback method of sorting. If InitMergeSort succeeded, you must call
+DoneMergeSort whether or not the sort itself succeeded.
+
+DoneMergeSort does not change the value returned by 0398GetSortStatus.
+
+See also:  0401MergeSort
+;
+;-------------------------------------------------------------------
+!TOPIC 397 GetElement,MSortP
+!NOINDEX
+function GetElement(var X) : Boolean;
+
+Return the next element in sorted order.
+
+Call this routine repeatedly in your GetFromSortEngine routine to retrieve
+the sorted elements. GetElement returns True until there are no more
+sorted elements to retrieve. GetElement copies the next element into the
+variable you pass as the parameter X. Be sure that this variable is large
+enough to hold an entire record; otherwise GetElement will overwrite
+memory.
+
+When GetElement returns False, the parameter X is not initialized.
+
+See also:  0404PutElement  0401MergeSort
+;
+;-------------------------------------------------------------------
+!TOPIC 398 GetSortStatus
+!NOINDEX
+function GetSortStatus : Word;
+
+Return the current sort status value.
+
+This function simply returns the value of an internal status variable used
+by 0393MSortP. You don't need to call it unless you're using the non-callback
+method of sorting. Here is a list of the values that can be returned by
+GetSortStatus:
+
+!NOWRAP
+;!TABLE
+  0     success
+  1     user abort
+  8     insufficient memory to sort
+  106   invalid input parameter
+  204   invalid pointer returned by GlobalLock, or SelectorInc <> 8
+  213   no elements available to sort
+  214   more than 65535 merge files
+  else  DOS or Turbo Pascal I/O error code
+!WRAP
+
+See also:  0399InitMergeSort  0401MergeSort
+;
+;-------------------------------------------------------------------
+!TOPIC 399 InitMergeSort
+!NOINDEX
+procedure InitMergeSort(MaxHeapToUse : LongInt;
+                        RecLen : Word;
+                        Less : ElementCompareFunc;
+                        MergeName : MergeNameFunc);
+
+Initialize the merge sort data structures for non-callback sorting.
+
+You can use this routine together with 0396DoneMergeSort as an alternative to
+0401MergeSort. Don't call it if you are calling MergeSort.
+
+InitMergeSort starts a sorting process that is referred to as "non-
+callback" sorting. The parameters passed to InitMergeSort have the same
+meanings as the parameters of the same name passed to MergeSort.
+
+See also:  0398GetSortStatus
+;
+;-------------------------------------------------------------------
+!TOPIC 400 MergeInfo
+!NOINDEX
+procedure MergeInfo(MaxHeapToUse : LongInt; RecLen : Word;
+                    NumRecs : LongInt; var MI : MergeInfoRec);
+
+Predict the status and resource usage of a merge sort.
+
+MaxHeapToUse is the maximum number of bytes of heap space the sort should
+use. MergeInfo actually allocates heap space up to this amount; if there
+is less heap space available, the MergeInfo results apply only to the
+available heap space.
+
+RecLen is the size in bytes of each record to be sorted. NumRecs is the
+total number of records to be sorted (or a close approximation).
+
+MI returns information about the proposed sort. MI.SortStatus is zero if
+the sort is predicted to succeed. MergeInfo assumes that there is
+sufficient disk space and that no disk errors will occur.
+
+MI.MergeFiles is the total number of merge files that will be created.
+
+MI.MergeHandles is the total number of file handles used. This will always
+be in the range of 0 to 0408MergeOrder+1 inclusive.
+
+MI.MergePhases is the number of merge phases. A value of 0 indicates that
+the sort can be done completely in memory. 1 indicates that MergeOrder or
+fewer merge files are created and will be merged in one pass. Higher
+values mean that multiple merge passes are required, with the output from
+earlier passes feeding the input of later passes.
+
+MI.MaxDiskSpace is the peak disk space required. Since merge files are
+deleted as soon as they are used, the disk space used in a merge sort
+grows and shrinks. All merge files are deleted when the sort is complete.
+MaxDiskSpace is always smaller than 2*RecLen*NumRecs. The analysis that
+MergeInfo performs to determine MaxDiskSpace requires that MI.MergeFiles
+be smaller than 16384, and that 4*MI.MergeFiles bytes of heap space be
+free when MergeInfo is called. If these requirements aren't met, MergeInfo
+returns -1 for MI.MaxDiskSpace.
+
+MI.HeapUsed is the number of bytes of heap space the sort will actually
+use. This is always less than or equal to MaxHeapToUse.
+
+MI.SelectorCount is the number of selectors (and memory blocks) that the
+sort will allocate in protected or Windows mode; in real mode it is the
+number of blocks of heap space the sort will allocate.
+
+MI.RecsPerSel is the number of records stored in each memory block. This
+is always a power of two.
+
+See also:  0402MinimumHeapToUse  0403OptimumHeapToUse
+;
+;-------------------------------------------------------------------
+!TOPIC 401 MergeSort
+!NOINDEX
+function MergeSort(MaxHeapToUse : LongInt; RecLen : Word;
+                   SendToSortEngine : ElementIOProc;
+                   Less : ElementCompareFunc;
+                   GetFromSortEngine : ElementIOProc;
+                   MergeName : MergeNameFunc) : Word;
+
+Sort a set of elements.
+
+MaxHeapToUse specifies the maximum number of bytes of heap space the sort
+will use. It is not an error for MaxHeapToUse to exceed MemAvail;
+MergeSort will use whatever is available. If you know in advance how many
+records will be sorted, it is a good idea to pass the result returned by
+0403OptimumHeapToUse for this parameter.
+
+RecLen is the number of bytes in each record to be sorted.
+
+SendToSortEngine is a procedure that you provide. It passes the sort
+elements to the sort engine.
+
+Less is another function that you provide. It compares pairs of elements.
+This function must return True if and only if element "X" (the first
+parameter) is strictly less than element "Y" (the second parameter).
+
+GetFromSortEngine is also a procedure that you provide. It retrieves the
+sorted elements from the sort engine.
+
+MergeName is a function that provides a name for each merge file. You can
+often pass 0395DefaultMergeName for this parameter.
+
+MergeSort returns a status code in its function result. It can return the
+following values:
+
+!NOWRAP
+;!TABLE
+  0     success
+  1     user abort (0394AbortSort was called)
+  8     insufficient memory to sort
+  106   invalid input parameter (RecLen zero, MaxHeapToUse too small)
+  204   invalid pointer returned by GlobalLock, or SelectorInc <> 8
+  213   no elements available to sort
+  214   more than 65535 merge files
+  else  DOS or Turbo Pascal I/O error code
+!WRAP
+
+See also:  0397GetElement  0400MergeInfo  0404PutElement
+;
+;-------------------------------------------------------------------
+!TOPIC 402 MinimumHeapToUse
+!NOINDEX
+function MinimumHeapToUse(RecLen : Word) : LongInt;
+
+Return the minimum heap space that allows 0401MergeSort to succeed.
+
+Given the size of each record (RecLen), MinimumHeapToUse returns the
+smallest amount of heap space that will allow a sort to succeed. You can
+pass this value to MergeSort to sort a group of elements using the
+smallest amount of memory. Note that the value returned by
+MinimumHeapToUse is often very small and can cause a significant amount of
+merging, so it's generally better to multiply the result by a reasonable
+factor (say 2-4) even if you want to minimize heap usage of a sort.
+
+See also:  0403OptimumHeapToUse
+;
+;-------------------------------------------------------------------
+!TOPIC 403 OptimumHeapToUse
+!NOINDEX
+function OptimumHeapToUse(RecLen : Word; NumRecs : LongInt) : LongInt;
+
+Return the smallest heap space for a sort with no merging.
+
+Given the size of each record (RecLen) and the number of records to be
+sorted (NumRecs), OptimumHeapToUse returns the amount of heap space needed
+to perform the sort entirely in memory. Additional heap space does not
+help the sort. Less heap space causes merging.
+
+See also:  0402MinimumHeapToUse
+;
+;-------------------------------------------------------------------
+!TOPIC 404 PutElement,MSortP
+!NOINDEX
+function PutElement(var X) : Boolean;
+
+Submit an element to the sort system.
+
+Call this function in your SendToSortEngine routine for each element to be
+sorted. Pass the element to be sorted in the untyped parameter X.
+PutElement returns True if the element is successfully processed by
+0401MergeSort. It returns False if an error occurred; do not continue to call
+PutElement in this case.
+
+See also:  0397GetElement
+;
+;-------------------------------------------------------------------
+!TOPIC 405 Declarations,MSortP
+!NOINDEX
+The following constants, types and variables are declared in the
+0393MSortP unit:
+
+!NOWRAP
+  0406MaxSelectors        0407MedianThreshold
+  0408MergeOrder          0409MinRecsPerRun
+  0410SwapThreshold       0411ElementIOProc
+  0412ElementCompareFunc  0413MergeNameFunc
+  0414MergeInfoRec
+!WRAP
+;
+;-------------------------------------------------------------------
+!TOPIC 406 MaxSelectors
+!NOINDEX
+const
+  MaxSelectors = 256;
+
+The maximum number of selectors that will be allocated by the 0393MSortP sort
+engine.
+
+For a real mode target (where selectors do not exist) this constant
+determines the number of individual allocations made on the heap.
+;
+;-------------------------------------------------------------------
+!TOPIC 407 MedianThreshold
+!NOINDEX
+const
+  MedianThreshold = 16;
+
+The partition length below which the in-memory quicksort simply uses the
+middle element of the partition for the pivot element. For partition
+lengths at least this size, 0401MergeSort uses the median of the left, right,
+and middle elements for the pivot. The median of three algorithm protects
+the sort against degrading to N*N performance for nearly sorted lists.
+;
+;-------------------------------------------------------------------
+!TOPIC 408 MergeOrder
+!NOINDEX
+const
+  MergeOrder = 5;
+
+Specifies the number of files open during the merge phase and affects the
+performance of the sort. You can set MergeOrder to any value in the range
+from 2 to 10 inclusive. However, experimentation indicates that the
+default value of 5 is optimal under a wide range of conditions.
+;
+;-------------------------------------------------------------------
+!TOPIC 409 MinRecsPerRun
+!NOINDEX
+const
+  MinRecsPerRun = 4;
+
+Minimum number of records that must fit in memory during a sort. If fewer
+records fit in memory, 0400MergeInfo and 0401MergeSort return an error code. If
+even MinRecsPerRun records fit in memory, MergeSort performs merging to
+complete the sort. Increase this constant if you prefer that the sort fail
+instead of doing an excessive amount of merging.
+;
+;-------------------------------------------------------------------
+!TOPIC 410 SwapThreshold
+!NOINDEX
+const
+  SwapThreshold = 64;
+
+The record size below which 0401MergeSort swaps complete data records. For
+records SwapThreshold bytes or larger, MergeSort swaps pointers to records
+instead of the records themselves. Swapping pointers is the faster
+approach for large records sorted in memory, but this approach has a
+memory overhead of 4 bytes per record plus a buffer segment that must be
+used for a run output buffer. The default of 64 was chosen to keep the
+typical overhead below 10%. Reducing the default also provides no
+significant improvement in performance.
+;
+;-------------------------------------------------------------------
+!TOPIC 411 ElementIOProc
+!NOINDEX
+type
+  ElementIOProc = procedure;
+
+Specifies the type of the routine passed as the SendToSortEngine and
+GetFromSortEngine parameters to 0401MergeSort. These routines must be declared
+FAR and must have no parameters.
+;
+;-------------------------------------------------------------------
+!TOPIC 412 ElementCompareFunc
+!NOINDEX
+type
+  ElementCompareFunc = function (var X, Y) : Boolean;
+
+Specifies the type of the routine passed as the Less parameter to
+0401MergeSort. MergeSort calls this function to compare pairs of elements as
+needed. It must be declared FAR and must have the form shown here. It
+should return True if and only if element X is strictly less than element
+Y. You should typecast the untyped parameters to treat them as elements of
+the type you are sorting.
+;
+;-------------------------------------------------------------------
+!TOPIC 413 MergeNameFunc
+!NOINDEX
+type
+  MergeNameFunc = function (Dest : PChar; MergeNum : Word) : PChar;
+
+Specifies the type of the routine passed as the MergeName parameter to
+0401MergeSort. MergeSort calls this function to obtain the name of each merge
+file when needed.
+
+See also:  0395DefaultMergeName
+;
+;-------------------------------------------------------------------
+!TOPIC 414 MergeInfoRec
+!NOINDEX
+type
+  MergeInfoRec = record
+    SortStatus   : Word;    {Predicted status of sort, assuming disk ok}
+    MergeFiles   : Word;    {Total number of merge files created}
+    MergeHandles : Word;    {Maximum file handles used}
+    MergePhases  : Word;    {Number of merge phases}
+    MaxDiskSpace : LongInt; {Maximum peak disk space used}
+    HeapUsed     : LongInt; {Heap space actually used}
+    SelectorCount: Word;    {Number of selectors allocated}
+    RecsPerSel   : Word;    {Records stored in each selector}
+  end;
+
+Describes the structure returned by the 0400MergeInfo function. This function
+predicts the status of a sort and its resource usage given certain
+information about it.

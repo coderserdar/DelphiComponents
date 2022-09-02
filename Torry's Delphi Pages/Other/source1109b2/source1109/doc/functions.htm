@@ -1,0 +1,415 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="pl">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1250">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>New Page 1</title>
+</head>
+
+<body>
+
+<p style="word-spacing: 0; line-height: 100%; text-indent: 0; margin: 0"><b><font size="4">Basic functions
+detail:</font></b><br>
+<br>
+'ISWORDPRESENT(&lt;Word>,&lt;String>,&lt;Delimiters>)'<br>
+  'Determines is word &lt;Word> present in the string &lt;String>.'<br>
+  '&lt;Delimiters> is the list of word delimiters.'<br>
+<br>
+'WORDPOSITION(&lt;WordNo>,&lt;String>,&lt;Delimiters>)'<br>
+  'Returns position of word number &lt;WordNo> in the string &lt;String>.'<br>
+  '&lt;Delimiters> is the list of word delimiters.'<br>
+<br>
+'EXTRACTWORD(&lt;WordNo>,&lt;String>,&lt;Delimiters>)'<br>
+  'Returns word number &lt;WordNo> from the string &lt;String>.'<br>
+  '&lt;Delimiters> is the list of word delimiters.'<br>
+<br>
+'WORDCOUNT(&lt;String>,&lt;Delimiters>)'<br>
+  'Returns number of words in the string &lt;String>.'<br>
+  '&lt;Delimiters> is the list of word delimiters.'<br>
+<br>
+'NPOS(&lt;SubStr>,&lt;String>,&lt;SubStrNo>)'<br>
+  'Returns position of &lt;SubStrNo>-th substring &lt;SubStr> inclusion in '<br>
+  'the string &lt;String>.'<br>
+<br>
+'REPLACESTR(&lt;String>,&lt;SubStr1>,&lt;SubStr2>)'<br>
+  'Replaces all inclusions of &lt;SubStr1> string to the &lt;SubStr2> string '<br>
+  'in the string &lt;String> and returns the result.'<br>
+<br>
+'TRIMRIGHT(&lt;String>)'<br>
+  'Trims all right spaces from the string &lt;String> and returns the result.'<br>
+<br>
+'TRIMLEFT(&lt;String>)'<br>
+  'Trims all left spaces from the string &lt;String> and returns the result.'<br>
+<br>
+'DELETE(&lt;String>,&lt;DelFrom>,&lt;DelCount>)'<br>
+  'Deletes &lt;DelCount> symbols starting at position &lt;DelFrom> in the '<br>
+  'given string &lt;String> and returns the result.'<br>
+<br>
+'INSERT(&lt;SubStr>,&lt;String>,&lt;InsertFrom>)'<br>
+  'Inserts &lt;SubStr> substring into &lt;String> string starting at position '<br>
+  '&lt;InsertFrom> and returns the result.'<br>
+'DATETOSTR(&lt;Date>)'<br>
+  'Converts date &lt;Date> to string and returns the result.'<br>
+<br>
+'TIMETOSTR(&lt;Time>)'<br>
+  'Converts time &lt;Time> to string and returns the result.'<br>
+<br>
+'REPLICATE(&lt;Symbol>,&lt;Length>)'<br>
+  'Returns the string with length &lt;Length> that consists of symbols &lt;Symbol>.'<br>
+<br>
+'PADLEFT(&lt;String>,&lt;Length>,&lt;Symbol>)'<br>
+  'Adds symbols &lt;Symbol> to begin of the string &lt;String> to make it as long '<br>
+  'as stated in the &lt;Length> parameter and returns result string.'<br>
+<br>
+'PADRIGHT(&lt;String>,&lt;Length>,&lt;Symbol>)'<br>
+  'Adds symbols &lt;Symbol> to end of the string &lt;String> to make it as long '<br>
+  'as stated in the &lt;Length> parameter and returns result string.'<br>
+<br>
+'PADCENTER(&lt;String>,&lt;Length>,&lt;Symbol>)'<br>
+  'Adds symbols &lt;Symbol> to begin and end of the string &lt;String> to make it as long '<br>
+  'as stated in the &lt;Length> parameter and returns result string.'<br>
+<br>
+'ENDPOS(&lt;String>,&lt;SubStr>)'<br>
+  'Returns position of substring &lt;SubStr> in the string &lt;String> starting '<br>
+  'at the end of the string.'<br>
+<br>
+'LEFTCOPY(&lt;String>,&lt;Count>)'<br>
+  'Copies number of symbols &lt;Count> from the string &lt;String> starting '<br>
+  'at the begin of the string.'<br>
+<br>
+'RIGHTCOPY(&lt;String>,&lt;Count>)'<br>
+  'Copies number of symbols &lt;Count> from the string &lt;String> starting '<br>
+  'at the end of the string.'<br>
+<br>
+'COMPARESTR(&lt;String1>,&lt;String2>)'<br>
+  'Compares two strings. Returns the position where begins the difference '<br>
+  'between the strings or 0 if strings are equivalent.'<br>
+<br>
+'CHR(&lt;Code>)'<br>
+  'Returns symbol of ASCII code &lt;Code>.'<br>
+<br>
+'VALIDINT(&lt;String>)'<br>
+  'Returns True if &lt;String> is valid integer value.'<br>
+<br>
+'VALIDFLOAT(&lt;String>)'<br>
+  'Returns True if &lt;String> is valid float value.'<br>
+<br>
+'ISRANGENUM(&lt;Number1>,&lt;Number2>,&lt;Number3>)'<br>
+  'Returns True if &lt;Number3> is between &lt;Number1> and &lt;Number2>.'<br>
+<br>
+'STRTOFLOATDEF(&lt;String>,&lt;DefValue>)'<br>
+  'Converts &lt;String> string to float value. If conversion fails, returns '<br>
+  'default value &lt;DefValue>.'<br>
+<br>
+'STRTOINTDEF(&lt;String>,&lt;DefValue>)'<br>
+  'Converts &lt;String> string to integer value. If conversion fails, returns '<br>
+  'default value &lt;DefValue>.'<br>
+<br>
+'STRTOINT(&lt;String>)'<br>
+  'Converts &lt;String> string to the integer value.'<br>
+<br>
+'STRTOFLOAT(&lt;String>)'<br>
+  'Converts &lt;String> string to the float value.'<br>
+<br>
+'DATEDIFF(&lt;Date1>,&lt;Date2>,&lt;var String>)'<br>
+  'Returns the difference between two dates &lt;Date1> and &lt;Date2>. '<br>
+  'Result is in the string &lt;String> in format 'days;months;years'.'<br>
+<br>
+'INCDATE(&lt;Date>,&lt;String>)'<br>
+  'Increments the date &lt;Date> by given number of days, months and years '<br>
+  'passed in the &lt;String> parameter in format 'days;months;years'. '<br>
+  'Returns the result date.'<br>
+<br>
+'INCTIME(&lt;Time>,&lt;String>)'<br>
+  'Increments the time &lt;Time> by given number of hours, minutes, seconds '<br>
+  'and milliseconds passed in the &lt;String> parameter in format 'h;min;sec;msec'. '<br>
+  'Returns the result time.'<br>
+<br>
+'DAYSPERMONTH(&lt;Year>,&lt;Month>)'<br>
+  'Returns days in the given month &lt;Month> of the year &lt;Year>.'<br>
+<br>
+'FIRSTDAYOFNEXTMONTH(&lt;Date>)'<br>
+  'Returns the date of first day of the next month of date &lt;Date>.'<br>
+<br>
+'FIRSTDAYOFPREVMONTH(&lt;Date>)'<br>
+  'Returns the date of first day of the previous month of date &lt;Date>.'<br>
+<br>
+'LASTDAYOFPREVMONTH(&lt;Date>)'<br>
+  'Returns the date of last day of the previous month of date &lt;Date>.'<br>
+<br>
+'INCDAY(&lt;Date>,&lt;Number>)'<br>
+  'Increments the date &lt;Date> by given number of days &lt;Number> and returns '<br>
+  'the result date.'<br>
+<br>
+'INCYEAR(&lt;Date>,&lt;Number>)'<br>
+  'Increments the date &lt;Date> by given number of years &lt;Number> and returns '<br>
+  'the result date.'<br>
+<br>
+'ISRANGEDATE(&lt;Date1>,&lt;Date2>,&lt;Date3>)'<br>
+  'Returns True if date &lt;Date3> is between &lt;Date1> and &lt;Date2>.'<br>
+<br>
+'STRTODATEDEF(&lt;String>,&lt;DefDate>)'<br>
+  'Converts &lt;String> string to date. If conversion fails, returns '<br>
+  'default value &lt;DefDate>.'<br>
+<br>
+'VALIDDATE(&lt;String>)'<br>
+  'Returns True if &lt;String> string is valid date.'<br>
+<br>
+'INCMONTH(&lt;Date>,&lt;Number>)'<br>
+  'Increments the date &lt;Date> by given number of months &lt;Number> and returns '<br>
+  'the result date.'<br>
+<br>
+'ISLEAPYEAR(&lt;Year>)'<br>
+  'Returns True if &lt;Year> year is leap year.'<br>
+<br>
+'CREATEDATE(&lt;String>)'<br>
+  'Converts &lt;String> string to string that contains date to use it in SQL '<br>
+  'clause. To use this function put the string with desired date format '<br>
+  'to TfrAddFunctionLibrary.FormatDate property.'<br>
+<br>
+'CREATESTR(&lt;String>)'<br>
+  'Adds quotes to the &lt;String> string to use it in SQL clause.'<br>
+<br>
+'CREATENUM(&lt;String>)'<br>
+  'Converts &lt;String> string to string that contains numeric value to use '<br>
+  'it in SQL clause.'<br>
+<br>
+'ABS(&lt;Number>)'<br>
+  'Returns absolute value &lt;Number>'<br>
+<br>
+'DAYOF(&lt;Date>)' +<br>
+    'Returns day number (1..31) of given &lt;Date>.';<br>
+<br>
+'FORMATDATETIME(&lt;Fmt>, &lt;DateTime&gt;)'&nbsp;<br>
+'Converts a &lt;DateTime> value to a string using mask in &lt;Fmt>.';<br>
+<br>
+'FORMATFLOAT(&lt;Fmt>, &lt;Numeric&gt;)'&nbsp;<br>
+'Converts a &lt;Numeric> value to a string using mask in &lt;Fmt>.';<br>
+<br>
+'LENGTH(&lt;String&gt;)' 'Returns length of &lt;String>.';<br>
+<br>
+'LOWERCASE(&lt;String&gt;)'&nbsp;<br>
+'Converts &lt;String> symbols to lower case.';<br>
+<br>
+'MONTHOF(&lt;Date&gt;)'&nbsp;<br>
+'Returns month number (1..12) of given &lt;Date>.';<br>
+<br>
+'NAMECASE(&lt;String&gt;)'&nbsp;<br>
+'Converts &lt;String> symbols to lower case, and first symbol '&nbsp;<br>
+'is in upper case.';<br>
+<br>
+'STRTODATE(&lt;String>)' +'Converts &lt;String> to date.';<br>
+<br>
+'STRTOTIME(&lt;String&gt;)' 'Converts &lt;String> to time.';<br>
+<br>
+'TRIM(&lt;String>)' +<br>
+    'Trims all heading and trailing spaces in &lt;String> and returns '&nbsp;<br>
+'resulting string.';<br>
+<br>
+'UPPERCASE(&lt;String&gt;)' 'Converts &lt;String> symbols to upper case.';<br>
+<br>
+'YEAROF(&lt;Date&gt;)' 'Returns year of given &lt;Date>.';<br>
+<br>
+'IFF(&lt;Expression>, &lt;Value1>, &lt;Value2>)'&nbsp;<br>
+'Returns &lt;Value1>, if expression &lt;Expression> is True; '&nbsp;<br>
+'otherwise returns &lt;Value2>. Return value can be not only string.';<br>
+<br>
+'COPY(&lt;String>, &lt;From>, &lt;Count&gt;)' 'Returns a substring of string.';<br>
+<br>
+'MOD = '&lt;Value1> MOD &lt;Value2>' 'Returns remainder from dividing &lt;Value1> by &lt;Value2>.';<br>
+<br>
+'STR(&lt;Value&gt;)' 'Converts number given in &lt;Value> to a string.';<br>
+<br>
+'NOT &lt;Value&gt;' 'Logical ''NOT''.';<br>
+<br>
+'AND = '&lt;Value1> AND &lt;Value2>' 'Logical ''AND''.';<br>
+<br>
+'OR = '&lt;Value1> OR &lt;Value2>' 'Logical ''OR''.';<br>
+<br>
+'ROUND(&lt;Value&gt;)' 'Returns rounded &lt;Value>.';<br>
+<br>
+'FRAC(&lt;Value&gt;)' 'Returns fractional part of &lt;Value>.';<br>
+<br>
+'INT(&lt;Value&gt;)' 'Returns integer part of &lt;Value&gt;.';<br>
+<br>
+'TRUE' 'Logical ''TRUE''.';<br>
+<br>
+'FALSE' 'Logical ''FALSE''.';<br>
+<br>
+'NOW' 'Returns current datetime.';<br>
+<br>
+'NULL' 'Returns Null.';<br>
+<br>
+'DATE' 'Returns current date.';<br>
+<br>
+'TIME' 'Returns current time.';<br>
+<br>
+'INC(&lt;Value&gt;)' 'Increments &lt;Value>.';<br>
+<br>
+'DEC(&lt;Value&gt;)' 'Decrements &lt;Value>.';<br>
+<br>
+'MAXNUM(&lt;Value1>, &lt;Value2>)' 'Returns max of given values.';<br>
+<br>
+'MINNUM(&lt;Value1>, &lt;Value2>)' 'Returns min of given values.';<br>
+<br>
+'POS(&lt;SubString>, &lt;String&gt;)' 'Returns position of substring in given string.';<br>
+<br>
+'FORMATTEXT(&lt;Mask>, &lt;String&gt;)' 'Applies &lt;Mask> to given &lt;String> and returns formatted string.';<br>
+<br>
+<br>
+FORMATDATETIME( p1,p2  )<br>
+FORMATFLOAT( p1,p2  )<br>
+LOWERCASE( p1 )<br>
+NAMECASE( p1  )<br>
+UPPERCASE( p1  )<br>
+NUMBERTOSTRPL( p1  )<br>
+ROUNDFLOAT( p1,p2, p3,p4  ) Value, precision, decimals, roundtype<br>
+DAY( p1  )<br>
+MONTH( p1  )<br>
+YEAR( p1  )<br>
+WEEKNO( p1  )<br>
+INTEGERTOSTRPL( p1  )<br>
+CAPITALIZE( p1  )<br>
+REPLACE( p1,p2, p3  )<br>
+DATEDIFF( p1,p2, p3  )<br>
+ABS( p1  )<br>
+CHR( p1  )<br>
+COMPARESTR( p1,p2  )<br>
+CREATEDATE( p1,p2  )<br>
+CREATENUM(  p1 )<br>
+CREATESTR( p1  )<br>
+DATETOSTR( p1  )<br>
+DAYSPERMONTH( p1,p2  )<br>
+DELETE( p1,p2, p3  )<br>
+ENDPOS( p1,p2  )<br>
+EXTRACTWORD( p1,p2, p3  )<br>
+FIRSTDAYOFNEXTMONTH( p1  )<br>
+FIRSTDAYOFPREVMONTH(  p1 )<br>
+INCDATE( p1,p2  )<br>
+INCDAY( p1,p2  )<br>
+INCMONTH( p1,p2  )<br>
+INCTIME( p1,p2  )<br>
+INCYEAR( p1,p2  )<br>
+INSERT( p1,p2, p3  )<br>
+ISLEAPYEAR(  p1 )<br>
+ISRANGEDATE( p1,p2, p3  )<br>
+ISRANGENUM( p1,p2, p3  )<br>
+ISWORDPRESENT( p1,p2, p3  )<br>
+LASTDAYOFPREVMONTH(  p1 )<br>
+LEFTCOPY( p1,p2  )<br>
+NPOS( p1,p2, p3  )<br>
+PADCENTER(  p1,p2, p3 )<br>
+PADLEFT(  p1,p2, p3 )<br>
+PADRIGHT( p1,p2, p3  )<br>
+REPLACESTR( p1,p2, p3  )<br>
+REPLICATE(  p1,p2 )<br>
+RIGHTCOPY(  p1,p2 )<br>
+STRTODATEDEF( p1,p2  )<br>
+STRTOFLOAT(  p1 )<br>
+STRTOFLOATDEF( p1,p2  )<br>
+STRTOINT( p1  )<br>
+STRTOINTDEF( p1, p2  )<br>
+TIMETOSTR( p1  )<br>
+TRIMLEFT( p1  )<br>
+TRIMRIGHT( p1  )<br>
+VALIDDATE( p1  )<br>
+VALIDFLOAT( p1  )<br>
+VALIDINT( p1  )<br>
+WORDCOUNT( p1,p2  )<br>
+WORDPOSITION( p1,p2, p3  )<br>
+DATETIMETOSTR( p1  )<br>
+INTTOSTR( p1  )<br>
+DATETOFLOAT( p1  )<br>
+FLOATTODATE( p1  )<br>
+LENGTH( p1  )<br>
+TRIM( p1  )<br>
+IFF( p1,p2, p3  )<br>
+POS( p1,p2  )<br>
+ISNULL( p1  )<br>
+INC(p1)<br>
+DEC(p1)<br>
+DAYOF(p1)<br>
+FORMATTEXT(p1, p2)<br>
+MAXNUM(p1, p2)<br>
+MINNUM(p1, p2)<br>
+MONTHOF(p1)<br>
+YEAROF(p1)<br>
+<br>
+<br>
+SQLSTRDATETIME( p1  ) Return sql format like '2005-12-12 10:10:10'<br>
+SQLSTRDATE( p1  ) Return sql format like '2005-12-12'<br>
+SQLSTRTIME( p1  ) Return sql format like '10:10:10'<br>
+SQLSTRDOUBLE( p1  ) 123.12<br>
+SQLSTRINTEGER( p1  ) 123<br>
+SQLSTRBOOLEAN( p1  ) True/False<br>
+<br>
+SQLNOW Return sql format NOW like '2005-12-12 10:10:10'<br>
+SQLTIME Return sql format TIME like '10:10:10'<br>
+SQLDATE Return sql format DATE like '2005-12-12'<br>
+<br>
+NOW Return current NOW<br>
+TIME Return current TIME<br>
+DATE Return current DATE<br>
+<br>
+<b>TStringList:</b><br>
+<br>
+CREATESTRINGLIST.NAME - Create StringList<br>
+NAMESTRINGLIST.DESTROY - Destroy StringList<br>
+<br>
+NAMESTRINGLIST.endupdate<br>
+NAMESTRINGLIST.beginupdate<br>
+NAMESTRINGLIST.insert(p1,p2)<br>
+NAMESTRINGLIST.delete(p1),<br>
+NAMESTRINGLIST.ITEMS(p1) - Return string of StringList[position]<br>
+NAMESTRINGLIST.count<br>
+NAMESTRINGLIST.add(p1)<br>
+NAMESTRINGLIST.FIND(p1)<br>
+NAMESTRINGLIST.INDEXOF(p1)<br>
+NAMESTRINGLIST.SORT := true/false<br>
+NAMESTRINGLIST.CLEAR<br>
+<br>
+if not destroy Stringlist then parser destroy before close<br>
+<br>
+<b>Errors:</b><br>
+<br>
+Error - Show error<br>
+ErrorUpdate - ShowError for update<br>
+ErrorDelete - ShowError for delete<br>
+<br>
+<b>Cursors function:</b><br>
+<br>
+CURSOR.NameCursor.select('Select * from  SlKrajeMiastaUlica');<br>
+CURSOR.NameCursor.eof<br>
+CURSOR.NameCursor.bof<br>
+CURSOR.NameCursor.next<br>
+CURSOR.NameCursor.prior<br>
+CURSOR.NameCursor.value(fieldname)<br>
+CURSOR.NameCursor.sqlvalue(fieldname)&nbsp;<br>
+CURSOR.NameCursor.close<br>
+CURSOR.NameCursor.ISEMPTY<br>
+CURSOR.NameCursor.INSERT&nbsp;<br>
+CURSOR.NameCursor.RECORDCOUNT<br>
+CURSOR.NameCursor.update(fieldname, value)<br>
+CURSOR.NameCursor.ClearRow - clear row cursor<br>
+CURSOR.NameCursor.FIELDEXISTS(fieldname)<br>
+CURSOR.NameCursor.FIELDTYPE(fieldname) - return fieldtype like fftdsDate ....<br>
+<br>
+CURSOR.modify('insert into dtklienci default values');&nbsp;<br>
+CURSOR.modify('Update dtklienci set Version = 123');&nbsp;<br>
+<br>
+CURSOR.NameCursor.INTRANSACTION<br>
+CURSOR.NameCursor.STARTTRANSACTION<br>
+CURSOR.NameCursor.ROLLBACKTRANSACTION<br>
+CURSOR.NameCursor.COMMITTRANSACTION<br>
+<br>
+if nead used vars then&nbsp;<br>
+i:= sqlnow;<br>
+CURSOR.modify('Update dtklienci set DateChange = [i]');&nbsp;<br>
+<br>
+CURSOR.NameCursor.iscursorresult( true); return Handle ID of cursor  if uses procedure</p>
+
+</body>
+
+</html>

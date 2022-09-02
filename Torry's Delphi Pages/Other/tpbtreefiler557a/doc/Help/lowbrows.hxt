@@ -1,0 +1,275 @@
+;
+;-------------------------------------------------------------------
+!TOPIC 363 LOWBROWS
+
+This topic describes three low level units that implement an abstract
+browser object upon which platform-specific layers are built. These units
+are called LOWBROWS, MEDBROWS, and HIBROWS. The abstract browser objects
+manage a buffer of records that are to be displayed, but they do not
+actually get input from the user or write output to the screen. Those
+actions are reserved for the final, platform-specific layer.
+
+Most of the types and members in the abstract objects are for internal use
+and are not documented here. The compatibility layers for each platform
+access the internal methods in ways that are documented for each layer.
+However, the module LOWBROWS declares some constants and types that affect
+all of the browsers; those are documented here.
+
+Most of the methods in all levels of the browser hierarchy are implemented
+as functions returning integer results. The result corresponds to a B-Tree
+Filer error class ranging from 0 to 4 (see BTIsamErrorClass). All error
+classes 3 or larger cause the browser to abort its operation immediately.
+Error classes of 1 or 2 can abort the current operation in some cases.
+
+  0364Declarations
+;
+;-------------------------------------------------------------------
+!TOPIC 364 Declarations,LOWBROWS
+!NOINDEX
+
+The 0363LOWBROWS unit declares the following constants, types and variables
+that are used by the platform dependent browsers 0685OPBROW, 0779TVBROWS and
+0831WBROWSER:
+
+!NOWRAP
+  0365MaxCols            0366MaxEltsPerRow
+  0367BRCurrentlyLocked  0368BRNoFilterResult
+  0369BRFilterError      0370BRUserStatStart
+  0371NoError            0372DialogError
+  0373LockError          0374BRLRowEltString
+  0375RowString          0376BRLRowEltStrArr
+  0377GenKeyStr          0378RowRec
+  0379BRHBrowser
+!WRAP
+;
+;-------------------------------------------------------------------
+!TOPIC 365 MaxCols,LOWBROWS
+!NOINDEX
+const
+  MaxCols = 128;
+
+The maximum number of columns that can be displayed in a browser window
+with the assistance of horizontal scrolling. This value can be increased
+to a maximum of 255.
+;
+;-------------------------------------------------------------------
+!TOPIC 366 MaxEltsPerRow
+!NOINDEX
+const
+  MaxEltsPerRow = 8;
+
+The maximum number of lines that can be displayed for each record
+displayed by the browser. However, at this time the browser modules
+support a maximum of one line per record.
+;
+;-------------------------------------------------------------------
+!TOPIC 367 BRCurrentlyLocked
+!NOINDEX
+const
+  BRCurrentlyLocked = -1;
+
+The Status field of a variable of type 0378RowRec contains this
+value if the corresponding data record is locked. In this case, the
+record's data cannot be read successfully. The RowRec is passed as a
+parameter to the browser window's BuildRow virtual method, which must be
+overridden. Your BuildRow method should detect the BRCurrentlyLocked
+status and build an appropriate string for display.
+;
+;-------------------------------------------------------------------
+!TOPIC 368 BRNoFilterResult
+!NOINDEX
+const
+  BRNoFilterResult = -2;
+
+The Status field of a variable of type 0378RowRec contains this value if
+filtering is active and the filter routine could not decide whether to
+accept a particular record because the record was locked.
+;
+;-------------------------------------------------------------------
+!TOPIC 369 BRFilterError
+!NOINDEX
+const
+  BRFilterError = -3;
+
+The Status field of a variable of type 0378RowRec contains this value if an
+error occurred during the record filter check (apart from the record being
+locked, for which 0368BRNoFilterResult is used).
+;
+;-------------------------------------------------------------------
+!TOPIC 370 BRUserStatStart
+!NOINDEX
+const
+  BRUserStatStart = -10;
+
+Values equal to or more negative than this value can be defined for your
+own purposes and passed in the 0378RowRec variable.
+;
+;-------------------------------------------------------------------
+!TOPIC 371 NoError
+!NOINDEX
+const
+  NoError = 0;
+
+This constant corresponds to the lowest error class of B-Tree Filer.
+;
+;-------------------------------------------------------------------
+!TOPIC 372 DialogError
+!NOINDEX
+const
+  DialogError = 1;
+
+This constant corresponds to the second lowest error class of B-Tree
+Filer.
+;
+;-------------------------------------------------------------------
+!TOPIC 373 LockError
+!NOINDEX
+const
+  LockError = 2;
+
+This constant corresponds to the third lowest error class of B-Tree
+Filer.
+;
+;-------------------------------------------------------------------
+!TOPIC 374 BRLRowEltString
+!NOINDEX
+type
+  BRLRowEltString = String[MaxCols];
+
+BRLRowEltString is the type used for an element of the display string
+array for each record in the browser.
+
+See also:  0376BRLRowEltStrArr  0378RowRec
+;
+;-------------------------------------------------------------------
+!TOPIC 375 RowString
+!NOINDEX
+type
+  RowString = BRLRowEltString;
+
+RowString is the type used to hold the display string for each record in
+the browser.
+
+See also:  0378RowRec
+;
+;-------------------------------------------------------------------
+!TOPIC 376 BRLRowEltStrArr
+!NOINDEX
+type
+  BRLRowEltStrArr = Array[1..MaxEltsPerRow] of BRLRowEltString;
+
+BRLRowEltStrArr holds the array of lines used to display each record in
+the browser. However, at this time the browser modules support a maximum
+of one line per record.
+
+See also:  0374BRLRowEltString  0378RowRec
+;
+;-------------------------------------------------------------------
+!TOPIC 377 GenKeyStr
+!NOINDEX
+type
+  GenKeyStr = IsamKeyStr;
+
+GenKeyStr is an alias for IsamKeyStr, used to pass key string parameters
+to and from the browser methods.
+;
+;-------------------------------------------------------------------
+!TOPIC 378 RowRec,LOWBROWS
+!NOINDEX
+!NOWRAP
+;!TABLE
+type
+  RowRec = record
+    {Read only portion}
+    IKS    : GenKeyStr;
+    Ref    : LongInt;
+    Status : Integer;
+    RowModified : Boolean;
+    RowBuilt    : Boolean;
+    {Portion to be initialized by BuildRow}
+    case Boolean of
+      True  : (Row : RowString);
+      False : (RowElt : BRLRowEltStrArr);
+  end;
+  RowRecPtr : ^RowRec;
+!WRAP
+
+A parameter of this type is passed to many methods of the browsers,
+including particularly the BuildRow and PerformFilter methods which must
+be overridden in a user application. IKS is the key string of the browsing
+index of the corresponding record. Ref is the data reference number of the
+record. Status equals 0 if the data record could be read successfully,
+0367BRCurrentlyLocked if the record was locked, or other values as defined
+above. RowModified and RowBuilt are flags used internally by the browser
+modules.
+
+Row is a string that must be filled in by the BuildRow method. RowElt
+alternatively specifies multiple lines to be displayed for a given record.
+However, at this time the browser units support a maximum of one line per
+record.
+
+See also:  0376BRLRowEltStrArr  0375RowString
+;
+;-------------------------------------------------------------------
+!TOPIC 379 BRHBrowser
+!NOINDEX
+type
+  BRHBrowser = object(...)
+  end;
+
+The highest object declared by the units 0363LOWBROWS, MEDBROWS, and HIBROWS
+is BRHBrowser. Each of the compatibility layers derives a new object from
+BRHBrowser and then stores a pointer to this new object within a window
+object native to a particular platform. BRHBrowser contains (or inherits)
+data fields that can be used in a read-only manner after a browser is
+initialized. The following declarations can all be used in this fashion:
+
+CurRow : Word;
+
+Contains the relative row of the currently highlighted record. Always
+ranges from 1 to NrOfRows.
+
+DataBuffer : Pointer;
+
+Pointer to a user-supplied data buffer for reading the current record.
+
+DelayTimeOnGetRec : Word;
+
+The time (in milliseconds) between attempts to read a data record when the
+record is locked.
+
+KeyNr : Word;
+
+The fileblock index being used to control the browsing order.
+
+LastVarRecLen : Word;
+
+Length of the last variable length record read.
+
+LowKey  : 0377GenKeyStr; HighKey : GenKeyStr;
+
+These strings contain the lowest and highest keys of the browsing index
+that the browser will display. LowKey will be set to '' and HighKey set to
+MaxKeyLen bytes of $FF to display all indexed records.
+
+NrOfRows : Word;
+
+Contains the current count of browser lines. NrOfRows is changed
+automatically when the browser window is resized.
+
+RetriesOnGetRec : Word;
+
+The number of times to retry reading a locked record.
+
+UsedFileBlock : IsamFileBlockPtr;
+
+The fileblock being browsed.
+
+VariableRecs : Boolean;
+
+True when variable length records are being browsed.
+
+VarRecMaxReadLen : Word;
+
+The maximum number of bytes that the browser reads in each variable length
+record.

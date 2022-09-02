@@ -1,0 +1,86 @@
+;
+;-------------------------------------------------------------------
+!TOPIC 770 TpCmd
+TpCmd is "borrowed" from our Turbo Professional library. It is used to
+map logical action codes to keystrokes or combination of keystrokes.
+TpCmd is used only by the 0100Browser unit.
+
+It provides the following routines:
+
+  0771GetCommand                     0772AddCommandPrim
+  0773GetKeysForCommand              0774UnpackKeys
+  0775PackKeys                       0776SizeKeys
+  0777ConflictsFound                 0778CheckForKeyConflict
+;
+;-------------------------------------------------------------------
+!TOPIC 771 GetCommand
+!NOINDEX
+function 0770TpCmd.GetCommand(var KeySet; KeyPtr : Pointer;
+                          var ChWord : Word) : Byte;
+
+Get next command or character.
+;
+;-------------------------------------------------------------------
+!TOPIC 772 AddCommandPrim
+!NOINDEX
+function 0770TpCmd.AddCommandPrim(var KeySet;
+                              LastKeyIndex : Word;
+                              Cmd, NumKeys : Byte;
+                              Key1, Key2 : Word) : Boolean;
+
+Add a new command key assignment or change an existing one.
+;
+;-------------------------------------------------------------------
+!TOPIC 773 GetKeysForCommand
+!NOINDEX
+procedure 0770TpCmd.GetKeysForCommand(var KeySet;
+                                  Cmd : Byte;
+                                  var NumKeys : Byte;
+                                  var Key1, Key2 : Word);
+
+Search KeySet for Cmd, returning first set of matching keys. NumKeys
+= 0 if no match found.
+;
+;-------------------------------------------------------------------
+!TOPIC 774 UnpackKeys
+!NOINDEX
+function 0770TpCmd.UnpackKeys(var PackedKeys, UnpackedKeys;
+                         MaxCmds : Word; Cols : Byte) : Word;
+
+Unpack keys into a fixed element array. Returns number of commands in
+PackedKeys.
+;
+;-------------------------------------------------------------------
+!TOPIC 775 PackKeys
+!NOINDEX
+function 0770TpCmd.PackKeys(var PackedKeys; NumCmds, MaxBytes : Word;
+                        var UnpackedKeys) : Word;
+
+Convert fixed array into a packed list of keys again. Returns the number of
+keys that we wanted to store. Error if that number is greater than
+MaxBytes.
+;
+;-------------------------------------------------------------------
+!TOPIC 776 SizeKeys
+!NOINDEX
+function 0770TpCmd.SizeKeys(var UnpackedKeys; NumCmds : Word) : Word;
+
+Return number of bytes in packed version of UnpackedKeys.
+;
+;-------------------------------------------------------------------
+!TOPIC 777 ConflictsFound
+!NOINDEX
+function 0770TpCmd.ConflictsFound(var UnpackedKeys; NumCmds : Word) : Boolean;
+
+Check UnpackedKeys for conflicts. Returns True if conflicts were found.
+;
+;-------------------------------------------------------------------
+!TOPIC 778 CheckForKeyConflict
+!NOINDEX
+function 0770TpCmd.CheckForKeyConflict(var KeySet;
+                                   LastKeyIndex : Word;
+                                   Cmd, NumKeys : Byte;
+                                   Key1, Key2 : Word) : MatchType;
+
+Check to see if the specified key combination conflicts with an existing
+one. Possible return values are NoMatch, PartMatch, and FullMatch.

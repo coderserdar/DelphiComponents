@@ -1,0 +1,919 @@
+;
+;-------------------------------------------------------------------
+!TOPIC 128 DBImpExp
+The DBImpExp unit implements routines to convert a dBase data file
+(.DBF file) and associated memo file (.DBT) to a B-Tree Filer fileblock,
+and vice versa.
+
+The unit caters for files in both dBase III and dBase IV format (this
+version does not convert information from dBase index files). There is
+an option to create a Pascal include file when converting a dBase data
+file to a B-Tree Filer fileblock that has a record type declaration that
+defines the converted record format.
+
+  0129AddFieldNode                    0130CloseDBaseFiles
+  0131CloseIsamFiles                  0132CompleteDBaseList
+  0133CompleteIsamList                0134CreateListHeaderOpenFileBlock
+  0135CreateListHeaderUseDBaseFiles   0136Data type conversion tables
+  0137DBaseErrorMessage               0138DBaseExport
+  0139DBaseImport                     0140Declarations
+  0141FreeListHeader                  0142NoErrorHandler
+  0143NoReXUser                       0144StdDecideWrite
+  0145WriteNoTypeDef                  0146WritePascalTypeDef
+;
+;-------------------------------------------------------------------
+!TOPIC 129 AddFieldNode
+!NOINDEX
+Function AddFieldNode ( Var LHPtr     : PListHeader;
+                            Name      : DBaseFieldNameStr;
+                            CType,
+                            BufSize,
+                            Offset    : Word;
+                            Width,
+                            Decimals  : Integer ) : Boolean;
+
+This function is used during the preparation stage for a conversion from
+a B-Tree Filer fileblock to a dBase database. It allocates a memory
+block for a field node, fills it with the passed information and appends
+it to the end of the field definition list LHPtr^.ListPtr.
+
+Generally, as far as B-Tree Filer is concerned the records it manages are
+typeless: they have size but no structure. A program which uses Filer
+will impose its own structure on the records by defining them as
+variables of some record type. Because of this, the 0138DBaseExport function
+cannot deduce the structure of your Filer records, you must inform it
+about the fields that make up a record. You do this by calling
+AddFieldNode once for every field that you want to convert to dBase
+format.
+
+Name will be the dBase field name; this will be automatically converted
+into upper-case letters. CType indicates the data type of the B-Tree
+Filer field. BufSize contains the size of the field in bytes. Offset
+indicates the start position of the field from the beginning of the
+record (the first field will have offset zero).
+
+The next two parameters are to further define the resulting dBase field.
+Width determines its width and Decimals is the number of decimal places
+if the field is numeric. You may pass the value -1 for either of these
+parameters, and the function 0133CompleteIsamList will calculate the actual
+values from the values passed originally for CType and BufSize.
+
+Note that you do not have to call AddFieldNode for every field in the
+Filer record structure, nor do you have to add the nodes in offset
+sequence. The sequence of calls to AddFieldNode just gives the order of
+the fields in the final dBase record.
+
+The AddFieldNode function does check to see whether a given field to be
+converted falls entirely within the Filer record.
+
+The only field that B-Tree Filer takes for granted in a Filer record is
+the first four bytes of the record. It uses these four bytes as a longint
+deletion marker: if zero the record is active, if non-zero the record has
+been deleted and can be reused. You can, if you want to, convert these
+'deleted' records as well by calling AddFieldNode with CType equal to
+ReservedCType, BufSize equal to 4 (the size of a longint), and Offset
+equal to 0. If DBaseExport finds such a field node in the field
+definition list, then it will convert the 'deletedness' of a Filer
+record: if the first four bytes are zero the converted dBase record is
+marked active, otherwise it is marked as deleted. If such a field node is
+not added, all new dBase records will be marked active.
+
+If AddFieldNode encounters an error, all the open files are closed and
+the memory allocated for LHPtr and its nodes is freed. The function will
+return False in this case. If the function succeeds, it will return True.
+;
+;-------------------------------------------------------------------
+!TOPIC 130 CloseDBaseFiles
+!NOINDEX
+Function CloseDBaseFiles ( LHPtr : PListHeader ) : Integer;
+
+This function must be called after the function 0139DBaseImport to close the
+dBase data and memo files opened by 0135CreateListHeaderUseDBaseFiles.
+;
+;-------------------------------------------------------------------
+!TOPIC 131 CloseIsamFiles
+!NOINDEX
+Function CloseIsamFiles ( LHPtr : PListHeader ) : Integer;
+
+This function must be called after the function 0138DBaseExport to close the
+Filer source file opened by 0134CreateListHeaderOpenFileBlock.
+;
+;-------------------------------------------------------------------
+!TOPIC 132 CompleteDBaseList
+!NOINDEX
+Function CompleteDBaseList ( LHPtr   : PListHeader;
+                             AZStrs,
+                             AutoRel : Boolean ) : Integer;
+
+This function is used as the final preparatory step towards the actual
+conversion of a dBase database to a B-Tree Filer fileblock. It takes a
+field definition list LHPtr, created by 0135CreateListHeaderUseDBaseFiles
+and completes the definition of each field node by determining the
+Filer data type for each dBase field type.
+
+If AZStrs is True, dBase character arrays (of length greater than 1) are
+converted to null-terminated strings (C style). If False, they are
+converted to length-byte strings (Pascal style).
+
+If AutoRel is True, an extra LongInt field node is added after the
+deletion field node (the first node). During the conversion this field
+will act as an auto-incrementing field, the first record converted and
+written will have the value given by StartAutoRel, the next record will
+have the next value (StartAutoRel+1), and so on.
+
+If the function succeeds it returns zero, otherwise it returns a non-zero
+value.
+;
+;-------------------------------------------------------------------
+!TOPIC 133 CompleteIsamList
+!NOINDEX
+Function CompleteIsamList ( LHPtr : PListHeader;
+                            DBVer : DBaseVersion ) : Integer;
+
+This function is used as the final preparatory step towards the actual
+conversion of a B-Tree Filer fileblock to a dBase database. It takes a
+field definition list LHPtr, created by 0134CreateListHeaderOpenFileBlock
+and added to by several calls to 0129AddFieldNode, and completes the
+definition of each field node by determining the dBase field type for
+each Filer data type.
+
+The DBVer parameter sets an internal flag that determines whether a dBase
+III or dBase IV compatible data file will be created by 0138DBaseExport.
+
+If the function succeeds it returns zero, otherwise it returns a non-zero
+value.
+;
+;-------------------------------------------------------------------
+!TOPIC 134 CreateListHeaderOpenFileBlock
+!NOINDEX
+Function CreateListHeaderOpenFileBlock ( BTFileName : IsamFileBlockName )
+                                                          : PListHeader;
+
+This function is used in the preparation for a conversion of a Filer
+fileblock to a dBase file (or files). It opens the fileblock (data and
+index files) whose name (without extension) is given by BTFileName. It
+allocates memory for and builds an empty field definition list, and the
+list's address is passed back as the function result.
+
+After calling this function, you must call 0129AddFieldNode at least once
+(the field list must define at least one field to be converted) before
+the list can be 'completed' by calling 0133CompleteIsamList, and used by
+0138DBaseExport.
+
+If an error occurs, the function returns nil and the fileblock remains
+closed.
+;
+;-------------------------------------------------------------------
+!TOPIC 135 CreateListHeaderUseDBaseFiles
+!NOINDEX
+Function CreateListHeaderUseDBaseFiles ( Var LHPtr       : PListHeader;
+                                         DBFileName  : DBaseFileName;
+                                         MaxMemoSize : Word ) : Integer;
+
+This function is used in preparation for a conversion of a dBase data
+file (and possible memo file) to a B-Tree Filer fileblock. DBFileName is
+the complete path of the dBase file(s) without any extension (the
+constants DBDataExtension and DBMemoExtension are suffixed to produce the
+full path names of the data and memo files respectively). This routine
+then opens the dBase file(s) ready for reading the database structure
+and for the data conversion.
+
+MaxMemoSize indicates the maximum number of bytes that will be converted
+from any memo fields found. If 0 is passed in the MaxMemoSize parameter
+then the dBase memo file will not be opened, and no memo fields will be
+converted at all.
+
+CreateListHeaderUseDBaseFiles reads the dBase database format from the
+dBase data file and builds a field definition linked list from the
+information read. Each node in the linked list is the definition of a
+single field. The list is allocated on the heap, and its address is
+passed back in LHPtr. This field list is reorganized internally by this
+function so that all memo field nodes appear at the end of the list.
+
+Note also that the field list will always start with a deletion field
+node because dBase records always have a hidden delete marker as the
+first field.
+
+Before using the list pointed to by LHPtr in the 0139DBaseImport routine, it
+must be 'completed' by the 0132CompleteDBaseList function.
+
+If this function succeeds it returns zero as a function result, otherwise
+it returns a non-zero value and the dBase database is closed.
+
+See also: 0169XxxxExtension
+;
+;-------------------------------------------------------------------
+!TOPIC 136 Data type conversion tables
+!NOINDEX
+The following table shows the Pascal types which the dBase field types
+are converted to by default.
+
+!NOWRAP
+;!TABLE
+ dBase                       ³ BÄTree Filer         ³ DBIMPEXP
+ÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+ Field ³ Length   ³ Decimal  ³ Pascal data type     ³ CType
+ type  ³ (n)      ³ places   ³                      ³
+ÍÍÍÍÍÍÍØÍÍÍÍÍÍÍÍÍÍØÍÍÍÍÍÍÍÍÍÍØÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍØÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ
+ 'C'   ³ = 1      ³ 0        ³ Char                 ³ CharCType
+       ³ > 1      ³ 0        ³ Array [0..n] Of Char ³ AZStringCType or
+       ³          ³          ³ String [n]           ³ StringCType (note1)
+ÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+ 'D'   ³ 8        ³ 0        ³ LongInt (note3)      ³ DateCType
+ÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+ 'L'   ³ 1        ³ 0        ³ Boolean              ³ BooleanCType
+ÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+ 'N'   ³ < 3      ³ 0        ³ ShortInt             ³ ShortIntCType
+ 'F'   ³ < 5      ³ 0        ³ Integer              ³ IntegerCType
+(note2)³ < 10     ³ 0        ³ LongInt              ³ LongIntCType
+       ³ < 12     ³ 0        ³ Real                 ³ RealCType
+       ³ < 16     ³ 0        ³ Double               ³ DoubleCType
+       ³ >= 16    ³ 0        ³ Extended             ³ ExtendedCType
+       ÃÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+       ³ < 8      ³ > 0      ³ Single               ³ SingleCType
+       ³ < 12     ³ > 0      ³ Real                 ³ RealCType
+       ³ < 16     ³ > 0      ³ Double               ³ DoubleCType
+       ³ >= 16    ³ > 0      ³ Extended             ³ ExtendedCType
+ÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+ 'M'   ³ <= 65000 ³ 0        ³ Array [0..n] Of Char ³ AZStringCType
+!WRAP
+
+Notes:
+ 1. The actual type depends on the parameter AZStrs in the function
+    0132CompleteDBaseList
+ 2. The 'F' data type is a dBase IV field type.
+ 3. The resulting longint value varies from 0 (1-Jan-1600) to $D6025
+    (31-Dec-3999).
+
+
+The following table shows the dBase field types which the Pascal data types
+are converted to by default.
+
+!NOWRAP
+;!TABLE
+ DBIMPEXP      ³ BÄTree Filer         ³ dBase
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄ
+ CType         ³ Pascal data type     ³ Field   ³ Length ³ Decimal
+               ³                      ³ type    ³ (n)    ³ places
+ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍØÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍØÍÍÍÍÍÍÍÍÍØÍÍÍÍÍÍÍÍØÍÍÍÍÍÍÍÍÍ
+ DateCType     ³ LongInt              ³ 'D'     ³ 8      ³ 0
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄ
+ TimeCType     ³ LongInt              ³ 'C'     ³ 8      ³ 0
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄ
+ StringCType   ³ String [n]           ³ 'C'     ³ <= 255 ³ 0
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄ
+ AZStringCType ³ Array [0..n] Of Char ³ 'C'     ³ <= 255 ³ 0
+               ³                      ³ 'M'     ³ > 255  ³ 0
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄ
+ CharCType     ³ Char                 ³ 'C'     ³ 1      ³ 0
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄ
+ BooleanCType  ³ Boolean              ³ 'L'     ³ 1      ³ 0
+               ³                      ³ (note2) ³        ³
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄ
+ ByteCType     ³ Byte                 ³ 'N'     ³ 3      ³ 0
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´ 'F'     ³        ³
+ ShortIntCType ³ ShortInt             ³ (note1) ³ 4      ³ 0
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´         ³        ³
+ WordCType     ³ Word                 ³         ³ 5      ³ 0
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´         ³        ³
+ IntegerCType  ³ Integer              ³         ³ 6      ³ 0
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´         ³        ³
+ LongIntCType  ³ LongInt              ³         ³ 11     ³ 0
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄ
+ CompCType     ³ Comp                 ³ 'N'     ³ 14     ³ 4
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´ 'F'     ³        ³
+ RealCType     ³ Real                 ³ (note1) ³ 14     ³ 4
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´         ³        ³
+ SingleCType   ³ Single               ³         ³ 14     ³ 4
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´         ³        ³
+ DoubleCType   ³ Double               ³         ³ 14     ³ 4
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´         ³        ³
+ ExtendedCType ³ Extended             ³         ³ 14     ³ 4
+!WRAP
+
+Notes:
+ 1. The 'F' data type is a dBase IV field type.
+ 2. The Boolean value true is converted to 'T', false to 'F'.
+;
+;-------------------------------------------------------------------
+!TOPIC 137 DBaseErrorMessage
+!NOINDEX
+Function DBaseErrorMessage ( ErrorNr : DBaseErrorNr ) : String;
+
+This function returns a string describing the error code ErrorNr. The
+function can return the string in different languages, the language used
+will depend on the value of the typed constant 0151DBUseErrorMessage.
+
+See also: 0147DBaseErrorNr
+;
+;-------------------------------------------------------------------
+!TOPIC 138 DBaseExport
+!NOINDEX
+Function DBaseExport ( LHPtr           : PListHeader;
+                       DBFName         : DBaseFileName;
+                       KeyNr           : Word;
+                       FuncReXUser     : IntFct_ReXUser;
+                       ProcCArrConv    : VoidFct_CharArrConvert;
+                       FuncDecideWrite : EnumFct_DecideWrite )
+                                                            : Integer;
+
+The DBaseExport function does the actual conversion of the B-Tree Filer
+data file to the dBase data and (possible) memo files. A dBase database
+(ie the data file and the memo file) with the name given by DBaseFileName
+is created; if these files already exist, they will be overwritten.
+
+The conversion uses the information stored in the field definition list
+LHPtr^.ListPtr. This linked list contains a node for each field to be
+converted, and each node record contains the data required for the
+conversion of that field. The field list is created by the function
+0134CreateListHeaderOpenFileBlock, fields are added by the 0129AddFieldNode
+routine, completed by 0133CompleteIsamList, and its memory will be
+deallocated by 0141FreeListHeader after DBaseImport has finished.
+
+If the field list contains one or more nodes that define a memo field (ie
+a null-terminated string whose length is greater than 255 bytes) then a
+dBase memo file is created in addition to the data file. If there are no
+such fields, a memo file is not created - all of the converted data ends
+up in the dBase data file.
+
+KeyNr defines the index to use for reading the records from the B-Tree
+Filer fileblock. By using an index, you can create a sorted dBase data
+file (note, do not take 'sorted' to mean 'indexed'). If you wish to use
+a purely sequential order and are not concerned with the final order of
+the dBase records, pass 0 as the KeyNr parameter.
+
+The parameter FuncReXUser defines a routine that will be called by the
+conversion process for every record read. The function of this routine is
+to display some kind of status or progess information to the user. If
+such a routine is not required, pass the predefined routine 0143NoReXUser.
+The routine should return zero; if, however, it returns a non-zero result
+the conversion process is aborted and DBaseExport will terminate
+immediately.
+
+The parameter ProcCArrConv defines a routine that will be called after
+each conversion of a string field (both length-byte strings and null-
+terminated strings) or a character field. This enables you to do some
+further manipulation of the converted string, for example forcing
+upper-case, or translating from ANSI to OEM characters. If no further
+conversion is required for these character type fields use the predefined
+function NoCArrConv.
+
+The last parameter FuncDecideWrite defines a routine that will get called
+after each record has been converted, and that should decide whether the
+new record is written to the dBase file(s) or not. There is one
+predefined example function, 0144StdDecideWrite, that skips all records that
+are marked as deleted (ie that have a non-zero value in the first four
+bytes of the Filer record).
+
+The DBaseExport function returns zero, unless there is an error, in which
+case it returns a non-zero value.
+
+If errors occur during the conversion, the numbers of the records and the
+field names of the fields that were not converted are written in a file.
+This file is given the same name as the source file but with the
+extension DumpExtension.
+
+See also: 0169XxxxExtension
+;
+;-------------------------------------------------------------------
+!TOPIC 139 DBaseImport
+!NOINDEX
+Function DBaseImport ( LHPtr             : PListHeader;
+                       IFBName           : IsamFileBlockName;
+                       FuncWriteTypeDef  : IntFct_WriteTDef;
+                       FuncReXUser       : IntFct_ReXUser;
+                       ProcCArrConv      : VoidFct_CharArrConvert;
+                       FuncDecideWrite   : EnumFct_DecideWrite )
+                                                           : Integer;
+
+The DBaseImport function does the actual conversion of dBase data and
+memo fields to the B-Tree Filer format. A fileblock with the name given
+by IFBName is created; if one already existed it will be overwritten.
+
+The conversion uses the information stored in the field definition list
+LHPtr^.ListPtr. This linked list contains a node for each field to be
+converted, and each node record contains the data required for the
+conversion of that field. The field list is created by the function
+0135CreateListHeaderUseDBaseFiles, completed by 0132CompleteDBaseList, and its
+memory will be deallocated by 0141FreeListHeader after DBaseImport has
+finished.
+
+FuncWriteTypeDef must point to a function that knows how to create some
+kind of record type definition file (an 'include' file) corresponding to
+the format of the records converted by DBaseImport. Two example functions
+are provided: 0145WriteNoTypeDef and 0146WritePascalTypeDef.
+
+The parameter FuncReXUser defines a routine that will be called by the
+conversion process for every record read. The function of this routine is
+to display some kind of status or progess information to the user. If
+such a routine is not required, pass the predefined routine 0143NoReXUser.
+The routine should return zero; if, however, it returns a non-zero result
+the conversion process is aborted and DBaseImport will terminate
+immediately.
+
+The parameter ProcCArrConv defines a routine that will be called after
+each conversion of a string field or a character field. This enables
+you to do some further manipulation of the converted string, for example
+forcing upper-case, or translating from ANSI to OEM characters. If no
+further conversion is required for character type fields use the
+predefined function NoCArrConv.
+
+The last parameter FuncDecideWrite defines a routine that will get called
+after each record has been converted, and that should decide whether the
+new record is written to the Filer fileblock or not. There is one
+predefined example function, 0144StdDecideWrite, that skips all records that
+are marked as deleted.
+
+The DBaseImport function returns zero, unless there is an error, in which
+case it returns a non-zero value.
+
+If errors occur during the conversion, the numbers of the records and the
+field names of the fields that were not converted are written in a file.
+This file is given the same name as the source file but with the
+extension DumpExtension.
+
+See also: 0169XxxxExtension
+;
+;-------------------------------------------------------------------
+!TOPIC 140 Declarations,DBImpExp
+!NOINDEX
+The DBImpExp unit declares the following constants, types and
+variables:
+
+  0147DBaseErrorNr                   0148DBaseFileName
+  0149DBaseUsedErrorMessages         0150DBaseVersion
+  0151DBUseErrorMessage              0152DBVersionXx
+  0153DCxxxxx                        0154DecideCase
+  0155DExxxxx                        0156EnumFct_DecideWrite
+  0157ErrorReaction                  0158ERxxxxx
+  0159IntFct_ReXUser                 0160IntFct_WriteTDef
+  0161ListHeader                     0162ProcErrorHandler
+  0163StartAutoRel                   0164VoidFct_CharArrConvert
+  0165VoidFct_ErrorHandler           0166WorkStatus
+  0167WSxxxxx                        0168XxxxCType
+  0169XxxxExtension
+;
+;-------------------------------------------------------------------
+!TOPIC 141 FreeListHeader
+!NOINDEX
+Procedure FreeListHeader ( Var LHPtr : PListHeader );
+
+This routine deallocates all memory used in LHPtr, including all the
+field nodes. It also functions correctly when LHPtr has been only
+partially set up, ie if it has not yet been passed to 0133CompleteIsamList
+or 0132CompleteDBaseList.
+;
+;-------------------------------------------------------------------
+!TOPIC 142 NoErrorHandler
+!NOINDEX
+Procedure NoErrorHandler ( Reaction   : ErrorReaction;
+                           IsamError  : Integer;
+                           DBaseError : DBaseErrorNr);
+
+By default, the global variable 0162ProcErrorHandler is initialized with this
+function. ProcErrorHandler is called by all the routines of this unit
+should an error occur, and this particular implementation is a
+do-nothing procedure that ignores all errors.
+;
+;-------------------------------------------------------------------
+!TOPIC 143 NoReXUser
+!NOINDEX
+Function NoReXUser (     Status    : WorkStatus;
+                         LHPtr     : PListHeader;
+                         ReadRecs,
+                         WriteRecs,
+                         ErrorRecs : Longint;
+                     Var DatSBuf ) : Integer;
+
+A standard function that can be passed as the FuncReXUser parameter for
+the 0139DBaseImport and 0138DBaseExport functions. This particular implementation
+does nothing.
+;
+;-------------------------------------------------------------------
+!TOPIC 144 StdDecideWrite
+!NOINDEX
+Function StdDecideWrite (     LHPtr   : PListHeader;
+                              Errors  : Integer;
+                          Var BTBuf,
+                              DBBuf ) : DecideCase;
+
+A standard function that can be passed as the FuncDecideWrite parameter
+for the 0139DBaseImport and 0138DBaseExport functions. This particular
+implementation causes any deleted record to be skipped and hence not
+written to the output file. B-Tree Filer records with a non-zero value
+in the first four bytes are assumed to be deleted; dBase records with an
+asterisk ('*') in the first byte are assumed to be deleted.
+;
+;-------------------------------------------------------------------
+!TOPIC 145 WriteNoTypeDef
+!NOINDEX
+Function WriteNoTypeDef ( LHPtr  : PListHeader;
+                          IFName : IsamFileName ) : Integer;
+
+A standard function that can be passed as the FuncWriteTypeDef parameter
+for the 0139DBaseImport function. This particular implementation is a
+do-nothing function, it does not write any type definition file.
+;
+;-------------------------------------------------------------------
+!TOPIC 146 WritePascalTypeDef
+!NOINDEX
+Function WritePascalTypeDef ( LHPtr  : PListHeader;
+                              IFName : IsamFileName ) : Integer;
+
+A standard function that can be passed as the FuncWriteTypeDef parameter
+for the 0139DBaseImport function. This particular implementation creates an
+include file that contains a Pascal record type definition for the record
+format of the dBase file being converted.
+;
+;-------------------------------------------------------------------
+!TOPIC 147 DBaseErrorNr
+!NOINDEX
+type
+  DBaseErrorNr = Integer;
+
+A variable of this type is passed to the current error handler. Its value
+will define the error that has just occurred. Codes are prefixed 'DE', and
+have been chosen so that they do not clash with the set of error codes
+that IsamError can take.
+
+See also: 0162ProcErrorHandler
+;
+;-------------------------------------------------------------------
+!TOPIC 148 DBaseFileName
+!NOINDEX
+type
+  DBaseFileName = IsamFileName;
+
+A string defining the drive, path and name (without extension) of a set of
+files to be used by the DBIMPEXP unit. The various required extensions
+will be suffixed to variables of this type to get the full path names. All
+file names passed to the 0139DBaseImport, 0138DBaseExport,
+0135CreateListHeaderUseDBaseFiles, and 0134CreateListHeaderOpenFileBlock functions
+must be of this type.
+
+See also: 0169XxxxExtension
+;
+;-------------------------------------------------------------------
+!TOPIC 149 DBaseUsedErrorMessages
+!NOINDEX
+type
+  DBaseUsedErrorMessages = ( DBNoMsg, DBGerman, DBEnglish );
+
+This enumerated type defines the different values that the typed constant
+0151DBUseErrorMessage can have.
+;
+;-------------------------------------------------------------------
+!TOPIC 150 DBaseVersion
+!NOINDEX
+type
+  DBaseVersion = Integer;
+
+A parameter of this type is passed to 0133CompleteIsamList, and defines whether
+0138DBaseExport is to create a dBase III or a dBase IV compatible file.
+
+See also: 0152DBVersionXx
+;
+;-------------------------------------------------------------------
+!TOPIC 151 DBUseErrorMessage
+!NOINDEX
+type
+  DBUseErrorMessage : DBaseUsedErrorMessages =
+  {$IFDEF DBaseEnglishMessage}
+    DBEnglish;
+  {$ELSE}
+    {$IFDEF DBaseGermanMessage}
+      DBGerman;
+    {$ELSE}
+      DBNoMsg;
+    {$ENDIF}
+  {$ENDIF}
+
+This typed constant determines the language in which error message strings
+are produced by 0137DBaseErrorMessage.
+;
+;-------------------------------------------------------------------
+!TOPIC 152 DBVersionXx
+!NOINDEX
+const
+  DBVersion3X = $0300;
+  DBVersion4X = $0400;
+
+These constants are the defined values for the 0150DBaseVersion type.
+;
+;-------------------------------------------------------------------
+!TOPIC 153 DCxxxxx
+!NOINDEX
+const
+  DCWrite = 0;
+  DCSkip  = 1;
+  DCAbort = 2;
+
+These constants are the defined values for the 0154DecideCase type.
+;
+;-------------------------------------------------------------------
+!TOPIC 154 DecideCase
+!NOINDEX
+type
+  DecideCase = Integer;
+
+This type is returned by a record filter function which is of type
+0156EnumFct_DecideWrite. The intended values for a DecideCase variable are
+prefixed with 'DC': DCWrite means accept the record; DCSkip means reject
+the record; DCAbort means cancel the entire conversion.
+
+See also: 0153DCxxxxx
+;
+;-------------------------------------------------------------------
+!TOPIC 155 DExxxxx
+!NOINDEX
+!NOWRAP
+;!TABLE
+const
+  DEZERO    =    0; {No error}
+  DEEOF     = 9011; {End of file}
+  DEOOM     = 9012; {Out of memory}
+  DEBV      = 9013; {Bad version or not a dBase III/IV file}
+  DECMF     = 9014; {Corrupted memo file}
+  DERSTL    = 9015; {Record size to large}
+  DEWCT     = 9016; {Wrong CType}
+  DEEWTD    = 9017; {Error writing type definition file}
+  DEECF     = 9018; {Error converting field}
+  DELHNI    = 9019; {List header not initialized or bad part}
+  DETMF     = 9020; {Too many fields}
+  DEWFT     = 9021; {Wrong field type}
+  DEFWTL    = 9022; {Field width too large}
+  DETMD     = 9023; {Too many decimals}
+  DEFTVC    = 9024; {Field type version conflict}
+  DEARFNA   = 9025; {Auto relation field is not allowed here}
+  DEFCNMF   = 9026; {File contains no memo fields}
+  DEEODF    = 9027; {Error opening dump file}
+  DEEWDF    = 9028; {Error writing to dump file}
+  DEECDF    = 9029; {Error closing dump file}
+  DEPE      = 9030; {Programming error}
+  DEFNAE    = 9031; {Field name already exists}
+  DENFD     = 9032; {No field defined}
+  DELAST    = 9033; {Last error const, not an error}
+!WRAP
+
+These constants are the defined values for the 0147DBaseErrorNr type.
+For their values and meanings check the source code.
+
+See also: 0137DBaseErrorMessage
+;
+;-------------------------------------------------------------------
+!TOPIC 156 EnumFct_DecideWrite
+!NOINDEX
+type
+  EnumFct_DecideWrite = Function (     LHPtr   : PListHeader;
+                                       Errors  : Integer;
+                                   Var BTBuf,
+                                       DBBuf ) : DecideCase;
+
+A function of this type is passed as a parameter to the 0139DBaseImport and
+0138DBaseExport functions. It is called after converting every input record,
+and prior to writing the output record. The function must decide whether
+the converted record is to be written, and returns DCWrite, DCSkip or
+even DCAbort. LHPtr defines the field definition list. Errors is the total
+number of fields in this record that could not be converted for whatever
+reason. BTBuf contains the B-Tree Filer record and DBBuf the dBase record.
+
+See also: 0153DCxxxxx  0154DecideCase
+;
+;-------------------------------------------------------------------
+!TOPIC 157 ErrorReaction
+!NOINDEX
+type
+  ErrorReaction = Integer;
+
+A variable of this type is passed to the current error handler whose
+address is held in 0162ProcErrorHandler. The variable indicates the severity
+of the error: ERAbort is a severe error, the program cannot recover and is
+about to be aborted; ERIgnore is non-fatal, the program can continue and
+will ignore the error (apart from reporting it to the error handler).
+
+See also: 0158ERxxxxx
+;
+;-------------------------------------------------------------------
+!TOPIC 158 ERxxxxx
+!NOINDEX
+const
+  ERAbort  = 0;
+  ERIgnore = 1;
+
+These constants are the defined values for the 0157ErrorReaction type.
+;
+;-------------------------------------------------------------------
+!TOPIC 159 IntFct_ReXUser
+!NOINDEX
+type
+  IntFct_ReXUser = Function (     Status    : WorkStatus;
+                                  LHPtr     : PListHeader;
+                                  ReadRecs,
+                                  WriteRecs,
+                                  ErrorRecs : Longint;
+                              Var DatSBuf ) : Integer;
+
+A function of this type is passed as a parameter to the 0139DBaseImport and
+0138DBaseExport functions. It is used to allow the display of status
+information to the user. It is called every time through the read, convert
+and write loop of the conversion routine, just after the output record is
+written (or would have been written).
+
+If Status is WSInit, the conversion process is about to start. ReadRecs
+contains the total number of records in the source file, and WriteRecs will
+hold the record length of the source file. ErrorRecs is zero, and DatSBuf
+is undefined.
+
+If Status is WSWork or WSExit, the conversion process has just completed
+reading a record, converting it and (possibly) writing it to the output
+file. ReadRecs contains the number of records read and WriteRecs the number
+of records written. ErrorRecs is the total number of records to date that
+had errors during the conversion. DatSBuf contains the newly formed record.
+Note that WSExit is called once only, just for the last time through the
+loop after the last record was converted and written. It allows the program
+to clean up the screen by removing the status display.
+
+The function should return zero.
+
+See also: 0166WorkStatus  0167WSxxxxx
+;
+;-------------------------------------------------------------------
+!TOPIC 160 IntFct_WriteTDef
+!NOINDEX
+type
+  IntFct_WriteTDef = Function ( LHPtr  : PListHeader;
+                                IFName : IsamFileName ) : Integer;
+
+A parameter of this type is passed to 0139DBaseImport. Its function is to write
+an include file that defines the B-Tree Filer record format for the dBase
+file that is to be converted. LHPtr holds the field definition list and
+IFName is the name of the fileblock that is about to be created. Two
+predefined functions of this type are provided: 0145WriteNoTypeDef (which does
+nothing at all), and 0146WritePascalTypeDef (which creates a simple include
+file for Pascal programs).
+;
+;-------------------------------------------------------------------
+!TOPIC 161 ListHeader
+!NOINDEX
+type
+  ListHeader = Record
+    DBSource    : Boolean;
+    ListPtr     : PFieldNode;
+    DBHeaderPtr : PDBaseHeader;
+    BTHeaderPtr : PIsamHeader;
+  End;
+  PListHeader = ^ListHeader;
+
+ListHeader is the central type for the dBase import and export routines. It
+holds the complete set of information about the conversion to be done, most
+importantly it holds the field definition list. A variable of type PListHeader
+is allocated and returned by the 0135CreateListHeaderUseDBaseFiles and
+0134CreateListHeaderOpenFileBlock functions.
+
+The field DBSource indicates whether the ListHeader has been created for
+conversion from a dBase file (True) or to a dBase file (False).
+
+ListPtr points to a simple linked list that contains the field definition
+information. Each node of this list, just prior to the conversion, will contain
+full information about a field, both in terms of the dBase and of the B-Tree
+Filer implementations. The list is initially set up in part by the functions
+CreateListHeaderUseDBaseFiles and/or CreateListHeaderOpenFileBlock. For a
+conversion to a dBase file, 0129AddFieldNode will add nodes that define the Filer
+fields to be converted. The list is checked and completed by 0132CompleteDBaseList
+and/or 0133CompleteIsamList.
+
+DBHeaderPtr and BTHeaderPtr contain information about the dBase and/or B-Tree
+Filer files. For further information on these fields, please review the source
+code files.
+;
+;-------------------------------------------------------------------
+!TOPIC 162 ProcErrorHandler
+!NOINDEX
+var
+  ProcErrorHandler : VoidFct_ErrorHandler;
+
+ProcErrorHandler points to a routine that will be called if an error
+occurs during a conversion process. By default this global variable is set
+to the 0142NoErrorHandler procedure which is a do-nothing routine. You may
+set this typed constant to the address of any far procedure of type
+0165VoidFct_ErrorHandler to handle errors yourself.
+;
+;-------------------------------------------------------------------
+!TOPIC 163 StartAutoRel
+!NOINDEX
+const
+  StartAutoRel : LongInt = 0;
+
+This constant contains the start value for an auto-incrementing field.
+;
+;-------------------------------------------------------------------
+!TOPIC 164 VoidFct_CharArrConvert
+!NOINDEX
+type
+  VoidFct_CharArrConvert = Procedure ( CArrPtr : Pointer;
+                                       Len     : Word );
+
+A parameter of this type (ProcCArrConv) is passed to the 0139DBaseImport and
+0138DBaseExport functions. It allows an array of characters to be further
+modified before writing to the output file. The modifications allowed must
+not alter the length of the array, and generally will be limited to
+modifying the case of the characters, or translating them between
+character sets. Len is the number of characters, and CArrPtr is a pointer
+to the character string (which can be thought of as an array [1..Len] of
+Char).
+;
+;-------------------------------------------------------------------
+!TOPIC 165 VoidFct_ErrorHandler
+!NOINDEX
+type
+  VoidFct_ErrorHandler = Procedure ( Reaction   : ErrorReaction;
+                                     IsamError  : Integer;
+                                     DBaseError : DBaseErrorNr );
+
+The global variable 0162ProcErrorHandler is a variable of this type. You can
+write a procedure of this type and install it in ProcErrorHandler, and it
+will get called whenever the conversion process gets an error.
+
+Reaction indicates the severity of the error: ERAbort (the program is about
+to be terminated) or ERIgnore (the error will be ignored). IsamError will
+be non-zero if the error occurred in a B-Tree Filer routine, DBaseError
+will be non-zero for any other type of error.
+
+See also: 0147DBaseErrorNr  0157ErrorReaction  0158ERxxxxx
+;
+;-------------------------------------------------------------------
+!TOPIC 166 WorkStatus
+!NOINDEX
+type
+  WorkStatus = Integer;
+
+A variable of this type is passed to a status display function, which is
+of type 0159IntFct_ReXUser. The intended values for a WorkStatus variable are
+prefixed with 'WS': WSInit means that the conversion process is about to
+start, it allows the status display routine to build its screen; WSExit
+means that the conversion process has completed, the status routine can
+clear its screen; WSWork is passed at all other times, and indicates that
+a record has just been converted.
+
+See also: 0167WSxxxxx
+;
+;-------------------------------------------------------------------
+!TOPIC 167 WSxxxxx
+!NOINDEX
+const
+  WSInit = 0;
+  WSWork = 1;
+  WSExit = 2;
+
+These constants are the defined values for the 0166WorkStatus type.
+;
+;-------------------------------------------------------------------
+!TOPIC 168 XxxxCType
+!NOINDEX
+!NOWRAP
+;!TABLE
+const
+  ReservedCType   = 0;
+  BooleanCType    = 1;
+  CharCType       = 2;
+  ByteCType       = 3;
+  ShortIntCType   = 4;
+  IntegerCType    = 5;
+  WordCType       = 6;
+  LongIntCType    = 7;
+  CompCType       = 8;
+  RealCType       = 9;
+  SingleCType     = 10;
+  DoubleCType     = 11;
+  ExtendedCType   = 12;
+  StringCType     = 13;
+  ArrayCType      = 14;
+  AZStringCType   = 15;
+  DateCType       = 16;
+  TimeCType       = 17;
+!WRAP
+
+These constants define the possible conversion data types that the
+routines 0139DBaseImport and 0138DBaseExport use to convert from a
+dBase field to a Filer field and vice versa. When converting from a
+dBase file the field types are determined automatically; when converting
+in the opposite direction, you have to specify the field type in the
+parameter CType for the routine 0129AddFieldNode.
+
+See also: 0136Data type conversion tables
+;
+;-------------------------------------------------------------------
+!TOPIC 169 XxxxExtension
+!NOINDEX
+!NOWRAP
+;!TABLE
+const
+  DBDataExtension  : String [3] = 'DBF';
+  DBMemoExtension  : String [3] = 'DBT';
+  DumpExtension    : String [3] = 'DMP';
+  PasIncExtension  : String [3] = 'INC';
+!WRAP
+
+These constants contain the standard file name extensions of dBase data
+files, dBase memo files, conversion log files (dump files), and Pascal
+include files.

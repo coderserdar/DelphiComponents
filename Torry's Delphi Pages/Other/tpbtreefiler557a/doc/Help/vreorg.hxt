@@ -1,0 +1,79 @@
+;
+;-------------------------------------------------------------------
+!TOPIC 829 VReorg
+Reorganization is a process similar to rebuilding, but one that is used in
+different circumstances. Reorganization is used when the size of each data
+record or its format must be changed. Reorganization can also be used to
+import foreign data into the Fileblock format.
+
+The VReorg unit uses the Restruct and ReIndex units to do its work.
+
+   0830ReorgVFileBlock   0730RESTRUCT/REINDEX
+;
+;-------------------------------------------------------------------
+!TOPIC 830 ReorgVFileBlock
+!NOINDEX
+procedure 0829VReorg.ReorgVFileBlock(FBlName : IsamFileBlockName;
+                                 DatSLen : LongInt;
+                                 NumKeys : Integer;
+                                 IID : IsamIndDescr;
+                                 DatSLenOld : LongInt;
+                                 MaxDiffBytes : Word;
+                                 BuildKeyFunc : FuncBuildKey;
+                                 ChangeDatSProc : FuncChangeDatS);
+
+This procedure rebuilds the defective Fileblock with variable length
+records with a possibly different data record length, and/or different
+keys. Every data record must begin with a longint of value 0 in order for
+this to work.
+
+A safety backup copy of the ".DAT" file of the fileblock to be rebuilt
+should be made before using VReorgFileBlock. The procedure goes through
+the following steps:
+
+!NOWRAP
+  1) Rename the ".DAT" file to ".SAV" if no ".SAV" file exists.
+  2) BTCreateFileBlock with the name FBlName, data record length DatSLen,
+     NumKeys of keys, and the index descriptor IID, then BTOpenFileBlock.
+  3) Read every data record from the .SAV file.
+  4) Rebuild the data record into the new format specifying the length, and
+     BTAddVariableRec into the new Fileblock.
+  5) For every single key (1 to NumKeys), read every data record from the
+     new ".DAT" file and enter the key with BTAddKey.
+  6) Close the new fileblock.
+  7) Delete the ".SAV" file.
+!WRAP
+
+The user must write a procedure that will build a new data record from the
+contents of the old one in order to carry out step 4. The address of the
+new routine must be passed in ProcChangeDatS. This procedure must be
+compiled under the FAR model, and it may not be nested within any other
+procedure or function. It should be of the following form:
+
+  {$F+}
+  function ChangeDatSFunc(var DatSOld; var DatSNew;
+                          var Len : Word) :Boolean;
+
+This procedure builds a new data record DatSNew from the old DatSOld.
+
+The user must also write a function that builds the desired key from the
+data record in order to carry out step 5. This function's address must be
+passed in FuncBuildKey. This procedure should be of the following form:
+
+  {$F+}
+  function BuildKeyFunc(var DatS; KeyNr : Word) : IsamKeyStr;
+
+This function returns the key of number KeyNr from the data record
+DatS.
+
+The reorg operation procedure is terminated immediately in case of a fatal
+I/O error. The remaining ".SAV" file may not be deleted, since it will be
+needed for another construction attempt. The data record with all the keys
+that have been entered is deleted from the fileblock if a duplicate key is
+detected during the rebuild. The contents of the data record, along with
+its corresponding keys, are written to a file with a ".MSG" extension.
+This may later be examined with TYPE or a program like LIST. No file
+with a ".MSG" extension exists after the rebuild if there were no
+duplicate keys found during the reconstruction.
+
+See also: 0813VRec        0811VRebuild        0728Reorg

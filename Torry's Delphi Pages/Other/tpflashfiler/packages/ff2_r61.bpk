@@ -1,0 +1,228 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!-- C++Builder XML Project -->
+<PROJECT>
+  <MACROS>
+    <VERSION value="BCB.06.00"/>
+    <PROJECT value="ff2_r61.bpl"/>
+    <OBJFILES value="ff2_r61.obj ..\source\ffsrsort.obj ..\source\ffsrcur.obj 
+      ..\source\ffllcoll.obj ..\source\cocobase.obj ..\source\ffclbase.obj 
+      ..\source\ffclbde.obj ..\source\ffclcfg.obj ..\source\ffclconv.obj 
+      ..\source\ffclintf.obj ..\source\ffclreng.obj ..\source\ffcltbrg.obj 
+      ..\source\ffdb.obj ..\source\fffile.obj ..\source\ffhash.obj 
+      ..\source\ffllbase.obj ..\source\ffllcomm.obj ..\source\ffllcomp.obj 
+      ..\source\fflldict.obj ..\source\fflleng.obj ..\source\ffllexcp.obj 
+      ..\source\ffllgrid.obj ..\source\ffconst.obj ..\source\ffconvff.obj 
+      ..\source\ffdbbase.obj ..\source\ffdtmsgq.obj ..\source\fflllgcy.obj 
+      ..\source\fflllog.obj ..\source\ffllprot.obj ..\source\ffllreq.obj 
+      ..\source\ffllthrd.obj ..\source\ffllunc.obj ..\source\ffllwsck.obj 
+      ..\source\ffllwsct.obj ..\source\fflogdlg.obj ..\source\ffnetmsg.obj 
+      ..\source\ffsql.obj ..\source\ffsqlbas.obj ..\source\ffsqldb.obj 
+      ..\source\ffsqldef.obj ..\source\ffsqleng.obj ..\source\ffsrbase.obj 
+      ..\source\ffsrbde.obj ..\source\ffsrblob.obj ..\source\ffsrcfg.obj 
+      ..\source\ffsrcmd.obj ..\source\ffsrcvex.obj ..\source\ffsreng.obj 
+      ..\source\ffsrfltr.obj ..\source\ffsrfmap.obj ..\source\ffsrfold.obj 
+      ..\source\ffsrintf.obj ..\source\ffsrintm.obj ..\source\ffsrixhl.obj 
+      ..\source\ffsrlock.obj ..\source\ffsrmgr.obj ..\source\ffsrsec.obj 
+      ..\source\ffsrstat.obj ..\source\ffsrtran.obj ..\source\ffsrvdlg.obj 
+      ..\source\ffstdate.obj ..\source\fftbbase.obj ..\source\fftbblob.obj 
+      ..\source\fftbcryp.obj ..\source\fftbdata.obj ..\source\fftbdict.obj 
+      ..\source\fftbindx.obj ..\source\fftbstrm.obj ..\source\ffutil.obj 
+      ..\source\ffsrjour.obj"/>
+    <RESFILES value="ff2_r61.res"/>
+    <IDLFILES value=""/>
+    <IDLGENFILES value=""/>
+    <DEFFILE value=""/>
+    <RESDEPEN value="$(RESFILES) ..\source\fflogdlg.dfm ..\source\ffsrvdlg.dfm"/>
+    <LIBFILES value=""/>
+    <LIBRARIES value="bdertl.lib"/>
+    <SPARELIBS value="rtl.lib vcl.lib dbrtl.lib vcldb.lib bdertl.lib"/>
+    <PACKAGES value="rtl.bpi vcl.bpi dbrtl.bpi vcldb.bpi"/>
+    <PATHCPP value=".;"/>
+    <PATHPAS value=".;..\source;..\source;..\source;..\source;..\source;..\source;..\source;..\source;..\source;..\source;..\source;..\source;..\source;..\source;..\source;..\source;..\source;..\source;..\source;..\source;..\source;..\source;..\source;..\source;..\source;..\source;..\source;..\source;..\source;..\source;..\source;..\source;..\source;..\source;..\source;..\source;..\source;..\source;..\source;..\source;..\source;..\source;..\source;..\source;..\source;..\source;..\source;..\source;..\source;..\source;..\source;..\source;..\source;..\source;..\source;..\source;..\source;..\source;..\source;..\source;..\source;..\source;..\source;..\source;..\source;..\source;..\source;..\source;..\source"/>
+    <PATHRC value=".;"/>
+    <PATHASM value=".;"/>
+    <DEBUGLIBPATH value="$(BCB)\lib\debug"/>
+    <RELEASELIBPATH value="$(BCB)\lib\release"/>
+    <LINKER value="ilink32"/>
+    <USERDEFINES value=""/>
+    <SYSDEFINES value="NO_STRICT;_VIS_NOLIB;USEPACKAGES"/>
+    <MAINSOURCE value="ff2_r61.cpp"/>
+    <INCLUDEPATH value="..\source;$(BCB)\include;$(BCB)\include\vcl"/>
+    <LIBPATH value="..\source;$(bcb)\lib;$(BCB)\lib\obj"/>
+    <WARNINGS value="-w-par -w-8027 -w-8026"/>
+    <WARNOPTSTR value=""/>
+    <OTHERFILES value=""/>
+  </MACROS>
+  <OPTIONS>
+    <IDLCFLAGS value="-I..\source -I$(BCB)\include -I$(BCB)\include\vcl -src_suffix cpp -boa"/>
+    <CFLAG1 value="-O2 -Vx -Ve -Tkh30000 -X- -a8 -b- -k- -vi -c -tWM"/>
+    <PFLAGS value="-$Y- -$L- -$D- -$A8 -v -M -JPHNE"/>
+    <RFLAGS value=""/>
+    <AFLAGS value="/mx /w2 /zn"/>
+    <LFLAGS value="-D&quot;TurboPower FlashFiler Runtime Package - VCL61&quot; -aa -Tpp -Gpr -x -Gn -Gl 
+      -Gi"/>
+    <OTHERFILES value=""/>
+  </OPTIONS>
+  <LINKER>
+    <ALLOBJ value="c0pkg32.obj $(PACKAGES) sysinit.obj $(OBJFILES)"/>
+    <ALLRES value="$(RESFILES)"/>
+    <ALLLIB value="$(LIBFILES) $(LIBRARIES) import32.lib cp32mt.lib"/>
+    <OTHERFILES value=""/>
+  </LINKER>
+  <FILELIST>
+      <FILE FILENAME="ff2_r61.cpp" FORMNAME="" UNITNAME="ff2_r61" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="ff2_r61.res" FORMNAME="" UNITNAME="ff2_r61" CONTAINERID="ResTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\ffsrsort.pas" FORMNAME="" UNITNAME="ffsrsort" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\ffsrcur.pas" FORMNAME="" UNITNAME="ffsrcur" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\ffllcoll.pas" FORMNAME="" UNITNAME="ffllcoll" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\cocobase.pas" FORMNAME="" UNITNAME="cocobase" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\ffclbase.pas" FORMNAME="" UNITNAME="ffclbase" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\ffclbde.pas" FORMNAME="" UNITNAME="ffclbde" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\ffclcfg.pas" FORMNAME="" UNITNAME="ffclcfg" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\ffclconv.pas" FORMNAME="" UNITNAME="ffclconv" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\ffclintf.pas" FORMNAME="" UNITNAME="ffclintf" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\ffclreng.pas" FORMNAME="" UNITNAME="ffclreng" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\ffcltbrg.pas" FORMNAME="" UNITNAME="ffcltbrg" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\ffdb.pas" FORMNAME="" UNITNAME="ffdb" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\fffile.pas" FORMNAME="" UNITNAME="fffile" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\ffhash.pas" FORMNAME="" UNITNAME="ffhash" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\ffllbase.pas" FORMNAME="" UNITNAME="ffllbase" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\ffllcomm.pas" FORMNAME="" UNITNAME="ffllcomm" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\ffllcomp.pas" FORMNAME="" UNITNAME="ffllcomp" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\fflldict.pas" FORMNAME="" UNITNAME="fflldict" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\fflleng.pas" FORMNAME="" UNITNAME="fflleng" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\ffllexcp.pas" FORMNAME="" UNITNAME="ffllexcp" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\ffllgrid.pas" FORMNAME="" UNITNAME="ffllgrid" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\ffconst.pas" FORMNAME="" UNITNAME="ffconst" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\ffconvff.pas" FORMNAME="" UNITNAME="ffconvff" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\ffdbbase.pas" FORMNAME="" UNITNAME="ffdbbase" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\ffdtmsgq.pas" FORMNAME="" UNITNAME="ffdtmsgq" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\fflllgcy.pas" FORMNAME="" UNITNAME="fflllgcy" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\fflllog.pas" FORMNAME="" UNITNAME="fflllog" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\ffllprot.pas" FORMNAME="" UNITNAME="ffllprot" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\ffllreq.pas" FORMNAME="" UNITNAME="ffllreq" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\ffllthrd.pas" FORMNAME="" UNITNAME="ffllthrd" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\ffllunc.pas" FORMNAME="" UNITNAME="ffllunc" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\ffllwsck.pas" FORMNAME="" UNITNAME="ffllwsck" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\ffllwsct.pas" FORMNAME="" UNITNAME="ffllwsct" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\fflogdlg.pas" FORMNAME="FFLoginDialog" UNITNAME="Fflogdlg" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\ffnetmsg.pas" FORMNAME="" UNITNAME="ffnetmsg" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\ffsql.pas" FORMNAME="" UNITNAME="ffsql" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\ffsqlbas.pas" FORMNAME="" UNITNAME="ffsqlbas" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\ffsqldb.pas" FORMNAME="" UNITNAME="ffsqldb" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\ffsqldef.pas" FORMNAME="" UNITNAME="ffsqldef" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\ffsqleng.pas" FORMNAME="" UNITNAME="ffsqleng" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\ffsrbase.pas" FORMNAME="" UNITNAME="ffsrbase" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\ffsrbde.pas" FORMNAME="" UNITNAME="ffsrbde" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\ffsrblob.pas" FORMNAME="" UNITNAME="ffsrblob" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\ffsrcfg.pas" FORMNAME="" UNITNAME="ffsrcfg" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\ffsrcmd.pas" FORMNAME="" UNITNAME="ffsrcmd" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\ffsrcvex.pas" FORMNAME="" UNITNAME="ffsrcvex" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\ffsreng.pas" FORMNAME="" UNITNAME="ffsreng" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\ffsrfltr.pas" FORMNAME="" UNITNAME="ffsrfltr" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\ffsrfmap.pas" FORMNAME="" UNITNAME="ffsrfmap" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\ffsrfold.pas" FORMNAME="" UNITNAME="ffsrfold" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\ffsrintf.pas" FORMNAME="" UNITNAME="ffsrintf" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\ffsrintm.pas" FORMNAME="" UNITNAME="ffsrintm" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\ffsrixhl.pas" FORMNAME="" UNITNAME="ffsrixhl" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\ffsrlock.pas" FORMNAME="" UNITNAME="ffsrlock" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\ffsrmgr.pas" FORMNAME="" UNITNAME="ffsrmgr" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\ffsrsec.pas" FORMNAME="" UNITNAME="ffsrsec" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\ffsrstat.pas" FORMNAME="" UNITNAME="ffsrstat" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\ffsrtran.pas" FORMNAME="" UNITNAME="ffsrtran" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\ffsrvdlg.pas" FORMNAME="FFPickServerDlg" UNITNAME="Ffsrvdlg" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\ffstdate.pas" FORMNAME="" UNITNAME="ffstdate" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\fftbbase.pas" FORMNAME="" UNITNAME="fftbbase" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\fftbblob.pas" FORMNAME="" UNITNAME="fftbblob" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\fftbcryp.pas" FORMNAME="" UNITNAME="fftbcryp" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\fftbdata.pas" FORMNAME="" UNITNAME="fftbdata" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\fftbdict.pas" FORMNAME="" UNITNAME="fftbdict" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\fftbindx.pas" FORMNAME="" UNITNAME="fftbindx" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\fftbstrm.pas" FORMNAME="" UNITNAME="fftbstrm" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\ffutil.pas" FORMNAME="" UNITNAME="ffutil" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\source\ffsrjour.pas" FORMNAME="" UNITNAME="ffsrjour" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="rtl.bpi" FORMNAME="" UNITNAME="rtl" CONTAINERID="BPITool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="vcl.bpi" FORMNAME="" UNITNAME="vcl" CONTAINERID="BPITool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="dbrtl.bpi" FORMNAME="" UNITNAME="dbrtl" CONTAINERID="BPITool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="vcldb.bpi" FORMNAME="" UNITNAME="vcldb" CONTAINERID="BPITool" DESIGNCLASS="" LOCALCOMMAND=""/>
+  </FILELIST>
+  <BUILDTOOLS>
+  </BUILDTOOLS>
+
+  <IDEOPTIONS>
+[Version Info]
+IncludeVerInfo=1
+AutoIncBuild=0
+MajorVer=1
+MinorVer=0
+Release=0
+Build=0
+Debug=0
+PreRelease=0
+Special=0
+Private=0
+DLL=0
+Locale=1033
+CodePage=1252
+
+[Version Info Keys]
+CompanyName=TurboPower Software Company
+FileDescription=TurboPower FlashFiler Runtime Package - VCL61
+FileVersion=2.1.3.0
+InternalName=FF2_R61
+LegalCopyright=Copyright (c) TurboPower Software Company 1996-2002
+LegalTrademarks=
+OriginalFilename=FF2_R61.BPL
+ProductName=FlashFiler
+ProductVersion=2.1.3.0
+Comments=
+
+[HistoryLists\hlIncludePath]
+Count=1
+Item0=$(BCB)\include;$(BCB)\include\vcl
+
+[HistoryLists\hlLibraryPath]
+Count=2
+Item0=$(bcb)\lib;$(BCB)\lib\obj
+Item1=$(bcb)\lib;$(BCB)\lib\obj;$(BCB)\lib
+
+[HistoryLists\hlDebugSourcePath]
+Count=1
+Item0=$(BCB)\source\vcl
+
+[Debugging]
+DebugSourceDirs=$(BCB)\source\vcl
+
+[Parameters]
+RunParams=
+Launcher=
+UseLauncher=0
+DebugCWD=
+HostApplication=
+RemoteHost=
+RemotePath=
+RemoteLauncher=
+RemoteCWD=
+RemoteDebug=0
+
+[Compiler]
+ShowInfoMsgs=0
+LinkDebugVcl=0
+LinkCGLIB=0
+
+[CORBA]
+AddServerUnit=1
+AddClientUnit=1
+PrecompiledHeaders=1
+
+[Language]
+ActiveLang=
+ProjectLang=
+RootDir=
+
+[Linker]
+LibPrefix=
+LibSuffix=
+LibVersion=
+  </IDEOPTIONS>
+</PROJECT>

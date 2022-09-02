@@ -1,0 +1,42 @@
+package fsutilsd50;
+
+{$R *.RES}
+{$R 'fsutl.res'}
+{$ALIGN ON}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'FSSQL Utils'}
+{$IMPLICITBUILD ON}
+
+requires
+  vcl50,
+  Vclx50,
+  vcldb50,
+  fsql1_r50;
+
+contains
+  fsadminplug in 'fsadminplug.pas',
+  fsbackup in 'fsbackup.pas',
+  fsmessagingcommon in 'fsmessagingcommon.pas',
+  fsmessagingclient in 'fsmessagingclient.pas',
+  fsmessagingplugin in 'fsmessagingplugin.pas';
+
+end.

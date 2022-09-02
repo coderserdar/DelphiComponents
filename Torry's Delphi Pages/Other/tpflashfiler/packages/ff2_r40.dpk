@@ -1,0 +1,111 @@
+package ff2_r40;
+
+{$R *.RES}
+{$ALIGN ON}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $00400000}
+{$DESCRIPTION 'TurboPower FlashFiler Runtime Package - VCL40'}
+{$RUNONLY}
+{$IMPLICITBUILD OFF}
+
+requires
+  Vcl40,
+  Vcldb40;
+
+contains
+  ffsrmgr in '..\source\ffsrmgr.pas',
+  ffclconv in '..\source\ffclconv.pas',
+  ffsrsort in '..\source\ffsrsort.pas',
+  ffsrcur in '..\source\ffsrcur.pas',
+  ffllcoll in '..\source\ffllcoll.pas',
+  fflltemp in '..\source\fflltemp.pas',
+  ffclbde in '..\source\ffclbde.pas',
+  ffclintf in '..\source\ffclintf.pas',
+  ffclplug in '..\source\ffclplug.pas',
+  ffconst in '..\source\ffconst.pas',
+  ffhash in '..\source\ffhash.pas',
+  fflldict in '..\source\fflldict.pas',
+  fflogdlg in '..\source\fflogdlg.pas',
+  ffsrvdlg in '..\source\ffsrvdlg.pas',
+  ffdtmsgq in '..\source\ffdtmsgq.pas',
+  ffclbase in '..\source\ffclbase.pas',
+  ffllbase in '..\source\ffllbase.pas',
+  ffllexcp in '..\source\ffllexcp.pas',
+  ffllprot in '..\source\ffllprot.pas',
+  ffllwsck in '..\source\ffllwsck.pas',
+  ffllwsct in '..\source\ffllwsct.pas',
+  ffnetmsg in '..\source\ffnetmsg.pas',
+  ffclcfg in '..\source\ffclcfg.pas',
+  ffstdate in '..\source\ffstdate.pas',
+  ffdbbase in '..\source\ffdbbase.pas',
+  ffdb in '..\source\ffdb.pas',
+  ffcltbrg in '..\source\ffcltbrg.pas',
+  ffsrbde in '..\source\ffsrbde.pas',
+  ffsreng in '..\source\ffsreng.pas',
+  ffsqleng in '..\source\ffsqleng.pas',
+  ffsql in '..\source\ffsql.pas',
+  cocobase in '..\source\cocobase.pas',
+  ffsqlbas in '..\source\ffsqlbas.pas',
+  ffsrcfg in '..\source\ffsrcfg.pas',
+  ffsrfmap in '..\source\ffsrfmap.pas',
+  ffsrintm in '..\source\ffsrintm.pas',
+  ffsrstat in '..\source\ffsrstat.pas',
+  ffsrcvex in '..\source\ffsrcvex.pas',
+  ffsrtran in '..\source\ffsrtran.pas',
+  ffsrfold in '..\source\ffsrfold.pas',
+  ffllunc in '..\source\ffllunc.pas',
+  ffsrfltr in '..\source\ffsrfltr.pas',
+  ffconvff in '..\source\ffconvff.pas',
+  fftbdata in '..\source\fftbdata.pas',
+  fftbblob in '..\source\fftbblob.pas',
+  fftbindx in '..\source\fftbindx.pas',
+  fftbdict in '..\source\fftbdict.pas',
+  fftbstrm in '..\source\fftbstrm.pas',
+  ffclreng in '..\source\ffclreng.pas',
+  fflllgcy in '..\source\fflllgcy.pas',
+  ffsrbase in '..\source\ffsrbase.pas',
+  fftbbase in '..\source\fftbbase.pas',
+  fffile in '..\source\fffile.pas',
+  ffsrintf in '..\source\ffsrintf.pas',
+  ffllcomm in '..\source\ffllcomm.pas',
+  ffllthrd in '..\source\ffllthrd.pas',
+  ffllreq in '..\source\ffllreq.pas',
+  fflllog in '..\source\fflllog.pas',
+  ffsrcmd in '..\source\ffsrcmd.pas',
+  ffllgrid in '..\source\ffllgrid.pas',
+  ffsrsec in '..\source\ffsrsec.pas',
+  fflleng in '..\source\fflleng.pas',
+  fftbcryp in '..\source\fftbcryp.pas',
+  ffsrblob in '..\source\ffsrblob.pas',
+  ffsqldb in '..\source\ffsqldb.pas',
+  ffsqldef in '..\source\ffsqldef.pas',
+  ffllcomp in '..\source\ffllcomp.pas',
+  ffsrlock in '..\source\ffsrlock.pas',
+  ffsrixhl in '..\source\ffsrixhl.pas',
+  ffutil in '..\source\ffutil.pas',
+  uFFSRJrn in '..\source\uffsrjrn.pas' {JournalForm},
+  ffsrjour in '..\source\ffsrjour.pas';
+
+{$IFDEF SingleEXE}
+!!! Error: This package should not be compiled with SingleEXE mode enabled
+{$ENDIF}
+
+end.

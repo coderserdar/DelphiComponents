@@ -1,0 +1,219 @@
+B-Tree Filer - FLUSHTST.TXT
+===========================
+
+Forcing the writing of buffered data
+------------------------------------
+
+You can use two methods to get B-Tree Filer to force all buffered data to
+be written onto the external storage medium. The first of these two methods
+is explicit and uses the procedures BTFlushFileBlock and
+BTFlushAllFileBlocks. The second method (in a network or multitasking
+environment) is implicit and uses Save mode together with
+
+     BTForceNetBufferWriteThrough(True);
+
+To force the operating system to actually write the system buffers to disk,
+B-Tree Filer uses three algorithms. The simplest is to close and reopen the
+file concerned. However this can not be utilized in a network or
+multitasking system because it has the side effect of removing all locks
+that are present. Therefore the second strategy is used in this case: the
+DOS file handle is duplicated (DOS INT $21, function $45), and then the
+duplicate file handle is closed (DOS INT $21, function $3E).
+
+Unfortunately, with certain network systems, we discovered that other
+problems appeared when this strategy was used. These systems will remove
+locks on the original handle when the duplicate handle is closed.
+
+This introduces the third method to flush data to disk: the DOS commit file
+function (DOS INT $21, function $68). This function appeared for the first
+time in MS-DOS 3.30. This function has the benefit of preserving file
+locks. Hence, by default, B-Tree Filer uses this function as the method to
+flush file buffers to disk.
+
+However, using this latter function also introduces problems. First you
+must have at least MS-DOS 3.30 (not a particularly grave restriction
+nowadays). Secondly, you must determine that the networks you are using
+actually do something when this function is called, without errors.
+
+To cover the broadest possible spectrum, a flush process within B-Tree
+Filer happens as follows: firstly DOS function $68 is called if
+IsamFlushDOS33 has the value True. If this fails (DOS returns an error) or
+IsamFlushDOS33 has the value False, the flush process is done with a
+duplication of the file handle and a closing of the duplicate handle. If
+that fails then (only for a single user fileblock) the simple flush process
+of closing/reopening the file is performed.
+
+To check your particular network's performance with these flushing
+strategies we include the following two test programs.
+
+
+First Test
+----------
+
+The first test attempts to determine whether your network operating system
+obeys the DOS Commit File function (DOS INT $21 function $68). If your
+network passes this test all flushing functionality in B-Tree Filer is
+fully available, and you should keep IsamFlushDOS33 set to True.
+
+If, however, the test fails then either the Commit File function returns
+with an error, or it returns successfully but the flush did not take place.
+In this case you must set IsamFlushDOS33 to False, and proceed to the
+second test.
+
+
+Program FlushTest1;
+
+uses
+  Dos,
+  Filer;
+
+var
+  F : IsamFile;
+  R : Registers;
+
+begin
+  writeln('Testing the DOS Commit File function (INT $21/$68)');
+  writeln;
+  IsamClearOK;
+  IsamAssign(F, 'TESTDAT.TST');
+  IsamRewrite(F);
+  if IsamOK then
+    IsamBlockWrite(F,F,2);
+  if not IsamOK then begin
+    writeln('Error generating the Test file');
+    Halt;
+  end;
+  FillChar(R, sizeof(R), 0);
+  with R do begin
+    AH := $68;
+    BX := F.Handle;
+    MsDos(R);                     {Flush the handle}
+    if Odd(Flags) then begin      {Carry flag set?}
+      writeln('Test failed!' );
+      writeln('DOS INT $21 function $68 is not supported - DOS returned');
+      writeln('with the carry flag set when it was called.');
+      writeln('Therefore IsamFlushDOS33 must be set False,');
+      writeln('and the second test must be executed.' );
+      Halt;
+    end;
+  end;
+  writeln('DOS INT $21 function $68 was called successfully.' );
+  writeln('Reboot this PC now, by pressing the Reset button or pressing' );
+  writeln('  the key combination <Ctrl><Alt><Del>.' );
+  writeln;
+  writeln('When the PC has been rebooted, if there exists a file in this');
+  writeln('directory with the name TESTDAT.TST with length 2 then this');
+  writeln('flush test was successful.' );
+  writeln;
+  writeln('If no such file exists or its length is not 2 then the flush');
+  writeln('test was unsuccessful.');
+  writeln('In this case IsamFlushDOS33 must be set False, and the second');
+  writeln('test must be executed.' );
+  Readln;
+end.
+
+
+
+Second Test
+-----------
+
+The second test checks to see whether locks are maintained through the
+second type of flush: duplicating the file handle and closing the
+duplicate. For this test you must compile the FILER unit to have the
+correct network included, whether Novell or MsNet or both.
+
+
+Program FlushTest2;
+
+uses
+  Filer;
+
+var
+  F                 : IsamFile;
+  Err               : Integer;
+  PBS               : LongInt;
+  Para              : String;
+  Dummy             : Boolean;
+  ExpectedNetToInit : NetSupportType;
+
+procedure ShowParams;
+  begin
+    writeln;
+    writeln;
+    writeln('One of the following parameters must be used:');
+    writeln;
+    writeln('/N  for Novell NetWare');
+    writeln('/M  Microsoft network (or compatible)');
+  end;
+
+begin
+  writeln('Testing a network or multiuser system for keeping a' );
+  writeln('lock after calling Duplicate File Handle (DOS INT $21/$45)' );
+  writeln('folloed by "Close Duplicate Handle (DOS INT $21/$3E)' );
+  writeln;
+  if IsamFlushDOS33 then begin
+    writeln('This test is only meaningful if the first test fails.');
+    writeln('You must set IsamFlushDOS33 to False before running this test.' );
+    Halt;
+  end;
+
+  if ParamCount <> 1 then begin
+    ShowParams;
+    Halt;
+  end;
+  Para := ParamStr(1);
+  if Para[1] <> '/' then begin
+    ShowParams;
+    Halt;
+  end;
+  Delete(Para, 1, 1);
+  case UpCase(Para[1]) of
+    'N' : ExpectedNetToInit := Novell;
+    'M' : ExpectedNetToInit := MsNet;
+  else
+    ShowParams;
+    Halt;
+  end; {case}
+
+  PBS := BTInitIsam(ExpectedNetToInit, MinimizeUseOfNormalHeap, 0);
+  if not IsamOK then begin
+    writeln('Network initialization failed.');
+    writeln('Either the network is not present or the ');
+    writeln('$DEFINE of the network was not activated.');
+    Halt;
+  end;
+
+  IsamAssign(F, 'TESTDAT.TST');
+  IsamRewrite(F);
+  if IsamOK then IsamClose(F);
+  if IsamOK then IsamReset(F, True, False);
+  if IsamOK then IsamBlockWrite(F, F, 4);
+  if not IsamOK then begin
+    writeln('Error occurred when creating the test file');
+    Halt;
+  end;
+
+  if not BTIsamLockRecord(0, 4, F.Handle, 0, 0) then begin
+    writeln('Error placing a lock.');
+    writeln('Probably the network to be initialized is not available.');
+    Halt;
+  end;
+
+  IsamFlush(F, Dummy, True);
+  if not IsamOK then begin
+    writeln('Flush error.');
+    Halt;
+  end;
+
+  if not BTIsamUnLockRecord(0, 4, F.Handle) then begin
+    writeln('Test failed!');
+    writeln('The flush process removed the lock placed on the file.' );
+    writeln('You cannot use this network to flush files that have locks present.');
+    Halt;
+  end;
+
+  writeln('Test successful!');
+  writeln('If you ensure that the constant IsamFlushDOS33 has the value False,' );
+  writeln('you can use all the B-Tree Filer flush routines successfully.');
+end.
+

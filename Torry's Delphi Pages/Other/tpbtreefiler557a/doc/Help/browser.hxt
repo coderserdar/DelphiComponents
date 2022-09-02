@@ -1,0 +1,649 @@
+;
+;-------------------------------------------------------------------
+!TOPIC 100 Browser
+The Browser provides a utility for examining a selection of data records
+from a Fileblock. The data records are displayed on screen using one row
+per record, in a format that you define. A highlight bar can be positioned
+to select a particular record.
+
+Browser depends on the following units:
+
+  CRT, TPCRT, or OPCRT
+  DOS
+  TPMOUSE or OPMOUSE  (optional)
+  TPCMD
+  FILER
+  VREC
+
+The command handling behavior of Browser is implemented just as in Turbo
+Professional 5.0's TpPick and TpEntry units. A configurable command
+table is defined to map keystrokes to logical commands such as "move to
+next record". Although this table is initialized to reasonable default
+values, an application can modify it at runtime for special capabilities.
+
+For correct behavior of the browser, the first four bytes of each data
+record must be reserved for B-Tree Filer's use, and initialized by the
+application to zero whenever a record is added to the Fileblock.
+
+  00101AddBrowseCommand    00102Browse
+  00103BrowseAgain         00104BrowseReadKey
+  00110Declarations        00109DisableBrowseMouse
+  00106DisableFiltering    00108EnableBrowseMouse
+  00105EnableFiltering     00107IsFilteringEnabled
+;
+;-------------------------------------------------------------------
+!TOPIC 101 AddBrowseCommand
+!NOINDEX
+function 00100Browser.AddBrowseCommand(Cmd : BKtype;
+                                  NumKeys : Byte;
+                                  Key1, Key2 : Word) : Boolean;
+
+Add a new command key assignment or change an existing one.
+
+See also:  00102Browse                00110Declarations
+;
+;-------------------------------------------------------------------
+!TOPIC 102 Browse
+!NOINDEX
+function 00100Browser.Browse(IFBPtr : IsamFileblockPtr;
+                        VarRec : Boolean;
+                        KeyNr : Integer;
+                        LowKey,
+                        HighKey : IsamKeyStr;
+                        StartScreenRow,
+                        NrOfRows : Integer;
+                        var DatS;
+                        var DatLen : Word;
+                        var Ref : LongInt;
+                        var KeyStr : IsamKeyStr;
+                        var ExitKey : BKtype;
+                        ProcSpecialTask : Pointer;
+                        ProcBuildaRow : Pointer;
+                        ProcDisplayaRow : Pointer) : Integer;
+
+A list is created with the corresponding keys from LowKey to HighKey
+inclusive and their data structures. The parameter VarRec must be True
+for variable length records (otherwise False). The display starts at the
+row StartScreenRow and entails NrOfRows rows. NrOfRows may not be
+less than 4. DatS is a buffer for the data structure. DatLen contains
+the length of the current variable length record only if VarRec is True.
+ExitKey returns the code for the command that exited the browser; it can
+also be used to specify the first action that the browser should perform.
+BKnone (Byte 0) must be passed if no action is to be performed.
+
+The procedures whose addresses are passed as the ProcBuildaRow and
+ProcDisplayaRow parameters are used to create and display a row. These
+procedures must be supplied by the user of Browser and must be declared
+as in the example procedure definitions, below. These procedures must be
+GLOBAL and declared as FAR.
+
+A procedure whose address is passed as the ProcBuildARow parameter should
+be of the following form:
+
+  {$F+}
+  procedure BuildARow(var RR : 00115RowRec;
+                      KeyNr  : Integer;
+                      var DatS;
+                      DatLen : Word);
+
+On entry to BuildARow, the field RR.IKS will be initialized with the
+key string of the current record, and the field RR.Ref will contain the
+current record number. DatS will contain the complete data record.
+
+On exit, the BuildARow procedure must have initialized the field RR.Row.
+This field is a string no longer than 00118MaxCols that contains
+information to be displayed for the record. The string may be wider than
+the physical screen, as long as the DisplayARow routine is prepared to
+display a portion of the string and support horizontal scrolling.
+
+Note: If Browse is used with a net-Fileblock, it will set the field
+RR.Ref to -1 after attempting to read a locked record.
+
+A procedure whose address is passed as the ProcDisplayARow parameter
+should be of the following form:
+
+  {$F+}
+  procedure DisplayARow(var RR       : 00115RowRec;
+                        KeyNr        : Integer;
+                        RowNr        : Integer;
+                        StartRow     : Integer;
+                        Highlight    : Boolean;
+                        var HorizOfs : Integer);
+
+The field RR.Row will contain a string formatted by BuildARow that is
+to be displayed. StartRow will contain the first row of the browser
+display, and RowNr will reflect the relative position of the row. The
+absolute row where the record should be written is therefore
+
+  StartRow + RowNr - 1
+
+When Highlight is True, the record is currently selected. This should be
+indicated by the use of reverse video or some other special color.
+
+HorizOfs is used to control horizontal scrolling. If the entire display
+string fits within the screen, this parameter may be ignored. Otherwise
+note that Browse increments this parameter for every press of the <Right>
+arrow key and decrements it for every press of <Left>. The DisplayARow
+routine may modify the value of HorizOfs to constrain horizontal
+scrolling to a desired range.
+
+A procedure whose address is passed as the ProcSpecialTask parameter
+should be of the following form:
+
+  {$F+}
+  procedure SpecialTask(IFBPtr : 0301IsamFileblockPtr;
+                        var DatS;
+                        Ref : LongInt;
+                        IKS : 0306IsamKeyStr;
+                        KeyNr : Integer;
+                        var Command : 00114BKType;
+                        var ExitCode : Integer;
+                        DatLen : Word);
+
+IFBPtr refers to the Fileblock being browsed. DatS is an untyped var
+that contains the data record currently highlighted. Ref is the record's
+data reference number. IKS is the 0306IsamKeyStr of the current record
+for key number KeyNr. Command contains the code for the command
+(BKtask0..BKtask9) that triggered the call to the SpecialTask
+procedure. Command is a VAR parameter and therefore may be changed by the
+SpecialTask procedure. If Command is changed, then the Browser will
+execute that command. A SpecialTask procedure MUST set Command on exit to
+a reasonable value (like BKnone), or the Browser will loop forever.
+ExitCode is the key that caused the Browser to trigger the SpecialTask.
+It may be modified by the SpecialTask procedure.
+
+There are three possible return values from Browse:
+
+  0: No error encountered.
+     ExitKey = BKquit  : Esc was pressed.
+     ExitKey <> BKquit : DatS contains the data structure,
+                         Ref the corresponding reference,
+                         KeyStr the chosen key.
+  1: There were no keys available that were in the requested range.
+  2: Hard error (Class 2 or higher).
+
+See also:
+  00101AddBrowseCommand          00103BrowseAgain
+  00111Command codes             00126Commands
+  00110Declarations
+;
+;-------------------------------------------------------------------
+!TOPIC 103 BrowseAgain
+!NOINDEX
+function 00100Browser.BrowseAgain(IFBPtr : IsamFileblockPtr;
+                             VarRec : Boolean;
+                             KeyNr : Integer;
+                             LowKey : IsamKeyStr;
+                             HighKey : IsamKeyStr;
+                             StartScreenRow,
+                             NrOfRows : Integer;
+                             var HighlightedRow : Integer;
+                             var HorizOfs : Integer;
+                             var DatS;
+                             var DatLen : Word;
+                             var Ref : LongInt;
+                             var KeyStr : IsamKeyStr;
+                             var ExitKey : BKtype;
+                             ProcSpecialTask : Pointer;
+                             ProcBuildaRow : Pointer;
+                             ProcDisplayaRow : Pointer) : Integer;
+
+This routine is identical to 00102Browse, except that it takes a value
+for the row to position the highlight bar and a horizontal offset. If
+HighlightedRow is 0, then the browser will position the highlight for
+you. Otherwise HighlightedRow must be between 1 and NrOfRows. The value
+HorizOfs is passed to the user procedure ProcDisplayaRow to indicate
+the horizontal offset of the line.
+
+See also:  00102Browse
+;
+;-------------------------------------------------------------------
+!TOPIC 104 BrowseReadKey
+!NOINDEX
+function 00100Browser.BrowseReadKey : Word;
+
+Return next keystroke as a word. This procedure is the default keyboard
+handler if neither UseTPCRT nor UseOPCRT is defined in BTDEFINE.INC.
+
+See also:  00123BrowseKeyPtr
+;
+;-------------------------------------------------------------------
+!TOPIC 105 EnableFiltering
+!NOINDEX
+procedure 00100Browser.EnableFiltering(ValidateFunc : Pointer);
+
+Enables Browser filtering. ValidateFunc is a pointer to a user defined
+function that determines whether a given record should be displayed in the
+browser. This Boolean function should return True if the specified record
+should be displayed, or False if it should be ignored.
+
+The validation function should be of the following form:
+
+  {$F+}
+  function ValidateARecord(IFBPtr     : IsamFileBlockPtr;
+                           KeyNr      : Integer;
+                           Ref        : LongInt;
+                           var KeyStr : IsamKeyStr;
+                           NetUsed    : Boolean) : Boolean;
+  begin
+    ...
+  end;
+  {$F-}
+
+See also:  00106DisableFiltering  00107IsFilteringEnabled
+;
+;-------------------------------------------------------------------
+!TOPIC 106 DisableFiltering
+!NOINDEX
+procedure 00100Browser.DisableFiltering;
+
+Disables Browser filtering. Has no effect if filtering is not enabled.
+
+See also:  00105EnableFiltering  00107IsFilteringEnabled
+;
+;-------------------------------------------------------------------
+!TOPIC 107 IsFilteringEnabled
+!NOINDEX
+function 00100Browser.IsFilteringEnabled : Boolean;
+
+Returns True if Browser filtering has been enabled through a call to
+EnableFiltering.
+
+See also:  00106DisableFiltering  00105EnableFiltering
+;
+;-------------------------------------------------------------------
+!TOPIC 108 EnableBrowseMouse
+!NOINDEX
+procedure 00100Browser.EnableBrowseMouse;
+
+Enable mouse support.
+
+See also:  00109DisableBrowseMouse  00122Mouse & Scroll bar control
+;
+;-------------------------------------------------------------------
+!TOPIC 109 DisableBrowseMouse
+!NOINDEX
+procedure 00100Browser.DisableBrowseMouse;
+
+Disable mouse support.
+
+See also:  00108EnableBrowseMouse  00122Mouse & Scroll bar control
+;
+;-------------------------------------------------------------------
+!TOPIC 110 Declarations,Browser
+!NOSEARCH
+!NOINDEX
+The 00100Browser unit interfaces the following constant, type and
+variable declarations:
+
+  00114BKtype                         00125BrowseHelpIndex
+  00124BrowseHelpPtr                  00123BrowseKeyPtr
+  00111Command codes                  00118MaxCols
+  00117MaxRows                        00116MinRows
+  00122Mouse & Scroll bar control     00112NoNetMode
+  00121ReadDataRecord                 00127RefreshFunc
+  00113RetriesOnLock                  00115RowRec
+  00120RowsToJump                     00119UseReadLock
+;
+;-------------------------------------------------------------------
+!TOPIC 111 Command codes
+!NOSEARCH
+!NOINDEX
+!NOWRAP
+;!TABLE
+const
+  BKnone      = 00; {Not a command}
+  BKchar      = 01; {Regular character--not a command}
+  BKenter     = 02; {Select}
+  BKquit      = 03; {Escape}
+  BKfirstRec  = 04; {Cursor to first record}
+  BKlastRec   = 05; {Cursor to last record}
+  BKleft      = 06; {Cursor left one column}
+  BKright     = 07; {Cursor right one column}
+  BKup        = 08; {Cursor up one row}
+  BKdown      = 09; {Cursor down one row}
+  BKpageUp    = 10; {Cursor up one page}
+  BKpageDown  = 11; {Cursor down one page}
+  BKplus      = 12; {Reread current record}
+  BKhelp      = 13; {Invoke help routine}
+  BKredraw    = 14; {Redraw the browse screen}
+  BKprobe     = 15; {Signals a mouse event}
+  BKRowEnd    = 16; {Command to go to end of row}
+  BKRowBegin  = 17; {Command to go to start of row}
+  BKtask0     = 18; {User-defined task commands}
+  ...
+  BKtask9     = 27;
+  BKuser0     = 28; {user-defined exit commands}
+  ...
+  BKuser9     = 37;
+!WRAP
+
+These are the codes for each of Browser's cursor movement and
+selection commands.
+
+See also:  00101AddBrowseCommand  00102Browse  00126Commands
+;
+;-------------------------------------------------------------------
+!TOPIC 112 NoNetMode
+!NOINDEX
+const
+  NoNetMode : Boolean = False;
+
+In a network environment, the browser must read from the disk more often
+than for a single user application. When NoNetMode is False, the browser
+rebuilds each display page from scratch after each command. When it is
+True, the browser can assume that no records are deleted or modified until
+the browser exits.
+;
+;-------------------------------------------------------------------
+!TOPIC 113 RetriesOnLock
+!NOINDEX
+const
+  RetriesOnLock : Integer = 50;
+
+Number of read retries in case of lock error. Because this is defined as a
+typed constant, it may be altered dynamically in an application.
+;
+;-------------------------------------------------------------------
+!TOPIC 114 BKtype
+!NOINDEX
+type
+  BKtype = BKnone..BKuser9;
+
+This subrange type defines the class of actions performed by the browser.
+
+See also:  00111Command codes
+;
+;-------------------------------------------------------------------
+!TOPIC 115 RowRec,Browser
+!NOINDEX
+!NOWRAP
+;!TABLE
+type
+  RowRec =
+    record
+      IKS : IsamKeyStr;       {Record key}
+      Ref : LongInt;          {Record reference number}
+      Row : string[00118MaxCols];  {String to display}
+    end;
+!WRAP
+
+00100Browser uses this type to manage the record display.
+;
+;-------------------------------------------------------------------
+!TOPIC 116 MinRows
+!NOINDEX
+const
+  MinRows = 4;
+
+Minimum number of usable lines on the screen.
+;
+;-------------------------------------------------------------------
+!TOPIC 117 MaxRows
+!NOINDEX
+const
+  MaxRows = 20;
+
+Maximum number of usable lines on the screen.
+;
+;-------------------------------------------------------------------
+!TOPIC 118 MaxCols,Browser
+!NOINDEX
+const
+  MaxCols = 128;
+
+Number of usable columns on screen (must be less than or equal to 255).
+;
+;-------------------------------------------------------------------
+!TOPIC 119 UseReadLock
+!NOINDEX
+const
+  UseReadLock : Boolean = False;
+
+If True, Browser will use read locks while building its pages.
+;
+;-------------------------------------------------------------------
+!TOPIC 120 RowsToJump
+!NOINDEX
+const
+  RowsToJump : Integer = 0;
+
+Number of rows to jump when scrolling one row at a time and top/bottom of
+browse window is passed. 0 means "one half the height of the window."
+;
+;-------------------------------------------------------------------
+!TOPIC 121 ReadDataRecord
+!NOINDEX
+const
+  ReadDataRecord : Boolean = True;
+
+If False, Browser will not read the data record associated with each key
+before calling the user-defined BuildARow routine.
+;
+;-------------------------------------------------------------------
+!TOPIC 122 Mouse & Scroll bar control
+!NOINDEX
+!NOSEARCH
+!NOWRAP
+;!TABLE
+const
+  ScrollBarAttr      : Byte = $07;
+  SliderAttr         : Byte = $0F;
+  MouseUpMark        : Char = #24;
+  MouseDnMark        : Char = #25;
+  ScrollMark         : Char = '²'; {#178}
+  UserMousePtr       : Pointer = Nil;
+  BrowseMousePage    : Boolean = False;
+  AutoScaleMouse     : Boolean = True;
+  UseScrollBar       : Boolean = True;
+  ScrollBarAutoSize  : Boolean = True;
+  ScrollBarUp        : Byte = 1;
+  ScrollBarHt        : Byte = 18;
+  ScrollBarCol       : Byte = 80;
+  MouseX1            : Byte = 1;
+  MouseX2            : Byte = 79;
+!WRAP
+
+These typed constants allow you to control the appearance of mouse scroll
+bars and customize the way that the mouse is handled. ScrollBarAttr and
+SliderAttr are the video attributes used when displaying a scroll bar.
+MouseUpMark and MouseDnMark are the characters used for the up and down
+arrows of the scroll bar. ScrollMark is the character used for the
+"slider."
+
+UserMousePtr, if not nil, points to a routine of the following form:
+
+  {$F+}
+  procedure MouseHotSpotHandler(X, Y : Byte; var Cmd : BKtype);
+  begin
+    ...
+  end;
+  {$F-}
+
+X and Y are the absolute coordinates of the mouse cursor at the time the
+mouse was clicked somewhere outside the browse window. Cmd is the command
+to be executed next, if any, based on the position of the mouse.
+BrowseMousePage, if True, indicates that clicking on the up/down arrows
+should scroll the display by a full page.
+
+AutoScaleMouse indicates whether or not a vertical scroll bar should be
+scaled based on the low and high keys passed to Browse. UseScrollBar
+indicates whether or not a scroll bar is desired; it is forced to False if
+a mouse is not present. If True, ScrollBarAutoSize indicates that the size
+and vertical position of the scroll bar should be calculated automatically
+based on the height and location of the browse window. If False,
+ScrollBarUp and ScrollBarHt indicate the top row and the height of the
+scroll bar. ScrollBarCol is the column in which the scroll bar should
+appear.
+
+MouseX1 and MouseX2 control the horizontal extent of the region where mouse
+clicks affect the browser. If you're drawing Browser rows less than the width
+of the full screen, you should adjust MouseX1 and MouseX2 to cover just the
+columns where browser data appears.
+
+See also:  00109DisableBrowseMouse  00108EnableBrowseMouse
+;
+;-------------------------------------------------------------------
+!TOPIC 123 BrowseKeyPtr
+!NOINDEX
+var
+  BrowseKeyPtr : Pointer;
+
+Points to a routine that reads each keystroke while in the 00100Browser.
+The function must be of the following form:
+
+  {$F+}
+  function ReadKeyFunc : Word;
+  begin
+    ...
+  end;
+  {$F-}
+
+See also:  00102Browse  00104BrowseReadKey
+;
+;-------------------------------------------------------------------
+!TOPIC 124 BrowseHelpPtr
+!NOINDEX
+var
+  BrowseHelpPtr : Pointer;
+
+Points to a routine that will be called when the help key is pressed. A Nil
+value means no action will be taken when the help key is pressed. The topic
+number index is passed to the help routine in the variable
+00125BrowseHelpIndex.
+
+A help procedure must be of the following form:
+
+  {$F+}
+  procedure HelpProc(UnitCode : Byte; IdPtr : Pointer; HelpIndex : Word);
+  begin
+    ...
+  end;
+  {$F-}
+
+See also:  00102Browse  00126Commands
+;
+;-------------------------------------------------------------------
+!TOPIC 125 BrowseHelpIndex
+!NOINDEX
+var
+  BrowseHelpIndex : Word;
+
+Contains a topic number to be passed to the help routine when it is
+activated. 00124BrowseHelpPtr contains the address of the help routine.
+
+See also:  00102Browse  00126Commands
+;
+;------------------------------------------------------------
+!TOPIC 126 Commands
+!NOSEARCH
+!NOINDEX
+The commands available while browsing through a data file are arranged by
+category in the list below. In each case the first line gives the name of
+the command, followed by the key(s) to which it is normally assigned. The
+second and following lines give a brief description of the command.
+
+BKleft        <Left>, <CtrlS>
+!LINE
+Scroll the display window to the left.
+
+BKright       <Right>, <CtrlD>
+!LINE
+Scroll the display window to the right.
+
+BKRowBegin    none
+!LINE
+Scroll to beginning of current row.
+
+BKRowEnd      none
+!LINE
+Scroll to end of current row.
+
+BKfirstRec    <Home>, <CtrlPgUp>, <CtrlQ><R>
+!LINE
+Scroll to the first record.
+
+BKlastRec     <End>, <CtrlPgDn>, <CtrlQ><C>
+!LINE
+Scroll to the last record.
+
+BKup          <Up>, <CtrlE>, <CtrlW>
+!LINE
+Cursor up one row.
+
+BKdown        <Down>, <CtrlX>, <CtrlZ>
+!LINE
+Cursor down one row.
+
+BKpageUp      <PgUp>, <CtrlR>
+!LINE
+Scroll up one page.
+
+BKpageDown    <PgDn>, <CtrlC>
+!LINE
+Scroll down one page.
+
+BKenter       <Enter>, <CtrlM>
+!LINE
+Exit Browse making a choice.
+
+BKplus        <+>
+!LINE
+Reread current record.
+
+BKquit        <CtrlBreak>, <Esc>, <ClickRight>
+!LINE
+Exit Browse without making a selection.
+
+BKredraw      none
+!LINE
+Redraw the browse screen.
+
+BKprobe       <ClickLeft>
+!LINE
+Move the highlight bar to the position indicated by the mouse, if possible.
+If the highlight bar is already over the indicated item, select the item
+and exit from the browser. This command can also be used to scroll the
+browse window by clicking on a scroll bar.
+
+BKhelp        <F1>, <ClickBoth>
+!LINE
+Help. If a user-written help routine has been established by setting
+BrowseHelpPtr, pressing <F1> will call that routine; otherwise this command
+does nothing. If there is a help routine, Browse will pass it the following
+three parameters: HelpForBrowse, the Fileblock pointer passed as the first
+parameter to Browse, and BrowseHelpIndex.
+
+See also:  00102Browse  00125BrowseHelpIndex  00124BrowseHelpPtr
+;
+;------------------------------------------------------------
+!TOPIC 127 RefreshFunc
+!NOINDEX
+const
+  RefreshFunc : Pointer = Nil;
+
+A pointer to the refresh function for the browser. The refresh function's
+purpose is to signal that the browser screen must be updated when it detects
+that another workstation has modified the Fileblock. When activated, the
+refresh function is called just prior to getting each keyboard command while
+the browser is active. RefreshFunc must point to a routine declared as
+follows:
+
+{$F+}
+!LINE
+function RefreshFunction(IFBPtr : IsamFileBlockPtr;
+                         KeyNo : Integer) : Boolean;
+
+The Refresh function should return True if a screen refresh is required, and
+False if not.
+
+BROWSER interfaces two predefined refresh functions, RefreshAtEachCommand and
+RefreshPeriodically. RefreshAtEachCommand signals for a screen refresh if a)
+no keystrokes are pending and b) the Fileblock has been modified since the
+last refresh. RefreshPeriodically checks every RefreshPeriod clock ticks to
+see whether the Fileblock has been modified. If a key is pressed prior to
+detecting a modification, RefreshPeriodically exits with a False result;
+otherwise it returns True. The global typed constant RefreshPeriod defaults to
+90 clock ticks (about 5 seconds). RefreshPeriodically usually generates less
+network traffic because it checks for a modification less frequently; however,
+screen updates won't occur as quickly after other stations modify the data.

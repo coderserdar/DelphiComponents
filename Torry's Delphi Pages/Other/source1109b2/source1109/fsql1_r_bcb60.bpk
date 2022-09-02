@@ -1,0 +1,211 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!-- C++Builder XML Project -->
+<PROJECT>
+  <MACROS>
+    <VERSION value="BCB.06.00"/>
+    <PROJECT value="fsql1_r_bcb60.bpl"/>
+    <OBJFILES value="fsql1_r_bcb60.obj fssrsort.obj fssrcur.obj fsllcoll.obj fscocobase.obj 
+      fsclbase.obj fsclbde.obj fsclcfg.obj fsclconv.obj fsclintf.obj 
+      fsserverremoteclass.obj fscltbrg.obj fsdb.obj fsfile.obj fshash.obj fsllbase.obj 
+      fsllcomm.obj fsllcomp.obj fslldict.obj fslleng.obj fsllexcp.obj 
+      fsllgrid.obj fsconst.obj fsconvff.obj fsdbbase.obj fsdtmsgq.obj 
+      fslllgcy.obj fslllog.obj fsllprot.obj fsllreq.obj fsllthrd.obj fsllunc.obj 
+      fsllwsck.obj fsllwsct.obj fsnetmsg.obj fssql.obj fssqlbas.obj fssqldb.obj 
+      fssqldef.obj fssqleng.obj fssrbase.obj fssrbde.obj fssrblob.obj 
+      fssrcfg.obj fssrcmd.obj fssrcvex.obj fsserverclass.obj fssrfltr.obj fssrfmap.obj 
+      fssrfold.obj fssrintf.obj fssrintm.obj fsindexhelper.obj fssrlock.obj 
+      fssrmgr.obj fssrsec.obj fssrstat.obj fssrtran.obj fsstdate.obj fsutil.obj 
+      fssrjour.obj"/>
+    <RESFILES value="fsql1_r_bcb60.res"/>
+    <IDLFILES value=""/>
+    <IDLGENFILES value=""/>
+    <DEFFILE value=""/>
+    <RESDEPEN value="$(RESFILES)"/>
+    <LIBFILES value=""/>
+    <LIBRARIES value="bdertl.lib"/>
+    <SPARELIBS value="rtl.lib vcl.lib dbrtl.lib vcldb.lib bdertl.lib"/>
+    <PACKAGES value="rtl.bpi vcl.bpi dbrtl.bpi vcldb.bpi"/>
+    <PATHCPP value=".;"/>
+    <PATHPAS value=".;"/>
+    <PATHRC value=".;"/>
+    <PATHASM value=".;"/>
+    <DEBUGLIBPATH value="$(BCB)\lib\debug"/>
+    <RELEASELIBPATH value="$(BCB)\lib\release"/>
+    <LINKER value="ilink32"/>
+    <USERDEFINES value=""/>
+    <SYSDEFINES value="NO_STRICT;_VIS_NOLIB;USEPACKAGES"/>
+    <MAINSOURCE value="fsql1_r_bcb60.cpp"/>
+    <INCLUDEPATH value="..\source;$(BCB)\include;$(BCB)\include\vcl"/>
+    <LIBPATH value="e:\cbuilder6\lib\debug;..\source;$(bcb)\lib;$(BCB)\lib\obj"/>
+    <WARNINGS value="-w-par -w-8027 -w-8026"/>
+    <WARNOPTSTR value=""/>
+    <OTHERFILES value=""/>
+  </MACROS>
+  <OPTIONS>
+    <IDLCFLAGS value="-I..\source -I$(BCB)\include -I$(BCB)\include\vcl -src_suffix cpp -boa"/>
+    <CFLAG1 value="-O2 -Vx -Ve -Tkh30000 -X- -a8 -b- -k- -vi -c -tWM"/>
+    <PFLAGS value="-$Y- -$L- -$D- -$A8 -v -M -JPHNE"/>
+    <RFLAGS value=""/>
+    <AFLAGS value="/mx /w2 /zn"/>
+    <LFLAGS value="-D&quot;FSSQL Runtime Package - VCL51&quot; -aa -Tpp -Gpr -x -Gn -Gl -Gi"/>
+    <OTHERFILES value=""/>
+  </OPTIONS>
+  <LINKER>
+    <ALLOBJ value="c0pkg32.obj $(PACKAGES) sysinit.obj $(OBJFILES)"/>
+    <ALLRES value="$(RESFILES)"/>
+    <ALLLIB value="$(LIBFILES) $(LIBRARIES) import32.lib cp32mt.lib"/>
+    <OTHERFILES value=""/>
+  </LINKER>
+  <FILELIST>
+      <FILE FILENAME="fsql1_r_bcb60.cpp" FORMNAME="" UNITNAME="fsql1_r_bcb60" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="fsql1_r_bcb60.res" FORMNAME="" UNITNAME="fsql1_r_bcb60" CONTAINERID="ResTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="fssrsort.pas" FORMNAME="" UNITNAME="fssrsort" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="fssrcur.pas" FORMNAME="" UNITNAME="fssrcur" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="fsllcoll.pas" FORMNAME="" UNITNAME="fsllcoll" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="fscocobase.pas" FORMNAME="" UNITNAME="fscocobase" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="fsclbase.pas" FORMNAME="" UNITNAME="fsclbase" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="fsclbde.pas" FORMNAME="" UNITNAME="fsclbde" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="fsclcfg.pas" FORMNAME="" UNITNAME="fsclcfg" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="fsclconv.pas" FORMNAME="" UNITNAME="fsclconv" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="fsclintf.pas" FORMNAME="" UNITNAME="fsclintf" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="fsclreng.pas" FORMNAME="" UNITNAME="fsclreng" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="fscltbrg.pas" FORMNAME="" UNITNAME="fscltbrg" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="fsdb.pas" FORMNAME="" UNITNAME="fsdb" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="fsfile.pas" FORMNAME="" UNITNAME="fsfile" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="fshash.pas" FORMNAME="" UNITNAME="fshash" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="fsllbase.pas" FORMNAME="" UNITNAME="fsllbase" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="fsllcomm.pas" FORMNAME="" UNITNAME="fsllcomm" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="fsllcomp.pas" FORMNAME="" UNITNAME="fsllcomp" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="fslldict.pas" FORMNAME="" UNITNAME="fslldict" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="fslleng.pas" FORMNAME="" UNITNAME="fslleng" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="fsllexcp.pas" FORMNAME="" UNITNAME="fsllexcp" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="fsllgrid.pas" FORMNAME="" UNITNAME="fsllgrid" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="fsconst.pas" FORMNAME="" UNITNAME="fsconst" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="fsconvff.pas" FORMNAME="" UNITNAME="fsconvff" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="fsdbbase.pas" FORMNAME="" UNITNAME="fsdbbase" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="fsdtmsgq.pas" FORMNAME="" UNITNAME="fsdtmsgq" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="fslllgcy.pas" FORMNAME="" UNITNAME="fslllgcy" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="fslllog.pas" FORMNAME="" UNITNAME="fslllog" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="fsllprot.pas" FORMNAME="" UNITNAME="fsllprot" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="fsllreq.pas" FORMNAME="" UNITNAME="fsllreq" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="fsllthrd.pas" FORMNAME="" UNITNAME="fsllthrd" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="fsllunc.pas" FORMNAME="" UNITNAME="fsllunc" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="fsllwsck.pas" FORMNAME="" UNITNAME="fsllwsck" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="fsllwsct.pas" FORMNAME="" UNITNAME="fsllwsct" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="fsnetmsg.pas" FORMNAME="" UNITNAME="fsnetmsg" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="fssql.pas" FORMNAME="" UNITNAME="fssql" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="fssqlbas.pas" FORMNAME="" UNITNAME="fssqlbas" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="fssqldb.pas" FORMNAME="" UNITNAME="fssqldb" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="fssqldef.pas" FORMNAME="" UNITNAME="fssqldef" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="fssqleng.pas" FORMNAME="" UNITNAME="fssqleng" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="fssrbase.pas" FORMNAME="" UNITNAME="fssrbase" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="fssrbde.pas" FORMNAME="" UNITNAME="fssrbde" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="fssrblob.pas" FORMNAME="" UNITNAME="fssrblob" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="fssrcfg.pas" FORMNAME="" UNITNAME="fssrcfg" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="fssrcmd.pas" FORMNAME="" UNITNAME="fssrcmd" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="fssrcvex.pas" FORMNAME="" UNITNAME="fssrcvex" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="fssreng.pas" FORMNAME="" UNITNAME="fssreng" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="fssrfltr.pas" FORMNAME="" UNITNAME="fssrfltr" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="fssrfmap.pas" FORMNAME="" UNITNAME="fssrfmap" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="fssrfold.pas" FORMNAME="" UNITNAME="fssrfold" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="fssrintf.pas" FORMNAME="" UNITNAME="fssrintf" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="fssrintm.pas" FORMNAME="" UNITNAME="fssrintm" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="fsindexhelper.pas" FORMNAME="" UNITNAME="fsindexhelper" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="fssrlock.pas" FORMNAME="" UNITNAME="fssrlock" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="fssrmgr.pas" FORMNAME="" UNITNAME="fssrmgr" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="fssrsec.pas" FORMNAME="" UNITNAME="fssrsec" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="fssrstat.pas" FORMNAME="" UNITNAME="fssrstat" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="fssrtran.pas" FORMNAME="" UNITNAME="fssrtran" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="fsstdate.pas" FORMNAME="" UNITNAME="fsstdate" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="fsutil.pas" FORMNAME="" UNITNAME="fsutil" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="fssrjour.pas" FORMNAME="" UNITNAME="fssrjour" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="rtl.bpi" FORMNAME="" UNITNAME="rtl" CONTAINERID="BPITool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="vcl.bpi" FORMNAME="" UNITNAME="vcl" CONTAINERID="BPITool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="dbrtl.bpi" FORMNAME="" UNITNAME="dbrtl" CONTAINERID="BPITool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="vcldb.bpi" FORMNAME="" UNITNAME="vcldb" CONTAINERID="BPITool" DESIGNCLASS="" LOCALCOMMAND=""/>
+  </FILELIST>
+  <BUILDTOOLS>
+  </BUILDTOOLS>
+
+  <IDEOPTIONS>
+[Version Info]
+IncludeVerInfo=1
+AutoIncBuild=0
+MajorVer=1
+MinorVer=0
+Release=7
+Build=5
+Debug=0
+PreRelease=0
+Special=0
+Private=0
+DLL=0
+Locale=1033
+CodePage=1252
+
+[Version Info Keys]
+CompanyName=Krzysztof Winnicki
+FileDescription=FSSQL
+FileVersion=1.0.7.5
+InternalName=
+LegalCopyright=
+LegalTrademarks=
+OriginalFilename=
+ProductName=FSSQL
+ProductVersion=1.0.7.5
+Comments=
+
+[Excluded Packages]
+E:\HierCube\CB5\Lib\xhCntrls50.bpl=HierCube Library Controls
+E:\HierCube\CB5\Lib\xhChart50.bpl=HierCube Library Chart
+E:\HierCube\CB5\Lib\xhDsgn50.bpl=HierCube Library
+E:\HierCube\CB5\Lib\xhExport50.bpl=HierCubeGrid Export
+E:\HierCube\CB5\Lib\xhQR50.bpl=HierCube Library QuickReport support
+
+[HistoryLists\hlIncludePath]
+Count=3
+Item0=..\source;$(BCB)\include;$(BCB)\include\vcl
+Item1=..\..\CBuilder5\Zlib;..\source;$(BCB)\include;$(BCB)\include\vcl
+Item2=$(BCB)\include;$(BCB)\include\vcl
+
+[HistoryLists\hlLibraryPath]
+Count=4
+Item0=..\source;$(bcb)\lib;$(BCB)\lib\obj
+Item1=..\..\CBuilder5\Zlib;..\source;$(bcb)\lib;$(BCB)\lib\obj
+Item2=$(bcb)\lib;$(BCB)\lib\obj
+Item3=$(bcb)\lib;$(BCB)\lib\obj;$(BCB)\lib
+
+[HistoryLists\hlDebugSourcePath]
+Count=1
+Item0=$(BCB)\source\vcl
+
+[Debugging]
+DebugSourceDirs=$(BCB)\source\vcl
+
+[Parameters]
+RunParams=
+Launcher=
+UseLauncher=0
+DebugCWD=
+HostApplication=
+RemoteHost=
+RemotePath=
+RemoteLauncher=
+RemoteCWD=
+RemoteDebug=0
+
+[Compiler]
+ShowInfoMsgs=0
+LinkDebugVcl=0
+
+[Language]
+ActiveLang=
+ProjectLang=
+RootDir=
+
+[Linker]
+LibPrefix=
+LibSuffix=
+LibVersion=
+  </IDEOPTIONS>
+</PROJECT>

@@ -1,0 +1,1115 @@
+;
+;-------------------------------------------------------------------
+!TOPIC 415 NETBIOS
+
+NetBIOS stands for Network Basic Input/Output System. It is an application
+programming interface (API) that supports data exchange between
+workstations on a network.
+
+The NETBIOS unit isolates the programmer from the details of issuing the
+NetBIOS function calls. It is designed to make writing NetBIOS-compatible
+Pascal programs easy.
+
+A fundamental part of NetBIOS programming is the concept of a "name". Each
+workstation can have up to 17 names, each 16 bytes long. One of these names
+is the "permanent node name". The permanent node name is the physical
+network adapter card's own unique signature. It is programmed into the
+hardware and cannot be changed by the application. Because this name always
+exists, it is sometimes convenient to refer to it during other NetBIOS
+calls.
+
+Each station's adapter card (or NetBIOS emulator) also supports a "local
+name table" that holds up to 16 software-selectable names. Each can be a
+"unique name", which the station reserves for its exclusive use on the
+network, or a "group name", which other stations can share. Case is
+significant when comparing NetBIOS names. When a name is added to the
+table, the NetBIOS broadcasts its intentions to claim the name to all other
+stations on the network. If a unique name was requested, and another
+station already has stored the same name in its local table, the request
+fails. When a name is successfully added to the name table, NetBIOS returns
+the position in the table where it resides. This "name number" is used by
+many NetBIOS commands as a quick way of referring to a name that's known to
+be in the table.
+
+The simplest way you can use NetBIOS to communicate from station to station
+is with a "datagram". A datagram is just a small block of raw data. The
+maximum size of a datagram is implementation specific, but the most common
+limit is 512 bytes. A datagram message can be sent to a unique name, a
+group name, or everyone on the network (with a broadcast datagram).
+
+A second, more robust, NetBIOS protocol is called a "session". Session
+packets are automatically acknowledged upon receipt, providing for
+guaranteed delivery of the data.
+
+The NETBIOS unit supports both datagrams and sessions. The following list
+summarizes the unit's functions:
+
+   . determine whether NetBIOS is installed
+   . reset the network adapter
+   . add a unique name to the local name table
+   . add a group name to the local name table
+   . remove a name from the local name table
+   . send a datagram
+   . receive a datagram
+   . establish a session
+   . send a session message
+   . receive a session message
+   . close a session
+
+Many NetBIOS calls can operate in a "no-wait" mode. This means that the
+call returns immediately after the request is submitted and doesn't wait
+for completion.
+
+!NOWRAP
+  0416Declarations          0429NetBiosAddGroupName
+  0430NetBiosAddName        0431NetBiosAllocNCB
+  0432NetBiosAllocPacket    0433NetBiosAllocPost
+  0434NetBiosCancelRequest  0435NetBiosClearNCB
+  0436NetBiosCmdCompleted   0437NetBiosDeleteName
+  0438NetBiosFreeNCB        0439NetBiosFreePacket
+  0440NetBiosFreePost       0441NetBiosHangUp
+  0442NetBiosInfo           0443NetBiosInstalled
+  0444NetBiosListen         0445NetBiosListenNoWait
+  0446NetBiosOpen           0447NetBiosOpenNoWait
+  0448NetBiosReceive        0449NetBiosReceiveBDG
+  0450NetBiosReceiveDG      0451NetBiosReceiveNoWait
+  0452NetBiosRequest        0453NetBiosResetAdapter
+  0454NetBiosSend           0455NetBiosSendBDG
+  0456NetBiosSendDG         0457NetBiosSendNoWait
+!WRAP
+;
+;-------------------------------------------------------------------
+!TOPIC 416 Declarations,NETBIOS
+!NOINDEX
+
+The 0415NETBIOS unit declares the following constants, types and variables:
+
+!NOWRAP
+  0417DefaultAdapterNum   0418Errors
+  0419NBNameMax           0420NetBiosReenterError
+  0421CallNameType        0422NBNameStr
+  0423NetBiosPostRoutine  0424PnbPacket
+  0425TNCB                0426TPostHandler
+  0427NetBiosName         0428TNetBiosStatus
+!WRAP
+;
+;-------------------------------------------------------------------
+!TOPIC 417 DefaultAdapterNum
+!NOINDEX
+const
+  DefaultAdapterNum : Byte = 0;
+
+The network adapter number used for all calls in the 0415NETBIOS unit.
+Possible values are 0 or 1, with 0 being the primary adapter.
+;
+;-------------------------------------------------------------------
+!TOPIC 418 Errors,NETBIOS
+!NOINDEX
+!NOWRAP
+;!TABLE
+const
+  NBESuccess              = $00;
+  NBEInvalidBufferLength  = $01;
+  NBEInvalidCommand       = $03;
+  NBETimedOut             = $05;
+  NBEIncomplete           = $06;
+  NBELocalNoAckFailed     = $07;
+  NBEInvalidLSN           = $08;
+  NBENoResourceAvail      = $09;
+  NBESessionClosed        = $0A;
+  NBECommandCancelled     = $0B;
+  NBEDuplicateName        = $0D;
+  NBENameTableFull        = $0E;
+  NBENameHasActive        = $0F;
+  NBELocalSessionTableFull= $11;
+  NBESessionNoListen      = $12;
+  NBEIllegalNameNumber    = $13;
+  NBECannotFindName       = $14;
+  NBENoAnswer             = $14;
+  NBEInvalidName          = $15;
+  NBENameInUseOnRemote    = $16;
+  NBENameDeleted          = $17;
+  NBESessionAbnormal      = $18;
+  NBENameConflict         = $19;
+  NBEIncompatibleDevice   = $1A;
+  NBEInterfaceBusy        = $21;
+  NBETooManyCommands      = $22;
+  NBEInvalidLanA          = $23;
+  NBECompletedWhileCancel = $24;
+  NBEReservedName         = $25;
+  NBENotValidCancel       = $26;
+  NBESystemError          = $40;
+  NBEHotCarrierFromRemote = $41;
+  NBEHotCarrier           = $42;
+  NBENoCarrier            = $43;
+  NBECommandPending       = $FF;
+  NBEDPMIError            = $FE;
+  NBEUnexpectedAdaptClose = $FD;
+!WRAP
+
+NetBIOS error codes returned in the RetCode field of an NCB. See the
+functions in this chapter for more information about how they apply to
+each NetBIOS command. Many NetBIOS commands can generate errors $21 and
+$22. When this occurs, the appropriate response is to wait a while and try
+again. Commands can also generate errors $40-$FD. These errors indicate a
+hardware failure or an internal NetBIOS error. The appropriate response is
+to halt the application and repair the hardware. Error code $FE is
+specially defined by the 0415NETBIOS unit for use in protected mode
+applications. It is returned in three situations: 1) if insufficient free
+DOS memory exists to allow allocating a temporary NCB in a wait service;
+2) if the NCB address or packet buffer address passed to a function was
+not correctly allocated in DOS memory; or 3) if the DPMI (DOS Protected
+Mode Interface) service used to call the NetBIOS driver fails.
+;
+;-------------------------------------------------------------------
+!TOPIC 419 NBNameMax
+!NOINDEX
+const
+  NBNameMax = 16;
+
+The maximum length of a NetBIOS name.
+;
+;-------------------------------------------------------------------
+!TOPIC 420 NetBiosReenterError
+!NOINDEX
+const
+  NetBiosReenterError : boolean = False;
+
+When using post-event routines in protected mode, a DPMI real-mode
+callback is used to translate the real mode NetBIOS post-event call into
+protected mode. If the post-event handler you write is servicing receipt
+events, you should call 0451NetBiosReceiveNoWait to post the NCB back to
+NetBIOS to receive the next packet. If there is a high volume of packet
+traffic, the next packet could arrive before the post-event handler is
+finished. If this is the case, the real mode callback stub that the
+0415NETBIOS unit installs sets NetBiosReenterError to True and exits.
+;
+;-------------------------------------------------------------------
+!TOPIC 421 CallNameType
+!NOINDEX
+type
+  CallNameType = array[1..NBNameMax] of Char;
+
+Internal format used by NetBIOS to store names.
+
+See also:  0419NBNameMax
+;
+;-------------------------------------------------------------------
+!TOPIC 422 NBNameStr
+!NOINDEX
+type
+  NBNameStr = string[NBNameMax];
+
+Type for a NetBIOS name.
+
+See also:  0419NBNameMax
+;
+;-------------------------------------------------------------------
+!TOPIC 423 NetBiosPostRoutine
+!NOINDEX
+type
+  NetBiosPostRoutine = procedure (LastError : Byte; N : PNCB);
+
+Procedure prototype for a NetBIOS post-event routine written in Pascal.
+LastError is the completion code of the finished event. N is the event's
+NCB.
+;
+;-------------------------------------------------------------------
+!TOPIC 424 PnbPacket
+!NOINDEX
+type
+  PnbPacket = pointer;
+
+Pointer to a data packet. All data packets must be allocated by calling
+0432NetBiosAllocPacket.
+;
+;-------------------------------------------------------------------
+!TOPIC 425 TNCB
+!NOINDEX
+!NOWRAP
+;!TABLE
+type
+  PNCB = ^TNCB
+  TNCB = record
+    Command     : Byte;
+    RetCode     : Byte;
+    LSN         : Byte;
+    NameNum     : Byte;
+    Buffer      : Pointer;
+    BufLen      : Word;
+    RemName     : CallNameType;
+    LocName     : CallNameType;
+    RTO         : Byte;
+    STO         : Byte;
+    PostRoutine : Pointer;
+    LanANum     : Byte;
+    CmdComplete : Byte;
+    Reserved    : array[1..14] of Byte;
+  end;
+!WRAP
+
+The NetBIOS control block. This 64 byte record structure is the heart of
+all NetBIOS requests. Although the routines in the 0415NETBIOS unit generally
+manage these fields for you, a brief description of each member may be of
+interest.
+
+Command specifies which NetBIOS command to execute. RetCode is the final
+result of the command; many of the possible values are shown in the list
+of error codes earlier in this section. RetCode is valid only after
+CmdComplete does not equal $FF. LSN is the local session number (if any)
+associated with the command. NameNum is a NetBIOS name table number
+associated with the command. Buffer is a pointer to data associated with
+the command. BufLen is the length in bytes of the data buffer. RemName is
+usually the remote name associated with the command, while LocName is the
+local name. RTO is the receive timeout value, in half-second units. STO is
+the send timeout value. PostRoutine is a pointer to a routine to call upon
+completion of a no-wait command (the NETBIOS unit installs a stub that
+sets up the program environment and then calls your post-event handler, if
+you are using one). LanANum is the number of the network adapter to use;
+in the NETBIOS unit it is always assigned the value of the global variable
+0417DefaultAdapterNum. CmdComplete is a flag that equals $FF while the command
+is pending, and changes to a different value thereafter.
+
+Under Windows, the NETBIOS unit expands the standard NCB to hold extra
+fields that are used by the post-event handler stub.
+;
+;-------------------------------------------------------------------
+!TOPIC 426 TPostHandler
+!NOINDEX
+type
+  PPostHandler = ^TPostHandler;
+  TPostHandler = record
+    ...
+  end;
+
+A post-event handler and a pointer to it. The fields of this type are used
+internally by the 0415NETBIOS unit's post-event stub routine. The layout of
+this type varies for different compiler targets.
+;
+;-------------------------------------------------------------------
+!TOPIC 427 NetBiosName
+!NOINDEX
+type
+  NetBiosName = record
+    Name   : CallNameType;
+    Number : Byte;
+    Status : Byte;
+  end;
+
+Information about a NetBIOS name returned by the 0442NetBiosInfo function.
+
+See also:  0421CallNameType
+;
+;-------------------------------------------------------------------
+!TOPIC 428 TNetBiosStatus
+!NOINDEX
+!NOWRAP
+;!TABLE
+type
+  PNetBiosStatus = ^TNetBiosStatus;
+  TNetBiosStatus = record
+    PermanentNodeName  : Array [1..6] of char;  {hardware node name}
+    ExtJumpers         : Byte;
+    SelfTest           : Byte;
+    ProtocolMajor      : Byte;
+    ProtocolMinor      : Byte;
+    ReportingPeriod    : Word;
+    CRCCount           : Word;
+    AlignmentErrors    : Word;
+    Collisions         : Word;
+    TransmitAborts     : Word;
+    Transmits          : LongInt;
+    Receives           : LongInt;
+    Retransmits        : Word;
+    ResourceDepletion  : Word;
+    ReservedArea1      : Array [1..8] of byte;
+    FreeCommandBlocks  : Word;
+    CurrentMaxNCBs     : Word;
+    HardwareMaxNCBs    : Word;
+    ReservedArea2      : Array [1..4] of byte;
+    Sessions           : Word;
+    CurrentMaxSessions : Word;
+    HardwareMaxSessions: Word;
+    MaxPacketSize      : Word;
+    NameCount          : Word;
+    NetBiosNames       : Array [0..0] of NetBiosName;
+  end;
+!WRAP
+
+Information returned by the 0442NetBiosInfo function.
+
+See also:  0427NetBiosName
+;
+;-------------------------------------------------------------------
+!TOPIC 429 NetBiosAddGroupName
+!NOINDEX
+function 0415NETBIOS.NetBiosAddGroupName(NameToAdd : NBNameStr;
+                             var NameNumber : Byte) : Byte;
+
+Add a group name to the local NetBIOS name table.
+
+This function does not return until the command is complete.
+
+NameToAdd is any ASCII string up to 16 characters long. IBM imposes
+several restrictions on the name, however. It cannot begin with a
+null (#0), asterisk ('*'), or the three letters 'IBM'. The
+sixteenth character cannot be ASCII #31. NetBiosAddGroupName pads
+the string with nulls to reach 16 characters. Case is significant
+when comparing NetBIOS names.
+
+NameNumber returns the local name table slot assigned to the name.
+This number is used to call the datagram routines.
+
+A status code is returned in function result:
+
+!NOWRAP
+;!TABLE
+  $00  Name added successfully.
+  $0D  Duplicate name in local table.
+  $0E  Name table is full.
+  $15  Invalid name.
+  $16  Name in use on another station.
+  $19  Name conflict detected.
+!WRAP
+
+See also:  0430NetBiosAddName  0437NetBiosDeleteName  0422NBNameStr
+;
+;-------------------------------------------------------------------
+!TOPIC 430 NetBiosAddName
+!NOINDEX
+function 0415NETBIOS.NetBiosAddName(NameToAdd : NBNameStr;
+                        var NameNumber : Byte) : Byte;
+
+Add a unique name to the local NetBIOS name table.
+
+This function does not return until the command is complete.
+
+NameToAdd is any ASCII string up to 16 characters long. IBM imposes
+several restrictions on the name, however. It cannot begin with a
+null (#0), asterisk ('*'), or the three letters 'IBM'. The
+sixteenth character cannot be ASCII #31. NetBiosAddName pads the
+string with nulls to reach 16 characters. Case is significant when
+comparing NetBIOS names.
+
+NameNumber returns the local name table slot assigned to the name.
+This number is used to call the datagram routines.
+
+A status code is returned in function result:
+
+!NOWRAP
+;!TABLE
+  $00  Name added successfully.
+  $0D  Duplicate name in local table.
+  $0E  Name table is full.
+  $15  Invalid name.
+  $16  Name in use on another station.
+  $19  Name conflict detected.
+!WRAP
+
+See also:
+  0429NetBiosAddGroupName  0437NetBiosDeleteName  0422NBNameStr
+  0446NetBiosOpen          0447NetBiosOpenNoWait
+;
+;-------------------------------------------------------------------
+!TOPIC 431 NetBiosAllocNCB
+!NOINDEX
+function 0415NETBIOS.NetBiosAllocNCB : PNCB;
+
+Allocate and return a pointer to an NCB.
+
+You must allocate a NetBIOS control block (NCB) prior to calling
+any no-wait function from the 0415NETBIOS module. The NCB must remain
+accessible to the NetBIOS driver until the operation is complete.
+
+NetBiosAllocNCB returns Nil if there is insufficient free memory to
+satisfy the request.
+
+See also:  0432NetBiosAllocPacket  0438NetBiosFreeNCB  0425TNCB
+;
+;-------------------------------------------------------------------
+!TOPIC 432 NetBiosAllocPacket
+!NOINDEX
+function 0415NETBIOS.NetBiosAllocPacket(Size : word) : PnbPacket;
+
+Allocate and return a pointer to a packet buffer.
+
+See also:  0431NetBiosAllocNCB  0439NetBiosFreePacket
+;
+;-------------------------------------------------------------------
+!TOPIC 433 NetBiosAllocPost
+!NOINDEX
+function 0415NETBIOS.NetBiosAllocPost(Handler : NetBiosPostRoutine)
+                             : PPostHandler;
+
+Allocate and return a pointer to a post-event handler.
+
+Applications that make use of post-event handlers must call this
+routine to create a special post-event control block. This function
+takes the address of a post-event procedure of type
+0423NetBiosPostRoutine and creates a special stub routine to call it.
+This stub routine is the actual post-event handler that NetBIOS
+calls when an event completes. The routine sets up the program
+environment and then call the Handler procedure.
+
+If an error occurs (such as an out of memory condition or a DPMI
+error), NetBiosAllocPost returns Nil.
+
+See also:  0440NetBiosFreePost  0426TPostHandler
+;
+;-------------------------------------------------------------------
+!TOPIC 434 NetBiosCancelRequest
+!NOINDEX
+function 0415NETBIOS.NetBiosCancelRequest(N : PNCB) : Byte;
+
+Cancel a pending NetBIOS request.
+
+N is the NCB of the command that is to be cancelled. This routine
+can be used to cancel the operation of any 0415NETBIOS functions that
+has NoWait in its name. All other functions do not return until the
+operation is complete, so NetBiosCancelRequest is irrelevant to
+them.
+
+A status code is returned in function result:
+
+!NOWRAP
+;!TABLE
+  $00  Command cancelled.
+  $24  Command completed while cancel occurring.
+  $26  Command not valid to cancel.
+!WRAP
+
+See also:  0436NetBiosCmdCompleted  0440NetBiosFreePost  0425TNCB
+;
+;-------------------------------------------------------------------
+!TOPIC 435 NetBiosClearNCB
+!NOINDEX
+procedure 0415NETBIOS.NetBiosClearNCB(N : PNCB);
+
+Initialize an NCB.
+
+This function fills the NCB with zeros and sets its LanANum field
+to 0417DefaultAdapterNum. This is always required before using an NCB.
+The higher level functions in the 0415NETBIOS module call this function
+to initialize all NCBs they use. It is interfaced in case you need
+to make a direct call to the NetBIOS.
+
+See also:  0452NetBiosRequest  0425TNCB
+;
+;-------------------------------------------------------------------
+!TOPIC 436 NetBiosCmdCompleted
+!NOINDEX
+function 0415NETBIOS.NetBiosCmdCompleted(N : PNCB:
+                             var FinalRetCode : Byte) : Boolean;
+
+Determine whether no-wait event is complete.
+
+Call this routine repeatedly after using any 0415NETBIOS unit no-wait
+function without specifying a post-event handler. It returns True
+and the final status code in FinalRetCode when the event is
+complete. In the meantime the application can continue with other
+tasks or cancel the event if desired.
+
+N is the same NCB that was passed to the original no-wait function.
+Calling NetBiosCmdCompleted is equivalent to comparing the CmdComplete
+field of the NCB to NBECommandPending.
+
+See also:
+  0445NetBiosListenNoWait      0447NetBiosOpenNoWait       0425TNCB
+  0451NetBiosReceiveNoWait     0457NetBiosSendNoWait
+;
+;-------------------------------------------------------------------
+!TOPIC 437 NetBiosDeleteName
+!NOINDEX
+function 0415NETBIOS.NetBiosDeleteName(NameToDelete : NBNameStr) : Byte;
+
+Delete a unique or group name from the local NetBIOS name table.
+
+All names added to the name table should be deleted before an
+application exits. NetBIOS does not do this automatically.
+
+A status code is returned in the function result:
+
+!NOWRAP
+;!TABLE
+  $00  Name deleted successfully.
+  $0F  Name has active sessions. Deletion is delayed.
+  $15  Invalid name.
+!WRAP
+
+See also:  0429NetBiosAddGroupName  0430NetBiosAddName  0422NBNameStr
+;
+;-------------------------------------------------------------------
+!TOPIC 438 NetBiosFreeNCB
+!NOINDEX
+procedure 0415NETBIOS.NetBiosFreeNCB(N : PNCB);
+
+Free an NCB.
+
+All NCB's allocated using 0431NetBiosAllocNCB should be freed by
+calling NetBiosFreeNCB. Otherwise heap space that is no longer in
+use remains allocated.
+
+See also:  0431NetBiosAllocNCB  0425TNCB
+;
+;-------------------------------------------------------------------
+!TOPIC 439 NetBiosFreePacket
+!NOINDEX
+procedure 0415NETBIOS.NetBiosFreePacket(P : PnbPacket);
+
+Free a packet buffer.
+
+All packet buffers allocated using 0432NetBiosAllocPacket should be
+freed by calling NetBiosFreePacket. Otherwise heap space that is no
+longer in use remains allocated.
+;
+;-------------------------------------------------------------------
+!TOPIC 440 NetBiosFreePost
+!NOINDEX
+procedure 0415NETBIOS.NetBiosFreePost(P : PPostHandler);
+
+Free a post-event handler.
+
+All post-event handlers allocated by 0433NetBiosAllocPost should be
+freed by calling NetBiosFreePost. Otherwise heap space that is no
+longer in use remains allocated. In protected mode, a DPMI callback
+also remains allocated if you don't call NetBiosFreePost.
+;
+;-------------------------------------------------------------------
+!TOPIC 441 NetBiosHangUp
+!NOINDEX
+function 0415NETBIOS.NetBiosHangUp(SessionNumber : Byte) : Byte;
+
+Terminate an existing session.
+
+The function does not return until the command is complete. Either
+side of a session can call this routine to terminate the session.
+
+A status code is returned in the function result:
+
+!NOWRAP
+;!TABLE
+  $05  Command timed out.
+  $08  Invalid local session number.
+  $0A  Session already closed.
+  $0B  Command was cancelled.
+  $18  Session ended abnormally.
+!WRAP
+
+NetBIOS terminates any pending NetBIOS commands that use the
+specified session when this routine is called, although this can
+generate a delay before NetBiosHangUp returns.
+
+See also:  0437NetBiosDeleteName  0446NetBiosOpen
+;
+;-------------------------------------------------------------------
+!TOPIC 442 NetBiosInfo
+!NOINDEX
+function 0415NETBIOS.NetBiosInfo(NS : PNetBiosStatus;
+                      Name : NBNameStr;
+                      MaxNames : Byte);
+
+Return information about a NetBIOS driver or adapter.
+
+Name specifies the NetBIOS driver or adapter that NetBiosInfo
+queries for information. If Name equals "*", the default local
+adapter is used. If Name is a node, unique, or group name of a
+different adapter, information is returned from that adapter.
+NS points to a buffer that is at least 60 plus 18*MaxNames bytes in
+size (the default size for a 0428TNetBiosStatus variable assumes
+MaxNames is 16). The tail of the NetBiosStatus struct is a variable
+length array that contains information about each NetBIOS name
+stored in the specified adapter. In a protected mode applications,
+NS must be allocated by calling 0432NetBiosAllocPacket.
+
+The typical value to pass for MaxNames is 16, although some NetBIOS
+drivers allow a larger number of names. If MaxNames is smaller than
+the actual number of names, NetBiosInfo returns information about
+the names that will fit.
+
+A status code is returned in the function result:
+
+!NOWRAP
+;!TABLE
+  $00 Status returned.
+  $05 Command timed out.
+  $06 Buffer too small; partial information returned.
+!WRAP
+
+See also:  0422NBNameStr
+;
+;-------------------------------------------------------------------
+!TOPIC 443 NetBiosInstalled
+!NOINDEX
+function 0415NETBIOS.NetBiosInstalled : Boolean;
+
+Return True if NetBIOS or a compatible emulator is installed.
+;
+;-------------------------------------------------------------------
+!TOPIC 444 NetBiosListen
+!NOINDEX
+function 0415NETBIOS.NetBiosListen(RemoteName, LocalName : NBNameStr;
+                        SendTimeOut, RecTimeOut : Byte;
+                        var SessionNunber : Byte) : Byte;
+
+Listen for a call to initiate a session.
+
+The local station must call NetBiosListen before the remote station
+calls 0446NetBiosOpen. To make a successful connection, each command is
+generally called within a loop (which should also provide an
+opportunity for the user to abort). Once the session is created,
+either station can send or receive messages.
+
+LocalName specifies an existing name in the local adapter's name
+table. RemoteName specifies a name in the table of the caller. Both
+ends must agree on the names in order for a session to be created.
+Generally, the names should be unique, since a session cannot
+connect more than two stations. It is also possible for both ends
+of the session to be on a single workstation.
+
+SendTimeOut and RecTimeOut specify how long (in half-second
+increments) the NetBIOS will retry when sending and receiving
+messages. A value of zero means to retry forever.
+
+Upon successful completion of this routine, SessionNumber contains
+a local session number. This number is used in later calls to send
+or receive messages, and to disconnect the session.
+
+A status code is returned in the function result:
+
+!NOWRAP
+;!TABLE
+  $00  Session established.
+  $05  Command timed out.
+  $09  Remote session table full.
+  $11  Local session table full.
+  $15  Invalid name.
+  $18  Session ended abnormally.
+  $19  Name conflict detected.
+!WRAP
+
+See also:  0445NetBiosListenNoWait
+;
+;-------------------------------------------------------------------
+!TOPIC 445 NetBiosListenNoWait
+!NOINDEX
+procedure 0415NETBIOS.NetBiosListenNoWait(N : PNCB; PostEvent : PPostHandler;
+                               RemoteName, LocalName : NBNameStr;
+                               SendTimeOut, RecTimeOut : Byte);
+
+Listen for a call to initiate a session; don't wait for connection.
+
+This routine works like 0444NetBiosListen, except that it returns
+immediately instead of waiting for the connection to be established
+or for timeout to occur.
+The application should either specify a Pascal post-event routine
+and convert it into a PostEvent handler with 0433NetBiosAllocPost, or
+should loop calling 0436NetBiosCmdCompleted to see whether the session
+has been established. The NCB pointed to by N is initialized by
+this call; its associated variable must remain valid until the
+event completes or is cancelled. When the command is complete, the
+session number is found in the LSN field of the NCB.
+
+See also:
+  0434NetBiosCancelRequest  0447NetBiosOpenNoWait  0446NetBiosOpen  0425TNCB
+;
+;-------------------------------------------------------------------
+!TOPIC 446 NetBiosOpen
+!NOINDEX
+function 0415NETBIOS.NetBiosOpen(RemoteName, LocalName : NBNameStr;
+                      SendTimeOut, RecTimeOut : Byte;
+                      var SessionNumber : Byte) : Byte;
+
+Call another station to initiate a session.
+
+The remote station must call 0444NetBiosListen before the local station
+calls NetBiosOpen. To make a successful connection, each command is
+generally called within a loop (which should also provide an
+opportunity for the user to abort). Once the session is created,
+either station can send or receive messages.
+
+LocalName specifies an existing name in the local adapter's name
+table. RemoteName specifies a name in the table of the listener.
+Both ends must agree on the names in order for a session to be
+created. Generally, the names should be unique, since a session
+cannot connect more than two stations. It is also possible for both
+ends of the session to be on a single workstation.
+
+SendTimeOut and ReceiveTimeOut specify how long (in half-second
+increments) the NetBIOS will retry when sending and receiving
+messages. A value of zero means to retry forever.
+
+Upon successful completion of this routine, SessionNumber contains
+a local session number. This number is used in later calls to send
+or receive messages, and to disconnect the session.
+
+A status code is returned in the function result:
+
+!NOWRAP
+;!TABLE
+$00  Session established.
+$05  Command timed out.
+$09  Remote session table full.
+$11  Local session table full.
+$12  No listen is outstanding.
+$14  Cannot find name called, or no answer.
+$15  Invalid name.
+$18  Session ended abnormally.
+$19  Name conflict detected
+!WRAP
+
+See also:  0447NetBiosOpenNoWait
+;
+;-------------------------------------------------------------------
+!TOPIC 447 NetBiosOpenNoWait
+!NOINDEX
+procedure 0415NETBIOS.NetBiosOpenNoWait(N : PNCB; PostEvent : PPostHandler;
+                             RemoteName, LocalName : NBNameStr;
+                             SendTimeOut, RecTimeOut : Byte);
+
+Call another station to initiate a session; don't wait for
+connection.
+
+This routine works like 0446NetBiosOpen, except that it returns
+immediately after posting the event.
+
+The application should either specify a Pascal post-event routine
+and convert it into a PostEvent handler with 0433NetBiosAllocPost, or
+should loop calling 0436NetBiosCmdCompleted to see whether the session
+has been established. The NCB pointed to by N is initialized by
+this call; its associated variable must remain valid until the
+event completes or is cancelled. When the command is complete, the
+session number is found in the LSN field of the NCB.
+
+See also:
+  0434NetBiosCancelRequest  0445NetBiosListenNoWait
+  0448NetBiosReceive        0425TNCB
+;
+;-------------------------------------------------------------------
+!TOPIC 448 NetBiosReceive
+!NOINDEX
+function 0415NETBIOS.NetBiosReceive(SessionNumber : Byte; PacketSize : Word;
+                         Packet : PnbPacket) : Byte;
+
+Receive data during a session.
+
+SessionNumber must have been initialized by a prior call to
+NetBiosCall or 0444NetBiosListen. NetBiosReceive waits for the command
+to complete, either by receiving the data or by timing out with an
+error.
+
+PacketSize specifies the maximum size of the data packet (0..65521)
+and Packet is the buffer to receive the data. In protected mode
+applications, Packet must be allocated by calling 0432NetBiosAllocPacket,
+and it is advisable to do so in DOS and Windows applications as well.
+It is essential that the Packet variable be at least as large as the
+PacketSize parameter.
+
+A status code is returned in the function result:
+
+!NOWRAP
+;!TABLE
+  $00  Message received.
+  $05  Command timed out.
+  $06  Incomplete received message (buffer too small).
+  $08  Invalid local session number.
+  $0A  Session was closed.
+  $0B  Command was cancelled.
+  $18  Session ended abnormally.
+!WRAP
+
+See also:  0451NetBiosReceiveNoWait  0454NetBiosSend
+;
+;-------------------------------------------------------------------
+!TOPIC 449 NetBiosReceiveBDG
+!NOINDEX
+function 0415NETBIOS.NetBiosReceiveBDG(ReceiverNameNum : Byte;
+                           DatagramSize : Word;
+                           Datagram : PnbPacket);
+
+procedure NetBiosReceiveBDGNoWait(N : PNCB;
+                                  PostEvent : PPostHandler;
+                                  ReceiverNameNum : Byte;
+                                  DatagramSize : Word;
+                                  Datagram : 0424PnbPacket);
+
+Receive a broadcast datagram.
+
+These commands work just like 0450NetBiosReceiveDG and
+NetBiosReceiveDGNoWait, but they receive only those messages sent
+by 0455NetBiosSendBDG and NetBiosSendBDGNoWait.
+
+See also:  0425TNCB  0426TPostHandler
+;
+;-------------------------------------------------------------------
+!TOPIC 450 NetBiosReceiveDG
+!NOINDEX
+function 0415NETBIOS.NetBiosReceiveDG(ReceiverNameNum : Byte;
+                          DatagramSize : Word;
+                          Datagram : PnbPacket) : Byte;
+
+procedure NetBiosReceiveDGNoWait(N : PNCB;
+                                 PostEvent : PPostHandler;
+                                 ReceiverNameNum : Byte;
+                                 DatagramSize : Word;
+                                 Datagram : 0424PnbPacket);
+
+Receive a normal datagram.
+
+These functions receive datagrams that were sent to the NetBIOS
+name with number ReceiverNameNum in the local name table. Any other
+station could have transmitted the datagram. The transmission could
+have been directed to a unique name or to a group name shared by
+many stations. Although this command does not receive broadcast
+datagrams, it can be made to intercept any normal datagram if the
+value $FF is specified for ReceiverNameNum.
+
+The call to NetBiosReceiveDG or NetBiosReceiveDGNoWait must be
+pending when the sender transmits the message. If not, the message
+is lost.
+
+If you use NetBiosReceiveDG, the call does not return until a
+message is received. Use this option with care, because there is no
+time out value associated with datagram reception. In most cases,
+using NetBiosReceiveDGNoWait is the better option. Then the routine
+returns immediately. The calling application can go ahead with
+other work while waiting for a message to appear, as long as the
+NetBIOS control block N and the data buffer Datagram remain
+undisturbed in memory. When a message finally arrives, the NetBIOS
+writes status and data to them.
+
+In protected mode applications, the Datagram buffer must be
+allocated by calling 0432NetBiosAllocPacket. The maximum size of a
+datagram is implementation specific, but is typically 512 bytes. Be
+sure that the size of the buffer is at least as large as
+DatagramSize to prevent NetBIOS from overwriting memory. It is
+recommended to allocate the Datagram packet with NetBiosAllocPacket.
+
+A status code is returned in the function result of
+NetBiosReceiveDG (or the FinalRetCode parameter of
+0436NetBiosCmdCompleted when NetBiosReceiveDGNoWait is called):
+
+!NOWRAP
+;!TABLE
+  $00 Datagram received.
+  $06 Incomplete received message.
+  $0B Command was cancelled.
+  $13 Illegal name number.
+  $17 Name was deleted.
+  $19 Name conflict detected.
+!WRAP
+
+See also:  0449NetBiosReceiveBDG  0456NetBiosSendDG  0425TNCB  0426TPostHandler
+;
+;-------------------------------------------------------------------
+!TOPIC 451 NetBiosReceiveNoWait
+!NOINDEX
+procedure 0415NETBIOS.NetBiosReceiveNoWait(N : PNCB;
+                               PostEvent : PPostHandler
+                               SessionNumber : Byte;
+                               PacketSize : Word;
+                               Packet : PnbPacket) : Byte;
+
+Receive data during a session; don't wait for completion.
+
+This routine works like 0448NetBiosReceive, except that it does not
+wait to receive the message before returning.
+
+The application should either specify a Pascal post-event routine
+and convert it into a PostEvent handler with 0433NetBiosAllocPost, or
+should loop calling 0436NetBiosCmdCompleted to see whether the message
+has been received. The NCB pointed to by N is initialized by this
+call; its associated variable must remain valid until the event
+completes or is cancelled. The same is true for the buffer pointed
+to by Packet.
+
+See also:  0457NetBiosSendNoWait  0425TNCB
+;
+;-------------------------------------------------------------------
+!TOPIC 452 NetBiosRequest
+!NOINDEX
+procedure 0415NETBIOS.NetBiosRequest(N : PNCB);
+
+Issue a direct NetBIOS call.
+
+This routine sets ES:BX to point to the NCB and then calls
+interrupt $5C. In protected mode applications, the NCB must have
+been allocated previously by calling 0431NetBiosAllocNCB. The NCB must
+have been initialized previously by calling 0435NetBiosClearNCB and
+then setting the appropriate fields.
+
+See also:  0425TNCB
+;
+;-------------------------------------------------------------------
+!TOPIC 453 NetBiosResetAdapter
+!NOINDEX
+function 0415NETBIOS.NetBiosResetAdapter(SessionCount : Byte;
+                              CommandCount : Byte) : Byte;
+
+Reset a NetBIOS adapter card.
+
+The global variable 0417DefaultAdapterNum, which defaults to 0,
+specifies the adapter card to reset. This command was originally
+designed to reset the hardware network adapter for IBM's PC LAN;
+NetBIOS emulators may treat the command differently. One of its
+functions is to clear the local name and session tables; all
+NetBIOS versions should perform this action.
+
+SessionCount is the number of simultaneous sessions that the
+current workstation will allow. CommandCount is the maximum number
+of pending commands. Specify 0 for each parameter to keep the
+current settings. Unless the 0415NETBIOS units's no-wait services are
+being used, the command count should not matter.
+
+Note that other programs might be using the NetBIOS adapter or
+driver, and if you call NetBiosResetAdapter, you will destroy their
+list of names in the name table. This is especially a concern with
+Windows for Workgroups because it uses NetBIOS to communicate with
+other workstations on the network. Calling NetBiosResetAdapter in
+this situation is not recommended.
+
+A status code is returned in the function result:
+
+!NOWRAP
+;!TABLE
+  0x00 Successful reset.
+  0x23 Invalid adapter number.
+!WRAP
+;
+;-------------------------------------------------------------------
+!TOPIC 454 NetBiosSend
+!NOINDEX
+function 0415NETBIOS.NetBiosSend(SessionNumber : Byte; PacketSize : Word;
+                      Packet : PnbPacket) : Byte;
+
+Send data during a session.
+
+SessionNumber must have been initialized by a prior call to
+NetBiosCall or 0444NetBiosListen. NetBiosSend waits for the command to
+complete, either with an acknowledgement from the receiver or by
+timing out with an error.
+
+PacketSize is the size of the data packet. Although the NetBios
+standard allows sending up to 65535 bytes in a single packet,
+Windows applications are typically limited to 512 byte packets.
+The address of the data to be sent is passed in Packet. In
+protected mode applications, Packet must be allocated by calling
+0432NetBiosAllocPacket. This is also recommended for real mode and
+Windows applications.
+
+A status code is returned in the function result:
+
+!NOWRAP
+;!TABLE
+  $00  Message sent.
+  $05  Command timed out.
+  $08  Invalid local session number.
+  $0A  Session was closed.
+  $0B  Command was cancelled.
+  $18  Session ended abnormally.
+!WRAP
+
+See also:  0448NetBiosReceive  0457NetBiosSendNoWait
+;
+;-------------------------------------------------------------------
+!TOPIC 455 NetBiosSendBDG
+!NOINDEX
+function 0415NETBIOS.NetBiosSendBDG(SenderNameNum : Byte;
+                        DatagramSize : Word;
+                        Datagram : PnbPacket) : Byte;
+
+procedure NetBiosSendBDGNoWait(N : PNCB;
+                               PostEvent : PPostHandler;
+                               SenderNameNum : Byte;
+                               DatagramSize : Word;
+                               Datagram : 0424PnbPacket);
+
+Send a broadcast datagram.
+
+These commands work just like 0456NetBiosSendDG and
+NetBiosSendDGNoWait, except that the message is sent to all nodes.
+Only nodes listening with 0449NetBiosReceiveBDG or
+NetBiosReceiveBDGNoWait will receive the message.
+
+See also:  0425TNCB  0426TPostHandler
+;
+;-------------------------------------------------------------------
+!TOPIC 456 NetBiosSendDG
+!NOINDEX
+function 0415NETBIOS.NetBiosSendDG(SenderNameNum : Byte;
+                        ReceiverName : NBNameStr;
+                        DatagramSize : Word;
+                        Datagram : PnbPacket) : Byte;
+
+procedure NetBiosSendDGNoWait(N : PNCB;
+                              PostEvent : PPostHandler;
+                              SenderNameNum : Byte;
+                              ReceiverName : 0422NBNameStr;
+                              DatagramSize : Word;
+                              Datagram : 0424PnbPacket);
+
+Send a normal datagram.
+
+If ReceiverName is a unique name, the message will go to at most
+one station. If ReceiverName is a group name, the message can go to
+many stations at once. ReceiverName can refer to a name within the
+current workstation; if so, and the station is listening, it
+receives its own message.
+
+SenderNameNum is the slot number associated with a name previously
+added to the sender's local name table. The number is used by
+NetBIOS to manage the transmission. Slot number 1 is always safe to
+use, since this slot is associated with the adapter's permanent
+name.
+
+The message is lost if the target station does not have a
+0450NetBiosReceiveDG or NetBiosReceiveDGNoWait call pending when the
+datagram is sent.
+
+If you use NetBiosSendDG, the NetBIOS call does not return until
+the message is transmitted. This function returns a status code
+that can be used to determine whether the transmission was
+successful.
+
+If you use NetBiosSendDGNoWait, the call returns immediately. The
+calling application can go ahead with other work while waiting for
+the transmission to occur. In the meantime, the NCB variable must
+remain undisturbed in memory because the NetBIOS will eventually
+write status information to it.
+
+Datagram contains the address of a message buffer to send. In a
+protected mode application, it must be allocated by calling
+0432NetBiosAllocPacket (this is also recommended for real mode DOS and
+Windows applications). The maximum size of a datagram is
+implementation specific, but is typically 512 bytes. DatagramSize
+specifies the actual number of bytes to send.
+
+A status code is returned in the function result of NetBiosSendDG
+(or the FinalRetCode parameter of 0436NetBiosCmdCompleted when
+NetBiosSendDGNoWait is called):
+
+!NOWRAP
+;!TABLE
+  $00 Datagram sent.
+  $01 Invalid buffer length.
+  $13 Illegal name number.
+  $19 Name conflict detected.
+!WRAP
+
+See also:
+  0455NetBiosSendBDG  0425TNCB  0426TPostHandler
+;
+;-------------------------------------------------------------------
+!TOPIC 457 NetBiosSendNoWait
+!NOINDEX
+function 0415NETBIOS.NetBiosSendNoWait(N : PNCB; PostEvent : PPostHandler;
+                            SessionNumber : Byte; PacketSize : Word;
+                            Packet : PnbPacket) : Byte;
+
+Send data during a session; don't wait for completion.
+
+This routine works like 0454NetBiosSend, except that it does not wait
+for the message to be sent before returning. Use a post-event
+handler or poll 0436NetBiosCmdCompleted to determine when the message
+has been successfully sent and the NCB can be reused.
+
+See also:  0451NetBiosReceiveNoWait  0425TNCB  0426TPostHandler

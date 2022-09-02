@@ -1,0 +1,350 @@
+;
+;-------------------------------------------------------------------
+!TOPIC 651 NumKeys
+B-Tree Filer requires that all index keys take the form of a string. This
+offers the greatest flexibility in designing indexes: keys can be composed
+of several record fields, they can be stored in compressed format, they can
+be logically inverted, and so on. Nevertheless, numeric values are often
+desirable for keys because they encode unique information in a compact
+format.
+
+The NumKeys unit offers routines to convert numeric values to sortable
+key strings and back again. The strings produced are compact, and the exact
+numeric value may be recovered by calling the inverse routine. Although the
+encoded strings cannot be viewed directly, they are carefully designed to
+produce the correct sorting order when used in a B-Tree or in any data
+file.
+
+The NumKeys unit also contains several routines that can create packed
+key strings. Given a regular string, these routines will return a
+compressed version of it. There are also complementary routines provided to
+unpack a packed key string.
+
+The NumKeys unit also contains several routines that can help when
+accessing fileblocks created with B-Tree Filer for C. These routines convert
+a Pascal-style numeric key to a C-style one and vice-versa, and there is a
+routine to invert a key string according to the C-style algorithm.
+
+Finally there is also a routine provided that inverts a string key, to allow
+descending sorts.
+
+  0681C-Style keys     0678DescendingKey
+  0652Keys to numbers  0653Numbers to keys
+  0654Packing keys     0655Unpacking keys
+;
+;-------------------------------------------------------------------
+!TOPIC 652 Keys to numbers
+!NOINDEX
+!NOSEARCH
+The following routines convert from a sortable string key back to the
+numeric key:
+
+  0667KeyToBcd
+  0680KeyToByte
+  0669KeyToExt
+  0659KeyToInt
+  0663KeyToLong
+  0665KeyToReal
+  0657KeyToShort
+  0661KeyToWord
+;
+;-------------------------------------------------------------------
+!TOPIC 653 Numbers to keys
+!NOINDEX
+!NOSEARCH
+The following routines convert from a numeric type to a sortable string:
+
+  0666BcdToKey
+  0679ByteToKey
+  0668ExtToKey
+  0658IntToKey
+  0662LongToKey
+  0664RealToKey
+  0656ShortToKey
+  0660WordToKey
+;
+;-------------------------------------------------------------------
+!TOPIC 654 Packing keys
+!NOINDEX
+!NOSEARCH
+The following routines pack a key string:
+
+  0670Pack4BitKey                    0671Pack5BitKeyUC
+  0673Pack6BitKey                    0672Pack6BitKeyUC
+;
+;-------------------------------------------------------------------
+!TOPIC 655 Unpacking keys
+!NOINDEX
+!NOSEARCH
+The following routines unpack a key string:
+
+  0674Unpack4BitKey                  0675Unpack5BitKeyUC
+  0677Unpack6BitKey                  0676Unpack6BitKeyUC
+;
+;-------------------------------------------------------------------
+!TOPIC 656 ShortToKey
+!NOINDEX
+function 0651NumKeys.ShortToKey(S : ShortInt) : String1;
+
+Convert a shortint to a string.
+
+See also:  0657KeyToShort
+;
+;-------------------------------------------------------------------
+!TOPIC 657 KeyToShort
+!NOINDEX
+function 0651NumKeys.KeyToShort(S : String1) : ShortInt;
+
+Convert a string to a shortint.
+
+See also:  0656ShortToKey
+;
+;-------------------------------------------------------------------
+!TOPIC 658 IntToKey
+!NOINDEX
+function 0651NumKeys.IntToKey(I : Integer) : String2;
+
+Convert an integer to a string.
+
+See also:  0659KeyToInt
+;
+;-------------------------------------------------------------------
+!TOPIC 659 KeyToInt
+!NOINDEX
+function 0651NumKeys.KeyToInt(S : String2) : Integer;
+
+Convert a string to an integer.
+
+See also:  0658IntToKey
+;
+;-------------------------------------------------------------------
+!TOPIC 660 WordToKey
+!NOINDEX
+function 0651NumKeys.WordToKey(W : Word) : String2;
+
+Convert a word to a string.
+
+See also:  0661KeyToWord
+;
+;-------------------------------------------------------------------
+!TOPIC 661 KeyToWord
+!NOINDEX
+function 0651NumKeys.KeyToWord(S : String2) : Word;
+
+Convert a string to a word.
+
+See also:  0660WordToKey
+;
+;-------------------------------------------------------------------
+!TOPIC 662 LongToKey
+!NOINDEX
+function 0651NumKeys.LongToKey(L : LongInt) : String4;
+
+Convert a longint to a string.
+
+See also:  0663KeyToLong
+;
+;-------------------------------------------------------------------
+!TOPIC 663 KeyToLong
+!NOINDEX
+function 0651NumKeys.KeyToLong(S : String4) : LongInt;
+
+Convert a string to a longint.
+
+See also:  0662LongToKey
+;
+;-------------------------------------------------------------------
+!TOPIC 664 RealToKey
+!NOINDEX
+function 0651NumKeys.RealToKey(R : Real) : String6;
+
+Convert a real to a string.
+
+See also:  0665KeyToReal
+;
+;-------------------------------------------------------------------
+!TOPIC 665 KeyToReal
+!NOINDEX
+function 0651NumKeys.KeyToReal(S : String6) : Real;
+
+Convert a string to a real.
+
+See also:  0664RealToKey
+;
+;-------------------------------------------------------------------
+!TOPIC 666 BcdToKey
+!NOINDEX
+function 0651NumKeys.BcdToKey(var B) : String10;
+
+Convert a BCD real to a string.
+
+See also:  0667KeyToBcd
+;
+;-------------------------------------------------------------------
+!TOPIC 667 KeyToBcd
+!NOINDEX
+procedure 0651NumKeys.KeyToBcd(S : String10; var B);
+
+Convert a string to a BCD real.
+
+See also:  0666BcdToKey
+;
+;-------------------------------------------------------------------
+!TOPIC 668 ExtToKey
+!NOINDEX
+function 0651NumKeys.ExtToKey(E : Extended) : String10;
+
+Convert an extended (or any other 8087 real) to a string.
+
+See also:  0669KeyToExt
+;
+;-------------------------------------------------------------------
+!TOPIC 669 KeyToExt
+!NOINDEX
+procedure 0651NumKeys.KeyToExt(S : String10) : Extended;
+
+Convert a string to an extended.
+
+See also:  0668ExtToKey
+;
+;-------------------------------------------------------------------
+!TOPIC 670 Pack4BitKey
+!NOINDEX
+function 0651NumKeys.Pack4BitKey(Src : string; Len : Byte) : string;
+
+Pack the Src string into sequences of 4 bits. Len is the maximum length
+of the string to return. The following characters are mapped to 1-15,
+respectively, all others to 0: '(', ')', '+', '-', '.', '0'..'9'.
+
+See also:  0674Unpack4BitKey
+;
+;-------------------------------------------------------------------
+!TOPIC 671 Pack5BitKeyUC
+!NOINDEX
+function 0651NumKeys.Pack5BitKeyUC(Src : string; Len : Byte) : string;
+
+Pack the Src string into sequences of 5 bits. Len is the maximum length
+of the string to return. Characters from 'a' to 'z' are converted to upper
+case, then characters from 'A' to 'Z' are mapped to 1-26, all others to 0.
+
+See also:  0675Unpack5BitKeyUC
+;
+;-------------------------------------------------------------------
+!TOPIC 672 Pack6BitKeyUC
+!NOINDEX
+function 0651NumKeys.Pack6BitKeyUC(Src : string; Len : Byte) : string;
+
+Pack the Src string into sequences of 6 bits. Len is the maximum length
+of the string to return. Characters from 'a' to 'z' are converted to upper
+case, then characters from '!' to '_' are mapped to 1-63, all others to 0.
+
+See also:  0676Unpack6BitKeyUC
+;
+;-------------------------------------------------------------------
+!TOPIC 673 Pack6BitKey
+!NOINDEX
+function 0651NumKeys.Pack6BitKey(Src : string; Len : Byte) : string;
+
+Pack the Src string into sequences of 6 bits. Len is the maximum length
+of the string to return. Characters from '0'-'9' are mapped to 1-10,
+'A'-'Z' to 11-36, 'a'-'z' to 37-62, all others to 0.
+
+See also:  0677Unpack6BitKey
+;
+;-------------------------------------------------------------------
+!TOPIC 674 Unpack4BitKey
+!NOINDEX
+function 0651NumKeys.Unpack4BitKey(Src : string) : string;
+
+Unpack a key created by Pack4BitKey.
+
+See also:  0670Pack4BitKey
+;
+;-------------------------------------------------------------------
+!TOPIC 675 Unpack5BitKeyUC
+!NOINDEX
+function 0651NumKeys.Unpack5BitKeyUC(Src : string) : string;
+
+Unpack a key created by Pack5BitKeyUC.
+
+See also:  0671Pack5BitKeyUC
+;
+;-------------------------------------------------------------------
+!TOPIC 676 Unpack6BitKeyUC
+!NOINDEX
+function 0651NumKeys.Unpack6BitKeyUC(Src : string) : string;
+
+Unpack a key created by Pack6BitKeyUC.
+
+See also:  0672Pack6BitKeyUC
+;
+;-------------------------------------------------------------------
+!TOPIC 677 Unpack6BitKey
+!NOINDEX
+function 0651NumKeys.Unpack6BitKey(Src : string) : string;
+
+Unpack a key created by Pack6BitKey.
+
+See also:  0673Pack6BitKey
+;
+;-------------------------------------------------------------------
+!TOPIC 678 DescendingKey
+!NOINDEX
+function 0651NumKeys.DescendingKey(S : string; MaxLen : Byte) : string;
+
+Invert values in S to allow descending sorts, pad to MaxLen with #$FF.
+;
+;-------------------------------------------------------------------
+!TOPIC 679 ByteToKey
+!NOINDEX
+function 0651NumKeys.ByteToKey(B : Byte) : String10;
+
+Convert a Byte to a string.
+
+See also:  0680KeyToByte
+;
+;-------------------------------------------------------------------
+!TOPIC 680 KeyToByte
+!NOINDEX
+function 0651NumKeys.KeyToByte(S : String10) : Byte;
+
+Convert a string to a Byte.
+
+See also:  0679ByteToKey
+;
+;-------------------------------------------------------------------
+!TOPIC 681 C-Style Keys
+!NOINDEX
+!NOSEARCH
+
+The following routines are used to convert keys between Pascal-style
+keys and C-style keys, using the algorithms defined in B-Tree Filer for C.
+
+  0682CStyleNumKey       0684CStyleDescendingKey
+  0683PascalStyleNumKey
+;
+;-------------------------------------------------------------------
+!TOPIC 682 CStyleNumKey
+!NOINDEX
+function CStyleNumKey(S : String) : String;
+
+Convert Pascal-style numeric key S into a C-style numeric key, compatible
+with ASCIIZ.
+
+See also:  0683PascalStyleNumKey
+;
+;-------------------------------------------------------------------
+!TOPIC 683 PascalStyleNumKey
+!NOINDEX
+function PascalStyleNumKey(S : String) : String;
+
+Convert C-style numeric key S into a Pascal-style numeric key.
+
+See also:  0682CStyleNumKey
+;
+;-------------------------------------------------------------------
+!TOPIC 684 CStyleDescendingKey
+!NOINDEX
+function CStyleDescendingKey(S : string; MaxLen : byte) : string;
+
+Convert S to a descending key, using C-style algorithm.

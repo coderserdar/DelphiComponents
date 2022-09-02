@@ -1,0 +1,214 @@
+;
+;-------------------------------------------------------------------
+!TOPIC 380 MSort
+The virtual sort unit, MSort, is an implementation of the merge sort
+algorithm. A merge sort allows you to sort more items than will fit in RAM
+at once, by sorting manageable portions of the input first, then merging
+these pre-sorted lists to form the final output. In theory, MSort can
+sort two billion records at once. In practice, the number of records will
+be limited by available disk or expanded memory (EMS) space.
+
+MSort is for real mode applications only. For protected mode and Windows
+programs use the 0393MSORTP.
+
+MSort is used in a manner similar to the Sort unit of the Borland
+Database Toolbox and the OpSort unit of our Object Professional
+package.
+
+  0392AbortSort                      0383AutoSort
+  0384AutoSortInfo                   0381Declarations
+  0382DoSort                         0386GetElement
+  0385PutElement
+;
+;-------------------------------------------------------------------
+!TOPIC 381 Declarations,MSort
+!NOINDEX
+!NOSEARCH
+The 0380MSort unit interfaces the following constants, types and
+variables:
+
+  0390MSortIoResult                  0389MSortStatus
+  0387STemp                          0388UseEms
+  0391UsingEms
+;
+;-------------------------------------------------------------------
+!TOPIC 382 DoSort
+!NOINDEX
+function 0380MSort.DoSort(RunLength     : Word;
+                      RecLength     : Word;
+                      InFileBufMax  : Word;
+                      OutFileBufMax : Word;
+                      TempPath      : PathName;
+                      GetElements   : Pointer;
+                      LessFunc      : Pointer;
+                      PutElements   : Pointer) : MSortStatus;
+
+The low level sorting routine.  The RunLength, RecLength and in and out
+file buffer sizes must be explicitly specified.
+
+The following declarations show sample GetElements, LessFunc and PutElement
+routines. These must be declared FAR and may not be nested within any other
+procedure or functions:
+
+  {$F+}
+  procedure SampleGetElements;
+  begin
+    ...
+  end;
+
+  function SampleLessFunc(var X, Y) : Boolean;
+  begin
+    ...
+  end;
+
+  procedure SamplePutElements;
+  begin
+    ...
+  end;
+  {$F-}
+
+See also:
+  0383AutoSort                  0384AutoSortInfo
+;
+;-------------------------------------------------------------------
+!TOPIC 383 AutoSort
+!NOINDEX
+function 0380MSort.AutoSort(FSizeInRecs : LongInt;
+                        RecLength   : Word;
+                        TempPath    : PathName;
+                        GetElements : Pointer;
+                        LessFunc    : Pointer;
+                        PutElements : Pointer) : MSortStatus;
+
+The high level sorting routine. Based on the size of the file, the record
+length of the data, and available resources (heap, EMS and disk space),
+AutoSort chooses reasonable values for the RunLength and file buffers.
+If the entire sort can be performed in memory, it will be. If not, a merge
+sort will be performed.
+
+The following declarations show sample GetElements, LessFunc and PutElement
+routines. These must be declared FAR and may not be nested within any other
+procedure or functions:
+
+  {$F+}
+  procedure SampleGetElements;
+  begin
+    ...
+  end;
+
+  function SampleLessFunc(var X, Y) : Boolean;
+  begin
+    ...
+  end;
+
+  procedure SamplePutElements;
+  begin
+    ...
+  end;
+  {$F-}
+
+See also:
+  0384AutoSortInfo         0381Declarations        0382DoSort
+;
+;-------------------------------------------------------------------
+!TOPIC 384 AutoSortInfo
+!NOINDEX
+function 0380MSort.AutoSortInfo(FSizeInRecs     : LongInt;
+                            RecLength       : Word;
+                            var HeapSpace   : LongInt;
+                            var DiskSpace   : LongInt;
+                            var FileHandles : Word;
+                            var EMSPages    : Word;
+                            var RunLen      : Word;
+                            var FileBufs    : Word;
+                            var OutFileBufs : Word;
+                            var AllInMem    : Boolean) : MSortStatus;
+
+Return information about the sort's resource usage.
+
+See also:  0383AutoSort        0381Declarations        0382DoSort
+;
+;-------------------------------------------------------------------
+!TOPIC 385 PutElement,MSort
+!NOINDEX
+function 0380MSort.PutElement(var X) : Boolean;
+
+Submits a record to the sort system. Returns True if record successfully
+submitted.
+;
+;-------------------------------------------------------------------
+!TOPIC 386 GetElement,MSort
+!NOINDEX
+function 0380MSort.GetElement(var X) : Boolean;
+
+Returns a record from the sort system. Returns True if a record was placed
+in the var X, False if there are no more records.
+;
+;-------------------------------------------------------------------
+!TOPIC 387 STemp
+!NOINDEX
+const
+  STemp : String[5] = 'STEMP';
+
+Used as the first five characters of each temporary file name created
+during the merge phase.
+
+This typed constant is interfaced so that network applications writing to
+the same directory can specify unique names for each workstation using the
+0380MSort unit.
+;
+;-------------------------------------------------------------------
+!TOPIC 388 UseEms
+!NOINDEX
+const
+  UseEMS : Boolean = True;
+
+Controls whether the merge sort system will attempt to use EMS if it is
+avalable and needed.
+;
+;-------------------------------------------------------------------
+!TOPIC 389 MSortStatus
+!NOINDEX
+type
+  MSortStatus = (MSortSuccess,     {Successful sort}
+                 MSortOutOfMemory, {Insufficient memory}
+                 MSortDiskError,   {Disk I/O error}
+                 MSortOutOfDisk,   {Insufficient disk space for merge}
+                 MSortEMSError,    {EMM error}
+                 MSortUserAbort);  {Sort aborted}
+
+Both 0383AutoSort and 0382DoSort return a function result of this
+type. The calling application should check this result to determine the
+outcome of the sort. 0390MSortIoResult provides additional information
+in case of a disk I/O error.
+;
+;-------------------------------------------------------------------
+!TOPIC 390 MSortIoResult
+!NOINDEX
+var
+  MSortIOResult : Integer;
+
+If the sort system returns a status of MSortDiskError, then
+MSortIoResult will contain the value of IoResult at the time of the
+error.
+;
+;-------------------------------------------------------------------
+!TOPIC 391 UsingEms
+!NOINDEX
+var
+  UsingEms : Boolean;
+
+This variable will be True if the merge sort system is using EMS memory.
+EMS memory will be used only if the typed constant 0388UseEMS is True,
+if there are enough EMS pages available for use (at least one run's worth),
+and if a merge phase is required.
+;
+;-------------------------------------------------------------------
+!TOPIC 392 AbortSort,MSort
+!NOINDEX
+procedure 0380MSort.AbortSort;
+
+Call this procedure from within any of the three user-defined
+routines of the sort to prematurely abort the sort. The 0383AutoSort
+or 0382DoSort function will then return a result code of
+MSortUserAbort.

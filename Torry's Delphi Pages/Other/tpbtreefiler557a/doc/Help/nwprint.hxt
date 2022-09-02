@@ -1,0 +1,798 @@
+;
+;-------------------------------------------------------------------
+!TOPIC 599 NWPrint
+
+NWPrint provides routines to control the local workstation's printer
+capture and also to access print queues on a server. Printer capture refers
+to the ability for the local NetWare shell to 'capture' all the data that
+is sent to a local printer (LPT1, LPT2, etc) and send it instead to a file
+on the server or to a print job on a server's print queue. This capability
+is usually provided by NetWare's CAPTURE program, and NWPrint provides an
+interface to the same functions. It provides the following capture
+capabilities:
+
+   . determine the number of local printers (under the VLM Requester,
+        you can access up to 9 local printers, from LPT1 to LPT9)
+   . start a capture session to a print job on a print queue
+   . start a capture session to a file on a server volume
+   . get or set the capture flags (the configuration settings) for each
+        printer
+   . flush a capture
+   . close a capture
+   . get and set the name used on banner pages
+
+!NOWRAP
+  0600Declarations           0613nwCancelCapture
+  0614nwEndCapture           0615nwEnumQueues
+  0616nwFlushCapture         0617nwGetBannerName
+  0618nwGetCaptureFlags      0619nwGetNumPrinters
+  0620nwIsCaptured           0621nwSetBannerName
+  0622nwSetCaptureFlags      0623nwStartCaptureToFile
+  0624nwStartCaptureToQueue
+!WRAP
+
+In addition, NWPrint provides several routines to access a NetWare print
+queue. These functions are useful when the output to be printed is already
+stored in a file.
+
+   . enumerating the print queues on a server
+   . creating a new print job on a queue (returning a writeable Pascal
+        file variable that is used to add data to the print job)
+   . close an open print job
+   . abort an open print job
+   . alter the position of a print job in a print queue
+   . get and set the attributes of a print job
+   . delete a print job from a queue
+
+!NOWRAP
+  0600Declarations          0625nwqAbortPrintJobFile
+  0626nwqChangePrintJob     0627nwqChangePrintJobPos
+  0628nwqClosePrintJobFile  0629nwqCreatePrintJobFile
+  0630nwqEnumPrintJobs      0631nwqGetPrintJob
+  0632nwqRefreshPrintJob    0633nwqRemovePrintJob
+!WRAP
+;
+;-------------------------------------------------------------------
+!TOPIC 600 Declarations,NWPrint
+!NOINDEX
+
+The 0599NWPrint unit declares the following constants, types and
+variables:
+
+!NOWRAP
+  0601Errors            0602nwpfXxxx
+  0603nwjcXxxx          0604nwPrintASAP
+  0605TnwEnumQueueFunc  0606TnwEnumPrintJobFunc
+  0607TnwPrinter        0608TnwBannerName
+  0609TnwBannerJob      0610TnwFormName
+  0611TnwCaptureFlags   0612TnwPrintJob
+!WRAP
+;
+;-------------------------------------------------------------------
+!TOPIC 601 Errors,NWPrint
+!NOINDEX
+!NOWRAP
+;!TABLE
+const
+  nwpErrBadPrinter = $7F51;
+  nwqErrNoSuchJob  = $89D5;
+!WRAP
+
+Extra error codes for the 0599NWPrint unit. nwpErrBadPrinter means
+that a bad nwLPTx value was passed to a routine: there are not enough
+printers that can be captured. nwqErrNoSuchJob means that the print job
+(as defined by a 0612TnwPrintJob variable) is invalid or no longer exists (it
+has been printed or deleted from the queue).
+;
+;-------------------------------------------------------------------
+!TOPIC 602 nwpfXxxx
+!NOINDEX
+!NOWRAP
+;!TABLE
+const
+  nwpfSuppressFF   = $08;    {do not issue form feed at end}
+  nwpfTabExpand    = $40;    {enable tab expansion}
+  nwpfPrintBanner  = $80;    {print banner page}
+!WRAP
+
+Bit masks used for the PrintFlags fields in the 0611TnwCaptureFlags and
+0612TnwPrintJob structures.
+;
+;-------------------------------------------------------------------
+!TOPIC 603 nwjcXxxx
+!NOINDEX
+!NOWRAP
+;!TABLE
+const
+  nwjcAutoStart    = $08;    {autostart even if server connection broken}
+  nwjcRestart      = $10;    {remains in queue after job cancelled}
+  nwjcEntryOpen    = $20;    {job file is being created}
+  nwjcUserHold     = $40;    {user has job on hold}
+  nwjcOperatorHold = $80;    {operator has job on hold}
+!WRAP
+
+Bit masks used for the JobControlFlags field in the 0612TnwPrintJob
+structures.
+;
+;-------------------------------------------------------------------
+!TOPIC 604 nwPrintASAP
+!NOINDEX
+const
+  nwPrintASAP : TnwDate = (...);
+
+Set the TargetExecTime field in your 0612TnwPrintJob variable to this value to
+make a print job print as soon as possible.
+;
+;-------------------------------------------------------------------
+!TOPIC 605 TnwEnumQueueFunc
+!NOINDEX
+type
+  TnwEnumQueueFunc = function (Name : TnwObjectStr; ID : nwLong;
+                               var ExtraData) : boolean;
+
+Type of the function that 0615nwEnumQueues calls when it enumerates the
+available print queues on a server. Name is the queue name, ID its bindery
+object ID, and ExtraData is an untyped var parameter that was passed to
+the original call to nwEnumQueues. The function should return True if the
+enumeration is to continue, False if it should stop.
+;
+;-------------------------------------------------------------------
+!TOPIC 606 TnwEnumPrintJobFunc
+!NOINDEX
+type
+  TnwEnumPrintJobFunc = function (JobNumber : nwLong;
+                                  var ExtraData) : boolean;
+
+Type of the function that 0630nwqEnumPrintJobs calls when it enumerates the
+available print jobs on a queue. JobNumber is the number of the print job,
+and ExtraData is an untyped var parameter that was passed to the original
+call to nwqEnumPrintJobs. The function should return true if the
+enumeration is to continue, false if it should stop.
+;
+;-------------------------------------------------------------------
+!TOPIC 607 TnwPrinter
+!NOINDEX
+type
+  TnwPrinter = (nwLPT1, nwLPT2, nwLPT3, nwLPT4, nwLPT5, nwLPT6,
+                nwLPT7, nwLPT8, nwLPT9);
+
+A type that enumerates the possible printers for the print capture
+routines. nwLPT4 through nwLPT9 are only available with the VLM Requester.
+;
+;-------------------------------------------------------------------
+!TOPIC 608 TnwBannerName
+!NOINDEX
+type
+  TnwBannerName = string[12];
+
+A user name string for use on a banner page.
+;
+;-------------------------------------------------------------------
+!TOPIC 609 TnwBannerJob
+!NOINDEX
+type
+  TnwBannerJob = string[12];
+
+A job name string for use on a banner page.
+;
+;-------------------------------------------------------------------
+!TOPIC 610 TnwFormName
+!NOINDEX
+type
+  TnwFormName = string[12];
+
+TnwFormName is a string for a form name in the 0611TnwCaptureFlags and
+0612TnwPrintJob structures.
+;
+;-------------------------------------------------------------------
+!TOPIC 611 TnwCaptureFlags
+!NOINDEX
+!NOWRAP
+;!TABLE
+type
+  TnwCaptureFlags = record
+    {read/write values - set by nwSetCaptureFlags}
+    PrintFlags        : byte;         {print flags}
+    TabSize           : byte;         {tab size (1..18)}
+    NumCopies         : byte;         {number of copies (0..255)}
+    FormType          : byte;         {form type (0..255)}
+    MaxLines          : word;         {maximum lines per page}
+    MaxCols           : word;         {maximum columns per line}
+    FlushTimeout      : word;         {ticks before automatic flush}
+    BannerJobName     : TnwBannerJob; {job name for banner page}
+    FlushOnClose      : boolean;      {True when autoflush enabled}
+    FormName          : TnwFormName;  {name of the current form}
+    {read only values - returned by nwGetCaptureFlags}
+    Printer           : TnwPrinter;   {the local printer}
+    IsCaptured        : boolean;      {True if printer is captured}
+    IsCapturingData   : boolean;      {True if print data is being captured}
+    IsDoingTimeOut    : boolean;      {True if capture is timing out}
+    IsCapturedToFile  : boolean;      {True if captured to a file}
+    Server            : TnwServer;    {server processing the capture}
+    QueueID           : nwLong;       {print queue bindery ID if}
+  end;                                {  IsCapturedToFile is False}
+!WRAP
+
+Data structure used and returned by the workstation capture flag routines
+0618nwGetCaptureFlags and 0622nwSetCaptureFlags. The first part of the structure
+contains all the fields that you can set with nwSetCaptureFlags. The last
+part of the structure contains the extra fields that are returned from the
+NetWare shell with nwGetCaptureFlags.
+
+The read/write fields are:
+
+!NOWRAP
+;!TABLE
+  PrintFlags     Bit-mapped flags (0602nwpfXxxx).
+  TabSize        Number of spaces for each tab when expansion is enabled.
+  NumCopies      Number of copies to print.
+  FormType       Form type (0..255). The default form type is 0.
+  MaxLines       The maximum number of lines per page before an automatic
+                 form feed is inserted.
+  MaxCols        The maximum number of columns per line before an automatic
+                 line break is inserted.
+  FlushTimeout   The time in clock ticks that the capture process waits
+                 without receiving any characters before it flushes the
+                 print job. Zero means no timeout.
+  BannerJobName  A string that describes the job name for the banner page.
+  FlushOnClose   True if the print job is flushed when the DOS LPT device
+                 is closed (i.e., the print job is released for printing).
+  FormName       A string containing the name of the current form. This is
+                 displayed for informational purposes by PCONSOLE.
+!WRAP
+
+The read only fields are:
+
+!NOWRAP
+;!TABLE
+  Printer          The local DOS LPT device (nwLPT1..nwLPT9).
+  IsCaptured       True if the printer is currently captured.
+  IsCapturingData  True if print output data is being captured.
+  IsDoingTimeOut   True if the capture is timing out.
+  IsCapturedToFile True if the printer is being captured to a file.
+  Server           Handle of the server processing the capture.
+  QueueID          Bindery ID of the print queue, if captured to one.
+!WRAP
+
+When a printer is captured, but before any data is written, IsCaptured is
+True. If the printer is captured to a print queue, IsCapturedToFile is
+False, and the Server and QueueID fields uniquely identify the queue. If
+the printer is captured to a file, IsCapturedToFile is True and Server is
+the handle of the server where the file is found. Once the first character
+is written to the printer after the capture is started, IsCapturingData is
+set to True and, if a timeout was set, IsDoingTimeOut is also set to True.
+;
+;-------------------------------------------------------------------
+!TOPIC 612 TnwPrintJob
+!NOINDEX
+!NOWRAP
+;!TABLE
+type
+  TnwPrintJob = record
+    VerifyFlag     : word;          {** verify flag}
+    Server         : word;          {** server handle}
+    QueueID        : nwLong;        {** print queue bindery ID}
+    ServerVersion  : word;          {** effective server version}
+    ClientStation  : nwLong;        {** client who started job: conn.number}
+    ClientTaskNum  : nwLong;        {** ...task number}
+    ClientID       : nwLong;        {** ...bindery object ID}
+    TargetServerID : nwLong;        {   print server ID, -1 = any}
+    TargetExecTime : TnwDate;       {   time to print job, $FF = ASAP}
+    JobEntryTime   : TnwDate;       {** time job entered the queue}
+    JobNumber      : nwLong;        {** job number}
+    JobType        : word;          {** type of job (usually 0)}
+    JobPosition    : word;          {** position in queue, 1 = at top}
+    JobControlFlags: word;          {   job control flags}
+    JobFileName    : string[13];    {** filename of queue job}
+    JobFileHandle  : TnwFileHandle; {** NetWare handle of JobFileName}
+    ServerStation  : nwLong;        {** print server: conn.number}
+    ServerTaskNum  : nwLong;        {** ...task number}
+    ServerID       : nwLong;        {** ...bindery object ID}
+    JobDesc        : string[49];    {   description of job}
+    PrintFlags     : byte;          {   print flags}
+    TabSize        : byte;          {   default tab size}
+    FormName       : TnwFormName;   {   name of form to print on}
+    NumCopies      : byte;          {   number of copies}
+    MaxLines       : word;          {   max lines per page}
+    MaxCols        : word;          {   max columns per page}
+    BannerUserName : TnwBannerName; {   user name for banner page}
+    BannerJobName  : TnwBannerJob;  {   job name for banner page}
+    JobFileSize    : nwLong;        {** size of file JobFileName}
+  end;
+!WRAP
+
+The data structure that defines a print job on a queue. A variable of this
+type is initialized by 0629nwqCreatePrintJobFile, and is maintained by
+0632nwqRefreshPrintJob amongst others. The routine 0631nwqGetPrintJob will also
+initialize a data structure of this type.
+
+The fields marked (**) are read only and are set either by Queue Management
+Services (QMS) or by the 0599NWPrint unit.
+
+All other fields can be changed by 0626nwqChangePrintJob. You should not change
+the read only fields because the print job routines use them to track the
+print job (in particular the Server, QueueID, ServerVersion and JobNumber
+fields). The 0476TnwDate fields TargetExecTime and JobEntryTime do not return
+and do not use the WeekDay field.
+
+The following describes the TnwPrintJob fields:
+
+!NOWRAP
+;!TABLE
+  VerifyFlag      Used for validity checking.
+  Server          Server handle for the print queue.
+  QueueID         Bindery ID of the print queue.
+  ServerVersion   Effective server version.
+  ClientStation   Connection number of the workstation of the user who
+                  started the job.
+  ClientTaskNum   User's task number.
+  ClientID        Bindery ID for the user.
+  TargetServerID  Bindery ID for the print server ID that will service the
+                  job (-1 means any print server can do so).
+  TargetExecTime  Time to print the job (use 0604nwPrintASAP to print as soon
+                  as possible).
+  JobEntryTime    Time that the print job was created on the queue.
+  JobNumber       Job number.
+  JobType         Type of job (usually 0).
+  JobPosition     Job's position in the queue (1 means at the top).
+  JobControlFlags Job control flags (see the 0603nwjcXxxx constants).
+  JobFileName     Name of file where QMS is storing data.
+  JobFileHandle   NetWare handle of JobFileName.
+  ServerStation   Connection number of the print server.
+  ServerTaskNum   Task number of the print server.
+  ServerID        Bindery ID of the print server.
+  JobDesc         String describing the job (for display in PCONSOLE).
+  PrintFlags      Bit-mapped print flags (see the 0602nwpfXxxx constants).
+  TabSize         Number of spaces for each tab when expansion is enabled.
+  FormName        Name of the form to print on.
+  NumCopies       Number of copies.
+  MaxLines        Maximum number of lines per page.
+  MaxCols         Maximum number of columns per page.
+  BannerUserName  User name for the banner page.
+  BannerJobName   Job name for the banner page.
+  JobFileSize     The size of the print job's file.
+!WRAP
+;
+;-------------------------------------------------------------------
+!TOPIC 613 nwCancelCapture
+!NOINDEX
+function 0599NWPrint.nwCancelCapture(Printer : TnwPrinter) : TnwErrorCode;
+
+Abort a capture session.
+
+If the printer was captured to a print queue, then the print job is closed
+and deleted from the print queue. If the capture was to a file, the file
+is closed and deleted from the server. If no print data has been captured
+since the start capture call, a call to this routine just stops the
+capture.
+
+After a call to nwCancelCapture, the printer is no longer captured. Call
+0624nwStartCaptureToQueue or 0623nwStartCaptureToFile to start the capture for the
+printer again.
+
+The function returns an error code in its function result, or zero if it
+is successful.
+
+See also:  0614nwEndCapture
+;
+;-------------------------------------------------------------------
+!TOPIC 614 nwEndCapture
+!NOINDEX
+function 0599NWPrint.nwEndCapture(Printer : TnwPrinter) : TnwErrorCode;
+
+Close a capture session.
+
+If the printer was captured to a print queue, then the print job is closed
+and released for printing. If the capture was to a file, the file is
+closed. If no print data has been captured since the start capture call, a
+call to this routine just stops the capture.
+
+After a call to nwEndCapture, the printer is no longer captured. Call
+0624nwStartCaptureToQueue or 0623nwStartCaptureToFile to start the capture for the
+printer again.
+
+The function returns an error code in its function result, or zero if it
+is successful.
+
+See also:  0613nwCancelCapture
+;
+;-------------------------------------------------------------------
+!TOPIC 615 nwEnumQueues
+!NOINDEX
+procedure 0599NWPrint.nwEnumQueues(Server : TnwServer; EnumFunc : TnwEnumQueueFunc;
+                       var ExtraData);
+
+Enumerate the print queues on a server.
+
+This procedure enumerates the available print queues on the specified
+server. For each print queue found it calls a function (EnumFunc) of the
+0605TnwEnumQueueFunc type. ExtraData is an untyped var parameter that is not
+used by nwEnumQueues. It is just passed on as a parameter to your
+EnumFunc. You can use this parameter to pass any extra data you need.
+;
+;-------------------------------------------------------------------
+!TOPIC 616 nwFlushCapture
+!NOINDEX
+function 0599NWPrint.nwFlushCapture(Printer : TnwPrinter) : TnwErrorCode;
+
+Flush a capture.
+
+The effect of this call depends on whether the printer was captured to
+file or print queue.
+
+If the printer was captured to a print queue, the print job is closed and
+released for printing. The printer is still captured after a call to this
+routine and will be captured to the same print queue. Sending another
+character to the printer starts another print job on that queue.
+
+If the capture was to a file, the file is closed. The printer is no longer
+captured after this call.
+
+The function returns an error code in its function result, or zero if it
+is successful.
+
+See also:  0613nwCancelCapture  0614nwEndCapture
+;
+;-------------------------------------------------------------------
+!TOPIC 617 nwGetBannerName
+!NOINDEX
+function 0599NWPrint.nwGetBannerName(var Name : TnwBannerName) : TnwErrorCode;
+
+Get the user name for print job banner pages.
+
+When the NetWare capture facilities are used, a banner page that
+identifies the origin of each print job optionally precedes the printout
+itself. nwGetBannerName returns the user name that will appear on this
+banner page. The user name can be changed by calling 0621nwSetBannerName. The
+default for the banner user name is generally the user's login name.
+There is only one banner user name per workstation. You cannot have one
+banner name per server or per printer.
+
+The function returns a status code in its function result, or zero if it
+is successful.
+;
+;-------------------------------------------------------------------
+!TOPIC 618 nwGetCaptureFlags
+!NOINDEX
+function 0599NWPrint.nwGetCaptureFlags(Printer : TnwPrinter;
+                           var CapFlags : TnwCaptureFlags) : TnwErrorCode;
+
+Get the capture flags for the printer.
+
+A variable of type 0611TnwCaptureFlags describes how a particular job will be
+printed. It applies to print jobs started using capture facilities
+(0623nwStartCaptureToFile or 0624nwStartCaptureToQueue).
+
+Generally you should start the capture for a printer, call
+nwGetCaptureFlags to get the current settings, modify the field(s) that
+you care about, and then call 0622nwSetCaptureFlags to alter the settings for
+this capture session. At this point you can start printing to the printer.
+The capture flag values are not preserved from capture session to capture
+session. You should assume that the current values are lost when
+0614nwEndCapture or 0613nwCancelCapture is called. Under some versions of the VLM
+Requester you should not even call nwGetCaptureFlags if the printer is not
+captured because, although the function is successful, the capture flags
+structure may contain invalid data.
+
+The function returns a status code in its function result (zero means
+successful).
+
+See also:  0617nwGetBannerName
+;
+;-------------------------------------------------------------------
+!TOPIC 619 nwGetNumPrinters
+!NOINDEX
+function 0599NWPrint.nwGetNumPrinters : byte;
+
+Return the number of printers available for capture.
+
+Under NETX, this routine always returns 3 (for the LPT1, LPT2 and LPT3
+printers).
+
+Under the VLM Requester, the total number of printers is configurable by
+the user in the NET.CFG file and the value varies from 0 to 9. If you
+configure 0 printers, the PRINT.VLM module does not load itself, and all
+of the capture routines return nwErrBadPrinter. This routine also returns
+0 for the number of printers if the PRINT.VLM module is not explicitly
+loaded.
+;
+;-------------------------------------------------------------------
+!TOPIC 620 nwIsCaptured
+!NOINDEX
+function 0599NWPrint.nwIsCaptured(Printer : TnwPrinter) : boolean;
+
+Return True if the printer is being captured.
+
+Under some versions of the VLM Requester, you must call this routine
+before calling 0618nwGetCaptureFlags, otherwise it might return
+invalid values.
+
+See also:  0614nwEndCapture  0623nwStartCaptureToFile  0624nwStartCaptureToQueue
+;
+;-------------------------------------------------------------------
+!TOPIC 621 nwSetBannerName
+!NOINDEX
+function 0599NWPrint.nwSetBannerName(Name : TnwBannerName) : TnwErrorCode;
+
+Set the user name for print job banner pages.
+
+When the NetWare capture facilities are used, a banner page that
+identifies the origin of each print job optionally precedes the printout
+itself. Name is a string that appears on this banner page and can be at
+most 12 characters long.
+
+There is only one banner user name per workstation. You cannot have one
+banner name per server or per printer.
+
+The function returns a status code in its function result (zero means
+successful).
+
+See also:  0617nwGetBannerName
+;
+;-------------------------------------------------------------------
+!TOPIC 622 nwSetCaptureFlags
+!NOINDEX
+function 0599NWPrint.nwSetCaptureFlags(Printer : TnwPrinter;
+                           CapFlags : TnwCaptureFlags) : TnwErrorCode;
+
+Set the capture flags for the printer.
+
+A variable of type 0611TnwCaptureFlags describes how a particular job will be
+printed. It applies to print jobs started using capture facilities
+(0623nwStartCaptureToFile or 0624nwStartCaptureToQueue).
+
+This function enables an application to control various capture attributes
+such as the banner page, tab size, number of copies, and so on.
+Generally you should start the capture for a printer, call
+0618nwGetCaptureFlags to get the current settings, modify the field(s) that
+you care about, and then call nwSetCaptureFlags to alter the settings for
+this capture session. At this point you can start printing to the printer.
+The capture flag values are not preserved from capture session to capture
+session. You should assume that the current values are lost when
+0614nwEndCapture or 0613nwCancelCapture is called.
+
+The function returns a status code in its function result (zero means
+successful).
+
+See also:  0621nwSetBannerName
+;
+;-------------------------------------------------------------------
+!TOPIC 623 nwStartCaptureToFile
+!NOINDEX
+function 0599NWPrint.nwStartCaptureToFile(Printer: TnwPrinter;
+                              FileName : string) : TnwErrorCode;
+
+Start capturing printer output to a file.
+
+When this function is called, there cannot be any capture active for the
+printer. You can check if a capture is active by calling 0620nwIsCaptured.
+Then use 0613nwCancelCapture if necessary. The file specified by FileName must
+specify a path that is on a NetWare server, you cannot capture to a file
+on a local disk or to a file on a remote non-NetWare drive.
+
+After this function is called, all output to the printer is redirected to
+the specified file. The file is created as a new file. If the file exists
+already, it is deleted first.
+
+See also:  0624nwStartCaptureToQueue
+;
+;-------------------------------------------------------------------
+!TOPIC 624 nwStartCaptureToQueue
+!NOINDEX
+function 0599NWPrint.nwStartCaptureToQueue(Printer : TnwPrinter; Server : TnwServer;
+                               QueueName : TnwObjectStr) : TnwErrorCode;
+
+Start capturing printer output to a print queue.
+
+When this function is called, there cannot be any capture active for the
+printer. You can check if a capture is active by calling 0620nwIsCaptured.
+Then use 0613nwCancelCapture if necessary. The print queue specified by
+QueueName must exist on the NetWare server defined by the handle in
+Server.
+
+After this call executes successfully, the local NetWare shell is primed
+to capture all printer output to the queue. However, a print job has not
+yet been created on the queue. A print job is created when the shell
+intercepts the first character output to the captured printer.
+
+See also:  0623nwStartCaptureToFile
+;
+;-------------------------------------------------------------------
+!TOPIC 625 nwqAbortPrintJobFile
+!NOINDEX
+function 0599NWPrint.nwqAbortPrintJobFile(var PrintJobData : TnwPrintJob;
+                              var F : file) : TnwErrorCode;
+
+Abort and delete an open print job on a queue.
+
+This routine aborts an open print job that was created with
+0629nwqCreatePrintJobFile. PrintJobData is the 0612TnwPrintJob variable that was
+returned by the create routine and F is the file variable that goes with it. This
+function deletes the print job from the queue (all data in the print job
+is discarded) and closes the file variable F.
+
+Do not use this routine if you closed the print job by calling
+0628nwqClosePrintJobFile and need to delete the print job. Use
+0633nwqRemovePrintJob instead.
+;
+;-------------------------------------------------------------------
+!TOPIC 626 nwqChangePrintJob
+!NOINDEX
+function 0599NWPrint.nwqChangePrintJob(var PrintJobData : TnwPrintJob) : TnwErrorCode;
+
+Change the settings for a print job.
+
+This routine changes various settings for a print job. PrintJobData must
+have been initialized by a call to 0631nwqGetPrintJob or 0629nwqCreatePrintJobFile. The
+definition of the 0612TnwPrintJob type shows which settings of
+the print job you can change. Generally you will be changing the
+description strings, the job control settings, and the print flag
+settings.
+
+You can call this routine at any time in the lifetime of the print job,
+you do not have to wait until the print job is closed. For example, the
+usual method is to create the new print job with 0629nwqCreatePrintJobFile,
+alter the settings of the print job by calling this routine (i.e., put a
+user hold on it, alter the JobDesc field to a useful text string), write
+data to the print job, and then close the print job by calling
+0628nwqClosePrintJobFile.
+
+This routine cannot be used to alter the position of a print job in the
+queue; this is done by calling 0627nwqChangePrintJobPos.
+;
+;-------------------------------------------------------------------
+!TOPIC 627 nwqChangePrintJobPos
+!NOINDEX
+function 0599NWPrint.nwqChangePrintJobPos(var PrintJobData : TnwPrintJob;
+                              NewPosition : word) : TnwErrorCode;
+
+Change the position of a print job in a queue.
+
+PrintJobData must have been initialized by a call to 0631nwqGetPrintJob or
+0629nwqCreatePrintJobFile. NewPosition is the numeric position that you want
+the print job to be moved to (use a value of 1 for the top of the queue).
+If you pass a value for NewPosition that is beyond the last job in the
+queue, the job is moved to the end of the queue.
+
+After this function completes, PrintJobData contains the latest
+information about the print job.
+
+To use this routine you must have queue operator rights, otherwise an
+error code is returned.
+
+See also:  0626nwqChangePrintJob  0612TnwPrintJob
+;
+;-------------------------------------------------------------------
+!TOPIC 628 nwqClosePrintJobFile
+!NOINDEX
+function 0599NWPrint.nwqClosePrintJobFile(var PrintJobData : TnwPrintJob;
+                              var F : file) : TnwErrorCode;
+
+Close an open print job on a queue and mark it ready for printing.
+
+This routine closes an open print job that was created with
+0629nwqCreatePrintJobFile. PrintJobData is the 0612TnwPrintJob variable returned by the
+create routine and F is the file variable that goes with it. nwqClosePrintJobFile
+closes the print job and NetWare's Queue Management System marks the print
+job ready for processing by a print server. The file variable F is closed.
+
+The print job is printed when it reaches the top of the queue (the
+JobPosition field has value 1), providing that there is no hold on the
+print job (either an operator hold or a user hold) or that you have not
+specified a TargetExecTime value for some time in the future. You can
+modify the job control flags, including the hold options, by calling
+0626nwqChangePrintJob. To modify the job's position, call
+0627nwqChangePrintJobPos.
+
+After this function completes, PrintJobData contains the current
+information about the print job.
+;
+;-------------------------------------------------------------------
+!TOPIC 629 nwqCreatePrintJobFile
+!NOINDEX
+function 0599NWPrint.nwqCreatePrintJobFile(Server : TnwServer;
+                               QueueName : TnwObjectStr;
+                               var PrintJobData : TnwPrintJob;
+                               var F : file) : TnwErrorCode;
+
+Create a new print job on a queue and return a file variable for it.
+
+This routine creates a print job on a queue, and allows you to write data
+to it. It returns a variable of type File (which has been opened by the
+routine) that is used to write to the print job, and also a variable of
+type 0612TnwPrintJob which is used to track the print job.
+
+Server and QueueName uniquely define the print queue. The queue must be a
+print queue and it must exist on the server given by the server handle.
+You can get the names of all the print queues on a server by calling
+0615nwEnumQueues.
+
+After this function completes, PrintJobData contains the information about
+the print job. The print job is created with the following default values:
+-1 for the TargetServerID , TargetExecTime is set to 0604nwPrintASAP, JobDesc
+and BannerJobName are set to '(unknown)', and BannerUserName is set to the
+value returned by 0617nwGetBannerName.
+
+You must pass a closed file variable as a parameter to the routine, and it
+is returned opened, with a record length of 1 byte. You can output data to
+this file by using BlockWrite and the data goes directly to the print job
+on the queue.
+
+Once you have written data to the print job, you have a choice of actions
+to take. You can close the print job by calling 0628nwqClosePrintJobFile and
+allow the print server to print the job. Or you can abort the print job by
+calling 0625nwqAbortPrintJobFile to discard all the data and delete the print
+job. Both routines close the file variable.
+
+You must never close the file variable F yourself because there is a link
+between the file and the print job. Call nwqClosePrintJobFile or
+nwqAbortPrintJobFile instead.
+;
+;-------------------------------------------------------------------
+!TOPIC 630 nwqEnumPrintJobs
+!NOINDEX
+procedure 0599NWPrint.nwqEnumPrintJobs(Server : TnwServer; QueueName : TnwObjectStr;
+                           EnumFunc : TnwEnumPrintJobFunc; var ExtraData);
+
+Enumerate all the print jobs on a queue.
+
+This procedure enumerates the current print jobs on the specified print
+queue and server. For each print job, it calls a function (EnumFunc) of
+the 0606TnwEnumPrintJobFunc type. ExtraData is an untyped var parameter that
+is not used by nwqEnumPrintJobs. It is just passed on as a parameter to
+your EnumFunc.
+
+You can use nwqEnumPrintJobs to build a list of print job numbers. Then to
+get the information for a single print job, call the 0631nwqGetPrintJob
+routine (this can be done inside your EnumFunc routine).
+;
+;-------------------------------------------------------------------
+!TOPIC 631 nwqGetPrintJob
+!NOINDEX
+function 0599NWPrint.nwqGetPrintJob(Server : TnwServer; QueueName : TnwObjectStr;
+                        JobNumber : nwLong;
+                        var PrintJobData : TnwPrintJob) : TnwErrorCode;
+
+Return the print job data for a print job on a queue.
+
+This function is designed to be used in tandem with 0630nwqEnumPrintJobs to
+get the print job information for a print job on a queue. For each print
+job on the queue, nwqEnumPrintJobs calls your EnumFunc with the job number
+as one of the parameters. You can then use this job number in a call to
+nwqGetPrintJob to get the information about the print job (the user name,
+the job description, and so on).
+
+nwqGetPrintJob returns an error code, or zero if it is successful. The
+most common error code is nwqErrNoSuchJob which means either you passed an
+invalid job number or the print job was completed and no longer exists.
+;
+;-------------------------------------------------------------------
+!TOPIC 632 nwqRefreshPrintJob
+!NOINDEX
+function 0599NWPrint.nwqRefreshPrintJob(var PrintJobData : TnwPrintJob)
+                               : TnwErrorCode;
+
+Get the latest information about a print job.
+
+PrintJobData must have been initialized by a call to 0631nwqGetPrintJob or
+0629nwqCreatePrintJobFile. After this function completes, PrintJobData
+contains the latest information about the print job.
+
+See also:  0626nwqChangePrintJob  0612TnwPrintJob
+;
+;-------------------------------------------------------------------
+!TOPIC 633 nwqRemovePrintJob
+!NOINDEX
+function 0599NWPrint.nwqRemovePrintJob(var PrintJobData : TnwPrintJob) : TnwErrorCode;
+
+Delete a print job from a queue.
+
+PrintJobData must have been initialized by a call to 0631nwqGetPrintJob or
+0629nwqCreatePrintJobFile. This function deletes the print job from the queue
+and all print data associated with it is discarded.
+
+The print job must be closed by calling 0628nwqClosePrintJobFile before you
+can call this routine. If you want to delete an open print job, call
+0625nwqAbortPrintJobFile instead.
+
+See also:  0612TnwPrintJob

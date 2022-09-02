@@ -1,0 +1,135 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!-- C++Builder XML Project -->
+<PROJECT>
+  <MACROS>
+    <VERSION value="BCB.05.03"/>
+    <PROJECT value="FF2_R51.bpl"/>
+    <OBJFILES value="..\source\ffsrsort.obj ..\source\ffsrcur.obj ..\source\ffllcoll.obj 
+      ..\source\cocobase.obj ..\source\ffclbase.obj ..\source\ffclbde.obj 
+      ..\source\ffclcfg.obj ..\source\ffclconv.obj ..\source\ffclintf.obj 
+      ..\source\ffclreng.obj ..\source\ffcltbrg.obj ..\source\ffdb.obj 
+      ..\source\fffile.obj ..\source\ffhash.obj ..\source\ffllbase.obj 
+      ..\source\ffllcomm.obj ..\source\ffllcomp.obj ..\source\fflldict.obj 
+      ..\source\fflleng.obj ..\source\ffllexcp.obj ..\source\ffllgrid.obj 
+      ..\source\ffconst.obj ..\source\ffconvff.obj ..\source\ffdbbase.obj 
+      ..\source\ffdtmsgq.obj ..\source\fflllgcy.obj ..\source\fflllog.obj 
+      ..\source\ffllprot.obj ..\source\ffllreq.obj ..\source\ffllthrd.obj 
+      ..\source\ffllunc.obj ..\source\ffllwsck.obj ..\source\ffllwsct.obj 
+      ..\source\fflogdlg.obj ..\source\ffnetmsg.obj ..\source\ffsql.obj 
+      ..\source\ffsqlbas.obj ..\source\ffsqldb.obj ..\source\ffsqldef.obj 
+      ..\source\ffsqleng.obj ..\source\ffsrbase.obj ..\source\ffsrbde.obj 
+      ..\source\ffsrblob.obj ..\source\ffsrcfg.obj ..\source\ffsrcmd.obj 
+      ..\source\ffsrcvex.obj ..\source\ffsreng.obj ..\source\ffsrfltr.obj 
+      ..\source\ffsrfmap.obj ..\source\ffsrfold.obj ..\source\ffsrintf.obj 
+      ..\source\ffsrintm.obj ..\source\ffsrixhl.obj ..\source\ffsrlock.obj 
+      ..\source\ffsrmgr.obj ..\source\ffsrsec.obj ..\source\ffsrstat.obj 
+      ..\source\ffsrtran.obj ..\source\ffsrvdlg.obj ..\source\ffstdate.obj 
+      ..\source\fftbbase.obj ..\source\fftbblob.obj ..\source\fftbcryp.obj 
+      ..\source\fftbdata.obj ..\source\fftbdict.obj ..\source\fftbindx.obj 
+      ..\source\fftbstrm.obj ..\source\ffutil.obj ..\source\ffsrjour.obj 
+      ff2_r51.obj"/>
+    <RESFILES value="..\source\ff2_r51.res"/>
+    <IDLFILES value=""/>
+    <IDLGENFILES value=""/>
+    <DEFFILE value=""/>
+    <RESDEPEN value="$(RESFILES) ..\source\fflogdlg.dfm ..\source\ffsrvdlg.dfm"/>
+    <LIBFILES value=""/>
+    <LIBRARIES value="VCLBDE50.lib"/>
+    <SPARELIBS value="vcl50.lib vcldb50.lib VCLBDE50.lib"/>
+    <PACKAGES value="vcl50.bpi vcldb50.bpi"/>
+    <PATHCPP value=".;"/>
+    <PATHPAS value=".;..\source"/>
+    <PATHRC value=".;"/>
+    <PATHASM value=".;"/>
+    <DEBUGLIBPATH value="$(BCB)\lib\debug"/>
+    <RELEASELIBPATH value="$(BCB)\lib\release"/>
+    <LINKER value="ilink32"/>
+    <USERDEFINES value=""/>
+    <SYSDEFINES value="NO_STRICT;_VIS_NOLIB;USEPACKAGES"/>
+    <MAINSOURCE value="ff2_r51.cpp"/>
+    <INCLUDEPATH value="..\source;$(BCB)\include;$(BCB)\include\vcl"/>
+    <LIBPATH value="..\source;$(bcb)\lib;$(BCB)\lib\obj"/>
+    <WARNINGS value="-w-par -w-8027 -w-8026"/>
+    <WARNOPTSTR value=""/>
+  </MACROS>
+  <OPTIONS>
+    <IDLCFLAGS value="-I..\source -I$(BCB)\include -I$(BCB)\include\vcl -src_suffix cpp -boa"/>
+    <CFLAG1 value="-O2 -Vx -Ve -Tkh30000 -X- -a8 -b- -k- -vi -c -tWM"/>
+    <PFLAGS value="-$Y- -$L- -$D- -v -M -JPHNE"/>
+    <RFLAGS value=""/>
+    <AFLAGS value="/mx /w2 /zn"/>
+    <LFLAGS value="-D&quot;TurboPower FlashFiler Runtime Package - VCL51&quot; -aa -Tpp -Gpr -x -Gn -Gl 
+      -Gi"/>
+  </OPTIONS>
+  <LINKER>
+    <ALLOBJ value="c0pkg32.obj $(PACKAGES) sysinit.obj $(OBJFILES)"/>
+    <ALLRES value="$(RESFILES)"/>
+    <ALLLIB value="$(LIBFILES) $(LIBRARIES) import32.lib cp32mt.lib"/>
+  </LINKER>
+  <IDEOPTIONS>
+[Version Info]
+IncludeVerInfo=1
+AutoIncBuild=0
+MajorVer=1
+MinorVer=0
+Release=0
+Build=0
+Debug=0
+PreRelease=0
+Special=0
+Private=0
+DLL=0
+Locale=1033
+CodePage=1252
+
+[Version Info Keys]
+CompanyName=TurboPower Software Company
+FileDescription=TurboPower FlashFiler Runtime Package - VCL51         
+FileVersion=2.1.3.0
+InternalName=FF2_R51
+LegalCopyright=Copyright (c) TurboPower Software Company 1996-2002
+LegalTrademarks=
+OriginalFilename=FF2_R51.BPL
+ProductName=FlashFiler
+ProductVersion=2.1.3.0
+Comments=
+
+[HistoryLists\hlIncludePath]
+Count=1
+Item0=$(BCB)\include;$(BCB)\include\vcl
+
+[HistoryLists\hlLibraryPath]
+Count=2
+Item0=$(bcb)\lib;$(BCB)\lib\obj
+Item1=$(bcb)\lib;$(BCB)\lib\obj;$(BCB)\lib
+
+[HistoryLists\hlDebugSourcePath]
+Count=1
+Item0=$(BCB)\source\vcl
+
+[Debugging]
+DebugSourceDirs=$(BCB)\source\vcl
+
+[Parameters]
+RunParams=
+HostApplication=
+RemoteHost=
+RemotePath=
+RemoteDebug=0
+
+[Compiler]
+ShowInfoMsgs=0
+LinkDebugVcl=0
+LinkCGLIB=0
+
+[CORBA]
+AddServerUnit=1
+AddClientUnit=1
+PrecompiledHeaders=1
+
+[Language]
+ActiveLang=
+ProjectLang=
+RootDir=
+  </IDEOPTIONS>
+</PROJECT>

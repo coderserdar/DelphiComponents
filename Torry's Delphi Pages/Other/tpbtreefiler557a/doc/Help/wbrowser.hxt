@@ -1,0 +1,1003 @@
+;
+;-------------------------------------------------------------------
+!TOPIC 831 WBROWSER
+
+The WBROWSER unit implements an ObjectWindows Library (OWL) compatibility
+layer over the abstract browser objects in 0363LOWBROWS, etc. The 0837TBrowserWindow object
+implemented by WBROWSER is also an abstract object; at least one method,
+0841BuildRow, must be overridden in an object you derive from TBrowserWindow.
+Several other virtual methods, including 0874PreCompletePage, 0873PostCompletePage,
+0885ShowFilterWorking, 0871PerformFilter, 0884ShowErrorOccured (sic), and 0867HandleChar,
+can be overridden to customize the behavior of the browser.
+
+TBrowserWindow is designed to act as either the main window of a Windows
+application (the MainWindow field of the TApplication object), or as a
+subsidiary window (child window).
+
+See the demonstration program BTWDEMO for examples of how to use this
+object.
+
+!NOWRAP
+  0832Declarations               0838Init,LowWinBrowser
+  0839AdjustHorizOfs             0840BuildBrowScreenRow
+  0841BuildRow                   0842CalcMaxWidth
+  0843CanCallLowBrowser          0844ConnectLowBrowser
+  0845DeleteTheFont              0846Done
+  0847EnableFilter               0848FilterIsOn
+  0849FirstUserInit              0850GetBrowserTextRect
+  0851GetCurNrOfLines            0852GetCurrentDatRef
+  0853GetCurrentKeyNr            0854GetCurrentKeyStr
+  0855GetCurrentRec              0856GetFooter
+  0857GetHeader                  0858GetHeaderFooterColor
+  0859GetHighLightColor          0860GetLineNrFromY
+  0861GetLowHighKey              0862GetNormalColor
+  0863GetRowAreaRect             0864GetSuppressTimer
+  0865GetTextOutPosY             0866GetThisRec
+  0867HandleChar                 0868Init,TBrowserWindow
+  0869MoveToHorizPos             0870MoveToRelPos
+  0871PerformFilter              0872PosClientCorruption
+  0873PostCompletePage           0874PreCompletePage
+  0875SetAndUpdateBrowserScreen  0876SetCharValues
+  0877SetHeaderFooter            0878SetKeyNr
+  0879SetLowHighKey              0880SetMargins
+  0881SetSuppressTimer           0882SetTheFont
+  0883SetupWindow                0884ShowErrorOccured
+  0885ShowFilterWorking          0886TotalCharHeight
+  0887UpdateBrowserScreen        0888UseSeparator
+  0889WriteStringOut
+!WRAP
+;
+;-------------------------------------------------------------------
+!TOPIC 832 Declarations,WBROWSER
+!NOINDEX
+
+The 0831WBROWSER unit declares the following constants, type and variables:
+
+!NOWRAP
+  0833HardError       0834ProgrammingError
+  0835FontInfo        0836LowWinBrowser
+  0837TBrowserWindow
+!NOWRAP
+;
+;-------------------------------------------------------------------
+!TOPIC 833 HardError
+!NOINDEX
+const
+  HardError  = 4;
+
+Convenient constant for the error classes reported by B-Tree Filer and
+the 0831WBROWSER module.
+;
+;-------------------------------------------------------------------
+!TOPIC 834 ProgrammingError
+!NOINDEX
+const
+  ProgrammingError  = 5;
+
+Convenient constants for the error classes reported by B-Tree Filer and
+the 0831WBROWSER module.
+;
+;-------------------------------------------------------------------
+!TOPIC 835 FontInfo
+!NOINDEX
+type
+  FontInfo = record
+    Font       : THandle;
+    ChHeightExtra,
+    ChHeight,
+    ChWidth,
+    ChRefWidth : Word;
+    FixedPitch : Boolean;
+  end;
+
+A field of type FontInfo stores information about the font being used by
+the browser. Font is the handle of the font. FixedPitch is True for a
+fixed pitch font, False for a proportional font.
+
+The width and height fields are measured in the logical units used by the
+GetTextMetrics Windows API function. ChHeight is the character height plus
+external leading (tmHeight+tmExternalLeading from the Windows API
+TEXTMETRIC structure). ChHeightExtra is any additional leading used by the
+browser (0 by default). ChRefWidth is the average character width
+(tmAveCharWidth). ChWidth is the mean of the average width (tmCharWidth)
+and the maximum width (tmMaxCharWidth). For fixed pitch fonts, ChWidth and
+ChRefWidth are equal.
+
+By default the browser uses the "System Fixed Font". To use a different
+font, override the 0882SetTheFont and/or 0876SetCharValues methods of
+0837TBrowserWindow.
+;
+;-------------------------------------------------------------------
+!TOPIC 836 LowWinBrowser,WBROWSER
+!NOINDEX
+type
+  PLowWinBrowser = ^LowWinBrowser;
+  LowWinBrowser = object(BRHBrowser)
+    Owner : PBrowserWindow;
+    ...
+  end;
+
+The 0837TBrowserWindow object is connected to an instance of a LowWinBrowser,
+which performs all file access and keeps most of the browsing data
+structures up to date. A pointer to a LowWinBrowser is stored in the
+BrowserPtr field of TBrowserWindow. Owner points back to the
+TBrowserWindow instance that owns the LowWinBrowser. See 7.B for
+information about the fields that LowWinBrowser inherits.
+
+The only method of LowWinBrowser that you will use directly is its
+constructor. In the Windows browser, you must instantiate a LowWinBrowser
+explicitly, unlike the Object Professional and Turbo Vision browsers where
+the LowWinBrowser is instantiated automatically.
+;
+;-------------------------------------------------------------------
+!TOPIC 837 TBrowserWindow,WBROWSER
+!NOINDEX
+type
+  PBrowserWindow = ^TBrowserWindow;
+  TBrowserWindow = object(TWindow)
+    ...
+    BrowserPtr : PLowWinBrowser;
+    FontDescr  : FontInfo;
+    HorizOfs   : Integer;
+    Width,
+    FullPage,
+    FirstRow,
+    MaxHorizOfs: Word;
+    TextMargin : TRect;
+    ...
+  end;
+
+You create a descendant of a TBrowserWindow object to display a browser
+using the ObjectWindows Library window system. TBrowserWindow is used just
+like any other TWindow object.
+
+BrowserPtr points to a 0836LowWinBrowser, which handles the platform-
+independent work of the browser. FontDescr contains the description of the
+font being used by the browser. See the 0835FontInfo type for more
+information. HorizOfs is the current horizontal scrolling offset in
+pixels, and MaxHorizOfs is the maximum allowable horizontal scroll value
+in pixels. Width is the current width of the browser window in pixels.
+FullPage contains the number of rows that can currently be displayed by
+the browser, not counting any header or footer rows. FirstRow equals 1 if
+a header is being displayed; otherwise it equals 0.
+
+There are a set of methods for TBrowserWindow which perform all of the
+basic scrolling commands. Rather than describe them individually in
+this help text, it would be easier to define them here. They are
+all procedures with no parameters and all are virtual.
+
+!NOWRAP
+;!TABLE
+  FirstPage    scroll to and highlight the first record
+  LastPage     scroll to and highlight the last record
+  LeftHome     horizontally scroll to the leftmost column
+  LineDown     move the highlight down one record
+  LineLeft     horizontally scroll one column to the left
+  LineRight    horizontally scroll one column to the right
+  LineUp       move the highlight up one record
+  PageDown     move the highlight down one page
+  PageLeft     horizontally scroll one window width to the left
+  PageRight    horizontally scroll one window width to the right
+  PageUp       move the highlight up one page
+  RightHome    horizontally scroll to the rightmost column
+!WRAP
+;
+;-------------------------------------------------------------------
+!TOPIC 838 Init,WBROWSER:LowWinBrowser
+!NOINDEX
+constructor LowWinBrowser.Init(ParOnHeap : Boolean;
+                 ADrvOrFileBlockPtr : pointer;
+                 ANumberOfEltsPerRow : Word;
+                 ANumberOfRows : Word;
+                 AKeyNr : Word;
+                 ALKey, AHKey : GenKeyStr;
+                 var ADatS;
+                 AIsVarRec : Boolean);
+
+Create an instance of a 0836LowWinBrowser.
+
+ParOnHeap should be True if a dynamic instance is being created (with New)
+or False if a static instance is being initialized. This parameter allows
+the 0837TBrowserWindow's destructor to destroy the LowWinBrowser automatically
+later.
+
+ADrvOrFileBlockPtr is the address of an IsamFileBlock, already opened.
+ANumberOfEltsPerRow is currently ignored. At some point it will specify
+the number of screen lines displayed for each browsed record. Currently
+the number of screen lines per record is always 1.
+
+ANumberOfRows specifies the maximum number of record elements buffered by
+the browser. The number of rows in the browser window must always be less
+than or equal to ANumberOfRows.
+
+AKeyNr is the fileblock index number used for selecting and ordering the
+records displayed by the browser. AKeyNr can be 0, in which case an index
+is not used at all, the records are just taken in reference number
+sequence from the data file.
+
+ALKey and AHKey determine the lowest and highest keys displayed in the
+browser window. All records that begin with AHKey will be displayed. Pass
+ALKey as a blank string and AHKey as a string of $FF characters to display
+all records in the fileblock.
+
+ADatS must point to a buffer large enough to hold the largest record in
+the fileblock. The browser reads each record into this buffer as needed.
+The 0866GetThisRec and 0855GetCurrentRec methods also read a record into this
+buffer.
+
+AIsVarRec must be True for browsing a variable length record fileblock,
+False otherwise.
+
+The TDemoWin constructor in BTWDEMO.PAS shows how to initialize a
+LowWinBrowser and a TBrowserWindow and connect them in the proper way.
+
+See also:  0844ConnectLowBrowser
+;
+;-------------------------------------------------------------------
+!TOPIC 839 AdjustHorizOfs,TBrowserWindow
+!NOINDEX
+function TBrowserWindow.AdjustHorizOfs(Delta : Integer) : Integer; virtual;
+
+Set the horizontal offset.
+
+AdjustHorizOfs changes the horizontal offset (measured in pixels) by
+adding the value passed in Delta. It returns the new horizontal offset,
+which is always in the range 0..MaxHorizOfs. The data field HorizOfs can
+only be changed by calling this function, as it performs some essential
+housekeeping.
+
+See also:  0869MoveToHorizPos
+;
+;-------------------------------------------------------------------
+!TOPIC 840 BuildBrowScreenRow,TBrowserWindow
+!NOINDEX
+function TBrowserWindow.BuildBrowScreenRow(var RR : RowRec) : Integer;
+
+Build a RowRec for the record currently in the record buffer.
+
+This function is provided primarily for use in filter routines. The filter
+method, 0871PerformFilter, should execute the following sequence. First, it
+should call 0866GetThisRec to load the record being tested into the record
+buffer. Then it should decide whether to filter or display the record. If
+it displays the record, it should call BuildBrowScreenRow, which
+ultimately calls 0841BuildRow to build the display string. Calling
+BuildBrowScreenRow in PerformFilter avoids having to construct the RowRec
+a second time later. BuildBrowScreenRow returns an error class, which
+should also be returned by PerformFilter.
+;
+;-------------------------------------------------------------------
+!TOPIC 841 BuildRow,TBrowserWindow
+!NOINDEX
+function TBrowserWindow.BuildRow(var RR : RowRec) : Integer;
+
+Build the display string for the current row.
+
+You must override this method in an object derived from 0837TBrowserWindow.
+When BuildRow is called, the record buffer (supplied by you when you
+construct the object) contains the current record (or the portion of it
+specified by VarRecMaxReadLen for variable length records). The function
+must initialize the RR.Row field with the string to be displayed for this
+record. The Status field of RR is already initialized when BuildRow is
+called. If Status equals zero, the record buffer is properly initialized.
+The Status field can contain other values. When Status is non-zero, the
+record buffer is not initialized. BuildRow should construct
+an appropriate string to indicate the lock or error condition. The IKS and
+Ref fields of RR are always initialized when BuildRow is called. BuildRow
+should return zero if it is successful. Otherwise it should return a
+B-Tree Filer error class.
+;
+;-------------------------------------------------------------------
+!TOPIC 842 CalcMaxWidth,TBrowserWindow
+!NOINDEX
+function TBrowserWindow.CalcMaxWidth : Integer; virtual;
+
+Calculate the maximum width of a browser window in pixels.
+
+The maximum width is computed as 0365MaxCols (defined in 0363LOWBROWS, 128 by
+default) times FontDescr.ChWidth. Override this method if you need a
+different formula for the maximum width.
+
+See also:  0876SetCharValues
+;
+;-------------------------------------------------------------------
+!TOPIC 843 CanCallLowBrowser,TBrowserWindow
+!NOINDEX
+function TBrowserWindow.CanCallLowBrowser : Boolean; virtual;
+
+Return True if BrowserPtr points to a valid 0836LowWinBrowser.
+
+If you override virtual methods and you must refer to the BrowserPtr
+field, you must ensure that CanCallLowBrowser returns True before doing
+so. If it returns False, your function should perform a safe default
+action and return.
+;
+;-------------------------------------------------------------------
+!TOPIC 844 ConnectLowBrowser,TBrowserWindow
+!NOINDEX
+function TBrowserWindow.ConnectLowBrowser(ABrowserPtr : PLowWinBrowser;
+                            AHeader, AFooter : BRLRowEltString) : Boolean;
+
+Connect a 0836LowWinBrowser object and a 0837TBrowserWindow object.
+
+ABrowserPtr is the address of a LowWinBrowser previously instantiated.
+ConnectLowBrowser returns False if ABrowserPtr is nil, else True. If the
+instantiation of ABrowserPtr is done when ConnectLowBrowser is called,
+this provides a convenient way of detecting errors.
+
+AHeader and AFooter contain the header and footer lines displayed in the
+browser window. Specify an empty string to leave out either line. AHeader
+and AFooter are limited to one line each. These can also be changed later
+with a call to 0877SetHeaderFooter.
+;
+;-------------------------------------------------------------------
+!TOPIC 845 DeleteTheFont,TBrowserWindow
+!NOINDEX
+procedure TBrowserWindow.DeleteTheFont; virtual;
+
+Delete the font for the browser window.
+
+This function deletes the font produced by 0882SetTheFont. There is currently
+no reason for you to override this function.
+;
+;-------------------------------------------------------------------
+!TOPIC 846 Done,TBrowserWindow
+!NOINDEX
+destructor TBrowserWindow.Done; virtual;
+
+Dispose of the browser window.
+
+This destructor deallocates all data structures used by the browser, then
+calls TWindow's Done destructor. The associated fileblock is not closed.
+
+See also:  0868Init
+;
+;-------------------------------------------------------------------
+!TOPIC 847 EnableFilter,TBrowserWindow
+!NOINDEX
+procedure TBrowserWindow.EnableFilter(On : Boolean);
+
+Enable or disable calls to the 0871PerformFilter method.
+
+If On is False, an internal field of the browser is set to False and the
+0848FilterIsOn function then returns False. The PerformFilter method should
+detect this condition and accept all records passed to it.
+
+By default the filter is disabled. Pass True to EnableFilter to start
+filtering.
+;
+;-------------------------------------------------------------------
+!TOPIC 848 FilterIsOn,TBrowserWindow
+!NOINDEX
+function TBrowserWindow.FilterIsOn(var InProgress : Boolean) : Boolean;
+
+Return True if the filter is enabled.
+
+The result of this function reflects the last call to 0847EnableFilter. It
+should be used by the 0871PerformFilter method to determine whether filtering
+is active.
+
+InProgress is set to True if FilterIsOn is called within certain methods
+while the browser page is being rebuilt.
+
+See also:  0885ShowFilterWorking
+;
+;-------------------------------------------------------------------
+!TOPIC 849 FirstUserInit,TBrowserWindow
+!NOINDEX
+procedure TBrowserWindow.FirstUserInit; virtual;
+
+Called once after 0844ConnectLowBrowser is called and a window handle is
+assigned.
+
+Override this virtual method to perform any browser setup tasks that
+depend on having a 0836LowWinBrowser attached to the 0837TBrowserWindow and also
+on having a window handle assigned to the window (HWindow <> 0). This
+method is called only once, within the TBrowserWindow's 0883SetupWindow
+method.
+;
+;-------------------------------------------------------------------
+!TOPIC 850 GetBrowserTextRect,TBrowserWindow
+!NOINDEX
+procedure TBrowserWindow.GetBrowserTextRect(var TextRect : TRect); virtual;
+
+Return the rectangle within which the header, footer and data records are
+displayed.
+
+See also:  0863GetRowAreaRect
+;
+;-------------------------------------------------------------------
+!TOPIC 851 GetCurNrOfLines,TBrowserWindow
+!NOINDEX
+function TBrowserWindow.GetCurNrOfLines : Word;
+
+Return the current count of the browser lines (not including the header
+and footer lines).
+
+This method accounts for the pixel height of the window and the font size
+used for the text.
+;
+;-------------------------------------------------------------------
+!TOPIC 852 GetCurrentDatRef,TBrowserWindow
+!NOINDEX
+function TBrowserWindow.GetCurrentDatRef : LongInt;
+
+Return the record number of the highlighted record.
+
+This method simply returns the data reference number of the highlighted
+record.
+;
+;-------------------------------------------------------------------
+!TOPIC 853 GetCurrentKeyNr,TBrowserWindow
+!NOINDEX
+function TBrowserWindow.GetCurrentKeyNr : Word;
+
+Return the number of the browsing index.
+
+This method simply returns the number of the index being used for
+browsing.
+;
+;-------------------------------------------------------------------
+!TOPIC 854 GetCurrentKeyStr,TBrowserWindow
+!NOINDEX
+function TBrowserWindow.GetCurrentKeyStr : String;;
+
+Return the key string for the browsing index of the highlighted record.
+
+This method simply returns the key string associated with the browsing
+index of the highlighted record. The string is returned as the function
+result.
+;
+;-------------------------------------------------------------------
+!TOPIC 855 GetCurrentRec,TBrowserWindow
+!NOINDEX
+function TBrowserWindow.GetCurrentRec(var Match : Boolean) : Integer;
+
+Read the highlighted record into the record buffer.
+
+The data record for the current browser row can be read by calling this
+method. The record is read into the buffer specified to the constructor.
+The function return value contains the encountered error class. Note that
+it is not necessary to call this method within the 0841BuildRow method.
+
+Match returns True if the display string of the record just read matches
+the string already in the display buffer of the browser. It returns False
+if the record has changed.
+
+See also:  0866GetThisRec
+;
+;-------------------------------------------------------------------
+!TOPIC 856 GetFooter,TBrowserWindow
+!NOINDEX
+function TBrowserWindow.GetFooter : BRLRowEltString;
+
+Return the current footer string.
+
+This method is an alternative to using 0877SetHeaderFooter, for use when you
+are continually altering the footer line. The default implementation of
+this method retrieves the last footer set by SetHeaderFooter or the
+original footer.
+
+See also:  0857GetHeader
+;
+;-------------------------------------------------------------------
+!TOPIC 857 GetHeader,TBrowserWindow
+!NOINDEX
+function TBrowserWindow.GetHeader : BRLRowEltString;
+
+Return the current header string.
+
+This method is an alternative to using 0877SetHeaderFooter, for use when you
+are continually altering the header line. The default implementation of
+this method retrieves the last header set by SetHeaderFooter or the
+original header.
+
+See also:  0856GetFooter
+;
+;-------------------------------------------------------------------
+!TOPIC 858 GetHeaderFooterColor,TBrowserWindow
+!NOINDEX
+procedure TBrowserWindow.GetHeaderFooterColor(var Color, BkColor : TColorRef;
+                               ForHeader : Boolean); virtual;
+
+Return the colors for the header and footer lines.
+
+This method is called when the browser needs to determine the colors for
+the header and footer lines of the window. By default, the header and
+footer colors are the same and it sets the values of the foreground color
+(Color) and background color (BkColor) to the Windows colors for control
+elements (system color indices COLOR_HIGHLIGHT and COLOR_HIGHLIGHTTEXT).
+If you would like to use different colors, you must override this
+function.
+
+See also:  0888UseSeparator
+;
+;-------------------------------------------------------------------
+!TOPIC 859 GetHighLightColor,TBrowserWindow
+!NOINDEX
+procedure TBrowserWindow.GetHighLightColor(var Color, BkColor : TColorRef); virtual;
+
+Define the colors for the current browser line.
+
+This method is called when the browser needs to determine the colors for
+the currently highlighted line of the window. By default, it sets the
+values of the foreground color (Color) and background color (BkColor) to
+the Windows colors for window text and background (system color indices
+COLOR_WINDOW and COLOR_WINDOWTEXT), although it reverses the normal sense
+of foreground and background to achieve an inverted appearance. If you
+would like to use different colors, you must override this function.
+
+See also:  0858GetHeaderFooterColor  0862GetNormalColor
+;
+;-------------------------------------------------------------------
+!TOPIC 860 GetLineNrFromY,TBrowserWindow
+!NOINDEX
+function TBrowserWindow.GetLineNrFromY(Y : Integer) : Word;
+
+Calculate a browser row number given a pixel coordinate.
+
+This method is called by the WMLButtonDown and WMMouseMove message
+handlers to map the mouse position to a browser row number.
+
+See also:  0865GetTextOutPosY
+;
+;-------------------------------------------------------------------
+!TOPIC 861 GetLowHighKey,TBrowserWindow
+!NOINDEX
+procedure TBrowserWindow.GetLowHighKey(var ALowKey, AHighKey : GenKeyStr);
+
+Return the smallest and largest key.
+
+Sets the parameters ALowKey and AHighKey to the smallest and largest keys
+currently displayed by the browser.
+
+See also:  0837TBrowserWindow
+;
+;-------------------------------------------------------------------
+!TOPIC 862 GetNormalColor,TBrowserWindow
+!NOINDEX
+procedure TBrowserWindow.GetNormalColor(var Color, BkColor : TColorRef);
+
+Define the colors for the Browser window.
+
+This method is called when the browser needs to determine the colors for
+normal (non-highlighted) lines of the window. By default, it sets the
+values of the foreground color (Color) and background color (BkColor) to
+the Windows colors for window text and background (system color indices
+COLOR_WINDOWTEXT and COLOR_WINDOW). If you would like to use different
+colors, you must override this function.
+
+See also:  0858GetHeaderFooterColor
+;
+;-------------------------------------------------------------------
+!TOPIC 863 GetRowAreaRect,TBrowserWindow
+!NOINDEX
+procedure TBrowserWindow.GetRowAreaRect(var Rect : TRect); virtual;
+
+Return the rectangle within which the data records are displayed.
+
+See also:  0850GetBrowserTextRect
+;
+;-------------------------------------------------------------------
+!TOPIC 864 GetSuppressTimer,TBrowserWindow
+!NOINDEX
+function TBrowserWindow.GetSuppressTimer : Boolean; virtual;
+
+Return True if timer messages sent to the browser window are being
+ignored.
+
+By default, timer suppression is turned off, i.e., timer messages sent to
+the browser window cause a screen update whenever possible.
+
+See also:  0881SetSuppressTimer
+;
+;-------------------------------------------------------------------
+!TOPIC 865 GetTextOutPosY,TBrowserWindow
+!NOINDEX
+function TBrowserWindow.GetTextOutPosY(LineNr : Word) : Integer; virtual;
+
+Return the pixel coordinate of a browser row number.
+
+The function result can be passed as parameter to the Windows API function
+TextOut.
+
+See also:  0860GetLineNrFromY
+;
+;-------------------------------------------------------------------
+!TOPIC 866 GetThisRec,TBrowserWindow
+!NOINDEX
+function TBrowserWindow.GetThisRec(var RR : RowRec) : Integer;
+
+Read the specified record into the record buffer.
+
+RR contains fields named IKS and Ref which describe the key string and
+reference number of a record. GetThisRec is usually called within a
+0871PerformFilter method to get complete record data for making a filter
+decision. The function result is the error class obtained when reading the
+record.
+;
+;-------------------------------------------------------------------
+!TOPIC 867 HandleChar,TBrowserWindow
+!NOINDEX
+function TBrowserWindow.HandleChar(var Msg : TMessage ) : Boolean; virtual;
+
+Handle ASCII characters entered within the browser.
+
+This method is always called when the wm_Char message is sent to the
+browser window. The Msg parameter contains the original contents of the
+message, including the character itself in the wParam field.
+
+If the function returns True, the browser assumes that HandleChar has
+completely handled the message and performs no further action on the
+character. If HandleChar returns False, the browser treats the character
+in its standard way. Note that HandleChar can modify the character it
+receives (for example, by uppercasing it) and return False to have the
+browser act on the modified character.
+
+The default implementation of this method simply returns False. Override
+it for different behavior.
+;
+;-------------------------------------------------------------------
+!TOPIC 868 Init,TBrowserWindow
+!NOINDEX
+constructor TBrowserWindow.Init(AParent : PWindowsObject; ATitle : PChar);
+
+Initialize a 0837TBrowserWindow.
+
+This constructor first calls TWindow's Init constructor to initialize the
+OWL window object.
+
+The 0837TBrowserWindow constructor then initializes fields of the browser
+window itself, but it leaves the BrowserPtr field set to nil, since no
+0836LowWinBrowser class is attached to it yet. Next instantiate a LowWinBrowser
+class, then call TBrowserWindow.ConnectLowBrowser to connect the two. Most
+methods of TBrowserWindow do nothing until this sequence is completed.
+
+See also:  0846Done
+;
+;-------------------------------------------------------------------
+!TOPIC 869 MoveToHorizPos,TBrowserWindow
+!NOINDEX
+procedure TBrowserWindow.MoveToHorizPos(Pos : Word); virtual;
+
+Scroll the browser horizontally.
+
+The browser is scrolled horizontally until the pixel position Pos is at
+the left of the window. The 0839AdjustHorizOfs method is called to ensure that
+Pos is within range for the browser.
+;
+;-------------------------------------------------------------------
+!TOPIC 870 MoveToRelPos,TBrowserWindow
+!NOINDEX
+procedure TBrowserWindow.MoveToRelPos(Pos : Word); virtual;
+
+Move the highlight bar to a relative position in the fileblock.
+
+This procedure positions the highlight bar approximately at the relative
+position Pos in the current browsing index. Pos can take on the values 0
+(start of file) to 63 (end of file).
+;
+;-------------------------------------------------------------------
+!TOPIC 871 PerformFilter,TBrowserWindow
+!NOINDEX
+function TBrowserWindow.PerformFilter(var RR : RowRec;
+                       var UseIt : Boolean) : Integer;
+                                                   virtual;
+
+Determine whether to display a given record.
+
+The default implementation of this method accepts all records; override it
+for different behavior. This method is called for all records, regardless
+of whether 0847EnableFilter was called with a parameter of True. It should
+check the value returned by 0848FilterIsOn before doing any real filtering.
+
+On entry to this function, the IKS and Ref fields of the RR parameter are
+already initialized. If possible, the filter routine should determine
+whether to accept the given record by using just the values of these
+fields. If the filter routine needs the complete data record to decide
+whether to accept the record, it should call the method 0866GetThisRec
+(passing it RR) to load the specified record into the record buffer.
+
+To accept the record for display, PerformFilter should set UseIt to True;
+to filter (ignore) the record, it should set UseIt to False. PerformFilter
+should return a function result of zero to indicate success; otherwise it
+should return an error class.
+
+If the record is accepted for display, PerformFilter can immediately build
+the row to be displayed by calling 0840BuildBrowScreenRow. This prevents the
+browser from having to read the data record a second time.
+;
+;-------------------------------------------------------------------
+!TOPIC 872 PosClientCorruption,TBrowserWindow
+!NOINDEX
+procedure TBrowserWindow.PosClientCorruption;
+
+Indicate that the browser window needs to be fully updated.
+
+You should call PosClientCorruption to inform the browser when the entire
+window needs to be rebuilt and repainted. For example, you should do so
+when a new record is added to the database or when you change filtering
+criteria.
+;
+;-------------------------------------------------------------------
+!TOPIC 873 PostCompletePage,TBrowserWindow
+!NOINDEX
+function TBrowserWindow.PostCompletePage : Integer; virtual;
+
+Execute an operation after constructing each browser page.
+
+By default this method does nothing. Override it to perform a custom
+action.
+
+This method is called after constructing the browser page. See
+0874PreCompletePage for more information.
+
+PostCompletePage can signal an error by returning a non-zero function
+result. This causes the browser to call the virtual method
+0884ShowErrorOccured with the given result.
+;
+;-------------------------------------------------------------------
+!TOPIC 874 PreCompletePage,TBrowserWindow
+!NOINDEX
+function TBrowserWindow.PreCompletePage : Integer; virtual
+
+Execute an operation before constructing each browser page.
+
+By default this method does nothing. Override it to perform a custom
+action.
+
+A browser page consists of an array of information with one element for
+each row displayed within the browser window. Each element is of type
+RowRec. Whenever a browser command is executed, the browser must rebuild
+the page of elements to display. The page is constructed in two steps. In
+the first step, the IKS and Ref fields of each element are filled in by
+scanning the browse index and calling the 0871PerformFilter method. In the
+second step, the 0841BuildRow method is called for each of the elements to
+construct a display string for each one.
+
+PreCompletePage is called after the first step is complete.
+
+0873PostCompletePage is called after the second step is complete.
+
+PreCompletePage can signal an error by returning a non-zero function
+result. This causes the browser to call the virtual method
+0884ShowErrorOccured with the given result. In this case, the second step is
+not executed.
+;
+;-------------------------------------------------------------------
+!TOPIC 875 SetAndUpdateBrowserScreen,TBrowserWindow
+!NOINDEX
+procedure TBrowserWindow.SetAndUpdateBrowserScreen(NewKeyStr : GenKeyStr;
+                                                   NewRef : LongInt);
+
+Move the highlight bar to the specified record.
+
+NewKeyStr and NewRef specify the key string and reference number of a
+record to highlight. A new browser page is built and the screen is updated
+immediately if the browser window is visible.
+
+You can use this routine after a search is performed on the fileblock, or
+after a new record is added, to position the highlight on a new record.
+
+See also:  0887UpdateBrowserScreen
+;
+;-------------------------------------------------------------------
+!TOPIC 876 SetCharValues,TBrowserWindow
+!NOINDEX
+procedure TBrowserWindow.SetCharValues virtual;
+
+Set the character width and height based on browser font.
+
+The browser calls this function to initialize the following data fields in
+the FontDescr record: ChHeight, ChWidth and ChRefWidth. It uses the
+Windows API GetTextMetrics call to do so. The FontDescr.ChHeightExtra
+field is set to 0.
+
+Override this method if you need to apply another calculation algorithm to
+determine the value of these fields.
+
+See also:  0882SetTheFont  0835FontInfo
+;
+;-------------------------------------------------------------------
+!TOPIC 877 SetHeaderFooter,TBrowserWindow
+!NOINDEX
+procedure TBrowserWindow.SetHeaderFooter(AHeader, AFooter : BRLRowEltString);
+
+Change the header and footer lines.
+
+Use this method to change the header and footer specified when the browser
+window was constructed. Specify an empty string to disable the header or
+footer.
+
+Calling this method causes the browser page to be rebuilt. If the browser
+window is visible, the screen is updated immediately.
+
+See also:  0837TBrowserWindow
+;
+;-------------------------------------------------------------------
+!TOPIC 878 SetKeyNr,TBrowserWindow
+!NOINDEX
+procedure TBrowserWindow.SetKeyNr(Value : Word);
+
+Set the index number used by the browser.
+
+Value should range between 0 and the largest index number of the fileblock
+being browsed.
+
+SetKeyNr simply stores the new index number in a field of the browser
+class. You must specify a new current record and update the screen by
+calling 0875SetAndUpdateBrowserScreen.
+
+Index 0 is defined to be the arrival sequence of the records in the data
+file (i.e., the reference number sequence).
+;
+;-------------------------------------------------------------------
+!TOPIC 879 SetLowHighKey,TBrowserWindow
+!NOINDEX
+procedure TBrowserWindow.SetLowHighKey(ALowKey, AHighKey : GenKeyStr);
+
+Set new key limits for the browser.
+
+ALowKey and AHighKey specify the new low and high key limits.
+
+SetLowHighKey simply stores the new key limits in fields of the browser.
+You must update the browser screen by calling 0887UpdateBrowserScreen or
+0875SetAndUpdateBrowserScreen (if the current record is outside of the new key
+range).
+;
+;-------------------------------------------------------------------
+!TOPIC 880 SetMargins,TBrowserWindow
+!NOINDEX
+procedure TBrowserWindow.SetMargins; virtual;
+
+Initialize the text margins.
+
+The browser calls this method to initialize the TextMargin field of the
+object. By default it sets the margins to 0 pixels on all sides. Override
+this method to allow for non-zero margin values.
+;
+;-------------------------------------------------------------------
+!TOPIC 881 SetSuppressTimer,TBrowserWindow
+!NOINDEX
+function TBrowserWindow.SetSuppressTimer(DoSuppr : Boolean) : Boolean;
+
+Suppress or enable timer message handling in the browser.
+
+Timer message handling is enabled by default. When it is enabled, the
+browser updates its screen whenever a timer message is received, the
+window is not iconized, and the browser is fully initialized.
+Pass True to SetSuppressTimer to disable timer message handling. The
+function returns the previous state of timer handling in its function
+result.
+
+See also:  0864GetSuppressTimer
+;
+;-------------------------------------------------------------------
+!TOPIC 882 SetTheFont,TBrowserWindow
+!NOINDEX
+procedure TBrowserWindow.SetTheFont; virtual;
+
+Set the font for the browser window.
+
+If you would like to use a special font for the Browser window, you must
+override this method and assign a new font handle to the FontDescr.Font
+field of the class (for example, by calling CreateFontIndirect). If the
+font uses a fixed character width, you must set lwFont.FixedPitch to True,
+otherwise to False.
+
+By default SetTheFont initializes the FontDescr.Font field to the font
+handle returned by the Windows API call GetStockObject(SYSTEM_FIXED_FONT).
+It then sets the family to FF_MODERN, the pitch to FIXED_PITCH, and the
+wieght to FW_NORMAL. It also sets FontDescr.FixedPitch to True.
+
+See also:  0845DeleteTheFont  0876SetCharValues  0835FontInfo
+;
+;-------------------------------------------------------------------
+!TOPIC 883 SetupWindow,TBrowserWindow
+!NOINDEX
+procedure TBrowserWindow.SetupWindow; virtual;
+
+OWL calls this method as soon as a TWindow object is assigned a window
+handle.
+
+0837TBrowserWindow's implementation of SetupWindow first calls the inherited
+TWindow.SetupWindow. Then, if the BrowserPtr field of TBrowserWindow is
+not nil, it calls lwFirstInit, which performs additional initialization
+including a call to 0882SetTheFont and 0849FirstUserInit.
+;
+;-------------------------------------------------------------------
+!TOPIC 884 ShowErrorOccured,TBrowserWindow
+!NOINDEX
+procedure TBrowserWindow.ShowErrorOccured(AClass : Integer); virtual;
+
+Execute an operation when a browser error occurs.
+
+By default this method just produces a beep. Override it to perform a
+custom action. This method is called whenever an error is detected within
+the browser. The parameter AClass is the B-Tree Filer error class.
+;
+;-------------------------------------------------------------------
+!TOPIC 885 ShowFilterWorking,TBrowserWindow
+!NOINDEX
+procedure TBrowserWindow.ShowFilterWorking(CallState : Integer;
+                            Rejected : Boolean); virtual;
+
+Called by the browser as a hook to indicate that the filter is working.
+
+This method is called immediately after each call to 0871PerformFilter to
+filter a record from the display. If the record was rejected, the Rejected
+parameter passed to ShowFilterWorking is True, otherwise False.
+
+ShowFilterWorking is called once before actual filtering begins, with the
+CallState parameter set to -1. This provides an opportunity for the
+application to instantiate a window or prepare the screen in some other
+way. For each record that is tested by PerformFilter, CallState is set to
+0. After the page is built, a final call is made with CallState set to 1,
+which allows the application to destroy the window or otherwise clean up.
+
+The default implementation of ShowFilterWorking does nothing.
+
+See also:  0847EnableFilter
+;
+;-------------------------------------------------------------------
+!TOPIC 886 TotalCharHeight,TBrowserWindow
+!NOINDEX
+function TBrowserWindow.TotalCharHeight : Word; virtual;
+
+Return the height of one browser row in pixels.
+
+This function returns the sum of FontDescr.ChHeight and
+FontDescr.ChHeightExtra.
+
+See also:  0876SetCharValues
+;
+;-------------------------------------------------------------------
+!TOPIC 887 UpdateBrowserScreen,TBrowserWindow
+!NOINDEX
+procedure TBrowserWindow.UpdateBrowserScreen;
+
+Rebuild and redraw the browser screen.
+
+Call this method when the fileblock has been changed in a way that affects
+the browser screen. For example, if you delete a record, call
+UpdateBrowseScreen to account for it.
+
+See also:  0875SetAndUpdateBrowserScreen
+;
+;-------------------------------------------------------------------
+!TOPIC 888 UseSeparator,TBrowserWindow
+!NOINDEX
+function TBrowserWindow.UseSeparator(var Color : TColorRef) : Boolean;
+
+Determine whether a dividing line should be displayed between the header
+or footer and the body of the browser window.
+
+The browser window calls this function to determine whether separator
+lines are displayed. The default implementation returns False, which
+indicates that no separators should be used. To obtain a separator,
+override this method and return True. Also, return the color value to be
+used for the separator.
+
+See also:  0858GetHeaderFooterColor
+;
+;-------------------------------------------------------------------
+!TOPIC 889 WriteStringOut,TBrowserWindow
+!NOINDEX
+function TBrowserWindow.WriteStringOut(var S : String; LineNr : word;
+                                       DC : HDC;
+                                       XOfs : Integer) : Word; virtual;
+
+Output a browser string (header, footer, or data row).
+
+This function outputs the string S to the text row LineNr at a horizontal
+offset of XOfs pixels. LineNr equals 0 for the header, 1 for the first
+data row, etc. DC is the device context. To obtain the Y position of the
+write, you must call 0865GetTextOutPosY; this function's result is the result
+of that call.
+
+The browser calls this function while painting the window. You could
+override it if, for example, you were using a proportional font in the
+browser and you wanted to have WriteStringOut call the Windows API routine
+TabbedTextOut instead of TextOut to display the string.
+
+When the browser calls this method, the font and the colors of the line
+have already been selected into the display context.

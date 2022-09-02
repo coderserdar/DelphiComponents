@@ -1,0 +1,151 @@
+;
+;-------------------------------------------------------------------
+!TOPIC 634 NWSema
+
+NWSema provides complete access to NetWare's semaphore services. Semaphores
+provide a flexible but simple service that is useful in many multi-user
+applications. A semaphore is a signed byte value that is stored in server
+memory and can be accessed and changed by all workstations. The traditional
+use for semaphores is as a synchronization or locking mechanism. For
+example, if the value of the semaphore is greater than or equal to zero, a
+particular resource can safely be accessed by a workstation. To reserve the
+resource, the station decrements the semaphore and assures that the
+semaphore is still non-negative. When it's done using the resource, it
+increments the semaphore value again. By setting the semaphore's initial
+value, the application can control the number of stations that have
+simultaneous access to the resource.
+
+This is but one use for semaphores, but they can be used for many other
+reasons: see the demo program NETDEMO for another use.
+
+!NOWRAP
+  0635Declarations  0638nwCloseSema
+  0639nwDecSema     0640nwExamineSema
+  0641nwIncSema     0642nwOpenSema
+!WRAP
+
+Like other NetWare units in B-Tree Filer this unit builds upon the identifiers in the
+0458NWBase unit.
+;
+;-------------------------------------------------------------------
+!TOPIC 635 Declarations,NWSema
+!NOINDEX
+
+The 0634NWSema unit declares the following constants, types and variables:
+
+  0636Errors  0637TnwSemaName
+
+;
+;-------------------------------------------------------------------
+!TOPIC 636 Errors,NWSema
+!NOINDEX
+!NOWRAP
+;!TABLE
+const
+  nwsErrInvValue  = $7F21;  {Negative initial value on open operation}
+  nwsErrInvName   = $7F22;  {Invalid semaphore name on open operation}
+  nwsErrInvHandle = $89FF;  {Invalid semaphore handle passed to routine}
+  nwsErrTimeOut   = $897F;  {Timeout on nwDecSema}
+  nwsErrOverflow  = $8901;  {Overflow on nwIncSema}
+!WRAP
+
+Error codes that can be returned by using the semaphore routines.
+;
+;-------------------------------------------------------------------
+!TOPIC 637 TnwSemaName
+!NOINDEX
+type
+  TnwSemaName  = string[127];
+
+A type defining a semaphore name.
+;
+;-------------------------------------------------------------------
+!TOPIC 638 nwCloseSema
+!NOINDEX
+function 0634NWSema.nwCloseSema(Server : TnwServer; Handle : nwLong) : TnwErrorCode;
+
+Close a semaphore.
+
+Server is the server's handle for the semaphore. Handle must have been
+obtained from a previous call to 0642nwOpenSema. nwCloseSema decrements the
+open count for the semaphore. When the open count reaches zero, the
+semaphore is automatically deleted by the server. nwCloseSema does not
+alter the semaphore's value.
+
+The function returns 0 if it is successful, otherwise it returns
+nwsErrInvHandle.
+;
+;-------------------------------------------------------------------
+!TOPIC 639 nwDecSema
+!NOINDEX
+function 0634NWSema.nwDecSema(Server : TnwServer; Handle : nwLong;
+                   TimeOut : word) : TnwErrorCode;
+
+Decrement the value of a semaphore.
+
+If the result is greater than or equal to zero, the function returns
+immediately with a result of 0. If the value is negative, the workstation
+is put in a queue until another workstation increments the semaphore or
+TimeOut ticks go by (18.2 ticks per second). If another workstation
+increments the semaphore, the function returns 0. If a timeout occurs,
+the semaphore's value is incremented again and the function returns
+nwsErrTimeout.
+
+See also:  0641nwIncSema  0642nwOpenSema
+;
+;-------------------------------------------------------------------
+!TOPIC 640 nwExamineSema
+!NOINDEX
+function 0634NWSema.nwExamineSema(Server : TnwServer;
+                       Handle : nwLong;
+                       var Value : nwInt;
+                       var OpenCount : word) : TnwErrorCode;
+
+Return the open count and value of a semaphore.
+
+See also:  0642nwOpenSema
+;
+;-------------------------------------------------------------------
+!TOPIC 641 nwIncSema
+!NOINDEX
+function 0634NWSema.nwIncSema(Server : TnwServer; Handle : nwLong) : TnwErrorCode;
+
+Increment the value of a semaphore.
+
+If it is 127, the function returns with nwsErrOverflow. If it is less
+than 127, the value of the semaphore in incremented by one and the
+function returns with zero. If there are callers of 0639nwDecSema waiting
+in a queue when nwIncSema is called, the first process in the queue is
+released.
+
+See also:  0642nwOpenSema
+;
+;-------------------------------------------------------------------
+!TOPIC 642 nwOpenSema
+!NOINDEX
+function 0634NWSema.nwOpenSema(Server : TnwServer;
+                    Name : TnwSemaName;
+                    InitialValue : nwInt;
+                    var OpenCount : word;
+                    var Handle : nwLong) : TnwErrorCode;
+
+Open or create a semaphore.
+
+You must call this function before using a semaphore. Name is a string
+that labels the semaphore. All stations using this semaphore must refer to
+the same name (although case is not significant).
+
+InitialValue sets the initial value of the semaphore. This value is
+ignored except when the first station opens the semaphore. The initial
+value must be in the range from 0 to 127 inclusive.
+
+The number of stations (including the current one) that have opened the
+semaphore is returned in the variable OpenCount. A four byte handle to the
+semaphore is returned in the variable Handle. This handle must be passed
+to all of the other routines for accessing semaphores.
+
+The function returns zero if the semaphore is successfully opened,
+nwsErrInvName if the name is empty, or nwsErrInvValue if the initial value
+is invalid.
+
+See also:  0638nwCloseSema

@@ -1,0 +1,62 @@
+;
+;-------------------------------------------------------------------
+!TOPIC 763 TpAlloc
+The TpAlloc unit is used by 0380MSort to allocate blocks of heap
+that are greater than 64K in size.
+
+  0764HugeGetMem                     0765HugeFreeMem
+  0766Linear                         0767LinearToPointer
+  0768PtrDiff                        0769Normalized
+;
+;-------------------------------------------------------------------
+!TOPIC 764 HugeGetMem
+!NOINDEX
+procedure 0763TpAlloc.HugeGetMem(var Pt; Bytes : LongInt);
+
+Allocate a block of memory of size Bytes and store pointer to it in
+Pt. Pt is nil if Bytes > MaxAvail.
+
+See also:  0765HugeFreeMem
+;
+;-------------------------------------------------------------------
+!TOPIC 765 HugeFreeMem
+!NOINDEX
+procedure 0763TpAlloc.HugeFreeMem(var Pt; Bytes : LongInt);
+
+Deallocate a block of memory of size Bytes pointed to by Pt, a pointer
+variable. Pt is set to nil on Exit. Does nothing if Pt is nil.
+
+See also:  0764HugeGetMem
+;
+;-------------------------------------------------------------------
+!TOPIC 766 Linear
+!NOINDEX
+function 0763TpAlloc.Linear(P : Pointer) : LongInt;
+
+Converts a pointer to a linear address to allow differences in addresses to
+be calculated. The pointer must be in the range $0:$0 to $FFFF:$000F.
+
+See also:  0767LinearToPointer
+;
+;-------------------------------------------------------------------
+!TOPIC 767 LinearToPointer
+!NOINDEX
+function 0763TpAlloc.LinearToPointer(L : LongInt) : Pointer;
+
+Return linear address L as a normalized pointer.
+
+See also:  0766Linear
+;
+;-------------------------------------------------------------------
+!TOPIC 768 PtrDiff
+!NOINDEX
+function 0763TpAlloc.PtrDiff(P1, P2 : Pointer) : LongInt;
+
+Return the number of bytes between P1^ and P2^.
+;
+;-------------------------------------------------------------------
+!TOPIC 769 Normalized
+!NOINDEX
+function 0763TpAlloc.Normalized(P : Pointer) : Pointer;
+
+Return P as a normalized pointer.

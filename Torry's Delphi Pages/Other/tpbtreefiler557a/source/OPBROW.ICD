@@ -1,0 +1,65 @@
+Const
+  bcUpdate = ccUser0 - 1;
+
+Const
+  OpBrKeyMax = 220;
+    {-Last available slot in QkRefKeySet}
+{--ID string for installation programs}
+  OpBrKeyID : string[12] = 'opBrows keys';
+{--Default key assignments}
+  OpBrKeySet : Array [0..OpBrKeyMax] Of Byte = (
+   {length keys         command type      key sequence}
+    3,     $00, $00,    ccQuit,          {^Break}
+    3,     $00, $3B,    ccHelp,          {F1}
+    3,     $00, $47,    ccHome,          {Home}
+    3,     $00, $48,    ccUp,            {Up}
+    3,     $00, $49,    ccPageUp,        {PgUp}
+    3,     $00, $4B,    ccLeft,          {Left}
+    3,     $00, $4D,    ccRight,         {Right}
+    3,     $00, $4F,    ccEnd,           {End}
+    3,     $00, $50,    ccDown,          {Down}
+    3,     $00, $51,    ccPageDn,        {PgDn}
+    3,     $00, $76,    ccEndOfFile,     {^PgDn}
+    3,     $00, $84,    ccTopOfFile,     {^PgUp}
+    2,     $03,         ccPageDn,        {^C}
+    2,     $04,         ccRight,         {^D}
+    2,     $05,         ccUp,            {^E}
+    2,     $12,         ccPageUp,        {^R}
+    2,     $13,         ccLeft,          {^S}
+    2,     $17,         ccUp,            {^W}
+    2,     $18,         ccDown,          {^X}
+    2,     $1A,         ccDown,          {^Z}
+    2,     $1B,         ccQuit,          {Esc}
+    3,     $11, $12,    ccTopOfFile,     {^Q^R}
+    3,     $11, $03,    ccEndOfFile,     {^Q^C}
+    3,     $11, $04,    ccEnd,           {^Q^D}
+    3,     $11, $13,    ccHome,          {^Q^S}
+    2,     $0D,         ccSelect,        {Enter}
+    2,     $01,         ccWordLeft,      {^A}
+    2,     $06,         ccWordRight,     {^F}
+    3,     $00, $73,    ccWordLeft,      {^Left}
+    3,     $00, $74,    ccWordRight,     {^Right}
+    2,     $2B,         bcUpdate,        {+}
+
+  {$IFDEF UseMouse}
+    3,     $00, $EF,    ccMouseSel,      {click left  = mouse select}
+    3,     $00, $EE,    ccQuit,          {click right = ESC}
+    3,     $00, $ED,    ccHelp,          {click both  = help}
+  {$ELSE}
+                         0, 0, 0,        {110}
+    0, 0, 0, 0, 0, 0, 0, 0, 0,           {120}
+  {$ENDIF}
+    {-----------pad to End of array----------}
+          0, 0, 0, 0, 0, 0, 0, 0,        {130}
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,        {140}
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,        {150}
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,        {160}
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,        {170}
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,        {180}
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,        {190}
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,        {200}
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,        {210}
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0);       {220}
+
+const
+  OPBrCfgEnd : Byte = 0;

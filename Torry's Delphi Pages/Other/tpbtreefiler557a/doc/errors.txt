@@ -1,0 +1,130 @@
+Summary of B-Tree Filer Error Codes, version 5.57a
+
+Error Class * Message (routine that generates error)
+----- ----- - --------------------------------------------------
+ 9011   -     dBase conversion: End of file
+ 9012   -     dBase conversion: Out of memory
+ 9013   -     dBase conversion: dBase version not supported or not a dBASE III/IV file
+ 9014   -     dBase conversion: Corrupted memo file
+ 9015   -     dBase conversion: Record size too large
+ 9016   -     dBase conversion: Invalid CType (conversion field type)
+ 9017   -     dBase conversion: Error writing type definition include file
+ 9018   -     dBase conversion: Error converting field
+ 9019   -     dBase conversion: List header not initialized or bad part
+ 9020   -     dBase conversion: Too many fields
+ 9021   -     dBase conversion: Wrong field type
+ 9022   -     dBase conversion: Field width too large
+ 9023   -     dBase conversion: Too many decimals
+ 9024   -     dBase conversion: Field type version conflict
+ 9025   -     dBase conversion: Auto relation field is not allowed here
+ 9026   -     dBase conversion: File contains no memo fields
+ 9027   -     dBase conversion: Error opening dump file
+ 9028   -     dBase conversion: Error writing to dump file
+ 9029   -     dBase conversion: Error closing dump file
+ 9030   -     dBase conversion: Programming error
+ 9031   -     dBase conversion: Field name already exists
+ 9032   -     dBase conversion: No field defined
+ 9500   4     Reserved for IoResult error codes (subtract 9500)
+  :     :      :
+ 9899   4     Reserved for IoResult error codes (subtract 9500)
+ 9900   2     Invalid path name (general) (or 'drive not ready' in Windows & protected mode)
+ 9901   4     Too many open files (general)
+ 9902   4     Current directory is full (general)
+ 9903   1     File not found (general)
+ 9904   4     Invalid file descriptor (general)
+ 9905   4     Read request exceeds 64K bytes (general)
+ 9906   4     Write request exceeds 64K bytes (general)
+ 9907   4     Error getting file size (general)
+ 9908   4     Invalid file access mode (general)
+10000   4     Number of page buffers is less than MaxHeight (BTInitIsam)
+10001   3     Serious I/O error in save mode (BTAddRec)
+10002   3     Serious I/O error in save mode (BTDeleteRec)
+10003   3     Serious I/O error in save mode (BTAddKey)
+10004   3     Serious I/O error in save mode (BTDeleteKey)
+10005   3     Serious I/O error in save mode (BtDeleteAllKeys)
+10010   4     Index file probably corrupt (BTOpenFileBlock)
+10020   4     Record length out of range (BTCreateFileBlock)
+10030   4     Insufficient memory (BTOpenFileBlock, BTCreateFileBlock)
+10040   4     Insufficient memory to expand variable record buffer (VREC, general)
+10050   4     Invalid number of indexes specified (BTCreateFileBlock)
+10055   4     Key length too long (BTCreateFileBlock)
+10060   4     Too many indexes (BTOpenFileBlock)
+10065   2     Attempt to write to a read-only fileblock (general);
+10070   4     File read error (general)
+10075   4     File write error (general)
+10080   4     Fileblock not open (BTCloseFileBlock)
+10090   4     Insufficient memory (BTCreateFileBlock)
+10100   4     Insufficient memory (BTOpenFileBlock)
+10110   2     Drive not ready (general)
+10120   4     Index header corrupt; cannot calculate key length (BTOpenFileBlock)
+10121   4     MaxKeyLen incompatible with Fileblock (BTOpenFileBlock)
+10122   4     PageSize for fileblock is greater than MaxPageSize (BTOpenFileBlock)
+10125   4     Key length too long (BTAddKey)
+10130   4     Attempt to write to record number 0 (BTPutRec)
+10135   4     Attempt to delete record 0, or record beyond end of file (BTDeleteRec)
+10140   4     Unexpected DOS error (general)
+10150   4     Out of handles on flush of network fileblock (general)
+10160   4     Fileblock not correctly closed (BTCloseFileBlock)
+10164   4     Invalid key number (general)
+10170   4     Free record list corrupt (BTAddRec, BTDeleteRec)
+10180   4     Attempt to repair Fileblock failed (general)
+10190   4     Extend handle call requires DOS 3.3 or later (ExtendHandles)
+10191   4     Insufficient memory for new file handle table (ExtendHandles)
+10192   4     Unable to initialize new file handle table (ExtendHandles)
+10200   1     No matching key found (BTFindKey)
+10205   1     Data record is locked (BTGetRecReadOnly)
+10210   1     No key found and no larger keys available (BTSearchKey)
+10215   1     Data file is defective (ReIndexFileBlock)
+10220   1     Key to delete was not found (BTDeleteKey)
+10230   1     Cannot add duplicate key (BTAddKey)
+10240   1     No larger key found (BTNextDiffKey)
+10245   1     No smaller key found (BTPrevDiffKey)
+10250   1     No larger key found (BTNextKey)
+10255   1     Sequential access not allowed (BTNextKey)
+10260   1     No smaller key found (BTPrevKey)
+10265   1     Sequential access not allowed (BTPrevKey)
+10270   1     No matching key and record number found (BTFindKeyAndRef)
+10280   1     Index empty (BTGetApprKeyAndRef)
+10285   1     Index empty (BTGetApprRelPos)
+10306   2     Too many fileblock users (BTOpenFileBlock)
+10310   4     Network initialization error (BTInitIsam)
+10315   4     Network exit error (BTExitIsam)
+10322   4     Readlock unlock attempt failed (BTCloseFileBlock)
+10323   4     Record unlock attempt failed (BTCloseFileBlock)
+10330   2     Fileblock lock attempt failed (BTLockFileBlock, BTLockAllOpenFileBlocks)
+10332   2     Readlock attempt failed (BTReadLockFileBlock, BTReadLockAllOpenFileBlocks)
+10335   2     Record lock attempt failed (BTLockRec)
+10337   4     Insufficient memory to expand lock list (BTLockRec)
+10340   4     Fileblock unlock attempt failed (BTUnlockFileBlock, BTUnlockAllOpenFileBlocks)
+10341   4     Readlock unlock attempt failed (general)
+10342   4     Fileblock unlock attempt failed (BTOpenFileBlock)
+10345   4     Record unlock attempt failed (BTUnlockRec)
+10355   2     A lock prevents the operation (BTOpenFileBlock)
+10356   4     Insufficient memory (BTOpenFileBlock)
+10360   2     Cannot repair dialog file (BTOpenFileBlock)
+10390   2     Unexpected DOS error occurred (BTFindRecRef)
+10397   2     A lock prevents operation (general)
+10398   4     Fileblock must be locked (general)
+10399   2     A lock prevents the operation or fileblock is read-only (general)
+10410   1     Data file not found (RestructFileBlock)
+10411   4     Insufficient memory (RestructFileBlock, ReIndexFileBlock)
+10412   4     Section length exceeds 64K (RestructFileBlock, ReIndexFileBlock)
+10415   4     Too many sections in a variable rec (general, VREC unit)
+10420   4     Relative position or scale invalid (BTGetApprKeyAndRef, BTGetApprRecRef)
+10425   4     Relative position or scale invalid (BTGetApprRelPos, BTGetApprRecPos)
+10430   4     No repair in read-only mode (general)
+10435   4     Index page larger than 16K bytes (BTInitIsam)
+10440   4     Cannot create dialog file in read-only mode (BTOpenFileBlock)
+10445   4     Fileblock pointer or descriptor corrupted (general)
+10446   4     Recursive call to B-Tree Filer when EMS in use (general)
+10450   4     BTInitIsam called twice (BTInitIsam)
+10455   4     BTInitIsam not called (general)
+10460   4     Reorganization aborted (RestructFileBlock, ReIndexFileBlock)
+10465   4     Both DAT and SAV files exist (RestructFileBlock, ReIndexFileBlock)
+10470   4     Reindexing aborted (ReIndexFileBlock)
+10475   4     Restructuring aborted (RestructFileBlock)
+10480   4     Operating system's locking function not working (BTOpenFileBlock)
+
+* A number in the third column indicates the FILER version when the error
+code was added or changed, relative to the manual.
+

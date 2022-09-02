@@ -1,0 +1,590 @@
+;
+;-------------------------------------------------------------------
+!TOPIC 779 TVBROWS
+
+The TVBROWS unit implements a Turbo Vision compatibility layer over the
+abstract browser objects in 0363LOWBROWS, etc. The 0785TBrowserView object implemented
+by TVBROWS is also an abstract object; at least one method, 0789BuildRow, must be
+overridden in an object you derive from 0785TBrowserView. Several other virtual methods,
+including 0797GetPalette, 0799HandleEvent, 0801PerformFilter, 0803PreCompletePage,
+0802PostCompletePage, and 0808ShowErrorOccured (sic), can be overridden to
+customize the behavior of the browser.
+
+The closely related object 0787TBrowserWindow is a complete Turbo Vision window
+containing a 0785TBrowserView.
+
+See the demonstration program TVISDEMO for examples of how to use these
+objects.
+
+!NOWRAP
+  0780Declarations         0788BuildBrowScreenRow
+  0789BuildRow             0790ChangeBounds
+  0791Done                 0792Draw
+  0793GetCurrentDatRef     0794GetCurrentKeyNr
+  0795GetCurrentKeyStr     0796GetCurrentRec
+  0797GetPalette           0798GetThisRec
+  0799HandleEvent          0800Init,TBrowserView
+  0801PerformFilter        0802PostCompletePage
+  0803PreCompletePage      0804SetAndUpdateBrowserScreen
+  0805SetHeaderFooter      0806SetKeyNr
+  0807SetLowHighKey        0808ShowErrorOccured
+  0809UpdateBrowserScreen  0810Init,TBrowserWindow
+!WRAP
+;
+;-------------------------------------------------------------------
+!TOPIC 780 Declarations,TVBROWS
+!NOINDEX
+
+The 0779TVBROWS unit declares the following constants, types and variables:
+
+!NOWRAP
+  0781CBrowserView       0782CBInterior
+  0783TBrowserScrollBar  0784LowWinBrowser
+  0785TBrowserView       0786TBInterior
+  0787TBrowserWindow
+!WRAP
+;
+;-------------------------------------------------------------------
+!TOPIC 781 CBrowserView
+!NOINDEX
+const
+  CBrowserView = #29#27#28;
+
+The color palette for a 0785TBrowserView object.
+;
+;-------------------------------------------------------------------
+!TOPIC 782 CBInterior
+!NOINDEX
+const
+  CBInterior = #2#6#7;
+
+The color palette for a 0786TBInterior object, which is used within a
+0787TBrowserWindow.
+;
+;-------------------------------------------------------------------
+!TOPIC 783 TBrowserScrollBar
+!NOINDEX
+type
+  PBrowserScrollBar = ^TBrowserScrollBar;
+  TBrowserScrollBar = object(TScrollBar)
+    function ScrollStep(Part : Integer) : Integer; virtual;
+  end;
+
+This object provides specialized scroll bar behavior for the 0779TVBROWS
+browsers.
+;
+;-------------------------------------------------------------------
+!TOPIC 784 LowWinBrowser,TVBROWS
+!NOINDEX
+type
+  LowWinBrowserPtr = ^LowWinBrowser;
+  LowWinBrowser = object(BRHBrowser)
+    Owner : PBrowserView;
+    ...
+  end;
+
+The 0785TBrowserView and 0787TBrowserWindow objects instantiate an instance of a
+LowWinBrowser, which performs all file access and keeps most of the
+browsing data structures up to date. A pointer to a LowWinBrowser is
+stored in the PBrowser field of TBrowserView and TBrowserWindow. Owner
+points back to the TBrowserView or TBrowserWindow instance that owns the
+LowWinBrowser.
+;
+;-------------------------------------------------------------------
+!TOPIC 785 TBrowserView
+!NOINDEX
+type
+  PBrowserView = ^TBrowserView
+  TBrowserView = object(TView)
+    PBrowser :PLowWinBrowser;
+    PHScrollBar,
+    PVScrollBar : PBrowserScrollBar;
+    ...
+  end;
+
+You create a descendant of a TBrowserView object to display a browser as a
+view, e.g., as a control within a dialog box. TBrowserView is used like
+any other Turbo Vision view. PBrowser points to a 0784LowWinBrowser, which
+handles the platform-independent work of the browser. PHScrollBar and
+PVScrollBar point to browser scroll bars, or are set to nil when there are
+no scroll bars. The methods of the TBrowserView are described in the
+reference section that follows. Note that TBrowserView also inherits all
+methods of the Turbo Vision TView object.
+;
+;-------------------------------------------------------------------
+!TOPIC 786 TBInterior
+!NOINDEX
+type
+  PBInterior = ^TBInterior;
+  TBInterior = object(TBrowserView)
+    ...
+  end;
+
+TBInterior is used internally by the 0779TVBROWS unit.
+;
+;-------------------------------------------------------------------
+!TOPIC 787 TBrowserWindow,TVBROWS
+!NOINDEX
+type
+  PBrowserWindow = ^TBrowserWindow;
+  TBrowserWindow = object(TWindow)
+    PInterior : PBrowserView;
+    ...
+  end;
+
+TBrowserWindow is a complete window containing a 0785TBrowserView. PInterior
+points to the TBrowserView. Note that the methods of TBrowserWindow are
+almost identical to those of TBrowserView. The only real difference is in
+the constructor.
+
+The following methods of TBrowserWindow are the same as those for
+TBrowserView.
+
+  0788BuildBrowScreenRow   0789BuildRow
+  0791Done                 0793GetCurrentDatRef
+  0794GetCurrentKeyNr      0795GetCurrentKeyStr
+  0796GetCurrentRec        0798GetThisRec
+  0801PerformFilter        0802PostCompletePage
+  0803PreCompletePage      0804SetAndUpdateBrowserScreen
+  0805SetHeaderFooter      0806SetKeyNr
+  0807SetLowHighKey        0808ShowErrorOccured
+  0809UpdateBrowserScreen
+;
+;-------------------------------------------------------------------
+!TOPIC 788 BuildBrowScreenRow,TBrowserView
+!NOINDEX
+function TBrowserView.BuildBrowScreenRow(var RR : RowRec) : Integer;
+
+Build a RowRec for the record currently in the record buffer.
+
+This function is provided primarily for use in filter routines. The filter
+method, 0801PerformFilter, should execute the following sequence. First, it
+should call 0798GetThisRec to load the record being tested into the record
+buffer. Then it should decide whether to filter or display the record. If
+it decides to display the record, it should call BuildBrowScreenRow, which
+ultimately calls 0789BuildRow to build the display string for the record.
+Calling BuildBrowScreenRow in PerformFilter avoids having to construct the
+RowRec a second time later. BuildBrowScreenRow returns an error class,
+which should also be returned by PerformFilter.
+;
+;-------------------------------------------------------------------
+!TOPIC 789 BuildRow,TBrowserView
+!NOINDEX
+function TBrowserView.BuildRow(var RR : RowRec) : Integer; virtual;
+
+Build the display string for the current row.
+
+You must override this method in an object derived from 0785TBrowserView. When
+BuildRow is called, the record buffer (supplied by you when you construct
+the object) contains the current record (or the portion of it specified by
+VarRecMaxReadLen for variable length records). The function must
+initialize the RR.Row field with the string to be displayed for this
+record. The Status field of RR is already initialized when BuildRow is
+called. If Status equals zero, the record buffer is properly initialized.
+The Status field can contain other values. When Status is non-zero, the
+record buffer is not initialized. BuildRow should construct an appropriate
+string to indicate the lock or error condition. The IKS and Ref fields of
+RR are always initialized when BuildRow is called. BuildRow should return
+zero if it is successful. Otherwise it should return a B-Tree Filer error
+class.
+
+See also:  0788BuildBrowScreenRow
+;
+;-------------------------------------------------------------------
+!TOPIC 790 ChangeBounds,TBrowserView
+!NOINDEX
+procedure TBrowserView.ChangeBounds(var Bounds : TRect); virtual;
+
+Called by Turbo Vision to change the position or size of the view.
+This method overrides a standard Turbo Vision virtual method that is
+called when the position or size of the view is changed. It first calls
+the inherited TView.ChangeBounds. Then, if the number of rows in the view
+has changed, the browser page is rebuilt.
+;
+;-------------------------------------------------------------------
+!TOPIC 791 Done,TBrowserView
+!NOINDEX
+destructor TBrowserView.Done; virtual;
+
+Dispose of the browser view.
+
+This destructor deallocates all data structures used by the browser, then
+calls TView's destructor. The associated fileblock is not closed.
+
+See also:  0800Init
+;
+;-------------------------------------------------------------------
+!TOPIC 792 Draw,TBrowserView
+!NOINDEX
+procedure TBrowserView.Draw; virtual;
+
+Display the browser view.
+
+This method overrides the standard Turbo Vision virtual method for drawing
+a view. It draws all of the browser rows within the view's bounds.
+;
+;-------------------------------------------------------------------
+!TOPIC 793 GetCurrentDatRef,TBrowserView
+!NOINDEX
+function TBrowserView.GetCurrentDatRef : LongInt;
+
+Return the record number of the highlighted record.
+
+This method simply returns the data reference number of the highlighted
+record.
+;
+;-------------------------------------------------------------------
+!TOPIC 794 GetCurrentKeyNr,TBrowserView
+!NOINDEX
+function TBrowserView.GetCurrentKeyNr; Word;
+
+Return the number of the browsing index.
+
+This method simply returns the number of the index being used for
+browsing.
+;
+;-------------------------------------------------------------------
+!TOPIC 795 GetCurrentKeyStr,TBrowserView
+!NOINDEX
+function TBrowserView.GetCurrentKeyStr : String;
+
+Return the key string for the highlighted record.
+
+This method simply returns the key string associated with the browsing
+index of the highlighted record. The string is returned as the function
+result.
+;
+;-------------------------------------------------------------------
+!TOPIC 796 GetCurrentRec,TBrowserView
+!NOINDEX
+function TBrowserView.GetCurrentRec(var Match : Boolean) : Integer;
+
+Read the highlighted record into the record buffer.
+
+This method is typically called in a 0799HandleEvent method that is responding
+to a user command to edit or delete a record. It reloads the record that
+was highlighted by the user into the buffer provided when the browser was
+initialized.
+
+Match is set to True if the string generated from the just read record
+equals the string currently displayed. If the strings are unequal, Match
+is set to False. This gives a simple check to find out whether the record
+was changed by another workstation.
+
+An error class is returned as the function result. Any non-zero value
+indicates that the record could not be read.
+
+See also:  0798GetThisRec
+;
+;-------------------------------------------------------------------
+!TOPIC 797 GetPalette,TBrowserView
+!NOINDEX
+function TBrowserView.GetPalette : PPalette; virtual;
+
+Return the address of the view's palette.
+
+The default implementation of this method returns a pointer to a constant
+with the value 0781CBrowserView. Override this method to use a different
+palette.
+;
+;-------------------------------------------------------------------
+!TOPIC 798 GetThisRec,TBrowserView
+!NOINDEX
+function TBrowserView.GetThisRec(var RR : RowRec) : Integer;
+
+Read the specified record into the record buffer.
+
+RR contains fields named IKS and Ref which describe the key string and
+reference number of a record. GetThisRec is usually called within a
+0801PerformFilter method to get complete record data for making a filter
+decision. The function result is the error class obtained when reading the
+record.
+;
+;-------------------------------------------------------------------
+!TOPIC 799 HandleEvent,TBrowserView
+!NOINDEX
+procedure TBrowserView.HandleEvent(var Event : TEvent); virtual;
+
+Handle events for the browser view.
+
+HandleEvent first calls the inherited TView.HandleEvent. If the view's
+state has the sfSelected flag set, HandleEvent then handles scroll bar,
+mouse click, mouse move, and keyboard events. Otherwise, if the
+view's ofSelectable option is set and the mouse is clicked on one of the
+view's scroll bars, the view is selected.
+;
+;-------------------------------------------------------------------
+!TOPIC 800 Init,TBrowserView
+!NOINDEX
+constructor TBrowserView.Init(var Bounds : TRect;
+                 PHS, PVS : PBrowserScrollBar;
+                 AFileBlockPtr : IsamFileBlockPtr;
+                 ANumberOfEltsPerRow : Word;
+                 ANumberOfRows : Word;
+                 AKeyNr : Word;
+                 ALKey, AHKey : GenKeyStr;
+                 AHeader, AFooter : BRLRowEltString;
+                 var ADatS;
+                 AIsVarRec : Boolean);
+
+Initialize a browser view (a 0785TBrowserView object).
+
+This constructor first calls TView's constructor, passing it the rectangle
+Bounds. It also stores the scroll bars pointed to by PHS and PVS.
+TBrowserView's constructor allocates a dynamic instance of type
+0784LowWinBrowser and stores its address in the PBrowser field.
+AFileBlockPtr is the address of an IsamFileBlock, already opened.
+
+ANumberOfEltsPerRow is currently ignored. At some point it will specify
+the number of screen lines displayed for each browsed record. Currently
+the number of screen lines per record is always 1.
+
+ANumberOfRows specifies the maximum number of record elements buffered by
+the browser. The number of rows in the browser view must always be less
+than or equal to ANumberOfRows.
+
+AKeyNr is the fileblock index number used for selecting and ordering the
+records displayed by the browser. AKeyNr can be 0, in which case an index
+is not used, the records are just taken in reference number sequence from
+the data file.
+
+ALKey and AHKey determine the lowest and highest keys displayed in the
+browser window. All records that begin with AHKey will be displayed. For
+example, if AHKey = 'bird', the browser displays records having the key
+'bird song'. Pass ALKey as a blank string and AHKey as a string of $FF
+characters to display all records in the fileblock.
+
+AHeader and AFooter contain the header and footer lines displayed in the
+browser window. Specify an empty string to leave out either line. AHeader
+and AFooter are limited to one line each.
+
+ADatS must point to a buffer large enough to hold the largest record in
+the fileblock. The browser reads each record into this buffer as needed.
+The 0798GetThisRec and 0796GetCurrentRec methods also read a record into this
+buffer.
+
+AIsVarRec must be True for browsing a variable length record fileblock,
+False otherwise.
+
+Calling this constructor does not cause the browser to access the
+fileblock or build any display pages. This occurs only when 0792Draw or
+0804SetAndUpdateBrowserScreen is called.
+
+See also:  0791Done
+;
+;-------------------------------------------------------------------
+!TOPIC 801 PerformFilter,TBrowserView
+!NOINDEX
+function TBrowserView.PerformFilter(var RR : RowRec;
+                        var UseIt : Boolean) : Integer;
+
+Determine whether to display a given record.
+
+The default implementation of this method accepts all records. You must
+override it to provide different behavior.
+
+On entry to this function, the IKS and Ref fields of the RR parameter are
+already initialized. If possible, the filter routine should determine
+whether to accept the given record by using just the values of these
+fields. If the filter routine needs the complete data record to decide
+whether to accept the record, it should call the method 0798GetThisRec
+(passing it RR) to load the specified record into the record buffer.
+To accept the record for display, PerformFilter should set UseIt to True;
+to filter (or ignore) the record, it should set UseIt to False.
+
+PerformFilter should return a function result of 0 to indicate success;
+otherwise it should return a B-Tree Filer error class.
+
+If the record is accepted for display, PerformFilter can immediately build
+the row to be displayed by calling 0788BuildBrowScreenRow. This prevents the
+browser from having to read the data record a second time.
+;
+;-------------------------------------------------------------------
+!TOPIC 802 PostCompletePage,TBrowserView
+!NOINDEX
+function TBrowserView.PostCompletePage : Integer;
+
+Execute an operation after constructing each browser page.
+
+By default this method does nothing. Override it to perform a custom
+action.
+
+This method is called after constructing the browser page. See
+0803PreCompletePage for more information.
+
+PostCompletePage can signal an error by returning a non-zero function
+result. This causes the browser to call the virtual method
+0808ShowErrorOccured with the given result.
+;
+;-------------------------------------------------------------------
+!TOPIC 803 PreCompletePage,TBrowserView
+!NOINDEX
+function TBrowserView.PreCompletePage : Integer;
+
+Execute an operation before constructing each browser page.
+
+By default this method does nothing. Override it to perform a custom
+action.
+
+A browser page consists of an array of information with one element for
+each row displayed within the browser window. Each element is of type
+RowRec. Whenever a browser command is executed, the browser must rebuild
+the page of elements to display. The page is constructed in two steps. In
+the first step, the IKS and Ref fields of each element are filled in by
+scanning the browse index and calling the 0801PerformFilter method. In the second
+step, the 0789BuildRow method is called for each of the elements to construct
+a display string for each one.
+
+PreCompletePage is called after the first step is complete.
+
+0802PostCompletePage is called after the second step is complete.
+
+PreCompletePage can signal an error by returning a non-zero function
+result. This causes the browser to call the virtual method
+0808ShowErrorOccured with the given result. In this case, the second step is
+not executed.
+;
+;-------------------------------------------------------------------
+!TOPIC 804 SetAndUpdateBrowserScreen,TBrowserView
+!NOINDEX
+procedure TBrowserView.SetAndUpdateBrowserScreen(NewKeyStr : GenKeyStr;
+                                                  NewRef : LongInt);
+
+Move the highlight bar to the specified record.
+
+NewKeyStr and NewRef specify the key string and reference number of a
+record to highlight. A new browser page is built and the screen is updated
+immediately if the view is visible.
+
+You can use this routine after a search is performed on the fileblock, or
+after a new record is added, to position the highlight on a new record.
+
+See also:  0809UpdateBrowserScreen
+;
+;-------------------------------------------------------------------
+!TOPIC 805 SetHeaderFooter,TBrowserView
+!NOINDEX
+procedure TBrowserView.SetHeaderFooter(AHeader, AFooter : BRLRowEltString);
+
+Change the header and footer lines.
+
+Use this method to change the header and footer specified when the browser
+window was constructed. Specify an empty string to disable the header or
+footer.
+
+Calling this method causes the browser page to be rebuilt. If the browser
+window is visible, the screen is updated immediately.
+
+See also:  0785TBrowserView
+;
+;-------------------------------------------------------------------
+!TOPIC 806 SetKeyNr,TBrowserView
+!NOINDEX
+procedure TBrowserView.SetKeyNr(Value : Word);
+
+Set the index number used by the browser.
+
+Value should range between 0 and the largest index number of the fileblock
+being browsed.
+
+SetKeyNr simply stores the new index number in a field of the browser
+class. You must specify a new current record and update the screen by
+calling 0804SetAndUpdateBrowserScreen.
+
+Index 0 is defined to be the arrival sequence of the records in the data
+file (i.e., the reference number sequence).
+;
+;-------------------------------------------------------------------
+!TOPIC 807 SetLowHighKey,TBrowserView
+!NOINDEX
+procedure TBrowserView.SetLowHighKey(ALowKey, AHighKey : GenKeyStr);
+
+Set new key limits for the browser.
+
+ALowKey and AHighKey specify the new low and high key limits. See the
+0785TBrowserView constructor for more information.
+
+SetLowHighKey simply stores the new key limits in fields of the browser.
+You must update the browser screen by calling 0809UpdateBrowserScreen or
+0804SetAndUpdateBrowserScreen (if the current record is outside of the new key
+range).
+;
+;-------------------------------------------------------------------
+!TOPIC 808 ShowErrorOccured,TBrowserView
+!NOINDEX
+procedure TBrowserView.ShowErrorOccured(Class : Integer); virtual;
+
+Execute an operation when a browser error occurs.
+
+By default this method does nothing. Override it to perform a custom
+action.
+
+This method is called whenever an error is detected within the browser.
+The parameter Class is a B-Tree Filer error class.
+;
+;-------------------------------------------------------------------
+!TOPIC 809 UpdateBrowserScreen,TBrowserView
+!NOINDEX
+procedure TBrowserView.UpdateBrowserScreen;
+
+Rebuild and redraw the browser screen.
+
+Call this method when the fileblock is changed in a way that affects the
+browser screen. For example, if you delete a record, call
+UpdateBrowseScreen to account for it. If you want to move the highlight to
+a different record, call 0804SetAndUpdateBrowserScreen instead.
+;
+;-------------------------------------------------------------------
+!TOPIC 810 Init,TVBROWS:TBrowserWindow
+!NOINDEX
+constructor TBrowserWindow.Init(var Bounds : TRect;
+                  ATitle : TTitleStr;
+                  ANumber : Integer;
+                  ADrvOrFileBlockPtr : Pointer;
+                  ANumberOfEltsPerRow : Word;
+                  ANumberOfRows : Word;
+                  AKeyNr : Word;
+                  ALKey, AHKey : GenKeyStr;
+                  AHeader, AFooter : BRLRowEltString;
+                  var ADatS;
+                  AIsVarRec : Boolean);
+
+Initialize a browser window (a 0787TBrowserWindow object).
+
+This constructor first calls TWindow's constructor, passing it the window
+bounds (Bounds), the title (ATitle), and the window number (ANumber). Then
+it constructs the interior of the window as a 0785TBrowserView and also
+creates vertical and horizontal scroll bars for the window.
+
+ADrvOrFileBlockPtr is the address of an IsamFileBlock, already opened.
+ANumberOfEltsPerRow is currently ignored. At some point it will specify
+the number of screen lines displayed for each browsed record. Currently
+the number of screen lines per record is always 1.
+
+ANumberOfRows specifies the maximum number of record elements buffered by
+the browser. The number of rows in the browser view must always be less
+than or equal to ANumberOfRows.
+
+AKeyNr is the fileblock index number used for selecting and ordering the
+records displayed by the browser.
+
+ALKey and AHKey determine the lowest and highest keys displayed in the
+browser window. All records that begin with AHKey will be displayed. Pass
+ALKey as a blank string and AHKey as a string of $FF characters to display
+all records in the fileblock.
+
+AHeader and AFooter contain the header and footer lines displayed in the
+browser window. Specify an empty string to leave out either line. AHeader
+and AFooter are limited to one line each.
+
+ADatS must point to a buffer large enough to hold the largest record in
+the fileblock. The browser reads each record into this buffer as needed.
+The 0798GetThisRec and 0796GetCurrentRec methods also read a record into this
+buffer.
+
+AIsVarRec must be True for browsing a variable length record fileblock,
+False otherwise.
+
+Calling this constructor does not cause the browser to access the
+fileblock or build any display pages. This occurs only when 0792Draw or
+0804SetAndUpdateBrowserScreen is called.

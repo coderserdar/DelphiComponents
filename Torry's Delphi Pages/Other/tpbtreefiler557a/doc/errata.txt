@@ -1,0 +1,956 @@
+==============================
+Latest News About B-Tree Filer
+==============================
+
+Latest documentation for B-Tree Filer 5.57a
+
+This file describes changes, additions, and clarifications to B-Tree
+Filer that do not appear in the fourth or fifth editions of the
+manual. Please print and read this file prior to using B-Tree Filer,
+and save it for future reference.
+
+This file includes the following sections:
+
+  001.  MAJOR CHANGES *** Please Read This First ***
+  005.  Supported compilers
+  010.  Corrections to the Manuals
+  020.  Delphi (general)
+  030.  Delphi 32-bit
+  035.  Delphi 3, 4, 5, 6, 7, and 2005 packages
+  040.  Changes to FILER (part 1)
+  050.  Changes to FILER (part 2 - Windows NT/Windows 95 caching)
+  060.  DLL discontinued
+  061.  Data Entry Workshop support discontinued
+  090.  Record locks and TTS
+  100.  Known Network problems
+  110.  Rebuilding using FILER.MAK
+
+  900.  Popular Questions and Answers
+
+  999.  Warnings about the next version of B-Tree Filer
+
+
+
+001.  *** Please Read This First ***
+======================================================================
+B-Tree Filer in version 5.53 and later has changed a great deal. The
+most important items (together with a section reference where you'll
+discover more details) are as follows:
+
+  - the list of supported compilers has been reduced (see 008)
+
+  - Authenticated Delphi 3, 4 and 5 packages provided (see 035)
+
+  - FILER unit has been split into 4 separate units (see 050)
+
+  - DefeatLocalCache variable for Windows NT or 95 users (see 050)
+
+  - support for the Filer DLL has been discontinued (see 060)
+
+  - support for Data Entry Workshop has been discontinued (see 061)
+
+
+
+005.  Supported compilers
+======================================================================
+With B-Tree Filer 5.53 and later, support for Turbo Pascal 6 and Turbo
+Pascal for Windows 1.5 has been dropped. The only officially supported
+compilers are
+
+   Turbo Pascal 7
+   Borland Pascal 7; real, protected and Windows modes
+   Delphi 1
+   Delphi 2
+   Delphi 3
+   Delphi 4
+   Delphi 5
+   Delphi 6
+   Delphi 7
+   Delphi 2005 (Win32 only)
+
+Although we have not explicitly changed the older code in B-Tree Filer
+to exclude these old Turbo Pascal compilers, the new code we have had
+to write probably will not compile with them.
+
+
+
+010.  Corrections to the Manual
+======================================================================
+This READ.1ST file covers two manuals: the fourth edition and the
+fifth (the latter was published in April 1995).
+
+No errors have been noted to the fifth edition.
+
+Despite rigorous proof-reading, the following mistakes crept through
+into the fourth edition of the manual:
+
+p. 187    ConvertRec's definition should be
+            function ConvertRec(var DatSOld; var DatSNew;
+                                var Len : Word) : Boolean; far;
+
+p. 187    MsgFile should be defined in the var section as a Boolean.
+
+p. 187    ReIndexFileBlock has two extra parameters at the end:
+            ..., MsgFile, BTNoCharConvert, Nil);
+
+p. 193    ReIndexFileBlock has two extra parameters at the end:
+            ...
+            var MsgFileCreated : Boolean;
+            CharConvProc : ProcBTCharConvert;
+            CCHookPtr : Pointer);
+
+          For a description of these parameters refer to the
+          RestructFileBlock description.
+
+p. 346    In the description for TnwErrorCode, the NETX shell has a
+          error source byte of $81, not $87.
+
+p. 459    The syntax for NetBiosSendNoWait should specify "procedure"
+          not "function".
+
+
+
+020.  DELPHI
+======================================================================
+Versions 5.52 onwards of B-Tree Filer are compatible with Delphi.
+There is a fileblock browser component for Delphi in the main FILER
+directory (FVCBROWS.PAS) and a demo in the DEMOS directory
+(DELDEMO.DPR) which shows how to use the new FvcBrowser component.  Be
+sure to install the browser component to your component palette
+(instructions below) before trying to compile the demo program.
+
+Please note that the compiled version of DELDEMO supplied on the
+distribution disks is a 32-bit application, and will only run on
+Windows 95 or Windows NT.
+
+Also available in the FILER directory is a helpfile and keyword
+file that works with Delphi's multi-help facility.  To use the help,
+we recommend that you copy the FVC.HLP file to your DELPHI\BIN
+directory and copy the FVC.KWF file to the DELPHI\HELP directory for
+Delphi 1.0.  Copy both files to the DELPHI 2.0\HELP directory for
+Delphi 2.0. For Delphi 3, 4, 5, 6, 7, and 2005 we recommend that you
+install the help into the Tools menu (we do not provide a 32-bit help
+file and hence you cannot use it using the official method).
+
+Install FVC.KWF by running Delphi's HelpInst utility (note that you
+should not be running Delphi at this point) -- select File|Open from
+HelpInst's menu and open DELPHI.HDX in the DELPHI\BIN directory.  A
+list of the current *.KWF files will be shown.  Select the
+KEYWORDS|ADD KEYWORD FILE option from HelpInst's menu and add the
+FVC.KWF file. Select FILE|SAVE and exit HelpInst.  The HelpInst
+utility is found in the DELPHI\HELP directory for Delphi 1.0 and in
+the DELPHI 2.0\HELP\TOOLS directory for Delphi 2.0.
+
+Run Delphi and install the FvcBrowser component by selecting OPTIONS|
+INSTALL COMPONENTS from Delphi's main menu (COMPONENT|INSTALL for
+Delphi 2.0).  Press the 'Add' button on the Install Components dialog
+and browse for FVCREG.PAS (or FVCREG.DCU).  The default location for
+this file is FILER\BROWSERS.  Note that the FvcBrowser component uses
+files in other directories, so you may have to add their directories
+to the search path on the Install Components dialog.  The directories
+to add are FILER and FILER\NETTOOLS if you are using the default
+layout of the Filer directories. You can eliminate this need for
+multiple directories by having all of your compiled units in the
+FILER\UNITS directory.
+
+You should now be able to load, compile and run DELDEMO.DPR.
+
+All documentation for the FvcBrowser component is located in FVC.HLP.
+
+
+
+030.  Delphi 32-bit
+======================================================================
+B-Tree Filer 5.57a can be partially compiled with Delphi 2, 3, 4, 5, 6,
+7, 2005 (Win32 only), or 2006 (Win32 only). This is purely a convenience 
+for our customers so that they can compile their B-Tree Filer apps as 
+32-bit programs. It is unlikely that B-Tree Filer itself will be 
+enhanced any further for 32-bit mode.
+
+The first item to note is that you cannot compile B-Tree Filer to use
+the Filer DLL. In other words you cannot activate the UseFilerDLL
+define in BTDEFINE.INC.
+
+The Filer units that will compile with Delphi 2 through 7 and 2005
+(Win32 only) are:
+
+  FILER, VREC
+  RESTRUCT, REINDEX
+  REORG, REBUILD, VREORG, VREBUILD, FIXTOVAR
+  ISAMTOOL,
+  LOWBROWS, MEDBROWS, HIBROWS, FVCBROWS
+
+Note that no attempt has been made to optimize these units for running
+in 32-bit mode; also the units (whereever applicable) do not use long
+strings. As you can see, it is what might be termed the basic Filer
+engine that has been converted.
+
+There is a new unit called NUMKEY32 which replaces the NUMKEYS unit.
+
+It must be mentioned in particular that _none_ of the NetWare units
+have been converted to 32-bit mode. That in turn means that you cannot
+use the Novell network define in your apps; use MsNet instead. This is
+now our official recommendation for any B-Tree Filer application. Also
+note that the NETBIOS unit has not been converted either, although
+there is an equivalent unit in our FlashFiler product. For programmers
+who require NetWare specific code in their applications, there is a
+choice: either subscribe to the Novell NetWare Client API CD-ROM (4
+issues per year for about $300), use the Developers Suite for NetWare
+(Delphi edition) from Apiary Software, or use one of the many
+shareware NetWare libraries on the Internet.
+
+Details of installing the FvcBrowser component and the FvcBrowser help
+into Delphi can be found in the previous section.
+
+
+
+035.  Delphi 3, 4, 5, 6, 7, and 2005 packages
+======================================================================
+In common with its normal Delphi products, TurboPower is now providing
+authenticated run-time and design time packages for Delphi 3, 4, 5, 6
+and 7.
+
+B-Tree Filer comes with two pre-compiled, authenticated packages for
+each compiler that supports them. In Delphi 3, the packages are called
+T557_R30.DPL (run-time) and T557_D30.BPL (design time). In Delphi 4,
+the packages are called T557_R40.DPL (run-time) and T557_D40.BPL
+(design time). In Delphi 5, the packages are called T557_R50.DPL (run-
+time) and T557_D50.BPL (design time). In Delphi 6, the packages are
+called T557_R60.DPL (run-time) and T557_D60.BPL (design time). In
+Delphi 7, the packages are called T557_R70.DPL (run-time) and
+T557_D70.BPL (design time). In Delphi 2005, the packages are called
+T557_R90.DPL (run-time) and T557_D90.BPL (design time). In Delphi 2006,
+the packages are called T557_R100.DPL (run-time) and T557_D100.BPL 
+(design time). The design time packages just provide the FvcBrowser 
+component.
+
+The run-time package consists of the following units: FILER, VREC,
+RESTRUCT, REINDEX, FIXTOVAR, ISAMTOOL, LOWBROWS, MEDBROWS, HIBROWS,
+and FVCBROWS.
+
+The naming convention we use does mean that we ship different named
+packages for each version of B-Tree Filer. Although this can cause
+some problems when you (our customer) update your version of B-Tree
+Filer, it will ensure that your customers have less of a problem
+since, in theory, they could have two applications from different
+vendors, both using the B-Tree Filer package. If you update your
+product to use our latest version of B-Tree Filer then your customer
+will find that his other product will still work.
+
+Although we allow you to recompile the packages (ie, we supply the DPK
+files), if you do so the TurboPower License Agreement does not allow
+you to redistribute these newly compiled packages under their original
+name. You must rename them if you plan not to ship the authenticated
+packages. TurboPower reserves the right to use the TNNN_KVV name
+(where NNN=version number, K=R for runtime or D for designtime, and VV
+is the VCL version number) for its B-Tree Filer packages, so please
+use another completely different name.
+
+Please read the DEPLOY.TXT file for details on our license agreement
+regarding redistributing packages.
+
+
+
+040.  Changes to FILER (part 1)
+=====================================================================
+The first and most important change is to BTInitIsam. Because
+Microsoft changed some underlying system code for 16-bit applications
+when accessing memory in Windows95, BTInitIsam needed to be changed
+for the Windows environment. (Indeed, whereever memory was allocated
+in B-Tree Filer, the code had to be changed; however BTInitIsam is the
+most visible change.) BTInitIsam now has two different calling
+declarations, one for DOS programs (in both real and protected modes)
+and one for Windows applications. The former syntax is exactly the
+same as before. The latter declaration is as follows:
+
+  Function BTInitIsam ( ExpectedNet : NetSupportType;
+                        Pages       : integer ) : integer;
+
+ExpectedNet is the network type you want Filer to use. Pages is the
+number of page blocks in the internal index structure (the Page Stack)
+Filer is to allocate. Pages must be greater than MaxHeight, and
+generally the larger the better. However do not make Pages so large
+that Windows virtual memory swapping comes into play; after all the
+reason for the Page Stack is to minimize disk access. One rule of
+thumb is to try using 8 pages per open fileblock in the application.
+
+The next change is that the procedural parameters passed to the
+rebuilding type routines are now fully typed, as is IsamReXUserPtr.
+The latter routine is now of type
+
+  TIsamReXUserProc = procedure (KeyNr : integer;
+                                NumRecsRead : longint;
+                                NumRecsWritten : longint;
+                            var Data;
+                                Len : word);
+
+and is no longer just of type pointer. This means that code which set
+the IsamReXUserPtr which used to look like this:
+
+  IsamReXUserPtr := @MyReXUserProc;
+
+will now look like this:
+
+  IsamReXUserPtr := MyReXUserProc;
+
+The routines that are passed as parameters to (V)RebuildFileBlock and
+(V)ReorgFileBlock are now fully typed as well. The build key routines
+must be of type FuncBuildKey (defined in the REINDEX unit), and the
+record restructuring routines must be of type FuncChangeDatS (defined
+in the RESTRUCT unit). Note that this means a change to the routine
+passed to ReorgFileBlock which will be used to restructure the data
+record: the Len parameter must now be a var parameter.
+
+There is a new internal routine exported from the FILER unit which you
+can use in your own programs.
+
+  {$IFDEF Win32}
+  function IsamGetMem(var P {: pointer}; Size : longint) : boolean;
+  {$ELSE}
+  function IsamGetMem(var P {: pointer}; Size : word) : boolean;
+  {$ENDIF}
+
+IsamGetMem allocates memory. If there is enough memory for the
+allocation it returns true with the pointer to the allocated block in
+P. If there is not enough memory, it will return false and P will be
+set to nil. For 32-bit mode, the size of the block can be greater than
+64K, for all 16-bit modes the size of the block must be less than 64K.
+
+
+
+050.  Changes to FILER (part 2 - Windows NT/Windows 95 caching)
+======================================================================
+Originally, this section of the READ.1ST file read as follows, however
+research has shown that the problem it addresses is in fact a
+Microsoft bug. We leave it here for an explanation of why B-Tree Filer
+has changed so much. If you do not want to read it, skip over it where
+there is some inportant information.
+
+-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-
+
+Microsoft made some changes to the way that Win32 operating systems
+cache data for a file on a remote drive. The reason is to improve
+network access speeds for normal applications. The caching is much
+more 'aggressive' than before, in that writing to a remote file may
+not make it to the remote file immediately (the data is cached by the
+local system for a while), and reading from a remote file may in fact
+be satisfied from the local cache rather than going to the remote
+system. Either one of these would be deadly to B-Tree Filer: records
+get overwritten, keys get lost, updates are not noticed; the result
+being data corruption on a grand scale.
+
+The solution is detailed in article Q165966 in the Microsoft Knowledge
+Base (to read it go to //http:www.microsoft.com). Applications that
+share remote files with other apps on other machines must lock the
+regions they read or write. The act of placing the lock informs Win32
+that it should not cache reads or writes on the local machine, but
+must go to the server (the machine with the remote file) to get or put
+the data.
+
+There have been many, many changes to the FILER unit to accomodate
+this solution. The first is the most obvious: the FILER unit has been
+split into four units. The reason for this major change is that the
+FILER unit would no longer compile with Borland Pascal 7 or Delphi.
+The new set of units are BTBASE, BTFILEIO, BTISBASE and FILER. In
+general you will have to add the BTBASE and BTISBASE units to any of
+your uses lists that currently contain the FILER unit.
+
+The next is that there is a new global boolean variable declared in
+the BTISBASE unit called DefeatLocalCache (it can be found in the
+FILER.CFG include file). If this variable is true, for every read and
+write from a fileblock (be it the data, index or dialog file) B-Tree
+Filer will lock the region requested, read or write the region, and
+then unlock the region. If DefeatLocalCache is false, no locking or
+unlocking takes place (in other words B-Tree Filer will work as it did
+before). There is no option to disable this code at the compiler
+define level: the code is *always* linked into B-Tree Filer, you just
+make the choice to execute it or not at run-time by setting
+DefeatLocalCache.
+
+The next change is the implementation of a Lock Manager so that B-Tree
+Filer can track locks being placed and removed. Consider the problem:
+B-Tree Filer uses locks itself and you cannot (even in the same
+program) place a lock twice over the same region. So, in order to
+place a lock prior to reading and writing a file region, B-Tree Filer
+has to find out whether the region is already locked by the program or
+not. This is where the Lock Manager comes in: every lock that is
+placed or removed in B-Tree Filer now goes through the Lock Manager
+(by the way, this includes arbitrary locks placed with
+BTIsamLockRecord).
+
+The next change is that B-Tree Filer's five main interfaced low-level
+read and write routines have been changed to optionally place a lock
+prior to the read or write and remove it afterwards (the option being
+governed by the value of the DefeatLocalCache variable). The five
+routines are IsamBlockWrite, IsamPutBlock, IsamBlockReadRetLen,
+IsamBlockRead and IsamGetBlock. One of these five routines is called
+by all other B-Tree Filer routines (in whatever unit) whenever data
+has to be written to or read from the disk.
+
+The result of all this extra activity is an unavoidable slowing down
+of B-Tree Filer's operations when the DefeatLocalCache variable is set
+to True. Of course, with the variable set to False there will be an
+eventual but unavoidable data corruption problem on Win32 machines.
+
+-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-
+
+Since the above code changes were made, new information has come to
+light indicating that the problem was a Microsoft bug all along. We
+wrote a white paper on the subject, reproduced here in its entierety,
+that details how to avoid the bug without using the new
+DefeatLocalCache variable in B-Tree Filer.
+
+-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-
+
+Introduction
+------------
+During 1997, TurboPower started to receive some worrying reports of
+corrupted indexes when using B-Tree Filer on a Windows network,
+especially one with a mix of Windows NT 4 servers, Windows NT 4
+workstations and Windows 95 PCs. After some research, we found a
+Microsoft authored document (tech article Q165966, dated 28-Mar-97,
+which can be found at http://support.microsoft.com/support/kb/
+articles/q165/9/66.asp) stating that applications that share data on a
+network should always access the shared data in the following manner:
+
+   lock the file region to be read or updated
+   read or update the file region
+   unlock the file region
+
+TurboPower then initiated an update of B-Tree Filer to version 5.53
+which implemented this strategy. The update turned out to be a fairly
+major rewrite of the low-level file access code and necessitated the
+inclusion of a new global variable called DefeatLocalCache to turn the
+new code on and off.
+
+However, there have been some new developments in this story,
+prompting the writing of this technical paper. Indeed, if you follow
+the solution in this paper, you do not have use the DefeatLocalCache
+variable at all, making your app run faster.
+
+
+Background
+----------
+The original problem was due to 'aggressive' caching code in the new
+Windows 95, especially when related to remote files (i.e., files that
+reside on another machine on the network, and that are shared).
+Sometimes, reading data from a remote file would be satisfied from the
+local cache rather than actually retrieving the data from the remote
+machine. Similarly, writing to a remote file would cause the new data
+to 'hang around' in the local cache before being flushed to the remote
+system.
+
+Either of these two possibilities would spell major corruption to
+B-Tree Filer. For example, to add a record to a B-Tree Filer fileblock
+requires reading the system record to find the next available 'slot'
+and then writing the record there. If the read of the system record
+retrieves an 'old' version from the app's local cache, then two
+records from different workstations could be added to the same place.
+Similarly, updating the file but not having the data reach the remote
+machine immediately could also cause the same type of corruption.
+
+
+Research
+--------
+One of our customers, John Santmann of Wellsoft Corporation, ran into
+this problem and found that our new B-Tree Filer 5.53 - even with
+DefeatLocalCache set to true - did not solve it completely. He found
+that, under heavy loads on the network, he could cause the corruption
+problem to reappear, though, it must be said, not on demand: sometimes
+it took a couple of hours before the data corruption was detected.
+
+Anyway, he did some invaluable research trying to pin the problem
+down. He found out that B-Tree Filer was not the only product to
+suffer from this problem with corruption: Symantec's ACT! and Lotus
+Notes also demonstrated data corruption under certain circumstances.
+As a result of his research, he came up with the solution detailed in
+this paper. He also found that part of his problem was a flaky network
+adapter, and that B-Tree Filer 5.53 did work correctly with
+DefeatLocalCache set to true.
+
+The solution is in three parts.
+
+
+Solution - Part I
+-----------------
+The problem all along was in the VREDIR.VXD (virtual redirector)
+system file shipped with Windows 95 (even with Service Pack 1), and
+Windows 95 OSR2. It is buggy and the previous tech note quoted above
+(Q165966) is erroneous. Microsoft have released a new version of
+VREDIR.VXD (4.00.1116) and VNETSUP.VXD (4.00.1112) that eliminate the
+problems with the local cache (as well as other problems). You can
+download the new versions from
+
+http://support.microsoft.com/download/support/mslfiles/vrdrupd.exe
+
+The file is 215,728 bytes in length. When run, it starts up a standard
+setup to install the new VREDIR.VXD (156,773 bytes, dated 11-Sep-97
+11:16am) and the new VNETSUP.VXD (17,595 bytes, dated 30-May-97
+11:12am).
+
+(Note: to find out the version of your VREDIR.VXD file you can do the
+following. Start up Explorer, find the file in \WINDOWS\SYSTEM and
+right click on it. Select Properties and then click on the Version
+tab. The version of the file is the top item.)
+
+You'll have to reboot your Windows 95 system to complete the
+installation.
+
+
+Solution - Part II
+------------------
+The next step is to add a new registry entry to the Windows 95 system,
+using Windows 95's REGEDIT.EXE.
+
+Key:   HKEY_LOCAL_MACHINE\
+         System\CurrentControlSet\Services\VxD\VREDIR
+Value: DiscardCacheOnOpen (binary value)
+Data:  01
+
+Walk down the key tree until you reach the VREDIR subkey. Right click
+on the right hand pane, select New then Binary value. Enter the
+identifier DiscardCacheOnOpen and press Enter. Double click on the new
+identifier and a dialog is shown where you can enter the data 01.
+
+Once you've exited REGEDIT, you will need to reboot your machine for
+the new setting to take effect. Only the new VREDIR.VXD will
+understand this setting, previous ones will ignore it.
+
+
+Solution - Part III
+-------------------
+If you are using a Windows NT 4 server as your file manager (in other
+words, the shared data files reside on a Windows NT 4 server machine),
+there's one more step to take: You need to turn off optimistic locking
+at the server. You need to add a new registry key on the Windows NT 4
+Server (or modify the current one if it exists).
+
+Key:   HKEY_LOCAL_MACHINE\
+         System\CurrentControlSet\Services\LanmanServer\Parameters
+Value: EnableOpLocks (DWORD value)
+Data:  0
+
+
+Warnings
+--------
+These changes will have to be made to every Windows 95 and NT 4 Server
+PC on the network. If your B-Tree Filer application gets installed on
+a new network then it is up to you to ensure that all workstations and
+servers on the new network are also upgraded.
+
+Using Registry Editor incorrectly can cause serious, system-wide
+problems that may require you to reinstall your operating system to
+correct them. Although the above information is presented in good
+faith, TurboPower cannot be responsible for any problems due to their
+misapplication. TurboPower also cannot guarantee that any problems
+resulting from the use or misuse of Registry Editor can be solved. Use
+REGEDIT at your own risk. If in doubt, BACK UP YOUR REGISTRY FIRST.
+
+
+Conclusion
+----------
+This document presents a way of updating your Windows 95 and NT 4
+systems in order that you don't have to use the new B-Tree Filer
+DefeatLocalCache variable in your applications (it can be permanently
+set to false). However, it is up to you to ensure that all PCs on the
+network where the B-Tree Filer app is being run are updated according
+to this paper's three part solution.
+
+-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-
+
+
+060.  DLL discontinued
+======================================================================
+Support for the B-Tree Filer DLL has been discontinued.
+
+The main reason for this decision is that the DLL is compiled from
+B-Tree Filer for C. This latter product has been discontinued, is no
+longer being supported and has not been enhanced in over two years.
+Hence the DLL itself has not been changed in over two years. The
+recent changes to B-Tree Filer to add 32-bit support and to combat the
+Win32 caching problem have not made it into the DLL code. The former
+change is an inconvenience, the latter is fatal to any application
+that cares about its data.
+
+Consequently the DLL support in B-Tree Filer has been withdrawn. All
+the old PDL source files have been deleted and the PSL source files
+have been remerged into the PAS files.
+
+
+
+061.  Data Entry Workshop support discontinued
+======================================================================
+TurboPower's Data Entry Workshop product has been superceded by the
+Orpheus product and has been discontinued. Consequently the B-Tree
+Filer demo program DEWDEMO is no longer shipped.
+
+
+
+090.  Record locks and TTS
+======================================================================
+There has been at least one reported problem with using record locks
+on fileblocks whose data and index files have been marked as
+transactional under Novell NetWare. Although this problem shouldn't
+manifest itself for the majority of our users, we thought a small
+discussion would be appropriate together with a workaround.
+
+The basic problem is with implicit TTS transactions. Normally when you
+use TTS in your application you use explicit transactions. The logic
+in the app decides that a transaction is about to start and calls
+nwTTSBegin, the records are then added, modified or deleted, together
+with the keys, and then the app calls nwTTSEnd to complete the
+transaction. The server will store enough information in a rollback
+disk buffer to be able to commit or rollback the transaction in case
+of a problem.
+
+Implicit transactions on the other hand operate in this fashion. If
+you place any lock on any transactional file, the TTS server will
+start a transaction automatically, and will only end that transaction
+when all the locks on all transactional files are removed. In the
+meantime you cannot close any transactional files and so on. So if you
+use record locks in your application (with BTLockRec and BTUnlockRec)
+you will be continually starting and ending transactions. Essentially
+this is what happens if you make the dialog file transactional, which
+is why we advise against that (in normal use, the dialog file _always_
+has locks active, therefore a transaction _always_ exists, therefore
+the rollback disk buffer on the server continually grows and grows as
+you update the fileblock until dire things happen at the server!).
+
+Our advice is to inform the TTS server that you don't want to use
+implicit transactions. To do this you use the undocumented routines in
+the nwTTS unit that set the thresholds for implicit transactions to
+start. The one you want to use is nwTTSSetWSThresh; do the following
+early on in your application:
+
+  Status := nwTTSGetWSThresh(MyTTSServer, OriginalLogThresh,
+                                          OriginalPhyThresh);
+  if (Status <> 0) then
+    ..error reporting, or assume OriginalLog(Phy)Thresh are zero ..
+  Status := nwTTSSetWSThresh(MyTTSServer, 255, 255);
+
+and you would reset the thresholds at the end of the application
+(hence the call to nwTTSGetWSThresh above):
+
+  Status := nwTTSSetWSThresh(MyTTSServer, OriginalLogThresh,
+                                          OriginalPhyThresh);
+  if (Status <> 0) then
+    ..error reporting, or ignore it..
+
+The call to nwTTSSetWSThresh at the start of the app informs the
+server that you do not want implicit transactions to happen at all.
+
+WARNING: It is our opinion that TTS and the new locking methodology to
+defeat read/write caching on the new Win32 platforms do not mix. Our
+recommendation is not to use TTS in an environment that has Windows NT
+4 or Windows 95 OSR 2 on workstations.
+
+
+
+100.  Known Network problems
+======================================================================
+The following network problems have been identified with regard to
+B-Tree Filer's network support.
+
+
+Novell NetWare
+--------------
+
+You can use the Novell network compiler define and identifier although
+our recommendation is to use the MsNet define). For 32-bit Delphi the
+Novell compiler define is not available, so you must use MsNet.
+
+Our recommendation is to use the MsNet network compiler define
+exclusively. People have reported problems with a mixture of B-Tree
+Filer applications, some running Novell and some MsNet, and it would
+be more prudent to stick to MsNet in the future. There isn't that much
+difference efficiency-wise, and the main benefit for using NetWare
+calls for locking (the wait occurs at the server) doesn't work with
+the B-Tree Filer locking methodology.
+
+In DOS or Windows 3.1, if you are using NETX as your shell you may
+have to alter your NET.CFG file to include the FILE HANDLES line. This
+defines the number of file handles that NETX will track on the server
+for you, and has a default of 40. A multiuser B-Tree Filer application
+uses 3 handles per fileblock, so if you have more than 13 fileblocks
+open at any one time you could run into IsamError 9901 (too many open
+files). You will need to add (or alter) your NET.CFG as follows:
+
+   NetWare Shell
+     FILE HANDLES=N
+
+where N is the number of network file handles you require. The FILES=
+line in CONFIG.SYS is used for local file handles.
+
+The FILE HANDLES= option does not apply to the VLM Requester; this
+uses the FILES= setting in your CONFIG.SYS, so make sure that this is
+large enough for all your local and remote file needs.
+
+Please see your Novell NetWare Client documentation for more details.
+
+
+One of the questions that seems to crop up every now and then with
+B-Tree Filer is that of flushing fileblocks. It so happens that
+through some investigation by Magne Nielsen we have some news
+regarding Novell NetWare and B-Tree Filer's flushing methods.
+
+B-Tree Filer has a boolean variable called IsamFlushDOS33, the value
+of which determines the flushing method used by Filer. False and Filer
+will flush by duplicating the file handle and closing it, True and
+Filer will use the newer DOS Commit File call (INT $21/$68).
+
+Enter NetWare. It turns out that there are two settings which will
+fool Filer's flushing method with IsamFlushDOS33 set to True. The
+first one is a server option, NCP File Commit. The default for this
+option is ON, meaning that workstations which issue a file commit call
+will cause the server to write the file data to disk immediately. If
+OFF then the server will also commit the file data, but only when it
+wants to. However, do note that the directory information (time
+updated, file size) is only updated when this option is ON.
+
+The second setting is a DOS Requester NET.CFG setting, TRUE COMMIT.
+The default is OFF and in this case a file commit call is not passed
+to the server. If ON then the file commit call is passed on.
+
+As you can now see, to get B-Tree Filer's automatic flushing mechanism
+to work you must (a) have TRUE COMMIT = ON in your NET.CFG (if using
+the VLMs) and (b) have NCP File Commit set ON at the server. If you
+cannot guarantee this, you should set IsamFlushDOS33 to False and
+these problems should be neatly sidestepped.
+
+
+Artisoft LANtastic
+------------------
+
+You should use the MsNet network compiler define and identifier.
+
+LANtastic servers have a configuration option called LOCK_HOLD_TIME.
+This option specifies the length of time in ticks (1/18.2 seconds)
+that the server will wait for a record lock before assuming the
+request has failed. The default value is 9 (about 1/2 second).
+
+B-Tree Filer has an implicit assumption that under an MsNet network
+(i.e. you specified MsNet as the first parameter to BTInitIsam) a lock
+attempt will return immediately with either a success or a failure
+indication. If the latter, Filer will internally wait and then try
+again. Under the default values for the locking constants the maximum
+total wait time will be about 3 seconds. If, however, this LANtastic
+server option is also taken into account, the maximum total wait time
+will jump to about 27 seconds.
+
+We recommend therefore that you disable this server option by using
+
+   LOCK_HOLD_TIME=Disabled
+
+
+OS/2 3.0 (aka Warp)
+-------------------
+
+You should use the MsNet network compiler define and identifier.
+
+If you are running a B-Tree Filer DOS application in a DOS box under
+OS/2 3.0, be warned that the DOS function used by BTSetDOSRetry fails
+(INT $21 function $440B); it is not supported by OS/2 3.0. We have
+heard news that a service pack is available to solve this, but we do
+not have any further information.
+
+
+SHARE.EXE
+---------
+
+You should use the MsNet network compiler define and identifier.
+
+Note that if you are using SHARE.EXE as your 'network', for example
+under Windows or DESQview, or under LANtastic or Personal NetWare, its
+default settings are woefully inadequate. We recommend that you should
+run SHARE with at least the following parameters:
+
+  SHARE /L:500 /F:5000
+
+Please see your DOS manual or the DOS HELP system for for details.
+
+
+
+110.  Rebuilding using FILER.MAK
+===========================================================================
+When you recreate the B-Tree Filer units by using FILER.MAK, there are
+a couple of things you need to be aware of. (Please refer to your
+Borland documentation about MAKE and its terminology.)
+
+Firstly, you need to alter the various MAKE macros within FILER.MAK so
+that you are compiling for the correct target and have defined the
+correct directory structure and so on. See FILER.MAK for details.
+
+Secondly, FILER.MAK uses the command line compiler for your particular
+version of Turbo Pascal or Delphi. You must specify the directory
+where your command line compiler is found (see the DirCompiler macro).
+The command line compiler will attempt to find a configuration file in
+this directory (BPC.CFG, TPC.CFG or TPCW.CFG depending on your version
+of Turbo Pascal). This is where some problems might occur:
+
+  - the CFG file is missing. In this case the make file might abort
+    because it cannot find any standard Pascal units. You must create
+    a CFG file with at least a /U directive present that points to
+    your units directory (for BP7 for example, this is usually
+    C:\BP\UNITS).
+
+  - the CFG file is present but it has a /U line that points to a
+    directory that contains an earlier version of the B-Tree Filer
+    units (for example with BP7, you have moved all the Filer units
+    into C:\BP\UNITS). The make file will probably abort with a unit
+    version mismatch error. You must ensure that no older B-Tree Filer
+    units can be found.
+
+  - it is entirely possible that the command line created by the MAKE
+    program to compile a unit or program is too long. In this case the
+    make process will fail. You must then edit your CFG file (or
+    create a new one) that transfers some of the path information (eg
+    the /U or /I paths) from the make file to the CFG file. Edit the
+    make file to remove these paths.
+
+
+
+900. Popular Questions and Answers
+======================================================================
+
+Q: What does IsamError 10445 really mean?
+A: In terms of code: either you have passed a nil pointer for an
+   IsamFileBlockPtr parameter to a BTxxxx routine, or the pointer does
+   not point to an IsamFileBlock variable on the heap. In layman's
+   terms: either you haven't opened the fileblock yet (ie the
+   IsamFileBlockPtr hasn't been initialized yet) or your program has a
+   memory overwrite (either the pointer itself has been trashed, or
+   the block in memory it points to has). The majority of times we
+   hear about this error, it's due to a memory overwrite. Our advice
+   is to trace your program in the debugger. Make a note of the
+   pointer returned by BTOpenFileBlock and check it against the
+   parameter passed to the BTxxxx routine where you get the 10445
+   error. The pointer parameter should be the same as previously noted
+   and point to a block of memory whose first longint is $11195851.
+
+
+Q: What does IsamError 10310 really mean?
+A: BTInitIsam was unable to find the network you specified as the
+   first parameter. For Novell this means that proper shell wasn't
+   found (either NETX or the VLM Requester) or that a server that has
+   been logged in to was not found.
+
+
+Q: How big should my dialog file be?
+A: In single user mode (ie using NoNet for the network parameter in
+   BTInitIsam) there are two cases: if you are not using Save mode
+   there is no DIA file, if you are it should be 1 byte long. If the
+   dialog file is another length, it could be a journalled record
+   waiting for a fileblock repair. In network mode the size of the
+   dialog file depends on MaxNrOfWorkstations and the number of
+   indexes in the fileblock:
+
+     DialogFileSize :=
+        3 + (MaxNrOfWorkstations + 1) * ((NumIndexes + 9) div 8);
+
+   Hence if MaxNrOfWorkstations is its default value of 50 then we can
+   create the following table:
+
+      NumIndexes    DialogFileSize
+      ----------------------------
+      0..6          54
+      7..14         105
+      15..22        156
+      etc
+
+   In Save mode if the dialog file is larger than you thought, it
+   could be a journalled record waiting for a fileblock repair.
+
+   Note that if a network has applications running that disagree about
+   the maximum number of workstations, you could get some weird
+   errors.
+
+
+Q: In DOS mode what's the best value to pass for Free in a call to
+   BTInitIsam?
+A: We don't know.
+Q: Oh, please expand a bit.
+A: This parameter tells Filer how much memory it can take to cache
+   index pages over all the open fileblocks in your program (this
+   memory is known as the page stack). The value depends on a myriad
+   of different issues:
+
+     - is the application a real mode program (or protected mode one)?
+
+     - is the application a single user or a multi-user program?
+
+     - if a network program, how active are the updates to the
+       fileblocks going to be?
+
+   So for example a single user application would benefit from having
+   as big a page stack as possible, so you'd want to make Free as
+   small as you could (depending on the other users of the heap in
+   your program). However in protected mode, this would create a
+   problem in that Filer would generally exhaust all the selectors
+   before it exhausted the heap memory, so you would want to limit
+   Filer in some way.
+
+   For a heavily used network application, it doesn't make sense to
+   have a huge page stack because most of it would be unused (Filer
+   would not be able to cache index pages very much, as they would
+   continually be changing).
+
+   Our advice therefore is to experiment a bit. Make the page stack
+   size configurable (either through an INI file, or a command line
+   switch, or something similar) and test your application with
+   various sizes. How does the application feel, is it responsive
+   enough? You should find that as the page stack size increases the
+   application becomes more responsive, but that there is an upper
+   limit where adding lots of memory to the page stack doesn't seem to
+   improve things at all. The start of this plateau is where you
+   should be looking for the 'best' value for the size of the page
+   stack.
+
+   Of course if the application is a multiuser program, you should
+   test its performance with both heavy and light usage.
+
+
+Q: Why is my index file so big?
+A: The index file size depends on two things: the key size for each
+   index and the number of keys in the largest index (ie the one with
+   the largest number of keys). Filer's index file algorithms are
+   optimal (in the sense of using disk space) for the case that each
+   index has exactly the same number of keys. If you have the case
+   where you have 10 indexes with the first 9 having 100 keys but the
+   10th having 100,000 keys, the size of the index file depends on
+   that 10th index. Essentially the other indexes are padded with
+   empty space.
+
+   A rough calculation for the size of an index file is:
+
+     IndexFileSize :=
+        (1.5 * NumKeysInLargestIndex * BTKeyRecordSize) div
+        CreatePageSize;
+
+
+Q: Why can't I calculate _exactly_ how big my index file is?
+A: The index pages in the index file are the nodes in the B-tree. Each
+   B-tree node used by Filer is between 50% and 100% full (apart from
+   the root node which varies from 0 to 100% full). The structure of
+   the B-tree at any moment in time depends on the exact order the
+   keys were added to and deleted from the B-tree. In effect, the
+   structure of the B-tree is balanced but random: adding a set of
+   keys in one sequence will produce a different B-tree than that
+   produced by adding the keys in a different sequence. Hence all that
+   can said about the B-tree is that on average the nodes (ie pages)
+   are 75% full, consequently you get this approximation for the index
+   file size.
+
+   Note that research has shown that this 'common sense' value of 75%
+   full on average is high. For the insertion algorithm used by B-Tree
+   Filer, the average drops to 69% full for a B-tree populated through
+   insertion of random keys.
+
+
+Q. I want to use NetWare's TTS, what should I be aware of?
+A. For the fileblocks you want to use with transactions, make both the
+   data and index files transactional (the DAT and IX files). Do _not_
+   under any circumstances make the dialog file transactional. Have a
+   look at the TTSFILER.PAS demo program for some ideas on how to
+   structure your application. Read the section above on record locks
+   and TTS, and disable implicit transactions.
+

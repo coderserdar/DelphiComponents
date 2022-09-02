@@ -1,0 +1,129 @@
+;*********************************************************
+;* FlashFiler: Server string table resource              *
+;*********************************************************
+
+;* ***** BEGIN LICENSE BLOCK *****
+;* Version: MPL 1.1
+;*
+;* The contents of this file are subject to the Mozilla Public License Version
+;* 1.1 (the "License"); you may not use this file except in compliance with
+;* the License. You may obtain a copy of the License at
+;* http://www.mozilla.org/MPL/
+;*
+;* Software distributed under the License is distributed on an "AS IS" basis,
+;* WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+;* for the specific language governing rights and limitations under the
+;* License.
+;*
+;* The Original Code is TurboPower FlashFiler
+;*
+;* The Initial Developer of the Original Code is
+;* TurboPower Software
+;*
+;* Portions created by the Initial Developer are Copyright (C) 1996-2002
+;* the Initial Developer. All Rights Reserved.
+;*
+;* Contributor(s):
+;*
+;* ***** END LICENSE BLOCK *****
+
+#include "ffconst.inc"
+
+fferrBadStruct, "INTERNAL: TbtdFileInfo record contains invalid data"
+fferrOpenFailed, "INTERNAL: File could not be opened [%s, error %d, %s]"
+fferrOpenNoMem, "INTERNAL: Out of memory when opening a file"
+fferrCloseFailed, "INTERNAL: File could not be closed [%s, error %d, %s]"
+fferrReadFailed, "INTERNAL: Error when reading from file [%s, error %d, %s]"
+fferrReadExact, "INTERNAL: Could not read exact number of bytes from file [%s, %d bytes]"
+fferrWriteFailed, "INTERNAL: Error when writing to file [%s, error %d, %s]"
+fferrWriteExact, "INTERNAL: Could not write exact number of bytes to file [%s, %d bytes]"
+fferrSeekFailed, "INTERNAL: Error when seeking to position in file [%s, offset %d:%d, error %d, %s]"
+fferrFlushFailed, "INTERNAL: Error when flushing file [%s, error %d, %s]"
+fferrSetEOFFailed, "INTERNAL: Error when setting end-of-file [%s, error %d, %s]"
+
+fferrNotAnFFFile, "[%s] is not a FlashFiler formatted file, or its file header is corrupt"
+fferrBadBlockNr, "Block number is either < 0, or >= number of blocks in file [%s, block %d]"
+fferrEncrypted, "[%s] is an encrypted FlashFiler file and the Server cannot read it (it is not secure)"
+
+fferrRecDeleted, "Record has been deleted, cannot read/delete/update it [%s, ref %d]"
+fferrBadRefNr, "Number is not a valid FlashFiler record reference number [%s, ref %d]"
+fferrBadDataBlock, "Block just read from file is not a valid data block [%s, block %d]"
+
+fferrBlobDeleted, "BLOB has been deleted, cannot read/delete it [%s, (%d, %d)]"
+fferrBadBlobNr, "Number is not a valid FlashFiler BLOB number [%s, (%d, %d)]"
+fferrBadBlobBlock, "Block just read from file is not a valid BLOB data block [%s, %d]"
+fferrBadBlobSeg, "Internal link to BLOB segment has been corrupted [%s, (%d, %d)]%s"
+fferrLenMismatch, "Truncate length is greater than length of BLOB [%s, (%d, %d), offset %d, length %d]"
+fferrOfsNotInBlob, "Offset value is greater than the length of the BLOB [%s, (%d, %d), offset %d, length %d]"
+fferrFileBlobWrite, "Cannot write to a file BLOB [%s, (%d, %d)]"
+
+fferrBadStreamBlock, "Block just read from file is not a valid stream block [%s, block %d]"
+fferrBadStreamOrigin, "An invalid stream origin has been specified"
+fferrStreamSeekError, "Stream could not seek requested position"
+
+fferrBadInxBlock, "Block just read from file is not a valid index block [%s, block %d]"
+fferrBadIndex, "Index number passed to routine is out of range [%d]"
+fferrMaxIndexes, "The maximum number of indexes have already been added [%s]"
+fferrBadMergeCall, "INTERNAL: MergeChildren called with pages not half-filled, suspect corruption [%s, left %d, right %d]"
+fferrKeyNotFound, "Key was not found in index when attempting to delete it"
+fferrKeyPresent, "Key was found in index when attempting to add it"
+fferrNoKeys, "There are no keys in the index, cannot calculate an approximate position/key"
+fferrNoSeqAccess, "Cannot create sequential cursor (index 0) as the group has no sequential access path"
+fferrBadApproxPos, "The approximate position must be between 0 and 100 [%s, index %d, pos %d]"
+
+fferrBadServerName, "The server name is invalid: can only have a-z, A-Z, 0-9 characters"
+fferrFFV1File, "File %s (signature %d) could not be opened because it is a FlashFiler 1.0 file."
+
+fferrUnknownClient, "The client ID passed to the server is unknown"
+fferrUnknownSession, "Either the client ID is unknown or the session does not exist for the given client"
+fferrUnknownAlias, "The Alias name has not been defined: it cannot be found"
+fferrUnknownPath, "Path [%s] does not exist"
+fferrUnknownDB, "The database ID does not exist"
+fferrUnknownTable, "Table %s does not exist within database %s"
+fferrUnknownIndex, "The index for table %s could not be identified from the given index name (%s) or index number %d"
+fferrUnknownCursor, "The passed cursor ID does not exist"
+fferrUnknownTrans, "Transaction ID %d is unknown"
+fferrUnknownMsg, "Message %d is not recognized by this server"
+
+fferrDBExclusive, "The database is already open: either already in exclusive mode or it is now opened in exclusive mode"
+fferrDBReadOnly, "The table cannot be opened in read/write mode because the database has been opened in readonly mode"
+fferrTableExclusive, "The table is already open in a non-shared (exclusive) mode, it cannot be opened by any other session"
+fferrCursorReadOnly, "Cannot delete or modify current record or insert new record because the cursor (table %s) was opened in read-only mode"
+fferrWriteLocked, "The table has been write-locked by another workstation, no other read-locks or write-locks allowed"
+fferrReadLocked, "The table has been read-locked by another workstation, no write-lock allowed"
+fferrCannotUnlock, "The lock could not be removed: it does not exist"
+fferrTableLocked, "The table is locked preventing the update operation"
+fferrRecLocked, "Record is locked by another user"
+fferrNoCurrentRec, "The cursor has no current record (either it's positioned on BOF, EOF or on a crack)"
+fferrDynamicLink, "The server could not find a DLL, or a routine within a DLL [Index(%s/%s:%d) DLL(%s) Routines(%s, %s)]"
+fferrResolveTableLinks, "A table needed some user defined routines but they were not found in the server configuration"
+fferrTableMismatch, "SetToCursor failed because the given cursor was not for the same table"
+fferrNoNextRecord, "There is no next record in this index; the cursor is positioned at EOF"
+fferrNoPriorRecord, "There is no prior record in this index; the cursor is positioned at BOF"
+fferrTableExists, "Table %s already exists"
+fferrDBInTrans, "Database [%s] is already in a transaction"
+fferrAliasExists, "Alias [%s] already exists"
+fferrCannotCompare, "Cannot compare BLOB fields in a table"
+fferrBadFieldXform, "Cannot copy field [%s to %s], incompatible field types"
+fferrNoTransaction, "No transaction has been started for the database, hence no updates can take place"
+fferrBadBookmark, "The bookmark is corrupt or was not created for the current index"
+fferrTransactionFailed, "A transaction failed during commit, probably due to running out of disk space, or other disk problem"
+fferrDiskFull, "The disk is out of free space"
+fferrTableFull, "This table has grown to its maximum size: pack the table or remove unneeded data"
+fferrInvalidSqlStmtHandle, "Invalid statement handle"
+fferrBLOBTooBig, "BLOB size exceeds maximum size. [size: %d]"
+fferrDeadlock, "A lock request (type %s, %s) resulted in a deadlock.  Transaction %d was chosen as the victim."
+fferrLockTimeout, "A lock request (type %s, %s, file %s) timed out."
+fferrLockRejected, "A lock request (type %s, %s, file %s) was rejected."
+fferrTableLockTimeout, "A lock request (type %s, %s) timed out."
+fferrGeneralTimeout, "The operation could not be completed within the allotted time."
+fferrNoSQLEngine, "Server engine [%s] is not attached to a SQL engine."
+fferrIndexNotSupported, "Indexes are not supported by this table [table %s, class %s]."
+fferrInvalidTableName, "'%s' is not a valid table name, most likely because it contains a file extension. Be sure to omit the file extension."
+fferrRangeNotSupported, "Ranges are not supported by this table [table %s, class %s]."
+fferrTableOpen, "Table %s is already open."
+fferrSameTable, "The cursors may not reference the same table for this operation."
+fferrSortFail, "Sort failure in method %s"
+fferrBadDistinctField, "BLOB or ByteArray fields not allowed with DISTINCT key word: %s."
+fferrTableVersion, "Cannot open table %s. It was created with version %5.4f of FlashFiler, which is newer than this server's version (%5.4f)." 
+

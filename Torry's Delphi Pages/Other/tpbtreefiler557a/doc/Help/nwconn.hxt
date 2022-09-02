@@ -1,0 +1,341 @@
+;
+;-------------------------------------------------------------------
+!TOPIC 510 NWConn
+
+NWConn provides access to the workstation's connection details. It provides
+the following functions:
+
+   . determine the available servers on the network
+   . obtain the default or primary server
+   . get information about a server
+   . determine the connection number of the workstation
+   . determine the details for a given connection
+
+!NOWRAP
+  0511Declarations           0519nwDefaultServer
+  0520nwEnumServers          0521nwGetConnInfo
+  0522nwGetConnNo            0523nwGetConnNoForUser
+  0524nwGetInternetAddress   0525nwGetNetworkList
+  0526nwGetServerInfo        0527nwGetServerTime
+  0528nwIsLoggedIn           0529nwServerFromName
+  0530nwServerVersion        0531nwSetServerTime
+!WRAP
+
+Like other NetWare units in B-Tree Filer this unit builds upon the identifiers in the
+0458NWBase unit.
+;
+;-------------------------------------------------------------------
+!TOPIC 511 Declarations,NWConn
+!NOINDEX
+
+The 0510NWConn unit defines the following constants, types and variables:
+
+!NOWRAP
+  0512MaxNetworks        0513TnwServerName
+  0514TnwEnumServerFunc  0515TnwServerInfo
+  0516TnwConnInfo        0517TnwConnList
+  0518TnwNetworkList
+!WRAP
+;
+;-------------------------------------------------------------------
+!TOPIC 512 MaxNetworks
+!NOINDEX
+const
+  MaxNetworks = 8;
+
+The maximum number of networks returned by 0525nwGetNetworkList.
+;
+;-------------------------------------------------------------------
+!TOPIC 513 TnwServerName
+!NOINDEX
+type
+  TnwServerName = TnwObjectStr;
+
+Type for a server name.
+;
+;-------------------------------------------------------------------
+!TOPIC 514 TnwEnumServerFunc
+!NOINDEX
+type
+  TnwEnumServerFunc = function (Name : TnwServerName; Server : word;
+                                var ExtraData) : boolean;
+
+Type of the function that 0520nwEnumServers calls when it enumerates the
+available servers. Name is the server name, Server is its handle, and
+ExtraData is an untyped var parameter that was passed to the original call
+to nwEnumServers. The function should return True if the enumeration is to
+continue, False if it should stop.
+;
+;-------------------------------------------------------------------
+!TOPIC 515 TnwServerInfo
+!NOINDEX
+!NOWRAP
+;!TABLE
+type
+  TnwServerInfo = record
+    ServerName  : TnwServerName;
+    NetWareVer  : byte;
+    NetWareSub  : byte;
+    MaxConns    : word;
+    UsedConns   : word;
+    MaxVols     : word;
+    Revision    : byte;
+    SFTLevel    : byte;
+    TTSLevel    : byte;
+    PeakConn    : word;
+    AccountVer  : byte;
+    VAPVer      : byte;
+    QueueVer    : byte;
+    PrintServVer: byte;
+    VirtualVer  : byte;
+    SecurityVer : byte;
+    BridgeVer   : byte;
+    Reserved    : array [1..60] of byte;
+  end;
+!WRAP
+
+A structure returned by the function 0526nwGetServerInfo. Most of the fields
+describe version numbers of the NetWare software running on the server.
+The most important fields are NetWareVer (the major version number),
+NetWareSub (the minor version number), MaxConns (the maximum number of
+workstation connections), and UsedConns (the number of connections in
+use).
+;
+;-------------------------------------------------------------------
+!TOPIC 516 TnwConnInfo
+!NOINDEX
+!NOWRAP
+;!TABLE
+type
+  TnwConnInfo = record
+    ObjectID   : nwLong;        {..the logged in object's ID}
+    ObjectType : word;          {..the logged in object's type}
+    ObjectName : TnwObjectStr;  {..the name of the object}
+    LoginDate  : TnwDate;       {..the time/date the object logged on}
+  end;
+!WRAP
+
+A structure returned by 0521nwGetConnInfo to describe the bindery object that
+is logged on to the connection. Usually this means a user, but other types
+of bindery objects can log onto connections. ObjectID is the bindery
+object ID, ObjectType is the bindery type of that object, ObjectName is
+the login name. LoginDate is the date and time the object logged into the
+connection (the WeekDay field is also returned by nwGetConnInfo).
+;
+;-------------------------------------------------------------------
+!TOPIC 517 TnwConnList
+!NOINDEX
+!NOWRAP
+;!TABLE
+type
+  PnwConnList = ^TnwConnList;
+  TnwConnList = record
+    Count : word;
+    List  : array [0..126] of word;
+  end;
+!WRAP
+
+A structure describing a list of connection numbers. Used primarily by the
+0591NWMSG basic message unit.
+;
+;-------------------------------------------------------------------
+!TOPIC 518 TnwNetworkList
+!NOINDEX
+!NOWRAP
+;!TABLE
+type
+  TnwNetworkList = record
+    Count : word;
+    List  : array [1..MaxNetworks] of nwLong;
+  end;
+!WRAP
+
+A structure describing a list of network numbers. The routine
+0525nwGetNetworkList returns a variable of this type. Count is the number of
+network numbers in the List field. List is an array of network numbers.
+
+See also:  0512MaxNetworks
+;
+;-------------------------------------------------------------------
+!TOPIC 519 nwDefaultServer
+!NOINDEX
+function 0510NWConn.nwDefaultServer : TnwServer;
+
+Return the default server handle.
+;
+;-------------------------------------------------------------------
+!TOPIC 520 nwEnumServers
+!NOINDEX
+procedure 0510NWConn.nwEnumServers(EnumFunc : TnwEnumServerFunc; var ExtraData);
+
+Cycle through the available servers.
+
+This procedure enumerates the available servers. For each server found, it
+calls a function (EnumFunc) of the 0514TnwEnumServerFunc type. ExtraData is an
+untyped var parameter that is not used by nwEnumServers, it is just passed
+on as a parameter to EnumFunc. You can use ExtraData to pass information
+to each call of EnumFunc.
+
+Under the NETX shell, the number of servers is 8 or less. Under the VLM
+Requester, the number of servers is configurable.
+;
+;-------------------------------------------------------------------
+!TOPIC 521 nwGetConnInfo
+!NOINDEX
+function 0510NWConn.nwGetConnInfo(Server : TnwServer; ConnNo : word;
+                       var CI : TnwConnInfo) : TnwErrorCode;
+
+Return login information for a connection number on the specified server.
+
+The information returned includes the bindery object ID, the object type
+and name, and the date and time it logged into the connection. If the
+connection number specifies an unknown connection, nwGetConnInfo returns
+with a non-zero error code and the CI structure is left uninitialized.
+
+See also:  0522nwGetConnNo  0523nwGetConnNoForUser
+;
+;-------------------------------------------------------------------
+!TOPIC 522 nwGetConnNo
+!NOINDEX
+function 0510NWConn.nwGetConnNo(Server : TnwServer) : word;
+
+Return the connection number for this workstation.
+
+Each workstation is given a connection number when it attaches to a
+server. The connection number for a single workstation will be different
+for different servers.
+
+Various methods exist to determine the connection number for another
+workstation. If the user name is known, you can call 0523nwGetConnNoForUser to
+iterate through the connection numbers. Another method is to iterate
+through the available connections (the UsedConns field returned by
+0526nwGetServerInfo). Connection numbers start at 1.
+;
+;-------------------------------------------------------------------
+!TOPIC 523 nwGetConnNoForUser
+!NOINDEX
+function 0510NWConn.nwGetConnNoForUser(Server : TnwServer; UserName : TnwObjectStr;
+                            var ConnNo : word) : TnwErrorCode;
+
+Return the connection number for a user.
+
+This function is designed to operate in an iterative manner. It returns a
+connection number for the user defined by UserName that is greater than
+the value that is passed in ConnNo when the routine is called. Thus you
+can iterate through all the connection numbers for a particular user by
+passing the previous value for ConnNo when you next call
+nwGetConnNoForUser. The function returns nwErrNoMoreConns when there are
+no more connection numbers.
+
+See also:  0522nwGetConnNo
+;
+;-------------------------------------------------------------------
+!TOPIC 524 nwGetInternetAddress
+!NOINDEX
+function 0510NWConn.nwGetInternetAddress(Server : TnwServer; ConnNo : word;
+                              var IA : IPXAddress) : TnwErrorCode;
+
+Return the internetwork address for the specified connection number.
+
+Use this routine to translate a known connection number (can be obtained
+from 0523nwGetConnNoForUser) into an internetwork address for IPX and SPX
+communications. nwGetInternetAddress returns an IPXAddress structure with
+the network and node fields filled in. The Socket field is the socket
+number that the NetWare shell uses to communicate with the server and
+should not be used by any other application.
+;
+;-------------------------------------------------------------------
+!TOPIC 525 nwGetNetworkList
+!NOINDEX
+procedure 0510NWConn.nwGetNetworkList(Server : TnwServer;
+                           var NetList : TnwNetworkList);
+
+Return a list of the network numbers accessible on a given server.
+
+This function is useful when you need to broadcast an IPX message to all
+workstations that are connected to the default server. In a multi-server
+environment, these stations might not all share the same IPX network
+number. nwGetNetworkList returns a list that contains all unique network
+numbers of connected stations. It calls 0524nwGetInternetAddress for all
+connections in use and builds the network list. The 0518TnwNetworkList Count
+field is the number of unique network numbers, and the List field is an
+array of these numbers. If an error occurs, Count contains zero.
+;
+;-------------------------------------------------------------------
+!TOPIC 526 nwGetServerInfo
+!NOINDEX
+function 0510NWConn.nwGetServerInfo(Server : TnwServer;
+                         var SI : TnwServerInfo) : TnwErrorCode;
+
+Return information about a server.
+
+The information returned includes the server's name, its version number,
+the maximum number of connections, and the number of connections currently
+in use. nwGetServerInfo returns zero if no error occurred.
+
+See also:  0527nwGetServerTime  0515TnwServerInfo
+;
+;-------------------------------------------------------------------
+!TOPIC 527 nwGetServerTime
+!NOINDEX
+function 0510NWConn.nwGetServerTime(Server : TnwServer;
+                         var DT : TnwDate) : TnwErrorCode;
+
+Return the date and time on the given server.
+
+See also:  0526nwGetServerInfo  0531nwSetServerTime  0476TnwDate
+;
+;-------------------------------------------------------------------
+!TOPIC 528 nwIsLoggedIn
+!NOINDEX
+function 0510NWConn.nwIsLoggedIn(Server : TnwServer) : Boolean;
+
+Return True if the calling workstation is logged into a server.
+
+If the workstation is logged into the server (or, using NetWare 4.x
+terminology, is authenticated) this routine returns True. If the
+workstation is attached to the server, but not logged in, nwIsLoggedIn
+returns False (as it does if an error occurs during the call).
+;
+;-------------------------------------------------------------------
+!TOPIC 529 nwServerFromName
+!NOINDEX
+function 0510NWConn.nwServerFromName(Name : TnwServerName) : TnwServer;
+
+Return a handle for a server name.
+
+If the server name is not found in the available server list,
+nwServerFromName returns zero. The handle list is maintained by the
+NetWare shell.
+
+See also:  0520nwEnumServers  0541nwParseFileName
+;
+;-------------------------------------------------------------------
+!TOPIC 530 nwServerVersion
+!NOINDEX
+function 0510NWConn.nwServerVersion(Server : TnwServer) : word;
+
+Return the version of the specified server.
+
+The major version number is returned in the most significant byte and the
+minor version number is returned in the least significant byte. If the
+server handle is not found (or another error occurs), nwServerVersion
+returns zero.
+
+See also:  0529nwServerFromName
+;
+;-------------------------------------------------------------------
+!TOPIC 531 nwSetServerTime
+!NOINDEX
+function 0510NWConn.nwSetServerTime(Server : TnwServer;
+                         var DT : TnwDate) : TnwErrorCode;
+
+Set the date and time on the specified server.
+
+The time passed in the DT record must be the local time. If the server
+uses UTC time (e.g. NetWare 4.x) it makes the necessary adjustments
+itself.
+
+See also:  0527nwGetServerTime  0476TnwDate
+
+

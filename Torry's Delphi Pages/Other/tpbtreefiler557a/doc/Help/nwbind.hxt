@@ -1,0 +1,551 @@
+;
+;-------------------------------------------------------------------
+!TOPIC 482 NWBind
+NWBind provides access the server bindery. The bindery is the secure
+database where the server stores various information about users, groups,
+queues, other servers, and so on. Under NetWare 4.x, the bindery doesn't
+exist in the form that users of NetWare 2.x and 3.x know, but instead is
+emulated by the server software from Directory Services information. The
+following functions are provided:
+
+   . add and modify details about bindery objects
+   . list bindery objects
+   . add/modify/delete properties for bindery objects
+
+!NOWRAP
+  0483Declarations               0489nwbAddObjectToSet
+  0490nwbChangeObjectSecurity    0491nwbChangePassword
+  0492nwbChangePropertySecurity  0493nwbCloseBindery
+  0494nwbCreateObject            0495nwbCreateProperty
+  0496nwbDeleteObject            0497nwbDeleteObjectFromSet
+  0498nwbDeleteProperty          0499nwbGetBinderyAccessLevel
+  0500nwbGetObjectID             0501nwbGetObjectName
+  0502nwbIsObjectInSet           0503nwbOpenBindery
+  0504nwbReadPropertyValue       0505nwbRenameObject
+  0506nwbScanObject              0507nwbScanProperty
+  0508nwbVerifyPassword          0509nwbWritePropertyValue
+!WRAP
+
+Like other NetWare units in B-Tree Filer this unit builds upon the identifiers in the
+0458NWBase unit.
+;
+;-------------------------------------------------------------------
+!TOPIC 483 Declarations,NWBind
+!NOINDEX
+The following constants, types and variables are declared in the
+0482NWBind unit:
+
+!NOWRAP
+  0484Security Flags  0485Bindery object types
+  0486Errors          0487TnwPropValue
+  0488TnwPasswordStr
+!WRAP
+;
+;-------------------------------------------------------------------
+!TOPIC 484 Security Flags
+!NOINDEX
+!NOWRAP
+;!TABLE
+const
+  nwbAnyOne     = $00;  {access allowed to all clients}
+  nwbLogged     = $01;  {access allowed to logged in clients}
+  nwbObject     = $02;  {access allowed to the object itself}
+  nwbSupervisor = $03;  {access allowed to the supervisor}
+  nwbNetWare    = $04;  {access allowed only to the NetWare OS}
+!WRAP
+
+Security flags. The security byte that is returned by routines such as
+0506nwbScanObject consists of two nibbles (4 bits each), the upper nibble
+refers to write access and the lower nibble to read access. Each nibble
+takes one of the 5 values above. Hence a security byte of $32 means that
+the object (i.e., generally the user) can read the information, but only
+the supervisor can alter it.
+;
+;-------------------------------------------------------------------
+!TOPIC 485 Bindery object types
+!NOINDEX
+!NOWRAP
+;!TABLE
+const
+  nwboUnknown          = $0000;
+  nwboUser             = $0001;
+  nwboGroup            = $0002;
+  nwboPrintQueue       = $0003;
+  nwboFileServer       = $0004;
+  nwboJobServer        = $0005;
+  nwboGateway          = $0006;
+  nwboPrintServer      = $0007;
+  nwboArchiveQueue     = $0008;
+  nwboArchiveServer    = $0009;
+  nwboJobQueue         = $000A;
+  nwboAdministration   = $000B;
+  nwboNASSNAGateway    = $0021;
+  nwboRemoteBridge     = $0026;
+  nwboRemBridgeServer  = $0027;
+  nwboTimeSyncServer   = $002D;
+  nwboArchiveServerSAP = $002E;
+  nwboAdvertisingPrint = $0047;
+  nwboBtrieveVAP       = $0050;
+  nwboPrintQueueUser   = $0051;
+  nwboWild             = $FFFF;
+!WRAP
+
+Types of well-known bindery objects. nwboWild is used for wildcard
+scanning.
+;
+;-------------------------------------------------------------------
+!TOPIC 486 Errors,NWBind
+!NOINDEX
+!NOWRAP
+;!TABLE
+const
+  nwbErrServerOutOfMem   = $8996; {server out of memory}
+  nwbErrMemberExists     = $89E9; {object already exists as member in set}
+  nwbErrNotMember        = $89EA; {object does not exist as memebr in set}
+  nwbErrNotSetProperty   = $89EB; {property is not a set}
+  nwbErrNoSuchSegment    = $89EC; {segment number does not exist}
+  nwbErrPropExists       = $89ED; {property already exists}
+  nwbErrObjExists        = $89EE; {object already exists}
+  nwbErrInvName          = $89EF; {name contains invalid characters}
+  nwbErrWildcardBanned   = $89F0; {no wildcards allowed for this call}
+  nwbErrInvSecurity      = $89F1; {invalid bindery security}
+  nwbErrNoObjRenamePriv  = $89F3; {user has no object rename privileges}
+  nwbErrNoObjDeletePriv  = $89F4; {user has no object delete privileges}
+  nwbErrNoObjCreatePriv  = $89F5; {user has no object create privileges}
+  nwbErrNoPropDeletePriv = $89F6; {user has no property delete privileges}
+  nwbErrNoPropCreatePriv = $89F7; {user has no property create privileges}
+  nwbErrNoPropWritePriv  = $89F8; {user has no property write privileges}
+  nwbErrNoPropReadPriv   = $89F9; {user has no property read privileges}
+  nwbErrNoSuchProperty   = $89FB; {given property does not exist}
+  nwbErrNoSuchObject     = $89FC; {given object does not exist}
+  nwbErrBinderyLocked    = $89FE; {the bindery is locked}
+  nwbErrBinderyFailure   = $89FF; {the bindery has failed}
+!WRAP
+
+Error codes that can be returned by the server. This list is the one
+provided by Novell. It is not guaranteed to be exhaustive.
+;
+;-------------------------------------------------------------------
+!TOPIC 487 TnwPropValue
+!NOINDEX
+!NOWRAP
+;!TABLE
+type
+  TnwPropValue = record
+    case boolean of
+      True  : (pvItem : Array[1..128] of Char);
+      False : (pvSet  : Array[1..32] of nwLong);
+  end;
+!WRAP
+
+A structure that defines a property segment value for an object in the
+bindery. A property for an object consists of one or more of these
+segments. If the property is a set, then it is assumed that it consists of
+an array of bindery object IDs in blocks of 32. If the property is an
+item, then it is assumed to consist of application-defined fields in 128
+byte segments.
+;
+;-------------------------------------------------------------------
+!TOPIC 488 TnwPasswordStr
+!NOINDEX
+type
+  TnwPasswordStr = string[127];
+
+A type that defines a password for a bindery object.
+;
+;-------------------------------------------------------------------
+!TOPIC 489 nwbAddObjectToSet
+!NOINDEX
+function 0482NWBind.nwbAddObjectToSet(Server : TnwServer; ObjType : word;
+                           ObjName : TnwObjectStr; PropName: TnwPropStr;
+                           MemberObjType : word;
+                           MemberObjName : TnwObjectStr) : TnwErrorCode;
+
+Add a bindery object to a set property of a bindery object.
+
+The object uniquely defined by MemberObjName and MemberObjType is added to
+the PropName property owned by the object uniquely defined by ObjName and
+ObjType. Note that all objects must reside in the same bindery; you cannot
+cross reference an object from the bindery on one server to the bindery on
+another server.
+
+The user must have sufficient write access rights to the object whose
+property is being added to, as well as to the property itself.
+
+See also:  0497nwbDeleteObjectFromSet
+;
+;-------------------------------------------------------------------
+!TOPIC 490 nwbChangeObjectSecurity
+!NOINDEX
+function 0482NWBind.nwbChangeObjectSecurity(Server : TnwServer; ObjType : word;
+                                 ObjName : TnwObjectStr;
+                                 NewSecurity : byte) : TnwErrorCode;
+
+Change the security flag for the specified bindery object.
+
+The NewSecurity byte consists of two nibbles, the upper one for write
+access, the lower one for read access. The different nibble values are
+defined by the constants nwbAnyOne..nwbNetWare (described earlier in this
+section). The security byte of the bindery object defined by ObjName and
+ObjType is altered to NewSecurity by this call, providing the user has
+sufficient write access authority.
+
+See also:  0492nwbChangePropertySecurity  0484Security Flags
+;
+;-------------------------------------------------------------------
+!TOPIC 491 nwbChangePassword
+!NOINDEX
+function 0482NWBind.nwbChangePassword(Server : TnwServer; ObjType : word;
+                           ObjName : TnwObjectStr; OldPassword,
+                           NewPassword : TnwPasswordStr) : TnwErrorCode;
+
+Change the password of a bindery object.
+
+This routine does not work for servers that use encrypted passwords. If
+the OldPassword matches, then the password for the object uniquely defined
+by ObjName and ObjType is changed to NewPassword.
+
+See also:  0508nwbVerifyPassword
+;
+;-------------------------------------------------------------------
+!TOPIC 492 nwbChangePropertySecurity
+!NOINDEX
+function 0482NWBind.nwbChangePropertySecurity(Server : TnwServer;
+                                   ObjType : word;
+                                   ObjName : TnwObjectStr;
+                                   PropName: TnwPropStr;
+                                   NewPropSecurity : byte) : TnwErrorCode;
+
+Change the security flag for a bindery object's property.
+
+The NewPropSecurity byte consists of two nibbles, the upper one for write
+access, the lower one for read access. The nibble values are defined by
+the constants nwbAnyOne.. nwbNetWare. The security byte of property
+PropName for the bindery object defined by ObjName and ObjType is altered
+to NewPropSecurity by this call, providing the user has sufficient write
+access authority.
+
+See also:  0490nwbChangeObjectSecurity  0484Security Flags
+;
+;-------------------------------------------------------------------
+!TOPIC 493 nwbCloseBindery
+!NOINDEX
+function 0482NWBind.nwbCloseBindery(Server : TnwServer) : TnwErrorCode;
+
+Close the bindery for backup purposes.
+
+This call is ignored under Netware 4.x (the bindery is emulated - there
+are no bindery files). For Netware 2.x and 3.x, use this call only if you
+need to backup the bindery files (for their names see the NetWare
+documentation). The server is effectively crippled while the bindery is
+closed, so reopen the bindery as soon as possible.
+
+See also:  0503nwbOpenBindery
+;
+;-------------------------------------------------------------------
+!TOPIC 494 nwbCreateObject
+!NOINDEX
+function 0482NWBind.nwbCreateObject(Server : TnwServer; ObjType : word;
+                         ObjName : TnwObjectStr; ObjIsDynamic : boolean;
+                         ObjSecurity : byte) : TnwErrorCode;
+
+Create a new bindery object.
+
+If you use this routine to create a 'well-known' object, such as a user,
+then it is entirely up to you to create and initialize the properties for
+that object so that the normal NetWare utilities can access it. Therefore,
+it is recommended to create only your own object types, where you can have
+full control over property contents.
+
+The function creates a bindery object called ObjName, of type ObjType,
+with security byte ObjSecurity (see 0490nwbChangeObjectSecurity). If
+ObjIsDynamic is True, the object is temporary and is deleted the next time
+the server is started. If ObjIsDynamic is False, the object is permanent.
+To get the object ID of the newly created object, call 0500nwbGetObjectID.
+
+See also:  0496nwbDeleteObject  0484Security Flags
+;
+;-------------------------------------------------------------------
+!TOPIC 495 nwbCreateProperty
+!NOINDEX
+function 0482NWBind.nwbCreateProperty(Server : TnwServer; ObjType : word;
+                           ObjName : TnwObjectStr; PropName : TnwPropStr;
+                           PropIsDynamic, PropIsSet : boolean;
+                           PropSecurity : byte) : TnwErrorCode;
+
+Create a new property for a bindery object.
+
+This routine creates a property called PropName for the bindery object
+given by ObjName and ObjType. If PropIsDynamic is True, the property is
+temporary and is deleted the next time the server is started. If
+PropIsDynamic is False, the property is permanent. If PropIsSet is True,
+the property is assumed to be a set (i.e., a list of bindery object IDs),
+otherwise the property structure depends on the application accessing it.
+
+The PropSecurity byte consists of two nibbles, the upper one for write
+access, the lower one for read access. The nibble values are defined by
+the constants nwbAnyOne..nwbNetWare. The user must have sufficient write
+access rights to the object. To add data to the property, use
+0509nwbWritePropertyValue or 0489nwbAddObjectToSet.
+
+See also:  0498nwbDeleteProperty  0484Security Flags
+;
+;-------------------------------------------------------------------
+!TOPIC 496 nwbDeleteObject
+!NOINDEX
+function 0482NWBind.nwbDeleteObject(Server : TnwServer; ObjType : word;
+                         ObjName : TnwObjectStr) : TnwErrorCode;
+
+Delete a bindery object.
+
+This routine deletes the bindery object defined by ObjName and ObjType
+from the bindery. All of the object's properties are also deleted. The
+user must have sufficient write access rights to the object.
+
+See also:  0494nwbCreateObject
+;
+;-------------------------------------------------------------------
+!TOPIC 497 nwbDeleteObjectFromSet
+!NOINDEX
+function 0482NWBind.nwbDeleteObjectFromSet(Server : TnwServer;
+                                ObjType : word;
+                                ObjName : TnwObjectStr;
+                                PropName: TnwPropStr;
+                                MemberObjType : word;
+                                MemberObjName : TnwObjectStr)
+                                    : TnwErrorCode;
+
+Delete a bindery object from a set property of a bindery object.
+
+The object defined by MemberObjName and MemberObjType is deleted from the
+PropName property of the object defined by ObjName and ObjType. The user
+must have sufficient write access rights to the object and its property.
+
+See also:  0489nwbAddObjectToSet
+;
+;-------------------------------------------------------------------
+!TOPIC 498 nwbDeleteProperty
+!NOINDEX
+function 0482NWBind.nwbDeleteProperty(Server : TnwServer; ObjType : word;
+                           ObjName : TnwObjectStr;
+                           PropName: TnwPropStr) : TnwErrorCode;
+
+Delete a property.
+
+This routine deletes the property PropName (and all its data) from the
+object defined by ObjName and ObjType. The user must have sufficient write
+access rights to the object and its property.
+
+See also:  0495nwbCreateProperty
+;
+;-------------------------------------------------------------------
+!TOPIC 499 nwbGetBinderyAccessLevel
+!NOINDEX
+function 0482NWBind.nwbGetBinderyAccessLevel(Server : TnwServer;
+                                  var AccessLevel : byte;
+                                  var ObjID : nwLong) : TnwErrorCode;
+
+Return the workstation's access level to the bindery.
+
+The AccessLevel returned is a standard security byte: the high nibble
+specifies the user's write privileges, the low nibble specifies the read
+privileges. The ObjID returned is the logged on user's bindery object ID.
+;
+;-------------------------------------------------------------------
+!TOPIC 500 nwbGetObjectID
+!NOINDEX
+function 0482NWBind.nwbGetObjectID(Server : TnwServer; ObjType : word;
+                        ObjName : TnwObjectStr;
+                        var ObjID : nwLong) : TnwErrorCode;
+
+Return the bindery object ID for the specified object.
+
+This function returns the bindery object ID for the object defined by
+ObjName and ObjType.
+
+See also:  0501nwbGetObjectName
+;
+;-------------------------------------------------------------------
+!TOPIC 501 nwbGetObjectName
+!NOINDEX
+function 0482NWBind.nwbGetObjectName(Server : TnwServer;
+                          ObjID : nwLong; var ObjType : word;
+                          var ObjName : TnwObjectStr) : TnwErrorCode;
+
+Return the name and type of the specified bindery object.
+
+This routine returns the name and bindery object type for a given bindery
+object ID.
+
+See also:  0500nwbGetObjectID
+;
+;-------------------------------------------------------------------
+!TOPIC 502 nwbIsObjectInSet
+!NOINDEX
+function 0482NWBind.nwbIsObjectInSet(Server : TnwServer; ObjType : word;
+                          ObjName : TnwObjectStr; PropName: TnwPropStr;
+                          MemberObjType : word;
+                          MemberObjName : TnwObjectStr) : TnwErrorCode;
+
+Return True if a bindery object is present in a set property.
+
+This function returns zero if the bindery object defined by MemberObjName
+and MemberObjType exists in the set property PropName for the object
+defined by ObjName and ObjType. The user must have sufficient read access
+rights to the object and its property. If the object is not in the set,
+the return code is nwbErrNotMember.
+
+See also:  0489nwbAddObjectToSet  0497nwbDeleteObjectFromSet
+;
+;-------------------------------------------------------------------
+!TOPIC 503 nwbOpenBindery
+!NOINDEX
+function 0482NWBind.nwbOpenBindery(Server : TnwServer) : TnwErrorCode;
+
+Open the bindery.
+
+This call is the complement of 0493nwbCloseBindery. This call is ignored under
+Netware 4.x (the bindery is emulated).
+;
+;-------------------------------------------------------------------
+!TOPIC 504 nwbReadPropertyValue
+!NOINDEX
+function 0482NWBind.nwbReadPropertyValue(Server : TnwServer;
+                              ObjType : word;
+                              ObjName : TnwObjectStr;
+                              PropName: TnwPropStr;
+                              SegmentNumber: byte;
+                              var PropValue : TnwPropValue;
+                              var PropIsDynamic: boolean;
+                              var PropIsSet : boolean;
+                              var MoreSegments : boolean) : TnwErrorCode;
+
+Read the value of a property for a bindery object.
+
+Property values consist of one or more 128 byte segments, each segment
+numbered consecutively from 1. This function reads the SegmentNumber part
+of property PropName for the bindery object defined by ObjName and
+ObjType. Other fields returned are PropIsDynamic and PropIsSet (see
+0495nwbCreateProperty for their definition) and also a flag to define whether
+there are any more segments after this one. nwbReadPropertyValue returns
+zero if it is successful, otherwise a non-zero error code. The user must
+have sufficient read access rights to the object and its property.
+
+See also:  0509nwbWritePropertyValue
+;
+;-------------------------------------------------------------------
+!TOPIC 505 nwbRenameObject
+!NOINDEX
+function 0482NWBind.nwbRenameObject(Server : TnwServer;
+                         ObjType : word;
+                         OldObjName, NewObjName : TnwObjectStr)
+                            : TnwErrorCode;
+
+Rename a bindery object.
+
+This routine changes the name of a bindery object from OldObjName to
+NewObjName. The user must have sufficient write access rights to the
+object.
+
+See also:  0494nwbCreateObject
+;
+;-------------------------------------------------------------------
+!TOPIC 506 nwbScanObject
+!NOINDEX
+function 0482NWBind.nwbScanObject(Server : TnwServer; var ObjType : word;
+                       var ObjName : TnwObjectStr; var ObjID : nwLong;
+                       var ObjIsDynamic : boolean; var ObjSecurity : byte;
+                       var HasProperties : boolean) : TnwErrorCode;
+
+Sequentially scan through the objects in a bindery.
+
+This function enables you to move through a bindery, retrieving
+information about objects found there. It is equivalent to the
+FindFirst/FindNext routines in the DOS unit.
+
+The scan is started by specifying ObjType, either as a specific bindery
+object type or as the wildcard object type nwboWild, and ObjName, either
+as a specific name or as a string with a '*' wildcard at the end. Set
+ObjID to -1. Call nwbScanObject and it returns the first object in the
+bindery that matches your search criteria. Leave the ObjID alone, and set
+up the ObjType and ObjName fields as before and call nwbScanObject again.
+It returns with the next object in sequence.
+
+nwbScanObject returns the type, name, and object ID for the bindery
+object. For the definitions of ObjIsDynamic and ObjSecurity, see
+0494nwbCreateObject. The boolean HasProperties is True if the object has any
+properties.
+;
+;-------------------------------------------------------------------
+!TOPIC 507 nwbScanProperty
+!NOINDEX
+function 0482NWBind.nwbScanProperty(Server : TnwServer; ObjType : word;
+                         ObjName : TnwObjectStr; var Sequence : nwLong;
+                         var PropName : TnwPropStr;
+                         var PropIsDynamic : boolean;
+                         var PropIsSet : boolean; var PropSecurity : byte;
+                         var HasValue : boolean;
+                         var MoreProps : boolean) : TnwErrorCode;
+
+Sequentially scan through the properties for a bindery object.
+
+Use this function to move through the property list for a given bindery
+object, retrieving information about the individual properties found
+there. It is equivalent to the FindFirst/FindNext routines in the DOS
+unit.
+
+The scan is started by specifying the Sequence field as -1. Call
+nwbScanProperty and it returns the first property for the object. Leave
+the Sequence field alone, call nwbScanProperty again, and it returns with
+the next property in sequence. When the MoreProps parameter is False,
+there are no more properties to scan.
+
+nwbScanProperty returns the name of the property (PropName), whether it is
+dynamic or not (PropIsDynamic), and whether it is a set or not
+(PropIsSet). The PropSecurity byte consists of two nibbles, the upper one
+for write access, the lower one for read access. The nibble values are
+defined by the constants nwbAnyOne..nwbNetWare (described earlier in this
+section). HasValue is True if the property has a value or not.
+
+See also:  0495nwbCreateProperty  0484Security Flags
+;
+;-------------------------------------------------------------------
+!TOPIC 508 nwbVerifyPassword
+!NOINDEX
+function 0482NWBind.nwbVerifyPassword(Server : TnwServer; ObjType : word;
+                           ObjName : TnwObjectStr;
+                           Password: TnwPasswordStr) : TnwErrorCode;
+
+Verify a bindery object password.
+
+This function does not work with servers that use encrypted passwords.
+Generally this routine can be used to verify user passwords.
+
+See also:  0491nwbChangePassword
+;
+;-------------------------------------------------------------------
+!TOPIC 509 nwbWritePropertyValue
+!NOINDEX
+function 0482NWBind.nwbWritePropertyValue(Server : TnwServer;
+                               ObjType : word;
+                               ObjName : TnwObjectStr;
+                               PropName: TnwPropStr;
+                               SegmentNumber : byte;
+                               var PropValue : TnwPropValue;
+                               EraseRemainingSegments : boolean)
+                                  : TnwErrorCode;
+
+Write a segment to a property for a bindery object.
+
+This routine should be used to update properties that are not sets. For a
+property that is a set, use 0489nwbAddObjectToSet.
+
+The property to be written to is PropName, and is owned by the bindery
+object defined by ObjName and ObjType. The number of the segment to write
+is SegmentNumber and its actual value is passed in PropValue. Novell's
+recommendation is to write the property segments in order, starting at 1.
+When you write the last segment of your property value, set the
+EraseRemainingSegments parameter to True and the server's bindery software
+closes off the property value at that point.
+
+See also:  0495nwbCreateProperty

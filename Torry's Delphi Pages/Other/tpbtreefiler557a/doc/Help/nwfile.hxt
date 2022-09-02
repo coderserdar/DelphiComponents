@@ -1,0 +1,238 @@
+;
+;-------------------------------------------------------------------
+!TOPIC 532 NWFile
+
+NWFile provides some access to NetWare's file and directory services.
+Generally this unit should be viewed as an adjunct to some of the other
+NetWare units. It was not designed to provide a plethora of NetWare file
+and directory routines because it is far easier to use the corresponding
+DOS routines. The provided routines include:
+
+   . parsing a DOS, NetWare, or UNC filename into a NetWare server,
+        volume, and path
+   . setting and getting file attributes
+   . locking and unlocking file regions directly
+
+!NOWRAP
+  0533Declarations    0539nwGetFileAttr
+  0540nwLockRecord    0541nwParseFileName
+  0542nwSetFileAttr   0543nwUNCtoNetWare
+  0544nwUnlockRecord
+!WRAP
+
+Like other NetWare units in B-Tree Filer this unit builds upon the identifiers in the
+0458NWBase unit.
+;
+;-------------------------------------------------------------------
+!TOPIC 533 Declarations,NWFile
+!NOINDEX
+
+The 0532NWFile unit declares the following constants, types and variables:
+
+!NOWRAP
+  0534Errors         0535nwfaXxxx
+  0536nweaXxxx       0537TnwVolumeName
+  0538TnwFileHandle
+!WRAP
+;
+;-------------------------------------------------------------------
+!TOPIC 534 Errors,NWFile
+!NOINDEX
+!NOWRAP
+;!TABLE
+const
+  nwfErrUnknownServer = $7F21;  {Server name not found}
+  nwfErrUnknownVolume = $7F22;  {Volume name not found}
+  nwfErrNotOnServer   = $7F23;  {Path is not on a server}
+  nwfErrNoFileName    = $7F23;  {Filename missing}
+  nwfErrUNCTooShort   = $7F31;  {UNC: filename < 7 characters}
+  nwfErrUNCBadStart   = $7F32;  {UNC: filename didn't start with '\\'}
+  nwfErrUNCBadServer  = $7F33;  {UNC: server name < 2 chars}
+  nwfErrUNCBadVolume  = $7F34;  {UNC: volume name < 2 chars}
+  nwfErrUNCBadRoot    = $7F35;  {UNC: \\ after volume name}
+  nwfErrNWBadServer   = $7F41;  {NW: unknown server name}
+  nwfErrNWBadVolume   = $7F42;  {NW: unknown volume name}
+  nwfErrDOSBadDrive   = $7F51;  {DOS: bad drive letter}
+!WRAP
+
+Extra error codes for the NWFILE unit, above and beyond those
+declared in NWBase.
+
+See also:  0466Errors,NWBase
+;
+;-------------------------------------------------------------------
+!TOPIC 535 nwfaXxxx
+!NOINDEX
+!NOWRAP
+;!TABLE
+const
+  nwfaExecuteOnly  = $08;
+  nwfaShareable    = $80;
+!WRAP
+
+NetWare's extra file attributes. These attributes are returned with the
+normal DOS file attributes (for these bit values, see the Borland Pascal
+or DOS documentation). nwfaExecuteOnly defines the file as being an
+executable program (an EXE or COM file). Once this attribute is set it
+cannot be unset. Note that it is a redefinition of the Volume Label bit
+for DOS files on local drives. nwfaShareable defines the file as being
+shareable for those programs who do not open the file in a shareable mode.
+
+See also:  0539nwGetFileAttr  0542nwSetFileAttr
+;
+;-------------------------------------------------------------------
+!TOPIC 536 nweaXxxx
+!NOINDEX
+!NOWRAP
+;!TABLE
+const
+  nweaSearchMode    = $07;
+  nweaTransactional = $10;
+  nweaIndexed       = $20;
+  nweaReadAudit     = $40;
+  nweaWriteAudit    = $80;
+!WRAP
+
+NetWare's extended file attributes. The main one to be aware of is the
+transactional bit. A file that has this bit set in its extended attribute
+byte will be tracked by NetWare's Transaction Tracking Services (TTS).
+
+See also:  0539nwGetFileAttr  0542nwSetFileAttr
+;
+;-------------------------------------------------------------------
+!TOPIC 537 TnwVolumeName
+!NOINDEX
+type
+  TnwVolumeName = string[17];
+
+A NetWare volume name, including the terminating colon (:).
+;
+;-------------------------------------------------------------------
+!TOPIC 538 TnwFileHandle
+!NOINDEX
+type
+  TnwFileHandle = array [0..2] of word;
+
+A NetWare file handle, used internally.
+;
+;-------------------------------------------------------------------
+!TOPIC 539 nwGetFileAttr
+!NOINDEX
+function 0532NWFile.nwGetFileAttr(FileName : string; var FAttr : byte;
+                       var ExtFAttr : byte) : TnwErrorCode;
+
+Return the normal and extended file attributes for a file.
+
+The file name can be specified in either DOS, NetWare, or UNC format. This
+function extracts the server and volume from the name by using
+0541nwParseFileName. If the file is on a NetWare server, both the DOS
+attributes and the NetWare attributes for the file are returned.
+FAttr contains the DOS-style attributes. This bit-mapped byte is
+interpreted as follows:
+
+!NOWRAP
+;!TABLE
+         7  6  5  4  3  2  1  0
+         |     |  |  |  |  |  +--Read only
+         |     |  |  |  |  +-----Hidden
+         |     |  |  |  +--------System
+         |     |  |  +-----------Execute-only
+         |     |  +--------------Subdirectory
+         |     +-----------------Modified since archiving
+         +-----------------------Shareable
+!WRAP
+
+The bits have their normal DOS interpretation, with the exception of the
+Execute-Only and Shareable flags, which are Novell specific. See the
+descriptions of nwfaExecuteOnly and nwfaShareable earlier in this section.
+
+The extended file attributes parameter, ExtFAttr, is a bit-mapped byte,
+interpreted as follows:
+
+!NOWRAP
+;!TABLE
+         7  6  5  4  3  2  1  0
+         |  |  |  |     +--------Search mode
+         |  |  |  +--------------Transactions allowed
+         |  |  +-----------------Fast indexing
+         |  +--------------------Read Audit
+         +-----------------------Write Audit
+!WRAP
+
+You can use the defines nweaSearchMode..nweaWriteAudit described earlier
+in this section to access these bits.
+
+See also:  0542nwSetFileAttr  0536nweaXxxx  0535nwfaXxxx
+;
+;-------------------------------------------------------------------
+!TOPIC 540 nwLockRecord
+!NOINDEX
+function 0532NWFile.nwLockRecord(Handle : word; Start, Len : nwLong;
+                      TimeOut : word) : TnwErrorCode;
+
+Lock a region of a file.
+
+This routine makes a NetWare-specific call to lock part of a file. Handle
+is the DOS file handle of the already opened file, Start is the starting
+byte (zero based) of the region, and Len is the number of bytes to lock.
+Timeout is the length of time in clock ticks (18.2 ticks per second) to
+try to lock the file region. nwLockRecord returns when either the region
+is locked, or when TimeOut ticks expire. A result of zero means that the
+lock was successful, a non-zero result means the lock attempt was
+unsuccessful.
+
+See also:  0544nwUnlockRecord
+;
+;-------------------------------------------------------------------
+!TOPIC 541 nwParseFileName
+!NOINDEX
+function 0532NWFile.nwParseFileName(FileName : string; var Server : TnwServer;
+                         var ServerName : TnwServerName;
+                         var VolumeName : TnwVolumeName;
+                         var Path : string) : TnwErrorCode;
+
+Parse a file name into a NetWare server, volume, and full path.
+
+This routine takes a file name in DOS, NetWare, or UNC format and attempts
+to extract the server handle and name, volume name, and remaining path
+from it. The input filename does not have to be in uppercase, as the
+routine internally converts it to uppercase.
+;
+;-------------------------------------------------------------------
+!TOPIC 542 nwSetFileAttr
+!NOINDEX
+function 0532NWFile.nwSetFileAttr(FileName : string; FAttr : byte;
+                       ExtFAttr : byte) : TnwErrorCode;
+
+Set the normal and extended file attributes for a file.
+
+See also:  0539nwGetFileAttr
+;
+;-------------------------------------------------------------------
+!TOPIC 543 nwUNCtoNetWare
+!NOINDEX
+function 0532NWFile.nwUNCtoNetWare(UNC : string; var NW : string) : TnwErrorCode;
+
+Convert a UNC filename to a NetWare filename.
+
+This routine is used internally to convert a UNC style filename
+(\\SERVER\VOLUME\PATH) to a NetWare style pathname (SERVER\VOLUME:PATH).
+No checking is done on the validity of the server name or volume name. The
+only checking done is to verify the basic format (i.e., the string starts
+with a double backslash, and so on).
+
+See also:  0541nwParseFileName
+;
+;-------------------------------------------------------------------
+!TOPIC 544 nwUnlockRecord
+!NOINDEX
+function 0532NWFile.nwUnlockRecord(Handle : word;
+                        Start, Len : nwLong) : TnwErrorCode;
+
+Unlock a region of a file.
+
+This routine makes a NetWare-specific call to unlock part of a file that
+was locked with 0540nwLockRecord. Handle is the DOS file handle of the already
+opened file. The values of Start and Len must agree with those passed to
+the original call to nwLockRecord. nwUnlockRecord returns zero if the lock
+was released, otherwise it returns an error code.

@@ -1,0 +1,46 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="pl">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1250">
+<title>New Page 1</title>
+</head>
+
+<body>
+
+<p style="word-spacing: 0; line-height: 100%; text-indent: 0; margin: 0"><b><font size="4">Triggers:</font></b><br>
+<br>
+Basic function detail and Cursors function and<br>
+<br>
+OLD.FIELDNAME<br>
+NEW.FIELDNAME<br>
+SQLOLD.FIELDNAME<br>
+SQLNEW.FIELDNAME<br>
+FIELDEXISTS(fieldname)<br>
+FIELDTYPE(fieldname) - return fieldtype like fftdsDate ....<br>
+TABLENAME - Return current table name<br>
+USER - Return current user name<br>
+<br>
+new.version:= old.version + 1;<br>
+<br>
+<b>Triggers type:</b></p>
+<p style="word-spacing: 0; line-height: 100%; text-indent: 0; margin: 0"><br>
+BEFOREINSERT - like IB<br>
+AFTERINSERT - like IB<br>
+BEFOREUPDATE - like IB<br>
+AFTERUPDATE - like IB<br>
+BEFOREDELETE - like IB<br>
+AFTERDELETE - like IB<br>
+</p>
+
+<p style="word-spacing: 0; line-height: 100%; text-indent: 0; margin: 0">&nbsp;</p>
+<p style="word-spacing: 0; line-height: 100%; text-indent: 0; margin: 0"><font color="#008080"><b>TRIGGERS</b></font><font color="#008080"><b>:</b></font></p>
+<font color="#000080"><b>begin;</b></font></p>
+new.version:= old.version + 1;<br>
+<font color="#000080"><b>end;</b></font></p>
+<p style="word-spacing: 0; line-height: 100%; text-indent: 0; margin: 0">&nbsp;</p>
+<p style="word-spacing: 0; line-height: 100%; text-indent: 0; margin: 0">&nbsp;</p>
+
+</body>
+
+</html>
