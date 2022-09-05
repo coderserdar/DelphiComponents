@@ -1,0 +1,35 @@
+ANN: DelphiCodeToDoc v0.23Beta disponible - Outil gratuit de generation de documentation pour Delphi
+
+La dernière version de DelphiCodeToDoc (v0.23Beta) est disponible. Elle peut être téléchargée ici :
+
+http://downloads.sourceforge.net/dephicodetodoc/DelphiCodeToDoc_exe_v0.23b.zip
+
+DelphiCodeToDoc est un outils gratuit de génération de documentation pour
+Delphi, distribuer sous la licence GNU - GPL. Il utilise les informations
+contenu dans le code source, comme les symboles et les commentaires
+formattés, pour produire une documentation précise de votre code ou de votre
+composant.
+
+-----------------------------------------------------------------
+Quelles sont les nouveautés de cette version ?
+Cette version v0.23Beta contient les modifications suivantes :
+* Correction du crash du parser lorsque la description du tag @param est vide (Tracker 2781298)
+* Correction de fichiers non parsés à cause de certains attributs de NTFS (Tracker 2523851)
+* Ajout d'une option pour exclure les resourcestring de la documentation finale (Tracker 2736801, 1106583)
+* Correction de l'onglet 'qualité' qui ne suivait pas le fitre des catégories (Tracker 1855474)
+* Ajout d'un générateur de documentation PDF
+
+
+Quels sont les bugs connus du logiciel ?
+*Differences non justifiés entre champs et variables de classe
+*Les traductions ne sont pas à jour
+
+Quelles sont les limitations connues du programme ?
+*Les variables de classe ne peuvent être commentées que par un commentaire inline juste après la declaration
+*Les évenements n'ont pas de description
+*Seul l'Anglais est disponible pour le document généré
+*Le TAG @see n'est pas supporté
+
+Quelles seront les futures évolutions ?
+* Fix critical and major bugs
+

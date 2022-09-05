@@ -1,0 +1,73 @@
+unit TSPropEdit;
+
+interface
+
+uses
+	Classes,
+	Types,
+	DesignIntf,
+	DesignEditors,
+	VCLEditors;
+
+
+type
+	TTSStringProperty = class(TStringProperty)
+		function GetAttributes: TPropertyAttributes; override;
+		procedure Edit; override;
+	end;
+
+	TTSStringListProperty = class(TClassProperty)
+		procedure Edit; override;
+		function GetAttributes: TPropertyAttributes; override;
+	end;
+
+implementation
+
+uses
+	Controls,
+	Forms,
+	SysUtils,
+	TypInfo,
+	TSStrPropDlg;
+
+
+
+{ TTSStringListProperty }
+
+procedure TTSStringListProperty.Edit;
+begin
+	with TFrmStrPropDlg.Create(Application) do
+		try
+			MeText.Lines.Assign(TStringList(Pointer(GetOrdValue)));
+			if ShowModal = mrOK then
+				SetOrdValue(Longint(Pointer(MeText.Lines)));
+		finally
+			Free;
+		end;
+end;
+
+function TTSStringListProperty.GetAttributes: TPropertyAttributes;
+begin
+	Result := [paDialog];
+end;
+
+{ TTSStringProperty }
+
+procedure TTSStringProperty.Edit;
+begin
+	with TFrmStrPropDlg.Create(Application) do
+		try
+			MeText.Lines.Text := GetStrValue;
+			if ShowModal = mrOK then
+				SetStrValue(MeText.Lines.Text);
+		finally
+			Free;
+		end;
+end;
+
+function TTSStringProperty.GetAttributes: TPropertyAttributes;
+begin
+	Result := inherited GetAttributes + [paDialog];
+end;
+
+end.

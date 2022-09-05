@@ -1,0 +1,293 @@
+Version 3.1 - 2011-04-xx
+========================
+- Fixed: Closing editor tab could raise access violation
+- Added: msxmldom, XMLDoc and Variants optimization for the IDE's usage pattern
+- Added: Masks.pas optimization (UpperCase => UpCase)
+
+
+Version 3.0 - 2011-04-18
+========================
+- Added: Extensive Code Completion/Code Insight optimizations
+- Added: Compiler file search cache (Delphi 7, 2007)
+- Fixed: Debugger sometimes stopped working (Start, Pause, Stop buttons are disabled)
+
+
+Version 2.8 - 2009-12-01
+========================
+- Added: Improves "Step Into" speed, especially for large projects or projects with packages (Supported for Delphi 6-2007).
+
+
+Version 2.78 - 2008-07-19
+=========================
+- Improved: Packages are loaded a little bit faster (Delphi/C++ 2005, 2006, 2007)
+- Added: Delphi Compiler's C RTL optimizations (much faster map file creation)
+- Added: Background Parser now stops if the main thread wants to do something with the compiler. (Delphi/C++ 2005, 2006, 2007),
+- Added: CodeCompletion can be aborted by pressing ESC
+- Added: HelpInsight can be aborted by moving the mouse or pressing ESC.
+
+
+Version 2.76 - 2008-05-03
+=========================
+- Fixed: Huge memory leak in DLL hooking code
+
+
+Version 2.75 - 2008-04-19
+=========================
+- Added: Fix for TCustomActionList.Notification memory overwrite (also in IDEFixPack for RAD Studio 2007; not fixed for Delphi 5)
+- Added: No delay after switching from Text DFM to the form designer (Delphi 2006, RAD Studio 2007)
+- Fixed: FastQuit (Ctrl+Quit) ignored the "Cancel" button in the "Do you want to save?" dialog
+
+
+Version 2.73 - 2008-02-24
+=========================
+- Fixed: Faster StrScan returned nil when doing a search for #0
+- Changed: Some minor tweaks
+
+
+Version 2.72 - 2008-01-07
+=========================
+- Improved: Better cache algorithm for LoadResString
+- Improved: .NET 1.1 SetThreadPriotity hook is not necessary for .NET 2.0
+- Improved: Delphi 7 RTM Compiler that has a working optimization is used to compile DelphiSpeedUp for Delphi 7.
+- Added: Some I/O operation optimizations for the Delphi 2007 compiler.
+- Added: LStrAsg, LStrLAsg speed optimization (QC 50564)
+- Added: Faster WideStrUtils.InOpSet (QC 43080)
+
+
+Version 2.7 - 2007-10-01
+========================
+- Added: Disables Package and Palette cache to improve startup and project opening time
+- Added: Cache for LoadResString and FindHInstance
+- Improved: GetDynaMethod now uses binary search and an aligned DMT
+- Improved: Some optimizations for RTL functions were rewritten
+- Fixed: C++Builder 2006 and 2007 syntax highlighter hasn't worked for .h, .hpp files anymore
+
+
+Version 2.6 - 2007-09-14
+========================
+- Added: New startup optimizations
+- Added: TComponent.FindComponent uses a hash table
+- Added: Package loading is indicated by crAppStart cursor and IDE caption change
+- Added: Project resource file is now loaded with a memory stream resulting in less I/O operations
+- Added: extracppfilemask.txt was loaded multiple times. DSU reduces the amount of I/O operations
+- Added: Ignoring invalid filenames ("C:\dir\C:\dir\file.txt")
+- Improved: Some better TList optimizations
+
+
+Version 2.51
+============
+- Removed TWinControl.WMPaint optimization (which already exists in Delphi 2007) from Delphi 5-2006
+
+
+Version 2.5
+===========
+- Added: Delphi Compiler I/O optimizations for Delphi 2007
+- Added: .NET DynamicXmlSerializer caching for Delphi 2007
+- Fixed: Support for non-NULL zero length WideStrings (mainly for .NET IDE experts)
+- Fixed: FastObj finalization bug
+
+
+Version 2.45
+============
+- Added: Delphi 2007 support
+- Added: Delphi 5, 6, 7, BCB 5, 6 Compiler is now faster especially for files on network drives.
+- Added: Improves the speed of the compiler a little bit
+
+
+Version 2.41
+============
+- Fixed: Package loading when opening a project caused "Value must be between 0 and 65535" exception.
+- Fixed: _WStrCmp hook caused an access violation
+
+
+Version 2.4
+===========
+- Added: FastCode 0.6.4
+- Added: Lots of new faster functions.
+- Added: Option "Disable FastQuit" that removes the "Close all and terminate process" menu item from the file menu.
+- Fixed: _LStrLCmp/_WStrWCmp calls from the RTL itself weren't replaced by _LStrEqual/_WStrEqual where applicatable.
+- Fixed: Package unloading hadn't correctly cleared the unit name hash table.
+- Fixed: The splash progressbar was painted over the "Registered..." text in the splash screen.
+- Fixed: French users got German menu items, a missing dcc32.de caused the menu items to be English instead of German.
+- Improved: Overhead for inlining and function splitting (_LStrCmp=>_LStrEqual) is now faster.
+
+
+Version 2.35
+============
+- Improved: _LStrCmp and _WStrCmp optimization
+- Improved: Removed two memory accesses from each hooked function
+- Added: Delphi 2005/BDS 2006 environment options dialog now opens much faster
+- Added: Improves the speed of the compiler a little bit
+- Added: Improves the speed of the .NET framework and other msvcrt dependent code
+- Fixed: Missing Package Import Resolver for Delphi/BCB 5
+- Fixed: Closing the IDE could have caused an access violation
+
+
+Version 2.3
+===========
+- Added: Package Import Resolver for many System.pas functions and TList/TObjectList/TInterfaceList
+- Added: Some FastSys tweaks to improve speed in runtime packages
+- Added: .NET's SetThreadPriority(HIGHEST) during IDE loading is now ignored (Delphi 2005, BDS 2006)
+- Added: The IDE is terminated faster by pressing CTRL when closing the main form.
+- Added: DelphiSpeedUp calls BeginUpdate/EndUpdate for BDS's Tool Palette during startup.
+
+
+Version 2.2
+===========
+- Added: "Clear unit buffer" menu item is now also visible in Delphi 2005 and BDS 2006
+- Fixed: Rehooking code in an often called function is replaced by a faster rehooking code.
+- Added: TObjectList speed improvements
+- Added: Replaced FastCode library 0.5 by version 0.6.1.
+
+
+Version 2.1
+===========
+- Added: Another speed improvement that also affects the Delphi compiler
+- Added: Caching of the on the fly generated c# serializer assemblies after the first IDE start (BDS 2006)
+- Fixed: Shift+F9 works now directly after the IDE is loaded (Delphi 5-7/BCB 5-6)
+- Fixed: Hooking code is now protected against TortoiseSVN dll injection
+- Fixed: Installer failed to install the DLL when a readonly DLL already existed
+
+
+Version 2.0
+============
+- Added: Replaced FastCode library 0.4 by version 0.5.
+- Added: Startup progressbar for Delphi 2005 and BDS 2006
+
+
+Version 1.99
+============
+- Added: Turbo Edition support
+- Fixed: BCB splashscreen and faster BPL loading failed
+- Fixed: Access violation when a BPL/DLL used an address higher than 0x7FFFFFFF
+- Added: very fast (hashed) CheckDuplicateUnits (secures IDE against bad packages), makes load time a little bit slower, but more secure
+- Improved: BPL/DLL hooking got another speed boost.
+- Removed: "Source modified. Rebuild?" dialog is now disabled by DDevExtensions 1.3
+
+
+Version 1.96
+============
+- Improved BPL/DLL hooking speed
+
+
+Version 1.95
+============
+- Split into DelphiSpeedUp and DDevExtensions
+
+
+Version 1.92
+============
+- Fixed: Some components (TDataSource, TClientDataSet, ...) were missing in the ComponentSelector
+- Fixed: ComponentSelector updated the component list everytime the listbox was opened
+- Fixed: ComponentSelector open the list even if it had the focus only for a short time
+- Added: ComponentSelector is now available for Delphi 2005 und BDS 2006
+- Added: ComponentSelector toolbar can be hidden, location is stored to registry
+- Added: New option "Set IDE shortcuts"
+- Removed: FastQuit (superseeded by "Close all and terminate process")
+
+
+Version 1.9
+============
+- Fixed: ITE had not worked with 'Disable "Files modified. Rebuild?"-Dialog' option
+- Fixed: Starting Delphi without splash screen disabled some features of DelphiSpeedUp
+- Fixed: Wrong "close all and terminate process" dialog text
+- Added: ComponentSelector edit (Delphi 5 to 7)
+- Added: French translation
+
+
+Version 1.8
+============
+- Fixed: The 'Disable "Files modified. Rebuild?"-Dialog' option caused the IDE to not recompile a project when the changes were made during a debug session.
+- Fixed: DLL unhooking could cause access violations
+- Added: "File"/"Close all and kill" menu item for a very fast quit.
+- Removed: FastSys optimizations. They caused crashes on some systems (maybe a bug in TThemeManager)
+
+
+Version 1.72
+============
+- Fixed: "&" was translated to AccelChar in the splash screen
+- Fixed: "File not found filename.dcu" when compiling after using the open/save dialog
+- Fixed: SetCurrentDir had not worked with "\\computer\share\" and "X:\"
+- Added: BDS 2006 CheckDuplicateUnits hook for all packages (hooks function InitializePackage(Filename, ValidateCallback) )
+- Added: Installer supports BCB 5 and 6.
+
+
+Version 1.71
+============
+- Fixed wrong PosEx hooking
+- Faster DLL/BPL hooking (reduced GetModuleHandle calls)
+- Fixed NoFastObj registry setting
+- DLL unload bugfix
+
+
+Version 1.7
+===========
+- Replaced buggy FastCode_IntToStr function
+- Removed buggy FastCode_IntToStr64 function
+- Disabled buggy FastCodeStrCopyPMD function, uses FastCodeStrCopyBlended instead (caused 'Sender: TObjec));' bug)
+- Disabled special Delphi 2005/BDS 2006 optimization for Delphi 5, 6 and 7.
+- Added new registry switches.
+- Installer allows to change the DelphiSpeedUp registry switches.
+- Registry switches are now Delphi version specific (new subkey)
+
+
+Version 1.69
+============
+- New bugfixed FastObj
+- ExpandFileName cache is also cleared if the SetCurrentDirectory() call fails
+- FileAgeCache is cleared if SetCurrentDirectory() is calls
+- Fixed bug in direct RTL hooking code
+- Hooked some more optimized RTL functions
+
+
+Version 1.65
+============
+- Fixed Delphi 5 bug with ALT+F12 (Delphi 5 uses "old" FastCode unit)
+- FastMove 3.03 (06-MAR-2006)
+- Original FastCode
+
+
+Version 1.6
+===========
+- Switched to newer FastMove version.
+- FastCode functions are now selected by the actual CPU
+- Fixed MSVCRT.StrLen/StrCmp bug (caused AVs)
+- Some new speed improvements for BDS 2006
+- Added version number to spash screen
+- Fixed FastObj bug with classes that overwrite TObject/TInterfacedObject.NewInstance
+- Moved VCL and IDE related code out of Utils and FastRTL.
+
+* Delphi 2005 support still not tested
+
+
+Version 1.5
+===========
+- Better Delphi 2005 and BDS 2006 support
+- Fixed hooking limitation (overall speed improvement for more Packages and DLLs)
+- DLLs go to $(APPDATA) instead of $(DELPHI)\Bin
+
+
+Version 1.4
+===========
+- Fixed Win9x bug
+- Fixed relative project filename in the .dpr/.dpk file.
+- FastMove.pas replaces i386 FastCode Move. Uses SSE, MMX or i386 depending on the CPU
+- New faster TList functions (not that radical as FasterTList)
+- Show menu item: "Run/Run without debugger (SHIFT+CTRL+F9)"  [D6, D7]
+- Added shortcut to Build project: SHIFT+F9  [D5, D6, D7]
+
+
+Version 1.3
+===========
+- Fixed many bugs
+- Removed FasterTList which caused lots of bugs
+- Added own TList.Get and TList.IndexOf
+- Projects are now compiled a little bit faster
+- BDS 2006 support.
+- DelphiSpeedUp is now loaded earlier by the helper package DelphiSpeedUpLoader (Known IDE Packages)
+
+
+Version 1.2
+============
+- Fixed File not found bug (SetCurrentDir hook has cleared the cache)
+
