@@ -1,0 +1,60 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{42085cda-8f18-4859-a681-a3109ff5e295}</ProjectGuid>
+    <MainSource>tb2k_d11.dpk</MainSource>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
+    <DCC_DependencyCheckOutputName>tb2k_d11.bpl</DCC_DependencyCheckOutputName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Version>7.0</Version>
+    <DCC_DebugInformation>False</DCC_DebugInformation>
+    <DCC_LocalDebugSymbols>False</DCC_LocalDebugSymbols>
+    <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+    <DCC_Define>RELEASE</DCC_Define>
+    <DCC_CBuilderOutput>All</DCC_CBuilderOutput>
+    <DCC_ImageBase>3FC00000</DCC_ImageBase>
+    <DCC_DcuOutput>..\Lib\D11</DCC_DcuOutput>
+    <DCC_ObjOutput>..\Lib\D11</DCC_ObjOutput>
+    <DCC_HppOutput>..\Lib\D11</DCC_HppOutput>
+    <DCC_BpiOutput>..\Lib\D11</DCC_BpiOutput>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <Version>7.0</Version>
+    <DCC_Define>DEBUG</DCC_Define>
+    <DCC_CBuilderOutput>All</DCC_CBuilderOutput>
+    <DCC_ImageBase>3FC00000</DCC_ImageBase>
+    <DCC_DcuOutput>..\Lib\D11</DCC_DcuOutput>
+    <DCC_ObjOutput>..\Lib\D11</DCC_ObjOutput>
+    <DCC_HppOutput>..\Lib\D11</DCC_HppOutput>
+    <DCC_BpiOutput>..\Lib\D11</DCC_BpiOutput>
+  </PropertyGroup>
+  <ProjectExtensions>
+    <Borland.Personality>Delphi.Personality</Borland.Personality>
+    <Borland.ProjectType>Package</Borland.ProjectType>
+    <BorlandProject>
+<BorlandProject><Delphi.Personality><Parameters><Parameters Name="UseLauncher">False</Parameters><Parameters Name="LoadAllSymbols">True</Parameters><Parameters Name="LoadUnspecifiedSymbols">False</Parameters></Parameters><Package_Options><Package_Options Name="ImplicitBuild">False</Package_Options><Package_Options Name="DesigntimeOnly">False</Package_Options><Package_Options Name="RuntimeOnly">True</Package_Options><Package_Options Name="PackageDescription">Toolbar2000 Components (Jordan Russell)</Package_Options></Package_Options><VersionInfo><VersionInfo Name="IncludeVerInfo">False</VersionInfo><VersionInfo Name="AutoIncBuild">False</VersionInfo><VersionInfo Name="MajorVer">1</VersionInfo><VersionInfo Name="MinorVer">0</VersionInfo><VersionInfo Name="Release">0</VersionInfo><VersionInfo Name="Build">0</VersionInfo><VersionInfo Name="Debug">False</VersionInfo><VersionInfo Name="PreRelease">False</VersionInfo><VersionInfo Name="Special">False</VersionInfo><VersionInfo Name="Private">False</VersionInfo><VersionInfo Name="DLL">False</VersionInfo><VersionInfo Name="Locale">1033</VersionInfo><VersionInfo Name="CodePage">1252</VersionInfo></VersionInfo><VersionInfoKeys><VersionInfoKeys Name="CompanyName"></VersionInfoKeys><VersionInfoKeys Name="FileDescription"></VersionInfoKeys><VersionInfoKeys Name="FileVersion">1.0.0.0</VersionInfoKeys><VersionInfoKeys Name="InternalName"></VersionInfoKeys><VersionInfoKeys Name="LegalCopyright"></VersionInfoKeys><VersionInfoKeys Name="LegalTrademarks"></VersionInfoKeys><VersionInfoKeys Name="OriginalFilename"></VersionInfoKeys><VersionInfoKeys Name="ProductName"></VersionInfoKeys><VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys><VersionInfoKeys Name="Comments"></VersionInfoKeys></VersionInfoKeys><Source><Source Name="MainSource">tb2k_d11.dpk</Source></Source></Delphi.Personality></BorlandProject></BorlandProject>
+  </ProjectExtensions>
+  <Import Project="$(MSBuildBinPath)\Borland.Delphi.Targets" />
+  <ItemGroup>
+    <DelphiCompile Include="tb2k_d11.dpk">
+      <MainSource>MainSource</MainSource>
+    </DelphiCompile>
+    <DCCReference Include="rtl.dcp" />
+    <DCCReference Include="vcl.dcp" />
+    <DCCReference Include="..\Source\TB2Acc.pas" />
+    <DCCReference Include="..\Source\TB2Anim.pas" />
+    <DCCReference Include="..\Source\TB2Common.pas" />
+    <DCCReference Include="..\Source\TB2Consts.pas" />
+    <DCCReference Include="..\Source\TB2Dock.pas" />
+    <DCCReference Include="..\Source\TB2ExtItems.pas" />
+    <DCCReference Include="..\Source\TB2Hook.pas" />
+    <DCCReference Include="..\Source\TB2Item.pas" />
+    <DCCReference Include="..\Source\TB2MDI.pas" />
+    <DCCReference Include="..\Source\TB2MRU.pas" />
+    <DCCReference Include="..\Source\TB2Toolbar.pas" />
+    <DCCReference Include="..\Source\TB2ToolWindow.pas" />
+    <DCCReference Include="..\Source\TB2Version.pas" />
+  </ItemGroup>
+</Project>

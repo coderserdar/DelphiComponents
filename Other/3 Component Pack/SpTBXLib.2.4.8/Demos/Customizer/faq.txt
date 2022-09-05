@@ -1,0 +1,33 @@
+
+TSpTBXCustomizer FAQ:
+
+1) What is it?
+
+TSpTBXCustomizer is a SpTBXLib toolbar customization component.
+It allows you to save the toolbars and dockable panels layout and customize the toolbars items.
+
+2) How do I start using it?
+
+Double click the TSpTBXCustomizer or use the Items property to add your custom commands.
+Use the ImageList property to hook the images to the commands, and the Menubar property to fill the shortcuts list.
+To show the customizer at runtime use the Show method.
+
+3) How do I load and save the items customizations?
+
+You can load and save to the Registry or to an Ini file, call the Load method from the Form.OnShow event, and the Save method from the Form.OnDestroy event:
+
+SpTBXCustomizer1.Load('C:\Options.ini');
+
+SpTBXCustomizer1.Save('C:\Options.ini');
+
+SpTBXCustomizer1.Load(HKEY_CURRENT_USER, 
+'Software\Silverpointdev\CustomizerDemo');
+
+SpTBXCustomizer1.Save(HKEY_CURRENT_USER, 
+'Software\Silverpointdev\CustomizerDemo');
+
+4) How do I load a specific layout?
+
+Once the toolbar layouts are loaded you can access the available layouts through the Layouts property.
+To load a specific layout use the LoadLayout method.
+To save the current layout use the SaveLayout method.
