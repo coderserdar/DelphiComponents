@@ -1,0 +1,50 @@
+package PBEditPack345;
+
+{$R *.RES}
+{$R 'PBBinHexEdit.dcr'}
+{$R 'PBEdit.dcr'}
+{$R 'PBEditEx.dcr'}
+{$R 'PBMaskEdit.dcr'}
+{$R 'PBNumEdit.dcr'}
+{$R 'PBSpinEdit.dcr'}
+{$R 'PBSuperSpin.dcr'}
+{$ALIGN OFF}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA OFF}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS ON}
+{$RANGECHECKS ON}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS OFF}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $00400000}
+{$DESCRIPTION 'BakSoft-Denmark - Edit components'}
+{$DESIGNONLY}
+{$IMPLICITBUILD ON}
+
+requires
+  vcl40,
+  VCLSMP40;
+
+contains
+  PBBinHexEdit in 'PBBinHexEdit.pas',
+  PBEdit in 'PBEdit.pas',
+  PBEditEx in 'PBEditEx.pas',
+  PBEditExReg in 'PBEditExReg.pas',
+  PBMaskEdit in 'PBMaskEdit.pas',
+  PBNumEdit in 'PBNumEdit.pas',
+  PBSpinEdit in 'PBSpinEdit.pas',
+  PBSuperSpin in 'PBSuperSpin.pas';
+
+end.

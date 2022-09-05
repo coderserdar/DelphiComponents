@@ -1,0 +1,651 @@
+SQLMemTable: History of changes
+===============================
+
+- version 15.00 (12/25/2018)
+  New features added: 
+    1. RAD Studio 10.3 Rio support added (Windows 32 bit and Windows 64 bit).
+    2. RAD Studio 10.2 Tokyo rebuilt with update 3.
+
+
+- version 14.00 (04/17/2017)
+  New features added: 
+    1. RAD Studio 10.2 Tokyo support added (Windows 32 bit and Windows 64 bit).
+    2. RAD Studio 10.1 Berlin rebuilt with update 2.
+
+
+- version 13.00 (06/17/2016)
+  New features added: 
+    1. RAD Studio 10.1 Berlin support added (Windows 32 bit and Windows 64 bit).
+    2. Windows 64-bit platform support improved - components now enabled in form designer.
+
+
+- version 12.00 (09/08/2015)
+  New features added: 
+    1. RAD Studio 10 Seattle support added (Windows 32 bit and Windows 64 bit).
+
+
+- version 11.10 (09/05/2015)
+  Bugs fixed:
+    1. Problem with blob and memo fields under Windows 64 bit platform was fixed.
+
+
+- version 11.00 (04/16/2015)
+  New features added: 
+    1. Delphi and C++ Builder XE8 support added.
+
+
+- version 10.20 (12/10/2014)
+
+  New features added: 
+  1. RAD Studio XE7 support improved.
+
+
+- version 10.10 (10/30/2014)
+  New features added: 
+    1. RAD Studio XE7 support essentially improved.
+
+  Bugs fixed:
+    1. Bookmark related problems in Rad Studio XE7 are solved.
+
+
+- version 10.00 (09/10/2014)
+  New features added: 
+    1. Delphi and C++ Builder XE7 support added.
+
+
+- version 9.00 (05/20/2014)
+  New features added: 
+    1. Delphi and C++ Builder XE6 support added.
+
+
+- version 8.00 (12/19/2013)
+  New features added: 
+    1. Delphi and C++ Builder XE5 support added.
+
+
+- version 7.00 (06/04/2013)
+  New features added: 
+    1. Delphi and C++ Builder XE4 support added.
+
+
+- version 6.00 (10/01/2012)
+  New features added: 
+    1. Delphi XE3 support added.
+
+
+- version 5.20 (09/28/2012)
+
+  New features added: 
+    1. Stability in x64 platform greatly increased. Memory manager optimized.
+  Bugs fixed:
+    1. Bug with memory allocation in x64 platform fixed.
+    2. Bug with incorrect calculation IsNull property on calculated and lookup fields is fixed.
+
+
+- version 5.10 (09/12/2012)
+
+  New features added: 
+   1. Delphi and C++ Builder XE2 (64-bit) support added (Compression is not supported in x64 platform). 
+      Read more about using x64 build in file x64_notes.txt.
+
+
+- version 5.00 (10/18/2011)
+
+  New features added: 
+    1. New memory table SQL engine from Accuracer 6 - 100% Unicode, more fast and powerful
+    2. Stored functions and procedures supported.
+    3. Views supported.
+    4. Correlated subqueries are now supported in SELECT, UPDATE and DELETE statements.
+        ANY / SOME and ALL operators implemented for SQL statements with subqueries.
+    5. CAST operator extended - now it supports size restriction on string data types, like Char(20)
+    6. CONSTRAINT keyword is now supported in DDL statements (NULL, NOT NULL, FOREIGN KEY).
+    7. Database designer added in design time package (double click TSQLMemDatabase).
+	TSQLMemQuery now has SQL designer (double-click in IDE). 
+    8. New editor for SQL property of TACRQuery supports loading / saving Unicode SQL scripts in all IDE versions.
+    9. Rad Stuido XE2 supported.
+ 
+
+- version 4.00 (05/21/2009)
+
+  New features added: 
+    1. Multiple memory databases support. TSQLMemDatabase component added.
+    2. TwoMemoryDatabases and LoadSaveMemoryDatabase demos were added.
+    3. SQL syntax extended:
+        - CREATE DATABASE
+        - DROP DATABASE
+    4. Null values support improved in filter expressions and SQL Statements:
+        - condition like Argument = NULL is treated as Argument IS NULL
+        - condition like Argument <> NULL is treated as Argument IS NOT NULL
+        - condition like StringArgument = "" is treated as StringArgument IS NULL
+        - condition like StringArgument <> "" is treated as StringArgument IS NOT NULL
+    5. Unicode demo was added to Delphi folder.
+    6. ClearDefinitions and AssignDefinitions methods were added to TSQLMemDataset.
+    7. Documentation updated - both Component Reference and Developer's Guide.
+    8. The performance of insert record and save table operations as well as write to memory and temporary streams
+        essentially increased. SQLMemTable version 4 works up to 10 times faster then version 3.
+    9. Database designer created - TSQLMemDatabaseDesigner.
+
+  Bugs fixed:
+    1. Bugs in SELECT INTO and INSERT SELECT were fixed.
+    2. The problems with executing SQL queries on not existing tables were solved.
+    3. Bug with ignoring DESC and NOCASE options in PRIMARY KEY operator was fixed.
+    4. Bug in line numbering in SQL error messages was fixed.     
+    5. Problem with converting Unicode variant strings was solved (Delphi 2009 only).
+
+- version 3.90 (03/30/2009)
+
+  New features added: 
+    1. SQLConsole utility updated - export table to SQL implemented.
+
+  Bugs fixed:
+    1. Bug in SELECT statement with JOIN operator on string conditions was fixed.
+    2. Memory leak in TOBLOB SQL function fixed.
+
+
+- version 3.80 (02/16/2009)
+
+  New features added: 
+    1. BDS 2009 compatibility improved.
+    2. Unicode demo added.
+    3. Stability in multi-threaded applications is greatly increased. The product works stable with 100 threads in
+       both disk and memory modes.
+    4. Component Reference updated - load and save methods.
+    5. The performance of most of operations increased.
+
+  Bugs fixed:
+    1. SUBSTRING and TOSTRING functions fixed.
+    2. Problems with Unicode strings comparison were solved.
+    3. Bug in TSQLMemBatchMove.Execute on tables with BLOB fields was fixed.
+    4. Problem in repair / restructuring table with some type of indexes was solved.
+    6. Minor issues in TSQLMemBatchMove and TSQLMemTable.ImportTable were solved.
+
+
+- version 3.70 (09/18/2008)
+
+  New features added: 
+    1. The performance of UPDATE statements is essentially increased in most cases.
+    2. ClearCache method added to TACRDatabase.
+    3. The performance of parametrized queries essentially increased.
+    4. SQLConsole utility updated - now it can be compiled in Turbo Delphi.
+       Many thanks to Petr Skaloud for this job!
+    5. GotoCurrent method added to TACRDataset - same as TTable.GotoCurrent.
+    6. Component Reference updated.
+
+  Bugs fixed:
+    1. Problem with executing scripts with '?' symbol generated by TClientDataset was solved.
+    2. Bug with sub-queries in FROM clause was fixed.
+    3. Bug with DISTINCT option on joined tables was fixed.
+    4. Problem with memory leaks in DELETE SQL statement on table with BLOB fields was solved.
+    5. Bugs with Prepare/Unprepare calls on parametrized queries were fixed.
+    6. Bug in SetRange call on table without records matching search criteria was fixed.
+
+
+- version 3.60 (08/08/2008)
+
+  New features added: 
+    1. The performance of SELECT statements on single table with RequestLive = false is essentially increased.
+    2. SQLConsole utility improved. 
+       Display of query execution time and number of records added (hint on the Run / ExecSQL buttons).
+       Checkbox 'Live Query' was added.
+    3. The performance of DISTINCT option increased in 2-3 times on single table with 100,000 records.
+    4. DISTINCT on fields that cannot be indexed (like BLOB, MEMO) is now supported.
+    5. The ORDER BY implementation in UNION statement changed to standard - 
+       it is applied to the whole result dataset instead of last SELECT as it was before.
+    6. Execution of SELECT INTO statements was optimized.
+
+  Bugs fixed:
+    1. Problem with executing large scripts with '?' symbol was solved.
+    2. Bugs in SELECT statement with OUTER JOIN (LEFT, FULL, RIGHT) and filter conditions were fixed.
+    3. Bugs in most of string functions with memo fields were fixed.
+    4. Problem with wrong result order when TOP option is combined with ORDER BY in SELECT statement was solved.    
+    5. Bug with inserting empty string to memo field using parameter was fixed.
+    6. Problems with evaluation of string expressions containing NULL values were solved.
+    7. Bugs in TOP option implementation were fixed.
+    8. Bugs in ORDER BY and ORDER BY INDEX implementation were fixed.
+    9. All known problems with SELECT INTO were solved.
+   10. Problems with evaluation of expressions on wide strings were solved.
+   11. Bug with AND conditions on expression field in SELECT statements with joins was fixed.
+   12. Bug in ApplyRange call with partially NULL key was fixed.
+
+- version 3.50 (05/21/2008)
+
+  New features added: 
+    1. Support for parameter names specified by question symbol '?' implemented.
+
+  Bugs fixed:
+    1, Bug with mathematical functions in combination with count(*) was fixed.
+    2. Problems with GROUP BY on memo field were solved.
+
+- version 3.40 (04/02/2008)
+
+  New features added: 
+    1. Sub-queries are now supported in FROM clause of SELECT statement.
+    2. New SQL functions were added:
+       - ABS
+       - CEILING, CEIL 
+       - FLOOR
+       - MOD
+       - POWER, POW
+       - RANDOM, RAND
+       - ROUND     
+       - SIGN
+       - TRUNCATE,TRUNC
+       - HEX
+    3. New SQL operators were added:
+       - %, mod (same as MOD(x,y))
+       - shl, << (shift left)
+       - shr, >> (shift right)
+       - xor, ^  (bitwise XOR)
+       - &  (bitwise AND)
+       - |  (bitwise OR)
+       - ~  (bitwise NOT)
+    4. Hex constants are now supported (both C++ and Delphi forms: 0xff and $FF)
+    5. C++ form of logical and comparison operators is now supported (!, &&, !=, ==).
+    6. The performance of in-memory tables in multi-threaded applications was essentially increased.
+       Parallelism level is now much higher.
+    7. Import compatibility with MS Access database was essentially improved.
+    8. Column and table names can be quoted by back quote `.
+    9. Developer's guide updated - the following topics were added / modified:
+        - Restructuring a table
+        - HEX constants
+        - Naming conventions
+        - Using parameters
+        - Operators
+        - Functions
+    10. Demo scripts were added to SQLConsole\SQL: Random.sql, Random_0_1.sql
+
+  Bugs fixed:
+    1. Bug with OnFilterRecord and GetWideMemoField was fixed.
+    2. Bug on destroying in-memory table component in multi-threaded applications was fixed.  
+    3. The bug in parsing parameter names in quotes (',") was fixed.
+    4. Problem with using TOBLOB function in INSERT / UPDATE statements with memo fields was solved.
+    5. Bug in comparison of memo field values was fixed.
+
+- version 3.30 (10/31/2007)
+
+  New features added: 
+    1. The speed of navigation by active index was increased in ~100 times.
+
+  Bugs fixed:
+    1. Bug in foreign key implementation with default update action was fixed.
+    2. Bug in subquery containing quoted or bracketed strings was fixed.
+
+- version 3.20 (03/30/2007)
+
+  New features added: 
+    1. SQL performance increased on most of frequently used queries.
+    2. SaveTablesToStream, SaveTablesToFile methods were added to TSQLMemTable. 
+       Many thanks to Eric LAUNAY!
+    3. Parameter names in quotes ('," and `) are now supported.
+    4. SQLConsole utility extended - loading / saving tables were added.
+
+  Bugs fixed:
+    1. Bug with SELECT statements with multiple conditions in WHERE clause and RequestLive set to True was fixed.
+    2. Bug with DELETE and UPDATE statements with multiple conditions in WHERE clause was fixed.
+    3. C++ Builder build problem (some wrong compiler defines) was solved.
+    4. Bug in SUM and AVG functions with NULL arguments was fixed.
+    5. Bug with LENGTH function on wide strings fixed.
+
+- version 3.10 (10/18/2006)
+
+  New features added: 
+    1. New SQL functions were added:
+       - ISNULL
+       - YEAR
+       - QUARTER
+       - MONTH
+       - DAY
+       - WEEKDAY
+       - DAYOFWEEK
+       - DAYNAME
+       - MONTHNAME
+       - HOUR
+       - MINUTE
+       - SECOND
+       - MSECOND
+       - EXTRACT
+    2. MIN and MAX functions can be used with any data types, except BLOB types.
+    3. SQL functions description is modified in Developer's Guide.
+  Bugs fixed:
+    1. Memory leak problem with executing SQL via ClientDataset was solved.
+       Many thanks to Gildas Dubois!
+    2. Problems with OnEditError, OnDeleteError, OnPostError events of TACRTable were solved.
+    3. RestructureTable example was fixed in both Developer's Guide and Component Reference.
+    4. Bug with incorrect loading corrupted memory tables was fixed.
+    5. Bug in SQL with parameters of ftBytes type was fixed.
+
+- version 3.06 (05/18/2006)
+
+  Bugs fixed:
+  1. Problem with ftWideString fields in Borland Developer Studio 2006 was solved.
+  2. Bug with filters with NOT operator was fixed.
+
+- version 3.05 (03/06/2006)
+
+  New features added: 
+    1. SQL performance on some types of SELECT statements was optimized.
+  Bugs fixed:
+    1. Problem with displaying icons of the components in C++ Builder 2006 is solved.
+
+- version 3.04 (12/23/2005)
+
+  New features added: 
+    1. Importing ftOraBLOB and ftOraClob field types - many thanks to Douglas Stites.
+  Bugs fixed:
+    1. Bug with joins on string fields was fixed.
+    2. Bugs in searching on memo and wide memo fields were fixed.
+    3. Bug with TSQLTimeStamp and TClientDataset was fixed.
+    4. Bugs in joins on multiple fields were fixed.
+
+- version 3.03 (08/05/2005)
+
+  Bugs fixed:
+    1. Some minor bugs with Union, Except, Intersect SQL operators were fixed.
+    2. Bug with ToString function and formats with milliseconds ('zzz','z') was fixed.
+    3. Bug with closing tables in some cases was fixed.
+    4. Bug with DY format in TODATE and TOSTRING was fixed. 
+       SQL Reference updated - DY returns 3 symobols.
+    5. Bug in UNION sql statement was fixed.
+    6. Minor bug with foreign key types mismatch was fixed.
+
+- version 3.02 (07/16/2005)
+
+  New features added: 
+    1. Milliseconds ('ZZZ','Z') are now supported in TODATE and TOSTRING SQL functions.
+    2. ClientDataset compatibility was improved.
+    3. Method AddForeignKey was added to TACRTable. ALTER TABLE ADD FOREIGN KEY was optimized.
+  Bugs fixed:
+    1. Bug with case insensitive string comparison was fixed.
+    2. Problems with opening tables at design-time were solved.
+    3. Bug with conversion of some data types was fixed.
+    4. Bug with table renaming was fixed. ALTER TABLE ADD FOREIGN KEY now works fine.    
+    5. Bug with executing DELETE SQL statement on memory table was fixed.
+    6. Problem with loosing foreign keys in RepairTable, RestructureTable, RepairDatabase, 
+       CompactDatabase is solved now.    
+    7. Problems in RestructureTable, CreateTable, RenameTable when multiple foreign keys 
+       referencing same table exists were solved.
+    8. Bug with updating memo fields using UPDATE SQL statement was fixed.
+    9. Bug with DROP INDEX in ExportTableTOSQL and ExportDatabaseToSQL was fixed.
+   10. Minor bug with filter setting was fixed.
+
+- version 3.01 (03/16/2005)
+
+  Bugs fixed:
+    1. Bug in searching and filtering on date, time and datetime fields was fixed.
+    2. Problem with foreign key checking was solved.
+
+- version 3.00 (12/28/2004)
+
+  New features added: 
+    1. Referential Integrity support (SQL'99 compliance) was added.
+    2. ForeignKeyDefs, RestructureForeignKeyDefs properties were added to TSQLMemTableTable.
+    3. FOREIGN KEY support was added to SQL CREATE TABLE and ALTER TABLE statements.
+    4. DROP CONSTRAINT support was added to SQL statement ALTER TABLE.
+    5. CASCADE option was added to SQL statement DELETE TABLE.
+    6. Cascade parameter was added to DeleteTable method TACRTable.
+    7. Referential Integrity demo was added.
+    8. DeleteConstraint method was added to TACRTable.
+    9. Performance of insert, update and delete operations was improved.
+  Bugs fixed:
+    1. Some bugs with SELECT from single table were fixed.
+
+
+- version 2.60 (12/10/2004)
+
+  New features added: 
+    1. SQL performance was essentially increased on most types of queries.
+    2. ORDER BY clause now supports column numbers.
+    3. ImportTable speed from some databases was increased.    
+    4. Parameters are now supported in sub-queries.
+    5. FindIndex method was added to TSQLMemTable component.
+  Bugs fixed:
+    1. Bug with closing queries at design time in some cases was fixed.
+    2. Some bugs in SQL engine were fixed.
+    3. Problem with exporting float values in ExportToSQL was solved.
+    4. Bug with loading in-memory table was fixed.
+
+- version 2.50 (09/29/2004)
+
+  New features added: 
+    1. Export to SQL was implemented. 
+       ExportTableToSQL method was added to TSQLMemTable component.
+       New demo ExportToSQL was added.
+    2. TOBLOB SQL function was added.
+    3. SQL, filter and navigation performance was essentially increased.
+
+  Bugs fixed:
+    1. Bug in Refresh was fixed.    
+    2. Bug with filters on empty wide strings was fixed.
+    3. Bug with refreshing DBGrid after insert was fixed.
+    4. Bug with deleting records from the table using SQL DELETE statement was fixed.
+    5. Bug with updating empty blob field in the table was fixed.
+    6. Bug with inserting record after deleting record was fixed.
+    7. Some bugs with field names in SQL engine were fixed.
+
+- version 2.40 (08/12/2004)
+
+  New features added: 
+    1. SQL, filters and navigation performance was essentially increased.
+    2. Aggregate functions COUNT, SUM and AVG now can be used with DISTINCT option.
+    3. Compatibility with third party DB-aware controls was improved.
+    4. All memory tables now can be saved to file or to stream by single call. 
+       Methods SaveAllTablesToStream, LoadAllTablesFromStream, SaveAllTablesToFile, LoadAllTablesFromFile 
+       were added to TACRTable component.
+
+  Bugs fixed:
+    1. Some bugs with SQL field naming were fixed.
+    2. Problem with temporary indexes uniquness was solved.
+    3. Bug in AddIndex on closed table was fixed.
+    4. Bugs with filters on date, time or datetime fields were fixed.
+    5. Bug in CAST to string type implementation was fixed.
+    6. Bug in SELECT DISTINCT implementation was fixed.
+
+
+- version 2.30 (06/29/2004)
+
+  New features added: 
+    1. SQL queries and filters now supports memo fields. MemoSearch demo was added.   
+    2. SQL DDL performance was improved.
+    3. MemoryTableAllocBy property was added to TACRTable component.
+
+  Bugs fixed:
+    1. Bugs in ALTER TABLe and CREATE TABLe implementation were fixed.
+    2. Left, right and full outer joins now works corectly.    
+    3. Bug in CREATE INDEX on memory table was fixed.
+
+
+- version 2.20 (06/03/2004)
+
+  New features added: 
+    1. IF NOT EXISTS option was added to CREATE INDEX SQL statement.
+    2. IF EXISTS option was added to DROP INDEX SQL statement.
+    3. NOCASE option was added to ORDER BY clause of SELECT SQL statement.
+    4. INDEX option was added to ORDER BY clause of SELECT SQL statement.
+    5. SQL performance was essentially increased.
+    6. Filters were optimized.
+    7. CSVImport demo was added.
+
+  Bugs fixed:
+    1. Now update records with indexes and filters works correctly.
+    2. Bug in TSQLMemQuery.SetParamsFromCursor was fixed.
+    3. Some porblems with compatibility with third-party treeviews and grids were solved.
+
+- version 2.10 (03/31/2004)
+
+  New features added: 
+    1. New component TSQLMemBatchMove (TBatchMove analog) was added. 
+    2. New method BatchMove was added to TSQLMemTable component.
+    3. New demo BatchMove was added.
+    4. TSQLMemTable component now automaticaly sets a default table name.
+    5. Now in-memory table can be created at runtime by setting Active to True.
+    6. Filters performance was increased due to better choise of filtering algorithm.
+
+
+  Bugs fixed:
+    1. LargeInt fields now can be accessed via SQL and in Master/Detail tables.
+    2. SQL function POS now returns 0 if one of its arguments is NULL.
+    3. Bug with deleting record on filtered and indexed in-memory table was fixed.
+    4. Bug with setting IndexName property of TSQLMemTable to empty string was fixed.
+    5. OnFilterRecord now have True as a default value for Accept parameter.
+    6. Problems with record positioning after refreshing filtered dataset were solved. 
+
+
+
+- version 2.00 (02/09/2004)
+
+  New features added: 
+    1. The speed of loading tables from file was essentially increased.
+    2. Uncorrelated subqueries is now supported. 
+       See scripts in Utils\Bin\SQLConsole\SQL\SubQuery folder for examples.
+       Also read SELECT Statement topic in Developer's Guide to learn more about it.
+    3. SQL operator IN now can be used with subquery.
+    4. SQL operator EXISTS was added.
+
+  Bugs fixed:
+    1. Bug in SetRecNo method of TACRDataset was fixed. Now RecNo is set correctly when 
+       some DB controls are connected to the table.
+
+
+- version 1.32 (01/14/2004)
+
+  New features added: 
+    
+    1. Performance on insert and Edit operations was increased.
+    2. MultiThread demo for Delphi is added.
+
+  Bugs fixed:
+    1. Bug with invalid memo and blob fields settings in 
+       SELECT statement was fixed.
+    2. Bug with closing queries with ORDER BY statement was fixed.
+    3. Bug with invalid record position after Insert and Edit on
+       filtered dataset was fixed.
+    4. Bug with invalid TACRQuery.RowsAffected value after executing UPDATE statement
+       with WHERE cluase on one of the fields specified in SET clause was fixed.
+    5. Problem with unique temporary index names was solved.
+    6. Problem with storing current record position in TSQLMemDataset.BookmarkValid method 
+       was solved.
+    7. Bug with parameters implementation in TSQLMemQuery was fixed.
+    8. Bug in filters and SELECT statements with multiple AND operators was fixed.
+
+
+- version 1.31 (12/11/2003)
+
+  New features added: 
+
+    1. OnProgress event was added to TSQLMemTable component.
+       Now methods RestructureTable, ImportTable and ExportTable shows their progress.
+    2. SQL scripts parsing and executing was optimized, 
+       memory usage was essentially decreased.
+
+  Bugs fixed:
+    1. Bug in queries with WHERE clause and specified field list was fixed.
+
+
+- version 1.30 (11/12/2003)
+
+  New features added: 
+    1. IProvider interface support was implemented. Now you can access TACRTable
+       and TACRQuery components via TClientDataset.
+    2. Save/Load methods now saves AutoInc field descriptions, 
+       file format have been changed.
+  Bugs fixed:
+    1. Bug with restructuring table with AutoInc fields after LoadTable was fixed.
+
+- version 1.20 (10/23/2003)
+
+  Bugs fixed:
+    1. Bug with importing tables from ADO and BDE was fixed.
+
+- version 1.12 (10/21/2003)
+
+  Bugs fixed:
+    1. Bug with saving / loading table after delete with active index operation was fixed.
+
+
+- version 1.11 (10/20/2003)
+
+  Bugs fixed:
+    1. Bugs with cancelling edit or insert operations with BLOB fields were fixed.
+
+
+- version 1.10 (10/08/2003)
+
+  New features added: 
+    1. TSQLMemTable.SetLastAutoincValue method was added
+    2. LoadTableFromFile, LoadTableFromStream, SaveTableToFile, SaveTableToStream
+       methods of TSQLMemTable were essentially optimized in speed and compression rate. 
+       New format is incompatible with previous versions.
+
+  Bugs fixed:
+    1. Bugs with locate on empty table was fixed.
+
+- version 1.09 (10/02/2003)
+
+  Bugs fixed:
+    1. Bugs with edit and delete operations were fixed.
+
+- version 1.08 (09/30/2003)
+
+  Bugs fixed:
+    1. Bug with delete in detail table with Master-Detail relationship was fixed.
+
+- version 1.07 (09/29/2003)
+
+  Bugs fixed:
+    1. Bug with search operations being performed on empty table was fixed.
+
+- version 1.06 (09/20/2003)
+
+  Bugs fixed:
+    1. Another bug with scrolling in DBGrid was fixed.
+
+
+- version 1.05 (09/09/2003)
+
+  Bugs fixed:
+    1. Bug with scrolling in DBGrid was fixed.
+
+
+- version 1.04 (08/22/2003)
+
+  Bugs fixed:
+    1. ExportTable without log parameter now works properly.
+    2. SQL CAST with blank string problem was fixed.
+    3. Last autoinc value is now saved correctly when a table is saved.
+    4. Primary key creation on two or more fields in SQL bug was fixed.
+
+
+- version 1.03 (08/20/2003)
+
+  Bugs fixed:
+    1. 'SELECT NULL from tabel1' now works correctly.
+    2. SQLMemTable.LoadFromFile problem was solved.
+    3. AV after application closing in C++ Builder is fixed.
+    4. Bugs with SQL date functions were fixed.
+    5. IS NULL, IS NOT NULL filters are supported correctly.
+    6. Bug with ImportTable on existing table was fixed.
+    7. Aggregate functions now work OK on empty tables.
+    8. DBMemo control now displays field value if 
+       it was inserted directly from code.
+
+
+- version 1.02 (07/24/2003)
+
+  New features added: 
+    1. Navigation operations were optimized.
+
+
+- version 1.01 (07/24/2003)
+
+  New features added: 
+    1. Insert and Search operations were optimized
+    2. Memory manager speed was essentally increased
+
+  Bugs fixed:
+    1. RecNo, RecordCount now works correctly with invisible records
+    2. Some bugs in index system (edit operations) were fixed
+    3. Some bugs in Load and Save methods were fixed that leads to 
+       incompatibility with previous version files
+
+- version 1.00 (07/15/2003)
+
