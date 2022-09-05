@@ -1,0 +1,102 @@
+package DelphiX;
+
+{$R *.res}
+{$R 'DelphiX.dcr'}
+{$ALIGN 8}
+{$ASSERTIONS OFF}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS OFF}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'DelphiX - DirectX components for Delphi'}
+{$IFDEF VER140} { Borland Delphi 6.x }
+{$LIBSUFFIX '60'}
+{$ENDIF}
+{$IFDEF VER145} { Borland C++Builder 6.x }
+{$LIBSUFFIX '65'}
+{$ENDIF}
+{$IFDEF VER150} { Borland Delphi 7.x }
+{$LIBSUFFIX '70'}
+{$ENDIF}
+{$IFDEF VER170} { Borland Delphi 2005 9.x }
+{$LIBSUFFIX '90'}
+{$ENDIF}
+{$IFDEF VER180} { Borland Delphi 2006, Turbo 10.x }   // JB
+{$LIBSUFFIX '100'}
+{$ENDIF}
+{$IFDEF VER185} { Borland Delphi 2007 11.x }   // JB
+{$LIBSUFFIX '110'}
+{$ENDIF}
+{$IFDEF VER200} { Borland Delphi 2009 12.x }   // JB
+{$LIBSUFFIX '120'}
+{$ENDIF}
+{$IFDEF VER210} { Borland Delphi 2010 14.x }   // JB
+{$LIBSUFFIX '140'}
+{$ENDIF}
+
+{$DESIGNONLY}
+{$IMPLICITBUILD ON}
+
+{Note: must be defined as global for SXMedia using}
+{$DEFINE D3D_deprecated}
+
+requires
+  vcl,
+  vclsmp,
+  designide,
+  //png,
+  rtl,
+  vcljpg,
+  vclx;
+
+contains
+  DIB in 'DIB.pas',
+  DXClass in 'DXClass.pas',
+  DXConsts in 'DXConsts.pas',
+  DXDraws in 'DXDraws.pas',
+  DXETable in 'DXETable.pas',
+  DXInput in 'DXInput.pas',
+  DXPlay in 'DXPlay.pas',
+  DXPlayFm in 'DXPlayFm.pas' {DelphiXDXPlayForm},
+  DXRender in 'DXRender.pas',
+  DXReg in 'DXReg.pas',
+  DXSounds in 'DXSounds.pas',
+  DXSprite in 'DXSprite.pas',
+  DXWave in 'DXWave.pas',
+  DXFFBEdit in 'DXFFBEdit.pas' {DelphiXFFEditForm},
+  DXGUIDEdit in 'DXGUIDEdit.pas' {DelphiXGUIDEditForm},
+  DXInptEdit in 'DXInptEdit.pas' {DelphiXInputEditForm},
+  DXPictEdit in 'DXPictEdit.pas' {DelphiXPictureEditForm},
+  DXWaveEdit in 'DXWaveEdit.pas' {DelphiXWaveEditForm},
+  TurboPixels in 'TurboPixels.pas',
+  DXSpriteEdit in 'DXSpriteEdit.pas' {DelphiXSpriteEditForm},
+  DXMidiEdit in 'DXMidiEdit.pas' {DelphiXMidiEditForm},
+  DXMapEditProperties in 'DXMapEditProperties.pas' {DelphiXMapEditPropertiesForm},
+  DXMapEdit in 'DXMapEdit.pas' {DelphiXMapEditForm},
+  DxPathEdit in 'DxPathEdit.pas' {DelphiXPathsEditForm},
+  DXGlueItEdit in 'DXGlueItEdit.pas' {DXGlueItEditor},
+  DXDIBEffectEdit in 'DXDIBEffectEdit.pas' {TDelphiXDIBEffectEditForm},
+  SXReg in '.\SXMedia\SXReg.pas',
+  SXEditor in '.\SXMedia\SXEditor.pas',
+  SXAbout in '.\SXMedia\SXAbout.pas',
+  MpSndSys in '.\SXMedia\MpSndSys.pas',
+  SXEngine in '.\SXMedia\SXEngine.pas',
+  SXModPlayer in '.\SXMedia\SXModPlayer.pas',
+  SXMovie in '.\SXMedia\SXMovie.pas';
+
+end.

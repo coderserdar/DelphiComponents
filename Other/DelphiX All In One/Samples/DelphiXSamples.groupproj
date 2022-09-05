@@ -1,0 +1,230 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{26d646c6-5e7b-4189-9554-7b07db1aac51}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="Sound\AStream\AStream.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Sound\Full-Duplex\SCapture.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Sound\HDRecorder\HDRecder.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Network\Chat2\Chat.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Input\Basic\SimpleInput.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Input\FFCondition\DIEffect.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Input\FFMachineGun\DIEffect2.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Graphic\AlphaBlending\AlphaBlendSample.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Graphic\Basic\BasicSample.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Graphic\DisplayModeChanger\DisplayModeChangerSample.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Graphic\DXImageList\ImageListSample.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Graphic\DynImageList\DynamicImageListSample.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Graphic\PaletteAnimation\PaletteAnim.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Graphic\RegisterNotifyEvent\RegisterNotifySample.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Graphic\Surface\SurfaceSample.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="DIB\TestDIBEffects.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="d3dim\Texture\TextureSample.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <BorlandProject>
+                <Default.Personality/>
+            </BorlandProject>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="AStream">
+        <MSBuild Projects="Sound\AStream\AStream.dproj"/>
+    </Target>
+    <Target Name="AStream:Clean">
+        <MSBuild Projects="Sound\AStream\AStream.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="AStream:Make">
+        <MSBuild Projects="Sound\AStream\AStream.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="SCapture">
+        <MSBuild Projects="Sound\Full-Duplex\SCapture.dproj"/>
+    </Target>
+    <Target Name="SCapture:Clean">
+        <MSBuild Projects="Sound\Full-Duplex\SCapture.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="SCapture:Make">
+        <MSBuild Projects="Sound\Full-Duplex\SCapture.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="HDRecder">
+        <MSBuild Projects="Sound\HDRecorder\HDRecder.dproj"/>
+    </Target>
+    <Target Name="HDRecder:Clean">
+        <MSBuild Projects="Sound\HDRecorder\HDRecder.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="HDRecder:Make">
+        <MSBuild Projects="Sound\HDRecorder\HDRecder.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Chat">
+        <MSBuild Projects="Network\Chat2\Chat.dproj"/>
+    </Target>
+    <Target Name="Chat:Clean">
+        <MSBuild Projects="Network\Chat2\Chat.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Chat:Make">
+        <MSBuild Projects="Network\Chat2\Chat.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="SimpleInput">
+        <MSBuild Projects="Input\Basic\SimpleInput.dproj"/>
+    </Target>
+    <Target Name="SimpleInput:Clean">
+        <MSBuild Projects="Input\Basic\SimpleInput.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="SimpleInput:Make">
+        <MSBuild Projects="Input\Basic\SimpleInput.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="DIEffect">
+        <MSBuild Projects="Input\FFCondition\DIEffect.dproj"/>
+    </Target>
+    <Target Name="DIEffect:Clean">
+        <MSBuild Projects="Input\FFCondition\DIEffect.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="DIEffect:Make">
+        <MSBuild Projects="Input\FFCondition\DIEffect.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="DIEffect2">
+        <MSBuild Projects="Input\FFMachineGun\DIEffect2.dproj"/>
+    </Target>
+    <Target Name="DIEffect2:Clean">
+        <MSBuild Projects="Input\FFMachineGun\DIEffect2.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="DIEffect2:Make">
+        <MSBuild Projects="Input\FFMachineGun\DIEffect2.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="AlphaBlendSample">
+        <MSBuild Projects="Graphic\AlphaBlending\AlphaBlendSample.dproj"/>
+    </Target>
+    <Target Name="AlphaBlendSample:Clean">
+        <MSBuild Projects="Graphic\AlphaBlending\AlphaBlendSample.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="AlphaBlendSample:Make">
+        <MSBuild Projects="Graphic\AlphaBlending\AlphaBlendSample.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="BasicSample">
+        <MSBuild Projects="Graphic\Basic\BasicSample.dproj"/>
+    </Target>
+    <Target Name="BasicSample:Clean">
+        <MSBuild Projects="Graphic\Basic\BasicSample.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="BasicSample:Make">
+        <MSBuild Projects="Graphic\Basic\BasicSample.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="DisplayModeChangerSample">
+        <MSBuild Projects="Graphic\DisplayModeChanger\DisplayModeChangerSample.dproj"/>
+    </Target>
+    <Target Name="DisplayModeChangerSample:Clean">
+        <MSBuild Projects="Graphic\DisplayModeChanger\DisplayModeChangerSample.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="DisplayModeChangerSample:Make">
+        <MSBuild Projects="Graphic\DisplayModeChanger\DisplayModeChangerSample.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ImageListSample">
+        <MSBuild Projects="Graphic\DXImageList\ImageListSample.dproj"/>
+    </Target>
+    <Target Name="ImageListSample:Clean">
+        <MSBuild Projects="Graphic\DXImageList\ImageListSample.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ImageListSample:Make">
+        <MSBuild Projects="Graphic\DXImageList\ImageListSample.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="DynamicImageListSample">
+        <MSBuild Projects="Graphic\DynImageList\DynamicImageListSample.dproj"/>
+    </Target>
+    <Target Name="DynamicImageListSample:Clean">
+        <MSBuild Projects="Graphic\DynImageList\DynamicImageListSample.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="DynamicImageListSample:Make">
+        <MSBuild Projects="Graphic\DynImageList\DynamicImageListSample.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="PaletteAnim">
+        <MSBuild Projects="Graphic\PaletteAnimation\PaletteAnim.dproj"/>
+    </Target>
+    <Target Name="PaletteAnim:Clean">
+        <MSBuild Projects="Graphic\PaletteAnimation\PaletteAnim.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="PaletteAnim:Make">
+        <MSBuild Projects="Graphic\PaletteAnimation\PaletteAnim.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="RegisterNotifySample">
+        <MSBuild Projects="Graphic\RegisterNotifyEvent\RegisterNotifySample.dproj"/>
+    </Target>
+    <Target Name="RegisterNotifySample:Clean">
+        <MSBuild Projects="Graphic\RegisterNotifyEvent\RegisterNotifySample.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="RegisterNotifySample:Make">
+        <MSBuild Projects="Graphic\RegisterNotifyEvent\RegisterNotifySample.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="SurfaceSample">
+        <MSBuild Projects="Graphic\Surface\SurfaceSample.dproj"/>
+    </Target>
+    <Target Name="SurfaceSample:Clean">
+        <MSBuild Projects="Graphic\Surface\SurfaceSample.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="SurfaceSample:Make">
+        <MSBuild Projects="Graphic\Surface\SurfaceSample.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="TestDIBEffects">
+        <MSBuild Projects="DIB\TestDIBEffects.dproj"/>
+    </Target>
+    <Target Name="TestDIBEffects:Clean">
+        <MSBuild Projects="DIB\TestDIBEffects.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="TestDIBEffects:Make">
+        <MSBuild Projects="DIB\TestDIBEffects.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="TextureSample">
+        <MSBuild Projects="d3dim\Texture\TextureSample.dproj"/>
+    </Target>
+    <Target Name="TextureSample:Clean">
+        <MSBuild Projects="d3dim\Texture\TextureSample.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="TextureSample:Make">
+        <MSBuild Projects="d3dim\Texture\TextureSample.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="AStream;SCapture;HDRecder;Chat;SimpleInput;DIEffect;DIEffect2;AlphaBlendSample;BasicSample;DisplayModeChangerSample;ImageListSample;DynamicImageListSample;PaletteAnim;RegisterNotifySample;SurfaceSample;TestDIBEffects;TextureSample"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="AStream:Clean;SCapture:Clean;HDRecder:Clean;Chat:Clean;SimpleInput:Clean;DIEffect:Clean;DIEffect2:Clean;AlphaBlendSample:Clean;BasicSample:Clean;DisplayModeChangerSample:Clean;ImageListSample:Clean;DynamicImageListSample:Clean;PaletteAnim:Clean;RegisterNotifySample:Clean;SurfaceSample:Clean;TestDIBEffects:Clean;TextureSample:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="AStream:Make;SCapture:Make;HDRecder:Make;Chat:Make;SimpleInput:Make;DIEffect:Make;DIEffect2:Make;AlphaBlendSample:Make;BasicSample:Make;DisplayModeChangerSample:Make;ImageListSample:Make;DynamicImageListSample:Make;PaletteAnim:Make;RegisterNotifySample:Make;SurfaceSample:Make;TestDIBEffects:Make;TextureSample:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

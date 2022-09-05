@@ -1,0 +1,59 @@
+package mcmTwn7;
+
+{$R *.res}
+{$R '..\mcmTWAIN.dcr'}
+{$R '..\mcmSTI.dcr'}
+{$ALIGN 8}
+{$ASSERTIONS OFF}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS OFF}
+{$LOCALSYMBOLS OFF}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'ImagingToolbox.com, TWAIN Toolkit for Delphi'}
+{$IMPLICITBUILD ON}
+{$DEFINE DATASOURCE}
+{$DEFINE mcmLZW}
+{$DEFINE RELEASE}
+{$DEFINE TWNDEBUG}
+
+requires
+  rtl,
+  vcl,
+  vclx,
+  mcmInte7,
+  designide;
+
+contains
+  InstmcmTwn in '..\InstmcmTwn.pas',
+  mcmTWAIN in '..\mcmTWAIN.pas',
+  mcmTWAINFix in '..\mcmTWAINFix.pas',
+  mcmTWAINContainer in '..\mcmTWAINContainer.pas',
+  mcmTWAINIntf in '..\mcmTWAINIntf.pas',
+  mcmTWAINKernel in '..\mcmTWAINKernel.pas',
+  mcmTWAINLog in '..\mcmTWAINLog.pas',
+  twain in '..\twain.pas',
+  twainproc in '..\twainproc.pas',
+  uTwnDlgPref in '..\uTwnDlgPref.pas' {DlgTwainPref},
+  uTwnDlgSend in '..\uTwnDlgSend.pas' {DlgTwnSend},
+  mcmSTI in '..\mcmSTI.pas',
+  mcmTWAINThread in '..\mcmTWAINThread.pas',
+  mcmTWAINQueue in '..\mcmTWAINQueue.pas',
+  mcmAboutConst in '..\mcmAboutConst.pas',
+  uTwnAbout in '..\uTwnAbout.pas' {mcmAboutBox};
+
+end.

@@ -1,0 +1,130 @@
+#include "ZRConst.pas"
+
+#ifdef win32
+LANGUAGE LANG_POLISH,1
+#endif
+
+STRINGTABLE
+
+{
+  szrParentReport        , "Komponent klasy %s mo¿na umieœciæ tylko na raporcie lub na wstêdze"
+  szrParentBand          , "Komponent klasy %s mo¿na umieœciæ tylko na wstêdze"
+  szrCircularMaster      , "Zapêtlone po³¹czenia s¹ niedozwolone"
+  szrNoChildBand         , "Wstêga typu %s nie mo¿e posiadaæ potomków"
+  szrNoControllerBand    , "Wstêga typu %s nie mo¿e posiadaæ podkontrolek"
+  szrNoStretch           , "Wstêga %s nie mo¿e byæ rozci¹gana"
+  szrBandDelete          , "Wstêga %s zawiera etykiety.\nUsun¹æ ?"
+
+  szrPrinterNotReady     , "Drukarka nie jest gotowa"
+  szrPrinterNotFinished  , "Generowanie raportu zosta³o przerwane"
+  szrPrinterPageIndex    , "Poza zakresem strony, strona %d/%d, linia %d"
+  szrPrinterNotBusy      , "Nie zaczêto nowego dokumentu"
+  szrIllegalPageRange   , "Niepoprawny zakres stron: %d..%d"
+  szrInvalidFileName    , "Niepoprawna nazwa pliku: %s"
+
+  szrCompleted          , "wykonano"
+  szrProcessing         , "Przetwarzanie..."
+  szrPrinting           , "Drukowanie..."
+
+  szrOf                 , "z"
+  szrFirstPageHint      , "Pierwsza strona"
+  szrPrevPageHint       , "Poprzednia strona"
+  szrNextPageHint       , "Nastêpna strona"
+  szrLastPageHint       , "Ostatnia strona"
+  szrSaveReportHint     , "Zapisz raport - Ctrl+S"
+  szrLoadReportHint     , "Wczytaj raport"
+  szrPrintReportHint    , "Drukuj raport - Ctrl+P"
+  szrPrintReport        , "Wydruk"
+  szrGotoPageNo         , "Strona"
+  szrPageNoHint         , "PrzejdŸ do strony o numerze"
+  szrSearchReport       , "Szukaj"
+  szrSearchHint         , "Szukaj - F7,\nSzukaj nastêpne - Shift+F7"
+
+  szrPrinterSetup       , "Ustawienia drukarki"
+  szrFileFilter         , "Pliki tekstowe (*.txt)|*.txt|Wszystkie pliki (*.*)|*.*"
+  szrEscapeModelCustom  , "<inny>"
+  szrEscapeModelNone    , "<brak>"
+  szrConvertToOEM        , "Konwertuj do OEM"
+  szrIgnoreFontStyles    , "Ignoruj styl czcionek"
+  szrEscapeModel         , "Sekwencja znaków steruj¹cych"
+  szrPrintDialogCaption  , "Ustawienia drukarki"
+
+  szrOK    , "OK"
+  szrCancel, "Anuluj"
+  szrExit  , "&Wyjœcie"
+
+  szrTime        , "hh:mm:ss"
+  szrDate        , "dd/mm/yyyy"
+  szrDateTime    , "dd/mm/yyyy hh:mm:ss"
+  szrPageNumber  , "Str."
+  szrReportTitle , "Nag³ówek"
+  szrRecordNumber, "# p/p"
+  szrRecordCount , "rek."
+
+  szrExpressionError     , "Niepoprawne wyra¿enie '%s'"
+  szrExpressionParse     , "Wyra¿enie '%s' nie zosta³o zinterpretowane"
+  szrInvalidNumeric      , "Niepoprawna liczba w wyra¿eniu '%s'"
+  szrInvalidDate         , "Niepoprawna data w wyra¿eniu '%s'"
+  szrInvalidString       , "Niepoprawny ci¹g znaków w wyra¿eniu '%s'"
+  szrMissingBracket      , "Brak zamkniêcia '%s' w wyra¿eniu '%s'"
+  szrIllegalBracket      , "Niepoprawne u¿ycie '%s' w wyra¿eniu '%s'" 
+  szrUnknownEntry        , "Nieznana funkcja lub zmienna w wyra¿eniu '%s'"
+  szrIllegalUnary        , "Niepoprawny operator unarny '%s' w wyra¿eniu '%s'"
+
+  szrBooleanFalse        , "Fa³sz"
+  szrBooleanTrue         , "Prawda"
+  szrIllegalLogics       , "Operacje logiczne powinny mieæ logiczne operatory"
+  szrIllegalBitwise      , "Operacje na bitach powinny mieæ liczbowe operatory"
+  szrIllegalDate         , "Niepoprawna operacja na dacie"
+  szrIllegalArguments    , "Niepoprawna iloœæ argumentów dla '%s'"
+  szrCalculationError    , "B³¹d przy obliczaniu wyra¿enia '%s':\n%s"
+
+  szrCircularVariable    , "Niepoprawne wywo³anie rekurencyjne '%s'"
+  szrControllerLibrary   , "Zmienne kontrolera '%s'"
+
+  szrDesignNone                 , "<brak>"
+  szrDesignClose                , "&Zamknij"
+  szrDesignTSBands              , "Wstêgi i grupy"
+  szrDesignTSVars               , "Zmienne"
+  szrDesignGBBands              , "Wstêgi"
+  szrDesignGBGroups             , "Grupy"
+  szrDesignTVBands              , "|Wstêgi raportu"
+  szrDesignLBGroups             , "|Grupy raportu z bie¿¹cego poziomu"
+  szrDesignACBandsNew           , "Kontroler"
+  szrDesignACBandsRename        , "Zmieñ nazwê"
+  szrDesignACBandsDelete        , "Usuñ"
+  szrDesignACGroupsNew          , "Nowy"
+  szrDesignACGroupsDelete       , "Usuñ"
+  szrDesignSureBandDelete       , "Usuniêcie wstêgi %s. Jesteœ pewien?"
+  szrDesignSureGroupDelete      , "Usuniêcie grupy %s. Jesteœ pewien?"
+
+  szrDesignGBData               , "Kontrolery"
+  szrDesignGRControllers        , "|Lista kontrolerów raportu"
+  szrDesignCellController       , "Kontroler"
+  szrDesignCellDataSet          , "Dane"
+  szrDesignLADataFields         , "Pola"
+  szrDesignLBDataFields         , "|Lista dostêpnych pól"
+
+  szrDesignGBVariables          , "Zmienne"
+  szrDesignLAVariableFields     , "Pola"
+  szrDesignLBVariableFields     , "|Lista zmiennych dla pól"
+  szrDesignLAVariableExpressions, "Wyra¿enia"
+  szrDesignLBVariableExpressions, "|Lista wyra¿eñ"
+  szrDesignLAVariableTotals     , "Agregacja"
+  szrDesignLBVariableTotals     , "|Lista agregowanych zmiennych"
+
+  szrDesignACVariablesField     , "Pole"
+  szrDesignACVariablesExpression, "Wyra¿enie"
+  szrDesignACVariablesTotal     , "Agregacja"
+  szrDesignACVariablesDelete    , "Usuñ"
+
+  szrSearchDlgCaption           , "Szukaj tekstu"
+  szrSearchDlgInvitation        , "Szukany &tekst"
+  szrSearchDlgIgnoreCase        , "&Uwzglêdniaj wielkoœæ liter"
+  szrSearchDlgFromCurrent       , "Szukaj od &bie¿¹cej pozycji"
+  szrSearchDlgStartSearch       , "&Szukaj"
+  szrSearchDlgContinueSearch    , "Szukaj &nastêpne"
+  szrSearchNotFound             , "Nie znaleziono wyra¿enia '%s'"
+}
+
+

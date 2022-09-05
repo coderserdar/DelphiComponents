@@ -1,0 +1,60 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{C7E0D58E-431D-487B-8E92-905BADE418B2}</ProjectGuid>
+		</PropertyGroup>
+		<ItemGroup>
+			<Projects Include="Basic\SimpleInput.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="FFCondition\DIEffect.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="FFMachineGun\DIEffect2.dproj">
+				<Dependencies/>
+			</Projects>
+		</ItemGroup>
+		<ProjectExtensions>
+			<Borland.Personality>Default.Personality.12</Borland.Personality>
+			<Borland.ProjectType/>
+			<BorlandProject>
+				<Default.Personality/>
+			</BorlandProject>
+		</ProjectExtensions>
+		<Target Name="SimpleInput">
+			<MSBuild Projects="Basic\SimpleInput.dproj"/>
+		</Target>
+		<Target Name="SimpleInput:Clean">
+			<MSBuild Targets="Clean" Projects="Basic\SimpleInput.dproj"/>
+		</Target>
+		<Target Name="SimpleInput:Make">
+			<MSBuild Targets="Make" Projects="Basic\SimpleInput.dproj"/>
+		</Target>
+		<Target Name="DIEffect">
+			<MSBuild Projects="FFCondition\DIEffect.dproj"/>
+		</Target>
+		<Target Name="DIEffect:Clean">
+			<MSBuild Targets="Clean" Projects="FFCondition\DIEffect.dproj"/>
+		</Target>
+		<Target Name="DIEffect:Make">
+			<MSBuild Targets="Make" Projects="FFCondition\DIEffect.dproj"/>
+		</Target>
+		<Target Name="DIEffect2">
+			<MSBuild Projects="FFMachineGun\DIEffect2.dproj"/>
+		</Target>
+		<Target Name="DIEffect2:Clean">
+			<MSBuild Targets="Clean" Projects="FFMachineGun\DIEffect2.dproj"/>
+		</Target>
+		<Target Name="DIEffect2:Make">
+			<MSBuild Targets="Make" Projects="FFMachineGun\DIEffect2.dproj"/>
+		</Target>
+		<Target Name="Build">
+			<CallTarget Targets="SimpleInput;DIEffect;DIEffect2"/>
+		</Target>
+		<Target Name="Clean">
+			<CallTarget Targets="SimpleInput:Clean;DIEffect:Clean;DIEffect2:Clean"/>
+		</Target>
+		<Target Name="Make">
+			<CallTarget Targets="SimpleInput:Make;DIEffect:Make;DIEffect2:Make"/>
+		</Target>
+		<Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+	</Project>

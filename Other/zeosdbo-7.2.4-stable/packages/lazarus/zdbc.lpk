@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <Package Version="4">
+    <PathDelim Value="\"/>
+    <Name Value="zdbc"/>
+    <AddToProjectUsesSection Value="True"/>
+    <CompilerOptions>
+      <Version Value="11"/>
+      <PathDelim Value="\"/>
+      <SearchPaths>
+        <OtherUnitFiles Value="..\..\src\dbc;build"/>
+        <UnitOutputDirectory Value="lib\zdbc\$(TargetCPU)-$(TargetOS)"/>
+      </SearchPaths>
+      <Parsing>
+        <SyntaxOptions>
+          <SyntaxMode Value="Delphi"/>
+          <UseAnsiStrings Value="False"/>
+        </SyntaxOptions>
+      </Parsing>
+      <Other>
+        <CompilerMessages>
+          <UseMsgFile Value="True"/>
+        </CompilerMessages>
+        <CompilerPath Value="$(CompPath)"/>
+      </Other>
+    </CompilerOptions>
+    <Description Value="Zeos Low Level Database API"/>
+    <Version Major="7" Minor="2"/>
+    <Files Count="11">
+      <Item1>
+        <Filename Value="..\..\src\dbc\ZDbcDbLib.pas"/>
+        <UnitName Value="ZDbcDbLib"/>
+      </Item1>
+      <Item2>
+        <Filename Value="..\..\src\dbc\ZDbcInterbase6.pas"/>
+        <UnitName Value="ZDbcInterbase6"/>
+      </Item2>
+      <Item3>
+        <Filename Value="..\..\src\dbc\ZDbcIntfs.pas"/>
+        <UnitName Value="ZDbcIntfs"/>
+      </Item3>
+      <Item4>
+        <Filename Value="..\..\src\dbc\ZDbcMetadata.pas"/>
+        <UnitName Value="ZDbcMetadata"/>
+      </Item4>
+      <Item5>
+        <Filename Value="..\..\src\dbc\ZDbcMySql.pas"/>
+        <UnitName Value="ZDbcMySql"/>
+      </Item5>
+      <Item6>
+        <Filename Value="..\..\src\dbc\ZDbcOracle.pas"/>
+        <UnitName Value="ZDbcOracle"/>
+      </Item6>
+      <Item7>
+        <Filename Value="..\..\src\dbc\ZDbcPostgreSql.pas"/>
+        <UnitName Value="ZDbcPostgreSql"/>
+      </Item7>
+      <Item8>
+        <Filename Value="..\..\src\dbc\ZDbcSqLite.pas"/>
+        <UnitName Value="ZDbcSqLite"/>
+      </Item8>
+      <Item9>
+        <Filename Value="..\..\src\dbc\ZDbcASA.pas"/>
+        <UnitName Value="ZDbcASA"/>
+      </Item9>
+      <Item10>
+        <Filename Value="..\..\src\dbc\ZDbcPooled.pas"/>
+        <UnitName Value="ZDbcPooled"/>
+      </Item10>
+      <Item11>
+        <Filename Value="..\..\src\dbc\ZDbcAdo.pas"/>
+        <UnitName Value="ZDbcAdo"/>
+      </Item11>
+    </Files>
+    <RequiredPkgs Count="5">
+      <Item1>
+        <PackageName Value="zplain"/>
+        <MinVersion Major="7" Minor="2" Valid="True"/>
+      </Item1>
+      <Item2>
+        <PackageName Value="zparsesql"/>
+        <MinVersion Major="7" Minor="2" Valid="True"/>
+      </Item2>
+      <Item3>
+        <PackageName Value="zcore"/>
+        <MinVersion Major="7" Minor="2" Valid="True"/>
+      </Item3>
+      <Item4>
+        <PackageName Value="LCL"/>
+      </Item4>
+      <Item5>
+        <PackageName Value="FCL"/>
+        <MinVersion Major="1" Valid="True"/>
+      </Item5>
+    </RequiredPkgs>
+    <UsageOptions>
+      <UnitPath Value="$(PkgOutDir)"/>
+    </UsageOptions>
+    <PublishOptions>
+      <Version Value="2"/>
+      <IgnoreBinaries Value="False"/>
+    </PublishOptions>
+    <CustomOptions Items="ExternHelp" Version="2">
+      <_ExternHelp Items="Count"/>
+    </CustomOptions>
+  </Package>
+</CONFIG>

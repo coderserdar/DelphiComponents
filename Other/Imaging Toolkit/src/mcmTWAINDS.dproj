@@ -1,0 +1,57 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{693f0079-3ff4-4c7a-a7a0-e3314bbaee55}</ProjectGuid>
+    <MainSource>mcmTWAINDS.dpr</MainSource>
+    <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
+    <DCC_DependencyCheckOutputName>..\win\twain_32\mcmTWAINDS.ds</DCC_DependencyCheckOutputName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Version>7.0</Version>
+    <DCC_AssertionsAtRuntime>False</DCC_AssertionsAtRuntime>
+    <DCC_DebugInformation>False</DCC_DebugInformation>
+    <DCC_IOChecking>False</DCC_IOChecking>
+    <DCC_LocalDebugSymbols>False</DCC_LocalDebugSymbols>
+    <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+    <DCC_Define>RELEASE</DCC_Define>
+    <DCC_ExeOutput>..\win\twain_32</DCC_ExeOutput>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <Version>7.0</Version>
+    <DCC_AssertionsAtRuntime>False</DCC_AssertionsAtRuntime>
+    <DCC_DebugInformation>False</DCC_DebugInformation>
+    <DCC_IOChecking>False</DCC_IOChecking>
+    <DCC_LocalDebugSymbols>False</DCC_LocalDebugSymbols>
+    <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+    <DCC_Define>DEBUG</DCC_Define>
+  </PropertyGroup>
+  <ProjectExtensions>
+    <Borland.Personality>Delphi.Personality</Borland.Personality>
+    <Borland.ProjectType />
+    <BorlandProject>
+<BorlandProject><Delphi.Personality><Parameters><Parameters Name="UseLauncher">False</Parameters><Parameters Name="LoadAllSymbols">True</Parameters><Parameters Name="LoadUnspecifiedSymbols">False</Parameters></Parameters><VersionInfo><VersionInfo Name="IncludeVerInfo">True</VersionInfo><VersionInfo Name="AutoIncBuild">False</VersionInfo><VersionInfo Name="MajorVer">4</VersionInfo><VersionInfo Name="MinorVer">0</VersionInfo><VersionInfo Name="Release">0</VersionInfo><VersionInfo Name="Build">0</VersionInfo><VersionInfo Name="Debug">False</VersionInfo><VersionInfo Name="PreRelease">False</VersionInfo><VersionInfo Name="Special">False</VersionInfo><VersionInfo Name="Private">False</VersionInfo><VersionInfo Name="DLL">True</VersionInfo><VersionInfo Name="Locale">2057</VersionInfo><VersionInfo Name="CodePage">1252</VersionInfo></VersionInfo><VersionInfoKeys><VersionInfoKeys Name="FileVersion">4.0.0.0</VersionInfoKeys><VersionInfoKeys Name="ProductVersion">4.0</VersionInfoKeys><VersionInfoKeys Name="CompanyName">MCM DESIGN</VersionInfoKeys><VersionInfoKeys Name="FileDescription">TWAIN Driver example for Delphi</VersionInfoKeys><VersionInfoKeys Name="InternalName">Delphi TWAIN Driver</VersionInfoKeys><VersionInfoKeys Name="LegalCopyright">Copyright ? 1993-2014 MCM DESIGN</VersionInfoKeys><VersionInfoKeys Name="LegalTrademarks"></VersionInfoKeys><VersionInfoKeys Name="OriginalFilename">mcmTWAINDS.DS</VersionInfoKeys><VersionInfoKeys Name="ProductName">Delphi TWAIN Driver</VersionInfoKeys><VersionInfoKeys Name="Comments">This example is intended to show how to write TWAIN drivers in Delphi 3 and 4</VersionInfoKeys></VersionInfoKeys><Source><Source Name="MainSource">mcmTWAINDS.dpr</Source></Source></Delphi.Personality></BorlandProject></BorlandProject>
+  </ProjectExtensions>
+  <Import Project="$(MSBuildBinPath)\Borland.Delphi.Targets" />
+  <ItemGroup>
+    <DelphiCompile Include="mcmTWAINDS.dpr">
+      <MainSource>MainSource</MainSource>
+    </DelphiCompile>
+    <DCCReference Include="mcmTWAINDSEntry.pas" />
+    <DCCReference Include="mcmTWAINDSLayer.pas" />
+    <DCCReference Include="mcmTWAINLog.pas" />
+    <DCCReference Include="uDSUserInterface.PAS">
+      <Form>FormSource</Form>
+    </DCCReference>
+    <DCCReference Include="USABOUT.PAS">
+      <Form>FormAbout</Form>
+    </DCCReference>
+    <DCCReference Include="uTwnDlgAppInfo.pas">
+      <Form>FormAppInfo</Form>
+    </DCCReference>
+    <DCCReference Include="uTwnDlgHandle.pas" />
+    <DCCReference Include="uTwnDlgSimEvents.pas">
+      <Form>FormEvents</Form>
+    </DCCReference>
+  </ItemGroup>
+</Project>

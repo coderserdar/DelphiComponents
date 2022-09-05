@@ -1,0 +1,132 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{B078F18B-6133-49C4-8C31-A6607A970C57}</ProjectGuid>
+		</PropertyGroup>
+		<ItemGroup>
+			<Projects Include="AlphaBlending\AlphaBlendSample.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="Basic\BasicSample.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="DisplayModeChanger\DisplayModeChangerSample.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="DXImageList\ImageListSample.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="DynImageList\DynamicImageListSample.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="GammaControl\GCSample.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="PaletteAnimation\PaletteAnim.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="RegisterNotifyEvent\RegisterNotifySample.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="Surface\SurfaceSample.dproj">
+				<Dependencies/>
+			</Projects>
+		</ItemGroup>
+		<ProjectExtensions>
+			<Borland.Personality>Default.Personality.12</Borland.Personality>
+			<Borland.ProjectType/>
+			<BorlandProject>
+				<Default.Personality/>
+			</BorlandProject>
+		</ProjectExtensions>
+		<Target Name="AlphaBlendSample">
+			<MSBuild Projects="AlphaBlending\AlphaBlendSample.dproj"/>
+		</Target>
+		<Target Name="AlphaBlendSample:Clean">
+			<MSBuild Targets="Clean" Projects="AlphaBlending\AlphaBlendSample.dproj"/>
+		</Target>
+		<Target Name="AlphaBlendSample:Make">
+			<MSBuild Targets="Make" Projects="AlphaBlending\AlphaBlendSample.dproj"/>
+		</Target>
+		<Target Name="BasicSample">
+			<MSBuild Projects="Basic\BasicSample.dproj"/>
+		</Target>
+		<Target Name="BasicSample:Clean">
+			<MSBuild Targets="Clean" Projects="Basic\BasicSample.dproj"/>
+		</Target>
+		<Target Name="BasicSample:Make">
+			<MSBuild Targets="Make" Projects="Basic\BasicSample.dproj"/>
+		</Target>
+		<Target Name="DisplayModeChangerSample">
+			<MSBuild Projects="DisplayModeChanger\DisplayModeChangerSample.dproj"/>
+		</Target>
+		<Target Name="DisplayModeChangerSample:Clean">
+			<MSBuild Targets="Clean" Projects="DisplayModeChanger\DisplayModeChangerSample.dproj"/>
+		</Target>
+		<Target Name="DisplayModeChangerSample:Make">
+			<MSBuild Targets="Make" Projects="DisplayModeChanger\DisplayModeChangerSample.dproj"/>
+		</Target>
+		<Target Name="ImageListSample">
+			<MSBuild Projects="DXImageList\ImageListSample.dproj"/>
+		</Target>
+		<Target Name="ImageListSample:Clean">
+			<MSBuild Targets="Clean" Projects="DXImageList\ImageListSample.dproj"/>
+		</Target>
+		<Target Name="ImageListSample:Make">
+			<MSBuild Targets="Make" Projects="DXImageList\ImageListSample.dproj"/>
+		</Target>
+		<Target Name="DynamicImageListSample">
+			<MSBuild Projects="DynImageList\DynamicImageListSample.dproj"/>
+		</Target>
+		<Target Name="DynamicImageListSample:Clean">
+			<MSBuild Targets="Clean" Projects="DynImageList\DynamicImageListSample.dproj"/>
+		</Target>
+		<Target Name="DynamicImageListSample:Make">
+			<MSBuild Targets="Make" Projects="DynImageList\DynamicImageListSample.dproj"/>
+		</Target>
+		<Target Name="GCSample">
+			<MSBuild Projects="GammaControl\GCSample.dproj"/>
+		</Target>
+		<Target Name="GCSample:Clean">
+			<MSBuild Targets="Clean" Projects="GammaControl\GCSample.dproj"/>
+		</Target>
+		<Target Name="GCSample:Make">
+			<MSBuild Targets="Make" Projects="GammaControl\GCSample.dproj"/>
+		</Target>
+		<Target Name="PaletteAnim">
+			<MSBuild Projects="PaletteAnimation\PaletteAnim.dproj"/>
+		</Target>
+		<Target Name="PaletteAnim:Clean">
+			<MSBuild Targets="Clean" Projects="PaletteAnimation\PaletteAnim.dproj"/>
+		</Target>
+		<Target Name="PaletteAnim:Make">
+			<MSBuild Targets="Make" Projects="PaletteAnimation\PaletteAnim.dproj"/>
+		</Target>
+		<Target Name="RegisterNotifySample">
+			<MSBuild Projects="RegisterNotifyEvent\RegisterNotifySample.dproj"/>
+		</Target>
+		<Target Name="RegisterNotifySample:Clean">
+			<MSBuild Targets="Clean" Projects="RegisterNotifyEvent\RegisterNotifySample.dproj"/>
+		</Target>
+		<Target Name="RegisterNotifySample:Make">
+			<MSBuild Targets="Make" Projects="RegisterNotifyEvent\RegisterNotifySample.dproj"/>
+		</Target>
+		<Target Name="SurfaceSample">
+			<MSBuild Projects="Surface\SurfaceSample.dproj"/>
+		</Target>
+		<Target Name="SurfaceSample:Clean">
+			<MSBuild Targets="Clean" Projects="Surface\SurfaceSample.dproj"/>
+		</Target>
+		<Target Name="SurfaceSample:Make">
+			<MSBuild Targets="Make" Projects="Surface\SurfaceSample.dproj"/>
+		</Target>
+		<Target Name="Build">
+			<CallTarget Targets="AlphaBlendSample;BasicSample;DisplayModeChangerSample;ImageListSample;DynamicImageListSample;GCSample;PaletteAnim;RegisterNotifySample;SurfaceSample"/>
+		</Target>
+		<Target Name="Clean">
+			<CallTarget Targets="AlphaBlendSample:Clean;BasicSample:Clean;DisplayModeChangerSample:Clean;ImageListSample:Clean;DynamicImageListSample:Clean;GCSample:Clean;PaletteAnim:Clean;RegisterNotifySample:Clean;SurfaceSample:Clean"/>
+		</Target>
+		<Target Name="Make">
+			<CallTarget Targets="AlphaBlendSample:Make;BasicSample:Make;DisplayModeChangerSample:Make;ImageListSample:Make;DynamicImageListSample:Make;GCSample:Make;PaletteAnim:Make;RegisterNotifySample:Make;SurfaceSample:Make"/>
+		</Target>
+		<Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+	</Project>

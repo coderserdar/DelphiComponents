@@ -1,0 +1,96 @@
+object FormChild: TFormChild
+  Left = 360
+  Top = 117
+  Width = 396
+  Height = 415
+  HorzScrollBar.Increment = 32
+  HorzScrollBar.Tracking = True
+  VertScrollBar.Increment = 32
+  VertScrollBar.Tracking = True
+  Caption = 'New Image'
+  Color = clSilver
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  FormStyle = fsMDIChild
+  KeyPreview = True
+  Position = poDefault
+  Visible = True
+  OnActivate = FormActivate
+  OnClose = FormClose
+  OnCloseQuery = FormCloseQuery
+  OnCreate = FormCreate
+  OnResize = FormResize
+  OnShow = FormActivate
+  PixelsPerInch = 96
+  TextHeight = 13
+  object ImageCtrl: TmcmImageCtrl
+    Left = 0
+    Top = 0
+    Width = 388
+    Height = 381
+    Align = alClient
+    Color = clWhite
+    ParentColor = False
+    Scale = 1.000000000000000000
+    ScaleToFit = False
+    OnChange = ImageCtrlChange
+    OnMouseDown = ImageCtrlMouseDown
+    OnMouseMove = ImageCtrlMouseMove
+    OnMouseUp = ImageCtrlMouseUp
+    OnMouseWheel = ImageCtrlMouseWheel
+  end
+  object mcmProfile: TmcmProfile
+    Left = 32
+    Top = 72
+    Width = 113
+    Height = 105
+    Hint = 'Intensity Profile'
+    Pen.Color = clRed
+    Scale = 1.000000000000000000
+    Enabled = False
+    ParentShowHint = False
+    ShowHint = False
+    Visible = False
+    OnMouseMove = mcmControlMouseMove
+    EndX = 75
+    EndY = 50
+    HitDistance = 5
+    Length = 50.000000000000000000
+    MarkerNegative = PDM_BRACKETEND
+    MarkerPeak = PDM_CROSS
+    MarkerPen.Color = clLime
+    MarkerPositive = PDM_BRACKETBEGIN
+    MarkerValley = PDM_LINE
+    NodeSize = 4
+    StartX = 25
+    StartY = 50
+    Transitions = []
+  end
+  object mcmRegion: TmcmRegion
+    Left = 48
+    Top = 8
+    Width = 57
+    Height = 57
+    AllowResize = True
+    LinePen.Color = clRed
+    LinePen.Style = psDot
+    MaxHeight = 422
+    MaxWidth = 462
+    Scale = 1.000000000000000000
+    OnMouseDown = mcmRegionMouseDown
+    OnMouseMove = mcmControlMouseMove
+    OnMouseUp = mcmRegionMouseUp
+    OnMoved = RegionChanged
+    OnResized = RegionChanged
+  end
+  object mcmDropSource: TmcmDropSource
+    DragMode = dmAutomatic
+    DragInverval = 500
+    DragThreshold = 5
+    Left = 8
+    Top = 8
+  end
+end

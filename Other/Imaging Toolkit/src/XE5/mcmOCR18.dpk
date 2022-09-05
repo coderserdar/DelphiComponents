@@ -1,0 +1,45 @@
+package mcmOCR18;
+
+{$R *.res}
+{$R '..\mcmOCR.dcr'}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS OFF}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS OFF}
+{$LOCALSYMBOLS OFF}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE RELEASE}
+{$ENDIF IMPLICITBUILDING}
+{$DESCRIPTION 'ImagingToolbox.com, OCR Toolkit for Delphi'}
+{$IMPLICITBUILD OFF}
+
+requires
+  vcl,
+  vclx,
+  designide,
+  rtl,
+  mcmInte18,
+  mcmImaging18;
+
+contains
+  mcmOCR in '..\mcmOCR.pas',
+  InstmcmOCR in '..\InstmcmOCR.pas',
+  uOcrAbout in '..\uOcrAbout.pas' {mcmOCRAboutBox};
+
+end.

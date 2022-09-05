@@ -1,0 +1,177 @@
+-------------------------------------------------------------------------------
+17.12.2002
+-------------------------------------------------------------------------------
+- Delphi 7 ready;
+- mini-fix with a 'copy' function in expressions
+
+
+-------------------------------------------------------------------------------
+29.04.2002
+-------------------------------------------------------------------------------
+- corrected Portuguese string resources (by Sergio Alexander Loback da Silva 
+  <loback@univali.br>)
+
+-------------------------------------------------------------------------------
+06.04.2002
+-------------------------------------------------------------------------------
+- a serious bug with group totals of subdetails fixed;
+- Delphi 6 ready;
+- numerous improvements since last time I`ve edited this file :)
+
+
+-------------------------------------------------------------------------------
+14.06.2001
+-------------------------------------------------------------------------------
+- a great collection of printer codes (by Martin Valdez <mvaldez@megacable.com.mx>)
+- some bug fixes since the last update^ I`m quite unable to remeber them :)
+
+-------------------------------------------------------------------------------
+23.10.2000
+-------------------------------------------------------------------------------
+- editor for Caption property of lables (by Konstantin Lushnikov <k_l@newmail.ru>).
+- installation instructions Delphi4 (Delphi5):
+  1. Unpack somewhere and create additional directory D4 (D5).
+     The structure should be something like that:
+       X:\ZReport
+               |-source
+               |-doc
+               |-demo
+               +-d4 (d5)
+  2. Adjust build4.bat (build5.bat) to use your path do dcc32
+  3. Copy *.dfm and *.res
+  4. Overwrite D4\zrconst.res (D5\zrconst.res) with source\resource\<language>\zrconst.res
+  5. Run build4.bat (build5.bat) - the resulting modules should appear in D4 (D5)
+  6. Add X:\ZReport\D4 (X:\ZReport\D5) to your PATH
+  7. Under Delphi IDE install X:\ZReport\D4\DclZrpt4.bpl (X:\ZReport\D5\DclZrpt5.bpl)
+
+-------------------------------------------------------------------------------
+18.09.2000
+-------------------------------------------------------------------------------
+- multiple bug fixes;
+- now really Delphi5 ready.
+- Installation changed.
+  ZReport library was divided into 2 packages: ZRptX.dpk (run-time) and
+  DclZrptX.dpk (design-time). You`ll have to compile both of them,
+  put ZRptX.dpl somewhere on your path and install DclZrptX.dpl into IDE.
+
+-------------------------------------------------------------------------------
+18.02.2000
+-------------------------------------------------------------------------------
+- updated polish resources (by Bolek Umnicki <strato@polandmail.com>);
+- escape codes for HP DeskJet and LaserJet printers 
+  (thanks to Paul Barry <barryp@itcarlow.ie>);
+- field variable bug when FieldName not found in DataSet;
+- aggrragator variable bug when trying to aggregate
+  non-numeric variables.
+
+
+-------------------------------------------------------------------------------
+13.02.2000
+-------------------------------------------------------------------------------
+Some bugs fixed:
+- printer settings dialog bug in visualization;
+- wrong master-detail behaviour under certain conditions;
+- designer bug with field variables;
+- corrected package file.
+Updated language resources.
+
+===============================================================================
+ZReport v2K (1.02.2000)
+===============================================================================
+This is a further development of ZR 2.0 ideas. Now I hope it
+to be a working version (not a pre-release).
+- Delphi 5 ready (not tested thouroughly, tell me if not working OK);
+- completely changed printing engine: more precise (I hope)
+  still keeping all the beauties described earlier (see readme.*);
+- new property for Bands: ForceKind (you`ll easily understand it);
+- improved TZRField.Variable: work not only with the variables of 
+  the current controller but of all its masters as well;
+- another one ZReport.Options.PaperType: zptContinuous - 
+  to create continuous report with no pagination at all;
+- improved expression evaluation: evaluate variables of
+  all the master controllers (see previous modification);
+- some new escape-codes: ReportStart, ReportFinish;
+- two new properties of ZReport.Options: FirstPageHeader and
+  LastPageFooter - you asked for that, didn`t you?
+- improved previewing: searching text through the whole report,
+  not only on the current page (developed by Alexey Gorbunov);
+- customized printer settings dialog: select OEM-coding and
+  escape model (all of them contain no escape-codes yet except
+  emEpson - can anyone help? - search the very bottom of 
+  ZREscape.pas for escape-codes map) alongside with the standard 
+  Windows print setup dialog (developed by Alexey Gorbunov);
+- new component: TZRComposite - I think you`ll easily deal
+  with that. Similar to QuickReport. Enjoy...
+- some new kinds of Alignment for lables: zawBandXXX, zahBandXXX,
+  the Anchors property is also available;
+- design-time preview!!! - at last;
+- some new language resources added (not complete yet):
+  - Serbian (great thanks to Sinisa Nenkov <sinisanenkov@yahoo.com>);
+  - Polish (great thanks to Bolek Umnicki <strato@polandmail.com>);
+  - Brazilian-portuguese (great thanks to Mamede Milanez 
+    <mamede@enter-net.com.br>);
+- a lot of bugs fixed, plenty of bugs introduced :-)
+
+Since now ZReport has two authors whom you can contact with
+to tell they were so foolish to make a stupid bug in ?.pas:
+- Alexey Gorbunov (AlGo) <algo_kov@chat.ru>;
+- Yuri Zaitsev (ZYZ) <zyz@inbox.ru>.
+
+===============================================================================
+
+
+-------------------------------------------------------------------------------
+28.09.1999
+-------------------------------------------------------------------------------
+- Demo based on the one supplied by Antoni Aloy López (aloy@ctv.es).
+- Language resources:
+  - Spanish (thanks to Antoni Aloy López - aloy@ctv.es);
+  - Italian (thanks to Davide Moretti - dave@rimini.com).
+- Bug fixes:
+  - Preview bug - report was continuing working
+    after the Preview was closed;
+  - Bug of progress indicator with some kind of queries;
+  - TZRField bug when using DataSet with DefaultFields=true;
+  - Revealled fixed, unrevealled left as is.
+Hey, guys! Try to test www2.cybercities.com/~zyz/zreport/zr200.zip
+from time to time - I`m not able to notify everybody of the changes
+in my report.
+-------------------------------------------------------------------------------
+
+
+===============================================================================
+ZReport v.2.0 (10.09.1999)
+===============================================================================
+- Completely new version - pre-release
+===============================================================================
+
+
+===============================================================================
+ZReport v.1.02 (20.03.1999)
+===============================================================================
+- Now ready for Delphi 4.
+- Added date operations and functions in expressions.
+- Language resources:
+  - Polish (great thanks to Bolek Umnicki - strato@polandmail.com);
+  - Spanish (great thanks to Antoni Aloy López - aloy@ctv.es).
+- Revealled bugs fixed, unrevealled left as is.
+===============================================================================
+
+
+===============================================================================
+ZReport v.1.01 (11.09.1998)
+===============================================================================
+- Localization made possible:
+  Just select your language resource file (LIB\RESOURCE\ZRConst.*),
+  copy it to LIB\*.* and rename to ZRConst.res (English by default).
+- Demo error fix: problem with TZRChildBand
+  (unlike QuickReport I got no such component).
+- Minor changes in preview behavior
+  (I hope that up & down keys handling is more correct now).
+===============================================================================
+
+===============================================================================
+ZReport v.1.0 (31.08.1998)
+===============================================================================
+- The very first version.
+

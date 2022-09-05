@@ -1,0 +1,48 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{B8785609-74C1-4FDC-ACB3-0BF9B3997BAB}</ProjectGuid>
+		</PropertyGroup>
+		<ItemGroup>
+			<Projects Include="AlphaBlending\BasicDRMSample.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="Wrap\Sample.dproj">
+				<Dependencies/>
+			</Projects>
+		</ItemGroup>
+		<ProjectExtensions>
+			<Borland.Personality>Default.Personality.12</Borland.Personality>
+			<Borland.ProjectType/>
+			<BorlandProject>
+				<Default.Personality/>
+			</BorlandProject>
+		</ProjectExtensions>
+		<Target Name="BasicDRMSample">
+			<MSBuild Projects="AlphaBlending\BasicDRMSample.dproj"/>
+		</Target>
+		<Target Name="BasicDRMSample:Clean">
+			<MSBuild Targets="Clean" Projects="AlphaBlending\BasicDRMSample.dproj"/>
+		</Target>
+		<Target Name="BasicDRMSample:Make">
+			<MSBuild Targets="Make" Projects="AlphaBlending\BasicDRMSample.dproj"/>
+		</Target>
+		<Target Name="Sample">
+			<MSBuild Projects="Wrap\Sample.dproj"/>
+		</Target>
+		<Target Name="Sample:Clean">
+			<MSBuild Targets="Clean" Projects="Wrap\Sample.dproj"/>
+		</Target>
+		<Target Name="Sample:Make">
+			<MSBuild Targets="Make" Projects="Wrap\Sample.dproj"/>
+		</Target>
+		<Target Name="Build">
+			<CallTarget Targets="BasicDRMSample;Sample"/>
+		</Target>
+		<Target Name="Clean">
+			<CallTarget Targets="BasicDRMSample:Clean;Sample:Clean"/>
+		</Target>
+		<Target Name="Make">
+			<CallTarget Targets="BasicDRMSample:Make;Sample:Make"/>
+		</Target>
+		<Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+	</Project>

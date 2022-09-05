@@ -1,0 +1,40 @@
+package mcmImagingDB7;
+
+{$R *.res}
+{$R '..\mcmImageDB.dcr'}
+{$ALIGN 8}
+{$ASSERTIONS OFF}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS OFF}
+{$LOCALSYMBOLS OFF}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'ImagingToolbox.com, Imaging Toolkit for Delphi DB'}
+{$IMPLICITBUILD ON}
+{$DEFINE RELEASE}
+
+requires
+  vcl,
+  vcldb,
+  vcldbx,
+  mcmImaging7;
+
+contains
+  mcmImageDB in '..\mcmImageDB.pas',
+  InstmcmDB in '..\InstmcmDB.pas';
+
+end.

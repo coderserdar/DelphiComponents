@@ -1,0 +1,140 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{07bd9e2c-4217-409e-b486-64b5f6f64961}</ProjectGuid>
+    <MainSource>itfd.dpr</MainSource>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
+    <DCC_DependencyCheckOutputName>itfd.exe</DCC_DependencyCheckOutputName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Version>7.0</Version>
+    <DCC_AssertionsAtRuntime>False</DCC_AssertionsAtRuntime>
+    <DCC_DebugInformation>False</DCC_DebugInformation>
+    <DCC_IOChecking>False</DCC_IOChecking>
+    <DCC_LocalDebugSymbols>False</DCC_LocalDebugSymbols>
+    <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+    <DCC_Define>mcmLZW;RELEASE</DCC_Define>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <Version>7.0</Version>
+    <DCC_AssertionsAtRuntime>False</DCC_AssertionsAtRuntime>
+    <DCC_DebugInformation>False</DCC_DebugInformation>
+    <DCC_IOChecking>False</DCC_IOChecking>
+    <DCC_LocalDebugSymbols>False</DCC_LocalDebugSymbols>
+    <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+    <DCC_Define>mcmLZW;DEBUG</DCC_Define>
+  </PropertyGroup>
+  <ProjectExtensions>
+    <Borland.Personality>Delphi.Personality</Borland.Personality>
+    <Borland.ProjectType />
+    <BorlandProject>
+<BorlandProject xmlns=""> <Delphi.Personality>   <Parameters>
+      <Parameters Name="UseLauncher">False</Parameters>
+      <Parameters Name="LoadAllSymbols">True</Parameters>
+      <Parameters Name="LoadUnspecifiedSymbols">False</Parameters>
+    </Parameters>
+    <VersionInfo>
+      <VersionInfo Name="IncludeVerInfo">True</VersionInfo>
+      <VersionInfo Name="AutoIncBuild">False</VersionInfo>
+      <VersionInfo Name="MajorVer">1</VersionInfo>
+      <VersionInfo Name="MinorVer">0</VersionInfo>
+      <VersionInfo Name="Release">0</VersionInfo>
+      <VersionInfo Name="Build">0</VersionInfo>
+      <VersionInfo Name="Debug">False</VersionInfo>
+      <VersionInfo Name="PreRelease">False</VersionInfo>
+      <VersionInfo Name="Special">False</VersionInfo>
+      <VersionInfo Name="Private">False</VersionInfo>
+      <VersionInfo Name="DLL">False</VersionInfo>
+      <VersionInfo Name="Locale">1030</VersionInfo>
+      <VersionInfo Name="CodePage">1252</VersionInfo>
+    </VersionInfo>
+    <VersionInfoKeys>
+      <VersionInfoKeys Name="FileVersion">1.0.0.0</VersionInfoKeys>
+      <VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys>
+    </VersionInfoKeys>
+    <Source>
+      <Source Name="MainSource">itfd.dpr</Source>
+    </Source>
+  </Delphi.Personality> </BorlandProject></BorlandProject>
+  </ProjectExtensions>
+  <ItemGroup />
+  <ItemGroup>
+    <DelphiCompile Include="itfd.dpr">
+      <MainSource>MainSource</MainSource>
+    </DelphiCompile>
+    <DCCReference Include="uchildwin.pas">
+      <Form>FormChild</Form>
+    </DCCReference>
+    <DCCReference Include="uFormAffine.pas">
+      <Form>FormAffine</Form>
+    </DCCReference>
+    <DCCReference Include="uFormBrightContrast.pas">
+      <Form>FormBrightContrast</Form>
+    </DCCReference>
+    <DCCReference Include="uFormBrowse.pas">
+      <Form>FormBrowse</Form>
+    </DCCReference>
+    <DCCReference Include="uFormCanvasSize.pas">
+      <Form>FormCanvasSize</Form>
+    </DCCReference>
+    <DCCReference Include="uFormCombine2RGB.pas">
+      <Form>FormCombineImage</Form>
+    </DCCReference>
+    <DCCReference Include="uFormFileAssociate.pas">
+      <Form>FormFormatAssociate</Form>
+    </DCCReference>
+    <DCCReference Include="uFormFilterBrowser.pas">
+      <Form>FormFilterBrowser</Form>
+    </DCCReference>
+    <DCCReference Include="uFormFilterUser.pas">
+      <Form>FormFilterUser</Form>
+    </DCCReference>
+    <DCCReference Include="uFormGamma.pas">
+      <Form>FormGamma</Form>
+    </DCCReference>
+    <DCCReference Include="uFormHistogram.pas">
+      <Form>FormHistogram</Form>
+    </DCCReference>
+    <DCCReference Include="uFormImageInfo.pas">
+      <Form>FormImageInfo</Form>
+    </DCCReference>
+    <DCCReference Include="uFormMain.pas">
+      <Form>FormMain</Form>
+    </DCCReference>
+    <DCCReference Include="uFormMargin.pas">
+      <Form>FormPageMargin</Form>
+    </DCCReference>
+    <DCCReference Include="uFormMath.pas">
+      <Form>FormMath</Form>
+    </DCCReference>
+    <DCCReference Include="uFormMorph.pas">
+      <Form>FormMorph</Form>
+    </DCCReference>
+    <DCCReference Include="uFormNew.pas">
+      <Form>FormNewImage</Form>
+    </DCCReference>
+    <DCCReference Include="uFormPaintBox.pas">
+      <Form>FormPaintBox</Form>
+    </DCCReference>
+    <DCCReference Include="uFormPalette.pas">
+      <Form>FormPalette</Form>
+    </DCCReference>
+    <DCCReference Include="uFormPrintPreview.pas">
+      <Form>FormPrintPreview</Form>
+    </DCCReference>
+    <DCCReference Include="uFormRotate.pas">
+      <Form>FormRotate</Form>
+    </DCCReference>
+    <DCCReference Include="uFormStretch.pas">
+      <Form>FormResize</Form>
+    </DCCReference>
+    <DCCReference Include="uFormThreshold.pas">
+      <Form>FormThreshold</Form>
+    </DCCReference>
+    <DCCReference Include="uFormViewProfile.pas">
+      <Form>FormViewProfile</Form>
+    </DCCReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Borland.Delphi.Targets" />
+</Project>

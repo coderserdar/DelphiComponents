@@ -1,0 +1,90 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{2c3d7db1-41d4-4265-a669-30a238b648f5}</ProjectGuid>
+    <MainSource>mcmImagingDB11.dpk</MainSource>
+    <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
+    <DCC_DependencyCheckOutputName>C:\Users\Public\Documents\RAD Studio\5.0\Bpl\mcmImagingDB11.bpl</DCC_DependencyCheckOutputName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Version>7.0</Version>
+    <DCC_AssertionsAtRuntime>False</DCC_AssertionsAtRuntime>
+    <DCC_DebugInformation>False</DCC_DebugInformation>
+    <DCC_IOChecking>False</DCC_IOChecking>
+    <DCC_WriteableConstants>True</DCC_WriteableConstants>
+    <DCC_LocalDebugSymbols>False</DCC_LocalDebugSymbols>
+    <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+    <DCC_Define>RELEASE</DCC_Define>
+    <DCC_UNSAFE_TYPE>True</DCC_UNSAFE_TYPE>
+    <DCC_UNSAFE_CODE>True</DCC_UNSAFE_CODE>
+    <DCC_UNSAFE_CAST>True</DCC_UNSAFE_CAST>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <Version>7.0</Version>
+    <DCC_AssertionsAtRuntime>False</DCC_AssertionsAtRuntime>
+    <DCC_DebugInformation>False</DCC_DebugInformation>
+    <DCC_IOChecking>False</DCC_IOChecking>
+    <DCC_WriteableConstants>True</DCC_WriteableConstants>
+    <DCC_LocalDebugSymbols>False</DCC_LocalDebugSymbols>
+    <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+    <DCC_UNSAFE_TYPE>True</DCC_UNSAFE_TYPE>
+    <DCC_UNSAFE_CODE>True</DCC_UNSAFE_CODE>
+    <DCC_UNSAFE_CAST>True</DCC_UNSAFE_CAST>
+  </PropertyGroup>
+  <ProjectExtensions>
+    <Borland.Personality>Delphi.Personality</Borland.Personality>
+    <Borland.ProjectType>Package</Borland.ProjectType>
+    <BorlandProject>
+<BorlandProject><Delphi.Personality>
+<Parameters><Parameters Name="UseLauncher">False</Parameters>
+<Parameters Name="LoadAllSymbols">True</Parameters>
+<Parameters Name="LoadUnspecifiedSymbols">False</Parameters></Parameters>
+<Package_Options><Package_Options Name="PackageDescription">ImagingToolbox.com, Imaging Toolkit for Delphi DB</Package_Options>
+<Package_Options Name="ImplicitBuild">False</Package_Options>
+<Package_Options Name="DesigntimeOnly">False</Package_Options>
+<Package_Options Name="RuntimeOnly">False</Package_Options></Package_Options>
+<Language><Language Name="ProjectLang">$00000406</Language></Language>
+<VersionInfo><VersionInfo Name="IncludeVerInfo">True</VersionInfo>
+<VersionInfo Name="AutoIncBuild">False</VersionInfo>.
+<VersionInfo Name="MajorVer">4</VersionInfo>
+<VersionInfo Name="MinorVer">1</VersionInfo>
+<VersionInfo Name="Release">0</VersionInfo>
+<VersionInfo Name="Build">0</VersionInfo>
+<VersionInfo Name="Debug">False</VersionInfo>
+<VersionInfo Name="PreRelease">False</VersionInfo>
+<VersionInfo Name="Special">False</VersionInfo>
+<VersionInfo Name="Private">False</VersionInfo>
+<VersionInfo Name="DLL">False</VersionInfo>
+<VersionInfo Name="Locale">2057</VersionInfo>
+<VersionInfo Name="CodePage">1252</VersionInfo></VersionInfo>
+<VersionInfoKeys><VersionInfoKeys Name="CompanyName">ImagingToolbox.com</VersionInfoKeys>
+<VersionInfoKeys Name="FileDescription">Imaging Toolkit for Delphi</VersionInfoKeys>
+<VersionInfoKeys Name="FileVersion">4.1.0.0</VersionInfoKeys>
+<VersionInfoKeys Name="InternalName">Imaging Toolkit for Delphi</VersionInfoKeys>
+<VersionInfoKeys Name="LegalCopyright">Copyright 2002-2014, ImagingToolbox.com</VersionInfoKeys>
+<VersionInfoKeys Name="LegalTrademarks"></VersionInfoKeys>
+<VersionInfoKeys Name="OriginalFilename">mcmImagingDB11.dpl</VersionInfoKeys>
+<VersionInfoKeys Name="ProductName">Imaging Toolkit for Delphi</VersionInfoKeys>
+<VersionInfoKeys Name="ProductVersion">4.1</VersionInfoKeys>
+<VersionInfoKeys Name="Comments">Imaging Toolkit for Delphi</VersionInfoKeys></VersionInfoKeys>
+<Source><Source Name="MainSource">mcmImagingDB11.dpk</Source></Source>
+<Excluded_Packages>
+      <Excluded_Packages Name="$(BDS)\bin\dcloffice2k100.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+      <Excluded_Packages Name="$(BDS)\bin\dclofficexp100.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+    </Excluded_Packages></Delphi.Personality></BorlandProject></BorlandProject>
+  </ProjectExtensions>
+  <Import Project="$(MSBuildBinPath)\Borland.Delphi.Targets" />
+  <ItemGroup>
+    <DelphiCompile Include="mcmImagingDB11.dpk">
+      <MainSource>MainSource</MainSource>
+    </DelphiCompile>
+    <DCCReference Include="..\InstmcmDB.pas" />
+    <DCCReference Include="..\mcmImageDB.dcr" />
+    <DCCReference Include="..\mcmImageDB.pas" />
+    <DCCReference Include="$(BDS)\lib\vcl.dcp" />
+    <DCCReference Include="$(BDS)\lib\vcldb.dcp" />
+    <DCCReference Include="$(BDS)\lib\vcldbx.dcp" />
+    <DCCReference Include="$(BDSCOMMONDIR)\Bpl\mcmImaging11.dcp" />
+  </ItemGroup>
+</Project>

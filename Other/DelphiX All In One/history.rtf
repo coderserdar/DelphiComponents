@@ -1,0 +1,611 @@
+{\rtf1\ansi\ansicpg1250\deff0\deflang1029\deflangfe1029{\fonttbl{\f0\fswiss\fprq2\fcharset238{\*\fname Arial;}Arial CE;}{\f1\fmodern\fprq1\fcharset238{\*\fname Courier New;}Courier New CE;}{\f2\froman\fprq2\fcharset238{\*\fname Times New Roman;}Times New Roman CE;}}
+{\colortbl ;\red0\green0\blue255;\red255\green0\blue0;\red128\green0\blue0;}
+{\*\generator Msftedit 5.41.21.2510;}\viewkind4\uc1\pard\nowidctlpar\b\f0\fs24 DELPHIX PACK EXTENDS HISTORY\par
+\b0\fs20\par
+\i  *  Copyright (c) 2004-2018 Jaro Benes\par
+ *  All Rights Reserved\par
+ *  Version 1.19.x\par
+ *  D2D Hardware module\par
+\pard  *  web site: {\field{\*\fldinst{HYPERLINK "http://www.micrel.cz/Dx" }}{\fldrslt{\cf1\ul www.micrel.cz/Dx}}}\cf0\ulnone\f0\fs20  \par
+ *  e-mail: {\field{\*\fldinst{HYPERLINK "mailto:delphix_d2d@micrel.cz" }}{\fldrslt{\cf1\ul delphix_d2d@micrel.cz}}}\cf0\ulnone\f0\fs20  \par
+\i0\par
+\cf1\b  * DISCLAIMER:\cf0\par
+\b0    This software is provided "as is" and is without warranty of any kind. The author of this software does not warrant, guarantee or make any representations regarding the use or results of use of this software in terms of reliability, accuracy or fitness for purpose. You assume the entire risk of direct or indirect, consequential or inconsequential results from the correct or incorrect usage of this software even if the author has been informed of the possibilities of such damage. Neither the author nor anybody connected to this software in any way can assume any responsibility.\par
+\par
+\par
+Sorry for any future errors, I first saw DelphiX in 17-3-2004 and DirectX began learn some month later.\par
+First work started at 13.9.2004. All units in this pack contain last changes and was added very interesting units (for study or inspiration).\par
+Tested in Delphi 4, 5, 6, 7 and Delphi 2005, 2006 (fine works in Turbo too), 2007, 2009, 2010 and XE/XE2/XE3/XE4/XE5/XE6/XE7/XE8/Seattle/Berlin/Tokyo/Rio. Delphi 3 is very old and is not support now. Some limitations can be for Delpi 4, 5 and 6 too , because Embarcadero unsuported it now (but not Delphi 2005 and 2006/Turbo).\par
+\par
+NOTE FOR RETAINED MODE:\par
+\i Retained mode is stil present in all source code, but exists more limitations under operation system Vista ans Windows7 - there is not include this part of DirectX and it is deprecated. Unofficial pack of DelphiX include limited support for this feature but without any warranty.\par
+\i0\par
+\cf1\b  * FEATURES:\cf0\par
+\b0    a) Implement Hardware acceleration for critical function like DrawAlpha \{Blend\}, DrawSub and DrawAdd for both way DXIMAGELIST and DIRECTDRAWSURFACE with rotation too.\par
+   b) Automatic adjustement for texture size different 2^n.\par
+   c) Minimum current source code change, all accelerated code added into:\par
+\f1\fs18       DXDraw.BeginScene;\par
+      //code here\par
+      DXDraw.EndScene;\par
+\f0\fs20    d) DelphiX facade continues using still.\par
+\par
+\cf1\b  * HOW TO USE\cf0\par
+\b0    a) Design code like as DelphiX and drawing routine put into\par
+\f1       DXDraw.BeginScene;\par
+      //code here\par
+      DXDraw.EndScene;\par
+\f0    b) setup options in code or property for turn-on acceleration like:\par
+\f1\fs18       DXDraw.Finalize; \{done DXDraw\}\par
+      \b If\b0  HardwareSwitch \b Then\b0\par
+\i       \{hardware\}\par
+\i0       \b Begin\par
+\b0         \b if\b0  NOT (doDirectX7Mode \b in\b0  DXDraw.Options) \b then\b0\par
+          DXDraw.Options := DXDraw.Options + [doDirectX7Mode];\par
+        \b if\b0  NOT (doHardware \b in\b0  DXDraw.Options) \b then\b0\par
+          DXDraw.Options := DXDraw.Options + [doHardware];\par
+        \b if\b0  NOT (do3D \b in\b0  DXDraw.Options) \b then\b0\par
+          DXDraw.Options := DXDraw.Options + [do3D];\par
+        \b if\b0  doSystemMemory \b in\b0  DXDraw.Options \b then\b0\par
+          DXDraw.Options := DXDraw.Options - [doSystemMemory];\par
+      \b End\par
+\b0       \b Else\par
+\b0\i       \{software\}\par
+\i0       \b Begin\par
+\b0         \b if\b0  doDirectX7Mode \b in\b0  DXDraw.Options \b then\b0\par
+          DXDraw.Options := DXDraw.Options - [doDirectX7Mode];\par
+        \b if\b0  do3D \b in\b0  DXDraw.Options then\par
+          DXDraw.Options := DXDraw.Options - [do3D];\par
+        \b if\b0  doHardware \b in\b0  DXDraw.Options \b then\b0\par
+          DXDraw.Options := DXDraw.Options - [doHardware];\par
+        \b if\b0  NOT (doSystemMemory \b in\b0  DXDraw.Options) \b then\b0\par
+          DXDraw.Options := DXDraw.Options + [doSystemMemory];\par
+      \b End\b0 ;\par
+\i       \{to fullscreen\}\par
+\i0       \b if\b0  doFullScreen \b in\b0  DXDraw.Options \b then\b0\par
+      \b begin\par
+\b0         RestoreWindow;\par
+        DXDraw.Cursor := crDefault;\par
+        BorderStyle := bsSingle;\par
+        DXDraw.Options := DXDraw.Options - [doFullScreen];\par
+        DXDraw.Options := DXDraw.Options + [doFlip];\par
+      \b end\b0  \b else\b0\par
+      \b begin\par
+\b0         StoreWindow;\par
+        DXDraw.Cursor := crNone;\par
+        BorderStyle := bsNone;\par
+        DXDraw.Options := DXDraw.Options + [doFullScreen];\par
+        DXDraw.Options := DXDraw.Options - [doFlip];\par
+      \b end\b0 ;\par
+      DXDraw1.Initialize; \i\{up DXDraw now\}\i0\par
+\b\f0\fs20  * NOTE\b0  When full screen no works properly, please add [doSelectedDriver]  into DXDraws.Options\par
+\b  * NOTE\b0  Main form has to declare like: \f1\fs18 TForm1 = \b class\b0 (TDXForm)\par
+\f0\fs20\par
+\cf1\b  * KNOWN BUGS OR RESTRICTION:\cf0\par
+\b0    1/ Cannot be use DirectDrawSurface other from DXDraw.Surface in HW mode.\par
+   2/ New functions was not tested for two and more DXDraws on form. Sorry.\par
+\par
+\cf1\b  *INSTALATION\cf0\par
+\b0    Before installation new version please remove all files from Source directory and copy new files into.\par
+   Open \i DelphiXx0.dpk \i0 for your Delphi IDE:\par
+\par
+\tab DelphiX30.dpk for Delphi 3\par
+\tab DelphiX40.dpk for Delphi 4\par
+\tab DelphiX50.dpk for Delphi 5\par
+\tab DelphiX60.dpk for Delphi 6\par
+\tab DelphiX70.dpk for Delphi 7\par
+\tab DelphiX90.dpk for Delphi 2005\par
+\tab DelphiX100.dpk for Delphi 2006\par
+\tab DelphiX110.dpk for Delphi 2007\par
+\tab DelphiX120.dpk for Delphi 2009\par
+\tab DelphiX140.dpk for Delphi 2010\par
+\tab DelphiX150.dpk for Delphi XE\par
+\tab DelphiX160.dpk for Delphi XE2\par
+\tab DelphiX170.dpk for Delphi XE3\par
+\tab DelphiX180.dpk for Delphi XE4\par
+\tab DelphiX190.dpk for Delphi XE5\par
+\tab DelphiX200.dpk for Delphi XE6\par
+\tab DelphiX210.dpk for Delphi XE7\par
+\tab DelphiX220.dpk for Delphi XE8\par
+\tab DelphiX230.dpk for Delphi 10.0 Seattle\par
+\tab DelphiX240.dpk for Delphi 10.1 Berlin\par
+\tab DelphiX250.dpk for Delphi 10.2 Tokyo\par
+\tab DelphiX260.dpk for Delphi 10.3 Rio\par
+\pard\nowidctlpar\par
+   Open Project options and check "Assignable typed constant" option when isn't checked (typically for Delphi 6 up).\par
+or\par
+you can use our installation program as helper for installation into IDE Delphi. Installation program is my small project with special features as my small direct support for beginners, cannot be perfect all.\par
+\par
+\cf1\b  * HISTORY\cf0\par
+\b0    All released versions \par
+\b\i  \cf2 1.00\cf0  11.02.2005 JB.\par
+\b0\i0    *Initial release of hardware accelerated unDelphiX\par
+\b\i  \cf2 1.01\cf0  28.03.2005 JB.\par
+\b0\i0    *Fix bug in Restore image procedure, when is picture change under HW mode.\par
+\b\i  \cf2 1.02\cf0  29.05.2005 Takanori Kawasaki\par
+\b0\i0    *Fix bug in TD2D.D2DFreeTextures memory leak.\par
+\b\i  \cf2 1.03\cf0  03.06.2005 JB.\par
+\b0\i0    *Transparent color area was partially corrected when display on 16 bit screen.\par
+  +Added full support for Delphi3 (overrides removed, dynarray supplement).\par
+\b\i  \cf2 1.04\cf0  11.06.2005 JB.\par
+\b0\i0    *Fix bug in bitmap mapping (8, 16, 32 bit) to DIB 24 bit.\par
+   *Fix bug in test transparent color from changed DIB.\par
+  +Added D3D support for Draw() routine.\par
+\b\i  \cf2 1.05\cf0  19.06.2005 JB.\par
+\b0\i0   +Function for D3D Draw() conditional switch off/on added, because not work properly on some adapters (Draw() accelerated in DirectDrawSurface yet).\par
+   Can be turn on please uncomment \{$Define DrawHWAcc\} in DelphiXcfg.inc\par
+\b\i       23.11.2005 JB.\par
+\b0\i0    +DXSpriteEngine improvement\par
+   Isn't necessary derive classes sprite and BackgroundSprite can use DrawAdd, DrawAlpha and DrawSub also. New property editor can able edit of sprite in collection (like that in DXImageList or DXWaveList), and can be use simple Events for Collision, Move or Draw. \par
+  \ul How to use:\par
+\pard\nowidctlpar\li426\ulnone\fs16 Examples by Events:\par
+\f1\par
+\f0 1a/ Initialize image of sprite\par
+\f1\par
+\b procedure \b0 TForm1.DXSpriteEngine1Items0GetImage(Sender: TObject;\par
+  \b var \b0 Image: TPictureCollectionItem);\par
+\b begin\b0\par
+\i   \{initialize image is indispensable\}\par
+  \{other way is TForm.OnCreate\}\par
+\i0   Image := DXImageList1.Items.Find(\cf1 'SpriteToRight'\cf0 );\par
+\b end\b0 ;\par
+\par
+\f0 1b/ Move event\par
+\f1\par
+\b procedure \b0 TForm1.DXSpriteEngine1Items0Move(Sender: TObject;\par
+  \b var \b0 MoveCount: Integer);\par
+\b begin\b0\par
+\i   \{can be searched in multi move event\}\par
+  \{or selected from a sender\}\par
+\i0   \b With \b0 Sender as TImageSpriteEx \b Do Begin\b0\par
+    \b If \b0 isUp \b in \b0 DXInput1.States \b Then\b0  Y := Y - \cf2 10\cf0 ;\par
+    \b If \b0 isDown \b in \b0 DXInput1.States  \b Then\b0  Y := Y + \cf2 10\cf0 ;\par
+\par
+    \b If \b0 isLeft \b in \b0 Form1.DXInput1.States  \b Then\b0\par
+    \b Begin\b0\par
+      \b If \b0 Image = DXImageList1.Items.Find(\cf1 'SpriteToRight'\cf0 ) \b Then\b0\par
+        Image := DXImageList1.Items.Find(\cf1 'SpriteToLeft'\cf0 );\par
+      Width := Image.Width;\par
+      Height := Image.Height;\par
+      X := X - \cf2 10\cf0 ; \i //move left\i0\par
+    \b End\b0 ;\par
+\par
+    \b If \b0 isRight \b in \b0 Form1.DXInput1.States  \b Then\b0\par
+    \b begin\b0\par
+      \b If \b0 Image = DXImageList1.Items.Find(\cf1 'SpriteToLeft'\cf0 ) \b Then\b0\par
+        Image := DXImageList1.Items.Find(\cf1 'SpriteToRight'\cf0 );\par
+      Width := Image.Width;\par
+      Height := Image.Height;\par
+      X := X + \cf2 10\cf0 ; \i //move right\i0\par
+    \b end\b0 ;\par
+\i     \{reanimate() is move animation procedure from TImageSprite\}\par
+    \{other way have to rewrite here youself\}\i0\par
+    Reanimate(MoveCount) \i //indispensable\par
+\i0   \b End\b0 ;\par
+\b end\b0 ;\par
+\f0\par
+2a/ How create multiple sprite\par
+\par
+\b\f1 procedure \b0 TForm1.FormCreate(Sender: TObject);\par
+\b var\b0\par
+  i: Integer;\par
+\b begin\b0\par
+\i   //Create 50 sprites here\par
+  //MyEnemySprite - sprite have to exist and has all events\par
+\i0   \b For \b0 i := \cf2 1 \cf0\b To \cf2\b0 50 \cf0\b Do\b0\par
+  \b Begin\b0\par
+    \b With \b0 DXSpriteEngine1.Items.Add \b Do Begin\b0\par
+      KindSprite := stImageSprite;\par
+      Sprite.AsSign(DXSpriteEngine1.Items.Find(\cf1 'MyEnemySprite'\cf0 ).Sprite);\par
+      Sprite.X := Random(DXDraw1.SurfaceWidth); \i //Set the Position Randomly\i0\par
+      Sprite.Y := Random(DXDraw1.SurfaceHeight);\par
+      Name := Format(\cf1 'EnemySprite%d'\cf0 ,[I]); \i //simple name for sprite\par
+\i0       Sprite.Tag := \cf2 0\cf0 ; \i //for sprite you can use Tag property as well\par
+\i0     \b End\b0 ;\par
+  \b End\b0 ;\par
+\b end\b0 ;\par
+\f0\par
+2b/ How detect collision\par
+\par
+\b\f1 procedure \b0 TForm1.DXSpriteEngine1Items0Collision(Sender: TObject;\par
+  \b var \b0 Done: Boolean);\par
+\b begin\b0\par
+  //MySprite exists too once\par
+  //For collision have to different sprite\par
+  \b If \b0 Sender <> DXSpriteEngine1.Items.Find(\cf1 'MySprite'\cf0 ) \b Then\b0\par
+  \b With \b0 Sender \b as \b0 TImageSprite \b Do\b0\par
+  \b Begin\par
+\b0\i     \{this features no use Dead, better is hide only\}\par
+    \{NOTE: USE HIDE INSTEAD OF DEAD, SYSTEM USE STATIC SPRITE DEFINED IN DESIGN\}\par
+\i0     Dead; \i //Kill MyEnemySprite here\i0\par
+    DXWaveList1.Items.Find(\cf1 'TaDa'\cf0 ).Play(False); \i //Tada\i0\par
+  \b End\b0 ;\par
+\b end\b0 ;\par
+\f0\par
+2c/ My sprite movement \par
+\par
+\b\f1 procedure \b0 TForm1.DXSpriteEngine1Items0Move(Sender: TObject;\par
+  \b var \b0 MoveCount: Integer);\par
+\b begin\b0\par
+\i   //movement\par
+\i0   \b With \b0 Sender \b as \b0 TImageSprite \b Do Begin\b0\par
+    \b If \b0 isUp in Form1.DXInput1.States \b Then\b0  Y := Y - \cf2 15\cf0 ;\par
+    \b If \b0 isDown in Form1.DXInput1.States \b Then \b0 Y := Y + \cf2 15\cf0 ;\par
+    \b If \b0 isLeft in Form1.DXInput1.States \b Then \b0 X := X - \cf2 15\cf0 ;\par
+    \b If \b0 isRight in Form1.DXInput1.States \b Then \b0 X := X + \cf2 15\cf0 ;\par
+\par
+\i     //detect limits of border\par
+\i0     \b If \b0 X > Form1.DXDraw1.SurfaceWidth \b Then \b0 X := \cf2 1\cf0 ;\par
+    \b If \b0 Y > Form1.DXDraw1.SurfaceHeight \b Then \b0 Y := \cf2 1\cf0 ;\par
+    \b If \b0 X <= 0 \b Then \b0 X := Form1.DXDraw1.SurfaceWidth - \cf2 1\cf0 ;\par
+    \b If \b0 Y <= 0 \b Then \b0 Y := Form1.DXDraw1.SurfaceHeight - \cf2 1\cf0 ;\par
+\par
+\i     //execute collision through sprites\par
+\i0     Collision;\par
+  \b End\b0 ;\par
+\b end\b0 ;\par
+\f0\par
+2d/ Chaotic move of EnemySprites\par
+\par
+\b\f1 procedure \b0 TForm1.DXSpriteEngine1Items1Move(Sender: TObject;\par
+  \b var \b0 MoveCount: Integer);\par
+\b begin\b0\par
+  \b If \b0 Sender <> DXSpriteEngine1.Items.Find(\cf1 'MySprite'\cf0 ) \b Then\b0\par
+  \b With \b0 Sender \b as \b0 TImageSprite \b do\b0\par
+  \b Begin\b0\par
+\i     //Choose a random new direction at a random time\par
+\i0     \b If \b0 (Random(\cf2 30\cf0 ) = \cf2 15\cf0 ) \b Or \b0 (Tag = \cf2 0\cf0 ) \b Then\b0\par
+       Tag := Random(\cf2 5\cf0 );\par
+\par
+\i     //Do the movement\par
+\i0     \b Case \b0 Tag \b of\b0\par
+     1: X := X + \cf2 15\cf0 ;\par
+     2: X := X - \cf2 15\cf0 ;\par
+     3: Y := Y + \cf2 15\cf0 ;\par
+     4: Y := Y - \cf2 15\cf0 ;\par
+    \b end\b0 ;\par
+\par
+\i     //If we're out of the screen we want to pop up at the other side again\par
+\i0     \b If \b0 X > Form1.DXDraw1.SurfaceWidth \b Then \b0 X := \cf2 1\cf0 ;\par
+    \b If \b0 Y > Form1.DXDraw1.SurfaceHeight \b Then \b0 Y := \cf2 1\cf0 ;\par
+    \b If \b0 X <= 0 \b Then \b0 X := Form1.DXDraw1.SurfaceWidth - \cf2 1\cf0 ;\par
+    \b If \b0 Y <= 0 \b Then \b0 Y := Form1.DXDraw1.SurfaceHeight - \cf2 1\cf0 ;\par
+  \b End\b0\par
+\b end\b0 ;\par
+\f0\par
+2d/ Images initialization\par
+\par
+\b\f1 procedure \b0 TForm1.DXSpriteEngine1Items0GetImage(Sender: TObject;\par
+  \b var \b0 Image: TPictureCollectionItem);\par
+\b begin\b0\par
+  Image := DXImageList1.Items.Find(\cf1 'MyEnemySprite'\cf0 );\par
+\b end\b0 ;\par
+\par
+\b procedure \b0 TForm1.DXSpriteEngine1Items1GetImage(Sender: TObject;\par
+  \b var \b0 Image: TPictureCollectionItem);\par
+\b begin\b0\par
+  Image := DXImageList1.Items.Find(\cf1 'MySprite'\cf0 );\par
+\b end\b0 ;\par
+\f0\par
+3a/ Backgroudsprite initialization of all\par
+\par
+\b\f1 procedure \b0 TForm1.FormCreate(Sender: TObject);\par
+\b var\b0\par
+  i: Integer;\par
+\b begin\b0\par
+  Blend := \cf2 128\cf0 ;\par
+\i   //Create background layer 1\par
+\i0   \b with \b0 DXSpriteEngine1.Items.Find(\cf1 'Back'\cf0 ).Sprite \b as \b0 TBackgroundSprite \b do begin\b0\par
+\i     //Since we use only one tile we set the map to 1 x 1\par
+\i0     SetMapSize(\cf2 1\cf0 , \cf2 1\cf0 );\par
+\i     //Now we set the image\par
+\i0     Image := DXImageList1.Items.Find(\cf1 'Back'\cf0 );\par
+\i     //And now the depth, this is indicated by the Z property\par
+    //The lower the number, the deeper the layer \par
+    //(this can also be used with normal TImageSprite Sprites)\par
+\i0     Z := \cf2 -2\cf0 ;\par
+\i     //We say the map has to be tiled, The image has to repeat over and over\par
+\i0     Tile := True;\par
+  \b end\b0 ;\par
+\par
+\i   //Now we create layer 2\par
+\i0   \b with \b0 DXSpriteEngine1.Items.Find(\cf1 'Back2'\cf0 ).Sprite \b as \b0 TBackgroundSprite \b do begin\b0\par
+    SetMapSize(\cf2 1\cf0 , \cf2 1\cf0 );\par
+    Image := DXImageList1.Items.Find(\cf1 'Back2'\cf0 );\par
+    Z := \cf2 -5\cf0 ; \i //A lower Z number 'cos Layer 2 has to be under Layer 1\par
+\i0     Tile := True;\par
+  \b end\b0 ;\par
+\par
+\i   //Sprites front of layers\par
+\i0   \b for \b0 i := \cf2 1\cf0  \b to \cf2\b0 6\cf0  \b do\b0\par
+  \b begin\b0\par
+\i     //Now we create the first row of balls\par
+\i0     \b with \b0 DXSpriteEngine1.Items.Add \b do begin\b0\par
+      Name := Format(\cf1 'PlayerE%d'\cf0 , [I]);\par
+      KindSprite := stImageSprite;\par
+      \b with \b0 Sprite \b as \b0 TImageSprite \b do begin\b0\par
+        Image := DXImageList1.Items.Find(\cf1 'Player'\cf0 );\par
+        Width := Image.Width;\par
+        Height := Image.Height;\par
+        X := \cf2 160\cf0 ;\par
+        Y := i * \cf2 80\cf0 ;\par
+        Tag := \cf2 1\cf0 ;\par
+        OnMove := DXSpriteEngine1Items2Move;\par
+      \b end\b0 ;\par
+    \b end\b0 ;\par
+\i     //And we create the 2nd row of ships\par
+\i0     \b with \b0 DXSpriteEngine1.Items.Add \b do begin\b0\par
+      Name := Format(\cf1 'PlayerL%d'\cf0 , [I]);\par
+      KindSprite := stImageSprite;\par
+      \b with \b0 Sprite \b as \b0 TImageSprite \b do begin\b0\par
+        Image := DXImageList1.Items.Find(\cf1 'Player'\cf0 );\par
+        Width := Image.Width;\par
+        Height := Image.Height;\par
+        X := \cf2 240\cf0 ;\par
+        Y := i * \cf2 80\cf0 ;\par
+        Tag := \cf2 1\cf0 ;\par
+        OnMove := DXSpriteEngine1Items2Move;\par
+      \b end\b0 ;\par
+    \b end\b0 ;\par
+\i     //And the third and last row of ships\par
+\i0     \b with \b0 DXSpriteEngine1.Items.Add \b do begin\b0\par
+      Name := Format(\cf1 'PalyerR%d'\cf0 , [I]);\par
+      KindSprite := stImageSprite;\par
+      \b with \b0 Sprite \b as \b0 TImageSprite \b do begin\b0\par
+        Image := DXImageList1.Items.Find(\cf1 'Player'\cf0 );\par
+        Width := Image.Width;\par
+        Height := Image.Height;\par
+        X := \cf2 320\cf0 ;\par
+        Y := i * \cf2 80\cf0 ;\par
+        Tag := \cf2 1\cf0 ;\par
+        OnMove := DXSpriteEngine1Items2Move;\par
+      \b end\b0 ;\par
+    \b end\b0 ;\par
+  \b end\b0 ;\par
+\b end\b0 ;\par
+\f0\par
+3b/ Move of layers automatically\par
+\par
+\b\f1 procedure \b0 TForm1.DXSpriteEngine1Items0Move(Sender: TObject;\par
+  \b var \b0 MoveCount: Integer);\par
+\b begin\b0\par
+\i   //Automatically move the 1st layer with a speed of 5 to the right\par
+\i0   \b with \b0 Sender \b as \b0 TBackgroundSprite \b do \b0\par
+    X := X + \cf2 5\cf0 ;\par
+\b end\b0 ;\par
+\par
+\b procedure \b0 TForm1.DXSpriteEngine1Items1Move(Sender: TObject;\par
+  \b var \b0 MoveCount: Integer);\par
+\b begin\b0\par
+\i   //Automatically move the 2nd layer with a speed of 1 to the right\par
+  // this gives a nice parralax effect since the first layer goes faster than the second, now we get the illusion of depth...\par
+\i0   \b with \b0 Sender \b as \b0 TBackgroundSprite \b do \b0\par
+    X := X + \cf2 1\cf0 ;\par
+\b end\b0 ;\par
+\f0\par
+3c/ Move a cluster of sprites\par
+\par
+\b\f1 procedure \b0 TForm1.DXSpriteEngine1Items2Move(Sender: TObject;\par
+  \b var \b0 MoveCount: Integer);\par
+\b begin\b0\par
+\i   //Proccess Input\par
+\i0   \b with \b0 Sender \b as \b0 TImageSprite \b do begin\b0\par
+    \b if \b0 isLeft in DXInput1.States \b then\b0  Y := Y + \cf2 10\cf0 ;\par
+    \b if \b0 isRight in DXInput1.States \b then\b0  Y := Y - \cf2 10\cf0 ;\par
+    \b if \b0 isUp in DXInput1.States \b then\b0  X := X - \cf2 10\cf0 ;\par
+    \b if \b0 isDown in DXInput1.States \b then\b0  X := X + \cf2 10\cf0 ;\par
+  \b end\b0 ;\par
+\b end\b0 ;\par
+\f0\par
+3d/ Own drawing background with alpha\par
+\par
+\b\f1 procedure \b0 TForm1.DXSpriteEngine1Items1Draw(Sender: TObject);\par
+\b begin\b0\par
+\i   \{enhacement for drawing tile, can be use blend or other techniques\}\par
+  \{for drawing different to Draw() have to set HW turn on for better speed\}\par
+\i0   \b With \b0 TBackgroundSprite(Sender) \b Do\b0\par
+\i     \{there can be use DrawAlpha, DrawAdd or DrawSub \}\par
+\i0     Image.DrawAlpha(DXDraw1.Surface, ChipsRect, ChipsPatternIndex, Blend);\par
+\b end\b0 ;\par
+\f0\par
+\ul How move it in DXTimer\ulnone\par
+\par
+\f1   DXDraw1.BeginScene;\par
+\par
+  DXDraw1.Surface.Fill(DXDraw.Surface.ColorMatch(clBlack));\par
+\i   //Update DXInputcomponent so we can receive new input\par
+\i0   DXInput1.Update;\par
+\i   //Now move the sprites, this method will execute the DoMove method of all it's sprites\par
+\i0   DXSpriteEngine1.Move(\cf2 1\cf0 ); \i //or use \cf2 LagCount\cf0\i0\par
+\i   //Draw the sprites on the screen\par
+\i0   DXSpriteEngine1.Draw;\par
+\par
+  DXDraw1.EndScene;\par
+\par
+\i   //Flip the buffers so the player can actually see what's happening\par
+\i0   DXDraw1.Flip;\par
+\par
+\pard\nowidctlpar\f0\fs20\par
+\b\i  \cf2 1.06\cf0  13.01.2006 user137, JB., Takanori Kawasaki\par
+      16.01.2006 user137\par
+\b0\i0   +\{$Define DrawHWAcc\} is enabled by default on DelphiXcfg.inc\par
+  +D2D variable is moved to interface so it is public\par
+  +New variable RenderError that denies Flip if errors\par
+  +Some functions of D2D made public\par
+  +All rotate functions have angle as single type (thanks User137)\par
+  +New rotate function\par
+  +Fixed access violation and texture bug in TD2D.D2DTexturedOn\par
+  +Rewrote all D2D effects (using most old code but split differently)\par
+  +Added Quad and Triangle drawing for D2D\par
+\b\i       16.01.2006 JB.\par
+\b0\i0   -D2D variable moved back, better use DXDraw.D2D1 pointer to TD2D structure.\par
+  +Asm for fast sin/cos function as single in rotation.\par
+  *Code revised, low level routines encapsulated again.\par
+  +Better initializing for DXDraw.Display, there is some AV or initialization error for D3D interface; Is advice in fullscreen initialize disable all GDI function (no wincontrol or form visible).\par
+\b\i       24.01.2006 JB.\par
+\b0\i0   +Low level routines for bump-mapping added.\par
+  *Bug fix resize windows.\par
+\b\i       24.02.2005 JB.\par
+\b0\i0   *Bug fix for transparent color when background color is not black.\par
+  +New effect for DrawAddCol(), DrawAlphaCol() and DrawSubCol() etc.\par
+  +New effect for DrawRotateAddCol(),DrawRotateSubCol and DrawRotateAlphaCol()\par
+  +Move TexImag into DXDraw, move DXFusion effect into DIB file.\par
+  +Move DIBeffect into DIB file as part TDIB.\par
+  +Add new function into DXClass file (very thanks Mr. Takanori Kawasaki).\par
+\b\i       07.03.2006 JB.\par
+\b0\i0   +Split uses sections in units for better compatibility with DX8 or DX9 DirectX headers.\par
+\b\i       10.03.2006 JB.\par
+\b0\i0   *Enhanced DIB effect (FadeIn, FadeOut, Ink etc.).\par
+  +Add property BlendMode into TImageSpriteEx and change draw routine for this feature (+ property editor).\par
+  -Remove deprecated TD3D class from unDelphiX pack\par
+\b\i       15.03.2006 JB.\b0\i0\par
+  +Added fast routines for pixel drawing into TDirectDrawSurface, Surface must be locked like\par
+\f1\fs18       DXDraw.Surface.Lock;\par
+      DXDraw.Surface.Pixel[X, Y] := TheColor;\par
+      TheColor := DXDraw.Surface.Pixel[X+1, Y+1];\par
+      DXDraw.Surface.Unlock;\par
+\cf3\f0\fs20 NOTE DON'T FORGET: The \b Pixel \b0 property required lock surface, againist \b Pixels \b0 property of Canvas required Release canvas only!\cf0\par
+  +Aded routines for drawing Poke*() into TDirectDrawSurface, Surface has to locked. like PokeLine(), PokeLinePolar(), PokeBox(), PokeBlendPixel(), PokeWuLine(), Noise(), Blur(), PokeCircle(), PokeEllipse(), PokeFilledEllipse() and etc.\par
+  +Added special drawing routine DrawCol() into DXImageList with special SubPattern parameter (idea by User137)\par
+\b\i  \cf2 1.06a\cf0  19.03.2006 JB.\b0\i0\par
+  *Bug fix in assembler for fast ploting routine through DDS Pixel[].\par
+\b\i       28.03.2006 JB.\b0\i0\par
+  +Added routine LoadRGB(), SaveRGB depend by BitCount and repair procedure Blur().\par
+  +Added DDS fade routine like Fade2White(), Fade2Color() and Fade2Black() etc.\par
+\b\i       09.04.2006 JB.\b0\i0\par
+  +Added routine for grab and paste DDS like GrabImage(), PasteImage().\par
+\b\i       15.04.2006 JB.\b0\i0\par
+  +Added flip DDS routine by MKost like DrawFlipH(), DrawFlipHV() and DrawFlipV() - untested.\par
+  \cf2\b\i 1.06b\cf0  18.04.2006 JB., user137\par
+\b0\i0   +Added overload routine D2DRenderDrawDDSXYby user137.\par
+\b\i       21.04.2006 JB.\b0\i0\par
+  *Synchronize drawing function in Images and DDS\par
+  +Add drawing routine DrawWaveY* like DrawWaveX but horizontally\par
+  \cf2\b\i 1.06c\cf0  1.05.2006 JB.\par
+\b0\i0   +Add class for native working with DXT and native work with DIB32 (RGBA) with Alphachannel\par
+  \cf2\b\i 1.07\cf0  4.05.2006 JB., Speeder\par
+\b0\i0   *Restructure new code and get out redundant functions in TD2D\par
+  *Change routine into DDS like DrawAddCol(), DrawAlphaCol(), DrawSubCol(), DrawRotateAddCol(), DrawRotateSubCol(), DrawRotateAlphaCol() (thanks Speeder)\par
+  *Make better compatibility with Delphi 3\par
+  +Enhanced DIB unit for AlphaChannel compatibility\par
+  *Change routine DIB2DXT() for make DXT from DIB32 file in one line, primary use for load DIB 32 with Alphachannel.\par
+\b\i       10.05.2006 JB.\b0\i0\par
+  +New component TDXMusic for play midi files from resource like TDXWave + property editor for load midis.\par
+  *Better assembler for DDS Pixel property.\par
+\b\i       14.05.2006 JB.\par
+\b0\i0   *Fix bug in WaveX/WaveY function, remapping function for animated image from DXImageList.\par
+  *Accepted DIB32 for DDS\par
+  *Move D2DWhite, D2DAlphaVertex and D2DFade from procedure into function for better using.\par
+\b\i       18.05.2006 JB.\par
+\b0\i0   +Add ColoredLine() and AntialiasLine() into DIB units with demo project.\par
+  \cf2\b\i 1.07a\cf0  21.05.2006 JB.\par
+\b0\i0   *Correct mistake in DelphiXcfg.ini file (wrong version of file included into packs).\par
+\cf2\b\i   1.07b\cf0  21.09.2006 JB.\par
+\b0\i0   *Add missing correction from Speeeder and interface \f1 ClearStack\f0  for force clear textures.\par
+  *Correct DXInput unit by Paul van Dinther (twice initialization).\par
+\cf2\b\i   1.07c\cf0  21.12.2006 JB.\par
+\b0\i0   *Fix bug function \f1 AssignAlphaChannel()\f0  in DIB unit.\par
+\cf2\b\i   1.07d\cf0  22.02.2007 JB.\par
+\b0\i0   *Fix bug procedure ReAnimate() in DXSprite unit. Flickering corrected - very thanks for demo by \b\f2\fs24 seiferalmasy\b0\f0\fs20 .\par
+\cf2\b\i   1.07e\cf0  1.03.2007 JB.\par
+\b0\i0   *Fix bug in texturing procedure in DXDraws unit. Correction of the texture size.\par
+\cf2\b\i   1.07f\cf0  18.06.2007 JB.\par
+\b0\i0   *Correct for turn-off RM mode on VISTA, it is set up in DelphiXcfg.inc now.\par
+  *Support for Delphi 2007.\par
+\b\i       10.07.2007 JB.\par
+\b0\i0   *Fix bug in temporary DIB for alpha channel assign in function \f1 TDIB\f0 .\f1 AssignAlphaChannel\f0 ().\par
+  *Fix bug in size for texture with alpha channel, see conditional define FORCE_SQUARE in DXDraws unit.\par
+  *Correct uses some units for separate compiling (see conditional define STANDARDDX for using split files from DirextX unit).\par
+  *Correct inline functions for Delphi 2005 and up.\par
+\cf2\b\i   1.08\cf0  31.10.2007 JB.\par
+\b0\i0   +New texture managing, new properties.\par
+  +Support JPG for DIB unit.\par
+  +New Hot Spot Effect \f1 DoNovaEffect\f0 () (like Supernova Effect) in DIB unit with own editor.\par
+  +New effect in DIB unit for direct Mandelbrot set drawing.\par
+  +Simple graphical cryptic function in DIB.\par
+  +New DXSpriteEngine and Sprite specifications for static creating of a complex sprite with directly attach image.\par
+  +New component editors for DXBackgroundSprite map, define map by mouse only.\par
+  +New MIDI stream storing like DXImageList.\par
+  +New functions in DXClass unit like \f1 CircumCenter3Pt()\f0  or \f1 InCenter()\f0 or adopted class for parceled image.\par
+  +New function for texture mirroring/flipping via procedure \f1 DXDraw.MirrorFlip()\f0  for each drawing texture.\par
+\b\i       20.12.2007 JB.\b0\i0\par
+  +Add glue-it editor for managing images and font editor for mask create.\par
+  +Add new trace editor for simple creating drawing path with effect like blurring, rotating, flipping, mirroring, waving and more.\par
+  +Add three new complex drawing routines for all supported effect in (un)DelphiX.\par
+\b\i       21.12.2007 JB.\b0\i0\par
+  -Get out support for Delphi 3, sorry. There is not conform array supported.\par
+\b\i       14.4.2008 JB.\par
+\b0\i0   -New version of installation program, new version of pack all-in-one (it will be supported still), new actualization web.\par
+\cf2\b\i   1.08.1\cf0  15.4.2008 JB.\b0\i0\par
+  +Add forgotten functionality flip/mirror for WaveX/WaveY procedure.\par
+\cf2\b\i   1.08.2\cf0  5.5.2008 Takanori Kawasaki\par
+\b0\i0   *The application (with hardware accelerated (Un)DelphiX) causes the error or the frieze under the situation:\par
+    1-1. When application (with H.A.) executes full-screen mode, push "Alt"+"Tab"(Change window).\par
+    1-2. When application (with H.A.) executes full-screen mode, push "Ctrl"+"Alt"+"Del"(Call Task Manager).\par
+    1-3. When application (with H.A.) executes window mode, another application executes full-screen mode.\par
+  *Fix memory leak. It occurred in "\f1 TDIB.GetAlphaChannel\f0 ".\par
+  *Fix exception \cf1\i 'DXT file is invalid'\cf0\i0  when application is executed.\par
+\cf2\b\i   1.08.3\cf0  28.10.2008 JB.\b0\i0\par
+  +Delphi 2009 support added (conditional UNICODE is default used now) as first version.\par
+\b\i       23.11.2008 Mariusz Bulkowski \b0\i0\f2\fs24\par
+\f0\fs20   *Fix Delphi 2009 bug in DXCommon in "\f1 IsNTandDelphiRunning\f0 ".\par
+\b\i       8.2.2009 Gilberto Rocha da Silva\b0\i0\par
+  +added two procedures (\f1 UpdateTag\f0 , \f1 InitializeImages\f0 ) for "\i\f2 fix the image in execution time, imagelist no initialize new images take for HD in execution time\i0\fs24 ",\f0\fs20  more directly to Gilberto Rocha da Silva by mail to xybersportgames@gmail.com.\cf2\b\i\par
+  1.08.4\cf0  28.2.2009 JB.\b0\i0\par
+  *Fix some conditionals in source code.\par
+\cf2\b\i   1.08.5\cf0  25.9.2009 JB.\par
+\b0\i0   *Fix size of background sprite editor - for large image and maps > 128x128 cell size.\par
+  *Fix some forgotten conditionals in source code DXDraws.pas.\par
+\b\i       29.9.2008 P\'e1sztor K\'e1roly [fenistil@hu.hu] \b0\i0\par
+  *Fix conditional for "Glue it..." item of component editor (item always invisible).\par
+\b\i       30.9.2008 JB. \b0\i0\par
+  *Fix drawing of bitmaps with alpha channel - DIB32 in scheme RGBA - low level fix in hardware acceleration and very important for all users.\par
+\b\i       26.10.2008 JB. \b0\i0\par
+  *Delphi 2010 support added, strict Unicode names check.\par
+\cf2\b\i   1.09.0\cf0  17.5.2010 JB.\par
+\b0\i0   *Fix bug in sprite unit function \f1 Collision_GetSpriteAt()\f0 . Very thanks \b\i Sergey\b0\i0 .\par
+  +Improvement rendering any size in image (background feature).\par
+  +Better works with videotexture (and for save memory can be removed from project).\par
+  +Better support pure interfaces from Delphi 2010.\par
+  +New function for drawing \f1 DrawRect()\f0 , can be draw rectangle image to rectange surface.\par
+  +Better rendering DIB32.\par
+  +Add support PNG (directly in Delphi 2010).\par
+  *Corrected problem use ZLib for texture compression (Note: in Delphi 4/5 problems still occurred).\par
+  *Better assign PNG to DIB32 (in Delphi 2010 directly, but lower version must be added manually).\par
+  *Corrected many small bugs + comment lines in cfg file for better settings of options.\par
+  *Correct installation program too.\par
+\b\i       2.9.2010 JB.\b0\i0\par
+  +Support for Delphi XE added.\par
+\cf2\b\i   1.09.1\cf0  1.9.2011 JB.\b0\i0\par
+  +Support for Delphi XE2 added.\par
+\cf2\b\i   1.09.2\cf0  6.9.2011 JB.\b0\i0\par
+  +Conditionals revision.\par
+  +Improvement function for future quaternion support and more D2/D3 expressions\par
+  *Inline optimization for all possible functions.\par
+  +Better support 3D Sound support and improvements.\par
+  *Convert some DFM files into text form as more comparable format.\par
+  *Better color match speed optimization.\par
+  +Function for set default sprite chip.\par
+\cf2\b\i   1.10.0\cf0  4.9.2012 JB.\b0\i0\par
+  +Support for Delphi XE3 added.\line\cf2\b\i   1.11.0\cf0  6.5.2013 JB.\b0\i0\par
+  +Support for Delphi XE4 added.\par
+\cf2\b\i   1.12.0\cf0  20.9.2013 JB.\b0\i0\par
+  +Support for Delphi XE5 added.\par
+\cf2\b\i   1.13.0\cf0  2.5.2014 JB.\b0\i0\par
+  +Support for Delphi XE6 added.\par
+\cf2\b\i   1.14.0\cf0  4.9.2014 JB.\b0\i0\par
+  +Support for Delphi XE7 added.\par
+\cf2\b\i   1.15.0\cf0  10.4.2015 JB.\b0\i0\par
+  +Support for Delphi XE8 added.\par
+  +Enhaced flip/flop.\par
+\cf2\b\i   1.16.0\cf0  10.12.2015 JB.\b0\i0\par
+  +Support for Delphi 10 Seattle added.\par
+\cf2\b\i   1.17.0\cf0  27.4.2016 JB.\b0\i0\par
+  +Support for Delphi 10.1 Berlin added.\par
+\cf2\b\i   1.18.0\cf0  19.11.2017 JB.\b0\i0\par
+  +Support for Delphi 10.2 Tokyo added.\par
+\cf2\b\i   1.19.0\cf0  4.12.2018 JB.\b0\i0\par
+  +Support for Delphi 10.3 Rio added.\par
+\par
+\par
+}
+ 

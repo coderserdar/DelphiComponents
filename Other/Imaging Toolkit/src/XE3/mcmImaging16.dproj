@@ -1,0 +1,304 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{23b2fb94-4256-4bd5-bec2-8872f30503cf}</ProjectGuid>
+        <MainSource>mcmImaging16.dpk</MainSource>
+        <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
+        <DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
+        <DCC_DependencyCheckOutputName>C:\Users\Public\Documents\RAD Studio\10.0\BPL\mcmImaging16.bpl</DCC_DependencyCheckOutputName>
+        <ProjectVersion>14.4</ProjectVersion>
+        <Config Condition="'$(Config)'==''">Release</Config>
+        <Base>True</Base>
+        <AppType>Package</AppType>
+        <FrameworkType>VCL</FrameworkType>
+        <Platform Condition="'$(Platform)'==''">Win32</Platform>
+        <TargetedPlatforms>1</TargetedPlatforms>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Base)'=='true') or '$(Base_Win32)'!=''">
+        <Base_Win32>true</Base_Win32>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win64' and '$(Base)'=='true') or '$(Base_Win64)'!=''">
+        <Base_Win64>true</Base_Win64>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_1)'!=''">
+        <Cfg_1>true</Cfg_1>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_1)'=='true') or '$(Cfg_1_Win32)'!=''">
+        <Cfg_1_Win32>true</Cfg_1_Win32>
+        <CfgParent>Cfg_1</CfgParent>
+        <Cfg_1>true</Cfg_1>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_2)'!=''">
+        <Cfg_2>true</Cfg_2>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_2)'=='true') or '$(Cfg_2_Win32)'!=''">
+        <Cfg_2_Win32>true</Cfg_2_Win32>
+        <CfgParent>Cfg_2</CfgParent>
+        <Cfg_2>true</Cfg_2>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base)'!=''">
+        <VerInfo_MinorVer>1</VerInfo_MinorVer>
+        <DCC_Namespace>Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;System;Xml;Data;Datasnap;Web;Soap;Winapi;System.Win;$(DCC_Namespace)</DCC_Namespace>
+        <DCC_UsePackage>rtl;$(DCC_UsePackage)</DCC_UsePackage>
+        <VerInfo_Keys>CompanyName=ImagingToolbox.com;FileDescription=Imaging Toolkit for Delphi;FileVersion=4.1.0.0;InternalName=Imaging Toolkit for Delphi;LegalCopyright=Copyright © 2001-2014, ImagingToolbox.com;LegalTrademarks=;OriginalFilename=mcmImaging16.bpl;ProductName=Imaging Toolkit for Delphi;ProductVersion=4.1;Comments=Imaging Toolkit for Delphi</VerInfo_Keys>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <VerInfo_Locale>2057</VerInfo_Locale>
+        <VerInfo_MajorVer>4</VerInfo_MajorVer>
+        <DCC_ImageBase>00400000</DCC_ImageBase>
+        <DCC_DependencyCheckOutputName>C:\Users\Public\Documents\RAD Studio\10.0\BPL\mcmImaging16.bpl</DCC_DependencyCheckOutputName>
+        <DCC_IOChecking>false</DCC_IOChecking>
+        <DCC_Define>RELEASE;$(DCC_Define)</DCC_Define>
+        <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
+        <DCC_Description>ImagingToolbox.com, Imaging Toolkit for Delphi</DCC_Description>
+        <DCC_AssertionsAtRuntime>false</DCC_AssertionsAtRuntime>
+        <GenDll>true</GenDll>
+        <DCC_OutputNeverBuildDcps>true</DCC_OutputNeverBuildDcps>
+        <DCC_DebugInformation>false</DCC_DebugInformation>
+        <DCC_WriteableConstants>true</DCC_WriteableConstants>
+        <GenPackage>true</GenPackage>
+        <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base_Win32)'!=''">
+        <DCC_Namespace>Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+        <DCC_UsePackage>vcl;vclx;VclSmp;mcmInte16;$(DCC_UsePackage)</DCC_UsePackage>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base_Win64)'!=''">
+        <DCC_UsePackage>vclx;vcl;VclSmp;mcmInte16;$(DCC_UsePackage)</DCC_UsePackage>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_1)'!=''">
+        <Version>7.0</Version>
+        <DCC_AssertionsAtRuntime>False</DCC_AssertionsAtRuntime>
+        <DCC_DebugInformation>False</DCC_DebugInformation>
+        <DCC_IOChecking>False</DCC_IOChecking>
+        <DCC_WriteableConstants>True</DCC_WriteableConstants>
+        <DCC_LocalDebugSymbols>False</DCC_LocalDebugSymbols>
+        <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
+        <VerInfo_Keys>CompanyName=ImagingToolbox.com;FileDescription=Imaging Toolkit for Delphi;FileVersion=4.1.0.0;InternalName=Imaging Toolkit for Delphi;LegalCopyright=Copyright © 2002-2014, ImagingToolbox.com;LegalTrademarks=;OriginalFilename=mcmImaging16.dpl;ProductName=Imaging Toolkit for Delphi;ProductVersion=4.1;Comments=Imaging Toolkit for Delphi</VerInfo_Keys>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2)'!=''">
+        <DCC_Define>DEBUG</DCC_Define>
+        <DCC_DebugInfoInExe>true</DCC_DebugInfoInExe>
+        <DCC_Optimize>false</DCC_Optimize>
+        <DCC_DebugDCUs>true</DCC_DebugDCUs>
+        <Version>7.0</Version>
+        <DCC_AssertionsAtRuntime>true</DCC_AssertionsAtRuntime>
+        <DCC_DebugInformation>true</DCC_DebugInformation>
+        <DCC_IOChecking>False</DCC_IOChecking>
+        <DCC_WriteableConstants>True</DCC_WriteableConstants>
+        <DCC_LocalDebugSymbols>true</DCC_LocalDebugSymbols>
+        <DCC_SymbolReferenceInfo>2</DCC_SymbolReferenceInfo>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
+        <VerInfo_Locale>1033</VerInfo_Locale>
+    </PropertyGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Delphi.Personality.12</Borland.Personality>
+        <Borland.ProjectType>Package</Borland.ProjectType>
+        <BorlandProject>
+            <Delphi.Personality>
+                <Parameters/>
+                <Language>
+                    <Language Name="ProjectLang">$00000406</Language>
+                </Language>
+                <VersionInfo>
+                    <VersionInfo Name="IncludeVerInfo">True</VersionInfo>
+                    <VersionInfo Name="AutoIncBuild">False</VersionInfo>
+                    <VersionInfo Name="MajorVer">4</VersionInfo>
+                    <VersionInfo Name="MinorVer">1</VersionInfo>
+                    <VersionInfo Name="Release">0</VersionInfo>
+                    <VersionInfo Name="Build">0</VersionInfo>
+                    <VersionInfo Name="Debug">False</VersionInfo>
+                    <VersionInfo Name="PreRelease">False</VersionInfo>
+                    <VersionInfo Name="Special">False</VersionInfo>
+                    <VersionInfo Name="Private">False</VersionInfo>
+                    <VersionInfo Name="DLL">False</VersionInfo>
+                    <VersionInfo Name="Locale">2057</VersionInfo>
+                    <VersionInfo Name="CodePage">1252</VersionInfo>
+                </VersionInfo>
+                <VersionInfoKeys>
+                    <VersionInfoKeys Name="CompanyName">ImagingToolbox.com</VersionInfoKeys>
+                    <VersionInfoKeys Name="FileDescription">Imaging Toolkit for Delphi</VersionInfoKeys>
+                    <VersionInfoKeys Name="FileVersion">4.1.0.0</VersionInfoKeys>
+                    <VersionInfoKeys Name="InternalName">Imaging Toolkit for Delphi</VersionInfoKeys>
+                    <VersionInfoKeys Name="LegalCopyright">Copyright © 2002-2014, ImagingToolbox.com</VersionInfoKeys>
+                    <VersionInfoKeys Name="LegalTrademarks"/>
+                    <VersionInfoKeys Name="OriginalFilename">mcmImaging.bpl</VersionInfoKeys>
+                    <VersionInfoKeys Name="ProductName">Imaging Toolkit for Delphi</VersionInfoKeys>
+                    <VersionInfoKeys Name="ProductVersion">4.1</VersionInfoKeys>
+                    <VersionInfoKeys Name="Comments">Imaging Toolkit for Delphi</VersionInfoKeys>
+                </VersionInfoKeys>
+                <Source>
+                    <Source Name="MainSource">mcmImaging16.dpk</Source>
+                </Source>
+                <Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k170.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclofficexp170.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+                </Excluded_Packages>
+            </Delphi.Personality>
+            <Platforms>
+                <Platform value="Win32">True</Platform>
+                <Platform value="Win64">False</Platform>
+            </Platforms>
+        </BorlandProject>
+        <ProjectFileVersion>12</ProjectFileVersion>
+    </ProjectExtensions>
+    <ItemGroup>
+        <DelphiCompile Include="$(MainSource)">
+            <MainSource>MainSource</MainSource>
+        </DelphiCompile>
+        <DCCReference Include="..\mcmImage.dcr"/>
+        <DCCReference Include="..\mcmPrinter.dcr"/>
+        <DCCReference Include="..\mcmThumbnail.dcr"/>
+        <DCCReference Include="..\mcmFileDialogues.dcr"/>
+        <DCCReference Include="..\mcmImageColor.dcr"/>
+        <DCCReference Include="..\mcmImageFilter.dcr"/>
+        <DCCReference Include="..\mcmRegion.dcr"/>
+        <DCCReference Include="..\mcmShape.dcr"/>
+        <DCCReference Include="..\mcmImageTransform.dcr"/>
+        <DCCReference Include="..\mcmImageMath.dcr"/>
+        <DCCReference Include="..\mcmImageDualView.dcr"/>
+        <DCCReference Include="..\mcmImageMorph.dcr"/>
+        <DCCReference Include="..\mcmColorGrid.dcr"/>
+        <DCCReference Include="..\mcmGraphics.dcr"/>
+        <DCCReference Include="..\mcmControls.dcr"/>
+        <DCCReference Include="..\mcmDragDrop.dcr"/>
+        <DCCReference Include="..\mcmTrace.dcr"/>
+        <DCCReference Include="vcl.dcp"/>
+        <DCCReference Include="designide.dcp"/>
+        <DCCReference Include="vclx.dcp"/>
+        <DCCReference Include="rtl.dcp"/>
+        <DCCReference Include="VclSmp.dcp"/>
+        <DCCReference Include="mcmInte16.dcp"/>
+        <DCCReference Include="..\InstmcmImaging.pas"/>
+        <DCCReference Include="..\mcmImage.pas"/>
+        <DCCReference Include="..\mcmImageFile.pas"/>
+        <DCCReference Include="..\mcmImageTypeDef.pas"/>
+        <DCCReference Include="..\mcmImageCompress.pas"/>
+        <DCCReference Include="..\mcmPrintProgress.pas">
+            <Form>mcmPrintProgress</Form>
+        </DCCReference>
+        <DCCReference Include="..\mcmPrinter.pas"/>
+        <DCCReference Include="..\mcmThumbnail.pas"/>
+        <DCCReference Include="..\DefIcon.pas"/>
+        <DCCReference Include="..\DefJPEG.pas"/>
+        <DCCReference Include="..\DefPCX.pas"/>
+        <DCCReference Include="..\DefPNG.pas"/>
+        <DCCReference Include="..\DefTarga.pas"/>
+        <DCCReference Include="..\DefTIFF.pas"/>
+        <DCCReference Include="..\mcmFileDialogues.pas"/>
+        <DCCReference Include="..\mcmHashTable.pas"/>
+        <DCCReference Include="..\mcmImageColor.pas"/>
+        <DCCReference Include="..\mcmImageFilter.pas"/>
+        <DCCReference Include="..\mcmImageKernel.pas"/>
+        <DCCReference Include="..\mcmImageResStr.pas"/>
+        <DCCReference Include="..\mcmPriorityQueue.pas"/>
+        <DCCReference Include="..\mcmQsort.pas"/>
+        <DCCReference Include="..\mcmRegion.pas"/>
+        <DCCReference Include="..\mcmShape.pas"/>
+        <DCCReference Include="..\mcmSlidingWindow.pas"/>
+        <DCCReference Include="..\DefHuffman.pas"/>
+        <DCCReference Include="..\mcmImageTransform.pas"/>
+        <DCCReference Include="..\DefGIF.pas"/>
+        <DCCReference Include="..\DefSGI.pas"/>
+        <DCCReference Include="..\mcmImageMath.pas"/>
+        <DCCReference Include="..\mcmDCT.pas"/>
+        <DCCReference Include="..\mcmFileStream.pas"/>
+        <DCCReference Include="..\uFormSelectView.pas">
+            <Form>FormSelectView</Form>
+        </DCCReference>
+        <DCCReference Include="..\mcmImageDualView.pas"/>
+        <DCCReference Include="..\mcmImageMorph.pas"/>
+        <DCCReference Include="..\mcmColorGrid.pas"/>
+        <DCCReference Include="..\mcmGraphics.pas"/>
+        <DCCReference Include="..\DefExif.pas"/>
+        <DCCReference Include="..\mcmControls.pas"/>
+        <DCCReference Include="..\mcmFileOpenDialog.pas">
+            <Form>FormOpenFile</Form>
+        </DCCReference>
+        <DCCReference Include="..\mcmCompressOptionDialog.pas">
+            <Form>FormCompressOption</Form>
+        </DCCReference>
+        <DCCReference Include="..\mcmLZW.pas"/>
+        <DCCReference Include="..\mcmDragDrop.pas"/>
+        <DCCReference Include="..\mcmHandleStream.pas"/>
+        <DCCReference Include="..\mcmTrace.pas"/>
+        <DCCReference Include="..\DefJBIG.pas"/>
+        <DCCReference Include="..\mcmAboutImgConst.pas"/>
+        <DCCReference Include="..\uImgAbout.pas">
+            <Form>mcmImgAboutBox</Form>
+        </DCCReference>
+        <None Include="..\ModelSupport\default.txvpck"/>
+        <None Include="..\ModelSupport\DefExif\DefExif.txvpck"/>
+        <None Include="..\ModelSupport\DefGIF\DefGIF.txvpck"/>
+        <None Include="..\ModelSupport\DefHuffman\DefHuffman.txvpck"/>
+        <None Include="..\ModelSupport\DefIcon\DefIcon.txvpck"/>
+        <None Include="..\ModelSupport\DefJPEG\DefJPEG.txvpck"/>
+        <None Include="..\ModelSupport\DefPCX\DefPCX.txvpck"/>
+        <None Include="..\ModelSupport\DefPNG\DefPNG.txvpck"/>
+        <None Include="..\ModelSupport\DefSGI\DefSGI.txvpck"/>
+        <None Include="..\ModelSupport\DefTarga\DefTarga.txvpck"/>
+        <None Include="..\ModelSupport\DefTIFF\DefTIFF.txvpck"/>
+        <None Include="..\ModelSupport\InstmcmImaging\InstmcmImaging.txvpck"/>
+        <None Include="..\ModelSupport\mcmColorGrid\mcmColorGrid.txvpck"/>
+        <None Include="..\ModelSupport\mcmCompressOptionDialog\mcmCompressOptionDialog.txvpck"/>
+        <None Include="..\ModelSupport\mcmControls\mcmControls.txvpck"/>
+        <None Include="..\ModelSupport\mcmDCT\mcmDCT.txvpck"/>
+        <None Include="..\ModelSupport\mcmFileDialogues\mcmFileDialogues.txvpck"/>
+        <None Include="..\ModelSupport\mcmFileOpenDialog\mcmFileOpenDialog.txvpck"/>
+        <None Include="..\ModelSupport\mcmFileStream\mcmFileStream.txvpck"/>
+        <None Include="..\ModelSupport\mcmGraphics\mcmGraphics.txvpck"/>
+        <None Include="..\ModelSupport\mcmHashTable\mcmHashTable.txvpck"/>
+        <None Include="..\ModelSupport\mcmImageColor\mcmImageColor.txvpck"/>
+        <None Include="..\ModelSupport\mcmImageCompress\mcmImageCompress.txvpck"/>
+        <None Include="..\ModelSupport\mcmImageDualView\mcmImageDualView.txvpck"/>
+        <None Include="..\ModelSupport\mcmImageFile\mcmImageFile.txvpck"/>
+        <None Include="..\ModelSupport\mcmImageFilter\mcmImageFilter.txvpck"/>
+        <None Include="..\ModelSupport\mcmImageKernel\mcmImageKernel.txvpck"/>
+        <None Include="..\ModelSupport\mcmImageMath\mcmImageMath.txvpck"/>
+        <None Include="..\ModelSupport\mcmImageMorph\mcmImageMorph.txvpck"/>
+        <None Include="..\ModelSupport\mcmImageResStr\mcmImageResStr.txvpck"/>
+        <None Include="..\ModelSupport\mcmImageTransform\mcmImageTransform.txvpck"/>
+        <None Include="..\ModelSupport\mcmImageTypeDef\mcmImageTypeDef.txvpck"/>
+        <None Include="..\ModelSupport\mcmImage\mcmImage.txvpck"/>
+        <None Include="..\ModelSupport\mcmLZW\mcmLZW.txvpck"/>
+        <None Include="..\ModelSupport\mcmPrinter\mcmPrinter.txvpck"/>
+        <None Include="..\ModelSupport\mcmPrintProgress\mcmPrintProgress.txvpck"/>
+        <None Include="..\ModelSupport\mcmPriorityQueue\mcmPriorityQueue.txvpck"/>
+        <None Include="..\ModelSupport\mcmQsort\mcmQsort.txvpck"/>
+        <None Include="..\ModelSupport\mcmRegion\mcmRegion.txvpck"/>
+        <None Include="..\ModelSupport\mcmShape\mcmShape.txvpck"/>
+        <None Include="..\ModelSupport\mcmSlidingWindow\mcmSlidingWindow.txvpck"/>
+        <None Include="..\ModelSupport\mcmThumbnail\mcmThumbnail.txvpck"/>
+        <None Include="..\ModelSupport\uFormSelectView\uFormSelectView.txvpck"/>
+        <None Include="..\ModelSupport\uImgAbout\uImgAbout.txvpck"/>
+        <BuildConfiguration Include="Debug">
+            <Key>Cfg_2</Key>
+            <CfgParent>Base</CfgParent>
+        </BuildConfiguration>
+        <BuildConfiguration Include="Base">
+            <Key>Base</Key>
+        </BuildConfiguration>
+        <BuildConfiguration Include="Release">
+            <Key>Cfg_1</Key>
+            <CfgParent>Base</CfgParent>
+        </BuildConfiguration>
+    </ItemGroup>
+    <Import Condition="Exists('$(BDS)\Bin\CodeGear.Delphi.Targets')" Project="$(BDS)\Bin\CodeGear.Delphi.Targets"/>
+    <Import Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')" Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj"/>
+</Project>

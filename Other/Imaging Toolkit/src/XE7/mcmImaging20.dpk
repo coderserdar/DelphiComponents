@@ -1,0 +1,106 @@
+package mcmImaging20;
+
+{$R *.res}
+{$R '..\mcmImage.dcr'}
+{$R '..\mcmPrinter.dcr'}
+{$R '..\mcmThumbnail.dcr'}
+{$R '..\mcmFileDialogues.dcr'}
+{$R '..\mcmImageColor.dcr'}
+{$R '..\mcmImageFilter.dcr'}
+{$R '..\mcmRegion.dcr'}
+{$R '..\mcmShape.dcr'}
+{$R '..\mcmImageTransform.dcr'}
+{$R '..\mcmImageMath.dcr'}
+{$R '..\mcmImageDualView.dcr'}
+{$R '..\mcmImageMorph.dcr'}
+{$R '..\mcmColorGrid.dcr'}
+{$R '..\mcmGraphics.dcr'}
+{$R '..\mcmControls.dcr'}
+{$R '..\mcmDragDrop.dcr'}
+{$R '..\mcmTrace.dcr'}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS OFF}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS OFF}
+{$LOCALSYMBOLS OFF}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE RELEASE}
+{$ENDIF IMPLICITBUILDING}
+{$DESCRIPTION 'ImagingToolbox.com, Imaging Toolkit for Delphi'}
+{$IMPLICITBUILD OFF}
+
+requires
+  vcl,
+  designide,
+  vclx,
+  rtl,
+  VclSmp,
+  mcmInte20;
+
+contains
+  InstmcmImaging in '..\InstmcmImaging.pas',
+  mcmImage in '..\mcmImage.pas',
+  mcmImageFile in '..\mcmImageFile.pas',
+  mcmImageTypeDef in '..\mcmImageTypeDef.pas',
+  mcmImageCompress in '..\mcmImageCompress.pas',
+  mcmPrintProgress in '..\mcmPrintProgress.pas' {mcmPrintProgress},
+  mcmPrinter in '..\mcmPrinter.pas',
+  mcmThumbnail in '..\mcmThumbnail.pas',
+  DefIcon in '..\DefIcon.pas',
+  DefJPEG in '..\DefJPEG.pas',
+  DefPCX in '..\DefPCX.pas',
+  DefPNG in '..\DefPNG.pas',
+  DefTarga in '..\DefTarga.pas',
+  DefTIFF in '..\DefTIFF.pas',
+  mcmFileDialogues in '..\mcmFileDialogues.pas',
+  mcmHashTable in '..\mcmHashTable.pas',
+  mcmImageColor in '..\mcmImageColor.pas',
+  mcmImageFilter in '..\mcmImageFilter.pas',
+  mcmImageKernel in '..\mcmImageKernel.pas',
+  mcmImageResStr in '..\mcmImageResStr.pas',
+  mcmPriorityQueue in '..\mcmPriorityQueue.pas',
+  mcmQsort in '..\mcmQsort.pas',
+  mcmRegion in '..\mcmRegion.pas',
+  mcmShape in '..\mcmShape.pas',
+  mcmSlidingWindow in '..\mcmSlidingWindow.pas',
+  DefHuffman in '..\DefHuffman.pas',
+  mcmImageTransform in '..\mcmImageTransform.pas',
+  DefGIF in '..\DefGIF.pas',
+  DefSGI in '..\DefSGI.pas',
+  mcmImageMath in '..\mcmImageMath.pas',
+  mcmDCT in '..\mcmDCT.pas',
+  mcmFileStream in '..\mcmFileStream.pas',
+  uFormSelectView in '..\uFormSelectView.pas' {FormSelectView},
+  mcmImageDualView in '..\mcmImageDualView.pas',
+  mcmImageMorph in '..\mcmImageMorph.pas',
+  mcmColorGrid in '..\mcmColorGrid.pas',
+  mcmGraphics in '..\mcmGraphics.pas',
+  DefExif in '..\DefExif.pas',
+  mcmControls in '..\mcmControls.pas',
+  mcmFileOpenDialog in '..\mcmFileOpenDialog.pas' {FormOpenFile},
+  mcmCompressOptionDialog in '..\mcmCompressOptionDialog.pas' {FormCompressOption},
+  mcmLZW in '..\mcmLZW.pas',
+  mcmDragDrop in '..\mcmDragDrop.pas',
+  mcmHandleStream in '..\mcmHandleStream.pas',
+  mcmTrace in '..\mcmTrace.pas',
+  DefJBIG in '..\DefJBIG.pas',
+  mcmAboutImgConst in '..\mcmAboutImgConst.pas',
+  uImgAbout in '..\uImgAbout.pas' {mcmImgAboutBox};
+
+end.
