@@ -1,0 +1,110 @@
+// Package file for Delphi 3
+
+package Freerep3;
+
+{$R *.RES}
+{$R 'FR_reg.dcr'}
+{$I FR.inc}
+
+{$DESCRIPTION 'FreeReport 2.33 Components'}
+{$ALIGN ON}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $00400000}
+{$IMPLICITBUILD ON}
+
+requires
+  VCL30,
+{$IFDEF IBO}
+  IBO_D3,
+{$ELSE}
+  VCLDB30,
+{$ENDIF}
+  VCLSMP30
+{$IFDEF TeeChart}
+  , TEE30
+{$ENDIF}
+{$IFDEF RX}
+  , RXCTL
+{$ENDIF};
+
+contains
+  FR_reg,
+  barcode,
+  fr_class,
+  fr_const,
+  fr_prntr,
+  fr_pars,
+  fr_about,
+  fr_barc,
+  fr_bnded,
+  fr_btyp,
+{$IFDEF TeeChart}
+  fr_chart,
+{$ENDIF}
+  fr_chbox,
+  fr_color,
+  fr_ctrls,
+  fr_dbop,
+  fr_dbrel,
+  fr_dbset,
+  fr_desgn,
+  fr_dock,
+  fr_dopt,
+  fr_dset,
+  fr_dsopt,
+{$IFDEF SYNTMEMO}
+  fr_sntxe,
+{$ELSE}
+  fr_edit,
+{$ENDIF}
+  fr_e_txt,
+  fr_e_rtf,
+  fr_e_csv,
+  fr_e_htm,
+  fr_ev_ed,
+  fr_flds,
+  fr_fmted,
+  fr_gedit,
+  fr_grped,
+  fr_hilit,
+  fr_iflds,
+  fr_insp,
+  fr_intrp,
+  fr_newrp,
+  fr_ole,
+  fr_pgopt,
+  fr_prdlg,
+  fr_progr,
+  fr_rich,
+  fr_rrect,
+{$IFDEF RX}
+  fr_rxrtf,
+{$ENDIF}
+  fr_shape,
+  fr_srch,
+  fr_templ,
+  fr_utils,
+  fr_var,
+  fr_vared,
+  fr_vbnd,
+  fr_view;
+
+end.

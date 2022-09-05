@@ -1,0 +1,97 @@
+Changes in v2.34:
+-----------------------------------------------------------------------------
+- Delphi2006 support; 
+
+Changes in v2.33:
+-----------------------------------------------------------------------------
+- Delphi7 and Delphi2005 support; 
+- Saving in FR3.0 format possibility
+- Now mouse scrolling works in the preview window (both by wheel and cursor)
+
+Changes in v2.32:
+-----------------------------------------------------------------------------
+- Added Add-In object TfrRoundRectObject;
+- Added double line style;
+- Improved text printing: now text strings showed like in designer mode
+  independently of preview scaling factor;
+- Added syntax hilightning in Script editor. You must install TSyntaxMemo
+  component by David Brock to use this feature
+  (http://users.colloquium.co.uk/~dbrock/synmemo/synmemo.htm
+   e-mail: dbrock@cqm.co.uk);
+- Added German resources;
+- Fixed bug when using TQuery in master-detail link;
+- Ctrl+End in preview now works properly;
+- Fixed bug when getting picture from empty blob field;
+- Fixed bugs in "Insert fields" wizard;
+- Now you can attach your own popup-menu to the TfrPreview component;
+- Added German, Dutch and Ukrain resources;
+- Fixed another bug with TQuery (AV when trying to preview report in
+  Delphi IDE);
+- Fixed bug - loading report form was incorrect and sometimes gives AV
+  when trying to preview report.
+
+
+Changes in v2.31.2:
+-----------------------------------------------------------------------------
+- Fixed bugs in RichEdit object editor;
+- Fixed bug - non-correct variable inserting in "Insert variable" dialog,
+  "Other variables" category;
+- Fixed bug - line style does'nt work if line width > 2 in designer mode;
+- Fixed bug with inserting CrossXXX band on empty page;
+- Added property TfrReport.PreviewButtons for setting which buttons to
+  show in preview window;
+- Added property TfrReport.InitialZoom for setting initial zoom in preview
+  window;
+- Fixed bug - when editing prepared report if pressing "New report" button
+  and then closing designer.
+- Fixed bug - assigning TQuery to the TfrDBDataSet.DataSet gives AV in
+  Delphi IDE when trying to save report form or entire project;
+- Fixed bug - AV when trying to print prepared report;
+- Now with English, French, Italian, Russian, Spanish resources.
+
+
+Changes in v2.31.1:
+-----------------------------------------------------------------------------
+- Fixed bug with assigning TDataSource to the TfrDBDataSet.DataSource;
+- Fixed bug - text search in the prepared report does'nt works;
+- Fixed bug - PageDown button in the preview window does'nt works;
+- Added property TfrDBDataSet.DataSet: TDataSet for easily connecting to
+  datasets with no TDataSource component needed.
+- Fixed strange bug - assigning TQuery to the TfrDBDataSet gives AV;
+- Fixed fr.cnt file;
+- Fixed autosize bug.
+
+
+Changes in v2.31:
+-----------------------------------------------------------------------------
+- Fixed some old bugs, added new bugs :)
+- Added TfrPreview component for creating custom preview windows;
+- Object's frame can have non-integer width (0.01 - 10);
+- Changes in code:
+  . Parser variable renamed to the frParser;
+  . TParser class renamed to the TfrParser;
+  . DataModule variable renamed to the frDataModule;
+  . use Font: TFont property instead of FontName, FontSize, etc properties
+    of TfrMemoView object;
+  . added TfrReport.ModifyPrepared: Boolean to disable editing of the
+    prepared report.
+- Value of query parameter can be taken from the FR variable;
+- Page tabs in designer reflects what page you editing: normal page or
+  subreport page;
+- Added option "Hide band tabs" in designer options;
+- Object inspector has sizable window;
+- Added Add-in object TfrRXRichObject (RTF 2.0);
+- Added Add-in object TfrBarCodeObject;
+- Cross-reports now can have variable row height;
+- Changed assigning header&footer bands to data bands. Now header&footer
+  assigned to the nearest data band;
+- Stretched and breaked RichObject;
+- Some changes in designer (page margins, column margins);
+- Memo editor has sizable window with splitter (between memo and script
+  editors);
+- Added ability of insertion FR variables (from frVariables object) visually;
+- Added compatibility with the old FRP files;
+- Added IBObjects support in reporter core (but not in data manager!);
+- Added Interbase Express (IBX), ActiveX Data Objects (ADO) support in
+  data manager with no BDE required;
+- Added line style.

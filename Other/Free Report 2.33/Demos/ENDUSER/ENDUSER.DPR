@@ -1,0 +1,15 @@
+program Enduser;
+
+uses
+  Forms,
+  Unit1 in 'Unit1.pas' {Form1};
+
+{$R *.RES}
+
+begin
+  Application.Initialize;
+  Application.CreateForm(TForm1, Form1);
+  Application.ShowMainForm := False;
+  Form1.frReport1.DesignReport;
+  Application.Terminate;
+end.

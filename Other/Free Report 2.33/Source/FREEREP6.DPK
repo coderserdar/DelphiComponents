@@ -1,0 +1,113 @@
+// Package file for Delphi 6
+
+package FreeRep6;
+
+{$R 'FR_reg.dcr'}
+{$I FR.inc}
+
+{$DESCRIPTION 'FreeReport 2.33 Components'}
+{$ALIGN ON}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $00400000}
+{$IMPLICITBUILD OFF}
+
+requires
+  VCL,
+  DESIGNIDE,
+  VCLSMP
+{$IFDEF IBO}
+, IBO_D6
+{$ELSE}
+, VCLDB
+{$ENDIF}
+
+{$IFDEF TeeChart},   TEE       {$ENDIF}
+{$IFDEF RX},         RXCTL6    {$ENDIF}
+{$IFDEF JPEG},       VCLJPG    {$ENDIF}
+{$IFDEF BDE},        BDERTL    {$ENDIF}
+{$IFDEF IBX},        IBEXPRESS {$ENDIF}
+{$IFDEF ADO},        ADORTL    {$ENDIF};
+
+
+contains
+  FR_reg    in 'Fr_reg.pas',
+  barcode   in 'barcode.pas',
+  fr_class  in 'fr_class.pas',
+  fr_const  in 'fr_const.pas',
+  fr_prntr  in 'fr_prntr.pas',
+  fr_pars   in 'fr_pars.pas',
+  fr_about  in 'fr_about.pas',
+  fr_barc   in 'fr_barc.pas',
+  fr_bnded  in 'fr_bnded.pas',
+  fr_btyp   in 'fr_btyp.pas',
+{$IFDEF TeeChart}
+  fr_chart  in 'fr_chart.pas',
+{$ENDIF}
+  fr_chbox  in 'fr_chbox.pas',
+  fr_color  in 'fr_color.pas',
+  fr_ctrls  in 'fr_ctrls.pas',
+  fr_dbop   in 'fr_dbop.pas',
+  fr_dbrel  in 'fr_dbrel.pas',
+  fr_dbset  in 'fr_dbset.pas',
+  fr_desgn  in 'fr_desgn.pas',
+  fr_dock   in 'fr_dock.pas',
+  fr_dopt   in 'fr_dopt.pas',
+  fr_dset   in 'fr_dset.pas',
+  fr_dsopt  in 'fr_dsopt.pas',
+{$IFDEF SYNTMEMO}
+  fr_sntxe  in 'fr_sntxe.pas',
+{$ELSE}
+  fr_edit   in 'fr_edit.pas',
+{$ENDIF}
+  fr_e_txt  in 'fr_e_txt.pas',
+  fr_e_rtf  in 'fr_e_rtf.pas',
+  fr_e_csv  in 'fr_e_csv.pas',
+  fr_e_htm  in 'fr_e_htm.pas',
+  fr_ev_ed  in 'fr_ev_ed.pas',
+  fr_flds   in 'fr_flds.pas',
+  fr_fmted  in 'fr_fmted.pas',
+  fr_gedit  in 'fr_gedit.pas',
+  fr_grped  in 'fr_grped.pas',
+  fr_hilit  in 'fr_hilit.pas',
+  fr_iflds  in 'fr_iflds.pas',
+  fr_insp   in 'fr_insp.pas',
+  fr_intrp  in 'fr_intrp.pas',
+  fr_newrp  in 'fr_newrp.pas',
+  fr_ole    in 'fr_ole.pas',
+  fr_pgopt  in 'fr_pgopt.pas',
+  fr_prdlg  in 'fr_prdlg.pas',
+  fr_progr  in 'fr_progr.pas',
+  fr_rich   in 'fr_rich.pas',
+  fr_rrect  in 'fr_rrect.pas',
+{$IFDEF RX}
+  fr_rxrtf  in 'fr_rxrtf.pas',
+{$ENDIF}
+  fr_shape  in 'fr_shape.pas',
+  fr_srch   in 'fr_srch.pas',
+  fr_templ  in 'fr_templ.pas',
+  fr_utils  in 'fr_utils.pas',
+  fr_var    in 'fr_var.pas',
+  fr_vared  in 'fr_vared.pas',
+  fr_vbnd   in 'fr_vbnd.pas',
+  fr_view   in 'fr_view.pas';
+
+
+end.
