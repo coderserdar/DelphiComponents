@@ -161,6 +161,14 @@ And I created a folder which is used to store compressed files of Delphi compone
    7. *RiverSoftAVG Flocking*
    8. *RiverSoftAVG Charting Component Suite*
    9. *Palette Bar IDE Plug-In Setup*
+   10. *Fortes Report*
+   11. *Balmsoft Wizard Reg*
+   12. *DB Monitor*
+   13. *File Transfer Component*
+   14. *Pivot Cube VCL*
+   15. *UniDAC Express (for Delphi 7)*
+   16. *VirtualDAC Express (for Delphi 7)*
+   17. *Active Query Builder (Free Version)*
 
 </details>
 
