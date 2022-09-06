@@ -171,10 +171,11 @@ And I created a folder which is used to store compressed files of Delphi compone
    1. *DDevExtensions (Delphi Developer Extensions)*
    2. *Delphi Speed Up (for Delphi 7)*
    3. *Delphi IDE Fix Pack*
-   4. *Raize Palette Menu*
-   5. *Unit Expert*
-   6. *Sampling Profiler*
-   7. *LangTools*
+   4. *DelForEx*
+   5. *Raize Palette Menu*
+   6. *Unit Expert*
+   7. *Sampling Profiler*
+   8. *LangTools*
 
 </details>
 
