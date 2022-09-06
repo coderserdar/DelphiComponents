@@ -4,7 +4,7 @@
 
 In this repo, I want to combine some kind of *freeware* **Delphi VCL and Non-VCL Components** which are from *Embarcadero Code Central*, *Torry's Delphi Pages* etc. Generally the components are for **older** Delphi IDE versions like *Delphi 5*, *Delphi 6*, *Delphi 7* etc.
 
-But some components like [**JSON**](https://github.com/coderserdar/DelphiComponents/tree/main/Embarcadero%20Code%20Central/JSON%204.5), [**CSV**](https://github.com/coderserdar/DelphiComponents/tree/main/Embarcadero%20Code%20Central/CSV%205.6), [**Cindy Component Suite**](https://github.com/coderserdar/DelphiComponents/tree/main/Embarcadero%20Code%20Central/Cindy%20Components), [**Yunqa**](https://github.com/coderserdar/DelphiComponents/tree/main/Yunqa), [**Precision Software Components**](https://github.com/coderserdar/DelphiComponents/tree/main/Other/Precision%20Software) can be used in most common Delphi IDEs like *Delphi 10 Rio* etc.
+But some components like [**JSON**](https://github.com/coderserdar/DelphiComponents/tree/main/Embarcadero%20Code%20Central/JSON%204.5), [**CSV**](https://github.com/coderserdar/DelphiComponents/tree/main/Embarcadero%20Code%20Central/CSV%205.6), [**Cindy Component Suite**](https://github.com/coderserdar/DelphiComponents/tree/main/Embarcadero%20Code%20Central/Cindy%20Components), [**Yunqa**](https://github.com/coderserdar/DelphiComponents/tree/main/Yunqa), [**Precision Software Components**](https://github.com/coderserdar/DelphiComponents/tree/main/Other/Precision%20Software), [**Imaging Toolkit**](https://github.com/coderserdar/DelphiComponents/tree/main/Other/Imaging%20Toolkit) can be used in most common Delphi IDEs like *Delphi 10 Rio* etc.
 
 In this repo there are components about
  - **DB Aware**, **Communication**, **File Operations**, **Reporting**, **Office Files**
@@ -15,6 +15,7 @@ Repo folder structure is like this
  - [**Other Components**](https://github.com/coderserdar/DelphiComponents/tree/main/Other/)
    - [*Alpha Components*](https://github.com/coderserdar/DelphiComponents/tree/main/Other/Alpha%20Components)
    - [*Bergsoft*](https://github.com/coderserdar/DelphiComponents/tree/main/Other/Bergsoft)
+   - [*CnPack VCL Components*](https://github.com/coderserdar/DelphiComponents/tree/main/Other/CnPack%20VCL%20Components)
    - [*Farsi Components*](https://github.com/coderserdar/DelphiComponents/tree/main/Other/Farsi%20Components)
    - [*Precision Software*](https://github.com/coderserdar/DelphiComponents/tree/main/Other/Precision%20Software)
    - [*RiverSoftAVG*](https://github.com/coderserdar/DelphiComponents/tree/main/Other/RiverSoftAVG)
@@ -160,6 +161,20 @@ And I created a folder which is used to store compressed files of Delphi compone
    7. *RiverSoftAVG Flocking*
    8. *RiverSoftAVG Charting Component Suite*
    9. *Palette Bar IDE Plug-In Setup*
+
+</details>
+
+
+<details>
+  <summary>IDE Tools Setups</summary>
+
+   1. *DDevExtensions (Delphi Developer Extensions)*
+   2. *Delphi Speed Up (for Delphi 7)*
+   3. *Delphi IDE Fix Pack*
+   4. *Raize Palette Menu*
+   5. *Unit Expert*
+   6. *Sampling Profiler*
+   7. *LangTools*
 
 </details>
 
