@@ -1,0 +1,64 @@
+{*******************************************************}
+{                                                       }
+{         Delphi VCL Extensions (RX)                    }
+{                                                       }
+{         Copyright (c) 1998 Master-Bank                }
+{                                                       }
+{*******************************************************}
+
+package rxbde;
+
+{$R *.res}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'RX Library BDE DB Component Package'}
+{$LIBSUFFIX '120'}
+{$RUNONLY}
+{$IMPLICITBUILD OFF}
+
+requires
+  rtl,
+  vclx,
+  vcl,
+  dbrtl,
+  bdertl,
+  VclSmp,
+  rxctl,
+  rxdb,
+  vcldb;
+
+contains
+  rxDBQBE in '..\..\units\rxDBQBE.pas',
+  rxDBLists in '..\..\units\rxDBLists.pas',
+  rxDBIndex in '..\..\units\rxDBIndex.pas',
+  rxDBPrgrss in '..\..\units\rxDBPrgrss.pas',
+  rxLoginDlg in '..\..\units\rxLoginDlg.pas',
+  rxDBSecur in '..\..\units\rxDBSecur.pas',
+  RxRemLog in '..\..\units\RxRemLog.pas',
+  rxChPswDlg in '..\..\units\rxChPswDlg.pas',
+  rxBdeUtils in '..\..\units\rxBdeUtils.pas',
+  RxQuery in '..\..\units\RxQuery.pas',
+  rxMemTable in '..\..\units\rxMemTable.pas',
+  rxDBExcpt in '..\..\units\rxDBExcpt.pas',
+  rxdbfilter in '..\..\Units\rxdbfilter.pas';
+
+end.

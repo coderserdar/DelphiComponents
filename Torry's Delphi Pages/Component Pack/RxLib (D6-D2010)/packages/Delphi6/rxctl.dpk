@@ -1,0 +1,110 @@
+{*******************************************************}
+{                                                       }
+{         Delphi VCL Extensions (RX)                    }
+{                                                       }
+{         Copyright (c) 1998 Master-Bank                }
+{                                                       }
+{*******************************************************}
+
+package rxctl;
+
+{$R *.res}
+{$ALIGN 8}
+{$ASSERTIONS OFF}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS OFF}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE ON}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'RX Library Component and Tools Package'}
+{$LIBSUFFIX '60'}
+{$RUNONLY}
+{$IMPLICITBUILD OFF}
+
+requires
+  vcl,
+  vclsmp,
+  vclx;
+
+contains
+  RxCtrls in '..\..\units\rxCtrls.pas',
+  rxGrids in '..\..\units\rxGrids.pas',
+  rxcurredit in '..\..\units\rxcurredit.pas',
+  rxtooledit in '..\..\units\rxtooledit.pas',
+  rxdateutil in '..\..\units\rxdateutil.pas',
+  rxSplit in '..\..\units\rxSplit.pas',
+  rxSlider in '..\..\units\rxSlider.pas',
+  rxClock in '..\..\units\rxClock.pas',
+  rxanimate in '..\..\units\rxanimate.pas',
+  rxSpin in '..\..\units\rxSpin.pas',
+  rxRichEd in '..\..\units\rxRichEd.pas',
+  rxSwitch in '..\..\units\rxSwitch.pas',
+  rxDice in '..\..\units\rxDice.pas',
+  rxvclutils in '..\..\units\rxvclutils.pas',
+  rxanifile in '..\..\units\rxanifile.pas',
+  rxicolist in '..\..\units\rxicolist.pas',
+  rxobjstr in '..\..\units\rxobjstr.pas',
+  rxCombos in '..\..\units\rxCombos.pas',
+  rxpickdate in '..\..\units\rxpickdate.pas',
+  rxmaxmin in '..\..\units\rxmaxmin.pas',
+  rxConst in '..\..\units\rxConst.pas',
+  rxCConst in '..\..\units\rxcconst.pas',
+  rxAppUtils in '..\..\units\rxAppUtils.pas',
+  rxstrutils in '..\..\units\rxstrutils.pas',
+  rxfileutil in '..\..\units\rxfileutil.pas',
+  rxTimer in '..\..\units\rxTimer.pas',
+  rxHook in '..\..\units\rxHook.pas',
+  rxplacemnt in '..\..\units\rxplacemnt.pas',
+  rxProps in '..\..\units\rxProps.pas',
+  rxPrgrss in '..\..\units\rxPrgrss.pas',
+  rxHints in '..\..\units\rxHints.pas',
+  rxCalc in '..\..\units\rxCalc.pas',
+  rxexcptdlg in '..\..\units\rxexcptdlg.pas',
+  rxboxprocs in '..\..\units\rxboxprocs.pas',
+  rxclipicon in '..\..\units\rxclipicon.pas',
+  rxclipmon in '..\..\units\rxclipmon.pas',
+  rxparsing in '..\..\units\rxparsing.pas',
+  rxGraph in '..\..\units\rxGraph.pas',
+  rxGConst in '..\..\units\rxGConst.pas',
+  rxGIF in '..\..\units\rxGIF.pas',
+  rxgifctrl in '..\..\units\rxgifctrl.pas',
+  rxpicclip in '..\..\units\rxpicclip.pas',
+  rxduallist in '..\..\units\rxduallist.pas',
+  rxfduallst in '..\..\units\rxfduallst.pas',
+  rxclipview in '..\..\units\rxclipview.pas',
+  rxspeedbar in '..\..\units\rxspeedbar.pas',
+  rxsbsetup in '..\..\units\rxsbsetup.pas',
+  rxpagemngr in '..\..\units\rxpagemngr.pas',
+  rxmrgmngr in '..\..\units\rxmrgmngr.pas',
+  rxstrhlder in '..\..\units\rxstrhlder.pas',
+  rxappevent in '..\..\units\rxappevent.pas',
+  rxtimerlst in '..\..\units\rxtimerlst.pas',
+  rxmrulist in '..\..\units\rxmrulist.pas',
+  rxIni in '..\..\units\rxIni.pas',
+  rxShell in '..\..\units\rxShell.pas',
+  rxMenus in '..\..\units\rxMenus.pas',
+  rxNotify in '..\..\units\rxNotify.pas',
+  rxGrdCpt in '..\..\units\rxGrdCpt.pas',
+  rxsplshwnd in '..\..\units\rxsplshwnd.pas',
+  rxdataconv in '..\..\units\rxdataconv.pas',
+  rxTConst in '..\..\units\rxTConst.pas',
+  rxole2auto in '..\..\units\rxole2auto.pas',
+  rxVerInf in '..\..\units\rxVerInf.pas',
+  rxstr16 in '..\..\units\rxstr16.pas',
+  rrxcombo in '..\..\units\rrxcombo.pas';
+
+end.

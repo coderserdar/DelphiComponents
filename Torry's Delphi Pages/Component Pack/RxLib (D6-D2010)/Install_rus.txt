@@ -1,0 +1,25 @@
+RxLib for Delphi7 - Delphi2010
+(10/10/2009)
+=======================================
+
+1. Добавить в IDE путь к папке с библиотекой (..\RxLib\Units):
+Tools->options 
+ - Environment Options
+   - Delphi Options
+     - Library - Win32 | Library Path
+
+* Открыть в IDE групповой проект:
+File->Open: ..\RxLib\packages\DelphiXXXX\Rxlib.groupproj
+  (DelphiXXXX - Ваша версия Delphi)
+
+* Ваполнить компиляцию вск пакетов проекта::
+Project-> Build All projects
+
+* Инсталлировать пакеты:
+Una vez que todos los paquetes se han compilado correctamente se 
+deben instalar los que son de diseсo; Click derecho sobre los packages y
+pulsar [Install] (View -> Project Manager):
+
+   dclrx.bpl [install]
+   dcldb.bpl [install]
+   dcldb.bpl [install]

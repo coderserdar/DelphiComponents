@@ -1,0 +1,195 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{753680af-30fa-4b10-99de-a3c799a3784a}</ProjectGuid>
+			<MainSource>rxctl.dpk</MainSource>
+			<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+			<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+			<DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
+			<DCC_DependencyCheckOutputName>..\..\..\..\5.0\Common\Bpl\rxctl100.bpl</DCC_DependencyCheckOutputName>
+			<ProjectVersion>12.0</ProjectVersion>
+			<Config Condition="'$(Config)'==''">Debug</Config>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_1)'!=''">
+			<Cfg_1>true</Cfg_1>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_2)'!=''">
+			<Cfg_2>true</Cfg_2>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Base)'!=''">
+			<DCC_OpenStringParams>false</DCC_OpenStringParams>
+			<DCC_DependencyCheckOutputName>..\..\..\..\6.0\Common\Bpl\rxctl120.bpl</DCC_DependencyCheckOutputName>
+			<DCC_ImageBase>00400000</DCC_ImageBase>
+			<DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
+			<DCC_Description>RX Library Component and Tools Package</DCC_Description>
+			<RuntimeOnlyPackage>true</RuntimeOnlyPackage>
+			<DesignOnlyPackage>false</DesignOnlyPackage>
+			<GenPackage>true</GenPackage>
+			<DCC_OutputNeverBuildDcps>true</DCC_OutputNeverBuildDcps>
+			<GenDll>true</GenDll>
+			<DCC_WriteableConstants>true</DCC_WriteableConstants>
+			<DllSuffix>120</DllSuffix>
+			<DCC_SymbolReferenceInfo>1</DCC_SymbolReferenceInfo>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_1)'!=''">
+			<Version>7.0</Version>
+			<DCC_DebugInformation>False</DCC_DebugInformation>
+			<DCC_WriteableConstants>True</DCC_WriteableConstants>
+			<DCC_LocalDebugSymbols>False</DCC_LocalDebugSymbols>
+			<DCC_OpenStringParams>False</DCC_OpenStringParams>
+			<DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+			<DCC_Define>RELEASE;$(DCC_Define)</DCC_Define>
+			<DCC_SYMBOL_PLATFORM>False</DCC_SYMBOL_PLATFORM>
+			<DCC_UNIT_PLATFORM>False</DCC_UNIT_PLATFORM>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_2)'!=''">
+			<Version>7.0</Version>
+			<DCC_SYMBOL_PLATFORM>False</DCC_SYMBOL_PLATFORM>
+			<DCC_UNIT_PLATFORM>False</DCC_UNIT_PLATFORM>
+			<DCC_MapFile>3</DCC_MapFile>
+		</PropertyGroup>
+		<ItemGroup>
+			<DelphiCompile Include="rxctl.dpk">
+				<MainSource>MainSource</MainSource>
+			</DelphiCompile>
+			<DCCReference Include="rtl.dcp"/>
+			<DCCReference Include="vclx.dcp"/>
+			<DCCReference Include="vcl.dcp"/>
+			<DCCReference Include="VclSmp.dcp"/>
+			<DCCReference Include="..\..\units\RxCtrls.pas"/>
+			<DCCReference Include="..\..\units\RxGrids.pas"/>
+			<DCCReference Include="..\..\units\rxCurrEdit.pas"/>
+			<DCCReference Include="..\..\units\rxToolEdit.pas"/>
+			<DCCReference Include="..\..\units\rxDateUtil.pas"/>
+			<DCCReference Include="..\..\units\RXSplit.pas"/>
+			<DCCReference Include="..\..\units\RxSlider.pas"/>
+			<DCCReference Include="..\..\units\RxClock.pas"/>
+			<DCCReference Include="..\..\units\rxAnimate.pas"/>
+			<DCCReference Include="..\..\units\RxSpin.pas"/>
+			<DCCReference Include="..\..\units\RxRichEd.pas"/>
+			<DCCReference Include="..\..\units\RxSwitch.pas"/>
+			<DCCReference Include="..\..\units\RxDice.pas"/>
+			<DCCReference Include="..\..\units\rxVCLUtils.pas"/>
+			<DCCReference Include="..\..\units\rxAniFile.pas"/>
+			<DCCReference Include="..\..\units\rxIcoList.pas"/>
+			<DCCReference Include="..\..\units\rxObjStr.pas"/>
+			<DCCReference Include="..\..\units\RxCombos.pas"/>
+			<DCCReference Include="..\..\units\rxPickDate.pas"/>
+			<DCCReference Include="..\..\units\rxMaxMin.pas"/>
+			<DCCReference Include="..\..\units\RxConst.pas"/>
+			<DCCReference Include="..\..\units\RxCConst.pas"/>
+			<DCCReference Include="..\..\units\rxAppUtils.pas"/>
+			<DCCReference Include="..\..\units\rxStrUtils.pas"/>
+			<DCCReference Include="..\..\units\rxFileUtil.pas"/>
+			<DCCReference Include="..\..\units\RxTimer.pas"/>
+			<DCCReference Include="..\..\units\RxHook.pas"/>
+			<DCCReference Include="..\..\units\rxPlacemnt.pas"/>
+			<DCCReference Include="..\..\units\RxProps.pas"/>
+			<DCCReference Include="..\..\units\RxPrgrss.pas"/>
+			<DCCReference Include="..\..\units\RxHints.pas"/>
+			<DCCReference Include="..\..\units\RxCalc.pas"/>
+			<DCCReference Include="..\..\units\rxExcptdlg.pas"/>
+			<DCCReference Include="..\..\units\rxBoxProcs.pas"/>
+			<DCCReference Include="..\..\units\rxClipIcon.pas"/>
+			<DCCReference Include="..\..\units\rxClipMon.pas"/>
+			<DCCReference Include="..\..\units\rxParsing.pas"/>
+			<DCCReference Include="..\..\units\RxGraph.pas"/>
+			<DCCReference Include="..\..\units\RxGConst.pas"/>
+			<DCCReference Include="..\..\units\RxGIF.pas"/>
+			<DCCReference Include="..\..\units\rxGIFCtrl.pas"/>
+			<DCCReference Include="..\..\units\rxPicClip.pas"/>
+			<DCCReference Include="..\..\units\rxDualList.pas"/>
+			<DCCReference Include="..\..\units\rxFDualLst.pas"/>
+			<DCCReference Include="..\..\units\rxClipview.pas"/>
+			<DCCReference Include="..\..\units\rxSpeedbar.pas"/>
+			<DCCReference Include="..\..\units\rxSbSetup.pas"/>
+			<DCCReference Include="..\..\units\rxPageMngr.pas"/>
+			<DCCReference Include="..\..\units\rxMrgMngr.pas"/>
+			<DCCReference Include="..\..\units\rxStrHlder.pas"/>
+			<DCCReference Include="..\..\units\rxAppEvent.pas"/>
+			<DCCReference Include="..\..\units\rxTimerLst.pas"/>
+			<DCCReference Include="..\..\units\rxMRUList.pas"/>
+			<DCCReference Include="..\..\units\RxIni.pas"/>
+			<DCCReference Include="..\..\units\RxShell.pas"/>
+			<DCCReference Include="..\..\units\RxMenus.pas"/>
+			<DCCReference Include="..\..\units\RxNotify.pas"/>
+			<DCCReference Include="..\..\units\RxGrdCpt.pas"/>
+			<DCCReference Include="..\..\units\rxSplshWnd.pas"/>
+			<DCCReference Include="..\..\units\rxDataConv.pas"/>
+			<DCCReference Include="..\..\units\RxTConst.pas"/>
+			<DCCReference Include="..\..\units\rxOle2Auto.pas"/>
+			<DCCReference Include="..\..\units\RxVerInf.pas"/>
+			<DCCReference Include="..\..\Units\rrxcombo.pas"/>
+			<BuildConfiguration Include="Base">
+				<Key>Base</Key>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Debug">
+				<Key>Cfg_2</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Release">
+				<Key>Cfg_1</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+		</ItemGroup>
+		<Import Project="$(BDS)\Bin\CodeGear.Delphi.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Delphi.Targets')"/>
+		<ProjectExtensions>
+			<Borland.Personality>Delphi.Personality.12</Borland.Personality>
+			<Borland.ProjectType>Package</Borland.ProjectType>
+			<BorlandProject>
+				<Delphi.Personality>
+					<Parameters>
+						<Parameters Name="UseLauncher">False</Parameters>
+						<Parameters Name="LoadAllSymbols">True</Parameters>
+						<Parameters Name="LoadUnspecifiedSymbols">False</Parameters>
+					</Parameters>
+					<VersionInfo>
+						<VersionInfo Name="IncludeVerInfo">True</VersionInfo>
+						<VersionInfo Name="AutoIncBuild">True</VersionInfo>
+						<VersionInfo Name="MajorVer">2</VersionInfo>
+						<VersionInfo Name="MinorVer">7</VersionInfo>
+						<VersionInfo Name="Release">6</VersionInfo>
+						<VersionInfo Name="Build">145</VersionInfo>
+						<VersionInfo Name="Debug">False</VersionInfo>
+						<VersionInfo Name="PreRelease">False</VersionInfo>
+						<VersionInfo Name="Special">False</VersionInfo>
+						<VersionInfo Name="Private">False</VersionInfo>
+						<VersionInfo Name="DLL">False</VersionInfo>
+						<VersionInfo Name="Locale">1033</VersionInfo>
+						<VersionInfo Name="CodePage">1252</VersionInfo>
+					</VersionInfo>
+					<VersionInfoKeys>
+						<VersionInfoKeys Name="CompanyName">rxlib project</VersionInfoKeys>
+						<VersionInfoKeys Name="FileDescription">RX Library Component and Tools Package</VersionInfoKeys>
+						<VersionInfoKeys Name="FileVersion">2.7.6.145</VersionInfoKeys>
+						<VersionInfoKeys Name="InternalName">rxctl</VersionInfoKeys>
+						<VersionInfoKeys Name="LegalCopyright"/>
+						<VersionInfoKeys Name="LegalTrademarks"/>
+						<VersionInfoKeys Name="OriginalFilename">rxctl.bpl</VersionInfoKeys>
+						<VersionInfoKeys Name="ProductName">RX Library</VersionInfoKeys>
+						<VersionInfoKeys Name="ProductVersion">2.7.6</VersionInfoKeys>
+						<VersionInfoKeys Name="Comments"/>
+						<VersionInfoKeys Name="LastCompiledTime">14.10.2008 04:50:17</VersionInfoKeys>
+					</VersionInfoKeys>
+					<Source>
+						<Source Name="MainSource">rxctl.dpk</Source>
+					</Source>
+					<Excluded_Packages>
+						<Excluded_Packages Name="$(BDS)\Common\Bpl\dclrxdb120.bpl">RX Library Database Components</Excluded_Packages>
+						<Excluded_Packages Name="$(BDS)\bin\bcboffice2k120.bpl">CodeGear C++Builder Office 2000 Servers Package</Excluded_Packages>
+						<Excluded_Packages Name="$(BDS)\bin\bcbofficexp120.bpl">CodeGear C++Builder Office XP Servers Package</Excluded_Packages>
+						<Excluded_Packages Name="$(BDS)\bin\dcloffice2k120.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+						<Excluded_Packages Name="$(BDS)\bin\dclofficexp120.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+						<Excluded_Packages Name="$(BDS)\Common\Bpl\dclrxbd120.bpl">RX Library BDE Database Components</Excluded_Packages>
+					</Excluded_Packages>
+				</Delphi.Personality>
+			</BorlandProject>
+			<ProjectFileVersion>12</ProjectFileVersion>
+		</ProjectExtensions>
+	</Project>

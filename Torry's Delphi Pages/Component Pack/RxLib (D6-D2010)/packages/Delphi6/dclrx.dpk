@@ -1,0 +1,62 @@
+{*******************************************************}
+{                                                       }
+{         Delphi VCL Extensions (RX)                    }
+{                                                       }
+{         Copyright (c) 1998 Master-Bank                }
+{                                                       }
+{*******************************************************}
+
+package dclrx;
+
+{$R *.res}
+{$ALIGN 8}
+{$ASSERTIONS OFF}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS OFF}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'RX Library Controls and Tools'}
+{$LIBSUFFIX '60'}
+{$DESIGNONLY}
+{$IMPLICITBUILD OFF}
+
+requires
+  RxCtl,
+  dclsmp,
+  dclstd;
+
+contains
+  RxLConst in '..\..\units\RxLConst.pas',
+  rxHintProp in '..\..\units\rxHintProp.pas',
+  rxcheckitm in '..\..\units\rxcheckitm.pas',
+  rxStrLEdit in '..\..\units\rxStrLEdit.pas',
+  RxColors in '..\..\units\RxColors.pas',
+  RxDsgn in '..\..\units\RxDsgn.pas',
+  rxPresrDsn in '..\..\units\rxPresrDsn.pas',
+  rxMinMaxEd in '..\..\units\rxMinMaxEd.pas',
+  rxsbedit in '..\..\units\rxsbedit.pas',
+  rxPgMngrEd in '..\..\units\rxPgMngrEd.pas',
+  rxTimLstEd in '..\..\units\rxTimLstEd.pas',
+  rxIcoLEdit in '..\..\units\rxIcoLEdit.pas',
+  rxPictEdit in '..\..\units\rxPictEdit.pas',
+  RxDirFrm in '..\..\units\RxDirFrm.pas',
+  rxGradEdit in '..\..\units\rxGradEdit.pas',
+  RxCtlReg in '..\..\units\RxCtlReg.pas',
+  RxTooReg in '..\..\units\RxTooReg.pas';
+
+end.

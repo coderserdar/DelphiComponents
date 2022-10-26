@@ -1,0 +1,76 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{49a1e01c-1648-43b9-967a-debce83e6bd1}</ProjectGuid>
+  </PropertyGroup>
+  <ItemGroup />
+  <ItemGroup />
+  <ProjectExtensions>
+    <Borland.Personality>Default.Personality</Borland.Personality>
+    <Borland.ProjectType />
+    <BorlandProject>
+  <BorlandProject xmlns=""> <Default.Personality> </Default.Personality> </BorlandProject></BorlandProject>
+  </ProjectExtensions>
+  <Target Name="rxctl">
+    <MSBuild Projects="rxctl.dproj" Targets="" />
+  </Target>
+  <Target Name="rxctl:Clean">
+    <MSBuild Projects="rxctl.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="rxctl:Make">
+    <MSBuild Projects="rxctl.dproj" Targets="Make" />
+  </Target>
+  <Target Name="dclrx">
+    <MSBuild Projects="dclrx.dproj" Targets="" />
+  </Target>
+  <Target Name="dclrx:Clean">
+    <MSBuild Projects="dclrx.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="dclrx:Make">
+    <MSBuild Projects="dclrx.dproj" Targets="Make" />
+  </Target>
+  <Target Name="rxdb">
+    <MSBuild Projects="rxdb.dproj" Targets="" />
+  </Target>
+  <Target Name="rxdb:Clean">
+    <MSBuild Projects="rxdb.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="rxdb:Make">
+    <MSBuild Projects="rxdb.dproj" Targets="Make" />
+  </Target>
+  <Target Name="dclrxdb">
+    <MSBuild Projects="dclrxdb.dproj" Targets="" />
+  </Target>
+  <Target Name="dclrxdb:Clean">
+    <MSBuild Projects="dclrxdb.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="dclrxdb:Make">
+    <MSBuild Projects="dclrxdb.dproj" Targets="Make" />
+  </Target>
+  <Target Name="rxbde">
+    <MSBuild Projects="rxbde.dproj" Targets="" />
+  </Target>
+  <Target Name="rxbde:Clean">
+    <MSBuild Projects="rxbde.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="rxbde:Make">
+    <MSBuild Projects="rxbde.dproj" Targets="Make" />
+  </Target>
+  <Target Name="dclrxbd">
+    <MSBuild Projects="dclrxbd.dproj" Targets="" />
+  </Target>
+  <Target Name="dclrxbd:Clean">
+    <MSBuild Projects="dclrxbd.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="dclrxbd:Make">
+    <MSBuild Projects="dclrxbd.dproj" Targets="Make" />
+  </Target>
+  <Target Name="Build">
+    <CallTarget Targets="rxctl;dclrx;rxdb;dclrxdb;rxbde;dclrxbd" />
+  </Target>
+  <Target Name="Clean">
+    <CallTarget Targets="rxctl:Clean;dclrx:Clean;rxdb:Clean;dclrxdb:Clean;rxbde:Clean;dclrxbd:Clean" />
+  </Target>
+  <Target Name="Make">
+    <CallTarget Targets="rxctl:Make;dclrx:Make;rxdb:Make;dclrxdb:Make;rxbde:Make;dclrxbd:Make" />
+  </Target>
+</Project>
